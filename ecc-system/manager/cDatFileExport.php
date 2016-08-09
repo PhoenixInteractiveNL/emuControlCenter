@@ -124,7 +124,7 @@ class DatFileExport {
 		if ($user_folder_export!==false) {
 			
 			// ECC_INFO
-			$this->exportHeader['release_version'] = "".$this->ecc_release['release_version']." ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state']."";
+			$this->exportHeader['local_release_version'] = "".$this->ecc_release['local_release_version']." build ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state']."";
 			$this->exportHeader['eccdat_version'] = $this->ecc_release['eccdat_version'];
 
 			$this->exportHeader['title'] = $this->ecc_release['title'];
@@ -246,7 +246,7 @@ $this->exportHeader['title'] = $this->ecc_release['title'];
 		$line .= "DAT-TYPE=\teccMediaDat\n";
 		$line .= "DAT-VERSION=\t".$this->exportHeader['eccdat_version']."\n";
 		$line .= "GENERATOR=\t".$this->exportHeader['title']." (".$this->exportHeader['title_short'].")\n";
-		$line .= "ECC-VERSION=\t".$this->exportHeader['release_version']."\n";
+		$line .= "ECC-VERSION=\t".$this->exportHeader['local_release_version']."\n";
 		$line .= "\n";
 		$line .= "[ECC_DAT]\n";
 		$line .= "ECCIDENT=\t".$this->exportHeader['export_ident']."\n";
@@ -283,7 +283,7 @@ $this->exportHeader['title'] = $this->ecc_release['title'];
 		$line1 .= "".$this->exportHeader['eccdat_version'].";";
 		
 		$head1 .= "ECC-VERSION;";
-		$line1 .= "".$this->exportHeader['release_version'].";";
+		$line1 .= "".$this->exportHeader['local_release_version'].";";
 		
 		$head2 = "";
 		$line2  = "";

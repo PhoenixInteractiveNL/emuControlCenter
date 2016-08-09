@@ -1,6 +1,6 @@
 *********************************************************************
 
-emuControlCenter is Copyright(c) 2005-2006 by Andreas Scheibel
+emuControlCenter is Copyright(c) 2005-2007 by Andreas Scheibel
 
 This licence grants you the following:
 
@@ -23,7 +23,7 @@ portions of the source in some other program, etc.), please contact
 the author.
 
 The author can be contacted via email at: eccas@camya.com
-emuControlWebsite: http://www.camya.com/ecc/
+emuControlCenter website: http://www.camya.com/ecc/
 
 *********************************************************************
 

@@ -37,64 +37,60 @@
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function executeFileWithProgramm($filePathCommand, $param=false, $filePathFile, $fileNameEscape=false, $fileName8dot3=false) {
+	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource, $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false) {
 		
-		// ABS-PATH TO REL-PATH...
-		$exePathFull = realpath($filePathCommand);
-		if (!$exePathFull) return false;
+		// if filenameOnly set, only use the basename (name.rom) without path!
+		if ($filenameOnly) {
+			$chdirDestination = dirname(realpath($romFileSource));
+			$romFile = basename($romFileSource); 
+			$exeFile = realpath($exeFileSource);
+		}
+		else {
+			$chdirDestination = dirname(realpath($exeFileSource));
+			$romFile = realpath($romFileSource);
+			$exeFile = escapeshellcmd(basename($exeFileSource));
+		}
 		
-		$filePathFile = realpath($filePathFile);
-		if (!$filePathFile) return false;
+		if (!$chdirDestination) return false;
+		if (!$romFile) return false;
+		if (!$exeFile) return false;
 		
-		// get only the filename from the path
-		$exeFileName = basename($filePathCommand);
+		// start romfile with removed fileextension e.g. "aof.rom" will be "aof"
+		if ($noExtension) {
+			$romFile = basename($romFile, '.'.FACTORY::get('manager/FileIO')->get_ext_form_file($romFile)); 
+		}
 		
 		// escape rompath or not
-		if ($this->os_env['PLATFORM']=='WIN' && $fileName8dot3) {
-			$filePathFile = $this->getEightDotThreePath($filePathFile);
+		if ($fileName8dot3 && !$filenameOnly) {
+			if ($this->os_env['PLATFORM']=='WIN') $romFile = $this->getEightDotThreePath($romFile); 
 		}
 
 		// escape rompath or not
 		if (!$fileNameEscape) {
-			if ($this->os_env['PLATFORM']=='WIN') {
-				// escape special dos chars
-				$filePathFile = str_replace("&", "^&", $filePathFile);
-			}
+			if ($this->os_env['PLATFORM']=='WIN') $romFile = str_replace("&", "^&", $romFile);
 		}
-		else {
-			$filePathFile = escapeshellarg($filePathFile);
-		}
-
+		else $romFile = escapeshellarg($romFile);
+				
 		// win98 needs "player". Otherwise, the file isnt started
 		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
 		
 		if (!$param) $param = '';
 		
 		// Compile start command
-		$command = 'start '.$start_ident.' "'.escapeshellcmd($exeFileName).'" '.$param.' '.$filePathFile;
+		$command = 'start '.$start_ident.' "'.$exeFile.'" '.$param.' '.$romFile;
 
 		// create an backup of the curren cwd
 		$cwdBackup = getcwd();
 		// change dir to the programs directory
-
-		//print "exeFileName $exeFileName".LF;
-		//print "escapeshellcmd ".escapeshellcmd($exeFileName)." //// $exeFileName".LF;
-		//print "filePathFile $filePathFile".LF;
-		//print "exePathFull $exePathFull".LF;
-		//print "command $command".LF;
-		
-		chdir(dirname($exePathFull));
-		
-		// STANDARD WORKING ECC WAY!
+		chdir($chdirDestination);
 		// execute command
 		pclose(popen($command, "r"));
 		// change dir back to cwdBacup!
 		chdir($cwdBackup);
 		
 		// working faster, but not full tested!!!!
-		// FACTORY::get('manager/Os')->executeProgramDirect($filePathCommand, 'open', $filePathFile);
-		
-		
+		// FACTORY::get('manager/Os')->executeProgramDirect($filePathCommand, 'open', $romFile);
+
 		return true;		
 	}
 	

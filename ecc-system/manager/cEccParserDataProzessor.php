@@ -28,6 +28,8 @@ class EccParserDataProzessor{
 		
 		$this->_base_directory = $this->fileListObj->get_base_directory();
 		$this->_known_extensions = $this->fileListObj->get_known_extensions();
+		
+		$this->invalidFiles = $this->fileListObj->invalidFile;
 	}
 	
 	public function parse()
@@ -146,6 +148,10 @@ class EccParserDataProzessor{
 		}
 		else {
 		}
+		
+		$detail_header = $this->format_results(true);
+		$this->fileListObj->status_obj->update_message($detail_header);
+		
 	}
 	
 	private function getParser($file_extension, $fileHandle) {
@@ -184,7 +190,7 @@ class EccParserDataProzessor{
 		return FACTORY::getStrict('parser/'.$className, $parameter);
 	}
 	
-	public function format_results()
+	public function format_results($addFinalNote = false)
 	{
 		$txt  = "";
 		if (isset($this->_parser_stats_cnt_add) && count($this->_parser_stats_cnt_add)) {
@@ -199,6 +205,14 @@ class EccParserDataProzessor{
 				$txt .=  "$key\t\t$value\n";
 			}
 		}
+		
+		if ($addFinalNote && count($this->invalidFiles)) {
+			$txt .= "\nFound invalid zip-files... please repack!\n";
+			foreach ($this->invalidFiles as $key => $value) {
+				$txt .=  "$value\n";
+			}
+		}
+		
 		return $txt;
 	}
 	

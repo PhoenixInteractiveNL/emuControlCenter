@@ -101,3 +101,10 @@
 "xpm" ""
 "/* XPM */" "" 100
 
+"pixbufloaders/svg_loader.dll"
+"svg" 2 "gtk20" "Scalable Vector Graphics"
+"image/svg+xml" "image/svg" "image/svg-xml" "image/vnd.adobe.svg+xml" "text/xml-svg" ""
+"svg" "svgz" "svg.gz" ""
+" <svg" "*    " 100
+" <!DOCTYPE svg" "*             " 100
+

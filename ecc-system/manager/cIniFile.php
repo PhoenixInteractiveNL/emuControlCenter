@@ -217,22 +217,23 @@ class IniFile {
 		$newIni = $this->storeIniFile($file, $ini);
 		return $newIni;
 	}
-	
-	
-//	public function storeNavigationIni($navArray) {
-//		if (!is_array($navArray) || !count($navArray)) return false;
-//		$eccNavigation['NAVIGATION'] = $navArray;
-//		$this->storeIniFile($this->eccDefaultConfigPath.$this->eccIniNavigationName, $eccNavigation);
-//	}
-//	
+
 	public function storeIniGlobal($assoc_array) {
 		if (!is_array($assoc_array) || !count($assoc_array)) return false;
-	
 		$saveArray = $assoc_array;
-//		$eccNavigation['NAVIGATION'] = $saveArray['NAVIGATION'];
-//		unset($saveArray['NAVIGATION']);
-//		$this->storeIniFile($this->eccDefaultConfigPath.$this->eccIniNavigationName, $eccNavigation);
 		return $this->storeIniFile($this->getGeneralIniPath(true), $saveArray);
+	}
+	
+	public function storeGlobalFont($fontDescription) {
+		$gtkFontFile = '../ecc-core/etc/gtk-2.0/font';
+		if (!$fontDescription) {
+			@unlink($gtkFontFile);
+			return false;
+		}
+		$iniData = array(
+			'gtk-font-name' => $fontDescription,
+		); 
+		return $this->storeIniFile($gtkFontFile, $iniData);
 	}
 	
 	public function backupFile($file) {
@@ -254,7 +255,8 @@ class IniFile {
 					$content .= "$key2 = $item2\n";
 				} 
 			} else {
-				if (0 === strpos($item, '"')) $item = '"'.$item.'"';
+				#if (0 === strpos($item, '"')) $item = '"'.$item.'"';
+				$item = '"'.$item.'"';
 				$content .= "$key = $item\n";
 			}
 		}

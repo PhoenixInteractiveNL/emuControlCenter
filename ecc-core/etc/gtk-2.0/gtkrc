@@ -1,1 +1,11 @@
-gtk-theme-name = "Default"
+# Include Global GUI font file
+# This is configured in ECC config
+include "font"
+
+# Include Theme file
+# This is configured in ECC Theme
+include "theme"
+
+# Include Icon Theme file
+# For now this is just a small fix that replaces the (bad) 'save' iconlink due to engine upgrade!
+include "icon"

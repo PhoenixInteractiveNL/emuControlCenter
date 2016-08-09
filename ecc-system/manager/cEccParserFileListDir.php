@@ -22,6 +22,8 @@ class EccParserFileListDir implements FileList {
 	private $_progress_count = 1;
 	private $found_str = "";
 	
+	public $invalidFile = array();
+	
 	#public $pbar_parser;
 	#public $statusbar_lbl_bottom;
 	
@@ -164,9 +166,10 @@ class EccParserFileListDir implements FileList {
 	public function handle_zip_file($zip_file) {
 		
 		// ABS-PATH TO REL-PATH...
-		$zip_hdl = @zip_open(realpath($zip_file));
+		$zip_hdl = zip_open(realpath($zip_file));
 		#$zip_hdl = @zip_open($zip_file);
-		if ($zip_hdl === false) {
+		if ($zip_hdl === false || is_int($zip_hdl)) {
+			$this->invalidFile[] = $zip_file;
 			return false;
 		}
 		else {

@@ -16,9 +16,11 @@ $i18n['menu'] = array(
 	'lbl_roms_add%s' =>
 		"Ajouter des ROMS",
 	'lbl_roms_optimize%s' =>
-		"Mettre à jour la base de données des ROMS",
+		"Actualiser la base de données des ROMS",
 	'lbl_roms_remove%s' =>
 		"Supprimer les ROMS de la base de données",
+	'lbl_roms_remove_dup%s' =>
+		"Supprimer les ROMS en double de la base de données",
 	'lbl_emu_config' =>
 		"Editer/Assigner un émulateur",
 	'lbl_ecc_config' =>
@@ -41,7 +43,7 @@ $i18n['menu'] = array(
 	// context menu main
 	// -------------------------------------------------------------
 	'lbl_start' =>
-		"Démarrer une ROM",
+		"Démarrer la ROM",
 	'lbl_fav_remove' =>
 		"Supprimer ce marque-pages",
 	'lbl_fav_all_remove' =>
@@ -59,9 +61,9 @@ $i18n['menu'] = array(
 	'lbl_roms_initial_add%s%s' =>
 		"Aucune ROM trouvée pour la platform\n----------------------------------------\n%s (%s)\n----------------------------------------\nCliquer ici pour ajouter des ROMS !",
 	'lbl_meta_webservice_meta_get' =>
-		"Obtenir des données à partir de eccdb (Internet)",
+		"Obtenir des données de eccdb (Internet)",
 	'lbl_meta_webservice_meta_set' =>
-		"Ajouter vos données à eccdb (Internet)",
+		"Ajouter vos données dans eccdb (Internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
 		"Operations sur le disque dur",

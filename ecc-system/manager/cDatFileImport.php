@@ -62,7 +62,7 @@ class DatFileImport extends App {
 			isset($dat_header['CREDITS']['VERSION'])
 		) {
 			$first_game = key($dat_header['GAMES']);
-			
+
 			if (!$this->eccident) {
 				$this->status_obj->update_progressbar(0, "ERROR!");
 				$message = "Romcenter: You have to choose a Platform!\n\n";
@@ -75,10 +75,13 @@ class DatFileImport extends App {
 			}
 			else {
 				$this->status_obj->update_progressbar(0, "ERROR!");
-				$message = "This is not a compatible Romcenter-Dat!\n";
-				$message .= '"'.$this->dat_filename.'"'."\n\n";
-				$message .= "emuControlCenter doesn�t find any fileextension in this dat-file!\n";
-				$message .= "ecc needs to match fileextension from dat-file and assigned extensions in ecc!\n";
+				$message = "Sorry... missing extension in Romcenter-Dat!\n";
+				$message .= '"'.basename($this->dat_filename).'"'."\n\n";
+				
+				$possible_extensions = $this->ini->getPlatformFileExtensions($this->eccident);
+				$message .= "ecc searching for extension \"*.".implode("; *.", array_keys($possible_extensions))."\" but dont find any of these in this dat-file! (Row 5)\n\n";
+				$message .= "You can modify the datfile placing the fileextension in the 5. row and try again!\n";
+				$message .= "-rname (U)-rname (U)-rname (U)-rname (U)-rname.ext (U)-f2ee11f9-2097152---\n";
 				$this->status_obj->update_message($message);
 			}
 		}
@@ -118,7 +121,7 @@ class DatFileImport extends App {
 	
 	public function validate_romcenter_format($rc_dat_version=false, $first_game = array()) {
 		
-		$split_row = explode("�", $first_game);
+		$split_row = explode("¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
 		
 		switch ($rc_dat_version) {
 			case '2.00':
@@ -191,7 +194,7 @@ class DatFileImport extends App {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			// get data for a row
-			$split = explode('�', $key);
+			$split = explode("¬", iconv('ISO-8859-1', 'UTF-8', $key));
 			
 			// corrupt data... jump to next entry and log!
 			if (!isset($split[$name_from_field]) || !isset($split[$extension_from_field])) {

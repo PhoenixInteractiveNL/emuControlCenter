@@ -15,7 +15,7 @@ class GuiHelper {
 	}
 	
 	public function getEccVersionString() {
-		return $this->gui->ecc_release['title']." ".$this->gui->ecc_release['release_version']." ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
+		return $this->gui->ecc_release['title']." ".$this->gui->ecc_release['local_release_version']." build ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
 	}
 	
 	public function createUserfolderIfNeeded() {

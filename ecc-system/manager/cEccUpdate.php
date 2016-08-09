@@ -9,7 +9,7 @@ class EccUpdate {
 	}
 	
 	public function updateSystem($eccVersion) {
-
+		
 		// get version of ecc stored in db
 		$eccDbVersion = $this->getEccDbVersion();
 		
@@ -28,20 +28,27 @@ class EccUpdate {
 				}
 			case $eccDbVersion < '0.7.0':
 				if ($this->updateEccFromConfig('0.7.0')) $this->updateEccDbVersion('0.7.0');
-				else $errorVersion = '0.7.0';
-			break;
-			
+				else {
+					$errorVersion = '0.7.0';
+					break;
+				}
+			case $eccDbVersion < '0.7.1':
+				if ($this->updateEccFromConfig('0.7.1')) $this->updateEccDbVersion('0.7.1');
+				else {
+					$errorVersion = '0.7.1';
+					break;
+				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
-		#print "VERSION NOW ".$eccVersion."".LF.LF;
+		#print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
 	}
 	
 	private function updateEccFromConfig($version) {
 		$success = true;
 		require_once('updates/update_'.$version.'.php');
 		foreach ($updateConfig['db'] as $index => $query) {
-			$hdl = @$this->dbms->query($query);
-			if (!$hdl) $success = false;
+			@$this->dbms->query($query);
+			#if (!$hdl) $success = false;
 		}
 		return $success;
 	}

@@ -40,7 +40,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3692">
+		<widget class="GtkImage" id="image3763">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-directory</property>
 		  <property name="icon_size">1</property>
@@ -64,7 +64,7 @@
 		      <accelerator key="A" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3693">
+			<widget class="GtkImage" id="image3764">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-directory</property>
 			  <property name="icon_size">1</property>
@@ -93,7 +93,7 @@
 		      <accelerator key="E" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3694">
+			<widget class="GtkImage" id="image3765">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-properties</property>
 			  <property name="icon_size">1</property>
@@ -122,7 +122,7 @@
 		      <accelerator key="O" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3695">
+			<widget class="GtkImage" id="image3766">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-execute</property>
 			  <property name="icon_size">1</property>
@@ -149,7 +149,7 @@
 		      <signal name="activate" handler="on_topMenuReparseRomFolder_activate" last_modification_time="Sun, 05 Nov 2006 21:38:17 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3696">
+			<widget class="GtkImage" id="image3767">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-execute</property>
 			  <property name="icon_size">1</property>
@@ -177,7 +177,7 @@
 		      <signal name="activate" handler="on_menubar_maint_duplicate_remove_all_activate" last_modification_time="Sat, 26 Aug 2006 16:20:12 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3697">
+			<widget class="GtkImage" id="image3768">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -205,7 +205,7 @@
 		      <accelerator key="R" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3698">
+			<widget class="GtkImage" id="image3769">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -230,7 +230,7 @@
 	      <signal name="activate" handler="on_import/export1_activate" last_modification_time="Sun, 20 Aug 2006 17:32:36 GMT"/>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3699">
+		<widget class="GtkImage" id="image3770">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-justify-fill</property>
 		  <property name="icon_size">1</property>
@@ -253,7 +253,7 @@
 		      <signal name="activate" handler="on_import_emuControlCenter_datfile_activate" last_modification_time="Sat, 26 Aug 2006 13:23:21 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3700">
+			<widget class="GtkImage" id="image3771">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -275,7 +275,7 @@
 		      <signal name="activate" handler="on_import_ecc/romcenter_datfile1_activate" last_modification_time="Sun, 20 Aug 2006 17:39:15 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3701">
+			<widget class="GtkImage" id="image3772">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -303,7 +303,7 @@
 		      <signal name="activate" handler="on_export_ecc_datfile_full1_activate" last_modification_time="Sun, 20 Aug 2006 17:39:15 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3702">
+			<widget class="GtkImage" id="image3773">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -325,7 +325,7 @@
 		      <signal name="activate" handler="on_export_ecc_datfile_user1_activate" last_modification_time="Sun, 20 Aug 2006 17:39:50 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3703">
+			<widget class="GtkImage" id="image3774">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -347,7 +347,7 @@
 		      <signal name="activate" handler="on_export_ecc_datfile_esearch1_activate" last_modification_time="Sun, 20 Aug 2006 17:39:50 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3704">
+			<widget class="GtkImage" id="image3775">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -375,7 +375,7 @@
 		      <signal name="activate" handler="on_empty_datfile_database1_activate" last_modification_time="Sun, 20 Aug 2006 17:49:04 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3705">
+			<widget class="GtkImage" id="image3776">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -399,7 +399,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3706">
+		<widget class="GtkImage" id="image3777">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-harddisk</property>
 		  <property name="icon_size">1</property>
@@ -439,7 +439,7 @@
 		      <signal name="activate" handler="on_topMenuFilesRemoveFile_activate" last_modification_time="Sun, 05 Nov 2006 21:10:57 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3707">
+			<widget class="GtkImage" id="image3778">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -476,7 +476,7 @@
 			      <signal name="activate" handler="on_menubar_filesys_organize_roms_preview_activate" last_modification_time="Sun, 27 Aug 2006 15:56:19 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image3708">
+				<widget class="GtkImage" id="image3779">
 				  <property name="visible">True</property>
 				  <property name="stock">gtk-info</property>
 				  <property name="icon_size">1</property>
@@ -498,7 +498,7 @@
 			      <signal name="activate" handler="on_menubar_maint_fs_organize_files_activate" last_modification_time="Sun, 27 Aug 2006 11:34:14 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image3709">
+				<widget class="GtkImage" id="image3780">
 				  <property name="visible">True</property>
 				  <property name="stock">gtk-dialog-warning</property>
 				  <property name="icon_size">1</property>
@@ -527,7 +527,7 @@
 	      <signal name="activate" handler="on_menubar_maint_main_activate" last_modification_time="Sat, 26 Aug 2006 13:42:16 GMT"/>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3710">
+		<widget class="GtkImage" id="image3781">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-execute</property>
 		  <property name="icon_size">1</property>
@@ -550,7 +550,7 @@
 		      <signal name="activate" handler="on_menubar_maint_db_vacuum_activate" last_modification_time="Sat, 26 Aug 2006 13:42:16 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3711">
+			<widget class="GtkImage" id="image3782">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-execute</property>
 			  <property name="icon_size">1</property>
@@ -578,7 +578,7 @@
 		      <signal name="activate" handler="on_create_all_ecc_user-folders1_activate" last_modification_time="Tue, 29 Aug 2006 20:36:56 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3712">
+			<widget class="GtkImage" id="image3783">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-execute</property>
 			  <property name="icon_size">1</property>
@@ -606,7 +606,7 @@
 		      <signal name="activate" handler="on_menubarMaintCleanHistory_activate" last_modification_time="Thu, 19 Oct 2006 18:29:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3713">
+			<widget class="GtkImage" id="image3784">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-help</property>
 			  <property name="icon_size">1</property>
@@ -630,7 +630,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3714">
+		<widget class="GtkImage" id="image3785">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-properties</property>
 		  <property name="icon_size">1</property>
@@ -691,7 +691,7 @@
 		      <accelerator key="C" modifiers="GDK_MOD1_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3715">
+			<widget class="GtkImage" id="image3786">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-preferences</property>
 			  <property name="icon_size">1</property>
@@ -715,7 +715,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3716">
+		<widget class="GtkImage" id="image3787">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-dialog-info</property>
 		  <property name="icon_size">1</property>
@@ -737,28 +737,7 @@
 		      <signal name="activate" handler="on_create_desktop_icon1_activate" last_modification_time="Mon, 04 Dec 2006 18:38:53 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3717">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-new</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="topMenuStartStartmenuEntry">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Add Startmenu Icon</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_create_startmenu_entry1_activate" last_modification_time="Mon, 04 Dec 2006 18:38:53 GMT"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image3718">
+			<widget class="GtkImage" id="image3788">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-new</property>
 			  <property name="icon_size">1</property>
@@ -822,7 +801,7 @@
 		      <signal name="activate" handler="on_topMenuStartResetRegistry_activate" last_modification_time="Mon, 04 Dec 2006 18:51:30 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3719">
+			<widget class="GtkImage" id="image3789">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-clear</property>
 			  <property name="icon_size">1</property>
@@ -849,7 +828,7 @@
 		      <signal name="activate" handler="on_topMenuStartConfig_activate" last_modification_time="Wed, 17 Jan 2007 19:51:16 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3720">
+			<widget class="GtkImage" id="image3790">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-preferences</property>
 			  <property name="icon_size">1</property>
@@ -873,7 +852,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image3721">
+		<widget class="GtkImage" id="image3791">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-help</property>
 		  <property name="icon_size">1</property>
@@ -919,7 +898,7 @@
 		      <signal name="activate" handler="on_documentation1_activate" last_modification_time="Fri, 17 Nov 2006 19:14:18 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3722">
+			<widget class="GtkImage" id="image3792">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-justify-center</property>
 			  <property name="icon_size">1</property>
@@ -940,7 +919,7 @@
 		      <signal name="activate" handler="on_documentation_(online)1_activate" last_modification_time="Fri, 17 Nov 2006 19:14:18 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3723">
+			<widget class="GtkImage" id="image3793">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-justify-center</property>
 			  <property name="icon_size">1</property>
@@ -967,7 +946,7 @@
 		      <signal name="activate" handler="on_official_website1_activate" last_modification_time="Fri, 17 Nov 2006 19:07:18 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3724">
+			<widget class="GtkImage" id="image3794">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-media-play</property>
 			  <property name="icon_size">1</property>
@@ -988,7 +967,7 @@
 		      <signal name="activate" handler="on_support_forum1_activate" last_modification_time="Fri, 17 Nov 2006 19:07:18 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3725">
+			<widget class="GtkImage" id="image3795">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-dialog-question</property>
 			  <property name="icon_size">1</property>
@@ -1015,7 +994,7 @@
 		      <signal name="activate" handler="on_donations1_activate" last_modification_time="Fri, 17 Nov 2006 19:07:18 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3726">
+			<widget class="GtkImage" id="image3796">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-about</property>
 			  <property name="icon_size">1</property>
@@ -1042,7 +1021,7 @@
 		      <signal name="activate" handler="on_about1_activate" last_modification_time="Sun, 20 Aug 2006 17:31:14 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image3727">
+			<widget class="GtkImage" id="image3797">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-dialog-question</property>
 			  <property name="icon_size">1</property>
@@ -3882,7 +3861,7 @@ emuControlCenter (ecc) will automaticly search for supported roms. (unpacked and
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">?</property>
 					  <property name="use_underline">False</property>
-					  <property name="use_markup">False</property>
+					  <property name="use_markup">True</property>
 					  <property name="justify">GTK_JUSTIFY_LEFT</property>
 					  <property name="wrap">False</property>
 					  <property name="selectable">False</property>
@@ -3924,7 +3903,7 @@ emuControlCenter (ecc) will automaticly search for supported roms. (unpacked and
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">?</property>
 					  <property name="use_underline">False</property>
-					  <property name="use_markup">False</property>
+					  <property name="use_markup">True</property>
 					  <property name="justify">GTK_JUSTIFY_LEFT</property>
 					  <property name="wrap">False</property>
 					  <property name="selectable">False</property>
@@ -9002,7 +8981,7 @@ CLOSE</property>
 
 <widget class="GtkWindow" id="win_imagePopup">
   <property name="title" translatable="yes">emuControlCenter ImageCenter</property>
-  <property name="type">GTK_WINDOW_POPUP</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_MOUSE</property>
   <property name="modal">False</property>
   <property name="default_width">800</property>

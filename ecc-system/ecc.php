@@ -324,9 +324,9 @@ class App extends GladeXml {
 		$menuRating->popup();
 	}
 	public function setSearchFfType($type) {
-		$this->searchSelectorFfTypeLbl->set_markup('<b>'.$type[0].$type[1].'</b>');
+		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$type[0].$type[1].'</b></span>');
 		
-		$color =  ($type == 'NAME') ? '#99aabb' : '#00bb00';
+		$color =  ($type == 'NAME') ? $this->colEventOptionSelect1 : $this->colEventOptionActive;
 		$this->searchSelectorFfType->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($color));
 		
 		$this->searchFreeformType = $type;
@@ -366,9 +366,11 @@ class App extends GladeXml {
 		$menuRating->show_all();
 		$menuRating->popup();
 	}
+	
 	public function setSearchFfOperator($key, $label) {
-		$this->searchSelectorOperatorLbl->set_markup('<b>'.$label.'</b>');
-		$color =  ($key == 'AND') ? '#99aabb' : '#00bb00';
+		$this->searchSelectorOperatorLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$label.'</b></span>');
+		
+		$color =  ($key == 'AND') ? $this->colEventOptionSelect1 : $this->colEventOptionActive;
 		$this->searchSelectorOperator->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($color));
 		
 		$this->searchFreeformOperator = $key;
@@ -402,8 +404,8 @@ class App extends GladeXml {
 	}
 	
 	public function setSearchRating($rate) {
-		$this->searchSelectorRatingLbl->set_markup('<b>'.$rate.'*</b>');
-		$color =  (!$rate) ? '#99aabb' : '#00bb00';
+		$this->searchSelectorRatingLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$rate.'*</b></span>');
+		$color =  (!$rate) ? $this->colEventOptionSelect1 : $this->colEventOptionActive;
 		$this->searchSelectorRating->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($color));
 		
 		
@@ -724,6 +726,27 @@ class App extends GladeXml {
 		$this->treeviewBgColor2 = $this->ini->getKey('GUI_COLOR', 'treeview_color_row2');
 		if (!$this->treeviewBgColor2 || !Valid::color($this->treeviewBgColor2)) $this->treeviewBgColor2 = "#556677";
 		
+		$this->treeviewBgColor2 = $this->ini->getKey('GUI_COLOR', 'treeview_color_row2');
+		if (!$this->treeviewBgColor2 || !Valid::color($this->treeviewBgColor2)) $this->treeviewBgColor2 = "#556677";
+
+		$this->colEventOptionSelect1 = $this->ini->getKey('GUI_COLOR', 'option_select_bg_1');
+		if (!$this->colEventOptionSelect1 || !Valid::color($this->colEventOptionSelect1)) $this->colEventOptionSelect1 = "#CCDDEE";
+
+		$this->colEventOptionSelect2 = $this->ini->getKey('GUI_COLOR', 'option_select_bg_2');
+		if (!$this->colEventOptionSelect2 || !Valid::color($this->colEventOptionSelect2)) $this->colEventOptionSelect2 = "#DDEEFF";
+
+		$this->colEventOptionActive = $this->ini->getKey('GUI_COLOR', 'option_select_bg_active');
+		if (!$this->colEventOptionActive || !Valid::color($this->colEventOptionActive)) $this->colEventOptionActive = "#00BB00";
+		
+		$this->colEventOptionText = $this->ini->getKey('GUI_COLOR', 'option_select_text');
+		if (!$this->colEventOptionText || !Valid::color($this->colEventOptionText)) $this->colEventOptionText = "#000000";		
+		
+		$this->treeviewSelectedBgColor = $this->ini->getKey('GUI_COLOR', 'treeview_color_bg_selection');
+		if (!$this->treeviewSelectedBgColor || !Valid::color($this->treeviewSelectedBgColor)) $this->treeviewSelectedBgColor = "#aabbcc";		
+		
+		$this->treeviewSelectedFgColor = $this->ini->getKey('GUI_COLOR', 'treeview_color_fg_selection');
+		if (!$this->treeviewSelectedFgColor || !Valid::color($this->treeviewSelectedFgColor)) $this->treeviewSelectedFgColor = "#000000";		
+		
 		// font family
 		$this->treeviewFontType = $this->ini->getKey('GUI_COLOR', 'treeview_font_type');
 		if (!$this->treeviewFontType) $this->treeviewFontType = "arial 10";
@@ -811,29 +834,34 @@ class App extends GladeXml {
 		$this->createEccOptBtnBar();
 
 		$this->nbMediaInfoStateRunningEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Running?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_running');
-		$this->nbMediaInfoStateRunningEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
+		$this->nbMediaInfoStateRunningEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		
 		$this->nbMediaInfoStateBuggyEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Buggy?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_bugs');
-		$this->nbMediaInfoStateBuggyEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+		$this->nbMediaInfoStateBuggyEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
+		
 		$this->nbMediaInfoStateTrainerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Trainer?', $this->dropdownStateCount, 'simpleMetaUpdate', 'md_trainer');
-		$this->nbMediaInfoStateTrainerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
+		$this->nbMediaInfoStateTrainerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		
 		$this->nbMediaInfoStateIntroEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Intro?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_intro');
-		$this->nbMediaInfoStateIntroEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+		$this->nbMediaInfoStateIntroEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
+		
 		$this->nbMediaInfoStateUsermodEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Usermod?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_usermod');
-		$this->nbMediaInfoStateUsermodEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
+		$this->nbMediaInfoStateUsermodEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		
 		$this->nbMediaInfoStateFreewareEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Freeware?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_freeware');
-		$this->nbMediaInfoStateFreewareEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+		$this->nbMediaInfoStateFreewareEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
+		
 		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Multiplayer?', $this->dropdownStateCount, 'simpleMetaUpdate', 'md_multiplayer');
-		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
-		$this->nbMediaInfoStateNetplayEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Netplay?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_netplay');
-		$this->nbMediaInfoStateNetplayEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 
+		$this->nbMediaInfoStateNetplayEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Netplay?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_netplay');
+		$this->nbMediaInfoStateNetplayEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 		
 		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Savetype?', $this->dropdownStorage, 'simpleMetaUpdate', 'md_storage', true);
-		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
-		
+		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		
 		$this->nbMediaInfoStateRatingEvent->connect('button-press-event', array($this, 'directRating'));
-		$this->nbMediaInfoStateRatingEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
+		$this->nbMediaInfoStateRatingEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
 		// ----------------------------------------------------------------
 		// Fill dropdown for category search!
@@ -842,15 +870,20 @@ class App extends GladeXml {
 		$combo->connect('changed', array($this, 'setSearchCategoryMain'));
 		
 		$this->searchSelectorFfType->connect('button-press-event', array($this, 'dispatchSearchFfType'));
-		$this->searchSelectorFfType->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->searchSelectorFfType->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+
+		$first = key($this->freeformSearchFields);
+		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
 		$this->objTooltips->set_tip($this->searchSelectorFfType, I18N::get('tooltips', 'search_field_select'));
 
 		$this->searchSelectorRating->connect('button-press-event', array($this, 'dispatchSearchSelectory'));
-		$this->searchSelectorRating->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->searchSelectorRating->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		$this->searchSelectorRatingLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>0*</b></span>');
 		$this->objTooltips->set_tip($this->searchSelectorRating, I18N::get('tooltips', 'search_rating'));
 		
 		$this->searchSelectorOperator->connect('button-press-event', array($this, 'dispatchSearchFfOperator'));
-		$this->searchSelectorOperator->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->searchSelectorOperator->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		$this->searchSelectorOperatorLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>+</b></span>');
 		$this->objTooltips->set_tip($this->searchSelectorOperator, I18N::get('tooltips', 'search_operator'));
 		
 		// ----------------------------------------------------------------
@@ -870,7 +903,7 @@ class App extends GladeXml {
 //		$this->oHelper->createUserfolderIfNeeded();
 		
 		// set title of the main window!
-		$this->wdo_main->set_title($this->ecc_release['title']);
+		$this->wdo_main->set_title('.oO('.$this->ecc_release['title'].')Oo.');
 		
 		// ----------------------------
 		// SET USER_SWITCHES FROM INI
@@ -916,6 +949,40 @@ class App extends GladeXml {
 		$this->img_ecc_header_ebox->connect_simple('button-press-event', array(FACTORY::get('manager/GuiHelper'), 'open_splash_screen'));
 		$this->img_plattform_ebox->connect_simple('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
 		//$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
+		
+		// ----------------------------
+		// init preselected imagetype
+		// ----------------------------
+				// ----------------------------
+		// MEDIA-INFOS Image init
+		// ----------------------------
+		$this->media_img_btn_next->connect_simple('clicked', array($this, 'set_image_show_pos'), 'next');
+		$this->media_img_btn_prev->connect_simple('clicked', array($this, 'set_image_show_pos'), 'prev');
+		$this->img_media_btn_delete->connect('clicked', array($this, 'remove_image'));
+		$this->img_media_btn_save->connect('clicked', array($this, 'save_image'));
+		// image popup, if you click into the preview image
+		$this->img_media_btn_count->connect_simple('clicked', array($this, 'openImagePopup'), false);
+		// hide all buttons, not needed at startup
+		$this->media_img_btn_next->set_sensitive(false);
+		$this->media_img_btn_prev->set_sensitive(false);
+		$this->img_media_btn_count->set_sensitive(false);
+		$this->img_media_btn_delete->set_sensitive(false);
+		$this->img_media_btn_save->set_sensitive(false);
+		$this->img_media_btn_show_unsaved->connect('clicked', array($this, 'on_image_toggle_unsaved'));
+		// change image order
+		$userSelectedImageType = $this->ini->getHistoryKey('imageTypeSelected');
+		$imageIndex = 0;
+		if ($userSelectedImageType) {
+			foreach ($this->image_type as $name => $void) {
+				if ($userSelectedImageType == $name) break;
+				$imageIndex++;
+			}
+		}
+		$this->image_type_selected = ($userSelectedImageType) ? $userSelectedImageType : key($this->image_type);
+		if (!$this->obj_image_type) $this->obj_image_type = new IndexedCombobox($this->cb_image_type, false, $this->image_type, 2, $imageIndex);
+		$this->cb_image_type->connect_after("changed", array($this, 'image_type_order'));
+		// set current selected imageindex
+		$this->image_type_order(false, $this->image_type_selected);
 		
 		// ----------------------------
 		// init main bombo for languages
@@ -1110,37 +1177,6 @@ class App extends GladeXml {
 		$this->btn_add_bookmark->connect("clicked", array($this, 'add_bookmark_by_id'));
 		$this->btn_add_bookmark->hide();
 		
-		// ----------------------------
-		// MEDIA-INFOS Image init
-		// ----------------------------
-		$this->media_img_btn_next->connect_simple('clicked', array($this, 'set_image_show_pos'), 'next');
-		$this->media_img_btn_prev->connect_simple('clicked', array($this, 'set_image_show_pos'), 'prev');
-		$this->img_media_btn_delete->connect('clicked', array($this, 'remove_image'));
-		$this->img_media_btn_save->connect('clicked', array($this, 'save_image'));
-		// image popup, if you click into the preview image
-		$this->img_media_btn_count->connect_simple('clicked', array($this, 'openImagePopup'), false);
-		// hide all buttons, not needed at startup
-		$this->media_img_btn_next->set_sensitive(false);
-		$this->media_img_btn_prev->set_sensitive(false);
-		$this->img_media_btn_count->set_sensitive(false);
-		$this->img_media_btn_delete->set_sensitive(false);
-		$this->img_media_btn_save->set_sensitive(false);
-		$this->img_media_btn_show_unsaved->connect('clicked', array($this, 'on_image_toggle_unsaved'));
-		// change image order
-		$userSelectedImageType = $this->ini->getHistoryKey('imageTypeSelected');
-		$imageIndex = 0;
-		if ($userSelectedImageType) {
-			foreach ($this->image_type as $name => $void) {
-				if ($userSelectedImageType == $name) break;
-				$imageIndex++;
-			}
-		}
-		$this->image_type_selected = ($userSelectedImageType) ? $userSelectedImageType : key($this->image_type);
-		if (!$this->obj_image_type) $this->obj_image_type = new IndexedCombobox($this->cb_image_type, false, $this->image_type, 2, $imageIndex);
-		$this->cb_image_type->connect_after("changed", array($this, 'image_type_order'));
-		// set current selected imageindex
-		$this->image_type_order(false, $this->image_type_selected);
-		
 		// ----------------------------		
 		// INLINE HELP PARSER BUTTON
 		// ----------------------------
@@ -1239,7 +1275,6 @@ class App extends GladeXml {
 		// Startup
 		// ----------------------------		
 		$this->topMenuStartDesktopIcon->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/deskicon');
-		$this->topMenuStartStartmenuEntry->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/starticon');
 
 		$this->topMenuStartPhpInfo->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/phpversion');
 		$this->topMenuStartPhpVerify->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/verify');
@@ -1748,6 +1783,8 @@ class App extends GladeXml {
 		$emuParameter = $usedEmu['param'];
 		$emuEscape = (int)$usedEmu['escape'];
 		$emuWin8char = (int)$usedEmu['win8char'];
+		$filenameOnly = (int)$usedEmu['filenameOnly'];
+		$noExtension = (int)$usedEmu['noExtension'];
 		
 		# search for some errors
 		$errorMessage = false;
@@ -1764,10 +1801,11 @@ class App extends GladeXml {
 			$this->open_window_info(I18N::get('popup', 'rom_miss_title'), I18N::get('popup', 'rom_miss_msg'));
 			return false;
 		}
+
 		
 		// execute the file with the assigned emulator		
 		$osManager = FACTORY::get('manager/Os');
-		if ($osManager->executeFileWithProgramm($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char)){
+		if ($osManager->executeFileWithProgramm($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char, $filenameOnly, $noExtension)){
 			$this->_fileView->update_launch_time($this->current_media_info['id']);	
 		}
 		return true;
@@ -2059,19 +2097,20 @@ class App extends GladeXml {
 					$this->media_nb_info_file_name_pack->set_markup('<span color="#334455">'.htmlspecialchars($path_pack).'</span>');
 					
 					$this->media_nb_info_file_path->set_markup('<span color="#334455">'.htmlspecialchars(dirname(realpath($info['path']))).'</span>');
-					
-					$this->media_nb_info_running->set_markup(''.$this->get_dropdown_string($info['md_running']).'');
-					$this->media_nb_info_bugs->set_markup(''.$this->get_dropdown_string($info['md_bugs']).'');
-					$this->media_nb_info_trainer->set_markup(''.$this->get_dropdown_string($info['md_trainer']).'');
-					$this->media_nb_info_intro->set_markup(''.$this->get_dropdown_string($info['md_intro']).'');
-					$this->media_nb_info_usermod->set_markup(''.$this->get_dropdown_string($info['md_usermod']).'');
-					$this->media_nb_info_freeware->set_markup(''.$this->get_dropdown_string($info['md_freeware']).'');
-					$this->media_nb_info_multiplayer->set_markup(''.$this->get_dropdown_string($info['md_multiplayer']).'');
-					$this->media_nb_info_netplay->set_markup(''.$this->get_dropdown_string($info['md_netplay']).'');
+
+					$this->media_nb_info_running->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_running']).'</span>');
+					$this->media_nb_info_bugs->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_bugs']).'</span>');
+					$this->media_nb_info_trainer->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_trainer']).'</span>');
+					$this->media_nb_info_intro->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_intro']).'</span>');
+					$this->media_nb_info_usermod->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_usermod']).'</span>');
+					$this->media_nb_info_freeware->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_freeware']).'</span>');
+					$this->media_nb_info_multiplayer->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_multiplayer']).'</span>');
+					$this->media_nb_info_netplay->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_netplay']).'</span>');
 					
 					$md_storage = ($info['md_storage'] === null) ? 0 : $info['md_storage'];
 					//$this->media_nb_info_storage->set_markup($this->dropdownStorage[$md_storage]);
-					$this->media_nb_info_storage->set_markup($this->dropdownStorage[$md_storage]);
+					#$this->media_nb_info_storage->set_markup($this->dropdownStorage[$md_storage]);
+					$this->media_nb_info_storage->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->dropdownStorage[$md_storage].'</span>');
 					
 					$category = (isset($this->media_category[$info['md_category']])) ? $this->media_category[$info['md_category']] : '?';
 					$this->media_nb_info_category->set_text($category);
@@ -2089,10 +2128,9 @@ class App extends GladeXml {
 					$publisher = (isset($info['md_publisher'])) ? $info['md_publisher'] : '?';
 					$this->media_nb_info_publisher->set_text($publisher);
 					
-					
-					
 					$rating = (isset($info['md_rating'])) ? $info['md_rating'] : 0;
-					$this->media_nb_info_rating->set_text(str_repeat($this->ratingChar, $rating));
+					#$this->media_nb_info_rating->set_text(str_repeat($this->ratingChar, $rating));
+					$this->media_nb_info_rating->set_markup('<span color="'.$this->colEventOptionText.'">'.str_repeat($this->ratingChar, $rating).'</span>');
 					
 					$this->current_media_info = $info;
 					$this->set_image_for_show(0);
@@ -2100,7 +2138,7 @@ class App extends GladeXml {
 					$this->updateMediaInfoFlags(array_keys($this->_fileView->get_language_by_mdata_id($info['md_id'])));
 					
 					// ecc-informations from ini
-					$version = "".$this->ecc_release['release_version']." ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state']."";
+					$version = "".$this->ecc_release['local_release_version']." build ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state']."";
 					$website = $this->ecc_release['website'];
 					$email = $this->ecc_release['email'];
 					$title = $this->ecc_release['title'];
@@ -2202,7 +2240,7 @@ class App extends GladeXml {
 		$this->media_nb_pers_played_time->set_markup($date);
 
 		// RATING
-		$rating = ($info['md_rating']) ? '<span foreground="#000000"><b>'.$info['md_rating'].'</b></span>' : '<span foreground="#aaaaaa"><b>not rated</b></span>';
+		$rating = ($info['md_rating']) ? '<span foreground="#000000"><b>'.str_repeat($this->ratingChar, $info['md_rating']).'</b></span>' : '<span foreground="#aaaaaa"><b>not rated</b></span>';
 		$this->media_nb_pers_rating->set_markup($rating);
 
 		// BOOKMARKED
@@ -2507,7 +2545,7 @@ class App extends GladeXml {
 		$temp[$needle] = $this->image_type[$needle];
 		unset($this->image_type[$needle]);
 		$this->image_type = array_merge($temp, $this->image_type);
-		$this->onReloadRecord();
+		if ($obj) $this->onReloadRecord();
 	}
 	
 	/*
@@ -2530,10 +2568,14 @@ class App extends GladeXml {
 			$itm_add_new = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_add%s'), $platform_name));
 			$itm_add_new->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ADD_NEW');
 			$menu->append($itm_add_new);
-			
+
 			$itm_maint_db_optimize = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_optimize%s'), $platform_name));
 			$itm_maint_db_optimize->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_OPTIMIZE');
 			$menu->append($itm_maint_db_optimize);
+
+			$itm_maint_db_clear_media = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove_dup%s'), $platform_name));
+			$itm_maint_db_clear_media->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DUPLICATE_REMOVE_ALL');
+			$menu->append($itm_maint_db_clear_media);
 			
 			$itm_maint_db_clear_media = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove%s'), $platform_name));
 			$itm_maint_db_clear_media->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
@@ -3561,67 +3603,48 @@ class App extends GladeXml {
 		// main model
 		$this->model = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT);
 		
-		// IMAGE
-		$renderer_0 = new GtkCellRendererPixbuf();
-		$column_0 = new GtkTreeViewColumn('IMAGE', $renderer_0, 'pixbuf', 0);
+		// INIT $pixbufRenderer
+		$pixbufRenderer = new GtkCellRendererPixbuf();
+		
+		// INIT $textRenderer
+		$textRenderer = new GtkCellRendererText();
+		$textRenderer->set_property('font',  $this->treeviewFontType);
+		$textRenderer->set_property("yalign", 0);
+		$textRenderer->set_property('foreground', $this->treeviewFgColor);
+		
+		$column_0 = new GtkTreeViewColumn('IMAGE', $pixbufRenderer, 'pixbuf', 0);
 		$column_0->set_expand(false);
+		$column_0->set_cell_data_func($pixbufRenderer, array($this, "format_col"));
 		
-		// IMAGE
-		$renderer_1 = new GtkCellRendererPixbuf();
-		$column_1 = new GtkTreeViewColumn('IMAGE', $renderer_1, 'pixbuf', 1);
-		
-		// IMAGE
-		$rPixbufRating = new GtkCellRendererPixbuf();
-		$cPixbufRating = new GtkTreeViewColumn('IMAGE', $rPixbufRating, 'pixbuf', 6);
-		
-		//$cPixbufRating->set_sizing(Gtk::TREE_VIEW_COLUMN_FIXED);
-		//Gtk::TREE_VIEW_COLUMN_AUTOSIZE
-		
-		// TEXT INFO
-		$renderer_2 = new GtkCellRendererText();
-		//$renderer_2->set_property('family',  'Verdana');
-		
-#$renderer_2->set_property('family',  $this->treeviewFontType);
-$renderer_2->set_property('font',  $this->treeviewFontType);
+		$column_1 = new GtkTreeViewColumn('IMAGE', $pixbufRenderer, 'pixbuf', 1);
+		$column_1->set_expand(false);
+		$column_1->set_cell_data_func($pixbufRenderer, array($this, "format_col"));
 
+		$cPixbufRating = new GtkTreeViewColumn('IMAGE', $pixbufRenderer, 'pixbuf', 6);
+		$cPixbufRating->set_expand(false);
+		$cPixbufRating->set_cell_data_func($pixbufRenderer, array($this, "format_col"));
 
-		$renderer_2->set_property("yalign", 0);
-		//$renderer_2->set_property('size-points',  '9');
-#$renderer_2->set_property('size-points',  $this->treeviewFontSize);
-		
-		$renderer_2->set_property('foreground', $this->treeviewFgColor);
-		//$renderer_2->set_property('cell-background', '#394D59');
-		$column_2 = new GtkTreeViewColumn('TITLE', $renderer_2, 'text', 2);
-		$column_2->set_cell_data_func($renderer_2, array($this, "format_col"));
-		
+		$column_2 = new GtkTreeViewColumn('TITLE', $textRenderer, 'text', 2);
+		$column_2->set_cell_data_func($textRenderer, array($this, "format_col"));
 		$column_2->set_sizing(Gtk::TREE_VIEW_COLUMN_FIXED);
-		//Gtk::TREE_VIEW_COLUMN_AUTOSIZE
-		
 		
 		// hidden file-id
-		$renderer_file_id = new GtkCellRendererText();
-		$col_file_id = new GtkTreeViewColumn('ID', $renderer_file_id, 'text', 3);
+		$col_file_id = new GtkTreeViewColumn('ID', $textRenderer, 'text', 3);
 		$col_file_id->set_visible(false);
 		
 		// hidden mdata-id
-		$renderer_mdata_id = new GtkCellRendererText();
-		$col_mdata_id = new GtkTreeViewColumn('MDATA_ID', $renderer_mdata_id, 'text', 4);
+		$col_mdata_id = new GtkTreeViewColumn('MDATA_ID', $textRenderer, 'text', 4);
 		$col_mdata_id->set_visible(false);
 		
 		// hidden mdata-id
-		$renderer_composite_id = new GtkCellRendererText();
-		$col_composite_id = new GtkTreeViewColumn('COMPOSITE_ID', $renderer_composite_id, 'text', 5);
+		$col_composite_id = new GtkTreeViewColumn('COMPOSITE_ID', $textRenderer, 'text', 5);
 		$col_composite_id->set_visible(false);
 		
 		// add model to GtkTreeView
 		$this->sw_mainlist_tree->set_model($this->model);
 		
-		//$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
-		
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
-		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
+		# change colors to user-selected values
+		$this->setModifiedTreeviewColors($this->sw_mainlist_tree);
 		
 		$this->sw_mainlist_tree->append_column($column_0);
 		$this->sw_mainlist_tree->append_column($cPixbufRating);
@@ -3657,10 +3680,11 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 			Gtk::TYPE_STRING
 		);
 		
-		$rendererText = new GtkCellRendererText();
-
-		// IMAGE
 		
+		// IMAGE
+		$pixbufRenderer = new GtkCellRendererPixbuf();
+		
+		$rendererText = new GtkCellRendererText();
 		$rendererText->set_property("yalign", 0);
 		$rendererText->set_property('foreground', $this->treeviewFgColor);
 		$rendererText->set_property('font', $this->treeviewFontType);
@@ -3771,15 +3795,6 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 		#$colNetplay->set_spacing(10);
 		$colNetplay->set_cell_data_func($rendererText, array($this, "format_col"));
 		
-//		$idx = 16;
-//		$colLanguages = new GtkTreeViewColumn('languages', $rendererText, 'text', $idx);
-//		$colLanguages->set_expand(false);
-//		$colLanguages->set_resizable(true);
-//		$colLanguages->set_sort_indicator(true);
-//		$colLanguages->set_sort_column_id($idx);
-//		$colLanguages->set_spacing(10);
-//		$colLanguages->set_cell_data_func($rendererText, array($this, "format_col"));
-		
 		$colDeveloper = new GtkTreeViewColumn('developer', $rendererText, 'text', 2);
 		$colDeveloper->set_expand(false);
 		$colDeveloper->set_resizable(true);
@@ -3805,9 +3820,8 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 		## HIDDEN FIELDS!!!!
 		## HIDDEN FIELDS!!!!
 		
-		// IMAGE
-		$rPixbuf = new GtkCellRendererPixbuf();
-		$colPixbufIcon = new GtkTreeViewColumn('IMAGE', $rPixbuf, 'pixbuf', 16);
+		$colPixbufIcon = new GtkTreeViewColumn('IMAGE', $pixbufRenderer, 'pixbuf', 16);
+		$colPixbufIcon->set_cell_data_func($pixbufRenderer, array($this, "format_col"));
 		
 		$idx = 17;
 		$colPublisher = new GtkTreeViewColumn('publisher', $rendererText, 'text', $idx);
@@ -3823,11 +3837,14 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 		// add model to GtkTreeView
 		$this->sw_mainlist_tree->set_model($this->model);
 		
-		#$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
-		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
+//		#$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+//		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
+//		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
+//		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
+//		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
+		
+		# change colors to user-selected values
+		$this->setModifiedTreeviewColors($this->sw_mainlist_tree);
 		
 		$this->sw_mainlist_tree->append_column($colPixbufIcon);
 		$this->sw_mainlist_tree->append_column($colName);
@@ -3896,45 +3913,29 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 	{
 		$this->model_languages = new GtkListStore(Gtk::TYPE_BOOLEAN, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT, Gtk::TYPE_OBJECT);
 		
-		// id
+		$pixbufRenderer = new GtkCellRendererPixbuf();
+		
+		$textRenderer = new GtkCellRendererText();
+		$textRenderer->set_property('height', 20);
+		$textRenderer->set_property('font',  $this->treeviewFontType);
+		$textRenderer->set_property("yalign",0);
+		$textRenderer->set_property('foreground', '#ffffff');
+		$textRenderer->set_property('cell-background', '#394D59');
+		
 		$renderer = new GtkCellRendererToggle();
 		$column = new GtkTreeViewColumn('', $renderer, 'active',0);
-		
-		// id
-		$renderer_0 = new GtkCellRendererText();
-		$column_0 = new GtkTreeViewColumn('', $renderer_0, 'text',1);
+
+		$column_0 = new GtkTreeViewColumn('', $textRenderer, 'text',1);
 		$column_0->set_visible(false);
 		
+		$column_1 = new GtkTreeViewColumn('', $pixbufRenderer, 'pixbuf',2);
 		
-		// icon
-		$renderer_1 = new GtkCellRendererPixbuf();
-		$column_1 = new GtkTreeViewColumn('', $renderer_1, 'pixbuf',2);
+		$column_2 = new GtkTreeViewColumn('CATEGORY', $textRenderer, 'text', 3);
 		
-		// label
-		$renderer_2 = new GtkCellRendererText();
-		
-		$renderer_2->set_property('height', 20);
-		//$renderer_2->set_property('family',  'Arial');
-
-#$renderer_2->set_property('family',  $this->treeviewFontType);
-$renderer_2->set_property('font',  $this->treeviewFontType);
-		
-		$renderer_2->set_property("yalign",0);
-#$renderer_2->set_property('size-points',  '9');
-		$renderer_2->set_property('foreground', '#ffffff');
-		$renderer_2->set_property('cell-background', '#394D59');
-		
-		$column_2 = new GtkTreeViewColumn('CATEGORY', $renderer_2, 'text', 3);
-		
-		
-		// image 2 inactive
-		$renderer_3 = new GtkCellRendererPixbuf();
-		$column_3 = new GtkTreeViewColumn('', $renderer_3, 'pixbuf',4);
+		$column_3 = new GtkTreeViewColumn('', $pixbufRenderer, 'pixbuf',4);
 		$column_3->set_visible(false);
 		
-		// image 2 inactive
-		$renderer_tmp = new GtkCellRendererPixbuf();
-		$column_tmp = new GtkTreeViewColumn('', $renderer_tmp, 'pixbuf',5);
+		$column_tmp = new GtkTreeViewColumn('', $pixbufRenderer, 'pixbuf',5);
 		$column_tmp->set_visible(false);
 		
 		$treeview->set_model($this->model_languages);
@@ -3980,46 +3981,35 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 	/*
 	*
 	*/
-	public function init_treeview_nav()
-	{
-		
+	public function init_treeview_nav() {
 		$this->model_navigation = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+
+		$pixbufRenderer = new GtkCellRendererPixbuf();
 		
-		$renderer_0 = new GtkCellRendererPixbuf();
-		$column_0 = new GtkTreeViewColumn('Image', $renderer_0, 'pixbuf',0);
+		$textRenderer = new GtkCellRendererText();
+		$textRenderer->set_property('font',  $this->treeviewFontType);
+		$textRenderer->set_property('foreground', $this->treeviewFgColor);		
 		
-		$renderer_1 = new GtkCellRendererText();
-		$column_1 = new GtkTreeViewColumn('ID', $renderer_1, 'text',1);
+		$column_0 = new GtkTreeViewColumn('Image', $pixbufRenderer, 'pixbuf',0);
+		$column_0->set_cell_data_func($pixbufRenderer, array($this, "format_col"));
+		
+		$column_1 = new GtkTreeViewColumn('ID', $textRenderer, 'text',1);
 		$column_1->set_visible(false);
 		
-		$renderer_2 = new GtkCellRendererText();
-		//$renderer_2->set_property('height', 20);
-		//$renderer_2->set_property('family',  'Arial');
-
-#$renderer_2->set_property('family',  $this->treeviewFontType);
-$renderer_2->set_property('font',  $this->treeviewFontType);
-		//$renderer_2->set_property('size-points',  '9');
-#$renderer_2->set_property('size-points',  $this->treeviewFontSize);
-		$renderer_2->set_property('foreground', $this->treeviewFgColor);
-		$column_2 = new GtkTreeViewColumn('CATEGORY', $renderer_2, 'text', 2);
-		$column_2->set_cell_data_func($renderer_2, array($this, "format_col"));
+		$column_2 = new GtkTreeViewColumn('CATEGORY', $textRenderer, 'text', 2);
+		$column_2->set_cell_data_func($textRenderer, array($this, "format_col"));
 		
-		$renderer_3 = new GtkCellRendererText();
-		$column_3 = new GtkTreeViewColumn('TYPE', $renderer_3, 'text',3);
+		$column_3 = new GtkTreeViewColumn('TYPE', $textRenderer, 'text',3);
 		$column_3->set_visible(false);
 		
-		$renderer_count = new GtkCellRendererText();
-		$column_count = new GtkTreeViewColumn('TITLE_SIMPLE', $renderer_count, 'text', 4);
+		$column_count = new GtkTreeViewColumn('TITLE_SIMPLE', $textRenderer, 'text', 4);
 		$column_count->set_visible(false);
 		
 		$this->treeview1->set_model($this->model_navigation);
 		
-		//$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
-		$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
-		$this->treeview1->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
-		$this->treeview1->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
-		$this->treeview1->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
-				
+		# change colors to user-selected values
+		$this->setModifiedTreeviewColors($this->treeview1);
+		
 		$this->treeview1->append_column($column_0);
 		$this->treeview1->append_column($column_1);
 		$this->treeview1->append_column($column_2);
@@ -4028,6 +4018,16 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 		
 		$this->update_treeview_nav();
 	}
+	
+	public function setModifiedTreeviewColors($treeview1) {
+		//$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		$treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
+		$treeview1->modify_base(Gtk::STATE_SELECTED, GdkColor::parse($this->treeviewSelectedBgColor));
+		$treeview1->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse($this->treeviewSelectedBgColor));
+		$treeview1->modify_text(Gtk::STATE_SELECTED, GdkColor::parse($this->treeviewSelectedFgColor));
+		$treeview1->modify_text(Gtk::STATE_ACTIVE, GdkColor::parse($this->treeviewSelectedFgColor));
+	}
+	
 	
 	// self-defined function to display alternate row color
 	function format_col($column, $cell, $model, $iter) {
@@ -4520,20 +4520,34 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 				$media_name = ($data['md_name']) ? $data['md_name'] : $media_name;
 				$year = ($data['md_year']) ? $data['md_year'] : '';
 				$category = (isset($this->media_category[$data['md_category']])) ? $this->media_category[$data['md_category']] : '';
-				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : '';
 				$creator = (isset($data['md_creator'])) ? $data['md_creator'] : '';
 				$publisher = (isset($data['md_publisher'])) ? $data['md_publisher'] : '';
-				$running = (isset($data['md_running'])) ? $data['md_running'] : '';
+
+				$running = '';
+				if (isset($data['md_running'])) $running = ($data['md_running']) ? 'yes' : 'no' ;
 				
-				$multiplayer = (isset($data['md_multiplayer'])) ? $data['md_multiplayer'] : '';
-				$trainer = (isset($data['md_trainer'])) ? $data['md_trainer'] : '';
-				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : '';
+				$multiplayer = '';
+				if (isset($data['md_multiplayer'])) $multiplayer = ($data['md_multiplayer'] == 0) ? 'no' : $data['md_multiplayer'] ;
+
+				$trainer = '';
+				if (isset($data['md_trainer'])) $trainer = ($data['md_trainer'] == 0) ? 'no' : $data['md_trainer'] ;
 				
-				$bugs = (isset($data['md_bugs'])) ? $data['md_bugs'] : '';
-				$free = (isset($data['md_freeware'])) ? $data['md_freeware'] : '';
-				$intro = (isset($data['md_intro'])) ? $data['md_intro'] : '';
-				$net = (isset($data['md_netplay'])) ? $data['md_netplay'] : '';
-				$mod = (isset($data['md_usermod'])) ? $data['md_usermod'] : '';
+				$rating = ($data['md_rating']) ? str_repeat($this->ratingChar, $data['md_rating']) : '';
+				
+				$bugs = '';
+				if (isset($data['md_bugs'])) $bugs = ($data['md_bugs']) ? 'yes' : 'no' ;
+
+				$free = '';
+				if (isset($data['md_freeware'])) $free = ($data['md_freeware']) ? 'yes' : 'no' ;
+				
+				$intro = '';
+				if (isset($data['md_intro'])) $intro = ($data['md_intro']) ? 'yes' : 'no' ;
+
+				$net = '';
+				if (isset($data['md_netplay'])) $net = ($data['md_netplay']) ? 'yes' : 'no' ;
+				
+				$mod = '';
+				if (isset($data['md_usermod'])) $mod = ($data['md_usermod']) ? 'yes' : 'no' ;
 				
 //				$languages = '';
 //				if ($lang_data = array_keys($this->_fileView->get_language_by_mdata_id($data['md_id']))) {
@@ -4543,7 +4557,7 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 				// create model array for cell output
 				$item = array();
 				$item[] = $running;
-				$item[] = iconv('ISO-8859-1', 'UTF-8', $media_name);
+				$item[] = $media_name;//iconv('ISO-8859-1', 'UTF-8', $media_name);
 				$item[] = $creator;
 				$item[] = $data['id'];
 				$item[] = $data['md_id'];
@@ -4554,13 +4568,31 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 				$item[] = $trainer;
 				$item[] = $rating;
 				$item[] = $bugs;
-				$item[] = $free;
 				$item[] = $intro;
 				$item[] = $mod;
+				$item[] = $free;
 				$item[] = $net;
 //				$item[] = $languages;
 				$item[] = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png');
 				$item[] = $publisher;
+				
+//		$this->sw_mainlist_tree->append_column($colPixbufIcon);
+//		$this->sw_mainlist_tree->append_column($colName);
+//		$this->sw_mainlist_tree->append_column($colYear);
+//		$this->sw_mainlist_tree->append_column($colDeveloper);
+//		$this->sw_mainlist_tree->append_column($colPublisher);
+//		$this->sw_mainlist_tree->append_column($colCategory);	
+////		$this->sw_mainlist_tree->append_column($colLanguages);
+//		$this->sw_mainlist_tree->append_column($colRating);		
+//		$this->sw_mainlist_tree->append_column($colRunning);
+//		$this->sw_mainlist_tree->append_column($colBugs);
+//		$this->sw_mainlist_tree->append_column($colTrainer);
+//		$this->sw_mainlist_tree->append_column($colIntro);
+//		$this->sw_mainlist_tree->append_column($colMod);
+//		$this->sw_mainlist_tree->append_column($colFree);
+//		$this->sw_mainlist_tree->append_column($colMulti);
+//		$this->sw_mainlist_tree->append_column($colNetplay);
+				
 				
 				$this->model->append($item);
 				
@@ -4868,6 +4900,9 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 			case 'DEVELOPER':
 				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.creator like '%s'", $this->searchFreeformOperator);
 				break;
+			case 'PUBLISHER':
+				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.publisher like '%s'", $this->searchFreeformOperator);
+				break;
 			case 'INFO':
 				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.info like '%s'", $this->searchFreeformOperator);
 				break;
@@ -4969,7 +5004,6 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 	*/
 	public function onNextRecord($offset=false)
 	{
-		
 		$this->nb_main->set_current_page(0);
 		
 		$order_by = ($this->search_order_asc1->get_active()) ? 'ASC' : 'DESC';
@@ -5224,6 +5258,7 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 	
 	private function loadEccConfig() {
 		$mngrValidator = FACTORY::get('manager/Validator');
+		
 		$this->ecc_release = $mngrValidator->getEccCoreKey('ecc_release');
 		$this->user_path_subfolder_default = $mngrValidator->getEccCoreKey('user_path_subfolder_default');
 		$this->supported_images = $mngrValidator->getEccCoreKey('supported_images');
@@ -5250,8 +5285,7 @@ $renderer_2->set_property('font',  $this->treeviewFontType);
 [GENERAL]
 current_version="'.$this->ecc_release["local_release_version"].'"
 date_build="'.$this->ecc_release['local_release_date'].'"
-[UPDATE]
-last_update='.$this->ecc_release['local_release_build'].'
+current_build="'.$this->ecc_release['release_build'].'"
 ';
 		file_put_contents(ECC_BASEDIR.'ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
 	}

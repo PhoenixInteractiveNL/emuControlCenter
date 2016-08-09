@@ -1,4 +1,4 @@
-###############################################################################
+﻿###############################################################################
 # emuControlCenter - Emulator Rom Manager
 ###############################################################################
 #
@@ -33,6 +33,113 @@
 ###############################################################################
 # emuControlCenter - CHANGELOG
 ###############################################################################
+
+-------------------------------------------------------------------------------
+- Version 0.8
+-------------------------------------------------------------------------------
+* config-popup
+** Full i18 translation support
+** EMU-SECTION
+*** implemented new emulator parameter
+**** "filename only"
+***** removes the path eg. "c:/emu/sf2.rom" to "sf2.rom"
+***** also auto-change the basepath to the rom-directory (standard emu-directory!)
+**** "no extension"
+***** removes the fileextesion from filename eg. "sf2.rom" to "sf2"
+** ECC-SECTION
+*** added color-selector for treeview hilight color (bg/fg)
+*** Added Fontselector for global Gui-Fonts
+*** added button to access startup config
+* added true option state (yes, no, value) output to the detail view
+* added background-colors to all colums (also image columns)
+* fixed order in detail view - some meta-fields are flipped
+* renamed ego-shooter to first-person shooter
+* optimized pixbuf and textrenderer in treeview
+* Polished platform images
+** Removed some artifacts, lost pixels and redone some unsharp images!
+* Image transparity and alpha channel
+** All images have been REDONE with image transparity and alpha channel!
+** This is a neat feature.....also for the themes , so NO MORE WHITE BORDERS!!
+* Improved rating image
+** Slightly improved the rating image, by darkening the border and faded it some more!
+* Improved cell image
+** Slightly improved the cell image, by giving it a border, and used some gradient overlay for extra eye candy!
+* Added platforms
+** Sinclair ZX Spectrum
+** Sega Mega-CD
+** Sega Saturn
+** Emerson Arcadia 2001
+** Magnavox Odyssey 2
+** Philips CDI
+** Sega Dreamcast
+** Nintendo Gamecube
+** Vtech Creativision
+-------------------------------------------------------------------------------
+- ECC Core
+-------------------------------------------------------------------------------
+- Update to GTK v2.10.7 (2007.01.09)
+- Libgdk-0 & Libgtk-0
+  - A small core update that eliminates the error message:
+  - 'This application cannot run because libgdk-0.dll cannot be found, reinstalling this application can solve this problem'
+- SVG Support for themes
+- Pango (language)
+  - Pango is a 'font renderer' for GTK, used to display the correct fonts to a specific 'non latin' language.
+-------------------------------------------------------------------------------
+- ECC Startup
+-------------------------------------------------------------------------------
+v1.4.0.0:
+- Fixed the registry writing, when not in 'admin' mode (HKLM --> HKCU) (fix)
+- Removed 'first startup' pop-up if user wants startmenu icons (ECC installation takes care of this)
+- Removed some commands:
+  - Removed /website (ECC installation takes care of this)
+  - Removed /starticon (ECC installation takes care of this)
+  - Removed /disclaimer (Tools and startup are distributed onder the same license)
+v1.4.0.1:
+- Removed the disclaimer line from the 'about' box.
+- Deleted Some old code.
+- Splash image
+  - Changed the footer line.
+  - Syncronized the ECC icon with the background.
+  - Now locked with MD5 Hash (unchangeable).
+-------------------------------------------------------------------------------
+- ECC Theme select
+-------------------------------------------------------------------------------
+v1.0.0.7
+- Updated for the 'new GTK v2.10.7 engine', corrected the path to '2.10.0'
+v1.0.0.8
+- Updated ECC Theme for the 'Global GUI font' config for ECC v0.7.5+
+v1.0.0.9
+- Auto highlight theme in list on startup has been fixed.
+-------------------------------------------------------------------------------
+- ECC Live!
+------------------------------------------------------------------------------
+v2.0.0.1:
+- Handling of the separate INI files!
+  - The file 'ecc_local_update_info.ini' has been added, ECC Live! keep it's track in this file.
+- Fixed a small bug that sould say 'No update available...' and not 'Waiting...' when no updates found.
+v2.0.0.2:
+- Fixed a bug where ECC Live! crashed when clicked on the update list when updating/downloading.
+- Fixed a bug where old file(s) should be deleted on the next update that uses a delete list.
+- Made some fields a bit longer, also made the list a bit bigger.
+- Added a 'kickstart', when updating ECC Live!, the new version wil directly continue downloading.
+- Some text strings have been adjusted.
+-------------------------------------------------------------------------------
+- ECC Bugreport
+-------------------------------------------------------------------------------
+v1.0.0.8:
+- Increased the 'local' INI size to be sent, otherwise Bugreport won't send the report (fix)
+- Adjusted some text messages.
+
+-------------------------------------------------------------------------------
+- Version 0.7.1
+-------------------------------------------------------------------------------
+* added search field publisher
+* added remove duplicate roms to context-menu
+* added error output for found invalid zip files
+* config-popup
+** (ecc) added color selectors for event-select boxes
+* fixed romcenter datfile import bug
+* fixed missing indices to database for better performance
 
 -------------------------------------------------------------------------------
 - Version 0.7.0

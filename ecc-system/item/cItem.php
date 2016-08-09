@@ -9,26 +9,27 @@ class Item {
 	protected $_errors = array();
 	
 	/**
-	 * Enter description here...
+	 * magic function - used to support the syntax
+	 * $item->setName('test') and $item->getName()
 	 *
-	 * @param unknown_type $function
-	 * @param unknown_type $param
+	 * @param string $function
+	 * @param mixed $param
 	 * @return unknown
 	 */
 	public function __call($function, $param) {
-		
 		assert(is_string($function));
 		
-		$type = substr($function, 0, 4);
-		if (!in_array($type, array('set_', 'get_'))) return false;
+		print "$function, $param".LF;
 		
-		$variable = substr($function, 4);
+		$type = substr($function, 0, 3);
+		if (!in_array($type, array('set', 'get'))) return false;
+		$variable = strtolower(substr($function, 3));
 		
 		switch ($type) {
-			case 'set_':
+			case 'set':
 				if (isset($this->$variable)) $this->$variable = $param[0];
 				break;
-			case 'get_':
+			case 'get':
 				return $this->$variable;
 				break;
 		}
@@ -37,39 +38,81 @@ class Item {
 	/**
 	 * Enter description here...
 	 *
+	 * @return unknown
 	 */
-	protected function createItemChecksum($filterVariables = false) {
-		
-		$filter  = ($filterVariables) ? $filterVariables : array();
-		$checksumData = array();
-		
-		foreach ($this as $key => $value) {
-			if (!in_array($key, $filter) && substr($key, 0, 1) != '_') $checksumData[] = $key."=".$value.";";
-		}
-		
-		$this->_checksum = sprintf('%08X', crc32(join(',', $checksumData)));
-		
-		return $this->_checksum;
+	public function storeItem() {
+		$queryData = array();
+		foreach ($this as $key => $value) if (substr($key, 0,1) != '_') $queryData[$key] = $value;
+		$q = "INSERT INTO `romdb_meta_in` (".$this->kw(array_keys($queryData)).") VALUES (".$this->qs($queryData).") ";
+		return $q;
+	}
 
+	public function getItemById($id) {
+		$q = "SELECT * FROM `romdb_meta_in` WHERE `id` = ".$this->qs($id);
+		
+		print $q;
+		
+		$test = array(
+			'name' => 'testname',
+			'crc32' => 'aaaaaa',
+		);
+		
+		return $this->createItemByRow($test);
 	}
 	
-//	public function getChecksum() {
-//		return ($this->_dcs) ? $this->_dcs : false;
-//	}
+	public function  createItemByRow($row) {
+		foreach ($row as $field => $value) $this->$field = $value;
+		return $this;
+	}
 	
-//	/**
-//	 * Enter description here...
-//	 *
-//	 * @return unknown
-//	 */
-//	public function buildSqlQuery() {
-//		$queryData = array();
-//		foreach ($this as $key => $value) {
-//			if (substr($key, 0,1) != '_') $queryData[$key] = $value;
-//		}
-//		$q = "INSERT INTO `romdb_meta_in` (".DBMS::kw(array_keys($queryData)).") VALUES (".DBMS::qs($queryData).") ";
-//		return $q;
-//	}
+	
+	/**
+	 * ADD TO DBMS
+	 */
+	public function qs($data) {
+		$sqlData = array();
+		if (!is_array($data)) $sqlData[] = $data;
+		else $sqlData = $data;
+		
+		$retData = array();
+		foreach ($sqlData as $value) {
+			switch(true) {
+				case ($value === false || $value === 0):
+					$retData[] = 0;
+				break;
+				case ($value === true):
+					$retData[] = 1;
+				break;
+				case ($value == 'NULL'):
+					$retData[] = 'NULL';
+				break;
+				case (!is_string($value) && @($value/$value) === 1):
+					$retData[] = (int)$value;
+				break;
+				default:
+					//$retData[] = "'".self::sql_escape($value)."'";
+					$retData[] = "'".($value)."'";
+				break;
+			}
+		}
+		
+		return implode(', ', $retData);
+	}
+	
+	/**
+	 * ADD TO DBMS
+	 */
+	public function kw($data) {
+		$sqlData = array();
+		if (!is_array($data)) $sqlData[] = $data;
+		else $sqlData = $data;
+		
+		$retData = array();
+		foreach ($sqlData as $value) {
+			$retData[] = '`'.$value.'`';
+		}
+		return implode(', ', $retData);
+	}
 	
 	public function addError($field, $description) {
 		$this->_errors[$field] = $description;

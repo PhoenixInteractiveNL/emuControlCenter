@@ -19,6 +19,8 @@ $i18n['menu'] = array(
 		"Optimiere ROMS",
 	'lbl_roms_remove%s' =>
 		"Entferne ROMS",
+	'lbl_roms_remove_dup%s' =>
+		"Entferne doppelte ROMS",
 	'lbl_emu_config' =>
 		"Bearbeite/Verknüpfe Emulator",
 	'lbl_ecc_config' =>

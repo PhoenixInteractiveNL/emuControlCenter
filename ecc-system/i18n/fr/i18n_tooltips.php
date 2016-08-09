@@ -20,10 +20,12 @@ $i18n['tooltips'] = array(
 	'opt_hide_img' =>
 		"Montrer/Cacher les images",
 	'search_field_select' =>
-		"Où voulez-vous chercher ?",
+		"Choix du critère de recherche",
 	'search_operator' =>
 		"Selectionnez une opération de recherche ([ = EQUAL] [ | OR ] [ + AND])",
 	'search_rating' =>
 		"Montrer seulement les ROMS votées par égal ou plus basse sélection",
+	'optvis_mainlistmode' =>
+		"Basculer le mode d'affichage des jeux : par liste/avec images",
 );
 ?>

@@ -13,7 +13,7 @@ $i18n['status'] = array(
 	'parse_rom_pbar_file_packed' =>
 		"(Compressé)",		
 	'parse_rom_detail_header%s' =>
-		"Nouvelle ROM ajoutée à ecc\n%s.",
+		"Nouvelle ROM ajoutée dans ecc.\n%s",
 	'parse_rom_detail_added_header' =>
 		"ROMS ajoutées :\n",
 	'parse_rom_detail_unchanged_header' =>

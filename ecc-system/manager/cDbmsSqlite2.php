@@ -18,6 +18,7 @@ class DbmsSqlite2 extends Dbms {
 	}
 
 	public function query($q) {
+		#print $q.LF;
 		return $this->dbms->query($q);
 	}
 

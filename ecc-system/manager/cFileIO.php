@@ -437,9 +437,9 @@ class FileIO {
 		if(!$fileSize) return false;
 		
 		# configuration
-		$crcGeneratorFile = realpath("../ecc-core/thirdparty/fsum/fsum.exe");
+		$crcGeneratorFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/fsum.exe');
 		$crcGeneratorParams = '-crc32';
-		$logFile = realpath('../ecc-core/thirdparty/fsum/').'eccCrc32.chk';
+		$logFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/').'eccCrc32.chk';
 		
 		# create command for execution
 		$execCommand = $crcGeneratorFile.' '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);

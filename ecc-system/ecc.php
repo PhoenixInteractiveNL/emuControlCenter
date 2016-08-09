@@ -1358,11 +1358,11 @@ class App extends GladeXml {
 		// ----------------------------
 		// Startup
 		// ----------------------------		
-		$this->mTopUpdateEccLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_LIVE']));
+		$this->mTopUpdateEccLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_LIVE']));
 		
 		#$this->mTopToolEccRomId->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_ROMID']));
-		$this->mTopToolEccTheme->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_THEME']));
-		$this->mTopToolEccBugreport->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_BUGREPORT']));
+		$this->mTopToolEccTheme->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_THEME']));
+		$this->mTopToolEccBugreport->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_BUGREPORT']));
 		$this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images'));
 		
 		// View

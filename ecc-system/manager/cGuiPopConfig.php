@@ -299,7 +299,7 @@ class GuiPopConfig extends GladeXml {
 		if ($path){
 			$mngrValidator = FACTORY::get('manager/Validator');
 			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-			FACTORY::get('manager/Os')->executeProgramDirect(ECC_BASEDIR.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.$path.$eccLoc['ECC_SCRIPT_EXTENSION'].'"');
+			FACTORY::get('manager/Os')->executeProgramDirect(ECC_BASEDIR.'/ecc-core-'.strtolower(PHP_OS).'/'.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.$path.$eccLoc['ECC_SCRIPT_EXTENSION'].'"');
 		}
 		elseif(!trim($path)) FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error'));
 		else FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error_notfound'));
@@ -901,7 +901,6 @@ class GuiPopConfig extends GladeXml {
 
 		$mngrValidator = FACTORY::get('manager/Validator');
 		$eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
-		#$this->cfgEccStartupConf->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$eccHelpLocations['ECC_EXE_START'], false, '/config');
 		
 		$logDetails = $iniManager->getKey('USER_SWITCHES', 'log_details');
 		$this->confEccStatusLogCheck->set_active($logDetails);
@@ -1255,7 +1254,7 @@ class GuiPopConfig extends GladeXml {
 	
 	public function onButtonPreviewSound(){
 		$eccLoc = FACTORY::get('manager/Validator')->getEccCoreKey('eccHelpLocations');
-		FACTORY::get('manager/Os')->executeProgramDirect(ECC_BASEDIR.$eccLoc['ECC_EXE_START'], 'open', '/sndprev "'.realpath($this->startConfSoundPath->get_text()).'"');
+		FACTORY::get('manager/Os')->executeProgramDirect(ECC_BASEDIR.'/'.$eccLoc['ECC_EXE_START'], 'open', '/sndprev "'.realpath($this->startConfSoundPath->get_text()).'"');
 	}
 	
 	

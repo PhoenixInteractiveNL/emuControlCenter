@@ -113,7 +113,7 @@
 			$scriptExtension = $eccLoc['ECC_SCRIPT_EXTENSION'];
 			if ($eccScriptFile = realpath($exeFileSource.$scriptExtension)){
 				$exeFile = $eccScriptFile;
-				if ($eccScriptExeFile = realpath(ECC_BASEDIR.$eccLoc['ECC_EXE_SCRIPT'])){
+				if ($eccScriptExeFile = realpath(ECC_BASEDIR.'/ecc-tools/'.$eccLoc['ECC_EXE_SCRIPT'])){
 					$eccScriptExeFile = '"'.$eccScriptExeFile.'"';
 				}
 			}

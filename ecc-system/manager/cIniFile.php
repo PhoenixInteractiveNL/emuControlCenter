@@ -242,7 +242,7 @@ class IniFile {
 	}
 	
 	public function storeGlobalFont($fontDescription) {
-		$gtkFontFile = '../ecc-core/etc/gtk-2.0/font';
+		$gtkFontFile = '../ecc-core-'.strtolower(PHP_OS).'/etc/gtk-2.0/font';
 		if (!$fontDescription) {
 			@unlink($gtkFontFile);
 			return false;

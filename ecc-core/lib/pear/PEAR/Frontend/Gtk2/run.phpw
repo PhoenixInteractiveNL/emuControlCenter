@@ -1,0 +1,10 @@
+<?php
+/**
+*   Start the PEAR_Frontend_Gtk2 program
+*   @author Christian Weiske <cweiske@php.net>
+*/
+require_once('PEAR/Frontend/Gtk2/Checks.php');
+require_once('PEAR/Frontend/Gtk2.php');
+$pf = new PEAR_Frontend_Gtk2();
+Gtk::main();
+?>

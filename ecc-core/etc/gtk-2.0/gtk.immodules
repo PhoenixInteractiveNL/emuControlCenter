@@ -1,0 +1,29 @@
+# GTK+ Input Method Modules file
+#
+"immodules/im-am-et.dll" 
+"am_et" "Amharic (EZ+)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "am" 
+
+"immodules/im-cedilla.dll" 
+"cedilla" "Cedilla" "gtk+" "/devel/target/gtk+-2.6.9/lib/locale" "az:ca:co:fr:gv:oc:pt:sq:tr:wa" 
+
+"immodules/im-cyrillic-translit.dll" 
+"cyrillic_translit" "Cyrillic (Transliterated)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "" 
+
+"immodules/im-ime.dll" 
+"ime" "Windows IME" "gtk+" "" "ja:ko:zh" 
+
+"immodules/im-inuktitut.dll" 
+"inuktitut" "Inuktitut (Transliterated)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "iu" 
+
+"immodules/im-ipa.dll" 
+"ipa" "IPA" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "" 
+
+"immodules/im-ti-er.dll" 
+"ti_er" "Tigrigna-Eritrean (EZ+)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "ti" 
+
+"immodules/im-ti-et.dll" 
+"ti_et" "Tigrigna-Ethiopian (EZ+)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "ti" 
+
+"immodules/im-viqr.dll" 
+"viqr" "Vietnamese (VIQR)" "gtk20" "/devel/target/gtk+-2.6.9/lib/locale" "vi" 
+

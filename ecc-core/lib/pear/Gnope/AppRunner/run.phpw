@@ -1,0 +1,10 @@
+<?php
+/**
+*   Start the application runner
+*
+*   @author Christian Weiske <cweiske@php.net>
+*/
+require_once(dirname(__FILE__) . '/AppRunner.php');
+new Gnope_AppRunner();
+Gtk::main();
+?>

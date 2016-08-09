@@ -1,0 +1,24 @@
+<?php
+
+$window = new GtkWindow();
+$window->set_title('GtkExpander test');
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+
+$expander = new GtkExpander('Expand me');
+$expander->set_expanded(false);
+$expander->add(new GtkLabel("1\r\n2\r\n3\r\n4\r\n5\r\n6"));
+$expander->connect_after('activate', 'expanded');
+
+function expanded($expander) {
+    if (!$expander->get_expanded()) {
+        echo "ba";
+        $expander->set_size_request(1,1);
+        $window = $expander->get_parent();
+        $window->set_default_size(1,1);
+    }
+}
+
+$window->add($expander);
+$window->show_all();
+Gtk::main();
+?>

@@ -1,0 +1,283 @@
+<?php
+if( !class_exists('gtk')) {
+    die('Please load the php-gtk2 module in your php.ini' . "\r\n");
+}
+
+
+class Dev_Inspector extends GtkWindow
+{
+    protected $notebook;
+    protected $treeviewInfo;
+    protected $strLastClass = null;
+    protected static $strTitle = 'PHP-Gtk2 Inspector';
+
+    public static $myStaticProperty = "asd";
+
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->set_title(Dev_Inspector::$strTitle);
+
+        $this->buildGui();
+        $this->show_all();
+    }//public function __construct()
+
+
+
+    protected function buildGui()
+    {
+        $this->set_default_size(700,400);
+        $this->connect_simple('destroy', array('gtk', 'main_quit'));
+
+        $hpaned = new GtkHPaned();
+        $this->add($hpaned);
+        $scrolledClasses = new GtkScrolledWindow();
+        $scrolledClasses->set_shadow_type(Gtk::SHADOW_ETCHED_IN);
+        $scrolledClasses->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+        $hpaned->add1($scrolledClasses);
+
+        $model = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+        $treeviewClasses = new GtkTreeView($model);
+
+        $arClasses = get_declared_classes();
+        natcasesort($arClasses);
+        foreach ($arClasses as $class) {
+            $iter = $model->append();
+            $model->set($iter, 0, $class);
+        }
+        $cell_renderer = new GtkCellRendererText();
+        $treeviewClasses->insert_column_with_data_func(-1, 'Classes', $cell_renderer, array($this, 'label_setter'));
+
+        $scrolledClasses->add($treeviewClasses);
+
+        $selection = $treeviewClasses->get_selection();
+        $selection->set_mode(Gtk::SELECTION_SINGLE);
+        $selection->connect('changed', array($this, 'onClassSelected'));
+
+        $vboxInfo = new GtkVBox(false);
+
+        $this->notebook = new GtkNotebook();
+        $vboxInfo->pack_start($this->notebook, false, true);
+
+
+
+        $hpaned->add2($vboxInfo);
+        $hpaned->set_position(150);
+
+        $this->titles = array(
+//			'Constructor', 
+            'Methods', 'Properties', 'Constants', 'Interfaces', 
+            'Static Properties', 'Default Properties', 'Signals'
+//			, 'Modifiers'
+        );
+
+        foreach ($this->titles as $title) {
+            $label = new GtkLabel(Dev_Inspector::getReflectionFunction($title));
+            $this->notebook->append_page($label, new GtkLabel($title));
+        }
+
+        $this->notebook->connect_simple_after('switch-page', array($this, 'onSelectNotebookPage'));
+
+        $scrolledList = new GtkScrolledWindow();
+        $scrolledList->set_shadow_type(Gtk::SHADOW_ETCHED_IN);
+        $scrolledList->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+        $vboxInfo->pack_start($scrolledList, true, true, 0);
+
+        $modelInfo = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+//        $filtermodel = new GtkTreeModelFilter($modelInfo, null);
+//        var_dump($filtermodel->get_model());
+        $this->treeviewInfo = new GtkTreeView($modelInfo);
+//        $this->treeviewInfo = new GtkTreeView($filtermodel);
+        $this->treeviewInfo->insert_column_with_data_func(0, '', $cell_renderer, array($this, 'label_setter'));
+        $this->treeviewInfo->get_column(0)->set_sort_column_id(1);
+        $this->treeviewInfo->set_search_column(1);
+        $this->treeviewInfo->get_model()->set_sort_column_id(1, Gtk::SORT_ASCENDING);
+        $this->treeviewInfo->set_headers_visible(false);
+
+        $scrolledList->add($this->treeviewInfo);
+
+    }//protected function buildGui()
+
+
+
+    public static function getReflectionFunction($strTitle)
+    {
+        return 'get' . str_replace(' ', '', $strTitle);
+    }//protected static function getReflectionFunction($strTitle)
+
+
+
+    public function label_setter($column, $cell, $model, $iter)
+    {
+        $class = $model->get_value($iter, 0);
+        $cell->set_property('markup', $class);
+    }//public function label_setter($column, $cell, $model, $iter)
+
+
+
+    public function onClassSelected($selection)
+    {
+        list($model, $iter) = $selection->get_selected();
+        if (!$iter) {
+            return;
+        }
+        $class = $model->get_value($iter, 0);
+        $this->loadList($class);
+    }//public function onClassSelected($selection)
+
+
+
+    /**
+    *   Load the list data for the given class
+    */
+    protected function loadList($class = null)
+    {
+        if ($class !== null) {
+            $this->strLastClass = $class;
+        } else {
+            $class = $this->strLastClass;
+            if ($class === null) {
+                echo "No class selected\n";
+                return;
+            }
+        }
+        //gtknotebook is somehow buggy right now
+        $page_title = $this->titles[$this->notebook->get_current_page()];
+        $this->set_title(Dev_Inspector::$strTitle . ': ' . $class . ' ' . $page_title);
+
+
+        $model = $this->treeviewInfo->get_model();
+        $model->clear();
+
+
+        if ($page_title == 'Signals') {
+            //why can't I do "$classname::gtype"?
+            if (substr($class, 0, 3) == 'Gtk') {
+                eval("\$gtype = $class::gtype;");
+                $arData = @GObject::signal_list_names($gtype);
+                if (!is_array($arData)) {
+                    $arData = array();
+                }
+            } else {
+                $arData = array();
+            }
+        } else {
+            $func = $this->getReflectionFunction($page_title);
+            $r = new ReflectionClass($class);
+            //fill the model
+            $arData = $r->$func();
+        }
+
+        foreach ($arData as $key => $data) {
+            $iter = $model->append();
+            if (is_object($data)) {
+                if (get_class($data) == 'ReflectionMethod') {
+                    $strParam = '';
+                    $nReqParameter = $data->getNumberOfRequiredParameters();
+                    if ($data->getNumberOfParameters() > 0) {
+                        $bOptional = false;
+                        foreach ($data->getParameters() as $id => $parameter) {
+                            if ($id > 0) { 
+                                $strParam .= ', ';
+                            }
+                            if ($nReqParameter == $id) {
+                                $bOptional = true;
+                                $strParam .= '[';
+                            }
+                            $class = $parameter->getClass();
+                            $strClass = '';
+                            if ($class !== null) {
+                                $strClass = '<span foreground="#00F">' . $class->getName() . '</span> ';
+                            }
+                            $strParam .= $strClass . '<span foreground="#A00">' . $parameter->getName() . '</span>';
+                        }
+                        if ($bOptional) {
+                            $strParam .= ']';
+                        }
+                    }
+                    $strFileInfo = ' ' . $data->getFilename() . '#' . $data->getStartLine() . '-' . $data->getEndLine();
+
+                    $strModifier = $data->isPublic() ? 'public ' : '';
+                    $strModifier .= $data->isPrivate() ? 'private ' : '';
+                    $strModifier .= $data->isProtected() ? 'protected ' : '';
+                    $strModifier .= $data->isStatic() ? 'static ' : '';
+                    $strModifier .= $data->isAbstract() ? 'abstract ' : '';
+                    $strModifier .= $data->isFinal() ? 'final ' : '';
+
+
+                    $model->set($iter, 0, '<span foreground="#00A">' . $strModifier . '</span>' . $data->name . '<span foreground="#F00">(</span>' . $strParam . '<span foreground="#F00">)</span>');
+                    $model->set($iter, 1, $data->name);
+                } else {
+                    $model->set($iter, 0, $data->name);
+                    $model->set($iter, 1, $data->name);
+                }
+            } else {
+                $model->set($iter, 0, $key . ' (' . $data . ')');
+                $model->set($iter, 1, $key . ' (' . $data . ')');
+            }
+        }
+    }//protected function loadList($class = null)
+
+
+
+    /**
+    *   Creates and returns an array with parent classes to the given classname.
+    *
+    *   @param string   $strClass   The class name
+    *   @return array   Array of strings with all the parent class names (class itself NOT)
+    */
+    protected static function getParentClasses($strClass)
+    {
+        $arParentClasses = array();
+        while (($strClass = get_parent_class($strClass)) !== false) {
+            $arParentClasses[] = $strClass;
+        }
+        return $arParentClasses;
+    }//protected staticfunction getParentClasses($strClass)
+
+
+
+    function onSelectNotebookPage()
+    {
+        $this->loadList();
+    }
+
+}//class Dev_Inspector extends GtkWindow
+
+
+
+/**
+*   Small test class
+*   Select it in the class list and you should have at least
+*   one entry in every tab
+*   Just for demonstration
+*/
+class _ReflectionTestClass implements _ReflectionTestInterface
+{
+    static $staticProperty = 'staticValue';
+    var $normalProperty = 'normalValue';
+    var $propertyWithoutValue;
+
+    const MY_CONSTANT = 'asd';
+
+    protected function test($param, $optionalparam = "asd", $optionalparam2 = "asd") { }
+
+    private function privFunc() {}
+
+    public static function staticfunc(GtkNotebook $param1) { }
+
+    function interfaceFunc() {}
+}
+
+interface _ReflectionTestInterface
+{
+    function interfaceFunc();
+}
+
+$di = new Dev_Inspector();
+//require_once('../Dev_GuiInspector/GuiInspector.php');
+//$gi = new Dev_GuiInspector($di);
+Gtk::main();
+?>

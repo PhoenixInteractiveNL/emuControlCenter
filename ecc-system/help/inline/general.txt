@@ -1,0 +1,380 @@
+###############################################################################
+# WELCOME / INTRO
+###############################################################################
+
+-------------------------------------------------------------------------------
+- What is emuControlCenter (ecc)
+-------------------------------------------------------------------------------
+ecc is a tool to manage your Games from different platforms like Consoles, Computer and Arcade.
+
+Images:		ecc support user-images for roms.
+Search:		standard and extended search. (Freeform and meta-informations!)
+Bookmarks:	You can bookmark your favorite roms.
+History:		All played roms are automaticly added to your history
+Media-Edit:	You can add the right Meta-Informations to your ecc-database!
+Im-/Export:	You can export/import media-data
+
+-------------------------------------------------------------------------------
+- How to support emuControlCenter?
+-------------------------------------------------------------------------------
+* Share your emuControlCenter-mediaDatFiles (Media-Edit) and emuControlCenter-User-Images with other users.
+* Donate, if you want support eccs fridge!. :-) (donations@camya.com)
+
+-------------------------------------------------------------------------------
+- Help
+-------------------------------------------------------------------------------
+
+# GENERAL / STARTUP
+- I´ve installed emuControlCenter, but i see nor ROMS or Images :-(
+- The numbers in the navigation do not matching the counts in main-view!
+- I parse Roms, but i see no ROMS!
+- There is no media in bookmarks-section
+- There is no media in History-section
+# SEARCH
+- I search for Games in a selected language/category, but i found nothing?
+- I use extended search. Now, i dont see anything!
+- Why is there a extended search?
+- How does the extended search work?
+- How to using the extended search / Legend?
+- How to reset extended search?
+# IMAGES
+- I want to add some screenshots to ecc. Howto do this?
+- I have used my emulator to take some screenshots but i see nothing in ecc.
+- I dont want to see image!
+- Where can i get more images?
+# IMPORT/EXPORT
+- How to export meta-informations? (Dat-File)
+- How to import meta-informations? (Dat-File)
+- Where can i get a better Dat-File?
+# MAINTENANCE / CLEAN
+- How to remove single ROMS from ecc
+# MEDIA-EDIT
+- Why should i edit my Media with Media-Edit?
+- Where can i get a more Meta-Informations?
+- Media-Edit Info-Legend
+# PLATFORM-CONTEXT-MENU
+- Where is this context-menu?
+- What is the meaning of this options / Legend?
+
+###############################################################################
+# GENERAL / STARTUP
+###############################################################################
+
+-------------------------------------------------------------------------------
+- I´ve installed emuControlCenter, but i see nor ROMS or Images :-(
+-------------------------------------------------------------------------------
+Maybe you forget to parse some media? :-) Maybe you should add new roms to ecc (see button above). Very simple, i think!
+You can also use a right-click into the primary platform-navigation to add new ROMS for the selected platform. (If using this on "#All found", ecc will search for all supported media in the selected folder! btw. This will take very long time, if you have a large amount of ROMS at your harddisk!) !! DONT ASK ME ABOUT ROMS !!
+
+-------------------------------------------------------------------------------
+- The numbers in the navigation do not matching the counts in main-view!
+-------------------------------------------------------------------------------
+Possibly you have changed the parameters of the extended-search (or standard-search)
+See next question "I parse Roms, but i see no ROMS!" or section SEARCH (- How to using the extended search / Legend?) in this FAQ
+
+-------------------------------------------------------------------------------
+- I parse Roms, but i see no ROMS!
+-------------------------------------------------------------------------------
+Maybe you have altered the extended search parameters (above the standard-search -> more search options). If the additional red label (options active!) is shown, it is possiby a good idea to reset this options. A activated red circle is the reset-button. (btw. also the standard-search has this kind of reset-button!) This extended search will be saved into the history.ini, so you can always filter some kind of crap out of your ROM-Repository! :-)
+
+-------------------------------------------------------------------------------
+- There is no media in bookmarks-section
+-------------------------------------------------------------------------------
+You can add bookmarks with the right mouse button "add to bookmarks". If you are in the bookmark-section, you can also remove the bookmark by using the right mouse-button "remove from bookmarks"
+
+-------------------------------------------------------------------------------
+- There is no media in History-section
+-------------------------------------------------------------------------------
+Everytime, you will start a media using the "start-media"-button or the right mouse-button "start", this media will be automaticly added to this history section. You cant remove this entries!
+
+###############################################################################
+# SEARCH
+###############################################################################
+
+-------------------------------------------------------------------------------
+- I search for Games in a selected language/category, but i found nothing?
+-------------------------------------------------------------------------------
+Maybe you will use the edit-function of ecc. Here, you can add supported languages and categories, status, multiplayer count aso.
+
+-------------------------------------------------------------------------------
+- I use extended search. Now, i dont see anything!
+-------------------------------------------------------------------------------
+Take a look at the description, how to reset and use the extended search.
+
+-------------------------------------------------------------------------------
+- Why is there a extended search?
+-------------------------------------------------------------------------------
+The extended-search options are options to filter your ROM-Repository. The standard-search is more intuitive and often used, i think :-). So, ext-search is hidden, because you not often use these options.
+
+-------------------------------------------------------------------------------
+- How does the extended search work?
+-------------------------------------------------------------------------------
+The exdended search will work on the meta-data, user have added to the eccMediaDat (see IMPORT/EXPORT-Section). You can eg. filter all not-running and buggy ROMS, so ecc will not show this crap anymore. Its also posible to filter data like Freeware/PD or UserMods (User-Tranlations)
+
+-------------------------------------------------------------------------------
+- How to using the extended search / Legend?
+-------------------------------------------------------------------------------
+You can choose the status of options in the ext-search dropdowns.
+
+LEGEND:
+*	= Search for all (option is off)
+no	= search only for roms, where selected option is set to NO
+no?	= search for roms, where selected option is set to NO OR UNKNOWN (?)
+yes	= search only for roms, where selected option is set to YES
+ye? = search for roms, where selected option is set to YES OR UNKNOWN (?)
+?	= search only for roms, where selected option is UNKNOWN (?)
+
+UNKNOWN means, that there is not Dat-File entry for this ROM.
+
+If you want to see all running and bugfree ROMS, you have to select
+running=yes and buggy=no
+
+If you also want to see all ROMS with unknown status, you could set this: 
+running=yes? and buggy=no?
+
+-------------------------------------------------------------------------------
+- How to reset extended search?
+-------------------------------------------------------------------------------
+Use the red reset button in front of the ext-search dropdowns.
+
+###############################################################################
+# IMAGES
+###############################################################################
+
+-------------------------------------------------------------------------------
+- I want to add some screenshots to ecc. Howto do this?
+-------------------------------------------------------------------------------
+Use your emulator to take some screenshots. ecc will search for this, if you switch emuControlCenter into "unsaved"-Image-Mode. (see next question). You can use the dropdown the save the image as a selected capture
+eg. You have 2 captures
+1 = ingame start-screen => select dropdown "ingame - start"
+2 = ingame play-scene => select dropdown "ingame - play"
+
+-------------------------------------------------------------------------------
+- I have used my emulator to take some screenshots but i see nothing in ecc.
+-------------------------------------------------------------------------------
+emuControlCenter have an optimized image-management. In standard-mode, ecc only gathering images in a predefinded format. If you select "the saved"-Button (beneath the Image-Preview), this button will switch to unsaved! All added images will shown in this mode, until you saved them to one of the ecc-image-slots. If saved, the images are removed from this mode. If you switch back to "saved"-Mode, you see all saved Images!
+
+-------------------------------------------------------------------------------
+- I want to see the inline-play images!
+-------------------------------------------------------------------------------
+You can toggle the images using the dropdown below the image-preview!
+
+-------------------------------------------------------------------------------
+- I dont want to see image!
+-------------------------------------------------------------------------------
+Select "Active [HIDE|SHOW] images (click to toggle)" in platform-context-menu
+
+-------------------------------------------------------------------------------
+- Where can i get more images?
+-------------------------------------------------------------------------------
+There are some guys on internet sharing emuControlCenter-Images and Dat-Files  with other users. Search for them! :-)
+Maybe you also share your images with other users of emuControlCenter.
+
+###############################################################################
+# IMPORT/EXPORT
+###############################################################################
+
+-------------------------------------------------------------------------------
+- How to export meta-informations? (Dat-File)
+-------------------------------------------------------------------------------
+Your can export your meta-informations like multiplayer, running, pd and languages to an ecc-datfile. You can use a right-click into the primary platform-navigation to export Meta-Data for the selected platform. (If using this on "#All found", ecc will export all supported media-metadata into one big ecc-datfile!
+
+-------------------------------------------------------------------------------
+- How to import meta-informations? (Dat-File)
+-------------------------------------------------------------------------------
+Your can import ecc-datfiles containing meta-informations like multiplayer, running, pd and languages for ony or many platforms. You can use a right-click into the primary platform-navigation to import this data from a dat-file for the selected platform. (If using this on "#All found", ecc will import all supported media-metadata from the selected dat-file into the emuControlCenter database!
+
+-------------------------------------------------------------------------------
+- Where can i get a better Dat-File?
+-------------------------------------------------------------------------------
+There are some guys on internet sharing emuControlCenter-Images and Dat-Files  with other users. Search for them! :-)
+Maybe you also share your images with other users of emuControlCenter.
+
+###############################################################################
+# MAINTENANCE / CLEAN
+###############################################################################
+
+-------------------------------------------------------------------------------
+- How to remove single ROMS from ecc
+-------------------------------------------------------------------------------
+Use right mouse-button at the Main-ROM-Cellview and select "remove from ecc-db". This will only remove the selected ROM from the emuControlCenter-Database. The file will not removed!
+
+
+###############################################################################
+# MEDIA-EDIT
+###############################################################################
+
+-------------------------------------------------------------------------------
+- Why should i edit my Media with Media-Edit?
+-------------------------------------------------------------------------------
+You will only have good search results using the standard- and extended-search-options, if you have good media-metadata. So, if you categorize your data, you can search for this categorized media. (eg. only, if there are languages assigned you can search for languages using the standard-search!)
+
+You also can share your exported eccMediaDat-Files with other users, to get more accurate Search-Results. (See IMPORT/Export Section!)
+
+-------------------------------------------------------------------------------
+- Where can i get a more Meta-Informations?
+-------------------------------------------------------------------------------
+There are some guys on internet sharing emuControlCenter-Images and Dat-Files  with other users. Search for them! :-)
+Maybe you also share your images with other users of emuControlCenter.
+
+-------------------------------------------------------------------------------
+- Media-Edit Info-Legend
+-------------------------------------------------------------------------------
+
+* NAME
+****************
+Description	=	real name of the rom
+Demo-Data	=	Dynamix Intro (Hidden Song)
+
+* RUNNING: 
+****************
+Description	=	Do this rom in a Emulator at all?
+Demo-Data	=	UNSET|NO|YES
+
+* BUGS: 
+****************
+Description	=	The ROM is playable, but has some bugs!
+Demo-Data	=	UNSET|NO|YES
+
+* TRAINER: 
+****************
+Description	=	There is a Trainer included. (Unlimited lives aso.)
+Demo-Data	=	UNSET|NO|1-10
+
+* INTRO: 
+****************
+Description	=	The ROM has an Crack-Intro. (Not Scene-Intro/Demo!)
+Demo-Data	=	UNSET|NO|YES
+
+* USERMOD: 
+****************
+Description	=	This is a Modification of the original ROM. eg a User-Translation or a Sprite-Hack!
+Demo-Data	=	UNSET|NO|YES
+
+* FREEWARE: 
+****************
+Description	=	This rom is not commercial and done by some freaks like me :-)
+Demo-Data	=	UNSET|NO|YES
+
+* MULTIPLAYER: 
+****************
+Description	=	ROM support a multiplayer mode to play with more than one player at one console/computer!
+Demo-Data	=	UNSET|NO|1-10
+
+* NETPLAY: 
+****************
+Description	=	ROM support a multiplayer mode to play with more than one player at many console/computer!
+Demo-Data	=	UNSET|No|YES
+
+* YEAR: 
+****************
+Description	=	Year
+Demo-Data	=	2001
+
+* USK: 
+****************
+Description	=	USK / Altersfreigabe
+Demo-Data	=	18
+
+* CATEGORY: 
+****************
+Description	=	Type of ROM, eg Action-Game, Puzzle or Racing
+Demo-Data	=	Racing
+
+* CATEGORY: 
+****************
+Description	=	real languages support of the ROM (not Country-Code!)
+Demo-Data	=	Dansk
+
+ADDITIONAL INFORMATIONS (DEPRECATED!)
+
+* INFO: 
+****************
+Description	=	DEPRECATED! Informations gathered from various datfiles (only as info!)
+Demo-Data	=	(PD)|byWidgetandImmo|
+
+* INFO_ID: 
+****************
+Description	=	DEPRECATED! Information gathered from datfiles (only as info!)
+Demo-Data	=	1310720
+
+###############################################################################
+# PLATFORM-CONTEXT-MENU
+###############################################################################
+
+-------------------------------------------------------------------------------
+- Where is this context-menu?
+-------------------------------------------------------------------------------
+You can access this menu by right/doubble-click the primary platform navigation.
+You will find this navigation on the left side of the emuControlCenter-Window!
+
+-------------------------------------------------------------------------------
+- What is the meaning of this options / Legend?
+-------------------------------------------------------------------------------
+
+-GENERAL--------------
+
+* #All found
+If you click this menu-item, you will find the Platform-Infos in the Main-View!
+
+* Add new ROMS
+Here you can add new Roms for the selected platform. If you choose the platform "#All found", ecc will search for ALL supported ROMS. If you choose eg. "Super Nintendo", only ROMS for this platform are parsed!
+
+-IMAGES--------------
+
+* Active [HIDE|SHOW] images (click to toggle)
+You can hide all images, if you think, ecc is to slow with active images.
+
+* Reload images
+** Reload all images.
+
+-MAINTENANCE--------------
+
+* Optimize database / check files
+This option crawling the database for the selected platform and check, if a file is moved or removed by you. If ecc´s optimizer dont find a rom anymore, ecc will remove this entry from his database. ecc will also optimize the bookmarks in this step!
+
+* Clear database (media)
+Empty the database for the selected platform. If you choose "#All found", ecc remove all entries! Also optimize bookmarks! This will not remove any pysical file.... only operating on ecc´s database.
+
+-IMPORT/EXPORT--------------
+
+* Import ecc/RC-DAT
+This option imports emuControlCenter(ecc)- and Romcenter(RC)-Datfiles. ecc will automaticly check, if the RC-Dat is a valid Dat for emuControlCenter. RC-Dats arent valid for ecc, if there is no file-extension assigned to Field 5! (ecc needs extensions to match entries with the internal extension to platform assingments!) (ecc can automaticly backup your old data... the datfile is automaticly writen to your user-folder/eccident/export/, if you want to backup!)
+
+* Export ecc-DAT - complete
+This option create a full ecc-DAT export for the selected platform. You can choose a folder, where the dat will be saved. The filename have the format:
+eccdat_all_complete.20060730_1850.ecc
+eccdat_all_complete.YYYYMMDD_HHII.ecc
+
+* Export ecc-DAT - user
+This option create a ecc-DAT export of your modified meta-data for the selected platform. You can choose a folder, where the dat will be saved. The filename have the format:
+eccdat_gba_user.20060806_1144.ecc
+eccdat_eccident_user.YYYYMMDD_HHII.ecc
+
+* Export ecc-DAT - eSearch result
+This option create a ecc-DAT export of your meta-data, limited by the extended search function, for the selected platform. You can choose a folder, where the dat will be saved. The filename have the format:
+eccdat_n64_esearch.20060806_1148.ecc
+eccdat_eccident_esearch.YYYYMMDD_HHII.ecc
+You will find the esearch parameters within the dat-file: [ECC_DAT] ESEARCH= (running > 0 OR running is NULL)
+
+* Clear DAT database
+Clear the DAT-Database for the selected platform. If you choose "#All found", all data will be removed! (ecc can automaticly backup your old data... the datfile is automaticly writen to your user-folder/eccident/export/, if you want to backup!)
+ecc will automaticlly optimize the languages in a second step.
+
+-PLATFORM--------------
+
+* Show platform infos
+Show Platform infos for the selected Platform like fullname, year_from->year_to and history.
+
+* Edit platform
+Here, you can change the platform-name, shown in the navigation and in all status-windows. Also you can change the assignments of the emulators to the extensions.
+
+-NAVIGATION--------------
+
+* Active [AUTOUPDATE|NORMAL] Navigation (click to toggle)
+The AUTOUPDATE-Navigation will update all counts, everytime, you alter your search-settings. So, you can see, which platform has results. You can combine this option with "Active [HIDE|SHOW] platforms w/o media", so automaticlly only platforms are shown in the navigations, that holds results! These options only work well, if you have good meta-data. Look for new ecc-datfiles to update your meta-informations.
+
+* Active [HIDE|SHOW] platforms w/o media (click to toggle)
+This option will hide all platforms without media assigned (parsed). "#All found" could not be hidden.
+
+---------------

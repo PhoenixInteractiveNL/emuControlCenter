@@ -1,0 +1,21 @@
+# Pango Modules file
+#
+"pango-arabic-fc.dll" ArabicScriptEngineFc PangoEngineShape PangoRenderFc arabic:*
+"pango-basic-fc.dll" BasicScriptEngineFc PangoEngineShape PangoRenderFc armenian:* bopomofo:* cherokee:* coptic:* cyrillic:* deseret:* ethiopic:* georgian:* gothic:* greek:* han:* hiragana:* katakana:* latin:* ogham:* old-italic:* runic:* canadian-aboriginal:* yi:* braille:* cypriot:* limbu:* osmanya:* shavian:* linear-b:* ugaritic:* common:
+"pango-basic-win32.dll" BasicScriptEngineWin32 PangoEngineShape PangoRenderWin32 common:
+"pango-hangul-fc.dll" HangulScriptEngineFc PangoEngineShape PangoRenderFc hangul:*
+"pango-hebrew-fc.dll" HebrewScriptEngineFc PangoEngineShape PangoRenderFc hebrew:*
+"pango-indic-fc.dll" devaScriptEngineFc PangoEngineShape PangoRenderFc devanagari:*
+"pango-indic-fc.dll" bengScriptEngineFc PangoEngineShape PangoRenderFc bengali:*
+"pango-indic-fc.dll" guruScriptEngineFc PangoEngineShape PangoRenderFc gurmukhi:*
+"pango-indic-fc.dll" gujrScriptEngineFc PangoEngineShape PangoRenderFc gujarati:*
+"pango-indic-fc.dll" oryaScriptEngineFc PangoEngineShape PangoRenderFc oriya:*
+"pango-indic-fc.dll" tamlScriptEngineFc PangoEngineShape PangoRenderFc tamil:*
+"pango-indic-fc.dll" teluScriptEngineFc PangoEngineShape PangoRenderFc telugu:*
+"pango-indic-fc.dll" kndaScriptEngineFc PangoEngineShape PangoRenderFc kannada:*
+"pango-indic-fc.dll" mlymScriptEngineFc PangoEngineShape PangoRenderFc malayalam:*
+"pango-indic-fc.dll" sinhScriptEngineFc PangoEngineShape PangoRenderFc sinhala:*
+"pango-khmer-fc.dll" KhmerScriptEngineFc PangoEngineShape PangoRenderFc khmer:*
+"pango-syriac-fc.dll" SyriacScriptEngineFc PangoEngineShape PangoRenderFc syriac:*
+"pango-thai-fc.dll" ThaiScriptEngineFc PangoEngineShape PangoRenderFc thai:* lao:*
+"pango-tibetan-fc.dll" TibetanScriptEngineFc PangoEngineShape PangoRenderFc tibetan:*

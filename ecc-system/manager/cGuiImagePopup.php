@@ -1,39 +1,51 @@
 <?
 class GuiImagePopup {
 	
-	private $eccident;
-	private $crc32;
+	/**
+	 * Holds the current selected rom object
+	 *
+	 * @var Rom object
+	 */
+	private $selectedRom;
 	
 	private $gui = false;
-	private $oImage;
+
 	private $imagePosition = 0;
-	private $imageTypes = array(); // contains the given imagetypes as array
+	
+	/**
+	 * contains the given imagetypes as array
+	 *
+	 * @var array of image types
+	 */
+	private $imageTypes = array();
 	
 	private $selectedImageType = false;
 	
 	private $imageTank = array();
-	private $mediaInfo = array();
+	
 	private $imageFit = true;
+	
 	private $statusbar_context_id;
 	
 	private $opened_state = false;
 	
-	private $error = false;
-	
 	private $fileIoManager;
 	
 	private $dropZoneBgColor;
+	
 	private $dropZoneBgColor2;
+	
 	private $dropZoneBgColorSelected;
 	
-	# array only used to unset unselected eventboxes
+	/**
+	 * array only used to unset unselected eventboxes
+	 *
+	 * @var array
+	 */
 	private $slotEventObjects = array();
 	
 	private $currentSlotSelection = false;
 	
-	/**
-	 * 
-	 */	
 	public function __construct($gui_obj=false) {
 		if (!$gui_obj) return false;
 		$this->gui = $gui_obj;
@@ -49,20 +61,28 @@ class GuiImagePopup {
 		$this->imageFit = !$this->gui->ini->getHistoryKey('imageCenterDefaultSize');
 	}
 	
+	/**
+	 * Set the current selected Rom object containinf RomFile,
+	 * RomMeta and RomAudit objects
+	 *
+	 * @param Rom $rom
+	 */
+	public function setSelectedRom(Rom $rom){
+		$this->selectedRom = $rom;
+	}
+	
+	/**
+	 * Get the current selected Rom object containinf RomFile,
+	 * RomMeta and RomAudit objects
+	 *
+	 * @return Rom object
+	 */
+	public function getSelectedRom(){
+		return $this->selectedRom;
+	}
+	
 	public function initEnviroment() {
 
-//		# dropzone default background
-//		$this->dropZoneBgColor = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_2');
-//		if (!$this->dropZoneBgColor) $this->dropZoneBgColor = '#CCDDEE';
-//		
-//		# dropzone image set background
-//		$this->dropZoneBgColor2 = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_1');
-//		if (!$this->dropZoneBgColor2) $this->dropZoneBgColor2 = '#DDEEFF';
-//		
-//		# dropzone selected background
-//		$this->dropZoneBgColorSelected = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_active');
-//		if (!$this->dropZoneBgColorSelected) $this->dropZoneBgColorSelected = '#00BB00';
-		
 		# dropzone default background
 		$this->dropZoneBgColor = $this->iniManager->getKey('GUI_COLOR', 'colImgSlotUnsetBgChooser');
 		if (!$this->dropZoneBgColor) $this->dropZoneBgColor = '#EAEAEA';
@@ -83,23 +103,11 @@ class GuiImagePopup {
 		$this->dropZoneBgColorText = $this->iniManager->getKey('GUI_COLOR', 'colImgSlotTextChooser');
 		if (!$this->dropZoneBgColorText) $this->dropZoneBgColorText = '#000000';
 		
-//		# imageCenter
-//		$this->globalIni['GUI_COLOR']['colImgSlotUnsetBgChooser'] = $this->getGdkColorHex($this->colImgSlotUnsetBgChooser->get_color());
-//		$this->globalIni['GUI_COLOR']['colImgSlotSetSelectChooser'] = $this->getGdkColorHex($this->colImgSlotSetSelectChooser->get_color());
-//		$this->globalIni['GUI_COLOR']['colImgSlotSetBgChooser'] = $this->getGdkColorHex($this->colImgSlotSetBgChooser->get_color());
-//		$this->globalIni['GUI_COLOR']['colImgSlotUnsetSelectChooser'] = $this->getGdkColorHex($this->colImgSlotUnsetSelectChooser->get_color());
-//		$this->globalIni['GUI_COLOR']['colImgSlotTextChooser'] = $this->getGdkColorHex($this->colImgSlotTextChooser->get_color());
-		
-		
-		
-		
 		$imageCenterHidePopup = $this->iniManager->getHistoryKey('imageCenterHidePopup');
 		$this->gui->mediaCenterOptConfirm->set_active(!$imageCenterHidePopup);
-
 		
 		$imageCenterTransferType = $this->iniManager->getHistoryKey('imageCenterConfirmPopupState');
 		if ($imageCenterTransferType == 'MOVE') $this->gui->mediaCenterOptRadioMove->set_active(true);
-
 		
 		$imageCenterSlotsHidden = $this->iniManager->getHistoryKey('imageCenterSlotsHidden');
 		$this->gui->mediaCenterOptExpand->set_expanded(!$imageCenterSlotsHidden);
@@ -122,18 +130,30 @@ class GuiImagePopup {
 		
 	}
 	
-	public function updateImages($mediaInfo, $imageType = false){
+	public function updateImages($imageType = false){
 		
-		$filePath = dirname($mediaInfo['path']);
-		$nameFile = $this->fileIoManager->get_plain_filename($mediaInfo['path']);
-		$fileExtension = ($mediaInfo['path_pack']) ? $this->fileIoManager->get_ext_form_file($mediaInfo['path_pack']) : $this->fileIoManager->get_ext_form_file($mediaInfo['path']);
-		$nameFilePacked = $mediaInfo['path_pack'];
-		$datName = $mediaInfo['md_name'];
+		$rom = $this->getSelectedRom();
 		
-		$onlyFirstFound = false;
-		$searchNames = array($nameFile, $nameFilePacked, $datName);
-		$cacheImages = false;
-		$imageTank = $this->imageManager->searchForRomImages('SAVED', $this->eccident, $this->crc32, $filePath, $fileExtension, $searchNames, $imageType, $onlyFirstFound, $cacheImages);
+		$romFile = $rom->getRomFile();
+		$romMeta = $rom->getRomMeta();
+		
+		$searchNames = array(
+			$romFile->getRomFilenamePlain(),
+			$romFile->getFilePathPacked(),
+			$romMeta->getName()
+		);
+		
+		$imageTank = $this->imageManager->searchForRomImages(
+			'SAVED',
+			$rom->getSystemIdent(),
+			$rom->getCrc32(),
+			dirname($romFile->getFilePath()),
+			$romFile->getRomExtension(),
+			$searchNames,
+			$imageType,
+			$onlyFirstFound = false,
+			$cacheImages = false
+		);
 		
 		$imageTankTemp = array();
 		foreach($this->imageManager->getEccImageTypes() as $key => $void){
@@ -161,41 +181,26 @@ class GuiImagePopup {
 		}
 	}
 	
-	public function show($mediaInfo, $imageType) {
+	public function show(Rom $rom, $imageType) {
+
+		// first set the selected rom object
+		$this->setSelectedRom($rom);
 		
 		if (!$this->is_opened()) $this->setPopupPosition();
 		
-		# if an user has selected an slot,
-		# make this selection sticky
-		if ($this->currentSlotSelection){
-			$imageType = $this->currentSlotSelection;
-		}
-//		else {
-//			$this->currentSlotSelection = $imageType;
-//		}
-//		print "show: $imageType ---> ".$this->currentSlotSelection."\n";
+		// if an user has selected an slot, make this selection sticky
+		if ($this->currentSlotSelection) $imageType = $this->currentSlotSelection;
 		
-		$this->eccident = ($mediaInfo['fd_eccident']) ? strtolower($mediaInfo['fd_eccident']) : strtolower($mediaInfo['md_eccident']);
-		$this->crc32 = ($mediaInfo['crc32']) ? $mediaInfo['crc32'] : $mediaInfo['md_crc32'];
-		
-		$this->updateImages($mediaInfo, $imageType);
-		
-		$this->mediaInfo = $mediaInfo;
-		
-		$this->eccident = ($this->mediaInfo['md_eccident']) ? $this->mediaInfo['md_eccident'] : $this->mediaInfo['fd_eccident'];
+		$this->updateImages($imageType);
 		
 		$this->gui->win_imagePopup->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->gui->viewport2->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->gui->win_imagePopup->show();
 		
 		// only some rom output!!
-		$name = ($mediaInfo['md_name']) ? $mediaInfo['md_name'] : '???';
-		$title = basename($mediaInfo['path']);
-//		$infoString = '<b>Platfom:</b> '.$this->eccident.' | <b>Name:</b> '.htmlspecialchars($name).' | <b>crc32:</b> '.$mediaInfo['crc32'].' | <b>Romfile:</b> '.htmlspecialchars($title).'';
-		$infoString = '<b>'.i18n::get('global', 'platform').':</b> '.$this->eccident.' | <b>'.i18n::get('global', 'name').':</b> '.htmlspecialchars($name).' | <b>'.i18n::get('global', 'crc32').':</b> '.$mediaInfo['crc32'].' | <b>'.i18n::get('global', 'fileNameShort').':</b> '.htmlspecialchars($title).'';
+		$infoString = '<b>'.i18n::get('global', 'platform').':</b> '.$rom->getSystemIdent().' | <b>'.i18n::get('global', 'name').':</b> '.htmlspecialchars($rom->getName()).' | <b>'.i18n::get('global', 'crc32').':</b> '.$rom->getCrc32().' | <b>'.i18n::get('global', 'fileNameShort').':</b> '.htmlspecialchars($rom->getRomFile()->getRomFilenamePlain()).'';
 		$this->gui->mediaCenterInfo->set_markup($infoString);
 		
-		#$this->imagePosition = 0;
 		$this->updateImagePosition();
 		$this->twImageFill();
 		$this->updateImage();
@@ -206,9 +211,6 @@ class GuiImagePopup {
 		
 		$this->createImageDataArray();
 		$this->createExtensionTable();
-		
-
-		
 	}
 
 	private function createImageDataArray() {
@@ -333,9 +335,12 @@ class GuiImagePopup {
 			if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
 		}
 
-		if ($sourceImagePath && $this->imageManager->storeUserImage($transferMode, $this->eccident, $this->crc32, $sourceImagePath, $slotName)) {
-			if(LOGGER::$active) LOGGER::add('images', "img add: ".$this->eccident."\t".$this->crc32."\t".$sourceImagePath, 0);
-			$this->updateImages($this->mediaInfo, $slotName);
+		$romSystemIdent = $this->getSelectedRom()->getSystemIdent();
+		$romCrc32 = $this->getSelectedRom()->getCrc32();
+		
+		if ($sourceImagePath && $this->imageManager->storeUserImage($transferMode, $romSystemIdent, $romCrc32, $sourceImagePath, $slotName)) {
+			if(LOGGER::$active) LOGGER::add('images', "img add: ".$romSystemIdent."\t".$romCrc32."\t".$sourceImagePath, 0);
+			$this->updateImages($slotName);
 			$this->twImageFill();
 			$this->createExtensionTable();
 		}
@@ -372,58 +377,41 @@ class GuiImagePopup {
 			
 			if(LOGGER::$active) LOGGER::add('images', "img remove: ".$imageFile, 0);
 			
-			$this->updateImages($this->mediaInfo, false);
+			$this->updateImages(false);
 			$this->twImageFill();
 			$this->createExtensionTable();
 			$this->updateImage();
 		}
 		else {
 			$title = I18N::get('popup', 'img_remove_error_title');
-			$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), $file);
-			if(FACTORY::get('manager/Gui')->openDialogInfo($title, $msg)) return false;
+			$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), basename($imageFile));
+			if(FACTORY::get('manager/Gui')->openDialogInfo($title, $msg, false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true))) return false;
 		}
 		
 		$this->gui->win_imagePopup->set_keep_above(true);
 	}
-	
 
-	
-	
 	public function is_opened() {
 		return $this->opened_state;
 	}
 	
-	/**
-	 * 
-	 */
 	private function connect_signals() {
-		
 		$this->gui->imageCenterStorePosition->connect('clicked', array($this, 'onStorePosition'));
-		
 		$this->gui->imgPopup_btn_prev_top->connect('clicked', array($this, 'updateImagePosition'));
-
 		$this->gui->imgPopup_btn_next_top->connect('clicked', array($this, 'updateImagePosition'));
-		
 		$this->gui->imgCenterButtonClose->connect_simple('clicked', array($this, 'hidePopup'));
-		
 		$this->statusbar_context_id = $this->gui->imgPopup_statusbar->get_context_id('imageUpdate');
-		
 		$this->gui->imgPopup_tglbtn_size_fit->connect('clicked', array($this, 'setImageSizeMode'));
-		
 		$this->imgPopupTreeSelection = $this->gui->imgPopup_tree->get_selection(); 
 		$this->imgPopupTreeSelection->set_mode(Gtk::SELECTION_BROWSE); 
 		$this->imgPopupTreeSelection->connect('changed', array($this, 'twImageSetIndex'));
-		
 		$this->gui->imgPopup_tree->connect('button-release-event', array($this, 'showContextMenu'));
-		
 		$this->gui->mediaCenterOptBtnFolder->connect_simple('clicked', array($this, 'onOpenImageFolder'));
-		
-		
 	}
 	
 	public function onOpenImageFolder() {
 		$this->gui->win_imagePopup->set_keep_below(false);
-		$imagePath = $this->imageManager->getUserImageCrc32Folder($this->eccident, $this->crc32);
+		$imagePath = $this->imageManager->getUserImageCrc32Folder($this->getSelectedRom()->getSystemIdent(), $this->getSelectedRom()->getCrc32());
 		FACTORY::get('manager/Os')->executeProgramDirect($imagePath, 'open');
 	}
 	
@@ -582,9 +570,6 @@ class GuiImagePopup {
 		$this->updateImage();
 	}
 	
-	/**
-	 * 
-	 */
 	public function updateImage() {
 		
 		$imageCount = count($this->imageTank);
@@ -748,7 +733,7 @@ class GuiImagePopup {
 
 		$title = i18n::get('imageCenter', 'addImageForSlot').": ".$slotName."";
 		
-		$shorcutFolder = $iniManager->getShortcutPaths($this->eccident);
+		$shorcutFolder = $iniManager->getShortcutPaths($this->getSelectedRom()->getSystemIdent());
 		$sourceImagePath = FACTORY::get('manager/Os')->openChooseFileDialog($path, $title, false, false, false, $shorcutFolder);
 		if ($sourceImagePath){
 			$sourceImagePath = realpath($sourceImagePath);
@@ -808,11 +793,12 @@ class GuiImagePopup {
 		}
 	}
 	
+	/**
+	 * Callback for store position button
+	 * write position and size settings
+	 *
+	 */
 	public function onStorePosition() {
-		# write position and size settings
-//		$this->writePopupPosition();
-//		$this->writePopupSize();
-		
 		$this->storeSettings();
 	}
 }

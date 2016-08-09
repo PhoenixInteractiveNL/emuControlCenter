@@ -18,7 +18,7 @@ class GuiStatus {
 		if ($this->status_status_running === true) {
 			$title = I18N::get('popup', 'status_process_running_title');
 			$msg = I18N::get('popup', 'status_process_running_msg');
-			FACTORY::get('manager/Gui')->openDialogInfo($title, $msg);
+			FACTORY::get('manager/Gui')->openDialogInfo($title, $msg, false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
 			return false;
 		}
 		
@@ -126,7 +126,7 @@ class GuiStatus {
 			if (!$msg) $msg = i18n::get('popup', 'processDoneMsg');
 			
 			$msg .= I18N::get('popup', 'status_dialog_close');
-			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg, $hideOption)) $this->hide_main();
+			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg, $hideOption, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_success.png', true))) $this->hide_main();
 		}
 		$this->reset1();
 	}

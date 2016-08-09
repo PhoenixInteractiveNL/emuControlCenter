@@ -10,14 +10,15 @@
 // p.s.
 // This file is hailed from the ECC root. (like ecc-core\php.exe ecc-system\filename.php)
 
+$bugreportFolder = '../../ecc-core/tools/eccBugreport';
+$zipFileName = $bugreportFolder.'/'.'eccBugreport.zip';
+$reportFileName = $bugreportFolder.'/'.'eccBugreport.htm';
+
 $zip = new ZipArchive();
-$filename = "././ecc-tools/eccBugreport.zip";
 
-if ($zip->open($filename, ZIPARCHIVE::CREATE)!==TRUE) {
-    exit("cannot open <$filename>\n");
-}
+if ($zip->open($zipFileName, ZIPARCHIVE::CREATE)!==TRUE) exit("cannot open <$zipFileName>\n");
 
-$zip->addFile("././ecc-tools/eccBugreport.htm","/eccBugreport.htm");
+$zip->addFile($reportFileName, '/eccBugreport.htm'');
 
 $zip->close();
 ?> 

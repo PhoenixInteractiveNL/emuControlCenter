@@ -1,0 +1,355 @@
+; Platform               : Commodore VIC-20
+; Script for             : VICE emulator (xvic.exe) (tested with v1.22)
+; Script version         : v1.0.0.0
+; Last changed           : 2008.05.31
+;
+;
+; Author :  Sebastiaan Ebeltjes, Phoenix Interactive
+;
+; NOTES:
+;
+;
+;
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------- 
+; SET additional variables for script 
+; ------------------------------------- 
+Global $emulator_ini = $eccEmuEmulatorPath & "vice.ini"
+Dim $search_cpu_found
+Dim $prg_type
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Check if 'PrgInfo.exe' exists in the script folder
+If FileExists($eccSystemEccFolder & "ecc-script\vic20\PrgInfo.exe") <> 1 Then 
+        MsgBox(0, $eccSystemName, "PRG Info '" & $eccSystemEccFolder & "vic20\PrgInfo.exe' not found!")
+        Exit 
+EndIf
+
+;First we need to 'catch' the right setting from 'PRGInfo'
+
+; start 'PRGInfo' (using chr34 to put rom in quotes)
+Run(@ScriptDir & "\PrgInfo.exe " & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+
+; wait until 'PRGInfo' is loaded
+WinWait("PRGInfo 1.0.2", "", 10)
+
+; Get the text from the PRG info windows and put it in a variable
+$prg_info = WinGetText("PRGInfo 1.0.2", "")
+
+; close 'PRGinfo' 
+WinClose("PRGInfo 1.0.2", "")
+
+; Get the 'cpu settings' string from 'PRGinfo'
+For $search_cpu = 1 to StringLen($prg_info)
+
+        ; Check if string is found
+        If StringMid($prg_info, $search_cpu, 14) = "--------------" Then
+   
+                ; go 2 bytes further to get the good 'cpu string'
+                $search_cpu_found = $search_cpu + 16
+
+        EndIf
+
+Next
+
+;Debug box
+;MsgBox(0, $script_title, $prg_info)
+
+; ---------------------------------------------------- 
+; CPU setting found!, taking right action for INI...
+; ---------------------------------------------------- 
+
+Select
+
+; ---------------------------------------------------- 
+; ROM FILES
+; ---------------------------------------------------- 
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 4K plugin for block 1"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 4K plugin for block 2"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 4K plugin for block 3"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 4K plugin for block 5"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "1")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 8K plugin for block 1"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 8K plugin for block 2"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 8K plugin for block 3"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Rom"
+
+Case StringMid($prg_info, $search_cpu_found, 27) = "Vic20 8K plugin for block 5"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "1")
+        $prg_type = "Rom"
+
+; ---------------------------------------------------- 
+; BASIC FILES
+; ---------------------------------------------------- 
+
+Case StringMid($prg_info, $search_cpu_found, 16) = "Unexpanded Vic20"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 33) = "Vic20 with 3K expansion (block 0)"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 33) = "Vic20 with 8K expansion (block 1)"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 37) = "Vic20 with 16K expansion (blocks 1/2)"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 39) = "Vic20 with 24K expansion (blocks 1/2/3)"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 13) = "Commodore 128"
+
+        MsgBox(0, $script_title, "No setting found for 'Commodore 128 (Or expanded Vic20 with altered basic memory address)'")
+        Exit
+
+Case StringMid($prg_info, $search_cpu_found, 26) = "Vic20 With Super Expander"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 64) = "Expanded Vic20, saved from manually altered basic memory address"
+
+        MsgBox(0, $script_title, "No setting found for 'Expanded Vic20, saved from manually altered basic memory address'")
+        Exit
+
+Case StringMid($prg_info, $search_cpu_found, 12) = "Commodore 64"
+
+        MsgBox(0, $script_title, "No setting found for 'Commodore 64 (Or Expanded Vic20, saved from manually altered basic memory address)'")
+        Exit
+
+Case StringMid($prg_info, $search_cpu_found, 46) = "Vic20 graphics memory (standard 5K) or C64/128"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 30) = "Cassette buffer or sprite data"
+
+        MsgBox(0, $script_title, "No setting found for 'Cassette buffer or sprite data'")
+        Exit
+
+Case StringMid($prg_info, $search_cpu_found, 42) = "Commodore64/128 or Vic20 with 3K expansion"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 34) = "Vic20 with 8K expansion or C64/128"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 35) = "Vic20 with 16K expansion or C64/128"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 35) = "Vic20 with 24K expansion or C64/128"
+
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "1")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "0")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 13) = "Vic20 block 5"
+
+        ;Only block 5 or All blocks?
+        IniWrite($emulator_ini, "VIC20", "RAMBlock0", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock1", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock2", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock3", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock4", "0")
+        IniWrite($emulator_ini, "VIC20", "RAMBlock5", "1")
+        $prg_type = "Basic"
+
+Case StringMid($prg_info, $search_cpu_found, 16) = "Commodore 64/128"
+
+        MsgBox(0, $script_title, "No setting found for 'Commodore 64/128'")
+        Exit
+
+EndSelect
+
+; ----------------------------------------------------
+; The INI has been set, startup the emulator...
+; ----------------------------------------------------
+
+Select
+
+Case $prg_type = "Rom"
+
+        EmuWindowControl("VICE: VIC20 emulator")
+
+        Send("{ALT}")
+        Sleep(1000)
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{RIGHT}")
+        Sleep(100)
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Send("{DOWN}")
+        Sleep(100)
+        Send("{ENTER}")
+        send($CmdLine[1])
+        Send("{TAB}") 
+        Send("{TAB}")
+        Sleep(100)
+        Send("{ENTER}") 
+        Sleep(300)
+        Send("!r") ; ALT+R
+
+Case $prg_type = "Basic"
+
+        Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+
+EndSelect
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit
+

@@ -1,8 +1,0 @@
-###############################################################################
-NEC PC-Engine - Emulator notes
-###############################################################################
-
-hu_189
-This emulator only support filenames in 8.3-Format (DOS). So you have to check this box in "CONFIG/EMULATOR"
-If you start the emu, a dos box will be opened and nothing more :-(. Hit space to play! :-) Hit escape to escape!
--------------------------------------------------------------------------------

@@ -547,7 +547,7 @@ class ImportDatControlMame extends ImportDat {
 		}
 		else {
 			# only one possible set found!
-			$result[$match[$index]['state']] = $match;
+			$result[@$match[$index]['state']] = $match;
 		}
 		
 //		# TODO REMOVE! :-)

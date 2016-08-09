@@ -27,7 +27,7 @@ class GuiRomAudit extends GladeXml {
 		
 		$this->eccGui = $eccGui;
 		
-		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiRomAudit.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui/guiRomAudit.glade');
 		$this->signal_autoconnect_instance($this);
 		$this->romAudit->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->romAudit->set_modal(false);
@@ -230,7 +230,8 @@ class GuiRomAudit extends GladeXml {
 		$isValidNonMergedSet,
 		$isValidSplitSet,
 		$cloneOf,
-		$fileId
+		$fileId,
+		$returnType = false
 	){
 	
 		$setType = '';
@@ -253,7 +254,15 @@ class GuiRomAudit extends GladeXml {
 
 		if (!$fileId) $setType = '_donthave';
 		
-		return ECC_DIR_SYSTEM.'/images/eccsys/audit/ecc'.$setType.$setClone.'_ok.gif';
+		if($returnType){
+			return array(
+				'type' => substr($setType, 1),
+				'clone' => (int)$cloneOf,
+			);
+		} else {
+			return ECC_DIR_SYSTEM.'/images/audit/ecc'.$setType.$setClone.'_ok.gif';	
+		}
+		
 	}
 
 	public function getAuditStateDescription(
@@ -303,7 +312,7 @@ class GuiRomAudit extends GladeXml {
 		while($pGuiFileOp->done === NULL){
 			while (gtk::events_pending()) gtk::main_iteration();
 			if ($pGuiFileOp->done === true) $this->getFileAuditData($this->onFileRenameConfig['compositeId']);
-			elseif ($pGuiFileOp->done === false) FACTORY::get('manager/Gui')->openDialogInfo(i18n::get('global', 'error_title'), i18n::get('romAudit', 'popupRomRenameFailed'));
+			elseif ($pGuiFileOp->done === false) FACTORY::get('manager/Gui')->openDialogInfo(i18n::get('global', 'error_title'), i18n::get('romAudit', 'popupRomRenameFailed'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
 		}
 	}
 }

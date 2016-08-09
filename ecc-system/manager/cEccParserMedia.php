@@ -146,7 +146,7 @@ class EccParserMedia {
 			path_pack = '".sqlite_escape_string($this->_file_data['FILE_PATH_PACK'])."'
 			
 		";
-		print $q."\n";
+		#print $q."\n";
 		#print " U: ".$this->_file_data['FILE_PATH']."\n";
 		$this->dbms->query($q);
 		return $this->dbms->lastInsertRowid();
@@ -170,6 +170,7 @@ class EccParserMedia {
 	*/
 	private function filedata_exists(){
 		$q= "SELECT * FROM fdata WHERE path = '".sqlite_escape_string($this->_file_data['FILE_PATH'])."' and path_pack = '".sqlite_escape_string($this->_file_data['FILE_PATH_PACK'])."' LIMIT 0,1";
+		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		if ($res = $hdl->fetch(SQLITE_ASSOC)) return $res;
 		return false;
@@ -220,11 +221,13 @@ class EccParserMedia {
 	* existieren. Wenn nicht, dann wird der DB-Eintrag gelï¿½scht
 	*/
 	public function optimize($type=false) {
+		
 		// only check files lower then basepath.		
-		if (!$type && ($this->_basepath)) $q_snip = "AND path like '".$this->_basepath."%'";
+		if (!$type && ($this->_basepath)) $q_snip = "AND path like '".sqlite_escape_string($this->_basepath)."%'";
 		else $q_snip = "";
 		
 		$q = "SELECT path FROM fdata WHERE cdate < ".$this->_timestamp." ".$q_snip."";
+		print $q;
 		$hdl = $this->dbms->query($q);
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
 			if ($res['path'] && !file_exists($res['path'])) {

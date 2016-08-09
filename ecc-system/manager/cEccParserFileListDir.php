@@ -77,6 +77,7 @@ class EccParserFileListDir implements FileList {
 						// 20061116 as
 						$full_file_path = FACTORY::get('manager/Os')->eccSetRelativeFile($full_file_path);
 						
+						// arcade roms in one zip file
 						if (isset($this->_known_extensions['zip']) && $this->get_file_ext($file) == 'zip'){
 							
 							# get list from zip
@@ -85,9 +86,20 @@ class EccParserFileListDir implements FileList {
 
 							# only add, if file exists
 							if (count($fileList)) {
+								
+								$parserFile = new ParserFile();
+								$parserFile->setType(ParserFile::ZIP);
+								$parserFile->setName($full_file_path);
+								$parserFile->setNamePacked(false);
+								$parserFile->setSize(false);
+								$parserFile->setCrc32(false);
+								$parserFile->setExtension($file_extension);
+								$parserFile->setMultiRomFiles($fileList);
+								
 								$this->_file[$file_extension][] = array(
 									'DIRECT_FILE' => $this->normalize_path($full_file_path),
 									'LIST' => $fileList,
+									'OBJECT' => $parserFile,
 								);
 								
 								if (!isset($this->_stats_direct[$file_extension])) $this->_stats_direct[$file_extension] = 0;
@@ -98,6 +110,7 @@ class EccParserFileListDir implements FileList {
 							}
 						}
 						elseif ($this->is_packed_file($full_file_path)) {
+							// handle zip, 7zip files
 						}
 						else {
 							// nur in liste, wenn die extension
@@ -105,12 +118,22 @@ class EccParserFileListDir implements FileList {
 							$file_extension = $this->get_file_ext($file);
 							if (isset($this->_known_extensions[$file_extension]['parser'])) {
 								
+								$parserFile = new ParserFile();
+								$parserFile->setType(ParserFile::ZIP);
+								$parserFile->setName($file);
+								$parserFile->setNamePacked(false);
+								$parserFile->setSize(false);
+								$parserFile->setCrc32(false);
+								$parserFile->setExtension($file_extension);
+								$parserFile->setMultiRomFiles(false);
+								
 								#$this->_file[$file_extension][]['FILE'] = $this->normalize_path($full_file_path);
 								$this->_file[$file_extension][] = array(
 									'FILE' => $this->normalize_path($full_file_path),
 									'PACKED' => false,
 									'DIRECT_FILE' => $this->normalize_path($full_file_path),
 									'PACKED_FILE' => false,
+									'OBJECT' => $parserFile,
 								);
 								
 								if (!isset($this->_stats_direct[$file_extension])) $this->_stats_direct[$file_extension] = 0;
@@ -168,7 +191,12 @@ class EccParserFileListDir implements FileList {
 					return true;
 				};
 				break;
-			
+			case '7z':
+			case '7zip':
+				if ($this->handle7ZipFile($full_file_path)) {
+					return true;
+				};
+				break;
 			case 'rar':
 				if ($this->handle_rar_file($full_file_path)) {
 					return true;
@@ -180,13 +208,13 @@ class EccParserFileListDir implements FileList {
 		}
 	}
 	
-	public function handle_zip_file($zip_file) {
+	public function handle_zip_file($fullFilePath) {
 		
 		// ABS-PATH TO REL-PATH...
-		$zip_hdl = zip_open(realpath($zip_file));
-		#$zip_hdl = @zip_open($zip_file);
+		$zip_hdl = zip_open(realpath($fullFilePath));
+		#$zip_hdl = @zip_open($fullFilePath);
 		if ($zip_hdl === false || is_int($zip_hdl)) {
-			$this->invalidFile[] = $zip_file;
+			$this->invalidFile[] = $fullFilePath;
 			return false;
 		}
 		else {
@@ -194,11 +222,22 @@ class EccParserFileListDir implements FileList {
 				$file = zip_entry_name($zip_entry);
 				$file_extension = $this->get_file_ext($file);
 				if (isset($this->_known_extensions[$file_extension]['parser'])) {
+					
+					$parserFile = new ParserFile();
+					$parserFile->setType(ParserFile::ZIP);
+					$parserFile->setName($fullFilePath);
+					$parserFile->setNamePacked($file);
+					$parserFile->setSize(zip_entry_filesize($zip_entry));
+					$parserFile->setCrc32(false);
+					$parserFile->setExtension($file_extension);
+					$parserFile->setMultiRomFiles(false);
+					
 					$this->_file[$file_extension][] = array(
 						'FILE' => $this->normalize_path($file),
-						'PACKED' => $this->normalize_path($zip_file),
-						'DIRECT_FILE' => $this->normalize_path($zip_file),
+						'PACKED' => $this->normalize_path($fullFilePath),
+						'DIRECT_FILE' => $this->normalize_path($fullFilePath),
 						'PACKED_FILE' => $this->normalize_path($file),
+						'OBJECT' => $parserFile,
 					);
 					if (!isset($this->_stats_packed[$file_extension])) {
 						$this->_stats_packed[$file_extension] = 0;
@@ -211,7 +250,53 @@ class EccParserFileListDir implements FileList {
 		}
 	}
 	
-	public function handle_rar_file() {
+	public function handle7ZipFile($fullFilePath){
+
+		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+
+		$list = $manager7zip->getList($fullFilePath);
+		$info = $manager7zip->getInfo($fullFilePath);
+		if(!$list || !$info){
+			$this->invalidFile[] = $fullFilePath;
+			return false;
+		}
+
+		foreach($list as $sZipEntry){
+			
+			$fileName = $sZipEntry->getName();
+			$fileExtension = $sZipEntry->getExtension();
+			
+			if (isset($this->_known_extensions[$fileExtension]['parser'])) {
+				
+				$parserFile = new ParserFile();
+				$parserFile->setType(ParserFile::SZIP);
+				$parserFile->setName($fullFilePath);
+				$parserFile->setNamePacked($sZipEntry->getName());
+				$parserFile->setSize($sZipEntry->getSize());
+				$parserFile->setCrc32($info[$sZipEntry->getName()]->getCrc());
+				$parserFile->setExtension($sZipEntry->getExtension());
+				$parserFile->setMultiRomFiles(false);
+				
+				// fill file data
+				$this->_file[$fileExtension][] = array(
+					'FILE' => $this->normalize_path($fileName),
+					'PACKED' => $this->normalize_path($fullFilePath),
+					'DIRECT_FILE' => $this->normalize_path($fullFilePath),
+					'PACKED_FILE' => $this->normalize_path($fileName),
+					'OBJECT' => $parserFile,
+				);
+				
+				// statistics
+				$this->_stats_packed[$fileExtension] = (!isset($this->_stats_packed[$fileExtension])) ? 0 : $this->_stats_packed[$fileExtension]++;
+			}
+		}
+		
+		return true;
+	}
+	
+	public function handle_rar_file($full_file_path) {
+		// not supported yet
 		return false;
 	}
 	

@@ -1,0 +1,38 @@
+; Platform       	: Sega Dreamcast
+; Script for     	: NullDC v1.00b1.6
+; Script version 	: v1.0.0.0
+; Last changed   	: 2008.06.12
+;
+;
+; Author :  Howard Philips (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("nullDC v1.0.0")
+
+; Load CD
+; 
+Send("{ALT}")
+Send("{DOWN}")
+Send("{ENTER}")
+Sleep(1000)
+Send($eccFileRomPath & $eccFileRomFile)
+Send("{ENTER}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

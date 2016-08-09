@@ -1,0 +1,7 @@
+v1.0.0.1
+
+Old:
+Send($CmdLine[1])
+
+New:
+Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))

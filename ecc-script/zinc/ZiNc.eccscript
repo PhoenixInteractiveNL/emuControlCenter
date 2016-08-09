@@ -1,0 +1,243 @@
+; Platform               : Sony ZiNc ZN-1/ZN-2
+; Script for             : ZiNc (tested with v1.1)
+; Script version         : v1.0.0.0
+; Last changed           : 2008.05.21
+;
+;
+; Author : Sebastiaan Ebeltjes, Phoenix Interactive 
+;
+; NOTES:
+; To play a game with ZiNc, you need to start ZiNc with an number,
+; each number represent a game.
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+Select
+
+Case $eccFileRomNamePlain = "starglad"
+Run($eccEmuEmulatorFile & " 1")
+
+Case $eccFileRomNamePlain = "sfex"
+Run($eccEmuEmulatorFile & " 2")
+
+Case $eccFileRomNamePlain = "sfexj"
+Run($eccEmuEmulatorFile & " 3")
+
+Case $eccFileRomNamePlain = "sfexa"
+Run($eccEmuEmulatorFile & " 4")
+
+Case $eccFileRomNamePlain = "sfexp"
+Run($eccEmuEmulatorFile & " 5")
+
+Case $eccFileRomNamePlain = "sfexpu1"
+Run($eccEmuEmulatorFile & " 6")
+
+Case $eccFileRomNamePlain = "sfexpj"
+Run($eccEmuEmulatorFile & " 7")
+
+Case $eccFileRomNamePlain = "sfex2"
+Run($eccEmuEmulatorFile & " 8")
+
+Case $eccFileRomNamePlain = "sfex2j"
+Run($eccEmuEmulatorFile & " 9")
+
+Case $eccFileRomNamePlain = "sfex2p"
+Run($eccEmuEmulatorFile & " 10")
+
+Case $eccFileRomNamePlain = "sfex2pj"
+Run($eccEmuEmulatorFile & " 11")
+
+Case $eccFileRomNamePlain = "sfex2pa"
+Run($eccEmuEmulatorFile & " 12")
+
+Case $eccFileRomNamePlain = "plsmaswd"
+Run($eccEmuEmulatorFile & " 13")
+
+Case $eccFileRomNamePlain = "stargld2"
+Run($eccEmuEmulatorFile & " 14")
+
+Case $eccFileRomNamePlain = "rvschola"
+Run($eccEmuEmulatorFile & " 15")
+
+Case $eccFileRomNamePlain = "jgakuen"
+Run($eccEmuEmulatorFile & " 16")
+
+Case $eccFileRomNamePlain = "rvschool"
+Run($eccEmuEmulatorFile & " 17")
+
+Case $eccFileRomNamePlain = "shiryu2"
+Run($eccEmuEmulatorFile & " 18")
+
+Case $eccFileRomNamePlain = "strider2"
+Run($eccEmuEmulatorFile & " 19")
+
+Case $eccFileRomNamePlain = "kikaioh"
+Run($eccEmuEmulatorFile & " 20")
+
+Case $eccFileRomNamePlain = "techromn"
+Run($eccEmuEmulatorFile & " 21")
+
+Case $eccFileRomNamePlain = "ts2"
+Run($eccEmuEmulatorFile & " 22")
+
+Case $eccFileRomNamePlain = "ts2j"
+Run($eccEmuEmulatorFile & " 23")
+
+Case $eccFileRomNamePlain = "tgmj"
+Run($eccEmuEmulatorFile & " 24")
+
+Case $eccFileRomNamePlain = "sncwgltd"
+Run($eccEmuEmulatorFile & " 25")
+
+Case $eccFileRomNamePlain = "beastrzb"
+Run($eccEmuEmulatorFile & " 26")
+
+Case $eccFileRomNamePlain = "beastrzr"
+Run($eccEmuEmulatorFile & " 27")
+
+Case $eccFileRomNamePlain = "bldyror2"
+Run($eccEmuEmulatorFile & " 28")
+
+Case $eccFileRomNamePlain = "brvblade"
+Run($eccEmuEmulatorFile & " 29")
+
+Case $eccFileRomNamePlain = "psyforcj"
+Run($eccEmuEmulatorFile & " 30")
+
+Case $eccFileRomNamePlain = "psyforce"
+Run($eccEmuEmulatorFile & " 31")
+
+Case $eccFileRomNamePlain = "psyfrcex"
+Run($eccEmuEmulatorFile & " 32")
+
+Case $eccFileRomNamePlain = "mgcldtex"
+Run($eccEmuEmulatorFile & " 33")
+
+Case $eccFileRomNamePlain = "raystorj"
+Run($eccEmuEmulatorFile & " 34")
+
+Case $eccFileRomNamePlain = "raystorm"
+Run($eccEmuEmulatorFile & " 35")
+
+Case $eccFileRomNamePlain = "ftimpcta"
+Run($eccEmuEmulatorFile & " 36")
+
+Case $eccFileRomNamePlain = "gdarius"
+Run($eccEmuEmulatorFile & " 37")
+
+Case $eccFileRomNamePlain = "gdarius2"
+Run($eccEmuEmulatorFile & " 38")
+
+Case $eccFileRomNamePlain = "danceyes"
+Run($eccEmuEmulatorFile & " 39")
+
+Case $eccFileRomNamePlain = "xevi3dg"
+Run($eccEmuEmulatorFile & " 40")
+
+Case $eccFileRomNamePlain = "starswep"
+Run($eccEmuEmulatorFile & " 41")
+
+Case $eccFileRomNamePlain = "myangel3"
+Run($eccEmuEmulatorFile & " 42")
+
+Case $eccFileRomNamePlain = "tekkenb"
+Run($eccEmuEmulatorFile & " 43")
+
+Case $eccFileRomNamePlain = "tekkena"
+Run($eccEmuEmulatorFile & " 44")
+
+Case $eccFileRomNamePlain = "tekken"
+Run($eccEmuEmulatorFile & " 45")
+
+Case $eccFileRomNamePlain = "tekken2a"
+Run($eccEmuEmulatorFile & " 46")
+
+Case $eccFileRomNamePlain = "tekken2b"
+Run($eccEmuEmulatorFile & " 47")
+
+Case $eccFileRomNamePlain = "tekken2"
+Run($eccEmuEmulatorFile & " 48")
+
+Case $eccFileRomNamePlain = "souledga"
+Run($eccEmuEmulatorFile & " 49")
+
+Case $eccFileRomNamePlain = "souledgb"
+Run($eccEmuEmulatorFile & " 50")
+
+Case $eccFileRomNamePlain = "souledge"
+Run($eccEmuEmulatorFile & " 51")
+
+Case $eccFileRomNamePlain = "dunkmnia"
+Run($eccEmuEmulatorFile & " 52")
+
+Case $eccFileRomNamePlain = "dunkmnic"
+Run($eccEmuEmulatorFile & " 53")
+
+Case $eccFileRomNamePlain = "primglex"
+Run($eccEmuEmulatorFile & " 54")
+
+Case $eccFileRomNamePlain = "weddingr"
+Run($eccEmuEmulatorFile & " 55")
+
+Case $eccFileRomNamePlain = "hyperath"
+Run($eccEmuEmulatorFile & " 56")
+
+Case $eccFileRomNamePlain = "pbball96"
+Run($eccEmuEmulatorFile & " 57")
+
+Case $eccFileRomNamePlain = "susume"
+Run($eccEmuEmulatorFile & " 58")
+
+Case $eccFileRomNamePlain = "fgtlayer"
+Run($eccEmuEmulatorFile & " 59")
+
+Case $eccFileRomNamePlain = "ehrgeiz"
+Run($eccEmuEmulatorFile & " 60")
+
+Case $eccFileRomNamePlain = "tekken3"
+Run($eccEmuEmulatorFile & " 61")
+
+Case $eccFileRomNamePlain = "mrdrillr"
+Run($eccEmuEmulatorFile & " 62")
+
+Case $eccFileRomNamePlain = "aquarush"
+Run($eccEmuEmulatorFile & " 63")
+
+Case $eccFileRomNamePlain = "pacapp"
+Run($eccEmuEmulatorFile & " 64")
+
+Case $eccFileRomNamePlain = "glpracr3"
+Run($eccEmuEmulatorFile & " 65")
+
+Case $eccFileRomNamePlain = "shngmtkb"
+Run($eccEmuEmulatorFile & " 66")
+
+Case $eccFileRomNamePlain = "cbaj"
+Run($eccEmuEmulatorFile & " 67")
+
+Case $eccFileRomNamePlain = "doapp"
+Run($eccEmuEmulatorFile & " 68")
+
+Case $eccFileRomNamePlain = "tondemo"
+Run($eccEmuEmulatorFile & " 69")
+
+Case $eccFileRomNamePlain = "mfjump"
+Run($eccEmuEmulatorFile & " 70")
+
+Case $eccFileRomNamePlain = "hvnsgate"
+Run($eccEmuEmulatorFile & " 71")
+
+EndSelect
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

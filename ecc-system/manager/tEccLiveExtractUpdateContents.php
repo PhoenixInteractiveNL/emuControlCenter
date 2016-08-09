@@ -1,6 +1,6 @@
 <?PHP
 
-$update_file = getcwd() . '\ecc-tools\ecc_update.zip';
+$update_file = getcwd() . '\ecc-core\tools\ecc_update.zip';
 unzip($update_file);
 
 

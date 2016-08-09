@@ -13,7 +13,7 @@ class GuiPopFileOperations extends GladeXml {
 	}
 	
 	private function prepareGui() {
-		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiPopFileOperations.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui/guiPopFileOperations.glade');
 		$this->signal_autoconnect_instance($this);
 		$this->guiFileOperations->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->guiFileOperations->set_modal(true);
@@ -130,11 +130,11 @@ class GuiPopFileOperations extends GladeXml {
     			if ($this->mainGui) $this->mainGui->onReloadRecord(false);
     		}
     		else {
-    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!');
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     		}
     	}
     	else {
-    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not copy file!');
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not copy file!', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     	}
         
         $this->copyTxtSourcePath->get_text();
@@ -167,11 +167,11 @@ class GuiPopFileOperations extends GladeXml {
     			if ($this->mainGui) $this->mainGui->onReloadRecord(false);
     		}
     		else {
-    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file in database!');
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file in database!', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     		}
     	}
     	else {
-    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file!');
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file!', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     	}
     }
     
@@ -203,12 +203,12 @@ class GuiPopFileOperations extends GladeXml {
     		}
     		else {
     			$this->done = false;
-    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!');
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     		}
     	}
     	else {
     		$this->done = false;
-    		FACTORY::get('manager/Gui')->openDialogInfo('Error', "could not rename file!\nFilename allready exists!");
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', "could not rename file!\nFilename allready exists!", false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
     	}
     	$this->done = true;
     }

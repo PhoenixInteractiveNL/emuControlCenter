@@ -1,0 +1,146 @@
+; Platform              : Commodore Amiga
+; Script for            : WinUAE (tested with v1.4.4)
+; Script version        : v1.0.0.6
+; Last changed          : 2008.07.15
+;
+;
+; Author:  - Sebastiaan Ebeltjes (Phoenix Interactive)
+;          - TheCyberDruid
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Generate an UAE file for this game.
+; Also overwrites the old content with new content.
+
+; First let's copy the WINAUE TEMPLATE INI to the UAE ROM NAME
+;
+$sUAEFilename = $eccFileRomPath & $eccFileRomNamePlain & ".uae"
+FileCopy(@Scriptdir & "\winuae-template.ini", $sUAEFilename,9)
+
+$iDiskCount = 1
+Dim $aDiskNames[5]
+If IsArray( $eccMultiRoms ) Then
+	$iRomCount = UBound( $eccMultiRoms, 1 ) - 1
+	For $i = 1 To $iRomCount
+		If $eccMultiRoms[$i][1] <> '""' Then
+			If StringInStr( $eccMultiRoms[$i][1], "\" ) Then
+				$sRomName = CleanRomName( $eccMultiRoms[$i][1] )
+			Else
+				$sRomName = $eccMultiRoms[$i][1]
+			EndIf
+			If Not FileExists( $eccFileRomPath & $sRomName ) Then
+				$sRomName = StringReplace( $sRomName, ".adf", ".zip" )
+			EndIf
+			$aDiskNames[$iDiskCount] = $sRomName
+			$iDiskCount += 1
+			If $iDiskCount == 5 Then
+				ExitLoop
+			EndIf
+		Else
+			ExitLoop
+		EndIf
+	Next
+	$iDiskCount -= 1
+Else
+	$aDiskNames[1] = $eccFileRomFile
+Endif
+
+$bConfigChange = False
+Dim $aRomSettings[30]
+$iSettingsCount = 1
+
+If FileExists( $eccScriptParamsFile ) Then
+	$bGoOn = True
+
+	$fileRomSettings = FileOpen( $eccScriptParamsFile, 0 )
+	While $bGoOn
+		$sLine = FileReadLine( $fileRomSettings )
+		If @error == -1 Then
+			$bGoOn = False
+		Else
+			$aRomSettings[$iSettingsCount] = $sLine
+			$iSettingsCount += 1
+		EndIf
+	WEnd
+	FileClose( $fileRomSettings )
+	ReDim $aRomSettings[$iSettingsCount]
+	$iSettingsCount -= 1
+	$bConfigChange = True
+EndIf
+
+; Now open the UAE file and write the ROM contents into it!
+;
+If $bConfigChange Then
+	Dim $aUAELines[30]
+	$iLineCount = 1
+	$bGoOn = True
+
+	$uae_file = FileOpen($sUAEFilename, 0)
+	While $bGoOn
+		$sLine = FileReadLine( $uae_file )
+		If @error == -1 Then
+			$bGoOn = False
+		Else
+			$aUAELines[$iLineCount] = $sLine
+			$iLineCount += 1
+		EndIf
+	WEnd
+	FileClose($uae_file)
+	ReDim $aUAELines[$iLineCount]
+	$iLineCount -= 1
+
+	$uae_file = FileOpen( $sUAEFilename, 2 )
+	For $i = 1 To $iLineCount
+		$iPos = StringInStr( $aUAELines[$i], "=" )
+		$sCheck = StringLeft( $aUAELines[$i], $iPos )
+		For $j = 1 To $iSettingsCount
+			$iPos = StringInStr( $aRomSettings[$j], "=" )
+			$sSetting = StringLeft( $aRomSettings[$j], $iPos )
+			If $sSetting == $sCheck Then
+				$aUAELines[$i] = $aRomSettings[$j]
+			EndIf
+		Next
+		FileWriteLine( $uae_file, $aUAELines[$i] )
+	Next
+	FileClose( $uae_file )
+EndIf
+
+$uae_file = FileOpen($sUAEFilename, 1)
+
+FileWriteLine($uae_file, "floppy0=" & $eccFileRomPath & $aDiskNames[1])
+If $iDiskCount > 1 Then FileWriteLine($uae_file, "floppy1=" & $eccFileRomPath & $aDiskNames[2])
+If $iDiskCount > 2 Then FileWriteLine($uae_file, "floppy2=" & $eccFileRomPath & $aDiskNames[3])
+If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & $aDiskNames[4])
+
+FileClose($uae_file)
+
+; Start the emulator
+
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " -f " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".uae" & chr(34))
+
+Func CleanRomName( $sRomName )
+	While StringInStr( $sRomName, "\" )
+		$iPos = StringInStr( $sRomName, "\" ) + 1
+		$sRomName = StringMid( $sRomName, $iPos )
+	Wend
+	Return StringReplace( $sRomName, '"', "" )
+EndFunc
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

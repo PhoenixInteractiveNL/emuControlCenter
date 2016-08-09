@@ -1,0 +1,134 @@
+JADMaker for Nokia Java Games
+Version 1.15
+for Windows 9x/NT/2K/ME/XP
+http://www.geocities.com/mangokun/
+
+
+!!! You MUST put the files below together in the same folder.
+JADMaker.exe
+JADMaker.txt
+config.xml (will be created if not found)
+unzip32.dll
+
+
+What
+
+JADMaker creates a JAD file for your .JAR Java Games, so that you can install them to your mobile phone.
+
+
+Features:
+- simple DRAG and DROP operations!
+- allows batch processing of JAR files
+- enabling Explorer Context-Menu extension allows you to generate a JAD file quickly
+- keep the program 'Always on Top' of all other windows (Useful)
+- keep your program settings (in a XML file)
+
+
+Why
+
+Interest in Java Games for Nokia mobile phones.
+Some of the Java Games for Nokia mobile phones does not comes with a .jad file, so I searched the net for a JAD generator.
+Came across a lousy program called 'JADgen', so I decided to make one that is better then it.
+
+
+How to use this program?
+
+There are 3 ways.
+1) Run JADMaker. Drag and drop a JAR file onto the window. JAD generated. That's it!
+
+2) Drag and drop a JAR file onto the JADMaker.exe icon in a Windows Explorer window.
+This means you can also create a desktop shortcut to JADMaker.exe, and then drop JAR file(s) onto the shortcut.
+
+3) Once the "Make JAD" Explorer Context-Menu extension is enabled (by checking it in the program), 
+you can right click on any JAR file(s) for a quick "Make JAD".
+
+Remember that you can process multiple JAR files at one time (=batch procesing).
+Just select multiple files, and use any of the ways above (this is really the icing on the cake!).
+
+With so many ways to get your JAD file, you are spoilt for choice!!!
+
+
+Installation
+
+No special installation is required on Windows.
+JADMaker can be put in any folder (together with other required files).
+
+You may make a shortcut to it on your Desktop.
+
+
+Troubleshooting
+
+Basic list of VB runtime files and MS scripting file required in your system
+msvbvm60.dll: http://www.microsoft.com/downloads/details.aspx?FamilyID=bf9a24f9-b5c5-48f4-8edd-cdf2d29a79d5&DisplayLang=en
+scrrun.dll: http://msdn.microsoft.com/library/default.asp?url=/downloads/list/webdev.asp
+mscomctl.ocx: http://www.majorgeeks.com/faqshow.php?id=8
+msxml3.dll
+
+
+* When I try to run JADMaker, it dies with the following error: Component 'MSCOMCTL.OCX' or one of its dependencies not correctly registered: a file is missing or invalid 
+
+If you encounter this error, you will need to install the file MSCOMCTL.OCX to your computer.
+Download sites: 
+- http://www.majorgeeks.com/faqshow.php?id=8
+- Missing MSCOMCTL.OCX Library File: http://www.ascentive.com/support/new/support_dll.phtml?dllname=MSCOMCTL.OCX
+- http://www.geocities.com/nitin_speed/resources.htm#mscomctl
+
+
+* When I try to run JADMaker, it dies with the following error: The file 'MSVBVM60.DLL' cannot be found... 
+
+MSVBVM60.DLL is a support file required to run any Visual Basic 6 program.
+If you encounter this error, you will need to install the 'Visual Basic 6.0 Runtime Module'.
+
+Visual Basic 6.0 Runtime Module
+http://www.microsoft.com/downloads/details.aspx?FamilyID=bf9a24f9-b5c5-48f4-8edd-cdf2d29a79d5&DisplayLang=en
+Download sites:
+- Direct Download from Microsoft site: http://download.microsoft.com/download/vb60pro/Redist/sp5/WIN98Me/EN-US/VBRun60sp5.exe
+- Missing MSVBVM60.DLL Library File: http://www.ascentive.com/support/new/support_dll.phtml?dllname=MSVBVM60.DLL
+
+
+* When I try to run JADMaker, it dies with the following error(s):
+Run-time error '429' ActiveX component can't create object
+Run-time error '-2147221231 (80040111)': Automation error ClassFactory cannot supply requested class
+
+The error that you have encountered is caused by some VB runtime and MS scripting files not being properly installed or uninstalled from the system.
+
+One way that the run-time error 429 occurs is when one of the components that is needed by the program is not registered correctly.
+The File System object is contained in the Scrrun.dll file. Make certain that this DLL file is installed on the target computer, and that it is correctly registered.
+http://support.microsoft.com/kb/247979/EN-US/
+
+
+* When I try to run JADMaker, it dies with the following error:
+Run time error '430': Class does not support Automation or does not support expected interface
+
+This error message does not mean that there is something wrong with MDAC. It means that some DLL file, which is referenced from the application, is missing.
+However it is recommended that you get your system updated to MDAC 2.5 SP3 or higher.
+- MDAC Downloads: http://msdn.microsoft.com/data/mdac/default.aspx
+- PQ Systems - MDAC Information: http://www.pqsystems.com/kb/question.php?qstId=521
+
+
+* When I try to run JADMaker, it dies with the following error:
+Run-time error '53': File not found
+or MANIFEST.MF not found in ...
+
+My program checks for a file "MANIFEST.MF" in your .JAR file.
+Pls check manually that you have a valid .JAR file.
+
+
+Version History
+
+1.15 (Jan 13, 2005)
+- Minor code changes to better handle error that arises with invalid .JAR files
+
+1.1 (Sep 12, 2003)
+- Removed a serious bug in the program, that will cause extra lines in the JAD file
+
+
+Disclaimer
+This program is free. You may distribute it, but you may not charge money for it.
+
+
+Send suggestions and comments to: 
+mangokun@hotmail.com
+
+Programmed by Goh Mingkun using Visual Basic 6.0
+Last update on Thurs, Jan 13, 2005

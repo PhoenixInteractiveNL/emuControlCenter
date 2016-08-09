@@ -113,7 +113,7 @@ class GuiPopConfig extends GladeXml {
 	
 	private function prepareGui() {
 		# get gui!
-		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guipopupconfig.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui/guipopupconfig.glade');
 		$this->signal_autoconnect_instance($this);
 		
 		$this->guiPopConfig->connect('delete-event', array($this, 'onButtonCancel'));
@@ -158,6 +158,7 @@ class GuiPopConfig extends GladeXml {
 		$this->lbl_emu_assign_parameter->set_text(I18N::get('popupConfig', 'lbl_emu_assign_parameter'));
 		$this->emuAssignGlobalEscape->set_label(I18N::get('popupConfig', 'lbl_emu_assign_escape'));
 		$this->emuAssignGlobalEightDotThree->set_label(I18N::get('popupConfig', 'lbl_emu_assign_eightdotthree'));
+		$this->emuAssignGlobalUseCueFile->set_label(I18N::get('popupConfig', 'lbl_emu_assign_usecuefile'));
 		$this->emuAssignGlobalFilenameOnly->set_label(I18N::get('popupConfig', 'lbl_emu_assign_nameonly'));
 		$this->emuAssignGlobalNoExtension->set_label(I18N::get('popupConfig', 'lbl_emu_assign_noextension'));
 		$this->emuAssignGlobalExecuteInEmuFolder->set_label(I18N::get('popupConfig', 'lbl_emu_assign_executeinemufolder'));
@@ -202,11 +203,10 @@ class GuiPopConfig extends GladeXml {
 		$this->lbl_img_opt_conv_minsize->set_label(I18N::get('popupConfig', 'lbl_img_opt_conv_minsize'));
 		$this->lbl_img_opt_conv_minsize_def->set_markup('<b>bytes</b> '.sprintf(I18N::get('popupConfig', 'lbl_img_opt_conv_minsize_def%s'), '30000'));
 		
-		$this->lbl_img_otp_list_fastrefresh->set_label(I18N::get('popupConfig', 'lbl_img_otp_list_fastrefresh'));
-		
 		$this->emuAssignGlobalEscape->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalFilenameOnly->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalEightDotThree->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
+		$this->emuAssignGlobalUseCueFile->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalNoExtension->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalExecuteInEmuFolder->connect_simple_after('toggled', array($this, 'updateEmuPreview'));		
 		
@@ -275,20 +275,21 @@ class GuiPopConfig extends GladeXml {
 		$emuEscape = $this->emuAssignGlobalEscape->set_sensitive($emuState);
 		$filenameOnly = $this->emuAssignGlobalFilenameOnly->set_sensitive($emuState);
 		$emuWin8char = $this->emuAssignGlobalEightDotThree->set_sensitive($emuState);
+		$useCueFile = $this->emuAssignGlobalUseCueFile->set_sensitive($emuState);
 		$noExtension = $this->emuAssignGlobalNoExtension->set_sensitive($emuState);
 		$executeInEmuFolder = $this->emuAssignGlobalExecuteInEmuFolder->set_sensitive($emuState);
 		
 		$this->emuAssignGlobalEnableEccScript->set_sensitive($emuState);
 
-# make unneeded options invisible
-$this->emuStartButton->set_visible($emuState);
-$this->emuCliParamArea->set_visible($emuState);
-$this->emuPreviewArea->set_visible($emuState);
-$this->emuScriptArea->set_visible($emuState);
-$this->emuParamArea->set_visible($emuState);
-$this->emuUnpackArea->set_visible($emuState);
-$this->emuAssignGlobalActive->set_visible($emuState);
-		
+		# make unneeded options invisible
+		$this->emuStartButton->set_visible($emuState);
+		$this->emuCliParamArea->set_visible($emuState);
+		$this->emuPreviewArea->set_visible($emuState);
+		$this->emuScriptArea->set_visible($emuState);
+		$this->emuParamArea->set_visible($emuState);
+		$this->emuUnpackArea->set_visible($emuState);
+		$this->emuAssignGlobalActive->set_visible($emuState);
+				
 		$this->emuAssignGlobalParam->set_sensitive($emuState);
 		
 		$this->emuAssignGlobalCheckZipVBox->set_sensitive($emuState);
@@ -306,12 +307,21 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		$emuEscape = $this->emuAssignGlobalEscape->get_active();
 		$filenameOnly = $this->emuAssignGlobalFilenameOnly->get_active();
 		$emuWin8char = $this->emuAssignGlobalEightDotThree->get_active();
+		$useCueFile = $this->emuAssignGlobalUseCueFile->get_active();
+
 		$noExtension = $this->emuAssignGlobalNoExtension->get_active();
 		$executeInEmuFolder = $this->emuAssignGlobalExecuteInEmuFolder->get_active();
 		
 		# only activate, if filename only is selected
 		$this->emuAssignGlobalExecuteInEmuFolder->set_sensitive($filenameOnly);
 		$this->emuAssignGlobalEightDotThree->set_sensitive(!$filenameOnly && !$noExtension);
+		
+		$this->emuAssignGlobalUseCueFile->set_sensitive(!$noExtension);
+		if($noExtension){
+			$this->emuAssignGlobalUseCueFile->set_active(false);	
+		}
+		
+		
 		if (!$filenameOnly){
 			$this->emuAssignGlobalExecuteInEmuFolder->set_active(false);
 		}
@@ -322,7 +332,8 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		
 		$enableEccScript = $this->emuAssignGlobalEnableEccScript->get_active();
 		$this->emuAssignGlobalParam->set_sensitive(!$enableEccScript);
-		$this->emuAssignGlobalEscape->set_sensitive(!$enableEccScript);
+//		$this->emuAssignGlobalEscape->set_sensitive(!$enableEccScript);
+		$this->emuAssignGlobalEscape->set_sensitive(!$enableEccScript && !$emuWin8char);
 		
 		if ($enableEccScript){
 			$this->emuAssignGlobalExecuteInEmuFolder->set_sensitive(false);
@@ -331,7 +342,7 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		}
 		
 		$emuCommand = I18N::get('popupConfig', 'lbl_preview_impossible');
-		if ($theEmuCommand = FACTORY::get('manager/Os')->getEmuCommand($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char, $filenameOnly, $noExtension, $enableEccScript, $executeInEmuFolder)){
+		if ($theEmuCommand = FACTORY::get('manager/Os')->getEmuCommand($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char, $filenameOnly, $noExtension, $enableEccScript, $executeInEmuFolder, $this->selectedEccident, $useCueFile)){
 			
 			$emuCommand = $theEmuCommand['command'];
 			$toolsFolder = getcwd()."\\";
@@ -339,6 +350,10 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 			
 			$emuFolder = dirname($emuPath)."\\";
 			$emuCommand = str_replace($emuFolder, DIRECTORY_SEPARATOR.'emupath'.DIRECTORY_SEPARATOR, $emuCommand);
+			
+			
+			$emuCommand = str_replace('ecc-core\\thirdparty\\autoit\\', '', $emuCommand);
+			
 			
 			$emuCommand = str_replace(ECC_DIR, '', $emuCommand);
 		}
@@ -351,10 +366,15 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		if ($path){
 			$mngrValidator = FACTORY::get('manager/Validator');
 			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-			FACTORY::get('manager/Os')->executeProgramDirect(ECC_DIR.'/ecc-core-'.strtolower(PHP_OS).'/'.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.$path.$eccLoc['ECC_SCRIPT_EXTENSION'].'"');
+			
+			$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($path).$eccLoc['ECC_SCRIPT_EXTENSION'];
+			if(!is_dir(dirname($eccScriptFile))) mkdir(dirname($eccScriptFile));
+
+			FACTORY::get('manager/Os')->executeProgramDirect(ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.$eccScriptFile.'"');
+
 		}
-		elseif(!trim($path)) FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error'));
-		else FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error_notfound'));
+		elseif(!trim($path)) FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
+		else FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error_notfound'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
 	}
 	
 	public function deleteEccScript(){
@@ -362,9 +382,13 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		if ($this->eccScriptExists($path)){
 			$mngrValidator = FACTORY::get('manager/Validator');
 			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-			$msg = sprintf(I18N::get('popupConfig', 'msg_emu_assign_delete_eccscript%s'), basename($path).$eccLoc['ECC_SCRIPT_EXTENSION']);
+			
+			// new script path
+			$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($path).$eccLoc['ECC_SCRIPT_EXTENSION'];
+			
+			$msg = sprintf(I18N::get('popupConfig', 'msg_emu_assign_delete_eccscript%s'), $eccScriptFile);
 			if (FACTORY::get('manager/Gui')->openDialogConfirm('', $msg)){
-				unlink($path.$eccLoc['ECC_SCRIPT_EXTENSION']);
+				unlink($eccScriptFile);
 				$this->updateEccScriptState();
 			}
 		}
@@ -374,7 +398,11 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		if (!trim($path)) return false;
 		$mngrValidator = FACTORY::get('manager/Validator');
 		$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-		return realpath($path.$eccLoc['ECC_SCRIPT_EXTENSION']);
+		
+		// new script path
+		$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($path).$eccLoc['ECC_SCRIPT_EXTENSION'];
+		
+		return realpath($eccScriptFile);
 	}
 	
 	public function activateEccScript($state){
@@ -541,6 +569,10 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		# set default off!
 		$eightDotThreeState = (!isset($iniEmu['win8char'])) ? false : $iniEmu['win8char'];
 		$eightDotThree = (!isset($storageEmu['win8char'])) ? $eightDotThreeState : $storageEmu['win8char'];
+
+		# set default off!
+		$useCueFileState = (!isset($iniEmu['useCueFile'])) ? false : $iniEmu['useCueFile'];
+		$useCueFile = (!isset($storageEmu['useCueFile'])) ? $useCueFileState : $storageEmu['useCueFile'];
 		
 		# set default off!
 		$filenameOnlyState = (!isset($iniEmu['filenameOnly'])) ? false : $iniEmu['filenameOnly'];
@@ -573,9 +605,9 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		if (!isset($this->emuInfoBuffer[$eccident])) {
 			$spacer = str_repeat('-', 80)."\n";
 			$buffer = new GtkTextBuffer();
-			if (file_exists('infos/ecc_platform_'.$eccident.'_emu.ini')) {
+			if (file_exists('system/ecc_'.$eccident.'_emu.ini')) {
 				$iniManager = FACTORY::get('manager/IniFile');
-				$emuData = $iniManager->parse_ini_file_quotes_safe('infos/ecc_platform_'.$eccident.'_emu.ini');
+				$emuData = $iniManager->parse_ini_file_quotes_safe('system/ecc_'.$eccident.'_emu.ini');
 				$text = '';
 				foreach($emuData as $section => $sectionData) {
 					$text .= trim($sectionData['name'])."\n";
@@ -604,6 +636,7 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		$this->emuAssignGlobalParam->set_text($param);
 		$this->emuAssignGlobalEscape->set_active($escape);
 		$this->emuAssignGlobalEightDotThree->set_active($eightDotThree);
+		$this->emuAssignGlobalUseCueFile->set_active($useCueFile);
 		$this->emuAssignGlobalFilenameOnly->set_active($filenameOnly);
 		$this->emuAssignGlobalNoExtension->set_active($noExtension);
 		$this->emuAssignGlobalExecuteInEmuFolder->set_active($executeInEmuFolder);
@@ -645,11 +678,11 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['param'] = $this->emuAssignGlobalParam->get_text();
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['escape'] = $this->emuAssignGlobalEscape->get_active();
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['win8char'] = $this->emuAssignGlobalEightDotThree->get_active();
+		$this->dataStorage[$eccident]['EMU'][$fileExt]['useCueFile'] = $this->emuAssignGlobalUseCueFile->get_active();
 		
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['filenameOnly'] = $this->emuAssignGlobalFilenameOnly->get_active();
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['noExtension'] = $this->emuAssignGlobalNoExtension->get_active();
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['executeInEmuFolder'] = $this->emuAssignGlobalExecuteInEmuFolder->get_active();		
-		
 		
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['enableEccScript'] = $this->emuAssignGlobalEnableEccScript->get_active();
 		
@@ -793,14 +826,19 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 			# eccScript available?
 			$mngrValidator = FACTORY::get('manager/Validator');
 			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-			if($eccScriptFile = realpath($newPath.$eccLoc['ECC_SCRIPT_EXTENSION'])){
+			
+			// new script path
+			$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($newPath).$eccLoc['ECC_SCRIPT_EXTENSION'];
+			
+			if(file_exists($eccScriptFile)){
 				$title = I18N::get('popupConfig', 'title_emu_assign_found_eccscript');
 				$msg = sprintf(I18N::get('popupConfig', 'msg_emu_assign_found_eccscript%s'), basename($eccScriptFile));
 				
 				$test = file($eccScriptFile);
+				
 				$preview = array();
 				foreach($test as $index => $line){
-					if ($index >= 15 || substr(trim($line), 0, 1) != ';') break; # only read first 10 lines
+					if ($index >= 20 || substr(trim($line), 0, 1) != ';') break; # only read first 20 lines
 					if (!isset($hilight) && trim($line) != ';') {
 						$hilight = true;
 						$preview[] = '<b>'.trim(substr(trim($line), 1)).'</b>';
@@ -813,6 +851,9 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 				else $msg .= "\n\n<b>".I18N::get('popupConfig', 'title_emu_found_eccscript_nopreview')."</b>";				
 			
 				$this->activateEccScript(FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg));
+			}
+			else{
+				$this->activateEccScript(false);
 			}
 			
 			$this->storeTempEmulatorData();
@@ -959,7 +1000,7 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		
 		$user_folder = $iniManager->getKey('USER_DATA', 'base_path');
 		if (!$user_folder || !realpath($user_folder)) {
-			FACTORY::get('manager/Gui')->openDialogInfo(i18n::get('global', 'error_title'), '<b>Userfolder not valid!!!</b>');
+			FACTORY::get('manager/Gui')->openDialogInfo(i18n::get('global', 'error_title'), '<b>Userfolder not valid!!!</b>', false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
 			#$this->configErrorLabel->set_markup('<b>Userfolder not valid!!!</b>');
 		}
 		$this->confEccUserPath->set_text($user_folder);
@@ -1174,7 +1215,11 @@ $this->emuAssignGlobalActive->set_visible($emuState);
 		
 		$this->lbl_img_otp_list_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_img_otp_list_hdl').'</b>');
 		$this->lbl_img_opt_list_imagesize->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_imagesize'));
+		$this->lbl_img_otp_list_imagesize_default->set_text('('.I18N::get('popupConfig', 'lbl_img_otp_list_imagesize_default').')');
 		$this->lbl_img_opt_list_aspectratio->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_aspectratio'));
+		$this->lbl_img_otp_list_aspectratio_default->set_text('('.I18N::get('popupConfig', 'lbl_img_otp_list_aspectratio_default').')');
+		$this->lbl_img_otp_list_fastrefresh->set_label(I18N::get('popupConfig', 'lbl_img_otp_list_fastrefresh'));
+		$this->lbl_img_otp_list_fastrefresh_default->set_label('('.I18N::get('popupConfig', 'lbl_img_otp_list_fastrefresh_default').')');
 		
 		$iniManager = FACTORY::get('manager/IniFile');
 		

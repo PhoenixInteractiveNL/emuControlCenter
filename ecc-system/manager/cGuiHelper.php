@@ -171,18 +171,10 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 	}
 	
 	public function set_eccheader_image() {
-		$img_path = ECC_DIR_SYSTEM.'/images/eccsys/internal/ecc_header_small.png';
+		$img_path = ECC_DIR_SYSTEM.'/images/internal/ecc_header_small.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
 		$obj_pixbuff = $this->getPixbuf($img_path);
 		$this->gui->img_ecc_header->set_from_pixbuf($obj_pixbuff);
-	}
-	
-	public function setEccSupportImage() {
-		$img_path = ECC_DIR_SYSTEM.'/images/eccsys/internal/ecc_logo_support.png';
-		if (!file_exists($img_path)) die ("missing ecc_header");
-		
-		$obj_pixbuff = $this->getPixbuf($img_path);
-		$this->gui->eccImageSupport->set_from_pixbuf($obj_pixbuff);
 	}
 	
 	public function open_splash_screen() {
@@ -200,7 +192,7 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 		$dlg->set_style($win_style_temp);
 		
 		$dlg->set_icon($this->getPixbuf(ECC_DIR_SYSTEM.'/images/ecc_icon_small.ico'));
-		$dlg->set_logo($this->getPixbuf(ECC_DIR_SYSTEM.'/images/eccsys/platform/ecc_ecc_teaser.png'));
+		$dlg->set_logo($this->getPixbuf(ECC_DIR_SYSTEM.'/images/platform/ecc_ecc_teaser.png'));
 		
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];

@@ -5,7 +5,7 @@ class sZipItem {
 	private $size;
 	private $attributes;
 	private $modified;
-	private $fileExtension;
+	private $extension;
 	
 	/**
 	 * Set name of the entry. Concat directory seperator for directories
@@ -71,7 +71,7 @@ class sZipItem {
 	 *
 	 */
 	public function finalize() {
-		$this->setFileExtension();
+		$this->setExtension();
 	}
 	
 	/**
@@ -124,7 +124,7 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function isZip(){
-		return (strtolower($this->getFileExtension()) == 'zip') ? true : false;
+		return (strtolower($this->getExtension()) == 'zip') ? true : false;
 	}
 	
 	/**
@@ -133,7 +133,7 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function isRar(){
-		return (strtolower($this->getFileExtension()) == 'rar') ? true : false;
+		return (strtolower($this->getExtension()) == 'rar') ? true : false;
 	}
 	
 	/**
@@ -142,7 +142,7 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function isAce(){
-		return (strtolower($this->getFileExtension()) == 'ace') ? true : false;
+		return (strtolower($this->getExtension()) == 'ace') ? true : false;
 	}
 	
 	/**
@@ -151,7 +151,7 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function is7z(){
-		return (strtolower($this->getFileExtension()) == '7z') ? true : false;
+		return (strtolower($this->getExtension()) == '7z') ? true : false;
 	}
 	
 	/**
@@ -160,7 +160,7 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function isTar(){
-		return (strtolower($this->getFileExtension()) == 'tar') ? true : false;
+		return (strtolower($this->getExtension()) == 'tar') ? true : false;
 	}
 	
 	/**
@@ -169,21 +169,21 @@ class sZipItem {
 	 * @return boolean
 	 */
 	public function isTarGz(){
-		return (strtolower($this->getFileExtension()) == 'tar.gz') ? true : false;
+		return (strtolower($this->getExtension()) == 'tar.gz') ? true : false;
 	}
 	
 	/**
 	 * @return unknown
 	 */
-	public function getFileExtension() {
-		return $this->fileExtension;
+	public function getExtension() {
+		return $this->extension;
 	}
 	
 	/**
 	 * 
 	 */
-	public function setFileExtension() {
-		$this->fileExtension = $this->extractFileExtension();
+	public function setExtension() {
+		$this->extension = $this->extractExtension();
 	}
 	
 	/**
@@ -191,18 +191,18 @@ class sZipItem {
 	 *
 	 * @return mixed containing file extension string, false if not found
 	 */
-	private function extractFileExtension() {
+	private function extractExtension() {
 		# only extract, if this is no an directory
 		if($this->isDir()) return false;
 		
 		# try to extract the extension, if available
-		$fileExtension = false;
+		$extension = false;
 		$fileName = basename($this->getName());
 		if(false !== strpos($fileName, '.')){
 			$split = explode('.', $fileName);
-			$fileExtension = end($split);
+			$extension = end($split);
 		}
-		return $fileExtension;
+		return $extension;
 	}
 	
 }

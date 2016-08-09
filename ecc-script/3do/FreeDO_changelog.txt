@@ -1,0 +1,7 @@
+v1.0.0.1
+
+Old:
+EmuWindowControl("FreeDO Project Phoenix")
+
+New:
+EmuWindowControl("FreeDO")

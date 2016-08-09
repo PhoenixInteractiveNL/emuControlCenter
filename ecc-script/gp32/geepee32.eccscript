@@ -1,0 +1,71 @@
+; Platform       	: Gamepark GP32
+; Script for     	: GeePee32 v0.43
+; Script version 	: v1.0.0.1
+; Last changed   	: 2008.07.08
+;
+;
+; Author :  Phoenix Interactive & Lenne (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("GeePee32 (0.43)")
+
+Select
+
+Case $eccFileRomExtension = "smc"
+
+	; Load ROM 
+	; 
+	Send("{ALT}")
+	Send("{DOWN}")
+	Send("{RIGHT}")
+	Send("{DOWN}")
+	Sleep(100)
+	Send("{ENTER}")
+	Send($CmdLine[1])
+	Sleep(1000)
+	Send("{TAB}")
+	Send("{TAB}")
+	Sleep(100)
+	Send("{ENTER}")
+
+Case $eccFileRomExtension <> "smc"
+
+	; Load ROM
+	;
+	Send("{ALT}")
+	Send("{DOWN}")
+	Send("{RIGHT}")
+	Sleep(100)
+	Send("{ENTER}")
+	Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+	Sleep(100)
+	Send("{TAB}")
+	Send("{TAB}")
+	Sleep(100)
+	Send("{ENTER}")
+
+EndSelect
+
+; Start emulator
+;
+Sleep(100)
+Send("{F5}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

@@ -9,7 +9,7 @@ require_once 'item/sZipInfoItem.php';
  * Wrapper for an configurable 7zip executable
  * Supports extracting from and listing of 7z archives.
  * 
- * Documentation: http://www.camya.com/
+ * Documentation: http://www.camya.com/php/7zip/
  *
  * @author Andreas Scheibel <ecc@camya.com>
  * @version 0.1.0 
@@ -35,20 +35,21 @@ class sZip {
 	 * 
 	 * @param string $sZipFile
 	 * @param string $fileName
-	 * @param string $outputPath relative path
+	 * @param string $outputFolder relative path
 	 */
-	public function extract($sZipFile, $fileName, $outputPath = false) {
-		
+	public function extract($sZipFile, $fileName, $outputFolder = false) {
+
+		// if no output folder is given, extract direct to 7zip file folder 
+		if(!$outputFolder) $outputFolder = dirname($sZipFile);
+		if(!file_exists($outputFolder)) mkdir($outputFolder);
+					
 		$this->setExecutableCommand('e');
-		$this->setFile(escapeshellarg($sZipFile).' '.escapeshellarg($fileName));
-		$switchOutput = ($outputPath) ? '-o'.($outputPath) : '' ;
+		$this->setFile(escapeshellarg(realpath($sZipFile)).' '.escapeshellarg($fileName));
+		$switchOutput = ($outputFolder) ? '-o"'.$outputFolder.'"' : '' ;
 		$this->setExecutableSwitches('-y '.$switchOutput);
 		
-		print __FUNCTION__.'<pre>';
-		print_r($this->getCommand(true));
-		print '</pre>';
-		
-		system($this->getCommand(true));
+		$command = $this->getCommand(true);
+		system($command);
 		
 		return true;
 	}
@@ -77,11 +78,13 @@ class sZip {
 	public function getList($zipfile){
 
 		$this->setExecutableCommand('l');
-		$this->setFile(escapeshellarg($zipfile));
+		$this->setFile(escapeshellarg(realpath($zipfile)));
 		$this->setExecutableSwitches('-scsWIN');
-		
+
+		# get data from command
 		$stdout = false; # init var
-		system($this->getCommand(), $stdout);
+		$command = $this->getCommand();
+		exec($command, $stdout);
 		
 		# start extracting informations
 		$out = array();
@@ -140,16 +143,18 @@ class sZip {
 	public function getInfo($zipfile){
 		
 		$this->setExecutableCommand('l');
-		$this->setFile(escapeshellarg($zipfile));
+		$this->setFile(escapeshellarg(realpath($zipfile)));
 		$this->setExecutableSwitches('-slt -scsWIN');
 		
 		# get data from command
 		$stdout = false; # init var
-		$code = exec($this->getCommand(), $stdout);
+		$command = $this->getCommand();
+		$code = exec($command, $stdout);
 		if($code > 0) return false; # here, errorcode false is "all fine" ;-)
 		
 		# start extracting informations
 		$out = array();
+
 		foreach($stdout as $row){
 			
 			$row = trim($row);
@@ -173,9 +178,10 @@ class sZip {
 			if(!isset($infoItem)) continue;
 			
 			# get the key and value and set object
-			list($key, $value) = split('=', $row);
-			$key = trim($key);
-			$value = trim($value);
+			
+			$split = explode('= ', $row);
+			$key = trim(array_shift($split));
+			$value = join('= ', $split);
 			
 			switch ($key) {
 				case 'Path':
@@ -204,6 +210,11 @@ class sZip {
 					break;
 			}
 		}
+		# store the last item
+		if(isset($infoItem)){
+			$infoItem->finalize();
+			$out[$infoItem->getPath()] = $infoItem;
+		}
 		asort($out);
 		
 		return $out;
@@ -215,17 +226,20 @@ class sZip {
 	 * @return string command to execute
 	 */
 	public function getCommand($silent = false){
-		$executable = escapeshellcmd($this->getExecutableFile());
+		$executable = FACTORY::get('manager/Os')->getEightDotThreePath($this->getExecutableFile());
 		$command = $this->getExecutableCommand();
 		$switches = $this->getExecutableSwitches();
 		$file = $this->getFile();
 		$silent = ($silent) ? '> nul' : ''; 
 		$command = $executable.' '.$command.' '.$switches.' '.$file.' '.$silent;
+		
+		print $command."\n";
+		
 		return $command;
 	}
 	
 	public function setExecutable($executableFile){
-		$this->setExecutableFile($executableFile);
+		$this->setExecutableFile(realpath($executableFile));
 	}
 	
 	public function setExecutableFile($executableFile){

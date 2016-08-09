@@ -59,10 +59,21 @@ class EccParser {
 				if(!$silentReparse){
 					
 					if ($eccident) {
-						$platformNames = join(" | ", $this->gui->ini->getPlatformsByFileExtension($fileExtension))."\n";
+						$systemIdents = $this->gui->ini->getPlatformsByFileExtension($fileExtension);
+						$platformNames = '';
+						$length = 0;
+						foreach ($systemIdents as $platformName){
+							$platformNames .= $platformName.' | ';
+							$length += strlen($platformName);
+							if($length > 200){
+								$platformNames .= '...';
+								break;
+							}
+						}
+						
 						$fileExtensionOutput = '*.'.$fileExtension;
 						$title = sprintf(I18N::get('popup', 'romparser_fileext_problem_title%s'), '"<b>'.$fileExtensionOutput.'</b>"');
-						$message = sprintf(I18N::get('popup', 'romparser_fileext_problem_msg%s%s%s%s%s%s'), '"<b>'.$fileExtensionOutput.'</b>"', '<span color="#6C6C6C">'.$platformNames.'</span>', '"<b>'.$this->gui->ecc_platform_name.'</b>"', '"'.join("\n", $path).'"', $fileExtensionOutput, $fileExtensionOutput);
+						$message = sprintf(I18N::get('popup', 'romparser_fileext_problem_msg%s%s%s%s%s%s'), '"<b>'.$fileExtensionOutput.'</b>"', '<span size="small" color="#6C6C6C">'.$platformNames."\n".'</span>', '"<b>'.$this->gui->ecc_platform_name.'</b>"', '<span size="small" color="#6C6C6C">"'.join("\n", $path).'"</span>', $fileExtensionOutput, $fileExtensionOutput);
 						
 						if (!$guiManager->openDialogConfirm($title, $message)) {
 							unset($wanted_extensions[$fileExtension]);
@@ -116,7 +127,7 @@ class EccParser {
 				if ($this->connectedMetaFilesizeCheck) $dataProzessor->setConnectedMetaFilesizeCheck($this->connectedMetaFilesizeCheck);
 			}
 			
-			$log = $dataProzessor->parse();
+			$log = $dataProzessor->parse($eccident);
 			$parser_stats = $dataProzessor->get_stats();
 			
 			// validate older files... are all in place?

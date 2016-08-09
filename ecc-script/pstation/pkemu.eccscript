@@ -1,0 +1,68 @@
+; Platform       : Nintendo Pokemon Mini
+; Script for     : PKemu (tested with v1.1)
+; Script version : v1.0.0.0
+; Last changed   : 2008.05.21
+;
+;
+; Author : Sebastiaan Ebeltjes, Phoenix Interactive 
+;
+; NOTES:
+; To play a game with Minimon, you need to have the BIOS file, i called it
+; 'kernel.bin' and placed it in the emulator root folder.
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("PocketStation")
+
+; Load BIOS ROM,
+; 
+Send("{ALT}")
+Sleep(100)
+Send("{DOWN}")
+Send("{DOWN}")
+Send("{DOWN}")
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+Send($eccEmuEmulatorPath & "kernel.bin") 
+Send("{TAB}")
+Send("{TAB}") 
+Sleep(100)
+Send("{ENTER}") 
+
+; Load ROM 
+; 
+Send("{ALT}")
+Sleep(100)
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+send($eccFileRomPath & $eccFileRomFile)
+Send("{TAB}") 
+Send("{TAB}") 
+Sleep(100)
+Send("{ENTER}") 
+
+; Start emulator 
+;
+Send("{ALT}") 
+Sleep(100)
+Send("{RIGHT}")
+Send("{RIGHT}")
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit
+

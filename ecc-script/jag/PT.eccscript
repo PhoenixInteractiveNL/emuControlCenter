@@ -1,0 +1,48 @@
+; Platform               : Atari Jaguar
+; Script for             : Project Tempest (tested with v0.95)
+; Script version         : v1.0.0.0
+; Last changed           : 2008.05.21
+;
+;
+; Author :  Sebastiaan Ebeltjes, Phoenix Interactive
+;
+; NOTES:
+; This script doens't work with PD (Public Domain) roms, because with these
+; roms you have to enter it's start and download adress :?
+;
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("Project Tempest")
+
+; Load GAME ROM 
+;
+Send("{ALT}")
+Sleep(100)
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+send($eccFileRomPath & $eccFileRomFile)
+Send("{TAB}") 
+Send("{TAB}") 
+Send("{TAB}")
+Sleep(100)
+Send("{ENTER}") 
+
+; START emulator 
+;
+Sleep(100)
+Send("{F2}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

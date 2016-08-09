@@ -1,0 +1,47 @@
+; Platform       	: Philips CD-I
+; Script for     	: CD-i Emulator, v0.5.2 (wcdiemu.exe)
+; Script version 	: v1.0.0.0
+; Last changed   	: 2008.06.10
+;
+;
+; Author :  Lenne (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("CD-i Emulator v0.5.2")
+
+; Load CD
+;
+Send("{ALT}")
+Send("{DOWN}")
+Send("{ENTER}")
+Sleep(1000)
+Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+Send("{ENTER}")
+
+; Start emulator
+;
+Send("{ALT}")
+Sleep(100)
+Send("{RIGHT}")
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

@@ -5,16 +5,38 @@ class IniFile {
 	private $cachedPlatformIni = array();
 	private $dataCache = array();
 
-	# ecc uses this folder as default!
+	/**
+	 * Default ecc-user folder, user can overwrite this in
+	 * ecc_general.ini
+	 *
+	 * @var string
+	 */
 	private $eccDefaultUserFolder = '../ecc-user/';
-	private $eccDefaultConfigPath = 'conf/';
+	
+	/**
+	 * The ecc-system configuration folder
+	 *
+	 * @var string
+	 */
+	private $eccDefaultConfigPath = 'system/';
+	
 	private $eccUserConfigPath = '../ecc-user-configs/';
 	
-	# general ini file - ecc configuration
-	private $eccIniGeneralName = 'ecc_general.ini';
-	#private $eccIniGeneralFile = false;
-	private $eccIniNavigationName = 'ecc_navigation.ini';
-	private $eccIniHistoryName = 'ecc_history.ini';
+	/**
+	 * general ini file - ecc configuration
+	 *
+	 * @var string
+	 */
+	private $eccIniGeneralName = 'config/ecc_general.ini';
+	
+	/**
+	 * Inif containing the activated platforms
+	 *
+	 * @var string ini file path
+	 */
+	private $eccIniNavigationName = 'config/ecc_navigation.ini';
+	
+	private $eccIniHistoryName = 'config/ecc_history.ini';
 	private $eccIniHistoryFile = false;
 	
 	# used for translation of the mame driver dropdown
@@ -61,6 +83,7 @@ class IniFile {
 	
 	public function createHistoryIni() {
 		$this->eccIniHistoryFile = $this->eccUserConfigPath.$this->eccIniHistoryName;
+		if(!is_dir(dirname($this->eccIniHistoryFile))) mkdir(dirname($this->eccIniHistoryFile));
 		if (file_exists($this->eccIniHistoryFile)) return true;
 		else return file_put_contents($this->eccIniHistoryFile, '');
 	}
@@ -121,11 +144,18 @@ class IniFile {
 		return $this->cachedPlatformIni;
 	}
 	
-	public function getPlatformIni($eccident) {
+	public function getPlatformIni($eccident, $useOriginalConfigs = false) {
 		if (!$eccident) return array();
 		
-		# get from default conf or form user-config folder!
-		$platformUserIni = $this->getPlatformIniPathByFolderDispatcher('ecc_'.$eccident.'_user.ini');
+		$iniName = 'ecc_'.$eccident.'_user.ini';
+		
+		if($useOriginalConfigs){
+			$platformUserIni = $this->eccDefaultConfigPath.$iniName;
+		}
+		else{
+			# get from default conf or form user-config folder!
+			$platformUserIni = $this->getPlatformIniPathByFolderDispatcher($iniName);
+		}
 		
 		if (!$platformUserIni) return false;
 		$platformUserIniData = $this->parse_ini_file_quotes_safe($platformUserIni);
@@ -186,6 +216,11 @@ class IniFile {
 		else return (isset($data[$key]) && $data[$key]) ? $data[$key] : false;	
 	}
 	
+	/**
+	 * Remove all content from history ini and the cache array
+	 *
+	 * @return unknown
+	 */
 	public function clearHistoryIni() {
 		if (!file_exists($this->eccIniHistoryFile)) return false;
 		unset($this->dataCache['history']);
@@ -253,7 +288,7 @@ class IniFile {
 	}
 	
 	public function storeGlobalFont($fontDescription) {
-		$gtkFontFile = '../ecc-core-'.strtolower(PHP_OS).'/etc/gtk-2.0/font';
+		$gtkFontFile = '../ecc-core/php-gtk2/etc/gtk-2.0/font';
 		if (!$fontDescription) {
 			@unlink($gtkFontFile);
 			return false;
@@ -456,6 +491,17 @@ class IniFile {
 		return array();
 	}
 	
+	public function getMetaDefaults($eccident, $extension){
+		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
+		if (isset($this->cachedPlatformIni[$eccident]['META_DEFAULT_'.strtoupper($extension)])){
+			return $this->cachedPlatformIni[$eccident]['META_DEFAULT_'.strtoupper($extension)];
+		}
+		elseif (isset($this->cachedPlatformIni[$eccident]['META_DEFAULT'])){
+			return $this->cachedPlatformIni[$eccident]['META_DEFAULT'];
+		}
+		return array();
+	}
+	
 	public function getSystemIni($eccident=false){
 		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
 		if (isset($this->cachedPlatformIni[$eccident])){
@@ -516,7 +562,7 @@ class IniFile {
 		if (!$this->ini) $this->getCompleteEccIni();
 		if ($eccident=='null' || !$eccident) $eccident = 'ecc';
 		$ini = array();
-		$file = realpath($this->eccDefaultConfigPath."/../infos/ecc_platform_".$eccident."_info.ini");
+		$file = realpath($this->eccDefaultConfigPath."/../system/ecc_".$eccident."_info.ini");
 		if (!$file) return false;
 		// @todo using other iniparser!
 		$ini = @parse_ini_file($file, true);
@@ -583,7 +629,7 @@ class IniFile {
 	
 	public function getLanguageFromI18Folders() {
 		$languages = array();
-		$dirHdl = opendir(ECC_DIR_SYSTEM."/i18n/");
+		$dirHdl = opendir(ECC_DIR_SYSTEM."/translations/");
 		if (!$dirHdl) return $languages;
 		while ($file = readdir($dirHdl)) {
 			if ($file == '.' || $file == '..') continue;

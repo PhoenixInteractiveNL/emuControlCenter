@@ -49,7 +49,7 @@ class EccParserDataProzessor{
 	   return strcmp($a, $b);
 	}
 	
-	public function parse()
+	public function parse($eccident = false)
 	{
 		$log = '';
 		$cntValid = 0;
@@ -85,12 +85,14 @@ class EccParserDataProzessor{
 					$file_name_direct = $file_name_info['DIRECT_FILE'];
 					$file_name_packed = isset($file_name_info['PACKED_FILE']) ? $file_name_info['PACKED_FILE'] : false;
 					
+					$parserFile = $file_name_info['OBJECT'];
+					
 					// Preparse, damit nur neu geparst wird,
 					// wenn eine ï¿½nderung der Filesize (bytes) aufgetreten
 					// ist. Soll verhindern, das zu oft unnï¿½tig geparst wird.
 					// Sobald ein byte unterschied vorhanden ist, wird geparst.
 					$size_db = $this->dataParserObj->get_file_size($file_name_direct, $file_name_packed);	// from database
-					$size_fs = FileIO::get_file_size($file_name_direct, $file_name_packed, 'B');
+					$size_fs = ($parserFile->getSize()) ? $parserFile->getSize() : FileIO::get_file_size($file_name_direct, $file_name_packed, 'B');	
 					
 					/*
 					 * HYPERFAST MODE!!!!!!!!!!!!!!!!!
@@ -140,7 +142,7 @@ class EccParserDataProzessor{
 
 								$file_temp = realpath(getcwd().'/temp/'.basename($inZipFile));
 								
-								$out = $this->getParser('zip', $fhdl)->parse($fhdl, $file_temp, $zipName, false);
+								$out = $this->getParser('zip')->parse($fhdl, $file_temp, $zipName, false);
 								$fileExt = $out['FILE_EXT'];
 								$inZipFilesChecksums[$inZipFile] = $out['FILE_CRC32'];
 								$inZipFilesChecksums[$inZipFile] = $out['FILE_CRC32'];
@@ -201,22 +203,67 @@ class EccParserDataProzessor{
 						}
 						elseif ($file_name_packed) {
 							
-							$fhdl = FileIO::fopen_zip($file_name_direct, $file_name_packed);
-							$file_temp = realpath(getcwd().'/temp/'.basename($file_name_packed));
+							$parserFile = $file_name_info['OBJECT'];
 							
-							$parser = $this->getParser($file_extension, $fhdl);
-							if ($parser) {
-								$out = $parser->parse($fhdl, $file_temp, $file_name_direct, $file_name_packed);
+							switch ($parserFile->getType()){
+								
+								// normal zip file
+								case ParserFile::ZIP:
+
+									$fhdl = FileIO::fopen_zip($file_name_direct, $file_name_packed);
+									$file_temp = realpath(getcwd().'/temp/'.basename($file_name_packed));
+									$parser = $this->getParser($file_extension);
+									$out = $parser->parse($fhdl, $file_temp, $file_name_direct, $file_name_packed);
+									if($fhdl) FileIO::fclose_zip($fhdl, $file_temp);
+									
+									break;
+
+								// seven zip file (7z)
+								case ParserFile::SZIP:
+									
+									$parser = $this->getParser($parserFile->getExtension());
+									if(!$parser->hasRipHeader()){
+										
+										$out = array();
+										$out['FILE_NAME'] = basename($parserFile->getNamePacked());
+										$out['FILE_PATH'] = $parserFile->getName();
+										$out['FILE_PATH_PACK'] = $parserFile->getNamePacked();
+										$out['FILE_EXT'] = strtoupper($eccident);
+										$out['FILE_SIZE'] = $parserFile->getSize();
+										$out['FILE_CRC32'] = $parserFile->getCrc32();
+										$out['FILE_MD5'] = NULL;
+										$out['FILE_VALID'] = true;
+									
+									}
+									else{
+										
+										$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+										$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+										
+										$outputFolder = realpath(getcwd().'/temp/');
+										$manager7zip->extract($parserFile->getName(), $parserFile->getNamePacked(), $outputFolder);
+	
+										$tempFile = $outputFolder.'/'.basename($parserFile->getNamePacked());
+										$tempFileHandle = fopen($tempFile, 'rb');
+										
+										$out = $parser->parse($tempFileHandle, $tempFile, $parserFile->getName(), $parserFile->getNamePacked());
+
+										fclose($tempFileHandle);
+										unlink($tempFile);
+										
+									}
+									
+
+									break;
 							}
-							else {
-								print "DISPATCH_".strtoupper($file_extension)." INVALID: ".basename($file_name_direct)." / ".basename($file_name_packed)."\n";
-							}
-							FileIO::fclose_zip($fhdl, $file_temp);
+							
+							
+
 						}
 						else {
 							$fhdl = fopen($file_name_direct, 'rb');
 							
-							$parser = $this->getParser($file_extension, $fhdl);
+							$parser = $this->getParser($file_extension);
 							if ($parser) {
 								$out = $parser->parse($fhdl, $file_name_direct, $file_name_direct, false);
 							}
@@ -299,29 +346,29 @@ class EccParserDataProzessor{
 		return $log;
 	}
 	
-	private function getParser($file_extension, $fileHandle) {
+	private function getParser($file_extension) {
 		
 		$parserClassNamePlain = $this->_known_extensions[$file_extension]['parser'];
 		
-		if (in_array($file_extension, $this->dispatchExtensions)) {
-			#$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
-			#$dispatcher = FACTORY::get($dispatcherClassName, $fileHandle);
-			
-			$dispatcherClassName = 'parser/dispatch/cDispatch'.ucfirst($file_extension).".php";
-			$dispatcherClass = 'Dispatch'.ucfirst($file_extension);
-			
-			require_once($dispatcherClassName);
-			$dispatcher = new $dispatcherClass($fileHandle);
-
-			$dispatchedParser = $dispatcher->getValidParser();
-			if ($dispatchedParser) {
-				$parserClassNamePlain = $dispatchedParser;
-			}
-			else {
-				// unknown file
-				return false;
-			}
-		}
+//		if (in_array($file_extension, $this->dispatchExtensions)) {
+//			#$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
+//			#$dispatcher = FACTORY::get($dispatcherClassName, $fileHandle);
+//			
+//			$dispatcherClassName = 'parser/dispatch/cDispatch'.ucfirst($file_extension).".php";
+//			$dispatcherClass = 'Dispatch'.ucfirst($file_extension);
+//			
+//			require_once($dispatcherClassName);
+//			$dispatcher = new $dispatcherClass($fileHandle);
+//
+//			$dispatchedParser = $dispatcher->getValidParser();
+//			if ($dispatchedParser) {
+//				$parserClassNamePlain = $dispatchedParser;
+//			}
+//			else {
+//				// unknown file
+//				return false;
+//			}
+//		}
 		
 		$parameter = false;
 		if (FALSE !== $position = strpos($parserClassNamePlain, "#")) {

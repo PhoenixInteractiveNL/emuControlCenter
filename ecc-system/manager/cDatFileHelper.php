@@ -330,7 +330,7 @@ class DatFileHelper {
 	 */
 	public function loadNameStripConfig() {
 		$nameStripConfig = array();
-		require_once getcwd().'/conf/datfile/eccNameStripConfig.php';
+		require_once getcwd().'/system/datfile/eccNameStripConfig.php';
 		$this->setNameStripConfig($nameStripConfig);
 	}
 

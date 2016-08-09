@@ -102,7 +102,9 @@ class Image {
 		
 		$destImagePath = $this->getUserImageFileName($imageDestFolder, $eccident, $crc32, $destImageType, $imageExtension);
 		
-		if (!$this->hasErrors() && !file_exists($destImagePath)) file_put_contents($destImagePath, $imageData);
+		if (!$this->hasErrors() && !file_exists($destImagePath)){
+			file_put_contents($destImagePath, $imageData);
+		}
 		else return false;
 		
 	}
@@ -225,6 +227,16 @@ class Image {
 		if ($createThumb) $this->createThumbnail($sourceImagePath, $this->getImageThumbFile($destImagePath), true, 240, false);
 		@copy($sourceImagePath, $destImagePath);
 		return true;
+	}
+	
+	public function copyImageFromStream($eccident, $crc32, $imageStream, $sourceImage) {
+		$imageDestFolder = $this->getUserImageCrc32Folder($eccident, $crc32, true);
+		if (!$imageDestFolder) return false;
+
+		if(file_put_contents($sourceImage, $imageStream)){
+			return $this->createThumbnail($sourceImage, $this->getImageThumbFile($sourceImage), true, 240, false);	
+		}
+		else return false;
 	}
 	
 	public function getImageThumbFile($destImagePath){

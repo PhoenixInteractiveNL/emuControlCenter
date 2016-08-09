@@ -7,6 +7,10 @@ class FileParserZip implements FileParser {
 		$this->_file_ext = $file_ext;
 	}
 	
+	public function hasRipHeader(){
+		return false;
+	}
+	
 	public function parse($fhdl, $file_name, $file_name_direct=false, $file_name_packed=false) {
 		
 		$ret = array();

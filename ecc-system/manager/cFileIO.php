@@ -130,6 +130,17 @@ class FileIO {
 		$zip->close();
 	}
 	
+	public function extractSzip($zipFile, $zipEntry, $outputFolder = false){
+		
+		# if destination not set, extract to zip file folder
+		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
+		else $outputFolder = realpath($outputFolder);
+		
+		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		$manager7zip->extract($zipFile, $zipEntry, $outputFolder);
+	}
+	
 	public function fclose_zip($fhdl, $path) {
 		fclose($fhdl);
 		unlink($path);
@@ -450,11 +461,11 @@ class FileIO {
 		if(!$fileSize) return false;
 		
 		# configuration
-		$crcGeneratorFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/fsum.exe');
+		$crcGeneratorFile = realpath('../ecc-core/thirdparty/fsum/fsum.exe');
 		if(!$crcGeneratorFile) return false;
 		
 		$crcGeneratorParams = '-crc32';
-		$logFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/').'eccCrc32.chk';
+		$logFile = realpath('../ecc-core/thirdparty/fsum/').'eccCrc32.chk';
 		
 		# create command for execution
 		#$execCommand = '"'.$crcGeneratorFile.'" '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);

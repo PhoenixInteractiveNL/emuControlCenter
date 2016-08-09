@@ -1,0 +1,4 @@
+v1.0.0.6
+
+- TheCyberDruid has written a piece for winuae to give better support
+  for amiga games using the MULTI lines in the eccScriptRom file.

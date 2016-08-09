@@ -32,9 +32,21 @@ class EccUpdate {
 					$errorVersion = '0.9.706';
 					break;
 				}
+			case $eccDbVersion < '0.9.802':
+				if ($this->updateEccFromConfig('0.9.802')) $this->updateEccDbVersion('0.9.802');
+				else {
+					$errorVersion = '0.9.802';
+					break;
+				}
+			case $eccDbVersion < '0.9.805':
+				if ($this->updateEccFromConfig('0.9.805')) $this->updateEccDbVersion('0.9.805');
+				else {
+					$errorVersion = '0.9.805';
+					break;
+				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
-		#print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
+		print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
 	}
 	
 	private function updateEccFromConfig($version) {
@@ -49,9 +61,15 @@ class EccUpdate {
 	}
 	
 	private function updateEccDbVersion($eccVersion) {
+		
+		print "Function: ".__FUNCTION__."\n";
+		print_r($eccVersion)."\n";
+		
+		
 		$q = "DELETE FROM eccdb_state";
 		$hdl = $this->dbms->query($q);
 		$q = "INSERT INTO eccdb_state (version, date) VALUES ('".sqlite_escape_string($eccVersion)."', ".(int)time().") ";
+		print $q;
 		$hdl = $this->dbms->query($q);
 	}
 	

@@ -1,0 +1,15 @@
+v1.0.0.2
+- Added '$eccScriptParamsFile' to locate the config file for a amiga game. (TheCyberDruid)
+
+v1.0.0.3
+- Added '$eccEmuUseCueFile' to see if the 'use CUE file' option is selected
+- Added CUE handler, changes the file extension to CUE when CUE option is selected.
+
+v1.0.0.4
+- Added '$eccFileRomFileExtension' to give the real extension (if the file is zipped)
+- Added '$eccFileRomFileIsPacked', a extra flag if the romfile is packed.
+- Fixed a bug where the filename is currupt when containing the extension piece in it.
+  - Example: a rom name called 'isolater man' was renamed to 'cuelater man'
+- Only make mounting possible for supported Deamontools LITE extensions.
+- Added ZIP support, where mouting happens from the temporally unpack folder.
+- Added strings for fileextensions, so you can see what daemontools is mouting.

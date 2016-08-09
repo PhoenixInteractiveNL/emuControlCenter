@@ -14,7 +14,7 @@ class i18n {
 	
 	public static function set($langIdent=FALSE) {
 		self::$langIdent = ($langIdent) ? $langIdent : self::$langIdentDefault;
-		self::$langDir = 'i18n/'.self::$langIdent.'/';
+		self::$langDir = 'translations/'.self::$langIdent.'/';
 		self::readLangDir();
 	}
 	
@@ -40,7 +40,8 @@ class i18n {
 		
 		$dirHdl = opendir(self::$langDir);
 		while($file = readdir($dirHdl)) {
-			if ($file=='.' || $file=='..' || self::$langDir.'/'.$file == $charsetIniFile ) continue;
+			
+			if ($file=='.' || $file=='..' || self::$langDir.'/'.$file == $charsetIniFile || substr($file, -4) == '.ini' ) continue;
 			include(self::$langDir.$file);
 			if (isset($i18n) && is_array($i18n)) {
 				foreach($i18n as $type => $i18nData){

@@ -1,0 +1,52 @@
+; Platform               : Cellphone Java
+; Script for             : Kwyshell's Midp2Exe Convert Tool v1.3.2 (Midp2Exe.exe)
+; Script version         : v1.0.0.0
+; Last changed           : 2008.05.23
+;
+;
+; Author :  Sebastiaan Ebeltjes, Phoenix Interactive
+;
+; NOTES:
+;
+; To emulate java games, you need these 2 files in the EMU folder:
+; Midp2Exe.exe, MidpRuntimeDLL.dll
+;
+; And these 4 files in the SCRIPT folder:
+; config.xml, JADMaker.exe, JADMaker.txt, unzip32.dll
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Check if JADMAKER exists in the script folder
+If FileExists($eccSystemEccFolder & "ecc-script\cpjava\JADMaker.exe") <> 1 Then 
+        MsgBox(0, $eccSystemName, "JAD Maker '" & $eccSystemEccFolder & "cpjava\JADMaker.exe' not found!")
+        Exit 
+EndIf
+
+;First we need to make a JAD file from the JAR file using 'JADMaker'
+Run(@ScriptDir & "\" & "JADMaker.exe" & " " & $eccFileRomPath & $eccFileRomFile) 
+
+; Add a timer to give JADMaker some time to write the JAD file
+Sleep(500)
+
+; Compile the EXE & RUN
+If FileExists($eccFileRomPath & $eccFileRomNamePlain & ".jad") Then
+        ;Adding the '-k' parameter runs the compiled exe and then de-lete it when closed
+        Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " -jar " & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34) & " -jad " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".jad" & Chr(34) & " -k")
+Else
+        MsgBox(0, $eccSystemName, "JADMaker could not write the JAD file :(, exiting...")
+        Exit 
+EndIf
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

@@ -37,9 +37,21 @@
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false, $enableEccScript = false, $executeInEmuFolder = false) {
+	public function executeFileWithProgramm(
+		$exeFileSource,
+		$param=false,
+		$romFileSource = "",
+		$fileNameEscape = false,
+		$fileName8dot3 = false,
+		$filenameOnly = false,
+		$noExtension = false,
+		$enableEccScript = false,
+		$executeInEmuFolder = false,
+		$systemIdent = false,
+		$useCueFile = false
+	) {
 		
-		if ($theEmuCommand = $this->getEmuCommand($exeFileSource, $param, $romFileSource, $fileNameEscape, $fileName8dot3, $filenameOnly, $noExtension, $enableEccScript, $executeInEmuFolder)){
+		if ($theEmuCommand = $this->getEmuCommand($exeFileSource, $param, $romFileSource, $fileNameEscape, $fileName8dot3, $filenameOnly, $noExtension, $enableEccScript, $executeInEmuFolder, $systemIdent, $useCueFile)){
 			$emuCommand = $theEmuCommand['command'];
 			$chdirDestination = $theEmuCommand['chdir'];
 		}
@@ -79,7 +91,19 @@
 		else chdir($cwdBackup); # change dir back to cwdBackup!
 	}
 	
-	public function getEmuCommand($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false, $enableEccScript = false, $executeInEmuFolder = false) {
+	public function getEmuCommand(
+		$exeFileSource,
+		$param = false,
+		$romFileSource = "",
+		$fileNameEscape = false,
+		$fileName8dot3 = false,
+		$filenameOnly = false,
+		$noExtension = false,
+		$enableEccScript = false,
+		$executeInEmuFolder = false,
+		$systemIdent = false,
+		$useCueFile = false
+	) {
 
 		// if filenameOnly set, only use the basename (name.rom) without path!
 		if ($filenameOnly) {
@@ -100,12 +124,21 @@
 		
 		$eccScriptExeFile = '';
 		if ($enableEccScript) {
+			
 			$fileNameEscape = true; # if ecc script is enabled, path has to be escaped
 			$eccLoc = FACTORY::get('manager/Validator')->getEccCoreKey('eccHelpLocations');
 			$scriptExtension = $eccLoc['ECC_SCRIPT_EXTENSION'];
-			if ($eccScriptFile = realpath($exeFileSource.$scriptExtension)){
+			
+			// if rom objet available
+			if($eccScriptFile = realpath('../ecc-script/'.$systemIdent.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($exeFileSource).$scriptExtension)){
 				$exeFile = $eccScriptFile;
-				if ($eccScriptExeFile = realpath(ECC_DIR.'/ecc-tools/'.$eccLoc['ECC_EXE_SCRIPT'])){
+				if ($eccScriptExeFile = realpath(ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT'])){
+					$eccScriptExeFile = '"'.$eccScriptExeFile.'"';
+				}
+			}	
+			elseif ($eccScriptFile = realpath($exeFileSource.$scriptExtension)){
+				$exeFile = $eccScriptFile;
+				if ($eccScriptExeFile = realpath(ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT'])){
 					$eccScriptExeFile = '"'.$eccScriptExeFile.'"';
 				}
 			}
@@ -116,12 +149,27 @@
 			$extraDir = (dirname($romFile) != '.') ? dirname($romFile).DIRECTORY_SEPARATOR : '';
 			$romFile = $extraDir.FACTORY::get('manager/FileIO')->get_plain_filename($romFile); 
 		}
+
+		// use .cue files
+		if($useCueFile && $romFile && !$noExtension){
+		
+			$path = (dirname($romFile) && dirname($romFile) != '.') ? dirname($romFile) : '';
+			
+			$romFileName = basename($romFile);
+			if (false !== strrpos($romFileName, ".")) {
+				$split = explode(".", $romFileName);
+				$romFileName = array_shift($split);
+			}
+			if($path) $path = realpath($path).DIRECTORY_SEPARATOR;
+			$romFile = $path.$romFileName.'.cue';
+			if(!file_exists($romFile)) $error = 'FILE-NOT_FOUND-CUE';;
+		}
 		
 		// escape rompath or not
 		if ($fileName8dot3 && !$filenameOnly) {
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = $this->getEightDotThreePath($romFile); 
 		}
-
+		
 		// escape rompath or not
 		if (!$fileNameEscape) {
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = str_replace("&", "^&", $romFile);
@@ -135,6 +183,7 @@
 		if($enableEccScript){
 			$paramPre = '';
 			$paramPost = '';
+			$romFile = '';
 		}
 		else{
 			$paramPre = '';
@@ -142,6 +191,12 @@
 			if (FALSE !== $startPos = strpos($param, '%ROM%')){
 				$paramPre = ltrim(substr($param, 0, $startPos));
 				$paramPost = rtrim(substr($param, $startPos+5));
+			}
+			else{
+				// if other parameters are set
+				$paramPre = $param;
+				$paramPost = '';
+				$romFile = '';
 			}
 		}
 		
@@ -248,7 +303,11 @@
 		if ($shorcutFolder && count($shorcutFolder)){
 			foreach ($shorcutFolder as $shorcutFolderDirname){
 				if (!is_dir(realpath($shorcutFolderDirname))) $shorcutFolder = dirname(realpath($shorcutFolderDirname));
-				$dialog->add_shortcut_folder($shorcutFolderDirname);
+				try {
+					$dialog->add_shortcut_folder($shorcutFolderDirname);	
+				}
+				catch (Exception $e){}
+				
 			}
 		}
 				
@@ -297,7 +356,7 @@
 	 * Function uses com-api to create 8.3 Winpaths
 	 * @return string string in 8.3 style
 	 */
-	private function getEightDotThreePath($filePath) {
+	public function getEightDotThreePath($filePath) {
 		if (!file_exists($filePath)) return $filePath;
 		$exFSO = new COM("Scripting.FileSystemObject");
 		$exFile = $exFSO->GetFile($filePath);

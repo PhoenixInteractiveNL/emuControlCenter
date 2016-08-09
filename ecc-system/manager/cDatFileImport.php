@@ -169,7 +169,7 @@ class DatFileImport extends App {
 		// only strip data, if activated in ecc_general_ini
 		$dat_strip_data = array();
 		if ($this->ini->getKey('USER_SWITCHES','dat_import_rc_namestrip')) {
-			include('conf/ecc_dat_stripper.php');
+			include('system/datfile/ecc_dat_stripper.php');
 		}
 		
 		$ecc_ident = $this->eccident;
@@ -669,6 +669,7 @@ class DatFileImport extends App {
 				case '0.98':
 					# filesize added (isnt added to database)
 					$terminator = 32;
+					if(count($res) == 24) $terminator = 24; // hotfix for an datfile bug.
 					break;
 			}
 

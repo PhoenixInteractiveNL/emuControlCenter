@@ -23,6 +23,7 @@ class TreeviewData {
 	private $searchMameDriver = false;
 	
 	private $sqlFields = '
+		UPPER(CASE WHEN md.name ISNULL THEN fd.title ELSE (CASE WHEN md.media_current ISNULL THEN md.name ELSE md.name||md.media_current END) END) as orderByThis,
 		md.crc32 as md_crc32,
 		md.id as md_id,
 		md.eccident as md_eccident,
@@ -53,6 +54,7 @@ class TreeviewData {
 		md.region as md_region,
 		md.cdate as md_cdate,
 		md.uexport as md_uexport,
+		md.dump_type as md_dump_type,
 		fd.id as id,
 		fd.title as title,
 		fd.path as path,
@@ -123,7 +125,7 @@ class TreeviewData {
 	* VERSION TO GET ALSO META-DATA, IF THERE IS NO FOUND GAME
 	* -------------------------------------------------------------------------
 	*/
-	public function get_file_data_TEST_META(
+	public function getSearchResults(
 		$extension,
 		$like=false,
 		$limit=array(),
@@ -140,6 +142,7 @@ class TreeviewData {
 		$updateCategories = false
 	)
 	{
+		
 		$snip_where = array();
 		$sqlOrderBy = array();
 		
@@ -200,11 +203,11 @@ class TreeviewData {
 		if ($this->showOnlyDontHave){
 			$snip_where[] = "fd.id IS NULL";
 			$snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
-			$sqlOrderBy[] = 'md.name '.$orderBy;
+			$sqlOrderBy[] = "orderByThis ".$orderBy;
 		}
 		elseif($this->showOnlyBookmarks){
 			$snip_join[] = "fdata_bookmarks AS fdb INNER JOIN fdata fd ON (fd.id=fdb.file_id) left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
-			$sqlOrderBy[] = 'UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE '.$orderBy;
+			$sqlOrderBy[] = "orderByThis ".$orderBy;
 		}
 		else{
 			if ($this->showOnlyPersonal){
@@ -222,7 +225,7 @@ class TreeviewData {
 			}
 			elseif (!$onlyFiles) $snip_join[] = "fdata AS fd left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
 			else $snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
-			$sqlOrderBy[] = 'UPPER(coalesce(md.name || md.media_current, fd.title)) COLLATE NOCASE '.$orderBy;			
+			$sqlOrderBy[] = "orderByThis ".$orderBy;	
 		}
 	
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
@@ -255,18 +258,44 @@ class TreeviewData {
 			".$snipSqlOrderBy."
 			".$snipSqlLimit."
 		";
-		#print $q;
+		//print $q;
 		$hdl = $this->dbms->query($q);
 		$ret = array();
 		$this->foundMameDriver = array();
+		
+		$romMetaObjects = array();
+		
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			$ret['data'][$res['id']."|".$res['md_id']] = $res;
-			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
+			
+			$compositeId = $res['id']."|".$res['md_id'];
+			
+			$ret['data'][$compositeId] = $res;
+			$ret['data'][$compositeId]['composite_id'] = $compositeId;
 			
 			if ($res['fa_mameDriver']) $this->foundMameDriver[trim($res['fa_mameDriver'])] = trim($res['fa_mameDriver']);
 			
 			if (!isset($mameDrivers[trim($res['fa_mameDriver'])])) $mameDrivers[trim($res['fa_mameDriver'])] = 1;
 			else $mameDrivers[trim($res['fa_mameDriver'])]++;
+
+			// create rom file object
+			$romFile = new RomFile(); // create new object
+			$romFile->fillFromDatabase($res); // create objects from db fields
+			
+			// create rom meta data object
+			$romMeta = new RomMeta(); // create new object
+			$romMeta->fillFromDatabase($res); // create objects from db fields
+			$romMeta->setLanguages($this->get_language_by_mdata_id($res['md_id'])); // set languages array
+
+			// create rom audit object
+			$romAudit = new RomAudit(); // create new object
+			$romAudit->fillFromDatabase($res); // create objects from db fields
+			
+			$rom = new Rom();
+			$rom->setRomFile($romFile);
+			$rom->setRomMeta($romMeta);
+			$rom->setRomAudit($romAudit);
+			
+			$ret['rom'][$compositeId] = $rom; // check valid stae
 		}
 		
 		if (isset($mameDrivers)) {
@@ -306,13 +335,28 @@ class TreeviewData {
 			md.id='".(int)$id."'
 		";
 		
-		$ret = array();
+		$romFile = new RomFile();
+		$romMeta = new RomMeta();
+		$romAudit = new RomAudit();
+		
+//		$ret = array();
 		$hdl = $this->dbms->query($q);
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			$ret['data'][$res['id']."|".$res['md_id']] = $res;
-			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
+			
+			$romMeta->fillFromDatabase($res);
+			$romFile->fillFromDatabase($res);
+			$romAudit->fillFromDatabase($res);
+			
+//			$ret['data'][$res['id']."|".$res['md_id']] = $res;
+//			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
 		}
-		return $ret;
+		
+		$rom = new Rom();
+		$rom->setRomFile($romFile);
+		$rom->setRomMeta($romMeta);
+		$rom->setRomAudit($romAudit);
+		
+		return $rom;
 	}
 	
 	public function getRecordByFileId($id){
@@ -325,15 +369,32 @@ class TreeviewData {
 			left join fdata_audit AS fa on fd.id=fa.fDataId
 			WHERE
 			fd.id='".(int)$id."'
+			LIMIT 1
 		";
+
+		
+		$romFile = new RomFile();
+		$romMeta = new RomMeta();
+		$romAudit = new RomAudit();
 
 		$ret = array();
 		$hdl = $this->dbms->query($q);
-		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			$ret['data'][$res['id']."|".$res['md_id']] = $res;
-			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
+		if($res = $hdl->fetch(SQLITE_ASSOC)) {
+			
+			$romMeta->fillFromDatabase($res);
+			$romFile->fillFromDatabase($res);
+			$romAudit->fillFromDatabase($res);
+			
+//			$ret['data'][$res['id']."|".$res['md_id']] = $res;
+//			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
 		}
-		return $ret;
+		
+		$rom = new Rom();
+		$rom->setRomFile($romFile);
+		$rom->setRomMeta($romMeta);
+		$rom->setRomAudit($romAudit);
+		
+		return $rom;
 	}	
 	
 	/**
@@ -367,7 +428,7 @@ class TreeviewData {
 	/* ------------------------------------------------------------------------
 	*
 	*/
-	public function add_bookmark_by_id($id)
+	public function addBookmarkById($id)
 	{
 		if (!$id) return false;
 		
@@ -384,7 +445,7 @@ class TreeviewData {
 	/* ------------------------------------------------------------------------
 	*
 	*/
-	public function remove_bookmark_by_id($id) {
+	public function deleteBookmarkById($id) {
 		if ($id) {
 			$q = 'DELETE FROM fdata_bookmarks WHERE file_id = '.(int)$id.'';
 			$hdl = $this->dbms->query($q);
@@ -460,7 +521,7 @@ class TreeviewData {
 	/* ------------------------------------------------------------------------
 	*
 	*/
-	public function remove_media_from_fdata($id, $eccident, $crc32) {
+	public function deleteRomFromDatabase($id, $eccident, $crc32) {
 		if (!$id) return false;
 		
 		$q = 'DELETE FROM fdata WHERE id = '.(int)$id;
@@ -474,7 +535,7 @@ class TreeviewData {
 		}
 		
 		// remove bookmarks also
-		$this->remove_bookmark_by_id($id);
+		$this->deleteBookmarkById($id);
 		
 		return true;
 	}
@@ -551,61 +612,9 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 	
-	public function saveMetaData($inputData) {
-
-		# first all fields, who could be NULL
-		$data = array();
-		$data['running'] = ($inputData['md_running']);
-		$data['bugs'] = ($inputData['md_bugs']);
-		$data['trainer'] = ($inputData['md_trainer']);
-		$data['intro'] = ($inputData['md_intro']);
-		$data['usermod'] = ($inputData['md_usermod']);
-		$data['multiplayer'] = ($inputData['md_multiplayer']);
-		$data['netplay'] = ($inputData['md_netplay']);
-		$data['freeware'] = ($inputData['md_freeware']);
-		$data['category'] = $inputData['md_category'];
-		$data['cdate'] = time();
-		$data['media_type'] = $inputData['md_media_type'];
-		$data['media_current'] = $inputData['md_media_current'];
-		$data['media_count'] = $inputData['md_media_count'];
-		
-		# now set to null, if not set
-		foreach ($data as $key => $value) {
-			if (!isset($data[$key])) $data[$key] = 'NULL';
-		}
-
-		$data['id'] = $inputData['md_id'];
-		$data['eccident'] = strtolower($inputData['fd_eccident']);
-		$data['crc32'] = $inputData['crc32'];
-		$path = ($inputData['path_pack']) ? $inputData['path_pack'] : $inputData['path'];
-		$data['extension'] = strtolower(".".FACTORY::get('manager/FileIO')->get_ext_form_file($path));
-		$data['name'] = (trim($inputData['md_name'])) ? $inputData['md_name'] : FACTORY::get('manager/FileIO')->get_plain_filename($path);
-		
-		$data['info'] = $inputData['md_info'];
-		$data['usk'] = $inputData['md_usk'];
-		$data['info_id'] = $inputData['md_info_id'];
-		$data['year'] = $inputData['md_year'];
-		$data['creator'] = $inputData['md_creator'];
-		$data['publisher'] = $inputData['md_publisher'];
-		
-		$data['programmer'] = $inputData['md_programmer'];
-		$data['musican'] = $inputData['md_musican'];
-		$data['graphics'] = $inputData['md_graphics'];
-
-		$data['storage'] = ($inputData['md_storage'] === null) ? $inputData['md_storage'] = 'NULL' : $inputData['md_storage'] ;		
-
-		$data['region'] = ($inputData['md_region'] === null) ? $inputData['md_region'] = 'NULL' : $inputData['md_region'] ;
-		
-		if ($inputData['md_id']) {
-			$this->update_file_info($data, false);
-		}
-		else {
-			return $this->insert_file_info($data);
-		}
-	}
-
 	private function updateMetaData($id, $data) {
 	}
+	
 	private function insertMetaData() {
 	}
 	
@@ -926,7 +935,7 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 
 		// remove bookmarks also
-		$this->remove_bookmark_by_id($id);
+		$this->deleteBookmarkById($id);
 		
 		return true;
 	}
@@ -1075,6 +1084,17 @@ class TreeviewData {
 			$availableCrc32[] = $res['crc32'];
 		}
 		return $availableCrc32;
+	}
+	
+	public function searchForFile($fileName){
+		$q = "SELECT title, path, path_pack FROM fdata WHERE path_pack LIKE '%".sqlite_escape_string($fileName)."%' OR path LIKE '%".sqlite_escape_string($fileName)."%' LIMIT 1";
+		//print $q."\n";
+		$hdl = $this->dbms->query($q);
+		if($row = $hdl->fetch(SQLITE_ASSOC)){
+//			return $row['title'];
+			return $row;
+		}
+		return false;
 	}
 	
 }

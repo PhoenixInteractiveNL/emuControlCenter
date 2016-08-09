@@ -1,0 +1,31 @@
+; Platform       	: Laser Disc
+; Script for     	: Daphne v??.??
+; Script version 	: v1.0.0.0
+; Last changed   	: 2008.06.12
+;
+;
+; Author :  Howard Philips (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & $eccFileRomNamePlain & " vldp -framefile " & _
+chr(34) & $eccFileRomPath & $eccFileRomNamePlain & "_framefile.txt" & chr(34) & " -fullscreen")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

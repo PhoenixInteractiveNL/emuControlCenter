@@ -1,0 +1,52 @@
+; Platform       	: Panasonic 3DO
+; Script for     	: FreeDo v1.9 beta?
+; Script version 	: v1.0.0.1
+; Last changed   	: 2008.07.08
+;
+;
+; Author :  Lenne (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("FreeDO")
+
+; Load CD
+;
+Send("{ALT}")
+Send("{DOWN}")
+Send("{ENTER}")
+Sleep(1000)
+Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+Send("{ENTER}")
+
+; Start emulator
+;
+Send("{ALT}")
+Sleep(100)
+Send("{RIGHT}")
+Send("{DOWN}")
+Sleep(100)
+Send("{ENTER}")
+
+; Full Screen
+;
+Sleep(1000)
+Send("{F4}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

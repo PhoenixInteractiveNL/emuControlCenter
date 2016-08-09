@@ -1,7 +1,0 @@
-###############################################################################
-Atari Lynx - Emulator notes
-###############################################################################
-
-handy
-You need a real lynxboot.img to play commercial games! The lynxboot.img in this emu-folder is only a placeholder for a original .img-file.
--------------------------------------------------------------------------------

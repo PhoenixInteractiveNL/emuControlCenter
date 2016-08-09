@@ -8,16 +8,14 @@ class FileParserGeneric implements FileParser {
 	
 	private $_file_ext = false;
 	
-	/*
-	*
-	*/
 	public function __construct($file_ext=false) {
 		$this->_file_ext = $file_ext;
 	}
 	
-	/*
-	*
-	*/
+	public function hasRipHeader(){
+		return false;
+	}
+	
 	public function parse($fhdl, $file_name, $file_name_direct=false, $file_name_packed=false) {
 		
 		$ret = array();
@@ -28,8 +26,7 @@ class FileParserGeneric implements FileParser {
 		$ret['FILE_PATH'] = $file_name_direct;
 		$ret['FILE_PATH_PACK'] = $file_name_packed;
 		$ret['FILE_EXT'] = (isset($this->_file_ext)) ? strtoupper($this->_file_ext) : strtoupper($file_info['EXT']) ;
-		$fstat = fstat($fhdl);
-		$ret['FILE_SIZE'] = $fstat['size'];
+		$ret['FILE_SIZE'] = $file_info['SIZE'];
 		
 		# use fsum to get the right crc32 for larger files!
 		# only usable for platforms withou offsets!!!!

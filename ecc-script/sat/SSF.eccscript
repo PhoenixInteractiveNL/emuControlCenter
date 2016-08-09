@@ -1,0 +1,32 @@
+; Platform       	: Sega Saturn
+; Script for     	: SSF v0.0.9 Alpha R4
+; Script version 	: v1.0.0.0
+; Last changed   	: 2008.06.11
+;
+;
+; Author : Sebastiaan Ebeltjes, Phoenix Interactive
+;
+; NOTES:
+; When you set the correct CD drive in the config of SSF, the game
+; will play automaticly!, you only have to configure this once.
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+CDImage("mount")
+ShellExecuteWait($eccEmuEmulatorPath & $eccEmuEmulatorFile, "", "")
+CDImage("unmount")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

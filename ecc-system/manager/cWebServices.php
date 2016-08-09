@@ -153,32 +153,44 @@ class WebServices {
 
 		$debug = true;
 		
-		$userData = $this->getModifiedUserData($perRun);
+		$roms = $this->getModifiedUserData($perRun);
+		
 		$urlData = array();
-		foreach ($userData as $key => $modData) {
+		foreach ($roms as $rom) {
 
-			$eccident = trim($modData['md.eccident']);
-			$crc32 = trim($modData['md.crc32']);
-			$filename = trim($modData['fd.title']);
-			$filesize = $modData['fd.size'];
-			$fileext = trim($modData['md.extension']);
-			//$filesize = ($filesize) ? round($filesize/1024, 1) : 0;
+			$romFile = $rom->getRomFile();
+			$romMeta = $rom->getRomMeta();
 			
-			$title = (trim($modData['md.name']));
-			$rating = $modData['md.rating'];
-			$data = trim($modData['md.running'].".".$modData['md.bugs'].".".$modData['md.trainer'].".".$modData['md.intro'].".".$modData['md.usermod'].".".$modData['md.freeware'].".".$modData['md.multiplayer'].".".$modData['md.netplay']);
-			$lang = trim(implode(".", array_keys(FACTORY::get('manager/TreeviewData')->get_language_by_mdata_id($modData['md.id']))));
-			$cat = (int)$modData['md.category'];
-			$year = trim($modData['md.year']);
+			$eccident = trim($romMeta->getSystemIdent());
+			$crc32 = trim($romMeta->getCrc32());
+			$filename = trim($romFile->getPlainFileName());
+			$filesize = $romFile->getFileSize();
+			$fileext = $romFile->getRomExtension();
 			
-			$usk = trim($modData['md.usk']);
-			$dev = trim($modData['md.creator']);
+			$title = trim($romMeta->getName());
+			$rating = $romMeta->getRating();
+			$features =
+				$romMeta->getRunning().".".
+				$romMeta->getBugs().".".
+				$romMeta->getTrainer().".".
+				$romMeta->getIntro().".".
+				$romMeta->getUsermod().".".
+				$romMeta->getFreeware().".".
+				$romMeta->getMultiplayer().".".
+				$romMeta->getNetplay()
+			;
+			$lang = trim(implode(".", array_keys(FACTORY::get('manager/TreeviewData')->get_language_by_mdata_id($romMeta->getId()))));
+			$cat = (int)$romMeta->getCategory();
+			$year = trim($romMeta->getYear());
 			
-			$publisher = trim($modData['md.publisher']);
-			$storage = trim($modData['md.storage']);
+			$usk = trim($romMeta->getUsk());
+			$dev = trim($romMeta->getDeveloper());
 			
-			$date = ($modData['fd.launchtime']) ? date('Ymd-His', $modData['fd.launchtime']) : 0;
-			$stats = (int)$modData['fd.launchcnt'].'.'.$date;
+			$publisher = trim($romMeta->getPublisher());
+			$storage = trim($romMeta->getStorage());
+			
+			$date = ($romFile->getLaunchTime()) ? date('Ymd-His', $romFile->getLaunchTime()) : 0;
+			$stats = (int)$romFile->getLaunchCount().'.'.$date;
 			
 			$data = array(
 				'eccident' => urlencode($eccident),
@@ -189,7 +201,7 @@ class WebServices {
 				'fext' => urlencode($fileext),
 				'rating' => urlencode($rating),
 				'eccvers' => urlencode($eccversion),
-				'data' => urlencode($data),
+				'data' => urlencode($features),
 				'lang' => urlencode($lang),
 				'year' => urlencode($year),
 				'cat' => urlencode($cat),
@@ -200,22 +212,24 @@ class WebServices {
 				'sto' => urlencode($storage),
 				'stat' => urlencode($stats),
 				'debug' => urlencode($debug),
-				'pro' => urlencode(trim($modData['md.programmer'])),
-				'mus' => urlencode(trim($modData['md.musican'])),
-				'gra' => urlencode(trim($modData['md.graphics'])),
-				'mtype' => urlencode($modData['md.media_type']),
-				'mcur' => urlencode($modData['md.media_current']),
-				'mcou' => urlencode($modData['md.media_count']),
-				'reg' => urlencode($modData['md.region']),
-				'catb' => urlencode($modData['md.category_base']),
+				'pro' => urlencode(trim($romMeta->getProgrammer())),
+				'mus' => urlencode(trim($romMeta->getMusican())),
+				'gra' => urlencode(trim($romMeta->getGraphics())),
+				'mtype' => urlencode($romMeta->getMedia_type()),
+				'mcur' => urlencode($romMeta->getMedia_current()),
+				'mcou' => urlencode($romMeta->getMedia_count()),
+				'reg' => urlencode($romMeta->getRegion()),
+				'catb' => urlencode($romMeta->getCategory_base()),
+				'infs' => urlencode($romMeta->getInfo()),
+				'infid' => urlencode($romMeta->getInfo_id()),
 			);
 			$params = array();
 			foreach($data as $key => $value) $params[] = $key.'='.$value;
+		
 			$paramString = join('&', $params);
 			
-			$urlData[$modData['md.id']]['title'] = $eccident."|".$crc32."|".$title;
-			$urlData[$modData['md.id']]['url'] = $this->serviceUrl.'?'.$paramString;
-			#$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."&pub=".urlencode($publisher)."&sto=".urlencode($storage)."&stat=".urlencode($stats)."&debug=".$debug;
+			$urlData[$romMeta->getId()]['title'] = $eccident."|".$crc32."|".$title;
+			$urlData[$romMeta->getId()]['url'] = $this->serviceUrl.'?'.$paramString;
 		}
 		
 		return $urlData;
@@ -225,27 +239,79 @@ class WebServices {
 	{
 		$q = '
 		SELECT
-			md.*,
-			fd.*
+		md.crc32 as md_crc32,
+		md.id as md_id,
+		md.eccident as md_eccident,
+		md.name as md_name,
+		md.info as md_info,
+		md.info_id as md_info_id,
+		md.running as md_running,
+		md.bugs as md_bugs,
+		md.trainer as md_trainer,
+		md.intro as md_intro,
+		md.usermod as md_usermod,
+		md.freeware as md_freeware,
+		md.multiplayer as md_multiplayer,
+		md.netplay as md_netplay,
+		md.year as md_year,
+		md.usk as md_usk,
+		md.rating as md_rating,
+		md.category as md_category,
+		md.creator as md_creator,
+		md.publisher as md_publisher,
+		md.programmer as md_programmer,
+		md.musican as md_musican,
+		md.graphics as md_graphics,
+		md.media_type as md_media_type,
+		md.media_current as md_media_current,
+		md.media_count as md_media_count,
+		md.storage as md_storage,
+		md.region as md_region,
+		md.cdate as md_cdate,
+		md.uexport as md_uexport,
+		fd.id as id,
+		fd.title as title,
+		fd.path as path,
+		fd.path_pack as path_pack,
+		fd.crc32 as crc32,
+		fd.md5 as md5,
+		fd.size as size,
+		fd.eccident as fd_eccident,
+		fd.launchtime as fd_launchtime,
+		fd.launchcnt as fd_launchcnt,
+		fd.isMultiFile as fd_isMultiFile,
+		fd.mdata as fd_mdata
 		FROM
-			mdata md
-			LEFT JOIN fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)
+		mdata md
+		LEFT JOIN fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)
 		WHERE
-			md.cdate NOT NULL AND
-			md.uexport IS NULL
+		md.cdate NOT NULL AND
+		md.uexport IS NULL
 		GROUP BY
-			md.id
-		ORDER BY
-			md.cdate DESC
-		LIMIT '.(int)$perRun.'
+		md.id
+		ORDER
+		BY md.cdate DESC
+		LIMIT
+		'.(int)$perRun.'
 		';
-		$ret = array();
 		$result = $this->dbms->query($q);
+		$roms = array();
 		while($row = $result->fetch(SQLITE_ASSOC)) {
-			$ret[] = $row;
+			
+			$romFile = new RomFile();
+			$romFile->fillFromDatabase($row);
+			$romMeta = new RomMeta();
+			$romMeta->fillFromDatabase($row);
+			$romAudit = new RomAudit();
+			
+			$rom = new Rom();
+			$rom->setRomFile($romFile);
+			$rom->setRomMeta($romMeta);
+			$rom->setRomAudit($romAudit);
+			
+			$roms[] = $rom;
 		}
-		
-		return $ret;
+		return $roms;
 	}
 	
 	public function getModifiedUserDataCount()
@@ -305,6 +371,65 @@ class WebServices {
 		return $data;
 		
 		#return @file_get_contents($this->serviceUrl.'/eccdat_all_complete.'.date('Ymd', time()).'.eccDat');
+	}
+	
+	public function getRomImages($systemIdent, $crc32, $cs){
+		
+		$mngrValidator = FACTORY::get('manager/Validator');
+		$this->eccdb = $mngrValidator->getEccCoreKey('eccdb');
+		$session = file_get_contents(ECC_DIR.'/'.$cs['cicheckdat']);
+		
+		while (gtk::events_pending()) gtk::main_iteration();
+		
+		// get zip
+		$zipFileDownload = file_get_contents($this->eccdb['IMAGE_INJECT_SERVER'].'idt='.$session.'&systemIdent='.$systemIdent.'&crc32='.$crc32);
+		if(!$zipFileDownload) return false;
+		
+		if(substr($zipFileDownload, 0, 5) == 'error'){
+			print $zipFileDownload."\n";
+			return false;
+		}
+		
+		while (gtk::events_pending()) gtk::main_iteration();
+		
+		// store temp file
+		$tempFilename = 'temp/eccimage_temp.zip';
+		if(!file_put_contents($tempFilename, $zipFileDownload)) return false;
+
+		while (gtk::events_pending()) gtk::main_iteration();
+		
+		$mngrImage = FACTORY::get('manager/Image');
+		$mngrFileIO = FACTORY::get('manager/FileIO');
+		
+		$userFolder = FACTORY::get('IniFile')->getUserFolder($systemIdent);
+				
+		$zipHandle = zip_open($tempFilename);
+		if(!$zipHandle) return false;
+		
+		while (false !== $zipEntry = zip_read($zipHandle)){
+			
+			while (gtk::events_pending()) gtk::main_iteration();
+			
+			$fileExtension = $mngrFileIO->get_ext_form_file(basename(zip_entry_name($zipEntry)));
+			if(strtolower($fileExtension) == 'txt') continue;
+			
+			if (zip_entry_open($zipHandle, $zipEntry, "r")) {
+				$imageStream = zip_entry_read($zipEntry, zip_entry_filesize($zipEntry));
+				$imagePath = $userFolder.''.zip_entry_name($zipEntry);
+
+				// write images and creates thumbs
+				$mngrImage->copyImageFromStream($systemIdent, $crc32, $imageStream, $imagePath);
+				
+				zip_entry_close($zipEntry);
+			}
+			
+		}
+		zip_close($zipHandle);
+
+		// remove temp file
+		unlink($tempFilename);
+		
+		return true;
 	}
 	
 }

@@ -8,7 +8,7 @@ class GuiDataCombiner extends GladeXml {
 	private $iniManager;
 	private $hasErrors = false;
 	
-	private $metaCategories = array();
+	private $realCategory = array();
 	
 	public function __construct($eccGui) {
 		$this->eccGui = $eccGui;
@@ -16,7 +16,7 @@ class GuiDataCombiner extends GladeXml {
 	}
 	
 	private function prepareGui() {
-		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiDataCombiner.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui/guiDataCombiner.glade');
 		$this->signal_autoconnect_instance($this);
 		
 		$this->dataCombiner->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
@@ -32,19 +32,34 @@ class GuiDataCombiner extends GladeXml {
 		$this->radiobutton2->connect('button-press-event', array($this, 'test'), 2);
 		$this->radiobutton3->connect('button-press-event', array($this, 'test'), 3);
 		
-		$this->metaCategories = FACTORY::get('manager/Validator')->getEccCoreKey('media_category');
+		$this->realCategory = FACTORY::get('manager/Validator')->getEccCoreKey('media_category');
+		$this->realMedia_type = I18n::translateArray('dropdownMedium', FACTORY::get('manager/Validator')->getEccCoreKey('dropdownMediaType'));
+		$this->realRegion = I18n::translateArray('dropdown_meta_region', FACTORY::get('manager/Validator')->getEccCoreKey('dropdownRegion'));
+		$this->realStorage = I18n::translateArray('dropdown_meta_storage', FACTORY::get('manager/Validator')->getEccCoreKey('dropdownStorage'));
 		
-		$this->paneLeftMetaTitleMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'left', 'metaName');
-		$this->paneLeftMetaDeveloperMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'left', 'metaCreator');
-		$this->paneLeftMetaPublisherMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'left', 'metaPublisher');
-		$this->paneLeftMetaYearMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'left', 'metaYear');
-		$this->paneLeftMetaCategoryMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'left', 'metaCategory');
+		$this->connectMergeButtonSignals('name');
+		$this->connectMergeButtonSignals('creator');
+		$this->connectMergeButtonSignals('publisher');
+		$this->connectMergeButtonSignals('year');
+		$this->connectMergeButtonSignals('category');
 		
-		$this->paneRightMetaTitleMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'right', 'metaName');
-		$this->paneRightMetaDeveloperMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'right', 'metaCreator');
-		$this->paneRightMetaPublisherMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'right', 'metaPublisher');
-		$this->paneRightMetaYearMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'right', 'metaYear');
-		$this->paneRightMetaCategoryMerge->connect_simple('button-press-event', array($this, 'mergeData'), 'right', 'metaCategory');
+		$this->connectMergeButtonSignals('programmer');
+		$this->connectMergeButtonSignals('graphics');
+		$this->connectMergeButtonSignals('musican');
+		
+		$this->connectMergeButtonSignals('media_type');
+		$this->connectMergeButtonSignals('region');
+		$this->connectMergeButtonSignals('storage');
+		$this->connectMergeButtonSignals('usk');
+
+	}
+	
+	private function connectMergeButtonSignals($key){
+		$arrayKey = 'meta'.ucfirst($key);
+		$widgetName = 'paneLeftMeta'.ucfirst($key).'Merge';
+		$this->$widgetName->connect_simple('button-press-event', array($this, 'mergeData'), 'left', $arrayKey);
+		$widgetName = 'paneRightMeta'.ucfirst($key).'Merge';
+		$this->$widgetName->connect_simple('button-press-event', array($this, 'mergeData'), 'right', $arrayKey);
 	}
 	
 	public function mergeData($side, $field){
@@ -113,56 +128,65 @@ class GuiDataCombiner extends GladeXml {
 		 * META
 		 */
 		
-		# TITLE
-		$metaName = (!$cData['metaName']['equal']) ? '<span color="red">'.htmlentities($cData['metaName']['left']).'</span>' : htmlentities($cData['metaName']['left']);
-		$this->paneLeftMetaTitle->set_markup($metaName);
-		$metaName = (!$cData['metaName']['equal']) ? '<span color="red">'.htmlentities($cData['metaName']['right']).'</span>' : htmlentities($cData['metaName']['right']);
-		$this->paneRightMetaTitle->set_markup($metaName);
+		# Name
+		$this->fillWidget($cData, 'name');
+		$this->fillWidget($cData, 'creator');
+		$this->fillWidget($cData, 'publisher');
+		$this->fillWidget($cData, 'year');
+		$this->fillWidget($cData, 'category', true);
 		
-		$sensitiveState = ($cData['metaName']['equal']) ? false : true;
-		$this->paneLeftMetaTitleMerge->set_sensitive($sensitiveState);
-		$this->paneRightMetaTitleMerge->set_sensitive($sensitiveState);
+		$this->fillWidget($cData, 'programmer');
+		$this->fillWidget($cData, 'graphics');
+		$this->fillWidget($cData, 'musican');
 		
-		# DEVELOPER
-		$metaCreator = (!$cData['metaCreator']['equal']) ? '<span color="red">'.htmlentities($cData['metaCreator']['left']).'</span>' : htmlentities($cData['metaCreator']['left']);
-		$this->paneLeftMetaDeveloper->set_markup($metaCreator);
-		$metaCreator = (!$cData['metaCreator']['equal']) ? '<span color="red">'.htmlentities($cData['metaCreator']['right']).'</span>' : htmlentities($cData['metaCreator']['right']);
-		$this->paneRightMetaDeveloper->set_markup($metaCreator);
+		$this->fillWidget($cData, 'media_type', true);
 		
-		$sensitiveState = ($cData['metaCreator']['equal']) ? false : true;
-		$this->paneLeftMetaDeveloperMerge->set_sensitive($sensitiveState);
-		$this->paneRightMetaDeveloperMerge->set_sensitive($sensitiveState);
+		$this->fillWidget($cData, 'region', true);
+		$this->fillWidget($cData, 'storage', true);
+		$this->fillWidget($cData, 'usk');
+	}
+	
+	private function fillWidget($cData, $key, $showIntAsString = false){
 		
-		# PUBLISHER
-		$metaPublisher = (!$cData['metaPublisher']['equal']) ? '<span color="red">'.htmlentities($cData['metaPublisher']['left']).'</span>' : htmlentities($cData['metaPublisher']['left']);
-		$this->paneLeftMetaPublisher->set_markup($metaPublisher);
-		$metaPublisher = (!$cData['metaPublisher']['equal']) ? '<span color="red">'.htmlentities($cData['metaPublisher']['right']).'</span>' : htmlentities($cData['metaPublisher']['right']);
-		$this->paneRightMetaPublisher->set_markup($metaPublisher);
+		$arrayKey = 'meta'.ucfirst($key);
 		
-		$sensitiveState = ($cData['metaPublisher']['equal']) ? false : true;
-		$this->paneLeftMetaPublisherMerge->set_sensitive($sensitiveState);
-		$this->paneRightMetaPublisherMerge->set_sensitive($sensitiveState);
+		$hilightLeft = (!$cData[$arrayKey]['equal']) ? true : false;
+		$valueLeft = ($hilightLeft) ? '<span color="red">'.htmlentities($cData[$arrayKey]['left']).'</span>' : htmlentities($cData[$arrayKey]['left']);
+		$valueLeft = (isset($cData[$arrayKey]['changed']) && $cData[$arrayKey]['changed'] == 'left') ? '<b>'.$valueLeft.'</b>' : $valueLeft;
+		$widgetName = 'paneLeftMeta'.ucfirst($key);
+		$this->$widgetName->set_markup($valueLeft);
+
+		$hilightRight = (!$cData[$arrayKey]['equal']) ? true : false;
+		$valueRight = ($hilightRight) ? '<span color="red">'.htmlentities($cData[$arrayKey]['right']).'</span>' : htmlentities($cData[$arrayKey]['right']);
+		$valueRight = (isset($cData[$arrayKey]['changed']) && $cData[$arrayKey]['changed'] == 'right') ? '<b>'.$valueRight.'</b>' : $valueRight;
+		$widgetName = 'paneRightMeta'.ucfirst($key);
+		$this->$widgetName->set_markup($valueRight);
 		
-		# YEAR
-		$metaYear = (!$cData['metaYear']['equal']) ? '<span color="red">'.htmlentities($cData['metaYear']['left']).'</span>' : htmlentities($cData['metaYear']['left']);
-		$this->paneLeftMetaYear->set_markup($metaYear);
-		$metaYear = (!$cData['metaYear']['equal']) ? '<span color="red">'.htmlentities($cData['metaYear']['right']).'</span>' : htmlentities($cData['metaYear']['right']);
-		$this->paneRightMetaYear->set_markup($metaYear);
+		// if a dropdown value is shown, show the real string for the given id!
+		if($showIntAsString) {
+			$memberVar = 'real'.ucfirst($key);
+			
+			$dataArray = $this->$memberVar;
+			
+			$valueLeft = ($hilightLeft) ? '<span color="red">'.htmlentities(@$dataArray[$cData[$arrayKey]['left']]).'</span>' : htmlentities(@$dataArray[$cData[$arrayKey]['left']]);
+			$valueLeft = (isset($cData[$arrayKey]['changed']) && $cData[$arrayKey]['changed'] == 'left') ? '<b>'.$valueLeft.'</b>' : $valueLeft;
+			$widgetName = 'paneLeftMetaString'.ucfirst($key);
+			$this->$widgetName->set_markup($valueLeft);
+			
+			$valueRight = ($hilightRight) ? '<span color="red">'.htmlentities(@$dataArray[$cData[$arrayKey]['right']]).'</span>' : htmlentities(@$dataArray[$cData[$arrayKey]['right']]);
+			$valueRight = (isset($cData[$arrayKey]['changed']) && $cData[$arrayKey]['changed'] == 'right') ? '<b>'.$valueRight.'</b>' : $valueRight;
+			$widgetName = 'paneRightMetaString'.ucfirst($key);
+			$this->$widgetName->set_markup($valueRight);
+		}
 		
-		$sensitiveState = ($cData['metaYear']['equal']) ? false : true;
-		$this->paneLeftMetaYearMerge->set_sensitive($sensitiveState);
-		$this->paneRightMetaYearMerge->set_sensitive($sensitiveState);
 		
-		# CATEGORY
-		$metaCategory = (!$cData['metaCategory']['equal']) ? '<span color="red">'.htmlentities($this->metaCategories[$cData['metaCategory']['left']]).'</span>' : htmlentities($this->metaCategories[$cData['metaCategory']['left']]);
-		$this->paneLeftMetaCategory->set_markup($metaCategory);
-		$metaCategory = (!$cData['metaCategory']['equal']) ? '<span color="red">'.htmlentities($this->metaCategories[$cData['metaCategory']['right']]).'</span>' : htmlentities($this->metaCategories[$cData['metaCategory']['right']]);
-		$this->paneRightMetaCategory->set_markup($metaCategory);
+		$sensitiveState = ($cData[$arrayKey]['equal']) ? false : true;
 		
-		$sensitiveState = ($cData['metaCategory']['equal']) ? false : true;
-		$this->paneLeftMetaCategoryMerge->set_sensitive($sensitiveState);
-		$this->paneRightMetaCategoryMerge->set_sensitive($sensitiveState);
+		$widgetName = 'paneLeftMeta'.ucfirst($key).'Merge';
+		$this->$widgetName->set_sensitive($sensitiveState);
 		
+		$widgetName = 'paneRightMeta'.ucfirst($key).'Merge';
+		$this->$widgetName->set_sensitive($sensitiveState);
 	}
 	
 	public function setLeftSide($id) {
@@ -209,7 +233,9 @@ class GuiDataCombiner extends GladeXml {
 		if ($ids['fdata_id']) $q = "SELECT * FROM fdata fd LEFT JOIN mdata md on (fd.eccident=md.eccident AND fd.crc32=md.crc32) WHERE fd.id = ".(int)$ids['fdata_id']." LIMIT 1";	
 		else $q = "SELECT * FROM mdata md LEFT JOIN fdata fd on (md.eccident=fd.eccident AND md.crc32=fd.crc32) WHERE md.id = ".(int)$ids['mdata_id']." LIMIT 1";
 		$hdl = $this->dbms->query($q);
-		if($row = $hdl->fetch(SQLITE_ASSOC)) return $row;
+		if($row = $hdl->fetch(SQLITE_ASSOC)){
+			return $row;
+		}
 		return false;
 	}
 	
@@ -269,10 +295,14 @@ class CompareItem{
 	public $dbms;
 	
 	public function __construct(){
-		$this->metaCategories = FACTORY::get('manager/Validator')->getEccCoreKey('media_category');
+//		$this->metaCategories = FACTORY::get('manager/Validator')->getEccCoreKey('media_category');
 	}
 	
 	public function fillSide($side, $data){
+		
+		foreach ($this->data as $key => $void) {
+			unset($this->data[$key]['changed']);
+		}
 		
 		$this->data['fileId'][$side] = $data['fd.id'];
 		$this->data['metaId'][$side] = $data['md.id'];
@@ -298,7 +328,17 @@ class CompareItem{
 		$this->data['metaCreator'][$side] = trim($data['md.creator']);
 		$this->data['metaPublisher'][$side] = trim($data['md.publisher']);
 		$this->data['metaYear'][$side] = trim($data['md.year']);
-		$this->data['metaCategory'][$side] = (int)$data['md.category'];
+		$this->data['metaCategory'][$side] = $data['md.category'];
+		
+		$this->data['metaProgrammer'][$side] = trim($data['md.programmer']);
+		$this->data['metaGraphics'][$side] = trim($data['md.graphics']);
+		$this->data['metaMusican'][$side] = trim($data['md.musican']);
+		
+		$this->data['metaMedia_type'][$side] = $data['md.media_type'];
+		$this->data['metaRegion'][$side] = $data['md.region'];
+		$this->data['metaStorage'][$side] = $data['md.storage'];
+		$this->data['metaUsk'][$side] = $data['md.usk'];
+
 	}
 	
 	public function getMatches(){

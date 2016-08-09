@@ -41,6 +41,9 @@ class Gui extends GladeXml{
 		if ($this->isHistoryKeyHidden($historyKey))return true;
 		
 		$this->init();
+		
+		if(!$image) $image = FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_question.png', true);
+		
 		$this->setDialogContent($title, $message, $image);
 		
 		$this->handleHistoryKey($historyKey);
@@ -69,6 +72,9 @@ class Gui extends GladeXml{
 		if ($this->isHistoryKeyHidden($historyKey))return true;
 		
 		$this->init();
+		
+		if(!$image) $image = FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_info.png', true);
+		
 		$this->setDialogContent($title, $message, $image);
 		
 		$this->handleHistoryKey($historyKey);
@@ -80,11 +86,19 @@ class Gui extends GladeXml{
 		return $this->getResponse($historyKey);
 	}
 	
-	public function openDialogWait($title=false, $message=false){
+	public function openDialogWait($title=false, $message=false, $image = false){
+
 		$this->init(Gdk::WINDOW_TYPE_HINT_SPLASHSCREEN);
+		
 		$this->checkboxHideDialog->set_visible(false);
 		$this->hbox32->set_visible(false);
-		$this->setDialogContent($title, $message, $image = false);
+		
+		if(!$image) $image = FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_wait.png', true);
+		$this->setDialogContent($title, $message, $image);
+		
+		
+		$this->guiDialog->show();
+		
 		return $this;
 	}
 	
@@ -95,7 +109,7 @@ class Gui extends GladeXml{
 	 * @param unknown_type $message
 	 * @param unknown_type $image
 	 */
-	private function setDialogContent($title, $message, $image){
+	private function setDialogContent($title, $message, $image = false){
 		
 		# default values
 		$title = ($title) ? $title : I18N::get('popup', 'sys_dialog_miss_title');
@@ -104,6 +118,12 @@ class Gui extends GladeXml{
 		# set given contents
 		$this->title->set_markup('<b>'.$title.'</b>');
 		$this->message->set_markup($message);
+		
+		$image = ($image && file_exists($image)) ? $image : 'images/dialog/ecc_yellowcross.png';
+		
+		$helper = FACTORY::get('manager/GuiHelper');
+		$pixbuf = $helper->getPixbuf($image);
+		$this->image->set_from_pixbuf($pixbuf);			
 	}
 	
 	/**
@@ -194,6 +214,9 @@ class Gui extends GladeXml{
 		
 		if($windowType) $this->guiDialog->set_type_hint($windowType);
 		
+		$this->checkboxHideDialog->set_visible(true);
+		$this->hbox32->set_visible(true);
+		
 		if ($show) $this->guiDialog->show();
 		
 		$this->guiDialog->set_keep_above(true);
@@ -210,7 +233,7 @@ class Gui extends GladeXml{
 		# so, the first time, the popup isnts opened via $show
 		if (!$show) return false;
 		
-		$path = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR).'/gui2/guiDialog.glade';
+		$path = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR).'/gui/guiDialog.glade';
 		parent::__construct($path);
 		
 		if($windowType) $this->guiDialog->set_type_hint($windowType);
@@ -230,6 +253,10 @@ class Gui extends GladeXml{
 		$this->guiDialog->connect('delete-event', array($this, 'destroyed'));
 		
 		$this->guiDialog->connect('key-press-event', array($this, 'handleKeyboardShortcuts'));
+		
+		$helper = FACTORY::get('manager/GuiHelper');
+		$pixbuf = $helper->getPixbuf('images/dialog/ecc_yellowcross.png');
+		$this->image->set_from_pixbuf($pixbuf);
 		
 		# connect buttons
 		$this->buttonCancel->connect_simple('clicked', array($this, 'onClick'), Gtk::RESPONSE_CANCEL);

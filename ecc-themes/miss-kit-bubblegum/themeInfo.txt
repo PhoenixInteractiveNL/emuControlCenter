@@ -1,5 +1,5 @@
-name="Default eccTheme"
-author="ecc"
+name="Miss Kit I - Bubblegum"
+author="Phoenix"
 date="20080123"
 contact="ecc@camya.com"
 website="http://www.camya.com/"

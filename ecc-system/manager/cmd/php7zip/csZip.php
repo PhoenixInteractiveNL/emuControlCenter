@@ -27,10 +27,10 @@ class sZip {
 	public function __construct() {/* NOT USED */}
 	
 	/**
-	 * Extracts files from an archive to a given directory
+	 * Extracts a file from an archive to a given directory
 	 *  
 	 * Command
-	 * 7zr.exe e -y -bd -otemp/ 7z457_extra.7z Installer\cr.bat
+	 * 7za.exe e -y -bd -otemp/ 7z457_extra.7z Installer\cr.bat
 	 * 
 	 * @param string $sZipFile
 	 * @param string $fileName
@@ -46,13 +46,40 @@ class sZip {
 		$this->setFile(escapeshellarg(realpath($sZipFile)).' '.escapeshellarg($fileName));
 		$switchOutput = ($outputFolder) ? '-o"'.$outputFolder.'"' : '' ;
 		$this->setExecutableSwitches('-y '.$switchOutput);
-		
+
 		$command = $this->getCommand(true);
 		system($command);
 		
 		return true;
 	}
 	
+	/**
+	 * Extracts ALL files from an archive to a given directory including subdirs!
+	 *  
+	 * Command
+	 * 7za.exe x -y -bd -otemp/ 7z457_extra.7z
+	 * 
+	 * @param string $sZipFile
+	 * @param string $fileName
+	 * @param string $outputFolder relative path
+	 */
+	public function extractAll($sZipFile, $fileName, $outputFolder = false) {
+
+		// if no output folder is given, extract direct to 7zip file folder 
+		if(!$outputFolder) $outputFolder = dirname($sZipFile);
+		if(!file_exists($outputFolder)) mkdir($outputFolder);
+					
+		$this->setExecutableCommand('x');
+		$this->setFile(escapeshellarg(realpath($sZipFile)));
+		$switchOutput = ($outputFolder) ? '-o"'.$outputFolder.'"' : '' ;
+		$this->setExecutableSwitches('-y '.$switchOutput);
+		
+		$command = $this->getCommand(true);
+		system($command);
+		
+		return true;
+	}
+
 	/**
 	 * List contents of archive
 	 * 

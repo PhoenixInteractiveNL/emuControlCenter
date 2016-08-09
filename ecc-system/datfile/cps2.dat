@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-2
-	description "CPS-2 20100103"
+	description "CPS-2 20100518"
 	category "Capcom Play System 2"
-	version 20100103
-	date 2010-01-03
+	version 20100518
+	date 2010-05-18
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -531,6 +531,31 @@ game (
 )
 
 game (
+	name ecofghtrh
+	description "Eco Fighters (Hispanic 931203)"
+	year 1993
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof ecofghtr
+	romof ecofghtr
+	rom ( name uech.03 size 524288 crc 14c9365e sha1 caba5e617a2c9516c6f24a327451edcff39b1bfd )
+	rom ( name uech.04 size 524288 crc 579495dc sha1 4b0f59da30c86d6c433429c46b4f24c7c55d6731 )
+	rom ( name uech.05 size 524288 crc 96807a8e sha1 6f12d5fbff17797338f26e2b32e9f27d8288262e )
+	rom ( name uech.06 size 524288 crc 682b9dbc sha1 80d86283ce850f1e9ac868a7e77819d2876df982 )
+	rom ( name uec.13m merge uec.13m size 2097152 crc dcaf1436 sha1 ba124cc0bb10c1d1c07592a3623add4ed054182e )
+	rom ( name uec.15m merge uec.15m size 2097152 crc 2807df41 sha1 66a9800af435055737ce50a0b0ced7c5718c2004 )
+	rom ( name uec.17m merge uec.17m size 2097152 crc 8a708d02 sha1 95ec527edc904a66e325667521b4d07d72579211 )
+	rom ( name uec.19m merge uec.19m size 2097152 crc de7be0ef sha1 bf8df9a31f8923f4b726ea12fe8327368463ebe1 )
+	rom ( name uec.14m merge uec.14m size 1048576 crc 1a003558 sha1 64bbd89e65dc0cf6f4ab5ea93a4cc6312d0d0802 )
+	rom ( name uec.16m merge uec.16m size 1048576 crc 4ff8a6f9 sha1 03968a301417e8843d42d4e0db42aa0a3a38664b )
+	rom ( name uec.18m merge uec.18m size 1048576 crc b167ae12 sha1 48c552d02caad27d680aa51170560794f2a51478 )
+	rom ( name uec.20m merge uec.20m size 1048576 crc 1064bdc2 sha1 c51f75ac8d3f02a771feda0a933314a928555c4e )
+	rom ( name uec.01 merge uec.01 size 131072 crc c235bd15 sha1 feb7cd7db9dc0b9887b33eed9796bb0205fb719d )
+	rom ( name uec.11m merge uec.11m size 2097152 crc 81b25d39 sha1 448adfcc7d98873a48c710d857225cdd1580e5c9 )
+	rom ( name uec.12m merge uec.12m size 2097152 crc 27729e52 sha1 a55c8159adf766dda70cb047f5ac85ce6bc0a3f3 )
+)
+
+game (
 	name uecology
 	description "Ultimate Ecology (Japan 931203)"
 	year 1993
@@ -832,6 +857,32 @@ game (
 	rom ( name dadh.03b size 524288 crc ae0cb98e sha1 e85fb56d8f55fd1626a47301953b66597814e516 )
 	rom ( name dadh.04b size 524288 crc b5774363 sha1 c91a6b257de4355a29d0a9742909592e69d287fb )
 	rom ( name dadh.05b size 524288 crc 6ce2a485 sha1 7397105bbf88f6f2aa46614395df38b205e6461c )
+	rom ( name dad.06 size 524288 crc 13aa3e56 sha1 ccd3cda528d625bbf4dc0e8c5ad629af6080d705 )
+	rom ( name dad.07 size 524288 crc 431cb6dd sha1 ad3342e2fb8f0b3d7f57e845d5b80a871923324d )
+	rom ( name dad.13m merge dad.13m size 2097152 crc da3cb7d6 sha1 d59bb53d5f32889eb6eb7f8b1c8781948c97283d )
+	rom ( name dad.15m merge dad.15m size 2097152 crc 92b63172 sha1 9bed7dbbb17729f2ad3d318396f5335c0bd39937 )
+	rom ( name dad.17m merge dad.17m size 2097152 crc b98757f5 sha1 3eead22e097906bf0e1e151cd0a9c75abc5a32d4 )
+	rom ( name dad.19m merge dad.19m size 2097152 crc 8121ce46 sha1 40c4dc969318d38f0c6d5401c9c64371f51aa12c )
+	rom ( name dad.14m merge dad.14m size 1048576 crc 837e6f3f sha1 c060183474fba0e82d765b9f282b84838550dff6 )
+	rom ( name dad.16m merge dad.16m size 1048576 crc f0916bdb sha1 9354d258dd26cbbf12c78ecfc277c357cbdb360e )
+	rom ( name dad.18m merge dad.18m size 1048576 crc cef393ef sha1 830b33c86cc24776d17ad65fa89a3b16c40446a1 )
+	rom ( name dad.20m merge dad.20m size 1048576 crc 8953fe9e sha1 f4795beb006335d13e3934aa9760e775eb0bb950 )
+	rom ( name dad.01 merge dad.01 size 131072 crc 3f5e2424 sha1 4aa744576bc6752c43a90a27a816ebd90076b248 )
+	rom ( name dad.11m merge dad.11m size 2097152 crc 0c499b67 sha1 a8ebd8a1cd6dece8344b7cb0439d85843fb97616 )
+	rom ( name dad.12m merge dad.12m size 2097152 crc 2f0b5a4e sha1 8d1ebbb811aa469b0f0d29d719d2b9af28fb63a2 )
+)
+
+game (
+	name ddtodhr2
+	description "Dungeons & Dragons: Tower of Doom (Hispanic 940113)"
+	year 1993
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof ddtod
+	romof ddtod
+	rom ( name dadh.03a size 524288 crc 43d04aa3 sha1 550fcc8ebf48d704223347abee759d0ed903432b )
+	rom ( name dadh.04a size 524288 crc 8b8d296c sha1 4cd6612855317ba13dd4c6b0dd024243677b5fbe )
+	rom ( name dadh.05a size 524288 crc daae6b14 sha1 ee132b19f8d8c17da6fd2d2da24205f2404a62d1 )
 	rom ( name dad.06 size 524288 crc 13aa3e56 sha1 ccd3cda528d625bbf4dc0e8c5ad629af6080d705 )
 	rom ( name dad.07 size 524288 crc 431cb6dd sha1 ad3342e2fb8f0b3d7f57e845d5b80a871923324d )
 	rom ( name dad.13m merge dad.13m size 2097152 crc da3cb7d6 sha1 d59bb53d5f32889eb6eb7f8b1c8781948c97283d )
@@ -1818,6 +1869,36 @@ game (
 
 game (
 	name xmcotah
+	description "X-Men: Children of the Atom (Hispanic 950105)"
+	year 1994
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof xmcota
+	romof xmcota
+	rom ( name xmnh.03d size 524288 crc 63b0a84f sha1 4a0d604ff11e68313a0711702803390cb0d2f234 )
+	rom ( name xmnh.04d size 524288 crc b1b9b727 sha1 b04ae3b7aab88cbb1a55068343ff9a9806d331a4 )
+	rom ( name xmn.05a merge xmn.05a size 524288 crc ac0d7759 sha1 650d4474b13f16af7910a0f721fcda2ddb2414fd )
+	rom ( name xmn.06a merge xmn.06a size 524288 crc 1b86a328 sha1 2469cd705139ee9f1142e6e379e68d0c9675b37e )
+	rom ( name xmn.07a merge xmn.07a size 524288 crc 2c142a44 sha1 7624875f9c39b361fc83e52e87e0fd5e96279713 )
+	rom ( name xmn.08a merge xmn.08a size 524288 crc f712d44f sha1 0d18d4a4eacad94a66beca6ec509ac7f690c6882 )
+	rom ( name xmn.09a merge xmn.09a size 524288 crc 9241cae8 sha1 bb6980abf25aaf3eb14e230ca6942f3e2ab2c660 )
+	rom ( name xmn.10a merge xmn.10a size 524288 crc 53c0eab9 sha1 e3b1ec1fd517735f7801cfebb257c43185c6d3fb )
+	rom ( name xmn.13m merge xmn.13m size 4194304 crc bf4df073 sha1 4d2740c3a827f0ec2cf75ad99c65e393c6a11c23 )
+	rom ( name xmn.15m merge xmn.15m size 4194304 crc 4d7e4cef sha1 50b8797b8099a8d76ad063ba1201a13dbb88ae3a )
+	rom ( name xmn.17m merge xmn.17m size 4194304 crc 513eea17 sha1 a497477ad9ac13180911d8745ef6ee1955c0b877 )
+	rom ( name xmn.19m merge xmn.19m size 4194304 crc d23897fc sha1 1e31627999736652252164d32662779a1ac6ca29 )
+	rom ( name xmn.14m merge xmn.14m size 4194304 crc 778237b7 sha1 89a759ec383518ec52f5059d10ec342f2247aa20 )
+	rom ( name xmn.16m merge xmn.16m size 4194304 crc 67b36948 sha1 692fb6e4096b880aa22996d554b160f664bbd907 )
+	rom ( name xmn.18m merge xmn.18m size 4194304 crc 015a7c4c sha1 cccc95dafd076a1a9fa004710006149c42d058ba )
+	rom ( name xmn.20m merge xmn.20m size 4194304 crc 9dde2758 sha1 17ba259cad03c7b5d56c0a5eda9ab53521665729 )
+	rom ( name xmn.01a merge xmn.01a size 131072 crc 40f479ea sha1 f29e15f537675305264ae2138a0a537fb9e2008b )
+	rom ( name xmn.02a merge xmn.02a size 131072 crc 39d9b5ad sha1 af502debfd36100d4fc971ed25fdf9d7121d6f18 )
+	rom ( name xmn.11m merge xmn.11m size 2097152 crc c848a6bc sha1 ac8ac564d3c43225822f8bc330eba9f35b24b0a4 )
+	rom ( name xmn.12m merge xmn.12m size 2097152 crc 729c188f sha1 3279774ad8aebbcf0fc779cdfcbe21044dd192ad )
+)
+
+game (
+	name xmcotahr1
 	description "X-Men: Children of the Atom (Hispanic 950331)"
 	year 1994
 	manufacturer "Capcom"
@@ -1850,6 +1931,38 @@ game (
 
 game (
 	name xmcotaj
+	description "X-Men: Children of the Atom (Japan 950105)"
+	year 1994
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof xmcota
+	romof xmcota
+	rom ( name xmnjx.03e size 524288 flags nodump )
+	rom ( name xmnjx.04e size 524288 flags nodump )
+	rom ( name xmnj.03e size 524288 crc 0df29f5f sha1 83993ea90e7a602c3db137d08c008dcd9bee3055 )
+	rom ( name xmnj.04e size 524288 crc 4a65833b sha1 cd899674ba6448fb3841247d3f434e82b19c5399 )
+	rom ( name xmn.05a merge xmn.05a size 524288 crc ac0d7759 sha1 650d4474b13f16af7910a0f721fcda2ddb2414fd )
+	rom ( name xmn.06a merge xmn.06a size 524288 crc 1b86a328 sha1 2469cd705139ee9f1142e6e379e68d0c9675b37e )
+	rom ( name xmn.07a merge xmn.07a size 524288 crc 2c142a44 sha1 7624875f9c39b361fc83e52e87e0fd5e96279713 )
+	rom ( name xmn.08a merge xmn.08a size 524288 crc f712d44f sha1 0d18d4a4eacad94a66beca6ec509ac7f690c6882 )
+	rom ( name xmn.09a merge xmn.09a size 524288 crc 9241cae8 sha1 bb6980abf25aaf3eb14e230ca6942f3e2ab2c660 )
+	rom ( name xmn.10a merge xmn.10a size 524288 crc 53c0eab9 sha1 e3b1ec1fd517735f7801cfebb257c43185c6d3fb )
+	rom ( name xmn.13m merge xmn.13m size 4194304 crc bf4df073 sha1 4d2740c3a827f0ec2cf75ad99c65e393c6a11c23 )
+	rom ( name xmn.15m merge xmn.15m size 4194304 crc 4d7e4cef sha1 50b8797b8099a8d76ad063ba1201a13dbb88ae3a )
+	rom ( name xmn.17m merge xmn.17m size 4194304 crc 513eea17 sha1 a497477ad9ac13180911d8745ef6ee1955c0b877 )
+	rom ( name xmn.19m merge xmn.19m size 4194304 crc d23897fc sha1 1e31627999736652252164d32662779a1ac6ca29 )
+	rom ( name xmn.14m merge xmn.14m size 4194304 crc 778237b7 sha1 89a759ec383518ec52f5059d10ec342f2247aa20 )
+	rom ( name xmn.16m merge xmn.16m size 4194304 crc 67b36948 sha1 692fb6e4096b880aa22996d554b160f664bbd907 )
+	rom ( name xmn.18m merge xmn.18m size 4194304 crc 015a7c4c sha1 cccc95dafd076a1a9fa004710006149c42d058ba )
+	rom ( name xmn.20m merge xmn.20m size 4194304 crc 9dde2758 sha1 17ba259cad03c7b5d56c0a5eda9ab53521665729 )
+	rom ( name xmn.01a merge xmn.01a size 131072 crc 40f479ea sha1 f29e15f537675305264ae2138a0a537fb9e2008b )
+	rom ( name xmn.02a merge xmn.02a size 131072 crc 39d9b5ad sha1 af502debfd36100d4fc971ed25fdf9d7121d6f18 )
+	rom ( name xmn.11m merge xmn.11m size 2097152 crc c848a6bc sha1 ac8ac564d3c43225822f8bc330eba9f35b24b0a4 )
+	rom ( name xmn.12m merge xmn.12m size 2097152 crc 729c188f sha1 3279774ad8aebbcf0fc779cdfcbe21044dd192ad )
+)
+
+game (
+	name xmcotaj1
 	description "X-Men: Children of the Atom (Japan 941222)"
 	year 1994
 	manufacturer "Capcom"
@@ -1881,7 +1994,7 @@ game (
 )
 
 game (
-	name xmcotaj1
+	name xmcotaj2
 	description "X-Men: Children of the Atom (Japan 941219)"
 	year 1994
 	manufacturer "Capcom"
@@ -1913,7 +2026,7 @@ game (
 )
 
 game (
-	name xmcotaj2
+	name xmcotaj3
 	description "X-Men: Children of the Atom (Japan 941217)"
 	year 1994
 	manufacturer "Capcom"
@@ -5685,6 +5798,36 @@ game (
 )
 
 game (
+	name sfa3h
+	description "Street Fighter Alpha 3 (Hispanic 980629)"
+	year 1998
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof sfa3
+	romof sfa3
+	rom ( name sz3h.03 size 524288 crc 4b16cb3e sha1 2e1f45c9076ce231a545146d475f410397f20e27 )
+	rom ( name sz3h.04 size 524288 crc 88ad2e6a sha1 2a1de667ebeffd247ab9ee11687813b3397fc8de )
+	rom ( name sz3.05 size 524288 crc 9b21518a sha1 5a928307cb90a98a62e7598cb101fb66d62b85f9 )
+	rom ( name sz3.06 size 524288 crc e7a6c3a7 sha1 63441eb19efcbf9149f4b723d3e9191fa972de2a )
+	rom ( name sz3.07 size 524288 crc ec4c0cfd sha1 1a5148e77bf633c728a8179dacb59c776f981bc4 )
+	rom ( name sz3.08 size 524288 crc 5c7e7240 sha1 33bdcdd1889f8fa77916373ed33b0854410d0263 )
+	rom ( name sz3.09 size 524288 crc c5589553 sha1 cda1fdc2ab2f390a2358defd9923a2796093926d )
+	rom ( name sz3.10 size 524288 crc a9717252 sha1 7ee94ace2a49e4e5d30474e49c0da04a488010fe )
+	rom ( name sz3.13m merge sz3.13m size 4194304 crc 0f7a60d9 sha1 c69e0ee22537312909dacc86d2e4be319d54e426 )
+	rom ( name sz3.15m merge sz3.15m size 4194304 crc 8e933741 sha1 f4ac4bfe830dc7df9fe4f680e4e0c053e7cbd8fe )
+	rom ( name sz3.17m merge sz3.17m size 4194304 crc d6e98147 sha1 37f331fbb1284db446faecade6f484f58c0e1b2a )
+	rom ( name sz3.19m merge sz3.19m size 4194304 crc f31a728a sha1 f14136564648f006c1b74afda78349f260524b5f )
+	rom ( name sz3.14m merge sz3.14m size 4194304 crc 5ff98297 sha1 9e0ce43380b776c7a03872bafd4856f6fa60bda7 )
+	rom ( name sz3.16m merge sz3.16m size 4194304 crc 52b5bdee sha1 7918204dc457f7a146d8fb8cf7242dfed3109fd8 )
+	rom ( name sz3.18m merge sz3.18m size 4194304 crc 40631ed5 sha1 c18c56822b90a71ca5fbdf3440eb2671011f3d8f )
+	rom ( name sz3.20m merge sz3.20m size 4194304 crc 763409b4 sha1 af60a5116c1ca9050366a35ea29128921867f3cc )
+	rom ( name sz3.01 merge sz3.01 size 131072 crc de810084 sha1 fd0b969b732921ed8b40c16fbfa30ee09c7a7cbd )
+	rom ( name sz3.02 merge sz3.02 size 131072 crc 72445dc4 sha1 14fca7596ac45ba655016eef5b6120f9f9671c23 )
+	rom ( name sz3.11m merge sz3.11m size 4194304 crc 1c89eed1 sha1 649a0b0a3eb72e2e69e9fb1ac51a58b70daa39f3 )
+	rom ( name sz3.12m merge sz3.12m size 4194304 crc f392b13a sha1 fa04ce0370144a49bd1d5acd873eef87b0dc9d15 )
+)
+
+game (
 	name sfa3b
 	description "Street Fighter Alpha 3 (Brazil 980629)"
 	year 1998
@@ -5931,6 +6074,26 @@ game (
 	rom ( name ggwa.03a size 524288 crc 116f8837 sha1 9ade6c2fae319e0111e7afd3af10096d8d88f0c5 )
 	rom ( name ggwa.04a size 524288 crc e6e3f0c4 sha1 3c28cc050f36fb070a8abf057f0972dc16bc5629 )
 	rom ( name ggwa.05a size 524288 crc 465e8ac9 sha1 da94fb64c7ea64ac9e4e847b69e2b870f716dd34 )
+	rom ( name ggw.13m merge ggw.13m size 4194304 crc 105530a4 sha1 3be06c032985ea6bd3805d73a407bf748385087b )
+	rom ( name ggw.15m merge ggw.15m size 4194304 crc 9e774ab9 sha1 adea1e844f3d9ccd5ad116ff8277f16a96e68d76 )
+	rom ( name ggw.17m merge ggw.17m size 4194304 crc 466e0ba4 sha1 9563455b95d36fafe508290659088b153539cfdf )
+	rom ( name ggw.19m merge ggw.19m size 4194304 crc 840c8dea sha1 ea04afce17f00b45d3d2cd5140d0dd7ab4bccc00 )
+	rom ( name ggw.01 merge ggw.01 size 131072 crc 4c6351d5 sha1 cef81fb7c4b8cb2ef1f8f3c27982aefbcbe38160 )
+	rom ( name ggw.11m merge ggw.11m size 4194304 crc e172acf5 sha1 d7b0963d66165f3607d887741c5e7ab952bcf2ff )
+	rom ( name ggw.12m merge ggw.12m size 4194304 crc 4bee4e8f sha1 c440b5a38359ec3b8002f39690b79bf78703f5d0 )
+)
+
+game (
+	name gigawingh
+	description "Giga Wing (Hispanic 990222)"
+	year 1999
+	manufacturer "Capcom, supported by Takumi"
+	sourcefile cps2.c
+	cloneof gigawing
+	romof gigawing
+	rom ( name ggwh.03a size 524288 crc b9ee36eb sha1 7b977dcd27c1ed8f9d2ebaccf2497abeafcc6081 )
+	rom ( name ggwh.04a size 524288 crc 72e548fe sha1 67d4870d6f7df4b947f1ac6f6605a2344bfc04c1 )
+	rom ( name ggw.05 merge ggw.05 size 524288 crc 3239d642 sha1 2fe3984c46a72aedb30a28e3db5af2612bdf0045 )
 	rom ( name ggw.13m merge ggw.13m size 4194304 crc 105530a4 sha1 3be06c032985ea6bd3805d73a407bf748385087b )
 	rom ( name ggw.15m merge ggw.15m size 4194304 crc 9e774ab9 sha1 adea1e844f3d9ccd5ad116ff8277f16a96e68d76 )
 	rom ( name ggw.17m merge ggw.17m size 4194304 crc 466e0ba4 sha1 9563455b95d36fafe508290659088b153539cfdf )
@@ -6440,7 +6603,7 @@ game (
 	rom ( name hs2j.04 size 524288 crc 40072c4a sha1 85b95bd3c907b4276a31777e092b8c40d3763257 )
 	rom ( name hs2.05 merge hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
 	rom ( name hs2.06 merge hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
-	rom ( name hs2j.07 size 524288 crc 09fe85b4 sha1 b15b3ae28a6a395d26580dc8f4b506507792df38 flags baddump )
+	rom ( name hs2.07 merge hs2.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
 	rom ( name hs2.08 merge hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
 	rom ( name hs2.09 merge hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
 	rom ( name hs2.10 merge hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )

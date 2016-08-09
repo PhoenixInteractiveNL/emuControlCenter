@@ -138,6 +138,18 @@ class FileIO {
 		$zip->extractTo($destinationFolder, $zipEntry);
 		$zip->close();
 	}
+
+	public function extractZipAll($zipFile, $zipEntry, $destinationFolder = false){
+		
+		# if destination not set, extract to zip file folder
+		if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
+		else $destinationFolder = realpath($destinationFolder);
+		
+		$zip = new ZipArchive();
+		$zip->open($zipFile);
+		$zip->extractTo($destinationFolder);
+		$zip->close();
+	}
 	
 	public function extractSzip($zipFile, $zipEntry, $outputFolder = false){
 		
@@ -148,6 +160,17 @@ class FileIO {
 		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
 		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
 		$manager7zip->extract($zipFile, $zipEntry, $outputFolder);
+	}
+
+	public function extractSzipAll($zipFile, $zipEntry, $outputFolder = false){
+		
+		# if destination not set, extract to zip file folder
+		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
+		else $outputFolder = realpath($outputFolder);
+		
+		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		$manager7zip->extractAll($zipFile, $zipEntry, $outputFolder);
 	}
 	
 	public function fclose_zip($fhdl, $path) {

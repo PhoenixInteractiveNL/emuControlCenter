@@ -1,0 +1,51 @@
+; ------------------------------------------------------------------------------
+; Platform               : Enterprise 64/128
+; Script for             : EP128Emu
+; Script version         : v1.0.0.1
+; Last changed           : 2010.06.26
+;
+;
+; Author: Vicman
+;
+; NOTES:
+; For this script you need to use the "EP_128k_Tape_FileIO_TASMON.cfg" as config.file in the emulator EP128Emu.
+; Go in the Emulator to : File / Configuration / Load from ASCII File / EP_128k_Tape_FileIO_TASMON.cfg
+; (or : Press ALT+Q / and select the cfg)
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+    EmuWindowControl("ep128emu")
+	AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(3000)
+	Send("{ENTER}")
+	Sleep(2000)
+	Send("{ALT down}")
+	Send("{f}")
+	Send("{ALT up}")
+	Sleep(200)
+	Send("{TAB}")
+	Sleep(300)
+    AutoItSetOption("SendKeyDownDelay", 1)
+	Send($eccFileRomPath)
+    Send("{ENTER}")
+    AutoItSetOption("SendKeyDownDelay", 100)
+	Send("{F1}")
+    Sleep(300)
+	AutoItSetOption("SendKeyDownDelay", 1)
+	Send($eccFileRomFile)
+    Send("{ENTER}")
+ ; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit
+
+

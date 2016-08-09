@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Μπορείτε να εισάγετε το τελευταίο online datfile για %s από τη διαδικτυακή ROM βάση εδώ.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Εισαγωγή datfile",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

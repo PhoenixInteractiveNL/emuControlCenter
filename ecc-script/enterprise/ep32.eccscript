@@ -1,0 +1,36 @@
+; ------------------------------------------------------------------------------
+; Platform               : Enterprise 64/128
+; Script for             : EP32-120
+; Script version         : v1.0.0.0
+; Last changed           : YYYY.MM.DD
+;
+;
+; Author: Vicman
+;
+; NOTES:
+; For this script you need to use the "EP_128k_Tape_FileIO_TASMON.cfg" as config.file in the emulator EP128Emu.
+; Go in the Emulator to : File / Configuration / Load from ASCII File / EP_128k_Tape_FileIO_TASMON.cfg
+; (or : Press ALT+Q / and select the cfg)
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+EmuWindowControl("ep32")
+    ;Sleep(35000)
+	;AutoItSetOption("SendKeyDownDelay", 100)
+	;Send("{ENTER}")
+	
+	
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

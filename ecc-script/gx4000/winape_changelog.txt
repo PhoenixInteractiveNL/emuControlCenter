@@ -1,0 +1,4 @@
+v1.0.0.2
+
+- Fixed: When using plain files the timer was set to fast, so i increased 1000 to 2500.
+- Fixed: When using ZIP files the '#' wasn't taken by the autoit 'send' command.

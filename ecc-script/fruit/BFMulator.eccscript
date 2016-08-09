@@ -1,0 +1,41 @@
+; ------------------------------------------------------------------------------
+; Platform               : Fruit-Machines
+; Script for             : BFMulator
+; Script version         : v1.0.0.0
+; Last changed           : 2010.02.18
+;
+;
+; Author: te_lanus(eCC forum member)
+;
+; NOTES:Please leave roms zipped
+;	Works with V2.02
+;
+;
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+Opt("WinTitleMatchMode", 1)
+EmuWindowControl("BFMulator V2.02")
+Sleep(1000)
+Send("{ALT}")
+Send("{ENTER 2}")
+Send($eccFileRomPath & $eccFileRomFile)
+Send("{ENTER 2}")
+Sleep(2000)
+Send("{ENTER}")
+
+
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

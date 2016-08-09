@@ -63,7 +63,7 @@ $i18n['dropdown_meta_region'] = array(
 	'[[Hispanic]]' =>
 		"Hispano",
 	'[[Japan]]' =>
-		"Japn",
+		"Japón",
 	'[[USA]]' =>
 		"U.S.A.",
 	'[[World]]' =>
@@ -83,9 +83,9 @@ $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"No",
+		"1P Only",
 	'[[01]]' =>
-		"1",
+		"2P Only",
 	'[[02]]' =>
 		"2",
 	'[[03]]' =>

@@ -28,7 +28,7 @@ game (
 	rom ( name te1rom2l.ic4 size 2097152 crc 41d77846 sha1 eeab049135c02a255899fe37e225c1111b2fbb7d )
 	rom ( name te1rom2u.ic7 size 2097152 crc a678987e sha1 c62c00ce5cf4d001723c999b2bc3dbb90283def1 )
 	rom ( name te1sprog.6d size 262144 crc 849587e9 sha1 94c6a757b24758a866a41bd8acd46aa46844f74b )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name te1wave.8k size 2097152 crc fce6c57a sha1 7fb8c69452c92c59a940a2b69d0d73ef7aefcb82 )
 )
 
@@ -51,7 +51,7 @@ game (
 	rom ( name te1rom2l.ic4 merge te1rom2l.ic4 size 2097152 crc 41d77846 sha1 eeab049135c02a255899fe37e225c1111b2fbb7d )
 	rom ( name te1rom2u.ic7 merge te1rom2u.ic7 size 2097152 crc a678987e sha1 c62c00ce5cf4d001723c999b2bc3dbb90283def1 )
 	rom ( name te1sprog.6d merge te1sprog.6d size 262144 crc 849587e9 sha1 94c6a757b24758a866a41bd8acd46aa46844f74b )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name te1wave.8k merge te1wave.8k size 2097152 crc fce6c57a sha1 7fb8c69452c92c59a940a2b69d0d73ef7aefcb82 )
 )
 
@@ -74,7 +74,7 @@ game (
 	rom ( name te1rom2l.ic4 merge te1rom2l.ic4 size 2097152 crc 41d77846 sha1 eeab049135c02a255899fe37e225c1111b2fbb7d )
 	rom ( name te1rom2u.ic7 merge te1rom2u.ic7 size 2097152 crc a678987e sha1 c62c00ce5cf4d001723c999b2bc3dbb90283def1 )
 	rom ( name te1sprog.6d merge te1sprog.6d size 262144 crc 849587e9 sha1 94c6a757b24758a866a41bd8acd46aa46844f74b )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name te1wave.8k merge te1wave.8k size 2097152 crc fce6c57a sha1 7fb8c69452c92c59a940a2b69d0d73ef7aefcb82 )
 )
 
@@ -97,7 +97,7 @@ game (
 	rom ( name te1rom2l.ic4 merge te1rom2l.ic4 size 2097152 crc 41d77846 sha1 eeab049135c02a255899fe37e225c1111b2fbb7d )
 	rom ( name te1rom2u.ic7 merge te1rom2u.ic7 size 2097152 crc a678987e sha1 c62c00ce5cf4d001723c999b2bc3dbb90283def1 )
 	rom ( name te1sprog.6d merge te1sprog.6d size 262144 crc 849587e9 sha1 94c6a757b24758a866a41bd8acd46aa46844f74b )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name te1wave.8k merge te1wave.8k size 2097152 crc fce6c57a sha1 7fb8c69452c92c59a940a2b69d0d73ef7aefcb82 )
 )
 
@@ -120,7 +120,7 @@ game (
 	rom ( name tes1rom3l.ic9 size 2097152 crc d5ac0f18 sha1 342d063f7974bd1f90b5ca4832dfa4fbc9605453 )
 	rom ( name tes1rom3u.ic1 size 2097152 crc 44ed509d sha1 27e26aaf5ce72ab686f3f05743b1d91b5334b4e0 )
 	rom ( name tes1sprog.6d size 262144 crc af18759f sha1 aabd7d1384925781d37f860605a5d4622e0fc2e4 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name tes1wave.8k size 4194304 crc 34a34eab sha1 8e83a579abdcd419dc5cff8aa4c1d7e6c3add773 )
 )
 
@@ -145,7 +145,7 @@ game (
 	rom ( name tes1rom3l.ic9 merge tes1rom3l.ic9 size 2097152 crc d5ac0f18 sha1 342d063f7974bd1f90b5ca4832dfa4fbc9605453 )
 	rom ( name tes1rom3u.ic1 merge tes1rom3u.ic1 size 2097152 crc 44ed509d sha1 27e26aaf5ce72ab686f3f05743b1d91b5334b4e0 )
 	rom ( name tes1sprog.6d merge tes1sprog.6d size 262144 crc af18759f sha1 aabd7d1384925781d37f860605a5d4622e0fc2e4 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name tes1wave.8k merge tes1wave.8k size 4194304 crc 34a34eab sha1 8e83a579abdcd419dc5cff8aa4c1d7e6c3add773 )
 )
 
@@ -170,7 +170,7 @@ game (
 	rom ( name tes1rom3l.ic9 merge tes1rom3l.ic9 size 2097152 crc d5ac0f18 sha1 342d063f7974bd1f90b5ca4832dfa4fbc9605453 )
 	rom ( name tes1rom3u.ic1 merge tes1rom3u.ic1 size 2097152 crc 44ed509d sha1 27e26aaf5ce72ab686f3f05743b1d91b5334b4e0 )
 	rom ( name tes1sprog.6d merge tes1sprog.6d size 262144 crc af18759f sha1 aabd7d1384925781d37f860605a5d4622e0fc2e4 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name tes1wave.8k merge tes1wave.8k size 4194304 crc 34a34eab sha1 8e83a579abdcd419dc5cff8aa4c1d7e6c3add773 )
 )
 
@@ -195,7 +195,7 @@ game (
 	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
 	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
 	rom ( name so1sprog.6d size 262144 crc f6f682b7 sha1 a64e19be3f6e630b8c34f34b46b95aadfabd3f63 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
 )
 
@@ -220,7 +220,7 @@ game (
 	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
 	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
 	rom ( name so1sprog.6d size 262144 crc f6f682b7 sha1 a64e19be3f6e630b8c34f34b46b95aadfabd3f63 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
 )
 
@@ -237,7 +237,7 @@ game (
 	rom ( name pg1rom1u.ic3 size 4194304 crc 1ee41152 sha1 d240e6ba820aa2aa4f12380c255f624f91aed564 )
 	rom ( name pg1rom1l.ic8 size 4194304 crc 59b5a71c sha1 ddc1f0a5488466166c21fd0c84ab2b4cf04316bf )
 	rom ( name pg1sprog.6d size 262144 crc e7c3396d sha1 12bbb8ebcaab1b40462a12917dd9b58bd9ab8663 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name pg1wave.8k size 4194304 crc fc9ad9eb sha1 ce5bb2288ed8cf1348825c39423cbb99d9324b9c )
 )
 
@@ -258,7 +258,7 @@ game (
 	rom ( name xv31rom2l.ic4 size 2097152 crc 8403a277 sha1 35193211351494a086d8422e3b0b71a8d3a262a6 )
 	rom ( name xv31rom2u.ic7 size 2097152 crc ecf70432 sha1 bec128a215e0aef66e9a8707bb0d1eb7b098a356 )
 	rom ( name xv31sprog.6d size 262144 crc e50b856a sha1 631da4f60c9ce08387fca26a70481a2fdacf9765 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name xv31wave.8k size 4194304 crc 14f25ddd sha1 4981cf1017432ff85b768ec88c36f535df30b783 )
 )
 
@@ -281,7 +281,7 @@ game (
 	rom ( name so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
 	rom ( name so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
 	rom ( name so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
 )
 
@@ -306,7 +306,7 @@ game (
 	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
 	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
 	rom ( name so1sprogc.6d merge so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
 )
 
@@ -325,7 +325,7 @@ game (
 	rom ( name dm1rom1l.ic3 size 4194304 crc 20dd3294 sha1 b2fd5075b6281ac7bfc2681fc282f9ebaa089af5 )
 	rom ( name dm1rom1u.ic8 size 4194304 crc 01e905d3 sha1 430b2ae0c67265b6acc8aa4dd50f6144929993f8 )
 	rom ( name dm1sprog.6d size 262144 crc de1cbc78 sha1 855ebece1841f50ae324d7d6b8b18ab6f657d28e )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name dm1wave.8k size 4194304 crc 4891d53e sha1 a1fee060e94d3219174b5974517f4fd3be32aaa5 )
 )
 
@@ -346,7 +346,7 @@ game (
 	rom ( name dm1rom1l.ic3 merge dm1rom1l.ic3 size 4194304 crc 20dd3294 sha1 b2fd5075b6281ac7bfc2681fc282f9ebaa089af5 )
 	rom ( name dm1rom1u.ic8 merge dm1rom1u.ic8 size 4194304 crc 01e905d3 sha1 430b2ae0c67265b6acc8aa4dd50f6144929993f8 )
 	rom ( name dm1sprog.6d merge dm1sprog.6d size 262144 crc de1cbc78 sha1 855ebece1841f50ae324d7d6b8b18ab6f657d28e )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin merge c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name dm1wave.8k merge dm1wave.8k size 4194304 crc 4891d53e sha1 a1fee060e94d3219174b5974517f4fd3be32aaa5 )
 )
 
@@ -369,7 +369,7 @@ game (
 	rom ( name dc1rom3l.ic1 size 2097152 crc a76bcd4c sha1 817abdc43158b7aaac329c3ea17782277acb36a4 )
 	rom ( name dc1rom3u.ic9 size 2097152 crc 1405d123 sha1 3d7be5558358740f5a0a3a3022543cf5aca4cf24 )
 	rom ( name dc1sprog.6d size 262144 crc 96cd7788 sha1 68a5a53a5fc50e2b6b684c99d27d81e3a8c56287 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name dc1wave.8k size 4194304 crc 8ba0f6a7 sha1 e9868debd808e92b196d1baeeeae9c4855356a01 )
 )
 
@@ -384,7 +384,7 @@ game (
 	rom ( name pkr1rom0l.ic5 size 2097152 crc 6c9b074c sha1 885f342bd178e4146e1f75259206f6625c0b3c18 )
 	rom ( name pkr1rom0u.ic6 size 2097152 crc a55c0906 sha1 3b6abfa877f88a4d96222d98af02498b0c777af6 )
 	rom ( name pkr1verb.6d size 262144 crc 9bf08992 sha1 fca7943f7bcf0ee758fa63fbdef8f7456b9e46cb )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name pkr1wave.8k size 4194304 crc 72517c46 sha1 d0dcc750fe8eca9e965e7c366ac39a42ffd76557 )
 )
 
@@ -397,7 +397,7 @@ game (
 	rom ( name stp1vera.1j size 2097152 crc ef83e126 sha1 f721b43358cedad0f28af5d2b292b44043fd47a0 )
 	rom ( name stp1vera.1l size 2097152 crc 0ee7fe1e sha1 8c2f5b0e7b49dbe0e8105bf55c493acd46a4f59d )
 	rom ( name stp1sprog.7e size 262144 crc 08aaaf6a sha1 51c913a39ff7c154aef8bb10139cc8b92eb4756a )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name stp1wave.8k size 4194304 crc 18f30e92 sha1 b3819455856298527a7224495f541145aecf23dd )
 )
 
@@ -414,7 +414,7 @@ game (
 	rom ( name kqt1prg1l.ic3 size 8388608 crc 298d8eeb sha1 c421b1bdd5fd46c026a41e2cec47cafd1a69d33d )
 	rom ( name kqt1prg1u.ic6 size 8388608 crc 911783db sha1 1005fc9b38e212844e397150a6f98f43ad88d4b9 )
 	rom ( name kqt1sprog.7e size 262144 crc bb1888a6 sha1 4db07738079725413cdba7eb75252ee71ae50a66 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name kqt1wave.8k size 4194304 crc 92ca8e4f sha1 48d6bdfcc5de1c280afa36c3f0dd6d4177771355 )
 )
 
@@ -431,7 +431,7 @@ game (
 	rom ( name gnb1prg0l.ic2 size 8388608 crc 78746037 sha1 d130ca1153a730e3c967945248f00662f9fab304 )
 	rom ( name gnb1prg0u.ic5 size 8388608 crc 697d3279 sha1 40302780f7494d9413888b2d1da38bd14a9a444f )
 	rom ( name gnb1vera.6d size 262144 crc 6461ae77 sha1 1377b716a69ef9d4d2e48083d23f22bd5c103c00 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name c76.bin size 16384 crc 399faac7 sha1 ceb184ef0486caf715dd997101999785f67a40b8 )
 	rom ( name gnb1wave.8k size 4194304 crc 4e19d9d6 sha1 0a92c987536999a789663a30c787950ab6995128 )
 )
 
@@ -657,6 +657,25 @@ game (
 )
 
 game (
+	name soulclbrb
+	description "Soul Calibur (SOC14/VER.B)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	cloneof soulclbr
+	romof soulclbr
+	rom ( name soc14verb.2l size 2097152 crc 6af5c5f6 sha1 51d1e7d78d95cfc765cd219ed07b405cd920044b )
+	rom ( name soc14verb.2p size 2097152 crc 23e7a4c4 sha1 a97f36cafdeff9e26fbd24e54ab8ac8080763761 )
+	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
 	name soulclbrj
 	description "Soul Calibur (Japan, SOC11/VER.C)"
 	year 1998
@@ -676,7 +695,7 @@ game (
 )
 
 game (
-	name soulclbrb
+	name soulclbrb2
 	description "Soul Calibur (SOC13/VER.B)"
 	year 1998
 	manufacturer "Namco"

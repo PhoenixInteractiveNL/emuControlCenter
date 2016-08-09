@@ -1,0 +1,17 @@
+line 1 column 1 - Error: <plugins> is not recognized!
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 1 column 1 - Warning: discarding unexpected <plugins>
+line 1 column 10 - Error: <pluginnames> is not recognized!
+line 1 column 10 - Warning: discarding unexpected <pluginnames>
+line 1 column 23 - Error: <pluginname> is not recognized!
+line 1 column 23 - Warning: discarding unexpected <pluginname>
+line 1 column 116 - Error: <pluginname> is not recognized!
+line 1 column 116 - Warning: discarding unexpected <pluginname>
+line 1 column 206 - Error: <pluginname> is not recognized!
+line 1 column 206 - Warning: discarding unexpected <pluginname>
+line 1 column 318 - Error: <pluginname> is not recognized!
+1254 warnings, 733 errors were found! Not all warnings/errors were shown.
+
+This document has errors that must be fixed before
+using HTML Tidy to generate a tidied up version.
+

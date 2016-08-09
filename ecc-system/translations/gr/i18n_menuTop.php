@@ -117,13 +117,11 @@ $i18n['menuTop'] = array(
 
 	/* TOOLS */
 	'mTopTool' =>
-		"eccTools",
-	'mTopToolEccRomId' =>
-		"ECC ROMid",
+		"Tools",
 	'mTopToolEccTheme' =>
-		"ECC επιλογή θέματος",
+		"επιλογή θέματος",
 	'mTopToolEccBugreport' =>
-		"ECC αναφορά σφαλμάτων-bugs",
+		"αναφορά σφαλμάτων-bugs",
 
 	/* HELP */
 	'mTopHelp' =>
@@ -205,5 +203,9 @@ $i18n['menuTop'] = array(
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
 		'Transfer by searchresult',
+
+	/* 1.1 WIP 06 */
+	'mTopImageIPC' =>
+		'ImagePackCreator (IPC)',
 );
 ?>

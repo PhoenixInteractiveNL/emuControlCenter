@@ -83,9 +83,9 @@ $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"No",
+		"Alleen 1P",
 	'[[01]]' =>
-		"1",
+		"Alleen 2P",
 	'[[02]]' =>
 		"2",
 	'[[03]]' =>

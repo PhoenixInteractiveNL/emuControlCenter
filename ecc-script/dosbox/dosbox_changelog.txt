@@ -1,3 +1,5 @@
 v1.0.0.1
 - Added a messagebox when a START file is not configured (user canceled)
   and the script wil end.
+v1.0.0.3
+- Fixed a problem when there is an IMG file found while the game needs to be started with a .EXE/.COM file.

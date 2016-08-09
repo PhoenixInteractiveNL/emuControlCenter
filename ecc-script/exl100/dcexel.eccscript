@@ -1,0 +1,155 @@
+; Platform       	: exelvision
+; Script for     	: dcexel
+; Script version 	: v1.0.0.1
+; Last changed   	: 2010.02.08
+;
+;
+; Author :  te_lanus (ECC forum member) & Phoenix
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+Opt("WinTitleMatchMode", 1)
+EmuWindowControl(" DCEXEL ")
+
+; Load Image
+;
+Send("{ALT}")
+Send("{DOWN}")
+Send("{ENTER}")
+
+If Not WinActive(" DCEXEL périphériques","") Then WinActivate(" DCEXEL périphériques","")
+WinWaitActive(" DCEXEL périphériques","")
+
+If $eccFileRomFileIsPacked = "1" Then
+	$coord = WinGetPos(" DCEXEL périphériques")
+	If $eccFileRomExtension = "rom" Then
+	; Cartouche
+		MouseMove($coord[0] + 370, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send($RomFile, 1)
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	ElseIf $eccFileRomExtension = "cram" Then
+	; Exelmemoire
+		MouseMove($coord[0] + 370, $coord[1]+ 100)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send($RomFile, 1)
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	; Disque A
+	ElseIf $eccFileRomExtension = "fd" Then
+		MouseMove($coord[0] + 440, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		MouseMove($coord[0] + 370, $coord[1]+ 130)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send($RomFile, 1)
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 360 )
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	; Cassette
+	ElseIf $eccFileRomExtension = "k7" Then
+		MouseMove($coord[0] + 440, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		MouseMove($coord[0] + 370, $coord[1]+ 250)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send($RomFile, 1)
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 400 )
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	EndIf
+Else
+	$coord = WinGetPos(" DCEXEL périphériques")
+	If $eccFileRomExtension = "rom" Then
+	; Cartouche
+		MouseMove($coord[0] + 370, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	ElseIf $eccFileRomExtension = "cram" Then
+	; Exelmemoire
+		MouseMove($coord[0] + 370, $coord[1]+ 100)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	; Disque A
+	ElseIf $eccFileRomExtension = "fd" Then
+		MouseMove($coord[0] + 440, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		MouseMove($coord[0] + 370, $coord[1]+ 130)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 360 )
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	; Cassette
+	ElseIf $eccFileRomExtension = "k7" Then
+		MouseMove($coord[0] + 440, $coord[1]+ 70)
+		MouseClick ( "primary" )
+		MouseMove($coord[0] + 370, $coord[1]+ 250)
+		MouseClick ( "primary" )
+		Send("{ENTER}")
+		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+		Send("{ENTER}")
+		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 400 )
+		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
+		Send("{ALT}")
+		Send("{DOWN 8}")
+		Send("{ENTER}")
+
+	EndIf
+EndIf
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

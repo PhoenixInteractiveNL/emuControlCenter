@@ -81,5 +81,8 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbGetDatfileButton' =>
 		"Импорт базы!",
 
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",	
 );
 ?>

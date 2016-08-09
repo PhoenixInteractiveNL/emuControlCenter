@@ -2,8 +2,8 @@ clrmamepro (
    name model1
    description "Model 1 20090915"
    category "Sega Model 1"
-   version 20090915
-   date 2009-09-15
+   version 20100518
+   date 2010-05-18
    author Logiqx
    homepage "Logiqx Home Page"
    url "http://www.logiqx.com/"
@@ -103,12 +103,12 @@ game (
 	rom ( name opr14746.bin merge opr14746.bin size 131072 crc 2a266cbd sha1 34e047a93459406c22acf4c25089d1a4955f94ca )
 	rom ( name opr14747.bin merge opr14747.bin size 131072 crc a4ad5e19 sha1 7d7ec300eeb9a8de1590011e37108688c092f329 )
 	rom ( name opr14748.bin merge opr14748.bin size 131072 crc 4a532cb8 sha1 23280ebbcd6b2bc8a8e643a2d07a58d6598301b8 )
-	rom ( name epr15638.14 size 524288 crc b9db21a2 sha1 db58c047977f5fc37f278afe7159a78e3fa6c015 )
-	rom ( name epr15639.15 size 524288 crc 4c3796f5 sha1 1bf312a4999a15fbc5d194627f9c0ad9dbc1f2c0 )
-	rom ( name epr15623.4 size 131072 crc 155fa5be sha1 a0a3fd8980c52279adbc1c64aa22e42a0b196dd9 )
-	rom ( name epr15622.5 size 131072 crc 18007f6f sha1 61573742627ec027abd2cc700e79f04da5215bfd )
-	rom ( name epr15641.6 size 524288 crc bf01e4d5 sha1 53ad9ecd2de2ea1d7b446f9db61352e10a55ea05 )
-	rom ( name epr15640.7 size 524288 crc 3e6d83dc sha1 62aa552a38ee193e0dfab5d1261756fe237db42c )
+	rom ( name epr-15638.14 size 524288 crc b9db21a2 sha1 db58c047977f5fc37f278afe7159a78e3fa6c015 )
+	rom ( name epr-15639.15 size 524288 crc 4c3796f5 sha1 1bf312a4999a15fbc5d194627f9c0ad9dbc1f2c0 )
+	rom ( name epr-15623.4 size 131072 crc 155fa5be sha1 a0a3fd8980c52279adbc1c64aa22e42a0b196dd9 )
+	rom ( name epr-15622.5 size 131072 crc 18007f6f sha1 61573742627ec027abd2cc700e79f04da5215bfd )
+	rom ( name epr-15641.6 size 524288 crc bf01e4d5 sha1 53ad9ecd2de2ea1d7b446f9db61352e10a55ea05 )
+	rom ( name epr-15640.7 size 524288 crc 3e6d83dc sha1 62aa552a38ee193e0dfab5d1261756fe237db42c )
 	rom ( name mpr-14884.8 merge mpr-14884.8 size 524288 crc 6cf9c026 sha1 f4d717958dba6b6402f5ffe7638fe0bf353b61ed )
 	rom ( name mpr-14885.9 merge mpr-14885.9 size 524288 crc f65c9262 sha1 511a22bcfaf199737bfc5a809fd66cb4439dd386 )
 	rom ( name mpr-14886.10 merge mpr-14886.10 size 524288 crc 92868734 sha1 e1dfb134dc3ba7e0b1d40681621e09ac5a222518 )
@@ -130,7 +130,7 @@ game (
 	rom ( name mpr-14899.40 merge mpr-14899.40 size 524288 crc 2cd58bee sha1 73defec823de4244a387af55fea7210edc1b314f )
 	rom ( name mpr-14900.41 merge mpr-14900.41 size 524288 crc aa7c017d sha1 0fa2b59a8bb5f5907b2b2567e69d11c73b398dc1 )
 	rom ( name mpr-14901.42 merge mpr-14901.42 size 524288 crc 175b7a9a sha1 c86602e771cd49bab425b4ba7926d2f44858bd39 )
-	rom ( name epr15624.17 size 131072 crc 9b3ba315 sha1 0cd0983cc8b2f2d6b41617d0d0a24cc6c188e62a )
+	rom ( name epr-15624.17 size 131072 crc 9b3ba315 sha1 0cd0983cc8b2f2d6b41617d0d0a24cc6c188e62a )
 	rom ( name vr-tgp.bin merge vr-tgp.bin size 8192 crc 3de33c7f sha1 acecc779c9d8fe39ded6c22492be5b7c25fd52db flags baddump )
 )
 
@@ -143,14 +143,14 @@ game (
 	rom ( name epr-16468.14 size 524288 crc 681d03c0 sha1 4d21e26ce211466d429b84bca69a8147ff31ec6c )
 	rom ( name epr-16469.15 size 524288 crc 6f281f7c sha1 6a9179e48d14838bb2a1a3f63fdd3a68ed009e03 )
 	rom ( name epr-16467.5 size 524288 crc 605068f5 sha1 99d7e171ce3353477c282d7567dedb9947206f14 )
-	rom ( name epr16470.bin size 131072 crc 7da18cf7 sha1 bd432d882d217277faee120e2577357a32eb4a6e )
-	rom ( name mpr16486.bin size 2097152 crc 7df50533 sha1 f2fb876738e37d70eb9005e5629a9ae89aa413a8 )
-	rom ( name mpr16487.bin size 2097152 crc 31b28dfa sha1 bd1ac11bf2f9161f61f8af3b9ff4c2709b7ee700 )
-	rom ( name mpr16484.bin size 2097152 crc 9d4c334d sha1 8b4d903f14559fed425d225bb23ccfe8da23cbd3 )
-	rom ( name mpr16485.bin size 2097152 crc 95aadcad sha1 4276db655db9834692c3843eb96a3e3a89cb7252 )
-	rom ( name epr16471.bin size 131072 crc f4ee84a4 sha1 f12b214e6f195b0e5f49ba9f41d8e54bfcea9acc )
-	rom ( name mpr16514.bin size 2097152 crc 3175b0be sha1 63649d053c8c17ce1746d16d0cc8202be20c302f )
-	rom ( name mpr16515.bin size 2097152 crc 3114d748 sha1 9ef090623cdd2a1d06b5d1bc4b9a07ab4eff5b76 )
+	rom ( name epr-16470.bin size 131072 crc 7da18cf7 sha1 bd432d882d217277faee120e2577357a32eb4a6e )
+	rom ( name mpr-16486.bin size 2097152 crc 7df50533 sha1 f2fb876738e37d70eb9005e5629a9ae89aa413a8 )
+	rom ( name mpr-16487.bin size 2097152 crc 31b28dfa sha1 bd1ac11bf2f9161f61f8af3b9ff4c2709b7ee700 )
+	rom ( name mpr-16484.bin size 2097152 crc 9d4c334d sha1 8b4d903f14559fed425d225bb23ccfe8da23cbd3 )
+	rom ( name mpr-16485.bin size 2097152 crc 95aadcad sha1 4276db655db9834692c3843eb96a3e3a89cb7252 )
+	rom ( name epr-16471.bin size 131072 crc f4ee84a4 sha1 f12b214e6f195b0e5f49ba9f41d8e54bfcea9acc )
+	rom ( name mpr-16514.bin size 2097152 crc 3175b0be sha1 63649d053c8c17ce1746d16d0cc8202be20c302f )
+	rom ( name mpr-16515.bin size 2097152 crc 3114d748 sha1 9ef090623cdd2a1d06b5d1bc4b9a07ab4eff5b76 )
 	rom ( name mpr-16476.26 size 2097152 crc d48609ae sha1 8c8686a5c9ca4837447a7f70ed194e2f1882b66d )
 	rom ( name mpr16477.bin size 2097152 crc 971ff194 sha1 9665ede3ca22885489f1f1b5865ccfac42364206 )
 	rom ( name mpr-16478.28 size 2097152 crc 80c780f7 sha1 2f57c5373b02765d302bcd81e24f7b7bc4181387 )
@@ -165,21 +165,21 @@ game (
 
 game (
 	name wingwar
-	description "Wing War (US)"
+	description "Wing War (World)"
 	year 1994
 	manufacturer "Sega"
 	sourcefile model1.c
 	rom ( name epr-16729.14 size 524288 crc 7edec2cc sha1 3e423a868ca7c8475fbb5bc1a10526e69d94d865 )
 	rom ( name epr-16730.15 size 524288 crc bab24dee sha1 26c95139c1aa7f34b6a5cce39e5bd1dd2ef0dd49 )
-	rom ( name epr-16951.4 size 131072 crc 8df5a798 sha1 ef2756f237933ecf429dab0f362e572eb1965f4d )
-	rom ( name epr-16950.5 size 131072 crc 841e2195 sha1 66f465aaf71955496e6f83335f7b836ad1d8c724 )
+	rom ( name epr16953.4 size 131072 crc c821a920 sha1 7fc9ea5d828aac664514fa6d38f708f1ffd26220 )
+	rom ( name epr16952.5 size 131072 crc 03a3ecc5 sha1 5c4aa221302b0a0800e1af99a41ab46fe4325184 )
 	rom ( name mpr-16738.6 size 524288 crc 51518ffa sha1 e4674ddfed4205957b14e133c6fdf6454872f324 )
 	rom ( name mpr-16737.7 size 524288 crc 37b1379c sha1 98620c324268e1dd906c077ac8a8cd903b9de1f7 )
 	rom ( name mpr-16736.8 size 524288 crc 10b6a025 sha1 7a4f624ceb7c0b92044a5db8ff55440562ef836b )
 	rom ( name mpr-16735.9 size 524288 crc c82fd198 sha1 d9e53ae1e14dfc8e84a14c0026ef0b904863bb1b )
 	rom ( name mpr-16734.10 size 524288 crc f76371c1 sha1 0ff082db3877383d0dd977dc60c932b725e3d164 )
 	rom ( name mpr-16733.11 size 524288 crc e105847b sha1 8489a6c91fd6d1e9ba81e8eaf36c514da30dccbe )
-	rom ( name epr-16751.7 size 131072 crc 23ba5ebc sha1 b98aab546c5e980baeedbada4e7472eb4c588260 )
+	rom ( name epr-17126.7 size 131072 crc 50178e40 sha1 fb01aecfbe4e90adc997de0d45a63c16ef353b37 )
 	rom ( name epr-16752.8 size 131072 crc 6541c48f sha1 9341eff160e31a8574b9545fafc1c4059323fa0c )
 	rom ( name mpr-16753.32 size 2097152 crc 324a8333 sha1 960342e08db637c6f72615d49cffd9fb0889620b )
 	rom ( name mpr-16754.33 size 2097152 crc 144f3cf5 sha1 d2f8cc9086affbbc5ef2195272200230f724e5d1 )
@@ -200,8 +200,8 @@ game (
 )
 
 game (
-	name wingwara
-	description "Wing War"
+	name wingwarj
+	description "Wing War (Japan)"
 	year 1994
 	manufacturer "Sega"
 	sourcefile model1.c
@@ -209,15 +209,53 @@ game (
 	romof wingwar
 	rom ( name epr-16729.14 merge epr-16729.14 size 524288 crc 7edec2cc sha1 3e423a868ca7c8475fbb5bc1a10526e69d94d865 )
 	rom ( name epr-16730.15 merge epr-16730.15 size 524288 crc bab24dee sha1 26c95139c1aa7f34b6a5cce39e5bd1dd2ef0dd49 )
-	rom ( name epr16953.bin size 131072 crc c821a920 sha1 7fc9ea5d828aac664514fa6d38f708f1ffd26220 )
-	rom ( name epr16952.bin size 131072 crc 03a3ecc5 sha1 5c4aa221302b0a0800e1af99a41ab46fe4325184 )
+	rom ( name epr-16728.4 size 131072 crc 194d58ff sha1 281201cbb9bb148a06fe88edeccf680f837dcc10 )
+	rom ( name epr-16727.5 size 131072 crc 430380eb sha1 25bd81a69a9b4cdc644f912283b65b3eab988327 )
 	rom ( name mpr-16738.6 merge mpr-16738.6 size 524288 crc 51518ffa sha1 e4674ddfed4205957b14e133c6fdf6454872f324 )
 	rom ( name mpr-16737.7 merge mpr-16737.7 size 524288 crc 37b1379c sha1 98620c324268e1dd906c077ac8a8cd903b9de1f7 )
 	rom ( name mpr-16736.8 merge mpr-16736.8 size 524288 crc 10b6a025 sha1 7a4f624ceb7c0b92044a5db8ff55440562ef836b )
 	rom ( name mpr-16735.9 merge mpr-16735.9 size 524288 crc c82fd198 sha1 d9e53ae1e14dfc8e84a14c0026ef0b904863bb1b )
 	rom ( name mpr-16734.10 merge mpr-16734.10 size 524288 crc f76371c1 sha1 0ff082db3877383d0dd977dc60c932b725e3d164 )
 	rom ( name mpr-16733.11 merge mpr-16733.11 size 524288 crc e105847b sha1 8489a6c91fd6d1e9ba81e8eaf36c514da30dccbe )
-	rom ( name epr17126.bin size 131072 crc 50178e40 sha1 fb01aecfbe4e90adc997de0d45a63c16ef353b37 )
+	rom ( name epr-16751.7 size 131072 crc 23ba5ebc sha1 b98aab546c5e980baeedbada4e7472eb4c588260 )
+	rom ( name epr-16752.8 merge epr-16752.8 size 131072 crc 6541c48f sha1 9341eff160e31a8574b9545fafc1c4059323fa0c )
+	rom ( name mpr-16753.32 merge mpr-16753.32 size 2097152 crc 324a8333 sha1 960342e08db637c6f72615d49cffd9fb0889620b )
+	rom ( name mpr-16754.33 merge mpr-16754.33 size 2097152 crc 144f3cf5 sha1 d2f8cc9086affbbc5ef2195272200230f724e5d1 )
+	rom ( name mpr-16755.4 merge mpr-16755.4 size 2097152 crc 4baaf878 sha1 661d4ea9be6a4952852d0ef94becee7ed42bf4a1 )
+	rom ( name mpr-16756.5 merge mpr-16756.5 size 2097152 crc d9c40672 sha1 83e6f1156b30888d3a00103f079dc74f4fca8446 )
+	rom ( name mpr-16743.26 merge mpr-16743.26 size 2097152 crc a710d33c sha1 1d0184545b34789ed511caaa25d57db3cd9a8e2f )
+	rom ( name mpr-16744.27 merge mpr-16744.27 size 2097152 crc de796e1f sha1 397efb86a21b178770f29d2464bacf5f893619a0 )
+	rom ( name mpr-16745.28 merge mpr-16745.28 size 2097152 crc 905b689c sha1 685dec2a65d5b3a386bda0af1bb5ae7e2b73a01a )
+	rom ( name mpr-16746.29 merge mpr-16746.29 size 2097152 crc 163b312e sha1 6b45007d6a9d17c8a0b46d81ec84ce9bfefb1695 )
+	rom ( name mpr-16747.30 merge mpr-16747.30 size 2097152 crc 7353bb12 sha1 608c5d561e909b8ba31d53db18e6e199855eaaec )
+	rom ( name mpr-16748.31 merge mpr-16748.31 size 2097152 crc 8ce98d3a sha1 1978776a0e2ea817508e30ba232d5f8d9c158f70 )
+	rom ( name mpr-16749.32 merge mpr-16749.32 size 2097152 crc 0e36dc1a sha1 4939177a6ac51ca57d0acd118ff14af4f4e438bb )
+	rom ( name mpr-16750.33 merge mpr-16750.33 size 2097152 crc e4f0b98d sha1 e69de2e5ccea2834fb8326bdd61fc6b517bc60b7 )
+	rom ( name mpr-16741.39 merge mpr-16741.39 size 524288 crc 84b2ffd8 sha1 0eba3855d20b88567c6fa08046e12429664d87cb )
+	rom ( name mpr-16742.40 merge mpr-16742.40 size 524288 crc e9cc12bb sha1 40c83c968be3b11fad193a00e7b760f074450683 )
+	rom ( name mpr-16739.41 merge mpr-16739.41 size 524288 crc 6c73e98f sha1 7b31e62922ab6d0df97c3ecc52b78e6d086c8635 )
+	rom ( name mpr-16740.42 merge mpr-16740.42 size 524288 crc 44b31007 sha1 4bb265fea25a7bbcbb8ab080fdcf09849b18f1de )
+)
+
+game (
+	name wingwaru
+	description "Wing War (US)"
+	year 1994
+	manufacturer "Sega"
+	sourcefile model1.c
+	cloneof wingwar
+	romof wingwar
+	rom ( name epr-16729.14 merge epr-16729.14 size 524288 crc 7edec2cc sha1 3e423a868ca7c8475fbb5bc1a10526e69d94d865 )
+	rom ( name epr-16730.15 merge epr-16730.15 size 524288 crc bab24dee sha1 26c95139c1aa7f34b6a5cce39e5bd1dd2ef0dd49 )
+	rom ( name epr-16951.4 size 131072 crc 8df5a798 sha1 ef2756f237933ecf429dab0f362e572eb1965f4d )
+	rom ( name epr-16950.5 size 131072 crc 841e2195 sha1 66f465aaf71955496e6f83335f7b836ad1d8c724 )
+	rom ( name mpr-16738.6 merge mpr-16738.6 size 524288 crc 51518ffa sha1 e4674ddfed4205957b14e133c6fdf6454872f324 )
+	rom ( name mpr-16737.7 merge mpr-16737.7 size 524288 crc 37b1379c sha1 98620c324268e1dd906c077ac8a8cd903b9de1f7 )
+	rom ( name mpr-16736.8 merge mpr-16736.8 size 524288 crc 10b6a025 sha1 7a4f624ceb7c0b92044a5db8ff55440562ef836b )
+	rom ( name mpr-16735.9 merge mpr-16735.9 size 524288 crc c82fd198 sha1 d9e53ae1e14dfc8e84a14c0026ef0b904863bb1b )
+	rom ( name mpr-16734.10 merge mpr-16734.10 size 524288 crc f76371c1 sha1 0ff082db3877383d0dd977dc60c932b725e3d164 )
+	rom ( name mpr-16733.11 merge mpr-16733.11 size 524288 crc e105847b sha1 8489a6c91fd6d1e9ba81e8eaf36c514da30dccbe )
+	rom ( name epr-16751.7 size 131072 crc 23ba5ebc sha1 b98aab546c5e980baeedbada4e7472eb4c588260 )
 	rom ( name epr-16752.8 merge epr-16752.8 size 131072 crc 6541c48f sha1 9341eff160e31a8574b9545fafc1c4059323fa0c )
 	rom ( name mpr-16753.32 merge mpr-16753.32 size 2097152 crc 324a8333 sha1 960342e08db637c6f72615d49cffd9fb0889620b )
 	rom ( name mpr-16754.33 merge mpr-16754.33 size 2097152 crc 144f3cf5 sha1 d2f8cc9086affbbc5ef2195272200230f724e5d1 )

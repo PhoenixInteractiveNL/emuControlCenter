@@ -117,13 +117,11 @@ $i18n['menuTop'] = array(
 
 	/* TOOLS */
 	'mTopTool' =>
-		"eccTools",
-	'mTopToolEccRomId' =>
-		"ECC ROMid (identifier une ROM)",
+		"Tools",
 	'mTopToolEccTheme' =>
-		"ECC Theme Select (sélectionner un thème)",
+		"Theme Select (sélectionner un thème)",
 	'mTopToolEccBugreport' =>
-		"ECC Bugreport (envoyer le rapport d'erreur)",
+		"Bugreport (envoyer le rapport d'erreur)",
 
 	/* HELP */
 	'mTopHelp' =>
@@ -205,5 +203,9 @@ $i18n['menuTop'] = array(
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
 		'Transférer par résultats de la recherche',
+
+	/* 1.1 WIP 06 */
+	'mTopImageIPC' =>
+		'ImagePackCreator (IPC)',
 );
 ?>

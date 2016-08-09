@@ -1,0 +1,49 @@
+; ------------------------------------------------------------------------------
+; Platform               : Exelvision
+; Script for             : exl100_wx.exe
+; Script version         : v1.0.0.0
+; Last changed           : 2010.02.09
+;
+;
+; Author: te_lanus (eCC Forum Member)
+;
+; NOTES:
+;
+;
+;
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+Opt("WinTitleMatchMode", 1)
+EmuWindowControl("wxExl100")
+If $eccFileRomFileIsPacked = "1" Then
+	Send("{ALT}")
+	Send("{DOWN}")
+	Send("{ENTER}")
+	Sleep(100)
+	Send($RomFile, 1)
+	Sleep(100)
+	Send("{ENTER}")
+Else
+	Send("{ALT}")
+	Send("{DOWN}")
+	Send("{ENTER}")
+	Sleep(100)
+	Send($eccFileRomPath & $eccFileRomFile)
+	Sleep(100)
+	Send("{ENTER}")
+EndIf
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

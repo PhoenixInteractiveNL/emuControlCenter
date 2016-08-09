@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Je kan het laatste online DAT-bestand voor %s hier van internet downloaden.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Importeer dat-bestand",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"PLAATJES",			
 );
 ?>

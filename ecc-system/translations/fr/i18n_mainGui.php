@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Vous pouvez importer le fichier de données pour %s le plus récent à partir de la romDB ici.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Importer le fichier de données",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

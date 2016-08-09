@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-1
-	description "CPS-1 20100103"
+	description "CPS-1 20100518"
 	category "Capcom Play System 1"
-	version 20100103
-	date 2010-01-03
+	version 20100518
+	date 2010-05-18
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -2199,6 +2199,44 @@ game (
 )
 
 game (
+	name sf2thndr
+	description "Street Fighter II - The World Warrior (Thunder Edition)"
+	year 1991
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof sf2
+	romof sf2
+	rom ( name 17_30.11e size 131072 crc d3cd6d18 sha1 c7efe9e7a7dee29bfe40a571960145efa26ac22e )
+	rom ( name 17_37.11f size 131072 crc e892716e sha1 b3836b33bc026a0bccc5ed7cdecf8d2ba2b5607a )
+	rom ( name sf2u_31b.12e size 131072 crc a673143d sha1 e565f0ec23d6deb543c72af5a83f070c07319477 )
+	rom ( name sf2u_38b.12f size 131072 crc 4c2ccef7 sha1 77b119c70c255622b023de25d9af3b3aac52ea47 )
+	rom ( name sf2u_28b.9e size 131072 crc 4009955e sha1 7842dbef7650485639fbae49b9f4db7494d4f73d )
+	rom ( name sf2u_35b.9f size 131072 crc 8c1f3994 sha1 5e1d334399d05a837c2d80f79eada543e83afaf7 )
+	rom ( name 17_29.10e size 131072 crc 8830b54d sha1 fe5e958f69d52fa12c31c1a7ccf0dcfd340045cb )
+	rom ( name 17_36.10f size 131072 crc 3f13ada3 sha1 412572f220f64e5b0ee2cad0a9204142ae2f7c90 )
+	rom ( name sf2_06.bin merge sf2_06.bin size 524288 crc 22c9cc8e sha1 b9194fb337b30502c1c9501cd6c64ae4035544d4 )
+	rom ( name sf2_08.bin merge sf2_08.bin size 524288 crc 57213be8 sha1 3759b851ac0904ec79cbb67a2264d384b6f2f9f9 )
+	rom ( name sf2_05.bin merge sf2_05.bin size 524288 crc ba529b4f sha1 520840d727161cf09ca784919fa37bc9b54cc3ce )
+	rom ( name sf2_07.bin merge sf2_07.bin size 524288 crc 4b1b33a8 sha1 2360cff890551f76775739e2d6563858bff80e41 )
+	rom ( name sf2_15.bin merge sf2_15.bin size 524288 crc 2c7e2229 sha1 357c2275af9133fd0bd6fbb1fa9ad5e0b490b3a2 )
+	rom ( name sf2_17.bin merge sf2_17.bin size 524288 crc b5548f17 sha1 baa92b91cf616bc9e2a8a66adc777ffbf962a51b )
+	rom ( name sf2_14.bin merge sf2_14.bin size 524288 crc 14b84312 sha1 2eea16673e60ba7a10bd4d8f6c217bb2441a5b0e )
+	rom ( name sf2_16.bin merge sf2_16.bin size 524288 crc 5e9cd89a sha1 f787aab98668d4c2c54fc4ba677c0cb808e4f31e )
+	rom ( name sf2_25.bin merge sf2_25.bin size 524288 crc 994bfa58 sha1 5669b845f624b10e7be56bfc89b76592258ce48b )
+	rom ( name sf2_27.bin merge sf2_27.bin size 524288 crc 3e66ad9d sha1 9af9df0826988872662753e9717c48d46f2974b0 )
+	rom ( name sf2_24.bin merge sf2_24.bin size 524288 crc c1befaa8 sha1 a6a7f4725e52678cbd8d557285c01cdccb2c2602 )
+	rom ( name sf2_26.bin merge sf2_26.bin size 524288 crc 0627c831 sha1 f9a92d614e8877d648449de2612fc8b43c85e4c2 )
+	rom ( name sf2_09.bin merge sf2_09.bin size 65536 crc a4823a1b sha1 7b6bf59dfd578bfbbdb64c27988796783442d659 )
+	rom ( name sf2_18.bin merge sf2_18.bin size 131072 crc 7f162009 sha1 346bf42992b4c36c593e21901e22c87ae4a7d86d )
+	rom ( name sf2_19.bin merge sf2_19.bin size 131072 crc beade53f sha1 277c397dc12752719ec6b47d2224750bd1c07f79 )
+	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
+	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
+	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
+	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
+	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
 	name 3wonders
 	description "Three Wonders (World 910520)"
 	year 1991
@@ -2602,19 +2640,19 @@ game (
 	year 1991
 	manufacturer "Capcom"
 	sourcefile cps1.c
-	rom ( name kr_23e.rom size 524288 crc 1b3997eb sha1 724b68eff319fcdf0dd3bc1eb6662996c1f6ecd9 )
-	rom ( name kr_22.rom size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
-	rom ( name kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
-	rom ( name kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
-	rom ( name kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
-	rom ( name kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
-	rom ( name kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
-	rom ( name kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
-	rom ( name kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
-	rom ( name kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
-	rom ( name kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
-	rom ( name kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
-	rom ( name kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
+	rom ( name kr-23e.8f size 524288 crc 1b3997eb sha1 724b68eff319fcdf0dd3bc1eb6662996c1f6ecd9 )
+	rom ( name kr-22.7f size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
+	rom ( name kr-5m.3a size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
+	rom ( name kr-7m.4a size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
+	rom ( name kr-1m.5a size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
+	rom ( name kr-3m.6a size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
+	rom ( name kr-6m.7a size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
+	rom ( name kr-8m.8a size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
+	rom ( name kr-2m.9a size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
+	rom ( name kr-4m.10a size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
+	rom ( name kr-09.11a size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
+	rom ( name kr-18.11c size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
+	rom ( name kr-19.12c size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
 	rom ( name buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
@@ -2636,18 +2674,18 @@ game (
 	cloneof knights
 	romof knights
 	rom ( name kru23.rom size 524288 crc 252bc2ba sha1 4f4901c253bd64bbe68ea01994ae663fe2ccd056 )
-	rom ( name kr_22.rom merge kr_22.rom size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
-	rom ( name kr_gfx1.rom merge kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
-	rom ( name kr_gfx3.rom merge kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
-	rom ( name kr_gfx2.rom merge kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
-	rom ( name kr_gfx4.rom merge kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
-	rom ( name kr_gfx5.rom merge kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
-	rom ( name kr_gfx7.rom merge kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
-	rom ( name kr_gfx6.rom merge kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
-	rom ( name kr_gfx8.rom merge kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
-	rom ( name kr_09.rom merge kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
-	rom ( name kr_18.rom merge kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
-	rom ( name kr_19.rom merge kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
+	rom ( name kr_22.rom size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
+	rom ( name kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
+	rom ( name kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
+	rom ( name kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
+	rom ( name kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
+	rom ( name kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
+	rom ( name kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
+	rom ( name kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
+	rom ( name kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
+	rom ( name kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
+	rom ( name kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
+	rom ( name kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
 	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
@@ -2672,18 +2710,18 @@ game (
 	rom ( name krj37.bin size 131072 crc e694a491 sha1 5a4d27c879c10032c49880019501de3e45ab1b35 )
 	rom ( name krj31.bin size 131072 crc 85596094 sha1 74ad294de63aa6b60aa8b885c45c3d41a07ce19a )
 	rom ( name krj38.bin size 131072 crc 9198bf8f sha1 aa3610600286ab25ce81705ea1319d42e7cc7f6c )
-	rom ( name kr_22.rom merge kr_22.rom size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
-	rom ( name kr_gfx1.rom merge kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
-	rom ( name kr_gfx3.rom merge kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
-	rom ( name kr_gfx2.rom merge kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
-	rom ( name kr_gfx4.rom merge kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
-	rom ( name kr_gfx5.rom merge kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
-	rom ( name kr_gfx7.rom merge kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
-	rom ( name kr_gfx6.rom merge kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
-	rom ( name kr_gfx8.rom merge kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
-	rom ( name kr_09.rom merge kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
-	rom ( name kr_18.rom merge kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
-	rom ( name kr_19.rom merge kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
+	rom ( name kr_22.rom size 524288 crc d0b671a9 sha1 9865472c5fc3f617345e23b5de5a9ba177945b5a )
+	rom ( name kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
+	rom ( name kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
+	rom ( name kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
+	rom ( name kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
+	rom ( name kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
+	rom ( name kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
+	rom ( name kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
+	rom ( name kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
+	rom ( name kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
+	rom ( name kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
+	rom ( name kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
 	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
@@ -2703,14 +2741,14 @@ game (
 	rom ( name 5.ic172 size 262144 crc 7fd91118 sha1 d2832b21309a467938891946d7af35d8095787a4 )
 	rom ( name 2.ic175 size 262144 crc 1eb91343 sha1 e02cfbbd7689346f14f2e3455ed17e7f0b51bad0 )
 	rom ( name 4.ic176 size 262144 crc af352703 sha1 7855ac65752203f45af4ef41af8c291540a1c8a8 )
-	rom ( name kr_gfx1.rom merge kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 flags baddump )
-	rom ( name kr_gfx3.rom merge kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 flags baddump )
-	rom ( name kr_gfx2.rom merge kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 flags baddump )
-	rom ( name kr_gfx4.rom merge kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be flags baddump )
-	rom ( name kr_gfx5.rom merge kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 flags baddump )
-	rom ( name kr_gfx7.rom merge kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 flags baddump )
-	rom ( name kr_gfx6.rom merge kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e flags baddump )
-	rom ( name kr_gfx8.rom merge kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c flags baddump )
+	rom ( name kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 flags baddump )
+	rom ( name kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 flags baddump )
+	rom ( name kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 flags baddump )
+	rom ( name kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be flags baddump )
+	rom ( name kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 flags baddump )
+	rom ( name kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 flags baddump )
+	rom ( name kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e flags baddump )
+	rom ( name kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c flags baddump )
 	rom ( name 1.ic26 size 262144 crc bd6f9cc1 sha1 9f33cccef224d2204736a9eae761196866bd6e41 )
 )
 
@@ -3952,6 +3990,31 @@ game (
 )
 
 game (
+	name dinohunt
+	description "Dinosaur Hunter (Chinese bootleg of Cadillacs and Dinosaurs)"
+	year 1993
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof dino
+	romof dino
+	rom ( name u23 size 524288 crc 8d5ddc5d sha1 3ed1da71d73425308d0c3ac1a01a7242e60b6677 )
+	rom ( name u22 size 524288 crc f72cd219 sha1 a3f580bd328b54d2546ae7e94262c1a706d27172 )
+	rom ( name u21 size 524288 crc bc275b76 sha1 1f7f7533b4ccb511dc479f531d9d6740d3ca6712 )
+	rom ( name u20 size 524288 crc 8987c975 sha1 3fd856805d627f855f72acc7aacc2e8ecf0f12bd )
+	rom ( name u1 size 524288 crc a01a9fb5 sha1 d1ab4c7ead04932c60923363a0a661d0d1472aaa )
+	rom ( name u2 size 524288 crc bdf02c17 sha1 046ba4c589a22a7ac65c86baaae18eff0bff6ecb )
+	rom ( name u3 size 524288 crc 058beefa sha1 0d09ab5a200643b5a16e0313228f7ea243752bd0 )
+	rom ( name u4 size 524288 crc 5028a9f1 sha1 ff3a988153860e76beb79918ad896e702c3ecd3d )
+	rom ( name u5 size 524288 crc d77f89ea sha1 1dd8c2a18742fd8483ecade31aed384c686ed244 )
+	rom ( name u6 size 524288 crc bfbcb034 sha1 c1eb4d420b10ffa05197d9a82c7adac4d265c546 )
+	rom ( name u7 size 524288 crc a2544d4e sha1 def704055e041bc7c3b8cf7977249b69aa7924a8 )
+	rom ( name u8 size 524288 crc 8869bbb1 sha1 e53f77baffb913bf3ef5396d84fbfbaec6a90ca2 )
+	rom ( name u9 size 65536 crc 2eb16a83 sha1 067ea0bfc2c1e73520d6b836c72fbb9da9998311 )
+	rom ( name u18 size 131072 crc 8d2899ba sha1 0b3ac6cf2ce0323e3bfc9da3ebfcb0fd14bc405b )
+	rom ( name u19 size 131072 crc b34a4b42 sha1 3eeb9e33bb911359e03d44949ac58439a3d3d54b )
+)
+
+game (
 	name punisher
 	description "The Punisher (World 930422)"
 	year 1993
@@ -4108,6 +4171,31 @@ game (
 	rom ( name psb2a.rom size 524288 crc d7b13f39 sha1 eb7cd92b44fdef3b72672b0be6786c526421b627 )
 	rom ( name psb-a.rom size 2097152 crc 57f0f5e3 sha1 130b6e92181994bbe874261e0895db65d4f3d5d1 )
 	rom ( name psb-b.rom size 2097152 crc d9eb867e sha1 9b6eaa4a780da5c9cf09658fcab3a1a6f632c2f4 )
+)
+
+game (
+	name punisherbz
+	description "Biaofeng Zhanjing (Chinese bootleg of The Punisher)"
+	year 1993
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof punisher
+	romof punisher
+	rom ( name 23.096 size 524288 crc bfa45d23 sha1 56d04d02c9b9b22603205b1ce9e376874d2eaa05 )
+	rom ( name 22.096 size 524288 crc 092578a4 sha1 c3c8f98f8b8fc9c71b33fb906b4c591067b4355b )
+	rom ( name 21.096 size 524288 crc d21ccddb sha1 295c886cd14ee54e12acfe3f1e8f13513442c8c0 )
+	rom ( name 20.096 size 524288 crc f9f334ce sha1 22e58ce5096b95138a30e9726e1169895118e990 )
+	rom ( name 1.096 size 524288 crc ad468e07 sha1 1ee8ecfd001b447982bc16972575eb2c5e01bc51 )
+	rom ( name 2.096 size 524288 crc b9fdb6b5 sha1 991fe0ded5c859f1e25766e9417e1ad691205e59 )
+	rom ( name 3.096 size 524288 crc be0b1a78 sha1 d002bd90d0f239d29f5ea481e455d85a1c088516 )
+	rom ( name 4.096 size 524288 crc bba67a43 sha1 9cd51a06a7661b2f78059ac392423f73de5cf56f )
+	rom ( name ps_gfx5.rom merge ps_gfx5.rom size 524288 crc c54ea839 sha1 0733f37329edd9d0cace1319a7544b40aa7ecb0b )
+	rom ( name ps_gfx7.rom merge ps_gfx7.rom size 524288 crc 04c5acbd sha1 fddc94b0f36d4d22d7c357856ae15b7514c342d3 )
+	rom ( name ps_gfx6.rom merge ps_gfx6.rom size 524288 crc a544f4cc sha1 9552df8934ba25f19a22f2e07783712d8c8ef03c )
+	rom ( name ps_gfx8.rom merge ps_gfx8.rom size 524288 crc 8f02f436 sha1 a2f0ebb7e9593469c7b843f8962a66f3d77f79e5 )
+	rom ( name 9.512 size 65536 crc b8367eb5 sha1 ec3db29fdd6200e9a8f4f8073a7e34aef731354f )
+	rom ( name 18.010 size 131072 crc 375c66e7 sha1 36189e23209ce4ae5d9cbabd1574540d0591e7b3 )
+	rom ( name 19.010 size 131072 crc eb5ca884 sha1 3592c69f77c7cd6ee241d6c1079c34a3e58abb5b )
 )
 
 game (
@@ -4445,12 +4533,12 @@ game (
 
 game (
 	name pang3
-	description "Pang! 3 (Euro 950511)"
+	description "Pang! 3 (Euro 950601)"
 	year 1995
 	manufacturer "Mitchell"
 	sourcefile cps1.c
-	rom ( name pa3w-17.11l size 524288 crc 12138234 sha1 956a2c847a3cfb94007d1a636167fd2bb9f826ec )
-	rom ( name pa3w-16.10l size 524288 crc d1ba585c sha1 c6d04441fe97abf0a72b23c917777a7b58e94a85 )
+	rom ( name pa3e-17a.11l size 524288 crc a213fa80 sha1 fee6b0b21e2ef573ebfb35eaa1785533101c9170 )
+	rom ( name pa3e-16a.10l size 524288 crc 7169ea67 sha1 1076afaff7b05c9009798a0cea13e71fa27f2b7e )
 	rom ( name pa3-01m.2c size 2097152 crc 068a152c sha1 fa491874068924c39bcc7de93dfda3b27f5d9613 )
 	rom ( name pa3-07m.2f size 2097152 crc 3a4a619d sha1 cfe68e24632b53fb6cd6d03b2166d6b5ba28b778 )
 	rom ( name pa3-11.11f size 32768 crc 90a08c46 sha1 7544adab2d7e052e0d21c920bff7841d9d718345 )
@@ -4461,6 +4549,28 @@ game (
 	rom ( name prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
 	rom ( name rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
 	rom ( name sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
+	name pang3n
+	description "Pang! 3 (Euro 950511, not encrypted)"
+	year 1995
+	manufacturer "Mitchell"
+	sourcefile cps1.c
+	cloneof pang3
+	romof pang3
+	rom ( name pa3w-17.11l size 524288 crc 12138234 sha1 956a2c847a3cfb94007d1a636167fd2bb9f826ec )
+	rom ( name pa3w-16.10l size 524288 crc d1ba585c sha1 c6d04441fe97abf0a72b23c917777a7b58e94a85 )
+	rom ( name pa3-01m.2c merge pa3-01m.2c size 2097152 crc 068a152c sha1 fa491874068924c39bcc7de93dfda3b27f5d9613 )
+	rom ( name pa3-07m.2f merge pa3-07m.2f size 2097152 crc 3a4a619d sha1 cfe68e24632b53fb6cd6d03b2166d6b5ba28b778 )
+	rom ( name pa3-11.11f merge pa3-11.11f size 32768 crc 90a08c46 sha1 7544adab2d7e052e0d21c920bff7841d9d718345 )
+	rom ( name pa3-05.10d merge pa3-05.10d size 131072 crc 73a10d5d sha1 999465e4fbc35a34746d2db61ad49f61403d5af7 )
+	rom ( name pa3-06.11d merge pa3-06.11d size 131072 crc affa4f82 sha1 27b9292bbc121cf585f53297a79fe8f0d0a729ae )
+	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
+	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
+	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
+	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
+	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
 )
 
 game (
@@ -4602,17 +4712,17 @@ game (
 	romof knights
 	rom ( name kre_23h.rom size 524288 crc fa2ff63d sha1 f3800102aadeccd13ed49c88039732453266283a )
 	rom ( name kre_22h.rom size 524288 crc 1438d070 sha1 4f6fad844c3e8eb960bb6cb85ac570979c0ae973 )
-	rom ( name kr_gfx1.rom merge kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
-	rom ( name kr_gfx3.rom merge kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
-	rom ( name kr_gfx2.rom merge kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
-	rom ( name kr_gfx4.rom merge kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
-	rom ( name kr_gfx5.rom merge kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
-	rom ( name kr_gfx7.rom merge kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
-	rom ( name kr_gfx6.rom merge kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
-	rom ( name kr_gfx8.rom merge kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
-	rom ( name kr_09.rom merge kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
-	rom ( name kr_18.rom merge kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
-	rom ( name kr_19.rom merge kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
+	rom ( name kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 )
+	rom ( name kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 )
+	rom ( name kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 )
+	rom ( name kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be )
+	rom ( name kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 )
+	rom ( name kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 )
+	rom ( name kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e )
+	rom ( name kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c )
+	rom ( name kr_09.rom size 65536 crc 5e44d9ee sha1 47a7503321be8d52b5c44af838e3bb82ee15a415 )
+	rom ( name kr_18.rom size 131072 crc da69d15f sha1 9616207e693bae85705f786cef60b9f6951b5067 )
+	rom ( name kr_19.rom size 131072 crc bfc654e9 sha1 01b3d92e4dedf55ea3933d387c7ddb9ba2549773 )
 )
 
 game (

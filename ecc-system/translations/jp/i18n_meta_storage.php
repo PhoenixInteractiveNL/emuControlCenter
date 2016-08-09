@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -83,9 +83,9 @@ $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"No",
+		"1P Only",
 	'[[01]]' =>
-		"1",
+		"2P Only",
 	'[[02]]' =>
 		"2",
 	'[[03]]' =>

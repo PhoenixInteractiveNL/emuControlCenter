@@ -63,7 +63,7 @@ $i18n['mainGui'] = array(
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
 	
-	/* 0.9.7 WIP 01*/
+	/* 0.9.7 WIP 01 */
 	'btnMainShowAllRomsLabel' => 
 		"Roms",
 	'btnMainShowBookmarkedRomsLabel' => 
@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"You can import the latest online datfile for %s from internet romDB here.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Import datfile",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",	
 );
 ?>

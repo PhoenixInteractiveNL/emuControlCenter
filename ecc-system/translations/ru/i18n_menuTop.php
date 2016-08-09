@@ -118,8 +118,6 @@ $i18n['menuTop'] = array(
 	/* TOOLS */
 	'mTopTool' =>
 		"Утилиты ECC",
-	'mTopToolEccRomId' =>
-		"ECC ROMid",
 	'mTopToolEccTheme' =>
 		"Выбрать тему ECC",
 	'mTopToolEccBugreport' =>
@@ -205,5 +203,9 @@ $i18n['menuTop'] = array(
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
 		'Переместить результат поиска',
+
+	/* 1.1 WIP 06 */
+	'mTopImageIPC' =>
+		'ImagePackCreator (IPC)',
 );
 ?>

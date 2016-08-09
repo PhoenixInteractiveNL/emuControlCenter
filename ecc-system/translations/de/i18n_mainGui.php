@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Du kannst das aktuelle datfile für %s aus dem online romDB importieren.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Datfile importieren",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",	
 );
 ?>

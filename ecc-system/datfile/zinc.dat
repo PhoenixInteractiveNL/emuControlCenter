@@ -2,8 +2,8 @@ clrmamepro (
 	name ZiNc
 	description "ZiNc v1.1"
 	category "Sony Playstation based arcade games"
-	version 20090915
-	date 2009-09-15
+	version 20100518
+	date 2010-05-18
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -73,6 +73,27 @@ game (
 	rom ( name ps1-02a.2e size 131072 crc b854df92 sha1 ea71a613b5b19ec7e9c6e342e7743d320582a6bb )
 	rom ( name ps1-03a.3e size 131072 crc a2562fbb sha1 3de02a4aa7ea620961ca2a5c331f38134033db79 )
 	rom ( name ps1-01m.3b size 4194304 crc 0bfb17aa sha1 cf4482785a2a33ad814c8b1461c5bc8e8e027895 )
+)
+
+game (
+	name stargladj
+	description "Star Gladiator (JAPAN 960627)"
+	year 1996
+	manufacturer "Capcom"
+	sourcefile zn.c
+	cloneof starglad
+	romof starglad
+	rom ( name coh-1000c.353 merge coh-1000c.353 size 524288 crc 50033af6 sha1 486d92ff6c7f1e54f8e0ef41cd9116eca0e10e1a )
+	rom ( name ps1j-04.2h size 524288 crc f865006d sha1 6abb476777a4309b1a60f12e6313c051db195808 )
+	rom ( name ps1-05m.3h merge ps1-05m.3h size 4194304 crc 8ad72c4f sha1 c848c37eb5365000b4d4720b5c08d89ddd8e2c33 )
+	rom ( name ps1-06m.4h merge ps1-06m.4h size 4194304 crc 95d8ed61 sha1 e9f259d589dc38a8321a6fea1f5dac741cadc0ff )
+	rom ( name ps1-07m.5h merge ps1-07m.5h size 4194304 crc c06752db sha1 0884b308e9cd9dde8660b422bc8fec9a362bcb52 )
+	rom ( name ps1-08m.2k merge ps1-08m.2k size 4194304 crc 381f9ded sha1 b7878a90740f5b3c5881ac7d46e2b84b18727337 )
+	rom ( name ps1-09m.3k merge ps1-09m.3k size 4194304 crc bd894812 sha1 9f0c3365e685a53ae793f4a256a6c177a843a424 )
+	rom ( name ps1-10m.4k merge ps1-10m.4k size 4194304 crc ff80c18a sha1 8d01717eed6ec1f508fe7c445da941fb84ef7d22 )
+	rom ( name ps1-02a.2e merge ps1-02a.2e size 131072 crc b854df92 sha1 ea71a613b5b19ec7e9c6e342e7743d320582a6bb )
+	rom ( name ps1-03a.3e merge ps1-03a.3e size 131072 crc a2562fbb sha1 3de02a4aa7ea620961ca2a5c331f38134033db79 )
+	rom ( name ps1-01m.3b merge ps1-01m.3b size 4194304 crc 0bfb17aa sha1 cf4482785a2a33ad814c8b1461c5bc8e8e027895 )
 )
 
 game (
@@ -322,7 +343,7 @@ game (
 	sourcefile zn.c
 	romof cpzn2
 	rom ( name coh-3002c.353 merge coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
-	rom ( name ex2u-04a size 524288 crc 8dc5317f sha1 c35224caf70662a0e45a74cbead294a51f9b9e16 )
+	rom ( name ex2u-04a.2h size 524288 crc 8dc5317f sha1 c35224caf70662a0e45a74cbead294a51f9b9e16 )
 	rom ( name ex2-05m size 8388608 crc 78726b17 sha1 2da449df335ef133ebc3997bbad73ef4137f4771 )
 	rom ( name ex2-06m size 8388608 crc be1075ed sha1 36dc673372f30f8b3ff5689ae568c5cd01fe2c07 )
 	rom ( name ex2-07m size 8388608 crc 6496c6ed sha1 054bcecbb04033abea14d9ffe6634b2bd11ca88b )
@@ -341,7 +362,7 @@ game (
 	cloneof sfex2
 	romof sfex2
 	rom ( name coh-3002c.353 merge coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
-	rom ( name ex2j-04 size 524288 crc 5d603586 sha1 ff546d3bd011d6441e9672b88bab763d3cd89be2 )
+	rom ( name ex2j-04.2h size 524288 crc 5d603586 sha1 ff546d3bd011d6441e9672b88bab763d3cd89be2 )
 	rom ( name ex2-05m merge ex2-05m size 8388608 crc 78726b17 sha1 2da449df335ef133ebc3997bbad73ef4137f4771 )
 	rom ( name ex2-06m merge ex2-06m size 8388608 crc be1075ed sha1 36dc673372f30f8b3ff5689ae568c5cd01fe2c07 )
 	rom ( name ex2-07m merge ex2-07m size 8388608 crc 6496c6ed sha1 054bcecbb04033abea14d9ffe6634b2bd11ca88b )
@@ -360,7 +381,26 @@ game (
 	cloneof sfex2
 	romof sfex2
 	rom ( name coh-3002c.353 merge coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
-	rom ( name ex2a-04 size 524288 crc ac9a872d sha1 4e237f5e2e5de58e587e9abc5767509b8d750004 )
+	rom ( name ex2a-04.2h size 524288 crc ac9a872d sha1 4e237f5e2e5de58e587e9abc5767509b8d750004 )
+	rom ( name ex2-05m merge ex2-05m size 8388608 crc 78726b17 sha1 2da449df335ef133ebc3997bbad73ef4137f4771 )
+	rom ( name ex2-06m merge ex2-06m size 8388608 crc be1075ed sha1 36dc673372f30f8b3ff5689ae568c5cd01fe2c07 )
+	rom ( name ex2-07m merge ex2-07m size 8388608 crc 6496c6ed sha1 054bcecbb04033abea14d9ffe6634b2bd11ca88b )
+	rom ( name ex2-08m merge ex2-08m size 8388608 crc 3194132e sha1 d1324fcf0a8528fc683791d6342697a7e08674f4 )
+	rom ( name ex2-09m merge ex2-09m size 4194304 crc 075ae585 sha1 6b88851db618fc3e96f1d740c46c1bc5be0ee21b )
+	rom ( name ex2-02 merge ex2-02 size 131072 crc 9489875e sha1 1fc9985ff98232c63ea8d05a69f7d77cdf72919f )
+	rom ( name ex2-01m merge ex2-01m size 4194304 crc 14a5bb0e sha1 dfe3c3a53bd4c58743d8039b5344d3afbe2a9c24 )
+)
+
+game (
+	name sfex2h
+	description "Street Fighter EX 2 (HISPANIC 980312)"
+	year 1998
+	manufacturer "Capcom/Arika"
+	sourcefile zn.c
+	cloneof sfex2
+	romof sfex2
+	rom ( name coh-3002c.353 merge coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
+	rom ( name ex2h-04.2h size 524288 crc 68f2ef80 sha1 212bb3c0d935c64f5e3b20e427e06d97404709d8 )
 	rom ( name ex2-05m merge ex2-05m size 8388608 crc 78726b17 sha1 2da449df335ef133ebc3997bbad73ef4137f4771 )
 	rom ( name ex2-06m merge ex2-06m size 8388608 crc be1075ed sha1 36dc673372f30f8b3ff5689ae568c5cd01fe2c07 )
 	rom ( name ex2-07m merge ex2-07m size 8388608 crc 6496c6ed sha1 054bcecbb04033abea14d9ffe6634b2bd11ca88b )
@@ -844,6 +884,20 @@ game (
 )
 
 game (
+	name lpadv
+	description "Logic Pro Adventure (Japan)"
+	year 1999
+	manufacturer "Amuse World"
+	sourcefile zn.c
+	romof tps
+	rom ( name coh-1002m.353 merge coh-1002m.353 size 524288 crc 69ffbcb4 sha1 03eb2febfab3fcde716defff291babd9392de965 )
+	rom ( name lp_3.u0119 size 1048576 crc 18cade44 sha1 8a44156224c77c51f4f6ca61a0168e48dfcc6eda )
+	rom ( name lp_4.u0120 size 1048576 crc 12fffc02 sha1 3294b65e4a0bbf501785565dd0c1f36f9bcea969 )
+	rom ( name rp00.u0216 size 4194304 crc d759d0d4 sha1 47b009a5dfa81611276b1376bdab44dfad597e85 )
+	rom ( name rp01.u0217 size 4194304 crc 5be576e1 sha1 e24a96d179016d6d65205079874b35500760a642 )
+)
+
+game (
 	name tblkkuzu
 	description "The Block Kuzushi (JAPAN)"
 	year 2000
@@ -1292,6 +1346,25 @@ game (
 	rom ( name e18-05.21 size 2097152 crc 2e984c50 sha1 6d8255e38c67d68bf489c9885663ed2edf148188 )
 	rom ( name e18-09.22 size 131072 crc bb5a5319 sha1 0bb700cafc157d3af663cc9bebb8167487ff2852 )
 	rom ( name e18-01.15 size 2097152 crc dbd1408c sha1 ef81064f2f95e5ae25eb1f10d1e78f27f9e294f5 )
+)
+
+game (
+	name sfchamp24o
+	description "Super Football Champ (Ver 2.4O)"
+	year 1995
+	manufacturer "Taito"
+	sourcefile zn.c
+	cloneof sfchamp
+	romof sfchamp
+	rom ( name coh-1000t.353 merge coh-1000t.353 size 524288 crc e3f23b6e sha1 e18907cf8c6ba54d96edba0a9a00487a90219e0d )
+	rom ( name e18-11.2 size 524288 crc f5462f30 sha1 44eb03a9b51e2d8dd14fe2ed36dbcf17035a22c7 )
+	rom ( name e18-08.7 size 524288 crc 6a5558cd sha1 75b26bcaaa213283e7e0dace69ee58f305b4572d )
+	rom ( name e18-02.12 merge e18-02.12 size 2097152 crc c7b4fe29 sha1 7f823bd61abf2b15d3ba62bca829a5b1acacfd09 )
+	rom ( name e18-03.16 merge e18-03.16 size 2097152 crc 76392346 sha1 2c5b70c4708208f866feea0472fcc72333061124 )
+	rom ( name e18-04.19 merge e18-04.19 size 2097152 crc fc3731da sha1 58948aad8d7bb7a8449d2bf12e9d5e6d7b4426b5 )
+	rom ( name e18-05.21 merge e18-05.21 size 2097152 crc 2e984c50 sha1 6d8255e38c67d68bf489c9885663ed2edf148188 )
+	rom ( name e18-09.22 merge e18-09.22 size 131072 crc bb5a5319 sha1 0bb700cafc157d3af663cc9bebb8167487ff2852 )
+	rom ( name e18-01.15 merge e18-01.15 size 2097152 crc dbd1408c sha1 ef81064f2f95e5ae25eb1f10d1e78f27f9e294f5 )
 )
 
 game (

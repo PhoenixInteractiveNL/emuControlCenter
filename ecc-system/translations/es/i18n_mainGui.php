@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Puedes importar los últimos datos romDB  %s desde internet.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Importar 'Meta-datos'",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

@@ -141,6 +141,7 @@ class GuiPopConfig extends GladeXml {
 		$this->emuAssignGlobalCheckZipUnpackOpen->connect_simple_after('clicked', array($this, 'openUnpackFolder'));
 		$this->emuAssignGlobalCheckZipUnpackActive->connect_simple_after('toggled', array($this, 'updateUnpackState'));
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_sensitive(false);
+		$this->emuAssignGlobalCheckZipUnpackAll->set_sensitive(false);
 		$this->emuAssignLabelZipUnpack->set_sensitive(false);
 		
 		$this->emuStartButton->connect_simple_after('clicked', array($this, 'startEmulator'));
@@ -643,6 +644,10 @@ class GuiPopConfig extends GladeXml {
 		# set default off!
 		$enableZipUnpackActiveState = (!isset($iniEmu['enableZipUnpackActive'])) ? false : $iniEmu['enableZipUnpackActive'];
 		$enableZipUnpackActive = (!isset($storageEmu['enableZipUnpackActive'])) ? $enableZipUnpackActiveState : $storageEmu['enableZipUnpackActive'];
+
+		# set default off!
+		$enableZipUnpackAllState = (!isset($iniEmu['enableZipUnpackAll'])) ? false : $iniEmu['enableZipUnpackAll'];
+		$enableZipUnpackAll = (!isset($storageEmu['enableZipUnpackAll'])) ? $enableZipUnpackAllState : $storageEmu['enableZipUnpackAll'];
 		
 		# set default off!
 		$enableZipUnpackSkipState = (!isset($iniEmu['enableZipUnpackSkip'])) ? true : $iniEmu['enableZipUnpackSkip'];
@@ -694,6 +699,7 @@ class GuiPopConfig extends GladeXml {
 
 		# zip unpack
 		$this->emuAssignGlobalCheckZipUnpackActive->set_active($enableZipUnpackActive);
+		$this->emuAssignGlobalCheckZipUnpackAll->set_active($enableZipUnpackAll);
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_active($enableZipUnpackSkip);
 		
 		$this->updateEccScriptState();
@@ -738,6 +744,7 @@ class GuiPopConfig extends GladeXml {
 		
 		# zip unpack
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['enableZipUnpackActive'] = $this->emuAssignGlobalCheckZipUnpackActive->get_active();
+		$this->dataStorage[$eccident]['EMU'][$fileExt]['enableZipUnpackAll'] = $this->emuAssignGlobalCheckZipUnpackAll->get_active();
 		$this->dataStorage[$eccident]['EMU'][$fileExt]['enableZipUnpackSkip'] = $this->emuAssignGlobalCheckZipUnpackSkip->get_active();
 		
 		# only needed for the initial checksum
@@ -919,6 +926,7 @@ class GuiPopConfig extends GladeXml {
 	public function updateUnpackState(){
 		$state = ($this->emuAssignGlobalCheckZipUnpackActive->get_active());
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_sensitive($state);
+		$this->emuAssignGlobalCheckZipUnpackAll->set_sensitive($state);
 		$this->emuAssignLabelZipUnpack->set_sensitive($state);
 	}
 	
@@ -1405,6 +1413,10 @@ class GuiPopConfig extends GladeXml {
 		$optMinimize = $iniManager->getKey('ECC_STARTUP', 'minimize_to_tray');
 		$optMinimize = (!$sectionExists) ? true : $optMinimize;
 		$this->startConfMinimize->set_active($optMinimize);
+
+		$OptDeleteUnpacked = $iniManager->getKey('ECC_STARTUP', 'delete_unpacked');
+		$OptDeleteUnpacked = (!$sectionExists) ? true : $OptDeleteUnpacked;
+		$this->startConfDeleteUnpacked->set_active($OptDeleteUnpacked);
 		
 		# send automatic bugreport on startup
 		$optBugreportSend = $iniManager->getKey('ECC_STARTUP', 'startup_bugreport_check');
@@ -1413,7 +1425,6 @@ class GuiPopConfig extends GladeXml {
 		
 		// Third Party
 		$optStartExpadder = $iniManager->getKey('ECC_STARTUP', 'startup_xpadder');
-		
 		$optStartExpadder = ($optStartExpadder === false || !$sectionExists) ? true : $optStartExpadder;
 		$this->startConfThirdPartyXpadder->set_active($optStartExpadder);
 		
@@ -1425,6 +1436,7 @@ class GuiPopConfig extends GladeXml {
 		$this->globalIni['ECC_STARTUP']['startup_sound'] = trim($this->startConfSoundPath->get_text());
 		$this->globalIni['ECC_STARTUP']['startup_update_check'] = (int)$this->startConfUpdate->get_active();
 		$this->globalIni['ECC_STARTUP']['minimize_to_tray'] = (int)$this->startConfMinimize->get_active();
+		$this->globalIni['ECC_STARTUP']['delete_unpacked'] = (int)$this->startConfDeleteUnpacked->get_active();
 		$this->globalIni['ECC_STARTUP']['startup_bugreport_check'] = (int)$this->startConfBugreportSend->get_active();
 		$this->globalIni['ECC_STARTUP']['startup_xpadder'] = (int)$this->startConfThirdPartyXpadder->get_active();
 	}

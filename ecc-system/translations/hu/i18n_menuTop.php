@@ -117,13 +117,11 @@ $i18n['menuTop'] = array(
 
 	/* TOOLS */
 	'mTopTool' =>
-		"ECC eszközök",
-	'mTopToolEccRomId' =>
-		"ECC ROMid",
+		"eszközök",
 	'mTopToolEccTheme' =>
-		"ECC témaválasztó",
+		"témaválasztó",
 	'mTopToolEccBugreport' =>
-		"ECC hibajelentés",
+		"hibajelentés",
 
 	/* HELP */
 	'mTopHelp' =>
@@ -205,5 +203,9 @@ $i18n['menuTop'] = array(
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
 		'Keresési találat átvitele',
+
+	/* 1.1 WIP 06 */
+	'mTopImageIPC' =>
+		'ImagePackCreator (IPC)',
 );
 ?>

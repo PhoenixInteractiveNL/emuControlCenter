@@ -1,4 +1,4 @@
-﻿<?php
+﻿f<?php
 
 // if this parameter "create_userfolder" is given, ecc will create
 // all needed userfolder and then exit the application with the
@@ -936,10 +936,10 @@ class App extends GladeXml {
 		
 		# right
 
-		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_multiplay').'?', $this->dropdownStateCount, 'metaEditDirectUpdate', 'setMultiplayer');
+		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_multiplay').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setMultiplayer');
 		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		
-		$this->nbMediaInfoStateTrainerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_trainer').'?', $this->dropdownStateCount, 'metaEditDirectUpdate', 'setTrainer');
+		$this->nbMediaInfoStateTrainerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_trainer').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setTrainer');
 		$this->nbMediaInfoStateTrainerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
 		$this->nbMediaInfoStateNetplayEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_netplay').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setNetplay');
@@ -1608,6 +1608,7 @@ class App extends GladeXml {
 		$this->mTopToolEccTheme->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_THEME']));
 		$this->mTopToolEccBugreport->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_BUGREPORT']));
 		$this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images'));
+		$this->mTopImageIPC->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_IPC']));
 		
 		// View
 		
@@ -2227,9 +2228,16 @@ class App extends GladeXml {
 					print $romFile->getFilePath()."\n";
 					print $romFile->getFilePathPacked()."\n";
 					
-					if($unpackFileNeeded) FileIO::extractZip($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
-					
+					// Unpack a single file or ALL?
+					if(@$usedEmu['enableZipUnpackAll']){
+						if($unpackFileNeeded) FileIO::extractZipAll($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
+						}
+					else {
+						if($unpackFileNeeded) FileIO::extractZip($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
+					}
+		
 					break;
+					
 				case '7z':
 				case '7zip':
 				
@@ -2240,7 +2248,14 @@ class App extends GladeXml {
 					if(@$usedEmu['enableZipUnpackSkip']){
 						if(file_exists($tempFilePath)) $unpackFileNeeded = false;
 					}
-					if($unpackFileNeeded) FileIO::extractSzip($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
+					// Unpack a single file or ALL?
+					if(@$usedEmu['enableZipUnpackAll']){
+						if($unpackFileNeeded) FileIO::extractSzipAll($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
+						}
+					else {
+						if($unpackFileNeeded) FileIO::extractSzip($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
+					}
+		
 					break;
 			}
 			$romPath = $tempFilePath;
@@ -2443,6 +2458,7 @@ class App extends GladeXml {
 				'noExtension' => (int)$usedEmu['noExtension'],
 				'executeInEmuFolder' => (int)$usedEmu['executeInEmuFolder'],
 				'enableZipUnpackActive' => (int)$usedEmu['enableZipUnpackActive'],
+				'enableZipUnpackAll' => (int)$usedEmu['enableZipUnpackAll'],
 				'enableZipUnpackSkip' => (int)$usedEmu['enableZipUnpackSkip'],
 				'useCueFile' => (int)$useCueFile,
 			),
@@ -3062,12 +3078,15 @@ class App extends GladeXml {
 				// set the file info string
 				$metaInfo = ($romMeta->getInfo()) ? str_replace('|', ' ', $romMeta->getInfo()) : '';
 				$this->setSpanMarkup($this->media_nb_info_infos, $metaInfo, '#334455');
-				
+
 				// set the filesize as formated string!
 				$this->setSpanMarkup($this->media_nb_info_file_size, $romFile->getFileSizeString(), '#334455');
 				
 				// set the crc32 value
 				$this->setSpanMarkup($this->media_nb_info_file_crc32, $crc32, '#334455');
+
+				// set the info-id value
+				$this->setSpanMarkup($this->media_nb_info_infoid, $romMeta->getInfo_id(), '');
 				
 				# get rom icon, if available
 				if ($iconPath = $this->imageManager->getImageByType($eccident, $crc32, 'media_icon', false)) $iconPath = reset($iconPath); # because its an array
@@ -4346,7 +4365,7 @@ class App extends GladeXml {
 				
     			$searchFields = array(
     				'NAME' => array('rom', 'getName'),
-    				'YEAR' => array('romMeta', 'getName'),
+    				'YEAR' => array('romMeta', 'getYear'),
     				'DEVELOPER' => array('romMeta', 'getDeveloper'),
     				'PUBLISHER' => array('romMeta', 'getPublisher'),
     				'PROGRAMMER' => array('romMeta', 'getProgrammer'),
@@ -5086,12 +5105,12 @@ class App extends GladeXml {
 
 		// multiplayer
 		$this->metaEditFeatureMultiplayLabel->set_text(i18n::get('meta', 'lbl_multiplay'));
-		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownStateCount);
+		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureMultiplayDropdown->set_active($this->set_dropdown_bool($romMeta->getMultiplayer()));
 		
 		// trainer
 		$this->metaEditFeatureTrainerLabel->set_text(i18n::get('meta', 'lbl_trainer'));
-		if (!$this->obj_trainer) $this->obj_trainer = new IndexedCombobox($this->metaEditFeatureTrainerDropdown, false, $this->dropdownStateCount);
+		if (!$this->obj_trainer) $this->obj_trainer = new IndexedCombobox($this->metaEditFeatureTrainerDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureTrainerDropdown->set_active($this->set_dropdown_bool($romMeta->getTrainer()));
 
 		// usermod
@@ -7799,7 +7818,8 @@ current_build="'.$this->ecc_release['release_build'].'"
 		# TOP-IMG
 		$this->mTopImage->get_child()->set_text(I18N::get('menuTop', 'mTopImage'));
 		$this->mTopImageConvert->get_child()->set_text(I18N::get('menuTop', 'mTopImageConvert'));
-
+		$this->mTopImageIPC->get_child()->set_text(I18N::get('menuTop', 'mTopImageIPC'));
+		
 		# TOP-FIES
 		$this->mTopFile->get_child()->set_text(I18N::get('menuTop', 'mTopFile'));
 		$this->mTopFileRename->get_child()->set_text(I18N::get('menuTop', 'mTopFileRename'));
@@ -7922,6 +7942,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		
 		$this->mainlist_tab_factsheet->set_label(I18N::get('mainGui', 'mainlist_tab_factsheet'));
 		$this->mainlist_tab_help->set_label(I18N::get('mainGui', 'mainlist_tab_help'));
+		$this->mainlist_tab_images->set_label(I18N::get('mainGui', 'mainlist_tab_images'));
 		
 		# images		
 		$this->infoImageBtnMatchImageType->set_label(I18N::get('mainGui', 'infoImageBtnMatchImageType'));
@@ -7935,7 +7956,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 //		$this->paneInfoEccDbGetTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetTitle').'</b>');
 //		$this->paneInfoEccDbGetText->set_text(i18n::get('mainGui', 'paneInfoEccDbGetText'));
 //		$this->paneInfoEccDbGetButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetButton'));	
-
 		$this->paneInfoEccDbGetDatfileTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetDatfileTitle').'</b>');
 		$this->paneInfoEccDbGetDatfileButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetDatfileButton'));
 		
@@ -7977,6 +7997,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		#$this->infotab_lbl_netplay->set_markup('<b>'.I18N::get('meta', 'lbl_netplay').'</b>');
 
 		$this->setSpanMarkup($this->infotab_lbl_dump, I18N::get('meta', 'lbl_dump_type'), false, 'b', false);
+		$this->setSpanMarkup($this->infotab_lbl_infoid, I18N::get('meta', 'lbl_infoid'), false, 'b', false);
 		
 		# Fileinfos
 		#$this->infotab_frame_fileinfo->set_markup('<b>'.I18N::get('global', 'fileInfo').'</b>');

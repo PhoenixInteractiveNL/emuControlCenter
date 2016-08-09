@@ -954,18 +954,18 @@ game (
 
 game (
 	name indy500
-	description "INDY 500 Twin (Revision A)"
+	description "INDY 500 Twin (Revision A, Newer)"
 	year 1995
 	manufacturer "Sega"
 	sourcefile model2.c
-	rom ( name epr-18254a.15 size 524288 crc ad0f1fc5 sha1 0bff35fc1d892aaffbf1a3965bf3109c54839f4b )
-	rom ( name epr-18255a.16 size 524288 crc 784daab8 sha1 299e87f8ec7bdefa6f94f4ab65e29e91f290611e )
+	rom ( name epr-18598a.15 size 524288 crc 3cdcac0f sha1 2f616e363f4d246fece309e81325e5e3c4e9d9f8 )
+	rom ( name epr-18599a.16 size 524288 crc 32bde9a2 sha1 0982952ab3c5b035f37beb9304ac950c0e78aea8 )
 	rom ( name mpr-18237.11 size 4194304 crc 37e4255a sha1 3ee69a5b9364048dfab242773d97f3af430845b7 )
 	rom ( name mpr-18238.12 size 4194304 crc bf837bac sha1 6624417b65f15f20427bc42c27283f10342c76b5 )
 	rom ( name mpr-18239.9 size 4194304 crc 9a2db86e sha1 0b81f6037657af7d96ed5e9bfef407d87cbcc294 )
 	rom ( name mpr-18240.10 size 4194304 crc ab46a35f sha1 67da857db7155a858a1fa575b6c50f4be3c9ab7c )
-	rom ( name epr-18389.7 size 524288 crc d22ea019 sha1 ef10bb0ffcb1bbcf4672bb5f705a27679a793764 )
-	rom ( name epr-18390.8 size 524288 crc 38e796e5 sha1 b23cfe45c363d616a65decd57aeb8ae61d5370e9 )
+	rom ( name epr-18596.7 size 524288 crc 8be1a5cd sha1 56ed21234c6494d95b4efda6c3374199c5ac65db )
+	rom ( name epr-18597.8 size 524288 crc 44824e38 sha1 f0fb0d73c1e72ce77c3931d436c54c034d2107a8 )
 	rom ( name epr-18249.29 size 524288 crc a399f023 sha1 8b453313c16d935701ed7dbf71c1607c40aede63 )
 	rom ( name epr-18250.30 size 524288 crc 7479ad52 sha1 d453e25709cd5970cd21bdc8b4785bc8eb5a50d7 )
 	rom ( name mpr-18233.17 size 4194304 crc 48a024d3 sha1 501c6ab969713187025331942f922cb0e8efa69a )
@@ -974,7 +974,7 @@ game (
 	rom ( name mpr-18236.22 size 4194304 crc 6ca29e0e sha1 5de8b569d2a91047836f4a251c21db82fd7841c9 )
 	rom ( name mpr-18232.27 size 4194304 crc f962347d sha1 79f07ee6b821724294ca9e7a079cb33249102508 )
 	rom ( name mpr-18231.25 size 4194304 crc 673d5338 sha1 ce592857496ccc0a51efb377cf7cccc000b4296b )
-	rom ( name epr-18391.31 size 262144 crc 79579b72 sha1 36fed8a9eeb34968b2852ea8fc9198427f0d27c6 )
+	rom ( name epr-18600.31 size 262144 crc 269ee4a0 sha1 8ebabfcd27d634ff0bead0a1f138efc8708575e7 )
 	rom ( name mpr-18241.32 size 2097152 crc 3a380ae1 sha1 114113325e9e5262af8750c05089f24818943cde )
 	rom ( name mpr-18242.33 size 2097152 crc 1cc3deae sha1 5c9cb8ce43a909b25b4e734c6a4ffd786f4dde31 )
 	rom ( name mpr-18243.34 size 2097152 crc a00a0053 sha1 9c24fbcd0318c7e195dd153d6ba05e8c1e052968 )
@@ -1006,6 +1006,37 @@ game (
 	rom ( name mpr-18232.27 merge mpr-18232.27 size 4194304 crc f962347d sha1 79f07ee6b821724294ca9e7a079cb33249102508 )
 	rom ( name mpr-18231.25 merge mpr-18231.25 size 4194304 crc 673d5338 sha1 ce592857496ccc0a51efb377cf7cccc000b4296b )
 	rom ( name epr-18253.31 size 262144 crc 2934e034 sha1 4a3037b69c4835ef16a20c5573de32a862f0b13e )
+	rom ( name mpr-18241.32 merge mpr-18241.32 size 2097152 crc 3a380ae1 sha1 114113325e9e5262af8750c05089f24818943cde )
+	rom ( name mpr-18242.33 merge mpr-18242.33 size 2097152 crc 1cc3deae sha1 5c9cb8ce43a909b25b4e734c6a4ffd786f4dde31 )
+	rom ( name mpr-18243.34 merge mpr-18243.34 size 2097152 crc a00a0053 sha1 9c24fbcd0318c7e195dd153d6ba05e8c1e052968 )
+	rom ( name mpr-18244.35 merge mpr-18244.35 size 2097152 crc bfa75beb sha1 fec89260d887e90ee9c2803e2eaf937cf9bfa10b )
+)
+
+game (
+	name indy500to
+	description "INDY 500 Twin (Revision A)"
+	year 1995
+	manufacturer "Sega"
+	sourcefile model2.c
+	cloneof indy500
+	romof indy500
+	rom ( name epr-18254a.15 size 524288 crc ad0f1fc5 sha1 0bff35fc1d892aaffbf1a3965bf3109c54839f4b )
+	rom ( name epr-18255a.16 size 524288 crc 784daab8 sha1 299e87f8ec7bdefa6f94f4ab65e29e91f290611e )
+	rom ( name mpr-18237.11 merge mpr-18237.11 size 4194304 crc 37e4255a sha1 3ee69a5b9364048dfab242773d97f3af430845b7 )
+	rom ( name mpr-18238.12 merge mpr-18238.12 size 4194304 crc bf837bac sha1 6624417b65f15f20427bc42c27283f10342c76b5 )
+	rom ( name mpr-18239.9 merge mpr-18239.9 size 4194304 crc 9a2db86e sha1 0b81f6037657af7d96ed5e9bfef407d87cbcc294 )
+	rom ( name mpr-18240.10 merge mpr-18240.10 size 4194304 crc ab46a35f sha1 67da857db7155a858a1fa575b6c50f4be3c9ab7c )
+	rom ( name epr-18389.7 size 524288 crc d22ea019 sha1 ef10bb0ffcb1bbcf4672bb5f705a27679a793764 )
+	rom ( name epr-18390.8 size 524288 crc 38e796e5 sha1 b23cfe45c363d616a65decd57aeb8ae61d5370e9 )
+	rom ( name epr-18249.29 merge epr-18249.29 size 524288 crc a399f023 sha1 8b453313c16d935701ed7dbf71c1607c40aede63 )
+	rom ( name epr-18250.30 merge epr-18250.30 size 524288 crc 7479ad52 sha1 d453e25709cd5970cd21bdc8b4785bc8eb5a50d7 )
+	rom ( name mpr-18233.17 merge mpr-18233.17 size 4194304 crc 48a024d3 sha1 501c6ab969713187025331942f922cb0e8efa69a )
+	rom ( name mpr-18234.21 merge mpr-18234.21 size 4194304 crc 1178bfc8 sha1 4a9982fdce08f9d375371763dd5287e8485c24b1 )
+	rom ( name mpr-18235.18 merge mpr-18235.18 size 4194304 crc e7d70d59 sha1 6081739c15a634d5cc7680a4fc7decead93540ed )
+	rom ( name mpr-18236.22 merge mpr-18236.22 size 4194304 crc 6ca29e0e sha1 5de8b569d2a91047836f4a251c21db82fd7841c9 )
+	rom ( name mpr-18232.27 merge mpr-18232.27 size 4194304 crc f962347d sha1 79f07ee6b821724294ca9e7a079cb33249102508 )
+	rom ( name mpr-18231.25 merge mpr-18231.25 size 4194304 crc 673d5338 sha1 ce592857496ccc0a51efb377cf7cccc000b4296b )
+	rom ( name epr-18391.31 size 262144 crc 79579b72 sha1 36fed8a9eeb34968b2852ea8fc9198427f0d27c6 )
 	rom ( name mpr-18241.32 merge mpr-18241.32 size 2097152 crc 3a380ae1 sha1 114113325e9e5262af8750c05089f24818943cde )
 	rom ( name mpr-18242.33 merge mpr-18242.33 size 2097152 crc 1cc3deae sha1 5c9cb8ce43a909b25b4e734c6a4ffd786f4dde31 )
 	rom ( name mpr-18243.34 merge mpr-18243.34 size 2097152 crc a00a0053 sha1 9c24fbcd0318c7e195dd153d6ba05e8c1e052968 )

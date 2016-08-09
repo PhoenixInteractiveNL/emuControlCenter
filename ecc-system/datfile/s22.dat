@@ -2,8 +2,8 @@ clrmamepro (
 	name S22
 	description "System 22 20090915"
 	category "Namco Sytem 22"
-	version 20090915
-	date 2009-09-15
+	version 20100518
+	date 2010-05-18
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -179,59 +179,19 @@ game (
 )
 
 game (
-	name aircombj
-	description "Air Combat (Japan)"
-	year 1992
-	manufacturer "Namco"
-	sourcefile namcos21.c
-	rom ( name ac1-mpr-u.3j size 524288 crc a4dec813 sha1 2ee8b3492d30db4c841f695151880925a5e205e0 )
-	rom ( name ac1-mpr-l.1j size 524288 crc 8577b6a2 sha1 32194e392fbd051754be88eb8c90688c65c65d85 )
-	rom ( name ac1-spr-u.6c size 131072 crc 5810e219 sha1 c312ffd8324670897871b12d521779570dc0f580 )
-	rom ( name ac1-spr-l.4c size 131072 crc 175a7d6c sha1 9e31dde6646cd9b6dcdbdb3f2326177508559e56 )
-	rom ( name ac1-snd0.8j size 131072 crc 5c1fb84b sha1 20e4d81289dbe58ffcfc947251a6ff1cc1e36436 )
-	rom ( name sys2mcpu.bin size 8192 crc a342a97e sha1 2c420d34dba21e409bf78ddca710fc7de65a6642 )
-	rom ( name sys2c65c.bin size 32768 crc a5b2a4ff sha1 068bdfcc71a5e83706e8b23330691973c1c214dc )
-	rom ( name c67.bin size 8192 crc 6bd8988e sha1 c9ec18d5f88d53976b94444eedc64d5568155958 )
-	rom ( name ac1-obj0.5s size 524288 crc d2310c6a sha1 9bb8fdfc2c232574777248f4959975f9a20e3105 )
-	rom ( name ac1-obj4.4s size 524288 crc 0c93b478 sha1 a92ffbcf04b64e0eee5bcf37008e247700641b25 )
-	rom ( name ac1-obj1.5x size 524288 crc f5783a77 sha1 0be1815ceb4ce4fa7ab75ba588e090f20ee0cac9 )
-	rom ( name ac1-obj5.4x size 524288 crc 476aed15 sha1 0e53fdf02e8ffe7852a1fa8bd2f64d0e58f3dc09 )
-	rom ( name ac1-obj2.3s size 524288 crc 01343d5c sha1 64171fed1d1f8682b3d70d3233ea017719f4cc63 )
-	rom ( name ac1-obj6.2s size 524288 crc c67607b1 sha1 df64ea7920cf64271fe742d3d0a57f842ee61e8d )
-	rom ( name ac1-obj3.3x size 524288 crc 7717f52e sha1 be1df3f4d0fdcaa5d3c81a724e5eb9d14136c6f5 )
-	rom ( name ac1-obj7.2x size 524288 crc cfa9fe5f sha1 0da25663b89d653c87ed32d15f7c82f3035702ab )
-	rom ( name ac1-data-u.3a size 524288 crc 82320c71 sha1 2be98d46853febb46e1cc728af2735c0e00ce303 )
-	rom ( name ac1-data-l.1a size 524288 crc fd7947d3 sha1 2696eeae37de6d256e626cc3f3cea7b0f6eff60e )
-	rom ( name ac1-edata1-u.3c size 524288 crc a9547509 sha1 1bc663cec03b60ad968896bbc2546f02efda135e )
-	rom ( name ac1-edata1-l.1c size 524288 crc a87087dd sha1 cd9b83a8f07886ab44e4ded68002b44338777e8c )
-	rom ( name ac1-poi-h.2f size 524288 crc 573bbc3b sha1 371be12b915db6872049f18980c1b55544cfc445 )
-	rom ( name ac1-poi-lu.2k size 524288 crc d99084b9 sha1 c604d60a2162af7610e5ff7c1aa4195f7df82efe )
-	rom ( name ac1-poi-ll.2n size 524288 crc abb32307 sha1 8e936ba99479215dd33a951d81ec2b04020dfd62 )
-	rom ( name ac1-voi0.12b size 524288 crc f427b119 sha1 bd45bbe41c8be26d6c997fcdc226d080b416a2cf )
-	rom ( name ac1-voi1.12c size 524288 crc c9490667 sha1 4b6fbe635c32469870a8e6f82742be6a9d4918c9 )
-	rom ( name ac1-voi2.12d size 524288 crc 1fcb51ba sha1 80fc815e5fad76d20c3795ab1d89b57d9abc3efd )
-	rom ( name ac1-voi3.12e size 524288 crc cd202e06 sha1 72a18f5ba402caefef14b8d1304f337eaaa3eb1d )
-	rom ( name gal16v8a-3pdsp5.17d size 279 crc 799c1f26 sha1 d28ed1b9fa78180c5a0b01a7198a2870137c7349 )
-	rom ( name plhs18p8-3pobj3.17n size 329 crc 9625f469 sha1 29158a3d37485fb0714d0a60bcd07abd26a3f56e )
-	rom ( name plhs18p8-3pobj4.17n size 329 crc 1b7c90c1 sha1 ae65aab7a191cdf1af488e144af22b9d8669c903 )
-)
-
-game (
-	name aircombu
+	name aircomb
 	description "Air Combat (US)"
 	year 1992
 	manufacturer "Namco"
 	sourcefile namcos21.c
-	cloneof aircombj
-	romof aircombj
 	rom ( name ac2-mpr-u.3j size 524288 crc a7133f85 sha1 9f1c99dd503f1fc81096170fd272e33ae8a7de2f )
 	rom ( name ac2-mpr-l.1j size 524288 crc 520a52e6 sha1 74306e02abfe08aa1afbf325b74dbc0840c3ad3a )
 	rom ( name ac2-spr-u.6c size 131072 crc 42aca956 sha1 10ea2400bb4d5b2d805e2de43ca0e0f54597f660 )
 	rom ( name ac2-spr-l.4c size 131072 crc 3e15fa19 sha1 65dbb33ab6b3c06c793613348ebb7b110b8bba0d )
-	rom ( name ac1-snd0.8j merge ac1-snd0.8j size 131072 crc 5c1fb84b sha1 20e4d81289dbe58ffcfc947251a6ff1cc1e36436 )
-	rom ( name sys2mcpu.bin merge sys2mcpu.bin size 8192 crc a342a97e sha1 2c420d34dba21e409bf78ddca710fc7de65a6642 )
-	rom ( name sys2c65c.bin merge sys2c65c.bin size 32768 crc a5b2a4ff sha1 068bdfcc71a5e83706e8b23330691973c1c214dc )
-	rom ( name c67.bin merge c67.bin size 8192 crc 6bd8988e sha1 c9ec18d5f88d53976b94444eedc64d5568155958 )
+	rom ( name ac1-snd0.8j size 131072 crc 5c1fb84b sha1 20e4d81289dbe58ffcfc947251a6ff1cc1e36436 )
+	rom ( name sys2mcpu.bin size 8192 crc a342a97e sha1 2c420d34dba21e409bf78ddca710fc7de65a6642 )
+	rom ( name sys2c65c.bin size 32768 crc a5b2a4ff sha1 068bdfcc71a5e83706e8b23330691973c1c214dc )
+	rom ( name c67.bin size 8192 crc 6bd8988e sha1 c9ec18d5f88d53976b94444eedc64d5568155958 )
 	rom ( name ac2-obj0.5s size 524288 crc 8327ff22 sha1 16f6022dedb7a74590898bc8ed3e8a97993c4635 )
 	rom ( name ac2-obj4.4s size 524288 crc e433e344 sha1 98ade550cf066fcb5c09fa905f441a1464d4d625 )
 	rom ( name ac2-obj1.5x size 524288 crc 43af566d sha1 99f0d9f005e28040f5cc10de2198893946a31d09 )
@@ -240,9 +200,46 @@ game (
 	rom ( name ac2-obj6.2s size 524288 crc 24cc3f36 sha1 e50af176eb3034c9cab7613ca614f5cc2c62f95e )
 	rom ( name ac2-obj3.3x size 524288 crc bd555a1d sha1 96e432b30da6f5f7ccb768c516b1f7186bc0d4c9 )
 	rom ( name ac2-obj7.2x size 524288 crc d561fbe3 sha1 a23976e10bddf74d4a6b292f044dfd0affbab101 )
+	rom ( name ac1-data-u.3a size 524288 crc 82320c71 sha1 2be98d46853febb46e1cc728af2735c0e00ce303 )
+	rom ( name ac1-data-l.1a size 524288 crc fd7947d3 sha1 2696eeae37de6d256e626cc3f3cea7b0f6eff60e )
+	rom ( name ac2-edata1-u.3c size 524288 crc 40c07095 sha1 5d9beaf5bc411ac66785d70980977b08446f46e3 )
+	rom ( name ac1-edata1-l.1c size 524288 crc a87087dd sha1 cd9b83a8f07886ab44e4ded68002b44338777e8c )
+	rom ( name ac1-poi-h.2f size 524288 crc 573bbc3b sha1 371be12b915db6872049f18980c1b55544cfc445 )
+	rom ( name ac1-poi-lu.2k size 524288 crc d99084b9 sha1 c604d60a2162af7610e5ff7c1aa4195f7df82efe )
+	rom ( name ac1-poi-ll.2n size 524288 crc abb32307 sha1 8e936ba99479215dd33a951d81ec2b04020dfd62 )
+	rom ( name ac1-voi0.12b size 524288 crc f427b119 sha1 bd45bbe41c8be26d6c997fcdc226d080b416a2cf )
+	rom ( name ac1-voi1.12c size 524288 crc c9490667 sha1 4b6fbe635c32469870a8e6f82742be6a9d4918c9 )
+	rom ( name ac1-voi2.12d size 524288 crc 1fcb51ba sha1 80fc815e5fad76d20c3795ab1d89b57d9abc3efd )
+	rom ( name ac1-voi3.12e size 524288 crc cd202e06 sha1 72a18f5ba402caefef14b8d1304f337eaaa3eb1d )
+)
+
+game (
+	name aircombj
+	description "Air Combat (Japan)"
+	year 1992
+	manufacturer "Namco"
+	sourcefile namcos21.c
+	cloneof aircomb
+	romof aircomb
+	rom ( name ac1-mpr-u.3j size 524288 crc a4dec813 sha1 2ee8b3492d30db4c841f695151880925a5e205e0 )
+	rom ( name ac1-mpr-l.1j size 524288 crc 8577b6a2 sha1 32194e392fbd051754be88eb8c90688c65c65d85 )
+	rom ( name ac1-spr-u.6c size 131072 crc 5810e219 sha1 c312ffd8324670897871b12d521779570dc0f580 )
+	rom ( name ac1-spr-l.4c size 131072 crc 175a7d6c sha1 9e31dde6646cd9b6dcdbdb3f2326177508559e56 )
+	rom ( name ac1-snd0.8j merge ac1-snd0.8j size 131072 crc 5c1fb84b sha1 20e4d81289dbe58ffcfc947251a6ff1cc1e36436 )
+	rom ( name sys2mcpu.bin merge sys2mcpu.bin size 8192 crc a342a97e sha1 2c420d34dba21e409bf78ddca710fc7de65a6642 )
+	rom ( name sys2c65c.bin merge sys2c65c.bin size 32768 crc a5b2a4ff sha1 068bdfcc71a5e83706e8b23330691973c1c214dc )
+	rom ( name c67.bin merge c67.bin size 8192 crc 6bd8988e sha1 c9ec18d5f88d53976b94444eedc64d5568155958 )
+	rom ( name ac1-obj0.5s size 524288 crc d2310c6a sha1 9bb8fdfc2c232574777248f4959975f9a20e3105 )
+	rom ( name ac1-obj4.4s size 524288 crc 0c93b478 sha1 a92ffbcf04b64e0eee5bcf37008e247700641b25 )
+	rom ( name ac1-obj1.5x size 524288 crc f5783a77 sha1 0be1815ceb4ce4fa7ab75ba588e090f20ee0cac9 )
+	rom ( name ac1-obj5.4x size 524288 crc 476aed15 sha1 0e53fdf02e8ffe7852a1fa8bd2f64d0e58f3dc09 )
+	rom ( name ac1-obj2.3s size 524288 crc 01343d5c sha1 64171fed1d1f8682b3d70d3233ea017719f4cc63 )
+	rom ( name ac1-obj6.2s size 524288 crc c67607b1 sha1 df64ea7920cf64271fe742d3d0a57f842ee61e8d )
+	rom ( name ac1-obj3.3x size 524288 crc 7717f52e sha1 be1df3f4d0fdcaa5d3c81a724e5eb9d14136c6f5 )
+	rom ( name ac1-obj7.2x size 524288 crc cfa9fe5f sha1 0da25663b89d653c87ed32d15f7c82f3035702ab )
 	rom ( name ac1-data-u.3a merge ac1-data-u.3a size 524288 crc 82320c71 sha1 2be98d46853febb46e1cc728af2735c0e00ce303 )
 	rom ( name ac1-data-l.1a merge ac1-data-l.1a size 524288 crc fd7947d3 sha1 2696eeae37de6d256e626cc3f3cea7b0f6eff60e )
-	rom ( name ac2-edata1-u.3c size 524288 crc 40c07095 sha1 5d9beaf5bc411ac66785d70980977b08446f46e3 )
+	rom ( name ac1-edata1-u.3c size 524288 crc a9547509 sha1 1bc663cec03b60ad968896bbc2546f02efda135e )
 	rom ( name ac1-edata1-l.1c merge ac1-edata1-l.1c size 524288 crc a87087dd sha1 cd9b83a8f07886ab44e4ded68002b44338777e8c )
 	rom ( name ac1-poi-h.2f merge ac1-poi-h.2f size 524288 crc 573bbc3b sha1 371be12b915db6872049f18980c1b55544cfc445 )
 	rom ( name ac1-poi-lu.2k merge ac1-poi-lu.2k size 524288 crc d99084b9 sha1 c604d60a2162af7610e5ff7c1aa4195f7df82efe )
@@ -251,6 +248,9 @@ game (
 	rom ( name ac1-voi1.12c merge ac1-voi1.12c size 524288 crc c9490667 sha1 4b6fbe635c32469870a8e6f82742be6a9d4918c9 )
 	rom ( name ac1-voi2.12d merge ac1-voi2.12d size 524288 crc 1fcb51ba sha1 80fc815e5fad76d20c3795ab1d89b57d9abc3efd )
 	rom ( name ac1-voi3.12e merge ac1-voi3.12e size 524288 crc cd202e06 sha1 72a18f5ba402caefef14b8d1304f337eaaa3eb1d )
+	rom ( name gal16v8a-3pdsp5.17d size 279 crc 799c1f26 sha1 d28ed1b9fa78180c5a0b01a7198a2870137c7349 )
+	rom ( name plhs18p8-3pobj3.17n size 329 crc 9625f469 sha1 29158a3d37485fb0714d0a60bcd07abd26a3f56e )
+	rom ( name plhs18p8-3pobj4.17n size 329 crc 1b7c90c1 sha1 ae65aab7a191cdf1af488e144af22b9d8669c903 )
 )
 
 game (
@@ -289,6 +289,7 @@ game (
 	rom ( name cy1-voi1.12c size 524288 crc 2b335f06 sha1 2b2cd407c34388b56496f84a414daa153780b098 )
 	rom ( name cy1-voi2.12d size 524288 crc 10cd15f0 sha1 9b721654ed97a13287373c1b2854ac9aeddc271f )
 	rom ( name cy1-voi3.12e size 524288 crc c902b4a4 sha1 816357ec1a02a7ebf817ac1182e9c50ce5ca71f6 )
+	rom ( name cybsled.nv size 8192 crc aa18bf9e sha1 3712d4d20e5f5f1c920e3f1f6a00101e874662d0 )
 )
 
 game (
@@ -329,6 +330,7 @@ game (
 	rom ( name cy1-voi1.12c merge cy1-voi1.12c size 524288 crc 2b335f06 sha1 2b2cd407c34388b56496f84a414daa153780b098 )
 	rom ( name cy1-voi2.12d merge cy1-voi2.12d size 524288 crc 10cd15f0 sha1 9b721654ed97a13287373c1b2854ac9aeddc271f )
 	rom ( name cy1-voi3.12e merge cy1-voi3.12e size 524288 crc c902b4a4 sha1 816357ec1a02a7ebf817ac1182e9c50ce5ca71f6 )
+	rom ( name cybsledj.nv size 8192 crc a73bb03e sha1 e074bfeae14178c867070e06f6690ed13115f5fa )
 )
 
 game (
@@ -471,6 +473,42 @@ game (
 	rom ( name rr1gam.2d merge rr1gam.2d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
 	rom ( name rr1gam.3d merge rr1gam.3d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
 	rom ( name rr1gam.4d merge rr1gam.4d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
+)
+
+game (
+	name rrf
+	description "Ridge Racer (Full Scale, 1993-12-13, World)"
+	year 1993
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	cloneof ridgerac
+	romof ridgerac
+	rom ( name rrf2prgll.4d size 524288 crc 23c6144d sha1 99f70e2c60fba7551cafdce12b07da1f8ab8aad6 )
+	rom ( name rrf2prglm.2d size 524288 crc 1ad638a1 sha1 505a7f4ba60bbc4e735865fbc5d664311b6045d9 )
+	rom ( name rrf2prgum.8d size 524288 crc d7e0aa16 sha1 cab4578cdd3af84b865114be4105cfdc2e7abf36 )
+	rom ( name rrf2prguu.6d size 524288 crc 12c808bb sha1 64e84686d4ceb8145b9a59b75d0dced830884c9d )
+	rom ( name c71.bin merge c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name c74.bin merge c74.bin size 16384 crc a3dce360 sha1 8f3248b1890abb2e649927240ae46f73bb171e3b )
+	rom ( name rrf1data.6r size 524288 crc ce3c6ed6 sha1 23e033364bc967c10c49fd1d5413dda837670633 )
+	rom ( name rrf2potl0.l0 size 524288 crc 9b762e60 sha1 50b67ff6678bacba140bad3aedda75c30851fa7a )
+	rom ( name rrf2potl1.l1 size 524288 crc ab4d66b0 sha1 59020b3dc2efff99cd528752ca7168b64ae96ac4 )
+	rom ( name rrf2potm0.m0 size 524288 crc 02d4daa3 sha1 9b4e48d3234cb91146b5d31ffcf42ad199ccb903 )
+	rom ( name rrf2potm1.m1 size 524288 crc 37e005c2 sha1 036ae1c44aaa6a6904e6d4938572035ccc6854ed )
+	rom ( name rrf2potu0.u0 size 524288 crc 86b3fe98 sha1 f242d33f7488e233ccdc0b5d309c64510d7a622d )
+	rom ( name rrf2potu1.u1 size 524288 crc e0c6ce3d sha1 cc559a2237ccb753cb1397fecba64733455a8c43 )
+	rom ( name rrf1wave0.10r size 1048576 crc a8e85bde sha1 b56677e9f6c98f7b600043f5dcfef3a482ca7455 )
+	rom ( name rrf1wave1.10p size 1048576 crc 35f47c8e sha1 7c3f9e942f532af8008fbead2a96fee6084bcde6 )
+	rom ( name rrf1wave2.10n size 1048576 crc 4ceeae12 sha1 ae3a6583f8912bc784c7bc63d32448228cf217ba )
+	rom ( name rrf1wave3.10l size 1048576 crc c4cda1a7 sha1 60bc96880ec79efdff3cc70c09e848692a40bea4 )
+	rom ( name rrf1gam.2d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 flags baddump )
+	rom ( name rrf1gam.3d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 flags baddump )
+	rom ( name rrf1gam.4d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 flags baddump )
+	rom ( name rrf1cg0.bin size 2097152 crc b557a795 sha1 f345486ffbe797246ad80a55d3c4a332ed6e2888 flags baddump )
+	rom ( name rrf1cg1.bin size 2097152 crc 0fa212d9 sha1 a1311de0a504e2d399044fa8ac32ec6c56ec965f flags baddump )
+	rom ( name rrf1cg2.bin size 2097152 crc 18e2d2bd sha1 69c2ea62eeb255f27d3c69373f6716b0a34683cc flags baddump )
+	rom ( name rrf1cg3.bin size 2097152 crc 9564488b sha1 6b27d1aea75d6be747c62e165cfa49ecc5d9e767 flags baddump )
+	rom ( name rrf1ccrl.bin size 2097152 crc 6092d181 sha1 52c0e3ac20aa23059a87d1a985d24ae641577310 flags baddump )
+	rom ( name rrf1ccrh.bin size 524288 crc dd332fd5 sha1 a7d9c1d6b5a8e3a937b525c1363880e404dcd147 flags baddump )
 )
 
 game (
@@ -984,7 +1022,7 @@ game (
 	rom ( name rr1gam.2d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
 	rom ( name rr1gam.3d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
 	rom ( name rr1gam.4d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
-	rom ( name cy1eeprm.9e size 8192 crc 4e1d294b sha1 954ce04dcdba65214f5d0690ca59264f9090a1d6 )
+	rom ( name cybrcomm.nv size 8192 crc 8432c066 sha1 99d4bfda3f8aec288dbeaf291bce85fe9009a1de )
 )
 
 game (

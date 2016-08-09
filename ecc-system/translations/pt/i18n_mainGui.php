@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"Você pode importar o atual datfile (arquivo contendo metadados) para o %s da base de dados aqui.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Importar datfile",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

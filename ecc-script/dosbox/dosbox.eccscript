@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Platform               : DOSBox (DOS Games)
 ; Script for             : DOSBox (tested with) 0.73
-; Script version         : v1.0.0.1
-; Last changed           : 2010.02.02
+; Script version         : v1.0.0.3
+; Last changed           : 2010.04.07
 ;
 ; Author: S. Ebeltjes (Phoenix Interactive)
 ;
@@ -111,6 +111,9 @@ ToolTip("Determing ROM type...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox",
 RecursiveFileSearch($GameOutputFolder, "(?i)\.(img)", "", 1, true, 0) ;Search only for .IMG files.
 If Ubound($RFSarray) = 2 Then ;When there is only 1 IMG file found (+1) = 2.
 	$RomType = "img"
+	; Determine if this IMG file is part of a dos game using .EXE/.COM files, if yes...set back to dosgame.
+	RecursiveFileSearch($GameOutputFolder, "(?i)\.(exe|com)", "", 1, true, 0) ;Search only for .EXE/.COM files.
+	If Ubound($RFSarray) >= 2 Then $RomType = "dos" ;When there is an .EXE/.COM file found (+1) = 2.
 Else
 	$RomType = "dos"
 EndIf

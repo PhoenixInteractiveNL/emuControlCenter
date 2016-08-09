@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -94,7 +94,7 @@ $i18n['dropdownMedium'] = array(
 		"CD/DVD-Rom",
 	'tape' =>
 		"Kassette",
-	'floppydics' =>
+	'floppydisc' =>
 		"Diskette",
 	'cartridge' =>
 		"Steckmodul (Catridge)",
@@ -127,5 +127,17 @@ $i18n['dropdownDumpType'] = array(
 		"[p] Pirate",
 	'[cr]' =>
 		"[cr] Cracked",
+
+	/* 1.1 WIP 02 */
+	'[misc_fav]' =>
+		"Favorite dump",
+	'[misc_amiga_WHD]' =>
+		"Amiga WHDLoad dump",
+	'[misc_amiga_ADF]'=>
+		"Amiga ADF dump",
+	'[misc_amiga_IPF]' =>
+		"Amiga IPF dump",
+	'[misc_amiga_SPS]' =>
+		"Amiga SPS dump",
 );
 ?>

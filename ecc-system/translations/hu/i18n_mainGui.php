@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"A legfrissebb online adatfájl importja a %s platformhoz az internet romDB-bõl.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Adatfájl import",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

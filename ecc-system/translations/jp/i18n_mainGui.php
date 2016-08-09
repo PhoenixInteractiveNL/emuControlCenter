@@ -80,6 +80,9 @@ $i18n['mainGui'] = array(
 		"You can import the latest online datfile for %s from internet romDB here.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Import datfile",
-		
+
+	/* 1.1 WIP03 */
+	'mainlist_tab_images' =>
+		"IMAGES",			
 );
 ?>

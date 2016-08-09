@@ -1,4 +1,5 @@
 v1.0.0.6
+- Better support for amiga games using the MULTI lines in the eccScriptRom file. (TheCyberDruid)
 
-- TheCyberDruid has written a piece for winuae to give better support
-  for amiga games using the MULTI lines in the eccScriptRom file.
+v1.0.0.7
+- Adjusted the script to use new MULTI output with ZIP in eccScriptDat (TheCyberDruid)

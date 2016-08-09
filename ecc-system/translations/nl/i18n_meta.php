@@ -108,22 +108,22 @@ $i18n['dropdownDumpType'] = array(
 	'unknown' =>
 		"Unknown",
 	'[!]' =>
-		"[!] Verified Good Dump",
+		"[!] Geverifieerde goede Dump",
 	'[a]' =>
-		"[a] Alternate Dump",
+		"[a] Alternatieve Dump",
 	'[b]' =>
-		"[b] Bad Dump",
+		"[b] Slechte Dump",
 	'[t]' =>
-		"[t] Trained",
+		"[t] Trainer",
 	'[f]' =>
-		"[f] Fixed",
+		"[f] Gemanipuleerd",
 	'[T]' =>
-		"[T] Translation",
+		"[T] Translatie",
 	'[h]' =>
-		"[h] Hack",
+		"[h] Gehackt",
 	'[o]' =>
 		"[o] Overdump",
 	'[p]' =>
-		"[p] Pirate",
+		"[p] Piraat",
 );
 ?>

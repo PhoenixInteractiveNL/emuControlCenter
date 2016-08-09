@@ -39,13 +39,13 @@ $i18n['dropdown_lang'] = array(
 	'[[dutch]]' =>
 		"Nederlands",
 	'[[norway]]' =>
-		"Noorwegen",
+		"Noorweegs",
 	'[[swedish]]' =>
-		"Zweden",
+		"Zweeds",
 	'[[finnish]]' =>
-		"Finnish",
+		"Fins",
 	'[[czech]]' =>
-		"Czech",
+		"Tjechies",
 );
 
 /*

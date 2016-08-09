@@ -1,13 +1,13 @@
 ; Platform              : Commodore Amiga
 ; Script for            : WinUAE (tested with v1.4.4)
-; Script version        : v1.0.0.6
-; Last changed          : 2008.07.15
+; Script version        : v1.0.0.7
+; Last changed          : 2008.07.23
 ;
 ;
 ; Author:  - Sebastiaan Ebeltjes (Phoenix Interactive)
 ;          - TheCyberDruid
 ;
-; NOTES:
+; NOTES: Works only with 8.3 activated!
 ;
 ;
 ;
@@ -37,18 +37,20 @@ If IsArray( $eccMultiRoms ) Then
 	$iRomCount = UBound( $eccMultiRoms, 1 ) - 1
 	For $i = 1 To $iRomCount
 		If $eccMultiRoms[$i][1] <> '""' Then
-			If StringInStr( $eccMultiRoms[$i][1], "\" ) Then
-				$sRomName = CleanRomName( $eccMultiRoms[$i][1] )
-			Else
-				$sRomName = $eccMultiRoms[$i][1]
-			EndIf
-			If Not FileExists( $eccFileRomPath & $sRomName ) Then
-				$sRomName = StringReplace( $sRomName, ".adf", ".zip" )
-			EndIf
-			$aDiskNames[$iDiskCount] = $sRomName
-			$iDiskCount += 1
-			If $iDiskCount == 5 Then
-				ExitLoop
+			If Not StringInStr( $eccMultiRoms[$i][0], "packed" ) Then
+				If StringInStr( $eccMultiRoms[$i][1], "\" ) Then
+					$sRomName = CleanRomName( $eccMultiRoms[$i][1] )
+				Else
+					$sRomName = $eccMultiRoms[$i][1]
+				EndIf
+				If Not FileExists( $eccFileRomPath & $sRomName ) Then
+					$sRomName = StringReplace( $sRomName, ".adf", ".zip" )
+				EndIf
+				$aDiskNames[$iDiskCount] = $sRomName
+				$iDiskCount += 1
+				If $iDiskCount == 5 Then
+					ExitLoop
+				EndIf
 			EndIf
 		Else
 			ExitLoop
@@ -121,10 +123,12 @@ EndIf
 
 $uae_file = FileOpen($sUAEFilename, 1)
 
-FileWriteLine($uae_file, "floppy0=" & $eccFileRomPath & $aDiskNames[1])
-If $iDiskCount > 1 Then FileWriteLine($uae_file, "floppy1=" & $eccFileRomPath & $aDiskNames[2])
-If $iDiskCount > 2 Then FileWriteLine($uae_file, "floppy2=" & $eccFileRomPath & $aDiskNames[3])
-If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & $aDiskNames[4])
+	FileWriteLine($uae_file, "floppy0=" & $eccFileRomPath & $aDiskNames[1])
+	If $iDiskCount > 1 Then FileWriteLine($uae_file, "floppy1=" & $eccFileRomPath & $aDiskNames[2])
+	If $iDiskCount > 2 Then FileWriteLine($uae_file, "floppy2=" & $eccFileRomPath & $aDiskNames[3])
+	If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & $aDiskNames[4])
+
+	;FileWriteLine($uae_file, "statefile=" & $eccFileRomNamePlain & ".uss" )
 
 FileClose($uae_file)
 

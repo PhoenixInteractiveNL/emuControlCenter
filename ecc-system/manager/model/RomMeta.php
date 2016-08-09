@@ -489,7 +489,7 @@ class RomMeta extends Item {
 			musican = ".$this->getCleanString($this->getMusican()).",
 			graphics = ".$this->getCleanString($this->getGraphics()).",
 			media_type = ".$this->getCleanInteger($this->getMedia_type()).",
-			media_current = ".$this->getCleanInteger($this->getMedia_current(), $storeEmptyString = true).",
+			media_current = ".$this->getCleanInteger($this->getMedia_current()).",
 			media_count = ".$this->getCleanInteger($this->getMedia_count()).",
 			storage = ".$this->getCleanInteger($this->getStorage()).",
 			region = ".$this->getCleanInteger($this->getRegion()).",

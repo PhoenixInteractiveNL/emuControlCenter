@@ -80,7 +80,8 @@ class WebServices {
 			$error = false;
 			
 			$urlData['url'] .= "&csid=".urlencode($this->eccDbSessionKey);	
-			$ret = @file_get_contents($urlData['url'], false, NULL, 0, 30); // only read the first 30 chars
+			
+			$ret = file_get_contents($urlData['url'], false, NULL, 0, 30); // only read the first 30 chars
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$split = explode(':', $ret);
@@ -151,9 +152,16 @@ class WebServices {
 			$usk = trim($modData['md.usk']);
 			$dev = trim($modData['md.creator']);
 			
+			$publisher = trim($modData['md.publisher']);
+			$storage = trim($modData['md.storage']);
+			
+			$date = ($modData['fd.launchtime']) ? date('Ymd-His', $modData['fd.launchtime']) : 0;
+			$stats = (int)$modData['fd.launchcnt'].'.'.$date;
+			
 			$urlData[$modData['md.id']]['title'] = $title;
-			$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."";
+			$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."&pub=".urlencode($publisher)."&sto=".urlencode($storage)."&stat=".urlencode($stats)."";
 		}
+		
 		return $urlData;
 	}
 	
@@ -162,8 +170,7 @@ class WebServices {
 		$q = '
 		SELECT
 			md.*,
-			fd.size,
-			fd.title
+			fd.*
 		FROM
 			mdata md
 			LEFT JOIN fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)
@@ -181,6 +188,7 @@ class WebServices {
 		while($row = $result->fetch(SQLITE_ASSOC)) {
 			$ret[] = $row;
 		}
+		
 		return $ret;
 	}
 	

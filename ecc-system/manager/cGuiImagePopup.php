@@ -26,10 +26,7 @@ class GuiImagePopup {
 		
 		$this->connect_signals();
 		$this->twImageInit();
-		
-		
-		
-		$this->imageFit = !$this->gui->ini->read_ecc_histroy_ini('imageCenterDefaultSize');
+		$this->imageFit = !$this->gui->ini->getHistoryKey('imageCenterDefaultSize');
 		
 	}
 	
@@ -77,7 +74,7 @@ class GuiImagePopup {
 	
 	public function setImageSizeMode($obj) {
 		$this->imageFit = $obj->get_active();
-		$this->gui->ini->write_ecc_histroy_ini('imageCenterDefaultSize', !$this->imageFit);
+		$this->gui->ini->storeHistoryKey('imageCenterDefaultSize', !$this->imageFit);
 		$this->updateImage();
 	}
 	
@@ -110,8 +107,10 @@ class GuiImagePopup {
 		foreach ($this->imageTank as $index => $imagePath) {
 			while (gtk::events_pending()) gtk::main_iteration();
 			if (!file_exists($imagePath)) continue;
-			$oPixbuf = GdkPixbuf::new_from_file($imagePath);
-			$oPixbuf = $oPixbuf->scale_simple(80, 60, Gdk::INTERP_BILINEAR);
+			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($imagePath, 80, 60);
+//			if ($oPixbuf !== null) {
+//				$oPixbuf = $oPixbuf->scale_simple(80, 60, Gdk::INTERP_BILINEAR);
+//			}
 			$this->imgPopup_model->append(array($index, $oPixbuf, $imagePath));
 		}
 	}
@@ -174,29 +173,29 @@ class GuiImagePopup {
 	 * 
 	 */
 	private function updateImage() {
-		
 		if (isset($this->imageTank[$this->imagePosition]) && file_exists($this->imageTank[$this->imagePosition])) {
 			
-			$obj_pixbuff = GdkPixbuf::new_from_file($this->imageTank[$this->imagePosition]);
-			
+			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($this->imageTank[$this->imagePosition]);
+
 			// autofit image
-			if ($this->imageFit) {
+			if ($oPixbuf !== null && $this->imageFit) {
+
 				// get viewport size
 				$size = $this->gui->viewport2->window->get_size();
 				$maxViewportWidth = $size[0]-4;
 				$maxViewportHeight = $size[1]-4;
 				
 				// get original image size
-				$imageOriginalWidth = $obj_pixbuff->get_width();
-				$imageOriginalHeight = $obj_pixbuff->get_height();
+				$imageOriginalWidth = $oPixbuf->get_width();
+				$imageOriginalHeight = $oPixbuf->get_height();
 				
 				// calculate new size
 				list($imageNewWidth, $imageNewHeight) = $this->calculateMaxSize($maxViewportWidth, $maxViewportHeight, $imageOriginalWidth, $imageOriginalHeight);
 				// set new size
-				$objImage = $obj_pixbuff->scale_simple($imageNewWidth, $imageNewHeight, Gdk::INTERP_BILINEAR);
+				$objImage = $oPixbuf->scale_simple($imageNewWidth, $imageNewHeight, Gdk::INTERP_BILINEAR);
 			}
 			else {
-				$objImage = $obj_pixbuff;
+				$objImage = $oPixbuf;
 			}
 			$this->gui->imgPopup_image->set_from_pixbuf($objImage);			
 			
@@ -275,8 +274,8 @@ class GuiImagePopup {
 	
 	/*
 	private function saveImage($prefix, $file) {
-		$convertImage = $this->gui->ini->get_ecc_ini_key('USER_SWITCHES', 'image_convert_to_jpg');
-		$user_folder_images = $this->ini->get_ecc_ini_user_folder($this->eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, true);
+		$convertImage = $this->gui->ini->getKey('USER_SWITCHES', 'image_convert_to_jpg');
+		$user_folder_images = $this->ini->getUserFolder($this->eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, true);
 		if ($user_folder_images===false) return false;
 		$res = $this->oImage->save($this->eccident, $prefix, $file, $convertImage);
 		print "<pre>";

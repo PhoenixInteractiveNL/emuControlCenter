@@ -1,0 +1,25 @@
+widget "gtk-tooltips" style "tooltip"
+
+style "default"
+{    
+    stock["gtk-go-down"]  =  {{"Down.png"}}
+    stock["gtk-go-back"]  =  {{"Back.png"}}
+    stock["gtk-go-forward"] =  {{"Forward.png"}}
+    stock["gtk-go-up"]    =  {{"Up.png"}}
+    stock["gtk-home"] =  {{"Home.png"}}
+    stock["gtk-refresh"] = {{"Refresh.png"}}
+    stock["gtk-stop"] =   {{"Stop.png"}}
+
+}
+
+class "GtkWidget" style "default"
+
+
+style "panel-icons" 
+{
+    stock["panel-arrow-down"]  =  {{"Down.png"}}
+    stock["panel-arrow-left"]  =  {{"Back.png"}}
+    stock["panel-arrow-right"] =  {{"Forward.png"}}
+    stock["panel-arrow-up"]    =  {{"Up.png"}}
+}
+class "GtkWidget" style "panel-icons"

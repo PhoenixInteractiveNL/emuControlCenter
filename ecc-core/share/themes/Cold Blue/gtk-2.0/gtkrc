@@ -8,6 +8,9 @@
 # 3D raised appearance with overall skyblue color
 
 style "default" {
+  GtkTreeView::odd_row_color = "#E8E8E8"
+  GtkTreeView::even_row_color = "#E8E8E8"
+
   GtkButton::default_border = {0, 0, 0, 0}
   GtkButton::default_outside_border = {0, 0, 0, 0}
 
@@ -38,14 +41,14 @@ style "default" {
   fg[SELECTED]     = { 1.0, 1.0, 1.0 }
   fg[INSENSITIVE]  = { 0.52, 0.52, 0.55 }
   
-  base[NORMAL]     = { 1.0, 1.0, 1.0 }
-  base[ACTIVE]     = { 0.6, 0.72, 0.82 }
+  base[NORMAL]     = "#D9E3EB"
+  base[ACTIVE]     = "#D9E3EB"
   base[PRELIGHT]   = { 0.93, 0.97, 1.0 }
   base[SELECTED]   = { 0.32, 0.42, 0.6 }
   base[INSENSITIVE]= { 0.9, 0.9, 0.9 }
   
   text[NORMAL]     = { 0.0, 0.0, 0.0 }
-  text[ACTIVE]     = { 1.0, 1.0, 1.0 }
+  text[ACTIVE]     = "#000000"
   text[PRELIGHT]   = { 0.0, 0.0, 0.0 }
   text[SELECTED]   = { 1.0, 1.0, 1.0 }
   text[INSENSITIVE]= { 0.45, 0.45, 0.45 } 
@@ -124,7 +127,7 @@ style "menuitem" {
  
   # Radio/Check items use text[state] for the check colour
   text[NORMAL]   = { 0.32, 0.42, 0.6 }
-  text[PRELIGHT] = { 0, 0, 0 }
+  text[PRELIGHT] = "#ffffff"
 
   engine "smooth" {
     fill {

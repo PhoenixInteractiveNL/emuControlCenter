@@ -102,7 +102,7 @@
 		switch($this->os_env['PLATFORM']) {
 			case 'WIN':
 			case 'WINNT':
-				if (FACTORY::get('manager/IniFile')->get_ecc_ini_key('EXPERIMENTAL', 'win32Dialogs')) {
+				if (FACTORY::get('manager/IniFile')->getKey('EXPERIMENTAL', 'win32Dialogs')) {
 					// win32std standard windows32 style
 					return $this->openWin32ChooseFolderDialog($path, $title);
 				}
@@ -133,7 +133,7 @@
 		switch($this->os_env['PLATFORM']) {
 			case 'WIN':
 			case 'WINNT':
-				if (FACTORY::get('manager/IniFile')->get_ecc_ini_key('EXPERIMENTAL', 'win32Dialogs')) {
+				if (FACTORY::get('manager/IniFile')->getKey('EXPERIMENTAL', 'win32Dialogs')) {
 					// win32std standard windows32 style
 					return $this->openWin32ChooseFileDialog($path, $filter, $defaultFilename);
 				}
@@ -176,7 +176,7 @@
 			)
 		);
 		$dialog->set_position(Gtk::WIN_POS_CENTER);
-		
+
 		if (!realpath($path)) {
 			$path = (dirname($path)) ? dirname($path) : false;
 		}
@@ -202,7 +202,6 @@
 		$dialog->destroy();
 		return false;
 	}
-	
 	
 	/*
 	*

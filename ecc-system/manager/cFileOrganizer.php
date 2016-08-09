@@ -82,7 +82,7 @@ class FileOrganizer extends App{
 	* @author ascheibel
 	*/
 	public function set_destination_path() {
-		$destination_path = $this->ini->get_ecc_ini_user_folder($this->eccident.DIRECTORY_SEPARATOR."roms".DIRECTORY_SEPARATOR."organized".DIRECTORY_SEPARATOR, true);
+		$destination_path = $this->ini->getUserFolder($this->eccident.DIRECTORY_SEPARATOR."roms".DIRECTORY_SEPARATOR."organized".DIRECTORY_SEPARATOR, true);
 		if (!$destination_path || !is_dir($destination_path)) return false;
 		$this->destination_path = $destination_path;
 	}
@@ -187,7 +187,7 @@ class FileOrganizer extends App{
 				// create directories, if needed
 				if (!is_dir(dirname($path_destination))) {
 					if ($this->reorganize_mode != 'preview') {
-						$this->create_dirs_recursive(dirname($path_destination), 0777, true);
+						$this->createDirectoryRecursive(dirname($path_destination), 0777, true);
 					}
 				}
 				if (!file_exists($path_destination) && !isset($catFileColisionTest[$path_destination])) {
@@ -415,8 +415,8 @@ class FileOrganizer extends App{
 	
 
 	
-	private function create_dirs_recursive($strPath, $mode = 0777) {
-		return is_dir($strPath) or ($this->create_dirs_recursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
+	private function createDirectoryRecursive($strPath, $mode = 0777) {
+		return is_dir($strPath) or ($this->createDirectoryRecursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
 	}
 }
 ?>

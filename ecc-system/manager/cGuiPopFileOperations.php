@@ -181,7 +181,7 @@ class GuiPopFileOperations extends GladeXml {
     		$this->addError('could not rename file!');
     	}
     }
-
+    
     public function hideWindow() {
     	$this->guiFileOperations->hide();
 	}

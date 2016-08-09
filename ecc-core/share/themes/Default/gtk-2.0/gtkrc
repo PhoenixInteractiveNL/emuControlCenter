@@ -13,6 +13,11 @@ gtk-alternative-button-order = 1
 
 style "msw-default"
 {
+  base[ACTIVE]     = "#FFFFFF"
+  
+  GtkTreeView::odd_row_color = "#E8E8E8"
+  GtkTreeView::even_row_color = "#E8E8E8"
+
   GtkWidget::interior-focus = 1
   GtkOptionMenu::indicator-size = { 9, 5 }
   GtkOptionMenu::indicator-spacing = { 7, 5, 2, 2 }

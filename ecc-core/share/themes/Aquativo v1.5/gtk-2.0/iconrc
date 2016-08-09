@@ -1,0 +1,20 @@
+pixmap_path "/home/public/Icons/stock"
+style "icon-style"
+{
+  stock["gtk-copy"] = {{ "editcopy.png", *, *, * }}
+  stock["gtk-paste"] = {{ "editpaste.png", *, *, * }}
+  stock["gtk-cut"] = {{ "editcut.png", *, *, * }}
+  stock["gtk-delete"] = {{ "edittrash.png", *, *, * }}
+  stock["gtk-find"] = {{ "find.png", *, *, * }}
+  stock["gtk-go-back"] = {{ "back.png", *, *, * }}
+  stock["gtk-go-down"] = {{ "down.png", *, *, * }}
+  stock["gtk-go-forward"] = {{ "forward.png", *, *, * }}
+  stock["gtk-go-up"] = {{ "up.png", *, *, * }}
+  stock["gtk-help"] = {{ "help.png", *, *, * }}
+  stock["gtk-home"] = {{ "gohome.png", *, *, * }}
+  stock["gtk-print"] = {{ "fileprint.png", *, *, * }}
+  stock["gtk-quit"] = {{ "exit.png", *, *, * }}
+  stock["gtk-refresh"] = {{ "reload.png", *, *, * }}
+  stock["gtk-stop"] = {{ "stop.png", *, *, * }}
+}
+class "GtkWidget" style "icon-style"

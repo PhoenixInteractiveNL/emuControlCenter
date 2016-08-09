@@ -19,14 +19,13 @@ class EccParser {
 		if ($status_obj->is_canceled()) return false;
 
 		
-		$useExtDispatcher = $ini->get_ecc_ini_key('USER_SWITCHES', 'useExtensionDispatcher');
+		$useExtDispatcher = $ini->getKey('USER_SWITCHES', 'useExtensionDispatcher');
 		
 		$dataParser = FACTORY::get('manager/EccParserMedia', $path);
 		
 		// parse only eccident, if set. else parse everything found
-		$wanted_extensions = $ini->get_ecc_platform_parser($eccident);
-		
-		$all_extensions = $ini->get_ecc_platform_parser();
+		$wanted_extensions = $ini->getPlatformExtensionParser($eccident);
+		$all_extensions = $ini->getPlatformExtensionParser();
 		
 		$directUnseted = array();
 		foreach ($wanted_extensions as $fileExtension => $eccParser) {

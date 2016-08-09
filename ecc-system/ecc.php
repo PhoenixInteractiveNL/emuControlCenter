@@ -113,6 +113,9 @@ class App extends GladeXml {
 	private $visibleMedia = true;
 	
 	
+	// manager
+	private $oHelper = false;
+	
 	public function create_combo_lanugages()
 	{
 		$combobox = new IndexedCombobox();
@@ -132,22 +135,19 @@ class App extends GladeXml {
 			),
 		);
 		$combobox->init_combobox($this->cb_search_language, $data);
-		
-		// insert data
+
 		$lang = array();
 		$lang[] = array(
 			false,
-			GdkPixbuf::new_from_file(dirname(__FILE__)."/"."images/eccsys/languages/ecc_lang_unknown.png"),
+			$this->oHelper->getPixbuf(dirname(__FILE__)."/"."images/eccsys/languages/ecc_lang_unknown.png"),
 			'ALL',
 		);
 		foreach($this->media_language as $indent => $label) {
-			
 			$img_path = dirname(__FILE__)."/".'images/eccsys/languages/ecc_lang_'.strtolower($indent).'.png';
 			if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/languages/ecc_lang_unknown.png';
-			
 			$lang[] = array(
 				$indent,
-				GdkPixbuf::new_from_file($img_path),
+				$this->oHelper->getPixbuf($img_path),
 				$label,
 			);
 		} 
@@ -201,7 +201,7 @@ class App extends GladeXml {
 		
 		$state = $obj->get_active_text();
 		$this->ext_search_selected[$obj->get_name()] = $state;
-		$state = $this->ini->write_ecc_histroy_ini($obj->get_name(), $state, false);
+		$state = $this->ini->storeHistoryKey($obj->get_name(), $state, false);
 		$this->ext_search_reset->set_sensitive(true);
 		
 		// now control, if any dropdown is selected.
@@ -263,7 +263,7 @@ class App extends GladeXml {
 	 * 
 	 */	
 	private function set_ecc_image_size_from_ini() {
-		$image_size = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'image_mainview_size');
+		$image_size = $this->ini->getKey('USER_SWITCHES', 'image_mainview_size');
 		
 		// check, if valid
 		if (!$image_size | !strpos($image_size, 'x')) return FALSE;
@@ -437,7 +437,7 @@ class App extends GladeXml {
 		$menuRating->popup();
 	}
 	
-	public function simpleContextMenu($title=false, $dataArray=array(), $callback, $field) {
+	public function simpleContextMenu($title=false, $dataArray=array(), $callback, $field, $param=false) {
 			if (!$title) $title = 'Change:';
 			$menu = new GtkMenu();
 			$menuItem = new GtkMenuItem($title);
@@ -448,18 +448,23 @@ class App extends GladeXml {
 			
 			foreach ($dataArray as $key => $value) {
 				$menuItem = new GtkMenuItem($value);
-				$menuItem->connect_simple_after('activate', array($this, $callback), $dataArray, $key, $field);
+				$menuItem->connect_simple_after('activate', array($this, $callback), $dataArray, $key, $field, $param);
 				$menu->append($menuItem);
 			}
 		$menu->show_all();
 		$menu->popup();
 	}
 	
-	public function simpleMetaUpdate($dataArray, $key, $field) {
+	public function simpleMetaUpdate($dataArray, $key, $field, $dontUseBool = false) {
 		
 		if (!isset($this->current_media_info)) return false;
 		
-		$this->current_media_info[$field] = $this->get_dropdown_bool($key);
+		if ($dontUseBool) {
+			$this->current_media_info[$field] = $key;
+		} else {
+			$this->current_media_info[$field] = $this->get_dropdown_bool($key);
+		}
+		
 		$id = $this->_fileView->saveMetaData($this->current_media_info);
 		// only, if new dataset
 		if ($id) $this->current_media_info['md_id'] = $id;
@@ -499,15 +504,15 @@ class App extends GladeXml {
 						$base_path = dirname(__FILE__)."/"."images/eccsys/languages/";
 						$path_a = $base_path.'ecc_lang_'.$selectedLanguages[$languagePosition].'.png';
 						if (!file_exists($path_a)) $path_a =  $base_path.'ecc_lang_unknown.png';
-						$pixbuf_icon_active = GdkPixbuf::new_from_file($path_a);
-						$obj_icon_active = $pixbuf_icon_active->scale_simple(28, 20, Gdk::INTERP_BILINEAR);
-			
+
+						$pixbuf_icon_active = $this->oHelper->getPixbuf($path_a);
+//						if ($pixbuf_icon_active !== null) {
+//							$obj_icon_active = $pixbuf_icon_active->scale_simple(28, 20, Gdk::INTERP_BILINEAR);
+//						}
 						// set pixbuf to image
 						$image = new GtkImage();
-						$image->set_from_pixbuf($obj_icon_active);
+						$image->set_from_pixbuf($pixbuf_icon_active);
 						
-						//$button = new GtkButton($row." - ".$col);
-//						$table->attach($image, $col+1, $col+2, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
 						$table->attach($image, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
 					}
 					$languagePosition++;
@@ -515,19 +520,11 @@ class App extends GladeXml {
 			}
 		}
 		else {
-			
-//			$entryCopletition = FACTORY::get('manager/thirdParty/PhpGtkEntryCompletion', $this->media_category);
-//			print "<pre>";
-//			print_r($entryCopletition);
-//			print "</pre>";
-//			$table->attach($entryCopletition, 0, 1, 0, 1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
-			
-			// get pixbuf
-			$base_path = dirname(__FILE__)."/"."images/eccsys/languages/";
-			$imgPathEditButton = $base_path.'btn_edit.png';
-			if (!file_exists($imgPathEditButton)) die($imgPathEditButton.' not found!');
-			$pixbufEditButton = GdkPixbuf::new_from_file($imgPathEditButton);
-			$pixbufEditButton = $pixbufEditButton->scale_simple(118, 20, Gdk::INTERP_BILINEAR);
+			$imgPathEditButton = dirname(__FILE__).'/images/eccsys/languages/btn_edit.png';
+			$pixbufEditButton = $this->oHelper->getPixbuf($imgPathEditButton);
+//			if ($pixbufEditButton !== null) {
+//				$pixbufEditButton = $pixbufEditButton->scale_simple(118, 20, Gdk::INTERP_BILINEAR);
+//			}
 	
 			// set pixbuf to image
 			$image = new GtkImage();
@@ -554,7 +551,8 @@ class App extends GladeXml {
 		
 		$state = ($this->optVisMainListMode) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_optvis_listmode_'.$state.'.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);	
 
@@ -569,7 +567,7 @@ class App extends GladeXml {
 		//$row++;
 		
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_optvis_spacer.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);	
 		$table->attach($oImage, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);
@@ -579,7 +577,7 @@ class App extends GladeXml {
 		
 		$state = ($this->nav_autoupdate) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_auto_nav_'.$state.'.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);
 
@@ -596,7 +594,7 @@ class App extends GladeXml {
 		
 		$state = ($this->nav_inactive_hidden) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_hide_nav_null_'.$state.'.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);
 		
@@ -613,7 +611,7 @@ class App extends GladeXml {
 
 		$state = ($this->toggle_show_doublettes) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_hide_dup_'.$state.'.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);
 
@@ -630,7 +628,7 @@ class App extends GladeXml {
 		
 		$state = ($this->images_inactiv) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_hide_img_'.$state.'.png';
-		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
 		$oImage = new GtkImage();
 		$oImage->set_from_pixbuf($pixbuf);	
 
@@ -657,9 +655,9 @@ class App extends GladeXml {
 	}
 	
 	public function toggleMailListMode() {
-		if ($this->open_window_confirm('BETA', "The view cannot changed on the fly because of an php-gtk2 bug (maybe :-))\n\nThis i only a beta feature... you have to restart ecc to the the changes... sorry!\n\nRestart ecc?")) {
+		if ($this->open_window_confirm('Restart ecc', "The view cannot changed on the fly. \n\nShould emuControlCenter restart?")) {
 			$this->optVisMainListMode = !$this->optVisMainListMode;
-			$this->ini->write_ecc_histroy_ini('optVisMainListMode', $this->optVisMainListMode);
+			$this->ini->storeHistoryKey('optVisMainListMode', $this->optVisMainListMode);
 			FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open');
 			Gtk::main_quit();
 		}
@@ -677,9 +675,8 @@ class App extends GladeXml {
 		define('ECC_BASEDIR_OFFSET', "..".DIRECTORY_SEPARATOR);
 		define('ECC_BASEDIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_BASEDIR_OFFSET).DIRECTORY_SEPARATOR);
 		
-
 		$this->writeLocalReleaseInfo();
-
+		
 // TEST ONLY!	
 // CONVERTER FOR IMAGES FROM NO-INTRO!!!	
 //$imgConvert = FACTORY::get('manager/ImageConvertNoIntro');
@@ -703,7 +700,33 @@ class App extends GladeXml {
 		// INI get ecc main ini-file
 		// ----------------------------------------------------------------
 		$this->ini = FACTORY::get('manager/IniFile');
-		if ($this->ini === false) die();
+		if ($this->ini === false) die('miss ini');
+		
+		$this->set_ecc_image_size_from_ini();
+		
+		// ----------------------------------------------------------------
+		// Init colors
+		// ----------------------------------------------------------------
+
+		// TREEVIEWS:
+		// treeview background
+		$this->treeviewBgColor = $this->ini->getKey('GUI_COLOR', 'treeview_color_bg');
+		if (!$this->treeviewBgColor || !Valid::color($this->treeviewBgColor)) $this->treeviewBgColor = "#445566";
+		
+		// text color
+		$this->treeviewFgColor = $this->ini->getKey('GUI_COLOR', 'treeview_color_text');
+		if (!$this->treeviewFgColor || !Valid::color($this->treeviewFgColor)) $this->treeviewFgColor = "#FFFFFF";
+		
+		// color swap
+		$this->treeviewBgColor1 = $this->ini->getKey('GUI_COLOR', 'treeview_color_row1');
+		if (!$this->treeviewBgColor1 || !Valid::color($this->treeviewBgColor1)) $this->treeviewBgColor1 = "#445566";
+		
+		$this->treeviewBgColor2 = $this->ini->getKey('GUI_COLOR', 'treeview_color_row2');
+		if (!$this->treeviewBgColor2 || !Valid::color($this->treeviewBgColor2)) $this->treeviewBgColor2 = "#556677";
+		
+		// font family
+		$this->treeviewFontType = $this->ini->getKey('GUI_COLOR', 'treeview_font_type');
+		if (!$this->treeviewFontType) $this->treeviewFontType = "arial 10";
 		
 		// ----------------------------------------------------------------
 		// DBMS connect to database and fill FACTORY with dbms
@@ -719,14 +742,12 @@ class App extends GladeXml {
 		FACTORY::setDbms($dbms);
 		
 		$mngrEccUpdate = FACTORY::get('manager/EccUpdate');
-		if (!$mngrEccUpdate->updateSystem($this->ecc_release['local_release_version'])) {
-			
-		}
+		if (!$mngrEccUpdate->updateSystem($this->ecc_release['local_release_version'])) {}
 		
 		// ----------------------------------------------------------------
 		// I18N Initialize 
 		// ----------------------------------------------------------------
-		$language = $this->ini->get_ecc_ini_key('USER_DATA', 'language');
+		$language = $this->ini->getKey('USER_DATA', 'language');
 		I18N::set($language);
 		// translate "language"-dropdown array!
 
@@ -737,50 +758,53 @@ class App extends GladeXml {
 		//$this->signal_autoconnect();
 		$this->wdo_main->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->background_color));
 		
-		
 		$this->wdo_main->connect('key-press-event', array($this, 'handleShortcuts'));
 		
-//		if (count($this->ini->read_ecc_histroy_ini()) <= 1) {
-//			print "<pre>";
-//			print_r($this->ini->read_ecc_histroy_ini());
-//			print "</pre>";
-//		}
+		
+		// ----------------------------------------------------------------
+		// get helper object
+		// ----------------------------------------------------------------
+		$this->oHelper = FACTORY::get('manager/GuiHelper', $this);
+		
+		// get ecc header image
+		$this->oHelper->set_eccheader_image();
+		$this->oHelper->setEccSupportImage();
+
+		$this->oHelper->createUserfolderIfNeeded();
 		
 		// ----------------------------
 		// is this an initialized history ini?
 		// use defaults if init-ini!
 		// ----------------------------		
 		
-		$initialHistroyIni = (count($this->ini->read_ecc_histroy_ini()) <= 1);
-		
+		$initialHistroyIni = (count($this->ini->getHistoryKey()) <= 1);
 		$this->objTooltips = new GtkTooltips();
 		$this->objLinkCursor = new GdkCursor(Gdk::DRAFT_SMALL); // note 1
-		
 		
 		// ----------------------------
 		// get saved data from hist ini
 		// ----------------------------
-		$this->images_inactiv = $this->ini->read_ecc_histroy_ini('images_inactiv');
-		$this->nav_inactive_hidden = $this->ini->read_ecc_histroy_ini('nav_inactive_hidden');
+		$this->images_inactiv = $this->ini->getHistoryKey('images_inactiv');
+		$this->nav_inactive_hidden = $this->ini->getHistoryKey('nav_inactive_hidden');
 		
 		if (!$initialHistroyIni) {
-			$this->nav_autoupdate = $this->ini->read_ecc_histroy_ini('nav_autoupdate');
+			$this->nav_autoupdate = $this->ini->getHistoryKey('nav_autoupdate');
 		}
 		else {
 			$this->nav_autoupdate = true;
-			$this->ini->write_ecc_histroy_ini('nav_autoupdate', true);
+			$this->ini->storeHistoryKey('nav_autoupdate', true);
 		}
 		
-		$this->toggle_show_doublettes = $this->ini->read_ecc_histroy_ini('toggle_show_doublettes');
+		$this->toggle_show_doublettes = $this->ini->getHistoryKey('toggle_show_doublettes');
 		
 		
-		$pp = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'show_media_pp');
+		$pp = $this->ini->getKey('USER_SWITCHES', 'show_media_pp');
 		if ($pp) $this->_results_per_page = $pp;
 		
 		// 20060108 hack for simle mediaview
-		if ($this->ini->read_ecc_histroy_ini('optVisMainListMode')) {
+		if ($this->ini->getHistoryKey('optVisMainListMode')) {
 			$this->optVisMainListMode = true;
-			$pp = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'media_perpage_list');
+			$pp = $this->ini->getKey('USER_SWITCHES', 'media_perpage_list');
 			$this->_results_per_page = ($pp) ? $pp : 100;
 		}
 		
@@ -802,6 +826,11 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
 		$this->nbMediaInfoStateNetplayEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Netplay?', $this->dropdownStateYesNo, 'simpleMetaUpdate', 'md_netplay');
 		$this->nbMediaInfoStateNetplayEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+
+		
+		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), 'Savetype?', $this->dropdownStorage, 'simpleMetaUpdate', 'md_storage', true);
+		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ddeeff'));
+		
 		
 		$this->nbMediaInfoStateRatingEvent->connect('button-press-event', array($this, 'directRating'));
 		$this->nbMediaInfoStateRatingEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ccddee'));
@@ -829,17 +858,17 @@ class App extends GladeXml {
 		// ----------------------------------------------------------------
 		$this->os_env = FACTORY::get('manager/Os')->getOperatingSystemInfos();
 		
-		// ----------------------------------------------------------------
-		// get helper object
-		// ----------------------------------------------------------------
-		$oHelper = FACTORY::get('manager/GuiHelper', $this);
+//		// ----------------------------------------------------------------
+//		// get helper object
+//		// ----------------------------------------------------------------
+//		$this->oHelper = FACTORY::get('manager/GuiHelper', $this);
+//		
+//		// get ecc header image
+//		$this->oHelper->set_eccheader_image();
+//		$this->oHelper->setEccSupportImage();
+//
+//		$this->oHelper->createUserfolderIfNeeded();
 		
-		// get ecc header image
-		$oHelper->set_eccheader_image();
-		$oHelper->setEccSupportImage();
-		
-		$oHelper->createUserfolderIfNeeded();
-
 		// set title of the main window!
 		$this->wdo_main->set_title($this->ecc_release['title']);
 		
@@ -847,9 +876,11 @@ class App extends GladeXml {
 		// SET USER_SWITCHES FROM INI
 		// ----------------------------
 		// fast list refresh activated? 
-		$this->fastListRefresh = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'fast_list_refresh');
+		$this->fastListRefresh = $this->ini->getKey('USER_SWITCHES', 'fast_list_refresh');
 		// get size from the inifile!
-		$this->set_ecc_image_size_from_ini();
+		
+		
+
 		
 		// ----------------------------
 		// GuiImagePopup init
@@ -860,14 +891,14 @@ class App extends GladeXml {
 		// ----------------------------
 		// GuiEccConfig init
 		// ----------------------------
-		$this->oGuiEccConfig = FACTORY::get('manager/GuiEccConfig', $this);
-		$this->oGuiEccConfig->update();
+//		$this->oGuiEccConfig = FACTORY::get('manager/GuiEccConfig', $this);
+//		$this->oGuiEccConfig->update();
 
 		// ----------------------------
 		// GuiStatus init
 		// ----------------------------		
 		$this->status_obj = FACTORY::get('manager/GuiStatus', $this);
-
+		
 		// ----------------------------
 		// HELP init
 		// ----------------------------
@@ -897,13 +928,13 @@ class App extends GladeXml {
 		// ----------------------------
 		// language  dropdown
 		$this->init_treeview_languages($this->test_language);
-
+		
 		// ----------------------------
 		// extended search
 		// ----------------------------
 		foreach($this->ext_search_combos as $key => $name) {
 			$obj_name = "o".$name;
-			$state =  $this->ini->read_ecc_histroy_ini($name);
+			$state =  $this->ini->getHistoryKey($name);
 			$this->ext_search_selected[$name] = $state;
 			if (!$this->$obj_name) $this->$obj_name = new IndexedCombobox($this->$name, false, $this->cbox_yesno, 1, $state);
 			$this->$name->connect("changed", array($this, 'dispatcher_ext_search'));
@@ -924,22 +955,22 @@ class App extends GladeXml {
 		// navigation_last / index
 		// ----------------------------
 		// navigation_last_index for treeview
-		$selected_platform = $this->ini->read_ecc_histroy_ini('navigation_last_index');
+		$selected_platform = $this->ini->getHistoryKey('navigation_last_index');
 		if (isset($selected_platform)) {
 			$treeview_nav_selection->select_path((int)$selected_platform);
 		}
 		$treeview_nav_selection->set_mode(Gtk::SELECTION_BROWSE);
 		$treeview_nav_selection->connect('changed', array($this, 'get_treeview_nav_selection'));
 		// navigation_last for database
-		$this->_eccident = $this->ini->read_ecc_histroy_ini('navigation_last');
+		$this->_eccident = $this->ini->getHistoryKey('navigation_last');
 		$ident = ($this->_eccident) ? $this->_eccident : 'null';
-		$platform_name = $this->ini->get_ecc_platform_navigation($ident);
+		$platform_name = $this->ini->getPlatformNavigation($ident);
 		$this->setEccident($this->_eccident, false);
 		// set also platform name
 		$this->setPlatformName($platform_name);
 		$txt = '<b>'.htmlspecialchars($this->ecc_platform_name).'</b>';
 		$this->nb_main_lbl_media->set_markup($txt);
-
+		
 		// ----------------------------
 		// platform context menu init
 		// ----------------------------		
@@ -959,23 +990,25 @@ class App extends GladeXml {
 		// INIT Category dropdown!
 		// ----------------------------	
 		$this->cbPlatformCategories->connect("changed", array($this, 'changePlatformCategory'));
-		$availableCategories = $this->ini->get_ecc_platform_categories();
+		$availableCategories = $this->ini->getPlatformCategories();
 		$this->dd_pf_categories = new IndexedCombobox($this->cbPlatformCategories, false, $availableCategories);
-
+		
 		// ----------------------------
 		// INIT NOTEBOCKS visibility
 		// ----------------------------	
 		$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
 		$this->set_notebook_page_visiblility($this->nb_main, 1, $this->view_mode); // factsheet
-		$this->set_notebook_page_visiblility($this->nb_main, 2, $this->_eccident); // config-emu
-		$this->set_notebook_page_visiblility($this->nb_main, 3, !$this->_eccident); // config-ecc
-		$this->set_notebook_page_visiblility($this->nb_main, 4, true); // help
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, $this->_eccident); // config-emu
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, !$this->_eccident); // config-ecc
+		$this->set_notebook_page_visiblility($this->nb_main, 2, true); // help
 		
 		// ----------------------------
 		// Update notebook pages
 		// ----------------------------	
-		$this->update_platform_edit($ident);
+		# 20070127
+		#$this->update_platform_edit($ident);
 		$this->update_platform_info($ident);
+
 
 		// ----------------------------
 		// Special navigation beyond
@@ -990,14 +1023,19 @@ class App extends GladeXml {
 		// MEDIA-EDIT POPUP - signals
 		// ----------------------------	
 		$this->media_edit_btn_save->connect_simple('clicked', array($this, 'edit_media_save'));
+		$this->media_edit_btn_save_bottom->connect_simple('clicked', array($this, 'edit_media_save'));
+		$this->media_edit_btn_saveandclose_bottom->connect_simple('clicked', array($this, 'edit_media_save'), false, true);
+		
 		$this->media_edit_btn_cancel->connect_simple('clicked', array($this, 'media_edit_hide'));
 		$this->media_nb_info_edit->connect_simple('clicked', array($this, 'edit_media'), false);
-		$this->media_edit_btn_start->connect("clicked", array($this, 'open_media_with_player'));
+		$this->media_edit_btn_start->connect("clicked", array($this, 'startRom'));
 		$this->media_nb_info_edit->hide();
 		
 		
 		// Webservices eccdb
 		$this->media_nb_info_eccdb->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
+		$this->media_nb_info_eccdb_info->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
+		$this->media_nb_info_eccdb_mediaedit->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET', true);
 		//$this->media_nb_info_eccdb->hide();
 		
 //		$this->media_nb_info_eccdb_get->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccdb['META_GET_URL'], 'open');
@@ -1005,7 +1043,8 @@ class App extends GladeXml {
 		//$this->media_nb_info_eccdb_get->hide();
 		
 		$this->media_nb_info_eccdb_get_info->connect_simple('clicked', array($this, 'openRomdbGetUrl'));
-		$this->media_nb_info_eccdb_get_info->hide();
+
+		#$this->media_nb_info_eccdb_get_info->hide();
 		
 		
 		// ----------------------------
@@ -1040,8 +1079,10 @@ class App extends GladeXml {
 		// ----------------------------
 		// SETUP Imagepreview placeholder
 		// ----------------------------		
-		$obj_pixbuff = GdkPixbuf::new_from_file(dirname(__FILE__)."/".'images/eccsys/platform/ecc_ecc_teaser.png');
-		$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+		$obj_pixbuff = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/eccsys/platform/ecc_ecc_teaser.png', 240, 160);
+//		if ($obj_pixbuff !== null) {
+//			$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+//		}
 		$this->media_img->set_from_pixbuf($obj_pixbuff);
 		
 		// ----------------------------
@@ -1053,7 +1094,7 @@ class App extends GladeXml {
 		$selection->connect('changed', array($this, 'show_media_info'));
 		// return key (keyboard)
 		// 20061029 - switched from select-cursor-row to row-activated
-		$this->sw_mainlist_tree->connect("row-activated", array($this, 'open_media_with_player'));
+		$this->sw_mainlist_tree->connect("row-activated", array($this, 'startRom'));
 		// right mouse key (context menu)
 		$this->sw_mainlist_tree->connect('button-release-event', array($this, 'show_popup_menu'));
 
@@ -1063,7 +1104,7 @@ class App extends GladeXml {
 		// MEDIA-INFOS
 		// ----------------------------
 		// button start media
-		$this->btn_start_media->connect("clicked", array($this, 'open_media_with_player'));
+		$this->btn_start_media->connect("clicked", array($this, 'startRom'));
 		$this->btn_start_media->hide();
 		// button add to bookmarks
 		$this->btn_add_bookmark->connect("clicked", array($this, 'add_bookmark_by_id'));
@@ -1086,7 +1127,7 @@ class App extends GladeXml {
 		$this->img_media_btn_save->set_sensitive(false);
 		$this->img_media_btn_show_unsaved->connect('clicked', array($this, 'on_image_toggle_unsaved'));
 		// change image order
-		$userSelectedImageType = $this->ini->read_ecc_histroy_ini('imageTypeSelected');
+		$userSelectedImageType = $this->ini->getHistoryKey('imageTypeSelected');
 		$imageIndex = 0;
 		if ($userSelectedImageType) {
 			foreach ($this->image_type as $name => $void) {
@@ -1191,7 +1232,8 @@ class App extends GladeXml {
 		$this->testRadio3->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_METALESS');
 		
 		// configuration
-		$this->menubar_config_ecc_config->connect_simple('activate', array($this, 'show_nb_ecc_configuration'));
+		//$this->menubar_config_ecc_config->connect_simple('activate', array($this, 'show_nb_ecc_configuration'));
+		$this->menubar_config_ecc_config->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT', 'ECC');
 		
 		// ----------------------------
 		// Startup
@@ -1203,8 +1245,12 @@ class App extends GladeXml {
 		$this->topMenuStartPhpVerify->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/verify');
 		$this->topMenuStartResetRegistry->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/regreset');
 		
+		$this->topMenuStartConfig->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_START'], false, '/config');
+		
 		$this->topMenuHelpUpdCheckLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_LIVE'], false);
 		$this->topMenuHelpUpdCheckWeb->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_UPD_ONLINE'], 'open');
+		
+		
 		
 		// ----------------------------
 		// ABOUT
@@ -1252,7 +1298,7 @@ class App extends GladeXml {
 			
 			if ($userfoder_path==true) {
 				// get path from history
-				$path_history = $this->ini->read_ecc_histroy_ini($history_key);
+				$path_history = $this->ini->getHistoryKey($history_key);
 				$title = sprintf(I18N::get('popup', 'dat_export_filechooser_title%s'), $user_only_strg);
 				
 				#$path = $this->openFileChooserDialog($title, $path_history, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
@@ -1279,7 +1325,7 @@ class App extends GladeXml {
 			$this->status_obj->show_main();
 			$this->status_obj->show_output();
 			
-			if ($userfoder_path==true) $this->ini->write_ecc_histroy_ini($history_key, $path, true);
+			if ($userfoder_path==true) $this->ini->storeHistoryKey($history_key, $path, true);
 			
 			require_once('manager/cDatFileExport.php');
 			$export = new DatFileExport($this->ini, $this->status_obj, $this->ecc_release);
@@ -1302,7 +1348,7 @@ class App extends GladeXml {
 	
 	private function fileOrganizer($process=false) {
 		
-		$process_type = $this->ini->get_ecc_ini_key('USER_SWITCHES','fs_rom_reorganization_type');
+		$process_type = $this->ini->getKey('USER_SWITCHES','fs_rom_reorganization_type');
 		
 		require_once('manager/cFileOrganizer.php');
 		$oFileOrga = new FileOrganizer($this->_eccident, $this->ini, $this->status_obj);
@@ -1443,7 +1489,7 @@ class App extends GladeXml {
 		if ($this->status_obj->init()) {
 			
 			// get path from history
-			$path_history = $this->ini->read_ecc_histroy_ini('eccMediaDat_import');
+			$path_history = $this->ini->getHistoryKey('eccMediaDat_import');
 			
 			$title = sprintf(I18N::get('popup', 'dat_import_filechooser_title%s'), $platfom);
 			
@@ -1467,7 +1513,7 @@ class App extends GladeXml {
 			$this->status_obj->show_output();
 			
 			// write path to history
-			$this->ini->write_ecc_histroy_ini('eccMediaDat_import', $path, true);
+			$this->ini->storeHistoryKey('eccMediaDat_import', $path, true);
 			require_once('manager/cDatFileImport.php');
 			$import = new DatFileImport($this->_eccident, $this->status_obj, $this->ini);
 			$import->setDbms($this->dbms);
@@ -1615,7 +1661,7 @@ class App extends GladeXml {
 	
 	public function on_image_toggle() {
 		$this->images_inactiv = ($this->images_inactiv) ? false : true ;
-		$this->ini->write_ecc_histroy_ini('images_inactiv', $this->images_inactiv, false);
+		$this->ini->storeHistoryKey('images_inactiv', $this->images_inactiv, false);
 		$this->onInitialRecord();
 		return true;
 	}
@@ -1630,7 +1676,7 @@ class App extends GladeXml {
 	public function on_toggle_state(&$observed_var, $write_histroy=false) {
 		$observed_var = ($observed_var) ? false : true ;
 		if ($write_histroy) {
-			$this->ini->write_ecc_histroy_ini($write_histroy, $observed_var, false);
+			$this->ini->storeHistoryKey($write_histroy, $observed_var, false);
 			//print "write: $observed_var -- $write_histroy";
 		}
 		$this->onInitialRecord();
@@ -1664,70 +1710,73 @@ class App extends GladeXml {
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function open_media_with_player() {
+	public function startRom($alternateEmuName = false) {
+
 		if (!$this->current_media_info['id']) return false;
 		
-		$media_name = ($this->current_media_info['path_pack']) ? $this->current_media_info['path_pack'] : $this->current_media_info['path'];
-		$ext = strtolower($this->get_ext_form_file($media_name));
-		$ini_player1 = $this->ini->get_ecc_ini_key('ECC_PLATFORM', strtolower($this->current_media_info['fd_eccident']));
-		$ini_player = (isset($ini_player1['EMU.'.$ext])) ? $ini_player1['EMU.'.$ext] : false;
+		$eccident = strtolower($this->current_media_info['fd_eccident']);
 		
-		$playerDefault = (isset($ini_player1['EMU.GLOBAL'])) ? $ini_player1['EMU.GLOBAL'] : false;
-
-		$playerUsed = $playerDefault;
+		$romPath = $this->current_media_info['path'];
 		
-		if (isset($ini_player['path']) && trim($ini_player['path'])) $playerUsed['path'] = trim($ini_player['path']);
-		if (isset($ini_player['param']) && trim($ini_player['param'])) $playerUsed['param'] = trim($ini_player['param']);
+		$romName = ($this->current_media_info['path_pack']) ? $this->current_media_info['path_pack'] : $this->current_media_info['path'];
+		$romFileExtension = strtolower($this->get_ext_form_file($romName));
 		
-		if ((isset($ini_player['path']) && trim($ini_player['path'])) || (isset($ini_player['param']) && trim($ini_player['param']))) {
-			if (isset($ini_player['escape']) && trim($ini_player['escape'])) $playerUsed['escape'] = trim($ini_player['escape']);
-			if (isset($ini_player['win8char']) && trim($ini_player['win8char'])) $playerUsed['win8char'] = trim($ini_player['win8char']);
-		}
+		$emuConfig = $this->ini->getKey('ECC_PLATFORM', $eccident);
 		
-		$emu = $playerUsed['path'];
-		$param = $playerUsed['param'];
+		# global emulator used as overall fallback!
+		$emuGlobal = $emuConfig['EMU.GLOBAL'];
 		
-		$emu_escape = ($playerUsed['escape']) ? $playerUsed['escape'] : 0 ;
-		$emu_win8char = ($playerUsed['win8char']) ? $playerUsed['win8char'] : 0 ;
-
-		if (!$emu) {
-			$title = I18N::get('popup', 'emu_miss_title');
-			$msg = I18N::get('popup', 'emu_miss_notset_msg');
-			$this->open_window_info($title, $msg);
-			return false;
-		}
-		elseif (!realpath($emu)) {
-			$title = I18N::get('popup', 'emu_miss_title');
-			$msg = sprintf(I18N::get('popup', 'emu_miss_notfound_msg%s'), $emu);
-			$this->open_window_info($title, $msg);
-			return false;
-		}
-		elseif (is_dir($emu)) {
-			$title = I18N::get('popup', 'emu_miss_title');
-			$msg = sprintf(I18N::get('popup', 'emu_miss_dir_msg%s'), $emu);
-			$this->open_window_info($title, $msg);
-			return false;			
-		}
-		
-		$path = $this->current_media_info['path'];
-		if (!realpath($path)) {
-			$title = I18N::get('popup', 'rom_miss_title');
-			$msg = I18N::get('popup', 'rom_miss_msg');
-			$this->open_window_info($title, $msg);
-			return false;
-		}
-		
-		#$emu_escape = (isset($ini_player['escape'])) ? $ini_player['escape'] : 0 ;
-		#$emu_win8char = (isset($ini_player['win8char'])) ? $ini_player['win8char'] : 0 ;
-		
-		// execute the file with the assigned emulator		
-		$oOs = FACTORY::get('manager/Os');
-		if ($oOs->executeFileWithProgramm($emu, $param, $path, $emu_escape, $emu_win8char)){
-			$this->_fileView->update_launch_time($this->current_media_info['id']);	
+		# if there is a emulator for the fileextesion of the rom, use this.
+		# otherwise use global... + test for alternate emulator
+		if (isset($emuConfig['EMU.'.$romFileExtension]) && $emuConfig['EMU.'.$romFileExtension]['active'] == 1) {
+			$emuExtesion = $emuConfig['EMU.'.$romFileExtension];
+			if (!trim($emuExtesion['path'])) $emuExtesion['path'] = $emuGlobal['path'];
+			$usedEmu = $emuExtesion;
 		}
 		else {
-			
+			$usedEmu = $emuGlobal;
 		}
+		# if there is an alternate emulator selected, use this one.
+		# if there is no path assigned, use the path form usedEmu
+		if ($alternateEmuName && isset($emuConfig['EMU.'.$alternateEmuName])) {
+			$emuAlternate = $emuConfig['EMU.'.$alternateEmuName];
+			if (!trim($emuAlternate['path'])) $emuAlternate['path'] = $usedEmu['path'];
+			$usedEmu = $emuAlternate;
+		}
+		
+		$emuPath = $usedEmu['path'];
+		$emuParameter = $usedEmu['param'];
+		$emuEscape = (int)$usedEmu['escape'];
+		$emuWin8char = (int)$usedEmu['win8char'];
+		
+		# search for some errors
+		$errorMessage = false;
+		if (!$emuPath) $errorMessage = I18N::get('popup', 'emu_miss_notset_msg');
+		elseif (!realpath($emuPath)) $errorMessage = I18N::get('popup', 'emu_miss_notfound_msg%s');
+		elseif (is_dir($emuPath)) $errorMessage = I18N::get('popup', 'emu_miss_dir_msg%s');
+		// if error, open popup
+		if ($errorMessage) {
+			$this->openGuiConfig('EMU', $eccident, $errorMessage);
+			return false;
+		}
+		
+		if (!realpath($romPath)) {
+			$this->open_window_info(I18N::get('popup', 'rom_miss_title'), I18N::get('popup', 'rom_miss_msg'));
+			return false;
+		}
+		
+		// execute the file with the assigned emulator		
+		$osManager = FACTORY::get('manager/Os');
+		if ($osManager->executeFileWithProgramm($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char)){
+			$this->_fileView->update_launch_time($this->current_media_info['id']);	
+		}
+		return true;
+	}
+	
+	public function openGuiConfig($type = false, $eccident = false, $errorMessage = false) {
+		// $type EMU|???
+		$this->oGuiConfig = FACTORY::get('manager/GuiPopConfig', $this);
+		$this->oGuiConfig->open($type, $eccident, $errorMessage);
 	}
 	
 	/*
@@ -1758,6 +1807,17 @@ class App extends GladeXml {
 	public function handleShortcuts($widged, $event) {
 		
 		#print "$event->keyval && $event->state".LF;
+		
+		// reload
+		// F5
+		if ($event->keyval == '65474' && $event->state == '0') {
+			$this->onReloadRecord();
+			return true;
+		}
+		if ($event->keyval == '114' && $event->state == '8') {
+			$this->onReloadRecord();
+			return true;
+		}
 		
 		// add rom
 		// strg A
@@ -1809,7 +1869,7 @@ class App extends GladeXml {
 		// F6 show media
 		if ($event->keyval == '65475' && $event->state == '0') {
 			$this->view_mode = 'MEDIA';
-			$platformName = $this->ini->get_ecc_platform_navigation($this->_eccident);
+			$platformName = $this->ini->getPlatformNavigation($this->_eccident);
 			$txt = '<b>'.htmlspecialchars($platformName).'</b>';
 			$this->nb_main_lbl_media->set_markup($txt);
 			$this->onInitialRecord();
@@ -1957,12 +2017,13 @@ class App extends GladeXml {
 					$this->btn_add_bookmark->set_sensitive($btn_sensitive_bool);
 					
 					$title = ($info['md_name']) ? $info['md_name'] : basename($info['path']);
-	
 					$eccident = ($info['fd_eccident']) ? $info['fd_eccident'] : $info['md_eccident'];
-					$plattform = strtolower($eccident);
 					
-					$this->set_style($this->media_nb_info_plattform, 10000);
-					$this->media_nb_info_plattform->set_text($plattform);
+					$platformName = $this->ini->getPlatformNavigation(strtolower($eccident)).' ('.strtolower($eccident).')';
+					if (!trim($platformName)) $platformName = "emuControlCenter";
+					
+					$this->set_style($this->media_nb_info_plattform, 9000);
+					$this->media_nb_info_plattform->set_text($platformName);
 					
 					$packed = ($info['path_pack']) ? 'YES' : 'NO';
 					
@@ -2008,7 +2069,11 @@ class App extends GladeXml {
 					$this->media_nb_info_multiplayer->set_markup(''.$this->get_dropdown_string($info['md_multiplayer']).'');
 					$this->media_nb_info_netplay->set_markup(''.$this->get_dropdown_string($info['md_netplay']).'');
 					
-					$category = (isset($this->media_category[$info['md_category']])) ? $this->media_category[$info['md_category']] : '???';
+					$md_storage = ($info['md_storage'] === null) ? 0 : $info['md_storage'];
+					//$this->media_nb_info_storage->set_markup($this->dropdownStorage[$md_storage]);
+					$this->media_nb_info_storage->set_markup($this->dropdownStorage[$md_storage]);
+					
+					$category = (isset($this->media_category[$info['md_category']])) ? $this->media_category[$info['md_category']] : '?';
 					$this->media_nb_info_category->set_text($category);
 					//$this->media_nb_info_category->set_text($this->get_category($info['md_category']));
 					
@@ -2020,10 +2085,14 @@ class App extends GladeXml {
 					
 					$creator = (isset($info['md_creator'])) ? $info['md_creator'] : '?';
 					$this->media_nb_info_creator->set_text($creator);
+
+					$publisher = (isset($info['md_publisher'])) ? $info['md_publisher'] : '?';
+					$this->media_nb_info_publisher->set_text($publisher);
+					
+					
 					
 					$rating = (isset($info['md_rating'])) ? $info['md_rating'] : 0;
 					$this->media_nb_info_rating->set_text(str_repeat($this->ratingChar, $rating));
-					
 					
 					$this->current_media_info = $info;
 					$this->set_image_for_show(0);
@@ -2056,7 +2125,7 @@ class App extends GladeXml {
 					$text .= "PATH:\t".$info['path']."\n";
 					$text .= "PACKED:\t".$packed."\n";
 					$text .= "PACKED_NAME:\t".basename($info['path_pack'])."\n";
-					$text .= "PLATFORM:\t".$plattform."\n";
+					$text .= "PLATFORM:\t".$platformName."\n";
 					$text .= "SIZE:\t".$size."\n";
 					$text .= "CRC32:\t".$crc32."\n";
 					
@@ -2097,6 +2166,9 @@ class App extends GladeXml {
 				}
 				
 				$text .= $spacer;
+				// remove null bytes
+				$text = str_replace("\0", '', $text);
+				
 				$text_buf = new GtkTextBuffer();
 				try {
 					$text_buf->set_text($text);
@@ -2322,7 +2394,7 @@ class App extends GladeXml {
 	public function save_image() {
 		
 		// convert to jpg or direct copy?
-		$convert_images = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'image_convert_to_jpg');
+		$convert_images = $this->ini->getKey('USER_SWITCHES', 'image_convert_to_jpg');
 		
 		$gui_label = $this->img_media_lbl_filename;
 		
@@ -2334,7 +2406,7 @@ class App extends GladeXml {
 		$crc32 = $info['crc32'];
 		$title = $info['title'];
 		
-		$user_folder_images = $this->ini->get_ecc_ini_user_folder($eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, true);
+		$user_folder_images = $this->ini->getUserFolder($eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, true);
 		if ($user_folder_images===false) return false;
 		
 		$path = dirname($info['path']);
@@ -2430,7 +2502,7 @@ class App extends GladeXml {
 		if (!$needle) $needle = $obj->get_active_text();
 		$this->image_type_selected = $needle;
 		
-		$this->ini->write_ecc_histroy_ini('imageTypeSelected', $this->image_type_selected);
+		$this->ini->storeHistoryKey('imageTypeSelected', $this->image_type_selected);
 		
 		$temp[$needle] = $this->image_type[$needle];
 		unset($this->image_type[$needle]);
@@ -2472,8 +2544,8 @@ class App extends GladeXml {
 			$itm_platform_edit = new GtkMenuItem(I18N::get('menu', 'lbl_emu_config'));
 			$itm_platform_edit->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
 			$menu->append($itm_platform_edit);
-			$itm_platform_editState = ($this->_eccident) ? true : false;
-			$itm_platform_edit->set_sensitive($itm_platform_editState);
+			#$itm_platform_editState = ($this->_eccident) ? true : false;
+			#$itm_platform_edit->set_sensitive($itm_platform_editState);
 			
 			$menu->append(new GtkSeparatorMenuItem());
 			
@@ -2567,7 +2639,7 @@ class App extends GladeXml {
 				$title = I18N::get('popup', 'maint_empty_history_title');
 				$msg = I18N::get('popup', 'maint_empty_history_msg');
 				if (!$this->open_window_confirm($title, $msg)) return false; 
-				if ($this->ini->emptyEccHistory()) {
+				if ($this->ini->clearHistoryIni()) {
 					FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open');
 					Gtk::main_quit();
 				}
@@ -2580,7 +2652,7 @@ class App extends GladeXml {
 					$title = I18N::get('global', 'done_title');
 					$msg = I18N::get('global', 'done_msg');
 					$this->open_window_info($title, $msg);
-					$this->onReloadRecord();
+					$this->onReloadRecord(false);
 				}
 				break;				
 			case 'MAINT_DB_OPTIMIZE':
@@ -2618,7 +2690,9 @@ class App extends GladeXml {
 				$this->nb_main->set_current_page(1);
 				break;
 			case 'PLATFORM_EDIT':
-				$this->nb_main->set_current_page(2);
+				$this->oGuiConfig = FACTORY::get('manager/GuiPopConfig', $this);
+				if (!$test) $test = 'EMU';
+				$this->oGuiConfig->open($test, $this->_eccident);
 				break;
 			case 'IMPORT_RC':
 				$this->DatFileImport(array('romcenter datfiles (*.dat)'=>'*.dat', $this->ecc_release['title'].' datfiles (*.ecc)'=>'*.ecc'));
@@ -2650,13 +2724,13 @@ class App extends GladeXml {
 				$this->currentPlatformCategory = false;
 				$this->update_treeview_nav();
 				$this->currentPlatformCategory = $tmpCat;
-				$this->ini->write_ecc_histroy_ini('nav_inactive_hidden', $this->nav_inactive_hidden, false);
+				$this->ini->storeHistoryKey('nav_inactive_hidden', $this->nav_inactive_hidden, false);
 				$this->createEccOptBtnBar();
 				break;
 			case 'NAVIGATION_TOGGLE_AUTOUPDATE':
 				$this->nav_autoupdate = ($this->nav_autoupdate) ? false : true;
 				$this->update_treeview_nav();
-				$this->ini->write_ecc_histroy_ini('nav_autoupdate', $this->nav_autoupdate, false);
+				$this->ini->storeHistoryKey('nav_autoupdate', $this->nav_autoupdate, false);
 				$this->createEccOptBtnBar();
 				break;
 			case 'TOGGLE_MAINVIEV_DOUBLETTES':
@@ -2694,7 +2768,8 @@ class App extends GladeXml {
 				$this->fileOrganizer(true);
 				break;	
 			case 'HELP':
-				$this->nb_main->set_current_page(4);
+//				$this->nb_main->set_current_page(4);
+				$this->nb_main->set_current_page(2);
 				break;
 			default:
 				// do nothing
@@ -2726,7 +2801,7 @@ class App extends GladeXml {
 				$msg .= "All found duplicate ROMS for ".$this->ecc_platform_name." removed from database\n\n";
 				$msg .= "Statistics:\n";
 				foreach ($stats_duplicate as $eccident => $count) {
-					$msg .= "Removed: ".$count." Roms\t".$eccident." - ".$this->ini->get_ecc_platform_name_by_eccident($eccident)."\n";
+					$msg .= "Removed: ".$count." Roms\t".$eccident." - ".$this->ini->getPlatformName($eccident)."\n";
 				}
 			}
 			else {
@@ -2749,20 +2824,69 @@ class App extends GladeXml {
 		if ($this->data_available && $this->data_available>0) {
 			//Check if it was the right mouse button (button 3)
 			if ($event->button == 1 && $event->type == 5) {
-				$this->open_media_with_player();
+				$this->startRom();
 			}
 			elseif ($event->button == 3) {
 				
+				$platformValid = false;
+				$eccident = strtolower($this->current_media_info['fd_eccident']);
+				$platformIni = $this->ini->getKey('ECC_PLATFORM', $eccident);
+				if ($platformIni) $platformValid = true;
+				
 				//popup the menu
 				$menu = new GtkMenu();
+				
+				# start with default emulator!
+				$menuItemLabel = I18N::get('menu', 'lbl_start');
+				$menuItem = new GtkMenuItem($menuItemLabel);
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'START_ROM',  false);
+				$menuItemActive = ($platformValid && $this->current_media_info['id']) ? true : false;
+				$menuItem->set_sensitive($menuItemActive);
+				$menu->append($menuItem);
+				
+				# start with alternate emulator!
+				$menuItemLabel = 'Start ROM with';
+				$menuItem = new GtkMenuItem($menuItemLabel);
+				$menuItemActive = ($platformValid && $this->current_media_info['id']) ? true : false;
+				$menuItem->set_sensitive($menuItemActive);
+				
+				if ($platformIni) {
+					$menuSub = new GtkMenu();
+					$menuItem->set_submenu($menuSub);
+					foreach ($platformIni as $key => $value) {
+						if (substr($key, 0, 4) !== 'EMU.') continue;
+						$alternateEmuIdent = substr($key, 4);
+						if (!$alternateEmuIdent) continue;
 
-				$echo1 = new GtkMenuItem(I18N::get('menu', 'lbl_start'));
-				$echo1->connect_simple('activate', array($this, 'dispatch_menu_context'), $obj);
-				$menu->append($echo1);
+						$emuNotFound = (trim($value['path']) && !file_exists(@$value['path']));
+						if (@$value['active'] && !$emuNotFound) {
+
+							$emuDesc = array();
+							$emuDesc[] = (trim($value['path'])) ? $this->get_plain_filename($value['path']) : '--';
+							$emuDesc[] = (trim($value['param'])) ? $value['param'] : '--';
+							$emuDesc[] = (trim($value['escape'])) ? 'escape' : '--';
+							$emuDesc[] = (trim($value['win8char'])) ? '8.3' : '--';
+							$emuDescription = join(' | ', $emuDesc);
+							
+							$emuNotFoundMessage = ($emuNotFound) ? ' [!EMU NOT FOUND!] ' : '';
+							
+							$menuSubItem = new GtkMenuItem($alternateEmuIdent.$emuNotFoundMessage.' [ '.$emuDescription.' ]');
+							$menuSubItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'START_ROM',  $alternateEmuIdent);
+							$menuSub->append($menuSubItem);
+						}
+					}
+				}
+				$menu->append($menuItem);
+				
+				# start with default emulator!
+				$menuItemLabel = 'Configure emulators';
+				$menuItem = new GtkMenuItem($menuItemLabel);
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'OPEN_CONFIG',  'EMU', strtolower($this->current_media_info['fd_eccident']));
+				#$menuItemActive = ($platformValid) ? true : false;
+				#$menuItem->set_sensitive($menuItemActive);
+				$menu->append($menuItem);
+				
 				$menu->append(new GtkSeparatorMenuItem());
-
-				$echo1State = ($this->current_media_info['id']) ? true : false;
-				$echo1->set_sensitive($echo1State);
 				
 				// ----------------------------------------------------------------
 				// Rating submenu
@@ -2806,6 +2930,11 @@ class App extends GladeXml {
 				
 				$menu->append(new GtkSeparatorMenuItem());
 
+				$echo4 = new GtkMenuItem('Get Images from web');
+				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'GET_IMAGE');
+				$menu->append($echo4);
+				$echo4->set_sensitive(false);
+				
 				$imagePopup = new GtkMenuItem(I18N::get('menu', 'lbl_image_popup'));
 				$imagePopup->connect_simple('activate', array($this, 'openImagePopup'), false);
 				$menu->append($imagePopup);
@@ -2922,12 +3051,15 @@ class App extends GladeXml {
 		}
 	}
 	
+
+	
+	
 	private $directMediaEdit = false;
 	
 	/*
 	*
 	*/
-	public function dispatch_menu_context($obj, $parameter=false) {
+	public function dispatch_menu_context($obj, $parameter=false, $parameter2 = false) {
 		
 		$name = (is_string($obj)) ? $obj : get_class($obj);
 		
@@ -2944,22 +3076,38 @@ class App extends GladeXml {
 			case 'REMOVE_BOOKMARK_ALL':
 				$this->remove_bookmark_all();
 				break;
-			case 'GtkTreeView':
-				$this->open_media_with_player();
+//			case 'GtkTreeView':
+//				$this->startRom();
+//				break;
+			case 'OPEN_CONFIG':
+//				$this->oGuiConfig = FACTORY::get('manager/GuiPopConfig', $this);
+//				$type = $parameter;
+//				$eccident = $parameter2;
+//				$this->oGuiConfig->open($type, $eccident);
+
+				$this->openGuiConfig($parameter, $parameter2);
+				break;				
+			case 'START_ROM':
+				$this->startRom($parameter);
 				break;
 			case 'REMOVE_MEDIA':
 				$this->remove_media_from_fdata($obj);
 				break;
-				
+			case 'GET_IMAGE':
+				$this->getImagesByEccInject();
+				break;
 			case 'WEBSERVICE':
 				
 				$oWebServices = FACTORY::get('manager/WebServices');
 				
 				//$oWebServices->setServiceUrl('http://127.0.0.1:88/eccdbpost.php');
-
+				
 				if ($parameter == 'GET') {
 				}
 				elseif($parameter == 'SET') {
+					
+					# save before add
+					if ($parameter2) $this->edit_media_save(true);
 					
 					$title = I18N::get('popup', 'eccdb_title');
 					$msg = sprintf(I18N::get('popup', 'eccdb_webservice_post_msg'));
@@ -3090,6 +3238,16 @@ class App extends GladeXml {
 		$store->set($iter, 0, $state);
 	}
 	
+				
+	public function getImagesByEccInject() {
+		if (!$this->current_media_info) return false;
+		$eccident = ($this->current_media_info['fd_eccident']) ? $this->current_media_info['fd_eccident'] : $this->current_media_info['md_eccident'];
+		$crc32 = $this->current_media_info['crc32'];
+		$parameter = '/images /'.$eccident.' /'.$crc32.'';
+		$exe = ECC_BASEDIR.$this->eccHelpLocations['ECC_INJECT_START'];
+		//print $exe.$parameter.LF;
+		FACTORY::get('manager/Os')->executeProgramDirect($exe, false, $parameter);
+	}
 	
 	/*
 	*
@@ -3128,13 +3286,19 @@ class App extends GladeXml {
 			'md_year' => $mdata['md_year'],
 			'md_usk' => $mdata['md_usk'],
 			'md_creator' => $mdata['md_creator'],
+			'md_publisher' => $mdata['md_publisher'],
+			'md_storage' => $mdata['md_storage'],
 		);
 		$mdata['edit_checksum'] = $this->create_mdata_checksum($check_data);
 		
-		$this->media_edit_filename->set_text($this->get_plain_filename($mdata['path']));
+		$fileNamePlain = $this->get_plain_filename($mdata['path']);
+		$this->media_edit_filename->set_text($fileNamePlain);
 		$this->media_edit_filename_packed->set_text($this->get_plain_filename($mdata['path_pack']));
 		
-		$this->media_edit_title->set_text($mdata['md_name']);
+		//$name = ($mdata['md_name']) ? $mdata['md_name'] : $fileNamePlain;
+		$name = $mdata['md_name'];
+		
+		$this->media_edit_title->set_text($name);
 		$this->media_edit_info->set_text($mdata['md_info']);
 		$this->media_edit_info_id->set_text($mdata['md_info_id']);
 		
@@ -3162,6 +3326,10 @@ class App extends GladeXml {
 		if (!$this->obj_netplay) $this->obj_netplay = new IndexedCombobox($this->cb_netplay, false, $this->dropdownStateYesNo);
 		$this->cb_netplay->set_active($this->set_dropdown_bool($mdata['md_netplay']));
 		
+		if (!$this->obj_storage) $this->obj_storage = new IndexedCombobox($this->cb_storage, false, $this->dropdownStorage);
+		//$this->cb_storage->set_active($this->set_dropdown_bool($mdata['md_storage']));
+		if ($mdata['md_storage'] === null) $mdata['md_storage'] = 0;
+		$this->cb_storage->set_active($mdata['md_storage']);
 
 		if (!$this->obj_category) $this->obj_category = FACTORY::get('manager/IndexedCombo')->set($this->cbe_category, $this->media_category, 0);
 		FACTORY::get('manager/IndexedCombo')->set_active_key($this->cbe_category, $mdata['md_category']);
@@ -3170,6 +3338,8 @@ class App extends GladeXml {
 		$this->cbe_year->set_text($mdata['md_year']);
 		$this->cbe_usk->set_text($mdata['md_usk']);
 		$this->cbe_creator->set_text($mdata['md_creator']);
+		$this->cbe_publisher->set_text($mdata['md_publisher']);
+		
 		
 		$this->model_languages->foreach(array($this, 'languages_set_selected'), $mdata['md_id']);
 		
@@ -3260,7 +3430,7 @@ class App extends GladeXml {
 	/*
 	*
 	*/
-	public function edit_media_save($validate_title=false)
+	public function edit_media_save($validate_title=false, $hideWindow = false)
 	{
 		$data['id'] = $this->current_media_info['md_id'];
 		$data['crc32'] = $this->edit_mdata['crc32'];
@@ -3276,6 +3446,7 @@ class App extends GladeXml {
 		$data['year'] = trim(str_replace(";", "", $this->cbe_year->get_text()));
 		$data['usk'] = trim(str_replace(";", "", $this->cbe_usk->get_text()));
 		$data['creator'] = trim(str_replace(";", "", $this->cbe_creator->get_text()));
+		$data['publisher'] = trim(str_replace(";", "", $this->cbe_publisher->get_text()));
 		
 		// new
 		$data['running'] = $this->get_dropdown_bool($this->cb_running_new->get_active());
@@ -3286,6 +3457,9 @@ class App extends GladeXml {
 		$data['freeware'] = $this->get_dropdown_bool($this->cb_freeware->get_active());
 		$data['multiplayer'] = $this->get_dropdown_bool($this->cb_multiplayer->get_active());
 		$data['netplay'] = $this->get_dropdown_bool($this->cb_netplay->get_active());
+		
+		$data['storage'] = $this->cb_storage->get_active();
+		#$data['storage'] = ($data['storage'] === null) ? null : $data['storage']+1;
 		
 		$data['category'] = FACTORY::get('manager/IndexedCombo')->getKey($this->cbe_category);
 		
@@ -3311,6 +3485,8 @@ class App extends GladeXml {
 				'md_year' => $data['year'],
 				'md_usk' => $data['usk'],
 				'md_creator' => $data['creator'],
+				'md_publisher' => $data['publisher'],
+				'md_storage' => $data['storage'],
 			);
 			$check = $this->create_mdata_checksum($check_data);
 			
@@ -3338,6 +3514,8 @@ class App extends GladeXml {
 		$this->show_media_info();
 		$this->onReloadRecord(false);
 		$this->directMediaEdit = false;	
+		
+		if ($hideWindow) $this->media_edit_hide();
 		
 	}
 
@@ -3401,12 +3579,18 @@ class App extends GladeXml {
 		
 		// TEXT INFO
 		$renderer_2 = new GtkCellRendererText();
-		$renderer_2->set_property('family',  'Verdana');
+		//$renderer_2->set_property('family',  'Verdana');
 		
+#$renderer_2->set_property('family',  $this->treeviewFontType);
+$renderer_2->set_property('font',  $this->treeviewFontType);
+
+
 		$renderer_2->set_property("yalign", 0);
-		$renderer_2->set_property('size-points',  '9');
-		$renderer_2->set_property('foreground', '#ffffff');
-		$renderer_2->set_property('cell-background', '#394D59');
+		//$renderer_2->set_property('size-points',  '9');
+#$renderer_2->set_property('size-points',  $this->treeviewFontSize);
+		
+		$renderer_2->set_property('foreground', $this->treeviewFgColor);
+		//$renderer_2->set_property('cell-background', '#394D59');
 		$column_2 = new GtkTreeViewColumn('TITLE', $renderer_2, 'text', 2);
 		$column_2->set_cell_data_func($renderer_2, array($this, "format_col"));
 		
@@ -3432,7 +3616,9 @@ class App extends GladeXml {
 		// add model to GtkTreeView
 		$this->sw_mainlist_tree->set_model($this->model);
 		
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		//$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
+		
 		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
 		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
 		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
@@ -3466,17 +3652,18 @@ class App extends GladeXml {
 			Gtk::TYPE_STRING,
 			Gtk::TYPE_STRING,
 			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_OBJECT,
 			Gtk::TYPE_STRING
 		);
 		
 		$rendererText = new GtkCellRendererText();
 
 		// IMAGE
-		$rendererText->set_property('family',  'Verdana');
+		
 		$rendererText->set_property("yalign", 0);
-		$rendererText->set_property('size-points',  '9');
-		$rendererText->set_property('foreground', '#ffffff');
-		$rendererText->set_property('cell-background', '#394D59');
+		$rendererText->set_property('foreground', $this->treeviewFgColor);
+		$rendererText->set_property('font', $this->treeviewFontType);
 		
 		$colRunning = new GtkTreeViewColumn('run', $rendererText, 'text', 0);
 		$colRunning->set_expand(false);
@@ -3488,11 +3675,8 @@ class App extends GladeXml {
 		#$colRunning->set_spacing(10);
 		$colRunning->set_cell_data_func($rendererText, array($this, "format_col"));
 		
-		
-		
-		
 		$colName = new GtkTreeViewColumn('name', $rendererText, 'text', 1);
-		$colName->set_expand(true);
+		$colName->set_expand(false);
 		$colName->set_resizable(true);
 		$colName->set_sort_indicator(true);
 		$colName->set_sort_column_id(1);
@@ -3618,9 +3802,20 @@ class App extends GladeXml {
 		$colCompositeId = new GtkTreeViewColumn('COMPOSITE_ID', $rendererText, 'text', 5);
 		$colCompositeId->set_visible(false);
 		$colCompositeId->set_expand(false);
+		## HIDDEN FIELDS!!!!
+		## HIDDEN FIELDS!!!!
 		
-		## HIDDEN FIELDS!!!!
-		## HIDDEN FIELDS!!!!
+		// IMAGE
+		$rPixbuf = new GtkCellRendererPixbuf();
+		$colPixbufIcon = new GtkTreeViewColumn('IMAGE', $rPixbuf, 'pixbuf', 16);
+		
+		$idx = 17;
+		$colPublisher = new GtkTreeViewColumn('publisher', $rendererText, 'text', $idx);
+		$colPublisher->set_expand(false);
+		$colPublisher->set_resizable(true);
+		$colPublisher->set_sort_indicator(true);
+		$colPublisher->set_sort_column_id($idx);
+		$colPublisher->set_cell_data_func($rendererText, array($this, "format_col"));
 		
 		$this->sw_mainlist_tree->set_headers_visible(true);
 		#$this->sw_mainlist_tree->columns_autosize();
@@ -3628,14 +3823,17 @@ class App extends GladeXml {
 		// add model to GtkTreeView
 		$this->sw_mainlist_tree->set_model($this->model);
 		
-		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		#$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
 		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
 		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
 		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
 		
+		$this->sw_mainlist_tree->append_column($colPixbufIcon);
 		$this->sw_mainlist_tree->append_column($colName);
 		$this->sw_mainlist_tree->append_column($colYear);
 		$this->sw_mainlist_tree->append_column($colDeveloper);
+		$this->sw_mainlist_tree->append_column($colPublisher);
 		$this->sw_mainlist_tree->append_column($colCategory);	
 //		$this->sw_mainlist_tree->append_column($colLanguages);
 		$this->sw_mainlist_tree->append_column($colRating);		
@@ -3716,9 +3914,13 @@ class App extends GladeXml {
 		$renderer_2 = new GtkCellRendererText();
 		
 		$renderer_2->set_property('height', 20);
-		$renderer_2->set_property('family',  'Arial');
+		//$renderer_2->set_property('family',  'Arial');
+
+#$renderer_2->set_property('family',  $this->treeviewFontType);
+$renderer_2->set_property('font',  $this->treeviewFontType);
+		
 		$renderer_2->set_property("yalign",0);
-		$renderer_2->set_property('size-points',  '9');
+#$renderer_2->set_property('size-points',  '9');
 		$renderer_2->set_property('foreground', '#ffffff');
 		$renderer_2->set_property('cell-background', '#394D59');
 		
@@ -3747,25 +3949,27 @@ class App extends GladeXml {
 			
 			$base_path = dirname(__FILE__)."/"."images/eccsys/languages/";
 			
+			/// acive image
 			// status active
 			$path_a = $base_path.'ecc_lang_'.strtolower($id).'.png';
 			if (!file_exists($path_a)) $path_a =  $base_path.'ecc_lang_unknown.png';
+			$pixbuf_icon_active = $this->oHelper->getPixbuf($path_a);
+//			if ($pixbuf_icon_active !== null) {
+//				$pixbuf_icon_active = $pixbuf_icon_active->scale_simple(30, 20, Gdk::INTERP_BILINEAR);
+//			}
+
+			// inacive image
 			// status inactive
 			$path_i =  $base_path.'ecc_lang_'.strtolower($id).'_i.png';
 			if (!file_exists($path_i)) $path_i =  $base_path.'ecc_lang_unknown_i.png';
-			
-			/// acive image
-			$pixbuf_icon_active = GdkPixbuf::new_from_file($path_a);
-			$obj_icon_active = $pixbuf_icon_active->scale_simple(30, 20, Gdk::INTERP_BILINEAR);
-			
-			// inacive image
-			$pixbuf_icon_inactive = GdkPixbuf::new_from_file($path_i);
-			$obj_icon_inactive = $pixbuf_icon_inactive->scale_simple(30, 20, Gdk::INTERP_BILINEAR);
-			
+			$pixbuf_icon_inactive = $this->oHelper->getPixbuf($path_i);
+//			if ($pixbuf_icon_inactive !== null) {
+//				$pixbuf_icon_inactive = $pixbuf_icon_inactive->scale_simple(30, 20, Gdk::INTERP_BILINEAR);
+//			}
+
 			/// current image
 			$obj_icon_current = $pixbuf_icon_inactive;
-			
-			$this->model_languages->append(array(false, $id, $obj_icon_current, $label, $obj_icon_active, $obj_icon_inactive));
+			$this->model_languages->append(array(false, $id, $obj_icon_current, $label, $pixbuf_icon_active, $pixbuf_icon_inactive));
 		}
 		
 		$test = $treeview->get_selection(); 
@@ -3778,6 +3982,7 @@ class App extends GladeXml {
 	*/
 	public function init_treeview_nav()
 	{
+		
 		$this->model_navigation = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING);
 		
 		$renderer_0 = new GtkCellRendererPixbuf();
@@ -3788,10 +3993,14 @@ class App extends GladeXml {
 		$column_1->set_visible(false);
 		
 		$renderer_2 = new GtkCellRendererText();
-		$renderer_2->set_property('height', 20);
-		$renderer_2->set_property('family',  'Arial');
-		$renderer_2->set_property('size-points',  '9');
-		$renderer_2->set_property('foreground', '#ffffff');
+		//$renderer_2->set_property('height', 20);
+		//$renderer_2->set_property('family',  'Arial');
+
+#$renderer_2->set_property('family',  $this->treeviewFontType);
+$renderer_2->set_property('font',  $this->treeviewFontType);
+		//$renderer_2->set_property('size-points',  '9');
+#$renderer_2->set_property('size-points',  $this->treeviewFontSize);
+		$renderer_2->set_property('foreground', $this->treeviewFgColor);
 		$column_2 = new GtkTreeViewColumn('CATEGORY', $renderer_2, 'text', 2);
 		$column_2->set_cell_data_func($renderer_2, array($this, "format_col"));
 		
@@ -3805,7 +4014,8 @@ class App extends GladeXml {
 		
 		$this->treeview1->set_model($this->model_navigation);
 		
-		$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		//$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		$this->treeview1->modify_base(Gtk::STATE_NORMAL, GdkColor::parse($this->treeviewBgColor));
 		$this->treeview1->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
 		$this->treeview1->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
 		$this->treeview1->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
@@ -3823,7 +4033,7 @@ class App extends GladeXml {
 	function format_col($column, $cell, $model, $iter) {
 		$path = $model->get_path($iter); // get the current path
 		$row_num = $path[0]; // note 2
-		$row_color = ($row_num%2==1) ? "#445566" : "#556677"; // sets the row color for odd and even rows
+		$row_color = ($row_num%2==1) ? $this->treeviewBgColor1 : $this->treeviewBgColor2; // sets the row color for odd and even rows
 		$cell->set_property('cell-background', $row_color); // sets the background color!
 	} 
 	
@@ -3833,8 +4043,8 @@ class App extends GladeXml {
 		$model = $this->model_navigation;
 		$model->clear();
 
-		//$nav_data = $this->ini->get_ecc_platform_navigation(false);
-		$nav_data = $this->ini->get_ecc_platform_navigation(false, $this->currentPlatformCategory);
+		//$nav_data = $this->ini->getPlatformNavigation(false);
+		$nav_data = $this->ini->getPlatformNavigation(false, $this->currentPlatformCategory);
 		
 		$eccIdentForCategories = array();
 		
@@ -3865,38 +4075,16 @@ class App extends GladeXml {
 			// for this platform, the navigation of these is set to hidden
 			// and a eccident is set. (so, eccident==false #all found will not be hidden)
 			if ($media_count == 0 && $this->nav_inactive_hidden && $eccident) continue;
-			
-			
-			if ($this->nav_autoupdate && (!$this->currentPlatformCategory || $this->ini->getPlatformCategoryByEccIdent($eccident) == $this->currentPlatformCategory)) {
-				
-				$eccIdentForCategories[] = $eccident;
-				$title_and_count = $title." (".$media_count.")";
-				
-				// read specified file
-				$img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png';
-				if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_unknown_nav.png';
-				
-				$obj_pixbuff = GdkPixbuf::new_from_file($img_path);
-				$obj_pixbuff = $obj_pixbuff->scale_simple(34, 22, Gdk::INTERP_BILINEAR);
-				
-				$model->append(array($obj_pixbuff, $eccident, $title_and_count, $eccident, $title));
 
-			}
-			else  {
-				
-				$eccIdentForCategories[] = $eccident;
-				$title_and_count = $title." (".$media_count.")";
-				
-				// read specified file
-				$img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png';
-				if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_unknown_nav.png';
-				
-				$obj_pixbuff = GdkPixbuf::new_from_file($img_path);
-				$obj_pixbuff = $obj_pixbuff->scale_simple(34, 22, Gdk::INTERP_BILINEAR);
-				
-				$model->append(array($obj_pixbuff, $eccident, $title_and_count, $eccident, $title));
-			}
+			$eccIdentForCategories[] = $eccident;
+			$title_and_count = $title." (".$media_count.")";
 			
+			// read specified file
+			$img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png';
+			if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_unknown_nav.png';
+			
+			$obj_pixbuff = $this->oHelper->getPixbuf($img_path);
+			$model->append(array($obj_pixbuff, $eccident, $title_and_count, $eccident, $title));
 		}
 		
 		if ($eccIdentForCategories && $updateCategories && $this->nav_autoupdate) {
@@ -3908,7 +4096,7 @@ class App extends GladeXml {
 			
 	public function updateCategorieDropdown($eccIdentForCategories, $currentCat=false) {
 		while (gtk::events_pending()) gtk::main_iteration();
-		$availableCategories = $this->ini->get_ecc_platform_categories($eccIdentForCategories);
+		$availableCategories = $this->ini->getPlatformCategories($eccIdentForCategories);
 		if ($currentCat && !isset($availableCategories[$currentCat])) {
 			$this->updateBreak = true;
 			$this->update_treeview_nav(false);
@@ -3953,7 +4141,7 @@ class App extends GladeXml {
 			
 			// read last selected platform from history
 			$path = $model->get_path($iter);
-			$this->ini->write_ecc_histroy_ini('navigation_last_index', current($path), false);
+			$this->ini->storeHistoryKey('navigation_last_index', current($path), false);
 			
 			// for twmain_data_dispatcher
 			$this->view_mode = 'MEDIA';
@@ -3969,11 +4157,12 @@ class App extends GladeXml {
 			
 			$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
 			$this->set_notebook_page_visiblility($this->nb_main, 1, $this->view_mode); // factsheet
-			$this->set_notebook_page_visiblility($this->nb_main, 2, $eccident); // config-emu
-			$this->set_notebook_page_visiblility($this->nb_main, 3, !$eccident); // config-ecc
-			$this->set_notebook_page_visiblility($this->nb_main, 4, true); // help
+			//$this->set_notebook_page_visiblility($this->nb_main, 2, $eccident); // config-emu
+//			$this->set_notebook_page_visiblility($this->nb_main, 2, !$eccident); // config-ecc
+			$this->set_notebook_page_visiblility($this->nb_main, 2, true); // help
 			
-			$this->update_platform_edit($eccident);
+			# 20070127
+			#$this->update_platform_edit($eccident);
 			$this->update_platform_info($eccident);
 		}
 	}
@@ -3995,19 +4184,20 @@ class App extends GladeXml {
 	}
 	
 	public function show_nb_ecc_configuration() {
-		$notebook = $this->nb_main;
-		$count = $notebook->get_n_pages();
-		for ($page_no=0; $page_no<$count; $page_no++) {
-			$page = $notebook->get_nth_page($page_no);
-			$page->hide();
-		}
-		$page = $notebook->get_nth_page(3);
-		$page->show();
+		$this->openGuiConfig('ECC');
+//		$notebook = $this->nb_main;
+//		$count = $notebook->get_n_pages();
+//		for ($page_no=0; $page_no<$count; $page_no++) {
+//			$page = $notebook->get_nth_page($page_no);
+//			$page->hide();
+//		}
+//		$page = $notebook->get_nth_page(2);
+//		$page->show();
 	}
 	
 	
 	public function update_platform_info($eccident) {
-		$pini = $this->ini->get_ecc_platform_info_data($eccident);
+		$pini = $this->ini->getPlatformInfo($eccident);
 		
 		$txt = '<b>'.htmlspecialchars($pini['GENERAL']['name']).'</b>';
 		$this->pf_info_name->set_markup($txt);
@@ -4037,220 +4227,6 @@ class App extends GladeXml {
 		
 	}
 	
-	private $inicfg_emu_btn_connected = array();
-	private $platform_edit_emu = array();
-	private $platform_ini = array();
-	public function update_platform_edit($eccident) {
-		
-		if (!$eccident) return false;
-		
-		$pini = $this->ini->get_ecc_platform_ini($eccident, false);
-		
-//		$helpfiles = array();
-//		$file = 'help/inline/edit_platform_'.$eccident.'.txt';
-//		if (file_exists($file)) $helpfiles[] = $file;
-//		$helpfiles[] = 'help/inline/edit_platform.txt';
-//		$this->update_inline_help($this->nb_main_config_ihelp_txt, $helpfiles);
-		
-		$this->inicfg_gen_eccident->set_label($pini['GENERAL']['eccident']);
-		$this->inicfg_gen_title->set_text($pini['GENERAL']['navigation']);
-		$this->inicfg_gen_category->set_text($pini['GENERAL']['category']);
-		
-		for ($i=1; $i<=10; $i++) {
-			$row_box = "inicfg_emu_row_".$i;
-			$this->$row_box->hide();
-		}
-		
-		if (isset($pini['EXTENSIONS'])) {
-			
-			$path = (isset($pini["EMU.GLOBAL"]['path'])) ? $pini["EMU.GLOBAL"]['path'] : "" ;
-			$this->inicfg_emu_row_0_path->set_text($path);
-			$this->objTooltips->set_tip($this->inicfg_emu_row_0_path, 'Add the path to your emulator or use EMU-Button!');
-			
-			$param = (isset($pini["EMU.GLOBAL"]['param'])) ? $pini["EMU.GLOBAL"]['param'] : "" ;
-			$this->inicfg_emu_row_0_param->set_text($param);
-			$this->objTooltips->set_tip($this->inicfg_emu_row_0_param, 'Add the emulator commandline parameters, if needed!');
-			
-			$emu_escape = (isset($pini["EMU.GLOBAL"]['escape'])) ? (int)$pini["EMU.GLOBAL"]['escape'] : 1 ;
-			$this->inicfg_emu_row_0_escape->set_active($emu_escape);
-			$this->objTooltips->set_tip($this->inicfg_emu_row_0_escape, 'Most of the emulator needs escaped rompaths!');
-			
-			$emu_win8char = (isset($pini["EMU.GLOBAL"]['win8char'])) ? (int)$pini["EMU.GLOBAL"]['win8char'] : 0 ;
-			$this->inicfg_emu_row_0_win8char->set_active($emu_win8char);
-			$this->objTooltips->set_tip($this->inicfg_emu_row_0_win8char, 'Some emulators only support short 8.3 filenames!');
-			
-			$this->platform_edit_emu[$eccident][0] = array(
-				'extension' => $this->inicfg_emu_row_0_ext,
-				'path' => $this->inicfg_emu_row_0_path,
-				'param' => $this->inicfg_emu_row_0_param,
-				'escape' => $this->inicfg_emu_row_0_escape,
-				'win8char' => $this->inicfg_emu_row_0_win8char,
-			);
-			$this->set_platform_edit_path_settings($eccident, 'GLOBAL');
-
-			$inicfg_emu_btn = "inicfg_emu_row_btn_0";
-			$this->objTooltips->set_tip($this->$inicfg_emu_btn, 'Select your emulator executeable!');
-			if (!isset($this->inicfg_emu_btn_connected[$inicfg_emu_btn])) {
-				$this->$inicfg_emu_btn->connect('clicked', array($this, 'get_platform_edit_path'));
-				$this->inicfg_emu_btn_connected[$inicfg_emu_btn] = true;
-			}
-			
-			$cnt = 1;
-			foreach($pini['EXTENSIONS'] as $extension => $state) {
-				if ($state) {
-					
-					// row count
-					$row_box = "inicfg_emu_row_".$cnt;
-					$this->$row_box->show();
-					
-					// file-extension
-					$inicfg_emu_ext = "inicfg_emu_row_".$cnt."_ext";
-					$this->$inicfg_emu_ext->set_label($extension);
-					
-					// path
-					$inicfg_emu_path = "inicfg_emu_row_".$cnt."_path";
-					$path = (isset($pini["EMU.".$extension]['path'])) ? $pini["EMU.".$extension]['path'] : "" ;
-					$this->$inicfg_emu_path->set_text($path);
-					
-					$this->objTooltips->set_tip($this->$inicfg_emu_path, 'Add the path to your emulator or use EMU-Button!');
-					
-					// params
-					$inicfg_emu_param = "inicfg_emu_row_".$cnt."_param";
-					$param = (isset($pini["EMU.".$extension]['param'])) ? $pini["EMU.".$extension]['param'] : "" ;
-					$this->$inicfg_emu_param->set_text($param);
-					
-					$this->objTooltips->set_tip($this->$inicfg_emu_param, 'Add the emulator commandline parameters, if needed!');
-					
-					// escape the path?
-					$inicfg_emu_escape = "inicfg_emu_row_".$cnt."_escape";
-					$emu_escape = (isset($pini["EMU.".$extension]['escape'])) ? (int)$pini["EMU.".$extension]['escape'] : 1 ;
-					$this->$inicfg_emu_escape->set_active($emu_escape);
-					
-					$this->objTooltips->set_tip($this->$inicfg_emu_escape, 'Most of the emulator needs escaped rompaths!');
-					
-					// only show testte~1
-					$inicfg_emu_win8char = "inicfg_emu_row_".$cnt."_win8char";
-					$emu_win8char = (isset($pini["EMU.".$extension]['win8char'])) ? (int)$pini["EMU.".$extension]['win8char'] : 0 ;
-					$this->$inicfg_emu_win8char->set_active($emu_win8char);
-					
-					$this->objTooltips->set_tip($this->$inicfg_emu_win8char, 'Some emulators only support short 8.3 filenames!');
-					
-					// is this emu-path valid
-					$inicfg_emu_path_state = "inicfg_emu_row_".$cnt."_path_state";
-					
-					if (file_exists($path)) {
-						$path_state_color = '#00CC00';
-						$path_state_label = 'EMU';
-					} else {
-						$path_state_color = '#CC0000';
-						$path_state_label = 'EMU';
-					}
-					
-					$markup='<span foreground="'.$path_state_color.'"><b>'.htmlspecialchars($path_state_label).'</b></span>';
-					$this->$inicfg_emu_path_state->set_markup($markup);
-					
-					$this->platform_edit_emu[$eccident][$cnt] = array(
-						'extension' => $this->$inicfg_emu_ext,
-						'path' => $this->$inicfg_emu_path,
-						'param' => $this->$inicfg_emu_param,
-						'escape' => $this->$inicfg_emu_escape,
-						'win8char' => $this->$inicfg_emu_win8char,
-					);
-					$this->set_platform_edit_path_settings($eccident, $extension);
-					
-					$inicfg_emu_btn = "inicfg_emu_row_btn_".$cnt."";
-					
-					$this->objTooltips->set_tip($this->$inicfg_emu_btn, 'Select your emulator executeable!');
-					
-					if (!isset($this->inicfg_emu_btn_connected[$inicfg_emu_btn])) {
-						$this->$inicfg_emu_btn->connect('clicked', array($this, 'get_platform_edit_path'));
-						$this->inicfg_emu_btn_connected[$inicfg_emu_btn] = true;
-					}
-				}
-				$cnt++;
-			}
-		}
-		
-		if (!isset($this->inicfg_emu_btn_connected['inicfg_emu_btn_save'])) {
-			$this->inicfg_emu_btn_save->connect_simple('clicked', array($this, 'write_platform_ini'), $eccident);
-			$this->inicfg_emu_btn_save_top->connect_simple('clicked', array($this, 'write_platform_ini'), $eccident);
-			$this->inicfg_emu_btn_connected['inicfg_emu_btn_save'] = true;
-		}
-		
-		$this->platform_ini[$eccident] = $pini;
-	}
-	public function set_platform_edit_path_settings($eccident, $extension) {
-		$this->pedit_eccident = $eccident;
-		$this->pedit_extension = $extension;
-	}
-	public function get_platform_edit_path($obj) {
-		
-		// dirty way to get the row to change! :-)
-		$pos = (int)substr($obj->get_name(), -1);
-
-		$path_obj = $this->platform_edit_emu[$this->pedit_eccident][$pos]['path'];
-		$path = realpath($path_obj->get_text()); // set path for popup
-		
-		$ext_obj = $this->platform_edit_emu[$this->pedit_eccident][$pos]['extension'];
-		$ext = trim($ext_obj->get_text()); // set path for popup
-		
-		// open file-chooser
-		$title = sprintf(I18N::get('popup', 'conf_platform_emu_filechooser_title%s'), $ext);
-		
-		#$path = $this->openFileChooserDialog($title, $path, false, Gtk::FILE_CHOOSER_ACTION_OPEN);
-		$path = FACTORY::get('manager/Os')->openChooseFileDialog($path, $title);
-		
-		
-		if ($path !== false) {
-			$path_obj->set_text($path);
-			$this->platform_ini[$this->pedit_eccident]['EMU.'.$ext] = $path;
-		}
-	}
-	public function write_platform_ini() {
-		
-		// prepare var for autocreate relative paths... if possible!
-		$ecc_user_path = realpath(dirname(__FILE__)."/../");
-		
-		$this->platform_ini[$this->pedit_eccident]['GENERAL']['navigation'] = '"'.$this->inicfg_gen_title->get_text().'"';
-		$this->platform_ini[$this->pedit_eccident]['GENERAL']['category'] = '"'.$this->inicfg_gen_category->get_text().'"';
-		
-		foreach ($this->platform_edit_emu[$this->pedit_eccident] as $pos => $obj) {
-			
-			$ext = $obj['extension']->get_text();
-			$path = trim($obj['path']->get_text());
-			$param = trim($obj['param']->get_text());
-			$escape = trim($obj['escape']->get_active());
-			$win8char = trim($obj['win8char']->get_active());
-			
-			// ABS-PATH TO REL-PATH...
-			// 20061116 as
-			$path = FACTORY::get('manager/Os')->eccSetRelativeFile($path);
-			
-			$this->platform_ini[$this->pedit_eccident]['EMU.'.$ext] = array(
-				'path' => '"'.$path.'"',
-				'param' => '"'.$param.'"',
-				'escape' => '"'.(int)$escape.'"',
-				'win8char' => '"'.(int)$win8char.'"',
-			);
-						
-		}
-		
-		$title = I18N::get('popup', 'conf_platform_update_title');
-		$msg = sprintf(I18N::get('popup', 'conf_platform_update_msg%s'), $this->platform_ini[$this->pedit_eccident]['GENERAL']['navigation']);
-		if (!$this->open_window_confirm($title, $msg)) return false;
-		
-		$state = $this->ini->write_ecc_platform_ini($this->platform_ini[$this->pedit_eccident]);
-		$this->update_platform_edit($this->pedit_eccident);
-		$this->ini->reload();
-		$this->update_treeview_nav();
-		
-		// update also model in ecc-config
-		$this->oGuiEccConfig->update();
-		
-		$categories = $this->ini->get_ecc_platform_categories();
-		$this->dd_pf_categories->fill($categories, 0);
-	}
-	
 	/**
 	*
 	*/
@@ -4265,8 +4241,10 @@ class App extends GladeXml {
 		$img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.strtolower($extension).'_teaser.png';
 		if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_unknown_teaser.png';
 		
-		$obj_pixbuff = GdkPixbuf::new_from_file($img_path);
-		$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+		$obj_pixbuff = $this->oHelper->getPixbuf($img_path, 240, 160);
+//		if ($obj_pixbuff !== null) {
+//			$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+//		}
 		$this->img_plattform->set_from_pixbuf($obj_pixbuff);
 		
 		if ($reload===true) {
@@ -4313,7 +4291,8 @@ class App extends GladeXml {
 		$file = basename($file);
 		if (false !== strpos($file, ".")) {
 			$split = explode(".", $file);
-			return array_shift($split);
+			array_pop($split);
+			return join(".", $split);
 		}
 		return "";
 	}
@@ -4339,7 +4318,7 @@ class App extends GladeXml {
 				$this->image_tank[$eccident][$crc32]['USER'] = array();
 			}
 		}
-		$user_folder_images = $this->ini->get_ecc_ini_user_folder($eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, false);
+		$user_folder_images = $this->ini->getUserFolder($eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, false);
 		if ($user_folder_images === false) return array();
 		
 		foreach ($image_type as $ident => $void) {
@@ -4388,7 +4367,7 @@ class App extends GladeXml {
 				'/Screenshots',
 			);
 
-			$ini_player = $this->ini->get_ecc_ini_key('ECC_PLATFORM', $eccident);
+			$ini_player = $this->ini->getKey('ECC_PLATFORM', $eccident);
 			$ini_player = (isset($ini_player['EMU.'.strtolower($file_ext)])) ? $ini_player['EMU.'.strtolower($file_ext)] : false;
 			$file_player = (isset($ini_player['path'])) ? $ini_player['path'] : "";
 			if ($file_player) {
@@ -4449,14 +4428,10 @@ class App extends GladeXml {
 	public function get_pixbuf($path, $media, $pos=false, $width=false, $height=false, $media_name='unknown') {
 		
 		if ($pos>0) {
-			$file_path = $media[$pos];
-			$ext = strtolower($this->get_ext_form_file($file_path));
+			$filename = $media[$pos];
+			$ext = strtolower($this->get_ext_form_file($filename));
 			if (isset($this->supported_images[$ext]) && $this->supported_images[$ext]) {
-				if (file_exists($file_path)) {
-					$obj_pixbuff = GdkPixbuf::new_from_file($file_path);
-					$obj_pixbuff = $obj_pixbuff->scale_simple($width, $height, Gdk::INTERP_BILINEAR);
-					return $obj_pixbuff;
-				}
+				return $this->oHelper->getPixbuf($filename, $width, $height);
 			}
 		}
 		
@@ -4466,14 +4441,14 @@ class App extends GladeXml {
 		
 		$obj_pixbuff = null;
 		foreach ($media as $file_path) {
-			
 			$ext = strtolower($this->get_ext_form_file($file_path));
-			if (isset($this->supported_images[$ext]) && $this->supported_images[$ext]) {
-				if (file_exists($file_path)) {
-					$obj_pixbuff = GdkPixbuf::new_from_file($file_path);
-					$obj_pixbuff = $obj_pixbuff->scale_simple($width, $height, Gdk::INTERP_BILINEAR);
-					return $obj_pixbuff;
-				}
+			//if (isset($this->supported_images[$ext]) && $this->supported_images[$ext]) {
+			if (isset($this->supported_images[$ext])) {
+				$obj_pixbuff = $this->oHelper->getPixbuf($file_path, $width, $height);
+//				if ($obj_pixbuff !== null) {
+//					$obj_pixbuff = $obj_pixbuff->scale_simple($width, $height, Gdk::INTERP_BILINEAR);
+//				}
+				return $obj_pixbuff;
 			}
 		}
 		
@@ -4488,9 +4463,10 @@ class App extends GladeXml {
 		else {
 			$img_path = dirname(__FILE__)."/".'images/eccsys/media/ecc_ph_media_'.$img_ident.'.png';
 			if (!file_exists($img_path)) $img_path = dirname(__FILE__)."/".'images/eccsys/media/ecc_ph_media_unknown_'.$active_state.'.png';
-			
-			$obj_pixbuff = GdkPixbuf::new_from_file($img_path);
-			$obj_pixbuff = $obj_pixbuff->scale_simple($width, $height, Gdk::INTERP_BILINEAR);
+			$obj_pixbuff = $this->oHelper->getPixbuf($img_path, $width, $height);
+//			if ($obj_pixbuff !== null) {
+//				$obj_pixbuff = $obj_pixbuff->scale_simple($width, $height, Gdk::INTERP_BILINEAR);
+//			}
 			$this->pixbuf_tank['maincell'][$img_ident."-".$img_ident_size] = $obj_pixbuff;
 			return $obj_pixbuff;
 		}
@@ -4502,31 +4478,31 @@ class App extends GladeXml {
 		if (isset($this->cell_ident_pixbuf[$eccident])) return $this->cell_ident_pixbuf[$eccident];
 		
 		// Get path
-//		$path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png';
 		$path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_cell.png';
 		if (!file_exists($path)) $path = dirname(__FILE__)."/".'images/eccsys/platform/ecc__cell.png';
-		
-		// create pixbuf and return
-		$obj = GdkPixbuf::new_from_file($path);
-		$obj->scale_simple(20, 80, Gdk::INTERP_BILINEAR);
-		$this->cell_ident_pixbuf[$eccident] = $obj;
-		return $obj;
+
+		$obj_pixbuff = $this->oHelper->getPixbuf($path);
+//		if ($obj_pixbuff !== null) {
+//			$obj_pixbuff = $obj_pixbuff->scale_simple(20, 80, Gdk::INTERP_BILINEAR);
+//		}
+		$this->cell_ident_pixbuf[$eccident] = $obj_pixbuff;
+		return $obj_pixbuff;
 	}
 	
 	public $cellRatingPixbufTank = array();
+	
 	public function getPixbufForRatingImage($rating) {
-
+		
+		// cached copy
 		if (isset($this->cellRatingPixbufTank[$rating])) return $this->cellRatingPixbufTank[$rating];
 
-		// Get path
+		// get new
 		$path = dirname(__FILE__)."/".'images/eccsys/rating/ecc_rating_'.$rating.'.png';
 		if (!file_exists($path)) $path = dirname(__FILE__)."/".'images/eccsys/rating/ecc_rating_0.png';
-		
-		// create pixbuf and return
-		$obj = GdkPixbuf::new_from_file($path);
-		$obj->scale_simple(20, 80, Gdk::INTERP_BILINEAR);
-		$this->cellRatingPixbufTank[$rating] = $obj;
-		return $obj;
+		$obj_pixbuff = $this->oHelper->getPixbuf($path);
+		//if ($obj_pixbuff !== null) $obj_pixbuff = $obj_pixbuff->scale_simple(5, 80, Gdk::INTERP_BILINEAR);
+		$this->cellRatingPixbufTank[$rating] = $obj_pixbuff;
+		return $obj_pixbuff;
 	}
 
 	// 20060108 hack for simle mediaview
@@ -4537,6 +4513,7 @@ class App extends GladeXml {
 				
 				$eccident = ($data['fd_eccident']) ? $data['fd_eccident'] : $data['md_eccident'];
 				$eccident = strtolower($eccident);
+				if (!$eccident) $eccident = 'unknown';
 				
 				$media_name = basename($data['path']);
 				
@@ -4545,6 +4522,7 @@ class App extends GladeXml {
 				$category = (isset($this->media_category[$data['md_category']])) ? $this->media_category[$data['md_category']] : '';
 				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : '';
 				$creator = (isset($data['md_creator'])) ? $data['md_creator'] : '';
+				$publisher = (isset($data['md_publisher'])) ? $data['md_publisher'] : '';
 				$running = (isset($data['md_running'])) ? $data['md_running'] : '';
 				
 				$multiplayer = (isset($data['md_multiplayer'])) ? $data['md_multiplayer'] : '';
@@ -4581,13 +4559,19 @@ class App extends GladeXml {
 				$item[] = $mod;
 				$item[] = $net;
 //				$item[] = $languages;
-								
+				$item[] = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png');
+				$item[] = $publisher;
+				
 				$this->model->append($item);
+				
+				
 				
 				unset($lang_data);
 				unset($media);
 				unset($media_name);
 				unset($item);
+				
+				#while (gtk::events_pending()) gtk::main_iteration();
 			}
 		}
 	}
@@ -4651,7 +4635,7 @@ class App extends GladeXml {
 					$media_name .= "YEAR: ".$year;
 					$media_name .= "\t\t";
 //					$media_name .= "CATEGORY: ".$this->get_category($data['md_category']);
-					$category = (isset($this->media_category[$data['md_category']])) ? $this->media_category[$data['md_category']] : '???';
+					$category = (isset($this->media_category[$data['md_category']])) ? $this->media_category[$data['md_category']] : '?';
 					$media_name .= "CAT: ".$category;
 					
 					$media_name .= "\n";
@@ -4705,13 +4689,15 @@ class App extends GladeXml {
 		
 		$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
 		$this->set_notebook_page_visiblility($this->nb_main, 1, false);
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
 		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 3, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 4, false);
 		
 		$placeholder_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_history_teaser.png';
-		$obj_pixbuff = GdkPixbuf::new_from_file($placeholder_path);
-		$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+		$obj_pixbuff = $this->oHelper->getPixbuf($placeholder_path, 240, 160);
+//		if ($obj_pixbuff !== null) {
+//			$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+//		}
 		$this->img_plattform->set_from_pixbuf($obj_pixbuff);
 		
 		$txt = '<b>'.htmlspecialchars($this->ecc_platform_name).'</b>';
@@ -4730,16 +4716,18 @@ class App extends GladeXml {
 		
 		$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
 		$this->set_notebook_page_visiblility($this->nb_main, 1, false);
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
+//		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
 		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 3, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 4, false);
 		
 		$txt = '<b>'.htmlspecialchars($this->ecc_platform_name).'</b>';
 		$this->nb_main_lbl_media->set_markup($txt);
 
 		$placeholder_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_bookmark_teaser.png';
-		$obj_pixbuff = GdkPixbuf::new_from_file($placeholder_path);
-		$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+		$obj_pixbuff = $this->oHelper->getPixbuf($placeholder_path, 240, 160);
+//		if ($obj_pixbuff !== null) {
+//			$obj_pixbuff = $obj_pixbuff->scale_simple(240, 160, Gdk::INTERP_BILINEAR);
+//		}
 		$this->img_plattform->set_from_pixbuf($obj_pixbuff);
 		
 		$this->onInitialRecord();
@@ -5106,17 +5094,14 @@ class App extends GladeXml {
 		$title = ($title) ? $title : I18N::get('popup', 'sys_dialog_miss_title');
 		$msg = ($msg) ? $msg : I18N::get('popup', 'sys_dialog_miss_msg');
 		$dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK, $msg);
-		$dialog->set_position(Gtk::WIN_POS_CENTER);		
-		
+		#$dialog->set_position(Gtk::WIN_POS_CENTER);		
+		$dialog->set_position(Gtk::WIN_POS_CENTER_ON_PARENT);		
 		if ($title) $dialog->set_title($title);
 		$response = $dialog->run();
-		
 		$dialog->destroy();
-		
 		if ($dialog->get_transient_for()) {
 			$dialog->get_transient_for()->present();
 		}
-		
 		if ($response == Gtk::RESPONSE_OK) {
 			return true;
 		}
@@ -5133,16 +5118,15 @@ class App extends GladeXml {
 		$title = ($title) ? $title : I18N::get('popup', 'sys_dialog_miss_title');
 		$msg = ($msg) ? $msg : I18N::get('popup', 'sys_dialog_miss_msg');
 		$dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_YES_NO, $msg);
-		$dialog->set_position(Gtk::WIN_POS_CENTER);
+		#$dialog->set_position(Gtk::WIN_POS_CENTER);		
+		$dialog->set_position(Gtk::WIN_POS_CENTER_ON_PARENT);
 		
 		if ($title) $dialog->set_title($title);
 		$response = $dialog->run();
+//		if ($dialog->get_transient_for()) {
+//			$dialog->get_transient_for()->present();
+//		}
 		$dialog->destroy();
-		
-		#if ($dialog->get_transient_for()) {
-		#	$dialog->get_transient_for()->present();
-		#}
-		
 		if ($response == Gtk::RESPONSE_YES) {
 			return true;
 		}
@@ -5160,7 +5144,7 @@ class App extends GladeXml {
 			if ($directEccIdent && $directParseDirectory) {
 				$eccIdent = $directEccIdent;
 				$parseDirectory = $directParseDirectory;
-				$platfom = $this->ini->get_ecc_platform_navigation($directEccIdent);
+				$platfom = $this->ini->getPlatformNavigation($directEccIdent);
 			}
 			else {
 				$eccIdent = $this->_eccident;
@@ -5202,14 +5186,14 @@ class App extends GladeXml {
 	public function setPathForEccParser($platfom)
 	{
 		// get path from history
-		$path_history = $this->ini->read_ecc_histroy_ini('eccparser');
+		$path_history = $this->ini->getHistoryKey('eccparser');
 		$title = sprintf(I18N::get('popup', 'rom_add_filechooser_title%s'), $platfom);
 
 		$path = FACTORY::get('manager/Os')->openChooseFolderDialog($path_history, $title);
 		
 		if ($path !== false) {
 			// write path to history
-			$this->ini->write_ecc_histroy_ini('eccparser', $path, true);
+			$this->ini->storeHistoryKey('eccparser', $path, true);
 			$this->fs_path_for_parser = $path;
 			return true;
 		}
@@ -5227,7 +5211,7 @@ class App extends GladeXml {
 	}
 	
 	public function quit() {
-		$this->ini->write_ecc_histroy_ini('navigation_last', $this->_eccident, false);
+		$this->ini->storeHistoryKey('navigation_last', $this->_eccident, false);
 		gtk::main_quit();
 	}
 	
@@ -5251,6 +5235,7 @@ class App extends GladeXml {
 		$this->freeformSearchFields = $mngrValidator->getEccCoreKey('freeformSearchFields');
 		$this->dropdownStateYesNo = $mngrValidator->getEccCoreKey('dropdownStateYesNo');
 		$this->dropdownStateCount = $mngrValidator->getEccCoreKey('dropdownStateCount');
+		$this->dropdownStorage = $mngrValidator->getEccCoreKey('dropdownStorage');
 		$this->eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
 		$this->eccdb = $mngrValidator->getEccCoreKey('eccdb');
 		$this->cs = $mngrValidator->getEccCoreKey('cs');
@@ -5261,8 +5246,13 @@ class App extends GladeXml {
 	
 	private function writeLocalReleaseInfo() {
 		$this->loadEccConfig();
-		
-		$versionInfos = "[GENERAL]\neccdate=\"".$this->ecc_release['local_release_date']."\"\neccversion=\"".$this->ecc_release['local_release_version']."\"";
+		$versionInfos = '
+[GENERAL]
+current_version="'.$this->ecc_release["local_release_version"].'"
+date_build="'.$this->ecc_release['local_release_date'].'"
+[UPDATE]
+last_update='.$this->ecc_release['local_release_build'].'
+';
 		file_put_contents(ECC_BASEDIR.'ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
 	}
 	

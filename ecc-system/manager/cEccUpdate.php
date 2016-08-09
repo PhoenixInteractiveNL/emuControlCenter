@@ -21,15 +21,16 @@ class EccUpdate {
 		$errorVersion = false;
 		switch (true) {
 			case $eccDbVersion < '0.5.901':
-				print "".LF;
-				#print "UPDATE FROM VERSION < '0.5.901'".LF;
-				if ($this->updateEccFromConfig('0.5.901')) {
-					$this->updateEccDbVersion('0.5.901');
-				}
+				if ($this->updateEccFromConfig('0.5.901')) $this->updateEccDbVersion('0.5.901');
 				else {
 					$errorVersion = '0.5.901';
 					break;
 				}
+			case $eccDbVersion < '0.7.0':
+				if ($this->updateEccFromConfig('0.7.0')) $this->updateEccDbVersion('0.7.0');
+				else $errorVersion = '0.7.0';
+			break;
+			
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
 		#print "VERSION NOW ".$eccVersion."".LF.LF;

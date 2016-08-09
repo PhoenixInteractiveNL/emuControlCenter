@@ -1,0 +1,583 @@
+include "iconrc"
+
+style "default"
+{
+  GtkTreeView::odd_row_color = "#E8E8E8"
+  GtkTreeView::even_row_color = "#E8E8E8"
+
+    GtkScrollbar::has_backward_stepper = 1
+    GtkScrollbar::has_secondary_backward_stepper = 1
+    GtkScrollbar::min_slider_length = 15
+    GTKPaned::handle_size = 0
+    GtkContainer::border_width = 0
+    GtkButton::default_border = {0,0,0,0}
+    GtkButton::default_outside_border = {0,0,0,0}
+
+    base[NORMAL]        = "#DDDDE0"
+    base[ACTIVE]        = "#DDDDE0"
+    base[SELECTED]      = "#4a4a4a"
+    base[PRELIGHT]      = "#DDDDE0"
+    base[INSENSITIVE]   = "#d0d0d0"
+
+    bg[NORMAL]          = "#E6E6E6"
+    bg[ACTIVE]          = "#F4F4F4"
+    ## colore cornice finestra
+    bg[SELECTED]        = "#7587b0"
+    bg[PRELIGHT]        = "#8a8a8a"
+    bg[INSENSITIVE]     = "#D3D3D3"
+
+    fg[NORMAL]          = "#000000"
+    fg[ACTIVE]          = "#314a82"
+    fg[SELECTED]        = "#ffffff"
+    fg[PRELIGHT]        = "#415a92"
+    fg[INSENSITIVE]     = "#747474"
+    
+    text[ACTIVE]        = "#000000"
+    text[SELECTED]      = "#ffffff"
+    text[INSENSITIVE]   = "#7587b0"
+    text[PRELIGHT]      = "#415a92"
+    
+    NautilusIconContainer::highlight_alpha=150
+    NautilusIconContainer::dark_info_color="#304050"
+    NautilusIconContainer::light_info_color="#ffffff"
+    
+    bg_pixmap[NORMAL]   = "bgpixmap_normal.png"
+    bg_pixmap[PRELIGHT] = "bgpixmap_prelight.png"
+
+    
+    engine "thinice" {
+	rect_scrollbar = FALSE
+	mark_type1 = DOT  #INVSLASH
+	mark_type2 = ARROW
+	paned_dots = FULL
+    }
+
+    engine "pixmap" {
+	image {
+	    function		= SHADOW
+	    recolorable 	= TRUE
+	    shadow		= OUT
+	    file		= "shadow_etched_out.png"
+	    border		= {1,1,1,1}
+	    stretch		= TRUE
+	}	
+	image {
+	    function		= SHADOW
+	    recolorable 	= TRUE
+	    shadow		= IN
+	    file		= "shadow_in.png"
+	    border		= {1,1,1,1}
+	    stretch		= TRUE
+	}
+	image {
+	    function		= SHADOW
+	    recolorable 	= TRUE
+	    shadow		= ETCHED_IN
+	    file		= "shadow_etched_in.png"
+	    border		= {1,1,1,1}
+	    stretch		= TRUE
+	}
+	image {
+	    function		= SHADOW
+	    recolorable 	= TRUE
+	    shadow		= ETCHED_OUT
+	    file		= "shadow_etched_out.png"
+	    border		= {1,1,1,1}
+	    stretch		= TRUE
+	}		
+    
+    
+    
+	image {
+	    function		= HANDLE
+	    recolorable 	= TRUE
+	    overlay_file	= "handleh.png"
+	    overlay_border	= {0,0,0,0}
+	    overlay_stretch	= FALSE
+	    orientation		= VERTICAL
+	}
+	
+	image {
+	    function		= HANDLE
+	    recolorable 	= TRUE
+	    overlay_file	= "handlev.png"
+	    overlay_border	= {0,0,0,0}
+	    overlay_stretch	= FALSE
+	    orientation		= HORIZONTAL
+	}
+
+    }
+    
+}
+
+style "ypaned" = "default" 
+{
+
+    GTKPaned::handle_size = 2
+
+    engine "pixmap" {
+	image {
+	    function		= HANDLE
+	    recolorable 	= TRUE
+#	    file		= "trasp.png"
+#    	    border		= {0,0,0,0}
+#	    stretch		= TRUE
+	    overlay_file	= "handlev2.png"
+	    overlay_border	= {0,0,0,0}
+	    overlay_stretch	= FALSE
+	    orientation		= VERTICAL
+	}
+	
+	image {
+	    function		= HANDLE
+	    recolorable 	= TRUE
+#	    file		= "trasp.png"
+#    	    border		= {0,0,0,0}
+#	    stretch		= TRUE
+	    overlay_file	= "handleh2.png"
+	    overlay_border	= {0,0,0,0}
+	    overlay_stretch	= FALSE
+	    orientation		= HORIZONTAL
+	}
+
+    }
+
+}
+
+
+style "Scrollbar" {
+    
+    engine "pixmap" {
+    
+    ## Sfondo scrollbar
+	image {
+	    function        = BOX
+	    recolorable     = TRUE
+	    detail          = "trough"
+	    file            = "vertical_trough.png"
+	    border          = { 0, 0, 39, 39 }
+	    stretch         = TRUE
+	    orientation     = VERTICAL
+	}
+       image {
+	    function        = BOX
+	    recolorable     = TRUE
+	    detail          = "trough"
+	    file            = "horizontal_trough.png"
+	    border          = { 39, 39, 0, 0 }
+	    stretch         = TRUE
+	    orientation     = HORIZONTAL
+       }
+       
+    ## Scrollbar
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = NORMAL
+            detail          = "slider"
+            file            = "scrollbar_horizontal.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = PRELIGHT
+            detail          = "slider"
+            file            = "scrollbar_prelight_horizontal.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+	image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = ACTIVE
+            detail          = "slider"
+            file            = "scrollbar_act_horizontal.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+ 	image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = NORMAL
+            detail          = "slider"
+            file            = "scrollbar_vertical.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = PRELIGHT
+            detail          = "slider"
+            file            = "scrollbar_prelight_vertical.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+	image {
+            function        = BOX
+            recolorable     = TRUE
+            state           = ACTIVE
+            detail          = "slider"
+            file            = "scrollbar_act_vertical.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+	
+    ## Freccine scrollbar
+       image {
+           function        = BOX
+           recolorable     = TRUE
+           state           = NORMAL
+           file            = "clear.png"
+           border          = { 0, 0, 0, 0 }
+           stretch         = TRUE
+       }
+       image {
+           function        = BOX
+           recolorable     = TRUE
+           state           = PRELIGHT
+           file            = "clear-pre.png"
+           border          = { 0, 0, 0, 0 }
+           stretch         = TRUE
+       }
+       image {
+           function        = BOX
+           recolorable     = TRUE
+           state           = ACTIVE
+           file            = "clear-act.png"
+           border          = { 0, 0, 0, 0 }
+           stretch         = TRUE
+       }
+    }
+}
+
+
+style "ProgressBar" {
+    
+    engine "pixmap" {
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            detail          = "bar"
+            file            = "progressbar.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+        }
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            detail          = "trough"
+            file            = "trough.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+    }
+
+}
+
+style "Scale" {
+    engine "pixmap" {
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            detail          = "trough"
+            file            = "vertical_trough_strc.png"
+            border          = { 2, 2, 1, 1 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            detail          = "trough"
+            file            = "horizontal_trough_strc.png"
+            border          = { 1, 1, 2, 2 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+        image {
+            function        = SLIDER
+            recolorable     = TRUE
+            state           = NORMAL
+            file            = "scrollbar_horizontal2.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }   
+        image {
+            function        = SLIDER 
+            recolorable     = TRUE
+            state           = PRELIGHT
+            file            = "scrollbar_prelight_horizontal2.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }
+        image {
+            function        = SLIDER
+            recolorable     = TRUE
+            state           = INSENSITIVE
+            file            = "scrollbar_horizontal2.png"
+            border          = { 10, 10, 6, 6 }
+            stretch         = TRUE
+            orientation     = HORIZONTAL
+        }   
+        image {
+            function        = SLIDER
+            recolorable     = TRUE
+            state           = NORMAL
+            file            = "scrollbar_vertical2.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+        image {
+            function        = SLIDER
+            recolorable     = TRUE
+            state           = PRELIGHT
+            file            = "scrollbar_prelight_vertical2.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+        image {
+            function        = SLIDER
+            recolorable     = TRUE
+            state           = INSENSITIVE
+            file            = "scrollbar_vertical2.png"
+            border          = { 6, 6, 10, 10 }
+            stretch         = TRUE
+            orientation     = VERTICAL
+        }
+    }
+}
+
+style "button" {
+  engine "pixmap" {
+
+    #
+    # Check marks
+    #
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+        shadow          = OUT
+	overlay_file    = "check_out.png"
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+	shadow          = IN
+	overlay_file    = "check_in.png"
+	overlay_stretch = FALSE
+      }
+
+    #
+    # Option marks
+    #
+    image 
+      {
+        function        = OPTION
+	recolorable     = TRUE
+	shadow          = OUT
+	overlay_file    = "option_out.png"
+	overlay_border  = { 0, 0, 0, 0 }
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = OPTION
+	recolorable     = TRUE
+	shadow          = IN
+	overlay_file    = "option_in.png"
+	overlay_border  = { 0, 0, 0, 0 }
+	overlay_stretch = FALSE
+      }
+    
+    #
+    # Regular buttons
+    #
+    image {
+        function        = BOX
+	file            = "button_normal.png"
+	state		= NORMAL
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_normal.png"
+	state		= INSENSITIVE
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_prelight.png"
+	state		= PRELIGHT
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_active.png"
+	state		= ACTIVE
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+  }
+}
+
+
+style "Notebook" {
+
+    engine "pixmap" {
+        
+	image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            state           = ACTIVE
+            file            = "notebook_active_bottom.png"
+            border          = { 10, 10, 10, 10 }
+            stretch         = TRUE
+            gap_side        = BOTTOM
+        }
+        
+	image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            state           = ACTIVE
+            file            = "notebook_active_top.png"
+            border          = { 10, 10, 10, 10 }
+            stretch         = TRUE
+            gap_side        = TOP
+        }
+
+        image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            state           = ACTIVE
+            file            = "extension_active_right.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+            gap_side        = RIGHT
+        }
+        
+	image {
+             function        = EXTENSION
+             recolorable     = TRUE
+             state           = ACTIVE
+             file            = "extension_active_left.png"
+             border          = { 2, 2, 2, 2 }
+             stretch         = TRUE
+             gap_side        = LEFT
+        }
+
+        image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            file            = "notebook_bottom.png"
+            border          = { 10, 10, 10, 10 }
+            stretch         = TRUE
+            gap_side        = BOTTOM
+        }
+        
+	image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            file            = "notebook_top.png"
+            border          = { 10, 10, 10, 10 }
+            stretch         = TRUE
+            gap_side        = TOP
+        }
+        
+	image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            file            = "extension_right.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+            gap_side        = RIGHT
+        }
+        
+	image {
+            function        = EXTENSION
+            recolorable     = TRUE
+            file            = "extension_left.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+            gap_side        = LEFT
+        }
+	
+	image {
+            function        = BOX_GAP
+            gap_side	    = TOP
+            file            = "notebook_top_flat.png"
+            border          = { 1, 1, 4, 1 }
+            stretch         = TRUE
+        }
+	
+	image {
+            function        = BOX_GAP
+            gap_side	    = BOTTOM
+            file            = "notebook_bottom_flat.png"
+            border          = { 1, 1, 1, 4 }
+            stretch         = TRUE
+        }
+	
+	image {
+            function        = BOX_GAP
+            gap_side	    = LEFT
+            file            = "notebook_left_flat.png"
+            border          = { 4, 1, 1, 1 }
+            stretch         = TRUE
+        }
+	
+	image {
+            function        = BOX_GAP
+            gap_side	    = RIGHT
+            file            = "notebook_right_flat.png"
+            border          = { 1, 4, 1, 1 }
+            stretch         = TRUE
+        }
+
+        image {
+            function        = BOX
+            recolorable     = TRUE
+            file            = "notebook_unattached.png"
+            border          = { 2, 2, 2, 2 }
+            stretch         = TRUE
+            gap_side        = TOP
+        }
+    }
+}
+
+
+style "tooltip"{
+    bg_pixmap[NORMAL]      = "<none>"
+    bg_pixmap[PRELIGHT]    = "<none>"
+}
+
+class "GtkNotebook" style "Notebook"
+class "GtkScrollbar" style "Scrollbar"
+class "GtkProgressBar" style "ProgressBar"
+class "GtkScale" style "Scale"
+class "GtkButton" style "button"
+class "GtkMenuItem" style "button"
+class "Gtk*Paned" style "ypaned"
+widget "gtk-tooltips" style "tooltip"
+
+class "GtkWidget" style "default"
+#class "GtkWidget" style "panel-icons"

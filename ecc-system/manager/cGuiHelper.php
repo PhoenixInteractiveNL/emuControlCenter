@@ -19,20 +19,21 @@ class GuiHelper {
 	}
 	
 	public function createUserfolderIfNeeded() {
-
-		$user_folder = $this->gui->ini->get_ecc_ini_key('USER_DATA', 'base_path');
+		
+		$user_folder = $this->gui->ini->getKey('USER_DATA', 'base_path');
 		
 		// is writeable directory?
-		if (!$user_folder && !$this->gui->ini->parentIsWritable($user_folder)) {
+		if (!$user_folder && !$this->gui->ini->parentDirIsWriteable($user_folder)) {
 			print "not writeable!!!!\n\n";
 			return false;
 		}
 		
 		// if directory not found - create default!
-		if (!is_dir($user_folder) || !is_dir($user_folder.'null/')) {
-			$this->gui->ini->setDefaultEccBasePath();
+		if (!is_dir($user_folder)) $this->gui->ini->setDefaultEccBasePath();
+		
+		if (is_dir($user_folder) && !is_dir($user_folder.'null/')) {
 			try {
-				$this->gui->ini->create_folder($user_folder);
+				$this->gui->ini->createFolder($user_folder);
 				$this->rebuildEccUserFolder(false);
 			}
 			catch (Exception $e) {
@@ -42,16 +43,17 @@ class GuiHelper {
 	}
 	
 	public function rebuildEccUserFolder($show_info_popup=true) {
-		$this->gui->ini->reload();
 		
-		$user_path_subfolder = $this->gui->ini->get_ecc_ini_key('USER_DATA', 'base_path_subfolder');
+		$this->gui->ini->flushIni();
+		
+		$user_path_subfolder = $this->gui->ini->getKey('USER_DATA', 'base_path_subfolder');
 		$user_path_subfolder_array = (trim($user_path_subfolder)) ?  explode(",", trim($user_path_subfolder)) : array();
 		$user_path_subfolder_merged = array_merge(array_flip($this->gui->user_path_subfolder_default), array_flip($user_path_subfolder_array));
 		
-		$nav_data = $this->gui->ini->get_ecc_platform_navigation();
+		$nav_data = $this->gui->ini->getPlatformNavigation();
 		foreach ($nav_data as $platform_eccident => $platform_name) {
 			foreach ($user_path_subfolder_merged as $subpath => $void) {
-				$this->gui->ini->get_ecc_ini_user_folder($platform_eccident.DIRECTORY_SEPARATOR.trim($subpath), true);
+				$this->gui->ini->getUserFolder($platform_eccident.DIRECTORY_SEPARATOR.trim($subpath), true);
 			}
 
 			
@@ -79,12 +81,12 @@ This folder is initial created with
 ".str_repeat('-', 80)."
 ";
 			
-			$eccInfoFile = $this->gui->ini->get_ecc_ini_user_folder($platform_eccident).DIRECTORY_SEPARATOR.'emuControlCenter.txt';
+			$eccInfoFile = $this->gui->ini->getUserFolder($platform_eccident).DIRECTORY_SEPARATOR.'emuControlCenter.txt';
 			file_put_contents($eccInfoFile, trim($eccInfoText));
 
 		}
 		if ($show_info_popup) {
-			$user_folder = $this->gui->ini->get_ecc_ini_key('USER_DATA', 'base_path');
+			$user_folder = $this->gui->ini->getKey('USER_DATA', 'base_path');
 			$title = I18N::get('popup', 'conf_userfolder_created_title');
 			$msg = sprintf(I18N::get('popup', 'conf_userfolder_created_msg%s%s'), '"'.implode('", "', array_keys($user_path_subfolder_merged)).'"', $user_folder);
 			$choice = $this->gui->open_window_info($title, $msg);
@@ -94,13 +96,16 @@ This folder is initial created with
 	public function set_eccheader_image() {
 		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_header_small.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
-		$this->gui->img_ecc_header->set_from_pixbuf(GdkPixbuf::new_from_file($img_path));
+		$obj_pixbuff = $this->getPixbuf($img_path);
+		$this->gui->img_ecc_header->set_from_pixbuf($obj_pixbuff);
 	}
 	
-		public function setEccSupportImage() {
+	public function setEccSupportImage() {
 		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_logo_support.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
-		$this->gui->eccImageSupport->set_from_pixbuf(GdkPixbuf::new_from_file($img_path));
+		
+		$obj_pixbuff = $this->getPixbuf($img_path);
+		$this->gui->eccImageSupport->set_from_pixbuf($obj_pixbuff);
 	}
 	
 	public function open_splash_screen() {
@@ -115,9 +120,8 @@ This folder is initial created with
 		$win_style_temp->bg[Gtk::STATE_NORMAL] = GdkColor::parse($this->gui->background_color);
 		$dlg->set_style($win_style_temp);
 		
-		$dlg->set_icon(GdkPixbuf::new_from_file(ECC_BASEDIR.'/ecc-system/images/eccsys/ecc_icon_camya.png'));
-		$dlg->set_logo(GdkPixbuf::new_from_file(ECC_BASEDIR.'/ecc-system/images/eccsys/platform/ecc_ecc_teaser.png'));
-		
+		$dlg->set_icon($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/ecc_icon_camya.png'));
+		$dlg->set_logo($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/platform/ecc_ecc_teaser.png'));
 		
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];
@@ -133,22 +137,39 @@ This folder is initial created with
 		$dlg->run();
 		$dlg->destroy();
 		
-		$this->gui->ini->write_ecc_histroy_ini('splashscreen_opened', true, false);
+		$this->gui->ini->storeHistoryKey('splashscreen_opened', true, false);
 	}
 	
+//	public function setBackgroundImage($window=false, $fileName=false, $mask=255) {
+//		if (!is_object($window)) return false;
+//		if (!$fileName) return false;
+//		
+//		$obj_pixbuff = $this->getPixbuf($fileName);
+//		list($pixmap, $mask) = $obj_pixbuff->render_pixmap_and_mask($mask);
+//		
+//		$style = $window->get_style();
+//		$style = $style->copy();
+//		
+//		$style->bg_pixmap[Gtk::STATE_NORMAL] = $pixmap;
+//		$window->set_style($style);
+//	}
 	
-	public function setBackgroundImage($window=false, $fileName=false, $mask=255) {
-		if (!is_object($window)) return false;
-		if (!$fileName) return false;
+	public function getPixbuf($imagePath, $width = false, $height = false) {
+		//if (!file_exists($imagePath)) return null;
+		try {
+			$oPixbuf = GdkPixbuf::new_from_file($imagePath);
+		}
+		catch (PhpGtkGErrorException $e) {
+			//return $this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/internal/error.gif');
+			return null;
+		}
+		// resizing
+		if ($oPixbuf !== null && $width && $height) {
+			$type = Gdk::INTERP_BILINEAR;
+			$oPixbuf = $oPixbuf->scale_simple((int)$width, (int)$height, $type);
+		}
 		
-		$pixbuf  =GdkPixbuf::new_from_file($fileName);
-		list($pixmap,$mask) = $pixbuf->render_pixmap_and_mask($mask);
-		
-		$style = $window->get_style();
-		$style = $style->copy();
-		
-		$style->bg_pixmap[Gtk::STATE_NORMAL] = $pixmap;
-		$window->set_style($style);
+		return  $oPixbuf;
 	}
 }
 

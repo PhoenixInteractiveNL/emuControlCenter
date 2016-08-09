@@ -117,11 +117,11 @@ $i18n['popup'] = array(
 	'emu_miss_title' =>
 		"Error - Emulator not found!",
 	'emu_miss_notfound_msg%s' =>
-		"The assigned emulator\n\n%s\n\nwas not found!\nPlease check the path in CONFIG/EMULATOR",
+		"The assigned emulator was not found. Green indicates an valid, red an invalid Emulator location.",
 	'emu_miss_notset_msg' =>
-		"Missing emulator!\n\nPlease add an emulator for this platform/extension! Please check the path in CONFIG/EMULATOR",
+		"You havent assigned any valid emulator for this platform",
 	'emu_miss_dir_msg%s' =>
-		"No emulator! (Only directory given!)\n\nPlease add an emulator for this platform/extension!\n\nPlease locate the emulators executeable (exe, bat, jar aso.). Only a directory will not work!",
+		"The assigned Path is an directory!!!!",
 	'rom_miss_title' =>
 		"Error - Media not found!",
 	'rom_miss_msg' =>

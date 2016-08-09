@@ -1,0 +1,30 @@
+                       Ultimate Packer for eXecutables
+    Copyright (C) 1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006
+UPX 2.03w       Markus Oberhumer, Laszlo Molnar & John Reiser    Nov 7th 2006
+
+        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+    892928 ->    640000   71.67%    win32/pe     iconv.dll
+     45056 ->     20480   45.45%    win32/pe     intl.dll
+    128254 ->     85758   66.87%    win32/pe     jpeg62.dll
+    112128 ->     39936   35.62%    win32/pe     libatk-1.0-0.dll
+   1000445 ->    631805   63.15%    win32/pe     libgdk-win32-2.0-0.dll
+    124139 ->     73963   59.58%    win32/pe     libgdk_pixbuf-2.0-0.dll
+     87040 ->     34816   40.00%    win32/pe     libglade-2.0-0.dll
+    663547 ->    306683   46.22%    win32/pe     libglib-2.0-0.dll
+     30991 ->     23311   75.22%    win32/pe     libgmodule-2.0-0.dll
+    281447 ->    135527   48.15%    win32/pe     libgobject-2.0-0.dll
+     36661 ->     26933   73.46%    win32/pe     libgthread-2.0-0.dll
+   3635785 ->   1594953   43.87%    win32/pe     libgtk-win32-2.0-0.dll
+    271524 ->    149668   55.12%    win32/pe     libpango-1.0-0.dll
+     74553 ->     54585   73.22%    win32/pe     libpangowin32-1.0-0.dll
+    203264 ->     93696   46.10%    win32/pe     libpng13.dll
+   1032657 ->    495057   47.94%    win32/pe     libxml2.dll
+     19735 ->     16663   84.43%    win32/pe     pango-basic-fc.dll
+     35277 ->     25549   72.42%    win32/pe     pango-basic-win32.dll
+   4571192 ->   1909248   41.77%    win32/pe     php5ts.dll
+     70656 ->     40960   57.97%    win32/pe     zlib1.dll
+   --------------------   ------   -----------   -----------
+  13317279 ->   6399591   48.05%                 [ 20 files ]
+
+Packed 20 files.

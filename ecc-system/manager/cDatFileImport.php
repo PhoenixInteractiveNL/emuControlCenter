@@ -53,7 +53,7 @@ class DatFileImport extends App {
 			isset($dat_header['ECC']['DAT-TYPE']) &&
 			isset($dat_header['ECC']['DAT-VERSION'])
 		) {
-			$this->parse_dat_emucontrolcenter($this->dat_filename);
+			$this->parse_dat_emucontrolcenter($dat_header['ECC']['DAT-VERSION']);
 		}
 		elseif (
 			//(isset($dat_header['DAT']['version']) && $dat_header['DAT']['version'] == "2.00") &&
@@ -146,7 +146,7 @@ class DatFileImport extends App {
 		// the dat-file! The array is
 		// only strip data, if activated in ecc_general_ini
 		$dat_strip_data = array();
-		if ($this->ini->get_ecc_ini_key('USER_SWITCHES','dat_import_rc_namestrip')) {
+		if ($this->ini->getKey('USER_SWITCHES','dat_import_rc_namestrip')) {
 			include('conf/ecc_dat_stripper.php');
 		}
 		
@@ -170,7 +170,7 @@ class DatFileImport extends App {
 		
 		// get extensions assigned to ecc-platform
 		// only do something, if a extension is assigned to the platform (eccident)
-		$possible_extensions = $this->ini->get_ecc_platform_extensions_by_eccident($this->eccident);
+		$possible_extensions = $this->ini->getPlatformFileExtensions($this->eccident);
 		if (count($possible_extensions) == 0) return false;
 		
 		// get data from ini-file
@@ -347,7 +347,7 @@ class DatFileImport extends App {
 					// Output
 					$percent_string = $count_total;
 					$message  = "Preparing Romcenter-DAT\n(".basename($this->dat_filename).") for:\n";
-					$message .= $this->ini->get_ecc_platform_name_by_eccident($this->eccident)." (".$this->eccident.")\n\n";
+					$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\n\n";
 					$message .= "Prepare only data for extensions assigned to ".$this->eccident."\n";
 					$message .= "Extensions: *.".implode("; *.", array_keys($possible_extensions))."\n";
 					$this->status_obj->update_message($message);
@@ -369,7 +369,7 @@ class DatFileImport extends App {
 		}
 		
 		if (!isset($ret['GAMES'])) {
-			$platform_name = $this->ini->get_ecc_platform_name_by_eccident($this->eccident);
+			$platform_name = $this->ini->getPlatformName($this->eccident);
 			$this->status_obj->update_progressbar(0, "ERROR!");
 			$message = "No matches in Dat-File\n(".basename($this->dat_filename).")\n";
 			$message .= "found for ".$platform_name." (".$this->eccident.")\n\n";
@@ -491,7 +491,7 @@ class DatFileImport extends App {
 				$this->status_obj->update_progressbar($percent, $msg);
 				
 				$message  = "Importing Romcenter-DAT\n(".basename($this->dat_filename).") for:\n";
-				$message .= $this->ini->get_ecc_platform_name_by_eccident($this->eccident)." (".$this->eccident.")\n\n";
+				$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\n\n";
 				$message .= "Search for: *.".implode("; *.", array_keys($possible_extensions))."\n";
 				$message .= "File $cnt_current of $cnt_total\n";
 				$message .= $infos['ECCIDENT']."\t".$infos['NAME'].chr(13);
@@ -506,7 +506,7 @@ class DatFileImport extends App {
 			// Output
 			$message  = "Importing Romcenter-DAT!\n";
 			$message  = "from Dat-File (".basename($this->dat_filename).") for\n";
-			$message .= $this->ini->get_ecc_platform_name_by_eccident($this->eccident)." (".$this->eccident.") DONE! :-)\n\n";
+			$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.") DONE! :-)\n\n";
 			$message .= "Statistics:\n";
 			if (isset($rc_status['EXT_ADDED'])) {
 				$msg_ext_added = array();
@@ -562,7 +562,7 @@ class DatFileImport extends App {
 	* $res[20] == '*'
 	* wenn *, dann valid.
 	*/
-	public function parse_dat_emucontrolcenter()
+	public function parse_dat_emucontrolcenter($version)
 	{
 		
 		$this->dat = $this->parse_ini_file_quotes_safe($this->dat_filename);
@@ -589,7 +589,17 @@ class DatFileImport extends App {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$res = explode(";", $mdata);
-			$is_valid = (isset($res[21]) && $res[21] == '#') ? true : false;
+			
+			switch ($version) {
+				case '0.95':
+					$terminator = 21;
+				break;
+				case '0.96':
+					$terminator = 23;
+				break;
+			}
+
+			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
 			
 			// if eccident is set, dont import not matching items.
 			if ($this->eccident && $this->eccident!=$res[0]) continue;
@@ -618,6 +628,15 @@ class DatFileImport extends App {
 				$data['doublettes'] = 	(($res[18] != "")) ? $res[18] : "NULL" ;
 				$data['info'] = 		(($res[19] != "")) ? $res[19] : "" ;
 				$data['info_id'] = 		(($res[20] != "")) ? $res[20] : "" ;
+				
+				// v0.96
+				
+				$data['publisher'] = "";
+				$data['storage'] = "NULL";
+				if ($terminator == 23) {
+					$data['publisher'] = (($res[21] != "")) ? $res[21] : "" ;
+					$data['storage'] = (($res[22] != "")) ? $res[22] : "NULL" ;				
+				}
 				
 				$q = "
 					SELECT
@@ -663,7 +682,7 @@ class DatFileImport extends App {
 			$this->status_obj->update_progressbar($percent, $msg);
 			// output
 			$message  = "Importing emuControlCenter-DAT (".basename($this->dat_filename).") for:\n";
-			$message .= $this->ini->get_ecc_platform_name_by_eccident($this->eccident)." (".$this->eccident.")\n\n";
+			$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\n\n";
 			$message .= "Import only data for Platform: '".$this->eccident."'\n";
 			$message .= "Entry $cnt_current of $cnt_total processed\n";
 			$message .= $data['eccident']."\t".$data['name'].chr(13);
@@ -695,7 +714,9 @@ class DatFileImport extends App {
 				year,
 				usk,
 				category,
-				creator
+				creator,
+				publisher,
+				storage
 			)
 			VALUES
 			(
@@ -716,7 +737,9 @@ class DatFileImport extends App {
 				'".sqlite_escape_string($data['year'])."',
 				".sqlite_escape_string($data['usk']).",
 				".sqlite_escape_string($data['category']).",
-				'".sqlite_escape_string($data['creator'])."'
+				'".sqlite_escape_string($data['creator'])."',
+				'".sqlite_escape_string($data['publisher'])."',
+				".sqlite_escape_string($data['storage'])."
 			)
 		";
 		#print $q."\n";
@@ -748,6 +771,8 @@ class DatFileImport extends App {
 			usk = ".sqlite_escape_string($data['usk']).",
 			category = ".sqlite_escape_string($data['category']).",
 			creator = '".sqlite_escape_string($data['creator'])."',
+			publisher = '".sqlite_escape_string($data['publisher'])."',
+			storage = ".sqlite_escape_string($data['storage']).",
 			uexport = NULL
 			WHERE
 			id = ".$id."

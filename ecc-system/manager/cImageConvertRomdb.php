@@ -27,7 +27,7 @@ class ImageConvertRomdb extends ImageConvert {
 			$crc32 = $split[2];
 			$desinationPath = $this->imageFolderDestination.$eccident.'/'.substr($crc32, 0, 1).'/'.substr($crc32, 0, 2).'/'.substr($crc32, 0,3).'/'.$crc32.'/thumb/'.$file;
 			
-			if (!is_dir(dirname($desinationPath))) $mngrIni->create_dirs_recursive(dirname($desinationPath));
+			if (!is_dir(dirname($desinationPath))) $mngrIni->createDirectoryRecursive(dirname($desinationPath));
 			copy($filePath, $desinationPath);
 			print '.';
 		}

@@ -35,6 +35,52 @@
 ###############################################################################
 
 -------------------------------------------------------------------------------
+- Version 0.7.0
+-------------------------------------------------------------------------------
+* added config popup
+** platform / emulators
+*** implemented activation/deactivation of platforms from emuconfig popup
+*** removed old platform treeview from emuControlCenter config tab
+*** start rom with (alternate emulator)
+*** global, extension and alternate emus available
+*** emus can use fallbacks and can overwrite parameters!!!
+*** added error output
+*** added indicator for escape and 8.3
+** emuControlCenter 
+*** moved from old tab to new config popup
+*** added color chooser and font selector
+** Datfile
+*** Added romcenter clean name option to frontend
+* extend rom context menu
+** added description in emu-selector context menu for better overview
+** doubleclick on rom without emu opens config
+* added platform-icons to list view
+* added ecc.exe startup-config to mainmenu
+* added new folder "ecc-tools"
+* added hotkey F5 and ALT-R for imagereload (fixed F5)
+* added meta-fields (metaedit/export/import/romdb)
+** publisher
+** storage type (savegame)
+* added extension gen to genesis
+* added fileextesion jma to snes
+* added missing flags for language dropdown
+* added new versions of ecc-tools
+** eccTheme - a theme selector
+** eccLive - for direct updates from internet
+** eccBugreport - for direct bugreports to the ecc developer
+* optimized image-error handling
+** for unknown imagetypes and for missing files
+* complete refactored startRom
+* complete refactored the ini-manager
+* fixed bug with not starting on first time!
+** I´ve missed the default ecc-user path in the ecc_general.ini
+* fixed extension to parser assignment for wonderswan bw/color
+* fix null byte problem in data-tab
+* fixed predifined best emu for 32X
+* fixed open zip files bug
+
+
+-------------------------------------------------------------------------------
 - Version 0.5.96
 -------------------------------------------------------------------------------
 * Update romdb - the internet rom/emu-metadatabase!

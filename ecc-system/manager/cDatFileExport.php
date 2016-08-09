@@ -57,7 +57,7 @@ class DatFileExport {
 	*/
 	public function export_data($path=false)
 	{
-		#$user_folder_images = $this->ini->get_ecc_ini_user_folder($this->_ident.DIRECTORY_SEPARATOR."export_backup".DIRECTORY_SEPARATOR, true);
+		#$user_folder_images = $this->ini->getUserFolder($this->_ident.DIRECTORY_SEPARATOR."export_backup".DIRECTORY_SEPARATOR, true);
 		return $this->save_dat_file_to_fs($path);
 	}
 	
@@ -118,7 +118,7 @@ class DatFileExport {
 			$user_folder_export = $path;
 		}
 		else {
-			$user_folder_export = $this->ini->get_ecc_ini_user_folder($this->exportHeader['export_ident'].DIRECTORY_SEPARATOR."exports".DIRECTORY_SEPARATOR, true);
+			$user_folder_export = $this->ini->getUserFolder($this->exportHeader['export_ident'].DIRECTORY_SEPARATOR."exports".DIRECTORY_SEPARATOR, true);
 		}
 		
 		if ($user_folder_export!==false) {
@@ -131,10 +131,10 @@ class DatFileExport {
 			$this->exportHeader['title_short'] = $this->ecc_release['title_short'];
 			
 			// USER_DAT_CREDITS
-			$this->exportHeader['author'] = $this->ini->get_ecc_ini_key('USER_DAT_CREDITS', 'author');
-			$this->exportHeader['website'] = $this->ini->get_ecc_ini_key('USER_DAT_CREDITS', 'website');
-			$this->exportHeader['email'] = $this->ini->get_ecc_ini_key('USER_DAT_CREDITS', 'email');
-			$this->exportHeader['comment'] = $this->ini->get_ecc_ini_key('USER_DAT_CREDITS', 'comment');
+			$this->exportHeader['author'] = $this->ini->getKey('USER_DAT_CREDITS', 'author');
+			$this->exportHeader['website'] = $this->ini->getKey('USER_DAT_CREDITS', 'website');
+			$this->exportHeader['email'] = $this->ini->getKey('USER_DAT_CREDITS', 'email');
+			$this->exportHeader['comment'] = $this->ini->getKey('USER_DAT_CREDITS', 'comment');
 			
 			$this->exportHeader['export_date'] = date('Ymd_Hi', time());
 			$this->exportHeader['export_type'] = ($this->_export_user_only) ? 'user' : 'complete';
@@ -145,8 +145,8 @@ class DatFileExport {
 				$this->exportHeader['export_esearch'] = $this->sql_snipp_esearch;
 			}
 			
-			if ($this->ini->get_ecc_ini_key('EXPERIMENTAL', 'exportType')) {
-				$this->exportType = $this->ini->get_ecc_ini_key('EXPERIMENTAL', 'exportType');
+			if ($this->ini->getKey('EXPERIMENTAL', 'exportType')) {
+				$this->exportType = $this->ini->getKey('EXPERIMENTAL', 'exportType');
 			}
 			$header = "";
 			switch($this->exportType) {
@@ -183,7 +183,7 @@ class DatFileExport {
 					$languages = $this->get_language_data($v['id']);
 					$languages = implode("|", $languages);
 					
-					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";#\n";
+					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";#\n";
 					#print $line."\n";
 					fwrite($fhdl, $line);
 					$line = "";
@@ -261,7 +261,7 @@ $this->exportHeader['title'] = $this->ecc_release['title'];
 		$line .= "COMMENT=\t".$this->exportHeader['comment']."\n";
 		$line .= "\n";
 		$line .= "[ECC_MEDIA]\n";
-		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;#\n";
+		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;#\n";
 		return $line;
 	}
 	

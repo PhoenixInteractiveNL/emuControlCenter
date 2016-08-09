@@ -48,5 +48,20 @@ class Valid {
 	static public function crc32($crc32) {
 		return (VALID::string($crc32, 8, 8, "/^[A-Za-z0-9]*$/")) ? true : false;
 	}
+	
+	static public function color($colorHex) {
+		return (VALID::string($colorHex, 7, 7, "/^#[A-F0-9]{6}$/")) ? true : false;
+	}
+	
+	public function strip_chars_subfolder_url($string=array()) {
+		$regex = '/([^0-9a-z_\-,]+)/iU';
+		$split = explode(",", $string);
+		$result = array();
+		foreach ($split as $string) {
+			$result[] = preg_replace($regex, "", trim($string));
+		}
+		return implode(",", $result);
+	}
+	
 }
 ?>

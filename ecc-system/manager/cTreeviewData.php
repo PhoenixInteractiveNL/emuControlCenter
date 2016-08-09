@@ -158,6 +158,11 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+
+			md.publisher as md_publisher,
+			md.storage as md_storage,
+			md.region as md_region,
+
 			md.cdate as md_cdate,
 			md.uexport as md_uexport,
 			fd.id as id,
@@ -288,6 +293,11 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+
+			md.publisher as md_publisher,
+			md.storage as md_storage,
+			md.region as md_region,
+
 			md.cdate as md_cdate,
 			md.uexport as md_uexport,
 			fd.id as id,
@@ -429,6 +439,11 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+
+			md.publisher as md_publisher,
+			md.storage as md_storage,
+			md.region as md_region,
+
 			md.cdate as md_cdate,
 			md.uexport as md_uexport,
 			fd.id as id,
@@ -680,6 +695,8 @@ class TreeviewData {
 			usk = '".sqlite_escape_string($data['usk'])."',
 			category = ".$data['category'].",
 			creator = '".sqlite_escape_string($data['creator'])."',
+			publisher = '".sqlite_escape_string($data['publisher'])."',
+			storage = ".sqlite_escape_string($data['storage']).",
 			cdate = ".time().",
 			uexport = NULL
 			WHERE
@@ -719,7 +736,9 @@ class TreeviewData {
 		$data['info_id'] = $inputData['md_info_id'];
 		$data['year'] = $inputData['md_year'];
 		$data['creator'] = $inputData['md_creator'];
-		
+		$data['publisher'] = $inputData['md_publisher'];
+
+		$data['storage'] = ($inputData['md_storage'] === null) ? $inputData['md_storage'] = 'NULL' : $inputData['md_storage'] ;		
 		
 		if ($inputData['md_id']) {
 			$this->update_file_info($data, false);
@@ -761,6 +780,8 @@ class TreeviewData {
 				usk,
 				category,
 				creator,
+				publisher,
+				storage,
 				cdate
 			)
 			VALUES
@@ -783,6 +804,8 @@ class TreeviewData {
 				'".sqlite_escape_string($data['usk'])."',
 				".$data['category'].",
 				'".sqlite_escape_string($data['creator'])."',
+				'".sqlite_escape_string($data['publisher'])."',
+				".$data['storage'].",
 				".time()."
 			)
 		";

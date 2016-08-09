@@ -1,4 +1,4 @@
-ï»¿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -9,201 +9,201 @@
  */
 $i18n['popup'] = array(
 	'rom_add_filechooser_title%s' =>
-		"%s: Por favor, localize sue diretÃ³rio de roms",
+		"%s: Por favor, localize o seu directório de roms",
 	'rom_add_parse_title%s' =>
-		"Add novas roms para %s",
+		"Adicionar novas roms para %s",
 	'rom_add_parse_msg%s%s' =>
-		"Adicionar novas roms para\n\n%s\n\ndo(s) diretÃ³rio(s)\n\n%s ?",
+		"Adicionar novas roms para\n\n%s\n\ndo(s) diretório(s)\n\n%s ?",
 	'rom_add_parse_done_title' =>
-		"VerificaÃ§Ã£o concluÃ­da",
+		"Verificação concluída",
 	'rom_add_parse_done_msg%s' =>
-		"AnÃ¡lise de novas roms para \n\n%s\n\nfoi realizada com sucesso!",
+		"Análise de novas roms para \n\n%s\n\nfoi realizada com sucesso!",
 	'rom_remove_title%s' =>
 		"APAGAR LISTA DE ROMS PARA %s",
 	'rom_remove_msg%s' =>
-		"VOCÃŠ DESEJA APAGAR AS ROMS PARA \n\%s\?\n\nEsta aÃ§Ã£o irÃ¡ remover TODAS as roms da plataforma selecionada. Esta aÃ§Ã£o NÃƒO irÃ¡ remover suas roms do disco rÃ­gido, nem as informaÃ§Ãµes (datfile) das mesmas.",
+		"DESEJA APAGAR AS ROMS PARA \n\%s\?\n\nEsta acção irá remover TODAS as roms da plataforma seleccionada. Esta acção NÃO irá remover as suas roms do disco rígido, nem as informações (ficheiro dat) das mesmas.",
 	'rom_remove_done_title' =>
-		"RemoÃ§Ã£o de roms concluÃ­da",
+		"Remoção de roms concluída",
 	'rom_remove_done_msg%s' =>
 		"Todas as roms para %s foram apagadas da lista!",
 	'rom_remove_single_title' =>
 		"Remover rom da base de dados?",
 	'rom_remove_single_msg%s' =>
-		"VocÃª deseja remover\n\n%s\n\nda base de dados do eCC?",
+		"Deseja remover\n\n%s\n\nda base de dados do eCC?",
 	'rom_remove_single_dupfound_title' =>
 		"Rom(s) duplicadas encontradas!!!",
 	'rom_remove_single_dupfound_msg%d%s' =>
-		"%d ROM(S) DUPLICADAS ENCONTRADAS\n\nVocÃª deseja remover todas as roms duplicadas de\n\n%s\n\n da base de dados do eCC?\n\nDÃª uma olhada em AJUDA para mais informaÃ§Ãµes!",
+		"%d ROM(S) DUPLICADAS ENCONTRADAS\n\nDeseja remover todas as roms duplicadas de\n\n%s\n\n da base de dados do eCC?\n\nDê uma olhada em AJUDA para mais informações!",
 	'rom_optimize_title' =>
-		"Otimizar base de dados",
+		"Optimizar base de dados",
 	'rom_optimize_msg' =>
-		"VocÃª gostaria de otimizar a base de dados das roms?\n\nÃ‰ recomendado otimizar a base de dados quando vocÃª mover ou remover arquivos do disco rÃ­gido.\nO eCC irÃ¡ procurar automaticamente, na base de dados, por entradas que nÃ£o sÃ£o mais utilizadas e removÃª-las!\nEsta opÃ§Ã£o apenas edita a base de dados.",
+		"Você gostaria de optimizar a base de dados das roms?\n\nÉ recomendado optimizar a base de dados quando mover ou remover ficheiros do disco rígido.\nO eCC irá procurar automaticamente na base de dados por entradas que não são mais utilizadas e removê-las!\nEsta opção apenas edita a base de dados.",
 	'rom_optimize_done_title' =>
-		"OtimizaÃ§Ã£o concluÃ­da",
+		"Optimização concluída",
 	'rom_optimize_done_msg%s' =>
-		"A base de dados para a plataforma\n\n%s\n\nfoi otimizada com sucesso!",
+		"A base de dados para a plataforma\n\n%s\n\nfoi optimizada com sucesso!",
 	'rom_dup_remove_title' =>
 		"Remover roms duplicadas da base de dados?",
 	'rom_dup_remove_msg%s' =>
-		"VocÃª gostaria de remover todas as roms duplicadas para\n\n%s\n\nda base de dados?\n\nEsta operaÃ§Ã£o sÃ³ funciona com a base de dados do emuControlCenter...\n\nIsto NÃƒO irÃ¡ remover arquivos do disco rÃ­gido!!!",
+		"Gostaria de remover todas as roms duplicadas para\n\n%s\n\nda base de dados?\n\nEsta operação só funciona com a base de dados do emuControlCenter...\n\nIsto NÃO irá remover ficheiros do disco rígido!!!",
 	'rom_dup_remove_done_title' =>
-		"RemoÃ§Ã£o concluÃ­da",
+		"Remoção concluída",
 	'rom_dup_remove_done_msg%s' =>
 		"Todas as roms duplicadas para\n\n%s\n\nforam removidas com sucesso!",
 	'rom_reorg_nocat_title' =>
-		"NÃ£o hÃ¡ categoria!",
+		"Não há categoria!",
 	'rom_reorg_nocat_msg%s' =>
-		"VocÃª nÃ£o atribuiu alguma categoria para suas roms de\n\n%s! Por favor, utilize a funÃ§Ã£o de ediÃ§Ã£o para adicionar alguma categoria ou importe um ecc-datfile!",
+		"Não atribuiu alguma categoria para as roms de\n\n%s! Por favor, utilize a função de edição para adicionar alguma categoria ou importe um ecc-datfile!",
 	'rom_reorg_title' =>
-		"Reorganizar suas roms no disco rÃ­gido?",
+		"Reorganizar roms no disco rígido?",
 	'rom_reorg_msg%s%s%s' =>
-		"------------------------------------------------------------------------------------------ESTA OPÃ‡ÃƒO IRÃ REORGANIZAR SUAS ROMS NO DISCO RÃGIDO !!! POR FAVOR, PRIMEIRO REMOVA QUALQUER ROM DUPLICADA DA BASE DE DADOS DO ECC !!!\nO MODO SELECIONADO Ã‰: #%s#\n------------------------------------------------------------------------------------------\n\nVocÃª gostaria de organizar suas roms de\n\n%s\n\npor categorias no diretÃ³rio principal do eCC? O eCC irÃ¡ organizar suas roms no ecc-user (pasta do usuÃ¡rio) em\n\n%s/roms/organized/\n\nPor favor, verifique se hÃ¡ espaÃ§o em disco.\n\nDESEJA CONTINUAR POR SUA CONTA E RISCO? :-)",
+		"------------------------------------------------------------------------------------------ESTA OPÇÃO IRÁ REORGANIZAR AS ROMS NO DISCO RÍGIDO !!! POR FAVOR, PRIMEIRO REMOVA QUALQUER ROM DUPLICADA DA BASE DE DADOS DO ECC !!!\nO MODO SELECCIONADO É: #%s#\n------------------------------------------------------------------------------------------\n\nGostaria de organizar suas roms de\n\n%s\n\npor categorias no directório principal do eCC? O eCC irá organizar suas roms no ecc-user (pasta do utilizador) em\n\n%s/roms/organized/\n\nPor favor, verifique se há espaço em disco.\n\nDESEJA CONTINUAR POR SUA CONTA E RISCO? :-)",
 	'rom_reorg_done_title' =>
-		"ReorganizaÃ§Ã£o concluÃ­da",
+		"Reorganização concluída",
 	'rom_reorg_done__msg%s' =>
-		"DÃª uma olhada no diretÃ³rio do eCC em\n\n%s\n\npara confirmar que estÃ¡ tudo OK.",
+		"Verifique o directório do eCC em\n\n%s\n\npara confirmar que está tudo OK.",
 	'db_optimize_title' =>
-		"Sistema de otimizaÃ§Ã£o da base de dados",
+		"Sistema de optimização da base de dados",
 	'db_optimize_msg' =>
-		"VocÃª gostaria de otimizar a base de dados?\nIsto irÃ¡ diminuir o tamanho fÃ­sico da base de dados do emuControlCenter. Ã‰ recomendado realizar se vocÃª adiciona e remove roms regularmente com o emuControlCenter!\n\nEsta operaÃ§Ã£o 'congelarÃ¡' o programa por alguns segundos - Por favor, espere! :-)",
+		"Gostaria de optimizar a base de dados?\nIsto irá diminuir o tamanho físico da base de dados do emuControlCenter. É recomendado fazer isto se adiciona e remove roms regularmente com o emuControlCenter!\n\nEsta operação 'congelará' o programa por alguns segundos - Por favor, espere! :-)",
 	'db_optimize_done_title' =>
-		"OtimizaÃ§Ã£o da base de dados concluÃ­da",
+		"Optimização da base de dados concluída",
 	'db_optimize_done_msg' =>
-		"A base de dados do eCC agora estÃ¡ otimizada!",
+		"A base de dados do eCC agora está optimizada!",
 	'export_esearch_error_title' =>
-		"Nenhuma opÃ§Ã£o do eSearch selecionada",
+		"Nenhuma opção do eSearch seleccionada",
 	'export_esearch_error_msg' =>
-		"VocÃª precisa usar o eSearch (extensÃ£o de pesquisa) para utilizar esta funÃ§Ã£o de exportaÃ§Ã£o. Esta operaÃ§Ã£o exportarÃ¡ somente metadados das ROMs que se pode ver na lista!",
+		"Precisa usar o eSearch (extensão de pesquisa) para utilizar esta função de exportação. Esta operação exportará somente metadados das ROMs que se pode ver na lista!",
 	'dat_export_filechooser_title%s' =>
-		"Selecione o diretÃ³rio para salvar o datfile do %s",	
+		"Seleccione o directório para salvar o ficheiro dat do %s",	
 	'dat_export_title%s' =>
-		"Exportar datfile do %s",
+		"Exportar ficheiro dat do %s",
 	'dat_export_msg%s%s%s' =>
-		"VocÃª gostaria de exportar o datfile de %s para a plataforma\n\n%s\n\ndentro deste diretÃ³rio?\n\n%s",
+		"Você gostaria de exportar o ficheiro dat de %s para a plataforma\n\n%s\n\ndentro deste directório?\n\n%s",
 	'dat_export_esearch_msg_add' =>
-		"O eCC usarÃ¡ as definiÃ§Ãµes feitas no eSearch na exportaÃ§Ã£o!",
+		"O eCC usará as definições feitas no eSearch na exportação!",
 	'dat_export_done_title' =>
-		"ExportaÃ§Ã£o concluÃ­da",
+		"Exportação concluída",
 	'dat_export_done_msg%s%s%s' =>
-		"ExportaÃ§Ã£o do datfile %s para\n\n%s\n\nno diretÃ³rio\n\n%s\n\nconcluÃ­da com sucesso!",
+		"Exportação do ficheiro dat %s para\n\n%s\n\nno diretório\n\n%s\n\nconcluída com sucesso!",
 	'dat_import_filechooser_title%s' =>
-		"Importar - Selecione um datfile para %s",
+		"Importar - Seleccione um ficheiro dat para %s",
 	'rom_import_backup_title' =>
-		"CriaÃ§Ã£o de backup",
+		"Criação de backup",
 	'rom_import_backup_msg%s%s' =>
-		"VocÃª gostaria de criar uma cÃ³pia de seguranÃ§a (backup) na sua pasta de usuÃ¡rio para\n\n%s (%s)\n\nantes de importar novos metadados?",
+		"Gostaria de criar uma cópia de segurança (backup) na sua pasta de utilizador para\n\n%s (%s)\n\nantes de importar novos metadados?",
 	'rom_import_title' =>
-		"Importar datfile",
+		"Importar ficheiro dat",
 	'rom_import_msg%s%s%s' =>
-		"VocÃª realmente deseja importar metadados para a plataforma\n\n%s (%s)\n\ndo datfile\n\n%s ?",
+		"Deseja mesmo importar metadados para a plataforma\n\n%s (%s)\n\ndo datfile\n\n%s ?",
 	'rom_import_done_title' =>
-		"ImportaÃ§Ã£o finalizada",
+		"Importação concluída",
 	'rom_import_done_msg%s' =>
-		"ImportaÃ§Ã£o do datfile para\n\n%s\n\nconcluÃ­da!",
+		"Importação do ficheiro dat para\n\n%s\n\nconcluída!",
 	'dat_clear_title%s' =>
 		"APAGAR BASE DE DADOS DO %s",
 	'dat_clear_msg%s%s' =>
-		"VOCÃŠ DESEJA APAGAR TODOS OS METADADOS PARA\n\n%s (%s) ?\n\nEsta operaÃ§Ã£o apagarÃ¡ todas as informaÃ§Ãµes como tÃ­tulo, gÃªnero, ano, status, etc. da plataforma selecionada! No passo seguinte vocÃª poderÃ¡ criar uma cÃ³pia de seguranÃ§a (backup) para estes dados (que serÃ¡ salva automaticamente na sua pasta de usuÃ¡rio)!\n\nO Ãºltimo passo Ã© fazer uma otimizaÃ§Ã£o da base de dados!",
+		"DESEJA APAGAR TODOS OS METADADOS PARA\n\n%s (%s) ?\n\nEsta operação apagará todas as informações como título, género, ano, estado, etc. da plataforma seleccionada! No passo seguinte poderá criar uma cópia de segurança (backup) para estes dados (que será guardada automaticamente na sua pasta de utilizador)!\n\nO último passo é fazer uma optimização da base de dados!",
 	'dat_clear_backup_title%s' =>
-		"CÃ³pia de seguranÃ§a %s",
+		"Cópia de segurança %s",
 	'dat_clear_backup_msg%s%s' =>
-		"VocÃª gostaria de criar um backup para a plataforma\n\n%s (%s) ?",
+		"Gostaria de criar um backup para a plataforma\n\n%s (%s) ?",
 	'dat_clear_done_title%s' =>
 		"Limpeza da base de dados finalizada",
 	'dat_clear_done_msg%s%s' =>
-		"Todas as informaÃ§Ãµes para\n\n%s (%s)\n\nforam removidas da base de dados do eCC com sucesso!",
+		"Todas as informações para\n\n%s (%s)\n\nforam removidas da base de dados do eCC com sucesso!",
 	'dat_clear_done_ifbackup_msg%s' =>
-		"O eCC guardou o backup de seus dados no diretÃ³rio 'ecc-user' -> %s",
+		"O eCC guardou o backup de seus dados no directório 'ecc-user' -> %s",
 	'emu_miss_title' =>
 		"ERRO!",
 	'emu_miss_notfound_msg%s' =>
-		"O emulador atribuÃ­do nÃ£o foi encontrado!\n\nPor favor, escolha um emulador em 'Emuladores' -> 'ConfiguraÃ§Ã£o'",
+		"O emulador atribuído não foi encontrado!\n\nPor favor, escolha um emulador em 'Emuladores' -> 'Configuração'",
 	'emu_miss_notset_msg' =>
-		"VocÃª nÃ£o atribuiu nenhum emulador vÃ¡lido para esta plataforma",
+		"Não atribuiu nenhum emulador válido para esta plataforma",
 	'emu_miss_dir_msg%s' =>
-		"O caminho atribuÃ­do Ã© um diretÃ³rio!",
+		"O destino atribuído é um directório!",
 	'img_overwrite_title' =>
 		"Sobrescrever imagem",
 	'img_overwrite_msg%s%s' =>
-		"A imagem\n\n%s\n\njÃ¡ existe!\n\nVocÃª realmente deseja substituir a imagem por\n\n%s ?",	
+		"A imagem\n\n%s\n\njá existe!\n\nDeseja realmente substituir a imagem por\n\n%s ?",	
 	'img_remove_title' =>
 		"Remover imagem",
 	'img_remove_msg%s' =>
-		"VocÃª realmente deseja remover a imagem %s ?",
+		"Deseja realmente  remover a imagem %s ?",
 	'img_remove_error_title' =>
 		"ERRO",
 	'img_remove_error_msg%s' =>
-		"NÃ£o foi possÃ­vel remover a imagem %s !",
+		"Não foi possível remover a imagem %s !",
 	'conf_platform_update_title' =>
-		"Atualizar ini da plataforma",
+		"Actualizar ini da plataforma",
 	'conf_platform_update_msg%s' =>
-		"VocÃª realmente deseja atualizar o INI da plataforma %s ?",
+		"Deseja realmente actualizar o INI da plataforma %s ?",
 	'conf_platform_emu_filechooser_title%s' =>
-		"Selecione um emulador para a extensÃ£o '%s'",
+		"Seleccione um emulador para a extensão '%s'",
 	'conf_userfolder_notset_title' =>
-		"ERRO - NÃ£o foi possÃ­vel encontrar diretÃ³rio",
+		"ERRO - Não foi possível encontrar directório",
 	'conf_userfolder_notset_msg%s' =>
-		"VocÃª alterou os caminhos de diretÃ³rio no ecc_general.ini. Este diretÃ³rio nÃ£o foi criado por enquanto.\n\nVocÃª gostaria de criar o diretÃ³rio\n\n%s\n\nagora?\n\nSe desejar escolher outro diretÃ³rio, clique em NÃƒO e escolha \n'OpÃ§Ãµes' -> 'ConfiguraÃ§Ã£o'\npara definir sua pasta do usuÃ¡rio!",
+		"Você alterou os destinos do directório no ecc_general.ini. Este directório não foi criado por enquanto.\n\nGostaria de criar o directório\n\n%s\n\nagora?\n\nSe desejar escolher outro directório, clique em NÃO e escolha \n'Opções' -> 'Configuração'\npara definir sua pasta de utilizador!",
 	'conf_userfolder_error_readonly_title' =>
-		"ERRO - NÃ£o foi possÃ­vel criar diretÃ³rio!!!",
+		"ERRO - Não foi possível criar directório!!!",
 	'conf_userfolder_error_readonly_msg%s' =>
-		"O diretÃ³rio %s nÃ£o pode ser criado porque vocÃª selecionou uma mÃ­dia que somente lÃª (read-only).\n\nSe desejar escolher outro diretÃ³rio, clique em OK e escolha \n'OpÃ§Ãµes' -> 'ConfiguraÃ§Ã£o'\npara definir sua pasta do usuÃ¡rio!",
+		"O directório %s não pode ser criado porque escolheu um sítio somente de leitura(read-only).\n\nSe desejar escolher outro directório, clique em OK e escolha \n'Opções' -> 'Configuração'\npara definir a sua pasta de utilizador!",
 	'conf_userfolder_created_title' =>
-		"Pasta do usuÃ¡rio criada!",
+		"Pasta de utilizador criada!",
 	'conf_userfolder_created_msg%s%s' =>
-		"As subpastas\n\n%s\n\nforam criadas na sua pasta de usuÃ¡rio\n\n%s",
+		"As subpastas\n\n%s\n\nforam criadas na sua pasta de utilizar\n\n%s",
 	'conf_ecc_save_title' =>
-		"Atualizar GLOBAL-INI do emuControlCenter",
+		"Actualizar GLOBAL-INI do emuControlCenter",
 	'conf_ecc_save_msg' =>
-		"Esta operaÃ§Ã£o irÃ¡ escrever as mudanÃ§as nas definiÃ§Ãµes para o ecc_global.ini.\n\nTambÃ©m irÃ¡ criar a pasta de usuÃ¡rio e as subpastas necessÃ¡rias.\n\nDeseja continuar?",
+		"Esta operação irá escrever as mudanças nas definições para o ecc_global.ini.\n\nTambém irá criar a pasta de utilizador e as subpastas necessárias.\n\nDeseja continuar?",
 	'conf_ecc_userfolder_filechooser_title' =>
-		"Selecione o diretÃ³rio para seus dados de usuÃ¡rio",
+		"Seleccione o directório para seus dados de usuário",
 	'fav_remove_all_title' =>
-		"RemoÃ§Ã£o de favoritos",
+		"Remoção de favoritos",
 	'fav_remove_all_msg' =>
-		"VocÃª realmente deseja apagar todos os favoritos?",
+		"Você realmente deseja apagar todos os favoritos?",
 	'maint_empty_history_title' =>
 		"Limpar history.ini?",
 	'maint_empty_history_msg' =>
-		"Esta operaÃ§Ã£o irÃ¡ limpar o arquivo history.ini (histÃ³rico). Este arquivo armazena suas preferÃªncias do eCC, como opÃ§Ãµes (ex. esconder roms duplicadas) e caminhos de diretÃ³rio selecionados!\n\nDeseja continuar?",
+		"Esta operação irá limpar o arquivo history.ini (histórico). Este arquivo armazena as suas preferências do eCC, como opções (ex. esconder roms duplicadas) e caminhos de directório seleccionados!\n\nDeseja continuar?",
 	'sys_dialog_info_miss_title' =>
-		"?? FALTANDO TÃTULO ??",
+		"?? FALTANDO TÍTULO ??",
 	'sys_dialog_info_miss_msg' =>
 		"?? FALTANDO MENSAGEM ??",
 	'sys_filechooser_miss_title' =>
-		"?? FALTANDO TÃTULO ??",
+		"?? FALTANDO TÍTULO ??",
 	'status_dialog_close' =>
-		"\n\nGostaria de fechar a Ã¡rea de status agora?",
+		"\n\nGostaria de fechar a área de status agora?",
 	'status_process_running_title' =>
-		"Um processo jÃ¡ estÃ¡ em execuÃ§Ã£o!",
+		"Um processo já está em execução!",
 	'status_process_running_msg' =>
-		"VocÃª somente pode iniciar um processo de cada vez como analisar/importar/exportar! Por favor, aguarde atÃ© o tÃ©rmino do processo em execuÃ§Ã£o!",
+		"Só pode iniciar um processo de cada vez como analisar/importar/exportar! Por favor, aguarde até fechar o processo em execução!",
 	'meta_rating_add_error_msg' =>
-		"VocÃª somente pode avaliar uma ROM que contenha metadados.\n\nPor favor, utilize a funÃ§Ã£o de ediÃ§Ã£o e add os dados necessÃ¡rios!",
+		"Só pode avaliar uma ROM que contenha metadados.\n\nPor favor, utilize a função de edição e adicione os dados necessários!",
 	'maint_unset_ratings_title' =>
-		"RemoÃ§Ã£o de avaliaÃ§Ãµes dos jogos",
+		"Remoção de avaliações dos jogos",
 	'maint_unset_ratings_msg' =>
-		"Esta operaÃ§Ã£o removerÃ¡ todas as avaliaÃ§Ãµes da base de dados... deseja continuar?",
+		"Esta operação removerá todas as avaliações da base de dados... deseja continuar?",
 	'eccdb_title' =>
-		"Banco de dados de games",
+		"Banco de dados de jogos",
 	'eccdb_statistics_msg%s%s%s%s%s' =>
-		"gamedb - EstatÃ­sticas:\n\n%s adicionado(s)\n%s ainda em vigor\n%s erro(s)\n\n%s fichier(s) sets de dados processados!%s",
+		"gamedb - Estatísticas:\n\n%s adicionado(s)\n%s ainda em vigor\n%s erro(s)\n\n%s fichier(s) sets de dados processados!%s",
 	'eccdb_webservice_post_msg' =>
-		"gamedb - Banco de dados:\n\nPara ajudar a comunidade do emuControlCenter, vocÃª pode adicionar seus metadados (tÃ­tulo, gÃªnero, ano, etc.) no gameDB (banco de dados de games).\n\nO gamedb funciona como o conhecido CDDB (banco de dados musical).\n\nSe vocÃª confirmar esta operaÃ§Ã£o, o eCC irÃ¡ automaticamente transferir seus metadados para o gamedb!\n\nVocÃª precisa estar conectado com a internet para adicionar as informaÃ§Ãµes!!!\n\nApÃ³s sets de 10 metadados processados, vocÃª precisa confirmar para adicionar mais!",
+		"gamedb - Banco de dados:\n\nPara ajudar a comunidade do emuControlCenter, você pode adicionar os seus metadados (título, género, ano, etc.) no gameDB (banco de dados de jogos).\n\nO gamedb funciona como o conhecido CDDB (banco de dados musical).\n\nSe você confirmar esta operação, o eCC irá automaticamente transferir os seus metadados para o gamedb!\n\nPrecisa estar conectado à internet para adicionar as informações!!!\n\nApós sets de 10 metadados processados você precisa confirmar para adicionar mais!",
 	'eccdb_error' =>
-		"gamedb - Erros:\n\nTalvez vocÃª nÃ£o esteja conectado Ã  internet... Somente com uma conexÃ£o ativa na internet serÃ¡ possÃ­vel adicionar dados no gamedb!",
+		"gamedb - Erros:\n\nTalvez não esteja conectado à internet... Somente com uma conexão activa à internet será possível adicionar dados à gamedb!",
 	'eccdb_no_data' =>
-		"gamedb - Nenhum dado adicional encontrado:\n\nVocÃª precisa editar mais seus metadados para adiciona-los no gamedb. FaÃ§a uma ediÃ§Ã£o e tente novamente!",
+		"gamedb - Nenhum dado adicional encontrado:\n\nPrecisa editar mais os seus metadados para adicioná-los no gamedb. Faça uma edição e tente novamente!",
 		
 	/* 0.9 FYEO 9 */
 	'rom_dup_remove_msg_preview%s' =>
-		"Esta opÃ§Ã£o irÃ¡ procurar por ROMs duplicadas na base de dados e irÃ¡ exibir as que encontrar.\n\nVocÃª poderÃ¡ encontrar o arquivo de histÃ³rico (log) no seu diretÃ³rio ecc-logs!",
+		"Esta opção irá procurar por ROMs duplicadas na base de dados e irá exibir as que encontrar.\n\nPoderá encontrar o ficheiro de histórico (log) no seu directório ecc-logs!",
 	
 	/* 0.9.1 FYEO 3 */
 	'img_remove_all_title' =>
-		"RemoÃ§Ã£o de imagens",
+		"Remoção de imagens",
 	'img_remove_all_msg%s' =>
-		"Esta opÃ§Ã£o irÃ¡ remover todas as imagens da ROM selecionada!\n\nDeseja continuar com a remoÃ§Ã£o de imagens de\n\n%s ?",
+		"Esta opção irá remover todas as imagens da ROM selecionada!\n\nDeseja continuar com a remoção de imagens de\n\n%s ?",
 	
 	/* 0.9.1 FYEO 6 */
 	'sys_dialog_miss_title' =>
@@ -212,13 +212,13 @@ $i18n['popup'] = array(
 	'parse_big_file_found_title' =>
 		"Analisar este arquivo?",
 	'parse_big_file_found_msg%s%s' =>
-		"Arquivo ENORME encontrado!!!\n\nA rom\n\nNome: %s\nTamanho: %s\n\nÃ© bem grande! Pode ficar um bom tempo sem resposta do emuControlCenter.\n\nVocÃª deseja analisar esta rom?",
+		"Ficheiro GRANDE encontrado!!!\n\nA rom\n\nNome: %s\nTamanho: %s\n\né muito grande! Pode ficar um bom tempo sem resposta do emuControlCenter.\n\nDeseja analisar esta rom?",
 
 	/* 0.9.5 WIP 19 */
 	'bookmark_added_title' =>
 		"Favorito adicionado",
 	'bookmark_added_msg' =>
-		"O favorito foi add com sucesso!",
+		"O favorito foi adicionado com sucesso!",
 	'bookmark_removed_single_title' =>
 		"Favorito removido",
 	'bookmark_removed_single_msg' =>
@@ -230,69 +230,69 @@ $i18n['popup'] = array(
 
 	/* 0.9.6 FYEO 1 */
 	'eccdb_webservice_get_datfile_title' =>
-		"Atualizar dados a partir da internet",
+		"Actualizar dados a partir da internet",
 	'eccdb_webservice_get_datfile_msg%s' =>
-		"VocÃª realmente deseja atualizar a plataforma\n\n%s\n\ncom informaÃ§Ãµes do banco de dados online (gameDB) do emuControlCenter?\n\nUma conexÃ£o com a internet Ã© necessÃ¡ria para realizar esta operaÃ§Ã£o!",
+		"Deseja realmente actualizar a plataforma\n\n%s\n\ncom informações da base de dados online (gameDB) do emuControlCenter?\n\nUma conexão com a internet é necessária para realizar esta operação!",
 	
 	'eccdb_webservice_get_datfile_error_title' =>
-		"NÃ£o foi possÃ­vel importar datfile",
+		"Não foi possível importar o ficheiro dat",
 	'eccdb_webservice_get_datfile_error_msg' =>
-		"VocÃª precisa estar conectado na internet. Por favor, conecte-se e tente novamente!",
+		"Precisa estar conectado à internet. Por favor, conecte-se e tente novamente!",
 
 	'romparser_fileext_problem_title%s' =>
-		"Problema na extensÃ£o %s",
+		"Problema na extensão %s",
 	'romparser_fileext_problem_msg%s%s%s%s%s%s' =>
-		"emuControlCenter encontrou mais de uma plataforma que utiliza a extensÃ£o %s em suas roms!\n\n%s\nVocÃª tem certeza de que somente roms de %s estÃ£o localizadas no diretÃ³rio indicado %s\n\n<b>Ok</b>: Procurar por %s neste diretÃ³rio!\n\n<b>CANCELAR</b>: NÃ£o procurar pela extensÃ£o %s neste diretÃ³rio!\n",
+		"emuControlCenter encontrou mais de uma plataforma que utiliza a extensão %s nas suas roms!\n\n%s\nTem certeza de que somente roms de %s estão localizadas no directório indicado %s\n\n<b>Ok</b>: Procurar por %s neste directório!\n\n<b>CANCELAR</b>: Não procurar pela extensão %s neste directório!\n",
 
 	/* 0.9.6 FYEO 8 */
 	'rom_dup_remove_title_preview' =>
 		"Procurar por roms duplicadas",
 	'rom_dup_remove_done_title_preview' => 
-		"Pesquisa concluÃ­da",
+		"Pesquisa concluída",
 	'rom_dup_remove_done_msg_preview' =>
-		"DÃª uma olhada na Ã¡rea de status para mais informaÃ§Ãµes!",
+		"Dê uma olhada na área de status para mais informações!",
 	'metaRemoveSingleTitle' =>
 		"Remover metadados",
 	'metaRemoveSingleMsg' =>
-		"VocÃª deseja remover os metadados desta rom?",
+		"Você deseja remover os metadados desta rom?",
 
 	/* 0.9.6 FYEO 11 */
 
 	'importDatCMFilechooseTitle%s' =>
-		"Selecione um datfile do ClrMAME",
+		"Selecione um ficheiro dat do ClrMAME",
 	'importDatCMConfirmTitle' =>
 		"Importar dat ClrMAME",
 	'importDatCMConfirmMsg%s%s%s' =>
-		"VocÃª realmente deseja importar dados para a plataforma\n\n%s (%s)\n\ndo datfile\n\n%s?",
+		"Deseja realmente importar dados para a plataforma\n\n%s (%s)\n\ndo datfile\n\n%s?",
 
 	/* 0.9.6 FYEO 13 */
 	'romAuditReparseTitle' =>
-		"Atualizar informaÃ§Ãµes",
+		"Actualizar informações",
 	'romAuditReparseMsg%s' =>
-		"Isto irÃ¡ atualizar as informaÃ§Ãµes de uma rom multiarquivo (se estÃ¡ completa ou nÃ£o).\n\nDeseja continuar?",
+		"Isto irá actualizar as informações de uma rom multiarquivo (se está completa ou não).\n\nDeseja continuar?",
 	'romAuditInfoNotPossibelTitle' =>
-		"NÃ£o estÃ¡ disponÃ­vel",
+		"Não está disponível",
 	'romAuditInfoNotPossibelMsg' =>
-		"InformaÃ§Ãµes de auditoria sÃ£o disponÃ­veis somente para roms multiarquivos, como por exemplo as roms de arcade!",
+		"Informações de auditoria estão disponíveis somente para roms multiarquivos, como por exemplo as roms de arcade!",
 
 	'romReparseAllTitle' =>
-		"Analisar diretÃ³rio de roms",
+		"Analisar directório de roms",
 	'romReparseAllMsg%s' =>
 		"Procurar por novas roms para a(s) seguinte(s) plataforma(s)?\n\n%s",
 
 	/* 0.9.6 FYEO 15 */
 	'parserUnsetExtTitle' =>
-		"ExtensÃµes multiplataforma",
+		"Extensões multiplataforma",
 	'parserUnsetExtMsg%s' =>
-		"Como vocÃª selecionou '#Todas encontradas', o eCC tem que pular extensÃµes duplicadas na pesquisa para prevenir atribuiÃ§Ãµes incorretas na base de dados!\n\nO emuControlCenter nÃ£o pesquisarÃ¡ por: %s\n\nPor favor, selecione a plataforma correta para analisar estas extensÃµes!\n\n",
+		"Como você selecionou '#Todas encontradas', o eCC tem que saltar extensões duplicadas na pesquisa para prevenir atribuições incorrectas na base de dados!\n\nO emuControlCenter não pesquisará por: %s\n\nPor favor, selecione a plataforma correcta para analisar estas extensões!\n\n",
 
 	'stateLabelDatExport%s%s' =>
-		"Exportar datfile de %s para %s",
+		"Exportar ficheiro dat de %s para %s",
 	'stateLabelDatImport%s' =>
-		"Importar datfile para %s",
+		"Importar ficheiro dat para %s",
 
 	'stateLabelOptimizeDB' =>
-		"Otimizar base de dados",
+		"Optimizar base de dados",
 	'stateLabelVacuumDB' =>
 		"Limpar base de dados",
 	'stateLabelRemoveDupRoms' =>
@@ -307,65 +307,65 @@ $i18n['popup'] = array(
 	'processCancelConfirmTitle' =>
 		"Cancelar processo?",
 	'processCancelConfirmMsg' =>
-		"VocÃª realmente deseja cancelar o processo em execuÃ§Ã£o?",
+		"Deseja realmente cancelar o processo em execução?",
 	'processDoneTitle' =>
 		"Fim!",
 	'processDoneMsg' =>
-		"O processo foi concluÃ­do com sucesso!",
+		"O processo foi concluído com sucesso!",
 
 	/* 0.9.7 FYEO 11 */
 	'userdata_backuped_in%s' =>
-		"A cÃ³pia de seguranÃ§a (backup) XML com seus dados foi criado em ecc-user/#_GLOBAL/ pasta\n\n%s\n\nDeseja ver o arquivo XML agora?",
+		"A cópia de segurança (backup) XML com seus dados foi criado em ecc-user/#_GLOBAL/ pasta\n\n%s\n\nDeseja ver o ficheiro XML agora?",
 
 	/* 0.9.7 FYEO 17 */
 	'executePostShutdownTaskTitle' =>
 		"Esta tarefa pode levar algum tempo",
 	'executePostShutdownTaskMessage%s' =>
-		"\nAviso: <b>%s</b>\n\nVocÃª realmente deseja executar esta longa tarefa?",
+		"\nAviso: <b>%s</b>\n\nDeseja realmente executar esta longa tarefa?",
 	'postShutdownTaskTitle' =>
 		"Executar tarefa selecionada",
 	'postShutdownTaskMessage' =>
-		"VocÃª selecionou uma tarefa que sÃ³ pode ser executada com o emuControlCenter fechado.\n\nApÃ³s esta tarefa, <b>o emuControlCenter irÃ¡ reiniciar automaticamente!</b>\n\nIsto pode levar alguns segundos, alguns minutos ou algumas horas! Esta janela congelarÃ¡! Respire fundo! :-)\n\n<b>Por favor, aguarde!</b>",
+		"Selecionou uma tarefa que só pode ser executada com o emuControlCenter fechado.\n\nApós esta tarefa, <b>o emuControlCenter irá reiniciar automaticamente!</b>\n\nIsto pode levar alguns segundos, alguns minutos ou algumas horas! Esta janela congelará! Respire fundo! :-)\n\n<b>Por favor, aguarde!</b>",
 
 	/* 0.9.8 FYEO 02 */
 	'startRomFileNotAvailableTitle' =>
-		"Arquivo nÃ£o encontrado...",
+		"Ficheiro não encontrado...",
 	'startRomFileNotAvailableMessage' =>
-		"Ei, acho que vocÃª nÃ£o tem esta rom!\n\nTente novamente, mas antes selecione em 'VisÃ£o' => 'todas (que possuo)' :-)",
+		"Ei, parece que  não tem esta rom!\n\nTente novamente, mas antes selecione em 'Visão' => 'todas (que possuo)' :-)",
 	'startRomWrongFilePathTitle' =>
-		"Rom se encontra na base de dados mas o arquivo nÃ£o foi encontrado!",
+		"A Rom encontra-se na base de dados mas o ficheiro não foi encontrado!",
 	'startRomWrongFilePathMessage' =>
-		"VocÃª removeu ou moveu de posiÃ§Ã£o suas roms?\n\nPor favor, use a opÃ§Ã£o 'ROMS' -> 'Otimizar roms' para limpar a base de dados!",
+		"Apagou ou moveu de posição as suas roms?\n\nPor favor, use a opção 'ROMS' -> 'Optimizar roms' para limpar a base de dados!",
 	
 	/* 0.9.8 FYEO 05 */
 	'waitForImageInjectTitle' =>
-		"Baixar imagens",
+		"Descarregar imagens",
 	'waitForImageInjectMessage' =>
-		"Esta tarefa pode levar um tempinho. Se forem encontradas imagens, esta janela fecharÃ¡ automaticamente e vocÃª verÃ¡ as imagens na lista!\n\nSe nÃ£o forem encontradas imagens, esta janela fecharÃ¡ automaticamente e vocÃª nÃ£o verÃ¡ imagens na lista... :-)",
+		"Esta tarefa pode levar algum tempo. Se forem encontradas imagens esta janela fechará automaticamente e você verá as imagens na lista!\n\nSe não forem encontradas imagens esta janela fechará automaticamente e você não verá imagens na lista... :-)",
 
 	/* 1.0.0 FYEO 02 */
 	'copy_by_search_title' =>
-		"Really copy/move files by search result?",
+		"Quer realmente copiar/mover os ficheiros por resultados de pesquisa",
 	'copy_by_search_msg_waring%s%s%s' =>
-		"This option will copy/rename ALL games found in your search result (Take care: If you dont have searched, all files are selected!)\n\nYou can select the destination in the next window.\n\nThere where found <b>%s games</b> in your searchresult\n\n<b>%s packed games</b> are skipped!\n\nDo you really want to copy/move these <b>%s</b> games to another location?",
+		"Esta opção irá copiar/renomear TODOS os jogos encontrandos nos resultados da sua pesquisa (Atenção: se não tiver pesquisado, todos os ficheiros serão selecionados!)\n\nPode escolher o destino na próxima janela.\n\nForam encontrados <b>%s jogos</b> nos resultados da sua pesquisa\n\n<b>%s jogos comprimidos</b> são saltados!\n\nDeseja mesmo copiar/mover estes jogos <b>%s</b> para outra localização?",
 	'copy_by_search_msg_error_noplatform' =>
-		"You have to select a platform to use this feature. It is not possible to use this function for ALL FOUND!",
+		"Tem que selecionar uma plataforma para usar esta capacidade. Não é possível usar esta função para TODOS os ENCONTRADOS!",
 	'copy_by_search_msg_error_notfound%s' =>
-		"No valid games are found in your searchresult. <b>%s packed games</b> skipped.",
+		"Não foram encontrados jogos válidos no resultado da sua pesquisa</b> saltado(s).",
 	'searchTab' =>
-		"Searchresult",
+		"Resultado de pesquisa",
 	'searchDescription' =>
-		"Here you can copy or move files from their source folder to a specified one.\n<b>Source is your current search result.</b>\nIf you move, also the paths in your database are updated! Clean by checksum remove files that are 100% duplicate!",
+		"Aqui pode copiar ou mover ficheiros do seu directório original ou mover para outro especificado.\n<b>A fonte é o seu actual resultado de pesquisa.</b>\nSe mover, os destinos da sua base de dados serão actualizados! Limpo por checksum remove ficheiros qu são 100% duplicados!",
 	'searchHeadlineMain' =>
-		"Introduction",
+		"Introducãon",
 	'searchHeadlineOptionSameName' =>
-		"same name",
+		"mesmo nome",
 	'searchRadioDuplicateAddNumber' =>
-		"add number",
+		"adicionar número",
 	'searchRadioDuplicateOverwrite' =>
-		"overwrite",
+		"sobrescrever",
 	'searchCheckCleanup' =>
-		"cleanup by checksum",
+		"limpar por checksum",
 
 );
 ?>

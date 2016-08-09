@@ -25,7 +25,7 @@ class FileParserGen implements FileParser {
 		// If invalid file, return this invalid data
 		if (!$this->isValid()) return $this->fileData;
 		
-		# use fsum to get the right crc32 for larger files!
+		# use external parser to get the right crc32 for larger files!
 		# only usable for platforms withou offsets!!!!
 		if (filesize($this->fileName) >= ExtParserTriggerSize) {
 			$ret['FILE_CRC32'] = FileIO::getExternalCrc32($this->fileName, 1);

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (spanish)
  * author:	Jarlaxe
- * date:	2011/07/16
+ * date:	2013/01/14
  * ------------------------------------------
  */
 $i18n['global'] = array(
@@ -245,6 +245,6 @@ $i18n['global'] = array(
 
 	/* ECC 1.13 build 10 */
 	'media_pager_number' =>
-		"Jump to page:"
+		"Saltar a la página:"
 );
 ?>

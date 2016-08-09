@@ -67,7 +67,7 @@ class GuiHelper {
 ".str_repeat('-', 80)."
 - This is an emuControlCenter GLOBAL userfolder!
 - (".$this->getEccVersionString().")
-- You can get the latest version of ecc at http://www.camya.com/
+- You can get the latest version of ECC at http://ecc.phoenixinteractive.mine.nu
 - With ecc, you can manage your roms in an easier way!
 ".str_repeat('-', 80)."
 

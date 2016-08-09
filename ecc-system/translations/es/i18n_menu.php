@@ -221,5 +221,12 @@ $i18n['menu'] = array(
 		"Añadir archivo de video",
 	'lbl_rom_video_delete' =>
 		"Eliminar archivo(s) de video",	
-);
+	
+	/* 1.14 BUILD 4 */
+	'lbl_rom_moby_import_manual' =>
+		"Import ROM information from MobyGames.com (manual)",
+	'lbl_rom_moby_import_fullauto' =>
+		"Import ROM information from MobyGames.com (full auto)",
+
+	);
 ?>

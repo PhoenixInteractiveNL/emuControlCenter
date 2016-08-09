@@ -47,7 +47,7 @@ class FileParserMp3 implements FileParser {
 			$ret['FILE_CRC32'] = false;	
 		}
 		else{
-			# fsum not possible here, because of offset!
+			# external parser not possible here, because of offset!
 			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, 0, $offset, $file_name));
 			$ret['FILE_VALID'] = true;
 		}

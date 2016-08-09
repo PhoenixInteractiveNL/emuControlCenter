@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.1.0 (2012.12.07)
+; Version: 1.2.1.2 (2013.10.04)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -85,18 +85,21 @@ $eccUserPath =							StringReplace($eccUserPath, "..", $eccSystemEccFolder)
 $eccUserPath =							StringReplace($eccUserPath, "/", "\")
 Global $DaemonTools =					IniRead($eccConfigFile, "DAEMONTOOLS", "daemontools_exe", "")
 
+Global $eccMultiRoms = 					"" ;Declare variable
+Global $eccScriptParamsFile = 			"" ;Declare variable
+
 ;[EXTRA]
 ; $eccScriptParamsFile (amiga gameconfig INI) (TheCyberDruid)
 ; ============================================================
 If StringLower($eccEmuEmulatorFilePlain) == "winuae" Then
-	$eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\amiga\winuae\eccscript_" & $eccFileRomCrc32 & ".ini"
+	$eccScriptParamsFile = $eccSystemEccFolder & "\ecc-script-user\amiga\winuae\eccscript_" & $eccFileRomCrc32 & ".ini"
 	$eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
 EndIf
 
 ; $eccScriptParamsFile (x68000 gameconfig INI) (Pacogf)
 ; ============================================================
 If StringLower($eccEmuEmulatorFilePlain) == "xm6" Then
-   $eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\x68000\XM6\eccscript_" & $eccFileRomCrc32 & ".ini"
+   $eccScriptParamsFile = $eccSystemEccFolder & "\ecc-script-user\x68000\XM6\eccscript_" & $eccFileRomCrc32 & ".ini"
    $eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
 EndIf
 

@@ -1,0 +1,74 @@
+﻿<html>
+	
+<head>
+	<title>DatFile Updater (DFU)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "emuControlCenter documentation.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("DatFileUpdaterDFU");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">DatFile Updater (DFU)</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="emuControlCenter.html">emuControlCenter</a> &rsaquo;&rsaquo; <a href="Changelog.html">Changelog</a> &rsaquo;&rsaquo; <a href="ToolScriptchangelogs.html">Tool/Script changelogs</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="ToolScriptchangelogs.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="eccScriptSystem.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="GtkThemeSelectGTKTS.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">Version 1.2.5.7</span><span class="rvts17"> (2012.07.04)</span><br/><span class="rvts17">- Changed filename for 7zip usage due to 7zip update.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.5.6</span><span class="rvts17"> (2012.05.06)</span><br/><span class="rvts17">- Improved ECC path fetching.</span><br/><span class="rvts17">- Adjusted for new ECC script adressing (without BAT file)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.5.5</span><span class="rvts17"> (2012.02.26)</span><br/><span class="rvts17">- Fixed a critical issue where ECC-DFU would not create DAT files properly when there are spaces in the pathnames!</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.5.2</span><span class="rvts17"> (2011.11.20)</span><br/><span class="rvts17">- Fixed date problem that is stored in the headers</span><br/><span class="rvts17">- Increased the need of available MB to update DATS, from 50 &gt; 100 MB</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.5.1</span><span class="rvts17"> (2011.05.01)</span><br/><span class="rvts17">- Added MAME fileversion to DATfile creation message.</span><br/><span class="rvts17">- Changed the forum link inside the DAT headers to 'mamedev.org/forum.html'</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.5.0</span><span class="rvts17"> (2011.04.24)</span><br/><span class="rvts17">- Improved the DATfile headers with right information.</span><br/><span class="rvts17">- Added a system that will use the temp DATfile when found and automatically update the user dats.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.0.0</span><span class="rvts17"> (2011.04.24)</span><br/><span class="rvts17">- Added support for the 64-Bit and i868 optimized version of MAME (executable selection).</span><br/><span class="rvts17">- Rounded the number of space free needed in MB (message) when you have not enough (also upped to 50MB).</span><br/><span class="rvts17">- Added check if the executable really is an 'official' MAME file.</span><br/><span class="rvts17">- Now writing the original MAME DATE inside the header, instead of the date on the users computer.</span><br/><span class="rvts17">- Cleaned up the code in DFU, made some functions etc.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.0</span><span class="rvts17"> (2010.11.30)</span><br/><span class="rvts17">- Fixed a problem where ECC could not import arcade ROMS, because the DATfiles didn't had any header.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.0</span><span class="rvts17"> (2011.05.06)</span><br/><span class="rvts17">- Initial release</span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/create-epub-ebooks">Generate EPub eBooks with ease</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy;2013 by Sebastiaan Ebeltjes. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

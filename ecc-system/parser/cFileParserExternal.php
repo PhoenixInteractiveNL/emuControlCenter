@@ -26,7 +26,7 @@ class FileParserExternal implements FileParser {
       $ret['FILE_EXT'] = (isset($this->_file_ext)) ? strtoupper($this->_file_ext) : strtoupper($file_info['EXT']) ;
       $ret['FILE_SIZE'] = $file_info['SIZE'];
       
-      # Always use FSUM
+      # Always use external parser!
       {
          $ret['FILE_CRC32'] = FileIO::getExternalCrc32($file_name, 1);
       }

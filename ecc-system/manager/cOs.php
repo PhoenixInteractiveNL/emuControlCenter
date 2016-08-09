@@ -34,9 +34,7 @@
 		return $this->os_env;
 	}
 	
-	/** Opens the selected media in the assigned player
-	*
-	*/
+	// Opens the selected media in the assigned player
 	public function executeFileWithProgramm(
 		$exeFileSource,
 		$param=false,
@@ -65,29 +63,20 @@
 	public function executeCommand($command, $cwdPath = false, $returnCwdPath = false, $useExec = false){
 		
 		# windows start tool
-		$commandWinStart  = 'start /B';
-		
-		# win98 needs "player". Otherwise, the file isnt started
-		$commandWinStart .= ($this->os_env['OS'] == 'WINNT') ? ' "player"' : '';
-		
-		# Compile start command
-		$executeCommand = $commandWinStart.' '.$command;
-
-		$cwdBackup = getcwd(); # create an backup of the current cwd
-		
-		# change to given path
+		$commandWinStart  = 'start /B'; //Maybe use COM object?
+		$commandWinStart .= ($this->os_env['OS'] == 'WINNT') ? ' "player"' : ''; # win98 needs "player". Otherwise, the file isn't started
+		$executeCommand = $commandWinStart.' '.$command; # Compile start command
+		$cwdBackup = getcwd(); # create an backup of the current cwd	
 		if($cwdPath) chdir($cwdPath); # change dir to the programs directory
 
-		# execute this command
-		if($useExec) exec($executeCommand);
+		if($useExec) exec($executeCommand); # execute this command
 		else pclose(popen($executeCommand, "r")); # execute command
 		
 //		print "<pre>".LF;
 //		print_r($executeCommand).LF;
 //		print "</pre>".LF;
 		
-		# return path
-		if($returnCwdPath) return $cwdBackup;
+		if($returnCwdPath) return $cwdBackup; # return path
 		else chdir($cwdBackup); # change dir back to cwdBackup!
 	}
 	
@@ -150,27 +139,38 @@
 			$romFile = $extraDir.FACTORY::get('manager/FileIO')->get_plain_filename($romFile); 
 		}
 
-		// use .cue files
+		// use .cue files?
 		if($useCueFile && $romFile && !$noExtension){
 		
-			$path = (dirname($romFile) && dirname($romFile) != '.') ? dirname($romFile) : '';
-			
-			$romFileName = basename($romFile);
-			if (false !== strrpos($romFileName, ".")) {
-				$split = explode(".", $romFileName);
-				$romFileName = array_shift($split);
-			}
+			$path = (dirname($romFile) && dirname($romFile) != '.') ? dirname($romFile) : '';	
+		
+			//OLD CODE, buggy if there are more dots in the filename, then only the partial name would be given!
+			//$romFileName = basename($romFile);
+			//if (false !== strrpos($romFileName, ".")) {
+			//	$split = explode(".", $romFileName);
+			//	$romFileName = array_shift($split);
+			//}
+
+			//NEW CODE, added 2013-11-17 (knowing that '.cue' is always 4 chars, just cut 4 chars of the right side of the string!)
+			$romFileName = substr(basename($romFile), 0, -4);
+								
 			if($path) $path = realpath($path).DIRECTORY_SEPARATOR;
-			$romFile = $path.$romFileName.'.cue';
-			if(!file_exists($romFile)) $error = 'FILE-NOT_FOUND-CUE';;
+			// Look for .CUE file and use if exists!, added 2012-11-18 (so this will also work if some roms don't have cue files!)
+			if(!file_exists($path.$romFileName.'.cue')) { //CUE file NOT found
+				$romFile = basename($romFile);
+				$error = 'FILE-NOT_FOUND-CUE';
+			}
+			else { //CUE file found
+				$romFile = $path.$romFileName.'.cue';
+			}
 		}
 		
-		// escape rompath or not
+		// 8.3 filepath & filename?
 		if ($fileName8dot3 && !$filenameOnly) {
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = $this->getEightDotThreePath($romFile); 
 		}
 		
-		// escape rompath or not
+		// escape rompath?
 		if (!$fileNameEscape) {
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = str_replace("&", "^&", $romFile);
 		}
@@ -179,7 +179,7 @@
 			#$romFile = escapeshellarg($romFile);
 		}
 		
-		# eccScript dont support commandline-params at the beginning!
+		// eccScript doesn't support commandline-params at the beginning!
 		if($enableEccScript){
 			$paramPre = '';
 			$paramPost = '';
@@ -227,7 +227,7 @@
 	}
 	
 	public function openChooseFolderDialog($path=false, $title=false, $multiSelection = false, $shorcutFolder = false) {
-		
+
 		return $this->openGtk2ChooseFsDialog($path, $title, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER, $multiSelection, $shorcutFolder);
 	}
 	
@@ -258,7 +258,7 @@
 	 	return ($result) ? $result : false;
 	}
 	
-		/*
+	/*
 	*
 	*/
 	public function openGtk2ChooseFsDialog($path=false, $title=false, $extension_limit=false, $type=Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER, $multiSelection = false, $shorcutFolder = false) {

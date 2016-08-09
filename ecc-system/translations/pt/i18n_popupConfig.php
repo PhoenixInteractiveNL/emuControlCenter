@@ -16,11 +16,11 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_hdl' =>
 		"Configurar emuControlCenter",
 	'lbl_ecc_userfolder' =>
-		"Pasta do usuário (para imagens, roms, datfiles...)",
+		"Pasta do utilizador (para imagens, roms, datfiles...)",
 	'lbl_ecc_userfolder_button' =>
-		"Mudar de diretório",
+		"Mudar de directório",
 	'title_ecc_userfolder_popup' =>
-		"Selecionar novo diretório da pasta do usuário",
+		"Seleccionar novo diretório da pasta do utilizador",
 	/* ECC-OPTIONS */
 	'lbl_ecc_otp_hdl' =>
 		"Opções",
@@ -38,7 +38,7 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_colfont_font_global' =>
 		"Tamanho e Fonte geral",
 	'title_ecc_colfont_font_global' =>
-		"Selecione uma fonte para visualização geral",
+		"Seleccione uma fonte para visualização geral",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
 		"Iniciar",
@@ -51,30 +51,30 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_platform_name' =>
 		"Nome da plataforma",
 	'lbl_emu_platform_category' =>
-		"Gênero da plataforma",
+		"Género da plataforma",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
 		"Atribuir emulador (%s)",
 	'lbl_emu_assign_path' =>
-		"Caminho para o emulador",
+		"Destino do emulador",
 	'btn_emu_assign_path_select' =>
-		"Selecionar emulador",
+		"Seleccionar emulador",
 	'title_emu_assign_path_select_popup%s' =>
 		"Selecionar emulador para %s",
 	'lbl_emu_assign_parameter' =>
 		"Linha de comando",
 	'lbl_emu_assign_escape' =>
-		"sem caminho",
+		"sem destino",
 	'lbl_emu_assign_eightdotthree' =>
-		"8.3 filename",
+		"nome do ficheiro em 8.3",
 	'lbl_emu_assign_nameonly' =>
-		"nome do arquivo somente",
+		"somente nome do arquivo ",
 	'lbl_emu_assign_noextension' =>
 		"sem extensão",
 	
 	/* DAT */
 	'lbl_dat_hdl' =>
-		"Configurar datfile",
+		"Configurar ficheiro dat",
 	'lbl_dat_author' =>
 		"Autor",
 	'lbl_dat_website' =>
@@ -87,7 +87,7 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"Opções",
 	'lbl_dat_opt_namestrip' =>
-		"Apagar Romcenter datfiles",
+		"Apagar ficheiro dat do Romcenter",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
@@ -95,14 +95,14 @@ $i18n['popupConfig'] = array(
 	'lbl_img_otp_list_imagesize' =>
 		"Tamanho da imagem",
 	'lbl_img_otp_list_aspectratio' =>
-		"Aspect ratio",
+		"Rácio de Aspecto",
 	/* 0.9 FYEO 4 */
 	'lbl_img_otp_list_fastrefresh' =>
-		"Atualização rápida",
+		"Actualização rápida",
 		
 	/* 0.9 FYEO 9 */
 	'confEccStatusLogCheck' =>
-		"Ativar logging",
+		"Activar logging",
 	'confEccStatusLogOpen' =>
 		"Mostrar arquivos de log",
 		
@@ -112,7 +112,7 @@ $i18n['popupConfig'] = array(
 	'tab_label_general' =>
 		"Geral",
 	'tab_label_datfiles' =>
-		"DAT files",
+		"Ficheiros DAT",
 	'tab_label_images' =>
 		"Imagens",
 	'tab_label_colorsandfonts' =>
@@ -146,7 +146,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_edit_eccscript' =>
 		"Editar eccScript",	
 	'lbl_emu_assign_edit_eccscript_error' =>
-		"Você pode adicionar scripts, se já tiver adicionado um emulador!",
+		"Pode adicionar scripts, se já tiver adicionado um emulador!",
 
 	/* 0.9.2 FYEO 6 */
 	'lbl_emu_assign_eccscript_hdl' =>
@@ -154,19 +154,19 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_delete_eccscript' =>
 		"deletar",
 	'msg_emu_assign_delete_eccscript%s' =>
-		"Remover o eccScript\n\n%s\n\nVocê tem certeza?",
+		"Remover o eccScript\n\n%s\n\nTem a certeza?",
 
 	/* 0.9.2 FYEO 8 */
 	'tab_label_startup' =>
 		"Inicialização",
 	'startConfHdl' =>
-		"Configuração de inicialização",
+		"Configuração de arranque",
 	'startConfSoundHdl' =>
-		"Tocar som na inicialização",
+		"Tocar som no de arranque",
 	'startConfOptHdl' =>
 		"Opções",
 	'startConfUpdate' =>
-		"Procurar por atualizações na inicialização",
+		"Procurar por actualizações no arranque",
 	'startConfMinimize' =>
 		"Minimizar para a área de notificação (tray)",
 	'startConfSoundSelect' =>
@@ -174,7 +174,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.2 FYEO 9 */
 	'lbl_preview_impossible' =>
-		"Não foi possível realizar prévia. As definições estão erradas ou faltando!",
+		"Não foi possível pré-visualizar. As definições estão erradas ou em falta!",
 
 	/* 0.9.2 FYEO 10 */
 	'lbl_emu_assign_edit_eccscript_error_notfound' =>
@@ -184,11 +184,11 @@ $i18n['popupConfig'] = array(
 	'emu_info_nodata' =>
 		"Sem informações disponíveis no momento...",
 	'emu_info_footer%s' =>
-		"Talvez você conheça um bom emulador para esta plataforma!\nVocê pode compartilhar esta informação no fórum pelo site\n%s",
+		"Talvez você conheça um bom emulador para esta plataforma!\nCompartilhe esta informação no fórum pelo site\n%s",
 	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
-		"Selecione um som",
+		"Seleccione um som",
 
 	/* 0.9.2 FYEO 14 */
 	'title_emu_assign_found_eccscript' =>
@@ -210,7 +210,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_executeinemufolder' =>
 		"Iniciar a partir da pasta de emuladores",
 	'lbl_preview_selectEmuFirst' =>
-		"Você não selecionou um emulador! Utilize o botão 'selecionar emulador' acima!",
+		"Você não seleccionou um emulador! Utilize o botão 'seleccionar emulador' acima!",
 
 	/* 0.9.6 FYEO 13 */
 	'winTitleConfiguration' =>
@@ -226,20 +226,20 @@ $i18n['popupConfig'] = array(
 	'colOptListBg2' =>
 		"Segundo plano 2",
 	'colOptListBgHilight' =>
-		"Segundo plano selecionado",
+		"Segundo plano seleccionado",
 	'colOptListBgImage' =>
 		"Imagem de fundo",
 	'colOptListText' =>
 		"Texto",
 	'colOptListTextHilight' =>
-		"Texto selecionado",
+		"Texto seleccionado",
 	'colOptListFont' =>
 		"Fonte",
 
 	'colOptOptionsBg1' =>
 		"Segundo plano 1",
 	'colOptOptionsBgHilight' =>
-		"Segundo plano selecionado",
+		"Segundo plano seleccionado",
 	'colOptOptionsText' =>
 		"Texto",
 
@@ -247,11 +247,11 @@ $i18n['popupConfig'] = array(
 	'colImgSlotUnsetBg' =>
 		"Segundo plano inutilizado",
 	'colImgSlotSetSelect' =>
-		"Segundo plano inutilizado selecionado",
+		"Segundo plano inutilizado seleccionado",
 	'colImgSlotSetBg' =>
 		"Segundo plano utilizado",
 	'colImgSlotUnsetSelect' =>
-		"Segundo plano utilizado selecionado",
+		"Segundo plano utilizado seleccionado",
 	'colImgSlotText' =>
 		"Texto",
 
@@ -267,7 +267,7 @@ $i18n['popupConfig'] = array(
 	
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
-		"Salvar definições de visualização (somente para peritos)",
+		"Guardar definições de visualização (somente para peritos)",
 	
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
@@ -286,19 +286,19 @@ $i18n['popupConfig'] = array(
 		"Análise silenciosa de ROMs (sem janelas saltando)",
 		
 	'emuAssignGlobalEnableEccScript' =>
-		"ativar eccScript",
+		"activar eccScript",
 	'emuAssignFileextLabel' =>
 		"Emulador para a extensão",
 	'emuAssignPreviewLabel' =>
-		"Prévia do comando de linha",
+		"Designar pré-visualização do comando de linha",
 	'emuAssignGlobalActive%s' =>
 		"Iniciar roms com a extensão '%s' neste emulador",
 	'emuAssignGlobalActiveGlobal%s' =>
-		"Ativar todos os emuladores '%s'",
+		"Activar todos os emuladores '%s'",
 	'lbl_emu_tips_ecc' =>
 		"eCC links",	
 	'emuPlatformActiveState' =>
-		"Ativar plataforma",
+		"Activar plataforma",
 	'tabGeneralHlListOptions' =>
 		"Visualização de roms por página",	
 		
@@ -306,19 +306,19 @@ $i18n['popupConfig'] = array(
 	'tab_label_themes' =>
 		"Temas",
 	'lblThemeSelect' =>
-		"Selecione um tema",
+		"Seleccione um tema",
 
 	/* 0.9.7 WIP 10 */
 	'emuAssignLabelZipUnpack' =>
 		"Descompactar zip/7zip",
 	'emuAssignGlobalCheckZipUnpackActive' =>
-		"Descompactar automaticamente arquivos zip/7zip",
+		"Descompactar automaticamente ficheiros zip/7zip",
 	'emuAssignGlobalCheckZipUnpackSkip' =>
-		"Pular arquivos já descompactados (rápido)",
+		"Saltar ficheiros já descompactados (rápido)",
 	'emuAssignGlobalCheckZipUnpackClean' =>
-		"Limpar pasta de descompactamento",
+		"Limpar pasta de descompactação",
 	'emuAssignGlobalCheckZipUnpackOpen' =>
-		"Abrir pasta de descompactamento",
+		"Abrir pasta de descompactação",
 
 	/* 0.9.7 WIP 10 */
 	'conEccSaveGuiSettings' =>
@@ -340,54 +340,54 @@ $i18n['popupConfig'] = array(
 	'startConfThirdPartyHdl' =>
 		"Programas de terceiros",
 	'startConfThirdPartyXpadder' =>
-		"Lançar 'xpadder' na inicialização",
+		"Lançar 'xpadder' no arranque",
 
     /* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
 		"Opções",
 	'lbl_emu_assign_refresh_eccscript' =>
-		"Atualizar",
+		"Actualizar",
 
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
-		"unpack ALL files including subdirs",
+		"descompactar TODOS os ficheiros incluíndo sub-directórios",
 	'emuUnpackNotelabel' =>
-		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+		'nota: in no SEPARADOR [início] pode purgar os ficheiros descompactados quando o ECC fechar.',
 	'startConfDeleteUnpacked' =>
-		"Empty ECC unpack folder on exit",
+		"Esvaziar directório de descompactações do ECC à saída",
 
 	/* 1.13 BUILD 4-8 */
 	'lbl_ecc_videoplayer' =>	
-	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
+	"Leitor de vídeo ECC precisa do VLC player instalado. Download @ http://www.videolan.org/vlc",
 	'lbl_ecc_videoplayer_note' =>	
-	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
+	"NOTAS: 1) Usar VideoLAN VLC v2.0.4+  2) Instale o componente ActiveX!",
 	'eccVideoPlayer_enable' =>
-		"Enable Video Player",
+		"Ligar o leitor de video",
 	'eccVideoPlayer_sound' =>
-		"Enable sound",
+		"Ligar o som",
 	'eccVideoPlayer_soundvolume' =>
 		"Volume (0-200%) =",
 	'eccVideoPlayer_loop' =>
-		"Loop video",
+		"Modo cíclico",
 	'eccVideoPlayer_resolution' =>
-		"Resolution (pixels): ",
+		"Resolução (pixéis): ",
 	'eccVideoPlayer_padding' =>
-		"Padding from rightbottom corner (pixels): ",
+		"Coordenadas de eixo no lado direito inferior (pixéis): ",
 
 	/* 1.13 BUILD 12 */		
 	'lbl_ecc_opt_hdl' =>
-		"Other options",
+		"Outras opções",
 	'tabGeneralImageTabOptions' =>
-		"IMAGE TAB in main view options",
+		"Separador de IMAGEMS na vista principal das opções",
 	'tabGeneralImageTabTcuttLabel' =>	
-		"Text cuttoff length (characters):",
+		"Corte de texto em extensão (caracteres):",
 	'tabGeneralParsingOptions' =>	
-		"Parsing options:",
+		"Opções de análise:",
 	'tabGeneralParsingTriggerLabel' =>	
-		"Big file parser trigger size (MB)",
+		"Activador de análise a ficheiros (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
-		"(experimental, PHP could crash if set to high)",
+		"(experimental, o PHP pode dar erro se o valor for alto)",
 	'ThemeSelectLabel' =>
-		"Theme:",
+		"Tema:",
 );
 ?>

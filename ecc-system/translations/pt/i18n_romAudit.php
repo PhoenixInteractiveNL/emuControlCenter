@@ -40,9 +40,9 @@ $i18n['romAudit'] = array(
 	'labelMameDriver' =>
 		"MAME Driver",
 	'labelLastAuditTime' =>
-		"Última atualização",
+		"Última actualização",
 	'labelHasTrashfiles' =>
-		"Arquivos errados",
+		"Ficheiros errados",
 
 	'textHitDetailCompleteHeader' =>
 		"Completos",
@@ -54,9 +54,9 @@ $i18n['romAudit'] = array(
 		"Reparar nome da rom",
 
 	'popupRomRenameFailed' =>
-		"Não foi possível renomear este arquivo! Parece que já há outro arquivo com este mesmo nome!",
+		"Não foi possível renomear este ficheiro! Parece que já há outro arquivo com este mesmo nome!",
 	'popupRomRenameAllreadyDone' =>
-		"Você já renomeou este arquivo... Por favor, recarregue esta janela!",
+		"Você já renomeou este ficheiro... Por favor, recarregue esta janela!",
 
 );
 ?>

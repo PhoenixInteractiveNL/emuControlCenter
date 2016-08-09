@@ -1,8 +1,14 @@
-v1.0.0.6
-- Better support for amiga games using the MULTI lines in the eccScriptRom file. (TheCyberDruid)
+v1.0.0.9b
+- Added GetGemusConfig v1.4 RELOADED permanently! (Phoenix)
+
+v1.0.0.9
+- Fixed crash if there are too many config lines available. (Phoenix)
+
+v1.0.0.8
+- Adjusted for LONG name support. (TheCyberDruid)
 
 v1.0.0.7
 - Adjusted the script to use new MULTI output with ZIP in eccScriptDat. (TheCyberDruid)
 
-v1.0.0.8
-- Adjusted for LONG name support. (TheCyberDruid)
+v1.0.0.6
+- Better support for amiga games using the MULTI lines in the eccScriptRom file. (TheCyberDruid)

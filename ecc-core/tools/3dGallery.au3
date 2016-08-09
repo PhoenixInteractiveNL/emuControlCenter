@@ -34,7 +34,7 @@ HotKeySet("{ESC}", "Terminate")
 ;Global Variables
 Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
 Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $GalleryImageUrl = "http://www.camya.com/ecc"
+Global $GalleryImageUrl = "http://ecc.phoenixinteractive.mine.nu"
 Global $RomName = IniRead($EccRomDataFile, "ROMDATA", "rom_name", "")
 Global $RomCrc32 = IniRead($EccRomDataFile, "ROMDATA", "rom_crc32", "")
 Global $RomCrc32short = StringLeft($RomCrc32, 2)

@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : EmuMoviesDownloader (EMD)
-; Script version         : v1.2.0.2
-; Last changed           : 2012-11-19
+; Script version         : v1.2.1.0
+; Last changed           : 2013-12-01
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -25,6 +25,7 @@ FileChangeDir(@ScriptDir)
 #include "..\thirdparty\autoit\include\URLStrings.au3"
 
 Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
+Global $7zExe = $EccInstallFolder & "\ecc-core\thirdparty\7zip\7z.exe"
 Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
 Global $EccDataBaseFile = $EccInstallFolder & "\ecc-system\database\eccdb"
 Global $eccUserCidFile = $EccInstallFolder & "\ecc-system\idt\cicheck.idt"
@@ -37,7 +38,7 @@ Global $SQLcommandFile = @Scriptdir & "\sqlcommands.cmd"
 Global $PlatformDataFile = "platformdata.txt"
 
 Global $EmuMoviesServer = "http://api.gamesdbase.com/"
-Global $EmuMoviesWebsite = "http://emumovies.com/forums/index.php/page/index.html"
+Global $EmuMoviesWebsite = "http://emumovies.com/"
 Global $EmuMoviesList = @ScriptDir & "\emuMoviesDownloader.list"
 Global $EmuMoviesName = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), GetCID(), 5)
 Global $EmuMoviesPass = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), GetCID(), 5)
@@ -83,7 +84,43 @@ If $EmuMoviesName = "" Or $EmuMoviesPass = "" Then
 	Exit
 EndIf
 
-; Retrieve ROMlist form ECC
+; Check: writable media...
+ToolTip("Check if media is writable...!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+
+Global $EccDummyFile = @ScriptDir & "\emuMoviesDownloader.dummy"
+$FileToWrite = FileOpen($EccDummyFile, 10)
+FileWrite($FileToWrite, "Dummy")
+FileClose($FileToWrite)
+If FileExists($EccDummyFile) Then
+	If FileGetSize($EccDummyFile) < 4 Then
+		ToolTip("This media is not writable!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+Else
+	ToolTip("This media is not writable!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+	Sleep(1500)
+	Exit
+EndIf
+
+; Check if 7zip is working...
+ToolTip("Check if 7zip is working...!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+ShellExecuteWait($7zexe, "a eccUpdate.7z " & Chr(34) & $EccDummyFile & Chr(34) & " -o" & Chr(34) & @ScriptDir & Chr(34) & " -y", "", "", @SW_HIDE)
+If FileExists(@ScriptDir & "\eccUpdate.7z") Then
+	If FileGetSize(@ScriptDir & "\eccUpdate.7z") < 100 Then
+		ToolTip("7Zip is not working properly!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+Else
+	ToolTip("7Zip is not working properly!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+	Sleep(1500)
+	Exit
+EndIf
+FileDelete($EccDummyFile)
+FileDelete(@ScriptDir & "\eccUpdate.7z")
+
+; Retrieve ROMlist from ECC
 ToolTip("Retrieving ROMlist from ECC database!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
 
 $INSTFile = Fileopen($SQLInstructionFile, 10)
@@ -135,8 +172,10 @@ Global $Message = _XMLGetAttrib("/Results/Result", "MSG")
 If $LoginOk = "False" Then
 	If $Error = "True" Then
 		MsgBox(64, "ECC EmuMovies Downloader", "Server message: " & $Message)
+		Exit
 	Else
 		MsgBox(64, "ECC EmuMovies Downloader", "Something went wrong!")
+		Exit
 	EndIf
 EndIf
 
@@ -157,52 +196,52 @@ Global $PlatformMediaUpdatedX = StringSplit($PlatformMediaUpdated, ",")
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $EMDGUI = GUICreate("ECC EmuMoviesDownloader (EMD)", 336, 511, -1, -1)
+Global $EMDGUI = GUICreate("ECC EmuMoviesDownloader (EMD)", 550, 375, -1, -1)
 GUISetBkColor(0xFFFFFF)
-Global $DownloadBarImage = GUICtrlCreateProgress(0, 352, 334, 17)
-Global $Label1 = GUICtrlCreateLabel("Downloading:", 0, 336, 92, 15)
+Global $DownloadBarImage = GUICtrlCreateProgress(0, 312, 422, 17)
+Global $Label1 = GUICtrlCreateLabel("Downloading:", 0, 296, 92, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $Label3 = GUICtrlCreateLabel("ECC ID:", 0, 0, 52, 15, $SS_RIGHT)
+Global $Label3 = GUICtrlCreateLabel("ECC ID:", 272, 16, 52, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $Label4 = GUICtrlCreateLabel("CRC32:", 216, 336, 44, 15, $SS_RIGHT)
+Global $Label4 = GUICtrlCreateLabel("CRC32:", 304, 296, 44, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $eccidLabel = GUICtrlCreateLabel("-", 64, 0, 68, 15)
+Global $eccidLabel = GUICtrlCreateLabel("-", 336, 16, 68, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $crcLabel = GUICtrlCreateLabel("-", 264, 336, 68, 15)
+Global $crcLabel = GUICtrlCreateLabel("-", 352, 296, 68, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $Label6 = GUICtrlCreateLabel("Total platform progress:", 0, 376, 164, 15)
+Global $Label6 = GUICtrlCreateLabel("Total platform progress:", 0, 336, 164, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $DownloadBarTotalPlatform = GUICtrlCreateProgress(0, 392, 334, 17)
-Global $Label7 = GUICtrlCreateLabel("Remaining:", 184, 376, 76, 15, $SS_RIGHT)
+Global $DownloadBarTotalPlatform = GUICtrlCreateProgress(0, 352, 422, 17)
+Global $Label7 = GUICtrlCreateLabel("Remaining:", 288, 336, 76, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $RemainingPlatformLabel = GUICtrlCreateLabel("-", 264, 376, 52, 15)
+Global $RemainingPlatformLabel = GUICtrlCreateLabel("-", 368, 336, 52, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $ProcessingList = GUICtrlCreateEdit("", 0, 200, 329, 129, BitOR($ES_AUTOHSCROLL,$ES_READONLY,$ES_WANTRETURN,$WS_VSCROLL))
-Global $MediaList = GUICtrlCreateListView("Media|Last updated", 0, 56, 266, 142)
+Global $ProcessingList = GUICtrlCreateEdit("", 0, 160, 545, 129, BitOR($ES_AUTOHSCROLL,$ES_READONLY,$ES_WANTRETURN,$WS_VSCROLL))
+Global $MediaList = GUICtrlCreateListView("Media|Last updated", 0, 16, 266, 142)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 160)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 85)
 GUICtrlSetBkColor(-1, 0xA6CAF0)
-Global $ButtonOk = GUICtrlCreateButton("OK", 272, 128, 59, 33)
+Global $ButtonOk = GUICtrlCreateButton("OK", 432, 296, 115, 33)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
-Global $Label2 = GUICtrlCreateLabel("Select content to download:", 0, 40, 180, 15)
+Global $Label2 = GUICtrlCreateLabel("Select content to download:", 0, 0, 180, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $Label5 = GUICtrlCreateLabel("EM ID:", 8, 16, 44, 15, $SS_RIGHT)
+Global $Label5 = GUICtrlCreateLabel("EM ID:", 280, 32, 44, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $emidLabel = GUICtrlCreateLabel("-", 64, 16, 164, 15)
+Global $emidLabel = GUICtrlCreateLabel("-", 336, 32, 164, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $Picture = GUICtrlCreatePic("", 32, 416, 272, 90)
-Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 272, 160, 59, 33)
+Global $Picture = GUICtrlCreatePic("", 272, 64, 272, 90)
+Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 432, 336, 115, 33)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
 ;==============================================================================
 ;END *** GUI
@@ -351,14 +390,15 @@ While 1
 				$RomDataFile = Fileopen(@ScriptDir & "\" & $PlatformDataFile)
 
 				For $imagecount = 1 to $PlatFormRomCountUser
-					$ReadRomData = StringSplit(FileReadLine($RomDataFile, $imagecount), ";") ;$ReadRomData[1] = CRC32, $ReadRomData[2] = ROM Name
+					$ReadRomData = StringSplit(FileReadLine($RomDataFile, $imagecount), ";") ;$ReadRomData[1] = CRC32, $ReadRomData[2] = ROM Filename
 					If @error = -1 Then ExitLoop
-					AddNote("searching for: " & $ReadRomData[2] & " {Media: " & StringReplace($SelectedMedia, "_", "") & "}...")
+					AddNote("searching for: " & FixRomName($ReadRomData[2]) & " {Media: " & StringReplace($SelectedMedia, "_", "") & "}...")
 					Global $ImageFolderLocal = $EccUserPath & $RomEccId & "\" & $MediaPath & "\" & StringLeft($ReadRomData[1], 2) & "\" & $ReadRomData[1] & "\" ;Constuct local image folder
 					Global $FileNameToSaveJPG = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".jpg" ;Construct JPG image filename
 					Global $FileNameToSavePNG = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".png" ;Construct PNG image filename
 					Global $FileNameToSaveMP4 = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".mp4" ;Construct MP4 video filename
 					Global $FileNameToSaveFLV = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".flv" ;Construct FLV video filename
+					;Global $FileNameToSaveZIP = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".zip" ;Construct ZIP file filename
 
 					;Check if content already exists...do NOT add doubles!
 					Global $FileNameToSave = "dummy"; we need the DUMMY otherwise it will also search for folders...
@@ -366,9 +406,10 @@ While 1
 					If FileExists($ImageFolderLocal & $FileNameToSavePNG) Then $FileNameToSave = $FileNameToSavePNG
 					If FileExists($ImageFolderLocal & $FileNameToSaveMP4) Then $FileNameToSave = $FileNameToSaveMP4
 					If FileExists($ImageFolderLocal & $FileNameToSaveFLV) Then $FileNameToSave = $FileNameToSaveFLV
+					;If FileExists($ImageFolderLocal & $FileNameToSaveZIP) Then $FileNameToSave = $FileNameToSaveZIP
 
 					If FileExists($ImageFolderLocal & $FileNameToSave) = 0 Then ;Do not overwrite existing files!
-						Global $EmuMoviesRomImageSearch = InetRead($EmuMoviesServer & "search.aspx?search=" & _UnicodeURLEncode($ReadRomData[2]) & "&system=" & $EmuMoviesId & "&media=" & $SelectedMedia & "&sessionid=" & $SessionID & "&product=" & $eccSig, 1) ; Download Rom image XML
+						Global $EmuMoviesRomImageSearch = InetRead($EmuMoviesServer & "search.aspx?search=" & _UnicodeURLEncode(FixRomName($ReadRomData[2])) & "&system=" & $EmuMoviesId & "&media=" & $SelectedMedia & "&sessionid=" & $SessionID & "&product=" & $eccSig, 1) ; Download Rom image XML
 						_XMLFileOpen($EmuMoviesRomImageSearch)
 						Global $ContentFound = _XMLGetAttrib("/Results/Result", "Found")
 						Global $Error = _XMLGetAttrib("/Results/Result", "Error")
@@ -409,9 +450,24 @@ While 1
 
 							Until InetGetInfo($FileDownloadHandle, 2) ;Check if the download is complete.
 
+							AddNote("complete!#")
+
+
+							; Handle ZIP files for MAME "Artwork", there could be more platforms later on.
+							; ALL Artwork seems to be in a ZIP file, and the image seems to be [romfilename].PNG format
+							If $ImageExtension = "zip" And $RomEccId = "mame" Then
+								AddNote("extracting images for: " & $ReadRomData[2] & "...")
+								ShellExecuteWait($7zexe, "e -y " & Chr(34) & $ImageFolderLocal & $FileNameToSave & Chr(34) & " -o" & Chr(34) & $ImageFolderLocal & Chr(34) & " " & Chr(34) & $ReadRomData[2] & ".png" & Chr(34), "", "", @SW_HIDE)
+								$FileNameToSavePNG = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".png"
+								FileMove($ImageFolderLocal & $ReadRomData[2] & ".png", $ImageFolderLocal & $FileNameToSavePNG) ; Rename the extracted file to the proper ECC filename
+								FileDelete($ImageFolderLocal & $FileNameToSave) ;Delete ZIP file
+								AddNote("complete!#")
+							EndIf
+
+
 							GUICtrlSetData($crcLabel, "-")
 							GUICtrlSetData($DownloadBarImage, 0)
-							AddNote("complete!#")
+
 							$FilesDownloaded = $FilesDownloaded + 1
 							Sleep(100)
 						Else
@@ -451,8 +507,6 @@ While 1
 
 	EndSwitch
 WEnd
-
-
 
 EndFunc
 
@@ -512,6 +566,24 @@ While 1
 Sleep(10)
 WEnd
 EndFunc ;EnterLoginData
+
+
+Func FixRomName($RomNameToFix)
+$RomNameBack = $RomNameToFix
+
+;Fix the ROM title if nessesary
+If StringInStr($RomNameBack, " (") Then
+	$FixedRomName = StringSplit($RomNameBack, " (", 1)
+	$RomNameBack = $FixedRomName[1]
+EndIf
+
+If StringInStr($RomNameBack, " [") Then
+	$FixedRomName = StringSplit($RomNameBack, " [", 1)
+	$RomNameBack = $FixedRomName[1]
+EndIf
+
+Return $RomNameBack
+EndFunc ;FixRomName()
 
 
 Func AddNote($string)

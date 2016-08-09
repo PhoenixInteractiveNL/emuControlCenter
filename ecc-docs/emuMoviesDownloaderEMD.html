@@ -1,0 +1,91 @@
+﻿<html>
+	
+<head>
+	<title>emuMoviesDownloader (EMD)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "emuControlCenter documentation.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("emuMoviesDownloaderEMD");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">emuMoviesDownloader (EMD)</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="emuControlCenter.html">emuControlCenter</a> &rsaquo;&rsaquo; <a href="Changelog.html">Changelog</a> &rsaquo;&rsaquo; <a href="ToolScriptchangelogs.html">Tool/Script changelogs</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="ToolScriptchangelogs.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="eccVideoPlayer.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="MobyGamesImporterMGI.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">Version 1.2.1.0</span><span class="rvts19"> (2013.12.01)</span></p>
+<p class="rvps2"><span class="rvts19">- Fixed "MAME Artwork" downloads, these download seems to be ZIP files now, so by</span></p>
+<p class="rvps2"><span class="rvts19"> &nbsp;adding a unpack feature for ZIP files these images are now extracted from the</span></p>
+<p class="rvps2"><span class="rvts19"> &nbsp;achives and given the proper name!</span></p>
+<p class="rvps2"><span class="rvts19">- Added check if 7Zip is working (due to "MAME Artwork" ZIP downloads)</span></p>
+<p class="rvps2"><span class="rvts19">- Added check if media is writable.</span></p>
+<p class="rvps2"><span class="rvts19">- Fixed a bug for the "Game Boy" platform when downloading resources from emuMovies</span></p>
+<p class="rvps2"><span class="rvts19"> &nbsp;The platform was not good detected due to a wrong double string in the EMD list.</span></p>
+<p class="rvps2"><span class="rvts19"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Version 1.2.0.6</span><span class="rvts19"> (2013.11.17)</span></p>
+<p class="rvps2"><span class="rvts19">- Improved search query's by removing "trash" in the search result</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Version 1.2.0.5</span><span class="rvts19"> (2013.10.04)</span></p>
+<p class="rvps2"><span class="rvts19">- Redesigned the EMD GUI, textbox has been made bigger!</span></p>
+<p class="rvps2"><span class="rvts19">- Fixed bug where EMD did not close after server error message.</span></p>
+<p class="rvps2"><span class="rvts19">- Fixed url in the EMD banner on the login menu to go their website.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Version 1.2.0.2</span><span class="rvts17"> (2012.11.19)</span><br/><span class="rvts17">- Adjusted code to use 'cover_3d' instead of 'cover_inlay_03'.</span><br/><span class="rvts17">- Fixed a bug where files are not downloaded if a folder already exists</span><br/><span class="rvts17">- Fixed a bug where 'PCB' images are not downloaded correctly</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.0.1</span><span class="rvts17"> (2012.11.15)</span><br/><span class="rvts17">- Fixed: Crash on importing/downloading videofiles.</span><br/><span class="rvts17">- Improved: Several GUI changes.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.0.0</span><span class="rvts17"> (2012.11.15)</span><br/><span class="rvts17">- Added: Cancel button.</span><br/><span class="rvts17">- Fixed: EMD will not create any doubles (PNG+JPG) of the same media (images).</span><br/><span class="rvts17">- Fixed: File extensions are now lowercased.</span><br/><span class="rvts17">- Improved: EMD now on Hyperspeed!, EMD will now first check if the file already</span><br/><span class="rvts17">exists before downloading the images data, this gives enormous speed increase!</span><br/><span class="rvts17">- Improved: The content list now only shows the content supported by ECC.</span><br/><span class="rvts17">- Improved: Clear processlist when downloading another content.</span><br/><span class="rvts17">- Made several GUI improvements and text changes.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.0</span><span class="rvts17"> (2012.11.09)</span><br/><span class="rvts17">- Added: new feature to download videos MP4/FLV from the EmuMovies server.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.0</span><span class="rvts17"> (2012.10.13)</span><br/><span class="rvts17">- With this tool integrated in ECC you can finally make your ROM artwork/images</span><br/><span class="rvts17">complete, you'll need an account on EmuMovies (registration is free)</span><br/><span class="rvts17">- Initial release</span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour">Easily create HTML Help documents</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy;2013 by Sebastiaan Ebeltjes. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

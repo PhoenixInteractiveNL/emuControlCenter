@@ -14,9 +14,9 @@ $i18n['mainList'] = array(
 	'simpleHeadYear' =>
 		"Ano",
 	'simpleHeadCategory' =>
-		"Gênero",
+		"Género",
 	'simpleHeadDeveloper' =>
-		"Desenvolvedor",
+		"Criador",
 
 	'detailNoMetaAvailable' =>
 		"Sem informações disponíveis",

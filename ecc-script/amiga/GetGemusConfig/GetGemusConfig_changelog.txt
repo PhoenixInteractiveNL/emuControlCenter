@@ -1,0 +1,8 @@
+v1.0.0.4
+- Changed tray messages to "center" Tooltips.
+
+v1.0.0.3
+- The GBA DB search is now only based on META info of the game NAME.
+
+v1.0.0.1
+- When META info of the game NAME is present, then use this name to search for.

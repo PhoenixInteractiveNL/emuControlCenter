@@ -1,15 +1,27 @@
-Notepad++ v6.2.3 fixed bugs and added features:
+Notepad++ v6.5 new features and bug fixes:
 
-1. Fix find "\r\n" bug in RegExpr mode.
-2. Change "Delete file" command to "Move to Recycle Bin".
-3. Add Remove empty lines feature.
-4. Change document default value from ANSI to UTF8 w/o BOM.
-5. Enable Word-completion under CJK environment for unicode document.
+1.  Update Scintilla to version 3.3.4
+2.  Add language CoffeeScript support.
+3.  Add multi-paste support for multi-selection/column mode.
+4.  Add new feature: auto-close parentheses, quotes, bracket and matched xml/html tag.
+5.  Add php, perl, xml, batch, ini and nsis for the build-in function list.
+6.  Add User Defined Languages support for the build-in function list.
+7.  Add reload feature for the build-in function list.
+8.  Fix a minor problem of file extension support for the build-in function list.
+9.  Fix a tag matching bug by disabling tag matching inside PHP code blocks.
+10. Fix right-to-left text after closing document map bug.
+11. Fix cancelling shutdown make Notepad++ quit w/o saving files bug.
+12. Enhance "Begin/End select" feature: Check "Begin/End select" menu item when active.
+13. Enhance Mark all feature: 2 options "Match case" and "Match whole word only" in Find/Replace dialog .
+14. Fix a Replace dialog status bar display problem by clearing status bar before processing any action.
+15. Add new feature: if Notepad++ is running as administrator, display this info on the title bar.
+16. Rename "block comment" to "Single line comment" and "stream comment" to "block comment".
+17. Remove invalid command "Online Documentation".
 
 
 Included plugins:
 
-1.  Spell Checker v1.3.3
+1.  DSpellCheck v1.2.7.0
 2.  NppFTP 0.24.1
 3.  NppExport v0.2.8
 4.  Plugin Manager 1.0.8

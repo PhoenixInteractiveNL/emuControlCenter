@@ -6,8 +6,8 @@ clrmamepro (
 	date 2009-04-10
 	author Gruby
 	homepage emuControlCenter
-	url "http://www.camya.com/"
-	comment "Please report any data file issues at http://ecc.phoenixinteractive.mine.nu/"
+	url "http://ecc.phoenixinteractive.mine.nu"
+	comment "Please report any data file issues at http://eccforum.phoenixinteractive.mine.nu/"
 )
 
 game (

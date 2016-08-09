@@ -1,23 +1,24 @@
 ; Platform              : Commodore Amiga
 ; Script for            : WinUAE (tested with v1.4.4)
-; Script version        : v1.0.0.8
-; Last changed          : 2008.08.09
-;
+; Script version        : v1.0.0.9b
+; Last changed          : 2013.10.04
 ;
 ; Author:  - Sebastiaan Ebeltjes (Phoenix Interactive)
 ;          - TheCyberDruid
 ;
 ; NOTES:
 ;
+; NONE YET!
 ;
-;
-
 ; ==============================================================================
 ; You need to implent this block in every script, this changes the workfolder to
 ; the folder where this script is executed, and loads the 'eccScriptSystem' script.
 FileChangeDir(@ScriptDir)
 #include "..\eccScriptSystem.au3"
 ; ==============================================================================
+
+; Load GetGemusConfig ADDON
+#include "GetGemusConfig\GetGemusConfig.eccscript"
 
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
@@ -27,26 +28,25 @@ FileChangeDir(@ScriptDir)
 ; Also overwrites the old content with new content.
 
 ; First let's copy the WINAUE TEMPLATE INI to the UAE ROM NAME
-;
 $sUAEFilename = $eccFileRomPath & $eccFileRomNamePlain & ".uae"
-FileCopy(@Scriptdir & "\winuae-template.ini", $sUAEFilename,9)
+FileCopy(@Scriptdir & "\winuae-template.ini", $sUAEFilename, 9)
 
 $iDiskCount = 1
 Dim $aDiskNames[5]
-If IsArray( $eccMultiRoms ) Then
-	$iRomCount = UBound( $eccMultiRoms, 1 ) - 1
+If IsArray($eccMultiRoms) Then
+	$iRomCount = UBound($eccMultiRoms, 1) - 1
 	For $i = 1 To $iRomCount
 		If $eccMultiRoms[$i][1] <> '""' Then
-			If Not StringInStr( $eccMultiRoms[$i][0], "packed" ) Then
-				If StringInStr( $eccMultiRoms[$i][1], "\" ) Then
-					$sRomName = CleanRomName( $eccMultiRoms[$i][1] )
+			If Not StringInStr($eccMultiRoms[$i][0], "packed") Then
+				If StringInStr($eccMultiRoms[$i][1], "\") Then
+					$sRomName = CleanRomName($eccMultiRoms[$i][1])
 				Else
 					$sRomName = $eccMultiRoms[$i][1]
 				EndIf
-				If Not FileExists( $eccFileRomPath & $sRomName ) Then
-					$sRomName = StringReplace( $sRomName, ".adf", ".zip" )
+				If Not FileExists($eccFileRomPath & $sRomName) Then
+					$sRomName = StringReplace($sRomName, ".adf", ".zip")
 				EndIf
-				$sRomName = StringReplace( $sRomName, '"', '' )
+				$sRomName = StringReplace($sRomName, '"', '')
 				$aDiskNames[$iDiskCount] = $sRomName
 				$iDiskCount += 1
 				If $iDiskCount == 5 Then
@@ -59,19 +59,19 @@ If IsArray( $eccMultiRoms ) Then
 	Next
 	$iDiskCount -= 1
 Else
-	$aDiskNames[1] = StringReplace( $eccFileRomFile, '"', '' )
+	$aDiskNames[1] = StringReplace($eccFileRomFile, '"', '')
 Endif
 
 $bConfigChange = False
-Dim $aRomSettings[30]
+Dim $aRomSettings[100]
 $iSettingsCount = 1
 
-If FileExists( $eccScriptParamsFile ) Then
+If FileExists($eccScriptParamsFile) Then
 	$bGoOn = True
 
-	$fileRomSettings = FileOpen( $eccScriptParamsFile, 0 )
+	$fileRomSettings = FileOpen($eccScriptParamsFile, 0)
 	While $bGoOn
-		$sLine = FileReadLine( $fileRomSettings )
+		$sLine = FileReadLine($fileRomSettings)
 		If @error == -1 Then
 			$bGoOn = False
 		Else
@@ -79,22 +79,21 @@ If FileExists( $eccScriptParamsFile ) Then
 			$iSettingsCount += 1
 		EndIf
 	WEnd
-	FileClose( $fileRomSettings )
+	FileClose($fileRomSettings)
 	ReDim $aRomSettings[$iSettingsCount]
 	$iSettingsCount -= 1
 	$bConfigChange = True
 EndIf
 
 ; Now open the UAE file and write the ROM contents into it!
-;
 If $bConfigChange Then
-	Dim $aUAELines[30]
+	Dim $aUAELines[100]
 	$iLineCount = 1
 	$bGoOn = True
 
 	$uae_file = FileOpen($sUAEFilename, 0)
 	While $bGoOn
-		$sLine = FileReadLine( $uae_file )
+		$sLine = FileReadLine($uae_file)
 		If @error == -1 Then
 			$bGoOn = False
 		Else
@@ -106,20 +105,20 @@ If $bConfigChange Then
 	ReDim $aUAELines[$iLineCount]
 	$iLineCount -= 1
 
-	$uae_file = FileOpen( $sUAEFilename, 2 )
+	$uae_file = FileOpen($sUAEFilename, 2)
 	For $i = 1 To $iLineCount
-		$iPos = StringInStr( $aUAELines[$i], "=" )
-		$sCheck = StringLeft( $aUAELines[$i], $iPos )
+		$iPos = StringInStr($aUAELines[$i], "=")
+		$sCheck = StringLeft($aUAELines[$i], $iPos)
 		For $j = 1 To $iSettingsCount
-			$iPos = StringInStr( $aRomSettings[$j], "=" )
-			$sSetting = StringLeft( $aRomSettings[$j], $iPos )
+			$iPos = StringInStr($aRomSettings[$j], "=")
+			$sSetting = StringLeft($aRomSettings[$j], $iPos)
 			If $sSetting == $sCheck Then
 				$aUAELines[$i] = $aRomSettings[$j]
 			EndIf
 		Next
-		FileWriteLine( $uae_file, $aUAELines[$i] )
+		FileWriteLine($uae_file, $aUAELines[$i])
 	Next
-	FileClose( $uae_file )
+	FileClose($uae_file)
 EndIf
 
 $uae_file = FileOpen($sUAEFilename, 1)
@@ -132,15 +131,14 @@ If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & 
 FileClose($uae_file)
 
 ; Start the emulator
-
 Run($Emulator & " " & "-f " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".uae" & chr(34))
 
-Func CleanRomName( $sRomName )
-	While StringInStr( $sRomName, "\" )
-		$iPos = StringInStr( $sRomName, "\" ) + 1
-		$sRomName = StringMid( $sRomName, $iPos )
+Func CleanRomName($sRomName)
+	While StringInStr($sRomName, "\")
+		$iPos = StringInStr($sRomName, "\") + 1
+		$sRomName = StringMid($sRomName, $iPos)
 	Wend
-	Return StringReplace( $sRomName, '"', "" )
+	Return StringReplace($sRomName, '"', "")
 EndFunc
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

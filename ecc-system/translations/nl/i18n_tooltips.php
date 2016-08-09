@@ -131,10 +131,17 @@ $i18n['tooltips'] = array(
 	'mTopHelpDocOnlineTooltip' =>
 		"Dit zal de ECC documentatie openen in je internetbrowser.",
 	'mTopHelpAboutTooltip' =>
-		"Dit zal de 'over ECC' box laten zien",
+		"Dit zal de 'over ECC' box laten zien.",
 
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesADTooltip' =>
 		"Dit zal een venster openen waar je je EmuMovies account gegevens kunt invoeren om gebruik te maken van hun diensten. (voor geregistreerde forum leden)",
-);
+	
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditorTooltip' =>
+		"Dit zal een notepad editor openen waarmee je tekatbestanden kan bewerken indien nodig.",
+	'mTopToolHexEditorTooltip' =>
+		"Dit zal een HEX editor openen waarmee je binaire bestanden kan bewerken indien nodig.",
+
+	);
 ?>

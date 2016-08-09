@@ -33,7 +33,7 @@ $i18n['dropdown_lang'] = array(
 	'[[portugese]]' =>
 		"Português",
 	'[[polish]]' =>
-		"Polonês",
+		"Polaco",
 	'[[danish]]' =>
 		"Dinamarquês",
 	'[[dutch]]' =>
@@ -76,7 +76,7 @@ $i18n['languages'] = array(
 
 	/* 1.0.0 WIP 01 */
 	'[[pt]]' =>
-		"Portuguese",
+		"Português",
 	'[[gr]]' =>
 		"Greek",
 	/* 1.0.0 WIP 04 */

@@ -1,17 +1,17 @@
-Welcome to ECC!, this is the first time you run ECC.
+Bienvenue dans ECC! C'est la première fois que vous lancez ECC.
 
 NOTES:
 
-- After you press the 'OK' button, ECC is going to create 'userfolders'
-and will generate 'media' images, this can take a while...
-Also make sure you have at least 50MB of free space!
+- Après avoir pressé le bouton 'OK', ECC va créer les dossiers 'userfolders'
+et va générer les 'media' images, ceci peut prendre un peu de temps...
+Soyez sûr d'avoir au moins 50MB d'espace libre !
 
-- Administrator rights:
-If you don't have Admin rights on this machine you can expect
-READ-ONLY behavior with ECC!!
+- Droits administrateur :
+Si vous n'avez pas les droits administrateur sur cette machine,
+attendez-vous à un comportement en LECTURE SEULE d'ECC !!!
 
-- Minimal width resolution of 1000 pixels:
-Your useable WIDTH resolution to display ECC, should be more then
-1000 pixels, otherwise you can expect GUI glitching or the GUI
-does not work at all !
-(this may occur when you have set the taskbar on the side @ 1024x768)
+- Résolution horizontale minimale de 1000 pixels:
+La largeur de la fenêtre pour afficher ECC doit être supérieure à
+1000 pixels, sinon attendez-vous à des défaillances d'affichage ou 
+même à ce que l'interface graphique ne fonctionne pas du tout !
+(possible en résolution 1024x768 avec la barre des tâches sur le côté)

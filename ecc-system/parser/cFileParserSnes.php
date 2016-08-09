@@ -105,7 +105,7 @@ class FileParserSnes implements FileParser {
 		#// ROM makeup (1 byte)
 		#$ret['ROM_MAKEUP_hi'] = trim(FileIO::ecc_read($fhdl, $starting_offset+65493+$snes_rom_header_offset, 1, false));
 		
-		# fsum not possible here, because of offset!
+		# external parser not possible here, because of offset!
 		if (filesize($file_name) >= ExtParserTriggerSize) {
 			$ret['FILE_VALID'] = false;
 			$ret['FILE_CRC32'] = false;	

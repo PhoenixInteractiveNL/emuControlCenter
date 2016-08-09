@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.0.0.4
+; Script version         : v1.0.0.5
 Global $ScriptVersion = "v1.0.0.4"
-; Last changed           : 2012.08.31
+; Last changed           : 2013.11.30
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -34,7 +34,6 @@ Global $EccExe = $EccPath & "\ecc.exe"
 Global $NotepadExe = $EccPath & "\ecc-core\thirdparty\notepad++\notepad++.exe"
 Global $EccUpdateLogFile = @Scriptdir & "\eccUpdate.log"
 
-;$UpdateServerScript = "http://www.camya.com/ecc/updates/download.php"
 Global $UpdateServer = "http://eccupdate.phoenixinteractive.mine.nu/" ; don't forget the / on the end!
 Global $EccLocalVersionIni = $EccPath & "\ecc-system\system\info\ecc_local_version_info.ini"
 Global $EccCurrentVersion = Iniread($EccLocalVersionIni, "GENERAL", "current_version", "")
@@ -46,6 +45,7 @@ Global $EccIdtFile = $EccPath & "\ecc-system\idt\cicheck.idt"
 $IdtRead = FileOpen($EccIdtFile)
 Global $EccIdt = FileRead($IdtRead)
 FileClose($IdtRead)
+Global $SkipUpdate
 
 
 Global $StartEccAfterUpdate = 0
@@ -83,7 +83,7 @@ AddNote(@YEAR & "-" & @MON & "-" & @MDAY & "  / " & @HOUR & ":" & @MIN & ":" & @
 AddNote("**************************************************************#")
 AddNote("Welcome to eccUpdate!, initializing...##")
 
-AddNote("checking: validations...")
+AddNote("check: validations...")
 If FileExists($7zExe) <> 1 Or FileExists($EccExe) <> 1 Or FileExists($AutoIt3Exe) <> 1 Then
 	AddNote("FAILED!#")
 	ExitOnError()
@@ -91,7 +91,7 @@ Else
 	AddNote("passed!#")
 EndIf
 
-AddNote("checking: free space...")
+AddNote("check: free space...")
 If DriveSpaceFree(@Scriptdir) < 100 Then
 	AddNote("FAILED!, you need at least 100 MB free space to perform updates#")
 	AddNote("you have only " & Round(DriveSpaceFree(@Scriptdir), -1) & " MB free!#")
@@ -100,7 +100,7 @@ Else
 	AddNote("ok!, you have " & Round(DriveSpaceFree(@Scriptdir) -1) & " MB free!#")
 EndIf
 
-AddNote("checking: writable media...")
+AddNote("check: writable media...")
 Global $EccDummyFile = @ScriptDir & "\eccUpdate.dummy"
 $FileToWrite = FileOpen($EccDummyFile, 10)
 FileWrite($FileToWrite, "Dummy")
@@ -117,7 +117,7 @@ Else
 	ExitOnError()
 EndIf
 
-AddNote("checking: is 7zip working...")
+AddNote("check: is 7zip working...")
 ShellExecuteWait($7zexe, "a eccUpdate.7z " & Chr(34) & $EccDummyFile & Chr(34) & " -o" & Chr(34) & @ScriptDir & Chr(34) & " -y", "", "", @SW_HIDE)
 If FileExists(@ScriptDir & "\eccUpdate.7z") Then
 	If FileGetSize(@ScriptDir & "\eccUpdate.7z") > 100 Then
@@ -133,7 +133,7 @@ EndIf
 FileDelete($EccDummyFile)
 FileDelete(@ScriptDir & "\eccUpdate.7z")
 
-AddNote("retrieving: current ECC version...")
+AddNote("check: current ECC version...")
 If $EccCurrentVersion <> "" And $EccCurrentBuild <> "" And $EccCurrentDateBuild <> "" Then
 	AddNote("succes!, ECC v" & $EccCurrentVersion & " build " & $EccCurrentBuild & " (" & $EccCurrentDateBuild & ")#")
 Else
@@ -141,7 +141,7 @@ Else
 	ExitOnError()
 EndIf
 
-AddNote("retrieving: last installed update...")
+AddNote("check: last installed update...")
 If $EccLocalLastUpdate <> "" Then
 	AddNote("succes!, last update is " & $EccLocalLastUpdate & "#")
 Else
@@ -151,7 +151,7 @@ EndIf
 
 AddNote("info: update server is: " & $UpdateServer & "#")
 
-AddNote("querying: update server...")
+AddNote("query: update server...")
 $ServerMessage = InetRead($UpdateServer & "update.php?idt=" & $EccIdt & "&eccversion=" & $EccCurrentVersion & "&eccbuild=" & $EccCurrentBuild & "&eccupdate=" & $EccLocalLastUpdate & "&command=message", 1)
 If StringLen(BinaryToString($ServerMessage)) > 10 Then
    AddNote("succes!#")
@@ -163,14 +163,14 @@ Else
 	ExitOnError()
 EndIf
 
-AddNote("checking: updates available?...")
+AddNote("check: updates available?...")
 $EccLastUpdate = BinaryToString(InetRead($UpdateServer & "update.php?idt=" & $EccIdt & "&eccversion=" & $EccCurrentVersion & "&eccbuild=" & $EccCurrentBuild & "&eccupdate=" & $EccLocalLastUpdate & "&command=lastupdate", 1))
 If $EccLastUpdate > $EccLocalLastUpdate Then
 	If $EccLastUpdate - $EccLocalLastUpdate > 30 Then
 	    Addnote("yes,#")
 		Addnote("there are more then 30 updates available!#")
-		Addnote("please download a more recent version of ECC!#")
-		Addnote("visit 'http://www.camya.com/ecc/' for more information.#")
+		Addnote("please download the most recent version of ECC!#")
+		Addnote("visit 'http://ecc.phoenixinteractive.mine.nu' for more information.#")
 		ExitOnError()
 	Else
 		Addnote("yes, found " & $EccLastUpdate - $EccLocalLastUpdate & " update(s).#")
@@ -180,13 +180,13 @@ Else
 	ExitNoUpdate()
 EndIf
 
-AddNote("checking: ECC still active?...") ;ECC needs to be closed of some file could be locked when attempt to overwrite!
+AddNote("check: ECC still active?...") ;ECC needs to be closed of some file could be locked when attempt to overwrite!
 If WinExists("emuControlCenter" & " v" & $EccCurrentVersion & " build:" & $EccCurrentBuild) Then
    AddNote("yes, closing ECC...#")
    WinKill("emuControlCenter" & " v" & $EccCurrentVersion & " build:" & $EccCurrentBuild)
    Sleep(1000)
    If WinExists("emuControlCenter" & " v" & $EccCurrentVersion & " build:" & $EccCurrentBuild) Then
-	  AddNote("checking: ECC did not close!, updating aborted...")
+	  AddNote("check: ECC did not close!, updating aborted...")
 	  ExitOnError()
    Else
 	  Global $StartEccAfterUpdate = 1 ;ECC was running so set flag to start ecc again after installing updates!
@@ -204,20 +204,8 @@ For $Download = $EccLocalLastUpdate + 1 To $EccLastUpdate
 
    AddNote("------------------------ UPDATE " & $UpdateToDownload & " ------------------------#")
 
-   ;Download update files, 7Z
-   AddNote("action: downloading update " &  $UpdateToDownload & " (" & Round($FileDownloadSize/1000, 0) & " kb)...") ;do NOT use 1024 otherwise the values of ROUND do not match!
-   $FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $EccIdt & "&eccversion=" & $EccCurrentVersion & "&eccbuild=" & $EccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=download", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z", 1, 1)
-   Do
-	  $InetBytesRead = InetGetInfo($FileDownloadHandle, 0)
-	  $DownloadProcent = (($InetBytesRead/$FileDownloadSize) * 100)
-	  GUICtrlSetData($UpdateProgress, $DownloadProcent)
-
-   Until InetGetInfo($FileDownloadHandle, 2) ;Check if the download is complete.
-   Sleep(100)
-   AddNote("succes!#")
-
-   ;Download update instructions, INI
-   AddNote("action: downloading update " &  $UpdateToDownload & " instructions...") ;do NOT use 1024 otherwise the values of ROUND do not match!
+   ;Download update instructions, INI (part 1)
+   AddNote("action: downloading update " & $UpdateToDownload & " info & instructions...") ;do NOT use 1024 otherwise the values of ROUND do not match!
    $FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $EccIdt & "&eccversion=" & $EccCurrentVersion & "&eccbuild=" & $EccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=instructions", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", 1, 1)
    Do
 	  If GUIGetMsg($ECCUPDATE) = $GUI_EVENT_CLOSE Then
@@ -233,17 +221,46 @@ For $Download = $EccLocalLastUpdate + 1 To $EccLastUpdate
 
    If $Message <> "" Then
 	  AddNote("message: " & $Message & "#")
-	  MsgBox(64, "eccUpdate Message", $Message)
+	  MsgBox(64, "eccUpdate important message for update " & $UpdateToDownload, $Message)
    EndIf
 
    AddNote("info: " & $ShortInfo & "#")
    AddNote("date: " & $FileDate & "#")
    AddNote("credits: " & $Credits & "#")
+   AddNote("download size: " & Round($FileDownloadSize/1000, 0) & " kB#") ;do NOT use 1024 otherwise the values of ROUND do not match!
 
-   $UpdateInstructions = IniReadSection(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_ACTION") ;$var[$i][0] = key, $var[$i][1] = value
 
-   ;Execute update instructions
-   For $i = 1 To $UpdateInstructions[0][0]
+	;Download update instructions, INI
+	$UpdateInstructions = IniReadSection(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_ACTION") ;$var[$i][0] = key, $var[$i][1] = value
+
+	;Execute update instructions (part 1) ;Skip update?
+	$SkipUpdate = 0
+	For $i = 1 To $UpdateInstructions[0][0]
+
+		If $UpdateInstructions[$i][0] = "SkipUpdate" And $UpdateInstructions[$i][1] = 1 Then
+			AddNote("action: skipping update!, reason: a more recent update awaits...#")
+			$SkipUpdate = "1"
+		EndIf
+	Next
+
+
+
+	If $SkipUpdate <> "1" Then ;Skip update?
+
+	;Download update files, 7Z
+	AddNote("action: downloading update " & $UpdateToDownload & "...")
+	$FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $EccIdt & "&eccversion=" & $EccCurrentVersion & "&eccbuild=" & $EccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=download", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z", 1, 1)
+	Do
+		$InetBytesRead = InetGetInfo($FileDownloadHandle, 0)
+		$DownloadProcent = (($InetBytesRead/$FileDownloadSize) * 100)
+		GUICtrlSetData($UpdateProgress, $DownloadProcent)
+
+	Until InetGetInfo($FileDownloadHandle, 2) ;Check if the download is complete.
+	Sleep(100)
+	AddNote("succes!#")
+
+	;Execute update instructions (part 2)
+	For $i = 1 To $UpdateInstructions[0][0]
 
 	  If $UpdateInstructions[$i][0] = "ExtractFiles" And $UpdateInstructions[$i][1] = 1 Then
 		 AddNote("action: extracting update files...")
@@ -302,6 +319,8 @@ For $Download = $EccLocalLastUpdate + 1 To $EccLastUpdate
 	  EndIf
 
    Next
+
+   EndIf
 
    AddNote("action: removing temporally update files...")
    FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z")

@@ -1,0 +1,115 @@
+; Platform              : Commodore Amiga
+; Script for            : GAMEBASE/GEMUS ADD-ON - Autoconfig loader
+; Script version        : v1.0.0.4
+; Last changed          : 2013.10.04
+;
+;
+; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
+;
+; NOTES:
+;
+; This ADD-ON only searches the DB when META info is added.
+;
+
+; Check if there is META info avaiable to search for in the database, if yes, then continue script...
+If $eccMetaName <> "" Then
+
+	; First check for underscores, when found stop there to get the name.
+        ; example: 'Name_Disk1', will be 'Name'.
+	Dim $eccAmigaMetaName
+	Dim $LineLocation
+
+	; First give the $eccAmigaMetaName variable the full name
+	$eccAmigaMetaName = $eccMetaName
+
+	; Check for underscores in the META name ($eccMetaName)
+	While $LineLocation <> StringLen($eccMetaName)
+
+		If @error = -1 Then ExitLoop
+
+			$LineLocation = $LineLocation + 1
+
+			; The name has got a _ (underscore)
+			If StringMid($eccMetaName, $LineLocation, 1) = "_" Then
+
+				; Give the $eccAmigaMetaName variable the new 'underscore free' name.
+				$eccAmigaMetaName = StringMid($eccMetaName, 1, $LineLocation - 1)
+
+			EndIf
+
+	Wend
+
+	; First check if there already is an AMIGA config for this game, if not then run the routine.
+	If FileExists($eccScriptParamsFile) = 0 Then
+
+	Local $oRS
+	Local $oConn
+
+	; Open the "GameBase Amiga.mdf" database file for input.
+	$oConn = ObjCreate("ADODB.Connection")
+	$oRS = ObjCreate("ADODB.Recordset")
+	$oConn.Open("Driver={Microsoft Access Driver (*.mdb)};Dbq=" & @Scriptdir & "\GetGemusConfig\GameBase Amiga.mdb")
+
+	; Open/Goto the "Games" database.
+	$oRS.Open("Select * FROM Games", $oConn, 1, 3)
+
+	; Display tooltip to let user know a scan is being executed.
+	ToolTip("Scanning " & $oRS.RecordCount & " GBA DB configrecords for '" & $eccAmigaMetaName & "'", @DesktopWidth/2, @DesktopHeight/2, "GetGemusConfig", 1, 6)
+
+	$oRS.MoveFirst
+	For $iIndex = 1 To $oRS.RecordCount
+
+		; Search the "Name" column for the Romname.
+		If $oRS.Fields("Name").value = $eccAmigaMetaName Then
+
+			;Show config window
+			$Form1 = GUICreate("Found configuration!", 267, 453, 193, 125)
+			$EditConfig = GUICtrlCreateEdit("", 8, 48, 249, 361)
+			GUICtrlSetData(-1, $oRS.Fields("Gemus").value)
+			$ButtonCancel = GUICtrlCreateButton("CANCEL", 8, 416, 113, 33, 0)
+			$ButtonOk = GUICtrlCreateButton("OK, USE THIS", 128, 416, 129, 33, 0)
+			$Label1 = GUICtrlCreateLabel("Found a config script for '" & $eccAmigaMetaName & "', you can tweak it here before saving it!", 8, 8, 252, 33)
+			GUISetState(@SW_SHOW)
+
+			While 1
+			$msg = GuiGetMsg()
+			Select
+
+				Case $Msg = -3
+				ExitLoop
+
+				Case $Msg = $ButtonCancel
+				ExitLoop
+
+				Case $Msg = $ButtonOk
+				; Open the amiga game INI file to write the content to.
+				$AmigaConfigFile = FileOpen($eccScriptParamsFile, 10)
+				FileWrite($AmigaConfigFile, GUICtrlRead($EditConfig,0))
+				FileClose($AmigaConfigFile)
+				ExitLoop
+
+			EndSelect
+			WEnd
+
+			; Exit the loop
+			$iIndex = $oRS.RecordCount
+		EndIf
+
+		; Goto the next row of the "Name" column.
+		$oRS.MoveNext
+	Next
+
+	; Close connection with the database.
+	$oConn.Close
+	$oConn = 0
+	EndIf
+
+	ToolTip("") ; Remove Tooltip
+
+Else
+	; Display tooltip to let user know there is now META data.
+	ToolTip("There is no META data inserted, skipping GBA DB scan...", @DesktopWidth/2, @DesktopHeight/2, "GetGemusConfig", 1, 6)
+	Sleep(1000)
+	ToolTip("") ; Remove Tooltip
+
+EndIf

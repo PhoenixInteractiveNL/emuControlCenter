@@ -900,7 +900,12 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkImageMenuItem" id="mTopAutoIt3GUI">
+                      <widget class="GtkSeparatorMenuItem" id="separator2">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopToolAutoIt3">
                         <property name="visible">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Create Autoit3 GUI (Koda)</property>
@@ -908,6 +913,32 @@
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image54">
                             <property name="stock">gtk-find-and-replace</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopToolNotepadEditor">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Start Notepad editor (Notepad++)</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image60">
+                            <property name="stock">gtk-edit</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopToolHexEditor">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Start HEX editor (HxD)</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image63">
+                            <property name="stock">gtk-sort-ascending</property>
                           </widget>
                         </child>
                       </widget>
@@ -2632,7 +2663,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">&lt;b&gt;emuControlCenter&lt;/b&gt;
-Visit www.camya.com for updates or use eccLive!</property>
+Visit ecc.phoenixinteractive.mine.nu for updates or use eccUpdate!</property>
                                         <property name="use_markup">True</property>
                                         <property name="use_underline">True</property>
                                         <property name="wrap">True</property>

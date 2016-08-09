@@ -136,5 +136,12 @@ $i18n['tooltips'] = array(
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesADTooltip' =>
 		"This will open a window where you can enter your EmuMovies account data to use their services. (registered forum members)",
-);
+	
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditorTooltip' =>
+		"This will open the notepad editor where you can edit text files and scripts if needed.",
+	'mTopToolHexEditorTooltip' =>
+		"This will open a HEX editor where you can edit binary files if needed.",
+		
+	);
 ?>

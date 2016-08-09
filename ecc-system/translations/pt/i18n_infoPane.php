@@ -19,7 +19,7 @@ $i18n['infoPane'] = array(
 	'iPanePersRatingLbl' =>
 		"Classificação",
 	'iPanePersBookmarkedLbl' =>
-		"Favoritado",
+		"Guardado como Favorito",
 	'iPanePersMetaEditedLbl' =>
 		"Editado em",
 	'iPanePersMetaExportLbl' =>
@@ -31,7 +31,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchHeadlineLbl' =>
 		"Pesquisa extendida",
 	'iPaneEsearchIntroTxt' =>
-		"Você pode esconder as ROMs que não quer que apareça utilizando o eSearch. Suas escolhas serão salvas no history.ini, então toda vez que você usar o eCC, o eSearch será usado automaticamente",
+		"Você pode esconder as ROMs que não quer que apareça utilizando o eSearch. Suas escolhas serão salvas no history.ini. Logo, sempre que você use o eCC, o eSearch será usado automaticamente",
 	'iPaneEsearchOptRunningLbl' =>
 		"Funcionando",
 	'iPaneEsearchOptMultiplayLbl' =>
@@ -39,11 +39,11 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptFreewareLbl' =>
 		"Gratuito",
 	'iPaneEsearchOptTrainerLbl' =>
-		"Trainer/Cheats",
+		"Trainer/Batotas",
 	'iPaneEsearchOptIntroLbl' =>
 		"Hack/Intro ",
 	'iPaneEsearchOptBugsLbl' =>
-		"Bugs",
+		"Erros",
 	'iPaneEsearchOptUsermodLbl' =>
 		"UserMod",
 	'iPaneEsearchOptNetplayLbl' =>

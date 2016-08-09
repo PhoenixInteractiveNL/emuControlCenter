@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2011/07/16
+ * date:	2013/01/14
  * ------------------------------------------
  */
 $i18n['tooltips'] = array(
@@ -135,6 +135,13 @@ $i18n['tooltips'] = array(
 
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesADTooltip' =>
-		"This will open a window where you can enter your EmuMovies account data to use their services. (registered forum members)",
-);
+		"Esto abrirá una ventana donde puedes introducir tu código de EmuMovies para poder utilizar ese servicio. (sólo miembros registrados del foro)",
+	
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditorTooltip' =>
+		"This will open the notepad editor where you can edit text files and scripts if needed.",
+	'mTopToolHexEditorTooltip' =>
+		"This will open a HEX editor where you can edit binary files if needed.",
+		
+	);
 ?>

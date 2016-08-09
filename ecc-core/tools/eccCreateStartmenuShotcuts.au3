@@ -38,7 +38,7 @@ $IconNumber = 0
 FileCreateShortcut($FileNametoLink, $LinkFileName, $WorkingDirectory, "", $Description, $Icon, "", $IconNumber,$State)
 
 ; Create shortcut to ECC website
-$FileNameToLink = "http://www.camya.com/ecc"
+$FileNameToLink = "http://ecc.phoenixinteractive.mine.nu"
 $WorkingDirectory = ""
 $LinkFileName = @ProgramsDir & "\" & $StartFolderName & "\" & "ECC Website"
 $Description = "Go to ECC Website"
@@ -48,7 +48,7 @@ $IconNumber = 0
 FileCreateShortcut($FileNametoLink, $LinkFileName, $WorkingDirectory, "", $Description, $Icon, "", $IconNumber,$State)
 
 ; Create shortcut to ECC official support forum
-$FileNameToLink = "http://ecc.phoenixinteractive.mine.nu"
+$FileNameToLink = "http://eccforum.phoenixinteractive.mine.nu"
 $WorkingDirectory = ""
 $LinkFileName = @ProgramsDir & "\" & $StartFolderName & "\" & "Official support forum"
 $Description = "Go to ECC official support forum"

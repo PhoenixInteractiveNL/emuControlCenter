@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 - This is the emuControlCenter tmp folder zipped roms!
-- You can get the latest version of ecc at http://www.camya.com/
+- You can get the latest version of ecc at http://ecc.phoenixinteractive.mine.nu
 - With ecc, you can manage your roms in an easier way!
 --------------------------------------------------------------------------------
 

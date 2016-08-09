@@ -235,5 +235,11 @@ $i18n['menuTop'] = array(
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesAD' =>
       'Introduce Datos de tu Cuenta EmuMovies',
-);
+
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditor' =>
+		'Start Notepad editor (Notepad++)',
+	'mTopToolHexEditor' =>
+		'Start Hex Editor (HxD)',
+	);
 ?>

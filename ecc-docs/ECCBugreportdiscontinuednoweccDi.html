@@ -1,0 +1,74 @@
+﻿<html>
+	
+<head>
+	<title>ECC Bugreport (discontinued, now eccDiagnostics)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "emuControlCenter documentation.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("ECCBugreportdiscontinuednoweccDi");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">ECC Bugreport (discontinued, now eccDiagnostics)</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="emuControlCenter.html">emuControlCenter</a> &rsaquo;&rsaquo; <a href="Changelog.html">Changelog</a> &rsaquo;&rsaquo; <a href="ToolScriptchangelogs.html">Tool/Script changelogs</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="ToolScriptchangelogs.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="eccLiveupddiscontinuednoweccUpda.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="ECCThemeselectdiscontinuednowGtk.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">Version 2.3.0.4</span><span class="rvts17"> (2008.07.16)</span><br/><span class="rvts17">- Read 'php.ini' again instead of 'php-emuControlCenter.ini'</span><br/><span class="rvts17">- Removed the GHS file, bugreport now writes the file itself, instead of renaming it.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.3.0.3</span><span class="rvts17"> (2008.07.08)</span><br/><span class="rvts17">- Fixed a bug where the user configs 'general' and 'history' INI's</span><br/><span class="rvts17">could not be found.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.3.0.2</span><span class="rvts17"> (2008.07.08)</span><br/><span class="rvts17">- Now using FSUM to compare file hashes (instead of QuickSFV).</span><br/><span class="rvts17">- Temporally hash results no longer in %user_temp% folder but</span><br/><span class="rvts17">are stored in the tools folder itself.</span><br/><span class="rvts17">- Added GHS (get hash) file, it is actually a helping batchfile,</span><br/><span class="rvts17">it is renamed as a GHS file to prevent the user from starting it directly.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.3.0.1</span><span class="rvts17"> (2008.06.18)</span><br/><span class="rvts17">- Now using system information from the HOST INI (instead from envment ini)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.3.0.0</span><span class="rvts17"> (2008.05.29)</span><br/><span class="rvts17">- Removed OS detection, now using the 'ecc-core' structure.</span><br/><span class="rvts17">- Adjusted all paths to the new 'ecc-core' structure.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.2.0.5</span><span class="rvts17"> (2008.05.03)</span><br/><span class="rvts17">- Improved ECC Core detecion, so that ECC software can be found.</span><br/><span class="rvts17">- Updated the MD5 hash file to 0.9.7 WIP20</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.2.0.4</span><span class="rvts17"> (2008.03.09)</span><br/><span class="rvts17">- Fixed a bug that would not remove the temporally log file.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.2.0.3</span><span class="rvts17"> (2008.03.05)</span><br/><span class="rvts17">- Adjusted the way the bugreports are stored on the server.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.2.0.2</span><span class="rvts17"> (2008.02.20)</span><br/><span class="rvts17">- Fixed an running problem 'please run from the ecc-tools folder'</span><br/><span class="rvts17">on Win32 systems and maybe other operation systems.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.2.0.1</span><span class="rvts17"> (2008.02.03)</span><br/><span class="rvts17">- Adjusted to look in the ECC rootfolder for ECC error.log.</span><br/><span class="rvts11"></span><br/><span class="rvts11">Version 2.2.0.0 </span><span class="rvts17">(2008.01.19)</span><br/><span class="rvts17">- Now uses the PHP extension 'php_zip.dll' to pack the htm file</span><br/><span class="rvts17">- Now the thirdparty tool RAR.EXE isn't needed for this anymore.</span><br/><span class="rvts17">- Improved the way the bugreport is stored on our server, to give us a much</span><br/><span class="rvts17">better overview, so we can fix bugs faster!</span><br/><span class="rvts17">- Not using the TEMP folder anymore, the temp file is created in the ecc-tools folder.</span><br/><span class="rvts17">- This because on a NON writable disc, the PHP error.log can't be created!</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.1.0.1</span><span class="rvts17"> (2007.10.25)</span><br/><span class="rvts17">- Fix for memory 'MB' to 'KB' mistake in the template &amp; envment INI.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.1.0.0</span><span class="rvts17"> (2007.10.25)</span><br/><span class="rvts17">- IP bugsender not noted when manually started the report.</span><br/><span class="rvts17">- Only exe/dll/ocx files are scanned in the 'version detail' lists.</span><br/><span class="rvts17">- Detect linebreaks in ECC general/history INI's.</span><br/><span class="rvts17">- Added 'back to top' in template.</span><br/><span class="rvts17">- Added report of ECC startup version.</span><br/><span class="rvts17">- Fixed displaying some incorrect fileversion informations.</span><br/><span class="rvts17">- The OS now displays a 'long' name.</span><br/><span class="rvts17">- QuickSFV intergration for MD5 hash checkup.</span><br/><span class="rvts17">- Added transations GER / FRA.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 2.0.0.0</span><span class="rvts17"> (2007.10.22)</span><br/><span class="rvts17">- Almost totally rebuild from scratch!</span><br/><span class="rvts17">- Whole new HTML output (using template file :D)</span><br/><span class="rvts17">- The user can run ECC Bugreport/Diagnostics whenever he/she wants,</span><br/><span class="rvts17">just to view/checkup ECC version/core/environment data.</span><br/><span class="rvts17">(for example placing the bugreport on the forum)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.0.5</span><span class="rvts17"> (2007.10.16)</span><br/><span class="rvts17">- Extended the bugreport details/diagnostics with the users environment data.</span><br/><span class="rvts17">- Coming soon: ECC Bugreport diagnostics build-in</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.2.0.0</span><span class="rvts17"> (2007.10.02)</span><br/><span class="rvts17">- Removed manual interface.</span><br/><span class="rvts17">- Automatic bug sending when a ECC error occurs.</span><br/><span class="rvts17">- Fully translatable!</span><br/><span class="rvts17">- Fixed an running issue on Win98 systems (and maybe other OS'es).</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.2</span><span class="rvts17"> (2007.05.02) </span><br/><span class="rvts17">- Fixed 'HALT' on Japanese / Chinese systems.</span><br/><span class="rvts17">- The 'self validation' check on the tools that where incompatible/conflicting</span><br/><span class="rvts17">with japanese / chinese charsets, hopefully this is fixed now!</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.0</span><span class="rvts17"> (2007.04.20)</span><br/><span class="rvts17">- White edition</span><br/><span class="rvts17">- Added XP look</span><br/><span class="rvts17">- Added tooltips on the buttons</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.8</span><span class="rvts17"> (2007.02.06)</span><br/><span class="rvts17">- Increased the 'local' INI size to be sent, otherwise Bugreport won't send the report (fix)</span><br/><span class="rvts17">- Adjusted some text messages.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.7</span><span class="rvts17"> (2007.02.03)</span><br/><span class="rvts17">- Changed the icon to red!</span><br/><span class="rvts17">- Rechanged calling the OCX Module (fixed filenames)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.6</span><span class="rvts17"> (2007.01.23)</span><br/><span class="rvts17">- Disable the exit/abort button when building the report. (fix)</span><br/><span class="rvts17">- Changed calling the OCX Module (fixed filenames)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.5</span><span class="rvts17"> (2007.01.22)</span><br/><span class="rvts17">- Changed all colors to original windows colors (no black theme)</span><br/><span class="rvts17">- Redisignd the GUI interface</span><br/><span class="rvts17">- Added splash screen (2 sec.)</span><br/><span class="rvts17">- Improved the size of phperror.log to be sent (from 1000 to 1500 bytes)</span><br/><span class="rvts17">- Removed retrieval of senders data (windows version, desktop info)</span><br/><span class="rvts17">- Some antivirus programs did detect this as a spyware/trojan thread :(</span><br/><span class="rvts17">- Added 'ecc-core' and 'ecc-core\ext' folder contents to the bugreport</span><br/><span class="rvts17">- Better anti hack check routine</span><br/><span class="rvts17">- Can only run from ECC-TOOLS folder (fix)</span><br/><span class="rvts17">- Display 'bytes left' for message at startup is now fixed!</span><br/><span class="rvts17">- Detects if ECC software is present (otherwise won't startup)</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.0</span><span class="rvts17"> (2007.01.21)</span><br/><span class="rvts17">- Initial (test) release</span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour/iphone-website-generation">iPhone web sites made easy</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy;2013 by Sebastiaan Ebeltjes. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

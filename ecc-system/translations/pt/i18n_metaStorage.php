@@ -13,7 +13,7 @@ $i18n['dropdown_meta_storage'] = array(
 	'[[not_possible]]' =>
 		"Impossível",
 	'[[not_battery]]' =>
-		"Mídia / Bateria",
+		"Media / Bateria",
 	'[[not_password_code]]' =>
 		"Password / Código",
 	'[[not_memory_card]]' =>
@@ -25,9 +25,9 @@ $i18n['dropdown_search_fields'] = array(
 	'[[name]]' =>
 		"Nome",
 	'[[developer]]' =>
-		"Desenvolvedora",
+		"Criador",
 	'[[publisher]]' =>
-		"Distribuidora",
+		"Distribuidor",
 	'[[year]]' =>
 		"Ano",
 	'[[info]]' =>
@@ -65,15 +65,15 @@ $i18n['dropdown_meta_region'] = array(
 	'[[Japan]]' =>
 		"Japão",
 	'[[USA]]' =>
-		"USA",
+		"EUA",
 	'[[World]]' =>
 		"Mundial",
 	'[[Australia]]' =>
 		"Australia",
 	'[[USA-Europe]]' =>
-		"USA-Europe",
+		"EUA-Europa",
 	'[[USA-Japan]]' =>
-		"USA-Japan",
+		"EUA-Japão",
 );
 
 /* 0.9.8 FYEO 04 */
@@ -89,9 +89,9 @@ $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"1P Only",
+		"Um Jogador",
 	'[[01]]' =>
-		"2P Only",
+		"Dois Jogadores",
 	'[[02]]' =>
 		"2",
 	'[[03]]' =>

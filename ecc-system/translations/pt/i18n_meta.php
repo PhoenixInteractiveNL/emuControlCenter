@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	pt (portuguese)
+ * language:	pt-pt (portuguese)
  * author:	traduzido por rodrigo 'namnam' almeida
  * date:	2009/01/22
  * ------------------------------------------
@@ -11,15 +11,15 @@ $i18n['meta'] = array(
 	
 	/* FILES */
 	'lbl_filename' =>
-		"Nome do arquivo",
+		"Nome do ficheiro",
 	'lbl_filename_short' =>
-		"Arquivo",
+		"Ficheiro",
 	'lbl_directory' =>
-		"Diretório",
+		"Directório",
 	'lbl_directory_short' =>
 		"Dir",
 	'lbl_filesize' =>
-		"Tamanho do arquivo",
+		"Tamanho do ficheiro",
 	'lbl_filesize_short' =>
 		"Tamanho",
 	
@@ -27,9 +27,9 @@ $i18n['meta'] = array(
 	'lbl_title' =>
 		"Título",
 	'lbl_category' =>
-		"Gênero",
+		"Género",
 	'lbl_developer' =>
-		"Desenvolvedor",
+		"Criador",
 	'lbl_publisher' =>
 		"Distribuidor",
 	'lbl_year' =>
@@ -51,7 +51,7 @@ $i18n['meta'] = array(
 	'lbl_running' =>
 		"Funcionando",
 	'lbl_buggy' =>
-		"Bugado",
+		"Defeituoso",
 	'lbl_trainer' =>
 		"Trainer",
 	'lbl_intro' =>
@@ -71,7 +71,7 @@ $i18n['meta'] = array(
 	'lbl_musican' =>
 		"Músico",
 	'lbl_medium' =>
-		"Mídia",
+		"Media",
 		
 	/* 0.9.7 WIP 20 */
 	'lbl_graphics' =>
@@ -93,7 +93,7 @@ $i18n['dropdownMedium'] = array(
 	'cd' =>
 		"CD/DVD-Rom",
 	'tape' =>
-		"Fita",
+		"Cassete",
 	'floppydisc' =>
 		"Disquete",
 	'cartridge' =>

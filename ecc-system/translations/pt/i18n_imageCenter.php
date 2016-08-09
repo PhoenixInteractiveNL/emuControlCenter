@@ -24,7 +24,7 @@ $i18n['imageCenter'] = array(
 	'mediaCenterOptRadioCopy' =>
 		"copiar",
 	'imageCenterStorePosition' =>
-		"Salvar posição",
+		"Guardar posição",
 
 	'slotDropDownReplace' =>
 		"Substituir por outra imagem",
@@ -41,7 +41,7 @@ $i18n['imageCenter'] = array(
 	'imageAddConfirmTitle' =>
 		"Transferir imagem para espaço",
 	'imageAddConfirmMsg%s%s%s' =>
-		"Eu devo armazenar (%s)\n\n%s\n\nno espaço\n\n%s ???\n",
+		"Deverei armazenar (%s)\n\n%s\n\nno espaço\n\n%s ???\n",
 
 	'transferModeCopy' =>
 		"Copiar",

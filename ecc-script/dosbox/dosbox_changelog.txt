@@ -1,5 +1,10 @@
-v1.0.0.1
+v1.0.0.1 (Phoenix)
 - Added a messagebox when a START file is not configured (user canceled)
   and the script wil end.
-v1.0.0.3
+
+v1.0.0.3 (Phoenix)
 - Fixed a problem when there is an IMG file found while the game needs to be started with a .EXE/.COM file.
+
+v1.0.0.4 (Phoenix)
+- Added new hotkey: SHIFT+C to configure your DOS game (setup.exe, etc.)
+- Fixed problems when there are spaces in the path/folder names

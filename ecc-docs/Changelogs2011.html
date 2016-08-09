@@ -1,0 +1,190 @@
+﻿<html>
+	
+<head>
+	<title>Changelogs 2011</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "emuControlCenter documentation.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Changelogs2011");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Changelogs 2011</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="emuControlCenter.html">emuControlCenter</a> &rsaquo;&rsaquo; <a href="Changelog.html">Changelog</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Changelog.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Changelogs2012.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Changelogs2010.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts15">Version 1.11 (2012.02.18)</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Fixed a bug where the IPC topmenu translation didn't work.</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed an issue where DATfiles created by ECC still had the 'v0.98' string.</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed a problem where ECC could not import arcade ROMS, because the DATfiles didn't had any header.</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed ECC DATfile importing.</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed the DAT file export and import of the Rom DUMPTYPE.</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed ECC recognizing the new MAME NeoGeo rom sets (lordashram)</span></p>
+<p class="rvps2"><span class="rvts14">- Fixed a bug causing a crash when using DAT import from clrmamepro. (BadWolf63)</span></p>
+<p class="rvps2"><span class="rvts14">- Added Developer tools for AutoIt3 wich are selectable through the ECC top menu.</span></p>
+<p class="rvps2"><span class="rvts14">- Added regions for roms: Australia, USA-Europe, USA-Japan</span></p>
+<p class="rvps2"><span class="rvts14">- Updated the HELP index file, also added Xpadder link</span></p>
+<p class="rvps2"><span class="rvts14">- Changed the "readme_thanks.txt" contents properly to the new situation in the DATfolder.</span></p>
+<p class="rvps2"><span class="rvts14">- Removed the "convert images" option from the top menu "tools", this was an old script and was used 3 years back to convert old-style images</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;to the new way that ecc stores them now.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Added ECC pro scripting</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Included 'WinAPIEx.au3' if you need usage of scripting on API level, you can include and use this for your ECC scripts!</span></p>
+<p class="rvps2"><span class="rvts14">- Added ECC advanced scripting</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Included all additional AU3 'help' files and UDF's for advanced scripting, like GUI's etc., located in 'ecc-core\thirdparty\autoit\include'</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Included HELP file for UDF's used in scripting.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- This is also the preperation pack to port the tools to Autoit3 (like eccTheme, eccBugreport, eccLive) wich need these files.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Emulator Script updates</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Added scripts for SummVM:</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Residual v1.0.0.1</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- ScummVM-SP v1.1.0.1</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated script for Vic20 - Xvic script v2.1.0.0 (Phoenix)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Fixed: The script can now determine the right memorysetting when the romfile is unpacked to a TEMP folder (using Prginfo).</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Fixed: Now displays correctly the path to 'Prginfo.exe' when this program is not found.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Improved: The versionnumer of 'Prginfo.exe' in the script isn't needed anymore (less script maintenance).</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated the 'ep128emu' script for the Enterprise platform v1.0.0.4 BETA (Vicman)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated the DCEXEL script for Excel 100 to v1.0.0.2 (Vicman)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Now working with all extensions.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Tools / Script updates</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; - Ported 'eccTheme' (VB6 coded) to 'GTK Theme Select' (ECC-GTKTS)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; wich is programmed in Autoit3 in a opensourceway, and also does not need OCX files.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; - Ported 'eccBugreport' (VB6 coded) to 'eccDiagnostics'</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; wich is programmed in Autoit3 in a opensourceway, and also does not need OCX files.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; - ECC Startup</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; v2.3.4.1</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; - Added a system that will run DFU when a temp DATfile is found, to update the user DATS on startup.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; v2.3.4.2</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; - Adjusted to send bugreports made with eccDiagnostics.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Imagepackcreator (IPC)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.1.0 (2010.12.24)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added program exit when there are no images found for the selected plaform.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Converted traytips to tooltips, wich shows information more efficient.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- eccScriptSystem</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.0.5</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added '$eccFileRomRegion' to use the roms region setting in a script (given as english language)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; &nbsp;Possible regions: Asia, Brazil, Europe, Hispanic, Japan, USA, World, Australia, USA-Europe, USA-Japan</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added Manual Datfile Updater (DFU) v1.0.0.0 into the ECC top menu, this way you can update your DATfiles manually if you need too.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.0.0</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added 8.3 Dosfile names on unpacked ROM files when 8.3 is enabled in ECC config! (only affects the FILEname of the ROM)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.1.0.6</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added an extra 'flag' in the function 'EmuWindowControl' to choose if the emulator should startup too.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Datfile Updater (DFU)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp; v1.2.5.5 (2012.02.26)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Fixed a critical issue where ECC-DFU would not create DAT files properly when there are spaces in the pathnames!</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.5.2 (2011.11.20)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Fixed date problem that is stored in the headers</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Increased the need of available MB to update DATS, from 50 &gt; 100 MB</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.5.1 (2011.05.01)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added MAME fileversion to DATfile creation message.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Changed the forum link inside the DAT headers to 'mamedev.org/forum.html'</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.5.0 (2011.04.24)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Improved the DATfile headers with right information.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added a system that will use the temp DATfile when found and automaticly update the user dats.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.2.0.0 (2011.04.24)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added support for the 64-Bit and i868 optimized version of MAME (executable selection).</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Rounded the number of space free needed in MB (message) when you have not enough (also upped to 50MB).</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Added check if the executable really is an 'official' MAME file.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Now writing the original MAME DATE inside the header, instead of the date on the users computer.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Cleaned up the code in DFU, made some functions etc.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;v1.1.0.0 (2010.11.30)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Fixed a problem where ECC could not import arcade ROMS, because the DATfiles didn't had any header.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated the eccSCript template file which shows how to include extra files.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated GTK Theme Select icon (instead of only 16x16)</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Thirdparty updates</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated Notepad++ v5.8.0 to v5.9.8</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated 7-zip v4.65 (2009-02-03) to v9.20 (2010-11-18)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Updated Autoit to 3.3.8.1 (2012-01-29)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Added 3rdparty tool: DatUtil v2.46 - 13/04/2009, Written by Logiqx (http://www.logiqx.com)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Added Koda v1.7.3.0 build 252 (http://koda.darkhost.ru)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Koda Language file's (localized downloadable)</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp; &nbsp;- Koda LanguageKit</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- Added Developer tools for ECC wich are selectable through the ECC top menu.</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- SQLite Browser v1.1</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- Glade GUI Editor v3.4.3</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">- DATfile updates</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- CPS-1 &nbsp;: v2010.05.18 to mame v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- CPS-2 &nbsp;: v2010.05.18 to mame v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- CPS-3 &nbsp;: v2009.01.06 to mame v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- MAME &nbsp; : v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- MODEL1 : from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- MODEL2 : from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- NAOMI &nbsp;: from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- NEOGEO : v2009.11.03 to mame v1.045</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- PGM &nbsp; &nbsp;: v2009.10.16 to mame v1.045</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- S11 &nbsp; &nbsp;: from mame v0.137 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- S16 &nbsp; &nbsp;: from mame v0.135 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- S18 &nbsp; &nbsp;: from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- S22 &nbsp; &nbsp;: from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- ZINC &nbsp; : from mame v0.138 to v0.145</span></p>
+<p class="rvps2"><span class="rvts14"> &nbsp;- SVM &nbsp; &nbsp;: v0.99.1.5 to v0.99.1.7 (Gruby)</span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Free EPub and documentation generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy;2013 by Sebastiaan Ebeltjes. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

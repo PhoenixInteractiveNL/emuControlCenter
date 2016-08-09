@@ -1,4 +1,4 @@
-ï»¿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -12,7 +12,7 @@ $i18n['tooltips'] = array(
 	// tooltips
 	// -------------------------------------------------------------
 	'opt_auto_nav' =>
-		"AtualizaÃ§Ã£o automÃ¡tica enquanto navega",
+		"Actualização automática enquanto navega",
 	'opt_hide_nav_null' =>
 		"Mostrar/Esconder plataformas sem roms",
 	'opt_hide_dup' =>
@@ -20,20 +20,20 @@ $i18n['tooltips'] = array(
 	'opt_hide_img' =>
 		"Mostrar/Esconder imagens",
 	'search_field_select' =>
-		"Escolha um critÃ©rio de pesquisa",
+		"Escolha um critério de pesquisa",
 	'search_operator' =>
 		"Escolha um operador de pesquisa ([ = EQUAL] [ | OR ] [ + AND])",
 	'search_rating' =>
-		"Mostrar somente roms avaliadas abaixo ou igualmente a seleÃ§Ã£o",
+		"Mostrar somente roms avaliadas abaixo ou igualmente a selecção",
 	'optvis_mainlistmode' =>
 		"Trocar entre lista detalhada (imagens) e lista simples",
 		
 	/* 0.9.7 WIP 01 */
 
 	'nbMediaInfoStateRatingEvent' =>
-		"Clique para add sua avaliaÃ§Ã£o pessoal do jogo",
+		"Clique para adicionar a sua avaliação pessoal do jogo",
 	'nbMediaInfoNoteEvent' =>
-		"Mostrar anotaÃ§Ãµes pessoais para este jogo",
+		"Mostrar anotações pessoais para este jogo",
 	'nbMediaInfoReviewEvent' =>
 		"Mostrar resenha para este jogo",
 	'nbMediaInfoBookmarkEvent' =>
@@ -46,95 +46,102 @@ $i18n['tooltips'] = array(
 	/* 0.9.7 WIP 14 */
 
 	'opt_only_disk' =>
-		"Mostrar apenas a mÃ­dia principal",
+		"Mostrar apenas o media principal",
 
 	/* 0.9.7 WIP 16 */
 	'optionContextOnlyDiskAll' =>
 		"Mostrar todas as roms",
 	'optionContextOnlyDiskOne' =>
-		"Mostrar apenas a primeira mÃ­dia da rom",
+		"Mostrar apenas a primeira versão da rom",
 	'optionContextOnlyDiskOnePlus' =>
-		"Mostrar primeira mÃ­dia + mÃ­dias desconhecidas",
+		"Mostrar primeira versão + versões desconhecidas",
 
 	/* 1.11 BUILD 8 */
 	// # TOP-ROM
 	'menuTopRomAddNewRomTooltip' =>
-		"This will add roms for the selected platform!",
+		"Isto adicionará roms para a primeira plataforma seleccionada!",
 	'mTopRomOptimizeTooltip' =>
-		"Optimize the ecc-Database for the selected platform e.g. if you move/remove files at your harddrive",
+		"Optimize a ecc-Database para a plataforma seleccionada e.g. Se mover/remover ficheiros no seu disco rígido",
 	'mTopRomRemoveDupsTooltip' =>
-		"This will remove all duplicate roms from your ecc database",
+		"Isto irá remover todas as roms duplicadas da ecc-database",
 	'mTopRomRemoveRomsTooltip' =>
-		"Remove all roms of the selected platform from the ecc-database",		
+		"Remover todas as roms da plataforma seleccionada da ecc-database",		
 	'mTopDatImportRcTooltip' =>
-		"You can import Romcenter Datfiles (*.dat) into ecc. You have to select the right platform! RC-Datfiles contain the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",
+		"Pode importar ficheiros dat do Romcenter (*.dat) para o ecc. Você tem que seleccionar a plataforma certa! Os ficheiros dat RC contém o nome do ficheiro, checksum e metadados atribuídos ao nome do ficheiro. O emuControlCenter irá retirar estas informações e automaticamente gerar metadados ecc!",
 	// # TOP-EMU
 	'mTopEmuConfigTooltip' =>
-		"Change the emulator assigned to the selected platform",
+		"Mudar o emulador atribuído à plataforma seleccionada.",
 	// # TOP-DAT
 	'mTopDatImportEccTooltip' =>
-		"Import emuControlCenter Datfiles (*.eccDat) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
+		"Importar ficheiros dat do emuControlCenter (*.eccDat) ao ecc. Se seleccionou uma plataforma, só roms para esta plataforma serão importados! O ficheiro dat do formato ecc extendeu as metainformações, como categorias, criador, estado, línguas etc.",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Import CLR MAME Datfiles (*.dat) into ecc.",
+		"Importar ficheiros CLR MAME (*.dat) para o ecc.",
 	'mTopDatImportRcTooltip' =>
-		"Import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
+		"Importar ficheiros dat do Romcenter (*.dat) para o ecc. Tem que seleccionar a plataforma correcta! Os ficheiros dat RC contém o nome do ficheiro, checksum e metadados atribuídos ao nome do ficheiro. O emuControlCenter irá retirar estas informações e automaticamente criar metadados ecc!",		
 	'mTopDatExportEccFullTooltip' =>
-		"This will export all your meta-data of the selected platform to a Datfile (plaintext).",
+		"Isto irá exportar todos os metadados da plataforma seleccionada para um ficheiro Dat (apenas texto).",
 	'mTopDatExportEccUserTooltip' =>
-		"This will export only the data modified by you of the selected platform to a Datfile (plaintext).",
+		"Isto irá exportar apenas os dados modificados por si da plataforma seleccionada para um ficheiro Dat (apenas texto).",
 	'mTopDatExportEccEsearchTooltip' =>
-		"This will export only the search result of eSearch meta-data of the selected platform to a Datfile (plaintext).",
+		"Isto irá exportar apenas o resultado da pesquisa dos metadados no eSearch da plataforma seleccionada para um ficheiro Dat (apenas texto).",
 	'mTopDatClearTooltip' =>
-		"Clear data from DATfiles of the selected platform!",
+		"Limpar dados dos ficheiros Dat da plataforma seleccionada!",
 	// # TOP-OPTIONS
 	'mTopOptionDbVacuumTooltip' =>
-		"Internal function to cleanup and shrink the database.",	
+		"Função interna para limpar e encolher a base de dados.",	
 	'mTopOptionCreateUserFolderTooltip' =>
-		"This will create all ecc user-folders like emus, roms, exports aso. Use this option, if you have created a new platform!",
+		"Isto irá criar todos os directórios do utilizador ecc, tais como emus, roms, exportações etc. Use esta opção se tiver criado uma nova plataforma!",
 	'mTopOptionCleanHistoryTooltip' =>
-		"This will clean up the ecc history.ini. Ecc stores data like selected Directories, selected Options aso. in this file.",
+		"Isto irá limpar o history.ini do ecc. O Ecc armazena dados, como directórios seleccionados, opções, etc neste ficheiro.",
 	'mTopOptionBackupUserdataTooltip' =>
-		"This will backup all your userdata like notes, highscore and time played to an XML file",
+		"Isto irá guardar todos os dados de utilizador, como notas, melhor pontuação e tempo jogado num ficheiro XML",
 	'mTopOptionCreateStartmenuShortcutsTooltip' =>
-		"This will create ECC shortcuts in the windows startmenu",
+		"Isto irá criar atalhos do ECC no menu Iniciar do Windows",
 	'mTopOptionConfigTooltip' =>
-		"This will open the configuration window of ECC",
+		"Isto irá abrir a janela de configuração do ECC",
 	// # TOP-TOOLS
 	'mTopToolEccGtktsTooltip' =>
-		"Select various GTK themes to use with ECC, you can make a nice combination when used with proper ECC themes.",	
+		"Escolhe variados temas GTK para usar no ECC, podes fazer uma bonita combinação quando usado com adequados temas ECC.",	
 	'mTopToolEccDiagnosticsTooltip' =>
-		"This will diagnose and give you information about your ECC installation.",
+		"Isto irá diagnosticar e dar-lhe informação sobre a sua instalação ECC.",
 	'mTopDatDFUTooltip' =>
-		"Manually update your DATfiles from MAME DAT.",
+		"Actualizar manualmente os seus ficheiros Dat do DAT MAME.",
 	'mTopAutoIt3GUITooltip' =>
-		"This will open KODA where you can create end export your own AutoIt3 GUI for use with scripts if needed.",
+		"Isto irá abrir o KODA onde você pode criar e exportar os seus próprios AutoIt3 GUI para usar, se necessário, com scripts.",
 	'mTopImageIPCTooltip' =>
 		"Create imagepacks of your platforms, so you can share it easily with us.",
 	// # TOP-DEVELOPER
 	'mTopDeveloperSQLTooltip' =>
-		"This will open a SQL browser wich you can use to view and edit the ECC database (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Isto irá abrir um explorador SQL que poderá usar para ver e editar a base de dados ECC (só para peritos, certifique-se que faz uma cópia de segurança das suas definições porque podem ser reescritas com uma actualização do ECC!)",
 	'mTopDeveloperGUITooltip' =>
-		"This will open the GLADE GUI editor where you can edit and adjust the ECC GUI (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Isto irá abrir o editor GLADE GUI onde poderá editar e ajustar o ECC GUI (só para peritos, certifique-se que faz uma cópia de segurança das suas definições porque podem ser reescritas com uma actualização do ECC!)",
 	// # TOP-UPDATE
 	'mTopUpdateEccLiveTooltip' =>
-		"This will check if there are updates available for ECC.",
+		"Isto irá verificar se há actualizações diponíveis para o ECC.",
 	// # TOP-SERVICES
 	'mTopServicesKameleonCodeTooltip' =>
-		"This will open a window where you can enter the kameleon code to use ECC services. (registered forum members)",
+		"Isto irá abrir uma janela onde poderá digitar o código kameleon para usar os servicos do ECC. (membros registados do fórum)",
 	// # TOP-HELP
 	'mTopHelpWebsiteTooltip' =>
-		"This will open the ECC website in your internetbrowser.",
+		"Isto irá abrir o site do ECC no seu navegador de internet.",
 	'mTopHelpForumTooltip' =>
-		"This will open the ECC support forum in your internetbrowser.",
+		"Isto irá abrir o forum de suporte ECC no seu navegador de internet your internetbrowser.",
 	'mTopHelpDocOfflineTooltip' =>
-		"This will open the ECC documentation locally.",
+		"Isto irá abrir a documentação ECC local.",
 	'mTopHelpDocOnlineTooltip' =>
-		"This will open the ECC documentation site in your internetbrowser.",
+		"Isto irá abrir a documentação ECC no seu navegador de internet.",
 	'mTopHelpAboutTooltip' =>
-		"This will pop-up the ECC about box.",
+		"Isto irá abrir uma janela com os créditos doECC.",
 
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesADTooltip' =>
-		"This will open a window where you can enter your EmuMovies account data to use their services. (registered forum members)",
-);
+		"Isto irá abrir uma janela onde pode inserir os dados da sua conta do EmuMovies e usar os seus serviços. (membros registados do fórum)",
+	
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditorTooltip' =>
+		"This will open the notepad editor where you can edit text files and scripts if needed.",
+	'mTopToolHexEditorTooltip' =>
+		"This will open a HEX editor where you can edit binary files if needed.",
+		
+	);
 ?>

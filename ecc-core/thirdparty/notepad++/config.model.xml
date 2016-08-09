@@ -6,7 +6,7 @@
         <!-- 2 status : "show" or "hide"-->
         <GUIConfig name="StatusBar">show</GUIConfig>
         <!-- For all attributs, 2 status : "yes" or "no"-->
-        <GUIConfig name="TabBar" dragAndDrop="yes" drawTopBar="yes" drawInactiveTab="yes" reduce="yes" closeButton="no" doubleClick2Close="no" vertical="no" multiLine="no" hide="no" />
+        <GUIConfig name="TabBar" dragAndDrop="yes" drawTopBar="yes" drawInactiveTab="yes" reduce="yes" closeButton="yes" doubleClick2Close="no" vertical="no" multiLine="no" hide="no" />
         <!-- 2 positions : "horizontal" or "vertical"-->
         <GUIConfig name="ScintillaViewsSplitter">vertical</GUIConfig>
         <!-- For the attribut of position, 2 status : docked or undocked ; 2 status : "show" or "hide" -->
@@ -74,6 +74,7 @@
         <GUIConfig name="URL">2</GUIConfig>
         <GUIConfig name="globalOverride" fg="no" bg="no" font="no" fontSize="no" bold="no" italic="no" underline="no" />
         <GUIConfig name="auto-completion" autoCAction="0" triggerFromNbChar="1" />
+        <GUIConfig name="multiInst" setting="0" />
         <GUIConfig name="sessionExt"></GUIConfig>
     </GUIConfigs>
     <!-- The History of opened files list -->

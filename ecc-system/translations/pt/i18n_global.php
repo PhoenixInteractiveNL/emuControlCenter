@@ -22,7 +22,7 @@ $i18n['global'] = array(
 	'done_title' =>
 		"Pronto",
 	'done_msg' =>
-		"Operação efetuada!",
+		"Operação efectuada!",
 
 	/* 0.9.2 WIP 17 */
 	'dialog_button_help' =>
@@ -60,11 +60,11 @@ $i18n['global'] = array(
 	'name' =>
 		"Nome",
 	'fileName' =>
-		"Nome do arquivo",
+		"Nome do ficheiro",
 	'fileNameShort' =>
 		"Arquivo",
 	'filePath' =>
-		"Diretório",
+		"Directório",
 	'filePathShort' =>
 		"Dir",
 	'crc32' =>
@@ -76,7 +76,7 @@ $i18n['global'] = array(
 	'packed' =>
 		"Compactado",
 	'category' =>
-		"Gênero",
+		"Género",
 
 	'closeWindow' =>
 		"Fechar",
@@ -91,21 +91,21 @@ $i18n['global'] = array(
 	'dataSaved' =>
 		"Dados salvos",
 	'dataRemoved' =>
-		"Os dados foram removidos!",
+		"Dados removidos!",
 	'dataUpdated' =>
-		"Os dados foram atualizados!",
+		"Dados actualizados!",
 	'dataAdded' =>
-		"Os dados foram adicionados!",
+		"Dados adiccionados!",
 
 	'fileInfos' =>
-		"Informações do arquivo",
+		"Informações do ficheiro",
 	'metaInfos' =>
 		"Informações da ROM",
 
 	'save' =>
-		"Salvar",
+		"Guardar",
 	'saveAndClose' =>
-		"Salvar e fechar",
+		"Guardar e fechar",
 	'close' =>
 		"Fechar",
 	'cancel' =>
@@ -126,7 +126,7 @@ $i18n['global'] = array(
 	'image' =>
 		"Imagem",
 	'all' =>
-		"todos",
+		"Todos",
 	'allFound' =>
 		"Todos encontrados",
 	'preview' =>
@@ -139,7 +139,7 @@ $i18n['global'] = array(
 		"Procurar por classificação",
 	
 	'change' =>
-		"Mudar",
+		"Alterar",
 	'options' =>
 		"Opções",
 
@@ -227,24 +227,24 @@ $i18n['global'] = array(
 
 	/* 1.0.0 FYEO 02 */
 	'done' =>
-		"Done",
+		"Terminado",
 	'ok' =>
 		"OK",
 	'move' =>
-		"Move",
+		"Mover",
 	'mode' =>
-		"Mode",
+		"Modo",
 	'location' =>
-		"Destination location",
+		"Localização do destino",
 
 	/* 1.0.0 FYEO 03 */
 	'images' =>
-		"Images",
+		"Imagem",
 	'metadata' =>
 		"Metadata",
 
 	/* ECC 1.13 build 10 */
 	'media_pager_number' =>
-		"Jump to page:"
+		"Saltar para página:"
 );
 ?>

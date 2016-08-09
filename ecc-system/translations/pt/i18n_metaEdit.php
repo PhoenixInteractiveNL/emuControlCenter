@@ -18,7 +18,7 @@ $i18n['metaEdit'] = array(
 	'mediaEditMetaFrameFeatures' =>
 		"Características da ROM",
 	'mediaEditMetaFrameFileInfos' =>
-		"Características do arquivo",
+		"Características do ficheiro",
 	'mediaEditMetaFrameAdditionalInfos' =>
 		"Info adicional",
 	'mediaEditMetaFrameLinks' =>
@@ -72,15 +72,15 @@ $i18n['metaEdit'] = array(
 
 	/* 0.9.8 WIP 02 */
 	'mEditMediaDataInserted' =>
-		"Metadados salvos!",
+		"Metadados guardados!",
 	'mEditMediaDataUpdated' =>
-		"Metadados atualizados!",
+		"Metadados actualizados!",
 	'mEditMediaDataUnchanged' =>
-		"Nada salvo, nada foi modificado!",
+		"Nada guardado, nada foi modificado!",
 	'mEditFileIsMultifileLabel' =>
-		"Multiarquivos",
+		"Multi-ficheiros",
 	'mediaEditTabFile' =>
-		"Infos do arquivo",
+		"Infos do ficheiro",
 	'mediaEditTabScript' =>
 		"eccScript",
 	'mEditScriptIniFrameLabel' =>
@@ -91,7 +91,7 @@ $i18n['metaEdit'] = array(
 		"eccScript não encontrado!",
 
 	'mEditUserWrongCharacters' =>
-		"Caracteres inválidos encontrados no texto. Por favor, arrume o texto!",
+		"Caracteres inválidos encontrados no texto. Corrija por favor!",
 
 
 );

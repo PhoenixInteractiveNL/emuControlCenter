@@ -14,9 +14,9 @@ $i18n['menu'] = array(
 	'lbl_platform%s' =>
 		"Opções do %s",
 	'lbl_roms_add%s' =>
-		"Adicionar ROMs",
+		"Adiccionar ROMs",
 	'lbl_roms_optimize%s' =>
-		"Otimizar ROMs",
+		"Optimizar ROMs",
 	'lbl_roms_remove%s' =>
 		"Remover ROMs",
 	'lbl_roms_remove_dup%s' =>
@@ -53,7 +53,7 @@ $i18n['menu'] = array(
 	'lbl_image_popup' =>
 		"Abrir imageCenter",
 	'lbl_img_reload' =>
-		"Atualizar imagens",
+		"Actualizar imagens",
 	'lbl_rom_remove' =>
 		"Remover ROM da lista",
 	'lbl_meta_edit' =>
@@ -63,10 +63,10 @@ $i18n['menu'] = array(
 	'lbl_meta_webservice_meta_get' =>
 		"Obter metadados do gamedb (internet)",
 	'lbl_meta_webservice_meta_set' =>
-		"Add seus metadados no gamedb (internet)",
+		"Adicionar seus metadados no gamedb (internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
-		"Modificar arquivo",
+		"Modificar ficheiro",
 	'lbl_shellop_browse_dir' =>
 		"Explorar diretório da ROM",
 	'lbl_shellop_file_rename' =>
@@ -83,7 +83,7 @@ $i18n['menu'] = array(
 	'lbl_import_submenu' =>
 		"Importar datfile",
 	'lbl_export_submenu' =>
-		"Exportar datfile",
+		"Exportar ficheiro dat",
 	'lbl_rom_rescan_folder' =>
 		"(Re)verificar diretório da ROM",
 	'lbl_meta_remove' =>
@@ -103,7 +103,7 @@ $i18n['menu'] = array(
 		"Remover imagens da ROM",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"COMPARAR - Selecionar lado esquerdo",		
+		"COMPARAR - Seleccionar lado esquerdo",		
 	'lbl_meta_compare_right%s' =>
 		"COMPARAR com \"%s\"",	
 
@@ -119,11 +119,11 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 1 */
 	'lbl_dat_import_ecc_romdb' =>
-		"Importar gameDB datfile (internet)",
+		"Importar ficheiro dat da gameDB(internet)",
 
 	/* 0.9.6 FYEO 8 */
 	'lContextRomSelectionAddNewRoms%s' =>
-		"Add mais ROMs do %s",
+		"Adicionar mais ROMs do %s",
 	'lContextRomSelectionRemoveRoms%s' =>
 		"Remover todas as ROMs do %s da lista",
 	'lContextMetaRemove' =>
@@ -137,11 +137,11 @@ $i18n['menu'] = array(
 	'labelRomAuditInfo' =>
 		"Mostrar infos rom audit",
 	'labelRomAuditReparse' =>
-		"Atualizado infos rom audit",
+		"Actualizado infos rom audit",
 	'lbl_roms_rescan_all' =>
-		"Re-escanear as pastas de ROMs",
+		"Examinar as pastas de ROMs",
 	'lbl_roms_add' =>
-		"Adicionar novas ROMs",
+		"Adiccionar novas ROMs",
 		
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
@@ -161,7 +161,7 @@ $i18n['menu'] = array(
 	'imagepackTopMenu' =>
 		"ferramentas do imagepack",
 	'imagepackRemoveImagesWithoutRomFile' =>
-		"Remover imagens das ROMs que eu não tenho",
+		"Remover imagens das ROMs que não possui",
 	'imagepackRemoveEmptyFolder' =>
 		"Remover pasta vazia",
 	'imagepackCreateAllThumbnails' =>
@@ -169,7 +169,7 @@ $i18n['menu'] = array(
 	'imagepackRemoveAllThumbnails' =>
 		"Remover imagens reduzidas (thumbs) para compartilhamento de imagepacks",
 	'imagepackConvertEccV1Images' =>
-		"Converter imagens para o nova estrutura do imagepack! (V1->V2)",
+		"Converter imagens para a nova estrutura do imagepack! (V1->V2)",
 
 	/* 0.9.7 FYEO 17 */
 	'onlineSearchForRom' =>
@@ -187,39 +187,46 @@ $i18n['menu'] = array(
 
 	/* 1.12 BUILD 06 */
 	'lbl_image_platform' =>
-		"Platform images",	
+		"Imagens da plataforma",	
 
 	'lbl_image_platform_import_online' =>
-		"Import platform images online (kameleon code needed)",	
+		"Importar imagens da plataforma pela internet (Requer código do kameleon)",	
 
 	'lbl_image_platform_import_local' =>
-		"Import platform images from local folder (non ecc, like no-intro)",
+		"Importar imagens da plataforma duma pasta local(non ecc, like no-intro)",
 
 	'lbl_image_platform_export_local' =>
-		"Create platform imagepack (ecc, no-intro, emumovies)",
+		"Criar imagepack da plataforma (ecc, no-intro, emumovies)",
 		
 	/* 1.13 BUILD 02 */
 	'lbl_emulator' =>
-		"Platform emulators",
+		"Emuladores das plataformas",
 		
 	'lbl_emulator_import_online' =>
-		"Download emulators online (kameleon code needed)",	
+		"Descarregar emuladores online (Requer código do kameleon)",	
 		
 	'lbl_emulator_information' =>
-		"Open info file where to get emulators",
+		"Abrir ficheiro de informação onde obter emuladores",
 
 	/* 1.13 BUILD 03 */
 	'lbl_image_platform_import_emumovies' =>
-		"Download platform images online from EmuMovies (forum account needed)",
+		"Descarregar imagens da plataforam online de EmuMovies (requer conta no forum)",
 
 	/* 1.13 BUILD 04 */
 	'lbl_rom_content' =>
-		"ROM Content/Media",	
+		"ROM Conteúdo/Media",	
 	'lbl_image_inject' =>
-		"Download images online from ICC server (kameleon code needed)",
+		"Descarregar imagens online do servidor ICC (Requer código kameleon)",
 	'lbl_rom_video_add' =>
-		"Add videofile",
+		"Adicionar ficheiro de vídeo",
 	'lbl_rom_video_delete' =>
-		"Delete videofile(s)",	
-);
+		"Apagar ficheiro(s) de vídeo",
+		
+	/* 1.14 BUILD 4 */
+	'lbl_rom_moby_import_manual' =>
+		"Import ROM information from MobyGames.com (manual)",
+	'lbl_rom_moby_import_fullauto' =>
+		"Import ROM information from MobyGames.com (full auto)",
+
+	);
 ?>

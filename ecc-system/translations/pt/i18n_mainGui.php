@@ -12,9 +12,9 @@
  **/
 $i18n['mainGui'] = array(
 	'gui_main_btn_rom_start' =>
-		"jogar",
+		"Jogar",
 	'gui_main_btn_rom_bookmark' =>
-		"add aos favoritos",
+		"adicionar aos favoritos",
 	'gui_main_btn_list_bookmark' =>
 		"Ver favoritos",
 	'gui_main_btn_list_history' =>
@@ -28,7 +28,7 @@ $i18n['mainGui'] = array(
 	'infoImageBtnMatchImageType' =>
 		"igualar",
 	'infoImageEditBtn' =>
-		"mostrar / add",
+		"mostrar / adicionar",
 	'media_nb_info_eccdb_get_info' =>
 		"Obter metadados",
 	'media_nb_info_eccdb_info' =>
@@ -38,15 +38,15 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbAddTitle' =>
 		"Exporte seus metadados",
 	'paneInfoEccDbAddText' =>
-		"gamedb é uma base de dados na internet para ROMs e emuladores. (Nome, data, desenvolvedor, etc...) Você pode adicionar e pegar informações dessa base. Para ajudar-nos, por favor, exporte seus melhores metadados!",
+		"gamedb é uma base de dados na internet para ROMs e emuladores. (Nome, data, criador, etc...) Você pode adicionar e transferir informações dessa base. Para ajudar-nos, por favor, exporte seus melhores metadados!",
 	'paneInfoEccDbAddButton' =>
 		"Clique aqui para exportar seus metadados!",
 	'paneInfoEccDbGetTitle' =>
 		"OBTER metadados",
 	'paneInfoEccDbGetText' =>
-		"No momento, a função OBTER metadados não está totalmente implementada. A idéia é, quando você pressionar o botão OBTER, suas informações serão automaticamente atualizadas pela base de dados da internet.",
+		"No momento, a função OBTER metadados não está totalmente implementada. A idéia é de quando você pressionar o botão OBTER, suas informações serão automaticamente actualizadas pela base de dados da internet.",
 	'paneInfoEccDbGetButton' =>
-		"Mostrar online os metadados da ROM selecionada!",
+		"Mostrar online os metadados da ROM seleccionada!",
 
 	'romDetailTabInfo' =>
 		"Info",
@@ -77,18 +77,18 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbGetDatfileTitle' =>
 		"Importar datfile online",
 	'paneInfoEccDbGetDatfileText%s' =>
-		"Você pode importar o atual datfile (arquivo contendo metadados) para o %s da base de dados aqui.",
+		"Você pode importar o datfile actual (arquivo contendo metadados) para o %s da base de dados aqui.",
 	'paneInfoEccDbGetDatfileButton' =>
 		"Importar datfile",
 
 	/* 1.1 WIP03 */
 	'mainlist_tab_images' =>
-		"IMAGES",			
+		"IMAGENS",			
 
 	/* 1.11 BUILD 9 */
 	'3dgalleryStart' =>
-		"Start",
+		"Iniciar",
 	'3dgalleryConfig' =>
-		"Config",		
+		"Configurar",		
 );
 ?>

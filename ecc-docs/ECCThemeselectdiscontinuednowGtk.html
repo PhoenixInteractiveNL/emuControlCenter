@@ -1,0 +1,72 @@
+﻿<html>
+	
+<head>
+	<title>ECC Theme select (discontinued, now GtkThemeSelect)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "emuControlCenter documentation.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("ECCThemeselectdiscontinuednowGtk");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">ECC Theme select (discontinued, now GtkThemeSelect)</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="emuControlCenter.html">emuControlCenter</a> &rsaquo;&rsaquo; <a href="Changelog.html">Changelog</a> &rsaquo;&rsaquo; <a href="ToolScriptchangelogs.html">Tool/Script changelogs</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="ToolScriptchangelogs.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="ECCBugreportdiscontinuednoweccDi.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">Version 1.1.0.6</span><span class="rvts17"> (2008.05.18)</span><br/><span class="rvts17">- Adjusted all paths to the new 'ecc-core' structure.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.5</span><span class="rvts17"> (2008.05.03)</span><br/><span class="rvts17">- Improved ECC Core detecion, so that ECC software can be found.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.4</span><span class="rvts17"> (2007.09.30)</span><br/><span class="rvts17">- Adjusted to look in the right ECC core folder for the themes.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.3</span><span class="rvts17"> (2007.09.30)</span><br/><span class="rvts17">- Fixed an running issue on Win98 systems (and maybe other OS'es).</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.2</span><span class="rvts17"> (2007.05.02)</span><br/><span class="rvts17">- Fixed 'HALT' on Japanese / Chinese systems.</span><br/><span class="rvts17">-The 'self validation' check on the tools that where incompatible/conflicting.</span><br/><span class="rvts17">with japanese / chinese charsets, hopefully this is fixed now.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.1.0.0</span><span class="rvts17"> (2007.04.20)</span><br/><span class="rvts17">- White edition.</span><br/><span class="rvts17">- Added XP look.</span><br/><span class="rvts17">- Added tooltips on the buttons.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.9</span><span class="rvts17"> (2007.02.28)</span><br/><span class="rvts17">- Auto highlight theme in list on startup has been fixed.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.8</span><span class="rvts17"> (2007.02.24)</span><br/><span class="rvts17">- Updated ECC Theme Select for the 'Global GUI font' config for ECC v0.7.5+</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.7</span><span class="rvts17"> (2007.02.14)</span><br/><span class="rvts17">- Updated for the 'new GTK v2.10.7 engine', corrected the path to '2.10.0'.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.6</span><span class="rvts17"> (2007.02.03)</span><br/><span class="rvts17">- Autoexit Theme Select when ECC is started from within Theme Select</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.5</span><span class="rvts17"> (2007.01.23)</span><br/><span class="rvts17">- Error handling when 'gtkrc' is read only. (like when executing from CD/DVD)</span><br/><span class="rvts17">- Removed the 'more info' section, now in ECC info.</span><br/><span class="rvts17">- Removed the 'tooltip help icons', now in ECC info.</span><br/><span class="rvts17">- Only one instance could be active.</span><br/><span class="rvts17">- Version number displaying in windows explorer. </span><br/><span class="rvts17">- Improved anti hack integration.</span><br/><span class="rvts17">- Improved the exit routine.</span><br/><span class="rvts17">- Can only run from the ECC-TOOLS folder. (fix)</span><br/><span class="rvts17">- Added splashscreen. (2 sec) </span><br/><span class="rvts17">- UPX compressed.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.2</span><span class="rvts17"> (2007.01.16)</span><br/><span class="rvts17">- Changed name from 'ECC Theme selector' to 'ECC theme select'</span><br/><span class="rvts17">- Now running from the ECC-TOOLS folder.</span><br/><span class="rvts17">- All windows now startup on center screen.</span><br/><span class="rvts17">- Added a small fix to not display files in the listbox.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.1</span><span class="rvts17"> (2007.01.12)</span><br/><span class="rvts17">- Some text replacement in the notes section.</span><br/><span class="rvts17">- Renamed some 'GOODSKIN' words to 'GOODTHEME'</span><br/><span class="rvts17">- Made the 'more notes' box a little bit bigger.</span><br/><span class="rvts17">- Fixed the 'more notes' icon on the button.</span><br/><span class="rvts17"></span><br/><span class="rvts11">Version 1.0.0.0</span><span class="rvts17"> (2007.01.11)</span><br/><span class="rvts17">-Initial release</span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/help-authoring-tool">Single source CHM, PDF, DOC and HTML Help creation</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy;2013 by Sebastiaan Ebeltjes. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	pt (portuguese)
+ * language:	pt-pt (portuguese)
  * author:	traduzido por rodrigo 'namnam' almeida
  * date:	2009/01/22
  * ------------------------------------------
@@ -27,9 +27,9 @@ $i18n['menuTop'] = array(
 		"com notas pessoais",
 	
 	'mTopViewRandomGame' =>
-		"Estou com sorte! (ROM aleatória)",
+		"Sinto-me com sorte! (ROM aleatória)",
 	'mTopViewReload' =>
-		"Atualizar",
+		"Actualizar",
 
 	'mTopViewOnlyRoms' =>
 		"Roms",
@@ -45,7 +45,7 @@ $i18n['menuTop'] = array(
 
 	/* 0.9.6 WIP 01 */	
 	'mTopViewListDetail' =>
-		"Lista de jogos em detalhes (com imagens)",
+		"Lista de jogos detalhada (com imagens)",
 	'mTopViewListSimple' =>
 		"Lista de jogos simples (sem imagens)",
 
@@ -55,9 +55,9 @@ $i18n['menuTop'] = array(
 	'mTopRom' =>
 		"Roms",
 	'mTopRomOptimize' =>
-		"Otimizar ROMs",
+		"Optimizar ROMs",
 	'mMenuReparseFolder' =>
-		"Analisar pasta selecionada",
+		"Analisar pasta seleccionada",
 	'mTopRomRemoveDups' =>
 		"Remover ROMs duplicadas da base de dados",
 	'mTopRomRemoveRoms' =>
@@ -73,17 +73,17 @@ $i18n['menuTop'] = array(
 	'mTopDat' =>
 		"Datfiles",
 	'mTopDatImportEcc' =>
-		"Importar emuControlCenter datfile",
+		"Importar ficheiro dat do emuControlCenter",
 	'mTopDatImportRc' =>
-		"Importar Romcenter datfile",
+		"Importar ficheiro dat do Romcenter",
 	'mTopDatExportEccFull' =>
-		"Exportar datfile ecc-completo (todos os metadados)",
+		"Exportar ficheiro dat ecc-completo (todos os metadados)",
 	'mTopDatExportEccUser' =>
 		"Exportar datfile ecc-usuário (apenas metadados modificados)",
 	'mTopDatExportEccEsearch' =>
-		"Exportar datfile ecc-eSearch",
+		"Exportar ficheiro dat ecc-eSearch",
 	'mTopDatClear' =>
-		"Apagar dados do datfile",
+		"Apagar dados do ficheiro dat",
 	'mTopDatConfig' =>
 		"Configuração",
 
@@ -107,13 +107,13 @@ $i18n['menuTop'] = array(
 	'mTopOption' =>
 		"Opções",
 	'mTopOptionDbVacuum' =>
-		"Otimizar base de dados",
+		"Optimizar base de dados",
 	'mTopOptionCreateUserFolder' =>
-		"Criar todas as pastas ecc-user (pastas do usuário)",
+		"Criar todas as pastas ecc-user (pastas do utilizador)",
 	'mTopOptionCleanHistory' =>
 		"Limpar histórico do eCC",
 	'mTopOptionConfig' =>
-		"Configuração",
+		"Configuracao",
 
 	/* TOOLS */
 	'mTopTool' =>
@@ -129,7 +129,7 @@ $i18n['menuTop'] = array(
 	'mTopHelpWebsite' =>
 		"Site oficial",
 	'mTopHelpForum' =>
-		"Forum de suporte",
+		"Fórum de suporte",
 	'mTopHelpDocOffline' =>
 		"Documentação",
 	'mTopHelpDocOnline' =>
@@ -139,9 +139,9 @@ $i18n['menuTop'] = array(
 
 	/* UPDATE */
 	'mTopUpdate' =>
-		"Atualizações",
+		"Actualizações",
 	'mTopUpdateEccLive' =>
-		"eCC Live! Atualizar",
+		"eCC Live! Actualizar",
 	
 	/* 0.9.6 WIP 08*/
 	'mTopDatImportOnlineRomdb' =>
@@ -157,7 +157,7 @@ $i18n['menuTop'] = array(
 	'mTopRomAuditUpdate' =>
 		"Reauditar arquivos",
 	'mTopDatImportCtrlMAME' =>
-		"Importar ClrMAME datfile",
+		"Importar ficheiro dat ClrMAME",
 	'mTopView' =>
 		"Visualizar",
 
@@ -175,65 +175,71 @@ $i18n['menuTop'] = array(
 
 	/* 0.9.7 WIP 01*/
 	'mTopViewModeRomPlayed' =>
-		"último jogado",
+		"Último jogado",
 	'mTopViewModeRomNotPlayed' =>
-		"nunca jogado",
+		"Nunca jogado",
 	'mTopViewModeRomBookmarks' =>
-		"favoritado",		
+		"Adicionado aos favoritos",		
 	'mTopViewModeRomMostPlayed' =>
-		'mais jogado',
+		'Mais jogado',
 	'mTopViewModeRomPersonalReviews' =>
-		'com resenha pessoal',
+		'Com resenha pessoal',
 
 	'mTopViewToggleSearch' =>
-		'Mostrar painel de pesquisa',
+		'Mostrar paínel de pesquisa',
 
 	/* 0.9.7 WIP 11*/
 	'mTopOptionBackupUserdata' =>
-		'Cópia de segurança (XML)',
+		'Cópia de seguranca (XML)',
 
 	/* 1.0.0 WIP 01 */
 	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
-		'  own metadata (edited or transfered)',
+		'  tem metadados (editados ou transferidos)',
 	'mTopViewModeRomPersonalMetaEdited' =>
-		'  own metadata (edited only)',
+		'  tem metadados (somente editados)',
 	'mTopViewModeRomPersonalMetaTransfered' =>
-		'  own metadata (transfered only)',
+		'  tem metadados (apenas transferidos)',
 
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
-		'Transfer by searchresult',
+		'Transferir por resultados de pesquisa',
 
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
-		'ImagePackCreator (IPC)',
+		'Criador de pacotes de imagem (IPC)',
 
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
-		'Manual DatFile Updater (DFU)',
+		'Actualizador manual de ficheiros Dat (DFU)',
 
 	/* 1.11 BUILD 4 */
 	'mTopOptionCreateStartmenuShortcuts' =>
-		'Create startmenu icons',
+		'Criar ícones no menu Iniciar',
 
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
-		'SQlite Browser',
+		'Explorador SQlite',
 	'mTopDeveloperGUI' =>
-		'Glade GUI Editor',
+		'GUI Editor Glade',
 	'mTopAutoIt3GUI' =>
-		'Create Autoit3 GUI (Koda)',
+		'Criar GUI Autoit3 (Koda)',
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
-		'Developer',
+		'Criador',
 	'mTopServices' =>
-		'Services',
+		'Serviços',
 	'mTopServicesKameleonCode' =>
-		'Enter Kameleon Code',
+		'Introduzir código Kameleon',
 
 	/* 1.13 BUILD 8 */
 	'mTopServicesEmuMoviesAD' =>
-		'Enter EmuMovies Account Data',
-);
+		'Introduzir dados de conta do EmuMovies',
+	
+	/* 1.14 BUILD 4 */
+	'mTopToolNotepadEditor' =>
+		'Start Notepad editor (Notepad++)',
+	'mTopToolHexEditor' =>
+		'Start Hex Editor (HxD)',
+	);
 ?>

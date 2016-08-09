@@ -40,7 +40,7 @@ class FileParserJarMIDlet implements FileParser {
 		}
 		else {
 			
-			# use fsum to get the right crc32 for larger files!
+			# use external parser to get the right crc32 for larger files!
 			# only usable for platforms withou offsets!!!!
 			if (filesize($file_name) >= ExtParserTriggerSize) {
 				$ret['FILE_CRC32'] = FileIO::getExternalCrc32($file_name, 1);
@@ -79,7 +79,7 @@ class EccMIDletReader {
 	 * Get data from manifest and write the icon, if needed
 	 * 
 	 * @author Andreas Scheibel <ecc@camya.com>
-	 * @copyright Andreas Scheibel (c) 2006, http://www.camya.com/ecc/
+	 * @copyright Andreas Scheibel (c) 2006
 	 * 
 	 * @param string $currentFile Filename of the 
 	 * @return mixed false on failure, array on success

@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter ImagePackCenter (IPC)
 ;
-; Script version         : v2.2.0.8
-; Last changed           : 2012.11.19
+; Script version         : v2.2.0.9
+; Last changed           : 2013.02.19
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -962,7 +962,7 @@ While 1
 		$PlatFormImagesFileNameData = StringSplit($PlatFormImagesFileName, "\")
 		$PlatFormImagesFileNameData = $PlatFormImagesFileNameData[Ubound($PlatFormImagesFileNameData)-1]
 		$TrueFileNameTemp = StringSplit($PlatFormImagesFileNameData, ".")
-		$TrueFileName = $TrueFileNameTemp[1]
+		$TrueFileName = StringLeft($PlatFormImagesFileNameData, StringLen($PlatFormImagesFileNameData) - StringLen($TrueFileNameTemp[UBound($TrueFileNameTemp)-1]) - 1)
 		ExitLoop
 	EndIf
 WEnd

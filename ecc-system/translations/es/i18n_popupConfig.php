@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2011/07/16
+ * date:	2013/01/14
  * ------------------------------------------
  */
 $i18n['popupConfig'] = array(
@@ -322,7 +322,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.7 WIP 10 */
 	'conEccSaveGuiSettings' =>
-		"Save gui settings",
+		"Grabar configuración de la interfaz",
 
 	/* 0.9.8 WIP 02 */
 	'lbl_img_otp_list_imagesize_default' =>
@@ -358,36 +358,36 @@ $i18n['popupConfig'] = array(
 
 	/* 1.13 BUILD 4-8 */
 	'lbl_ecc_videoplayer' =>	
-	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
+	"ECC necesita tener VLC player instalado!, descargar en @ http://www.videolan.org/vlc",
 	'lbl_ecc_videoplayer_note' =>	
-	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
+	"NOTAS: 1) Usa VideoLAN VLC v2.0.4+  2) Instala los controladores de ActiveX!",
 	'eccVideoPlayer_enable' =>
-		"Enable Video Player",
+		"Activar reproductor de vídeo",
 	'eccVideoPlayer_sound' =>
-		"Enable sound",
+		"Activar sonido",
 	'eccVideoPlayer_soundvolume' =>
-		"Volume (0-200%) =",
+		"Volumen (0-200%) =",
 	'eccVideoPlayer_loop' =>
-		"Loop video",
+		"Bucle de vídeo",
 	'eccVideoPlayer_resolution' =>
-		"Resolution (pixels): ",
+		"Resolución (pixels): ",
 	'eccVideoPlayer_padding' =>
-		"Padding from rightbottom corner (pixels): ",
+		"Relleno desde esquina inferior derecha (pixels): ",
 
 	/* 1.13 BUILD 12 */		
 	'lbl_ecc_opt_hdl' =>
-		"Other options",
+		"Otras opciones",
 	'tabGeneralImageTabOptions' =>
-		"IMAGE TAB in main view options",
+		"Opciones de visualización de la pestaña IMÁGENES",
 	'tabGeneralImageTabTcuttLabel' =>	
-		"Text cuttoff length (characters):",
+		"Longitud del texto (caracteres):",
 	'tabGeneralParsingOptions' =>	
-		"Parsing options:",
+		"Opciones de análisis:",
 	'tabGeneralParsingTriggerLabel' =>	
-		"Big file parser trigger size (MB)",
+		"Análizar archivos grandes (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
-		"(experimental, PHP could crash if set to high)",
+		"(experimental, PHP puede fallar si lo pones muy alto)",
 	'ThemeSelectLabel' =>
-		"Theme:",
+		"Tema:",
 );
 ?>

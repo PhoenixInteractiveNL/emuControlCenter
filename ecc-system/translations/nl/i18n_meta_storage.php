@@ -68,6 +68,12 @@ $i18n['dropdown_meta_region'] = array(
 		"Amerikaans",
 	'[[World]]' =>
 		"Wereld",
+	'[[Australia]]' =>
+		"Australie",
+	'[[USA-Europe]]' =>
+		"USA-Europa",
+	'[[USA-Japan]]' =>
+		"USA-Japan",
 );
 
 /* 0.9.8 FYEO 04 */

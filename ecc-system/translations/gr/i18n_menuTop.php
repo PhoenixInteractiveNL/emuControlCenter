@@ -118,9 +118,9 @@ $i18n['menuTop'] = array(
 	/* TOOLS */
 	'mTopTool' =>
 		"Tools",
-	'mTopToolEccTheme' =>
+	'mTopToolEccGtkts' =>
 		"επιλογή θέματος",
-	'mTopToolEccBugreport' =>
+	'mTopToolEccDiagnostics' =>
 		"αναφορά σφαλμάτων-bugs",
 
 	/* HELP */
@@ -207,5 +207,9 @@ $i18n['menuTop'] = array(
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
 		'ImagePackCreator (IPC)',
+
+	/* 1.1 WIP 06 DFU */
+	'mTopDatDFU' =>
+		'Manual DatFile Updater (DFU)',
 );
 ?>

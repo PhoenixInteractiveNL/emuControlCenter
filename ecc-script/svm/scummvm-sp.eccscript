@@ -1,0 +1,73 @@
+; Platform      : ScummVM
+; Script for      : ScummVM 0.12.0
+; Script version   : v1.1.0.1
+; Last changed      : 2009.02.15
+;
+; Authors: S. Ebeltjes (aka Phoenix), DerMicha75, Gruby, E.Canepa, marlborojacl
+;
+; NOTES:
+; - This script only works for ZIPPED (ZIP) ScummVM games.
+; - The files have to be direct inside the zip, no subdirs allowed.
+;
+; 7Z commands:
+; x = eXtract files with full paths.
+; -o = set Output directory.
+; -y = assume Yes on all queries.
+; -aos = skip already unpacked files.
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Set some variables to make life easier ;)
+;
+$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "\ecc-user\#_AUTO_UNPACKED\svm\" & $eccFileRomNamePlain & Chr(34)
+$PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
+
+; Extract the packed files to a temp folder.
+;
+TrayTip("ECC ScummVM", "Extracting files to temporally folder...please wait...", 10, 1)
+ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+;RomOf Handler
+If $eccAuditRomOf <> "" Then
+   $romof = $eccAuditRomOf & Chr(46) & $eccFileRomExtension
+   $PackedRomOfFile = $eccFileRomPath & $romof
+   If FileExists($PackedRomOfFile)=1 Then
+      TrayTip("ECC ScummVM", "Found RomOf field: Extracting files to temporally folder...please wait...", 10, 1)
+      $PackedRomOfFile = Chr(34) & $PackedRomOfFile & Chr(34)
+      ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomOfFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+   Else
+      MsgBox(64, "Tutorial", "ECC ScummVM: Unable to find RomOf file " & $romof &", exiting")
+      Exit
+   EndIf
+EndIf
+;Parent RomOf Handler (Disabled - Not Handled)
+;If $eccAuditParentRomOf <> "" Then
+;	$Parentromof = $eccAuditParentRomOf & Chr(46) & $eccFileRomExtension
+;	$PackedParentRomOfFile = $eccFileRomPath & $Parentromof
+;	If FileExists($PackedParentRomOfFile)=1 Then
+;     TrayTip("ECC ScummVM", "Found Parent RomOf field: Extracting files to temporally folder...please wait...", 10, 1)
+;      $PackedParentRomOfFile = Chr(34) & $PackedParentRomOfFile & Chr(34)
+;      ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedParentRomOfFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+;	Else
+;      MsgBox(64, "Tutorial", "ECC ScummVM: Unable to find Parent RomOf file " & $Parentromof &", exiting")
+;      Exit
+;	EndIf
+;EndIf
+
+; Run the emulator.
+;
+TrayTip("ECC ScummVM", "Starting ScummVM...", 5, 1)
+ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, "-p " & $TempExtractFolder & " " & $eccFileRomNamePlain, "", "")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

@@ -1,15 +1,15 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter ImagePackCreator (ECC-IPC)
 ;
-; Script version         : v1.2.0.0
-; Last changed           : 2010.02.20
+; Script version         : v1.2.1.0
+; Last changed           : 2010.12.24
 ;
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions: wAw (ecc forum member)
 ;
 ; NOTES: Nothing yet ;-)
-; 
+;
 ; ------------------------------------------------------------------------------
 
 
@@ -68,7 +68,7 @@ Else
 
 		If StringMid($ImagePackFolder, $LineLocation, 8) = "ecc-user" Then
 			$SelectedFolder = StringMid($ImagePackFolder, $LineLocation + 9, StringLen($ImagePackFolder)-($LineLocation + 3))
-		EndIf			
+		EndIf
 	Next
 
 	If $SelectedFolder = "" Then
@@ -99,7 +99,7 @@ EndIf
 ;==============================================================================
 ;BEGIN *** INPUT IMAGEPACKVERSION
 ;==============================================================================
-$VersionString = InputBox("ECC-IPC - Imagepack version string", "Enter the imagepack versionstring, suggested format: [YYYY]_v[N]_[N]", "2009_v1_0")
+$VersionString = InputBox("ECC-IPC - Imagepack version string", "Enter the imagepack versionstring, suggested format: [YYYY]_v[N]_[N]", "2011_v1_0")
 
 If $VersionString = "" Then
 	MsgBox(48, "ECC-IPC", "No version string entered!, aborting...")
@@ -136,6 +136,12 @@ $jpg_good_7z_name = StringSplit($jpg_7zname_temp, "|")
 ; end imagetype define
 
 For $ImageFile in $RFSarray
+
+;Exit the progam is there are no images found for the specific platform
+If $ImageFile = "" Then
+	MsgBox(48, "ECC-IPC", "There are no images found for platform '" & $ECCid & "', aborting...")
+	Exit
+EndIf
 
 	$FileName = StringSplit($ImageFile, "\")
 	$location = Ubound($FileName)-1
@@ -199,24 +205,26 @@ TrayTip("ECC-IPC", "Compressing image files for platform '" & $ECCid & "'...", 1
 ; ==== PNG ====
 Global $progress = 0
 For $loop = 1 To $png_good_array[0]
-   If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\" & $ECCid & "\images") Then
-      TrayTip("ECC-IPC", "Compressing PNG image files for platform '" & $ECCid & "'...", 10, 1)
-      FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
-      $7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $png_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
-      ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\*.png" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
-      DirRemove($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop], 1)
-   EndIf
+	If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\" & $ECCid & "\images") Then
+		ToolTip("Compressing PNG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
+		FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
+		$7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $png_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
+		ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\*.png" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
+		DirRemove($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop], 1)
+		ToolTip("")
+		EndIf
 Next
 
 ; ==== JPG ====
 For $loop = 1 To $jpg_good_array[0]
-   If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\" & $ECCid & "\images") Then
-      TrayTip("ECC-IPC", "Compressing JPG image files for platform '" & $ECCid & "'...", 10, 1)
-      FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
-      $7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $jpg_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
-      ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\*.jpg" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
-      DirRemove($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop], 1)
-   EndIf
+	If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\" & $ECCid & "\images") Then
+		ToolTip("Compressing JPG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
+		FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
+		$7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $jpg_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
+		ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\*.jpg" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
+		DirRemove($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop], 1)
+		ToolTip("")
+	EndIf
 Next
 
 ;==============================================================================
@@ -229,37 +237,37 @@ Exit
 ;==============================================================================
 Func RecursiveFileSearch($RFSstartDir, $RFSFilepattern = ".", $RFSFolderpattern = ".", $RFSFlag = 0, $RFSrecurse = true, $RFSdepth = 0)
 ;==============================================================================
-     If StringRight($RFSstartDir, 1) <> "\" Then $RFSstartDir &= "\"
+	If StringRight($RFSstartDir, 1) <> "\" Then $RFSstartDir &= "\"
 
-     If $RFSdepth = 0 Then
-         $RFSfilecount = DirGetSize($RFSstartDir, 1)       
-         Global $RFSarray[$RFSfilecount[1] + $RFSfilecount[2] + 1]
-     EndIf
-     
-     $RFSsearch = FileFindFirstFile($RFSstartDir & "*.*")
-     If @error Then Return
+	If $RFSdepth = 0 Then
+		$RFSfilecount = DirGetSize($RFSstartDir, 1)
+		Global $RFSarray[$RFSfilecount[1] + $RFSfilecount[2] + 1]
+	EndIf
 
-     While 1
-         $RFSnext = FileFindNextFile($RFSsearch)
-         If @error Then ExitLoop
-         
-         If StringInStr(FileGetAttrib($RFSstartDir & $RFSnext), "D") Then
-             
-             If $RFSrecurse AND StringRegExp($RFSnext, $RFSFolderpattern, 0) Then
-                 RecursiveFileSearch($RFSstartDir & $RFSnext, $RFSFilepattern, $RFSFolderpattern, $RFSFlag, $RFSrecurse, $RFSdepth + 1)
-                 If $RFSFlag <> 1 Then
-                   $RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
-                 EndIf
-             EndIf
-         ElseIf StringRegExp($RFSnext, $RFSFilepattern, 0) AND $RFSFlag <> 2 Then
-             $RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
-             $RFSarray[0] += 1
-         EndIf
-     WEnd
-     FileClose($RFSsearch)
+	$RFSsearch = FileFindFirstFile($RFSstartDir & "*.*")
+	If @error Then Return
 
-     If $RFSdepth = 0 Then
-         Redim $RFSarray[$RFSarray[0] + 1]
-         Return $RFSarray
-     EndIf
+	While 1
+		$RFSnext = FileFindNextFile($RFSsearch)
+		If @error Then ExitLoop
+
+		If StringInStr(FileGetAttrib($RFSstartDir & $RFSnext), "D") Then
+
+			If $RFSrecurse AND StringRegExp($RFSnext, $RFSFolderpattern, 0) Then
+				RecursiveFileSearch($RFSstartDir & $RFSnext, $RFSFilepattern, $RFSFolderpattern, $RFSFlag, $RFSrecurse, $RFSdepth + 1)
+				If $RFSFlag <> 1 Then
+					$RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
+				EndIf
+			EndIf
+		ElseIf StringRegExp($RFSnext, $RFSFilepattern, 0) AND $RFSFlag <> 2 Then
+			$RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
+			$RFSarray[0] += 1
+		EndIf
+	WEnd
+	FileClose($RFSsearch)
+
+	If $RFSdepth = 0 Then
+		Redim $RFSarray[$RFSarray[0] + 1]
+		Return $RFSarray
+	EndIf
 EndFunc ;==>RecursiveFileSearch

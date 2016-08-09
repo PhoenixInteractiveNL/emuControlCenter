@@ -20,6 +20,22 @@ FileChangeDir(@ScriptDir)
 #include "..\eccScriptSystem.au3"
 ; ==============================================================================
 
+; ==============================================================================
+; ADVANCED SCRIPTING (remove block when not needed)
+; If you need more advanced usage of scripting, like GUI's and UDF's, you may need
+; to include some additional (helping) scripts, these scripts are located in 
+; 'ecc-core\thirdparty\autoit\include\',and this way to include them properly:
+; #include "..\..\ecc-core\thirdparty\autoit\include\FILE.au3"
+; For more info view ECC documentation
+; ==============================================================================
+
+; ==============================================================================
+; PRO SCRIPTING (remove block when not needed)
+; If you need usage of scripting on API level, you can include and use this script.
+; #include "..\..\ecc-core\thirdparty\autoit\include\WinAPIEx.au3"
+; For more info view ECC documentation
+; ==============================================================================
+
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------

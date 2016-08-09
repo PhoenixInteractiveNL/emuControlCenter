@@ -1,16 +1,16 @@
 ; ------------------------------------------------------------------------------
 ; Platform               : Enterprise 64/128
 ; Script for             : EP128Emu
-; Script version         : v1.0.0.1
-; Last changed           : 2010.06.26
+; Script version         : v1.0.0.4 BETA
+; Last changed           : 2011.04.22
 ;
 ;
-; Author: Vicman
+; Author: Sebastiaan Ebeltjes (aka Phoenix), Vicman
 ;
 ; NOTES:
-; For this script you need to use the "EP_128k_Tape_FileIO_TASMON.cfg" as config.file in the emulator EP128Emu.
-; Go in the Emulator to : File / Configuration / Load from ASCII File / EP_128k_Tape_FileIO_TASMON.cfg
-; (or : Press ALT+Q / and select the cfg)
+;
+; Nothing yet!
+;
 ; ------------------------------------------------------------------------------
 
 ; ==============================================================================
@@ -23,29 +23,323 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-    EmuWindowControl("ep128emu")
-	AutoItSetOption("SendKeyDownDelay", 100)
+; Define variables
+$ep128emuConfigFolder = @Scriptdir & "\ep128-configs\"
+$ep128emuConfigFloppyInactive = "floppy.a.imageFile=" & Chr(34) & Chr(34)
+$ep128emuConfigFloppyActive = "floppy.a.imageFile=" & Chr(34) & $eccFileEccUnpackedPath & $eccFileEccUnpackedFile & Chr(34)
+;$ep128emuConfigDirectory = "fileio.workingDirectory=" & Chr(34) & $eccFileEccUnpackedPath & Chr(34)
+$ep128emuConfigDirectory = "fileio.workingDirectory=" & $eccFileEccUnpackedPath
+
+$ep128snapshotfile = "-snapshot=" & $eccFileEccUnpackedPath & $eccMetaInfoString  ; not working yet....what's the right commandline to add a snapshotfile ???
+
+; Check if the 'Meta-Info ID' field is filled in.
+If $eccMetaInfoString = "" Then
+   Msgbox(64, "ECC Script", "This script requires some startup info in the 'MetaInfo' string")
+   Exit
+EndIf
+
+; Check if user selected the option "unpack all files"
+If $eccEmuEnableZipUnpackAll <> 1 Then
+   Msgbox(64, "ECC Script", "Please enable the 'Unpack all files' option in the emulator config menu!")
+   Exit
+EndIf
+
+;Get proper CFG configurationfile from the 'MetaInfo' sting inside the ECC rom properties
+$ep128emuConfig = "00-default.cfg" ; Default config
+
+;Change the default config here if one of these strings are set:
+If StringInStr($eccMetaInfoString, "[EP640k]")   Then $ep128emuConfig = "01-ep640k.cfg"      ;Runs the Emulator with 640k RAM instead 128k (ca. 7 Games)
+If StringInStr($eccMetaInfoString, "[requires_zrom]")    Then $ep128emuConfig = "02-zrom.cfg"      ;Run basic-files wich needs the "zrom" (ca. 35 Games)
+If StringInStr($eccMetaInfoString, "[hun]")    Then $ep128emuConfig = "03-hun.cfg"      ;Run Tapefile with hungarian-config 128k (VIC20-Emulator and Game "Mad Mix 2")
+If StringInStr($eccMetaInfoString, "[requires_brd-rom]")       Then $ep128emuConfig = "04-brd.cfg"      ;Run Files wich needs the "brd.rom" (ca. 14 Basic-Games)
+If StringInStr($eccMetaInfoString, "[requires_exdos-rom]")    Then $ep128emuConfig = "05-exdos.cfg"      ;Run Files wich needs "EXDOS.rom" (Game Sokoban 1 & Sokoban 2 only)
+If StringInStr($eccMetaInfoString, "[isdos]")    Then $ep128emuConfig = "06-isdos.cfg"   ;Run Emulator with ISDOS (Seastalker, Sokoban 4k)
+If StringInStr($eccMetaInfoString, "[autostart]") Then $ep128emuConfig = "07-autostart.cfg"                  ;Run Disk-Images (autostart / without Program loader)
+If StringInStr($eccMetaInfoString, "[img]")      Then $ep128emuConfig = "08-img.cfg"      ;Run Disk-Images (slideshow or with Program loader/menue)
+If StringInStr($eccMetaInfoString, "[tape]")      Then $ep128emuConfig = "09-tape.cfg"   ;Run Game in Enterprise wich needs typing j ""
+If StringInStr($eccMetaInfoString, "[dtf-file]")      Then $ep128emuConfig = "10-dtf.cfg"   ;Run Games wich are converted as *.dtf file
+If StringInStr($eccMetaInfoString, "[demo]")   Then $ep128emuConfig = "00-default.cfg" ; Run Demo/Walkthr
+If StringInStr($eccMetaInfoString, "[img_v]")      Then $ep128emuConfig = "08_b-img.cfg"      ;Run Disk-Images (modified by vicman)
+
+If StringInStr($eccMetaInfoString, "[amstrad]")   Then $ep128emuConfig = "00-default.cfg"   ;Run Game in the Enterprise Amstrad-Emulator
+If StringInStr($eccMetaInfoString, "[vic20]")   Then $ep128emuConfig = "00-default.cfg"   ;Run Game in Enterprise Vic20-Emulator
+If StringInStr($eccMetaInfoString, "[tvc]")   Then $ep128emuConfig = "00-default.cfg"   ;Run Game in Enterprise TVC-Emulator
+If StringInStr($eccMetaInfoString, "[zx81]")   Then $ep128emuConfig = "00-default.cfg"   ;Run Game in Enterprise ZX81-Emulator
+If StringInStr($eccMetaInfoString, "emu.ep128s")   Then $ep128emuConfig = "00-default.cfg" ;run snapshotfile
+
+; Build the proper commandline
+$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyInactive & " " & $ep128emuConfigDirectory   ;just a test....well it works ;-)
+; Start emulator here....
+;msgbox(64,"test", $eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+;exit
+
+   
+If StringInStr($eccMetaInfoString, "[exdos]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
     Sleep(3000)
-	Send("{ENTER}")
-	Sleep(2000)
-	Send("{ALT down}")
-	Send("{f}")
-	Send("{ALT up}")
-	Sleep(200)
-	Send("{TAB}")
-	Sleep(300)
-    AutoItSetOption("SendKeyDownDelay", 1)
-	Send($eccFileRomPath)
+   Send("{ENTER}")
+   Sleep(7000)
+   Send("{F1}")
+    Sleep(500)
+   AutoItSetOption("SendKeyDownDelay", 2)
+   Send($RomFile, 1)
     Send("{ENTER}")
-    AutoItSetOption("SendKeyDownDelay", 100)
-	Send("{F1}")
-    Sleep(300)
-	AutoItSetOption("SendKeyDownDelay", 1)
-	Send($eccFileRomFile)
+   exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[isdos]") Then
+$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyActive & " " & $ep128emuConfigDirectory
+; Start emulator
+;msgbox(64,"test", $eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+;exit
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(4000)
     Send("{ENTER}")
- ; ------------------------------------------------------------------------------
+    Sleep(5000)
+    Send("{LSHIFT}")
+    Send("isdos")
+    Send("{ENTER}")
+    Sleep(4000)
+    Send(StringLower($eccMetaInfoId))
+    Send("{ENTER}")
+
+exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[img_v]") Then
+$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyActive & " " & $ep128emuConfigDirectory
+; Start emulator
+;msgbox(64,"test", $eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+;exit
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(4000)
+    Send("{ENTER}")
+    Sleep(5000)
+    Send("{LSHIFT}")
+    Send("dir")
+    Send("{ENTER}")
+    
+exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[img]") Then
+$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyActive & " " & $ep128emuConfigDirectory
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(4000)
+   Send("{ENTER}")
+  
+   exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[tape]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(2000)
+   Send("{ENTER}")
+   Sleep(1500)
+   Send("{F1}")
+    Sleep(500)
+   AutoItSetOption("SendKeyDownDelay", 2)
+   Send($RomFile, 1)
+    Send("{ENTER}")
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Sleep(3000)
+   Send("j")
+   Sleep(500)
+   Send("+{p}")
+   Send("+{p}")
+   Send("{ENTER}")
+exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[dtf-file]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(4000)
+   Send("{ENTER}")
+   Sleep(3000)
+   Send("+.")
+   Send("dl2")
+   Send("{SPACE}")
+    Send($eccFileEccUnpackedFile)
+   Send("{ENTER}")   
+exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[demo]")   Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(500)
+     Send("!l")                                 ; Alt+L loads the snapshotfile/demo.....how to add this as commandline/variable ???
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send($eccFileEccUnpackedFile)
+   Send("{ENTER}")
+     Exit
+EndIf
+
+
+;********************************************************************************************
+;* To Autorun the Games in the 4 Emulators [CPC,VIC20,TVC & ZX81] INSIDE the Emu EP128, *
+;* i have decided to use a "Snapshotfile" of the "Emulated Emulator" *
+;* The Games will be load, by using the %gamename_value% - Feature *
+;********************************************************************************************
+
+If StringInStr($eccMetaInfoString, "[amstrad]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(500)
+     Send("!l")                                ; Alt+L loads the snapshotfile.....how to add this as commandline/variable ???
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send("cpc.ep128s")
+   Send("{ENTER}")
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Send($eccFileEccUnpackedFile)
+   Send("{ENTER}")
+   Exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[vic20]")   Then
+;$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyInactive & " " & $ep128snapshotfile " "   ; just a test, yet
+; Start emulator
+;msgbox(64,"test", $eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+;exit
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(500)
+     Send("!l")                                 ; Alt+L loads the snapshotfile.....how to add this as commandline/variable ???
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send("Vic20.ep128s")
+   Send("{ENTER}")
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Send("{F6}")
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send($eccFileEccUnpackedFile)
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Send("{ENTER}")
+   Sleep(1000)
+   Send("run")
+   Send("{ENTER}")
+     Exit
+EndIf
+;-----------------------------------------------------------------------------------------------------
+;This is a test for autostarting the snapshot-files......don't work yet......
+;------------------------------------------------------------------------------------------------------
+If StringInStr($eccMetaInfoString, "emu.ep128s")   Then
+$ep128emuCommandline =  " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyInactive & " " & $ep128emuConfigDirectory & $ep128snapshotfile
+;$ep128emuCommandline = " -cfg " & $ep128emuConfigFolder & $ep128emuConfig & " " & $ep128emuConfigFloppyInactive & " " & $ep128snapshotfile " "   ; just a test, yet
+; Start emulator
+;msgbox(64,"test", $eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+;msgbox(64,"test", $eccEmuEmulatorFile & $ep128emuCommandline)
+;exit
+;Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline) 
+Run($ep128emuCommandline & $eccEmuEmulatorFile)
+;EmuWindowControl("ep128emu", 0)
+  ; AutoItSetOption("SendKeyDownDelay", 100)
+  ;  Sleep(500)
+   ;  Send("!l")                                 ; Alt+L loads the snapshotfile.....how to add this as commandline/variable ???
+   ;Sleep(1000)
+   ;AutoItSetOption("SendKeyDownDelay", 10)
+   ;Send("Vic20.ep128s")
+   ;Send("{ENTER}")
+   ;Sleep(1000)
+   ;AutoItSetOption("SendKeyDownDelay", 100)
+   ;Send("{F6}")
+   ;Sleep(1000)
+   ;AutoItSetOption("SendKeyDownDelay", 10)
+   ;Send($eccFileEccUnpackedFile)
+   ;AutoItSetOption("SendKeyDownDelay", 100)
+   ;Send("{ENTER}")
+   ;Sleep(1000)
+   ;Send("run")
+   ;Send("{ENTER}")
+     Exit
+EndIf
+
+
+
+
+
+If StringInStr($eccMetaInfoString, "[tvc]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(500)
+     Send("!l")                                           ; Alt+L loads the snapshotfile.....how to add this as commandline/variable ???
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send("tvc.ep128s")
+   Send("{ENTER}")
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Send($eccFileEccUnpackedFile)
+   Send("{ENTER}")
+   Exit
+EndIf
+
+If StringInStr($eccMetaInfoString, "[zx81]") Then
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(500)
+     Send("!l")                                                        ; Alt+L loads the snapshotfile.....how to add this as commandline/variable ???
+   Sleep(1000)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send("zx81.ep128s")
+   AutoItSetOption("SendKeyDownDelay", 200)
+   Send("{ENTER}")
+   Sleep(1000)
+   Send("{ENTER}")
+   Sleep(500)
+   AutoItSetOption("SendKeyDownDelay", 10)
+   Send($eccFileEccUnpackedFile)
+   AutoItSetOption("SendKeyDownDelay", 100)
+   Send("{ENTER}")
+   Sleep(1000)
+   Send("r")
+   Send("{ENTER}")
+   Exit
+EndIf
+
+;*********************************************************************************************************************************
+
+
+;Run all other files here...
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $ep128emuCommandline)
+EmuWindowControl("ep128emu", 0)
+   AutoItSetOption("SendKeyDownDelay", 100)
+    Sleep(4000)
+   Send("{ENTER}")
+   Sleep(1500)
+   Send("{F1}")
+    Sleep(500)
+   AutoItSetOption("SendKeyDownDelay", 2)
+   Send($RomFile, 1)
+    Send("{ENTER}")
+
+;Run_Emulator_Send_Keys([3]{Enter}[2]{F1}[-1][1]%gamepathfile%[-20]{Enter}||50)
+
+; What todo with -snapshot %gamepathfile% ?? - answer : i need the right variable for this !!! look at line 32
+
+; ------------------------------------------------------------------------------
 ; END OF SCRIPT
 ; ------------------------------------------------------------------------------
-Exit
-
 

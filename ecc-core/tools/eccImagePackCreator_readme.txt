@@ -1,4 +1,4 @@
-JAAAPTable of contents:
+Table of contents:
 
 1. What is emuControlCenter?
 2. What is an imagepack?

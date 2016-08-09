@@ -1,0 +1,71 @@
+; Platform      : ScummVM
+; Script for      : Residual 0.0.6svn
+; Script version   : v1.0.0.1
+; Last changed      : 2009.02.14
+;
+; Authors: S. Ebeltjes (aka Phoenix), DerMicha75, Gruby, E.Canepa, marlborojacl
+;
+; NOTES:
+; - This script only works for ZIPPED (ZIP) Residual games.
+; - The files have to be direct inside the zip, no subdirs allowed.
+;
+; 7Z commands:
+; x = eXtract files with full paths.
+; -o = set Output directory.
+; -y = assume Yes on all queries.
+; -aos = skip already unpacked files.
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Set some variables to make life easier ;)
+;
+$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\svm\" & $eccFileRomNamePlain & Chr(34)
+$PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
+$PathFolder = $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\svm\" & $eccFileRomNamePlain
+
+; Write $PathFolder in the residual-template.ini path=line
+;
+IniWrite($eccSystemEccFolder & "\ecc-script\svm\residual-template.ini", "grim", "path", $PathFolder)
+
+; Copy the residual-template.ini to the residual.ini to Emulator folder.
+;
+$IniFilename = "residual.ini"
+FileCopy(@Scriptdir & "\residual-template.ini", $eccEmuEmulatorPath & $IniFilename, 1)
+
+; Extract the packed files to a temp folder.
+;
+TrayTip("ECC ScummVM", "Extracting files to temporally folder...please wait...", 10, 1)
+ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+;RomOf Handler
+If $eccAuditRomOf <> "" Then
+   $romof = $eccAuditRomOf & Chr(46) & $eccFileRomExtension
+   $PackedRomOfFile = $eccFileRomPath & $romof
+   If FileExists($PackedRomOfFile)=1 Then
+      TrayTip("ECC ScummVM", "Found RomOf field: Extracting files to temporally folder...please wait...", 10, 1)
+      $PackedRomOfFile = Chr(34) & $PackedRomOfFile & Chr(34)
+      ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomOfFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+   Else
+      MsgBox(64, "Tutorial", "ECC ScummVM: Unable to find RomOf file " & $romof &", exiting")
+      Exit
+   EndIf
+EndIf
+
+; MsgBox(96, "Commandline", $eccEmuEmulatorPath & $eccEmuEmulatorFile & " -c " & $IniFilename )
+; Run the emulator.
+;
+TrayTip("ECC ScummVM", "Starting Residual...", 5, 1)
+ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, "-c " & $IniFilename) 
+; ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile & " -c " & $IniFilename)
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

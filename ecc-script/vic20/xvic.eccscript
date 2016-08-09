@@ -1,7 +1,7 @@
 ; Platform               : Commodore VIC-20
-; Script for             : VICE emulator (xvic.exe) (tested with v2.1)
-; Script version         : v2.0.0.0
-; Last changed           : 2009.02.05
+; Script for             : VICE emulator (xvic.exe) (tested with v2.2.x)
+; Script version         : v2.1.0.0
+; Last changed           : 2012.01.14
 ;
 ;
 ; Author :  Sebastiaan Ebeltjes (aka Phoenix)
@@ -22,43 +22,29 @@ FileChangeDir(@ScriptDir)
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
 
-; SET additional variables for script 
+; SET additional variables for script
 Global $VicIni = $eccEmuEmulatorPath & "vice.ini"
 Global $VicCommandline = " "
 
 ; Check if the 'Meta-Info ID' field is filled in.
-If $eccMetaInfoId = "" Then
-	; META INFO ID is not present
-
+If $eccMetaInfoId = "" Then ; META INFO ID is not present
 	; Check if 'PrgInfo.exe' exists in the script folder
-	If FileExists($eccSystemEccFolder & "\ecc-script\vic20\PrgInfo.exe") <> 1 Then 
-	        MsgBox(0, $eccSystemName, "PRG Info '" & $eccSystemEccFolder & "\vic20\PrgInfo.exe' not found!")
-	        Exit 
+	If FileExists($eccSystemEccFolder & "\ecc-script\vic20\PrgInfo.exe") <> 1 Then
+	        MsgBox(0, $eccSystemName, "PRG Info '" & $eccSystemEccFolder & "\ecc-script\vic20\PrgInfo.exe' not found!")
+	        Exit
 	EndIf
 
 	;First we need to 'catch' the right setting from 'PRGInfo'
-
-	; start 'PRGInfo' (using chr34 to put rom in quotes)
-	Run(@ScriptDir & "\PrgInfo.exe " & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-
-	; wait until 'PRGInfo' is loaded
-	WinWait("PRGInfo 1.0.2", "", 10)
-
-	; Get the text from the PRG info windows and put it in a variable
-	$prg_info = WinGetText("PRGInfo 1.0.2", "")
-
-	; close 'PRGinfo' 
-	WinClose("PRGInfo 1.0.2", "")
+	Run(@ScriptDir & "\PrgInfo.exe " & $RomFile) ; start 'PRGInfo' (using chr34 to put rom in quotes)
+	WinWait("PRGInfo ", "", 10) ; wait until 'PRGInfo' is loaded
+	$prg_info = WinGetText("PRGInfo ", "") ; Get the text from the PRG info windows and put it in a variable
+	WinClose("PRGInfo ", "") ; close 'PRGinfo'
 
 	; Get the 'cpu settings' string from 'PRGinfo'
 	For $search_cpu = 1 to StringLen($prg_info)
-
-		; Check if string is found
-		If StringMid($prg_info, $search_cpu, 14) = "--------------" Then
-
-		; go 2 bytes further to get the good 'cpu string'
-		$search_cpu_found = $search_cpu + 16
-	        EndIf
+		If StringMid($prg_info, $search_cpu, 14) = "--------------" Then ; Check if string is found
+			$search_cpu_found = $search_cpu + 16 ; go 2 bytes further to get the good 'cpu string'
+		EndIf
 	Next
 
 	; ROM files

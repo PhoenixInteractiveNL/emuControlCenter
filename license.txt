@@ -1,0 +1,47 @@
+emuControlCenter
+Copyright(c) 2005-2012 by Andreas Scheibel
+
+
+This licence grants you the following:
+
+Permission to use, copy, and distribute emuControlCenter in its entirety, for
+non-commercial purposes, is hereby granted without fee, provided that
+this license information and copyright notice appear in all copies.
+
+If you redistribute emuControlCenter, the entire contents of this distribution
+must be distributed.  The software may be modified for your own
+purposes, but modified versions may NOT be distributed without prior
+consent from Andreas Scheibel.
+
+This software is provided 'as-is', without any expressed or implied
+warranty.  In no event will the author be held liable for any damages
+arising from the use of this software (see also LIMITED WARRANTY section).
+
+If you would like to do something with emuControlCenter that this copyright
+prohibits (such as distributing it with a commercial product, using
+portions of the source in some other program, etc.), please contact
+the author.
+
+The author can be contacted via email at: eccas@camya.com
+emuControlCenter website: http://www.camya.com
+
+********************************************************
+LIMITED WARRANTY
+
+NO WARRANTIES.
+The Author of this Software expressly disclaims any warranty for the
+SOFTWARE PRODUCT. The SOFTWARE PRODUCT and any related documentation
+is provided "as is" without warranty of any kind, either express or implied,
+including, without limitation, the implied warranties or merchantability,
+fitness for a particular purpose, or non-infringement. The entire risk
+arising out of use or performance of the SOFTWARE PRODUCT remains with you.
+
+NO LIABILITY FOR DAMAGES.
+In no event shall the author of this Software be liable for any damages
+whatsoever (including, without limitation, damages for loss of business
+profits, business interruption, loss of business information, or any other
+pecuniary loss) arising out of the use of or inability to use this product,
+even if the Author of this Software has been advised of the possibility of
+such damages. Because some states/jurisdictions do not allow the exclusion
+or limitation of liability for consequential or incidental damages, the
+above limitation may not apply to you. 

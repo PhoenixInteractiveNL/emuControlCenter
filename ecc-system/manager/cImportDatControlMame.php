@@ -727,7 +727,7 @@ class ImportDatControlMame extends ImportDat {
 				$originalId = $gameIndex[$original];
 				
 				# create union for unique roms
-				if (isset($out[$cloneId]['rom_unique']) && is_array($out[$cloneId]['rom_unique'])) {
+				if (isset($out[$cloneId]['rom_unique']) && is_array($out[$cloneId]['rom_unique']) && isset($out[$originalId]['rom_unique']) && is_array($out[$originalId]['rom_unique'])) {
 					$out[$cloneId]['rom_unique'] = $out[$cloneId]['rom_unique'] + $out[$originalId]['rom_unique'];
 					$out[$cloneId]['rom_unique_simple'] = $out[$cloneId]['rom_unique_simple'] + $out[$originalId]['rom_unique_simple'];					
 				}

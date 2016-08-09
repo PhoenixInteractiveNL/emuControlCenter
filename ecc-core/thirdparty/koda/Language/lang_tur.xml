@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="windows-1254"?>
+<language>
+	<name>Türkçe</name>
+	<nativename>Turkish</nativename>
+	<version>1.7.3.0</version>
+	<author>M.H.Orhan</author>
+	<icon>
+		<bin>000001000100120C000001001800F80200001600000028000000120000001800</bin>
+		<bin>00000100180000000000D0020000000000000000000000000000000000000000</bin>
+		<bin>0000000000000000000000000000000000000000000000000000000000000000</bin>
+		<bin>000000000000000000000000000000000000000000000000001D1FCB0909C500</bin>
+		<bin>01C30303C40E0DCA1C1DD42D2EE03F3FEC4C4CF34D4EEE4444E33436CE3030C6</bin>
+		<bin>282AB92323AF1B1BA300000000000000003537D91818CD0807C80707C81C1DCF</bin>
+		<bin>3334DA2627E03736EC4546F75050F94E4EF14242E13434CE2E2EC32828B82121</bin>
+		<bin>AC00000000000000003F3FDC2020CF1F1FCD9696E9D3D5F59394EB797AEA3232</bin>
+		<bin>E94140F44E4EF85050F54B4CEE3E3FDB3333CB2D2DC02626B600000000000000</bin>
+		<bin>005354EB3D3BDF7D7EE5E6E6FA2826CF1314CE1F20D72626E1393BED4A4AF750</bin>
+		<bin>50FB5050F64949EA3A3BD53132C92C2CBD00000000000000006161EC6162F5DB</bin>
+		<bin>DBF9A8A8EC1A19CC0F0ECC0D0DCC1718D37D7CEAC0C0F84746F54F4EF84F4EF5</bin>
+		<bin>4546E53635D03030C600000000000000003A38BE6C6BF7C4C5FACDCCF62C2BD3</bin>
+		<bin>2322CE1F20CE1214CFBFBFF2ADADF43B39ED4546F7504FFA4E4EF14242E13334</bin>
+		<bin>CD000000000000000011128D3435B99292F3EAEAFD9091ED3838D51214CB0909</bin>
+		<bin>CA1516CD1C1CD32828E23A3AEF4A4AF85151F84C4CEE3D3EDB00000000000000</bin>
+		<bin>0001007A191B9C4040C68E8FF9B4B4F9A1A2ED6161DD0A09CA0201C70706CB18</bin>
+		<bin>18D82B2BE53D3DF34D4DFA5151F64949E9000000000000000000007911119133</bin>
+		<bin>33B86463F06261F24847E32526D10C0CC90200C70403C80D0DD01D1DDC2F2FE9</bin>
+		<bin>4242F54F4FFA5050F4000000000000000000007900017A1B19973A3BBD6363EE</bin>
+		<bin>5153E63434D11718C40505C00100C00606C61010D02121DD3535EB4646F6504F</bin>
+		<bin>F900000000000000000000000000000000000000000000000000000000000000</bin>
+		<bin>0000000000000000000000000000000000000000000000000000000000000000</bin>
+		<bin>3FFF00003FFF00003FFF00003FFF00003FFF00003FFF00003FFF00003FFF0000</bin>
+		<bin>3FFF00003FFF00003FFF00003FFF</bin>
+	</icon>
+	<messages>
+		<msgCloseModified>%s Dosyası degistirilmis. kaldirmadan önce kaydedilsin mi?</msgCloseModified>
+		<msgAlreadyOpened>:\n\n&quot;%s&quot;\n\nDosyası zaten dizaynir tarafindan açilmis.</msgAlreadyOpened>
+		<msgFileExists>&quot;%s&quot; Dosyasi zaten mevcut. Üzerine yazilsin mi?</msgFileExists>
+		<msgFileExistsNoConfirm>Dosya zaten mevcut. Lütfen başka bir isim seçin.</msgFileExistsNoConfirm>
+		<msgNoActiveForm>Dizaynırda etkin form yok, eylem tamamlanamaz.</msgNoActiveForm>
+		<msgUnrecoverable>Koda bu formu açamaz, Ayrıştırıcı şu hatayı iletti:\n\n  %s</msgUnrecoverable>
+		<msgNoKodaUpdates>Şuan kullandığınız sürüm.</msgNoKodaUpdates>
+		<msgNewKodaUpdate>Koda nın yeni %s%s sürümü bulundu.\n\n%s\n\nIndirme sayfasının açılmasını istiyor musunuz?</msgNewKodaUpdate>
+		<msgErrorUpdate>Versiyon bilgilerine erişilemedi.</msgErrorUpdate>
+		<msgFileNotExists>&quot;%s&quot; Dosyası mevcut değil.</msgFileNotExists>
+		<msgNoFormsInScript>Betikte Koda nın ürettiği içerik yok.</msgNoFormsInScript>
+		<msgNoFormIdent>Betik içinde form seçimi yok. Muhtemelen yanlışlıkla kimliğini kaldırdınız. Betik güncellenmedi!</msgNoFormIdent>
+		<msgFormHaveNoScript>Bu form ilişkilendirilmiş bir betik değil.</msgFormHaveNoScript>
+		<msgNewNamePrompt>Yeni isim girin:</msgNewNamePrompt>
+		<msgProjectNew>Lütfen yol seçip proje adını belirtin</msgProjectNew>
+		<msgProjectOpen>Lütfen proje seçin</msgProjectOpen>
+		<msgProjectNewScript>Mevcut bir betiği yeni bir tür yada isimle aç:</msgProjectNewScript>
+		<msgProjectNewForm>Mevcut bir formu yeni bir tür yada isimle aç :</msgProjectNewForm>
+		<msgSaveFormBefore>Şuanki form kaydedilmemiş. Kaydetmeden önce sırayla Güncelleme seçeneğini kullanarak betiği güncelleyin. Form kaydedilsin mi?</msgSaveFormBefore>
+		<msgProjectAskClose>Yeni proje oluşturmak diğer proje ve formlarının kapanmasına neden olur. Devam edilsin mi?</msgProjectAskClose>
+		<msgProjectFileMissing>Açmayı denediğiniz dosya kayıp.</msgProjectFileMissing>
+		<msgNoDatafile>styles.xml dosyası kayıp. Lütfen Koda arşivinden geri yükleyin. O olmadan betik ve stil düzenleyemezsiniz.</msgNoDatafile>
+		<msgWrongIconFormat>Açmayı denediğiniz dosya simge içermiyor.</msgWrongIconFormat>
+		<msgWrongIconLibFormat>Açmayı denediğiniz kütüphane simge içermiyor yada desteklenmeyen bir formatta.</msgWrongIconLibFormat>
+		<msgIconLibIs16bit>Açılan kütüphane dosyası 16-bit. Koda onun üzerinde çalışamaz, Simgeler sadece Vista dan eski sürümlerde görünebilir. Onu 32-bit kütüphane olarak kaydetmelisiniz. Kaydet butonu ile bu mümkündür.</msgIconLibIs16bit>
+		<msgNoPortable>Koda bu klasöre konfigürasyonunu yazamaz, muhtemelen yazma izni yoktur. ancak portable modda devam edebilirsiniz, ancak yaptığınız ayarlar kalıcı olmayacaktır, yada konfigürasyon kullanıcı profiline de kaydedilebilir.\n\nKullanıcı profiline kaydedilsin mi?</msgNoPortable>
+		<msgOutdatedStyles>&quot;styles.xml&quot; dosyanız hatalı bir sürümde, bazı hatalar oluşabilir. Koda dağıtımından indirmenizi öneririz.</msgOutdatedStyles>
+		<msgNotImplemented>Henüz yerine getirilmedi...</msgNotImplemented>
+		<msgWarningTitle>Uyarı</msgWarningTitle>
+		<msgInfoTitle>Bilgilendirme</msgInfoTitle>
+		<msgConfirmTitle>Doğrula</msgConfirmTitle>
+		<msgErrorTitle>Hata</msgErrorTitle>
+		<strErrOpFailed>Eylem başarısız!</strErrOpFailed>
+		<strAssociated>Ilişkilendirildi</strAssociated>
+		<strNotAssociated>Ilişkilendirilmedi</strNotAssociated>
+		<strObjInit>Hazırlanıyor...</strObjInit>
+		<strObjCreatedOk>Nesne başarıyla oluşturuldu</strObjCreatedOk>
+		<strObjCreatedErr>Nesne oluşturma hatalı!</strObjCreatedErr>
+		<strDefault>Varsayılan</strDefault>
+		<strMixed>Karıştırılmış</strMixed>
+		<strDownloading>Indiriliyor...</strDownloading>
+		<strFilterAU3>Autoit Script dosyası</strFilterAU3>
+		<strFilterKXF>Koda XML formu</strFilterKXF>
+		<strFilterKXP>Koda projesi</strFilterKXP>
+		<strFilterALL>Tümü</strFilterALL>
+		<strFilterBMP>Bitmap</strFilterBMP>
+		<strFilterJPG>JPEG dosyası</strFilterJPG>
+		<strFilterGIF>GIF dosyası</strFilterGIF>
+		<strFilterICO>Simgeler</strFilterICO>
+		<strFilterEXE>Exe yada Dll kütüphanesi</strFilterEXE>
+		<strFilterLIB>Simge kütüphanesi</strFilterLIB>
+		<strColorDesigner>Dizaynır</strColorDesigner>
+		<strColorHandle>Tutucu</strColorHandle>
+		<strColorHandleBorder>Tutucu kenarı</strColorHandleBorder>
+		<strColorInactiveHandle>Pasif tutucu</strColorInactiveHandle>
+		<strColorInactiveHandleBorder>Pasif tutucu kenarı</strColorInactiveHandleBorder>
+		<strColorMultiselHandle>Toplu seçim tutucusu</strColorMultiselHandle>
+		<strColorMultiselHandleBorder>Toplu seçim tutucu kenarı</strColorMultiselHandleBorder>
+		<strColorLockedHandle>Kilitli kontrol tutucusu</strColorLockedHandle>
+		<strColorGrid>Izgara</strColorGrid>
+		<strColorObjInsp>Nesne denetleyici</strColorObjInsp>
+		<strColorOIBackground>Arkaplan</strColorOIBackground>
+		<strColorOILabels>Katmanlar</strColorOILabels>
+		<strColorOIValues>Değerler</strColorOIValues>
+		<strColorOICompRef>Bileşen referansı</strColorOICompRef>
+		<strColorOICompRefChild>Alt bileşen referansı</strColorOICompRefChild>
+		<strColorOICustom>Grup özelliği %d</strColorOICustom>
+		<strColorOutputWindow>Çıkış penceresi</strColorOutputWindow>
+		<strColorErrorMessage>Hata iletisi</strColorErrorMessage>
+		<strColorWarningMessage>Uyarı iletisi</strColorWarningMessage>
+		<strColorInfoMessage>Bilgilendirme iletisi</strColorInfoMessage>
+		<strColorDebugMessage>Kırık iletisi</strColorDebugMessage>
+		<strColorOutWinBackground>Arkaplan</strColorOutWinBackground>
+	</messages>
+	<form name="DesignerMain">
+		<caption>Koda FormDesigner</caption>
+		<mnuFile property="Caption">&amp;Dosya</mnuFile>
+		<grpRecent property="Caption">&amp;Son kullanilanlar</grpRecent>
+		<grpImport property="Caption">&amp;Içe aktarım</grpImport>
+		<mnuEdit property="Caption">&amp;Düzenle</mnuEdit>
+		<grpControl property="Caption">Kontrol</grpControl>
+		<grpAlign property="Caption">Hizalama</grpAlign>
+		<mnuView property="Caption">&amp;Görünüm</mnuView>
+		<mnuOptions property="Caption">&amp;Ayarlar</mnuOptions>
+		<mnuTools property="Caption">&amp;Araçlar</mnuTools>
+		<mnuFormList property="Caption">&amp;Formlar</mnuFormList>
+		<mnuHelp property="Caption">&amp;Yardım</mnuHelp>
+		<tabStandard property="Caption">Standart</tabStandard>
+		<btnTMenu property="Hint">Ana menü</btnTMenu>
+		<btnTLabel property="Hint">Katman</btnTLabel>
+		<btnTInput property="Hint">Giriş</btnTInput>
+		<btnTEdit property="Hint">Düzenle</btnTEdit>
+		<btnTButton property="Hint">Buton</btnTButton>
+		<btnTCheckBox property="Hint">Kutucuk</btnTCheckBox>
+		<btnTRadio property="Hint">RadioButon</btnTRadio>
+		<btnTList property="Hint">ListeKutusu</btnTList>
+		<btnTCombo property="Hint">KomboKutu</btnTCombo>
+		<btnTContextMenu property="Hint">Bağlam menüsü</btnTContextMenu>
+		<btnTGroup property="Hint">GrupKutusu</btnTGroup>
+		<tabAdditional property="Caption">Ilave</tabAdditional>
+		<btnTPic property="Hint">Resim</btnTPic>
+		<btnTIcon property="Hint">Simge</btnTIcon>
+		<btnTGraphic property="Hint">Grafik</btnTGraphic>
+		<btnTUpdown property="Hint">Yukarı aşağı</btnTUpdown>
+		<btnTAvi property="Hint">Avi</btnTAvi>
+		<btnTTrayMenu property="Hint">Tepsi menüsü</btnTTrayMenu>
+		<btnTDummy property="Hint">Dummy kontrol</btnTDummy>
+		<btnTControlGroup property="Hint">Kontrol grupları</btnTControlGroup>
+		<tabWin32 property="Caption">Win32</tabWin32>
+		<btnTSlider property="Hint">Kaydırıcı</btnTSlider>
+		<btnTProgress property="Hint">İlerleme</btnTProgress>
+		<btnTDate property="Hint">Tarih tutucu</btnTDate>
+		<btnTMonthCal property="Hint">Aylık takvim</btnTMonthCal>
+		<btnTTreeView property="Hint">Ağaç görünümü</btnTTreeView>
+		<btnTListView property="Hint">Liste görünümü</btnTListView>
+		<btnTTab property="Hint">Sekme kontrolü</btnTTab>
+		<btnTObj property="Hint">COM nesnesi</btnTObj>
+		<tabCustom property="Caption">Uyarla</tabCustom>
+		<btnTStatusBar property="Hint">Durum çubuğu</btnTStatusBar>
+		<btnTIPAddress property="Hint">IP adresi kutusu</btnTIPAddress>
+		<btnTToolbar property="Hint">Araççubuğu</btnTToolbar>
+		<btnTImageList property="Hint">Resim listesi</btnTImageList>
+		<actProjectNew property="Caption">Yeni proje...</actProjectNew>
+		<actAlignToGrid property="Caption">&amp;Izgaraya hizala</actAlignToGrid>
+		<actAlignLeft property="Caption">Sol</actAlignLeft>
+		<actAlignCenterHorizontal property="Caption">Merkez</actAlignCenterHorizontal>
+		<actAlignRight property="Caption">Sağ</actAlignRight>
+		<actAlignTop property="Caption">Üst</actAlignTop>
+		<actAlignCenterVertical property="Caption">Orta</actAlignCenterVertical>
+		<actAlignBottom property="Caption">Alt</actAlignBottom>
+		<actAlignSpaceEquallyHorizontal property="Caption">Yatay boşluğu eşitle</actAlignSpaceEquallyHorizontal>
+		<actAlignSpaceEquallyVertical property="Caption">Dikey boşluğu eşitle</actAlignSpaceEquallyVertical>
+		<actAlignSameWidth property="Caption">Genişliği eşitle</actAlignSameWidth>
+		<actAlignSameHeight property="Caption">Yüksekliği eşitle</actAlignSameHeight>
+		<actAlignSameWidthHeight property="Caption">Boyutu eşitle</actAlignSameWidthHeight>
+		<actNew property="Caption">&amp;Yeni...</actNew>
+		<actNew property="Hint">Galeriden yeni form yükle</actNew>
+		<actAlignWCenterHorizontal property="Caption">Pencereye yatay ortala</actAlignWCenterHorizontal>
+		<actNewForm property="Caption">&amp;Yeni form</actNewForm>
+		<actNewForm property="Hint">Yeni boş form</actNewForm>
+		<actAlignWCenterVertical property="Caption">Pencereye dikey ortala</actAlignWCenterVertical>
+		<actOpen property="Caption">&amp;Aç</actOpen>
+		<actOpen property="Hint">Form aç</actOpen>
+		<actCloseForm property="Caption">&amp;Formu kapat</actCloseForm>
+		<actCloseForm property="Hint">Formu kapat</actCloseForm>
+		<actSave property="Caption">&amp;Kaydet</actSave>
+		<actSave property="Hint">Formu kaydet</actSave>
+		<actSaveAll property="Caption">&amp;Tümünü kaydet</actSaveAll>
+		<actSaveAll property="Hint">Tüm formları kaydet</actSaveAll>
+		<actSaveAs property="Caption">&amp;Farklı kaydet...</actSaveAs>
+		<actSaveAs property="Hint">Formu farklı kaydet...</actSaveAs>
+		<actExit property="Caption">&amp;Çıkış</actExit>
+		<actExit property="Hint">Programı kapat</actExit>
+		<actCut property="Caption">&amp;Kes</actCut>
+		<actCopy property="Caption">&amp;Kopyala</actCopy>
+		<actPaste property="Caption">&amp;Yapıştır</actPaste>
+		<actDelete property="Caption">&amp;Sil</actDelete>
+		<actSelectAll property="Caption">&amp;Tümünü seç</actSelectAll>
+		<actTabOrder property="Caption">&amp;Sekme sırası</actTabOrder>
+		<actBringToFront property="Caption">Öne getir</actBringToFront>
+		<actSendToBack property="Caption">Arkaya gönder</actSendToBack>
+		<actLock property="Caption">Kilitle</actLock>
+		<actUnlock property="Caption">Kilidi aç</actUnlock>
+		<actNoInsertIn property="Caption">No insert in</actNoInsertIn>
+		<actNoCopy property="Caption">No copy</actNoCopy>
+		<actOptions property="Caption">&amp;Ayarlar...</actOptions>
+		<actGenerate property="Caption">&amp;Form kodu oluştur...</actGenerate>
+		<actGenerate property="Hint">Kod oluştur</actGenerate>
+		<actConfigureGenerate property="Caption">&amp;Oluşturma ayarları...</actConfigureGenerate>
+		<actConfigureGenerate property="Hint">Kodu gelişmiş ayarlarla oluştur</actConfigureGenerate>
+		<actSaveUpdate property="Caption">Betiği güncelle</actSaveUpdate>
+		<actSaveUpdate property="Hint">Formu ilişkili betikten güncelle</actSaveUpdate>
+		<actRun property="Caption">&amp;Formu yürüt</actRun>
+		<actRun property="Hint">Form önizlemesi yap</actRun>
+		<actHelpContent property="Caption">&amp;Içerik</actHelpContent>
+		<actCheckUpdate property="Caption">&amp;Son sürüm kontrolü</actCheckUpdate>
+		<actAbout property="Caption">&amp;Hakkında...</actAbout>
+		<actSavePosition property="Caption">Konumu hatırla</actSavePosition>
+		<actNewPage property="Caption">&amp;Yeni sayfa</actNewPage>
+		<actNewToolButton property="Caption">&amp;Yeni buton</actNewToolButton>
+		<actImportAu3 property="Caption">Autoit GUI al</actImportAu3>
+		<actImportExt property="Caption">Harici alım...</actImportExt>
+		<actViewObjectTree property="Caption">Nesne ağacı</actViewObjectTree>
+		<actViewObjectInspector property="Caption">Nesne denetleyici</actViewObjectInspector>
+		<actViewFormList property="Caption">Form listesi</actViewFormList>
+		<actPopup_grpAlign property="Caption">Menü grubu hizala</actPopup_grpAlign>
+		<actPopup_grpControl property="Caption">Kontrol eylemleri</actPopup_grpControl>
+		<actPopup_grpImport property="Caption">Alım menüsü</actPopup_grpImport>
+		<actViewProjectManager property="Caption">Proje yöneticisi</actViewProjectManager>
+		<actProjectOpen property="Caption">Projeyi aç...</actProjectOpen>
+		<actProjectClose property="Caption">Projeyi kapat</actProjectClose>
+		<actProjectUpdate property="Caption">&amp;Güncelle - &amp;&amp; Proje dosyasını kaydet</actProjectUpdate>
+		<actProjectRun property="Caption">Projeyi yürüt</actProjectRun>
+		<actUndo property="Caption">&amp;Geri</actUndo>
+		<actToolbarCustomize property="Caption">Uyarlama...</actToolbarCustomize>
+		<actMoveTabBackward property="Caption">Sekmeyi arkaya taşı</actMoveTabBackward>
+		<actMoveTabForward property="Caption">Sekmeyi öne taşı</actMoveTabForward>
+		<actSeparator property="Caption">---Ayraç---</actSeparator>
+	</form>
+	<form name="frmFormList">
+		<caption>Form Listesi</caption>
+		<tipNotSaved property="Caption">Form kaydedilmedi</tipNotSaved>
+		<tipForm property="Caption"> Form</tipForm>
+		<tipScript property="Caption">Betik</tipScript>
+		<FormList property="Columns">
+			<item idx="0">Form</item>
+			<item idx="1">Yol</item>
+		</FormList>
+		<btnFormAdd property="Hint">Yeni Form</btnFormAdd>
+		<btnFormDel property="Hint">Formu kapat</btnFormDel>
+	</form>
+	<form name="PInsp">
+		<caption>Nesne denetleyici</caption>
+		<ModeTabSet property="Tabs">
+			<line idx="0">Özellikler</line>
+			<line idx="1">Stiller</line>
+			<line idx="2">ExStiller</line>
+		</ModeTabSet>
+		<btnResetStyle property="Caption">Sıfırla</btnResetStyle>
+		<btnResetExStyle property="Caption">Sıfırla</btnResetExStyle>
+	</form>
+	<form name="ConfigDlg">
+		<caption>Ayarlar</caption>
+		<OptTreeView property="Items">
+			<item idx="0">Genel</item>
+			<item idx="1">Kod oluşturucu</item>
+			<item idx="2">Formatlama</item>
+			<item idx="3">Şablonlar</item>
+			<item idx="4">Dizaynır</item>
+			<item idx="5">Renkler</item>
+			<item idx="6">Lisan</item>
+			<item idx="7">Araçlar</item>
+		</OptTreeView>
+		<lblUndoLevels property="Caption">Geri seviyesi (0 - kapalı)</lblUndoLevels>
+		<lblMRUCount property="Caption">Son kullanılan sayısı (1-20)</lblMRUCount>
+		<grpGeneralAssociate property="Caption">Ilişkilendirme</grpGeneralAssociate>
+		<btnAssociate property="Caption">Ayarla</btnAssociate>
+		<btnUnassociate property="Caption">Kaldır</btnUnassociate>
+		<grpGeneralAuPath property="Caption">Form yürütme metodu</grpGeneralAuPath>
+		<cbGeneralAuPath property="Items">
+			<line idx="0">Ilişkili</line>
+			<line idx="1">Kılavuz...</line>
+		</cbGeneralAuPath>
+		<grpGeneralStartup property="Caption">Koda başlangıcında</grpGeneralStartup>
+		<cbGeneralStartup property="Items">
+			<line idx="0">Yeni form oluştur</line>
+			<line idx="1">Son formu aç</line>
+			<line idx="2">Form aç...</line>
+		</cbGeneralStartup>
+		<cbGeneralBackup property="Caption">Yedek oluştur</cbGeneralBackup>
+		<cbUpdateSave property="Caption">Form kaydında butonu güncelle</cbUpdateSave>
+		<grpDesignerOptions property="Caption">Varsayılan oluşturucu ayarları</grpDesignerOptions>
+		<cbCodegenPopulate property="Caption">Tüm kontrollerin olaylarını hesapla</cbCodegenPopulate>
+		<cbCodegenPopulate property="Hint">Tüm fonksiyonlar için kontrol değişkenlerini hespalar, özellikleri bilirtilmiş olsun yada olmasın</cbCodegenPopulate>
+		<cbCodegenExpandVars property="Caption">%var% değişkenlerini genişlet</cbCodegenExpandVars>
+		<cbCodegenExpandVars property="Hint">Eğermetin %VAR% gibi bir değişken içeriyorsa - bu değişken olarak hesaplanabilir, string olarak değil</cbCodegenExpandVars>
+		<cbCodegenOnEvent property="Caption">OnEvent kodunu hesapla</cbCodegenOnEvent>
+		<cbCodegenOnEvent property="Hint">Will generate event-style code instead of message loop style</cbCodegenOnEvent>
+		<grpFormatDefaults property="Caption">Varsayılan format ayarları</grpFormatDefaults>
+		<grpFormatVariables property="Caption">Değişkenler</grpFormatVariables>
+		<lblScope property="Caption">Kapsam</lblScope>
+		<cbScope property="Items">
+			<line idx="0">Belirtilmemiş</line>
+			<line idx="1">Küresel</line>
+			<line idx="2">Yerel</line>
+		</cbScope>
+		<grpIndent property="Caption">Indent code</grpIndent>
+		<lblInitial property="Caption">Başlangıç</lblInitial>
+		<lblIndentBy property="Caption">Indent char</lblIndentBy>
+		<lblCount property="Caption">Sayı</lblCount>
+		<cbSymbol property="Items">
+			<line idx="0">Sekme</line>
+			<line idx="1">Boşluk</line>
+		</cbSymbol>
+		<grpFormatOther property="Caption">Diğer</grpFormatOther>
+		<lblSepChar property="Caption">Data separator char</lblSepChar>
+		<rbLoop property="Caption">Yinele</rbLoop>
+		<rbEvents property="Caption">Olaylar</rbEvents>
+		<TemplatesList property="Columns">
+			<item idx="0">Şablon adı</item>
+			<item idx="1">Varsayılan</item>
+		</TemplatesList>
+		<grpDesignerGrid property="Caption">Izgara ayarı</grpDesignerGrid>
+		<cbDesignerDispalyGrid property="Caption">Izgarayı göster</cbDesignerDispalyGrid>
+		<cbDesignerSnapToGrid property="Caption">Izgarayı sür</cbDesignerSnapToGrid>
+		<grpDesignerGridSize property="Caption">Izgara boyutu</grpDesignerGridSize>
+		<lblDesignerGridX property="Caption">Izgara &amp;X</lblDesignerGridX>
+		<lblDesignerGridY property="Caption">Izgara &amp;Y</lblDesignerGridY>
+		<grpDesignerOther property="Caption">Diğer ayarlar</grpDesignerOther>
+		<cbDesignerReflect property="Caption">Form stili değişikliklerini yansıt</cbDesignerReflect>
+		<cbDesignerSafe property="Caption">Güvensiz stilleri yansıtma (Saydamlık vs.)</cbDesignerSafe>
+		<grpWindows property="Caption">Windows</grpWindows>
+		<lblDesignerPosSaving property="Caption">Konum ve boyut kaydetme</lblDesignerPosSaving>
+		<cbDesignerWinSnap property="Caption">Pencereleri tut</cbDesignerWinSnap>
+		<cbDesignerSavePos property="Items">
+			<line idx="0">Kaydetme</line>
+			<line idx="1">Otomatik</line>
+			<line idx="2">Elle</line>
+		</cbDesignerSavePos>
+		<cbDesignerKeepLayout property="Caption">Standart düzeni koru</cbDesignerKeepLayout>
+		<cbDesignerKeepLayout property="Hint">Ana pencere oynatıldığında diğerlerinin konumunu bozma</cbDesignerKeepLayout>
+		<grpObjectTree property="Caption">Nesne ağacı</grpObjectTree>
+		<cbObjTreeAlwaysExpand property="Caption">Daima tam genişlet</cbObjTreeAlwaysExpand>
+		<cbObjTreeCaptionAsDescr property="Caption">By default use Caption instead Name</cbObjTreeCaptionAsDescr>
+		<lblActiveLang property="Caption">Seçili lisan: </lblActiveLang>
+		<LangList property="Columns">
+			<item idx="0">Lisan</item>
+			<item idx="1">Yerel isim</item>
+			<item idx="2">Yazar</item>
+			<item idx="3">Sürüm</item>
+		</LangList>
+		<btnCreateTemplate property="Caption">Şablon oluştur</btnCreateTemplate>
+		<btnDownloadHelpfile property="Caption">Yardım ı indir</btnDownloadHelpfile>
+		<AllCommandsList property="Columns">
+			<item idx="0">Tüm komutlar</item>
+		</AllCommandsList>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<btnOK property="Caption">Tamam</btnOK>
+		<btnApply property="Caption">Uygula</btnApply>
+		<mnuNew property="Caption">Yeni</mnuNew>
+		<mnuEdit property="Caption">Düzenle</mnuEdit>
+		<mnuDelete property="Caption">Sil</mnuDelete>
+		<mnuDuplicate property="Caption">Çoğalt</mnuDuplicate>
+		<mnuSetDef property="Caption">Varsayılan görünüm</mnuSetDef>
+	</form>
+	<form name="frmAdvGenerate">
+		<caption>Şuanki form hesaplama ayarları</caption>
+		<btnSaveGenerate property="Caption">&amp;&amp;Kaydet hesapla</btnSaveGenerate>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<grpTemplate property="Caption">Şablon</grpTemplate>
+		<btnManage property="Caption">Yönet</btnManage>
+		<tpOptions property="Caption">Ayarlar</tpOptions>
+		<cbCodegenPopulate property="Caption">Tüm kontrollerin olaylarını hesapla</cbCodegenPopulate>
+		<cbCodegenExpandVars property="Caption">%var% Değişlen olarak genişlet</cbCodegenExpandVars>
+		<cbCodegenOnEvent property="Caption">OnEvent kodunu hesapla</cbCodegenOnEvent>
+		<cbCodegenVarsForSet property="Caption">Variables instead '-1' when possible</cbCodegenVarsForSet>
+		<tpFormat property="Caption">Formatlama</tpFormat>
+		<grpIndent property="Caption">Indent code</grpIndent>
+		<lblInitial property="Caption">Başlangıç</lblInitial>
+		<lblIndentBy property="Caption">Indent char</lblIndentBy>
+		<lblCount property="Caption">Sayı</lblCount>
+		<cbSymbol property="Items">
+			<line idx="0">Sekme</line>
+			<line idx="1">Boşluk</line>
+		</cbSymbol>
+		<grpVariables property="Caption">Değişkenler</grpVariables>
+		<lblScope property="Caption">Kapsam</lblScope>
+		<cbScope property="Items">
+			<line idx="0">Belirlenmemiş</line>
+			<line idx="1">Küresel</line>
+			<line idx="2">Yerel</line>
+		</cbScope>
+		<btnSave property="Caption">Kaydet</btnSave>
+	</form>
+	<form name="frmObjectTree">
+		<caption>Nesne ağacı</caption>
+	</form>
+	<form name="frmImportDlg">
+		<caption>AU3 alımı</caption>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<btnProcess property="Caption">Ilerleme</btnProcess>
+		<btnLoad property="Caption">Yükle</btnLoad>
+		<btnClear property="Caption">Temizle</btnClear>
+		<mnuCut property="Caption">Kes</mnuCut>
+		<mnuCopy property="Caption">Kopyala</mnuCopy>
+		<mnuPaste property="Caption">Yapıştır</mnuPaste>
+		<mnuSelectAll property="Caption">Tümünü seç</mnuSelectAll>
+		<mnuClear property="Caption">Temizle</mnuClear>
+	</form>
+	<form name="frmOutput">
+		<caption>Çıkış penceresi</caption>
+		<btnOk property="Caption">Kapat</btnOk>
+	</form>
+	<form name="frmProjMan">
+		<caption>Proje yönetici</caption>
+		<mnuRenameFile property="Caption">Dosyayı adlandır</mnuRenameFile>
+		<mnuRenameFile property="Hint">Seçili dosyayı adlandır</mnuRenameFile>
+		<mnuScriptAdd property="Caption">Betik ekle</mnuScriptAdd>
+		<mnuScriptAdd property="Hint">Projeye betik ekle</mnuScriptAdd>
+		<mnuFormAdd property="Caption">Form ekle</mnuFormAdd>
+		<mnuFormAdd property="Hint">Şuanki beriğe form ekle</mnuFormAdd>
+		<mnuFormsExisting property="Caption">Form düzenleyici ekle</mnuFormsExisting>
+		<mnuFormsExisting property="Hint">Şuanki beriğin mevcut formuna ekle (Projeden dizaynırdakine açar)</mnuFormsExisting>
+		<mnuScriptSetMain property="Caption">Varsayılan yap</mnuScriptSetMain>
+		<mnuScriptSetMain property="Hint">Şuanki betiği varsayılan yap, this script will run when &quot;Run project&quot; command is executed</mnuScriptSetMain>
+		<mnuScriptRemove property="Caption">Betiği kaldır</mnuScriptRemove>
+		<mnuScriptRemove property="Hint">Projeden bu betiği kaldır (dosyalar silinmez)</mnuScriptRemove>
+		<mnuFormOpen property="Caption">Form aç</mnuFormOpen>
+		<mnuFormOpen property="Hint">Dizaynırda form aç</mnuFormOpen>
+		<mnuFormRemove property="Caption">Formı kaldır</mnuFormRemove>
+		<mnuFormRemove property="Hint">Şuanki betikten şuanki formu kaldır (dosyalar silinmez)</mnuFormRemove>
+		<mnuNotesEdit property="Caption">Düzeltme notu</mnuNotesEdit>
+		<mnuNotesEdit property="Hint">Proje düzenleme not penceresini aç</mnuNotesEdit>
+	</form>
+	<form name="frmAboutBox">
+		<caption>Hakkında</caption>
+		<lblHomePage property="Caption">Anasayfa</lblHomePage>
+		<lblVersion property="Caption">Sürüm</lblVersion>
+		<btnOK property="Caption">Tamam</btnOK>
+	</form>
+	<form name="frmDesignerCode">
+		<caption>Kod</caption>
+		<mnuCopyToClipboard property="Caption">&amp;Panoya kopyala</mnuCopyToClipboard>
+		<mnuSaveToFile property="Caption">&amp;Dosyaya kaydet</mnuSaveToFile>
+		<mnuInsertIntoScite property="Caption">&amp;Scite ye ekle</mnuInsertIntoScite>
+		<mnuCopySelection property="Caption">Seçimi kopyala</mnuCopySelection>
+		<mnuSelectAll property="Caption">Tümünü seç</mnuSelectAll>
+	</form>
+	<form name="frmTemplateEditor">
+		<caption>Kod şablonu düzenleyici</caption>
+		<lblName property="Caption">Şablon ismi</lblName>
+		<lblText property="Caption">Şablon metni</lblText>
+		<btnOK property="Caption">Tamam</btnOK>
+	</form>
+	<form name="frmImport">
+		<caption>Harici alım modülü</caption>
+		<ConvertersList property="Columns">
+			<item idx="0">Isim</item>
+			<item idx="1">Tanımlama</item>
+		</ConvertersList>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<btnOK property="Caption">Tamam</btnOK>
+	</form>
+	<form name="frmGalleryBrowser">
+		<caption>Form şablonları</caption>
+		<lblTGDescr property="Caption">Tanımlama:</lblTGDescr>
+		<btnTGOK property="Caption">Tamam</btnTGOK>
+		<btnTGCancel property="Caption">Vazgeç</btnTGCancel>
+		<btnTGHelp property="Caption">&amp;Yardım</btnTGHelp>
+		<tabGroups property="Tabs">
+			<line idx="0">Standart</line>
+		</tabGroups>
+		<lvItems property="Columns">
+			<item idx="0">Isim</item>
+			<item idx="1">Tanımlama</item>
+		</lvItems>
+		<mnuTGLargeIcons property="Caption">&amp;Büyük simgeleri göster</mnuTGLargeIcons>
+		<mnuTGSmallIcons property="Caption">&amp;Küçük simgeleri göster</mnuTGSmallIcons>
+		<mnuTGList property="Caption">&amp;Listeyi göster</mnuTGList>
+		<mnuTGDetails property="Caption">&amp;Detayları göster</mnuTGDetails>
+	</form>
+	<form name="frmPictureEditor">
+		<caption>Resim düzenleyici</caption>
+		<btnImgOk property="Caption">Tamam</btnImgOk>
+		<btnImgCancel property="Caption">Vazgeç</btnImgCancel>
+		<btnImgHelp property="Caption">Yardım</btnImgHelp>
+		<grpImgPicGroupBox property="Caption">Seçili resim</grpImgPicGroupBox>
+		<btnImgLoad property="Caption">&amp;Yükle...</btnImgLoad>
+		<btnImgClear property="Caption">&amp;Temizle</btnImgClear>
+		<cbFitImage property="Caption">Resmi oturt</cbFitImage>
+		<grpImages property="Caption">Dosyadaki resimler</grpImages>
+		<lblViewListAs property="Caption">Listeyi göster:</lblViewListAs>
+		<lblPath property="Caption">Uyarlı resim yolu</lblPath>
+		<btnTest property="Caption">Test</btnTest>
+	</form>
+	<form name="frmAXObjectEditor">
+		<caption>ActiveX nesne tarayıcı</caption>
+		<lblLoadStatus property="Caption">Durum: </lblLoadStatus>
+		<lblPath property="Caption">Yol:</lblPath>
+		<CompList property="Columns">
+			<item idx="0">Bileşen adı</item>
+		</CompList>
+		<btnOK property="Caption">Tamam</btnOK>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<btnHelp property="Caption">Yardım</btnHelp>
+	</form>
+	<form name="frmTreeViewEditor">
+		<caption>Ağaç görünümlü nesne düzenleyici</caption>
+		<grpTVItems property="Caption">Nesneler</grpTVItems>
+		<btnTVNew property="Caption">&amp;Yeni nesne</btnTVNew>
+		<btnTVNewSub property="Caption">&amp;Yeni altnesne</btnTVNewSub>
+		<btnTVDelete property="Caption">&amp;Sil</btnTVDelete>
+		<grpTVProperties property="Caption">Nesne özellikleri</grpTVProperties>
+		<lblSelectedIdx property="Caption">Seçili indeks:</lblSelectedIdx>
+		<lblTVText property="Caption">Metin:</lblTVText>
+		<lblImageIdx property="Caption">Reism indeksi:</lblImageIdx>
+		<btnTVCancel property="Caption">Vazgeç</btnTVCancel>
+		<btnTVApply property="Caption">&amp;Uygula</btnTVApply>
+		<btnTVOk property="Caption">Tamam</btnTVOk>
+		<btnTVHelp property="Caption">&amp;Yardım</btnTVHelp>
+	</form>
+	<form name="frmListViewEditor">
+		<caption>Liste görünümlü nesne düzenleyici</caption>
+		<grpLVItems property="Caption">Nesneler</grpLVItems>
+		<btnLVNew property="Caption">&amp;Yeni nesne</btnLVNew>
+		<btnLVDelete property="Caption">&amp;Sil</btnLVDelete>
+		<btnLVNewSub property="Caption">&amp;Yeni altnesne</btnLVNewSub>
+		<grpLVProperties property="Caption">Item Özellikler</grpLVProperties>
+		<lblLVCaption property="Caption">&amp;Metin:</lblLVCaption>
+		<lblImageIndex property="Caption">Resim indeksi:</lblImageIndex>
+		<cbAuto property="Caption">Autoindex</cbAuto>
+		<btnLVOk property="Caption">Tamam</btnLVOk>
+		<btnLVCancel property="Caption">Vazgeç</btnLVCancel>
+		<btnLVApply property="Caption">&amp;Uygula</btnLVApply>
+		<btnLVHelp property="Caption">&amp;Yardım</btnLVHelp>
+	</form>
+	<form name="frmCollectionEditor">
+		<strProperty property="Caption">Özellik</strProperty>
+		<btnAdd property="Hint">Nesne ekle</btnAdd>
+		<btnDelete property="Hint">Nesneyi sil</btnDelete>
+		<btnUp property="Hint">Yukarı taşı</btnUp>
+		<btnDown property="Hint">Aşağı taşı</btnDown>
+	</form>
+	<form name="frmEventEditor">
+		<caption>Olay düzenleyici</caption>
+		<grpNotify property="Caption">Kontrol bildirimi</grpNotify>
+		<lblNotifyState property="Caption">Şuanki bildirim: %s</lblNotifyState>
+		<grpEvent property="Caption">Kontrol olayı</grpEvent>
+		<lblEventState property="Caption">Şuanki olay: %s</lblEventState>
+		<rbEditFunc property="Caption">Bildir</rbEditFunc>
+		<rbNone property="Caption">Yok</rbNone>
+		<btnDefault property="Caption">Varsayılan</btnDefault>
+		<btnOK property="Caption">Tamam</btnOK>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+	</form>
+	<form name="frmTabOrder">
+		<caption>Sekme sırası düzenleyici</caption>
+		<btnOK property="Caption">Tamam</btnOK>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+	</form>
+	<form name="frmChooseScript">
+		<caption>Betik seç</caption>
+		<lblChooseHint property="Caption">Form &quot;%s&quot; you are trying to open is referenced in more then one script. Please choose the one you want to work with.</lblChooseHint>
+		<ScriptsList property="Columns">
+			<item idx="0">Betik ismi</item>
+			<item idx="1">Son değiştirme</item>
+		</ScriptsList>
+		<btnOK property="Caption">Tamam</btnOK>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+	</form>
+	<form name="frmImageListEditor">
+		<caption>Resimlistesi düzenleyici</caption>
+		<btnImgOk property="Caption">Tamam</btnImgOk>
+		<btnImgCancel property="Caption">Vazgeç</btnImgCancel>
+		<btnHelp property="Caption">Yardım</btnHelp>
+		<grpImages property="Caption">Listedeki resimler</grpImages>
+		<btnSingleAdd property="Caption">&amp;Tek ekle...</btnSingleAdd>
+		<btnMultiAdd property="Caption">&amp;Kütüphane ekle...</btnMultiAdd>
+		<btnImgRemove property="Caption">&amp;Kaldır</btnImgRemove>
+		<btnClear property="Caption">&amp;Listeyi temizle</btnClear>
+		<btnSave property="Caption">&amp;Kaydet</btnSave>
+	</form>
+	<form name="frmGraphicEditor">
+		<caption>Grafik düzenleyici</caption>
+		<mnuArrow property="Hint">Seçim</mnuArrow>
+		<btnLine property="Hint">Satır</btnLine>
+		<btnBezier property="Hint">Bezier</btnBezier>
+		<btnRectangle property="Hint">Dikdörtgen</btnRectangle>
+		<btnEllipse property="Hint">Elips</btnEllipse>
+		<btnPie property="Hint">Pasta</btnPie>
+		<btnDot property="Hint">Nokta</btnDot>
+		<btnPixel property="Hint">Piksel</btnPixel>
+		<mnuEdit property="Caption">Düzenle</mnuEdit>
+		<mnuCut property="Caption">Kes</mnuCut>
+		<mnuCopy property="Caption">Kopyala</mnuCopy>
+		<mnuPaste property="Caption">Yapıştır</mnuPaste>
+		<mnuClone property="Caption">Çoğalt</mnuClone>
+		<mnuDelete property="Caption">Sil</mnuDelete>
+		<mnuBringToFront property="Caption">Öne getir</mnuBringToFront>
+		<mnuSendToBack property="Caption">Arkaya gönder</mnuSendToBack>
+		<mnuPointInsert property="Caption">Kesişme gir</mnuPointInsert>
+		<mnuPointDelete property="Caption">Kesişmeyi kaldır</mnuPointDelete>
+		<mnuOptions property="Caption">Ayarlar</mnuOptions>
+		<mnuShowGrid property="Caption">Izgarayı göster</mnuShowGrid>
+		<mnuCreateNext property="Caption">Şuanki formatla yeni şekil göster</mnuCreateNext>
+		<btnCancel property="Caption">Vazgeç</btnCancel>
+		<btnOK property="Caption">Tamam</btnOK>
+		<strPoint property="Caption">Nokta</strPoint>
+		<strObjects property="Caption">Nesneler</strObjects>
+		<strTransparent property="Caption">Saydamlık</strTransparent>
+		<strAutomatic property="Caption">Otomatik</strAutomatic>
+		<strOtherColors property="Caption">Diğer renkler...</strOtherColors>
+		<strCustom property="Caption">Uyarla</strCustom>
+	</form>
+	<form name="frmMenuBuilder">
+		<caption>Menü dizaynır</caption>
+		<InsertItem property="Caption">&amp;Gir</InsertItem>
+		<DeleteItem property="Caption">&amp;Sil</DeleteItem>
+		<CreateSubmenu property="Caption">&amp;Altmanü oluştur</CreateSubmenu>
+	</form>
+	<form name="frmNotesEditor">
+		<caption>Not düzenleyici</caption>
+		<btnOK property="Caption">Tamam</btnOK>
+	</form>
+</language>

@@ -1,0 +1,1 @@
+..\thirdparty\autoit\AutoIt3.exe eccDiagnostics.au3

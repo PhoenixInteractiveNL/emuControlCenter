@@ -19,6 +19,8 @@
 				</Entries>
 				<!-- Sub Menu Entries -->
 				<SubEntries>
+					<Item posX = "0" posY = "19" name = "Recent geopende bestanden"/>
+
 					<Item posX = "1" posY = "9" name = "Kopiëren naar het klembord"/>
 					<Item posX = "1" posY = "10" name = "Insprong tekst"/>
 					<Item posX = "1" posY = "11" name = "Hoofdlettergebruik"/>
@@ -26,37 +28,41 @@
 					<Item posX = "1" posY = "13" name = "Markeren als commentaar"/>
 					<Item posX = "1" posY = "14" name = "Automatisch aanvullen"/>
 					<Item posX = "1" posY = "15" name = "Formaat"/>
+					<Item posX = "1" posY = "16" name = "Uitlijnen"/>
+					<Item posX = "1" posY = "17" name = "Plakken speciaal"/>
 
 					<Item posX = "2" posY = "16" name = "Alles markeren"/>
 					<Item posX = "2" posY = "17" name = "Markering wissen"/>
-					<Item posX = "2" posY = "18" name = "Ga naar begin markering"/>
-					<Item posX = "2" posY = "19" name = "Ga naar einde markering"/>
-					
+					<Item posX = "2" posY = "18" name = "Ga naar vorige markering"/>
+					<Item posX = "2" posY = "19" name = "Ga naar volgende markering"/>
+					<Item posX = "2" posY = "21" name = "Bladwijzers"/>
+
 					<Item posX = "3" posY = "4" name = "Niet-afdrukbare tekens"/>
 					<Item posX = "3" posY = "5" name = "In- en uitzoomen"/>
 					<Item posX = "3" posY = "6" name = "Vensterindeling"/>
-					
+
 					<Item posX = "3" posY = "16" name = "Sectie samenvouwen"/>
 					<Item posX = "3" posY = "17" name = "Sectie uitvouwen"/>
-					
+					<Item posX = "3" posY = "21" name = "Project"/>
+
 					<Item posX = "4" posY = "5" name = "Meer"/>
 					<Item posX = "4" posY = "5" posZ = "0" name = "Arabisch"/>
 					<Item posX = "4" posY = "5" posZ = "1" name = "Baltisch"/>
 					<Item posX = "4" posY = "5" posZ = "2" name = "Keltisch"/>
 					<Item posX = "4" posY = "5" posZ = "3" name = "Cyrillisch"/>
-					<Item posX = "4" posY = "5"  posZ = "4" name = "Centraal-Europees"/>
-					<Item posX = "4" posY = "5"  posZ = "5" name = "Chinees"/>
-					<Item posX = "4" posY = "5"  posZ = "6" name = "Oost-Europees"/>
-					<Item posX = "4" posY = "5"  posZ = "7" name = "Grieks"/>
-					<Item posX = "4" posY = "5"  posZ = "8" name = "Hebreeuws"/>
-					<Item posX = "4" posY = "5"  posZ = "9" name = "Japans"/>
-					<Item posX = "4" posY = "5"  posZ = "10" name = "Koreaans"/>
-					<Item posX = "4" posY = "5"  posZ = "11" name = "Noord-Europees"/>
-					<Item posX = "4" posY = "5"  posZ = "12" name = "Thai"/>
-					<Item posX = "4" posY = "5"  posZ = "13" name = "Turks"/>
-					<Item posX = "4" posY = "5"  posZ = "14" name = "West-Europees"/>
-					<Item posX = "4" posY = "5"  posZ = "15" name = "Vietnamees"/>
-					
+					<Item posX = "4" posY = "5" posZ = "4" name = "Centraal-Europees"/>
+					<Item posX = "4" posY = "5" posZ = "5" name = "Chinees"/>
+					<Item posX = "4" posY = "5" posZ = "6" name = "Oost-Europees"/>
+					<Item posX = "4" posY = "5" posZ = "7" name = "Grieks"/>
+					<Item posX = "4" posY = "5" posZ = "8" name = "Hebreeuws"/>
+					<Item posX = "4" posY = "5" posZ = "9" name = "Japans"/>
+					<Item posX = "4" posY = "5" posZ = "10" name = "Koreaans"/>
+					<Item posX = "4" posY = "5" posZ = "11" name = "Noord-Europees"/>
+					<Item posX = "4" posY = "5" posZ = "12" name = "Thai"/>
+					<Item posX = "4" posY = "5" posZ = "13" name = "Turks"/>
+					<Item posX = "4" posY = "5" posZ = "14" name = "West-Europees"/>
+					<Item posX = "4" posY = "5" posZ = "15" name = "Vietnamees"/>
+
 					<Item posX = "6" posY = "4" name = "Importeren"/>
 				</SubEntries>
 				<!-- all menu item -->
@@ -106,7 +112,7 @@
 					<Item id = "42021" name = "Macro &amp;afspelen"/>
 					<Item id = "42022" name = "Markeren als commentaar (vervangen)"/>
 					<Item id = "42023" name = "Markeren als commentaar (blok)"/>
-					<Item id = "42024" name = "Ruimte voor regeleinden verwijderen"/>
+					<Item id = "42024" name = "Ruimte voor regeleinden wissen"/>
 					<Item id = "42025" name = "Macro opsl&amp;aan"/>
 					<Item id = "42026" name = "Tekstrichting rechts-links"/>
 					<Item id = "42027" name = "Tekstrichting links-rechts"/>
@@ -119,8 +125,22 @@
 					<Item id = "42034" name = "Reeks bewerken..."/>
 					<Item id = "42035" name = "Markeren als commentaar (toevoegen)"/>
 					<Item id = "42036" name = "Markering wissen"/>
-					<Item id = "42040" name = "Alle recentelijke bestanden openen"/>
+					<Item id = "42037" name = "Tekstkolom..."/>
+					<Item id = "42038" name = "HTML-indeling invoegen"/>
+					<Item id = "42039" name = "RTF-indeling invoegen"/>
+					<Item id = "42040" name = "Alle recentelijk geopende bestanden openen"/>
 					<Item id = "42041" name = "Bestandsgeschiedenis wissen"/>
+					<Item id = "42042" name = "Insprong wissen"/>
+					<Item id = "42043" name = "Insprong en ruimte voor regeleinden wissen"/>
+					<Item id = "42044" name = "Regeleinden omzetten in spaties"/>
+					<Item id = "42045" name = "Regeleinden en overbodige witruimte wissen"/>
+					<Item id = "42046" name = "Tabs omzetten in spaties"/>
+					<Item id = "42047" name = "Spaties omzetten in tabs"/>
+					<Item id = "42048" name = "Kopiëren (Binair)"/>
+					<Item id = "42049" name = "Knippen (Binair)"/>
+					<Item id = "42050" name = "Plakken (Binair)"/>
+					<Item id = "42051" name = "Speciale tekens"/>
+					<Item id = "42052" name = "Klembord"/>
 
 					<Item id = "43001" name = "&amp;Zoeken..."/>
 					<Item id = "43002" name = "&amp;Volgende zoeken"/>
@@ -134,8 +154,8 @@
 					<Item id = "43010" name = "Vorig&amp;e zoeken"/>
 					<Item id = "43011" name = "&amp;Snel zoeken..."/>
 					<Item id = "43013" name = "Zoeken in &amp;bestanden"/>
-					<Item id = "43014" name = "Volgende zoeken (globaal)"/>
-					<Item id = "43015" name = "Vorige zoeken (globaal)"/>
+					<Item id = "43014" name = "Volgende zoeken (afzonderlijk)"/>
+					<Item id = "43015" name = "Vorige zoeken (afzonderlijk)"/>
 					<Item id = "43016" name = "Zoekterm markeren"/>
 					<Item id = "43017" name = "Markering wissen"/>
 					<Item id = "43018" name = "Aan bladwijzer gekoppelde regels knippen"/>
@@ -168,8 +188,12 @@
 					<Item id = "43045" name = "Gevonden resultaten"/>
 					<Item id = "43046" name = "Volgende zoekterm"/>
 					<Item id = "43047" name = "Vorige zoekterm"/>
-					<Item id = "43048" name = "Selecteren en volgende zoeken"/>
-					<Item id = "43049" name = "Selecteren en vorige zoeken"/>
+					<Item id = "43048" name = "Markeren en volgende zoeken"/>
+					<Item id = "43049" name = "Markeren en vorige zoeken"/>
+					<Item id = "43050" name = "Bladwijzers omkeren"/>
+					<Item id = "43051" name = "Regels zonder bladwijzer wissen"/>
+					<Item id = "43052" name = "Zoeken naar karakter in bereik..."/>
+
 					<Item id = "44009" name = "Interface verbergen"/>
 					<Item id = "44010" name = "Gegevensstructuur samenvouwen"/>
 					<Item id = "44011" name = "Syntaxismarkering ontwerpen..."/>
@@ -190,7 +214,13 @@
 					<Item id = "44036" name = "Horizontaal scrollen koppelen"/>
 					<Item id = "44041" name = "Terugloopmarkering weergeven"/>
 					<Item id = "44042" name = "Regels verbergen"/>
+					<Item id = "44049" name = "Samenvatting..."/>
 					<Item id = "44072" name = "Actieve deelvenster wisselen"/>
+
+					<Item id = "44081" name = "Project Panel 1"/>
+					<Item id = "44082" name = "Project Panel 2"/>
+					<Item id = "44083" name = "Project Panel 3"/>
+
 					<Item id = "45001" name = "Windows-indeling"/>
 					<Item id = "45002" name = "Unix-indeling"/>
 					<Item id = "45003" name = "Mac-indeling"/>
@@ -221,6 +251,10 @@
 					<Item id = "48009" name = "Sneltoetsen..."/>
 					<Item id = "48011" name = "Voorkeuren..."/>
 
+					<Item id = "48016" name = "Macro's wijzigen ..."/>
+					<Item id = "48017" name = "Opdrachten wijzigen..."/>
+					<Item id = "48018" name = "Contextmenu wijzigen"/>
+
 					<Item id = "49000" name = "&amp;Uitvoeren..."/>
 
 					<Item id = "50000" name = "Functies aanvullen"/>
@@ -250,7 +284,7 @@
 			</TabBar>
 		</Menu>
 		<Dialog>
-			<Find title = "" titleFind = "Zoeken" titleReplace = "Vervangen" titleFindInFiles = "Zoeken in bestanden">
+			<Find title = "" titleFind = "Zoeken" titleReplace = "Vervangen" titleFindInFiles = "Zoeken in bestanden" titleMark = "Markeren">
 				<Item id = "1" name = "&amp;Volgende zoeken"/>
 				<Item id = "2" name = "Sluiten"/>
 				<Item id = "1603" name = "Losse &amp;woorden"/>
@@ -289,6 +323,17 @@
 				<Item id = "1687" name = "Bij focusverlies"/>
 				<Item id = "1688" name = "Altijd"/>
 			</Find>
+			<FindCharsInRange title = "Karakter zoeken in bereik...">
+				<Item id = "2910" name = "&amp;Volgende zoeken"/>
+				<Item id = "2" name = "Sluiten"/>
+				<Item id = "2901" name = "Extended ASCII (128-255)"/>
+				<Item id = "2902" name = "ASCII (0-128)"/>
+				<Item id = "2903" name = "Aangepast:"/>
+				<Item id = "2906" name = "Omhoog"/>
+				<Item id = "2907" name = "Omlaag"/>
+				<Item id = "2908" name = "Richting"/>
+				<Item id = "2909" name = "Documenteinde negeren"/>
+			</FindCharsInRange>
 			<Run title = "Uitvoeren">
 				<Item id = "1" name = "OK"/>
 				<Item id = "2" name = "Annuleren"/>
@@ -367,6 +412,9 @@
 				<Item id = "20009" name = "Extensies:"/>
 				<Item id = "20011" name = "Transparantie"/>
 				<Item id = "20012" name = "Kapitaal als onderkast"/>
+
+				<Item id = "20015" name = "Exporteren..."/>
+				<Item id = "20016" name = "Importeren..."/>
 				<Folder title = "Algemeen">
 					<Item id = "21101" name = "Opmaak"/>
 					<Item id = "21201" name = "Markering sectie openen"/>
@@ -429,7 +477,9 @@
 					<Item id = "6120" name = "Verticale tabs"/>
 					<Item id = "6121" name = "Menubalk"/>
 					<Item id = "6122" name = "Verbergen (Tonen met Alt of F10)"/>
-					<Item id = "6123" name = "Taal"/> 
+					<Item id = "6123" name = "Taal"/>
+					<Item id = "6125" name = "Documentenlijst"/>
+					<Item id = "6126" name = "Documentenlijst weergeven"/>
 				</Global>
 				<Scintillas title = "Weergave">
 					<Item id = "6201" name = "Gegevensstructuur"/>
@@ -452,14 +502,16 @@
 					<Item id = "6222" name = "100"/>
 					<Item id = "6224" name = "Meervoudig bewerken"/>
 					<Item id = "6225" name = "Meervoudig bewerken inschakelen"/>
+					<Item id = "6226" name = "Verborgen"/>
+					<Item id = "6227" name = "Automatische terugloop"/>
+					<Item id = "6228" name = "Standaard"/>
+					<Item id = "6229" name = "Uitlijnen"/>
+					<Item id = "6230" name = "Inspringen"/>
 				</Scintillas>
 				<MISC title = "Overige">
-					<Item id = "6114" name = "Wisselen tussen documenten activeren"/>
+					<Item id = "6114" name = "Wisselen tussen documenten inschakelen"/>
 					<Item id = "6115" name = "Insprong automatisch toepassen"/>
 					<Item id = "6117" name = "Volgorde van wisselen onthouden"/>
-					<Item id = "6304" name = "Recent geopende bestanden"/>
-					<Item id = "6305" name = "Niet controleren op wijzigingen"/>
-					<Item id = "6306" name = "Maximaal aantal bestanden in lijst:"/>
 					<Item id = "6307" name = "Wijzigingen detecteren"/>
 					<Item id = "6308" name = "Minimaliseren naar systeemvak"/>
 					<Item id = "6309" name = "Werkomgeving bewaren"/>
@@ -468,10 +520,10 @@
 					<Item id = "6318" name = "Hyperlinks"/>
 					<Item id = "6319" name = "Hyperlinks activeren"/>
 					<Item id = "6320" name = "Hyperlinks niet onderstrepen"/>
-					<Item id = "6322" name = "Bestandsextensie sessie:"/> 
+					<Item id = "6322" name = "Bestandsextensie sessie:"/>
 					<Item id = "6323" name = "Notepad++ automatisch bijwerken"/>
 					<Item id = "6324" name = "Wisselen tussen documenten (Ctrl+Tab)"/>
-					<Item id = "6325" name = "Ga naar laatste regel na wijziging"/>
+					<Item id = "6325" name = "Ga naar de laatste regel na wijziging"/>
 					<Item id = "6326" name = "Intelligente syntaxmarkering toepassen"/>
 					<Item id = "6327" name = "Secties markeren"/>
 					<Item id = "6328" name = "Attributen markeren"/>
@@ -496,6 +548,15 @@
 					<Item id = "6415" name = "Laatst geopende bestandsmap"/>
 					<Item id = "6419" name = "Nieuw document"/>
 					<Item id = "6420" name = "ANSI-codering negeren"/>
+
+					<Item id = "-1" name = "Menu-indeling"/>
+					<Item id = "6304" name = "Recent geopende bestanden"/>
+					<Item id = "6305" name = "Niet controleren op wijzigingen"/>
+					<Item id = "6306" name = "Maximaal aantal bestanden in lijst:"/>
+					<Item id = "6424" name = "Submenu activeren"/>
+					<Item id = "6425" name = "Bestandsnaam weergeven"/>
+					<Item id = "6426" name = "Bestandslocatie weergeven"/>
+					<Item id = "6427" name = "Maximaal aantal karakters:"/>
 				</NewDoc>
 				<LangMenu title = "Syntaxismarkering">
 					<Item id = "6301" name = "Tabs"/>
@@ -541,7 +602,7 @@
 					<Item id = "6317" name = "Reservekopie per wijziging"/>
 					<Item id = "6801" name = "Reservekopiëen"/>
 					<Item id = "6803" name = "Map:"/>
-					<Item id = "6804" name = "Reservekopiëen in standaardmap plaatsen"/>
+					<Item id = "6804" name = "Reservekopieën in standaardmap plaatsen"/>
 					<Item id = "6807" name = "Automatisch aanvullen"/>
 					<Item id = "6808" name = "Automatisch aanvullen inschakelen"/>
 					<Item id = "6809" name = "Functies aanvullen"/>
@@ -568,5 +629,16 @@
 				<Item id = "8006" name = "Macro selecteren:"/>
 			</MultiMacro>
 		</Dialog>
+		<MessageBox>
+			<ContextMenuXmlEditWaring title = "Contextmenu wijzigen" message = "Met het wijzigen van het contextmenu kunt u Notepad++ aan uw persoonlijke voorkeur aanpassen.&#xD;&#xD;Wijzigingen worden zichtbaar na het opnieuw starten van de applicatie."/>
+			<NppHelpAbsentWaring title="Offline documentatie ontbreekt" message = "&#xD; is niet gevonden.&#xD;&#xD;Bezoek de website om de online documentatie te raadplegen."/>
+			<SaveCurrentModifWaring title = "Bestand is gewijzigd" message = "Bestand is gewijzigd; sla uw werk op om wijzigingen niet te verliezen.&#xD;&#xD;Doorgaan?"/>
+			<LoseUndoAbilityWaring title = "Bewerking ongedaan maken niet mogelijk" message="Deze bewerking kan niet ongedaan worden gemaakt.&#xD;&#xD;Doorgaan?"/>
+			<CannotMoveDoc title="Bestand verplaatsen niet mogelijk" message="Bestand is gewijzigd; sla uw werk op en probeer het opnieuw."/>
+			<DocReloadWarning title="Bestand herladen" message="Weet u zeker dat u het huidige bestand opnieuw wilt openen?&#xD;&#xD;U verliest al uw werk!"/>
+			<FileLockedWarning title="Bestand opslaan mislukt" message="Bestand is mogelijk in gebruik door een andere programma.&#xD;&#xD;Sluit andere programma's en probeer het opnieuw."/>
+			<FileAlreadyOpenedInNpp title="Bestand is al geopened" message="Bestand is al geopened in Notepad++."/>
+			<DeleteFileFailed title="Bestand verwijderen mislukt" message="Bestand verwijderen niet mogelijk."/>
+		</MessageBox>
 	</Native-Langue>
 </NotepadPlus>

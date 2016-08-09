@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Readme</title>
+</head>
+
+<body>
+<h3>How to create your own language file for Koda</h3>
+
+<ol>
+	<li><i>If you made translation first time, you can skip this step and use template included in this archive.</i> <br>Run Koda, go to <b>Options -> Language</b>. Check <b>Active language</b> - your new template will be based on this language. Then click <b>Create template</b> button - new template named <b>template_xxx.xml</b> (where xxx - code of currently selected language) will be created in the <b>Language</b> subfolder under Koda's folder.<br><br>
+	<li>Now you can translate sentences in <b>template_xxx.xml</b> file. You can use some XML editor or just text editor like notepad. If you will be use plain text editor, note <font color="#FF0000"><b>&amp;amp;</b></font> entity - this designate symbol <font color="#FF0000"><b>&amp;</b></font>, which used for hotkeys.
+  <br><i>Note: Only XML text should be translated, not properties!</i><br><br>
+	<li>Edit name, nativename, version, author of template.<br><br>
+  <li>Now you ready to add country icon. Run <b>add_icon.au3</b> script, in first field choose your translated template, in second - your country flag icon from "Country_icons" subfolder, in third - name of your translation, this should be in form <b>lang_###.xml</b>, where <b>###</b> - three-letter code of your language. Now you ready for conversion - click <b>Save</b> button and you done! This step needed only once, when saving template in the future, Koda will save icon as well.<br><br>
+	<li>Copy language file to the <b>Language</b> subfolder, run Koda, go to <b>Options -> Language</b>, choose new language and test it!
+</ol>
+</body>
+</html>

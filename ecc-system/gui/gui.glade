@@ -849,9 +849,9 @@
                 <child>
                   <widget class="GtkMenu" id="mTopTool_menu">
                     <child>
-                      <widget class="GtkImageMenuItem" id="mTopToolEccTheme">
+                      <widget class="GtkImageMenuItem" id="mTopToolEccGtkts">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">Theme Select</property>
+                        <property name="label" translatable="yes">GTK Theme Select</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_item2_activate"/>
                         <child internal-child="image">
@@ -864,67 +864,55 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkImageMenuItem" id="mTopToolEccBugreport">
+                      <widget class="GtkImageMenuItem" id="mTopToolEccDiagnostics">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">Bugreport</property>
+                        <property name="label" translatable="yes">ECC Diagnostics</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_send_bugreport1_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="image15276">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-stop</property>
+                            <property name="stock">gtk-zoom-fit</property>
                             <property name="icon_size">1</property>
                           </widget>
                         </child>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator42">
+                      <widget class="GtkImageMenuItem" id="mTopDatDFU">
                         <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopImage">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Image</property>
+                        <property name="label" translatable="yes">Manual Datfile Updater (DFU)</property>
                         <property name="use_underline">True</property>
-                        <child>
-                          <widget class="GtkMenu" id="mTopImage_menu">
-                            <child>
-                              <widget class="GtkImageMenuItem" id="mTopImageConvert">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">Image Converter</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_image_converter_activate"/>
-                                <child internal-child="image">
-                                  <widget class="GtkImage" id="menu-item-image46">
-                                    <property name="visible">True</property>
-                                    <property name="stock">gtk-refresh</property>
-                                  </widget>
-                                </child>
-                              </widget>
-                            </child>
-                            <child>
-                              <widget class="GtkImageMenuItem" id="mTopImageIPC">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">ImagePackCreator (IPC)</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_image_ipc_activate"/>
-                                <child internal-child="image">
-                                  <widget class="GtkImage" id="menu-item-image47">
-                                    <property name="visible">True</property>
-                                    <property name="stock">gtk-convert</property>
-                                  </widget>
-                                </child>
-                              </widget>
-                            </child>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image49">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-refresh</property>
+                            <property name="icon_size">1</property>
                           </widget>
                         </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopAutoIt3GUI">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Create Autoit3 GUI (Koda)</property>
+                        <property name="use_underline">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image15277">
+                          <widget class="GtkImage" id="menu-item-image54">
+                            <property name="stock">gtk-find-and-replace</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopImageIPC">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">ImagePackCreator (IPC)</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image57">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-select-color</property>
-                            <property name="icon_size">1</property>
+                            <property name="stock">gtk-convert</property>
                           </widget>
                         </child>
                       </widget>
@@ -1072,6 +1060,52 @@
                   <widget class="GtkImage" id="image15284">
                     <property name="visible">True</property>
                     <property name="stock">gtk-connect</property>
+                    <property name="icon_size">1</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkImageMenuItem" id="mTopDeveloper">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Developer</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="mTopDeveloper_menu">
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopDeveloperSQL">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">SQLite Browser</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image52">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-find</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopDeveloperGUI">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Glade GUI Editor</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image56">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-fullscreen</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child internal-child="image">
+                  <widget class="GtkImage" id="menu-item-image53">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-preferences</property>
                     <property name="icon_size">1</property>
                   </widget>
                 </child>

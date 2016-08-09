@@ -1,14 +1,14 @@
-; Platform       	: exelvision
-; Script for     	: dcexel
-; Script version 	: v1.0.0.1
-; Last changed   	: 2010.02.08
+; Platform          : exelvision
+; Script for        : dcexel
+; Script version    : v1.0.0.2
+; Last changed      : 2011.05.06
 ;
 ;
-; Author :  te_lanus (ECC forum member) & Phoenix
+; Author :  te_lanus (ECC forum member) & Phoenix ; Vicman (rewritten)
 ;
 ; NOTES:
-;
-;
+; You need the 'ExelBASIC+ (198x)(Exelvision)(FR).rom' (TOSEC-Name)
+; copy the rom into your EXL100 unpack-folder, and rename the rom to 'eb.rom'
 ;
 
 ; ==============================================================================
@@ -34,119 +34,143 @@ If Not WinActive(" DCEXEL périphériques","") Then WinActivate(" DCEXEL périphéri
 WinWaitActive(" DCEXEL périphériques","")
 
 If $eccFileRomFileIsPacked = "1" Then
-	$coord = WinGetPos(" DCEXEL périphériques")
-	If $eccFileRomExtension = "rom" Then
-	; Cartouche
-		MouseMove($coord[0] + 370, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send($RomFile, 1)
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   $coord = WinGetPos(" DCEXEL périphériques")
+   
+   If $eccFileRomExtension = "rom" Then
+      If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+    endif
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 70 )    ; load rom
+      Send($RomFile, 1)
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+   
 
-	ElseIf $eccFileRomExtension = "cram" Then
-	; Exelmemoire
-		MouseMove($coord[0] + 370, $coord[1]+ 100)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send($RomFile, 1)
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   ElseIf $eccFileRomExtension = "cram" Then
+      If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+    endif
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 75 )    ; unload rom
+       MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 145 )   ; load cram
+      Send($RomFile, 1)
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      
 
-	; Disque A
-	ElseIf $eccFileRomExtension = "fd" Then
-		MouseMove($coord[0] + 440, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		MouseMove($coord[0] + 370, $coord[1]+ 130)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send($RomFile, 1)
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 360 )
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   ElseIf $eccFileRomExtension = "fd" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="FFFFFF" Then  ; check if disk drive A: is connected...if not, do it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+   endif
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 75 )    ; unload rom
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 180 )   ; load disk A
+      Send($RomFile, 1)
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      sleep (2000)
+      AutoItSetOption("SendKeyDownDelay", 100)  
+      Send(StringLower($eccMetaInfoString))          ; type command on emu-screen...example for game soko.fd = exec soko
+      Send("{ENTER}")
 
-	; Cassette
-	ElseIf $eccFileRomExtension = "k7" Then
-		MouseMove($coord[0] + 440, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		MouseMove($coord[0] + 370, $coord[1]+ 250)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send($RomFile, 1)
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 400 )
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
-
-	EndIf
+      
+   ElseIf $eccFileRomExtension = "k7" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then  ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+   endif
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 409 ),6)="FFFFFF" Then  ; check if Tape is connected...if not, do it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 409 )
+   endif
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 70 )    ; load exelbasic+.rom (eb.rom)
+      sleep (300)
+       Send("eb.rom")                                                
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 250 )   ; load cassette
+      Send($RomFile, 1)
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      sleep (1000)
+      AutoItSetOption("SendKeyDownDelay", 150)
+      Send("load{rshift}31{rshift}3{ENTER}")                        ; type command on emu-screen....command is always : load"1" [enter]
+      sleep (2000)
+      Send("run")
+      Send("{ENTER}")
+      
+      
+   EndIf
 Else
-	$coord = WinGetPos(" DCEXEL périphériques")
-	If $eccFileRomExtension = "rom" Then
-	; Cartouche
-		MouseMove($coord[0] + 370, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   $coord = WinGetPos(" DCEXEL périphériques")
+   If $eccFileRomExtension = "rom" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+    endif
+      MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 70 )    ; load rom
+      Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+   
 
-	ElseIf $eccFileRomExtension = "cram" Then
-	; Exelmemoire
-		MouseMove($coord[0] + 370, $coord[1]+ 100)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   ElseIf $eccFileRomExtension = "cram" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+    endif
+      MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 75 )    ; unload rom
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 145 )   ; load cram
+      Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      
 
-	; Disque A
-	ElseIf $eccFileRomExtension = "fd" Then
-		MouseMove($coord[0] + 440, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		MouseMove($coord[0] + 370, $coord[1]+ 130)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 360 )
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+   ElseIf $eccFileRomExtension = "fd" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="FFFFFF" Then  ; check if disk drive A: is connected...if not, do it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+   endif
+      MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 75 )    ; unload rom
+      MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 180 )   ; load disk A
+      Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      sleep (2000)
+      AutoItSetOption("SendKeyDownDelay", 100)  
+      Send(StringLower($eccMetaInfoString))          ; type command on emu-screen...example for game soko.fd = exec soko
+      Send("{ENTER}")
 
-	; Cassette
-	ElseIf $eccFileRomExtension = "k7" Then
-		MouseMove($coord[0] + 440, $coord[1]+ 70)
-		MouseClick ( "primary" )
-		MouseMove($coord[0] + 370, $coord[1]+ 250)
-		MouseClick ( "primary" )
-		Send("{ENTER}")
-		Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-		Send("{ENTER}")
-		MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 400 )
-		MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 450 )
-		Send("{ALT}")
-		Send("{DOWN 8}")
-		Send("{ENTER}")
+      
+   ElseIf $eccFileRomExtension = "k7" Then
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 370 ),6)="000000" Then  ; check if disk drive A: is connected...if so, disable it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 370 )
+   endif
+   If Hex(PixelGetColor( $coord[0] + 324, $coord[1]+ 409 ),6)="FFFFFF" Then  ; check if Tape is connected...if not, do it
+      MouseClick ( "primary",  $coord[0] + 324, $coord[1]+ 409 )
+   endif
+       MouseClick ( "primary",  $coord[0] + 440, $coord[1]+ 145 )   ; unload cram
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 70 )    ; load exelbasic+.rom (eb.rom)
+      sleep (300)
+      Send("eb.rom")                                                
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 370, $coord[1]+ 250 )   ; load cassette
+      Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+      Send("{ENTER}")
+      MouseClick ( "primary",  $coord[0] + 345, $coord[1]+ 480 )   ; send hard reset
+      MouseClick ( "primary",  $coord[0] + 460, $coord[1]+ 480 )   ; send o.k.
+      sleep (1000)
+      AutoItSetOption("SendKeyDownDelay", 150)
+      Send("load{rshift}31{rshift}3{ENTER}")                        ; type command on emu-screen....command is always : load"1" [enter]
+      sleep (2000)
+      Send("run")
+      Send("{ENTER}")
 
-	EndIf
+   EndIf
 EndIf
 
 ; ------------------------------------------------------------------------------

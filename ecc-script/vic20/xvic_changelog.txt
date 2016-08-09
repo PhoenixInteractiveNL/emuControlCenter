@@ -1,0 +1,4 @@
+v2.1.0.0 (Phoenix)
+- Fixed: The script can now determine the right memorysetting when the romfile is unpacked to a TEMP folder (using Prginfo).
+- Fixed: Now displays correctly the path to 'Prginfo.exe' when this program is not found.
+- Improved: The versionnumer of 'Prginfo.exe' in the script isn't needed anymore (less script maintenance).

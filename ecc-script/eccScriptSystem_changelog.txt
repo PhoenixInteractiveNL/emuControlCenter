@@ -1,3 +1,13 @@
+v1.2.0.5
+- Added '$eccFileRomRegion' to use the roms region setting in a script (given as english language)
+  Possible regions: Asia, Brazil, Europe, Hispanic, Japan, USA, World, Australia, USA-Europe, USA-Japan
+
+v1.2.0.0
+- Added 8.3 Dosfile names on unpacked ROM files when 8.3 is enabled in ECC config! (only affects the FILEname of the ROM)
+
+v1.1.0.6
+- Added an extra 'flag' in the function 'EmuWindowControl' to choose if the emulator should startup too.
+
 v1.1.0.5
 - Fixed an issue where Windows could not find some emulators through the shell commandline due to a trailing space. (Phoenix)
 

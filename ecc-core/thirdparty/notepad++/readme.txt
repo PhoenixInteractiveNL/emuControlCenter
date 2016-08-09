@@ -23,7 +23,10 @@ Web sites:
 ***********
 
 Notepad++ official site:
-	http://notepad-plus.sourceforge.net/
+	http://notepad-plus-plus.org/
+
+Notepad++ online document site:
+	http://npp-community.tuxfamily.org/
 
 Notepad++ project site:
 	http://sourceforge.net/projects/notepad-plus/
@@ -32,13 +35,11 @@ Notepad++ wiki:
 	http://sourceforge.net/apps/mediawiki/notepad-plus/index.php?title=Main_Page
 
 Notepad++ support:
-	http://sourceforge.net/projects/notepad-plus/support
-	
-Notepad++ channel:
-	irc://irc.freenode.net:6667/notepad++
+	http://sourceforge.net/projects/notepad-plus/forums
 
 
-Notepad++ team:
-***************
+Author:
+*******
 
-http://sourceforge.net/project/memberlist.php?group_id=95717
+Don Ho <don.h@free.fr>
+	http://notepad-plus-plus.org/author

@@ -118,10 +118,10 @@ $i18n['menuTop'] = array(
 	/* TOOLS */
 	'mTopTool' =>
 		"Tools",
-	'mTopToolEccTheme' =>
-		"Theme Select (sélectionner un thème)",
-	'mTopToolEccBugreport' =>
-		"Bugreport (envoyer le rapport d'erreur)",
+	'mTopToolEccGtkts' =>
+		"GTK Theme Select (sélectionner un thème)",
+	'mTopToolEccDiagnostics' =>
+	    "ECC Diagnostics (envoyer le rapport d'erreur)",
 
 	/* HELP */
 	'mTopHelp' =>
@@ -207,5 +207,9 @@ $i18n['menuTop'] = array(
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
 		'ImagePackCreator (IPC)',
+
+	/* 1.1 WIP 06 DFU */
+	'mTopDatDFU' =>
+		'Manual DatFile Updater (DFU)',
 );
 ?>

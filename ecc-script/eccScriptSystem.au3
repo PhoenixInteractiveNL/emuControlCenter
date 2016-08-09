@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.1.0.5 (2010.02.11)
+; Version: 1.2.0.5 (2012.01.15)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -32,6 +32,7 @@ Global $eccMetaInfoString =				IniRead("..\eccScriptRom.dat", "META", "info_stri
 Global $eccFileRomCrc32 = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_crc32", "")
 Global $eccFileRomFile = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_file", "")
 Global $eccFileRomPath = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_path", "")
+Global $eccFileRomRegionNr = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_region", "")
 Global $eccFileRomFilePacked = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_file_packed", "")
 Global $eccFileRomNamePlain = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_name_plain", "")
 Global $eccFileRomExtension = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_extension", "")
@@ -107,6 +108,20 @@ If StringLower($eccFileRomFileExtension) = "7z" Then $eccFileRomFileIsPacked = "
 If StringLower($eccFileRomFileExtension) = "7zip" Then $eccFileRomFileIsPacked = "1"
 If StringLower($eccFileRomFileExtension) = "rar" Then $eccFileRomFileIsPacked = "1"
 
+; $eccFileRomRegion (variable for the region of the selected ROM (in English language) (Phoenix)
+; ============================================================
+$eccFileRomRegion = ""
+If $eccFileRomRegionNr = "1" Then $eccFileRomRegion = "Asia"
+If $eccFileRomRegionNr = "2" Then $eccFileRomRegion = "Brazil"
+If $eccFileRomRegionNr = "3" Then $eccFileRomRegion = "Europe"
+If $eccFileRomRegionNr = "4" Then $eccFileRomRegion = "Hispanic"
+If $eccFileRomRegionNr = "5" Then $eccFileRomRegion = "Japan"
+If $eccFileRomRegionNr = "6" Then $eccFileRomRegion = "USA"
+If $eccFileRomRegionNr = "7" Then $eccFileRomRegion = "World"
+If $eccFileRomRegionNr = "8" Then $eccFileRomRegion = "Australia"
+If $eccFileRomRegionNr = "9" Then $eccFileRomRegion = "USA-Europe"
+If $eccFileRomRegionNr = "10" Then $eccFileRomRegion = "USA-Japan"
+
 ;[IntelliX]
 ; This subroutine uses the ECC config variables and applies them automaticly.
 ; it leaves original parameters intact and creates 2 new variables:
@@ -126,6 +141,15 @@ If $eccEmuNoExtension = "1" Then $RomFile = $eccFileRomNamePlain
 If $eccEmuExecuteInEmufolder = "1" Then $RomPath = $eccEmuEmulatorPath
 ; Autounpack active?, then set rompath to the auto unpack folder (overrides execute in emulator folder)
 If $eccEmuEnableZipUnpackActive = "1" Then $RomPath = $eccFileEccUnpackedPath
+
+; Use 8.3 Dosfile names on unpacked files? (only affects the FILEname of the ROM)
+If $eccFileRomFileIsPacked = "1" And $eccEmuWin8char = "1" Then
+	$RomFile = FileGetShortName($RomPath & $eccFileRomFilePacked)
+	$RomFileDivided = Stringsplit($RomFile, "\")
+	$RomFileArray = Ubound($RomFileDivided) - 1 ; The part wich contains the filename
+	$RomFile = $RomFileDivided[$RomFileArray]
+EndIf
+
 ; Use .cue file if available (detect if the .cue file exist and use it if available) (overrides filename only)
 If $eccEmuUseCueFile = "1" Then
 	If FileExists($RomPath & $eccFileRomNamePlain & ".cue") Then
@@ -139,7 +163,6 @@ If $eccEmuFilenameOnly <> "1" Then $RomFile = $RomPath & $RomFile
 ; Escape? (") (quotes)
 If $eccEmuEscape = "1" Then $RomFile = Chr(34) & $RomFile & Chr(34)
 ; ============================================================
-
 
 ; ============================================================
 ; This part contains basic settings.
@@ -156,14 +179,14 @@ FileChangeDir($eccEmuEmulatorPath)
 
 
 ; ************************************************************
-; FUNCTION: EmuWindowControl(EmulatorWindowTitle) (also startup the emulator)
+; FUNCTION: EmuWindowControl($EmulatorWindowTitle, $EmulatorStartup)
 ; ************************************************************
-Func EmuWindowControl($EmulatorWindowTitle)
+Func EmuWindowControl($EmulatorWindowTitle, $EmulatorStartup = 1)
 ; Start the emulator
-Run($eccEmuEmulatorPath & $eccEmuEmulatorFile)
-; Wait until emulator is active (window name) (has a 10 seconds timeout) 
-WinWaitActive($EmulatorWindowTitle, "", 10) 
-; Is the emulator active or not? 
+If $EmulatorStartup = 1 Then Run($eccEmuEmulatorPath & $eccEmuEmulatorFile)
+; Wait until emulator is active (window name) (has a 10 seconds timeout)
+WinWaitActive($EmulatorWindowTitle, "", 10)
+; Is the emulator active or not?
 If WinExists($EmulatorWindowTitle) = 0 Then
 	MsgBox(0, $eccSystemName, "The emulator '" & $eccEmuEmulatorPath & $eccEmuEmulatorFile & "' did not respond!" & @CRLF & @CRLF & _
 	"eccScript searched for an window named '" & $EmulatorWindowTitle & "' but didn't find this!" & @CRLF & _

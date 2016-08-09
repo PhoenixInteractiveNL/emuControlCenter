@@ -66,20 +66,12 @@ class FileParserGb implements FileParser {
 		// 80h - Game supports CGB functions, but works on old gameboys also.
 		// C0h - Game works on CGB only (physically the same as 80h).
 		$ret['SGB_FEATURES'] = FileIO::ecc_read($fhdl, 323, 1, 'HEX');
-		
-		// Checksummen ermitteln.
-		// Aus performancegründen zuerst in string einlesen
-		while (gtk::events_pending()) gtk::main_iteration();
-		$file_content = FileIO::ecc_read_file($fhdl, false, false, $file_name);
-		
-		#while (gtk::events_pending()) gtk::main_iteration();
-		#$ret['FILE_MD5'] = FileIO::ecc_get_md5_from_string($file_content);
+
+		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));
 		$ret['FILE_MD5'] = NULL;
+		$ret['FILE_VALID'] = true;
 		
 		while (gtk::events_pending()) gtk::main_iteration();
-		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string($file_content);
-		
-		$ret['FILE_VALID'] = true;
 		
 		return $ret;
 	}

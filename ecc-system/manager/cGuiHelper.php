@@ -122,7 +122,7 @@ This folder is initial created with
 		$win_style_temp->bg[Gtk::STATE_NORMAL] = GdkColor::parse($this->gui->background_color);
 		$dlg->set_style($win_style_temp);
 		
-		$dlg->set_icon($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/ecc_icon_camya.png'));
+		$dlg->set_icon($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/ecc_icon_small.ico'));
 		$dlg->set_logo($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/platform/ecc_ecc_teaser.png'));
 		
 		$version = $this->getEccVersionString();
@@ -158,22 +158,32 @@ done by cyrille (aa@aa.fr)
 		$this->gui->ini->storeHistoryKey('splashscreen_opened', true, false);
 	}
 	
-	public function getPixbuf($imagePath, $width = false, $height = false, $aspectRatio = false) {
+	public function getPixbuf($imagePath, $width = false, $height = false, $aspectRatio = false, $maxWidth = false, $maxHeight = false) {
+		if (!$imagePath || !is_file($imagePath)) return null;
 		
-		if (!is_file($imagePath)) return null;
-		
-		if ($aspectRatio && $width && $height) {
-			return GdkPixbuf::new_from_file_at_size($imagePath, $width, $height);
+		if ($maxWidth || $maxHeight) {
+			if ($imageInfo = @getimagesize($imagePath)){
+				if ($imageInfo[0] > $maxWidth){
+					$width = $maxWidth;
+					$aspectRatio = true;
+				}
+				if ($imageInfo[1] > $maxHeight){
+					$height = $maxHeight;
+					$aspectRatio = true;
+				}
+			}
 		}
+		
+		if ($aspectRatio && $width && $height) return GdkPixbuf::new_from_file_at_size($imagePath, $width, $height);
 		
 		//if (!file_exists($imagePath)) return null;
 		try {
 			$oPixbuf = GdkPixbuf::new_from_file($imagePath);
 		}
 		catch (PhpGtkGErrorException $e) {
-			//return $this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/internal/error.gif');
 			return null;
 		}
+		
 		// resizing
 		if ($oPixbuf !== null && $width && $height) {
 			$type = Gdk::INTERP_BILINEAR;

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsFloat.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StringIsFloat</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringIsFloat</font>
+<hr size="2">
+<p>Checks if a string is a floating point number.<br></p>
+
+<p class="codeheader">
+StringIsFloat ( "string" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">The string or expression to check.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if not floating point format.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+A string is a float if it contains at least one decimal digit and exactly one period; the only other character allowed is an optional plus or minus at the beginning.  (StringIsFloat does not accept a comma character as the decimal point even if the computer Locale settings use that symbol.)  If parameter is not a string, its value is converted to a string.  See examples.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StringIsInt.html">StringIsInt</a>, <a href="IsFloat.html">IsFloat</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"1.5"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 1</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"7."</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;returns 1 since contains decimal</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"-.0"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 1</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"3/4"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 0 since '3' slash '4' is not a float</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"2"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; returns 0 since '2' is an interger, not a float</span><br>
+<br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S3">1.5</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S1">;returns 1 since 1.5 converted to string contain .</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S3">1.0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S1">;returns 0 since 1.0 converted to string does not contain .</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsFloat.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

@@ -1,0 +1,29 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	WinZip Setup
+Class:	#32770
+Size:	X: 464    Y: 341    W: 471    H: 333
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+&Help
+< &Back
+&Next >
+Close
+Thank you for installing WinZip!
+WinZip features include:
+
+* Quick and easy zip and unzip
+* Optional Wizard interface
+* E-mail support, including Zip and E-Mail from Explorer
+* Tight integration with the Windows shell
+* Internet file format support, including MIME, TAR, & CAB
+* 128-bit and 256-bit AES encryption
+
+Press the F1 key on your keyboard at any time while running WinZip for context sensitive help and complete documentation.
+
+Click Next to continue.
+
+
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<
+&WinZip Classic

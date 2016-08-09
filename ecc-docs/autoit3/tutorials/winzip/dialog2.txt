@@ -1,0 +1,16 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	WinZip Setup
+Class:	#32770
+Size:	X: 540    Y: 425    W: 320    H: 199
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+Setup will install WinZip into the following folder, which it will create if necessary.
+If you want to install WinZip in a different folder and/or drive, type the name of the folder below:
+&Install to:
+C:\Program Files\WinZip
+&Browse...
+OK
+Cancel
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<

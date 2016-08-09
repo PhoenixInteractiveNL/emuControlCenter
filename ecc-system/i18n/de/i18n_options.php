@@ -3,13 +3,14 @@
  * emuControlCenter language system file
  * ------------------------------------------
  * language:	de (german)
- * author:	franz schneider
- * date:	2007/03/04 
+ * author:	franz schneider / andreas scheibel
+ * date:	2007/05/13
  * ------------------------------------------
  *
  * dd = dropdown
  *
  **/
+
 $i18n['dropdown_lang'] = array(
 	// -------------------------------------------------------------
 	// context menu navigation
@@ -45,4 +46,19 @@ $i18n['dropdown_lang'] = array(
 	'[[finnish]]' =>
 		"Finnisch",
 );
+
+$i18n['languages'] = array(
+
+	'[[en]]' =>
+		"English",
+	'[[de]]' =>
+		"Deutsch",
+	'[[fr]]' =>
+		"Français",
+	'[[it]]' =>
+		"Italiano",
+	'[[es]]' =>
+		"Spanish",
+);
+
 ?>

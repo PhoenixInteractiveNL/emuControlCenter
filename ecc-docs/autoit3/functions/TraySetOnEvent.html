@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TraySetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TraySetOnEvent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TraySetOnEvent</font>
+<hr size="2">
+<p>Defines a user function to be called when a special tray action happens.<br></p>
+
+<p class="codeheader">
+TraySetOnEvent ( specialID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">specialID</td>
+    <td width="85%">See the <a href="#SpecialIDTable">Special ID table</a> below.</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>The name of the user function to call.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+OnEvent functions are only called when the option TrayOnEventMode is set to 1 - when in this mode TrayGetMsg is NOT used at all.<br>
+<br>
+&nbsp;&nbsp;&nbsp; <a name="SpecialIDTable"></a><b>Special ID table</b><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Special Id</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Value</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_SHOWICON</td>
+    <td>-3</td>
+    <td>The tray icon will be shown.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_HIDEICON</td>
+    <td>-4</td>
+    <td>The tray icon will be hidden.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_FLASHICON</td>
+    <td>-5</td>
+    <td>The user turned the tray icon flashing on.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_NOFLASHICON</td>
+    <td>-6</td>
+    <td>The user turned the tray icon flashing off.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_PRIMARYDOWN</td>
+    <td>-7</td>
+    <td>The primary mouse button was pressed on the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_PRIMARYUP</td>
+    <td>-8</td>
+    <td>The primary mouse button was released on the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_SECONDARYDOWN</td>
+    <td>-9</td>
+    <td>The secondary mouse button was pressed on the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_SECONDARYUP</td>
+    <td>-10</td>
+    <td>The secondary mouse button was released on the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_MOUSEOVER</td>
+    <td>-11</td>
+    <td>The mouse moves over the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_PRIMARYDOUBLE</td>
+    <td>-13</td>
+    <td>The primary mouse button was double pressed on the tray icon.</td>
+  </tr>
+  <tr>
+    <td>$TRAY_EVENT_SECONDARYDOUBLE</td>
+    <td>-14</td>
+    <td>The secondary mouse button was double pressed on the tray icon.</td>
+  </tr>
+</table><br>
+If the function is an empty string "" the previous user-defined is disabled.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#TrayOnEventMode">TrayOnEventMode (Option)</a>, <a href="TrayItemSetOnEvent.html">TrayItemSetOnEvent</a>, <a href="TraySetClick.html">TraySetClick</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayOnEventMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Default tray menu items (Script Paused/Exit) will not be shown.</span><br>
+<br>
+<span class="S9">$exit</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S7">"ExitEvent"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetOnEvent</span><span class="S8">(</span><span class="S9">$TRAY_EVENT_PRIMARYDOUBLE</span><span class="S8">,</span><span class="S7">"SpecialEvent"</span><span class="S8">)</span><br>
+<span class="S4">TraySetOnEvent</span><span class="S8">(</span><span class="S9">$TRAY_EVENT_SECONDARYUP</span><span class="S8">,</span><span class="S7">"SpecialEvent"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Idle loop</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<br>
+<span class="S1">; Functions</span><br>
+<span class="S5">Func</span><span class="S0"> SpecialEvent</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S6">@TRAY_ID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$TRAY_EVENT_PRIMARYDOUBLE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S7">"SpecialEvent-Info"</span><span class="S8">,</span><span class="S7">"Primary mouse button double clicked."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S6">@TRAY_ID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$TRAY_EVENT_SECONDARYUP</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S7">"SpecialEvent-Info"</span><span class="S8">,</span><span class="S7">"Secondary mouse button clicked."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> ExitEvent</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TraySetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

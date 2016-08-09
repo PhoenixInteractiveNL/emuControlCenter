@@ -1,0 +1,18 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	WinZip Setup
+Class:	#32770
+Size:	X: 464    Y: 341    W: 471    H: 333
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+&Help
+< &Back
+&Next >
+Close
+WinZip needs to associate itself with your archives.
+Associations allow WinZip to be used to open archives from My Computer, Windows Explorer, etc.
+Click "Next" to associate WinZip with all supported archive types.  Click "Associations" if you want more information or would like to specify the archive types with which WinZip is associated.
+&Associations...
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<
+&WinZip Classic

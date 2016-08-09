@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/compiler.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:05 GMT -->
+<head>
+  <title>Compiling Scripts with Aut2Exe</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Compiling Scripts with Aut2Exe</h1>
+<p>It is possible to take your <em>.au3</em> script and compile it into a <strong>standalone</strong>
+  executable; this executable can be used without the need for AutoIt to be installed
+  and without the need to have <em>AutoIt3.exe</em> on the machine.&nbsp; In addition,
+  the compiled script is compressed and encrypted and there is the option to bind
+  additional files (also compressed/encrypted) to the exe using the <a href="../functions/FileInstall.html">FileInstall</a>
+  function.&nbsp; Also, any <a href="../keywords/include.html">#include</a> files
+  will also be compiled into the script so they are not required at run-time.</p>
+<p><b>Caution</b>: the script to be compiled must be free of syntax error as the 
+compilation will not check the syntax.</p>
+<p>&nbsp;</p>
+<p>Aut2Exe can be used in three ways:</p>
+<h2>Method 1 - Start Menu</h2>
+<p><em>Only available if full install performed.</em></p>
+<p>1.&nbsp; Open the Start Menu and browse to the <em>AutoIt v3</em> group.</p>
+<p>2.&nbsp; Click <em>Script Compiler \ Convert .au3 to .exe</em></p>
+<p>3.&nbsp; The main Aut2Exe interface should appear.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/aut2exe.png" width="450" height="377"></p>
+<p>4.&nbsp; Use the <em>Browse</em> buttons to select your input (.au3) and output
+  (.exe) files.</p>
+<p>5.&nbsp; If you like you can change the icon of the resulting .exe - just browse
+  to the icon you want (some example icons are supplied in <em>Program Files\AutoIt3\Aut2Exe\Icons</em>).</p>
+<p>6.&nbsp; If you don't want anyone to be able to decompile your script (when
+  a decompiler is made available) then you should enter a passphrase.</p>
+<p>7.&nbsp; The only other option you might wish to change is the compression
+  level (especially if using FileInstall to add extra files).&nbsp; Use the <em>Compression</em>
+  menu to set this.&nbsp; As with all compression routines the better the compression
+  you select the slower it will be.&nbsp; However, no matter what compression
+  level you select the decompression speed (when the .exe is run) is the same.</p>
+<p>8.&nbsp; Click on <em>Convert</em> to compile the script.</p>
+<p>Note: scripts can be compile with .a3x extension. They should be run with 
+AutoIt.exe filename.a3x. The .a3x contains the script itself with all referred #include plus the FileInstall files. This format allow to distribute smaller files as they don't 
+include the AutoIt3.exe in each compile script. You still need to have it 
+accessible on the target machine but just AutoIt3.exe. </p>
+<p>&nbsp;</p>
+<h2>Method 2 - Right Click</h2>
+<p><em>Only available if full install performed.</em></p>
+<p>1.&nbsp; In Explorer browse to the .au3 file that you wish to compile.</p>
+<p>2.&nbsp; Right-click the file to access the pop-up menu.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/compile-rightclick.png" width="336" height="274"></p>
+<p>3.&nbsp; The file will be silently compiled with the same filename - just with
+  a .exe extension.</p>
+<p>When compiling in this way, Aut2Exe uses current icon/compression settings (from
+  the last time Aut2Exe was run manually as in method 1).</p>
+<p>&nbsp;</p>
+<h2>Method 3 - The Command Line</h2>
+<p>The <em>Aut2Exe.exe</em> program can be run from the command line as follows:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; Aut2exe.exe /in &lt;infile.au3&gt; [/out &lt;outfile.exe&gt;] [/icon
+  &lt;iconfile.ico&gt;] [/nodecompile] [/comp 0-4] [/pass &lt;passphrase&gt;] 
+[/nopack]<br>
+</p>
+<p>Long filenames should be enclosed in double-quotes like&nbsp; &quot;C:\Program
+  Files\Test\test.au3&quot;.&nbsp; If no &quot;out&quot; file is given the input
+  filename is used with a .exe extension.</p>
+<p>&nbsp;</p>
+<h2>Technical Details</h2>
+<p>The compiled script and additional files added with FileInstall are compressed
+  with my own (Jon)  compression scheme.&nbsp; </p>
+<p>Because a compiled script must &quot;run&quot; itself without a password it
+  needs to be able to decrypt itself - i.e., the encryption is <em>two-way</em>.&nbsp;
+  For this reason you should regard the compiled exe as being <em>encoded</em>
+  rather than completely safe.&nbsp; For example, if I wrote a script that contained
+  a username and password (say, for a desktop rollout) then I would be happy using
+  something like a workstation-level user/password but I would <strong> not</strong>
+  consider it safe for a domain/entire network password unless I was sure that
+  the end-user would not have easy access to the .exe file.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/compiler.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:07 GMT -->
+</html>

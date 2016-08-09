@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/Exit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Keyword Exit</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">Exit</font>
+<hr size="2">
+<p>Terminates the script.<br></p>
+
+<p class="codeheader">
+<b>Exit</b> [return code]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">return code</td>
+    <td width="85%">[optional] Integer that sets the script's return code.  This code can be used by Windows or the DOS variable %ERRORLEVEL%. The default is 0. Scripts normally set an errorlevel of 0 if the script executed properly; error levels 1 and above typically indicate that the script did not execute properly.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The parameter, if included, can be enclosed in parentheses.  Thus, the following are equivalent:  <b>Exit</b>, <b>Exit 0</b>, and<b> Exit(0)</b>.  However, <b>Exit()</b> is invalid.<br>
+<br>
+The code can be retrieved in a Func OnAutoItExit() by @EXITCODE.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ExitLoop.html">ExitLoop</a>, <a href="FuncOnAutoItExit.html">Func OnAutoItExit ()</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;First Example</span><br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S1">;Second Example</span><br>
+<span class="S1">; Terminate script if no command-line arguments</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$CmdLine</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;Third Example</span><br>
+<span class="S1">; Open file specified as first command-line argument</span><br>
+<span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S9">$CmdLine</span><span class="S8">[</span><span class="S3">1</span><span class="S8">],</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Check if file opened for reading OK</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><span class="S8">(</span><span class="S3">2</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; If file is empty then exit (script is successful)</span><br>
+<span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileReadLine</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S1">;code to process file goes here</span><br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S5">Exit</span><span class="S0"> </span><span class="S1">;is optional if last line of script</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/Exit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

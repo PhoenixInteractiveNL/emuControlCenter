@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlRead.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function GUICtrlRead</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlRead</font>
+<hr size="2">
+<p>Read state or data of a control.<br></p>
+
+<p class="codeheader">
+GUICtrlRead ( controlID [, advanced] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">The control identifier (controlID) as returned by a <a href="../guiref/GUICtrlCreate.html">GUICtrlCreate...</a> function.</td>
+  </tr>
+  <tr>
+   <td>advanced</td>
+   <td>[optional] returns extended information of a control.<br>
+       0 = (Default) Returns a value with state or data of a control.<br>
+       1 = Returns extended information of a control (see Remarks).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns depending the control (see below).</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table><table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Type</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Value</b></td>
+  </tr>
+  <tr>
+    <td>Checkbox, Radio</td>
+    <td>state of the button. <a href="GUICtrlSetState.html#StateTable">See State table</a></td>
+  </tr>
+  <tr>
+    <td>Combo, List</td>
+    <td>The value selected</td>
+  </tr>
+  <tr>
+    <td>Input, Edit</td>
+    <td>The text entered</td>
+  </tr>
+  <tr>
+    <td>Button</td>
+    <td>The display text</td>
+  </tr>
+  <tr>
+    <td>Date</td>
+    <td>The selected date</td>
+  </tr>
+  <tr>
+    <td>Progress</td>
+    <td>Current percentage</td>
+  </tr>
+  <tr>
+    <td>Slider</td>
+    <td>Current value</td>
+  </tr>
+  <tr>
+    <td>Tab</td>
+    <td>The number or the controlID of the tabitem selected depending of the advanced parameter value.</td>
+  </tr>
+  <tr>
+    <td>Menu, MenuItem</td>
+    <td>State of the menu/item. <a href="GUICtrlSetState.html#StateTable">See State table </a></td>
+  </tr>
+  <tr>
+    <td>TreeView</td>
+    <td>Control identifier (controlID) of the selected TreeViewItem</td>
+  </tr>
+  <tr>
+    <td>TreeViewItem</td>
+    <td>State of the TreeViewItem</td>
+  </tr>
+  <tr>
+    <td>ListView</td>
+    <td>Control identifier (controlID) of the selected ListViewItem. 0 means no item is selected</td>
+  </tr>
+  <tr>
+    <td>Dummy</td>
+    <td>The value set by <a href="GUICtrlSendToDummy.html">GUICtrlSendToDummy</a> or <a href="GUICtrlSetData.html">GUICtrlSetData</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+In 'advanced' mode the return value contains additional data of the control (see below).<br>
+<br>
+Note: not for all known controls there is additional data available!<br>
+<br><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Type</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Additional Value</b></td>
+  </tr>
+  <tr>
+    <td>Checkbox, Radio</td>
+    <td>The text of the control.</td>
+  </tr>
+  <tr>
+    <td>Menu, MenuItem</td>
+    <td>The text of the control.</td>
+  </tr>
+  <tr>
+    <td>TreeView</td>
+    <td>The text of the current selected TreeViewItem.</td>
+  </tr>
+  <tr>
+    <td>TreeViewItem</td>
+    <td>The text of the TreeViewItem.</td>
+  </tr>
+  <tr>
+    <td>ListViewItem</td>
+    <td>The state of the ListViewItem if $LVS_EX_CHECKBOXES exStyle used in advanced mode.  <a href="GUICtrlSetState.html#StateTable">See State table </a></td>
+  </tr>
+  <tr>
+    <td>Tab</td>
+    <td>The controlID of the tabitem selected</td>
+  </tr>
+</table><br>
+For Checkbox, Radio control several states can be returned as $GUI_FOCUS and $GUI_CHECKED,. So use i.e. BitAnd(GUICtrlRead($Item),$GUI_CHECKED) to test if the control is checked.<br>
+<br>
+For Listview items several states can be returned as $GUI_CHECKED and $GUI_UNCHECKED (only for listview controls with LVS_EX_CHECKBOXES-exstyle and on 'advanced' return) . So use i.e. BitAnd(GUICtrlRead($Item),$GUI_CHECKED) to test if the item is checked.<br>
+<br>
+For Treeview items several states can be returned as $GUI_FOCUS, $GUI_EXPAND and $GUI_CHECKED, $GUI_UNCHECKED (only for treeview controls with TVS_CHECKBOXES-style . So use i.e. BitAnd(GUICtrlRead($Item),$GUI_CHECKED) to test if the item is checked.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="../guiref/GUICtrlSet.html">GUICtrlSet...</a>, <a href="GUIGetMsg.html">GUIGetMsg</a>, <a href="AutoItSetOption.html#GUIEventOptions">GUIEventOptions (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUICtrlRead"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; will create a dialog box that when displayed is centered</span><br>
+<br>
+<span class="S9">$menu1</span><span class="S0">&nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenu</span><span class="S8">(</span><span class="S7">"File"</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$n1</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateList</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetData</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"item1|item2|item3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"item2"</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$n2</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Read"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetState</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_FOCUS</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; the focus is on this button</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><span class="S0"> </span><span class="S1">; will display an empty dialog box</span><br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">if</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$n2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Selected listbox entry"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$n1</span><span class="S8">))</span><span class="S0"> </span><span class="S1">; display the selected listbox entry</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$menustate</span><span class="S0">&nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$menu1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; return the state of the menu item</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$menutext</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$menu1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; return the text of the menu item</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"State and text of the menuitem"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"state:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$menustate</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"text:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$menutext</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlRead.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

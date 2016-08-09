@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/HotKeySet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function HotKeySet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">HotKeySet</font>
+<hr size="2">
+<p>Sets a hotkey that calls a user function.<br></p>
+
+<p class="codeheader">
+HotKeySet ( "key" [, "function"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">key</td>
+    <td width="85%">The key combination to use as the hotkey. <b>Same format as <a href="Send.html">Send()</a>.</b></td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>[optional] The name of the function to call when the key is pressed.  Leave blank to unset a previous hotkey.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If two AutoIt scripts set the same HotKeys, you should avoid running those scripts simultaneously.  (The second script cannot capture the hotkey unless the first script terminates or unregisters the key prior to the second script setting the hotkey.)<br>
+<br>
+A hotkey-press *typically* interrupts the active AutoIt function/statement and runs its user function until it completes or is interrupted.  Exceptions are as follows:<br>
+1)  If the current function is a "blocking" function, then the key-presses are buffered and execute as soon as the blocking function completes.  MsgBox and FileSelectFolder are examples of blocking functions.  Try the behavior of Shift-Alt-d in the Example.<br>
+2)  If you have paused the script by clicking on the AutoIt Tray icon, any hotkeys pressed during this paused state are ignored.<br>
+<br>
+<b>The following hotkeys cannot be set:</b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Ctrl+Alt+Delete</td>
+    <td width="85%">It is reserved by Windows</td>
+  </tr>
+  <tr>
+   <td>F12</td>
+   <td>It is also reserved by Windows, according to its API.</td>
+  </tr>
+  <tr>
+   <td>NumPad's Enter Key</td>
+   <td>Instead, use {Enter} which captures both Enter keys on the keyboard.</td>
+  </tr>
+  <tr>
+   <td>Win+B,D,E,F,L,M,R,U; and Win+Shift+M</td>
+   <td>These are built-in Windows shortcuts.  Note:  Win+B and Win+L might only be reserved on Windows XP and above.</td>
+  </tr>
+  <tr>
+   <td>Alt, Ctrl, Shift, Win</td>
+   <td>These are the modifier keys themselves!</td>
+  </tr>
+  <tr>
+   <td>Other</td>
+   <td>Any global hotkeys a user has defined using third-party software,  any combos of two or more "base keys" such as '{F1}{F2}', and any keys of the form '{LALT}' or '{ALTDOWN}'.</td>
+  </tr>
+</table><br>
+When you set a hotkey, AutoIt captures the key-press and does not pass it on to the active application, with one exception:  the Lock keys (NumLock, CapsLock, and ScrollLock) still toggle their respective state!<br>
+To Send() a key combination which will trigger a HotKeySet() event, either use ControlSend() or unregister the HotKeySet() event, otherwise, the Send() event may trigger an infinite loop.<br>
+<br>
+; capture and pass along a keypress<br>
+<i>HotKeySet("{Esc}", "captureEsc")<br>
+Func captureEsc()<br>
+&nbsp;&nbsp;&nbsp; ; ... can do stuff here<br>
+&nbsp;&nbsp;&nbsp; HotKeySet("{Esc}")<br>
+&nbsp;&nbsp;&nbsp; Send("{Esc}")<br>
+&nbsp;&nbsp;&nbsp; HotKeySet("{Esc}", "captureEsc")<br>
+EndFunc<br>
+</i><br>
+<br>
+The called function can <b>not</b> be given parameters. They will be ignored.<br>
+<br>
+@HotKeyPressed macro can be used inside the function to handle several keys in the same function.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Send.html">Send</a>, <a href="ControlSend.html">ControlSend</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Press Esc to terminate script, Pause/Break to "pause"</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{PAUSE}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"TogglePause"</span><span class="S8">)</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Terminate"</span><span class="S8">)</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"+!d"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ShowMessage"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;Shift-Alt-d</span><br>
+<br>
+<span class="S1">;;;; Body of program would go here ;;;;</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S1">;;;;;;;;</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> TogglePause</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$Paused</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">NOT</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">'Script is "Paused"'</span><span class="S8">,</span><span class="S3">0</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Terminate</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> ShowMessage</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"This is a message."</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/HotKeySet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

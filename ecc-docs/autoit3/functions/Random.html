@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Random.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function Random</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Random</font>
+<hr size="2">
+<p>Generates a pseudo-random float-type number.<br></p>
+
+<p class="codeheader">
+Random ( [Min [, Max [, Flag]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Min</td>
+    <td width="85%">[optional] The smallest number to be generated. The default is 0.</td>
+  </tr>
+  <tr>
+   <td>Max</td>
+   <td>[optional] The largest number to be generated. The default is 1.</td>
+  </tr>
+  <tr>
+   <td>Flag</td>
+   <td>[optional] If this is set to 1 then an integer result will be returned.  Default is a floating point number.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a pseudo-random number between Min and Max.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error flag to 1 if bad parameters.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+By default the Random function works with decimal/floating point numbers.  If you want to only have integer/whole number results then set the Flag to 1.<br>
+<br>
+If only one argument is provided, then it is interpreted to be the Max.<br>
+<br>
+The result will be in the range of Min to Max INCLUSIVE when using integers (just short of Max when using floats).<br>
+<br>
+<br><b>Comments based on the original source</b><br>
+<br>
+This function uses the Mersenne Twister random number generator, MT19937, written by Takuji Nishimura, Makoto Matsumoto, Shawn Cokus, Matthe Bellew and Isaku Wada.<br>
+<br>
+The Mersenne Twister is an algorithm for generating random numbers. It was designed with consideration of the flaws in various other generators. The period, 2<sup>19937</sup>-1, and the order of equidistribution, 623 dimensions, are far greater. The generator is also fast; it avoids multiplication and division, and it benefits from caches and pipelines. For more information see the inventors' web page at http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html<br>
+<br>
+Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura, All rights reserved.<br>
+<br>
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:<br>
+<br>
+1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.<br>
+<br>
+2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.<br>
+<br>
+3.  The names of its contributors may not be used to endorse or promote products derived from this software without specific prior written permission.<br>
+<br>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Int.html">Int</a>, <a href="Round.html">Round</a>, <a href="SRandom.html">SRandom</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;Flip of coin</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">Random</span><span class="S8">()</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">0.5</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> &nbsp;</span><span class="S1">; Returns a value between 0 and 1.</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Heads. 50% Win"</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Tails. 50% Loss"</span><br>
+<span class="S5">Endif</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Coin toss"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">;Roll of a die</span><br>
+<span class="S4">msgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Roll of die"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You rolled a "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Random</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">)</span><br>
+<br>
+<span class="S9">$StockPrice</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">98</span><br>
+<span class="S1">;In the middle of a stock market simulation game</span><br>
+<span class="S9">$StockPriceChange</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Random</span><span class="S8">(-</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; generate an integer between -10 and 10</span><br>
+<span class="S9">$StockPrice</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$StockPrice</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$StockPriceChange</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$StockPriceChange</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Stock Change"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Your stock dropped to $"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$StockPrice</span><span class="S8">)</span><br>
+<span class="S5">ElseIf</span><span class="S0"> </span><span class="S9">$StockPriceChange</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Stock Change"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Your stock rose to $"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$StockPrice</span><span class="S8">)</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Stock Change"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Your stock stayed at $"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$StockPrice</span><span class="S8">)</span><br>
+<span class="S5">Endif</span><br>
+<br>
+<br>
+<span class="S1">;Random letter</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">Random</span><span class="S8">()</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">0.5</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">;Capitals</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$Letter</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Chr</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"A"</span><span class="S8">),</span><span class="S0"> </span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"Z"</span><span class="S8">),</span><span class="S0"> </span><span class="S3">1</span><span class="S8">))</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">;Lower case</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$Letter</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Chr</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"a"</span><span class="S8">),</span><span class="S0"> </span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"z"</span><span class="S8">),</span><span class="S0"> </span><span class="S3">1</span><span class="S8">))</span><br>
+<span class="S5">Endif</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Random.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

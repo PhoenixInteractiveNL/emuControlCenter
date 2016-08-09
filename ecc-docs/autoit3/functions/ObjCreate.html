@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ObjCreate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:00 GMT -->
+<head>
+  <title>Function ObjCreate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ObjCreate</font>
+<hr size="2">
+<p>Creates a reference to a COM object from the given classname.<br></p>
+
+<p class="codeheader">
+ObjCreate ( "classname"  [, "servername" [,"username", ["password"]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Classname</td>
+    <td width="85%">The class of the object in the following format:<br>
+       "appname.objectype"</td>
+  </tr>
+  <tr>
+   <td>Servername</td>
+   <td>Optional name of a remote computer from which the<br>
+       object must be obtained.</td>
+  </tr>
+  <tr>
+   <td>Username</td>
+   <td>Optional name of a usercode on the remote computer<br>
+       You have to enter this in the format "computer\usercode" or<br>
+       "domain\usercode".</td>
+  </tr>
+  <tr>
+   <td>Password</td>
+   <td>Optional password for the usercode on the remote computer.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns an object.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error to 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Use ObjCreate() if you want to have a new instance of the referring application.<br>
+If you want to connect to an existing process, use ObjGet() instead.<br>
+<br>
+Keep in mind that not all computers have the same set of Objects. So <b>always</b> check for errors after calling ObjCreate(). <br>
+<br>
+The following requirements apply if you want to access objects on <i>remote</i> computers:<br>
+-The user running the script must have the appropriate permissions.<br>
+-The Object on the remote computer must support DCOM (Distributed COM)<br>
+-The remote computer must have 'Remote Registry Service' and 'File and Printer sharing' services running.<br>
+<br>
+See the <a href="../intro/ComRef.html">Obj/COM Reference</a> for more information about Objects.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUICtrlCreateObj.html">GUICtrlCreateObj</a>, <a href="IsObj.html">IsObj</a>, <a href="ObjEvent.html">ObjEvent</a>, <a href="ObjGet.html">ObjGet</a>, <a href="ObjName.html">ObjName</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Example 1</span><br>
+<span class="S1">;</span><br>
+<span class="S1">; Counting the number of open shell windows</span><br>
+<br>
+<span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; Get the Windows Shell Object</span><br>
+<span class="S9">$oShellWindows</span><span class="S8">=</span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; Get the collection of open shell Windows</span><br>
+<br>
+<span class="S5">if</span><span class="S0"> </span><span class="S4">Isobj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S9">$string</span><span class="S8">=</span><span class="S7">""</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; String for displaying purposes</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">for</span><span class="S0"> </span><span class="S9">$Window</span><span class="S0"> </span><span class="S5">in</span><span class="S0"> </span><span class="S9">$oShellWindows</span><span class="S0"> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S1">; Count all existing shell windows</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Window</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">next</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Shell Windows"</span><span class="S8">,</span><span class="S7">"You have the following shell windows:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$String</span><span class="S8">)</span><span class="S1">;</span><br>
+<br>
+<span class="S5">endif</span><br>
+<span class="S5">exit</span><br>
+<br>
+<br>
+<span class="S1">; Example 2</span><br>
+<span class="S1">;</span><br>
+<span class="S1">; Open the MediaPlayer on a REMOTE computer</span><br>
+<span class="S9">$oRemoteMedia</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"MediaPlayer.MediaPlayer.1"</span><span class="S8">,</span><span class="S7">"name-of-remote-computer"</span><span class="S8">)</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S7">"ObjCreate() of a remote Mediaplayer Object successful !"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$oRemoteMedia</span><span class="S8">.</span><span class="S14">Open</span><span class="S8">(</span><span class="S0"> </span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\media\Windows XP Startup.wav"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S1">; Play sound if file is present</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S7">"Failed to open remote Object. Error code: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">hex</span><span class="S8">(</span><span class="S6">@error</span><span class="S8">,</span><span class="S3">8</span><span class="S8">))</span><br>
+<span class="S5">Endif</span><br>
+<br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ObjCreate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

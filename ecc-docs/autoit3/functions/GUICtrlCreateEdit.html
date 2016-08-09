@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateEdit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function GUICtrlCreateEdit</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreateEdit</font>
+<hr size="2">
+<p>Creates an Edit control for the GUI.<br></p>
+
+<p class="codeheader">
+GUICtrlCreateEdit ( "text", left, top [, width [, height [, style [, exStyle]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">text</td>
+    <td width="85%">The text of the control.</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>The left side of the control. If -1 is used then left will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>The top of the control. If -1 is used then top will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td>[optional] The width of the control (default is the previously used width).</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td>[optional] The height of the control (default is the previously used height).</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>[optional] Defines the style of the control. See <a href="../appendix/GUIStyles.html#Edit">GUI Control Styles Appendix</a>.<br>
+       <br>
+       default ( -1) : $ES_WANTRETURN, $WS_VSCROLL, $WS_HSCROLL, $ES_AUTOVSCROLL, $ES_AUTOHSCROLL<br>
+       forced styles : $ES_MULTILINE, $WS_TABSTOP only if not $ES_READONLY</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td>[optional] Defines the extended style of the control. See <a href="../appendix/GUIStyles.html#Extended">Extended Style Table</a>.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the identifier (controlID) of the new control.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To obtain the value of the control see <a href="GUICtrlRead.html">GUICtrlRead</a>.<br>
+To set or change information in the control see <a href="../guiref/GUICtrlSet.html">GUICtrlSet...</a>.<br>
+<br>
+To combine styles with the default style use <b>BitOr</b>($GUI_SS_DEFAULT_EDIT, newstyle,...).<br>
+<br>
+If you want to drag & drop a filename onto this control just add the <a href="../appendix/GUIStyles.html#Extended">WS_EX_ACCEPTFILES extended style</a> on the <a href="GUICreate.html">GUICreate()</a> and set the state to $GUI_DROPACCEPTED.<br>
+Multiple selected files will be dropped as separate lines.<br>
+<br>
+Default resizing is $GUI_DOCKAUTO size and position will occur.<br>
+<br>
+Creating a RichEdit control is too complex so it will not be included as a basic control.<br>
+You have to use the GuiCtrlCreateObj. See the second example if you need to have a RichEdit control.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#GUICoordMode">GUICoordMode (Option)</a>, <a href="GUICtrlSetData.html">GUICtrlSetData</a>, <a href="GUICtrlSetState.html">GUICtrlSetState</a>, <a href="GUIGetMsg.html">GUIGetMsg</a>, <a href="GUICtrlRead.html">GUICtrlRead</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI edit"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; will create a dialog box that when displayed is centered</span><br>
+<br>
+<span class="S9">$myedit</span><span class="S8">=</span><span class="S4">GUICtrlCreateEdit</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"First line"</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">,</span><span class="S0"> </span><span class="S3">176</span><span class="S8">,</span><span class="S3">32</span><span class="S8">,</span><span class="S3">121</span><span class="S8">,</span><span class="S3">97</span><span class="S8">,</span><span class="S9">$ES_AUTOVSCROLL</span><span class="S8">+</span><span class="S9">$WS_VSCROLL</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S1">; will be append dont' forget 3rd parameter</span><br>
+<span class="S4">GUICtrlSetData</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$myedit</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Second line"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S1">; Rich edit control EXAMPLE using GUICtrlCreateObj</span><br>
+<br>
+<span class="S1">; Author: Kåre Johansson</span><br>
+<span class="S1">; AutoIt Version: 3.1.1.55</span><br>
+<span class="S1">; Description: Very Simple example: Embedding RICHTEXT object</span><br>
+<span class="S1">; Needs: MSCOMCT2.OCX in system32 but it's probably already there</span><br>
+<span class="S1">; Date: 3 jul 2005</span><br>
+<br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<span class="S9">$oMyError</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjEvent</span><span class="S8">(</span><span class="S7">"AutoIt.Error"</span><span class="S8">,</span><span class="S7">"MyErrFunc"</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$oRP</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"RICHTEXT.RichtextCtrl.1"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Embedded RICHTEXT control Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">320</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S4">BitOr</span><span class="S8">(</span><span class="S9">$WS_OVERLAPPEDWINDOW</span><span class="S8">,</span><span class="S9">$WS_CLIPSIBLINGS</span><span class="S8">,</span><span class="S9">$WS_CLIPCHILDREN</span><span class="S8">))</span><br>
+<span class="S9">$TagsPageC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GuiCtrlCreateLabel</span><span class="S8">(</span><span class="S7">'Visit Tags Page'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">,</span><span class="S0"> </span><span class="S3">180</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">15</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$SS_CENTER</span><span class="S8">)</span><br>
+<span class="S4">GuiCtrlSetFont</span><span class="S8">(</span><span class="S9">$TagsPageC</span><span class="S8">,</span><span class="S3">9</span><span class="S8">,</span><span class="S3">400</span><span class="S8">,</span><span class="S3">4</span><span class="S8">)</span><br>
+<span class="S4">GuiCtrlSetColor</span><span class="S8">(</span><span class="S9">$TagsPageC</span><span class="S8">,</span><span class="S3">0x0000ff</span><span class="S8">)</span><br>
+<span class="S4">GuiCtrlSetCursor</span><span class="S8">(</span><span class="S9">$TagsPageC</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S9">$AboutC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">'About'</span><span class="S8">,</span><span class="S3">105</span><span class="S8">,</span><span class="S3">177</span><span class="S8">,</span><span class="S3">70</span><span class="S8">,</span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S9">$PrefsC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">'FontSize'</span><span class="S8">,</span><span class="S3">175</span><span class="S8">,</span><span class="S3">177</span><span class="S8">,</span><span class="S3">70</span><span class="S8">,</span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S9">$StatC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">'Plain Style'</span><span class="S8">,</span><span class="S3">245</span><span class="S8">,</span><span class="S3">177</span><span class="S8">,</span><span class="S3">70</span><span class="S8">,</span><span class="S3">20</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$GUIActiveX</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateObj</span><span class="S8">(</span><span class="S0"> </span><span class="S9">$oRP</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S3">260</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$GUIActiveX</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">300</span><span class="S8">,</span><span class="S3">160</span><span class="S8">)</span><br>
+<br>
+<span class="S5">With</span><span class="S0"> </span><span class="S9">$oRP</span><span class="S1">; Object tag pool</span><br>
+<span class="S8">.</span><span class="S14">OLEDrag</span><span class="S8">()</span><br>
+<span class="S8">.</span><span class="S14">Font</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'Arial'</span><br>
+<span class="S8">.</span><span class="S14">text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Hello - Au3 supports ActiveX components like the RICHTEXT thanks to SvenP"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'Try write some text and quit to reload'</span><br>
+<span class="S1">;.FileName = @ScriptDir &amp; '\RichText.rtf'</span><br>
+<span class="S1">;.BackColor = 0xff00</span><br>
+<span class="S5">EndWith</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><span class="S1">;Show GUI</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SaveFile</span><span class="S8">(</span><span class="S0"> </span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\RichText.rtf"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$TagsPageC</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Run</span><span class="S8">(</span><span class="S6">@ComSpec</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">' /c start http://www.myplugins.info/guids/typeinfo/typeinfo.php?clsid={3B7C8860-D78F-101B-B9B5-04021C009402}'</span><span class="S8">,</span><span class="S7">''</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$AboutC</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">AboutBox</span><span class="S8">()</span><span class="S0"> </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$PrefsC</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SelFontSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">12</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$StatC</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SelBold</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">False</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SelItalic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">False</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SelUnderline</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">False</span><span class="S0"> </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$oRP</span><span class="S8">.</span><span class="S14">SelFontSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">8</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> MyErrFunc</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"AutoItCOM Test"</span><span class="S8">,</span><span class="S7">"We intercepted a COM Error !"</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> &nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.description is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">description</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.windescription:"</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">windescription</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.number is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">hex</span><span class="S8">(</span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">number</span><span class="S8">,</span><span class="S3">8</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.lastdllerror is: "</span><span class="S0"> &nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">lastdllerror</span><span class="S0"> &nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.scriptline is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">scriptline</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.source is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">source</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.helpfile is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">helpfile</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.helpcontext is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">helpcontext</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">,</span><span class="S3">5</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S1">; Will automatically continue after 5 seconds</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">number</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">SetError</span><span class="S8">(</span><span class="S9">$err</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; to check for after this function returns</span><br>
+<span class="S5">Endfunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateEdit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ContinueLoop.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Keyword ContinueLoop</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">ContinueLoop</font>
+<hr size="2">
+<p>Continue a While/Do/For loop.<br></p>
+
+<p class="codeheader">
+<b>ContinueLoop</b> [level]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">level</td>
+    <td width="85%">[optional]  The level of the loop to restart.  The default is 1 (meaning the current loop).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+ContinueLoop will continue execution of the loop at the expression testing statement (that is the While, Until or Next statement).<br>
+<br>
+A negative <i>level</i> or zero value has no effect.<br>
+<br>
+Even though any program that uses ContinueLoop can be rewritten using If-ElseIf-EndIf statements, ContinueLoop can make long scripts easier to understand.<br>
+Be careful with While/Do loops; you can create infinite loops by using ContinueLoop incorrectly.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ExitLoop.html">ExitLoop</a>, <a href="For.html">For</a>, <a href="While.html">While</a>, <a href="Do.html">Do</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;Print all numbers from 1 to 10 except number 7</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">10</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">7</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ContinueLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The value of $i is:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<br>
+<span class="S1">;Example of using level is needed.</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ContinueLoop.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

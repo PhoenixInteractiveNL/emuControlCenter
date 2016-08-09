@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ControlSend.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function ControlSend</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlSend</font>
+<hr size="2">
+<p>Sends a string of characters to a control.<br></p>
+
+<p class="codeheader">
+ControlSend ( "title", "text", controlID, "string" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">The title of the window to access.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>The text of the window to access.</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>The control to interact with.  See <a href="../intro/controls.html">Controls</a>.</td>
+  </tr>
+  <tr>
+   <td>string</td>
+   <td>String of characters to send to the control.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] Changes how "keys" is processed:<br>
+       &nbsp;&nbsp;flag = 0 (default), Text contains special characters like + to indicate SHIFT and {LEFT} to indicate left arrow.<br>
+       &nbsp;&nbsp;flag = 1, keys are sent raw.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if window/control is not found.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+ControlSend works in a similar way to <a href="Send.html">Send</a> but it can send key strokes directly to a window/control, rather than just to the active window.<br>
+<br>
+ControlSend is only unreliable for command prompts as that works differently to normal windows (seems to check physical states rather than accepting the keystroke messages).  For normal windows ControlSend should be way more reliable than a normal Send - and yes it does send shift, ctrl, alt etc.<br>
+<br>
+As mention in the Send help the keyboard that send different chars when in CAPS LOCK and using the Shift Key cannot be simulated. An example is the Czech Keyboard. A good workaround is to use the ControlSetText.<br>
+<br>
+The control might first need to be given focus with the ControlFocus command, specially when referencing an controlID created by the script itself.<br>
+<br>
+Opt("SendKeyDelay",...) alters the the length of the brief pause in between sent keystrokes.<br>
+Opt("SendKeyDownDelay",...) alters the length of time a key is held down before being released during a keystroke.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ControlCommand.html">ControlCommand</a>, <a href="Send.html">Send</a>, <a href="ControlSetText.html">ControlSetText</a>, <a href="ControlFocus.html">ControlFocus</a>, <a href="AutoItSetOption.html#SendKeyDelay">SendKeyDelay (Option)</a>, <a href="AutoItSetOption.html#SendKeyDownDelay">SendKeyDownDelay (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ControlSend</span><span class="S8">(</span><span class="S7">"Untitled"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Edit1"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is a line of text in the notepad window"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ControlSend.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

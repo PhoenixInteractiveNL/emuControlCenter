@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DirMove.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function DirMove</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DirMove</font>
+<hr size="2">
+<p>Moves a directory and all sub-directories and files.<br></p>
+
+<p class="codeheader">
+DirMove ( "source dir", "dest dir" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">source dir</td>
+    <td width="85%">Path of the source directory (with no trailing backslash). e.g. "C:\Path1"</td>
+  </tr>
+  <tr>
+   <td>dest dir</td>
+   <td>Path of the destination dir (with no trailing backslash). e.g. "C:\Path_Copy"</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] this flag determines whether to overwrite files if they already exist:<br>
+       &nbsp;0 = (default) do not overwrite existing files<br>
+       &nbsp;1 = overwrite existing files</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if there is an error moving the directory.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If the source and destination are on different volumes or UNC paths are used then a copy/delete operation will be performed rather than a move.<br>
+<br>
+If the destination already exists and the overwrite flag is specified then the source directory will be moved <b>inside</b> the destination.<br>
+<br>
+Because AutoIt lacks a "DirRename" function, use DirMove to rename a folder!<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="DirRemove.html">DirRemove</a>, <a href="FileMove.html">FileMove</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">DirMove</span><span class="S8">(</span><span class="S7">"C:\My Documents"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"C:\Backups\MyDocs"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DirMove.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

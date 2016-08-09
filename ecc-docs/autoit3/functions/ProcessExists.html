@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessExists.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function ProcessExists</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProcessExists</font>
+<hr size="2">
+<p>Checks to see if a specified process exists. <br></p>
+
+<p class="codeheader">
+ProcessExists ( "process" ) <br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process</td>
+    <td width="85%">The name or PID of the process to check. </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the PID of the process.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if process does not exist.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Process names are executables without the full path, e.g., "notepad.exe" or "winword.exe"<br>
+<br>
+PID is the unique number which identifies a Process.<br>
+<br>
+In order to work under Windows NT 4.0, ProcessExists requires the file PSAPI.DLL (included in the AutoIt installation directory).<br>
+<br>
+The process is polled approximately every 250 milliseconds.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ProcessClose.html">ProcessClose</a>, <a href="ProcessWait.html">ProcessWait</a>, <a href="ProcessWaitClose.html">ProcessWaitClose</a>, <a href="WinExists.html">WinExists</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">If</span><span class="S0"> </span><span class="S4">ProcessExists</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Example"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Notepad is running."</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessExists.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

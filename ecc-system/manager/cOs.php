@@ -37,7 +37,35 @@
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false) {
+	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false, $enableEccScript = false) {
+		
+		// win98 needs "player". Otherwise, the file isnt started
+		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
+		
+		if ($theEmuCommand = $this->getEmuCommand($exeFileSource, $param, $romFileSource, $fileNameEscape, $fileName8dot3, $filenameOnly, $noExtension, $enableEccScript)){
+			$emuCommand = $theEmuCommand['command'];
+			$chdirDestination = $theEmuCommand['chdir'];
+		}
+		else return false;
+			
+		// Compile start command
+		$command = 'start '.$start_ident.' '.$emuCommand;
+		
+		#print $command."\n\n".$cwdBackup;
+		
+		// create an backup of the curren cwd
+		$cwdBackup = getcwd();
+		// change dir to the programs directory
+		chdir($chdirDestination);
+		// execute command
+		pclose(popen($command, "r"));
+		// change dir back to cwdBacup!
+		chdir($cwdBackup);
+		
+		return true;		
+	}
+	
+	public function getEmuCommand($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false, $enableEccScript = false) {
 		
 		// if filenameOnly set, only use the basename (name.rom) without path!
 		if ($filenameOnly) {
@@ -55,6 +83,18 @@
 		if (!$romFile) return false;
 		if (!$exeFile) return false;
 		
+		$eccScriptExeFile = '';
+		if ($enableEccScript) {
+			$eccLoc = FACTORY::get('manager/Validator')->getEccCoreKey('eccHelpLocations');
+			$scriptExtension = $eccLoc['ECC_SCRIPT_EXTENSION'];
+			if ($eccScriptFile = realpath($exeFileSource.$scriptExtension)){
+				$exeFile = $eccScriptFile;
+				if ($eccScriptExeFile = realpath(ECC_BASEDIR.$eccLoc['ECC_EXE_SCRIPT'])){
+					$eccScriptExeFile = '"'.$eccScriptExeFile.'"';
+				}
+			}
+		}
+		
 		// start romfile with removed fileextension e.g. "aof.rom" will be "aof"
 		if ($noExtension) {
 			$romFile = basename($romFile, '.'.FACTORY::get('manager/FileIO')->get_ext_form_file($romFile)); 
@@ -70,28 +110,31 @@
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = str_replace("&", "^&", $romFile);
 		}
 		else $romFile = escapeshellarg($romFile);
-				
+		
+		# eccScript dont support commandline-params at the beginning!
+		if($enableEccScript){
+			$param = '';
+			$param2 = '';
+		}
+		else{
+			if (!$param) $param = '';
+			$param2 = '';
+			if (FALSE !== $startPos = strpos($param, '%ROM%')){
+				$param2 = trim(substr($param, $startPos+5));
+				$param = trim(substr($param, 0, $startPos));
+			}
+		}
+		
+		if ($param) $param = ' '.$param;
+		if ($param2) $param2 = ' '.$param2;
+
 		// win98 needs "player". Otherwise, the file isnt started
 		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
 		
-		if (!$param) $param = '';
+		$emuCommand = trim($eccScriptExeFile.' "'.$exeFile.'"'.$param.' '.$romFile.$param2);
 		
-		// Compile start command
-		$command = 'start '.$start_ident.' "'.$exeFile.'" '.$param.' '.$romFile;
-
-		// create an backup of the curren cwd
-		$cwdBackup = getcwd();
-		// change dir to the programs directory
-		chdir($chdirDestination);
-		// execute command
-		pclose(popen($command, "r"));
-		// change dir back to cwdBacup!
-		chdir($cwdBackup);
+		return array('command' => $emuCommand, 'chdir' => $chdirDestination);
 		
-		// working faster, but not full tested!!!!
-		// FACTORY::get('manager/Os')->executeProgramDirect($filePathCommand, 'open', $romFile);
-
-		return true;		
 	}
 	
 	public function openChooseFolderDialog($path=false, $title=false) {
@@ -222,6 +265,7 @@
 	 * @return string string in 8.3 style
 	 */
 	private function getEightDotThreePath($filePath) {
+		if (!file_exists($filePath)) return $filePath;
 		$exFSO = new COM("Scripting.FileSystemObject");
 		$exFile = $exFSO->GetFile($filePath);
 		$filePath = $exFile->ShortPath;
@@ -237,11 +281,11 @@
 	 * @param unknown_type $path
 	 * @return unknown
 	 */
-	private function eccSetPathRelative($path) {
+	public function eccSetPathRelative($path, $fromBasepath = true) {
 		if ($path && realpath($path)) {
-			//$path = realpath($path);
-			if ($path!="" && strpos($path, ECC_BASEDIR) == 0) {
-				$path = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path);
+			if ($path!="" && strpos($path, ECC_BASEDIR) === 0) {
+				$offset = ($fromBasepath) ? ECC_BASEDIR_OFFSET : '';
+				$path = str_replace(ECC_BASEDIR, $offset, $path);
 				$path = str_replace("\\", "/", $path);
 			};
 		}

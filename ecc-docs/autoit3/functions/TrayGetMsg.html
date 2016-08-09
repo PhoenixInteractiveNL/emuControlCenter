@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayGetMsg.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TrayGetMsg</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayGetMsg</font>
+<hr size="2">
+<p>Polls the tray to see if any events have occurred.<br></p>
+
+<p class="codeheader">
+TrayGetMsg ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns an event.<br>
+The "event" returned is the control ID of the control sending the message, or it is a special event (like the mouse clicking on the tray icon). Or if there is no message, the event is 0.<br>
+<BR><br>
+<b>Event IDs</b><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">0</td>
+    <td width="90%">No event</td>
+  </tr>
+  <tr>
+    <td valign="top">Control ID</td>
+    <td>the ID of the control sending the message</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYDOWN</td>
+    <td>the primary mouse button was pressed</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYUP</td>
+    <td>the primary mouse button was released</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYDOWN</td>
+    <td>the secondary mouse button was pressed</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYUP</td>
+    <td>the secondary mouse button was released</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYDOUBLE</td>
+    <td>the primary mouse button was double pressed</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYDOUBLE</td>
+    <td>the secondary mouse button was double pressed</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+This function automatically idles the CPU when required so that it can be safely used in tight loops without hogging all the CPU.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="TrayCreateItem.html">TrayCreateItem</a>, <a href="TrayCreateMenu.html">TrayCreateMenu</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#Include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Default tray menu items (Script Paused/Exit) will not be shown.</span><br>
+<br>
+<span class="S9">$settingsitem</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateMenu</span><span class="S8">(</span><span class="S7">"Settings"</span><span class="S8">)</span><br>
+<span class="S9">$displayitem</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Display"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$settingsitem</span><span class="S8">)</span><br>
+<span class="S9">$printeritem</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Printer"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$settingsitem</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$aboutitem</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"About"</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$exititem</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ContinueLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$aboutitem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S7">"About:"</span><span class="S8">,</span><span class="S7">"AutoIt3-Tray-sample"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$exititem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayGetMsg.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

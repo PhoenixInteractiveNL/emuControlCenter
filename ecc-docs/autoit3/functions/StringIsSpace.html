@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsSpace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StringIsSpace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringIsSpace</font>
+<hr size="2">
+<p>Checks if a string contains only whitespace characters.<br></p>
+
+<p class="codeheader">
+StringIsSpace ( "string" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">The string to check</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if string contains non-whitespace characters.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Whitespace includes Chr(9) thru Chr(13) which are HorizontalTab, LineFeed, VerticalTab, FormFeed, and CarriageReturn.<br>
+<br>
+Whitespace also includes the standard space ( Chr(32) ).<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StringIsAlNum.html">StringIsAlNum</a>, <a href="StringIsAlpha.html">StringIsAlpha</a>, <a href="StringIsASCII.html">StringIsASCII</a>, <a href="StringIsDigit.html">StringIsDigit</a>, <a href="StringIsLower.html">StringIsLower</a>, <a href="StringIsUpper.html">StringIsUpper</a>, <a href="StringIsXDigit.html">StringIsXDigit</a>, <a href="StringUpper.html">StringUpper</a>, <a href="StringLower.html">StringLower</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">" &nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Chr</span><span class="S8">(</span><span class="S3">11</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">StringIsSpace</span><span class="S8">(</span><span class="S9">$x</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"String only contained whitespace characters."</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsSpace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

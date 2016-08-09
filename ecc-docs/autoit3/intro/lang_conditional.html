@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_conditional.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:52 GMT -->
+<head>
+  <title>Language Reference - Conditional Statements</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - Conditional Statements</h1>
+
+  
+<p>You will often want to change the flow of your script based on a <em>condition</em> 
+  or series of conditions.&nbsp; Is one number bigger than another?&nbsp; Or, 
+  does a string contain a certain value?&nbsp; </p>
+<p>Conditions are evaluated as <strong>true</strong> (non-zero) or <strong>false</strong> 
+  (zero).&nbsp; Conditions generally use comparison <a href="lang_operators.html">operators</a> 
+  like <strong>==</strong>, <strong>&lt;&gt;</strong>, <strong>&gt;=</strong>.</p>
+<p>&nbsp;</p>
+<p>The following conditional statements are available in AutoIt:</p>
+<ul>
+  <li>&nbsp;<a href="../keywords/IfElseEndIf.html">If...Then...Else</a></li>
+  <li>&nbsp;<a href="../keywords/Select.html">Select...Case</a></li>
+  <li>&nbsp;<a href="../keywords/Switch.html">Switch...Case</a></li>
+</ul>
+<p>Both statements are similar and decide which code to execute depending on the 
+  condition given.&nbsp; Here is an example of an <a href="../keywords/IfElseEndIf.html">If</a> 
+  statement that pops up a <a href="../functions/MsgBox.html">message box</a> if 
+  a variable is greater than 10.</p>
+<p class="codebox">$var = 20<br>
+  <br>
+  If $var &gt; 10 Then<br>
+&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;$var was greater than 
+  10!&quot;)<br>
+  Else<br>
+&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;$var was less than 10&quot;)<br>
+EndIf</p>
+<p>&nbsp;</p>
+<p>In the example above the expression <strong>$var &gt; 10</strong> evaluated 
+  to <strong>true</strong> because the variable was indeed greater than 10.&nbsp; This caused the If statement to execute the first MsgBox line and display <strong>&quot;$var 
+  was greater than 10!&quot;</strong>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>A <a href="../keywords/Select.html">Select</a> statement is very similar, but 
+  is generally used for situations where you want to test a large number of conditions 
+  as it is generally easier to read than than large If/ElseIf type block.&nbsp; 
+  e.g.</p>
+<p class="codebox">$var = 30<br>
+  <br>
+  Select<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case $var &gt; 1 AND $var &lt;= 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 1&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case $var &gt; 10 AND $var &lt;= 20<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 10&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case $var &gt; 20 AND $var &lt;= 30<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 20&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case $var &gt; 30 AND $var &lt;= 40<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 30&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case $var &gt; 40<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 40&quot;)<br>
+  EndSelect
+</p>
+<p>&nbsp;</p>
+<p>A <a href="../keywords/Switch.html">Switch</a> statement is very similar to 
+Select statement, but is generally used for situations where the same expression 
+is tested against some different possible values.</p>
+<p class="codebox">$var = 30<br>
+  <br>
+  Switch Int($var)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case 1 To 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 1&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case 11 To 20<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 10&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case 21 To 30<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 20&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case 31 To 40<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 30&quot;)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Case Else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, 
+  &quot;$var was greater than 40 or less r equal to 0&quot;)<br>
+  <br>
+  EndSwitch
+</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_conditional.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:53 GMT -->
+</html>

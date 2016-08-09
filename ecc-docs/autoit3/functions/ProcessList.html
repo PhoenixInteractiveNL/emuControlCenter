@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessList.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function ProcessList</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProcessList</font>
+<hr size="2">
+<p>Returns an array listing the currently running processes (names and PIDs).<br></p>
+
+<p class="codeheader">
+ProcessList ( ["name"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">name</td>
+    <td width="85%">[Optional] If a name is given only processes of the same name will be returned.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">An array of process names and PIDs (See Remarks).</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>@error is set to 1 when the list cannot be build.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The array returned is two-dimensional and is made up as follows:<br>
+$array[0][0] = Number of processes <br>
+$array[1][0] = 1st Process name<br>
+$array[1][1] = 1st Process ID (PID)<br>
+$array[2][0] = 2nd Process name<br>
+$array[2][1] = 2nd Process ID (PID)<br>
+...<br>
+$array[n][0] = nth Process name<br>
+$array[n][1] = nth Process ID (PID)<br>
+<br>
+The list can be empty if $array[0][0] = 0. No @error set in this case.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ProcessClose.html">ProcessClose</a>, <a href="ProcessExists.html">ProcessExists</a>, <a href="ProcessSetPriority.html">ProcessSetPriority</a>, <a href="ProcessWait.html">ProcessWait</a>, <a href="ProcessWaitClose.html">ProcessWaitClose</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; List all processes</span><br>
+<span class="S9">$list</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ProcessList</span><span class="S8">()</span><br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S3">0</span><span class="S8">][</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">][</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">][</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">next</span><br>
+<br>
+<span class="S1">; List just notepad.exe processes</span><br>
+<span class="S9">$list</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ProcessList</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S3">0</span><span class="S8">][</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">][</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$list</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">][</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">next</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessList.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

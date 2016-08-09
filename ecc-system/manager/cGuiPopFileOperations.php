@@ -85,8 +85,6 @@ class GuiPopFileOperations extends GladeXml {
 	}
 	
 	public function onNoteBookChanged($oNoteBook, $oUnknown) {
-		//$currentPageId = $oNoteBook->get_current_page();
-		//print "-> $currentPageId ".get_class($oNoteBook)." -> ".get_class($oUnknown)."\n\n";		
 	}
 	
 	public function show() {

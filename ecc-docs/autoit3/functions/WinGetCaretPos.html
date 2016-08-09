@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinGetCaretPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function WinGetCaretPos</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">WinGetCaretPos</font>
+<hr size="2">
+<p>Returns the coordinates of the caret in the foreground window<br></p>
+
+<p class="codeheader">
+WinGetCaretPos ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a 2-element array containing the following information:</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[0] = X coordinate</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[1] = Y coordinate</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+WinGetCaretPos might not return accurate values for Multiple Document Interface (MDI) applications if absolute CaretCoordMode is used.  See example for a workaround.  Note: Some applications report static coordinates regardless of caret position!<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#CaretCoordMode">CaretCoordMode (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$a</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetCaretPos</span><span class="S8">()</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"First Method Pos"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">2000</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$b</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> _CaretPos</span><span class="S8">()</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"Second Method Pos"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$b</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$b</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">2000</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; More reliable method to get caret coords in MDI text editors.</span><br>
+<span class="S5">Func</span><span class="S0"> _CaretPos</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$x_adjust</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> &nbsp;</span><span class="S3">5</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$y_adjust</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">40</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"CaretCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;relative mode</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$c</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetCaretPos</span><span class="S8">()</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;relative caret coords</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$w</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;window's coords</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$f</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ControlGetFocus</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S7">""</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;text region "handle"</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$e</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ControlGetPos</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$f</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;text region coords</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$t</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S4">IsArray</span><span class="S8">(</span><span class="S9">$c</span><span class="S8">)</span><span class="S0"> </span><span class="S5">and</span><span class="S0"> </span><span class="S4">IsArray</span><span class="S8">(</span><span class="S9">$w</span><span class="S8">)</span><span class="S0"> </span><span class="S5">and</span><span class="S0"> </span><span class="S4">IsArray</span><span class="S8">(</span><span class="S9">$e</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$t</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$c</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$w</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$e</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$x_adjust</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$t</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$c</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$w</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$e</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$y_adjust</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$t</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;absolute screen coords of caret cursor</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">SetError</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinGetCaretPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

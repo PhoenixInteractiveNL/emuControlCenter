@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_comments.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:54 GMT -->
+<head>
+  <title>Language Reference - Comments</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - Comments</h1>
+
+  
+<p>Although only one statement per line is allowed, a long statement can span 
+  multiple lines if an underscore &quot; _&quot; preceded by a blank is placed at the end of a "broken" line. 
+String definition cannot be split in several lines, concatenation need to be 
+used.<br>
+</p>
+<p class="codebox"> MsgBox(4096,"", "This is a rather long line, so I &quot; &amp; _<br>
+&nbsp;&nbsp; &quot;broke it with the underscore, _, character.")</p>
+<p>&nbsp;</p>
+
+  
+<p> The semicolon (;) is the comment character.&nbsp; Unless the semicolon is 
+  within a string, all text following it is ignored by the script interpreter/compiler.<br>
+</p>
+<p class="codebox">; The next line contains a meaningful, end-of-line comment<br>
+  Sleep(5000)&nbsp; ;pause 5 seconds
+</p>
+  
+<p>&nbsp;</p> 
+  
+<p>You can combine underscore and semicolon to put comments on lines and still 
+have&nbsp;a long statement span on next line.</p>
+<p class="codebox"> dim $b_ ; This _ is not a continuation character, nor is the next one<br>
+dim $k_<br>
+Dim $a[8][2] = [ _<br>
+		[ "Word", 4 ], _ 			; Comment 1<br>
+		[ "Test", 3 ], _<br>
+		[ "pi", 3.14159], _ 		; Associate the name with the value<br>
+		[ "e", 2.718281828465], _	; Same here<br>
+		[ "test;1;2;3", 123], _<br>
+		[ ';', Asc(';') ], _		; This comment is removed, but the strings remain.<br>
+		["", 0] ]</p>
+<p>&nbsp;</p>
+<p>It is also possible to comment of large blocks of script by using the <a href="../keywords/comments-start.html">#comments-start</a> 
+  and <a href="../keywords/comments-start.html">#comments-end</a> directives.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_comments.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:54 GMT -->
+</html>

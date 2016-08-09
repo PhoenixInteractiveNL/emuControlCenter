@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StatusbarGetText.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function StatusbarGetText</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StatusbarGetText</font>
+<hr size="2">
+<p>Retrieves the text from a standard status bar control.<br></p>
+
+<p class="codeheader">
+StatusbarGetText ( "title" [, "text" [, part]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">The title of the window to check.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>[optional] The text of the window to check.</td>
+  </tr>
+  <tr>
+   <td>part</td>
+   <td>[optional] The "part" number of the status bar to read - the default is 1.  1 is the first possible part and usually the one that contains the useful messages like "Ready" "Loading...", etc.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the text read.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns "" (blank string) and sets @error to 1 if no text could be read.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+This functions attempts to read the first standard status bar on a window (Microsoft common control: msctls_statusbar32).  Some programs use their own status bars or special versions of the MS common control which StatusbarGetText cannot read.  For example, StatusbarText does not work on the program TextPad; however, the first region of TextPad's status bar can be read using ControlGetText("TextPad", "", "HSStatusBar1")<br>
+StatusbarGetText can work on windows that are minimized or even hidden.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ControlGetText.html">ControlGetText</a>, <a href="ControlCommand.html">ControlCommand</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">AutoItSetOption</span><span class="S8">(</span><span class="S7">"WinTitleMatchMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StatusbarGetText</span><span class="S8">(</span><span class="S7">"Internet Explorer"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Internet Explorer's status bar says:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$x</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StatusbarGetText.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

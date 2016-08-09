@@ -45,4 +45,18 @@ $i18n['dropdown_lang'] = array(
 	'[[finnish]]' =>
 		"Finnish",
 );
+
+$i18n['languages'] = array(
+
+	'[[en]]' =>
+		"English",
+	'[[de]]' =>
+		"Deutsch",
+	'[[fr]]' =>
+		"Français",
+	'[[it]]' =>
+		"Italiano",
+	'[[es]]' =>
+		"Spanish",
+);
 ?>

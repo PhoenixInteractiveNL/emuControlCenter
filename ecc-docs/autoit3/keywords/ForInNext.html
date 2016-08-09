@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ForInNext.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Keyword For...In...Next</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">For...In...Next</font>
+<hr size="2">
+<p>Enumerates elements in an Object collection or an array<br></p>
+
+<p class="codeheader">
+<b>For</b> &lt;$Variable&gt; <b>In</b> &lt;expression&gt;<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>Next</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Variable</td>
+    <td width="85%">A variable to which an element is being assigned</td>
+  </tr>
+  <tr>
+   <td>expression</td>
+   <td>Must be an expression resulting in an Object, or an Array with at least one element</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The Variable will be created automatically with a LOCAL scope, even when MustDeclareVars is on.<br>
+If the expression is an Object collection with no elements, the loop will be skipped and the Variable will contain an empty string.<br>
+If the expression is not an Object nor an Array, the script stops with an error, unless a COM Error handler had been configured.<br>
+<br>
+For...In...Next statements may be nested.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="With.html">With...EndWith</a>, <a href="../functions/ObjEvent.html">ObjEvent (COM Error handler)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;Using an Array</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><br>
+<br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]=</span><span class="S7">"a"</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]=</span><span class="S3">0</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]=</span><span class="S3">1.3434</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]=</span><span class="S7">"test"</span><br>
+<br>
+<span class="S9">$string</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">FOR</span><span class="S0"> </span><span class="S9">$element</span><span class="S0"> </span><span class="S5">IN</span><span class="S0"> </span><span class="S9">$aArray</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$string</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$string</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$element</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S5">NEXT</span><br>
+<br>
+<span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"For..IN Arraytest"</span><span class="S8">,</span><span class="S7">"Result is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$string</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;Using an Object Collection</span><br>
+<br>
+<span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span><br>
+<span class="S9">$oShellWindows</span><span class="S8">=</span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span><br>
+<br>
+<span class="S5">if</span><span class="S0"> </span><span class="S4">Isobj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S9">$string</span><span class="S8">=</span><span class="S7">""</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">for</span><span class="S0"> </span><span class="S9">$Window</span><span class="S0"> </span><span class="S5">in</span><span class="S0"> </span><span class="S9">$oShellWindows</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Window</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">next</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"You have the following windows open:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$String</span><span class="S8">)</span><br>
+<span class="S5">else</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"you have no open shell windows."</span><span class="S8">)</span><br>
+<span class="S5">endif</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ForInNext.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

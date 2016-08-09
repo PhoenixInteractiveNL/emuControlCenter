@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinSetState.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function WinSetState</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">WinSetState</font>
+<hr size="2">
+<p>Shows, hides, minimizes, maximizes, or restores a window.<br></p>
+
+<p class="codeheader">
+WinSetState ( "title", "text", flag )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">The title of the window to show.  See <a href="../intro/windowsadvanced.html">Title special definition</a>.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>The text of the window to show.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>The "show" flag of the executed program:<br>
+       @SW_HIDE = Hide window<br>
+       @SW_SHOW = Shows a previously hidden window<br>
+       @SW_MINIMIZE = Minimize window<br>
+       @SW_MAXIMIZE = Maximize window<br>
+       @SW_RESTORE = Undoes a window minimization or maximization<br>
+       @SW_DISABLE = Disables the window<br>
+       @SW_ENABLE = Enables the window</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1. </td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if window is not found. </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If multiple windows match the criteria, the most recently active window is used.<br>
+@SW_MINIMIZE and @SW_MAXIMIZE even work on modal dialog windows.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="WinActivate.html">WinActivate</a>, <a href="WinClose.html">WinClose</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">WinSetState</span><span class="S8">(</span><span class="S7">"Untitled -"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">3000</span><span class="S8">)</span><br>
+<span class="S4">WinSetState</span><span class="S8">(</span><span class="S7">"Untitled -"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinSetState.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

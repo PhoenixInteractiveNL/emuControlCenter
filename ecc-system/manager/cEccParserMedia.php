@@ -15,7 +15,7 @@ class EccParserMedia {
 	private static $_timestamp = false;
 	
 	/*
-	* Übergabe des DB-Objects
+	* ï¿½bergabe des DB-Objects
 	*/
 	public function __construct($path) {
 		$this->_basepath = $this->normalize_path($path);
@@ -27,26 +27,13 @@ class EccParserMedia {
 	}
 	
 	/*
-	* Überprüft, wie vorgegangen werden muss.
+	* ï¿½berprï¿½ft, wie vorgegangen werden muss.
 	* Ist ein File schon in der datenbank, muss es nicht
 	* noch einmal indiziert werden.
 	*/
 	public function add_file($file_data) {
 		
 		$this->_file_data = $file_data;
-		
-		/*
-		// ABS-PATH TO REL-PATH...
-		$path_destination = realpath($path_destination);
-		if (strpos($path_destination, ECC_BASEDIR) == 0) {
-			print $path_destination."\n";
-			
-			$path_destination = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_destination);
-			
-			print $path_destination."\n";
-			print "----\n";
-		};
-		*/
 		
 		if ($this->_file_data) {
 			// Was muss getan werden
@@ -56,7 +43,7 @@ class EccParserMedia {
 				// NEU - Noch nicht in der Datenbank vorhanden.
 				$this->filedata_insert();
 			} else {
-				// UPDATE - Änderungen im File == neue checksumme
+				// UPDATE - ï¿½nderungen im File == neue checksumme
 				if (
 					($this->_file_data['FILE_MD5'] && $this->_file_data['FILE_MD5'] != $fd_exists['md5']) ||
 					($this->_file_data['FILE_CRC32'] && $this->_file_data['FILE_CRC32'] != $fd_exists['crc32'])
@@ -110,7 +97,7 @@ class EccParserMedia {
 	}
 	
 	/*
-	* Bei geänderten Inhalt hat die gleiche datei eine
+	* Bei geï¿½nderten Inhalt hat die gleiche datei eine
 	* neue checksumme. In diesem Fall werden alle daten geupdated
 	*/
 	private function filedata_update() {
@@ -148,8 +135,8 @@ class EccParserMedia {
 	}
 	
 	/*
-	* Löscht Files anhand des Pfades aus der datenbank.
-	* Wird benötigt, wenn der user ein Verzeichnis gelöscht
+	* Lï¿½scht Files anhand des Pfades aus der datenbank.
+	* Wird benï¿½tigt, wenn der user ein Verzeichnis gelï¿½scht
 	* hat oder die datei umbenannt hat.
 	*/
 	private function filedata_delete($path) {
@@ -184,7 +171,7 @@ class EccParserMedia {
 		";
 		$hdl = $this->dbms->query($q);
 		if ($res = $hdl->fetch(SQLITE_ASSOC)) {
-			// Checksummen zur weiteren controlle zurückreichen
+			// Checksummen zur weiteren controlle zurï¿½ckreichen
 			return $res;
 		}
 		return false;
@@ -210,7 +197,7 @@ class EccParserMedia {
 		#print "query: ".$q."\n";
 		$hdl = $this->dbms->query($q);
 		if ($res = $hdl->fetch(SQLITE_ASSOC)) {
-			// Checksummen zur weiteren controlle zurückreichen
+			// Checksummen zur weiteren controlle zurï¿½ckreichen
 			if ($res['cnt'] > 0) return true;
 		}
 		return false;
@@ -240,17 +227,17 @@ class EccParserMedia {
 	
 	/*
 	* Kontrolliert nach dem Parsen, ob die Daten in der Datenbank
-	* valide sind, soll heißen, ob die Files in der DB noch im Filesystem
-	* existieren. Wenn nicht, dann wird der DB-Eintrag gelöscht
+	* valide sind, soll heiï¿½en, ob die Files in der DB noch im Filesystem
+	* existieren. Wenn nicht, dann wird der DB-Eintrag gelï¿½scht
 	*/
 	public function optimize($type=false) {
 		
 		if (!$type && ($this->_basepath)) {
-			// nur files im und unterhalb des basepaths überprüfen.
+			// nur files im und unterhalb des basepaths ï¿½berprï¿½fen.
 			$q_snip = "AND path like '".$this->_basepath."%'";
 		}
 		else {
-			// alle überprüfen
+			// alle ï¿½berprï¿½fen
 			$q_snip = "";
 		}
 		
@@ -280,5 +267,24 @@ class EccParserMedia {
 		#return ($path);
 		return str_replace("\\", "/", $path);
 	}
+	
+	/*
+	* ermittelt die filesize, die in der db gespeichert ist.
+	*/
+	public function findMetaByFilesize($eccident, $filesize) {
+		$q= "SELECT filesize FROM mdata WHERE eccident = '".sqlite_escape_string($eccident)."' AND filesize = ".$filesize." LIMIT 0,1";
+		print $q.LF;
+		$hdl = $this->dbms->query($q);
+		if ($res = $hdl->fetch(SQLITE_ASSOC)) return true;
+		return false;
+	}
+	public function findMetaByCrc32($eccident, $crc32) {
+		$q= "SELECT crc32 FROM mdata WHERE eccident = '".sqlite_escape_string($eccident)."' AND crc32 = '".sqlite_escape_string($crc32)."' LIMIT 0,1";
+		print $q.LF;
+		$hdl = $this->dbms->query($q);
+		if ($res = $hdl->fetch(SQLITE_ASSOC)) return true;
+		return false;
+	}	
+	
 }
 ?>

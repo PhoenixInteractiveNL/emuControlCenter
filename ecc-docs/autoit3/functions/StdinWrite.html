@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StdinWrite.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StdinWrite</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StdinWrite</font>
+<hr size="2">
+<p>Writes a number of characters to the STDIN stream of a previously run child process.<br></p>
+
+<p class="codeheader">
+StdinWrite ( process_id[, string] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process_id</td>
+    <td width="85%">The process ID of a child process, as returned by a previous call to Run.</td>
+  </tr>
+  <tr>
+   <td>string</td>
+   <td>String of characters to write.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the number of characters written.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to -1 if STDIN was not redirected for the process or other error.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+StdinWrite writes to the console standard input stream for a child process, which is normally used by console applications to read input from the user i.e. from the keyboard. During the call to Run for the child process you wish to write to the STD I/O parameter must have included the value of $Stdin_Child for this function to work properly.<br>
+<br>
+The optional second parameter is the string that you wish StdinWrite to write to the stream. If the function is called with no second argument, StdinWrite closes the stream and invalidates it for further writing.<br>
+<br>
+The stream is a first-in first-out buffer with an arbitrary limited size; if at any time when this function is called (unless it's being called to close the stream) there is no room for more characters to be written to the stream, the StdinWrite function will block (pause) and not return until the child process closes the stream or reads enough characters from the stream to permit the write procedure to complete. This means that the AutoIt process will be halted, and there will be no processing of hotkeys, GUI messages, etc. until the child process reads from the STDIN stream.<br>
+<br>
+Streams of child processes run with RunAsSet cannot be written to at this time.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StdoutRead.html">StdoutRead</a>, <a href="StderrRead.html">StderrRead</a>, <a href="Run.html">Run</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Demonstrates the use of StdinWrite()</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S9">$foo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"sort.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STDIN_CHILD</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$STDOUT_CHILD</span><span class="S8">)</span><br>
+<span class="S1">; Write string to be sorted to child sort.exe's STDIN</span><br>
+<span class="S4">StdinWrite</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"rat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"cat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"bat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span><br>
+<span class="S1">; Calling with no 2nd arg closes stream</span><br>
+<span class="S4">StdinWrite</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Read from child's STDOUT and show</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Debug"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">StdoutRead</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StdinWrite.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

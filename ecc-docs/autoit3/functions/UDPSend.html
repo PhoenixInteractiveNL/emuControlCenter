@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/UDPSend.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function UDPSend</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">UDPSend</font>
+<hr size="2">
+<p>Sends data on an opened socket<br></p>
+
+<p class="codeheader">
+UDPSend ( socketarray, data)<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">socketarray</td>
+    <td width="85%">The main socket/array as returned by a <a href="UDPOpen.html">UDPOpen</a> function.</td>
+  </tr>
+  <tr>
+   <td>data</td>
+   <td>binary/string to be sent to the connected socket</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns number of bytes sent to the opened socket.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error according to the WSAGetError Windows API return.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>If IPAddr is incorrect @error is set to 1.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>If  port  is incorrect @error is set to 2.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+None.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="UDPOpen.html">UDPOpen</a>, <a href="UDPBind.html">UDPBind</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;;This is the UDP Client</span><br>
+<span class="S1">;;Start the server first</span><br>
+<br>
+<span class="S1">; Start The UDP Services</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S4">UDPStartup</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Open a "SOCKET"</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S9">$socket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UDPOpen</span><span class="S8">(</span><span class="S7">"127.0.0.1"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65532</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S9">$n</span><span class="S8">=</span><span class="S3">0</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">2000</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$status</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UDPSend</span><span class="S8">(</span><span class="S9">$socket</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Message #"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$status</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">then</span><span class="S0"> </span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ERROR"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error while sending UDP message: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@error</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Exit</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">EndIf</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnAutoItExit</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPCloseSocket</span><span class="S8">(</span><span class="S9">$socket</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPShutdown</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/UDPSend.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

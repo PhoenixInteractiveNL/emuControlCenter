@@ -1,71 +1,239 @@
--------------------------------------------------------------------------------
-- Version 0.9.1
--------------------------------------------------------------------------------
-FYEO 06
-- platformNav contextmenu "configuration" now opens the emuconfig + selected platform
-- fixed "show only roms w/o meta"
-- Compare/Merge now also for roms you dont have possible (metadata only!)
+------------------------------------------------------------------------------- 
+- ECC Version 0.9.5
+------------------------------------------------------------------------------- 
+FYEO 18
+- changed the mechanism to get the icon
+- create a valid JAD File for transfering a game to a cellphone
+- fixed an encoding problem in the infopane (causing ecc crash)
 
+FYEO 17 
+- fixed a little bug in datfile import 
+- fixed some glitches in infoPane 
+- added new i18n strings 
+- added new popups for confirmation and infos. No more focus problem! 
 
-FYEO 05
-- removed option "navigation autoupdate" Now activated by default!
-- removed the tooltips from navigation and mainlist...
-- optimized search
--- decrease timeout for freeform search
--- fixed the strange behavior of "match beginning of searchword"
-- ConfigPopup - added i18n entries for all tab-names
-- updated ecc-datfile format (v0.97) filesize added!
-- fixed open compare popup only, if different roms are selected.
-- Topmenu
--- now, "Add new ROMS" is deactivated, if no platform is selected!
---- Also, if a platform is selected, this is shown as "Add new ROMS for Platform"
---- Better, because the most new user dont know how "All found works" :-(
---- new i18n file for topmenu translation
+FYEO 16 
+- added game icon output to right pane 
+- restructured the DATA tab 
+- added new HEADER tab for parsed header informations 
 
-FYEO 04
-- Doubleclick on Platform-Navigation opens "Add ROM"
-- optimized contextmenu - 'Start ROM with' - Now begins with emulator-name
-- romCombiner (Compare/Merge)
--- added FULL merge functionallity to merge eg. title, developer to an other rom!
---- Use the arrows in popup to merge data!
--- added mainlist contextmenu 'Compare - Select left side' -> 'Compare to "romname"'
---- First select a rom with 'Compare - Select left side'
---- Then a second with 'Compare to "romname"'
---- OR use drag´n´drop!!!!
+FYEO 15 
+- implements manifest parser for java cellphone games (eccident: celljar) 
+-- Automaticlly gather metadata and icon images form jar game (+ copy to ecc-user folder) 
+-- validate the file. Corrupt files arent inserted! 
+- implemented eccScript comment preview, if an eccScript is available! 
+-- Shows max first 15 lines of comment. First Textline is hilighted! 
 
-FYEO 03
-- Added option "show all roms with personal notes!"
-- romCombiner
--- as first step added rom-compare - use drag-n-drop in maint listview!
-- ConfigPopup
--- images: Added Thumbnail quality / min original size selector
--- emucontrolcenter: reactivate startup-config
-- imageCenter
--- Added 3 additional slots for storage images (like cds, cartdridges aso)
-- hopefully fixed problem with parsing PS1 Files.
-- mainlist context-menu
--- added Remove ROM images (also automaticlly called after Remove ROM from database)
+FYEO 14 
+- implemented autodetection of eccScripts, if an emulator is assigned. 
+- disabled creating of eccScript, if no valid emulator is assigned! 
+- fixed problem to migrate to php 5.2.x 
 
-FYEO 02
-- emuConfig
--- added new info area for emulator infos/config-tips/weblink
-- Top-Menu
--- added "feel lucky", showing a single random game (F4)
--- added "reload", reloading roms in view (F5)
--- added new main-menu item for update! (eccLive!)
-- imageCenter
--- Add/Remove popup dont put imageCenter in background
-- Personal-Tab
--- added save/delete-confirmation!
--- Empty note will remove entry in database
-- center all confirm/info/browser popups
-- added some info-popups on add/remove
+FYEO 13 
+- tried again to fix the paring bug with big files... 
+-- added new process output 
+-- now files greater than 96 MB are slower processed! 
 
-FYEO 01
-- added nav-autoupdate for "show all available metadata"
-- imageCenter
--- added contextmenu to add/remove images (rightclick on a imageSlot)
--- added hilighting on selection 
-- optimized listviews performance
-- removed logging from allfound romparsing. To many results freezes ecc
-- better integration of ecc imageConverter + statistcs in status-area
+FYEO 12 
+- fixed "ECC Crash on 'Empty datfile database backup'" 
+- fixed "Incorrect platform count!" 
+- added big file handeling ('SLOW_CRC32_PARSING_FROM', 134217728) (128MB) 
+-- ecc asks for confirmation, if an biger file than SLOW_CRC32_PARSING_FROM is found and warns! 
+-- added mp3 filter for sound selection 
+
+FYEO 11 
+- disable commandline-parameters, if eccScript is selected. 
+- fixed a problem with saving the startup sound to the ini. 
+- fixed the problem with parsing files bigger than 500MB (ps1) ecc crashes 
+-- php runs in am memory allocation problem with file_get_contents 
+-- ecc freezes very long if parsing these big files  No way now to prevent this! 
+
+FYEO 10 
+- Implemented new VIEW-MODES "HAVE" + "DONT HAVE" 
+- Optimized queries for building and updating navigation. 
+- Cache navigation images 
+- Implemented image caching for listview images 
+- eccScript 
+- added indicator, if there is an eccscript available 
+- alert error, if there is no valid emulator assigned 
+- fixed some little glitches 
+- added real language-strings to lang-dropdown in configuration 
+
+FYEO 09 
+- added a autoupdating preview of the emulator command! COOOL  
+- added placeholder %ROM% to "commandline-parameter" in emu-config 
+-- "--fullscreen=1 %ROM% --sync=1 == (emu.exe --fullscreen=1 romfile.rom --sync=1)" 
+- fixed problem with param 8.3 causing a ecc-crash 
+
+FYEO 08 
+- added startup configuration 
+
+FYEO 07 
+- added autoupdate for categories dropdown! 
+- optimize speed of import datfiles / parse roms to database 
+
+FYEO 06 
+- eccScript 
+-- added delete-button 
+-- escape path for script creation (button edit/create) 
+-- changed extension to .eccscript 
+-- added active/inactive state for eccscript 
+- added the 05+ features 
+
+FYEO 05 
+- fixed eccScript problem with finding eccScript.exe 
+- implemented button to edit eccScript to configuration 
+-- for ecc-core/tools-thirdParty/notepad++/notepad++.exe 
+- added /fastload for config-changes 
+- changed order in emu-config GLOBAL|ALT1|ALT2|extension1|....|extensionN 
+
+FYEO 04 
+- implemented possibility for platforms, to parse only roms with available metadata entry 
+- !!! THIS IS ONLY DEVEL !!! - This could be added to ecc_eccident_user.ini later 
+-- used for multifile platforms like neogeo 
+-- Create a datfile with the first (start) file of a game as entry in the datfile 
+-- Import this datfile to ecc metadatabase 
+--- ecc searches, if this entry is in db and parse the rom, otherwise not! 
+--- you have to set the option "connectedMetaOnly = 1" in the ecc_eccident_system.ini 
+
+FYEO 03 
+- Added possibility to start eccScript direct, if available 
+- updated frensh translation by cyrille 
+
+FYEO 02 
+- imageCenter: implemented storage for imagePopup options and imageslot expander (bottom) 
+- fixed a glitch in the compare-popup 
+- Full restructured right detail-pane for better overview 
+- added more translation files for mainGui and Metainformations pane 
+
+FYEO 01 
+- Added and fixed some i18n placeholders in configPopup 
+- added /fastload to ecc.exe calls
+
+- Added platforms 
+-- Entex Adventure Vision
+-- Sony Pocketstation
+-- Nintendo Pokémon mini
+-- Sharp MZ-2000
+-- Bally Astrocade
+-- RCA Studio II
+-- Cellphone Java games
+
+- Some small fixes
+-- Nintendo Virtual Boy now in handheld category! 
+-- Emu name fix for 'Nintendo Pokemon mini' 
+-- Emu name fix for 'Sony Pocketstation' 
+-- Removed all 'romrunner' strings in platform user INI
+-- Updated images
+--- TEASER & NAV --> Atari 2600 (the JR console) 
+--- NAV --> Atari 5200 (made transparant) 
+--- NAV --> Nec Pc Engine (fixed oversize) 
+
+- ECC Documentation 
+2007.06.17: 
+- Much better overview
+- New section: Scriptfunctions
+  - Added complete off-line mirror of Autoit3
+  - Added known scripts for ECC
+
+- ECC Startup 
+v2.0.0.5:
+- Now works with new ECC Live! v2.2.0.0
+- Fixed bug when 'startup check' notice shows message everytime!, until the user pressed 'yes'
+v2.0.0.4:
+- Fixed bug when ECC did not startup when having spaces in the pathname! 
+- Added timeout on ECC window catching! when ECC could/did not startup! 
+  - No more splashscreen hanging anymore!!, timeout is set on 5 sec! 
+- Added extra window on 'error' to notice user to use Bugreport or forum. 
+v2.0.0.3:
+- Put 'first startup' message to AFTER the checkup message.
+- Added warning if user is no admin or not in admin mode
+  - Because a user in admin mode has 'read-only' priveleges.
+- Now works with php 5.2.3.3
+v2.0.0.2:
+- Fixed some issues with the sound playing
+  - Fixed that sound plays again on ECC 'fastload'
+  - Fixed soundplay from being cut-off (because of unload ecc.exe)
+  - Sound now plays after splashcreen!
+- Fixed issue if splashscreen hangs
+  - When title screen hangs it should be closed when starting ECC again
+    This should prevent unnessesary multiple instances of ecc.exe!
+- ECC teaser image has been locked! (no change allowed)
+v2.0.0.1:
+- New splash screen & teaser image!
+- All ECC 'yellow' icons have been updated and look much better!
+- Added new startup sound
+- Added ECC teaser image validation
+- Reduced the splashscreen fade-in from 900 ms to 600 ms
+v2.0.0.0:
+- Total rewrite of the code (from 60 KB to 11 KB!!) 
+  - I did some 'smart 'n' better' coding ;) 
+  - Removed over 40 messageboxes and other stuff. 
+- No more usage of 'ecc-system\conf\ecc_startup.ini' (all variables are 'baked-in') 
+- Removed unnessesary checking of files and values. 
+  - This will also speedup the startup a little bit! 
+- Implented better ECC detection (not checking for 'php.exe' process anymore)
+  - This will let ECC function on a server machine!
+- When ECC crashed, it will startup normally again!
+  - This is without using the (now removed) '/unload' option first.
+- Changed the icon to the 'yellow' icon.
+- New MD5 hash for PHP ini (removed some lines not needed by ECC)
+- The auto update check does not function at this time! 
+  - I have to implent this feature in ECC Live! itself first
+- Tweaked the ECC title a little bit now: version...build...date....update 
+- Updated the 'default' general INI with the new strings 
+  - When general.ini not exist in 'ecc-user-configs' it will be copied from 'ecc-system\conf' 
+- Removed commandline parameters 
+  - Command '/config' removed (Can now configured in ECC itself) 
+  - Command '/about' removed (now in ecc-docs file) 
+  - Command '/regreset' removed (now using INI file) 
+  - Command '/regdelete' removed (now using INI file) 
+  - Command '/deskicon' removed (done by installer) 
+  - Command '/verify' removed (done by external program later) 
+  - Command '/phpinfo' removed (not needed anymore) 
+  - Command '/unload' removed (not needed anymore, ecc should startup again when crashed) 
+v1.4.2.2:
+- Fixed a 'ecc can not start twice' bug when changing from detail/list view. 
+
+- ECC Live! 
+v2.2.0.0 
+- Own update check-up (instead of ecc.exe v1.4.2.x) 
+- Using a INI file instead of 'zero byte' files to read-out 'status' 
+- Updating unrar from v3.20 (2003) to v3.70 (2007) 
+  - Placing unrar in 'thirdparty' and added license.txt 
+- Removed version check-ups of tools 
+- Adjusting some text in messageboxes 
+- Changed color & lettertype to verdana in info boxes
+- Cleaned-up some internal code
+
+- ECC Live! UPD 
+v2.0.0.3 
+- Changed Unrar path to 'ecc-core\thirdparty\unrar'
+
+- ECC Script
+v1.1.0.0
+- Turbo mode!, by using another function script validation speed has been increased by 50 times!!
+v1.0.0.3
+- Removed Autoit3 check 
+  - This will let ECC Script function on computers that have autoit3 running for other purposes 
+  - Multiple scripts can executed at the same time (if needed)
+v1.0.0.2
+- Added extra commandline support (pushed to script) 
+  - Commandline 2 in script is extra emulator options BEFORE ROM 
+  - Commandline 3 in script is extra emulator options AFTER ROM 
+- Internal checks 
+  - Added folder check (ecc-tools) 
+  - Added name check (eccScript.exe) 
+v1.0.0.1
+- Added 'please wait' text string to validation 
+- Removed the 'close' string from the validation 'blacklist' 
+
+- Tools GLOBAL 
+- Added Thirdparty tools for scriptfunctions 
+  - Autoit v3.2.4.9 
+  - Notepad++ v4.1.2 
+- Added NEW tool: eccScript
+  - This is to validate & run ECC scripts.
+
+- Core components 
+-- PHP update from 5.1.4.4 (04-May-2006) to v5.2.3.3 (31-May-2007)

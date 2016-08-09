@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Run.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function Run</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Run</font>
+<hr size="2">
+<p>Runs an external program.<br></p>
+
+<p class="codeheader">
+Run ( "filename" [, "workingdir" [, flag[, standard_i/o_flag]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">The name of the executable (EXE, BAT, COM, or PIF) to run.</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>[optional] The working directory.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] The "show" flag of the executed program:<br>
+       &nbsp;&nbsp;@SW_HIDE = Hidden window<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = Minimized window<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = Maximized window</td>
+  </tr>
+  <tr>
+   <td>standard_i/o_flag</td>
+   <td>[optional] Provide a meaningful handle to one or more STD I/O streams of the child process.<br>
+       &nbsp;&nbsp;1 ($STDIN_CHILD)  = Provide a handle to the child's STDIN stream<br>
+       &nbsp;&nbsp;2 ($STDOUT_CHILD) = Provide a handle to the child's STDOUT stream<br>
+       &nbsp;&nbsp;4 ($STDERR_CHILD) = Provide a handle to the child's STDERR stream</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">The PID of the process that was launched.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Depends on RunErrorsFatal; see Remarks.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To run DOS (console) commands, try <i>Run(@ComSpec & " /c " & 'commandName', "", @SW_HIDE)</i><br>
+<br>
+After running the requested program the script continues.  To pause execution of the script until the spawned program has finished use the RunWait function instead.<br>
+<br>
+By default the script will terminate with a fatal error if the Run function fails.  To set @error 1, @extended to GetLastError() Windows API and return 0 as an indication of failure, see AutoItSetOption.<br>
+<br>
+Providing the Standard I/O parameter with the proper values permits interaction with the child process through the StderrRead, StdinWrite and StdoutRead functions. Combine the flag values (or use $STDERR_CHILD, $STDIN_CHILD & $STDOUT_CHILD, defined in Constants.au3) to manage more than one stream.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="RunAsSet.html">RunAsSet</a>, <a href="AutoItSetOption.html#RunErrorsFatal">RunErrorsFatal (Option)</a>, <a href="RunWait.html">RunWait</a>, <a href="ShellExecute.html">ShellExecute</a>, <a href="ShellExecuteWait.html">ShellExecuteWait</a>, <a href="StderrRead.html">StderrRead</a>, <a href="StdinWrite.html">StdinWrite</a>, <a href="StdoutRead.html">StdoutRead</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"Notepad.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MAXIMIZE</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Run.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

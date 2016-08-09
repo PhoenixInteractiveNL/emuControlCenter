@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function DriveMapAdd</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DriveMapAdd</font>
+<hr size="2">
+<p>Maps a network drive.<br></p>
+
+<p class="codeheader">
+DriveMapAdd ( "device", "remote share" [, flags [, "user" [, "password"]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">device</td>
+    <td width="85%">The device to map, for example "O:" or "LPT1:".  If you pass a blank string for this parameter a connection is made but not mapped to a specific drive.  If you specify "*" an unused drive letter will be automatically selected.</td>
+  </tr>
+  <tr>
+   <td>remote share</td>
+   <td>The remote share to connect to in the form "\\server\share".</td>
+  </tr>
+  <tr>
+   <td>flags</td>
+   <td>[optional]<br>
+       A combination of the following:<br>
+       0 = default<br>
+       1 = Persistent mapping<br>
+       8 = Show authentication dialog if required</td>
+  </tr>
+  <tr>
+   <td>user</td>
+   <td>[optional] The username to use to connect.  In the form "username" or "domain\username".</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>[optional] The password to use to connect.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.  (See Remarks)</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if a new mapping could not be created and sets @error (see below).  (See Remarks)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+When the function fails (returns 0) @error contains extended information:<br>
+&nbsp;1 = Undefined / Other error. @extended set with Windows API return<br>
+&nbsp;2 = Access to the remote share was denied<br>
+&nbsp;3 = The device is already assigned<br>
+&nbsp;4 = Invalid device name<br>
+&nbsp;5 = Invalid remote share<br>
+&nbsp;6 = Invalid password<br>
+<br>
+Note: When using "*" for the device parameter the drive letter selected will be returned instead of 1 or 0, e.g. "U:".  If there was an error using "*" then a blank string "" will be returned.<br>
+<br>
+If defined the user/password will be presented to the remote computer that will validate the credential.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="DriveMapDel.html">DriveMapDel</a>, <a href="DriveMapGet.html">DriveMapGet</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S1">; Map X drive to \\myserver\stuff using current user</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver\stuff"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Map X drive to \\myserver2\stuff2 using the user "jon" from "domainx" with password "tickle"</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver2\stuff2"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"domainx\jon"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"tickle"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

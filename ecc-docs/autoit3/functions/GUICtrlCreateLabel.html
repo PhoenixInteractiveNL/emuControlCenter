@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateLabel.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function GUICtrlCreateLabel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreateLabel</font>
+<hr size="2">
+<p>Creates a static Label control for the GUI.<br></p>
+
+<p class="codeheader">
+GUICtrlCreateLabel ( "text", left, top [, width [, height [, style [, exStyle]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">text</td>
+    <td width="85%">The text of the control.</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>The left side of the control. If -1 is used then left will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>The top of the control. If -1 is used then top will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td>[optional] The width of the control (default is the previously used width).</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td>[optional] The height of the control (default is the previously used height).</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>[optional] Defines the style of the control. See <a href="../appendix/GUIStyles.html#Label">GUI Control Styles Appendix</a>.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>default ( -1) : none.<br>
+       forced styles : $SS_NOTIFY, $SS_LEFT</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td>[optional] Defines the extended style of the control. See <a href="../appendix/GUIStyles.html#Extended">Extended Style Table</a>.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the identifier (controlID) of the new control.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To set or change information in the control see <a href="../guiref/GUICtrlSet.html">GUICtrlSet...</a>.<br>
+<br>
+To combine styles with the default style use <b>BitOr</b>($GUI_SS_DEFAULT_LABEL, newstyle,...).<br>
+<br>
+Default resizing is $GUI_DOCKAUTO size and position will occur.<br>
+<br>
+The extended style $GUI_WS_EX_PARENTDRAG can be used to allow the dragging of the parent window for windows that don't have a titlebar (no $WS_CAPTION style in GUICreate).<br>
+<br>
+To set the background to transparent, use GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT).<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#GUICoordMode">GUICoordMode (Option)</a>, <a href="../guiref/GUICtrlSet.html">GUICtrlSet...</a>, <a href="GUIGetMsg.html">GUIGetMsg</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; will create a dialog box that when displayed is centered</span><br>
+<br>
+<span class="S4">GUISetHelp</span><span class="S8">(</span><span class="S7">"notepad"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; will run notepad if F1 is typed</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$widthCell</span><span class="S8">=</span><span class="S3">70</span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Line 1 Cell 1"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$widthCell</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; first cell 70 width</span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Line 2 Cell 1"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; next line</span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Line 3 Cell 2"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; next line and next cell &nbsp;</span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Line 3 Cell 3"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; next cell same line </span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Line 4 Cell 1"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S8">-</span><span class="S3">3</span><span class="S8">*</span><span class="S9">$widthcell</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; next line Cell1</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; will display an empty dialog box</span><br>
+<br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateLabel.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

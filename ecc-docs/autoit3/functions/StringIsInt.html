@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsInt.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StringIsInt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringIsInt</font>
+<hr size="2">
+<p>Checks if a string is an integer.<br></p>
+
+<p class="codeheader">
+StringIsInt ( "string" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">The string to check.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if string cannot be an integer.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+StringIsInt also returns 1 for non-string integer expressions; however, StringIsInt returns 0 for hexadecimal expressions such as "4ff0".  The only punctuation allowed is either a plus or a minus at the beginning of the string.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StringIsFloat.html">StringIsFloat</a>, <a href="StringIsDigit.html">StringIsDigit</a>, <a href="IsInt.html">IsInt</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">StringIsInt</span><span class="S8">(</span><span class="S7">"+42"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 1</span><br>
+<span class="S4">StringIsInt</span><span class="S8">(</span><span class="S7">"-00"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 1</span><br>
+<span class="S4">StringIsInt</span><span class="S8">(</span><span class="S7">"1.0"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 0 due to the decimal point</span><br>
+<span class="S4">StringIsInt</span><span class="S8">(</span><span class="S3">1.0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S1">;returns 1 due to number-string conversion</span><br>
+<span class="S4">StringIsInt</span><span class="S8">(</span><span class="S7">"1+2"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;returns 0 due to plus sign</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringIsInt.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

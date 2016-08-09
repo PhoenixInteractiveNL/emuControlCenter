@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSendToDummy.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+<head>
+  <title>Function GUICtrlSendToDummy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSendToDummy</font>
+<hr size="2">
+<p>Sends a message to a Dummy control.<br></p>
+
+<p class="codeheader">
+GUICtrlSendToDummy ( controlID [, state] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">The control identifier (controlID) as returned by <a href="GUICtrlCreateDummy.html">GUICtrlCreateDummy</a></td>
+  </tr>
+  <tr>
+   <td>state</td>
+   <td>[optional] value that can be retrieved later on by <a href="GUICtrlRead.html">GUICtrlRead</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+When this function is called a notification that can be handled through the message loop or with a <a href="GUICtrlSetOnEvent.html">OnEvent</a> function is generated (as if the control had been &quot;clicked&quot; on).<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUICtrlCreateDummy.html">GUICtrlCreateDummy</a>, <a href="GUICtrlSetOnEvent.html">GUICtrlSetOnEvent</a>, <a href="GUICtrlRead.html">GUICtrlRead</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"GUISendToDummy"</span><span class="S8">,</span><span class="S3">220</span><span class="S8">,</span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S3">200</span><span class="S8">)</span><br>
+<span class="S4">GUISetBkColor</span><span class="S0"> </span><span class="S8">(</span><span class="S3">0x00E0FFFF</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; will change background color</span><br>
+<span class="S4">GUICtrlSetOnEvent</span><span class="S8">(</span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OnClick"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; to handle click on button</span><br>
+<br>
+<span class="S9">$user</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateDummy</span><span class="S8">()</span><br>
+<span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Onexit"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; to handle click on button</span><br>
+<span class="S9">$button</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"event"</span><span class="S8">,</span><span class="S3">75</span><span class="S8">,</span><span class="S3">170</span><span class="S8">,</span><span class="S3">70</span><span class="S8">,</span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OnClick"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; to handle click on button</span><br>
+<span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S4">Sleep</span><span class="S0"> </span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnClick</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S4">GUICtrlSendToDummy</span><span class="S8">(</span><span class="S9">$user</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; fired dummy control</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnExit</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S1">; special action before exiting</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">Exit</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSendToDummy.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DllStructCreate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function DllStructCreate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllStructCreate</font>
+<hr size="2">
+<p>Creates a C/C++ style structure to be used in DllCall.<br></p>
+
+<p class="codeheader">
+DllStructCreate ( "Struct" [,Pointer] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">"Struct"</td>
+    <td width="85%">A string representing the structure to create (See Remarks).</td>
+  </tr>
+  <tr>
+   <td>Pointer</td>
+   <td>If supplied the struct will not allocate memory but use the pointer supplied.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">A variable for use with DllStruct calls.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>0.</td>
+  </tr>
+  <tr>
+    <td valign="top">@Error:</td>
+    <td>0 = No Error.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 = Variable passed to DllStructCreate was not a string.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>2 = There is an unknown Data Type in the string passed.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>3 = Failed to allocate the memory needed for the struct, or Pointer = 0.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>4 = Error allocating memory for the passed string.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Each data type must be separated by a semi-colon ';'.  Create arrays by adding '[size]' after the data type.<br>
+DllStructCreate("int;char[128]"). An elementname can be added similar C declaration DllStructCreate("int n;char buffer[128]"). This dataname can be used in place of the element in other DllStruct... functions.<br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>Type</b></td>
+    <td width="85%"><b>Details</b></td>
+  </tr>
+  <tr>
+   <td>byte</td>
+   <td>8bit(1byte) signed char</td>
+  </tr>
+  <tr>
+   <td>ubyte</td>
+   <td>8bit(1byte) unsigned char</td>
+  </tr>
+  <tr>
+   <td>char</td>
+   <td>8bit(1byte) ASCII char</td>
+  </tr>
+  <tr>
+   <td>short</td>
+   <td>16bit(2bytes) signed integer</td>
+  </tr>
+  <tr>
+   <td>ushort</td>
+   <td>16bit(2bytes) unsigned integer</td>
+  </tr>
+  <tr>
+   <td>int</td>
+   <td>32bit(4bytes) signed integer</td>
+  </tr>
+  <tr>
+   <td>long</td>
+   <td>32bit(4bytes) signed integer</td>
+  </tr>
+  <tr>
+   <td>uint</td>
+   <td>32bit(4bytes) unsigned integer</td>
+  </tr>
+  <tr>
+   <td>dword</td>
+   <td>32bit(4bytes) signed integer</td>
+  </tr>
+  <tr>
+   <td>udword</td>
+   <td>32bit(4bytes) unsigned integer</td>
+  </tr>
+  <tr>
+   <td>ptr</td>
+   <td>32bit(4bytes) integer</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td>32bit(4bytes) integer</td>
+  </tr>
+  <tr>
+   <td>float</td>
+   <td>32bit(4bytes) floating point</td>
+  </tr>
+  <tr>
+   <td>double</td>
+   <td>64bit(8bytes) floating point</td>
+  </tr>
+  <tr>
+   <td>int64</td>
+   <td>64bit(8bytes) signed integer</td>
+  </tr>
+  <tr>
+   <td>uint64</td>
+   <td>64bit(8bytes) unsigned integer</td>
+  </tr>
+</table><br>
+To release allocated memory just reset the returned variable to 0.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="DllCall.html">DllCall</a>, <a href="DllStructCreate.html">DllStructCreate</a>, <a href="DllStructGetData.html">DllStructGetData</a>, <a href="DllStructSetData.html">DllStructSetData</a>, <a href="DllStructGetPtr.html">DllStructGetPtr</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;Create the struct</span><br>
+<span class="S1">;&nbsp; &nbsp;struct {</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; int&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var1;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; unsigned char&nbsp; &nbsp;var2;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; unsigned int&nbsp; &nbsp; var3;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; char&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var4[128];</span><br>
+<span class="S1">;&nbsp; &nbsp;}</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S9">$str</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"int var1;ubyte var2;uint var3;char var4[128]"</span><br>
+<span class="S9">$a</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S9">$str</span><span class="S8">)</span><br>
+<span class="S5">if</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"Error in DllStructCreate "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@error</span><span class="S8">)</span><span class="S1">;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">exit</span><br>
+<span class="S5">endif</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;Set data in the struct</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var1&nbsp;= -1;</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var2&nbsp;= 255;</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var3&nbsp;= INT_MAX; -1 will be typecasted to (unsigned int)</span><br>
+<span class="S1">;&nbsp; &nbsp;strcpy(struct.var4,"Hello");</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var4[0]&nbsp; = 'h';</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S7">"var1"</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S7">"var2"</span><span class="S8">,</span><span class="S3">255</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S7">"var3"</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S7">"var4"</span><span class="S8">,</span><span class="S7">"Hello"</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S7">"var4"</span><span class="S8">,</span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"h"</span><span class="S8">),</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;Display info in the struct</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"DllStruct"</span><span class="S8">,</span><span class="S7">"Struct Size: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Struct pointer: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Data:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">3</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">4</span><span class="S8">))</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;Free the memory allocated for the struct if needed</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S9">$a</span><span class="S8">=</span><span class="S3">0</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DllStructCreate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

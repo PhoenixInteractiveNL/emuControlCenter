@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitXOR.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function BitXOR</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BitXOR</font>
+<hr size="2">
+<p>Performs a bitwise exclusive OR (XOR) operation.<br></p>
+
+<p class="codeheader">
+BitXOR ( value1, value2 [, value n] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value1</td>
+    <td width="85%">The first number.</td>
+  </tr>
+  <tr>
+   <td>value2</td>
+   <td>The second number.</td>
+  </tr>
+  <tr>
+   <td>value n</td>
+   <td>[optional] The nth number - up to 255 values can be specified.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the value of the parameters bitwise-XOR'ed together.<br>
+Bit operations are performed as 32-bit integers.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Remember hex notation can be used for numbers.<br>
+BitXOR returns 1 in a bit position if there are an odd number 1's in the corresponding bit position in all the input arguments, and 0 otherwise.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="BitAND.html">BitAND</a>, <a href="BitNOT.html">BitNOT</a>, <a href="BitOR.html">BitOR</a>, <a href="BitShift.html">BitShift</a>, <a href="Hex.html">Hex</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitXOR</span><span class="S8">(</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;x == 12 because 1010b XOR 0110b == 1100</span><br>
+<br>
+<span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitXOR</span><span class="S8">(</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">)</span><span class="S0"> </span><span class="S1">;x == 7 because 0010 XOR 0011 XOR 0110 = 0111</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitXOR.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

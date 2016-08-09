@@ -1,0 +1,23 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	License Agreement and Warranty Disclaimer
+Class:	#32770
+Size:	X: 473    Y: 368    W: 452    H: 279
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+As with other software, WinZip is subject to WARRANTY DISCLAIMERS and
+LIABILITY LIMITATIONS, including (but not limited to) the following:
+THIS SOFTWARE, AND ALL ACCOMPANYING FILES, DATA AND MATERIALS, ARE
+DISTRIBUTED "AS IS", and ANY LIABILITY OF WINZIP COMPUTING, INC. (WCI)
+WILL BE LIMITED EXCLUSIVELY TO REFUND OF THE LICENSE FEE PAID TO WCI.
+In addition, this version of WinZip is subject to the complete
+WinZip License Agreement, which you can view by clicking on the
+"View License Agreement" button now.
+I agree that by clicking on the "Yes" button below (or otherwise installing
+or using WinZip), I accept all terms of the License Agreement, and that I
+have read the License Agreement.
+&Yes
+&No
+&View License Agreement
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<

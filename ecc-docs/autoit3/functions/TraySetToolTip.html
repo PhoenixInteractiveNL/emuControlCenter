@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TraySetToolTip.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TraySetToolTip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TraySetToolTip</font>
+<hr size="2">
+<p>(Re)Sets the tooltip text for the tray icon.<br></p>
+
+<p class="codeheader">
+TraySetToolTip ( [text] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">text</td>
+    <td width="85%">[optional] The new text to be displayed as tooltip. The length is limited - see Remarks.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+!!! In Windows 95/98/NT4 the length of the tooltip text is limited to 64 characters, in Windows Me/2000/XP/2003 it is limited to 128 characters !!!<br>
+<br>
+To reset the tooltip to the default text, use the function with no parameters:<br>
+TraySetToolTip().<br>
+<br>
+The tooltip text is only changed when the tray icon is visible!<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="TrayTip.html">TrayTip</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#Include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<span class="S4">TraySetToolTip</span><span class="S8">(</span><span class="S7">"This is my new tooltip text!"</span><span class="S8">)</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Idle loop</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TraySetToolTip.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

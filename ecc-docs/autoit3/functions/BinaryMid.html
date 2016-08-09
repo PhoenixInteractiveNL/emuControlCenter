@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BinaryMid.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function BinaryMid</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BinaryMid</font>
+<hr size="2">
+<p>Extracts a number of bytes from a binary variant.<br></p>
+
+<p class="codeheader">
+BinaryMid ( binary, start [, count] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">binary</td>
+    <td width="85%">The binary data to evaluate.</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>The byte position to start.  (1 = first byte)</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>[optional] The number of bytes to extract. By default the entire remainder of the binary data.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the extracted binary data.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If <i>start</i> is out-of-bounds, an empty binary variant is returned.  If <i>start</i> is valid but count is out-of-bounds, the entire remainder of the binary data is returned.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Binary.html">Binary</a>, <a href="BinaryLen.html">BinaryLen</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Create the binary data 0x10203040</span><br>
+<span class="S9">$binary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Binary</span><span class="S8">(</span><span class="S7">"0x10203040"</span><span class="S8">)</span><br>
+<span class="S9">$extract</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryMid</span><span class="S8">(</span><span class="S9">$binary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"2nd and 3rd bytes are"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$extract</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BinaryMid.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

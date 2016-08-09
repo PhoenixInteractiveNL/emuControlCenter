@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/AutoItSetOption.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function AutoItSetOption</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">AutoItSetOption</font>
+<hr size="2">
+<p>Changes the operation of various AutoIt functions/parameters.<br></p>
+
+<p class="codeheader">
+AutoItSetOption ( "option" [, param] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">option</td>
+    <td width="85%">The option to change.  See Remarks.</td>
+  </tr>
+  <tr>
+   <td>param</td>
+   <td>[optional] The value to assign to the option.  The type and meaning vary by option.  See remarks below.  If the param is not provided, then the function just returns the value already assigned to the option.  The keyword <a href="../keywords/Default.html">Default</a> can be used for the parameter to reset the option to its default value.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the value of the previous setting for the option.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+You may use Opt() as an alternative to AutoItSetOption().<br>
+<br>
+AutoIt will halt with an error message if the requested option is unknown.  Options are as follows:<br>
+<br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>Option</b></td>
+    <td width="85%"><b>Param</b></td>
+  </tr>
+  <tr>
+   <td>CaretCoordMode</td>
+   <td><a name="CaretCoordMode"></a>Sets the way coords are used in the caret functions, either absolute coords or coords relative to the current active window:<br>
+       0 = relative coords to the active window<br>
+       1 = absolute screen coordinates (default)<br>
+       2 = relative coords to the client area of the active window</td>
+  </tr>
+  <tr>
+   <td>ColorMode</td>
+   <td><a name="ColorMode"></a>Sets the way colors are defined, either RGB or BGR.  RGB is the default but in previous versions of AutoIt (pre 3.0.102) BGR was the default:<br>
+       0 = Colors are defined as RGB (0xRRGGBB) (default)<br>
+       1 = Colors are defined as BGR (0xBBGGRR) (the mode used in older versions of AutoIt)</td>
+  </tr>
+  <tr>
+   <td>ExpandEnvStrings</td>
+   <td><a name="ExpandEnvStrings"></a>Changes how literal strings and % symbols are interpreted.  By default strings are treated literally, this option allows you to use %environment% variables inside strings, e.g., "The temp directory is: %temp%".<br>
+       1 = expand environment variables (similar to AutoIt v2)<br>
+       0 = do not expand environment variables (default)<br>
+       Without this option the usual way would be: 	"The temp directory is: " & EnvGet("temp")</td>
+  </tr>
+  <tr>
+   <td>ExpandVarStrings</td>
+   <td><a name="ExpandVarStrings"></a>Changes how literal strings and variable/macro ($ and @) symbols are interpreted.  By default strings are treated literally, this option allows you to use variables and macros inside strings, e.g., "The value of var1 is $var1$".<br>
+       1 = expand variables (when in this mode and you want to use a literal $ or @ then double it up: "This is a single dollar $$ sign".<br>
+       0 = do not expand variables (default)</td>
+  </tr>
+  <tr>
+   <td>FtpBinaryMode</td>
+   <td><a name="FtpBinaryMode"></a>Changes how FTP files are transferred.<br>
+       1 = Binary (default)<br>
+       0 = ASCII</td>
+  </tr>
+  <tr>
+   <td>GUICloseOnESC</td>
+   <td><a name="GUICloseOnESC"></a>When ESC is pressed on a GUI the $GUI_EVENT_CLOSE message is sent.  This option toggles this behavior on and off.<br>
+       1 = Send the $GUI_EVENT_CLOSE message when ESC is pressed (default).<br>
+       0 = Don't send the $GUI_EVENT_CLOSE message when ESC is pressed.</td>
+  </tr>
+  <tr>
+   <td>GUICoordMode</td>
+   <td><a name="GUICoordMode"></a>Alters the position of a control defined by <a href="GUICtrlSetPos.html">GUICtrlSetPos</a>.<br>
+       1 = absolute coordinates (default) still relative to the dialog box.<br>
+       0 = relative position to the start of the last control (upper left corner).<br>
+       2 = cell positionining relative to current cell. A -1 for left or top parameter don't increment the start.<br>
+       So next line is -1,offset; next cell is offset,-1; current cell is -1,-1.<br>
+       <br>
+       Obviously "offset" cannot be -1 which reserved to indicate the no increment. But if you can use a multiple of the width you choose to skip or go back.</td>
+  </tr>
+  <tr>
+   <td>GUIDataSeparatorChar</td>
+   <td><a name="GUIDataSeparatorChar"></a>Define the character which delimits subitems in GUICtrlSetData.<br>
+       &nbsp;The default character is '|'.</td>
+  </tr>
+  <tr>
+   <td>GUIOnEventMode</td>
+   <td><a name="GUIOnEventMode"></a>Enable/disable OnEvent functions notifications.<br>
+       0 = (default) disable.<br>
+       1 = enable.</td>
+  </tr>
+  <tr>
+   <td>GUIResizeMode</td>
+   <td><a name="GUIResizeMode"></a>Change default resizing for a control.<br>
+       0 = (default) keep default control resizing.<br>
+       &lt;1024 = anytype of resizing see <a href="GUICtrlSetResizing.html">GUICtrlSetResizing</a>.</td>
+  </tr>
+  <tr>
+   <td>GUIEventOptions</td>
+   <td><a name="GUIEventOptions"></a>Change special event behavior or GUI function return values.<br>
+       0 = (default) Windows behavior on click on Minimize,Restore, Maximize, Resize.<br>
+       1 = suppress windows behavior on minimize, restore or maximize click button or window resize. Just sends the notification.</td>
+  </tr>
+  <tr>
+   <td>MouseClickDelay</td>
+   <td><a name="MouseClickDelay"></a>Alters the length of the brief pause in between mouse clicks.<br>
+       Time in milliseconds to pause (default=10).</td>
+  </tr>
+  <tr>
+   <td>MouseClickDownDelay</td>
+   <td><a name="MouseClickDownDelay"></a>Alters the length a click is held down before release.<br>
+       Time in milliseconds to pause (default=10).</td>
+  </tr>
+  <tr>
+   <td>MouseClickDragDelay</td>
+   <td><a name="MouseClickDragDelay"></a>Alters the length of the brief pause at the start and end of a mouse drag operation.<br>
+       Time in milliseconds to pause (default=250).</td>
+  </tr>
+  <tr>
+   <td>MouseCoordMode</td>
+   <td><a name="MouseCoordMode"></a>Sets the way coords are used in the mouse functions, either absolute coords or coords relative to the current active window:<br>
+       0 = relative coords to the active window<br>
+       1 = absolute screen coordinates (default)<br>
+       2 = relative coords to the client area of the active window</td>
+  </tr>
+  <tr>
+   <td>MustDeclareVars</td>
+   <td><a name="MustDeclareVars"></a>If this option is used then all variables must be pre-declared with Dim, Local or Global before they can be used - removes the chance for misspelled variables causing bugs.<br>
+       1 = Variables must be pre-declared<br>
+       0 = Variables don't need to be pre-declared (default)</td>
+  </tr>
+  <tr>
+   <td>OnExitFunc</td>
+   <td><a name="OnExitFunc"></a>Sets the name of the function called when AutoIt exits (default is OnAutoItExit).</td>
+  </tr>
+  <tr>
+   <td>PixelCoordMode</td>
+   <td><a name="PixelCoordMode"></a>Sets the way coords are used in the pixel functions, either absolute coords or coords relative to the current active window:<br>
+       0 = relative coords to the active window<br>
+       1 = absolute screen coordinates (default)<br>
+       2 = relative coords to the client area of the active window</td>
+  </tr>
+  <tr>
+   <td>RunErrorsFatal</td>
+   <td><a name="RunErrorsFatal"></a>Sets if the script should terminate with a fatal error if a Run/RunWait function fails due to bad paths/file not found/Bad login IDs:<br>
+       1 = fatal error (default)<br>
+       0 = silent error (@error set to 1)</td>
+  </tr>
+  <tr>
+   <td>SendAttachMode</td>
+   <td><a name="SendAttachMode"></a>Specifies if AutoIt attaches input threads when using Send() function.  When not attaching (default mode=0) detecting the state of capslock/scrolllock and numlock can be unreliable under NT4.  However, when you specify attach mode=1 the Send("{... down/up}") syntax will not work and there may be problems with sending keys to "hung" windows.  ControlSend() ALWAYS attaches and is not affected by this mode.<br>
+       0 = don't attach (default)<br>
+       1 = attach</td>
+  </tr>
+  <tr>
+   <td>SendCapslockMode</td>
+   <td><a name="SendCapslockMode"></a>Specifies if AutoIt should store the state of capslock before a Send function and restore it afterwards.<br>
+       0 = don't store/restore<br>
+       1 = store and restore (default)</td>
+  </tr>
+  <tr>
+   <td>SendKeyDelay</td>
+   <td><a name="SendKeyDelay"></a>Alters the the length of the brief pause in between sent keystrokes.<br>
+       Time in milliseconds to pause (default=5).  Sometimes a value of 0 does not work; use 1 instead.</td>
+  </tr>
+  <tr>
+   <td>SendKeyDownDelay</td>
+   <td><a name="SendKeyDownDelay"></a>Alters the length of time a key is held down before being released during a keystroke.  For applications that take a while to register keypresses (and many games) you may need to raise this value from the default.<br>
+       Time in milliseconds to pause (default=5).</td>
+  </tr>
+  <tr>
+   <td>TCPTimeout</td>
+   <td><a name="TCPTimeout"></a>Defines the time before TCP functions stop if no communication.<br>
+       Time in milliseconds before timeout (default=100).</td>
+  </tr>
+  <tr>
+   <td>TrayAutoPause</td>
+   <td><a name="TrayAutoPause"></a>Script pauses when click on tray icon.<br>
+       0 = no pause<br>
+       1 = pause (default). If there is no DefaultMenu no pause will occurs.</td>
+  </tr>
+  <tr>
+   <td>TrayIconDebug</td>
+   <td><a name="TrayIconDebug"></a>If enabled shows the current script line in the tray icon tip to help debugging.<br>
+       0 = no debug information (default)<br>
+       1 = show debug</td>
+  </tr>
+  <tr>
+   <td>TrayIconHide</td>
+   <td><a name="TrayIconHide"></a>Hides the AutoIt tray icon.  Note:  The icon will still initially appear ~750 milliseconds.<br>
+       0 = show icon (default)<br>
+       1 = hide icon</td>
+  </tr>
+  <tr>
+   <td>TrayMenuMode</td>
+   <td><a name="TrayMenuMode"></a>Extend the behaviour of the script tray icon/menu. This can be done with a combination (adding) of the following values.<br>
+       0 = default menu items (Script Paused/Exit) are appended to the usercreated menu; usercreated checked items will automatically unchecked; if you double click the tray icon then the controlid is returned which has the "Default"-style (default).<br>
+       1 = no default menu<br>
+       2 = usercreated checked items will not automatically unchecked if you click it<br>
+       4 = don't return the menuitemID which has the "default"-style in the main contextmenu if you double click the tray icon<br>
+       8 = turn off auto check of radio item groups</td>
+  </tr>
+  <tr>
+   <td>TrayOnEventMode</td>
+   <td><a name="TrayOnEventMode"></a>Enable/disable OnEvent functions notifications for the tray.<br>
+       0 = (default) disable<br>
+       1 = enable</td>
+  </tr>
+  <tr>
+   <td>WinDetectHiddenText</td>
+   <td><a name="WinDetectHiddenText"></a>Specifies if hidden window text can be "seen" by the window matching functions.<br>
+       0 = Do not detect hidden text (default)<br>
+       1 = Detect hidden text</td>
+  </tr>
+  <tr>
+   <td>WinSearchChildren</td>
+   <td><a name="WinSearchChildren"></a>Allows the window search routines to search child windows as well as top-level windows.<br>
+       0 = Only search top-level windows (default)<br>
+       1 = Search top-level and child windows</td>
+  </tr>
+  <tr>
+   <td>WinTextMatchMode</td>
+   <td><a name="WinTextMatchMode"></a>Alters the method that is used to match window text during search operations.<br>
+       1 = Complete / Slow mode (default)<br>
+       2 = Quick mode<br>
+       In quick mode AutoIt can usually only "see" dialog text, button text and the captions of some controls.  In the default mode much more text can be seen (for instance the contents of the Notepad window).<br>
+       If you are having performance problems when performing many window searches then changing to the "quick" mode may help.</td>
+  </tr>
+  <tr>
+   <td>WinTitleMatchMode</td>
+   <td><a name="WinTitleMatchMode"></a>Alters the method that is used to match window titles during search operations.<br>
+       1 = Match the title from the start (default)<br>
+       2 = Match any substring in the title<br>
+       3 = Exact title match<br>
+       4 = Advanced mode, see <a href="../intro/windowsadvanced.html">Window Titles & Text (Advanced)</a><br>
+       -1 to -4 = force lower case match according to other type of match.</td>
+  </tr>
+  <tr>
+   <td>WinWaitDelay</td>
+   <td><a name="WinWaitDelay"></a>Alters how long a script should briefly pause after a successful window-related operation.<br>
+       Time in milliseconds to pause (default=250).</td>
+  </tr>
+</table><br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+Many!
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; copy any you want to change &nbsp;&nbsp;;default value is listed first</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"CaretCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=absolute, 0=relative, 2=client</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"ColorMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=RRGGBB color, 1=BBGGRR color</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"ExpandEnvStrings"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=don't expand, 1=do expand</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"ExpandVarStrings"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=don't expand, 1=do expand</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"FtpBinaryMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=binary, 0=ASCII</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICloseOnESC"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=ESC &nbsp;closes, 0=ESC won't close</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=absolute, 0=relative, 2=cell</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIDataSeparatorChar"</span><span class="S8">,</span><span class="S7">"|"</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">;"|" is the default</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=disabled, 1=OnEvent mode enabled</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIResizeMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=no resizing, &lt;1024 special resizing</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIEventOptions"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">;0=default, 1=just notification, 2=GuiCtrlRead tab index</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;10 milliseconds</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDownDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;10 milliseconds</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDragDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><span class="S0"> </span><span class="S1">;250 milliseconds</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=absolute, 0=relative, 2=client</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MustDeclareVars"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=no, 1=require pre-declare</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"OnExitFunc"</span><span class="S8">,</span><span class="S7">"OnAutoItExit"</span><span class="S8">)</span><span class="S1">;"OnAutoItExit" called</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"PixelCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=absolute, 0=relative, 2=client</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"RunErrorsFatal"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=fatal, 0=silent set @error</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendAttachMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=don't attach, 1=do attach</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendCapslockMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=store and restore, 0=don't</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendKeyDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;5 milliseconds</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendKeyDownDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1 millisecond</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TCPTimeout"</span><span class="S8">,</span><span class="S3">100</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;100 milliseconds</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayAutoPause"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=no pause, 1=Pause</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayIconDebug"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=no info, 1=debug line info</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayIconHide"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=show, 1=hide tray icon</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=append, 1=no default menu, 2=no automatic check, 4=menuitemID &nbsp;not return</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayOnEventMode"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=disable, 1=enable</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinDetectHiddenText"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;0=don't detect, 1=do detect</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinSearchChildren"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=no, 1=search children also</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinTextMatchMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=complete, 2=quick</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinTitleMatchMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=start, 2=subStr, 3=exact, 4=advanced, -1 to -4=Nocase</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinWaitDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;250 milliseconds</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/AutoItSetOption.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

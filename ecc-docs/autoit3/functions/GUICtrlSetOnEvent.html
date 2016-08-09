@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function GUICtrlSetOnEvent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSetOnEvent</font>
+<hr size="2">
+<p>Defines a user-defined function to be called when a control is clicked.<br></p>
+
+<p class="codeheader">
+GUICtrlSetOnEvent ( controlID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">The control identifier (controlID) as returned by a <a href="../guiref/GUICtrlCreate.html">GUICtrlCreate...</a> function.</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>The name of the user function to call.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0,</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+OnEvent functions are only called when the option GUIOnEventMode is set to 1 - when in this mode GUIGetMsg is NOT used at all.<br>
+<br>
+Within the called user function the control identifier can be retrieved with @GUI_CTRLID.<br>
+If needed the windows handle and the control handle can be retrieved with @GUI_WINHANDLE or @GUI_CTRLHANDLE.<br>
+<br>
+If the function is an empty string "" the previous user-defined is disabled.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUICreate.html">GUICreate</a>, <a href="../guiref/GUICtrlCreate.html">GUICtrlCreate...</a>, <a href="GUIGetMsg.html">GUIGetMsg</a>, <a href="AutoItSetOption.html#GUIOnEventMode">GUIOnEventMode (Option)</a>, <a href="GUISetOnEvent.html">GUISetOnEvent</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIResizeMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$parent1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Parent1"</span><span class="S8">)</span><br>
+<span class="S4">GUISetOnEvent</span><span class="S8">(</span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SpecialEvents"</span><span class="S8">)</span><br>
+<span class="S4">GUISetOnEvent</span><span class="S8">(</span><span class="S9">$GUI_EVENT_MINIMIZE</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SpecialEvents"</span><span class="S8">)</span><br>
+<span class="S4">GUISetOnEvent</span><span class="S8">(</span><span class="S9">$GUI_EVENT_RESTORE</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SpecialEvents"</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S9">$ok1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"OK"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OKPressed"</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$cancel1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S0"> </span><span class="S8">(</span><span class="S0"> </span><span class="S7">"Cancel"</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"CancelPressed"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">; Just idle around</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<br>
+<span class="S1">; END</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> OKPressed</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OK Pressed"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" WinHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_WINHANDLE</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" CtrlHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLHANDLE</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> CancelPressed</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Cancel Pressed"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" WinHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_WINHANDLE</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" CtrlHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLHANDLE</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> SpecialEvents</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Select</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Case</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Close Pressed"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" WinHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_WINHANDLE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Exit</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Case</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_MINIMIZE</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Window Minimized"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" WinHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_WINHANDLE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Case</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_RESTORE</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Window Restored"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_CTRLID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" WinHandle="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@GUI_WINHANDLE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">EndSelect</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

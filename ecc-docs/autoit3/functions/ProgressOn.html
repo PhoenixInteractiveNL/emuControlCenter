@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProgressOn.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function ProgressOn</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProgressOn</font>
+<hr size="2">
+<p>Creates a customizable progress bar window.<br></p>
+
+<p class="codeheader">
+ProgressOn ( "title", "maintext" [, "subtext" [, x pos [, y pos [, opt]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">Title for progress window.</td>
+  </tr>
+  <tr>
+   <td>maintext</td>
+   <td>Text for Main, Bold, Upper label.</td>
+  </tr>
+  <tr>
+   <td>subtext</td>
+   <td>[optional] text for Sub, Normal, Lower label. (default is blank)</td>
+  </tr>
+  <tr>
+   <td>x pos</td>
+   <td>[optional] position from left (in pixels) of progress window. (default is centered)</td>
+  </tr>
+  <tr>
+   <td>y pos</td>
+   <td>[optional] position from top (in pixels) of progress window. (default is centered)</td>
+  </tr>
+  <tr>
+   <td>opt</td>
+   <td>[optional] Default is 'always on top/with title'<br>
+       Add up the following options you want:<br>
+       &nbsp;1 = borderless, titleless window<br>
+       &nbsp;2 = Without "always on top" attribute<br>
+       16 = Window can be moved</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To skip an optional parameter, leaving it's default value intact, use:<br>
+&nbsp;&nbsp;"" for string parameters<br>
+&nbsp;&nbsp;-1 for numeric parameters<br>
+If ProgressOn is called while a progress window already exists, the window is redrawn/moved.  (If you want multiple simultaneous progress windows, you need to use multiple scripts.)<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ProgressOff.html">ProgressOff</a>, <a href="ProgressSet.html">ProgressSet</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ProgressOn</span><span class="S8">(</span><span class="S7">"Progress Meter"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Increments every second"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"0 percent"</span><span class="S8">)</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">100</span><span class="S0"> </span><span class="S5">step</span><span class="S0"> </span><span class="S3">10</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">1000</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ProgressSet</span><span class="S8">(</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" percent"</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">ProgressSet</span><span class="S8">(</span><span class="S3">100</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Done"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Complete"</span><span class="S8">)</span><br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">500</span><span class="S8">)</span><br>
+<span class="S4">ProgressOff</span><span class="S8">()</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProgressOn.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

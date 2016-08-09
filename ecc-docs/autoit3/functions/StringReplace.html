@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringReplace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function StringReplace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringReplace</font>
+<hr size="2">
+<p>Replaces substrings in a string.<br></p>
+
+<p class="codeheader">
+StringReplace ( "string", "searchstring" or start, "replacestring" [, count [, casesense]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">The string to evaluate.</td>
+  </tr>
+  <tr>
+   <td>searchstring</td>
+   <td>The substring to search for or the character position to start the replacement.</td>
+  </tr>
+  <tr>
+   <td>replacestring</td>
+   <td>The replacement string.</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>[optional] The number of times to replace the searchstring.<br>
+       0 = all searchstrings will be replaced (default)  [count < 0 also replaces all instances]</td>
+  </tr>
+  <tr>
+   <td>casesense</td>
+   <td>[optional] Flag to indicate if the search operation should be case sensitive.<br>
+       0 = not case sensitive (default)<br>
+       1 = case sensitive</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the new string, the number of replacements performed is stored in @extended.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The search/replace is performed left-to-right.  Thus, StringReplace("aaa", "aa", "bb") returns "bba"<br>
+<br>
+If the start method is used the count and casesense parameters are ignored. If the replacestring cannot be stored a blank string is returned and @error is set to 1.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="String.html">String</a>, <a href="StringLeft.html">StringLeft</a>, <a href="StringLen.html">StringLen</a>, <a href="StringLower.html">StringLower</a>, <a href="StringMid.html">StringMid</a>, <a href="StringRight.html">StringRight</a>, <a href="StringTrimLeft.html">StringTrimLeft</a>, <a href="StringTrimRight.html">StringTrimRight</a>, <a href="StringUpper.html">StringUpper</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringReplace</span><span class="S8">(</span><span class="S7">"this is a line of text"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">" "</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"-"</span><span class="S8">)</span><br>
+<span class="S9">$numreplacements</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@extended</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"New string is"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$text</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The number of replacements done was"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$numreplacements</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringReplace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RegEnumVal.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function RegEnumVal</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RegEnumVal</font>
+<hr size="2">
+<p>Reads the name of a value according to it's instance.<br></p>
+
+<p class="codeheader">
+RegEnumVal ( "keyname", instance )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">keyname</td>
+    <td width="85%">The registry key to read.</td>
+  </tr>
+  <tr>
+   <td>instance</td>
+   <td>The 1-based value instance to retrieve</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the requested registry value. @EXTENDED is set to the type of the value.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns an error message string and sets the @error flag:</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td> 1 if unable to open requested key</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td> 2 if unable to open requested main key</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td> 3 if unable to remote connect to the registry</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>-1 if unable to retrieve requested value name (value instance out of range)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+A registry key must start with "HKEY_LOCAL_MACHINE" ("HKLM") or "HKEY_USERS" ("HKU") or "HKEY_CURRENT_USER" ("HKCU") or "HKEY_CLASSES_ROOT" ("HKCR") or "HKEY_CURRENT_CONFIG" ("HKCC").<br>
+<br>
+When running on 64-bit Windows if you want to enum a value specific to the 64-bit environment you have to suffix the HK... with 64 i.e. HKLM64.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="RegEnumKey.html">RegEnumKey</a>, <a href="RegDelete.html">RegDelete</a>, <a href="RegWrite.html">RegWrite</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">100</span><br>
+<span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RegEnumVal</span><span class="S8">(</span><span class="S7">"HKEY_LOCAL_MACHINE\SOFTWARE\AutoIt v3\Autoit"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">if</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Value Name &nbsp;#"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" under in AutoIt3 key"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var</span><span class="S8">)</span><br>
+<span class="S5">next</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RegEnumVal.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

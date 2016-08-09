@@ -39,9 +39,6 @@ class Valid {
 	
 	static public function eccident($eccident, $validEccidents = false) {
 		if (!VALID::string($eccident, 10, 2, "/^[a-z0-9]*$/")) return false;
-//		if ($validEccidents && is_array($validEccidents)) {
-//			if (!in_array($eccident, array_keys($this->_validPlatforms))) return false;
-//		}
 		return true;
 	}
 	

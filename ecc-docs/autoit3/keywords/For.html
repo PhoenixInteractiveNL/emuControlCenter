@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/For.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Keyword For...To...Step...Next</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">For...To...Step...Next</font>
+<hr size="2">
+<p>Loop based on an expression.<br></p>
+
+<p class="codeheader">
+<b>For</b> &lt;variable&gt; = &lt;start&gt; <b>To</b> &lt;stop&gt; [<b>Step</b> &lt;stepval&gt;]<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>Next</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">variable</td>
+    <td width="85%">The variable used for the count.</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>The initial numeric value of the variable.</td>
+  </tr>
+  <tr>
+   <td>stop</td>
+   <td>The final numeric value of the variable.</td>
+  </tr>
+  <tr>
+   <td>stepval</td>
+   <td>[optional] The numeric value (possibly fractional) that the count is increased by each loop.  Default is 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The Variable will be created automatically with a LOCAL scope, even when MustDeclareVars is on.<br>
+<br>
+For...Next statements may be nested.  The For loop terminates when the value of <i>variable</i> exceeds the <i>stop</i> threshold.  If <i>stepVal</i> or <i>stop</i> is a variable, its value is only read the first time the loop executes.<br>
+<br>
+A For loop will execute zero times if:<br>
+&nbsp;&nbsp;&nbsp;<i>start</i> &gt; <i>stop</i> and <i>step</i> <u>&gt;</u> 0, or<br>
+&nbsp;&nbsp;&nbsp;<i>start</i> &lt; <i>stop</i> and <i>step</i> is negative<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ContinueLoop.html">ContinueLoop</a>, <a href="ExitLoop.html">ExitLoop</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">5</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">Step</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Count down!"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Blast Off!"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/For.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

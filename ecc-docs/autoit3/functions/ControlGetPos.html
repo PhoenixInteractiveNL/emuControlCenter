@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function ControlGetPos</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlGetPos</font>
+<hr size="2">
+<p>Retrieves the position and size of a control relative to it's window.<br></p>
+
+<p class="codeheader">
+ControlGetPos ( "title", "text", controlID )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">The title of the window to access.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>The text of the window to access.</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>The control to interact with.  See <a href="../intro/controls.html">Controls</a>.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns an array containing the control's position and size relative to it's window:</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[0] = X position</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[1] = Y position</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[2] = Width</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>$array[3] = Height</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The title/text is referencing the parent window, so be careful with "","" which references the active window which may not be the one containing the controlID control.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ControlCommand.html">ControlCommand</a>, <a href="ControlMove.html">ControlMove</a>, <a href="WinMove.html">WinMove</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$pos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ControlGetPos</span><span class="S8">(</span><span class="S7">"Untitled - Notepad"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Edit1"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Window Stats:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"POS: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" SIZE: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

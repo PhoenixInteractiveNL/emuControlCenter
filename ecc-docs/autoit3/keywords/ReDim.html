@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ReDim.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Keyword ReDim</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">ReDim</font>
+<hr size="2">
+<p>Resize an existing array<br></p>
+
+<p class="codeheader">
+<b>ReDim</b> $array<b>[</b>subscript 1<b>]</b>...<b>[</b>subscript n<b>]</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">$variable</td>
+    <td width="85%">The name of the variable to resize.</td>
+  </tr>
+  <tr>
+   <td>subscript</td>
+   <td>The number of elements to create for the array dimension, indexed 0 to n-1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The ReDim keyword is similar to <a href="Dim.html">Dim</a>, except that ReDim preserves the values in the array instead of removing the values while resizing an array.  The number of dimensions must remain the same, or the old array will be forgotten during the ReDim.  The array will retain the scope (Global or Local) that it had prior to resizing.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Dim.html">Dim</a>, <a href="../functions/UBound.html">UBound</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Example Resizing an array</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$I</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$K</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$T</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$MSG</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$X</span><span class="S8">[</span><span class="S3">4</span><span class="S8">][</span><span class="S3">6</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$Y</span><span class="S8">[</span><span class="S3">4</span><span class="S8">][</span><span class="S3">6</span><span class="S8">]</span><br>
+<br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">3</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">For</span><span class="S0"> </span><span class="S9">$K</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">5</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$T</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Int</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">20</span><span class="S8">)</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;Get random numbers between 1 and 20</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$X</span><span class="S8">[</span><span class="S9">$I</span><span class="S8">][</span><span class="S9">$K</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$T</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$Y</span><span class="S8">[</span><span class="S9">$I</span><span class="S8">][</span><span class="S9">$K</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$T</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">Next</span><br>
+<span class="S5">Next</span><br>
+<br>
+<span class="S5">ReDim</span><span class="S0"> </span><span class="S9">$X</span><span class="S8">[</span><span class="S3">3</span><span class="S8">][</span><span class="S3">8</span><span class="S8">]</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$Y</span><span class="S8">[</span><span class="S3">3</span><span class="S8">][</span><span class="S3">8</span><span class="S8">]</span><br>
+<br>
+<span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$X</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">For</span><span class="S0"> </span><span class="S9">$K</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$X</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$K</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">", "</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$X</span><span class="S8">[</span><span class="S9">$I</span><span class="S8">][</span><span class="S9">$K</span><span class="S8">]</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">Next</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CR</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ReDim Demo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$Y</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">For</span><span class="S0"> </span><span class="S9">$K</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$Y</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$K</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">", "</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Y</span><span class="S8">[</span><span class="S9">$I</span><span class="S8">][</span><span class="S9">$K</span><span class="S8">]</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S5">Next</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;</span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CR</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ReDim Demo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$MSG</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/ReDim.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

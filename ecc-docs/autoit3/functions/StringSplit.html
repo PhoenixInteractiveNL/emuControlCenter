@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringSplit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StringSplit</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringSplit</font>
+<hr size="2">
+<p>Splits up a string into substrings depending on the given delimiters.<br></p>
+
+<p class="codeheader">
+StringSplit ( "string", "delimiters" [, flag ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">The string to evaluate.</td>
+  </tr>
+  <tr>
+   <td>delimiters</td>
+   <td>One or more characters to use as delimiters.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] If flag is 0 (the default), then each character in the delimiter string will mark where to split the string.  If flag is 1, then the entire delimiter string is needed to mark the split.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns an array, the first element ($array[0]) contains the number of strings returned, the remaining elements ($array[1], $array[2], etc.) contain the delimited strings.<br>
+If no delimiters were found @error is set to 1, the count is 1 ($array[0]) and the full string is returned ($array[1]).<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If you use a blank string "" for the delimiters, each character will be returned as an element.<br>
+<br>
+If the delimiter you wish to use is a substring instead of individual single characters, see the example below.<br>
+<br>
+StringSplit is very useful as an alternative to StringInStr and as a means to populate an array.<br>
+<br>
+Caution if you use the macro @CRLF you are referring to a 2 character string so you will generate extra blanks lines.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="String.html">String</a>, <a href="StringInStr.html">StringInStr</a>, <a href="StringLeft.html">StringLeft</a>, <a href="StringLen.html">StringLen</a>, <a href="StringLower.html">StringLower</a>, <a href="StringMid.html">StringMid</a>, <a href="StringReplace.html">StringReplace</a>, <a href="StringRight.html">StringRight</a>, <a href="StringTrimLeft.html">StringTrimLeft</a>, <a href="StringTrimRight.html">StringTrimRight</a>, <a href="StringUpper.html">StringUpper</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$days</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S7">"Sun,Mon,Tue,Wed,Thu,Fri,Sat"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">","</span><span class="S8">)</span><br>
+<span class="S1">;$days[1] contains "Sun" ... $days[7] contains "Sat"</span><br>
+<br>
+<span class="S9">$text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"This\nline\ncontains\nC-style breaks."</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S9">$text</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'\n'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringSplit.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

@@ -16,9 +16,9 @@ $i18n['menu'] = array(
 	'lbl_roms_add%s' =>
 		"Ajouter des ROMS",
 	'lbl_roms_optimize%s' =>
-		"Actualiser la base de données des ROMS",
+		"Nettoyer la base de données des ROMS",
 	'lbl_roms_remove%s' =>
-		"Supprimer les ROMS de la base de données",
+		"Supprimer les ROMS de la liste",
 	'lbl_roms_remove_dup%s' =>
 		"Supprimer les ROMS en double de la base de données",
 	'lbl_emu_config' =>
@@ -45,21 +45,21 @@ $i18n['menu'] = array(
 	'lbl_start' =>
 		"Démarrer la ROM",
 	'lbl_fav_remove' =>
-		"Supprimer ce marque-pages",
+		"Supprimer ce favori",
 	'lbl_fav_all_remove' =>
-		"Supprimer tous les marque-pages",
+		"Supprimer tous les favoris",
 	'lbl_fav_add' =>
-		"Ajouter au marque-pages",
+		"Ajouter aux favoris",
 	'lbl_image_popup' =>
 		"Montrer toutes les images",
 	'lbl_img_reload' =>
 		"Recharger les images",
 	'lbl_rom_remove' =>
-		"Supprimer la ROM de la base données",
+		"Supprimer de la liste globale des ROMS",
 	'lbl_meta_edit' =>
 		"Editer",
 	'lbl_roms_initial_add%s%s' =>
-		"Aucune ROM trouvée pour la platform\n----------------------------------------\n%s (%s)\n----------------------------------------\nCliquer ici pour ajouter des ROMS !",
+		"Aucune ROM trouvée pour la plateforme\n----------------------------------------\n%s (%s)\n----------------------------------------\nCliquer ici pour ajouter des ROMS !",
 	'lbl_meta_webservice_meta_get' =>
 		"Obtenir des données de eccdb (Internet)",
 	'lbl_meta_webservice_meta_set' =>
@@ -68,7 +68,7 @@ $i18n['menu'] = array(
 	'lbl_shellop_submenu' =>
 		"Operations sur le disque dur",
 	'lbl_shellop_browse_dir' =>
-		"Choix du chemin des ROMS",
+		"Ouvrir le dossier contenant les ROMS",
 	'lbl_shellop_file_rename' =>
 		"Renommer ce fichier sur le disque dur",
 	'lbl_shellop_file_copy' =>
@@ -87,24 +87,37 @@ $i18n['menu'] = array(
 	'lbl_rom_rescan_folder' =>
 		"(Re)scanner le dossier des ROMS",
 	'lbl_meta_remove' =>
-		"Supprimer les META-données",
+		"Supprimer les données",
 	'lbl_rating_unset' =>
 		"Supprimer les votes",
 	
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
-		"Find duplicate ROMS",
+		"Trouver les ROMS en double",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
-		"Duplicate ROMS",
+		"ROMS en double",
 	
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
-		"Remove ROM images",
+		"Supprimer les images de la ROM",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"COMPARE - Select left side",		
+		"Comparaison - Sélection initiale",		
 	'lbl_meta_compare_right%s' =>
-		"COMPARE to \"%s\"",		
+		"Comparer avec \"%s\"",	
+
+	/* 0.9.2 FYEO 2*/
+	'lbl_start_with' =>
+		"Démarrer la ROM avec",
+	'lbl_emu_config' =>
+		"Configurer un émulateur",
+	'lbl_quickfilter' =>
+		"Filtre rapide",
+	'lbl_quickfilter_reset' =>
+		"Supprimer le filtre rapide",
+
+	
+
 );
 ?>

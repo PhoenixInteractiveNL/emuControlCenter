@@ -84,9 +84,6 @@ class IndexedCombobox {
 		// set model
 		$this->combobox->set_model($this->liststore);
 		
-		// connect changed dropdown
-		#$this->combobox->connect("changed", array($this, 'get_active'));
-		
 		// set create visible for all methods
 		$this->create = $create;
 	}

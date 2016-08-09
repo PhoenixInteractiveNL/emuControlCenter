@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/SoundPlay.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function SoundPlay</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">SoundPlay</font>
+<hr size="2">
+<p>Play a sound file.<br></p>
+
+<p class="codeheader">
+SoundPlay ( "filename" [, wait] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">Name of the file to be played (typically a WAV or MP3)</td>
+  </tr>
+  <tr>
+   <td>wait</td>
+   <td>[optional] This flag determines if the script should wait for the sound to finish before continuing:<br>
+       1 = wait until sound has finished<br>
+       0 = continue script while sound is playing (default)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+None.  (Always returns 1 regardless of success.)<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Terminating the script will stop the sound (if it is still playing).<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="SoundSetWaveVolume.html">SoundSetWaveVolume</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">SoundPlay</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\media\tada.wav"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/SoundPlay.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

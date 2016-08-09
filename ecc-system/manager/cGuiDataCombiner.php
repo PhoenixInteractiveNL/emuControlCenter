@@ -177,17 +177,6 @@ class GuiDataCombiner extends GladeXml {
 	public function save(){
 		$this->compareItem->setDbms($this->dbms);
 		$this->compareItem->saveData();	
-		/*
-		$state = $this->combinerTypeSelection->get_active();
-		if ($state) {
-			$leftId = $this->data['left']['fd.id'];
-			$rightId = $this->data['right']['fd.id'];
-			
-			print "$leftId LEFT: ".substr($leftId, -1)." - $rightId RIGHT: ".substr($rightId, -1).LF;
-			$this->addConncection('equal', $leftId, $rightId);
-			
-		}
-		*/
 		$this->eccGui->onReloadRecord();
 		$this->hide();
 	}
@@ -235,9 +224,30 @@ class GuiDataCombiner extends GladeXml {
 		}
 		
 		$q = "REPLACE INTO mdata_crossing (a, b, ".$type.") VALUES (".$leftId.", ".$rightId.", ".$value.")";
+		print $q.LF;
 		$hdl = $this->dbms->query($q);
 		$q = "REPLACE INTO mdata_crossing (b, a, ".$type.") VALUES (".$leftId.", ".$rightId.", ".$value.")";
+		print $q.LF;
 		$hdl = $this->dbms->query($q);
+		
+		print "LEFT".LF.LF;
+		$q="
+		select b AS theId from mdata_crossing where a = ".(int)$leftId." and equal = 1
+		union
+		select a AS theId from mdata_crossing where b = ".(int)$leftId." and equal = 1
+		";
+		$hdl = $this->dbms->query($q);
+		while($row = $hdl->fetch(1)) print $row['theId'].LF;
+		
+		print "RIGHT".LF.LF;
+		$q="
+		select b AS theId from mdata_crossing where a = ".(int)$rightId." and equal = 1
+		union
+		select a AS theId from mdata_crossing where b = ".(int)$rightId." and equal = 1
+		";
+		$hdl = $this->dbms->query($q);
+		while($row = $hdl->fetch(1)) print $row['theId'].LF;
+
 	}
 	
 	public function extractCompositeId($compositeId) {

@@ -1,0 +1,16 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	WinZip® 9.0 SR-1 Setup
+Class:	#32770
+Size:	X: 493    Y: 455    W: 413    H: 139
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+&Setup
+Cancel
+&Info...
+Thank you for your interest in WinZip!
+
+Click the "Setup" button to install WinZip 9.0 SR-1.
+
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<

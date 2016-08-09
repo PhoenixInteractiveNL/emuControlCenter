@@ -23,5 +23,34 @@ $i18n['global'] = array(
 		"Action done",
 	'done_msg' =>
 		"This is done!",
+
+	/* 0.9.2 WIP 17 */
+	'dialog_button_help' =>
+		"Help",
+	'dialog_button_apply' =>
+		"Apply",
+	'dialog_button_no' =>
+		"No",
+	'dialog_button_yes' =>
+		"Yes",
+	'dialog_button_close' =>
+		"close",
+	'dialog_button_cancel' =>
+		"Cancel",
+	'dialog_button_ok' =>
+		"OK",
+	'dialog_button_accept' =>
+		"Accept",
+	'dialog_button_reject' =>
+		"Reject",
+	'dialog_button_all' =>
+		"All",
+	'dialog_button_none' =>
+		"None",
+
+	/* 0.9.2 WIP 19 */
+	'dialog_dont_show_again' =>
+		"Don´t show this dialog again",
+
 );
 ?>

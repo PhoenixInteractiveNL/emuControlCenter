@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/unicode.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Unicode Support</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Unicode Support </h1>
+<p>From version 3.2.4.0 AutoIt is supplied with both Unicode and ANSI compiled versions. The Unicode versions are the default for Windows NT, Windows 2000, Windows XP and later. ANSI versions are supplied for backwards compatibility with Windows 9x systems. AutoIt executables with an <strong>A</strong> on the end are the ANSI versions. For example:</p>
+<ul>
+  <li>AutoIt.exe - Unicode version</li>
+  <li>AutoIt3A.exe - ANSI version   </li>
+</ul>
+<p>The Unicode versions will allow our international friends to finally use AutoIt with extended characters and scripts!</p>
+<p>AutoIt will read script files in ANSI, UTF16 (big or little endian) and UTF8 formats. In addition, functions such as <a href="../functions/FileReadLine.html">FileReadLine</a> will automatically read text from ANSI and UTF16/UTF8 text files providing a valid <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">BOM</a> is found. UTF files without a valid BOM will be treated as ANSI. </p>
+<p>Output functions such as <a href="../functions/FileWriteLine.html">FileWriteLine</a> can use ANSI, UTF16 (big or little endian) and UTF8 formats - but the file must be opened in the desired mode using the desired <a href="../functions/FileOpen.html">FileOpen</a> flags otherwise the default ANSI mode is used. </p>
+<p>The supported file formats for text files and scripts as saved in Notepad and the AutoIt <a href="http://www.autoitscript.com/autoit3/scite/">SciTe</a> editor are shown in this table:</p>
+<table width="562" border="1">
+  <tr>
+    <td width="180"><strong>AutoIt Notation </strong></td>
+    <td width="180"><strong>Notepad</strong></td>
+    <td width="180"><strong>SciTe</strong></td>
+  </tr>
+  <tr>
+    <td>ANSI</td>
+    <td>ANSI</td>
+    <td>8 bit / Code Page Property </td>
+  </tr>
+  <tr>
+    <td>UTF16 Little Endian </td>
+    <td>Unicode</td>
+    <td>UCS-2 Little Endian </td>
+  </tr>
+  <tr>
+    <td>UTF16 Big Endian</td>
+    <td>Unicode big endian </td>
+    <td>UCS-2 Big Endian </td>
+  </tr>
+  <tr>
+    <td>UTF8</td>
+    <td>UTF-8</td>
+    <td>UTF-8 with BOM </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>The recommended Unicode format is UTF16 Little Endian - this is how strings are stored within AutoIt and therefore require less processing/conversion when reading/writing. It is also the Notepad default for Unicode files. </p>
+<p>&nbsp; </p>
+<h2>Current Limitations  </h2>
+<p>There are a few parts of AutoIt that don't yet have full Unicode support. These are:</p>
+<ul>
+  <li><a href="../functions/Send.html">Send</a> and <a href="../functions/ControlSend.html">ControlSend</a> - Instead, Use <a href="../functions/ControlSetText.html">ControlSetText</a> or the <a href="../functions/ClipPut.html">Clipboard</a> functions.</li>
+  <li><a href="../functions/StringRegExp.html">Regular expressions</a> - To reduce the size of AutoIt, the regular expression engine is currently compiled in ANSI mode. </li>
+  <li><a href="../functions/ConsoleWrite.html">Console</a> operations are converted to ANSI. </li>
+</ul>
+<p>These limits will be addressed in future versions if possible. </p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/unicode.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

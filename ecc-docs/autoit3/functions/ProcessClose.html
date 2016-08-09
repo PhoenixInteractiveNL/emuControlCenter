@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessClose.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function ProcessClose</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProcessClose</font>
+<hr size="2">
+<p>Terminates a named process.<br></p>
+
+<p class="codeheader">
+ProcessClose ( "process" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process</td>
+    <td width="85%">The title or PID of the process to terminate.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Process names are executables without the full path, e.g., "notepad.exe" or "winword.exe"<br>
+<br>
+If multiple processes have the same name, the one with the highest PID is terminated--regardless of how recently the process was spawned.<br>
+<br>
+PID is the unique number which identifies a Process.  A PID can be obtained through the ProcessExists or Run commands.<br>
+<br>
+In order to work under Windows NT 4.0, ProcessClose requires the file PSAPI.DLL (included in the AutoIt installation directory).<br>
+<br>
+The process is polled approximately every 250 milliseconds.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ProcessExists.html">ProcessExists</a>, <a href="ProcessWait.html">ProcessWait</a>, <a href="ProcessWaitClose.html">ProcessWaitClose</a>, <a href="Run.html">Run</a>, <a href="WinClose.html">WinClose</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ProcessClose</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$PID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ProcessExists</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">; Will return the PID or 0 if the process isn't found.</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$PID</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S4">ProcessClose</span><span class="S8">(</span><span class="S9">$PID</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessClose.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

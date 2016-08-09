@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Ping.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function Ping</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Ping</font>
+<hr size="2">
+<p>Pings a host and returns the roundtrip-time.<br></p>
+
+<p class="codeheader">
+Ping ( address or hostname [, timeout] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">address/hostname</td>
+    <td width="85%">Can be i.e. "www.autoitscript.com" or "178.50.76.4".</td>
+  </tr>
+  <tr>
+   <td>timeout</td>
+   <td>[optional] Is the time to wait for an answer in milliseconds (default is 4000).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the roundtrip-time in milliseconds ( greater than 0 ).</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if host is not pingable or other network errors occurred and sets @error. (See Remarks)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+When the function fails (returns 0) @error contains extended information:<br>
+&nbsp;1 = Host is offline<br>
+&nbsp;2 = Host is unreachable<br>
+&nbsp;3 = Bad destination<br>
+&nbsp;4 = Other errors<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+None.
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Ping</span><span class="S8">(</span><span class="S7">"www.AutoItScript.com"</span><span class="S8">,</span><span class="S3">250</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$var</span><span class="S0"> </span><span class="S5">Then</span><span class="S1">; also possible: &nbsp;If @error = 0 Then ...</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Status"</span><span class="S8">,</span><span class="S7">"Online, roundtrip was:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$var</span><span class="S8">)</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Status"</span><span class="S8">,</span><span class="S7">"An error occured with number: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@error</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Ping.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

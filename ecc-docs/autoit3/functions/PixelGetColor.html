@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/PixelGetColor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function PixelGetColor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">PixelGetColor</font>
+<hr size="2">
+<p>Returns a pixel color according to x,y pixel coordinates.<br></p>
+
+<p class="codeheader">
+PixelGetColor ( x , y )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">x</td>
+    <td width="85%">x coordinate of pixel.</td>
+  </tr>
+  <tr>
+   <td>y</td>
+   <td>y coordinate of pixel.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns <b>decimal</b> value of pixel's color.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns -1 if invalid coordinates.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Earlier versions of AutoIt (prior to v3.0.102) used the BGR format for defining color - newer versions use RGB by default but this can be changed using the ColorMode option.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#ColorMode">ColorMode (Option)</a>, <a href="PixelSearch.html">PixelSearch</a>, <a href="AutoItSetOption.html#PixelCoordMode">PixelCoordMode (Option)</a>, <a href="MouseGetPos.html">MouseGetPos</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">PixelGetColor</span><span class="S8">(</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"The decmial color is"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"The hex color is"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">Hex</span><span class="S8">(</span><span class="S9">$var</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/PixelGetColor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

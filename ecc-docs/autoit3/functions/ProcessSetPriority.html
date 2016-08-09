@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessSetPriority.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function ProcessSetPriority</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProcessSetPriority</font>
+<hr size="2">
+<p>Changes the priority of a process<br></p>
+
+<p class="codeheader">
+ProcessSetPriority ( "process", priority)<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process</td>
+    <td width="85%">The name or PID of the process to check.</td>
+  </tr>
+  <tr>
+   <td>priority</td>
+   <td>A flag which determines what priority to set<br>
+       0 - Idle/Low<br>
+       1 - Below Normal (Not supported on Windows 95/98/ME)<br>
+       2 - Normal<br>
+       3 - Above Normal (Not supported on Windows 95/98/ME)<br>
+       4 - High<br>
+       5 - Realtime (Use with caution, may make the system unstable)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error to 1.  May set @error to 2 if attempting to use an unsupported priority class.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Above Normal and Below Normal priority classes are not supported on Windows 95/98/ME.  If you try to use them on those platforms, the function will fail and @error will be set to 2.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"Notepad.exe"</span><span class="S8">)</span><br>
+<span class="S4">ProcessSetPriority</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S1">; Notepad should now have Idle/Low priority</span><br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ProcessSetPriority.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

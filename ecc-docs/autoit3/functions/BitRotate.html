@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitRotate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function BitRotate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BitRotate</font>
+<hr size="2">
+<p>Performs a bit shifting operation, with rotation.<br></p>
+
+<p class="codeheader">
+BitRotate ( value , shift [, size] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value</td>
+    <td width="85%">The number to be operate on.</td>
+  </tr>
+  <tr>
+   <td>shift</td>
+   <td>Number of bits to rotate to the left (negative numbers shift right).  If not given, the default is 1.</td>
+  </tr>
+  <tr>
+   <td>size</td>
+   <td>[optional] A string that determines the rotation size, the default is (16 bits). See below.</td>
+  </tr>
+</table><br><br>
+Size parameter :<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">"B"</td>
+    <td width="85%">rotate bits within the low-order byte (8 bits).</td>
+  </tr>
+  <tr>
+   <td>"W"</td>
+   <td>rotate bits within the low-order word (16 bits).</td>
+  </tr>
+  <tr>
+   <td>"D"</td>
+   <td>rotate bits within the entire double-word (32 bits).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the value rotated by the required number of bits.<br>
+Bit operations are performed as 32-bit integers.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Remember hex notation can be used for numbers.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="BitShift.html">BitShift</a>, <a href="BitAND.html">BitAND</a>, <a href="BitNOT.html">BitNOT</a>, <a href="BitOR.html">BitOR</a>, <a href="BitXOR.html">BitXOR</a>, <a href="Hex.html">Hex</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitRotate</span><span class="S8">(</span><span class="S3">7</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;x == 3 because 111b left-rotated twice is 1 1100b == 28</span><br>
+<br>
+<span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitRotate</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;y == 32771 because 1110b right-rotated twice on 16 bits is 1000 0000 0000 0011b == 32771</span><br>
+<br>
+<span class="S9">$z</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitRotate</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"D"</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;z == -2147483645 because 1110b right-rotated twice on 16 bits is 1000 0000 0000 0000 0000 0000 0000 0011b == 2147483645</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitRotate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

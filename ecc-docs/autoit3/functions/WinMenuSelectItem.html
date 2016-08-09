@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinMenuSelectItem.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function WinMenuSelectItem</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">WinMenuSelectItem</font>
+<hr size="2">
+<p>Invokes a menu item of a window.<br></p>
+
+<p class="codeheader">
+WinMenuSelectItem ( "title", "text", "item" [, "item" [, "item" [, "item" [, "item" [, "item" [, "item"]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">The title of the window to read. See <a href="../intro/windowsadvanced.html">Title special definition</a>.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>The text of the window to read.</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>Text of Menu Item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>[optional] Text of SubMenu item</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if the menu could not be found.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+You should note that underlined menu items actually contain a & character to indicate the underlining.  Thus, the menu item <b><u>F</u>ile</b> would actually require the text "&File", and <b>Con<u>v</u>ert</b> would require "Con&vert"  You can access menu items up to six levels deep; and the window can be inactive, minimized, and/or even hidden.<br>
+<br>
+WinMenuSelectItem will only work on standard menus.  Unfortunately, many menus in use today are actually custom written or toolbars "pretending" to be menus.  This is true for most Microsoft applications.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ControlCommand.html">ControlCommand</a>, <a href="Send.html">Send</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; This will select File, Page Setup in notepad</span><br>
+<span class="S4">WinMenuSelectItem</span><span class="S8">(</span><span class="S7">"Untitled - "</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"&amp;File"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Page Set&amp;up..."</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/WinMenuSelectItem.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

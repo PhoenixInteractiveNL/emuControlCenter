@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayItemSetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TrayItemSetOnEvent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayItemSetOnEvent</font>
+<hr size="2">
+<p>Defines a user-defined function to be called when a tray item is clicked.<br></p>
+
+<p class="codeheader">
+TrayItemSetOnEvent ( itemID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">itemID</td>
+    <td width="85%">The item identifier (itemID) as returned by a <a href="TrayCreateItem.html">TrayCreateItem</a> function.</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>The name of the user function to call.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0,</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+OnEvent functions are only called when the option TrayOnEventMode is set to 1 - when in this mode TrayGetMsg is NOT used at all.<br>
+<br>
+Within the called user function the item identifier can be retrieved with @TRAY_ID.<br>
+<br>
+If the function is an empty string "" the previous user-defined is disabled.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="TrayCreateItem.html">TrayCreateItem</a>, <a href="TrayGetMsg.html">TrayGetMsg</a>, <a href="AutoItSetOption.html#TrayOnEventMode">TrayOnEventMode (Option)</a>, <a href="TraySetOnEvent.html">TraySetOnEvent</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayOnEventMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Default tray menu items (Script Paused/Exit) will not be shown.</span><br>
+<br>
+<span class="S4">TraySetClick</span><span class="S8">(</span><span class="S3">16</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; Only secondary mouse button will show the tray menu.</span><br>
+<br>
+<span class="S9">$infoitem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Info"</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S7">"ShowInfo"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$exititem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S7">"ExitScript"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Idle loop</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<br>
+<span class="S1">; Functions</span><br>
+<span class="S5">Func</span><span class="S0"> ShowInfo</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Info"</span><span class="S8">,</span><span class="S7">"Tray OnEvent Demo"</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> ExitScript</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayItemSetOnEvent.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

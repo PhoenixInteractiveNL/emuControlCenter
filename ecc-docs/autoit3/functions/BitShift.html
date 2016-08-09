@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitShift.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function BitShift</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BitShift</font>
+<hr size="2">
+<p>Performs a bit shifting operation.<br></p>
+
+<p class="codeheader">
+BitShift ( value, shift )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value</td>
+    <td width="85%">The number to be shifted.</td>
+  </tr>
+  <tr>
+   <td>shift</td>
+   <td>Number of bits to shift to the right (negative numbers shift left).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the value shifted by the required number of bits.<br>
+Bit operations are performed as 32-bit integers.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Remember hex notation can be used for numbers.<br>
+Right shifts are equivalent to halving; left shifts to doubling.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="BitAND.html">BitAND</a>, <a href="BitNOT.html">BitNOT</a>, <a href="BitOR.html">BitOR</a>, <a href="BitXOR.html">BitXOR</a>, <a href="Hex.html">Hex</a>, <a href="BitRotate.html">BitRotate</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;x == 3 because 1110b right-shifted twice is 11b == 3</span><br>
+<br>
+<span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;y == 56 because 1110b left-shifted twice is 111000b == 56</span><br>
+<br>
+<span class="S9">$z</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">31</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;z == -2147483648 because in 2's-complement notation, the</span><br>
+<span class="S1">; &nbsp;32nd digit from the right has a negative sign.</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitShift.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

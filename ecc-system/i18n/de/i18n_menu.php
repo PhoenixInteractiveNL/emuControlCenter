@@ -3,8 +3,8 @@
  * emuControlCenter language system file
  * ------------------------------------------
  * language:	de (german)
- * author:	franz schneider
- * date:	2007/03/04 
+ * author:	franz schneider / andreas scheibel
+ * date:	2007/05/13 
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -14,97 +14,110 @@ $i18n['menu'] = array(
 	'lbl_platform%s' =>
 		"%s Optionen",
 	'lbl_roms_add%s' =>
-		"ROMS hinzufügen",
+		"Spiele hinzufügen",
 	'lbl_roms_optimize%s' =>
-		"ROMS optimieren",
+		"Spiele DB optimieren",
 	'lbl_roms_remove%s' =>
-		"ROMS entfernen",
+		"Spiele entfernen",
 	'lbl_roms_remove_dup%s' =>
-		"ROMS Duplikate entfernen",
+		"Suche und LÖSCHE doppelte Spiele aus der Datenbank",
 	'lbl_emu_config' =>
-		"Bearbeite/Verknüpfe Emulator",
+		"Emulator Konfigurieren",
 	'lbl_ecc_config' =>
 		"Konfigurationen",
 	'lbl_dat_import_ecc' =>
-		"emuControlCenter Datfile importieren",
+		"ecc Datfile importieren",
 	'lbl_dat_import_rc' =>
 		"Romcenter Datfile importieren",
 	'lbl_dat_export_ecc_full' =>
-		"ECC-Datfile vollständig exportieren",
+		"ecc Datfile vollständig exportieren",
 	'lbl_dat_export_ecc_user' =>
 		"ecc Datfile exportieren ",
 	'lbl_dat_export_ecc_esearch' =>
 		"ecc Datfile eSearch exportieren",
 	'lbl_dat_empty' =>
-		"Leere Datfile Datenbank",
+		"Datfile Datenbank leeren",
 	'lbl_help' =>
 		"Hilfe",
 		// -------------------------------------------------------------
 	// context menu main
 	// -------------------------------------------------------------
 	'lbl_start' =>
-		"Starte ROM",
+		"Spiel starten",
 	'lbl_fav_remove' =>
-		"Lesezeichen entfernen",
+		"Bookmark entfernen",
 	'lbl_fav_all_remove' =>
-		"ALLE Lesezeichen entfernen",
+		"ALLE Bookmarks entfernen",
 	'lbl_fav_add' =>
-		"Lesezeichen hinzufügen",
+		"Bookmark hinzufügen",
 	'lbl_image_popup' =>
 		"Zeige alle Bilder",
 	'lbl_img_reload' =>
 		"Bilder neuladen",
 	'lbl_rom_remove' =>
-		"Entferne diesen ROM aus der Datenbank",
+		"Entferne dieses Spiel aus der Datenbank",
 	'lbl_meta_edit' =>
-		"Infos Bearbeiten",
+		"Metadaten des Spiels bearbeiten",
 	'lbl_roms_initial_add%s%s' =>
-		"Keine ROMS für die Plattform gefunden\n----------------------------------------\n%s (%s)\n----------------------------------------\nClick here to add new ROMS!",
+		"Keine Spiele für die Plattform gefunden\n----------------------------------------\n%s (%s)\n----------------------------------------\nHier klicken um neue Spiele hinzuzufügen!",
 	'lbl_meta_webservice_meta_get' =>
-		"Informationen abrufen (Internet)",
+		"Metainformation des Spiels abrufen (Internet)",
 	'lbl_meta_webservice_meta_set' =>
-		"Informationen zur ECCDB hochladen (Internet)",
+		"Metainformation des Spiels hochladen (Internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
-		"Ordner Operationen",
+		"Dateisystem Operationen",
 	'lbl_shellop_browse_dir' =>
-		"Durchsuche ROM Ordner",
+		"Öffne den Spiele Ordner",
 	'lbl_shellop_file_rename' =>
-		"Umbennenung der ROM-Datei",
+		"Spiel umbenennen",
 	'lbl_shellop_file_copy' =>
-		"Kopiere Datei auf Laufwerk",
+		"Spiel kopieren",
 	'lbl_shellop_file_unpack' =>
-		"Entpacke diese Datei",
+		"Spiel entpacken",
 	'lbl_shellop_file_remove' =>
-		"Lösche Datei vom Laufwerk",
+		"Spiel löschen",
 	// Rating
 	'lbl_rating_submenu' =>
-		"ROM bewerten",
+		"Spiel bewerten",
 	'lbl_import_submenu' =>
 		"Datfile importieren",
 	'lbl_export_submenu' =>
 		"Datfile exportieren",
 	'lbl_rom_rescan_folder' =>
-		"Vergleiche ROM-Ordner",
+		"Spiele im Ordner erneut Parsen",
 	'lbl_meta_remove' =>
-		"Entferne META-Infos aus der DB",
+		"Metainformation aus der DB löschen",
 	'lbl_rating_unset' =>
 		"Bewertung entfernen",
 	
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
-		"Find duplicate ROMS",
+		"Suche und ZEIGE doppelte Spiele",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
-		"Duplicate ROMS",
+		"Doppelte Spiele finden",
 	
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
-		"Remove ROM images",
+		"Lösche ALLE Bilder des Spiels",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"COMPARE - Select left side",		
+		"Vergleiche - Wähle Spiel für die linke Seite",		
 	'lbl_meta_compare_right%s' =>
-		"COMPARE to \"%s\"",		
+		"Vergleiche dieses Spiel mit \"%s\"",		
+
+	/* 0.9.2 FYEO 2*/
+	'lbl_start_with' =>
+		"Spiel starten mit",
+	'lbl_emu_config' =>
+		"Emulator Konfigurieren",
+	'lbl_quickfilter' =>
+		"quickFilter",
+	'lbl_quickfilter_reset' =>
+		"quickFilter entfernen",
+
+	
+
 );
 ?>

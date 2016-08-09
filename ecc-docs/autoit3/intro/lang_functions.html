@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_functions.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:53 GMT -->
+<head>
+  <title>Language Reference - User Functions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - User Functions</h1>
+
+  
+<p>A function is a section of code that can be called from the script to perform 
+  a certain &quot;function&quot;.&nbsp; There are two sorts of functions in AutoIt,<strong> 
+  built-in functions</strong> and<strong> user functions</strong>.</p>
+<p>&nbsp;</p>
+<h2>built-in Functions</h2>
+<p>The full list of built-in functions is <a href="../functions.html">here</a> and 
+  the notes on using them are <a href="../function_notes.html">here</a>.</p>
+<p>&nbsp;</p>
+<h2>User Functions</h2>
+<p>User functions are declared using the <a href="../keywords/Func.html">Func...EndFunc</a> 
+  statements.</p>
+<p>Functions can accept parameters and return values as required.</p>
+<p>Function names must start with either a letter or an underscore, and the remainder 
+  of the name can contain any combination of letters and numbers and underscores.&nbsp; 
+  Some valid function names are:</p>
+<p>&nbsp;&nbsp;&nbsp; MyFunc</p>
+<p>&nbsp;&nbsp;&nbsp; Func1</p>
+<p>&nbsp;&nbsp;&nbsp; _My_Func1</p>
+<p>&nbsp;</p>
+<p>Here is an example of using a function to double a number 5 times:</p>
+<p class="codebox">$val = 10&nbsp; <br>
+  For $i = 1 To 10<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $doubled = MyDouble($val)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;&quot;, $val &amp; &quot; doubled is 
+  &quot; &amp; $doubled)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $val = $doubled<br>
+  Next<br>
+  <br>
+  Exit<br>
+  <br>
+  <br>
+  Func MyDouble($value)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $value = $value * 2<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; Return $value<br>
+EndFunc</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_functions.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:54 GMT -->
+</html>

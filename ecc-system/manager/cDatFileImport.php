@@ -131,21 +131,6 @@ class DatFileImport extends App {
 		}
 	}
 	
-	/*
-	private function parse_dat_project64($filename) {
-		$eccident='n64';
-		
-		// get data from ini-file
-		$datfile_content = $this->parse_ini_file_quotes_safe($this->dat_filename);
-		
-		print "<pre>";
-		print_r($datfile_content);
-		print "</pre>\n";
-		
-	}
-	*/
-	
-	
 	public function validate_romcenter_format($rc_dat_version=false, $first_game = array()) {
 		
 		$split_row = explode("¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
@@ -232,9 +217,6 @@ class DatFileImport extends App {
 			// get valid data
 			$current_extension = $this->get_file_extension_from_string($split[$extension_from_field]);
 			if (isset($possible_extensions[$current_extension])) {
-				
-###############################################################
-###############################################################
 				
 				// einige felder sind in lowercase
 				// hier kann angegeben werden, welches feld
@@ -386,9 +368,6 @@ class DatFileImport extends App {
 				}
 				// --------------------
 				
-###############################################################
-###############################################################							
-				
 				if (!isset($rc_status['EXT_ADDED'][$current_extension])) $rc_status['EXT_ADDED'][$current_extension] = 0;
 				$rc_status['EXT_ADDED'][$current_extension]++;
 			}
@@ -414,6 +393,10 @@ class DatFileImport extends App {
 			$cnt_total = count($ret['GAMES']);
 			$cnt_current = 0;
 			$logCntHave = 0;
+			
+			####
+			$this->dbms->query('BEGIN TRANSACTION;');
+			####
 			
 			foreach ($ret['GAMES'] as $crc32 => $infos) {
 				
@@ -533,16 +516,22 @@ class DatFileImport extends App {
 				$message .= "File $cnt_current of $cnt_total\n";
 				$message .= $infos['ECCIDENT']."\t".$infos['NAME'].chr(13);
 				$this->status_obj->update_message($message);
-				if ($this->status_obj->is_canceled()) return false;
+				if ($this->status_obj->is_canceled()){
+					$this->dbms->query('ROLLBACK TRANSACTION;');
+					return false;
+				}
 				// --------------------
 
-				#if(LOGGER::$active) {
-					$iHave = $this->fileAvailable($infos['ECCIDENT'], $infos['CRC32']);
-					if ($iHave) $logCntHave++;
-					$this->log .= LOGGER::add('datirc', join("\t", array($log, (int)$iHave, $infos['ECCIDENT'], $infos['CRC32'], $infos['NAME'])));
-				#}
+				$iHave = $this->fileAvailable($infos['ECCIDENT'], $infos['CRC32']);
+				if ($iHave) $logCntHave++;
+				$this->log .= LOGGER::add('datirc', join("\t", array($log, (int)$iHave, $infos['ECCIDENT'], $infos['CRC32'], $infos['NAME'])));
 				
 			}
+			
+			####
+			$this->dbms->query('COMMIT TRANSACTION;');
+			####
+			
 			// ---------------
 			// ALL DONE
 			// ---------------
@@ -582,7 +571,7 @@ class DatFileImport extends App {
 			#}
 			
 			$this->status_obj->update_message($message);
-			if ($this->status_obj->is_canceled()) return false;			
+			if ($this->status_obj->is_canceled()) return false;
 		}
 	}
 	
@@ -619,8 +608,7 @@ class DatFileImport extends App {
 	* $res[20] == '*'
 	* wenn *, dann valid.
 	*/
-	public function parse_dat_emucontrolcenter($version)
-	{
+	public function parse_dat_emucontrolcenter($version){
 		
 		$this->dat = $this->parse_ini_file_quotes_safe($this->dat_filename);
 		$ret = array();
@@ -642,11 +630,18 @@ class DatFileImport extends App {
 		
 		$cnt_current = 0;
 		$logCntHave = 0;
+		
+		####
+		$this->dbms->query('BEGIN TRANSACTION;');
+		####
+		
 		foreach($this->dat['ECC_MEDIA'] as $mdata => $void) {
 			
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$res = explode(";", $mdata);
+			
+			if ($res[0] == 'eccident') continue;
 			
 			$terminator = false;
 			switch ($version) {
@@ -664,7 +659,7 @@ class DatFileImport extends App {
 					$terminator = 24;
 					break;
 			}
-
+			
 			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
 			
 			// if eccident is set, dont import not matching items.
@@ -699,7 +694,6 @@ class DatFileImport extends App {
 				
 				$data['publisher'] = "";
 				$data['storage'] = "NULL";
-				#if ($terminator == 23) {
 				if ($version >= '0.96') {
 					$data['publisher'] = (($res[21] != "")) ? $res[21] : "" ;
 					$data['storage'] = (($res[22] != "")) ? $res[22] : "NULL" ;				
@@ -730,18 +724,15 @@ class DatFileImport extends App {
 					$log = 'A';
 				}
 				
-				#if(LOGGER::$active) {
-					$iHave = $this->fileAvailable($data['eccident'], $data['crc32']);
-					if ($iHave) $logCntHave++;
-					$this->log .= LOGGER::add('datiecc', join("\t", array($log, (int)$iHave, $data['eccident'], $data['crc32'], $data['name'])));
-				#}
+				$iHave = $this->fileAvailable($data['eccident'], $data['crc32']);
+				if ($iHave) $logCntHave++;
+				$this->log .= LOGGER::add('datiecc', join("\t", array($log, (int)$iHave, $data['eccident'], $data['crc32'], $data['name'])));
 				
 				// save images
 				if ($id !== false && $data['languages'] !== false) {
 					$languages = explode("|", $data['languages']);
 					$this->save_language($id, array_flip($languages));
 				}
-				
 			}
 			
 			$cnt_current++;
@@ -761,18 +752,22 @@ class DatFileImport extends App {
 			if ($data) $message .= $data['eccident']."\t".$data['name'].chr(13);
 			$this->status_obj->update_message($message);
 			
-			if ($this->status_obj->is_canceled()) return false;
+			if ($this->status_obj->is_canceled()) {
+				$this->dbms->query('ROLLBACK TRANSACTION;');
+				return false;
+			}
 		}
+			
+		####
+		$this->dbms->query('COMMIT TRANSACTION;');
+		####
 		
-		#if(LOGGER::$active) {
-			$msg  = "DONE: emuControlCenter Datfile import\r\n";
-			$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
-			$msg .= "--> IHAVE: ".$logCntHave." | DONTHAVE: ".($cnt_current-$logCntHave)." | TOTAL: ".$cnt_current."\r\n";
-			$msg .= "File: ".basename($this->dat_filename)."\r\n";
-			$msg .= "Processed: ".$cnt_total;
-			$this->log .= LOGGER::add('datiecc', $msg, 2);
-		#}
-		
+		$msg  = "DONE: emuControlCenter Datfile import\r\n";
+		$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
+		$msg .= "--> IHAVE: ".$logCntHave." | DONTHAVE: ".($cnt_current-$logCntHave)." | TOTAL: ".$cnt_current."\r\n";
+		$msg .= "File: ".basename($this->dat_filename)."\r\n";
+		$msg .= "Processed: ".$cnt_total;
+		$this->log .= LOGGER::add('datiecc', $msg, 2);
 	}
 	
 	

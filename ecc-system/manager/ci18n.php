@@ -39,10 +39,12 @@ class i18n {
 		}
 	}
 	
-	public static function translateArray($category, $languageArray) {
+	public static function translateArray($category, $languageArray, $createPlaceholder=false, $valueAsIndex=false) {
 		$ret = array();
 		foreach($languageArray as $key => $placeholder) {
-			$ret[$key] = htmlspecialchars(I18n::get($category, $placeholder));
+			$needle = ($createPlaceholder) ? "[[".$placeholder."]]" : $placeholder;
+			if ($valueAsIndex) $key = $placeholder;
+			$ret[$key] = htmlspecialchars(I18n::get($category, $needle));
 		}
 		return $ret;
 	}

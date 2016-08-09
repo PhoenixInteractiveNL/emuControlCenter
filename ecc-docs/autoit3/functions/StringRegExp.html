@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringRegExp.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function StringRegExp</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringRegExp</font>
+<hr size="2">
+<p>Check if a string fits a given regular expression pattern.<br></p>
+
+<p class="codeheader">
+StringRegExp ( "test", "pattern" [, flag ] [, offset ] ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">test</td>
+    <td width="85%">The string to check</td>
+  </tr>
+  <tr>
+   <td>pattern</td>
+   <td>The regular expression to compare.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] A number to indicate how the function behaves.  See below for details.  The default is 0.</td>
+  </tr>
+  <tr>
+   <td>offset</td>
+   <td>[optional] The string position to start the match (starts at 1)  The default is 1.</td>
+  </tr>
+</table><br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>Flag</b> </td>
+    <td width="85%"><b>Values</b></td>
+  </tr>
+  <tr>
+   <td>0</td>
+   <td>Returns 1 (matched) or 0 (no match)</td>
+  </tr>
+  <tr>
+   <td>1</td>
+   <td>Return array of matches.</td>
+  </tr>
+  <tr>
+   <td>2</td>
+   <td>Return array of matches including the full match (Perl / PHP style).</td>
+  </tr>
+  <tr>
+   <td>3</td>
+   <td>Return array of global matches.</td>
+  </tr>
+  <tr>
+   <td>4</td>
+   <td>Return an array of arrays containing global matches including the full match (Perl / PHP style).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<i>Flag = 0 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">2 </td>
+    <td>Bad pattern. @Extended = offset of error in pattern.</td>
+  </tr>
+</table><br><br>
+<i>Flag = 1 or 2 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>Array is valid.  Check @Extended for next offset</td>
+  </tr>
+  <tr>
+    <td valign="top">1</td>
+    <td>Array is invalid.  No matches.</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>Bad pattern, array is invalid.  @Extended = offset of error in pattern.</td>
+  </tr>
+</table><br><br>
+<i>Flag = 3 or 4 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>Array is valid.  </td>
+  </tr>
+  <tr>
+    <td valign="top">1</td>
+    <td>Array is invalid.  No matches.</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>Bad pattern, array is invalid.  @Extended = offset of error in pattern.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Regular expression notation is a compact way of specifying a pattern for strings that can be searched.  Regular expressions are character strings in which plain text characters indicate what text should exist in the target string, and a some characters are given special meanings to indicate what variability is allowed in the target string.  AutoIt regular expressions are normally case-sensitive.  <br>
+<br>
+Regular expressions are constructed of one or more of the following simple regular expression specifiers.  If the character is not in the following table, then it will match only itself.<br>
+<br>
+Repeating characters (*, +, ?, {...} ) will try to match the largest set possible, which allows the following characters to match as well, unless followed immediately by a question mark; then it will find the smallest pattern that allows the following characters to match as well.<br>
+<br>
+Nested groups are allowed, but keep in mind that all the groups, except non-capturing groups, assign to the returned array, with the outer groups assigning after the inner groups.<br>
+<br>
+Complete description can be found <b><a href="http://www.autoitscript.com/autoit3/pcrepattern.html" target="_blank">here</a></b><br>
+<br>
+<b><u>Matching Characters</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">[ ... ]</td>
+    <td width="85%">Match any character in the set.  e.g. <b>[aeiou]</b> matches any lower-case vowel.  A contiguous set can be defined using a dash between the starting and ending characters.  e.g. <b>[a-z]</b> matches any lower case character.  To include a dash (<b>-</b>) in a set, use it as the first or last character of the set.  To include a closing bracket in a set, use it as the first character of the set.  e.g. <b>[][]</b> will match either [ or ].  Note that special characters <b>do not</b> retain their special meanings inside a set, with the exception of <b>\\</b>,  <b>\^</b>, <b>\-</b>,<b>\[</b> and <b>\]</b> match the escaped character inside a set.</td>
+  </tr>
+  <tr>
+   <td>[^ ... ]</td>
+   <td>Match any character <b>not</b> in the set.  e.g. <b>[^0-9]</b> matches any non-digit.  To include a caret (<b>^</b>) in a set, put it after the beginning of the set or escape it (\^).</td>
+  </tr>
+  <tr>
+   <td>[:class:]</td>
+   <td>Match a character in the given class of characters.  Valid classes are: alpha (any alphabetic character), alnum (any alphanumeric character), lower (any lower-case letter), upper (any upper-case letter), digit (any decimal digit 0-9), xdigit (any hexadecimal digit, 0-9, A-F, a-f), space (any whitespace character), blank (only a space or tab), print (any printable character), graph (any printable character except spaces), cntrl (any control character [ascii 127 or <32]) or punct (any punctuation character)</td>
+  </tr>
+  <tr>
+   <td>[^:class:]</td>
+   <td>Match any character <b>not</b> in the class. </td>
+  </tr>
+  <tr>
+   <td>( ... )</td>
+   <td>Group. The elements in the group are treated in order and can be repeated together.  e.g. <b>(ab)+</b> will match "ab" or "abab", but not "aba".  A group will also store the text matched for use in back-references and in the array returned by the function, depending on flag value.</td>
+  </tr>
+  <tr>
+   <td>(?i)</td>
+   <td>Case-insensitivity flag.  This does not operate as a group.  It tells the regular expression engine to do case-insensitive matching from that point on.</td>
+  </tr>
+  <tr>
+   <td>(?-i)</td>
+   <td>(default) Case-sensitivity flag.  This does not operate as a group.  It tells the regular expression engine to do case-sensitive matching from that point on.</td>
+  </tr>
+  <tr>
+   <td>(?i ... )</td>
+   <td>Case-insensitive group.  Behaves just like a normal group, but performs case-insensitive matches within the group.</td>
+  </tr>
+  <tr>
+   <td>(?-i ... )</td>
+   <td>Case-sensitive group.  Behaves just like a normal group, but performs case-sensitive matches within the group.  Primarily for use after (-i) flag or inside a case-insensitive group.</td>
+  </tr>
+  <tr>
+   <td>(?: ... )</td>
+   <td>Non-capturing group.  Behaves just like a normal group, but does not record the matching characters in the array nor can the matched text be used for back-referencing.</td>
+  </tr>
+  <tr>
+   <td>(?i: ... )</td>
+   <td>Case-insensitive non-capturing group.  Behaves just like a non-capturing group, but performs case-insensitive matches within the group.</td>
+  </tr>
+  <tr>
+   <td>(?-i: ... )</td>
+   <td>Case-sensitive non-capturing group.  Behaves just like a non-capturing group, but performs case-sensitive matches within the group.</td>
+  </tr>
+  <tr>
+   <td>(?m)</td>
+   <td>^ and $ match newlines within data.</td>
+  </tr>
+  <tr>
+   <td>(?s)</td>
+   <td>. matches anything including newline. (by default "." don't match newline)</td>
+  </tr>
+  <tr>
+   <td>(?x)</td>
+   <td>Ignore whitespace and # comments.</td>
+  </tr>
+  <tr>
+   <td>(?U)</td>
+   <td>Invert greediness of quantifiers.</td>
+  </tr>
+  <tr>
+   <td><b>.</b></td>
+   <td>Match any single character (except newline).</td>
+  </tr>
+  <tr>
+   <td>|</td>
+   <td>Or.  The expression on one side <b>or</b> the other can be matched.</td>
+  </tr>
+  <tr>
+   <td>\</td>
+   <td><i>Escape</i> a special character (have it match the actual character) or introduce a special character type (see below).</td>
+  </tr>
+  <tr>
+   <td>\\</td>
+   <td>Match an actual backslash (\).</td>
+  </tr>
+  <tr>
+   <td>\a</td>
+   <td>Alarm, that is, the BEL character (chr(7)).</td>
+  </tr>
+  <tr>
+   <td>\A</td>
+   <td>Match only at beginning of string.</td>
+  </tr>
+  <tr>
+   <td>\b</td>
+   <td>Matches at a word boundary.</td>
+  </tr>
+  <tr>
+   <td>\B</td>
+   <td>Matches when not at a word boundary.</td>
+  </tr>
+  <tr>
+   <td>\c</td>
+   <td>Match a control character, based on the next character.  For example, <b>\cM</b> matches ctrl-M.</td>
+  </tr>
+  <tr>
+   <td>\d</td>
+   <td>Match any digit (0-9).</td>
+  </tr>
+  <tr>
+   <td>\D</td>
+   <td>Match any non-digit.</td>
+  </tr>
+  <tr>
+   <td>\e</td>
+   <td>Match an escape character (chr(27)).</td>
+  </tr>
+  <tr>
+   <td>\E</td>
+   <td>end case modification.</td>
+  </tr>
+  <tr>
+   <td>\f</td>
+   <td>Match an formfeed character (chr(12)).</td>
+  </tr>
+  <tr>
+   <td>\l</td>
+   <td>Match lowercase next char.</td>
+  </tr>
+  <tr>
+   <td>\L</td>
+   <td>Match lowercase till \E.</td>
+  </tr>
+  <tr>
+   <td>\n</td>
+   <td>Match a newline (@LF, chr(10)).</td>
+  </tr>
+  <tr>
+   <td>\Q</td>
+   <td>quote (disable) pattern metacharacters till \E.</td>
+  </tr>
+  <tr>
+   <td>\r</td>
+   <td>Match a carriage return (@CR, chr(13)).</td>
+  </tr>
+  <tr>
+   <td>\s</td>
+   <td>Match any whitespace character: Chr(9) through Chr(13) which are Horizontal Tab, Line Feed, Vertical Tab, Form Feed, and Carriage Return, and the standard space ( Chr(32) ).</td>
+  </tr>
+  <tr>
+   <td>\S</td>
+   <td>Match any non-whitespace character.</td>
+  </tr>
+  <tr>
+   <td>\t</td>
+   <td>Match a tab character (chr(9)).</td>
+  </tr>
+  <tr>
+   <td>\u</td>
+   <td>Match uppercase next char.</td>
+  </tr>
+  <tr>
+   <td>\U</td>
+   <td>Match uppercase till \E.</td>
+  </tr>
+  <tr>
+   <td>\w</td>
+   <td>Match any "word" character: a-z, A-Z or underscore (_).</td>
+  </tr>
+  <tr>
+   <td>\W</td>
+   <td>Match any non-word character.</td>
+  </tr>
+  <tr>
+   <td>\###</td>
+   <td>Match the ascii character whose code is given or back-reference.  Can be up to 3 octal digits.<br>
+       Match back-reference if found. Match the prior group number given exactly.  For example, <b>([:alpha:])\1</b> would match a double letter.</td>
+  </tr>
+  <tr>
+   <td>\x##</td>
+   <td>Match the ascii character whose code is given in hexadecimal.  Can be up to 2 digits.</td>
+  </tr>
+  <tr>
+   <td>\z</td>
+   <td>Match only at end of string.</td>
+  </tr>
+  <tr>
+   <td>\Z</td>
+   <td>Match only at end of string, or before newline at the end.</td>
+  </tr>
+</table><br>
+<u><b>Repeating Characters</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">{<i>x</i>}</td>
+    <td width="85%">Repeat the previous character, set or group exactly <i>x</i> times.</td>
+  </tr>
+  <tr>
+   <td>{<i>x</i>,}</td>
+   <td>Repeat the previous character, set or group at least <i>x</i> times.</td>
+  </tr>
+  <tr>
+   <td>{0,<i>x</i>}</td>
+   <td>Repeat the previous character, set or group at most <i>x</i> times.</td>
+  </tr>
+  <tr>
+   <td>{<i>x</i>, <i>y</i>}</td>
+   <td>Repeat the previous character, set or group between <i>x</i> and <i>y</i> times, inclusive.</td>
+  </tr>
+  <tr>
+   <td>*</td>
+   <td>Repeat the previous character, set or group 0 or more times.  Equivalent to {0,}</td>
+  </tr>
+  <tr>
+   <td>+</td>
+   <td>Repeat the previous character, set or group 1 or more times.  Equivalent to {1,}</td>
+  </tr>
+  <tr>
+   <td>?</td>
+   <td>The previous character, set or group may or may not appear.  Equivalent to {0, 1}</td>
+  </tr>
+  <tr>
+   <td>? (after a repeating character)</td>
+   <td>Find the smallest match instead of the largest.</td>
+  </tr>
+</table><br>
+<u><b>Character Classes</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">[:alnum:]</td>
+    <td width="85%">letters and digits</td>
+  </tr>
+  <tr>
+   <td>[:alpha:]</td>
+   <td>letters</td>
+  </tr>
+  <tr>
+   <td>[:ascii:]</td>
+   <td>character codes 0 - 127</td>
+  </tr>
+  <tr>
+   <td>[:blank:]</td>
+   <td>space or tab only</td>
+  </tr>
+  <tr>
+   <td>[:cntrl:]</td>
+   <td>control characters</td>
+  </tr>
+  <tr>
+   <td>[:digit:]</td>
+   <td>decimal digits (same as \d)</td>
+  </tr>
+  <tr>
+   <td>[:graph:]</td>
+   <td>printing characters, excluding space</td>
+  </tr>
+  <tr>
+   <td>[:lower:]</td>
+   <td>lower case letters</td>
+  </tr>
+  <tr>
+   <td>[:print:]</td>
+   <td>printing characters, including space</td>
+  </tr>
+  <tr>
+   <td>[:punct:]</td>
+   <td>printing characters, excluding letters and digits</td>
+  </tr>
+  <tr>
+   <td>[:space:]</td>
+   <td>white space (not quite the same as \s, it include VT: chr(11) )</td>
+  </tr>
+  <tr>
+   <td>[:upper:]</td>
+   <td>upper case letters</td>
+  </tr>
+  <tr>
+   <td>[:word:]</td>
+   <td>"word" characters (same as \w)</td>
+  </tr>
+  <tr>
+   <td>[:xdigit:]</td>
+   <td>hexadecimal digits</td>
+  </tr>
+</table><br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StringInStr.html">StringInStr</a>, <a href="StringRegExpReplace.html">StringRegExpReplace</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;Option 1, using offset</span><br>
+<span class="S9">$nOffset</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nOffset</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nOffset</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@extended</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 1 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<br>
+<span class="S1">;Option 2, single return, php/preg_match() style</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 2 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S5">Next</span><br>
+<br>
+<br>
+<span class="S1">;Option 3, global return, old AutoIt style</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><br>
+<br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 3 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S5">Next</span><br>
+<br>
+<br>
+<span class="S1">;Option 4, global return, php/preg_match_all() style</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'F1oF2oF3o'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'(F.o)*?'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><br>
+<br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<br>
+<span class="S9">$match</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">for</span><span class="S0"> </span><span class="S9">$j</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$match</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"cRegExp Test with Option 4 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">','</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$j</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$match</span><span class="S8">[</span><span class="S9">$j</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">Next</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringRegExp.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

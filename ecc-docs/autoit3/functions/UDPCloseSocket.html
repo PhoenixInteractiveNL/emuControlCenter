@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/UDPCloseSocket.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function UDPCloseSocket</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">UDPCloseSocket</font>
+<hr size="2">
+<p>Close a UDP socket.<br></p>
+
+<p class="codeheader">
+UDPCloseSocket ( socketarray )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">socketarray</td>
+    <td width="85%">The socket/array as returned by a <a href="UDPBind.html">UDPBind</a> or <a href="UDPOpen.html">UDPOpen</a> functions.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and set @error according to WSAGetLastError Windows API return.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+None.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="UDPBind.html">UDPBind</a>, <a href="UDPOpen.html">UDPOpen</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;SERVER!! Start Me First !!!!!!!!!!!!!!!</span><br>
+<span class="S9">$g_IP</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"127.0.0.1"</span><br>
+<br>
+<span class="S1">; Start The UDP Services</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S4">UDPStartUp</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Create a Listening "SOCKET"</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S9">$socket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UDPBind</span><span class="S8">(</span><span class="S9">$g_IP</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65432</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S1">;--- Your code here </span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnAutoItExit</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPCloseSocket</span><span class="S8">(</span><span class="S9">$socket</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPShutdown</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/UDPCloseSocket.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

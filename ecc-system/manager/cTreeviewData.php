@@ -1,74 +1,62 @@
 <?php
+require_once('SqlHelper.php');
 
 class TreeviewData {
 	
 	private $dbms = false;
 	
 	private $showOnlyPersonal = false;
+	private $showOnlyDontHave = false;
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
-	public function __construct() {}
+	private $sqlFields = '
+		md.crc32 as md_crc32,
+		md.id as md_id,
+		md.eccident as md_eccident,
+		md.name as md_name,
+		md.info as md_info,
+		md.info_id as md_info_id,
+		md.running as md_running,
+		md.bugs as md_bugs,
+		md.trainer as md_trainer,
+		md.intro as md_intro,
+		md.usermod as md_usermod,
+		md.freeware as md_freeware,
+		md.multiplayer as md_multiplayer,
+		md.netplay as md_netplay,
+		md.year as md_year,
+		md.usk as md_usk,
+		md.rating as md_rating,
+		md.category as md_category,
+		md.creator as md_creator,
+		md.publisher as md_publisher,
+		md.storage as md_storage,
+		md.region as md_region,
+		md.cdate as md_cdate,
+		md.uexport as md_uexport,
+		fd.id as id,
+		fd.title as title,
+		fd.path as path,
+		fd.path_pack as path_pack,
+		fd.crc32 as crc32,
+		fd.md5 as md5,
+		fd.size as size,
+		fd.eccident as fd_eccident,
+		fd.launchtime as fd_launchtime,
+		fd.launchcnt as fd_launchcnt,
+		fd.mdata as fd_mdata
+	';
 	
 	// called by FACTORY
-	public function setDbms($dbmsObject) {
-		$this->dbms =  $dbmsObject;
-	}
-	
-	/* ------------------------------------------------------------------------
-	*
-	*/
-	private function get_sql_limit($limit=array())
-	{
-		if ( count($limit) == 2 && isset($limit[0]) && isset($limit[1])) {
-			return 'LIMIT '.(int)$limit[0].', '.(int)$limit[1].'';
-		}
-		return "";
+	public function setDbms($dbmsObject){
+		$this->dbms = $dbmsObject;
 	}
 	
 	public function showOnlyPersonal($state){
 		$this->showOnlyPersonal = $state;
 	}
-	
-	
-	public function get_search_ext_snipplet($search_ext=false) {
-		
-		if (!$search_ext || !is_array($search_ext)) return "";
-		
-		$out = array();
-		
-		foreach ($search_ext as $key => $int) {
-			
-			$field = str_replace("scb_", '', $key);
-			
-			switch ($int) {
-				case '0': // *
-					// nothing
-					break;
-				case '1': // no
-					$out[] = "$field <= 0";
-					break;
-				case '2': // no?
-					$out[] = "($field <= 0 OR $field is NULL)";
-					break;
-				case '3': // yes
-					$out[] = "$field > 0";
-					break;
-				case '4': //yes?
-					$out[] = "($field > 0 OR $field is NULL)";
-					break;
-				case '5': // ?
-					$out[] = "$field is NULL";
-					break;
-			}
-			
-		}
-		
-		$out_strg = implode(" AND ", $out);
-		#if ($out_strg) $out_strg = " AND ".$out_strg;
-		return $out_strg;
-	}
+	public function showOnlyDontHave($state){
+		$this->showOnlyDontHave = $state;
+	}	
 	
 	/* ------------------------------------------------------------------------
 	* VERSION TO GET ALSO META-DATA, IF THERE IS NO FOUND GAME
@@ -76,148 +64,109 @@ class TreeviewData {
 	*/
 	public function get_file_data_TEST_META(
 		$extension,
-		$search_like=false,
+		$like=false,
 		$limit=array(),
 		$return_count=true,
-		$order_by="",
+		$orderBy="",
 		$language=false,
 		$category=false,
 		$search_ext=false,
-		$show_files_only=true,
-		$toggle_show_doublettes=false,
-		$toggle_show_metaless_roms_only=false,
+		$onlyFiles=true,
+		$hideDup=false,
+		$hideMetaless=false,
 		$searchRating = false,
-		$randomGame = false
+		$randomGame = false,
+		$updateCategories = false
 	)
 	{
-		$ret = array();
-		$ret['data'] = array();
-		$ret['count'] = array();
-		
 		$snip_where = array();
 		$sqlOrderBy = array();
 		
 		// freeform search like
-		if ($search_like) $snip_where[] = $search_like;
+		if ($like) $snip_where[] = $like;
+
 		// Show/hide doublettes
-		if ($toggle_show_doublettes) $snip_where[] = "fd.duplicate is null";
+		if ($hideDup) $snip_where[] = "fd.duplicate is null";
+		
 		// show/hide missing roms
-		if (!$show_files_only) {
+		if (!$onlyFiles && !$this->showOnlyDontHave){
 			if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
 		}
-		else {
+		else{
 			if ($extension) $snip_where[] = "md.eccident='".sqlite_escape_string($extension)."'";
 		}
 		
 		if ($searchRating) {
 			$snip_where[] = "md.rating<=".(int)$searchRating."";
-			$rateOrder = ($order_by == 'DESC') ? 'ASC' : 'DESC';
+			$rateOrder = ($orderBy == 'DESC') ? 'ASC' : 'DESC';
 			$sqlOrderBy[] = "md.rating ".$rateOrder."";
 		}
 		
-		// category selection from dropdown
-//		if ($category !== false && $category != "-1") $snip_where[] = "md.category=".$category."";
 		if ($category) $snip_where[] = "md.category=".$category."";
-		
-		// eSearch selection
-		if ($esearch = $this->get_search_ext_snipplet($search_ext)) $snip_where[] = $esearch;
-		
-		// languages selection from dropdown
+		if ($esearch = SqlHelper::createSqlExtSearch($search_ext)) $snip_where[] = $esearch;
 		if ($language) $snip_where[] = "mdl.lang_id='".$language."'";
-		
-		// show only data with metadata assigned
-		if ($toggle_show_metaless_roms_only) $snip_where[] = "md.id IS NULL";
-		
-		$snip_where_sql = implode(" AND ", $snip_where);
-		if (!$snip_where_sql) $snip_where_sql = " 1 ";
+		if ($hideMetaless) $snip_where[] = "md.id IS NULL";
 		
 		$snip_join = array();
-		if ($this->showOnlyPersonal) {
-			$snip_join[] = "udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
-		}
-		elseif (!$show_files_only) {
-			$snip_join[] = "fdata AS fd left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
-		} else {
+		
+		if ($this->showOnlyDontHave){
+			$snip_where[] = "fd.id IS NULL";
 			$snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
+			$sqlOrderBy[] = 'md.name '.$orderBy;
+		}
+		else{
+			if ($this->showOnlyPersonal) $snip_join[] = "udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
+			elseif (!$onlyFiles) $snip_join[] = "fdata AS fd left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
+			else $snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
+			$sqlOrderBy[] = 'UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE '.$orderBy;			
 		}
 		
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
-		$snip_join_sql = implode(" ", $snip_join);
 
-		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$order_by;
-		
-		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
-		
 		if ($randomGame) {
-			$snipSqlOrderBy = "ORDER BY random(*)";
+			$sqlOrderBy = array('random(*)');
 			$limit = array(0,1);
 		}
 		
+		# create sql snipplets
+		$snipSqlWhere = SqlHelper::createSqlWhere($snip_where);
+		$snipSqlJoin = SqlHelper::createSqlJoin($snip_join);
+		$snipSqlOrderBy = SqlHelper::createSqlOrder($sqlOrderBy);
+		$snipSqlLimit = SqlHelper::createSqlLimit($limit);
+		
+		# create sql
 		$q = "
 			SELECT
-			md.crc32 as md_crc32,
-			md.id as md_id,
-			md.eccident as md_eccident,
-			md.name as md_name,
-			md.info as md_info,
-			md.info_id as md_info_id,
-			md.running as md_running,
-			md.bugs as md_bugs,
-			md.trainer as md_trainer,
-			md.intro as md_intro,
-			md.usermod as md_usermod,
-			md.freeware as md_freeware,
-			md.multiplayer as md_multiplayer,
-			md.netplay as md_netplay,
-			md.year as md_year,
-			md.usk as md_usk,
-			md.rating as md_rating,
-			md.category as md_category,
-			md.creator as md_creator,
-			md.publisher as md_publisher,
-			md.storage as md_storage,
-			md.region as md_region,
-			md.cdate as md_cdate,
-			md.uexport as md_uexport,
-			fd.id as id,
-			fd.title as title,
-			fd.path as path,
-			fd.path_pack as path_pack,
-			fd.crc32 as crc32,
-			fd.md5 as md5,
-			fd.size as size,
-			fd.eccident as fd_eccident,
-			fd.launchtime as fd_launchtime,
-			fd.launchcnt as fd_launchcnt,
-			fd.mdata as fd_mdata
+			".$this->sqlFields."
 			FROM
-			".$snip_join_sql."
+			".$snipSqlJoin."
 			WHERE
-			".$snip_where_sql."
+			".$snipSqlWhere."
 			".$snipSqlOrderBy."
-			". $this->get_sql_limit($limit)."
+			".$snipSqlLimit."
 		";
-		#print $q."\n";
+		#print $q;
 		$hdl = $this->dbms->query($q);
+		$ret = array();
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
 			$ret['data'][$res['id']."|".$res['md_id']] = $res;
 			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
 		}
-		#print_r($ret);
-		
 		if ($return_count===true) {
-			// GET COUNT
-			$q = "
-				SELECT
-				count(*)
-				FROM
-				".$snip_join_sql."
-				WHERE
-				".$snip_where_sql."
-			";
+			$q = "SELECT count(*) FROM ".$snipSqlJoin." WHERE ".$snipSqlWhere."";
 			#print $q."\n";
 			$hdl = $this->dbms->query($q);
 			$ret['count'] = $hdl->fetchSingle();
+		}
+				
+		if ($updateCategories){
+			$eccidentSql = ($extension) ? "fd.eccident='".sqlite_escape_string($extension)."'" : '1';
+			$q = "SELECT md.category, count(*) AS cnt FROM ".$snipSqlJoin." WHERE ".$eccidentSql." GROUP BY md.category ORDER BY cnt DESC";
+			#print $q."\n";
+			$hdl = $this->dbms->query($q);
+			while($res = $hdl->fetch(SQLITE_ASSOC)) {
+				$ret['cat'][$res['md.category']] = $res['cnt'];
+			}
 		}
 		return $ret;
 	}
@@ -227,126 +176,76 @@ class TreeviewData {
 	*/
 	public function get_bookmarks(
 		$extension,
-		$search_like=false,
+		$like=false,
 		$limit=array(),
 		$return_count=true,
-		$order_by="",
+		$orderBy="",
 		$language=false,
 		$category=false,
 		$search_ext=false,
-		$show_files_only=true,
-		$toggle_show_doublettes=false,
-		$toggle_show_metaless_roms_only=false,
+		$onlyFiles=true,
+		$hideDup=false,
+		$hideMetaless=false,
 		$searchRating = false
 	)
 	{
-		$ret = array();
-		$ret['data'] = array();
-		$ret['count'] = array();
-		
 		$snip_where = array();
 		$sqlOrderBy = array();
 		
 		// languages selection from dropdown
 		$snip_where[] = "fd.duplicate IS NULL";
-		// search like set?
-		if ($search_like) $snip_where[] = $search_like;
-		// show only data with metadata assigned
+
 		// show/hide missing roms
-		if (!$show_files_only) {
-			if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
-		}
-		else {
-			if ($extension) $snip_where[] = "md.eccident='".sqlite_escape_string($extension)."'";
-		}
+		if (!$onlyFiles) if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
+		else if ($extension) $snip_where[] = "md.eccident='".sqlite_escape_string($extension)."'";
 		
 		if ($searchRating) {
 			$snip_where[] = "md.rating<=".(int)$searchRating."";
-			$rateOrder = ($order_by == 'DESC') ? 'ASC' : 'DESC';
+			$rateOrder = ($orderBy == 'DESC') ? 'ASC' : 'DESC';
 			$sqlOrderBy[] = "md.rating ".$rateOrder."";
 		}
+
+		if ($like) $snip_where[] = $like;
+		if ($hideMetaless) $snip_where[] = "md.id IS NULL";
 		
-		if ($toggle_show_metaless_roms_only) $snip_where[] = "md.id IS NULL";
-		// esearch
-		$esearch = $this->get_search_ext_snipplet($search_ext);
-		if ($esearch) $snip_where[] = $esearch;
-		// category
-//		if ($category !== false && $category != "-1") $snip_where[] = "md.category=".$category;
+		#if ($esearch) $snip_where[] = SqlHelper::createSqlExtSearch($search_ext);
+		if ($esearch = SqlHelper::createSqlExtSearch($search_ext)) $snip_where[] = $esearch;
 		if ($category) $snip_where[] = "md.category=".$category;
-		// language
 		if ($language) $snip_where[] = "mdl.lang_id='".$language."'";
-		$snip_where_sql = implode(" AND ", $snip_where);
-		if (!$snip_where_sql) $snip_where_sql = " 1 ";
+
+		$snip_join = array();
+		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
 		
-		// language
-		$snipplet_language_join = ($language) ? " left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
+		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$orderBy;
 		
-		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$order_by;
+		# create sql snipplets
+		$snipSqlWhere = SqlHelper::createSqlWhere($snip_where);
+		$snipSqlJoin = SqlHelper::createSqlJoin($snip_join);
+		$snipSqlOrderBy = SqlHelper::createSqlOrder($sqlOrderBy);
+		$snipSqlLimit = SqlHelper::createSqlLimit($limit);
 		
-		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
-		
+		# create sql
 		$q = "
 			SELECT
-			md.crc32 as md_crc32,
-			md.id as md_id,
-			md.eccident as md_eccident,
-			md.name as md_name,
-			md.info as md_info,
-			md.info_id as md_info_id,
-			md.running as md_running,
-			md.bugs as md_bugs,
-			md.trainer as md_trainer,
-			md.intro as md_intro,
-			md.usermod as md_usermod,
-			md.freeware as md_freeware,
-			md.multiplayer as md_multiplayer,
-			md.netplay as md_netplay,
-			md.year as md_year,
-			md.usk as md_usk,
-			md.rating as md_rating,
-			md.category as md_category,
-			md.creator as md_creator,
-
-			md.publisher as md_publisher,
-			md.storage as md_storage,
-			md.region as md_region,
-
-			md.cdate as md_cdate,
-			md.uexport as md_uexport,
-			fd.id as id,
-			fd.title as title,
-			fd.path as path,
-			fd.path_pack as path_pack,
-			fd.crc32 as crc32,
-			fd.md5 as md5,
-			fd.size as size,
-			fd.eccident as fd_eccident,
-			fd.launchtime as fd_launchtime,
-			fd.launchcnt as fd_launchcnt,
-			fd.mdata as fd_mdata
+			".$this->sqlFields."
 			FROM
 			fdata_bookmarks as b
-            left join fdata AS fd on b.file_id=fd.id
-			left join mdata AS md on fd.crc32=md.crc32 and fd.eccident = md.eccident
-			".$snipplet_language_join."
+			left join fdata AS fd on b.file_id=fd.id
+			left join mdata AS md on fd.crc32=md.crc32
+			".$snipSqlJoin."
 			WHERE
-			".$snip_where_sql."
+			".$snipSqlWhere."
 			".$snipSqlOrderBy."
-			". $this->get_sql_limit($limit)."
+			".$snipSqlLimit."
 		";
 		
-		#print "bookmark ###### ".$q."\n";
 		$hdl = $this->dbms->query($q);
 		$ret = array();
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			#$ret['data'][$res['id']] = $res;
 			$ret['data'][$res['id']."|".$res['md_id']] = $res;
 			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
-			#print $res['id']."|".$res['md_id']."\n";
 		}
-		
 		if ($return_count===true) {
-			// GET COUNT
 			$q = "
 				SELECT
 				count(*)
@@ -354,11 +253,10 @@ class TreeviewData {
 				fdata_bookmarks as b
 				left join fdata AS fd on b.file_id=fd.id
 				left join mdata AS md on fd.crc32=md.crc32
-				".$snipplet_language_join."
+				".$snipSqlJoin."
 				WHERE
-				".$snip_where_sql."
+				".$snipSqlWhere."
 			";
-			#print $q."\n";
 			$hdl = $this->dbms->query($q);
 			$ret['count'] = $hdl->fetchSingle();
 		}
@@ -370,116 +268,64 @@ class TreeviewData {
 	*/
 	public function get_last_launched(
 		$extension,
-		$search_like=false,
+		$like=false,
 		$limit=array(),
 		$return_count=true,
-		$order_by="",
+		$orderBy="",
 		$language=false,
 		$category=false,
 		$search_ext=false,
-		$show_files_only=true,
-		$toggle_show_doublettes=false,
-		$toggle_show_metaless_roms_only=false,
+		$onlyFiles=true,
+		$hideDup=false,
+		$hideMetaless=false,
 		$searchRating = false
 	)
 	{
-		
-		$ret = array();
-		$ret['data'] = array();
-		$ret['count'] = array();
-
-		// ORDER
 		// order by must be reverse! :-(
-		$order_by = ($order_by=='DESC') ? 'ASC' : 'DESC';
+		$orderBy = ($orderBy=='DESC') ? 'ASC' : 'DESC';
 		
 		// INIT WHERE SNIPPLET		
 		$snip_where = array();
 		$sqlOrderBy = array();
 		
-		// COMPILE WHERE SNIPPLET
-		// languages selection from dropdown
 		$snip_where[] = "fd.duplicate IS NULL";
-		// search like set?
-		if ($search_like) $snip_where[] = $search_like;
-		// eccident
+		if ($like) $snip_where[] = $like;
 		if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
-		// category
-//		if ($category !== false && $category != "-1") $snip_where[] = "md.category=".$category;
 		if ($category) $snip_where[] = "md.category=".$category;
 		
 		if ($searchRating) {
 			$snip_where[] = "md.rating<=".(int)$searchRating."";
-			$sqlOrderBy[] = "md.rating ".$order_by."";
+			$sqlOrderBy[] = "md.rating ".$orderBy."";
 		}
 		
-		// language
 		if ($language) $snip_where[] = "mdl.lang_id='".$language."'";
-		// show only data with metadata assigned
-		if ($toggle_show_metaless_roms_only) $snip_where[] = "md.id IS NULL";
-		// esearch
-		$esearch = $this->get_search_ext_snipplet($search_ext);
-		if ($esearch) $snip_where[] = $esearch;
-		// BUILD WHERE SNIPPLET STRING
-		$snip_where_sql = implode(" AND ", $snip_where);
-		if (!$snip_where_sql) $snip_where_sql = " 1 ";
+		if ($hideMetaless) $snip_where[] = "md.id IS NULL";
+		if ($esearch = SqlHelper::createSqlExtSearch($search_ext)) $snip_where[] = $esearch;
+		$snip_where[] = 'launchtime != ""';
 		
-		// JOINS
-		// language
-		$snipplet_language_join = ($language) ? " left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
+		$snip_join = array();
+		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
 		
-		$sqlOrderBy[] = "launchtime ".$order_by;
-		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
+		$sqlOrderBy[] = "launchtime ".$orderBy;
 		
-
+		# create sql snipplets
+		$snipSqlWhere = SqlHelper::createSqlWhere($snip_where);
+		$snipSqlJoin = SqlHelper::createSqlJoin($snip_join);
+		$snipSqlOrderBy = SqlHelper::createSqlOrder($sqlOrderBy);
+		$snipSqlLimit = SqlHelper::createSqlLimit($limit);
 		
+		# create sql
 		$q = "
 			SELECT
-			md.crc32 as md_crc32,
-			md.id as md_id,
-			md.name as md_name,
-			md.info as md_info,
-			md.info_id as md_info_id,
-			
-			md.running as md_running,
-			md.bugs as md_bugs,
-			md.trainer as md_trainer,
-			md.intro as md_intro,
-			md.usermod as md_usermod,
-			md.freeware as md_freeware,
-			md.multiplayer as md_multiplayer,
-			md.netplay as md_netplay,
-			md.year as md_year,
-			md.usk as md_usk,
-			md.rating as md_rating,
-			md.category as md_category,
-			md.creator as md_creator,
-
-			md.publisher as md_publisher,
-			md.storage as md_storage,
-			md.region as md_region,
-
-			md.cdate as md_cdate,
-			md.uexport as md_uexport,
-			fd.id as id,
-			fd.title as title,
-			fd.path as path,
-			fd.path_pack as path_pack,
-			fd.crc32 as crc32,
-			fd.md5 as md5,
-			fd.size as size,
-			fd.eccident as fd_eccident,
-			fd.launchtime as fd_launchtime,
-			fd.launchcnt as fd_launchcnt,
-			fd.mdata as fd_mdata
+			".$this->sqlFields."
 			FROM
 			fdata AS fd
 			left join mdata AS md on (fd.eccident=md.eccident AND fd.crc32=md.crc32)
-			".$snipplet_language_join."
+			".$snipSqlJoin."
 			WHERE
-			".$snip_where_sql." AND
-			launchtime != ''
+			".$snipSqlWhere."
 			".$snipSqlOrderBy."
-			". $this->get_sql_limit($limit)."
+			".$snipSqlLimit."
 		";
 
 		$hdl = $this->dbms->query($q);
@@ -490,19 +336,16 @@ class TreeviewData {
 		}
 		
 		if ($return_count===true) {
-			// GET COUNT
 			$q = "
 				SELECT
 				count(*)
 				FROM
 				fdata AS fd
 				left join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
-				".$snipplet_language_join."
+				".$snipSqlJoin."
 				WHERE
-				".$snip_where_sql." AND
-				launchtime != ''
+				".$snipSqlWhere."
 			";
-			#print $q."\n";
 			$hdl = $this->dbms->query($q);
 			$ret['count'] = $hdl->fetchSingle();
 		}
@@ -586,7 +429,9 @@ class TreeviewData {
 		$snip_where = array();
 		if ($eccident) $snip_where[] = "eccident='".sqlite_escape_string($eccident)."'";
 		$snip_where[] = "duplicate=1";
-		$sql_snip = implode(" AND ", $snip_where);
+		
+		#$sql_snip = implode(" AND ", $snip_where);
+		$sql_snip = SqlHelper::createSqlWhere($snip_where);
 		
 		$removeString = ($remove) ? 'and removed (database only)' : 'your';
 		$msg = LOGGER::add('romparse', "Find $removeString duplicate roms\r\nPlatform: $eccident", 1);
@@ -903,15 +748,14 @@ class TreeviewData {
 	/* ------------------------------------------------------------------------
 	*
 	*/
-	public function get_media_count_for_eccident($eccident, $toggle_show_doublettes) {
+	public function get_media_count_for_eccident($eccident, $hideDup) {
 		$ret = false;
 		
 		$snip_where = array();
 		if ($eccident) $snip_where[] = "eccident='".sqlite_escape_string($eccident)."'";
-		if ($toggle_show_doublettes) $snip_where[] = "duplicate is null";
+		if ($hideDup) $snip_where[] = "duplicate is null";
 		// BUILD WHERE SNIPPLET STRING
-		$snip_where_sql = implode(" AND ", $snip_where);
-		if (!$snip_where_sql) $snip_where_sql = " 1 ";
+		$snip_where_sql = SqlHelper::createSqlWhere($snip_where);
 		
 		$q = "SELECT count(*) as cnt FROM fdata WHERE ".$snip_where_sql."";
 		#print $q."\n";
@@ -925,51 +769,61 @@ class TreeviewData {
 	*
 	*/
 	
-	public function getNavPlatformCounts($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false, $show_files_only=false)
+	public function getNavPlatformCounts($extension, $hideDup, $language=false, $category=false, $search_ext=false, $hideMetaless=false, $like=false, $onlyFiles=false)
 	{
 		// CREATE WHERE-CLAUSE
 		$snip_where = array();
 		// initial entry
 		$snip_where[] = "1";
 
-		//$search_like = $this->createSearchSqlLike();
-		if ($sqlLike) $snip_where[] = $sqlLike;
-		
-		$eccIdents = '"'.implode('","', $extension).'"';
-		$snip_where[] = "fd.eccident in (".sqlite_escape_string($eccIdents).")";
+		if ($like) $snip_where[] = $like;
 		
 		// show only data with metadata assigned
-		if ($toggle_show_metaless_roms_only) $snip_where[] = "md.id IS NULL";
+		if ($hideMetaless) $snip_where[] = "md.id IS NULL";
 		// doublettes
-		if ($toggle_show_doublettes) $snip_where[] = "fd.duplicate is null";
+		if ($hideDup) $snip_where[] = "fd.duplicate is null";
 		// category
 		if ($category) $snip_where[] = "md.category=".$category;
 		// language
 		if ($language) $snip_where[] = "mdl.lang_id='".$language."'";
 		// esearch
-		$esearch = $this->get_search_ext_snipplet($search_ext);
+		$esearch = SqlHelper::createSqlExtSearch($search_ext);
 		if ($esearch) $snip_where[] = $esearch;
-		// concat strings to snipplet
-		$sql_where = implode(" AND ", $snip_where);
 		
 		// inner = count only roms with metadata
-		$joinType = ($show_files_only) ? 'inner' : 'left';
+		$joinType = ($onlyFiles) ? 'inner' : 'left';
 		
 		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
 		
 		$personalJoin = ($this->showOnlyPersonal) ? " udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) " : 'fdata AS fd';
 		
+		$sqlNamespace = 'fd';
+		$snipSqlJoin = $personalJoin.' '.$joinType.' join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident '.$sql_join;
+		$snipSqlGroup = 'group by fd.eccident';
+
+		if ($this->showOnlyDontHave){
+			$sqlNamespace = 'md';
+			$snip_where[] = 'fd.id IS NULL';
+			$snipSqlJoin = ' mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32) ';
+			$snipSqlJoin .= ($language) ? ' left join mdata_language AS mdl on md.id=mdl.mdata_id ' : '';
+			$snipSqlGroup = 'group by md.eccident';
+		}
+
+		#$eccIdents = '"'.implode('","', $extension).'"';
+		#$snip_where[] = $sqlNamespace.'.eccident in ('.sqlite_escape_string($eccIdents).')';
+		
+		# create sql snipplets
+		$snipSqlWhere = SqlHelper::createSqlWhere($snip_where);
+		
 		// GET COUNT
 		$q = "
 			SELECT
-			fd.eccident as eccident, count(fd.id) as cnt
+			".$sqlNamespace.".eccident as eccident, count(".$sqlNamespace.".id) as cnt
 			FROM
-			".$personalJoin."
-			".$joinType." join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
-			".$sql_join."
+			".$snipSqlJoin."
 			WHERE
-			".$sql_where."
-			group by fd.eccident
+			".$snipSqlWhere."
+			".$snipSqlGroup."
 		";
 		#print $q."\n";
 		$hdl = $this->dbms->query($q);
@@ -980,63 +834,6 @@ class TreeviewData {
 		return $ret;
 	}
 		
-	/* ------------------------------------------------------------------------
-	*
-	*/
-	public function get_media_count_for_eccident_search($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false, $show_files_only=false)
-	{
-		// CREATE WHERE-CLAUSE
-		$snip_where = array();
-		// initial entry
-		$snip_where[] = "1";
-
-		//$search_like = $this->createSearchSqlLike();
-		if ($sqlLike) $snip_where[] = $sqlLike;
-		
-		// eccident
-		if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
-	
-		
-		// show only data with metadata assigned
-		if ($toggle_show_metaless_roms_only) $snip_where[] = "md.id IS NULL";
-		// doublettes
-		if ($toggle_show_doublettes) $snip_where[] = "fd.duplicate is null";
-		// category
-//		if ($category !== false && $category != "-1") $snip_where[] = "md.category=".$category;
-		if ($category) $snip_where[] = "md.category=".$category;
-		// language
-		if ($language) $snip_where[] = "mdl.lang_id='".$language."'";
-		// esearch
-		$esearch = $this->get_search_ext_snipplet($search_ext);
-		if ($esearch) $snip_where[] = $esearch;
-		// concat strings to snipplet
-		$sql_where = implode(" AND ", $snip_where);
-		
-		// inner = count only roms with metadata
-		$joinType = ($show_files_only) ? 'inner' : 'left';
-		
-		$personalJoin = ($this->showOnlyPersonal) ? " udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) " : 'fdata AS fd';
-
-		// CREATE JOIN, IF NEEDED
-		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";		
-		
-		// GET COUNT
-		$q = "
-			SELECT
-			count(fd.id)
-			FROM
-			".$personalJoin."
-			".$joinType." join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
-			".$sql_join."
-			WHERE
-			".$sql_where."
-		";
-		#print $q."\n";
-		$hdl = $this->dbms->query($q);
-		return $hdl->fetchSingle();
-	}
-	
-	
 	public function find_duplicate_by_id($id) {
 		if (!$id) return false;
 		$q="
@@ -1073,14 +870,7 @@ class TreeviewData {
 	
 	public function update_fdata_by_path($path_source, $path_destination) {
 		
-//		$path_destination = realpath($path_destination);
-//		if (strpos($path_destination, ECC_BASEDIR) == 0) {
-//			$path_destination = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_destination);
-//			$path_destination = str_replace("\\", "/", $path_destination);
-//		};
-		
-		// ABS-PATH TO REL-PATH...
-		// 20061116 as
+		// ABS-PATH TO REL-PATH... 20061116 as
 		$path_destination = FACTORY::get('manager/Os')->eccSetRelativeFile($path_destination);
 		
 		// set new filename
@@ -1109,14 +899,7 @@ class TreeviewData {
 	 */
 	public function updatePathById($fdataId, $path_destination) {
 		
-//		$path_destination = realpath($path_destination);
-//		if (strpos($path_destination, ECC_BASEDIR) == 0) {
-//			$path_destination = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_destination);
-//			$path_destination = str_replace("\\", "/", $path_destination);
-//		};
-		
 		// ABS-PATH TO REL-PATH...
-		// 20061116 as
 		$path_destination = FACTORY::get('manager/Os')->eccSetRelativeFile($path_destination);
 		
 		// set new filename

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayItemGetHandle.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TrayItemGetHandle</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayItemGetHandle</font>
+<hr size="2">
+<p>Returns the handle for a tray menu(item).<br></p>
+
+<p class="codeheader">
+TrayItemGetHandle ( controlID )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">The control identifier (controlID) as returned by a <a href="TrayCreateItem.html">TrayCreateItem</a> or <a href="TrayCreateMenu.html">TrayCreateMenu</a> function.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the handle of the given control ID.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To get the handle to the tray context menu itself use '0' as controlID.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="TrayItemGetState.html">TrayItemGetState</a>, <a href="TrayItemGetText.html">TrayItemGetText</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Don't show the default tray context menu</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$MIM_APPLYTOSUBMENUS</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x80000000</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$MIM_BACKGROUND</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x00000002</span><br>
+<br>
+<span class="S4">TraySetIcon</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">21</span><span class="S8">)</span><br>
+<span class="S4">TraySetToolTip</span><span class="S8">(</span><span class="S7">"This is just a small example to show that colored tray menus"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"are easy possible under Windows 2000 and higher."</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$OptionsMenu</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateMenu</span><span class="S8">(</span><span class="S7">"Options"</span><span class="S8">)</span><br>
+<span class="S9">$OnTopItem</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Always On Top"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetState</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$TRAY_CHECKED</span><span class="S8">)</span><br>
+<span class="S9">$RepeatItem</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Repeat Always"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$AboutItem</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"About"</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$ExitItem</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit Sample"</span><span class="S8">)</span><br>
+<br>
+<span class="S0">SetMenuColor</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xEEBB99</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">; BGR color value, '0' means the tray context menu handle itself</span><br>
+<span class="S0">SetMenuColor</span><span class="S8">(</span><span class="S9">$OptionsMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x66BB99</span><span class="S8">)</span><span class="S1">; BGR color value</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$Msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayGetMsg</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$Msg</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$ExitItem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$AboutItem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"About..."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Colored tray menu sample"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSwitch</span><span class="S0"> &nbsp;&nbsp;</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<br>
+<span class="S1">; Apply the color to the menu</span><br>
+<span class="S5">Func</span><span class="S0"> SetMenuColor</span><span class="S8">(</span><span class="S9">$nMenuID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Minimum OS are Windows98 and 2000 </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@OSVersion</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"WIN_95"</span><span class="S0"> </span><span class="S5">Or</span><span class="S0"> </span><span class="S6">@OSVersion</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"WIN_NT4"</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Return</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hMenu</span><span class="S0"> &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayItemGetHandle</span><span class="S8">(</span><span class="S9">$nMenuID</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Get the internal menu handle</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"CreateSolidBrush"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stMenuInfo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"dword;dword;dword;uint;dword;dword;ptr"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOr</span><span class="S8">(</span><span class="S9">$MIM_APPLYTOSUBMENUS</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$MIM_BACKGROUND</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SetMenuInfo"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">))</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TrayItemGetHandle.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

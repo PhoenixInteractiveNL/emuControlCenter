@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/running.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:05 GMT -->
+<head>
+  <title>Running Scripts</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Running Scripts</h1>
+<p>When you start AutoIt you will be asked to open a <strong>script file</strong>.&nbsp;
+  A script file is a simple text file containing AutoIt keywords and functions
+  that tell AutoIt what you want it to do.&nbsp; Script files are created in a
+  simple text editor such as <strong>notepad.exe</strong> or a much better <a href="editors.html">alternative</a>.</p>
+<p>Although AutoIt v3 scripts are just plain-text files they are usually given 
+  the file extension <strong>.au3</strong> to help tell the difference between 
+  a script and a text file.&nbsp; If you used the full installer to install AutoIt 
+  you can execute an AutoIt script simply by double-clicking it.&nbsp; There are 
+  also various options to open, edit, or compile a script if you right-click on 
+  the <span
+ style="font-weight: bold;">.au3</span> file.</p>
+<p>&nbsp;</p>
+<p>Here is an example script.  Notice that <strong>;</strong> is used
+for comments (much like <strong>REM</strong> in DOS batch files):</p>
+<p class="codebox">
+; This is my first script<br>
+MsgBox(0, "My First Script!", "Hello World!")</p>
+<p>&nbsp;</p>
+<p>More complicated scripts may use <strong>functions</strong>, which
+are usually placed at the end of a script.&nbsp; Here is a similar
+script using functions:</p>
+<p class="codebox">
+; This is my second script (with functions)<br>
+  MsgBox(0, "My second script!", "Hello from the main script!")<br>
+  TestFunc()<br>
+  <br>
+  Func TestFunc()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, "My Second Script!", "Hello from the functions!")<br>
+  EndFunc
+</p>
+<p class="code">&nbsp;</p>
+<h2><a name="CommandLine"></a>Command Line Parameters</h2>
+<p>The special array $CmdLine is initialized with the command line parameters
+  passed in to your AutoIt script.&nbsp; Note the scriptname is not classed as
+  a parameter; get this information with @ScriptName instead.&nbsp; A parameter
+  that contains spaces must be surrounded by <strong>&quot;</strong>double quotes<strong>&quot;</strong>.&nbsp;
+  <a href="compiler.html">Compiled</a> scripts accept command line parameters in
+  the same way.<br>
+  <br>
+  $CmdLine[0] is number of parameters<br>
+  $CmdLine[1] is param 1 (after the script name)<br>
+  $CmdLine[2] is param 2 etc<br>
+  ...<br>
+  $CmdLine[$CmdLine[0]] is one way to get the last parameter...</p>
+<p>&nbsp;</p>
+<p>So if your script is run like this:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; AutoIt3.exe myscript.au3 param1 &quot;this
+  is another param&quot;</p>
+<p>$CmdLine[0] <em>equals...</em> 2</p>
+<p>$CmdLine[1] <em>equals...</em> param1</p>
+<p>$CmdLine[2] <em>equals...</em> this is another param</p>
+<p>@ScriptName <em>equals...</em> myscript.au3</p>
+<p>&nbsp;</p>
+<p>In addition to $CmdLine there is a variable called $CmdLineRaw that contains the entire command line unsplit, so for the above example:</p>
+<p>$CmdLineRaw <em>equals...</em> <span class="code">myscript.au3 param1 &quot;this is another param&quot;</span></p>
+<p>&nbsp;</p>
+<p>If the script was compiled it would have been run like this:</p>
+<p class="code">&nbsp;&nbsp;&nbsp;  myscript.exe param1 &quot;this
+  is another param&quot;</p>
+<p>$CmdLineRaw <em>equals...</em> <span class="code">param1 &quot;this is another param&quot;</span></p>
+<p>Note that $CmdLineRaw just return the parameters.</p>
+<p>&nbsp;</p>
+<p><b>Note</b> : only 63 parameters can be return by $CmdLine[...], but $CmdLineRaw 
+will always returns the entire command line.</p>
+<p>&nbsp;</p>
+<h2>AutoIt specific command Line Switches</h2>
+<p><b>Form1</b>: AutoIt3.exe [/ErrorStdOut]  [/AutoIt3ExecuteScript] file [params ...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Execute an AutoIt3 Script File</p>
+<p><br>
+/ErrorStdOut&nbsp;&nbsp;&nbsp; Allows to redirect fatal error to StdOut which 
+can be captured by an application as Scite editor. This switch can be used with 
+a compiled script.<br>
+&nbsp;</p>
+<p>To execute a standard AutoIt Script File 'myscript.au3', use the command:<br>
+'AutoIt3.exe myscript.au3'</p>
+<p>&nbsp;</p>
+<p><b>Form2</b>: Compiled.exe [/ErrorStdOut] [params ...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Execute an compiled AutoIt3 Script File produced with Aut2Exe.</p>
+<p><b>Form3</b>: Compiled.exe [/ErrorStdOut] [/AutoIt3ExecuteScript file] [params 
+...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Execute another script file from a compiled AutoIt3 Script File. Then you 
+don't need to fileinstall another copy of AutoIT3.exe in your compiled file.</p>
+<p><br>
+<b>Form4</b>: AutoIt3.exe [/ErrorStdOut] /AutoIt3ExecuteLine &quot;command line&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Execute one line of code.<br>
+<br>
+To execute a single line of code, use the command:<br>
+Run(@AutoItExe &amp; ' /AutoIt3ExecuteLine&nbsp; &quot;MsgBox(0, 
+<font color="#FF0000">''</font>Hello World!<font color="#FF0000">''</font>, 
+<font color="#FF0000">''</font>Hi!<font color="#FF0000">''</font>)&quot;')</p>
+<p>The tray icon will not be displayed when using /AutoIt3ExecuteLine<br>
+<br>
+NOTE: Correct usage of single- and double- quotation marks is important, even
+<font color="#FF0000">double single</font>.&nbsp; </p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/running.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:05 GMT -->
+</html>

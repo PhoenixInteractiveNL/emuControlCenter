@@ -58,29 +58,6 @@ class TreeviewPager {
 				$this->_pfirst = false;
 			}	
 		}
-
-//		print "_res_total<pre>";
-//		print_r($this->_res_total);
-//		print "</pre>\n";
-//		print "_pp<pre>";
-//		print_r($this->_pp);
-//		print "</pre>\n";
-//		print "_pt<pre>";
-//		print_r($this->_pt);
-//		print "</pre>\n";
-//		print "_p<pre>";
-//		print_r($this->_p);
-//		print "</pre>\n";
-//		print "_plast<pre>";
-//		print_r($this->_plast);
-//		print "</pre>\n";
-//		print "_pfirst<pre>";
-//		print_r($this->_pfirst);
-//		print "</pre>\n";
-//		print "_res_offset<pre>";
-//		print_r($this->_res_offset);
-//		print "</pre>\n\n";
-		
 		return $this;
 	}
 	

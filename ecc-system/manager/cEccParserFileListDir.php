@@ -62,11 +62,6 @@ class EccParserFileListDir implements FileList {
 						$this->_create_file_list($full_file_path);
 					}
 					else {
-						// ABS-PATH TO REL-PATH...
-//						$full_file_path = realpath($full_file_path);
-//						if (strpos($full_file_path, ECC_BASEDIR) == 0) {
-//							$full_file_path = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $full_file_path);
-//						};
 
 						// ABS-PATH TO REL-PATH...
 						// 20061116 as
@@ -197,11 +192,6 @@ class EccParserFileListDir implements FileList {
 	public function handle_rar_file() {
 		return false;
 	}
-	
-//	public function get_file_ext($file_name)
-//	{
-//		return strtolower(array_pop(explode('.', basename($file_name))));
-//	}
 	
 	public function get_file_ext($file) {
 		$extension = '';

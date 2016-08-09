@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MouseGetPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function MouseGetPos</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">MouseGetPos</font>
+<hr size="2">
+<p>Retrieves the current position of the mouse cursor.<br></p>
+
+<p class="codeheader">
+MouseGetPos ( [dimension] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Dimension </td>
+    <td width="85%">An optional argument that determines what the return value will be.  See Return Value.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Dimension </td>
+    <td width="85%">Values</td>
+  </tr>
+  <tr>
+   <td><i>None</i></td>
+   <td>Returns a two-element <b>array</b> that containing the mouse coordinates:  $array[0] = X coord (horizontal), $array[1] = Y coord (vertical)</td>
+  </tr>
+  <tr>
+   <td>0</td>
+   <td>Returns the X co-ordinate as an integer.</td>
+  </tr>
+  <tr>
+   <td>1</td>
+   <td>Returns the Y co-ordinate as an integer.</td>
+  </tr>
+</table><br><br>
+If dimension is not a number @error will be set to 1.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+See MouseCoordMode for relative/absolute position settings.  If relative positioning, numbers may be negative.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="MouseClick.html">MouseClick</a>, <a href="MouseClickDrag.html">MouseClickDrag</a>, <a href="MouseMove.html">MouseMove</a>, <a href="AutoItSetOption.html#MouseCoordMode">MouseCoordMode (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$pos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">MouseGetPos</span><span class="S8">()</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Mouse x,y:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$pos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MouseGetPos.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

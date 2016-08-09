@@ -90,5 +90,8 @@ class FACTORY {
 	public function setDbms($dbmsObject) {
 		FACTORY::$dbms = $dbmsObject;
 	}
+	public function getDbms() {
+		return FACTORY::$dbms;
+	}
 }
 ?>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/IsDeclared.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:00 GMT -->
+<head>
+  <title>Function IsDeclared</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">IsDeclared</font>
+<hr size="2">
+<p>Check if a variable has been declared.<br></p>
+
+<p class="codeheader">
+IsDeclared ( expression )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">string representing name of the variable to be checked.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1 for Global variable or variable declared outside functions.</td>
+  </tr>
+  <tr>
+    <td valign="top">Special:</td>
+    <td>-1 for Local variable.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Return 0 when no variable can be found.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If there is a need to use IsDeclared() to check that a variable exists, then in most situations Assign() should be used to create/write to the variable and Eval() should be used to read from the variable.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Assign.html">Assign</a>, <a href="Eval.html">Eval</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S4">IsDeclared</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"a"</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"$a is NOT declared"</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; $a has never been assigned</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S9">$a</span><span class="S8">=</span><span class="S3">1</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">IsDeclared</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"a"</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"$a IS declared"</span><span class="S0"> &nbsp;</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; due to previous $a=1 assignment</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/IsDeclared.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:00 GMT -->
+</html>

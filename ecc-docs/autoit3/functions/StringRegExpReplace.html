@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringRegExpReplace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function StringRegExpReplace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringRegExpReplace</font>
+<hr size="2">
+<p>Replace text in a string based on regular expressions.<br></p>
+
+<p class="codeheader">
+StringRegExpReplace ( "test", "pattern", "replace", [ count ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">test</td>
+    <td width="85%">The string to check</td>
+  </tr>
+  <tr>
+   <td>pattern</td>
+   <td>The regular expression to compare.  See <A href="StringRegExp.html">StringRegExp</a> for pattern definition characters.</td>
+  </tr>
+  <tr>
+   <td>replace</td>
+   <td>The text to replace the regular expression matching text with.  To insert matched group text, \0 - \9 (or $0 - $9) can be used as back-references.</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>[optional] The number of times to execute the replacement in the string.  The default is 0.  Use 0 for global replacement.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>Executed properly.  Check @Extended for the number of replacements performed.</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>Pattern invalid.  @Extended = offset of error in pattern.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="StringReplace.html">StringReplace</a>, <a href="StringRegExp.html">StringRegExp</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Regular Expression Replace Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">StringRegExpReplace</span><span class="S8">(</span><span class="S7">"Where have all the flowers gone, long time passing?"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"[aeiou]"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"@"</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/StringRegExpReplace.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

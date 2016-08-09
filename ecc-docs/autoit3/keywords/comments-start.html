@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/comments-start.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Keyword #comments-start</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">#comments-start</font>
+<hr size="2">
+<p>Specify that an entire section of script should be commented out.<br></p>
+
+<p class="codeheader">
+<b>#comments-start</b><br>
+...<br>
+...<br>
+<b>#comments-end</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The #comments-start and #comments-end directives can be nested.<br>
+You can also use the abbreviated keywords <b>#cs</b> and <b>#ce</b>.<br>
+Additionally, the directives themselves can be commented out!<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="include.html">#include</a>, <a href="include-once.html">#include-once</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S2">#comments-start</span><br>
+<span class="S2">MsgBox(4096, "", "This won't be executed")</span><br>
+<span class="S2">MsgBox(4096, "", "Or this")</span><br>
+<span class="S2">#comments-end</span><br>
+<br>
+<span class="S1">;;; #cs</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This will print if '#cs' is commented out."</span><span class="S8">)</span><br>
+<span class="S11">#ce</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/keywords/comments-start.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

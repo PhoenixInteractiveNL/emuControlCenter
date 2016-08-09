@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitNOT.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function BitNOT</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BitNOT</font>
+<hr size="2">
+<p>Performs a bitwise NOT operation.<br></p>
+
+<p class="codeheader">
+BitNOT ( value )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value</td>
+    <td width="85%">The number to operate on.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns the bitwise NOT of the value.<br>
+Bit operations are performed as 32-bit integers.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Remember hex notation can be used for numbers.<br>
+Remember that in 2's-complement notation, BitNOT is functionally equivalent to adding 1 and negating the result.<br>
+Also remember that NOT changes a 0 bit to 1 and vice-versa.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="BitAND.html">BitAND</a>, <a href="BitOR.html">BitOR</a>, <a href="BitShift.html">BitShift</a>, <a href="BitXOR.html">BitXOR</a>, <a href="Hex.html">Hex</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitNot</span><span class="S8">(</span><span class="S3">5</span><span class="S8">)</span><br>
+<br>
+<span class="S2">#cs Comments:</span><br>
+<span class="S2">&nbsp; &nbsp; Result is -6 because for 32-bit numbers</span><br>
+<span class="S2">&nbsp; &nbsp; 5 == 00000000000000000000000000000101 binary</span><br>
+<span class="S2">&nbsp; &nbsp; -6 == 11111111111111111111111111111010 binary</span><br>
+<span class="S2">&nbsp; &nbsp; and the first bit is signed</span><br>
+<span class="S2">#ce</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BitNOT.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

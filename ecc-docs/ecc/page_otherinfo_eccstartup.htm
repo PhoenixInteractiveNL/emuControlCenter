@@ -1,0 +1,531 @@
+<html>
+	<head>
+		<title>emuControlCenter - Documentation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="title" content="emuControlCenter - emulator rom-management" />
+		<link rel="stylesheet" type="text/css" href="structure.css" />
+		<style type="text/css"></style>
+	</head>
+	<body>
+
+	<div class="content wide">
+	
+		<div class="header"><a href="http://www.camya.com/ecc/" target="_blank">&nbsp;</a></div>
+	
+		<div class="return"><a href="../index.html">&laquo; BACK</a><br /></div>
+		
+		<h1><font size="1">ECC Documentation - Other documentation - ECC Startup</font></h1>
+		
+		<ul class="level1">
+			<li>
+			<p align="center">
+			<img border="0" src="images/img_splashscreen_eccstartup.jpg" width="215" height="62"><ul class="level2">
+				<li></li>
+				<li>
+				<h1><a href="#B">Contents</a></h1><br>
+				<a href="#commandline">1. About</a>
+				<a href="#changelog">2. Changelog</a>
+			</ul>
+			</li>
+		</ul>
+		
+		<div class="contentQa">
+			<h2><a name="about"></a>1. About</h2>
+			<div class="qaBlock">
+				<ul class="level1">
+			<li>
+				<span style="font-weight: 400">ECC Startup is an file to startup 
+				ECC, created with Auto-it v3.<br>
+				<br>
+				In the beginning is was just to replace the .bat file and to 
+				execute some commandline options...but it kept growing and 
+				growing...when time passes, more features and options where 
+				added.</span></li>
+		</ul>
+			</div>
+		</div>
+
+		<div class="contentQa">
+			<h2><a name="changelog"></a>2. Changelog</h2>
+			<div class="qaBlock">
+				<ul class="level1">
+
+					<li>
+					<h1><font size="1">Version 2.0.0.6<span style="font-weight: 400"> 
+			(2007.06.17)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Adjusted splashscreen time-out to 15 seconds
+				</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+									<li>
+					<h1><font size="1">Version 2.0.0.5<span style="font-weight: 400"> 
+			(2007.06.16)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Now works with new ECC Live! v2.2.0.0<br>
+				- Fixed bug when &#39;startup check&#39; notice shows message everytime!, 
+				until the user pressed &#39;yes&#39;</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 2.0.0.4<span style="font-weight: 400"> 
+			(2007.06.11)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Fixed bug when ECC did not startup when having spaces in the 
+				pathname! <br>
+				- Added timeout on ECC window catching! when ECC could/did not 
+				startup! <br>
+				- No more splashscreen hanging anymore!!, timeout is set on 5 
+				sec! <br>
+				- Added extra window on &#39;error&#39; to notice user to use Bugreport 
+				or forum.
+				</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+									<li>
+					<h1><font size="1">Version 2.0.0.3<span style="font-weight: 400"> 
+			(2007.06.05)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Put &#39;first startup&#39; message to AFTER the checkup message.<br>
+				- Added warning if user is no admin or not in admin mode<br>
+&nbsp; - Because a user in admin mode has &#39;read-only&#39; priveleges.<br>
+				- Now works with php 5.2.3.3
+				</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+									<li>
+					<h1><font size="1">Version 2.0.0.2<span style="font-weight: 400"> 
+			(2007.06.03)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Fixed some issues with the sound playing<br>
+				- Fixed that sound plays again on ECC &#39;fastload&#39;<br>
+				- Fixed soundplay from being cut-off (because of unload ecc.exe)<br>
+				- Sound now plays after splashcreen!<br>
+				- Fixed issue if splashscreen hangs<br>
+				- When title screen hangs it should be closed when starting ECC 
+				again<br>
+&nbsp; - This should prevent unnessesary multiple instances of ecc.exe!<br>
+				- ECC teaser image has been locked! (no change allowed)</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+									<li>
+					<h1><font size="1">Version 2.0.0.1<span style="font-weight: 400"> 
+			(2007.06.02)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- New splash screen &amp; teaser image!<br>
+				- All ECC &#39;yellow&#39; icons have been updated and look much better!<br>
+				- Added new startup sound<br>
+				- Added ECC teaser image validation<br>
+				- Reduced the splashscreen fade-in from 900 ms to 600 ms</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+									<li>
+					<h1><font size="1">Version 2.0.0.0<span style="font-weight: 400"> 
+			(2007.06.01)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Total rewrite of the code (from 60 KB to 11 KB!!) <br>
+				- I did some &#39;smart &#39;n&#39; better&#39; coding ;) <br>
+				- Removed over 40 messageboxes and other stuff. <br>
+				- No more usage of &#39;ecc-system\conf\ecc_startup.ini&#39; (all 
+				variables are &#39;baked-in&#39;) <br>
+				- Removed unnessesary checking of files and values. <br>
+&nbsp; - This will also speedup the startup a little bit! <br>
+				- Implented better ECC detection (not checking for &#39;php.exe&#39; 
+				process anymore)<br>
+&nbsp; - This will let ECC function on a server machine!<br>
+				- When ECC crashed, it will startup normally again!<br>
+&nbsp; - This is without using the (now removed) &#39;/unload&#39; option first.<br>
+				- Changed the icon to the &#39;yellow&#39; icon.<br>
+				- New MD5 hash for PHP ini (removed some lines not needed by ECC)<br>
+				- I have to implent this feature in ECC Live! itself first<br>
+				- Tweaked the ECC title a little bit now: 
+				version...build...date....update <br>
+				- Updated the &#39;default&#39; general INI with the new strings <br>
+				- When general.ini not exist in &#39;ecc-user-configs&#39; it will be 
+				copied from &#39;ecc-system\conf&#39; <br>
+				- Removed commandline parameters <br>
+&nbsp; - Command &#39;/config&#39; removed (Can now configured in ECC itself) <br>
+&nbsp; - Command &#39;/about&#39; removed (now in ecc-docs file) <br>
+&nbsp; - Command &#39;/regreset&#39; removed (now using INI file) <br>
+&nbsp; - Command &#39;/regdelete&#39; removed (now using INI file) <br>
+&nbsp; - Command &#39;/deskicon&#39; removed (done by installer) <br>
+&nbsp; - Command &#39;/verify&#39; removed (done by external program later) <br>
+&nbsp; - Command &#39;/phpinfo&#39; removed (not needed anymore) <br>
+&nbsp; - Command &#39;/unload&#39; removed (not needed anymore, ecc should startup again 
+				when crashed)
+				</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 1.4.2.2<span style="font-weight: 400"> 
+			(2007.05.11)</span></font></h1></li>
+					<li><br> <span style="font-weight: 400">- Fixed a &#39;ECC can not start twice&#39; bug when changing from 
+				detail/list view.
+				</span><br><span style="font-weight: 400"><br>&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 1.4.2.1<span style="font-weight: 400"> 
+			(2007.05.05)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Auto update check 
+					on startup in total silent mode!<br>
+&nbsp;&nbsp; - Not even an error message will be shown, in some cases there is a 
+					error caused by ECC when writing</span></li>
+					<li><span style="font-weight: 400">&nbsp;&nbsp;&nbsp;&nbsp; 
+					new ini at fresh installation.<br>
+&nbsp;&nbsp; - And you will not get bothered of error messages showing up when 
+					something goes wrong</span><br>
+					<span style="font-weight: 400">
+					<br>
+&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 1.4.2.0<span style="font-weight: 400"> 
+			(2007.05.05)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Added &#39;auto update 
+					check&#39; on startup!<br>
+					* This will notify the user if there is an update available!<br>
+					* Speed up the splashscreen a little bit.<br>
+					* Sound now start playing when splashscreen is shown.</span><br>
+					<br>
+&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.4.1.2<span style="font-weight: 400"> 
+			(2007.03.11)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">
+					<span class="postbody">* &#39;ECC Startup Config&#39; can now only 
+					start once (fix).<br>
+					* Tweaked the &#39;fixed&#39; title a little bit.</span><br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.4.1.1<span style="font-weight: 400"> 
+			(2006.03.07)</span></font></h1></li>
+					<li><br><span class="postbody">
+					<span style="font-weight: 400">* The &#39;minimize-2-tray&#39; 
+					function can now be configured! <br>
+					&nbsp; - Run &#39;ecc.exe /config&#39; to configure ECC startup!</span><br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.4.1.0<span style="font-weight: 400"> 
+			(2007.03.06)</span></font></h1></li>
+					<li><br><span class="postbody">
+					<span style="font-weight: 400">* ECC gets a fixed title 
+					after capturing the window! <br>
+					* Added a nice &#39;minimize-2-tray&#39; function! <br>
+					* Added an egg... ;)</span><br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.4.0.3<span style="font-weight: 400"> 
+			(2007.03.05)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* ECC not longer 
+					standing on TOPMOST window! (fix)</span><br>
+					<br>
+&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.4.0.2<span style="font-weight: 400"> 
+			(2007.03.05)</span></font></h1></li>
+					<li><br><span class="postbody">
+					<span style="font-weight: 400">* Fixed the &#39;freeze&#39; bug on 
+					startup, by improving the focusing of the ECC window.</span><br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.4.0.1<span style="font-weight: 400"> 
+			(2007.02.28)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Removed the 
+					disclaimer line from the &#39;about&#39; box.<br>
+					* Deleted Some old code.<br>
+					* Splash image<br>
+&nbsp;&nbsp; - Changed the footer line.<br>
+&nbsp;&nbsp; - Syncronized the ECC icon with the background.<br>
+&nbsp;&nbsp; - Now locked with MD5 Hash (unchangeable).<br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.4.0.0<span style="font-weight: 400"> 
+			(2007.02.07)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Fixed the registry 
+					writing, when not in &#39;admin&#39; mode (HKLM --&gt; HKCU) (fix)<br>
+					* Removed &#39;first startup&#39; pop-up if user wants startmenu 
+					icons (ECC installation takes care of this)<br>
+					* Removed some commands:<br>
+&nbsp;&nbsp; - Removed /website (ECC installation takes care of this)<br>
+&nbsp;&nbsp; - Removed /starticon (ECC installation takes care of this)<br>
+&nbsp;&nbsp; - Removed /disclaimer (Tools and startup are distributed onder the 
+					same license)</span><br>
+					<br>
+&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.3.9.4<span style="font-weight: 400"> 
+			(2007.01.14)</span></font></h1></li>
+					<li></li>
+					<li><span style="font-weight: 400">* Deleted some duplicate 
+					code! <br>
+					* New command added: &#39;/config&#39; <br>
+&nbsp;&nbsp; - Bring up a ECC Startup config console, only the Startup sound has 
+					been implented </span><br>
+					<br>
+&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.3.9.3<span style="font-weight: 400"> 
+			(2007.01.01)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* ECC now startup 
+					maximized!<br>
+					*** NOTE ***</span></li>
+					<li><span style="font-weight: 400">- This is an fix of the &#39;displaymode 
+					= 2&#39; setting<br>
+					</span><br>
+&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.3.9.2<span style="font-weight: 400"> 
+			(2006.10.30)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Now compiled with 
+					Auto-it v3.2.2.0<br>
+&nbsp;&nbsp; - Has Performance improvements<br>
+					* Processbug fixed<br>
+					*** NOTE ***</span></li>
+					<li><span style="font-weight: 400">- ECC will not run on a 
+					server machine anymore!</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.3.9.1<span style="font-weight: 400"> 
+			(2006.12.23)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Fixed some ECC 
+					Live! implentation issues.<br>
+					* Improved process check-up<br>
+					* No major crash error messages should appear from now!<br>
+					* Minor text changes.<br>
+					* ECC Live! Startmenu icons<br>
+&nbsp;&nbsp; - When creating startmenu icons and ECC Live! is present, startmenu 
+					icons for ECC Live will also be created!</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.3.9.0<span style="font-weight: 400"> 
+			(2006.12.06)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Version number 
+					changed to 4 digits<br>
+&nbsp;&nbsp; - X.X.0.0, Major change<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0.0.X.0, Minor change<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0.0.0.X, Revision<br>
+					* Improved &#39;unload&#39; command<br>
+&nbsp;&nbsp; - Now also unloads &#39;startup&#39;.<br>
+					* Added extra command:<br>
+&nbsp;&nbsp; - Added &#39;-s&#39; option (silent), executes command without displaying 
+					popup window.<br>
+					* Added pop-up windows<br>
+&nbsp;&nbsp; - Added pop-up windows to the &#39;/deskicon&#39; &amp; &#39;/starticon&#39; for 
+					verification.<br>
+					* Improved look-a-like name<br>
+&nbsp;&nbsp; - Forbidden word &#39;emu&#39; has now been fixed.<br>
+&nbsp;&nbsp; - Now also points &#39;.&#39; are detected.<br>
+					* Improved integrated eccLive check!<br>
+&nbsp;&nbsp; - Only checks when running ECC, and not every command.<br>
+					* New register commands <br>
+&nbsp;&nbsp; - Command &#39;/regreset&#39; = Reset the register (reset values to zero)
+					<br>
+&nbsp;&nbsp; - Command &#39;/regclean&#39; = Clean the register (delete whole key and 
+					sub-keys) <br>
+&nbsp;&nbsp; - NOTE: renamed command &#39;/reset&#39; to &#39;/regreset&#39;</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.38<span style="font-weight: 400"> 
+			(2007.12.01)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* ECC Live! ready<br>
+&nbsp;&nbsp; - Added autoupdate integration at startup<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - This means that it will start eccLive.exe in 
+					silent mode, no update found..., nothing to be seen ;)<br>
+					* New updated icon ;)<br>
+					* Improved INI check-up<br>
+&nbsp;&nbsp; - Check certain values if they are numbers<br>
+					* Added Build values<br>
+&nbsp;&nbsp; - Build-in version number<br>
+&nbsp;&nbsp; - Extra info<br>
+					* Improved startmenu integration<br>
+&nbsp;&nbsp; - Added sub-folders to sort-out shortcuts.<br>
+&nbsp;&nbsp; - Delete &#39;old shortcuts&#39; first, then creates new ones<br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.37<span style="font-weight: 400"> 
+			(2006.11.23)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Fixed &#39;displaymode&#39; 
+					bug in &#39;/windows&#39; and &#39;/developer&#39; commandline options.<br>
+&nbsp;&nbsp; - The &#39;displaymode&#39; setting has been disabled for these commandline 
+					options.<br>
+					* Improved security<br>
+&nbsp;&nbsp; - Added &#39;ECC&#39; Self check, when modified, hex-edited or anything 
+					else, it will display a message.<br>
+&nbsp;&nbsp; - A &#39;one-time&#39; message will pop up when the &#39;ecc.exe&#39; filename is 
+					changed to another name<br>
+&nbsp;&nbsp; - The original &#39;ecc startup&#39; INI and PHP.INI are now locked and 
+					being verified, except when ecc.exe is renamed!<br>
+&nbsp;&nbsp; - &#39;look-a-like&#39; names are now forbidden to use.<br>
+&nbsp;&nbsp; - INIFILE &amp; PHP.INI are always set to read-only when ECC starts.<br>
+					* Added commands:<br>
+&nbsp;&nbsp; - Added &#39;/disclaimer&#39; show disclaimer information<br>
+&nbsp;&nbsp; - Added &#39;/starticon&#39; to create startmenu icons.<br>
+&nbsp;&nbsp; - Added &#39;/reset&#39; to reset all &#39;ECC&#39; registry values.<br>
+&nbsp;&nbsp; - Added &#39;/unload&#39; to unload the PHP engine.<br>
+					*** NOTE ***</span></li>
+					<li><span style="font-weight: 400">- Do not use this 
+					function on a server machine!<br>
+					* Code clean-up:<br>
+&nbsp;&nbsp; - Exported all functions and other routines to separate files.<br>
+&nbsp;&nbsp; - The function filecheck has been improved, it can now check a 
+					single file</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.35<span style="font-weight: 400"> 
+			(2006.11.17)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Improved mod 
+					support<br>
+&nbsp;&nbsp; - If the filename is abc.exe then the ini file would be &#39;\abc-system\conf\abc_startup.ini&#39;<br>
+					* Improved security<br>
+&nbsp;&nbsp; - Security check: fileversion check on PHP.EXE and PHPWIN.EXE on 
+					startup<br>
+					*** NOTE *** </span></li>
+					<li><span style="font-weight: 400">- if (other) program has 
+					no version, then version will result in 0.0.0.0.<br>
+					* Improved error handling:<br>
+&nbsp;&nbsp; - Can now display &#39;info&#39; commands without checking files (hopefully 
+					fixed for good ;)).<br>
+&nbsp;&nbsp; - Internal code cleanup<br>
+&nbsp;&nbsp; - Error handler with FUNCTION &amp; CASE selecting instead of using IF 
+					statements<br>
+&nbsp;&nbsp; - Some functions melted together<br>
+					* Added commands:<br>
+&nbsp;&nbsp; - Added &#39;/?&#39; for commandline help.<br>
+&nbsp;&nbsp; - Also displays when wrong commandline given!<br>
+&nbsp;&nbsp; - Added &#39;/deskicon&#39; to create a shortcut on the desktop.<br>
+&nbsp;&nbsp; - Uses &#39;ecc-system\ecc.ico&#39; as icon.<br>
+					*** NOTE ***</span></li>
+					<li><span style="font-weight: 400">- When on rename it uses 
+					for example: &#39;abc-system\abc.ico&#39; as icon.<br>
+&nbsp;&nbsp; - Name of the shortcut icon can be configured in INI.<br>
+&nbsp;&nbsp; - Comment of the shortcut icon can be configured in INI.<br>
+&nbsp;&nbsp; - Added &#39;/verify&#39; to check if PHP.EXE and PHP-WIN.EXE are &#39;original 
+					ECC&#39; php files.<br>
+					*** NOTE ***</span></li>
+					<li><span style="font-weight: 400">- Needed file 
+					&#39;MD5HASH.DLL&#39; (57 KB), stored in &#39;ecc-core&#39;.<br>
+					* More configuration options:<br>
+&nbsp;&nbsp; - One or unlimited processes can now be configured in INI.<br>
+&nbsp;&nbsp; - Display mode can now be configured in INI.<br>
+&nbsp;&nbsp; - Splashscreen can now be turned on or off in INI.<br>
+					* Icons changed in the &#39;error&#39; boxes, with the &#39;stop-sign&#39; 
+					icon.<br>
+					* Changed the &#39;/info&#39; command to &#39;/about&#39;.</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.32<span style="font-weight: 400"> 
+			(2006.11.02)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* ECC.EXE is now 
+					ready for MOD&#39;s/ADD-ON&#39;s<br>
+					* New Icon ;)<br>
+					* Command &#39;/eccinfo&#39; changed into &#39;/info&#39;<br>
+					* NEW Features:<br>
+&nbsp;&nbsp; x Auto fetch INI (EXAMPLE):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - when you run ecc.exe it will use &#39;\ecc-system\conf\ecc_startup.ini&#39;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - now when you rename/copy ecc.exe to ems.exe, it 
+					will use &#39;\ecc-system\conf\ems_startup.ini&#39; <br>
+&nbsp;&nbsp; x The &#39;script-php&#39; file to be loaded, can now be configured in INI<br>
+&nbsp;&nbsp; x The &#39;script-php&#39; window name (to have no php shell commands), can 
+					now be configured in INI<br>
+&nbsp;&nbsp; x The splashscreen title can now be configured in the INI file<br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.31<span style="font-weight: 400"> 
+			(2006.10.29)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* No tray icon.<br>
+					* Splash screen title:<br>
+&nbsp;&nbsp; - Text adjusted to &quot;emuControlCenter loading...&quot;<br>
+&nbsp;&nbsp; - Removed window controls.<br>
+&nbsp;&nbsp; - Title bar can now be set &#39;on&#39; or &#39;off&#39; in config file!<br>
+					* Improved error handling:<br>
+&nbsp;&nbsp; - Added file check before reading the INI config file ;)<br>
+&nbsp;&nbsp; - Checks the config file if any value is &#39;zero&#39; (empty).<br>
+					* Auto size the splashscreen according to found JPG 
+					dimensions!<br>
+					* Fade-in option added, see config file for options.<br>
+&nbsp;</span></li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.30<span style="font-weight: 400"> 
+			(2006.10.29)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* ECC.EXE is now 
+					totally &#39;dynamic&#39;.<br>
+&nbsp;&nbsp; - Uses the &#39;ecc-system\conf\ecc_startup.ini&#39; for config.</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.21<span style="font-weight: 400"> 
+					(2006.10.28)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* changed the name of 
+					the &#39;startup-file&#39; from: &#39;speech_welcome_to_ecc.wav&#39;, to &#39;ecc_sound_startup.wav&#39;.<br>
+					* added mp3 extension to startup sound!<br>
+					*** NOTE ***<br>
+					- If you have a wav and mp3 file, ecc will play them both 
+					(wav first).<br>
+					* Added a ECC icon to the splash screen &#39;\ecc-system\images\ecc_icon_small.ico&#39;<br>
+					* Icons added to the /phpversion &amp; /phpinfo windows.<br>
+					* Improved error handling:<br>
+&nbsp;&nbsp; - Added file check on command /phpversion &amp; /phpinfo.<br>
+					* Improved commandline function:<br>
+&nbsp;&nbsp; - Splashscreen doesn&#39;t popup when wrong commandline entered.<br>
+					* Massive interal code cleanup!</span></li>
+					<li>
+					<br>&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.20<span style="font-weight: 400"> 
+			(2006.10.25)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Commandline options 
+					are now &#39;fully&#39; written.<br>
+					* New commands added:<br>
+&nbsp;&nbsp; - ECC.EXE /phpversion, Displays current PHP version.<br>
+&nbsp;&nbsp; - ECC.EXE /phpinfo, Displays ECC PHP information.<br>
+					* Displays a SPLASH SCREEN.<br>
+&nbsp;&nbsp; - To disable, rename/delete the file &#39;ecc-system\images\ecc_splashscreen.jpg&#39;<br>
+					***NOTE***<br>
+&nbsp;&nbsp; - The splashscreen has a forced 2 second delay of it&#39;s own!<br>
+					(because on some systems ecc gets loaded in 0,3 sec, and we 
+					won&#39;t see the splash screen ;))<br>
+					* Plays a WELCOME SOUND.<br>
+&nbsp;&nbsp; - To disable, rename/delete the file &#39;ecc-system\sound\speech_welcome_to_ecc.wav&#39;<br>
+					* Improved error handler, can now display &#39;info&#39; commands 
+					without checking files.</span><br>
+					<br>&nbsp;</li>
+					<li>
+					<h1><font size="1">Version 1.12<span style="font-weight: 400"> 
+			(2006.10.08)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Supress the &#39;php&#39; 
+					shell window (window name &#39;emuControlCenter&#39;)<br>
+					* A ERROR HANDLER has been implented for the files:<br>
+&nbsp;&nbsp; - ecc-core\php.exe<br>
+&nbsp;&nbsp; - ecc-core\php-win.exe<br>
+&nbsp;&nbsp; - ecc-system\ecc.php<br>
+					* Command /url now start up the &#39;DEFAULT&#39; browser, instead 
+					of Microsoft EXPLORER.<br>
+					* ECC.EXE information is now /inf, instead of /info<br>
+					* Icons added to the /inf &amp; /ver windows<br>
+					* New command added:<br>
+					- ECC.EXE /win, Start ECC using php-win.exe (old behavior)</span><br>
+&nbsp;</li>
+					<li></li>
+					<li>
+					<h1><font size="1">Version 1.1<span style="font-weight: 400"> 
+			(2006.09.29)</span></font></h1></li>
+					<li><span style="font-weight: 400"><br>* Changed the 16x16 
+					icon to 32x32.<br>
+					* New commands added:<br>
+&nbsp;&nbsp; - ECC.EXE /dev, Start ECC using php.exe.<br>
+&nbsp;&nbsp; - ECC.EXE /url, startup EXPLORER and go to CAMYA website.<br>
+&nbsp;&nbsp; - ECC.EXE /ver, displays current ECC.EXE version.<br>
+&nbsp;&nbsp; - ECC.EXE /info, displays ECC information.<br>
+					<br>
+&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 1.0 <span style="font-weight: 400"> 
+			(2006.09.27)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Initial release, 
+					just replaces the &#39;ecc.bat&#39; file<br>
+&nbsp;&nbsp; - Starts ECC with &#39;php-win.exe&#39;<br>
+					<br>&nbsp;</span></li>
+				</ul></div>
+		</div>
+		
+		<div class="return"><a href="../index.html">&laquo; BACK</a><br /></div>
+		<div class="footer">(c) 2007 <a href="http://www.camya.com/ecc/">emuControlCenter</a> / design by ecc</div>
+	
+	</div>
+	
+	</body>
+</html>
+
+
+
+

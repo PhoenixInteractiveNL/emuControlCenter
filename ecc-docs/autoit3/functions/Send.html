@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Send.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function Send</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Send</font>
+<hr size="2">
+<p>Sends simulated keystrokes to the active window.<br></p>
+
+<p class="codeheader">
+Send ( "keys" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">keys</td>
+    <td width="85%">The sequence of keys to send.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] Changes how "keys" is processed:<br>
+       &nbsp;&nbsp;flag = 0 (default), Text contains special characters like + and ! to indicate SHIFT and ALT key-presses.<br>
+       &nbsp;&nbsp;flag = 1, keys are sent raw.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+See the <a href="../appendix/SendKeys.html">Appendix</a> for some tips on using Send.  AutoIt can send all ASCII and Extended ASCII characters (0-255), to send UNICODE characters you must use the "ASC" option and the code of the character you wish to send (see {ASC} at the bottom of the table below).<br>
+<br>
+The "Send" command syntax is similar to that of ScriptIt and the Visual Basic "SendKeys" command. Characters are sent as written with the exception of the following characters:<br>
+<br>
+'!'<br>
+This tells AutoIt to send an ALT keystroke, therefore Send("This is text!a") would send the keys "This is text" and then press "ALT+a".<br>
+<br>
+N.B. Some programs are very choosy about capital letters and ALT keys, i.e. "!A" is different to "!a". The first says ALT+SHIFT+A, the second is ALT+a. If in doubt, use lowercase!<br>
+<br>
+'+'<br>
+This tells AutoIt to send a SHIFT keystroke, therefore Send("Hell+o") would send the text "HellO". Send("!+a") would send "ALT+SHIFT+a".<br>
+<br>
+'^'<br>
+This tells AutoIt to send a CONTROL keystroke, therefore Send("^!a") would send "CTRL+ALT+a".<br>
+<br>
+N.B. Some programs are very choosy about capital letters and CTRL keys, i.e. "^A" is different to "^a". The first says CTRL+SHIFT+A, the second is CTRL+a.  If in doubt, use lowercase!<br>
+<br>
+'#'<br>
+The hash now sends a Windows keystroke; therefore, Send("#r") would send Win+r which launches the Run dialog box.<br>
+<br>
+You can set SendCapslockMode to make CAPS LOCK disabled at the start of a Send operation and restored upon completion.<br>
+However, if a user is holding down the Shift key when a Send function begins, text may be sent in uppercase.<br>
+One workaround is to Send("{SHIFTDOWN}{SHIFTUP}")  before the other Send operations.<br>
+<br>
+Certain keyboard as the Czech one send different characters when using the Shift Key or being in CAPS LOCK enabled and sending a char. Due to the send AutoIt implementation the CAPS LOCKed char will be sent as Shifted one so <b>it will not work</b>. <br>
+<br>
+Certain special keys can be sent and should be enclosed in braces:<br>
+<br>
+N.B.  Windows does not allow the simulation of the "CTRL-ALT-DEL" combination!<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Send Command (if zero flag)</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>Resulting Keypress</b></td>
+  </tr>
+  <tr>
+    <td>{!}</td>
+    <td>!</td>
+  </tr>
+  <tr>
+    <td>{#}</td>
+    <td>#</td>
+  </tr>
+  <tr>
+    <td>{+}</td>
+    <td>+</td>
+  </tr>
+  <tr>
+    <td>{^}</td>
+    <td>^</td>
+  </tr>
+  <tr>
+    <td>{{}</td>
+    <td>{</td>
+  </tr>
+  <tr>
+    <td>{}}</td>
+    <td>}</td>
+  </tr>
+  <tr>
+    <td>{SPACE}</td>
+    <td>SPACE</td>
+  </tr>
+  <tr>
+    <td>{ENTER}</td>
+    <td>ENTER key on the main keyboard</td>
+  </tr>
+  <tr>
+    <td>{ALT}</td>
+    <td>ALT</td>
+  </tr>
+  <tr>
+    <td>{BACKSPACE} or {BS}</td>
+    <td>BACKSPACE</td>
+  </tr>
+  <tr>
+    <td>{DELETE} or {DEL}</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>{UP}</td>
+    <td>Up arrow</td>
+  </tr>
+  <tr>
+    <td>{DOWN}</td>
+    <td>Down arrow</td>
+  </tr>
+  <tr>
+    <td>{LEFT}</td>
+    <td>Left arrow</td>
+  </tr>
+  <tr>
+    <td>{RIGHT}</td>
+    <td>Right arrow</td>
+  </tr>
+  <tr>
+    <td>{HOME}</td>
+    <td>HOME</td>
+  </tr>
+  <tr>
+    <td>{END}</td>
+    <td>END</td>
+  </tr>
+  <tr>
+    <td>{ESCAPE} or {ESC}</td>
+    <td>ESCAPE</td>
+  </tr>
+  <tr>
+    <td>{INSERT} or {INS}</td>
+    <td>INS</td>
+  </tr>
+  <tr>
+    <td>{PGUP}</td>
+    <td>PageUp</td>
+  </tr>
+  <tr>
+    <td>{PGDN}</td>
+    <td>PageDown</td>
+  </tr>
+  <tr>
+    <td>{F1} - {F12}</td>
+    <td>Function keys</td>
+  </tr>
+  <tr>
+    <td>{TAB}</td>
+    <td>TAB</td>
+  </tr>
+  <tr>
+    <td>{PRINTSCREEN}</td>
+    <td>Print Screen key</td>
+  </tr>
+  <tr>
+    <td>{LWIN}</td>
+    <td>Left Windows key</td>
+  </tr>
+  <tr>
+    <td>{RWIN}</td>
+    <td>Right Windows key</td>
+  </tr>
+  <tr>
+    <td>{NUMLOCK on}</td>
+    <td>NUMLOCK (on/off/toggle)</td>
+  </tr>
+  <tr>
+    <td>{CAPSLOCK off}</td>
+    <td>CAPSLOCK (on/off/toggle)</td>
+  </tr>
+  <tr>
+    <td>{SCROLLLOCK toggle}</td>
+    <td>SCROLLLOCK (on/off/toggle)</td>
+  </tr>
+  <tr>
+    <td>{BREAK}</td>
+    <td>for Ctrl+Break processing</td>
+  </tr>
+  <tr>
+    <td>{PAUSE}</td>
+    <td>PAUSE</td>
+  </tr>
+  <tr>
+    <td>{NUMPAD0} - {NUMPAD9}</td>
+    <td>Numpad digits</td>
+  </tr>
+  <tr>
+    <td>{NUMPADMULT}</td>
+    <td>Numpad Multiply</td>
+  </tr>
+  <tr>
+    <td>{NUMPADADD}</td>
+    <td>Numpad Add</td>
+  </tr>
+  <tr>
+    <td>{NUMPADSUB}</td>
+    <td>Numpad Subtract</td>
+  </tr>
+  <tr>
+    <td>{NUMPADDIV}</td>
+    <td>Numpad Divide</td>
+  </tr>
+  <tr>
+    <td>{NUMPADDOT}</td>
+    <td>Numpad period</td>
+  </tr>
+  <tr>
+    <td>{NUMPADENTER}</td>
+    <td>Enter key on the numpad</td>
+  </tr>
+  <tr>
+    <td>{APPSKEY}</td>
+    <td>Windows App key</td>
+  </tr>
+  <tr>
+    <td>{LALT}</td>
+    <td>Left ALT key</td>
+  </tr>
+  <tr>
+    <td>{RALT}</td>
+    <td>Right ALT key</td>
+  </tr>
+  <tr>
+    <td>{LCTRL}</td>
+    <td>Left CTRL key</td>
+  </tr>
+  <tr>
+    <td>{RCTRL}</td>
+    <td>Right CTRL key</td>
+  </tr>
+  <tr>
+    <td>{LSHIFT}</td>
+    <td>Left Shift key</td>
+  </tr>
+  <tr>
+    <td>{RSHIFT}</td>
+    <td>Right Shift key</td>
+  </tr>
+  <tr>
+    <td>{SLEEP}</td>
+    <td>Computer SLEEP key</td>
+  </tr>
+  <tr>
+    <td>{ALTDOWN}</td>
+    <td>Holds the ALT key down until {ALTUP} is sent</td>
+  </tr>
+  <tr>
+    <td>{SHIFTDOWN}</td>
+    <td>Holds the SHIFT key down until {SHIFTUP} is sent</td>
+  </tr>
+  <tr>
+    <td>{CTRLDOWN}</td>
+    <td>Holds the CTRL key down until {CTRLUP} is sent</td>
+  </tr>
+  <tr>
+    <td>{LWINDOWN}</td>
+    <td>Holds the left Windows key down until {LWINUP} is sent</td>
+  </tr>
+  <tr>
+    <td>{RWINDOWN}</td>
+    <td>Holds the right Windows key down until {RWINUP} is sent</td>
+  </tr>
+  <tr>
+    <td>{ASC nnnn}</td>
+    <td>Send the ALT+nnnn key combination</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_BACK}</td>
+    <td>2000/XP Only: Select the browser "back" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_FORWARD}</td>
+    <td>2000/XP Only: Select the browser "forward" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_REFRESH}</td>
+    <td>2000/XP Only: Select the browser "refresh" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_STOP}</td>
+    <td>2000/XP Only: Select the browser "stop" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_SEARCH}</td>
+    <td>2000/XP Only: Select the browser "search" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_FAVORITES}</td>
+    <td>2000/XP Only: Select the browser "favorites" button</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_HOME}</td>
+    <td>2000/XP Only: Launch the browser and go to the home page</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_MUTE}</td>
+    <td>2000/XP Only: Mute the volume</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_DOWN}</td>
+    <td>2000/XP Only: Reduce the volume</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_UP}</td>
+    <td>2000/XP Only: Increase the volume</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_NEXT}</td>
+    <td>2000/XP Only: Select next track in media player</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_PREV}</td>
+    <td>2000/XP Only: Select previous track in media player</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_STOP}</td>
+    <td>2000/XP Only: Stop media player</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_PLAY_PAUSE}</td>
+    <td>2000/XP Only: Play/pause media player</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_MAIL}</td>
+    <td>2000/XP Only: Launch the email application</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_MEDIA}</td>
+    <td>2000/XP Only: Launch media player</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_APP1}</td>
+    <td>2000/XP Only: Launch user app1</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_APP2}</td>
+    <td>2000/XP Only: Launch user app2</td>
+  </tr>
+</table><br>
+To send the ASCII value A (same as pressing ALT+065 on the numeric keypad)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ASC 065}")<br>
+<br>
+(When using 2 digit ASCII codes you must use a leading 0, otherwise an obsolete 437 code page is used).<br>
+<br>
+To send UNICODE characters enter the character code (decimal or hex), for example this sends a Chinese character<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ASC 2709}") or Send("{ASC 0xA95}")<br>
+<br>
+Single keys can also be repeated, e.g.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{DEL 4}")    ;Presses the DEL key 4 times<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{S 30}")      ;Sends 30 'S' characters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("+{TAB 4}")   ;Presses SHIFT+TAB 4 times<br>
+<br>
+The key will be send at least once even if the count is zero.<br>
+<br>
+To hold a key down (generally only useful for games)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{a down}")    ;Holds the A key down<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{a up}")        ;Releases the A key<br>
+<br>
+To set the state of the capslock, numlock and scrolllock keys<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{NumLock on}")        ;Turns the NumLock key on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{CapsLock off}")      ;Turns the CapsLock key off<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ScrollLock toggle}") ;Toggles the state of ScrollLock<br>
+<br>
+If you wish to use a variable for the count, try<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$n = 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("+{TAB " & $n & "}")<br>
+<br>
+If you wish to send the ASCII value A four times, then try<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$x = Chr(65)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{" & $x & " 4}")<br>
+<br>
+Most laptop computer keyboards have a special Fn key.  This key cannot be simulated.<br>
+<br>
+Note, by setting the flag parameter to 1 the above "special" processing will be disabled.  This is useful when you want to send some text copied from a variable and you want the text sent exactly as written.<br>
+<br>
+For example, open Folder Options (in the control panel) and try the following:<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Send("{TAB}")</td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Navigate to next control (button, checkbox, etc) </td>
+  </tr>
+  <tr>
+    <td>Send("+{TAB}")</td>
+    <td>Navigate to previous control. </td>
+  </tr>
+  <tr>
+    <td>Send("^{TAB}")</td>
+    <td>Navigate to next WindowTab (on a Tabbed dialog window) </td>
+  </tr>
+  <tr>
+    <td>Send("^+{TAB}")</td>
+    <td>Navigate to previous WindowTab. </td>
+  </tr>
+  <tr>
+    <td>Send("{SPACE}")</td>
+    <td>Can be used to toggle a checkbox or click a button. </td>
+  </tr>
+  <tr>
+    <td>Send("{+}")</td>
+    <td>Usually checks a checkbox (if it's a "real" checkbox.) </td>
+  </tr>
+  <tr>
+    <td>Send("{-}")</td>
+    <td>Usually unchecks a checkbox. </td>
+  </tr>
+  <tr>
+    <td>Send("{NumPadMult}")</td>
+    <td>Recursively expands folders in a SysTreeView32.</td>
+  </tr>
+</table><br>
+Use Alt-key combos to access menu items.  Also, open Notepad and try the following:<br>
+Send("!f") Send Alt+f, the access key for Notepad's file menu. Try other letters!<br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Send("{DOWN}")</td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Move down a menu. </td>
+  </tr>
+  <tr>
+    <td>Send("{UP}")</td>
+    <td>Move up a menu. </td>
+  </tr>
+  <tr>
+    <td>Send("{LEFT}")</td>
+    <td>Move leftward to new menu or expand a submenu. </td>
+  </tr>
+  <tr>
+    <td>Send("{RIGHT}")</td>
+    <td>Move rightward to new menu or collapse a submenu. </td>
+  </tr>
+</table>See Windows' Help--press Win+F1--for a complete list of keyboard shortcuts if you don't know the importance of Alt+F4, PrintScreen, Ctrl+C, and so on.<br>
+<br>
+When running a script on a remote computer through a program as psexec (www.sysinternals.com) or beyondexec (www.beyondlogic.org) it is necessary, specially when sending strokes to a program launch by the script with a Run function, to use <b>ControlSend</b> or other ControlXXX functions to directly communicate with the control. Send even with Opt("SendAttachMode",1) is not working.<br>
+Using the -s mode when submitting can help to have better right on the remote computer.<br>
+<br>
+Opt("SendKeyDelay",...) alters the the length of the brief pause in between sent keystrokes.<br>
+Opt("SendKeyDownDelay",...) alters the length of time a key is held down before being released during a keystroke.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#SendAttachmode">SendAttachmode (Option)</a>, <a href="AutoItSetOption.html#SendKeyDelay">SendKeyDelay (Option)</a>, <a href="AutoItSetOption.html#SendKeyDownDelay">SendKeyDownDelay (Option)</a>, <a href="ControlSend.html">ControlSend</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Send</span><span class="S8">(</span><span class="S7">"#r"</span><span class="S8">)</span><br>
+<span class="S4">WinWaitActive</span><span class="S8">(</span><span class="S7">"Run"</span><span class="S8">)</span><br>
+<span class="S4">Send</span><span class="S8">(</span><span class="S7">"notepad.exe</span><span class="S10">{Enter}</span><span class="S7">"</span><span class="S8">)</span><br>
+<span class="S4">WinWaitActive</span><span class="S8">(</span><span class="S7">"Untitled -"</span><span class="S8">)</span><br>
+<span class="S4">Send</span><span class="S8">(</span><span class="S7">"Today's time/date is </span><span class="S10">{F5}</span><span class="S7">"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Send.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

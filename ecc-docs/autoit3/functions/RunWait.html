@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RunWait.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function RunWait</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RunWait</font>
+<hr size="2">
+<p>Runs an external program and pauses script execution until the program finishes.<br></p>
+
+<p class="codeheader">
+RunWait ( "filename" [, "workingdir" [, flag]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">The name of the executable (EXE, BAT, COM, PIF) to run.</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>[optional] The working directory.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>[optional] The "show" flag of the executed program:<br>
+       &nbsp;&nbsp;@SW_HIDE = Hidden window<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = Minimized window<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = Maximized window</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the exit code of the program that was run.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Depends on RunErrorsFatal; see Remarks.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To run DOS commands, try <i>RunWait(@ComSpec & " /c " & "commandName")</i><br>
+<br>
+After running the requested program the script pauses until the program terminates.  To run a program and then immediately continue script execution use the Run function instead.<br>
+<br>
+Some programs will appear to return immediately even though they are still running; these programs spawn another process - you may be able to use the ProcessWaitClose function to handle these cases.<br>
+<br>
+By default the script will terminate with a fatal error if the Run function fails.  To set @error to 1 as an indication of failure, see AutoItSetOption.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="ProcessWait.html">ProcessWait</a>, <a href="ProcessWaitClose.html">ProcessWaitClose</a>, <a href="RunAsSet.html">RunAsSet</a>, <a href="AutoItSetOption.html#RunErrorsFatal">RunErrorsFatal (Option)</a>, <a href="Run.html">Run</a>, <a href="ShellExecute.html">ShellExecute</a>, <a href="ShellExecuteWait.html">ShellExecuteWait</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$val</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RunWait</span><span class="S8">(</span><span class="S7">"Notepad.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MAXIMIZE</span><span class="S8">)</span><br>
+<span class="S1">; script waits until Notepad closes</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Program returned with exit code:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RunWait.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

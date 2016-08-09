@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ShellExecute.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function ShellExecute</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ShellExecute</font>
+<hr size="2">
+<p>Runs an external program using the ShellExecute API.<br></p>
+
+<p class="codeheader">
+ShellExecute ( "filename" [, "parameters" [, "workingdir" [, "verb" [, showflag]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">The name of the file to run (EXE, .txt, .lnk, etc).</td>
+  </tr>
+  <tr>
+   <td>parameters</td>
+   <td>[optional] Any parameters for the program. Blank ("") uses none.</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>[optional] The working directory. Blank ("") uses the current working directory.</td>
+  </tr>
+  <tr>
+   <td>verb</td>
+   <td>[optional] The "verb" to use, common verbs include:<br>
+       &nbsp;&nbsp;open = (default) Opens the file specified. The file can be an executable file, a document file, or a folder<br>
+       &nbsp;&nbsp;edit = Launches an editor and opens the document for editing. If "filename" is not a document file, the function will fail<br>
+       &nbsp;&nbsp;print = Prints the document file specified. If "filename" is not a document file, the function will fail<br>
+       &nbsp;&nbsp;properties = Displays the file or folder's properties</td>
+  </tr>
+  <tr>
+   <td>showflag</td>
+   <td>[optional] The "show" flag of the executed program:<br>
+       &nbsp;&nbsp;@SW_HIDE = Hidden window<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = Minimized window<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = Maximized window</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Depends on RunErrorsFatal; see Remarks.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+After running the requested program the script continues.  To pause execution of the script until the spawned program has finished use the ShellExecuteWait function instead.<br>
+<br>
+By default the script will terminate with a fatal error if the ShellExecute function fails.  To set @error to 1 as an indication of failure, see AutoItSetOption.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Run.html">Run</a>, <a href="RunAsSet.html">RunAsSet</a>, <a href="AutoItSetOption.html#RunErrorsFatal">RunErrorsFatal (Option)</a>, <a href="RunWait.html">RunWait</a>, <a href="ShellExecuteWait.html">ShellExecuteWait</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Open Notepad</span><br>
+<span class="S4">ShellExecute</span><span class="S8">(</span><span class="S7">"Notepad.exe"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Open a .txt file with it's default editor</span><br>
+<span class="S4">ShellExecute</span><span class="S8">(</span><span class="S7">"myfile.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@ScriptDir</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"edit"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ShellExecute.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

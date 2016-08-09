@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Eval.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function Eval</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Eval</font>
+<hr size="2">
+<p>Return the value of the variable defined by an string.<br></p>
+
+<p class="codeheader">
+Eval ( string )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">string representing name of the variable.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the value of the variable.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns "" (blank string) with @error set not to 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If there is a need to use Eval() to to read a variable, the in most situations Assign() should be used to create/write to the variable and IsDeclared() should be used to check that the variable exists.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="IsDeclared.html">IsDeclared</a>, <a href="Assign.html">Assign</a>, <a href="Execute.html">Execute</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Dim</span><span class="S0"> </span><span class="S9">$a_b</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">12</span><br>
+<span class="S9">$s</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Eval</span><span class="S8">(</span><span class="S7">"a"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"_"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"b"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; $s is set to 12</span><br>
+<br>
+<span class="S9">$s</span><span class="S0"> </span><span class="S8">=</span><span class="S4">Eval</span><span class="S8">(</span><span class="S7">"c"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; $s = "" and @error = 1</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Eval.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

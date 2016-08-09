@@ -18,7 +18,7 @@ class DbmsSqlite2 extends Dbms {
 	}
 
 	public function query($q) {
-		#print $q.LF;
+		#if (strpos($q, 'TRANSACTION')) print substr($q, 0, 20).' ...'.LF;
 		return $this->dbms->query(trim($q));
 	}
 
@@ -31,14 +31,14 @@ class DbmsSqlite2 extends Dbms {
 		$this->dbms = new SQLiteDatabase($this->connectionPath, $this->connectionMode, $sqliteerror);
 		if ($sqliteerror) return $sqliteerror;
 		
-		#$q = "PRAGMA cache = 6000;";
-		#$this->query($q);
+		$q = "PRAGMA cache = 6000;";
+		$this->query($q);
 		
 		$q = "PRAGMA synchronous = OFF;";
 		$this->query($q);
 
-		$q = "PRAGMA temp_store = MEMORY;";
-		$this->query($q);
+		#$q = "PRAGMA temp_store = MEMORY;";
+		#$this->query($q);
 
 		return $this->dbms;
 	}

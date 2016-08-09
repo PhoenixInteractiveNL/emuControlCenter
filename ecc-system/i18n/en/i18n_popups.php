@@ -53,7 +53,7 @@ $i18n['popup'] = array(
 	'rom_reorg_nocat_title' =>
 		"There are no categories!",
 	'rom_reorg_nocat_msg%s' =>
-		"You havenÂ´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
+		"You haven´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
 	'rom_reorg_title' =>
 		"Reorganize your ROMS on Harddisk?",
 	'rom_reorg_msg%s%s%s' =>
@@ -147,7 +147,7 @@ $i18n['popup'] = array(
 	'conf_userfolder_notset_title' =>
 		"ERROR: Could not find userfolder!!!",
 	'conf_userfolder_notset_msg%s' =>
-		"You have altered the base_path in your ecc_general.ini. This folder isnÂ´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
+		"You have altered the base_path in your ecc_general.ini. This folder isn´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
 	'conf_userfolder_error_readonly_title' =>
 		"ERROR: Could not create folder!!!",
 	'conf_userfolder_error_readonly_msg%s' =>
@@ -208,5 +208,33 @@ $i18n['popup'] = array(
 		"Remove all images?",
 	'img_remove_all_msg%s' =>
 		"This will remove all images for the selected Game!\n\nShould the images for\n\n%s?",
+
+	/* 0.9.1 FYEO 6 */
+	'sys_dialog_miss_title' =>
+		"confirm",
+
+	/* 0.9.2 WIP 11 */
+	'parse_big_file_found_title' =>
+		"Really parse this file?",
+	'parse_big_file_found_msg%s%s' =>
+		"BIG FILE FOUND!!!\n\nThe found game\n\nName: %s\nSize: %s\n\nis very large. This can take a long time without direct feedback of emuControlCenter.\n\nDo you want parse this game?",
+
+	/* 0.9.5 WIP 19 */
+	'bookmark_added_title' =>
+		"Bookmark saved",
+	'bookmark_added_msg' =>
+		"The bookmark has been added!",
+	'bookmark_removed_single_title' =>
+		"Bookmark removed",
+	'bookmark_removed_single_msg' =>
+		"This bookmark has been removed!",
+	'bookmark_removed_all_title' =>
+		"All Bookmarks removed",
+	'bookmark_removed_all_msg' =>
+		"All bookmarks has been removed!",
+
+
+
+
 );
 ?>

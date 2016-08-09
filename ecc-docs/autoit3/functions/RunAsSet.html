@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RunAsSet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function RunAsSet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RunAsSet</font>
+<hr size="2">
+<p>Initialise a set of user credentials to use during Run and RunWait operations.  2000/XP or later ONLY.<br></p>
+
+<p class="codeheader">
+RunAsSet ( ["user", "domain", "password" [, options]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">username</td>
+    <td width="85%">[optional] The user name to use.</td>
+  </tr>
+  <tr>
+   <td>domain</td>
+   <td>[optional] The domain name to use.</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>[optional] The password to use.</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td>[optional] 0 = do not load the user profile, 1 = (default) load the user profile, 2 = use for net credentials only</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1--regardless of success.  (If the login information was invalid, subsequent Run/RunWait commands will fail....)</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if the operating system does not support this function.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+This function allows subsequent Run and RunWait functions to run as a different user (e.g. Administrator).  The function only works on the 2000/XP (or later) platforms.  NT4 users should install and use the SU command from the NT Resource Kit.<br>
+<br>
+The "Secondary Logon service" or "RunAs service" must not be disabled if you want this function to work.<br>
+<br>
+To unset the RunAs details, use the function with no parameters: RunAsSet().<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Run.html">Run</a>, <a href="AutoItSetOption.html#RunErrorsFatal">RunErrorsFatal (Option)</a>, <a href="RunWait.html">RunWait</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; This example will rerun itself with admin rights on using a local account</span><br>
+<span class="S1">; Note on Vista this may not work as even though the user is admin it may </span><br>
+<span class="S1">; not be elevated even after the RunAs call. &nbsp;In that case use #RequireAdmin</span><br>
+<span class="S1">; at the top of the script.</span><br>
+<br>
+<span class="S1">; Are we already admin?</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S4">IsAdmin</span><span class="S8">()</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">RunAsSet</span><span class="S8">(</span><span class="S7">'USER'</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@Computername</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'PASSWORD'</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Run</span><span class="S8">(</span><span class="S7">'"'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@AutoItExe</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'"'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">' "'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@ScriptFullPath</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'"'</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@WorkingDir</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'Message'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'Now running with admin rights.'</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/RunAsSet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

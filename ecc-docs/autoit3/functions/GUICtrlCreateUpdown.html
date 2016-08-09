@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateUpdown.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+<head>
+  <title>Function GUICtrlCreateUpdown</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreateUpdown</font>
+<hr size="2">
+<p>Creates an UpDown control for the GUI.<br></p>
+
+<p class="codeheader">
+GUICtrlCreateUpdown ( inputcontrolID [,style] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">inputcontrolID</td>
+    <td width="85%">The controlID of the input control in which the updown control will be created.</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>[optional] Defines the style of the control. See <a href="../appendix/GUIStyles.html#UpDown">GUI Control Styles Appendix</a>.<br>
+       <br>
+       default (-1) : $UDS_ALIGNRIGHT.<br>
+       forced style : $UDS_SETBUDDYINT and $UDS_ALIGNRIGHT if no align defined.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the identifier (controlID) of the new control.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Max and min value can be set with <a href="GUICtrlSetLimit.html">GUICtrlSetLimit</a>.<br>
+By default Windows increases the value when clicking the upper arrow button.<br>
+<br>
+Default height resizing is done according to the one of the related input control.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUICtrlCreateInput.html">GUICtrlCreateInput</a>, <a href="GUICtrlSetData.html">GUICtrlSetData</a>, <a href="GUICtrlSetLimit.html">GUICtrlSetLimit</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S9">$title</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"My GUI UpDown"</span><br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S9">$title</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_SIZEBOX</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$input</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateInput</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"2"</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S9">$updown</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateUpdown</span><span class="S8">(</span><span class="S9">$input</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Attempt to resize input control</span><br>
+<span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$input</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">40</span><span class="S0"> </span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Updown"</span><span class="S8">,</span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$input</span><span class="S8">))</span><br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateUpdown.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+</html>

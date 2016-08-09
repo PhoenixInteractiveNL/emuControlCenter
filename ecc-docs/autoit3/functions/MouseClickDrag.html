@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MouseClickDrag.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function MouseClickDrag</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">MouseClickDrag</font>
+<hr size="2">
+<p>Perform a mouse click and drag operation.<br></p>
+
+<p class="codeheader">
+MouseClickDrag ( "button", x1, y1, x2, y2 [, speed] ) <br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">button</td>
+    <td width="85%">The button to click: "left", "right", "middle", "main", "menu", "primary", "secondary".</td>
+  </tr>
+  <tr>
+   <td>x1, y1</td>
+   <td>The x/y coords to start the drag operation from.</td>
+  </tr>
+  <tr>
+   <td>x2, y2</td>
+   <td>The x/y coords to end the drag operation at.</td>
+  </tr>
+  <tr>
+   <td>speed</td>
+   <td>[optional] the speed to move the mouse in the range 1 (fastest) to 100 (slowest).  A speed of 0 will move the mouse instantly.  Default speed is 10.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0, the button is not in the list.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If the button is an empty string, the left button will be clicked.<br>
+<br>
+If the user has swapped the left and right mouse buttons in the control panel, then the behaviour of the buttons is different.  "Left" and "right" always click those buttons, whether the buttons are swapped or not.  The "primary" or "main" button will be the main click, whether or not the buttons are swapped.  The "secondary" or "menu" buttons will usually bring up the context menu, whether the buttons are swapped or not.  See the table in <a href="MouseClick.html#table">MouseClick</a> for more explaination<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="MouseClick.html">MouseClick</a>, <a href="MouseGetPos.html">MouseGetPos</a>, <a href="MouseMove.html">MouseMove</a>, <a href="AutoItSetOption.html#MouseCoordMode">MouseCoordMode (Option)</a>, <a href="AutoItSetOption.html#MouseClickDragDelay">MouseClickDragDelay (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Left click drag from 0,200 to 600, 700</span><br>
+<span class="S4">MouseClickDrag</span><span class="S8">(</span><span class="S7">"left"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">600</span><span class="S8">,</span><span class="S0"> </span><span class="S3">700</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MouseClickDrag.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

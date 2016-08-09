@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Call.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function Call</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Call</font>
+<hr size="2">
+<p>Calls a user-defined function contained in a string parameter.<br></p>
+
+<p class="codeheader">
+Call ( "function" [, param1 [, param2 [, param<i>N</i> ]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">function</td>
+    <td width="85%">The name of the user function to call.</td>
+  </tr>
+  <tr>
+   <td>param</td>
+   <td>Arguments that will be passed to the function being invoked.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the return value of the called function.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 1 if the function does not exist.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The <i>function</i> cannot be a built-in AutoIt function or plug-in function.<br>
+The function can pass arguments to functions, however, ByRef parameters are not supported; there is no way to retrieve the ByRef parameter.<br>
+A special array can be passed in lieu of individual parameters.  This array must have it's first element set to "CallArgArray" and elements 1 - <i>n</i> will be passed as seperate arguments to the function.  If using this special array, no other arguments can be passed to Call().  See example for a demonstration.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AdlibEnable.html">AdlibEnable</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; This calls a function accepting no arguments.</span><br>
+<span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test1"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; This calls a function accepting one argument and passes it an argument.</span><br>
+<span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test2"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Message from Call()!"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; This demonstrates how to use the special array argument.</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><br>
+<span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"CallArgArray"</span><span class="S0"> </span><span class="S1">; This is required, otherwise, Call() will not recognize the array as containing arguments</span><br>
+<span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"This is a string"</span><span class="S0">&nbsp; </span><span class="S1">; Parameter one is a string</span><br>
+<span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">47</span><span class="S0">&nbsp; </span><span class="S1">; Parameter two is a number</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><br>
+<span class="S9">$array</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Array Element 0"</span><br>
+<span class="S9">$array</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Array Element 1"</span><br>
+<span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$array</span><span class="S0">&nbsp; </span><span class="S1">; Parameter three is an array</span><br>
+<br>
+<span class="S1">; We've built the special array, now call the function</span><br>
+<span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test3"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$aArgs</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Test1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Hello"</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Test2</span><span class="S8">(</span><span class="S9">$sMsg</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Test3</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nNumber</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The string is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The number is: "</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nNumber</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Array["</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"] contains:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Call.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

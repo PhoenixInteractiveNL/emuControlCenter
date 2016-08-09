@@ -144,8 +144,6 @@ class FileOrganizer extends App{
 	*/
 	private function create_new_file_path($opt_cat_name, $file_name) {
 		$path = $this->destination_path.DIRECTORY_SEPARATOR.$opt_cat_name.DIRECTORY_SEPARATOR.$file_name;
-		#$path = str_replace("//", "/", $path);
-		#$path = str_replace("\\\\", "\\", $path);
 		return $path;
 	}
 	
@@ -239,12 +237,6 @@ class FileOrganizer extends App{
 			
 		}
 		$this->message .= "DONE!\n\n";
-		
-		/*
-		foreach($files['INVALID'] as $id => $data) {
-			$this->statistics['INVALID_SOURCE'][$opt_cat_name][dirname($data['path'])][] = basename($data['path']);
-		}
-		*/
 	}
 	
 	/**

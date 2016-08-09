@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateDate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function GUICtrlCreateDate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreateDate</font>
+<hr size="2">
+<p>Creates a date control for the GUI.<br></p>
+
+<p class="codeheader">
+GUICtrlCreateDate ( "text", left, top [, width [, height [, style [, exStyle]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">text</td>
+    <td width="85%">The preselected date.</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>The left side of the control. If -1 is used then left will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>The top of the control. If -1 is used then top will be computed according to <a href="AutoItSetOption.html#GUICoordMode">GUICoordMode.</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td>[optional] The width of the control (default is the previously used width).</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td>[optional] The height of the control (default is the previously used height).</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>[optional] Defines the style of the control. See <a href="../appendix/GUIStyles.html#Date">GUI Control Styles Appendix</a>.<br>
+       <br>
+       default (-1) : $DTS_LONGDATEFORMAT<br>
+       forced style : $WS_TABSTOP</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td>[optional] Defines the extended style of the control. See <a href="../appendix/GUIStyles.html#Extended">Extended Style Table</a>.<br>
+       default (-1) : WS_EX_CLIENTEDGE</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns the identifier (controlID) of the new control.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+To obtain the value of the control see <a href="GUICtrlRead.html">GUICtrlRead</a>.<br>
+To set or change information in the control see <a href="../guiref/GUICtrlSet.html">GUICtrlSet...</a>.<br>
+<br>
+To combine styles with the default style use <b>BitOr</b>($GUI_SS_DEFAULT_DATE, newstyle,...).<br>
+<br>
+To Format the date/time see example 3 to understand how to use a GuiCtrlSendMsg with a $DTM_SETFORMAT.<br>
+<br>
+Default resizing is $GUI_DOCKHEIGHT.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#GUICoordMode">GUICoordMode (Option)</a>, <a href="GUICtrlSetState.html">GUICtrlSetState</a>, <a href="GUIGetMsg.html">GUIGetMsg</a>, <a href="GUICtrlRead.html">GUICtrlRead</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; example1</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S0"> </span><span class="S8">(</span><span class="S0"> </span><span class="S7">"My GUI get date"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S3">200</span><span class="S8">,</span><span class="S3">800</span><span class="S8">,</span><span class="S3">200</span><span class="S8">)</span><br>
+<span class="S9">$date</span><span class="S8">=</span><span class="S4">GUICtrlCreateDate</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"1953/04/25"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">185</span><span class="S8">,</span><span class="S3">20</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Date"</span><span class="S8">,</span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$date</span><span class="S8">))</span><br>
+<span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; example2</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI get time"</span><span class="S8">)</span><br>
+<span class="S9">$n</span><span class="S8">=</span><span class="S4">GUICtrlCreateDate</span><span class="S0"> </span><span class="S8">(</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DTS_TIMEFORMAT</span><span class="S8">)</span><span class="S0"> </span><br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Run the GUI until the dialog is closed</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Time"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$n</span><span class="S8">))</span><br>
+<span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; example3</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S0"> </span><span class="S8">(</span><span class="S0"> </span><span class="S7">"My GUI get date"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S3">200</span><span class="S8">,</span><span class="S3">800</span><span class="S8">,</span><span class="S3">200</span><span class="S8">)</span><br>
+<span class="S9">$date</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateDate</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"1953/04/25"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">185</span><span class="S8">,</span><span class="S3">20</span><span class="S0"> </span><span class="S8">)</span><br>
+<br>
+<span class="S1">; to select a specific default format</span><br>
+<span class="S9">$DTM_SETFORMAT</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x1005</span><br>
+<span class="S9">$style</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"yyyy/MM/dd HH:mm:s"</span><br>
+<span class="S4">GuiCtrlSendMsg</span><span class="S8">(</span><span class="S9">$date</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DTM_SETFORMAT</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$style</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GuiSetState</span><span class="S8">()</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S4">GuiGetMsg</span><span class="S8">()</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Time"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlRead</span><span class="S8">(</span><span class="S9">$date</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlCreateDate.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

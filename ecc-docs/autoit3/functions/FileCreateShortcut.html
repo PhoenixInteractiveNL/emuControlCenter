@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileCreateShortcut.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function FileCreateShortcut</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileCreateShortcut</font>
+<hr size="2">
+<p>Creates a shortcut (.lnk) to a file.<br></p>
+
+<p class="codeheader">
+FileCreateShortcut ( "file", "lnk" [, "workdir" [, "args" [, "desc" [, "icon" [, "hotkey" [, icon number [, state]]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">file</td>
+    <td width="85%">Full path and file name of file to create shortcut to.</td>
+  </tr>
+  <tr>
+   <td>lnk</td>
+   <td>Full path and file name of the shortcut.</td>
+  </tr>
+  <tr>
+   <td>workdir</td>
+   <td>[optional] Working directory.</td>
+  </tr>
+  <tr>
+   <td>args</td>
+   <td>[optional] Additional file arguments.</td>
+  </tr>
+  <tr>
+   <td>desc</td>
+   <td>[optional] File Description.</td>
+  </tr>
+  <tr>
+   <td>icon</td>
+   <td>[optional] Full Path/File name of icon to use.</td>
+  </tr>
+  <tr>
+   <td>hotkey</td>
+   <td>[optional] Hotkey - same as the Send() key format.</td>
+  </tr>
+  <tr>
+   <td>icon number</td>
+   <td>[optional] The icon instance to use (usually 0)</td>
+  </tr>
+  <tr>
+   <td>state</td>
+   <td>[optional] The state the shortcut is launched in.  Use either @SW_SHOWNORMAL, @SW_SHOWMINNOACTIVE or @SW_SHOWMAXIMIZED</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if lnk cannot be created.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Hotkeys for windows shortcuts are of the following form:  Ctrl+Alt+X, Ctrl+Shift+X, Shift+Alt+X, Ctrl+NumPadKey, or Alt+NumPadKey where X represents a letter, number, punctuation, or function key.  If you specify an invalid form, Windows typically defaults to Ctrl+Alt<br>
+Note that Windows distinguishes number pad keys from regular number and punctuation keys.  FileCreateShortcut allows you to create Ctrl+X and Alt+X shortcuts (which Windows normally only allows when X is a NumPadKey); however, you should avoid these assignments as they may conflict with standard application hotkeys.<br>
+Windows prohibits ESC, ENTER, TAB, SPACEBAR, PRINT SCREEN, SHIFT, or BACKSPACE from being used in hotkeys.  <br>
+<br>
+FileCreateShortcut does not require a valid target, workdir, icon, or hotkey in order to "successfully" create the LNK file; however, the destination of the LNK file must be valid!  If the hotkey you choose is already in use, your new shortcut takes precedence.  Also, if you create a shortcut with the same path\name as as a pre-existing shortcut, it gets overwritten with your new version.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="FileGetShortcut.html">FileGetShortcut</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Sets a shortcut with ctrl+alt+t hotkey</span><br>
+<span class="S4">FileCreateShortcut</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Explorer.exe"</span><span class="S8">,</span><span class="S6">@DesktopDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Shortcut Test.lnk"</span><span class="S8">,</span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S7">"/e,c:\"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is an Explorer link;-)"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"^!t"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"15"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileCreateShortcut.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

@@ -57,6 +57,16 @@ class GuiImagePopup {
 		# dropzone selected background
 		$this->dropZoneBgColorSelected = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_active');
 		if (!$this->dropZoneBgColorSelected) $this->dropZoneBgColorSelected = '#00BB00';
+		
+		$imageCenterHidePopup = $this->iniManager->getHistoryKey('imageCenterHidePopup');
+		$this->gui->mediaCenterOptConfirm->set_active(!$imageCenterHidePopup);
+		
+		$imageCenterTransferType = $this->iniManager->getHistoryKey('imageCenterConfirmPopupState');
+		if ($imageCenterTransferType == 'MOVE') $this->gui->mediaCenterOptRadioMove->set_active(true);
+		
+		$imageCenterSlotsHidden = $this->iniManager->getHistoryKey('imageCenterSlotsHidden');
+		$this->gui->mediaCenterOptExpand->set_expanded(!$imageCenterSlotsHidden);
+		
 	}
 	
 	public function updateImages($mediaInfo, $imageType = false){
@@ -399,6 +409,13 @@ class GuiImagePopup {
 	}
 	
 	public function hidePopup() {
+		
+		$transferModeState = $this->gui->mediaCenterOptRadioCopy->get_active();
+		$transferMode = ($transferModeState) ? 'COPY' : 'MOVE';
+		$this->iniManager->storeHistoryKey('imageCenterConfirmPopupState', $transferMode);
+		$this->iniManager->storeHistoryKey('imageCenterHidePopup', !$this->gui->mediaCenterOptConfirm->get_active());
+		$this->iniManager->storeHistoryKey('imageCenterSlotsHidden', !$this->gui->mediaCenterOptExpand->get_expanded());
+		
 		$this->gui->hide($this->gui->win_imagePopup);
 		$this->opened_state = false;
 	}

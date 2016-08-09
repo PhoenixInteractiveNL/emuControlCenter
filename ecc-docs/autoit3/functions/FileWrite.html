@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileWrite.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+<head>
+  <title>Function FileWrite</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileWrite</font>
+<hr size="2">
+<p>Append a line of text to the end of a previously opened text file.<br></p>
+
+<p class="codeheader">
+FileWrite ( filehandle or "filename", "line" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filehandle</td>
+    <td width="85%">The handle of a file, as returned by a previous call to FileOpen.  Alternatively, you may use a string filename as the first parameter.</td>
+  </tr>
+  <tr>
+   <td>line</td>
+   <td>The line of text to write to the text file.  The line is written as is - no @CR or @LF characters are added.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if file not opened in writemode, file is read only, or file cannot otherwise be written to.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The text file must be opened in write mode or the FileWrite command will fail.<br>
+<br>
+If a filename is given rather than a file handle, the file will be opened and closed during the function call.  For parsing large text files this will be much slower than using filehandles.  However, filename will be created if it does not already exist.<br>
+<br>
+Note: Do not mix filehandles and filenames, i.e., don't FileOpen a file and then use a filename in this function. Either use filehandles or filenames in your routines, not both.<br>
+<br>
+When writing text AutoIt will write using ANSI by default. To write in Unicode mode the file must be opened with FileOpen() and the relevant flags.<br>
+<br>
+If the line is a binary type variant (and not text) it will be written to the file byte by byte. Binary operation can also be forced by using Fileopen with the binary flag.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="FileClose.html">FileClose</a>, <a href="FileOpen.html">FileOpen</a>, <a href="FileRead.html">FileRead</a>, <a href="FileReadLine.html">FileReadLine</a>, <a href="FileWriteLine.html">FileWriteLine</a>, <a href="Binary.html">Binary</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Check if file opened for writing OK</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">FileWrite</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line1"</span><span class="S8">)</span><br>
+<span class="S4">FileWrite</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Still Line1"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span><br>
+<span class="S4">FileWrite</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line2"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileWrite.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:58 GMT -->
+</html>

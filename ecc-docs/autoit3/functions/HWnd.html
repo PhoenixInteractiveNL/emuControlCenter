@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/HWnd.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:00 GMT -->
+<head>
+  <title>Function HWnd</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">HWnd</font>
+<hr size="2">
+<p>Converts an expression into an HWND handle.<br></p>
+
+<p class="codeheader">
+HWnd ( expression )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">An expression to convert into an HWND handle.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Success - If the value can be converted to an HWND, the HWND representation will be returned.<br>
+Failure - If the HWND does not denote a valid window, a 0 (NULL) HWND will be returned and @error set to 1.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Double numbers can not be converted to an HWND.<br>
+No literal string should be converted to an HWND because there is no guarantee that a given window will have the same HWND ever again.  This is not strictly forbidden, but it is a programming mistake and should be avoided.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Int.html">Int</a>, <a href="String.html">String</a>, <a href="Number.html">Number</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><br>
+<span class="S4">WinWait</span><span class="S8">(</span><span class="S7">"Untitled - Notepad"</span><span class="S8">)</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetHandle</span><span class="S8">(</span><span class="S7">"Untitled - Notepad"</span><span class="S8">)</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sHWND</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">String</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert to a string</span><br>
+<span class="S4">WinSetState</span><span class="S8">(</span><span class="S4">HWnd</span><span class="S8">(</span><span class="S9">$sHWND</span><span class="S8">),</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">5000</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">; Notepad should be minimized</span><br>
+<span class="S4">WinClose</span><span class="S8">(</span><span class="S4">HWnd</span><span class="S8">(</span><span class="S9">$sHWND</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/HWnd.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:00 GMT -->
+</html>

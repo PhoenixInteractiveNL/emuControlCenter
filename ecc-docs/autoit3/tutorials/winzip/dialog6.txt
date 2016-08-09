@@ -1,0 +1,20 @@
+>>>>>>>>>>>> Window Details <<<<<<<<<<<<<
+Title:	WinZip Setup
+Class:	#32770
+Size:	X: 464    Y: 341    W: 471    H: 333
+
+
+>>>>>>>>>>> Visible Window Text <<<<<<<<<<<
+&Help
+< &Back
+&Next >
+Close
+Choose "Classic" or "Wizard", then click "Next"
+You can start with the "Classic" or "Wizard" interface.  It is easy to switch between the two interfaces, and you can always change the default later.
+WinZip Classic is the more powerful of the two interfaces and is recommended if you are comfortable with Windows and Zip files. Most WinZip users choose this interface.
+The WinZip Wizard automates the most common tasks involving Zip files and is most useful for users who are new to Windows and Zip files.
+Start with WinZip &Classic 
+&Start with the WinZip Wizard 
+
+>>>>>>>>>>> Hidden Window Text <<<<<<<<<<<
+&WinZip Classic

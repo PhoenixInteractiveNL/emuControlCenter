@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/macros/AutoItRelated.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Macros Reference - AutoIt Related</title>
+  <meta content="text/html; charset=iso-8859-1"
+ http-equiv="Content-Type">
+  <link type="text/css" rel="stylesheet" href="../css/default.css">
+  <style>
+<!--
+.borderwrap{ /* this will affect the outlining border of all the tables and boxes through-out the skin. */
+	background: #FFF; 
+	border: 1px solid #072A66;
+	padding: 0px; 
+	margin: 0px; 
+}
+
+.ipbtable { width:100% }
+
+table.ipbtable
+{ /* required for text in tables, because tables do not inherit from body */
+	background: transparent;
+	color: #222;
+	font-size: 11px;
+	line-height: 135%;
+}
+
+.post1{ 
+	background: #F5F9FD;
+}
+
+.ipbtable td{ /* gives all tables faux cellpadding of 5px */
+	padding: 5px;
+}
+
+.postcolor{ 
+	font-size: 12px; 
+	line-height: 160%;
+}
+
+-->
+  </style>
+</head>
+<body>
+<h1>Macro Reference - AutoIt Related</h1>
+<p>Below is a list of AutoIt-related macros.&nbsp; </p>
+<p>The full list of macros can be found <a href="../macros.html">here</a>. </p>
+<p>&nbsp;</p>
+<table height="590" bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+<tr>
+  <td width="25%" bgcolor="#000099" height="16"><font color="#ffffff"><strong>Macro</strong></font></td>
+  <td width="75%" bgcolor="#000099" height="16"><font color="#ffffff"><strong>Description</strong></font></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@compiled</td>
+  <td>Returns 1 if script is a compiled executable; otherwise, returns 0.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@unicode</td>
+  <td><p>Returns 1 if running using the Unicode version of AutoIt (AutoIt3.exe) or 0 if running the ANSI version (AutoIt3A.exe).</p>
+    <p>Usually, this macro should not be required as AutoIt handles any Unicode/ANSI conversions. However, with certain DllCalls() or use of direct Windows messages this may be required.</p>
+    </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@error</td>
+  <td>Status of the error flag.&nbsp; See the <a
+href="../functions/SetError.html">SetError</a> function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@exitCode</td>
+  <td>Exit code as set by <a href="../keywords/Exit.html">Exit</a>
+  statement.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@exitMethod</td>
+  <td>See the <a
+href="../keywords/FuncOnAutoItExit.html">Func OnAutoItExit()</a>.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@extended<br></td>
+  <td>Extended function return - used in certain functions such as <a href="../functions/StringReplace.html">StringReplace</a>.<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@NumParams</td>
+  <td>Number of parameters used in calling the user function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptName<br></td>
+  <td>Filename of the running script.<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptDir<br></td>
+  <td>Directory containing the running script.&nbsp; (Result does <i>not</i> contain a trailing backslash) </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptFullPath<br></td>
+  <td>Equivalent to <i>@ScriptDir &amp; "\" &amp; @ScriptName</i><br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptLineNumber</td>
+  <td>Line number currently being executed. Useful for
+  debug statements specially when a function is call you can pass the caller
+  line number. (Not significant in compiled script)</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@WorkingDir<br></td>
+  <td>Current/active working directory.&nbsp; (Result does <i>not</i> contain a trailing backslash) </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItExe</td>
+  <td>The full path and filename of the AutoIt executable currently running.  For compiled scripts it is the path of the compiled script.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItPID</td>
+  <td>PID of the process in which the script is running.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItVersion<br></td>
+  <td>Version number of AutoIt such as <i>3.0.102.0</i><br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@InetGetActive</td>
+  <td>Is 1 if a InetGet download is currently active, otherwise is 0. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@InetGetBytesRead</td>
+  <td>During a InetGet download this is the number of bytes currently read. It is -1 when there is an error downloading. </td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@COM_EventObj</td>
+  <td> Object the COM event is being fired on. Only valid in a COM event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@GUI_CtrlId</td>
+  <td> Last click GUI Control identifier. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@GUI_CtrlHandle</td>
+  <td> Last click GUI Control handle. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DragID</td>
+  <td> Drag GUI Control identifier. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DragFile</td>
+  <td> Filename of the file being dropped. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DropID</td>
+  <td> Drop GUI Control identifier. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_WinHandle</td>
+  <td> Last click GUI Window handle. Only valid in an event Function.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @HotKeyPressed</td>
+  <td> Last HotKey pressed. See the <a
+href="../functions/HotKeySet.html">HotkeySet </a> function</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+    <td height="16" rowspan="1" colspan="2">For use with the <a href="../functions/WinSetState.html">WinSetState</a>,
+      <a href="../functions/Run.html">Run</a>, <a href="../functions/RunWait.html">RunWait</a>, <a href="../functions/FileCreateShortcut.html">FileCreateShortcut</a> and <a href="../functions/FileGetShortcut.html">FileGetShortcut</a> functions:<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SW_DISABLE</td>
+  <td> Disables the window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SW_ENABLE</td>
+  <td> Enables the window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_HIDE </td>
+  <td> Hides the window and activates another window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_LOCK</td>
+  <td> Lock window to avoid painting.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_MAXIMIZE </td>
+  <td> Maximizes the specified window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_MINIMIZE </td>
+  <td> Minimizes the specified window and activates the next top-level window in the Z order. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_RESTORE </td>
+  <td> Activates and displays the window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when restoring a minimized window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOW </td>
+  <td> Activates the window and displays it in its current size and position. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWDEFAULT </td>
+  <td> Sets the show state based on the SW_ value specified by the program that started the application. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMAXIMIZED </td>
+  <td> Activates the window and displays it as a maximized window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMINIMIZED </td>
+  <td> Activates the window and displays it as a minimized window. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMINNOACTIVE </td>
+  <td> Displays the window as a minimized window. This value is similar to @SW_SHOWMINIMIZED, except the window is not activated. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNA </td>
+  <td> Displays the window in its current size and position. This value is similar to @SW_SHOW, except the window is not activated. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNOACTIVATE </td>
+  <td> Displays a window in its most recent size and position. This value is similar to @SW_SHOWNORMAL, except the window is not activated. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNORMAL </td>
+  <td> Activates and displays a window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when displaying the window for the first time. </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_UNLOCK</td>
+  <td> Unlock windows to allow painting.</td>
+</tr>
+<tr>
+    <td height="16" rowspan="1" colspan="2"><br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TRAY_ID</td>
+  <td>Last clicked item identifier during a TraySet(Item)OnEvent action.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TrayIconFlashing</td>
+  <td>Returns 1 if tray icon is flashing; otherwise, returns 0.</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TrayIconVisible</td>
+  <td>Returns 1 if tray icon is visible; otherwise, returns 0.</td>
+</tr>
+<tr>
+    <td height="16" rowspan="1" colspan="2"><br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@CR<br></td>
+  <td>Carriage return, Chr(13); sometimes used for line breaks.<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@LF<br></td>
+  <td>Line feed, Chr(10); typically used for line breaks.<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@CRLF<br></td>
+  <td>= @CR &amp; @LF&nbsp; ;occasionally used for line breaks.<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TAB<br></td>
+  <td>Tab character, Chr(9)<br></td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/macros/AutoItRelated.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

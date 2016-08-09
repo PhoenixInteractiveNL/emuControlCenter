@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DriveMapGet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function DriveMapGet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DriveMapGet</font>
+<hr size="2">
+<p>Retrieves the details of a mapped drive.<br></p>
+
+<p class="codeheader">
+DriveMapGet ( "device" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">device</td>
+    <td width="85%">The device (drive or printer) letter to query, e.g. "O:" or "LPT1:"</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns details of the mapping, e.g. \\server\share</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns a blank string "" and sets @error to 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+None.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="DriveMapAdd.html">DriveMapAdd</a>, <a href="DriveMapDel.html">DriveMapDel</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S1">; Map X drive to \\myserver\stuff using current user</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver\stuff"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Get details of the mapping</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Drive X: is mapped to"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DriveMapGet</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">))</span><br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DriveMapGet.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

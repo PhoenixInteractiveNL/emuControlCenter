@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileOpen.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function FileOpen</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileOpen</font>
+<hr size="2">
+<p>Opens a text file for reading or writing.<br></p>
+
+<p class="codeheader">
+FileOpen ( "filename", mode )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">Filename of the text file to open.</td>
+  </tr>
+  <tr>
+   <td>mode</td>
+   <td>Mode (read or write) to open the file in.<br>
+       Can be a combination of the following:<br>
+       &nbsp;&nbsp;0 = Read mode<br>
+       &nbsp;&nbsp;1 = Write mode (append to end of file)<br>
+       &nbsp;&nbsp;2 = Write mode (erase previous contents)<br>
+       &nbsp;&nbsp;4 = Read raw mode<br>
+       &nbsp;&nbsp;8 = Create directory structure if it doesn't exist (See Remarks).<br>
+       &nbsp;&nbsp;16 = Force binary(byte) reading and writing mode with FileRead and FileWrite<br>
+       &nbsp;&nbsp;32 = Use Unicode UTF16 Little Endian mode when writing text with FileWrite and FileWriteLine (default is ANSI)<br>
+       &nbsp;&nbsp;64 = Use Unicode UTF16 Big Endian mode when writing text with FileWrite and FileWriteLine (default is ANSI)<br>
+       &nbsp;&nbsp;128 = Use Unicode UTF8 when writing text with FileWrite and FileWriteLine (default is ANSI)<br>
+       Both write modes will create the file if it does not already exist. The folder path must already exist (except using mode '8' - See Remarks).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a file "handle" for use with subsequent file functions.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns -1 if error occurs.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+A file can only be in either read or write mode; it cannot be in both.<br>
+When opening a file in write mode, the file will be created if it does not exist.<br>
+When finished working with a file, call the FileClose function to close the file.  Autoit normally closes all files upon termination, but explicitly calling FileClose is still a good idea.<br>
+<br>
+The default mode when writing text is ANSI - use the unicode flags to change this. When writing unicode files the Windows default mode (and the fastest in AutoIt due to the least conversion) is UTF16 Little Endian (mode 32).<br>
+<br>
+When using the mode=4 (Raw Read) the filename is defined as "\\.\A:" for reading sector on a floppy disk the count must be a multiple of sector size(512).<br>
+<br>
+Non-existing directory structure:<br>
+------------------------------------<br>
+By default the file will not be created if the directory structure doesn't exist.<br>
+To overwrite this behaviour use the modes '1' or '2' together with mode-flag '8'!<br>
+For instance the mode-flag '9' (1 + 8) checks for the directory structure and if it doesn't exist creates it automatically and then opens the file for appending.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="FileClose.html">FileClose</a>, <a href="FileReadLine.html">FileReadLine</a>, <a href="FileWriteLine.html">FileWriteLine</a>, <a href="FileRead.html">FileRead</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Check if file opened for reading OK</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">; Another sample which automatically creates the directory structure</span><br>
+<span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; which is similar to 2 + 8 (erase + create dir)</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/FileOpen.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

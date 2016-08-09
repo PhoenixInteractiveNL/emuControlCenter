@@ -71,6 +71,42 @@ class Image {
 		$this->eccImageTypes = $eccImageTypes;
 	}
 	
+	public function getImageByType($eccident, $crc32, $imageType, $useThumb=true){
+		#print "eccident $eccident, crc32 $crc32, imageType $imageType, useThumb $useThumb\n";
+		
+		$this->matchImageType = true;
+		$image = $this->searchForSavedRomImagesExtended($eccident, $crc32, $imageType, true, false);
+		$this->matchImageType = false;
+				
+		return $image;
+	}
+	
+	public function storeUserImageStream($eccident, $crc32, $imageData, $imageExtension, $destImageType){
+
+		$this->resetErrors();
+		
+		if (!$eccident || !$crc32 || !trim($imageData) || !$imageExtension || !$destImageType) return false;
+		
+		# test if extension is supported!
+		if (!isset($this->supportedExtensions[strtolower($imageExtension)])) {
+			$this->setError('image', 'type_not_supported');
+			return false;
+		}
+
+		# is the destination typ allowed?
+		if (!isset($this->eccImageTypes[strtolower($destImageType)])) return false;
+		
+		# get/create userfolder, if needed!
+		$imageDestFolder = $this->getUserImageCrc32Folder($eccident, $crc32, true);
+		if (!$imageDestFolder) return false;
+		
+		$destImagePath = $this->getUserImageFileName($imageDestFolder, $eccident, $crc32, $destImageType, $imageExtension);
+		
+		if (!$this->hasErrors() && !file_exists($destImagePath)) file_put_contents($destImagePath, $imageData);
+		else return false;
+		
+	}
+	
 	public function storeUserImage($transferMode, $eccident, $crc32, $sourceImagePath, $destImageType, $cleanupRemoved = true){
 		
 		$this->resetErrors();
@@ -89,13 +125,13 @@ class Image {
 			$this->setError('image', 'type_not_supported');
 			return false;
 		}
+
+		# is the destination typ allowed?
+		if (!isset($this->eccImageTypes[strtolower($destImageType)])) return false;
 		
 		# get/create userfolder, if needed!
 		$imageDestFolder = $this->getUserImageCrc32Folder($eccident, $crc32, true);
 		if (!$imageDestFolder) return false;
-		
-		# is the destination typ allowed?
-		if (!isset($this->eccImageTypes[strtolower($destImageType)])) return false;
 		
 		# $destImagePath = $imageDestFolder.DIRECTORY_SEPARATOR."ecc_".$eccident."_".$crc32."_".$destImageType.".".$fileExtension;
 		$destImagePath = $this->getUserImageFileName($imageDestFolder, $eccident, $crc32, $destImageType, $fileExtension);

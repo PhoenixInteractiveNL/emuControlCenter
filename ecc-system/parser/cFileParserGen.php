@@ -22,17 +22,11 @@ class FileParserGen implements FileParser {
 		// If invalid file, return this invalid data
 		if (!$this->isValid()) return $this->fileData;
 		
-		// redraw gui!
-		$this->whilePending();
-		
-		// Get all binary data from file
-		$file_content = FileIO::ecc_read_file($this->fHdl, false, false, $this->fileName);
+		// create crc32 from string
+		$this->fileData['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($this->fHdl, false, false, $this->fileName));
 
 		// redraw gui!
 		$this->whilePending();
-		
-		// create crc32 from string
-		$this->fileData['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string($file_content);
 		
 		return $this->fileData;
 	}

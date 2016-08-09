@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSetCursor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+<head>
+  <title>Function GUICtrlSetCursor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSetCursor</font>
+<hr size="2">
+<p>Sets the mouse cursor icon for a particular control.<br></p>
+
+<p class="codeheader">
+GUICtrlSetCursor ( controlID, cursorID )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">The control identifier (controlID) as returned by a <a href="../guiref/GUICtrlCreate.html">GUICtrlCreate...</a> function.</td>
+  </tr>
+  <tr>
+   <td>cursorID</td>
+   <td>cursor ID as used by Windows SetCursor API (use -1 for the default mouse cursor for the control)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Unlike GUISetCursor which changes the mouse cursor for an entire window, this function sets the mouse cursor that is used when the mouse is hovering over the specified control.<br>
+<br>
+If the cursorID is invalid the standard arrow will be displayed.<br>
+<br>
+For a list of valid cursor IDs see <a href="MouseGetCursor.html">MouseGetCursor</a>.<br>
+CursorId = 16 will hide the mouse cursor.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUISetCursor.html">GUISetCursor</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"put cursor over label"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"label"</span><span class="S8">,</span><span class="S3">125</span><span class="S8">,</span><span class="S3">40</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlSetCursor</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()&lt;&gt;</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUICtrlSetCursor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+</html>

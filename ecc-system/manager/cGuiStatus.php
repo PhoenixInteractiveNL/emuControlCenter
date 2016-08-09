@@ -43,7 +43,12 @@ class GuiStatus {
 	
 	public function update_message($txt="") {
 		if (!$this->txtbuf_output) $this->txtbuf_output = new GtkTextBuffer();
-		$this->txtbuf_output->set_text(trim($txt));
+
+		try{
+			$this->txtbuf_output->set_text(trim($txt));
+		}
+		catch(PhpGtkGErrorException $e){}
+		
 		$this->gui->status_area_output_msg->set_buffer($this->txtbuf_output);
 	}
 	
@@ -113,6 +118,8 @@ class GuiStatus {
 		if (!$this->status_cancel) {
 			$msg .= I18N::get('popup', 'status_dialog_close');
 			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) $this->hide_main();
+#			if (FACTORY::get('manager/GuiDialog')->openDialogConfirm($title, $msg)) $this->hide_main();
+			
 		}
 		$this->reset1();
 	}

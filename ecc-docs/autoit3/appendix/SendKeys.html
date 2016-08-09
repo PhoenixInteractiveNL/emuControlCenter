@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/appendix/SendKeys.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Send Key list</title>
+  <meta content="text/html; charset=iso-8859-1"
+ http-equiv="Content-Type">
+  <link type="text/css" rel="stylesheet" href="../css/default.css">
+</head>
+<body>
+<h1>Send Key list</h1>
+<p><br>
+  Quick reference for the <b><a href="../functions/Send.html">Send( "keys" [, flag] )</a></b> Command.&nbsp;&nbsp;&nbsp;
+  <b>^</b> Ctrl &nbsp;&nbsp; <b>!</b> Alt &nbsp;&nbsp; <b>+</b> Shift &nbsp;&nbsp; <b>#</b> Win<br>
+</p>
+<p>AutoIt can send all ASCII and Extended ASCII characters (0-255), to send UNICODE characters you must use the &quot;ASC&quot; option and the code of the character you wish to Send(see {ASC} below).</p>
+<p><br>
+  <br>
+  To send the ASCII value A (same as pressing ALT+065 on the numeric keypad)</p>
+<p class="codebox">Send(&quot;{ASC 065}&quot;)</p>
+<p>(When using 2 digit ASCII codes you must use a leading 0, otherwise an obsolete 437 code page is used).</p>
+<p>&nbsp;</p>
+<p>To send UNICODE characters enter the character code, for example this sends a Chinese character</p>
+<p class="codebox">Send(&quot;{ASC 2709}&quot;)</p>
+<p>&nbsp;</p>
+<p>Single keys can also be repeated, e.g.</p>
+<p class="codebox">Send("{DEL 4}")    ;Presses the DEL key 4 times<br>
+Send("{S 30}")      ;Sends 30 'S' characters<br>
+Send("+{TAB 4}&quot;)   ;Presses SHIFT+TAB 4 times</p>
+
+<p>&nbsp;</p>
+<p>To hold a key down (generally only useful for games)</p>
+<p class="codebox">Send("{a down}")    ;Holds the A key down<br>
+Send("{a up}")        ;Releases the A key</p>
+
+<p>&nbsp;</p>
+    <p>If you with to use a variable for the count, try
+<p class="codebox">$n = 4<br>
+Send("+{TAB " & $n & "}")</p>
+
+<p>&nbsp;</p>
+      <p>If you wish to send the ASCII value A four times, then try
+<p class="codebox">$x = Chr(65)<br>
+  Send("{" & $x & " 4}")</p>
+
+<p>&nbsp;</p>
+        <p>Most laptop computer keyboards have a special Fn key.  This key cannot be simulated.<br>
+          <br>
+          Note, by setting the flag parameter to 1 the "keys" parameter is sent RAW.  This is useful when you want to send some text copied from a variable and you want the text sent exactly as written.<br>
+          <br>
+          <br>
+          <b>Send is quite useful because windows can be navigated without needing a mouse.</b><br>
+          <br>
+        For example, open Folder Options (in the control panel) and try the following:<br>
+        <br>
+        </p>
+        </p>
+          </p>
+            </p>
+                </p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr>
+  <td>Send("{TAB}")</td>
+  <td>Navigate to next control (button, checkbox, etc)</td>
+</tr>
+<tr>
+  <td>Send("+{TAB}")</td>
+  <td>Navigate to previous control.</td>
+</tr>
+<tr>
+  <td>Send("^{TAB}")</td>
+  <td>Navigate to next WindowTab (on a Tabbed dialog window)</td>
+</tr>
+<tr>
+  <td>Send("^+{TAB}")</td>
+  <td>Navigate to previous WindowTab.</td>
+</tr>
+<tr>
+  <td>Send("{SPACE}")</td>
+  <td>Can be used to toggle a checkbox or click a button.</td>
+</tr>
+<tr>
+  <td>Send("{+}")</td>
+  <td>Usually checks a checkbox (if it's a "real" checkbox.)</td>
+</tr>
+<tr>
+  <td>Send("{-}")</td>
+  <td>Usually unchecks a checkbox.</td>
+</tr>
+  <td>Send("{NumPadMult}")</td>
+  <td>Recursively expands folders in a SysTreeView32.
+<tr>
+</tr>
+</table>
+<br>
+<br>
+Use Alt-key combos to access menu items.&nbsp; Also, open Notepad and
+try the following:<br>
+<br>
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+  <tbody>
+    <tr>
+      <td>Send("!f")</td>
+      <td>Send Alt+f, the access key for Notepad's file menu. <i>Try other letters!</i><br>
+      </td>
+    </tr>
+    <tr>
+      <td>Send("{DOWN}")</td>
+      <td>Move down a menu.</td>
+    </tr>
+    <tr>
+      <td>Send("{UP}")</td>
+      <td>Move up a menu.</td>
+    </tr>
+    <tr>
+      <td>Send("{LEFT}")</td>
+      <td>Move leftward to new menu or expand a submenu.</td>
+    </tr>
+    <tr>
+      <td>Send("{RIGHT}")</td>
+      <td>Move rightward to new menu or collapse a submenu.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+See Windows' Help--press <i>Win+F1</i>--for a complete list of keyboard shortcuts
+if you don't know the importance of Alt+F4, PrintScreen, Ctrl+C, and so on.<br>
+<br>
+<br>
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+  <tbody>
+<tr>
+  <td align="center"><b>Send Command (if zero flag)</b></td>
+  <td>
+  <p align="center"><b>Resulting Keypress</b></p>
+  </td>
+</tr>
+<tr>
+  <td align="center">{!}</td>
+  <td>!</td>
+</tr>
+<tr>
+  <td align="center">{#}</td>
+  <td>#</td>
+</tr>
+<tr>
+  <td align="center">{+}</td>
+  <td>+</td>
+</tr>
+<tr>
+  <td align="center">{^}</td>
+  <td>^</td>
+</tr>
+<tr>
+  <td align="center">{{}</td>
+  <td>{</td>
+</tr>
+<tr>
+  <td align="center">{}}</td>
+  <td>}</td>
+</tr>
+<tr>
+  <td align="center">{SPACE}</td>
+  <td>SPACE</td>
+</tr>
+<tr>
+  <td align="center">{ENTER}</td>
+  <td>ENTER key on the main keyboard</td>
+</tr>
+<tr>
+  <td align="center">{ALT}</td>
+  <td>ALT</td>
+</tr>
+<tr>
+  <td align="center">{BACKSPACE} or {BS}</td>
+  <td>BACKSPACE</td>
+</tr>
+<tr>
+  <td align="center">{DELETE} or {DEL}</td>
+  <td>DELETE</td>
+</tr>
+<tr>
+  <td align="center">{UP}</td>
+  <td>Up arrow</td>
+</tr>
+<tr>
+  <td align="center">{DOWN}</td>
+  <td>Down arrow</td>
+</tr>
+<tr>
+  <td align="center">{LEFT}</td>
+  <td>Left arrow</td>
+</tr>
+<tr>
+  <td align="center">{RIGHT}</td>
+  <td>Right arrow</td>
+</tr>
+<tr>
+  <td align="center">{HOME}</td>
+  <td>HOME</td>
+</tr>
+<tr>
+  <td align="center">{END}</td>
+  <td>END</td>
+</tr>
+<tr>
+  <td align="center">{ESCAPE} or {ESC}</td>
+  <td>ESCAPE</td>
+</tr>
+<tr>
+  <td align="center">{INSERT} or {INS}</td>
+  <td>INS</td>
+</tr>
+<tr>
+  <td align="center">{PGUP}</td>
+  <td>PGUP</td>
+</tr>
+<tr>
+  <td align="center">{PGDN}</td>
+  <td>PGDN</td>
+</tr>
+<tr>
+  <td align="center">{F1} - {F12}</td>
+  <td>Function keys</td>
+</tr>
+<tr>
+  <td align="center">{TAB}</td>
+  <td>TAB</td>
+</tr>
+<tr>
+  <td align="center">{PRINTSCREEN}</td>
+  <td>PRINTSCR</td>
+</tr>
+<tr>
+  <td align="center">{LWIN}</td>
+  <td>Left Windows key</td>
+</tr>
+<tr>
+  <td align="center"">{RWIN}</td>
+  <td>Right Windows key</td>
+</tr>
+<tr>
+  <td align="center">{NUMLOCK}</td>
+  <td>NUMLOCK</td>
+</tr>
+<tr>
+  <td align="center">{BREAK}</td>
+  <td>for Ctrl+Break processing</td>
+</tr>
+<tr>
+  <td align="center">{PAUSE}</td>
+  <td>PAUSE</td>
+</tr>
+<tr>
+  <td align="center"">{CAPSLOCK}</td>
+  <td>CAPSLOCK</td>
+</tr>
+<tr>
+  <td align="center">{NUMPAD0} - {NUMPAD9}</td>
+  <td>Numpad digits</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADMULT}</td>
+  <td>Numpad Multiply</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADADD}</td>
+  <td>Numpad Add</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADSUB}</td>
+  <td>Numpad Subtract</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADDIV}</td>
+  <td>Numpad Divide</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADDOT}</td>
+  <td>Numpad period</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADENTER}</td>
+  <td>Enter key on the numpad</td>
+</tr>
+<tr>
+  <td align="center">{APPSKEY}</td>
+  <td>Windows App key</td>
+</tr>
+<tr>
+  <td align="center">{LALT}</td>
+  <td>Left ALT key</td>
+</tr>
+<tr>
+  <td align="center">{RALT}</td>
+  <td>Right ALT key</td>
+</tr>
+<tr>
+  <td align="center">{LCTRL}</td>
+  <td>Left CTRL key</td>
+</tr>
+<tr>
+  <td align="center">{RCTRL}</td>
+  <td>Right CTRL key</td>
+</tr>
+<tr>
+  <td align="center">{LSHIFT}</td>
+  <td>Left Shift key</td>
+</tr>
+<tr>
+  <td align="center">{RSHIFT}</td>
+  <td>Right Shift key</td>
+</tr>
+<tr>
+  <td align="center">{SLEEP}</td>
+  <td>Computer SLEEP key</td>
+</tr>
+<tr>
+  <td align="center">{ALTDOWN}</td>
+  <td>Holds the ALT key down until {ALTUP} is sent</td>
+</tr>
+<tr>
+  <td align="center">{SHIFTDOWN}</td>
+  <td>Holds the SHIFT key down until {SHIFTUP} is sent</td>
+</tr>
+<tr>
+  <td align="center">{CTRLDOWN}</td>
+  <td>Holds the CTRL key down until {CTRLUP} is sent</td>
+</tr>
+<tr>
+  <td align="center">{LWINDOWN}</td>
+  <td>Holds the left Windows key down until {LWINUP} is sent</td>
+</tr>
+<tr>
+  <td align="center">{RWINDOWN}</td>
+  <td>Holds the right Windows key down until {RWINUP} is sent</td>
+</tr>
+<tr>
+  <td align="center">{ASC nnnn}</td>
+  <td>Send the ALT+nnnn key combination</td>
+</tr>
+<tr>
+  <td align="center">&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_BACK}</td>
+  <td>2000/XP Only: Select the browser "back" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_FORWARD}</td>
+  <td>2000/XP Only: Select the browser "forward" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_REFRESH}</td>
+  <td>2000/XP Only: Select the browser "refresh" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_STOP}</td>
+  <td>2000/XP Only: Select the browser "stop" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_SEARCH}</td>
+  <td>2000/XP Only: Select the browser "search" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_FAVORITES}</td>
+  <td>2000/XP Only: Select the browser "favorites" button</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_HOME}</td>
+  <td>2000/XP Only: Launch the browser and go to the home page</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_MUTE}</td>
+  <td>2000/XP Only: Mute the volume</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_DOWN}</td>
+  <td>2000/XP Only: Reduce the volume</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_UP}</td>
+  <td>2000/XP Only: Increase the volume</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_NEXT}</td>
+  <td>2000/XP Only: Select next track in media player</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_PREV}</td>
+  <td>2000/XP Only: Select previous track in media player</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_STOP}</td>
+  <td>2000/XP Only: Stop media player</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_PLAY_PAUSE}</td>
+  <td>2000/XP Only: Play/pause media player</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_MAIL}</td>
+  <td>2000/XP Only: Launch the email application</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_MEDIA}</td>
+  <td>2000/XP Only: Launch media player</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_APP1}</td>
+  <td>2000/XP Only: Launch user app1</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_APP2}</td>
+  <td>2000/XP Only: Launch user app2</td>
+</tr>
+  </tbody>
+</table>
+<br>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/appendix/SendKeys.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

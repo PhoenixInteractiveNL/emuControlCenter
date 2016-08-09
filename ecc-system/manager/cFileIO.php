@@ -220,23 +220,30 @@ class FileIO {
 			$start_offset === false &&
 			$end_offset === false
 		) {
-			if (!is_file($file_name)) return false;
-			
 			# fastest way to get the data
-			if ($content = file_get_contents($file_name)) {
-				return $content;
+			if (filesize($file_name) < SLOW_CRC32_PARSING_FROM) {
+				return file_get_contents($file_name);
 			}
 			else {
-				# slower than file_get_contents!
-				if ($fileSize = filesize($file_name)) {
-					$handle = fopen($file_name, "rb");
-					$contents = fread($handle, $fileSize);
-					fclose($handle);
-					return $contents;
+				$handle = fopen($file_name, "rb");
+				$contents = '';
+				$count = 0;
+				$bytesPerRun = SLOW_CRC32_PARSING_FROM/4;
+				$bytesTotal = filesize($file_name);
+				$currentFileName = basename($file_name);
+				while(!feof($handle)){
+					$contents += fread($handle, $bytesPerRun);
+					$bytesTotal -= $bytesPerRun;
+					$bytesLeft = round($bytesTotal/1024/1224, 1);
+					if($bytesLeft<0) $bytesLeft = 0; 
+					FACTORY::get('manager/GuiStatus')->update_message('Parsing '.$currentFileName.'... '.$bytesLeft.' MB left');
+					
+					while (gtk::events_pending()) gtk::main_iteration();
+					$count++;	 
 				}
+				fclose($handle);
+				return $contents;
 			}
-			// run in problems parsing very big files
-			#return file_get_contents($file_name);
 		}
 		else {
 			// Startposition verschieben zum lesen!
@@ -277,7 +284,7 @@ class FileIO {
 	*
 	*/	
 	public function ecc_get_crc32_from_string($string) {
-		return str_pad (strtoupper(dechex(crc32($string))), 8, '0', STR_PAD_LEFT);
+		return str_pad(strtoupper(dechex(crc32($string))), 8, '0', STR_PAD_LEFT);
 	}
 	
 	/*
@@ -325,13 +332,6 @@ class FileIO {
 		}
 		return true;
 	}
-	
-//	function rmdirr($path){ 
-//		$dir = new RecursiveDirectoryIterator($path);
-//		foreach(new RecursiveIteratorIterator($dir) as $file) unlink($file);
-//		foreach($dir as $subDir) if(!@rmdir($subDir)) recursiveRemoveDirectory($subDir);
-//		rmdir($path);
-//	}
 	
 	/*
 	*

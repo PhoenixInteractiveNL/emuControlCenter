@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/guiref/GUIRef_OnEventMode.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:27:01 GMT -->
+<head>
+  <title>GUI Reference - OnEvent Mode</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>GUI Reference - OnEvent Mode </h1>
+
+
+<p>In the OnEvent mode instead of constantly polling the GUI to find out if anything has happened you make the GUI temporarily pause your script and call a pre-defined function to handle the event. For example, if the user clicks Button1 the GUI pauses your main script and calls a previously defined user function that deals with Button1. When the function call is completed the main script is resumed. This mode is similar to the Visual Basic forms method.</p>
+<p>While the GUI is executing, your main script could be doing any normal scripting work, but for ease of examples we will just make the main script &quot;idle&quot; in an infinite While loop. </p>
+<p>The default mode is the MessageLoop mode so before using the OnEvent mode we must  use <a href="../functions/AutoItSetOption.html#GUIOnEventMode">Opt(&quot;GUIOnEventMode&quot;, 1)</a>. </p>
+<p>&nbsp;</p>
+<h2>Basic OnEvent Format </h2>
+<p>The general layout of OnEvent code is:</p>
+<p class="codebox">While 1<br>
+&nbsp;&nbsp;Sleep(1000)&nbsp;&nbsp; ; Just idle around <br>
+WEnd<br>
+&nbsp;&nbsp;<br>
+Func Event1()<br>
+&nbsp;&nbsp;; Code to handle event goes here<br>
+EndFunc<br>
+<br>
+Func Event2()<br>
+&nbsp;&nbsp;; Code to handle event goes here <br> 
+EndFunc
+</p>
+<p>&nbsp;</p>
+<h2>GUI Events </h2>
+<p>In the OnEvent mode your GUI will generate the following &quot;events&quot;:</p>
+<p>
+<li>Control Event</li>
+<li>System Event</li>
+<p>&nbsp;</p>
+<p>Both types of event will call a user defined function if one was set for the GUI (<a href="../functions/GUISetOnEvent.html">GUISetOnEvent</a>) or for a control (<a href="../functions/GUICtrlSetOnEvent.html">GUICtrlSetOnEvent</a>). If no functions are defined for an event then it is simply ignored.&nbsp; When inside this called function various macros will be set to values to help process the event.</p>
+<table width="100%" border="1" cellspacing="0" cellpadding="3">
+  <tr bgcolor="#000066">
+    <td width="12%" nowrap><strong><font color="#FFFFFF">Macro</font></strong></td>
+    <td width="88%"><strong><font color="#FFFFFF">Details</font></strong></td>
+  </tr>
+  <tr>
+    <td>@GUI_CTRLID</td>
+    <td>The control ID of the control sending the message <strong>OR</strong> the system event ID </td>
+  </tr>
+  <tr>
+    <td>@GUI_WINHANDLE</td>
+    <td>The handle of the GUI that sent the message </td>
+  </tr>
+  <tr>
+    <td>@GUI_CTRLHANDLE</td>
+    <td>The handle of the Control that sent the message (if applicable) </td>
+  </tr>
+</table>
+<p><strong>Note:</strong> It is perfectly legal to use the same function for multiple events, all that you need to do in these cases is to take action based on the @GUI_CTRLID macro.&nbsp; For example, you could register all system events to the same function.</p>
+<p>&nbsp;</p>
+<p><strong>Control Event</strong></p>
+<p>When a control is clicked or changes a control event is sent.&nbsp; The event is sent to the function defined with <a href="../functions/GUICtrlSetOnEvent.html">GUICtrlSetOnEvent</a>.&nbsp; Inside the user defined function @GUI_CTRLID is set to the <strong>controlID</strong> that was returned when the control was created with <a href="GUICtrlCreate.html">GUICtrlCreate...</a>. </p>
+<p>&nbsp;</p>
+<p><strong>System Event</strong></p>
+<p>System events - such as the GUI closing - are sent in a similar way to Control event, but the event type is defined by @GUI_CTRLID.&nbsp; The event is sent to the function defined with <a href="../functions/GUISetOnEvent.html">GUISetOnEvent</a>. The possible system event values are shown here: </p>
+<p class="code">$GUI_EVENT_CLOSE<br>
+  $GUI_EVENT_MINIMIZE<br>
+  $GUI_EVENT_RESTORE<br>
+  $GUI_EVENT_MAXIMIZE<br>
+  $GUI_EVENT_PRIMARYDOWN<br>
+  $GUI_EVENT_PRIMARYUP<br>
+  $GUI_EVENT_SECONDARYDOWN<br>
+  $GUI_EVENT_SECONDARYUP<br>
+$GUI_EVENT_MOUSEMOVE<br>
+$GUI_EVENT_RESIZED<br>
+$GUI_EVENT_DROPPED<br>
+<p>&nbsp;</p>
+<h2>Example GUI </h2>
+<p>In the main <a href="GUIRef.html">GUI Reference page</a> we started a simple Hello World example that looked like this:</p>
+<p class="codebox">#include &lt;GUIConstants.au3&gt;<br>
+    <br>
+  GUICreate(&quot;Hello World&quot;, 200, 100) <br>
+  GUICtrlCreateLabel("Hello world! How are you?", 30, 10)<br>
+  GUICtrlCreateButton("OK", 70, 50, 60)<br>
+  GUISetState(@SW_SHOW)<br>
+  Sleep(2000)</p>
+<p>&nbsp;</p>
+<p>Now we will finish the code using OnEvents and some of the event messages described above.</p>
+<p>&nbsp;</p>
+<p class="codebox">
+#include &lt;GUIConstants.au3&gt;<br>
+<br>
+Opt(&quot;GUIOnEventMode&quot;, 1)&nbsp; ; Change to OnEvent mode <br>
+$mainwindow = GUICreate("Hello World", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+GUICtrlCreateLabel("Hello world!  How are you?", 30, 10)<br>
+$okbutton = GUICtrlCreateButton("OK", 70, 50, 60)<br>
+GUICtrlSetOnEvent($okbutton, &quot;OKButton&quot;)<br>
+GUISetState(@SW_SHOW)<br>
+<br>
+While 1<br>
+  &nbsp;&nbsp;Sleep(1000)&nbsp; ; Idle around<br>
+  WEnd<br>
+<br>
+ Func OKButton()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $okbutton,<br>
+&nbsp; ;and @GUI_WINHANDLE would equal $mainwindow<br>
+&nbsp; MsgBox(0, &quot;GUI Event&quot;, &quot;You pressed OK!&quot;)<br>
+EndFunc<br>
+<br>
+Func CLOSEClicked()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $GUI_EVENT_CLOSE, <br>
+&nbsp; ;and @GUI_WINHANDLE would equal $mainwindow <br>
+&nbsp;
+MsgBox(0, &quot;GUI Event&quot;, &quot;You clicked CLOSE! Exiting...&quot;)<br>
+&nbsp;&nbsp;Exit<br> 
+EndFunc</p>
+<p>It's that simple. Obviously the more windows and controls you create the more complicated it gets but the above shows you the basics. </p>
+<p>&nbsp;</p>
+<h2>Advanced Operations and Multiple Windows</h2>
+<p>Control IDs are unique, even when you have multiple windows but how do we handle multiple windows? </p>
+<p> Here is an example similar to the one above but with another &quot;dummy&quot; window.&nbsp; </p>
+<p class="codebox"> #include &lt;GUIConstants.au3&gt;<br>
+  <br>
+Opt(&quot;GUIOnEventMode&quot;, 1)&nbsp; ; Change to OnEvent mode <br>
+$mainwindow = GUICreate("Hello World", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+GUICtrlCreateLabel("Hello world! How are you?", 30, 10)<br>
+$okbutton = GUICtrlCreateButton("OK", 70, 50, 60)<br>
+GUICtrlSetOnEvent($okbutton, &quot;OKButton&quot;)<br>
+<br>
+$dummywindow = GUICreate("Dummy window for testing ", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+<br>
+GUISwitch($mainwindow)<br>
+GUISetState(@SW_SHOW)<br>
+<br>
+While 1<br>
+&nbsp;&nbsp;Sleep(1000)&nbsp; ; Idle around<br>
+WEnd<br>
+<br>
+Func OKButton()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $okbutton<br>
+&nbsp; MsgBox(0, &quot;GUI Event&quot;, &quot;You pressed OK!&quot;)<br>
+EndFunc<br>
+<br>
+Func CLOSEClicked()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $GUI_EVENT_CLOSE,<br>
+&nbsp; ;@GUI_WINHANDLE will be either $mainwindow or $dummywindow<br>
+&nbsp; If @GUI_WINHANDLE = $mainwindow Then
+<br>
+&nbsp;&nbsp;&nbsp;
+MsgBox(0, &quot;GUI Event&quot;, &quot;You clicked CLOSE in the main window! Exiting...&quot;)<br>
+&nbsp;&nbsp;&nbsp; Exit<br>
+&nbsp; EndIf
+<br>
+
+EndFunc</p>
+<p>&nbsp;</p>
+<p>The first major change is the <a href="../functions/GUISwitch.html">GUISwitch</a> function call - when a new window is created it becomes the &quot;default&quot; window for future GUI operations (including control creation).&nbsp; In our case we want to work with the main &quot;Hello World&quot; window, not the test window, so we &quot;switch&quot;.&nbsp; Some GUI functions allow you to use the window handle in the function call itself - these functions will do the switch automatically.&nbsp; In our example we could have done this with:</p>
+<p class="codebox">GUISetState(@SW_SHOW, $mainwindow)</p>
+<p>&nbsp;</p>
+<p>Also notice that we used the same OnEvent function to handle the &quot;close&quot; button for both windows and then used @GUI_WINHANDLE to determine which window sent the message - then we only closed the GUI when the close button was clicked <strong>and</strong> the message came from the main window .&nbsp; You can just as easily use separate functions for each window if you wish.</p>
+<p>&nbsp;</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/guiref/GUIRef_OnEventMode.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:27:02 GMT -->
+</html>

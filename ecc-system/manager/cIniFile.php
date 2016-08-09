@@ -398,6 +398,14 @@ class IniFile {
 		return $ret;
 	}
 	
+	public function getParserOptions($eccident=false){
+		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
+		if (isset($this->cachedPlatformIni[$eccident]['OPTIONS'])){
+			return $this->cachedPlatformIni[$eccident]['OPTIONS'];
+		}
+		return array();
+	}
+	
 	/*
 	* Baut ein array auf, in dem der key die extension und die value
 	* der parser ist. Im FileList Object wird dann die extension
@@ -455,8 +463,11 @@ class IniFile {
 		
 		$count = array();
 		$countTotal = 0;
+		
 		foreach ($this->cachedPlatformIni as $eccident => $platform_data) {
 			$currentCat = (@$platform_data['PLATFORM']['category']) ? $platform_data['PLATFORM']['category'] : "???";
+			if ($currentCat == '???') continue;
+			
 			if ($eccIdents) {
 				if (in_array($eccident, $eccIdents)) {
 					if (!isset($count[$currentCat])) $count[$currentCat] = 1;

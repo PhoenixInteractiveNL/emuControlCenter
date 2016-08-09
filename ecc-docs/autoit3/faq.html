@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/faq.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:25:26 GMT -->
+<head>
+<title>AutoIt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<H1><a name="FAQ"></a>Frequently Asked Questions (FAQ)</H1>
+<p>This section gives some of the more frequently asked questions from the <a class="ext" href="http://www.autoitscript.com/forum/">forum</a>.&nbsp; 
+  If you can't find the answer you seek here then the <a class="ext" href="http://www.autoitscript.com/forum/">forum</a> 
+  should be your first port of call.</p>
+<h2>Questions</h2>
+<p>1. <a href="#1">Why doesn't my old AutoIt v2.64 script run in v3?</a></p>
+<p>2. <a href="#2">Isn't v3 much more difficult than previous versions?</a></p>
+<p>3. <a href="#3">How can I convert my v2.64 scripts to v3?</a></p>
+<p>4. <a href="#4">Where is the &quot;goto&quot; command?</a></p>
+<p>5. <a href="#5">How can I run a DOS program from within AutoIt?</a></p>
+<p>6. <a href="#6">Why can I only use Run() to execute .exe and .com files?&nbsp; 
+  What about .msi / .txt and others?</a></p>
+<p>7. <a href="#7">Why do I get errors when I try and use double quotes (&quot;) 
+  ?</a></p>
+<p>8. <a href="#8">What do the window &quot;title&quot; and &quot;text&quot; parameters 
+  mean?</a></p>
+<p>9. <a href="#9">Why can't I print a variable using &quot;My var is $variable&quot;?</a></p>
+<p>10. <a href="#10">When I use Send() to send a variable odd things happen?</a></p>
+<p>11. <a href="#11">What is the difference between the return value and @error?</a></p>
+<p>12. <a href="#12">How can I exit my script with a hot-key?</a></p>
+<p>13. <a href="#13">How can I use a custom icon when compiling my scripts?</a></p>
+<p>14. <a href="#14">How can I make sure only one copy of my script is run?</a></p>
+<p>15. <a href="#15">What are the current technical limits of AutoIt v3?</a></p>
+<p>16. <a href="#16">I get a missing picture symbol in the Help file under the 
+Examples.</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="1"></a>1. Why doesn't my old AutoIt v2.64 script run in v3?</h2>
+<p>v3 has a different language structure to v2.64.</p>
+<p>Previous versions of AutoIt were fine for what they were designed for - writing 
+  simple scripts to help with software installations.&nbsp; Over time people 
+  began using it for general and complicated scripting tasks.&nbsp; 
+  The old syntax and structure made this possible but very very difficult and 
+  cumbersome.&nbsp; The decision was made to make AutoIt more suitable for general 
+  automation tasks and to achieve that a more standard and basic-like language 
+  was made.&nbsp; This also means that if you already know a scripting language 
+  you will pick AutoIt v3 up easily.</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="2"></a>2. Isn't v3 much more difficult than previous versions?</h2>
+<p>No.&nbsp; In fact in many instances it's much easier than previous versions 
+  as you don't have to try and force the language to do something it was never 
+  designed to do.&nbsp; It also uses a familiar BASIC-like language, and BASIC 
+  is known for being...well...basic :)</p>
+<p>&nbsp;</p>
+<p>The vast majority of old AutoIt scripts were focused around software installation 
+  and clicking &quot;Next&quot; a lot in dialog boxes.&nbsp; Most of these scripts 
+  can be converted to v3 simply by adding a couple of brackets here and there.&nbsp; 
+  Here is an example of such a script in v2 and v3 (simulating a software installation 
+  with a few dialogs that have a <u><strong>N</strong></u><strong>ext</strong> 
+  button and a <u><strong>F</strong></u><strong>inish </strong>button)</p>
+<p>&nbsp;</p>
+<p class="code"> ; v2.64 Script<br>
+  WinWaitActive, Welcome, Welcome to the XSoft installation<br>
+  Send, !n<br>
+  WinWaitActive, Choose Destination, Please choose the<br>
+  Send, !n<br>
+  WinWaitActive, Ready to install, Click Next to install<br>
+  Send, !n<br>
+  WinWaitActive, Installation Complete, Click Finish to exit<br>
+  Send, !f<br>
+  WinWaitClose, Installation Complete<br>
+  <br>
+  ; v3 Script<br>
+  WinWaitActive(&quot;Welcome&quot;, &quot;Welcome to the XSoft installation&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Choose Destination&quot;, &quot;Please choose the&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Ready to install&quot;, &quot;Click Next to install&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Installation Complete&quot;, &quot;Click Finish to exit&quot;)<br>
+  Send(&quot;!f&quot;)<br>
+  WinWaitClose(&quot;Installation Complete&quot;)
+</p>
+<p>&nbsp;</p>
+<p>Now, that wasn't so bad! :)&nbsp; As all &quot;strings&quot; are enclosed in 
+  quotes you no longer have to wrestle with problems caused by leading and trailing 
+  spaces in text.&nbsp; There is also fantastic support for many <a href="intro/editors.html">text 
+  editors</a> so that when you are writing v3 scripts you can have syntax highlighting 
+  which makes everything much easier.</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="3"></a>3. How can I convert my v2.64 scripts to v3?</h2>
+<p>The first thing you should ask yourself is &quot;Do I need to convert my script?&quot;.&nbsp; 
+  v2.64 will continue to be downloadable and supported so don't update all your 
+  scripts just for the sake of it - well not unless you want to :)</p>
+<p>&nbsp;</p>
+<p>There is a section in the Help file that shows how the commands in v2 and v3 
+  are related - click <a href="intro/v264users.html">here</a> to see the page.</p>
+<p>&nbsp;</p>
+<p>One of the AutoIt v3 authors has written a utility to automatically convert 
+  v2 scripts to v3.&nbsp; Conversion is pretty good unless your code is a rats-nest 
+  of gotos :)&nbsp; You can find the converter in the &quot;Extras&quot; directory 
+  (Start \ AutoIt v3 \ Extras - or look in the directory that you installed AutoIt 
+  v3). </p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="4"></a>4. Where is the &quot;goto&quot; command?</h2>
+<p>Gone.&nbsp; It's evil.&nbsp; No, you can't ask why - it just is.&nbsp; It's 
+  like that lump of rock they find in the microwave at the end of the film <a class="ext" href="http://www.imdb.com/title/tt0081633/">Time 
+  Bandits</a> :)</p>
+<p>&nbsp;</p>
+<p>AutoIt v3 features most of the common &quot;loops&quot; in use today and with 
+  these Goto is no longer required.&nbsp; Look up <a href="keywords/While.html">While</a>, 
+  <a href="keywords/Do.html">Do</a>, <a href="keywords/For.html">For</a>, <a href="keywords/ExitLoop.html">ExitLoop</a>, 
+  <a href="keywords/ContinueLoop.html">ContinueLoop</a> and <a href="keywords/Func.html">Functions</a> 
+  for the modern way of doing things :)&nbsp; And while you are looking at help 
+  file sections check out these on <a href="intro/lang_loops.html">loops</a>, <a href="intro/lang_conditional.html">conditional 
+  statements</a> and <a href="intro/lang_functions.html">functions</a>.&nbsp; I 
+  promise you, once you have got the hang of such things you will be able to script 
+  in virtually any other language within a couple of minutes.</p>
+<p>&nbsp;</p>
+<p>Just to get you started, the most basic use of Goto in version 2.64 was an 
+  infinite loop like:</p>
+<p class="code"> :mylabel<br>
+  ...do something...<br>
+  ...and something else...<br>
+  goto, mylabel<br>
+
+</p>
+<p>A simple v3 version of that is a While loop that is always &quot;true&quot;.</p>
+<p class="code">While 1 = 1<br>
+  &nbsp;&nbsp; ...do something...<br>
+  &nbsp;&nbsp; ...do something else...<br>
+  Wend<br>
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="5" id="5"></a>5. <a href="#5">How can I run a DOS program from within 
+  AutoIt?</a></h2>
+<p>If you wanted to run something like a DOS &quot;Dir&quot; command then you 
+  must run it though the command interpreter (command.com or cmd.exe depending 
+  on your OS).&nbsp; The <a href="macros.html">@Comspec</a> macro contains the 
+  correct location of this file.&nbsp; You should use the <a href="functions/RunWait.html">RunWait()</a> 
+  function as it waits for the DOS program to finish before continuing with the 
+  next line of the script.&nbsp; Here is an example of running the DOS Dir command 
+  on the C: drive: (effectively running the command <strong>command.com /c Dir 
+  C:\</strong> )<strong> </strong></p>
+<p class="code">&nbsp;&nbsp;&nbsp; RunWait(@COMSPEC &amp; &quot; /c Dir C:\&quot;)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="6" id="6"></a>6. <a href="#6">Why can I only use Run() to execute 
+  .exe files?&nbsp; What about .msi / .txt and others?</a></h2>
+<p>Only a few file extensions are usually &quot;runable&quot; - these are .exe, 
+  .bat, .com, .pif.&nbsp; Other file types like .txt and .msi are actually executed 
+  with another program.&nbsp; When you double click on a &quot;myfile.msi&quot; 
+  file what actually happens in the background is that &quot;msiexec.exe myfile.msi&quot; 
+  is executed.&nbsp; So to run a .msi file from AutoIt you would do:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; RunWait(&quot;msiexec myfile.msi&quot;)</p>
+<p>&nbsp;</p>
+<p>Or, run the command &quot;start&quot; which will 
+  automatically work out how to execute the file for you:</p>
+<p class="code"
+>&nbsp;&nbsp;&nbsp; RunWait(@COMSPEC &amp; &quot; /c Start myfile.msi&quot;)</p>
+<p class="code"
+>&nbsp;</p>
+<p>Or, use the ShellExecuteWait function which 
+will automatically work out how to execute the file for you:</p>
+<p class="code">
+&nbsp;&nbsp;&nbsp; ShellExecuteWait(&quot;myfile.msi&quot;)</p>
+<p class="code">&nbsp;
+</p><!--QuoteEnd-->
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="7" id="7"></a>7. <a href="#7">Why do I get errors when I try and 
+  use double quotes (&quot;) ?</a></h2>
+<p>If you want to use double-quotes inside a string then you must &quot;double 
+  them up&quot;.&nbsp; So for every one quote you want you should use two.&nbsp; 
+  For example if you wanted to set a variable to the string: <strong>A word in 
+  &quot;this&quot; sentence has quotes around it!</strong>&nbsp; You would do:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; $var = &quot;A word in &quot;&quot;this&quot;&quot; 
+  sentence has quotes around it!&quot;</p>
+<p>or use single quotes instead:</p>
+<p class="code"
+>&nbsp;&nbsp;&nbsp; $var = 'A word in &quot;this&quot; sentence has quotes around 
+  it!'<font size="-2"></font></p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="8" id="8"></a>8. <a href="#8">What do the window &quot;title&quot; 
+  and &quot;text&quot; parameters mean?</a></h2>
+<p>There is a detailed description <a href="intro/windowsbasic.html">here</a>.</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="9" id="9"></a>9. <a href="#9">Why can't I print a variable using 
+  &quot;My var is $variable&quot;?</a></h2>
+<p>If you have a variable called $msg and you want to print in inside a MsgBox 
+  then this will NOT work:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;My variable 
+  is $msg&quot;)</p>
+<p>It will actually print&nbsp; <strong>My variable is $msg</strong> .&nbsp;What 
+  you need to do is tell AutoIt to join the string and the variable together using 
+  the <a href="intro/lang_operators.html">&amp; operator</a>:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;My variable 
+  is &quot; &amp; $msg)</p>
+<p>&nbsp;</p>
+<p><strong>Advanced:</strong> If you have many variables to add into a string 
+  then you may find the <a href="functions/StringFormat.html">StringFormat()</a> 
+  function useful.&nbsp; For example, if I wanted to insert $var1 to $var5 into 
+  a string then it may be easier to do:</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp; $msg = StringFormat(&quot;Var1 is %s, 
+  Var2 is %s, Var3 is %s, Var4 is %s, Var5 is %s&quot;, $var1, $var2, $var3, $var4, 
+  $var5)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, $msg)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="10" id="10"></a>10. <a href="#10">When I use Send() to send a variable 
+  odd things happen?</a></h2>
+<p>If you are <a href="functions/Send.html">sending</a> the contents of a variable 
+  then be mindful that if it contains special send characters like ! ^ + {SPACE} 
+  then these will be translated into special keystrokes - rarely what is wanted.&nbsp; 
+  To overcome this use the RAW mode of <a href="functions/Send.html">Send()</a> 
+  that does not translate special keys:</p>
+<p class="code">&nbsp;&nbsp;&nbsp; Send($myvar, 1)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="11" id="11"></a>11. <a href="#11">What is the difference between 
+  the return value and @error?</a></h2>
+<p>Generally a return value is used to indicate the success of a function.&nbsp; 
+  But, if a function is already returning something ( like <a href="functions/WinGetText.html">WinGetText()</a> 
+  ) then we need to have a way of working out if the function was successful, 
+  so we set @error instead.</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="12" id="12"></a>12. <a href="#12">How can I exit my script with a 
+  hot-key?</a></h2>
+<p>Ah, an easy one.&nbsp; If you want to make your script exit when you press 
+  a certain key combination then use the <a href="functions/HotKeySet.html">HotKeySet()</a> 
+  function to make a user function run when the desired key is pressed.&nbsp; 
+  This user function should just contain the <a href="keywords/Exit.html">Exit</a> 
+  keyword.</p>
+<p>Here some code that will cause the script to exit when CTRL+ALT+x is pressed:<br></p>
+<p class="code"> HotKeySet(&quot;^!x&quot;, &quot;MyExit&quot;)<br>
+  ...<br>
+  ...<br>
+  ; Rest of Script<br>
+  ...<br>
+  ...<br>
+  Func MyExit()<br>
+  &nbsp;&nbsp;&nbsp; Exit <br>
+  EndFunc
+
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="13" id="13"></a>13. <a href="#13">How can I use a custom icon when 
+  compiling my scripts?</a></h2>
+<p>You need to run the full compiler program (rather than just right-clicking 
+  a script and selecting compile).&nbsp; <a href="intro/compiler.html">This page</a> 
+  describes the compiler in detail.</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="14" id="14"></a>14. <a href="#14">How can I make sure only one copy 
+  of my script is run?</a></h2>
+<p>The easiest way is to rename the title of the hidden AutoIt window when your 
+  script first starts.&nbsp; Then in the same script check for that window title 
+  existing - if it does then another copy of the script is running.</p>
+<p class="code"><br>
+  ; Place at the top of your script<br>
+  $g_szVersion = &quot;My Script 1.1&quot;<br>
+  If WinExists($g_szVersion) Then Exit ; It's already running<br>
+  AutoItWinSetTitle($g_szVersion)<br>
+  ; Rest of your script goes here </p>
+<p class="code">&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="15" id="15"></a>15. <a href="#15">What are the current technical 
+  limits of AutoIt v3?</a></h2>
+<p>Here are details of the current technical limits of AutoIt. Please note that some of the limits are theoretical and you may run into performance or memory related problems before you reach the actual limit.</p>
+<p>&nbsp; </p>
+<p> Maximum length of a single script line: 4,095<br>
+  Maximum string length: 2,147,483,647 characters</p>
+<p>Number range (floating point): 1.7E&#8211;308 to 1.7E+308 with 15-digit precision<br>
+  Number range (integers): 64-bit signed integer<br>
+Hexadecimal numbers: 32-bit signed integer (0x80000000 to 0x7FFFFFFF)</p>
+<p>Arrays: A maximum of 64 dimensions and/or a total of 16 million elements<br>
+  Maximum depth of recursive function calls: 384 levels</p>
+<p>Maximum number of variables in use at one time: No limit <br>
+Maximum number of user defined functions: No limit</p>
+<p>Maximum number of GUI windows: 1024 <br>
+Maximum number of GUI controls per window: 4096 </p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="16" id="16"></a>16. <a href="#15">I get a missing picture symbol in 
+the Help file under the Examples.</a></h2>
+<p>This should be the Open button that enable you to open the Examples in the 
+Help file. <br>
+This issue is that the hhctrl.ocx isn't properly registered or corrupted. <br>
+Try registering it by doing &quot;regsvr32 hhctrl.ocx&quot; from the command prompt or 
+check if the file is still valid.<br>
+&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">Back To Top</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/faq.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:25:32 GMT -->
+</html>

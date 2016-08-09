@@ -105,6 +105,19 @@ $i18n['menu'] = array(
 	'lbl_meta_compare_left' =>
 		"COMPARE - Select left side",		
 	'lbl_meta_compare_right%s' =>
-		"COMPARE to \"%s\"",		
+		"COMPARE to \"%s\"",	
+
+	/* 0.9.2 FYEO 2*/
+	'lbl_start_with' =>
+		"Start ROM with...",
+	'lbl_emu_config' =>
+		"Configure emulator",
+	'lbl_quickfilter' =>
+		"quickFilter",
+	'lbl_quickfilter_reset' =>
+		"quickFilter entfernen",
+
+	
+
 );
 ?>

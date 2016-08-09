@@ -119,5 +119,94 @@ $i18n['popupConfig'] = array(
 		"Images",
 	'tab_label_colorsandfonts' =>
 		"Colors and Fonts",
+	
+	/* 0.9.2 FYEO 1 */
+	'lbl_emu_tips' =>
+		"Known emulator links and infos",
+	'lbl_img_opt_conv' =>
+		"Options - ImageConverter",
+	'lbl_img_opt_conv_quality' =>
+		"Thumb Quality",
+	'lbl_img_opt_conv_quality_def%s' =>
+		"(Default: %s)",
+	'lbl_img_opt_conv_minsize' =>
+		"Min original size",
+	'lbl_img_opt_conv_minsize_def%s' =>
+		"(Default: %s)",
+	'lbl_col_opt_global' =>
+		"Global",
+	'lbl_col_opt_list' =>
+		"List",
+	'lbl_col_opt_options' =>
+		"Options",
+
+	/* 0.9.2 FYEO 3 */
+	'lbl_emu_assign_use_eccscript' =>
+		"eccScript",
+	
+	/* 0.9.2 FYEO 5 */
+	'lbl_emu_assign_edit_eccscript' =>
+		"Edit eccScript",	
+	'lbl_emu_assign_edit_eccscript_error' =>
+		"You can add script, if you have added an emulator!",	
+
+	/* 0.9.2 FYEO 6 */
+	'lbl_emu_assign_eccscript_hdl' =>
+		"eccScript options",
+	'lbl_emu_assign_delete_eccscript' =>
+		"delete",
+	'msg_emu_assign_delete_eccscript%s' =>
+		"Remove the eccScript\n\n%s\n\nAre you sure?",
+
+	/* 0.9.2 FYEO 8 */
+	'tab_label_startup' =>
+		"Startup",
+	'startConfHdl' =>
+		"Startup configuration",
+	'startConfSoundHdl' =>
+		"Play startup sound",
+	'startConfOptHdl' =>
+		"Options",
+	'startConfUpdate' =>
+		"Check for updates on startup",
+	'startConfMinimize' =>
+		"Minimize to tray",
+	'startConfSoundSelect' =>
+		"Select sound",
+	
+	/* 0.9.2 FYEO 9 */
+	'lbl_preview_impossible' =>
+		"Preview not possible. Missing or wrong settings!",
+
+	/* 0.9.2 FYEO 10 */
+	'lbl_emu_assign_edit_eccscript_error_notfound' =>
+		"Could not find an emulator! Please choose an emulator first!",
+	'lbl_emu_assign_create_eccscript' =>
+		"Create eccScript",
+	'emu_info_nodata' =>
+		"No informations available yet...",
+	'emu_info_footer' =>
+		"Maybe you know an good emulator for this platform!\nYou can add your infos to the Forum/Board at\nhttp://ecc.phoenixinteractive.mine.nu/",
+	
+	/* 0.9.2 FYEO 11 */
+	'title_startup_select_sound' =>
+		"Select a startup sound",
+
+	/* 0.9.2 FYEO 14 */
+	'title_emu_assign_found_eccscript' =>
+		"eccScript found",
+	'msg_emu_assign_found_eccscript%s' =>
+		"A eccScript was found for the selected emulator!\n\nActivate this eccScript %s",
+	'title_popup_save' =>
+		"restart ecc",
+	'msg_popup_save' =>
+		"Restart emuControlCenter to see the changes?",
+	
+	/* 0.9.2 FYEO 15 */
+	'title_emu_found_eccscript_preview' =>
+		"Informations:",
+	'title_emu_found_eccscript_nopreview' =>
+		"No informations available!",
+
 );
 ?>

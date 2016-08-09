@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_variables.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:51 GMT -->
+<head>
+  <title>Language Reference - Variables</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - Variables</h1>
+
+  
+<p>A variable is just a place to store data in memory so that it can be accessed 
+  quickly.&nbsp; Think of it as a mailbox in memory that you can put information 
+  in or take information out of.&nbsp; For example you might create a variable 
+  to store the number a user's response to a question, or the result to a math 
+  equation.</p>
+<p>Each variable has a name (again, similar to a mailbox) and must start with 
+  the <strong>$</strong> character and may only contain <strong>letters</strong>, 
+  <strong>numbers</strong> and the underscore <strong>_</strong> character.&nbsp; 
+  Here are some example names:</p>
+<p>&nbsp;&nbsp;&nbsp; $var1</p>
+<p>&nbsp;&nbsp;&nbsp; $my_variable</p>
+<p>&nbsp;</p>
+<p>Each variable is stored as a <a href="lang_datatypes.html">variant</a>.</p>
+<p>&nbsp;</p>
+<h2>Declaring Variables</h2>
+<p>Variables are declared and created with the <a href="../keywords/Dim.html">Dim</a>, 
+  <a href="../keywords/Dim.html">Local</a> and <a href="../keywords/Dim.html">Global</a> 
+  keywords:</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Dim $var1</p>
+<p>Or you can declare multiple variables at once:</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Dim $var1, $myvariable</p>
+<p>&nbsp;</p>
+<p>You can also assign a variable <strong>without</strong> declaring it first, 
+  but many prefer explicit declarations.</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; $var1 = &quot;create and assign&quot;</p>
+<p>&nbsp;</p>
+<h2>Declaring Constants</h2>
+<p>Constants are declared and created using <a href="../keywords/Dim.html">Const</a> 
+  keyword like:</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Const $const1 = 1, $const2=12</p>
+<p>Constants can be declared and initialized using <a href="../keywords/Enum.html">
+Enum</a> keyword like:</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Enum $const1 = 1, $const2, $const3&nbsp;&nbsp;&nbsp; 
+; 1, 2, 3<br>
+&nbsp;&nbsp;&nbsp; Enum STEP 2 $incr1, $incr3, $incr5&nbsp;&nbsp;&nbsp; ; 1, 3, 
+5<br>
+&nbsp;&nbsp;&nbsp; Enum STEP *2 $mult1, $mult2, $mult4&nbsp;&nbsp; ; 1, 2, 4</p>
+<p>&nbsp;</p>
+<p>Constants cannot redeclare an existing variable.</p>
+<p>&nbsp;</p>
+<h2>Scope</h2>
+<p>A variable's scope is controlled by when and how you declare the variable.&nbsp; 
+  If you declare a variable at the start of your script and outside any functions 
+  it exists in the <strong>Global</strong> scope and can be read or changed from 
+  anywhere in the script.</p>
+<p>If you declare a variable <em>inside</em> a <a href="lang_functions.html">function</a> 
+  it is in <strong>Local</strong> scope and can only be used <em>within that same 
+  function</em>.&nbsp; Variables created inside functions are automatically destroyed 
+  when the function ends.</p>
+<p>By default when variables are declared using <a href="../keywords/Dim.html">Dim</a> 
+  or assigned in a function they have <strong>Local</strong> scope <strong>unless</strong> 
+  there is a global variable of the same name (in which case the global variable 
+  is reused).&nbsp; This can be altered by using the <a href="../keywords/Dim.html">Local</a> 
+  and <a href="../keywords/Dim.html">Global</a> keywords to declare variables and 
+  <strong>force</strong> the scope you want.</p>
+<h2>Arrays</h2>
+<p>An <b>Array</b> is a variable containing series of data elements of the same 
+type and size. Each element in this variable can be accessed by an index number.
+<br>
+<br>
+An example:<br>
+<br>
+Let's say you want to store these series of characters: &quot;A&quot;, &quot;U&quot;, &quot;T&quot;, &quot;O&quot;, &quot;I&quot;, 
+&quot;T&quot; and &quot;3&quot;.<br>
+You could use seven separate variables to do so, but using an Array is more 
+efficient:</p>
+<p class="codebox">$Array[0]=&quot;A&quot;<br>
+$Array[1]=&quot;U&quot;<br>
+..etc..<br>
+$Array[6]=&quot;3&quot;</p>
+<p>To access a specific value in an Array, you only have to know the index 
+number:</p>
+<p class="codebox">$MyChar=$Array[2]</p>
+<p>This results in $MyChar containing the letter &quot;T&quot; (See also: <b>'operators'</b>).<br>
+<br>
+<br>
+The index number can also be substituted by another variable or an expression, 
+so you can build complex ways to assign or access elements in an array.<br>
+<br>
+<br>
+Arrays can also be multi dimensional, when you use multiple series of index 
+numbers, like:</p>
+<p class="codebox">$Array[0][0]=&quot;Upper-Left&quot;<br>
+$Array[1][0]=&quot;Lower-Left&quot;<br>
+$Array[0][1]=&quot;Upper-Right&quot;<br>
+$Array[1][1]=&quot;Lower-Right&quot;</p>
+<p>(These values are just examples)<br>
+<br>
+You can use up to 64 dimensions in an Array.<br>
+<br>
+Before you can start using Arrays in your script, you must define their bounds 
+using the <b>'<a href="../keywords/Dim.html">Dim</a>'</b> keyword.<br>
+<br>
+<!--c1--></p>
+<h2>Data types in Arrays</h2>
+<p><br>
+It was said that an Array contains only <b>one</b> datatype of the same type. 
+But technically speaking, a Variant in AutoIt can contain anything from a number 
+to a boolean value. So an AutoIt-Array could also contain different types, even 
+other Arrays:</p>
+<p class="codebox">$Array[0]=1<br>
+$Array[1]=true<br>
+$Array[2]=&quot;Text&quot;<br>
+$Array[3]=$AnotherArray</p>
+<p>This has not been strictly forbidden in AutoIt. However, it is <b>NOT 
+ADVISABLE</b> to mix different datatypes in an Array. Especially the use of an 
+Array inside another Array will severely affect the execution speed of your 
+script.</p>
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/intro/lang_variables.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:26:52 GMT -->
+</html>

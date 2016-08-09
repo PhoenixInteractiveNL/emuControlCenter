@@ -12,9 +12,13 @@ class EccParser {
 	
 	public $gui;
 	
-	public function __construct($eccident=false, $ini, $path, $statusbar, $statusbar_lbl_bottom, $status_obj, $gui) {
+	public $connectedMetaFilesizeCheck = false;
+	
+	public function __construct($eccident=false, $ini, $path, $statusbar, $statusbar_lbl_bottom, $status_obj, $gui, $connectedMetaFilesizeCheck = false) {
 		
 		$guiManager = FACTORY::get('manager/Gui');
+		
+		$this->connectedMetaFilesizeCheck = $connectedMetaFilesizeCheck;
 		
 		$log = '';
 		
@@ -75,7 +79,7 @@ class EccParser {
 			$message .= "Please select the right Platform to parse these extensions!\n\n";
 			$dispatcherState = ($useExtDispatcher) ? 'ENABLED' : 'DISABLED';
 			$message .= "The ecc fileetension dispatcher is ".$dispatcherState."\n\n";
-			$guiManager->openDialogInfo($title, $message);
+			$guiManager->openDialogInfo($title, $message, array('dhide_parser_unset_extension_info'));
 		}
 		
 		if (is_dir($path) && count($wanted_extensions)) {
@@ -85,14 +89,27 @@ class EccParser {
 			$file_stats = $fileList->get_stats();
 			
 			if (!$useExtDispatcher) $directUnseted = array();
-
+			
+			$dbms = FACTORY::getDbms();
+			
+			$dbms->query('BEGIN TRANSACTION;');
+			
 			// parse files and write them to the dab
 			$dataProzessor = new EccParserDataProzessor($dataParser, $fileList, $directUnseted, $this->gui);
+			
+			if ($eccident) {
+				$parserOptions = $ini->getParserOptions($eccident);
+				if (@$parserOptions['connectedMetaOnly']) $dataProzessor->setConnectedMetaOnlyEccident($eccident);
+				if ($this->connectedMetaFilesizeCheck) $dataProzessor->setConnectedMetaFilesizeCheck($this->connectedMetaFilesizeCheck);
+			}
+			
 			$log = $dataProzessor->parse();
 			$parser_stats = $dataProzessor->get_stats();
 			
 			// validate older files... are all in place?
 			$dataParser->optimize();
+			
+			$dbms->query('COMMIT TRANSACTION;');
 		}
 		else {
 			#print "pfad oder keine extensions angegeben\n";

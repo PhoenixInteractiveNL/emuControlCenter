@@ -1,0 +1,1466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:27:07 GMT -->
+<head>
+  <title>Functions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<p>Below is a complete list of the functions available in AutoIt.&nbsp;
+Click on a function name for a detailed description.</p>
+<p>&nbsp;</p>
+
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+<tr>
+  <td height="16" bgcolor="#000099" width="25%"><font color="#ffffff"><b>Function</b></font></td>
+  <td height="16" bgcolor="#000099" width="75%"><font color="#ffffff"><b>Description</b></font></td>
+</tr>
+<tr>
+  <td><a href="functions/Abs.html">Abs</a></td>
+  <td>Calculates the absolute value of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/ACos.html">ACos</a></td>
+  <td>Calculates the arcCosine of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/AdlibDisable.html">AdlibDisable</a></td>
+  <td>Disables the adlib functionality.</td>
+</tr>
+<tr>
+  <td><a href="functions/AdlibEnable.html">AdlibEnable</a></td>
+  <td>Enables Adlib functionality.</td>
+</tr>
+<tr>
+  <td><a href="functions/Asc.html">Asc</a></td>
+  <td>Returns the ASCII code of a character.</td>
+</tr>
+<tr>
+  <td><a href="functions/AscW.html">AscW</a></td>
+  <td>Returns the unicode code of a character.</td>
+</tr>
+<tr>
+  <td><a href="functions/ASin.html">ASin</a></td>
+  <td>Calculates the arcsine of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/Assign.html">Assign</a></td>
+  <td>Assigns a variable by name with the data.</td>
+</tr>
+<tr>
+  <td><a href="functions/ATan.html">ATan</a></td>
+  <td>Calculates the arctangent of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/AutoItSetOption.html">AutoItSetOption</a></td>
+  <td>Changes the operation of various AutoIt functions/parameters.</td>
+</tr>
+<tr>
+  <td><a href="functions/AutoItWinGetTitle.html">AutoItWinGetTitle</a></td>
+  <td>Retrieves the title of the AutoIt window.</td>
+</tr>
+<tr>
+  <td><a href="functions/AutoItWinSetTitle.html">AutoItWinSetTitle</a></td>
+  <td>Changes the title of the AutoIt window.</td>
+</tr>
+<tr>
+  <td><a href="functions/Beep.html">Beep</a></td>
+  <td>Plays back a beep to the user.</td>
+</tr>
+<tr>
+  <td><a href="functions/Binary.html">Binary</a></td>
+  <td>Returns the binary representation of an expression.</td>
+</tr>
+<tr>
+  <td><a href="functions/BinaryLen.html">BinaryLen</a></td>
+  <td>Returns the number of bytes in a binary variant.</td>
+</tr>
+<tr>
+  <td><a href="functions/BinaryMid.html">BinaryMid</a></td>
+  <td>Extracts a number of bytes from a binary variant.</td>
+</tr>
+<tr>
+  <td><a href="functions/BinaryToString.html">BinaryToString</a></td>
+  <td>Converts a binary variant into its ANSI string representation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitAND.html">BitAND</a></td>
+  <td>Performs a bitwise AND operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitNOT.html">BitNOT</a></td>
+  <td>Performs a bitwise NOT operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitOR.html">BitOR</a></td>
+  <td>Performs a bitwise OR operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitRotate.html">BitRotate</a></td>
+  <td>Performs a bit shifting operation, with rotation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitShift.html">BitShift</a></td>
+  <td>Performs a bit shifting operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BitXOR.html">BitXOR</a></td>
+  <td>Performs a bitwise exclusive OR (XOR) operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/BlockInput.html">BlockInput</a></td>
+  <td>Disable/enable the mouse and keyboard.</td>
+</tr>
+<tr>
+  <td><a href="functions/Break.html">Break</a></td>
+  <td>Enables or disables the users' ability to exit a script from the tray icon menu.</td>
+</tr>
+<tr>
+  <td><a href="functions/Call.html">Call</a></td>
+  <td>Calls a user-defined function contained in a string parameter.</td>
+</tr>
+<tr>
+  <td><a href="functions/CDTray.html">CDTray</a></td>
+  <td>Opens or closes the CD tray.</td>
+</tr>
+<tr>
+  <td><a href="functions/Ceiling.html">Ceiling</a></td>
+  <td>Returns a number rounded up to the next integer.</td>
+</tr>
+<tr>
+  <td><a href="functions/Chr.html">Chr</a></td>
+  <td>Returns a character corresponding to an ASCII code.</td>
+</tr>
+<tr>
+  <td><a href="functions/ChrW.html">ChrW</a></td>
+  <td>Returns a character corresponding to a unicode code.</td>
+</tr>
+<tr>
+  <td><a href="functions/ClipGet.html">ClipGet</a></td>
+  <td>Retrieves text from the clipboard.</td>
+</tr>
+<tr>
+  <td><a href="functions/ClipPut.html">ClipPut</a></td>
+  <td>Writes text to the clipboard.</td>
+</tr>
+<tr>
+  <td><a href="functions/ConsoleRead.html">ConsoleRead</a></td>
+  <td>Read in a number of characters from the STDIN stream of the AutoIt script process.</td>
+</tr>
+<tr>
+  <td><a href="functions/ConsoleWrite.html">ConsoleWrite</a></td>
+  <td>Writes data to a stream that text editors can sometimes read.</td>
+</tr>
+<tr>
+  <td><a href="functions/ConsoleWriteError.html">ConsoleWriteError</a></td>
+  <td>Writes data to the stderr stream. Some text editors can read this stream as can other programs which may be expecting data on this stream.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlClick.html">ControlClick</a></td>
+  <td>Sends a mouse click command to a given control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlCommand.html">ControlCommand</a></td>
+  <td>Sends a command to a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlDisable.html">ControlDisable</a></td>
+  <td>Disables or "grays-out" a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlEnable.html">ControlEnable</a></td>
+  <td>Enables a "grayed-out" control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlFocus.html">ControlFocus</a></td>
+  <td>Sets input focus to a given control on a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlGetFocus.html">ControlGetFocus</a></td>
+  <td>Returns the ControlRef# of the control that has keyboard focus within a specified window.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlGetHandle.html">ControlGetHandle</a></td>
+  <td>Retrieves the internal handle of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlGetPos.html">ControlGetPos</a></td>
+  <td>Retrieves the position and size of a control relative to it's window.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlGetText.html">ControlGetText</a></td>
+  <td>Retrieves text from a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlHide.html">ControlHide</a></td>
+  <td>Hides a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlListView.html">ControlListView</a></td>
+  <td>Sends a command to a ListView32 control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlMove.html">ControlMove</a></td>
+  <td>Moves a control within a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlSend.html">ControlSend</a></td>
+  <td>Sends a string of characters to a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlSetText.html">ControlSetText</a></td>
+  <td>Sets text of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/ControlShow.html">ControlShow</a></td>
+  <td>Shows a control that was hidden.</td>
+</tr>
+<tr>
+  <td><a href="functions/Cos.html">Cos</a></td>
+  <td>Calculates the cosine of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/Dec.html">Dec</a></td>
+  <td>Returns a numeric representation of a hexadecimal string.</td>
+</tr>
+<tr>
+  <td><a href="functions/DirCopy.html">DirCopy</a></td>
+  <td>Copies a directory and all sub-directories and files (Similar to xcopy).</td>
+</tr>
+<tr>
+  <td><a href="functions/DirCreate.html">DirCreate</a></td>
+  <td>Creates a directory/folder.</td>
+</tr>
+<tr>
+  <td><a href="functions/DirGetSize.html">DirGetSize</a></td>
+  <td>Returns the size in bytes of a given directory.</td>
+</tr>
+<tr>
+  <td><a href="functions/DirMove.html">DirMove</a></td>
+  <td>Moves a directory and all sub-directories and files.</td>
+</tr>
+<tr>
+  <td><a href="functions/DirRemove.html">DirRemove</a></td>
+  <td>Deletes a directory/folder.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllCall.html">DllCall</a></td>
+  <td>Dynamically calls a function in a DLL.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllClose.html">DllClose</a></td>
+  <td>Closes a previously opened DLL.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllOpen.html">DllOpen</a></td>
+  <td>Opens a DLL file for use in DllCall.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllStructCreate.html">DllStructCreate</a></td>
+  <td>Creates a C/C++ style structure to be used in DllCall.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllStructGetData.html">DllStructGetData</a></td>
+  <td>Returns the data of an element of the struct.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllStructGetPtr.html">DllStructGetPtr</a></td>
+  <td>Returns the pointer to the struct or an element in the struct.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllStructGetSize.html">DllStructGetSize</a></td>
+  <td>Returns the size of the struct in bytes.</td>
+</tr>
+<tr>
+  <td><a href="functions/DllStructSetData.html">DllStructSetData</a></td>
+  <td>Sets the data in of an element in the struct.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveGetDrive.html">DriveGetDrive</a></td>
+  <td>Returns an array containing the enumerated drives.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveGetFileSystem.html">DriveGetFileSystem</a></td>
+  <td>Returns File System Type of a drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveGetLabel.html">DriveGetLabel</a></td>
+  <td>Returns Volume Label of a drive, if it has one.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveGetSerial.html">DriveGetSerial</a></td>
+  <td>Returns Serial Number of a drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveGetType.html">DriveGetType</a></td>
+  <td>Returns drive type.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveMapAdd.html">DriveMapAdd</a></td>
+  <td>Maps a network drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveMapDel.html">DriveMapDel</a></td>
+  <td>Disconnects a network drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveMapGet.html">DriveMapGet</a></td>
+  <td>Retrieves the details of a mapped drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveSetLabel.html">DriveSetLabel</a></td>
+  <td>Sets the Volume Label of a drive.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveSpaceFree.html">DriveSpaceFree</a></td>
+  <td>Returns the free disk space of a path in Megabytes.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveSpaceTotal.html">DriveSpaceTotal</a></td>
+  <td>Returns the total disk space of a path in Megabytes.</td>
+</tr>
+<tr>
+  <td><a href="functions/DriveStatus.html">DriveStatus</a></td>
+  <td>Returns the status of the drive as a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/EnvGet.html">EnvGet</a></td>
+  <td>Retrieves an environment variable.</td>
+</tr>
+<tr>
+  <td><a href="functions/EnvSet.html">EnvSet</a></td>
+  <td>Writes an environment variable.</td>
+</tr>
+<tr>
+  <td><a href="functions/EnvUpdate.html">EnvUpdate</a></td>
+  <td>Refreshes the OS environment.</td>
+</tr>
+<tr>
+  <td><a href="functions/Eval.html">Eval</a></td>
+  <td>Return the value of the variable defined by an string.</td>
+</tr>
+<tr>
+  <td><a href="functions/Execute.html">Execute</a></td>
+  <td>Execute an expression.</td>
+</tr>
+<tr>
+  <td><a href="functions/Exp.html">Exp</a></td>
+  <td>Calculates <i><b>e</b></i> to the power of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileChangeDir.html">FileChangeDir</a></td>
+  <td>Changes the current working directory.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileClose.html">FileClose</a></td>
+  <td>Closes a previously opened text file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileCopy.html">FileCopy</a></td>
+  <td>Copies one or more files.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileCreateNTFSLink.html">FileCreateNTFSLink</a></td>
+  <td>Creates an NTFS hardlink to a file or a directory</td>
+</tr>
+<tr>
+  <td><a href="functions/FileCreateShortcut.html">FileCreateShortcut</a></td>
+  <td>Creates a shortcut (.lnk) to a file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileDelete.html">FileDelete</a></td>
+  <td>Delete one or more files.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileExists.html">FileExists</a></td>
+  <td>Checks if a file or directory exists.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileFindFirstFile.html">FileFindFirstFile</a></td>
+  <td>Returns a search "handle" according to file search string.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileFindNextFile.html">FileFindNextFile</a></td>
+  <td>Returns a filename according to a previous call to FileFindFirstFile.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetAttrib.html">FileGetAttrib</a></td>
+  <td>Returns a code string representing a file's attributes.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetLongName.html">FileGetLongName</a></td>
+  <td>Returns the long path+name of the path+name passed.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetShortcut.html">FileGetShortcut</a></td>
+  <td>Retrieves details about a shortcut.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetShortName.html">FileGetShortName</a></td>
+  <td>Returns the 8.3 short path+name of the path+name passed.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetSize.html">FileGetSize</a></td>
+  <td>Returns the size of a file in bytes.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetTime.html">FileGetTime</a></td>
+  <td>Returns the time and date information for a file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileGetVersion.html">FileGetVersion</a></td>
+  <td>Returns the "File" version information.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileInstall.html">FileInstall</a></td>
+  <td>Include and install a file with the compiled script.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileMove.html">FileMove</a></td>
+  <td>Moves one or more files</td>
+</tr>
+<tr>
+  <td><a href="functions/FileOpen.html">FileOpen</a></td>
+  <td>Opens a text file for reading or writing.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileOpenDialog.html">FileOpenDialog</a></td>
+  <td>Initiates a Open File Dialog.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileRead.html">FileRead</a></td>
+  <td>Read in a number of characters from a previously opened text file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileReadLine.html">FileReadLine</a></td>
+  <td>Read in a line of text from a previously opened text file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileRecycle.html">FileRecycle</a></td>
+  <td>Sends a file or directory to the recycle bin.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileRecycleEmpty.html">FileRecycleEmpty</a></td>
+  <td>Empties the recycle bin.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileSaveDialog.html">FileSaveDialog</a></td>
+  <td>Initiates a Save File Dialog.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileSelectFolder.html">FileSelectFolder</a></td>
+  <td>Initiates a Browse For Folder dialog.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileSetAttrib.html">FileSetAttrib</a></td>
+  <td>Sets the attributes of one or more files.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileSetTime.html">FileSetTime</a></td>
+  <td>Sets the timestamp of one of more files.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileWrite.html">FileWrite</a></td>
+  <td>Append a line of text to the end of a previously opened text file.</td>
+</tr>
+<tr>
+  <td><a href="functions/FileWriteLine.html">FileWriteLine</a></td>
+  <td>Append a line of text to the end of a previously opened text file.</td>
+</tr>
+<tr>
+  <td><a href="functions/Floor.html">Floor</a></td>
+  <td>Returns a number rounded down to the closest integer.</td>
+</tr>
+<tr>
+  <td><a href="functions/FtpSetProxy.html">FtpSetProxy</a></td>
+  <td>Sets the internet proxy to use for ftp access.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICreate.html">GUICreate</a></td>
+  <td>Create a GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateAvi.html">GUICtrlCreateAvi</a></td>
+  <td>Creates an AVI video control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateButton.html">GUICtrlCreateButton</a></td>
+  <td>Creates a Button control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateCheckbox.html">GUICtrlCreateCheckbox</a></td>
+  <td>Creates a Checkbox control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateCombo.html">GUICtrlCreateCombo</a></td>
+  <td>Creates a ComboBox control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateContextMenu.html">GUICtrlCreateContextMenu</a></td>
+  <td>Creates a context menu for a control or entire GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateDate.html">GUICtrlCreateDate</a></td>
+  <td>Creates a date control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateDummy.html">GUICtrlCreateDummy</a></td>
+  <td>Creates a Dummy control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateEdit.html">GUICtrlCreateEdit</a></td>
+  <td>Creates an Edit control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateGraphic.html">GUICtrlCreateGraphic</a></td>
+  <td>Creates a Graphic control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateGroup.html">GUICtrlCreateGroup</a></td>
+  <td>Creates a Group control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateIcon.html">GUICtrlCreateIcon</a></td>
+  <td>Creates an Icon control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateInput.html">GUICtrlCreateInput</a></td>
+  <td>Creates an Input control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateLabel.html">GUICtrlCreateLabel</a></td>
+  <td>Creates a static Label control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateList.html">GUICtrlCreateList</a></td>
+  <td>Creates a List control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateListView.html">GUICtrlCreateListView</a></td>
+  <td>Creates a ListView control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateListViewItem.html">GUICtrlCreateListViewItem</a></td>
+  <td>Creates a ListView item.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateMenu.html">GUICtrlCreateMenu</a></td>
+  <td>Creates a Menu control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateMenuItem.html">GUICtrlCreateMenuItem</a></td>
+  <td>Creates a MenuItem control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateMonthCal.html">GUICtrlCreateMonthCal</a></td>
+  <td>Creates a month calendar control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateObj.html">GUICtrlCreateObj</a></td>
+  <td>Creates an ActiveX control in the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreatePic.html">GUICtrlCreatePic</a></td>
+  <td>Creates a Picture control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateProgress.html">GUICtrlCreateProgress</a></td>
+  <td>Creates a Progress control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateRadio.html">GUICtrlCreateRadio</a></td>
+  <td>Creates a Radio button control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateSlider.html">GUICtrlCreateSlider</a></td>
+  <td>Creates a Slider control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateTab.html">GUICtrlCreateTab</a></td>
+  <td>Creates a Tab control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateTabItem.html">GUICtrlCreateTabItem</a></td>
+  <td>Creates a TabItem control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateTreeView.html">GUICtrlCreateTreeView</a></td>
+  <td>Creates a TreeView control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateTreeViewItem.html">GUICtrlCreateTreeViewItem</a></td>
+  <td>Creates a TreeViewItem control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlCreateUpdown.html">GUICtrlCreateUpdown</a></td>
+  <td>Creates an UpDown control for the GUI.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlDelete.html">GUICtrlDelete</a></td>
+  <td>Deletes a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlGetHandle.html">GUICtrlGetHandle</a></td>
+  <td>Returns the handle for a control and some special (item) handles (Menu, ContextMenu, TreeViewItem).</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlGetState.html">GUICtrlGetState</a></td>
+  <td>Gets the current state of a control</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlRead.html">GUICtrlRead</a></td>
+  <td>Read state or data of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlRecvMsg.html">GUICtrlRecvMsg</a></td>
+  <td>Send a message to a control and retrieve information in lParam.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlRegisterListViewSort.html">GUICtrlRegisterListViewSort</a></td>
+  <td>Register a user defined function for an internal listview sorting callback function.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSendMsg.html">GUICtrlSendMsg</a></td>
+  <td>Send a message to a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSendToDummy.html">GUICtrlSendToDummy</a></td>
+  <td>Sends a message to a Dummy control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetBkColor.html">GUICtrlSetBkColor</a></td>
+  <td>Sets the background color of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetColor.html">GUICtrlSetColor</a></td>
+  <td>Sets the text color of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetCursor.html">GUICtrlSetCursor</a></td>
+  <td>Sets the mouse cursor icon for a particular control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetData.html">GUICtrlSetData</a></td>
+  <td>Modifies the data for a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetFont.html">GUICtrlSetFont</a></td>
+  <td>Sets the font for a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetGraphic.html">GUICtrlSetGraphic</a></td>
+  <td>Modifies the data for a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetImage.html">GUICtrlSetImage</a></td>
+  <td>Sets the bitmap or icon image to use for a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetLimit.html">GUICtrlSetLimit</a></td>
+  <td>Limits the number of characters/pixels for a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetOnEvent.html">GUICtrlSetOnEvent</a></td>
+  <td>Defines a user-defined function to be called when a control is clicked.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetPos.html">GUICtrlSetPos</a></td>
+  <td>Changes the position of a control within the GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetResizing.html">GUICtrlSetResizing</a></td>
+  <td>Defines the resizing method used by a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetState.html">GUICtrlSetState</a></td>
+  <td>Changes the state of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetStyle.html">GUICtrlSetStyle</a></td>
+  <td>Changes the style of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUICtrlSetTip.html">GUICtrlSetTip</a></td>
+  <td>Sets the tip text associated with a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUIDelete.html">GUIDelete</a></td>
+  <td>Deletes a GUI window and all controls that it contains.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUIGetCursorInfo.html">GUIGetCursorInfo</a></td>
+  <td>Gets the mouse cursor position relative to GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUIGetMsg.html">GUIGetMsg</a></td>
+  <td>Polls the GUI to see if any events have occurred.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUIRegisterMsg.html">GUIRegisterMsg</a></td>
+  <td>Register a user defined function for a known Windows Message ID (WM_MSG).</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetBkColor.html">GUISetBkColor</a></td>
+  <td>Sets the background color of the GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetCoord.html">GUISetCoord</a></td>
+  <td>Sets absolute coordinates for the next control.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetCursor.html">GUISetCursor</a></td>
+  <td>Sets the mouse cursor icon for a GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetFont.html">GUISetFont</a></td>
+  <td>Sets the default font for a GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetHelp.html">GUISetHelp</a></td>
+  <td>Sets an executable file that will be run when F1 is pressed.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetIcon.html">GUISetIcon</a></td>
+  <td>Sets the icon used in a GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetOnEvent.html">GUISetOnEvent</a></td>
+  <td>Defines a user function to be called when a system button is clicked.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISetState.html">GUISetState</a></td>
+  <td>Changes the state of a GUI window.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUIStartGroup.html">GUIStartGroup</a></td>
+  <td>Defines that any subsequent controls that are created will be "grouped" together.</td>
+</tr>
+<tr>
+  <td><a href="functions/GUISwitch.html">GUISwitch</a></td>
+  <td>Switches the current window used for GUI functions.</td>
+</tr>
+<tr>
+  <td><a href="functions/Hex.html">Hex</a></td>
+  <td>Returns a string representation of an integer or of a binary type converted to hexadecimal.</td>
+</tr>
+<tr>
+  <td><a href="functions/HotKeySet.html">HotKeySet</a></td>
+  <td>Sets a hotkey that calls a user function.</td>
+</tr>
+<tr>
+  <td><a href="functions/HttpSetProxy.html">HttpSetProxy</a></td>
+  <td>Sets the internet proxy to use for http access.</td>
+</tr>
+<tr>
+  <td><a href="functions/HWnd.html">HWnd</a></td>
+  <td>Converts an expression into an HWND handle.</td>
+</tr>
+<tr>
+  <td><a href="functions/InetGet.html">InetGet</a></td>
+  <td>Downloads a file from the internet using the http or ftp protocol.</td>
+</tr>
+<tr>
+  <td><a href="functions/InetGetSize.html">InetGetSize</a></td>
+  <td>Returns the size (in bytes) of a file located on the internet.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniDelete.html">IniDelete</a></td>
+  <td>Deletes a value from a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniRead.html">IniRead</a></td>
+  <td>Reads a value from a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniReadSection.html">IniReadSection</a></td>
+  <td>Reads all key/value pairs from a section in a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniReadSectionNames.html">IniReadSectionNames</a></td>
+  <td>Reads all sections in a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniRenameSection.html">IniRenameSection</a></td>
+  <td>Renames a section in a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniWrite.html">IniWrite</a></td>
+  <td>Writes a value to a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/IniWriteSection.html">IniWriteSection</a></td>
+  <td>Writes a section to a standard format .ini file.</td>
+</tr>
+<tr>
+  <td><a href="functions/InputBox.html">InputBox</a></td>
+  <td>Displays an input box to ask the user to enter a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/Int.html">Int</a></td>
+  <td>Returns the integer (whole number) representation of an expression.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsAdmin.html">IsAdmin</a></td>
+  <td>Checks if the current user has administrator privileges.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsArray.html">IsArray</a></td>
+  <td>Checks if a variable is an array type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsBinary.html">IsBinary</a></td>
+  <td>Checks if a variable or expression is a binary type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsBool.html">IsBool</a></td>
+  <td>Checks if a variable's base type is boolean.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsDeclared.html">IsDeclared</a></td>
+  <td>Check if a variable has been declared.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsDllStruct.html">IsDllStruct</a></td>
+  <td>Checks if a variable is a DllStruct type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsFloat.html">IsFloat</a></td>
+  <td>Checks if a variable or expression is a float-type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsHWnd.html">IsHWnd</a></td>
+  <td>Checks if a variable's base type is HWND.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsInt.html">IsInt</a></td>
+  <td>Checks if a variable or expression is an integer type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsKeyword.html">IsKeyword</a></td>
+  <td>Checks if a variable is a keyword (for example, Default).</td>
+</tr>
+<tr>
+  <td><a href="functions/IsNumber.html">IsNumber</a></td>
+  <td>Checks if a variable's base type is numeric.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsObj.html">IsObj</a></td>
+  <td>Checks if a variable or expression is an object type.</td>
+</tr>
+<tr>
+  <td><a href="functions/IsString.html">IsString</a></td>
+  <td>Checks if a variable is a string type.</td>
+</tr>
+<tr>
+  <td><a href="functions/Log.html">Log</a></td>
+  <td>Calculates the natural logarithm of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/MemGetStats.html">MemGetStats</a></td>
+  <td>Retrieves memory related information.</td>
+</tr>
+<tr>
+  <td><a href="functions/Mod.html">Mod</a></td>
+  <td>Performs the modulus operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseClick.html">MouseClick</a></td>
+  <td>Perform a mouse click operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseClickDrag.html">MouseClickDrag</a></td>
+  <td>Perform a mouse click and drag operation.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseDown.html">MouseDown</a></td>
+  <td>Perform a mouse down event at the current mouse position.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseGetCursor.html">MouseGetCursor</a></td>
+  <td>Returns the cursor ID Number for the current Mouse Cursor.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseGetPos.html">MouseGetPos</a></td>
+  <td>Retrieves the current position of the mouse cursor.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseMove.html">MouseMove</a></td>
+  <td>Moves the mouse pointer.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseUp.html">MouseUp</a></td>
+  <td>Perform a mouse up event at the current mouse position.</td>
+</tr>
+<tr>
+  <td><a href="functions/MouseWheel.html">MouseWheel</a></td>
+  <td>Moves the mouse wheel up or down.  NT/2000/XP ONLY.</td>
+</tr>
+<tr>
+  <td><a href="functions/MsgBox.html">MsgBox</a></td>
+  <td>Displays a simple message box with optional timeout.</td>
+</tr>
+<tr>
+  <td><a href="functions/Number.html">Number</a></td>
+  <td>Returns the numeric representation of an expression.</td>
+</tr>
+<tr>
+  <td><a href="functions/ObjCreate.html">ObjCreate</a></td>
+  <td>Creates a reference to a COM object from the given classname.</td>
+</tr>
+<tr>
+  <td><a href="functions/ObjEvent.html">ObjEvent</a></td>
+  <td>Handles incoming events from the given Object.</td>
+</tr>
+<tr>
+  <td><a href="functions/ObjGet.html">ObjGet</a></td>
+  <td>Retrieves a reference to a COM object from an existing process or filename.</td>
+</tr>
+<tr>
+  <td><a href="functions/ObjName.html">ObjName</a></td>
+  <td>Returns the name or interface description of an Object</td>
+</tr>
+<tr>
+  <td><a href="functions/Ping.html">Ping</a></td>
+  <td>Pings a host and returns the roundtrip-time.</td>
+</tr>
+<tr>
+  <td><a href="functions/PixelChecksum.html">PixelChecksum</a></td>
+  <td>Generates a checksum for a region of pixels.</td>
+</tr>
+<tr>
+  <td><a href="functions/PixelGetColor.html">PixelGetColor</a></td>
+  <td>Returns a pixel color according to x,y pixel coordinates.</td>
+</tr>
+<tr>
+  <td><a href="functions/PixelSearch.html">PixelSearch</a></td>
+  <td>Searches a rectangle of pixels for the pixel color provided.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessClose.html">ProcessClose</a></td>
+  <td>Terminates a named process.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessExists.html">ProcessExists</a></td>
+  <td>Checks to see if a specified process exists.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessList.html">ProcessList</a></td>
+  <td>Returns an array listing the currently running processes (names and PIDs).</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessSetPriority.html">ProcessSetPriority</a></td>
+  <td>Changes the priority of a process</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessWait.html">ProcessWait</a></td>
+  <td>Pauses script execution until a given process exists.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProcessWaitClose.html">ProcessWaitClose</a></td>
+  <td>Pauses script execution until a given process does not exist.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProgressOff.html">ProgressOff</a></td>
+  <td>Turns Progress window off.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProgressOn.html">ProgressOn</a></td>
+  <td>Creates a customizable progress bar window.</td>
+</tr>
+<tr>
+  <td><a href="functions/ProgressSet.html">ProgressSet</a></td>
+  <td>Sets the position and/or text of a previously created Progress bar window.</td>
+</tr>
+<tr>
+  <td><a href="functions/Random.html">Random</a></td>
+  <td>Generates a pseudo-random float-type number.</td>
+</tr>
+<tr>
+  <td><a href="functions/RegDelete.html">RegDelete</a></td>
+  <td>Deletes a key or value from the registry.</td>
+</tr>
+<tr>
+  <td><a href="functions/RegEnumKey.html">RegEnumKey</a></td>
+  <td>Reads the name of a subkey according to it's instance.</td>
+</tr>
+<tr>
+  <td><a href="functions/RegEnumVal.html">RegEnumVal</a></td>
+  <td>Reads the name of a value according to it's instance.</td>
+</tr>
+<tr>
+  <td><a href="functions/RegRead.html">RegRead</a></td>
+  <td>Reads a value from the registry.</td>
+</tr>
+<tr>
+  <td><a href="functions/RegWrite.html">RegWrite</a></td>
+  <td>Creates a key or value in the registry.</td>
+</tr>
+<tr>
+  <td><a href="functions/Round.html">Round</a></td>
+  <td>Returns a number rounded to a specified number of decimal places.</td>
+</tr>
+<tr>
+  <td><a href="functions/Run.html">Run</a></td>
+  <td>Runs an external program.</td>
+</tr>
+<tr>
+  <td><a href="functions/RunAsSet.html">RunAsSet</a></td>
+  <td>Initialise a set of user credentials to use during Run and RunWait operations.  2000/XP or later ONLY.</td>
+</tr>
+<tr>
+  <td><a href="functions/RunWait.html">RunWait</a></td>
+  <td>Runs an external program and pauses script execution until the program finishes.</td>
+</tr>
+<tr>
+  <td><a href="functions/Send.html">Send</a></td>
+  <td>Sends simulated keystrokes to the active window.</td>
+</tr>
+<tr>
+  <td><a href="functions/SetError.html">SetError</a></td>
+  <td>Manually set the value of the @error macro.</td>
+</tr>
+<tr>
+  <td><a href="functions/SetExtended.html">SetExtended</a></td>
+  <td>Manually set the value of the @extended macro.</td>
+</tr>
+<tr>
+  <td><a href="functions/ShellExecute.html">ShellExecute</a></td>
+  <td>Runs an external program using the ShellExecute API.</td>
+</tr>
+<tr>
+  <td><a href="functions/ShellExecuteWait.html">ShellExecuteWait</a></td>
+  <td>Runs an external program using the ShellExecute API and pauses script execution until it finishes.</td>
+</tr>
+<tr>
+  <td><a href="functions/Shutdown.html">Shutdown</a></td>
+  <td>Shuts down the system.</td>
+</tr>
+<tr>
+  <td><a href="functions/Sin.html">Sin</a></td>
+  <td>Calculates the sine of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/Sleep.html">Sleep</a></td>
+  <td>Pause script execution.</td>
+</tr>
+<tr>
+  <td><a href="functions/SoundPlay.html">SoundPlay</a></td>
+  <td>Play a sound file.</td>
+</tr>
+<tr>
+  <td><a href="functions/SoundSetWaveVolume.html">SoundSetWaveVolume</a></td>
+  <td>Sets the system wave volume by percent.</td>
+</tr>
+<tr>
+  <td><a href="functions/SplashImageOn.html">SplashImageOn</a></td>
+  <td>Creates a customizable image popup window.</td>
+</tr>
+<tr>
+  <td><a href="functions/SplashOff.html">SplashOff</a></td>
+  <td>Turns SplashText or SplashImage off.</td>
+</tr>
+<tr>
+  <td><a href="functions/SplashTextOn.html">SplashTextOn</a></td>
+  <td>Creates a customizable text popup window.</td>
+</tr>
+<tr>
+  <td><a href="functions/Sqrt.html">Sqrt</a></td>
+  <td>Calculates the square-root of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/SRandom.html">SRandom</a></td>
+  <td>Set Seed for random number generation.</td>
+</tr>
+<tr>
+  <td><a href="functions/StatusbarGetText.html">StatusbarGetText</a></td>
+  <td>Retrieves the text from a standard status bar control.</td>
+</tr>
+<tr>
+  <td><a href="functions/StderrRead.html">StderrRead</a></td>
+  <td>Read in a number of characters from the STDERR stream of a previously run child process.</td>
+</tr>
+<tr>
+  <td><a href="functions/StdinWrite.html">StdinWrite</a></td>
+  <td>Writes a number of characters to the STDIN stream of a previously run child process.</td>
+</tr>
+<tr>
+  <td><a href="functions/StdoutRead.html">StdoutRead</a></td>
+  <td>Reads in a number of characters from the STDOUT stream of a previously run child process.</td>
+</tr>
+<tr>
+  <td><a href="functions/String.html">String</a></td>
+  <td>Returns the string representation of an expression.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringAddCR.html">StringAddCR</a></td>
+  <td>Takes a string and prefixes all linefeed characters ( Chr(10) ) with a carriage return character ( Chr(13) ).</td>
+</tr>
+<tr>
+  <td><a href="functions/StringFormat.html">StringFormat</a></td>
+  <td>Returns a formatted string (similar to the C sprintf() function).</td>
+</tr>
+<tr>
+  <td><a href="functions/StringInStr.html">StringInStr</a></td>
+  <td>Checks if a string contains a given substring.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsAlNum.html">StringIsAlNum</a></td>
+  <td>Checks if a string contains only alphanumeric characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsAlpha.html">StringIsAlpha</a></td>
+  <td>Checks if a string contains only alphabetic characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsASCII.html">StringIsASCII</a></td>
+  <td>Checks if a string contains only ASCII characters in the range 0x00 - 0x7f (0 - 127).</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsDigit.html">StringIsDigit</a></td>
+  <td>Checks if a string contains only digit (0-9) characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsFloat.html">StringIsFloat</a></td>
+  <td>Checks if a string is a floating point number.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsInt.html">StringIsInt</a></td>
+  <td>Checks if a string is an integer.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsLower.html">StringIsLower</a></td>
+  <td>Checks if a string contains only lowercase characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsSpace.html">StringIsSpace</a></td>
+  <td>Checks if a string contains only whitespace characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsUpper.html">StringIsUpper</a></td>
+  <td>Checks if a string contains only uppercase characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringIsXDigit.html">StringIsXDigit</a></td>
+  <td>Checks if a string contains only hexadecimal digit (0-9, A-F) characters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringLeft.html">StringLeft</a></td>
+  <td>Returns a number of characters from the left-hand side of a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringLen.html">StringLen</a></td>
+  <td>Returns the number of characters in a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringLower.html">StringLower</a></td>
+  <td>Converts a string to lowercase.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringMid.html">StringMid</a></td>
+  <td>Extracts a number of characters from a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringRegExp.html">StringRegExp</a></td>
+  <td>Check if a string fits a given regular expression pattern.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringRegExpReplace.html">StringRegExpReplace</a></td>
+  <td>Replace text in a string based on regular expressions.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringReplace.html">StringReplace</a></td>
+  <td>Replaces substrings in a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringRight.html">StringRight</a></td>
+  <td>Returns a number of characters from the right-hand side of a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringSplit.html">StringSplit</a></td>
+  <td>Splits up a string into substrings depending on the given delimiters.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringStripCR.html">StringStripCR</a></td>
+  <td>Removes all carriage return values ( Chr(13) ) from a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringStripWS.html">StringStripWS</a></td>
+  <td>Strips the white space in a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringTrimLeft.html">StringTrimLeft</a></td>
+  <td>Trims a number of characters from the left hand side of a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringTrimRight.html">StringTrimRight</a></td>
+  <td>Trims a number of characters from the right hand side of a string.</td>
+</tr>
+<tr>
+  <td><a href="functions/StringUpper.html">StringUpper</a></td>
+  <td>Converts a string to uppercase.</td>
+</tr>
+<tr>
+  <td><a href="functions/Tan.html">Tan</a></td>
+  <td>Calculates the tangent of a number.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPAccept.html">TCPAccept</a></td>
+  <td>Permits an incoming connection attempt on a socket.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPCloseSocket.html">TCPCloseSocket</a></td>
+  <td>Closes a TCP socket.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPConnect.html">TCPConnect</a></td>
+  <td>Create a socket connected to an existing server.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPListen.html">TCPListen</a></td>
+  <td>Creates a socket listening for an incoming connection.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPNameToIP.html">TCPNameToIP</a></td>
+  <td>Converts an Internet name to IP address.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPRecv.html">TCPRecv</a></td>
+  <td>Receives data from a connected socket.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPSend.html">TCPSend</a></td>
+  <td>Sends data on a connected socket.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPShutdown.html">TCPShutdown, UDPShutdown</a></td>
+  <td>Stops TCP/UDP services.</td>
+</tr>
+<tr>
+  <td><a href="functions/TCPStartup.html">TCPStartup, UDPStartup</a></td>
+  <td>Starts TCP or UDP services.</td>
+</tr>
+<tr>
+  <td><a href="functions/TimerDiff.html">TimerDiff</a></td>
+  <td>Returns the difference in time from a previous call to TimerInit().</td>
+</tr>
+<tr>
+  <td><a href="functions/TimerInit.html">TimerInit</a></td>
+  <td>Returns a timestamp (in milliseconds).</td>
+</tr>
+<tr>
+  <td><a href="functions/ToolTip.html">ToolTip</a></td>
+  <td>Creates a tooltip anywhere on the screen.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayCreateItem.html">TrayCreateItem</a></td>
+  <td>Creates a menuitem control for the tray.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayCreateMenu.html">TrayCreateMenu</a></td>
+  <td>Creates a menu control for the tray menu.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayGetMsg.html">TrayGetMsg</a></td>
+  <td>Polls the tray to see if any events have occurred.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemDelete.html">TrayItemDelete</a></td>
+  <td>Deletes a menu/item control from the tray menu.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemGetHandle.html">TrayItemGetHandle</a></td>
+  <td>Returns the handle for a tray menu(item).</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemGetState.html">TrayItemGetState</a></td>
+  <td>Gets the current state of a control.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemGetText.html">TrayItemGetText</a></td>
+  <td>Gets the itemtext of a tray menu/item control.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemSetOnEvent.html">TrayItemSetOnEvent</a></td>
+  <td>Defines a user-defined function to be called when a tray item is clicked.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemSetState.html">TrayItemSetState</a></td>
+  <td>Sets the state of a tray menu/item control.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayItemSetText.html">TrayItemSetText</a></td>
+  <td>Sets the itemtext of a tray menu/item control.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetClick.html">TraySetClick</a></td>
+  <td>Sets the clickmode of the tray icon - what mouseclicks will display the tray menu.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetIcon.html">TraySetIcon</a></td>
+  <td>Loads/Sets a specified tray icon.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetOnEvent.html">TraySetOnEvent</a></td>
+  <td>Defines a user function to be called when a special tray action happens.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetPauseIcon.html">TraySetPauseIcon</a></td>
+  <td>Loads/Sets a specified tray pause icon.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetState.html">TraySetState</a></td>
+  <td>Sets the state of the tray icon.</td>
+</tr>
+<tr>
+  <td><a href="functions/TraySetToolTip.html">TraySetToolTip</a></td>
+  <td>(Re)Sets the tooltip text for the tray icon.</td>
+</tr>
+<tr>
+  <td><a href="functions/TrayTip.html">TrayTip</a></td>
+  <td>Displays a balloon tip from the AutoIt Icon. (2000/XP only)</td>
+</tr>
+<tr>
+  <td><a href="functions/UBound.html">UBound</a></td>
+  <td>Returns the size of array dimensions.</td>
+</tr>
+<tr>
+  <td><a href="functions/UDPBind.html">UDPBind</a></td>
+  <td>Create a socket bound to an incoming connection.</td>
+</tr>
+<tr>
+  <td><a href="functions/UDPCloseSocket.html">UDPCloseSocket</a></td>
+  <td>Close a UDP socket.</td>
+</tr>
+<tr>
+  <td><a href="functions/UDPOpen.html">UDPOpen</a></td>
+  <td>Open a socket connected to an existing server .</td>
+</tr>
+<tr>
+  <td><a href="functions/UDPRecv.html">UDPRecv</a></td>
+  <td>Receives data from a opened socket</td>
+</tr>
+<tr>
+  <td><a href="functions/UDPSend.html">UDPSend</a></td>
+  <td>Sends data on an opened socket</td>
+</tr>
+<tr>
+  <td><a href="functions/WinActivate.html">WinActivate</a></td>
+  <td>Activates (gives focus to) a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinActive.html">WinActive</a></td>
+  <td>Checks to see if a specified window exists and is currently active.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinClose.html">WinClose</a></td>
+  <td>Closes a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinExists.html">WinExists</a></td>
+  <td>Checks to see if a specified window exists.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinFlash.html">WinFlash</a></td>
+  <td>Flashes a window in the taskbar.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetCaretPos.html">WinGetCaretPos</a></td>
+  <td>Returns the coordinates of the caret in the foreground window</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetClassList.html">WinGetClassList</a></td>
+  <td>Retrieves the classes from a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetClientSize.html">WinGetClientSize</a></td>
+  <td>Retrieves the size of a given window's client area.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetHandle.html">WinGetHandle</a></td>
+  <td>Retrieves the internal handle of a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetPos.html">WinGetPos</a></td>
+  <td>Retrieves the position and size of a given window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetProcess.html">WinGetProcess</a></td>
+  <td>Retrieves the Process ID (PID) associated with a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetState.html">WinGetState</a></td>
+  <td>Retrieves the state of a given window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetText.html">WinGetText</a></td>
+  <td>Retrieves the text from a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinGetTitle.html">WinGetTitle</a></td>
+  <td>Retrieves the full title from a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinKill.html">WinKill</a></td>
+  <td>Forces a window to close.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinList.html">WinList</a></td>
+  <td>Retrieves a list of windows.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinMenuSelectItem.html">WinMenuSelectItem</a></td>
+  <td>Invokes a menu item of a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinMinimizeAll.html">WinMinimizeAll</a></td>
+  <td>Minimizes all windows.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinMinimizeAllUndo.html">WinMinimizeAllUndo</a></td>
+  <td>Undoes a previous WinMinimizeAll function.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinMove.html">WinMove</a></td>
+  <td>Moves and/or resizes a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinSetOnTop.html">WinSetOnTop</a></td>
+  <td>Change a window's  "Always On Top" attribute.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinSetState.html">WinSetState</a></td>
+  <td>Shows, hides, minimizes, maximizes, or restores a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinSetTitle.html">WinSetTitle</a></td>
+  <td>Changes the title of a window.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinSetTrans.html">WinSetTrans</a></td>
+  <td>Sets the transparency of a window. (Windows 2000/XP or later)</td>
+</tr>
+<tr>
+  <td><a href="functions/WinWait.html">WinWait</a></td>
+  <td>Pauses execution of the script until the requested window exists.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinWaitActive.html">WinWaitActive</a></td>
+  <td>Pauses execution of the script until the requested window is active.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinWaitClose.html">WinWaitClose</a></td>
+  <td>Pauses execution of the script until the requested window does not exist.</td>
+</tr>
+<tr>
+  <td><a href="functions/WinWaitNotActive.html">WinWaitNotActive</a></td>
+  <td>Pauses execution of the script until the requested window is not active.</td>
+</tr>
+</table>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MemGetStats.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function MemGetStats</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">MemGetStats</font>
+<hr size="2">
+<p>Retrieves memory related information.<br></p>
+
+<p class="codeheader">
+MemGetStats ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+Returns a seven-element array containing the memory information:<br><br>
+$array[0] = Memory Load (Percentage of memory in use)<br>
+$array[1] = Total physical RAM<br>
+$array[2] = Available physical RAM<br>
+$array[3] = Total Pagefile<br>
+$array[4] = Available Pagefile<br>
+$array[5] = Total virtual<br>
+$array[6] = Available virtual<br><br>
+All memory sizes are in <b>kilobytes</b>.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+None.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+None.
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$mem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">MemGetStats</span><span class="S8">()</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Total physical RAM (KB):"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$mem</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/MemGetStats.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

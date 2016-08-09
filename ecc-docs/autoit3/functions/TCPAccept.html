@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TCPAccept.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function TCPAccept</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TCPAccept</font>
+<hr size="2">
+<p>Permits an incoming connection attempt on a socket.<br></p>
+
+<p class="codeheader">
+TCPAccept ( mainsocket )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">mainsocket</td>
+    <td width="85%">The main socket identifier (SocketID) as returned by a <a href="TCPListen.html">TCPListen</a> function.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns connected socket identifier.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns -1 and set @error according to Windows API WSAGetError return.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="TCPStartup.html">TCPStartup</a>, <a href="TCPListen.html">TCPListen</a>, <a href="AutoItSetOption.html#TCPTimeout">TCPTimeout (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;SERVER!! Start Me First !!!!!!!!!!!!!!!</span><br>
+<span class="S9">$g_IP</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"127.0.0.1"</span><br>
+<br>
+<span class="S1">; Start The TCP Services</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S4">TCPStartUp</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; Create a Listening "SOCKET"</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S9">$MainSocket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TCPListen</span><span class="S8">(</span><span class="S9">$g_IP</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65432</span><span class="S8">,</span><span class="S0"> &nbsp;</span><span class="S3">100</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$MainSocket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S1">; &nbsp;look for client connection</span><br>
+<span class="S1">;--------------------</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S9">$ConnectedSocket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TCPAccept</span><span class="S8">(</span><span class="S0"> </span><span class="S9">$MainSocket</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$ConnectedSocket</span><span class="S0"> </span><span class="S8">&gt;=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"my server - Client Connected"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">exit</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S5">Wend</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/TCPAccept.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

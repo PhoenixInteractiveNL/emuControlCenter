@@ -3,8 +3,8 @@
  * emuControlCenter language system file
  * ------------------------------------------
  * language:	de (german)
- * author:	franz schneider
- * date:	2007/03/04 
+ * author:	franz schneider / andreas scheibel
+ * date:	2007/05/13
  * ------------------------------------------
  */
 $i18n['popupConfig'] = array(
@@ -14,13 +14,13 @@ $i18n['popupConfig'] = array(
 
 	/* ECC */
 	'lbl_ecc_hdl' =>
-		"Konfiguriere emuControlCenter",
+		"Konfiguration",
 	'lbl_ecc_userfolder' =>
-		"User Ordner (fï¿½r Bilder und Exportdateien)",
+		"Userverzeichnis (für Bilder und Exportdateien)",
 	'lbl_ecc_userfolder_button' =>
-		"Ordner ï¿½ndern",
+		"Ordner ändern",
 	'title_ecc_userfolder_popup' =>
-		"Ordner Position wï¿½hlen",
+		"Verzeichnis wählen",
 	/* ECC-OPTIONS */
 	'lbl_ecc_otp_hdl' =>
 		"Optionen",
@@ -36,16 +36,16 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_colfont_font_list' =>
 		"Listen Schriftart",
 	'title_ecc_colfont_font_list_popup' =>
-		"Bitte wï¿½hle eine Schriftart fï¿½r die Listen/Detailansicht.",
+		"Bitte wähle eine Schriftart für die Listen/Detailansicht.",
 	'lbl_ecc_colfont_font_global' =>
 		"GLOBALE Schriftart",
 	'title_ecc_colfont_font_global' =>
-		"Bitte wï¿½hle eine GLOBALE Schriftart ",
+		"Bitte wähle eine GLOBALE Schriftart ",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
-		"Startvorgï¿½nge",
+		"Startup Konfiguration",
 	'btn_ecc_startup' =>
-		"Startvorgï¿½nge einstellen",
+		"Konfiguration öffnen",
 	
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
@@ -56,17 +56,17 @@ $i18n['popupConfig'] = array(
 		"Platform Kategorie",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
-		"Emulator verknï¿½pfen (%s)",
+		"Emulator zuweisen (%s)",
 	'lbl_emu_assign_path' =>
 		"Ordner -> Emulator",
 	'btn_emu_assign_path_select' =>
-		"Emulator auswï¿½hlen",
+		"Emulator auswählen",
 	'title_emu_assign_path_select_popup%s' =>
-		"Emulator auswï¿½hlen fï¿½r %s",
+		"Emulator auswählen für %s",
 	'lbl_emu_assign_parameter' =>
 		"Komandozeilen-Parameter",
 	'lbl_emu_assign_escape' =>
-		"escape Pfad",
+		"Pfad escapen",
 	'lbl_emu_assign_eightdotthree' =>
 		"8.3 Dateinamen",
 	'lbl_emu_assign_nameonly' =>
@@ -76,7 +76,7 @@ $i18n['popupConfig'] = array(
 	
 	/* DAT */
 	'lbl_dat_hdl' =>
-		"Konfiguriere datfile",
+		"Datfile Konfiguration",
 	'lbl_dat_author' =>
 		"Autor",
 	'lbl_dat_website' =>
@@ -89,24 +89,24 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"Optionen",
 	'lbl_dat_opt_namestrip' =>
-		"Reinige Romcenter Dateien",
+		"Bereinige Romcenter Dateien",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
-		"Options - Rom details",
+		"Option - Rom Details",
 	'lbl_img_otp_list_imagesize' =>
-		"Imagesize",
+		"Bildgröße",
 	'lbl_img_otp_list_aspectratio' =>
-		"Aspect ratio",
+		"Originalformat",
 	/* 0.9 FYEO 4 */
 	'lbl_img_otp_list_fastrefresh' =>
-		"Fast refresh",
+		"Listen schnell aufbauen",
 		
 	/* 0.9 FYEO 9 */
 	'confEccStatusLogCheck' =>
-		"Activate logging",
+		"Aktiviere logging",
 	'confEccStatusLogOpen' =>
-		"Show logfiles",
+		"Öffne Logfiles",
 		
 	/* 0.9.1 FYEO 5 */
 	'tab_label_emulators' =>
@@ -114,10 +114,98 @@ $i18n['popupConfig'] = array(
 	'tab_label_general' =>
 		"General",
 	'tab_label_datfiles' =>
-		"DAT files",
+		"Datfiles",
 	'tab_label_images' =>
 		"Bilder",
 	'tab_label_colorsandfonts' =>
 		"Farben und Schrift",
+	
+	/* 0.9.2 FYEO 1 */
+	'lbl_emu_tips' =>
+		"Emulatoren Tips / Tricks / Downloads",
+	'lbl_img_opt_conv' =>
+		"Bildkonvertierung",
+	'lbl_img_opt_conv_quality' =>
+		"Thumb Qualität",
+	'lbl_img_opt_conv_quality_def%s' =>
+		"(Voreinstellung: %s)",
+	'lbl_img_opt_conv_minsize' =>
+		"Min. Originalgröße",
+	'lbl_img_opt_conv_minsize_def%s' =>
+		"(Voreinstellung: %s)",
+	'lbl_col_opt_global' =>
+		"Global",
+	'lbl_col_opt_list' =>
+		"Liste",
+	'lbl_col_opt_options' =>
+		"Optionen",
+
+	/* 0.9.2 FYEO 3 */
+	'lbl_emu_assign_use_eccscript' =>
+		"eccScript",
+
+	/* 0.9.2 FYEO 5 */
+	'lbl_emu_assign_edit_eccscript' =>
+		"eccScript ändern",
+	'lbl_emu_assign_edit_eccscript_error' =>
+		"Du kannst erst dann ein eccScript anlegen, wenn du bereits ein Emulator ausgewählt hast!",
+
+	/* 0.9.2 FYEO 6 */
+	'lbl_emu_assign_eccscript_hdl' =>
+		"eccScript Optionen",
+	'lbl_emu_assign_delete_eccscript' =>
+		"löschen",
+	'msg_emu_assign_delete_eccscript%s' =>
+		"Willst Du das eccScript\n\n%s\n\nwirklich löschen?",
+
+	/* 0.9.2 FYEO 8 */
+	'tab_label_startup' =>
+		"Start",
+	'startConfHdl' =>
+		"Startkonfiguration",
+	'startConfSoundHdl' =>
+		"Startsound abspielen",
+	'startConfOptHdl' =>
+		"Optionen",
+	'startConfUpdate' =>
+		"Beim starten nach updates suchen",
+	'startConfMinimize' =>
+		"Minimieren in die Schnellstartleiste",
+	'startConfSoundSelect' =>
+		"Sound auswählen",
+
+	/* 0.9.2 FYEO 9 */
+	'lbl_preview_impossible' =>
+		"Vorschau nicht möglich. Fehlende oder falsche Einstellungen!",
+
+	/* 0.9.2 FYEO 10 */
+	'lbl_emu_assign_edit_eccscript_error_notfound' =>
+		"Es wurde kein Emulator gefunden! Bitte zuerst einen Emulator auswählen!",
+	'lbl_emu_assign_create_eccscript' =>
+		"Neues eccScript",
+	'emu_info_nodata' =>
+		"Zur Zeit sind noch keine informationen verfügbar ...",
+	'emu_info_footer' =>
+		"Vielleicht kennst du einige gute Emulatoren für diese Platform!\nDu kannst deine Informationen in das\nemuControlCenter-Forum http://ecc.phoenixinteractive.mine.nu/\nposten!",
+	
+	/* 0.9.2 FYEO 11 */
+	'title_startup_select_sound' =>
+		"Select a startup sound",
+
+	/* 0.9.2 FYEO 14 */
+	'title_emu_assign_found_eccscript' =>
+		"eccScript gefunden",
+	'msg_emu_assign_found_eccscript%s' =>
+		"Ein eccScript wurde für den gewählten Emulator gefunden!\n\nSoll dieses eccScript (%s) aktiviert werden?",
+	'title_popup_save' =>
+		"Neustart",
+	'msg_popup_save' =>
+		"Das emuControlCenter muss neu gestartet werden, damit die Änderungen wirksam werden!",
+
+	/* 0.9.2 FYEO 15 */
+	'title_emu_found_eccscript_preview' =>
+		"Informationen:",
+	'title_emu_found_eccscript_nopreview' =>
+		"Keine Informationen verfügbar!",
 );
 ?>

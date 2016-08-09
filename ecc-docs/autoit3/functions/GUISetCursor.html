@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUISetCursor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+<head>
+  <title>Function GUISetCursor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUISetCursor</font>
+<hr size="2">
+<p>Sets the mouse cursor icon for a GUI window.<br></p>
+
+<p class="codeheader">
+GUISetCursor ( [cursorID [, override [, winhandle]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">cursorID</td>
+    <td width="85%">[optional] Cursor Id (See Remarks).</td>
+  </tr>
+  <tr>
+   <td>override</td>
+   <td>[optional] Force the requested mouse cursor even when over controls (see below).<br>
+       0 = (default) Don't override a control's default mouse cursor.<br>
+       1= override control's default mouse cursor.</td>
+  </tr>
+  <tr>
+   <td>winhandle</td>
+   <td>[optional] Windows handle as returned by GUICreate (default is the previously used Window).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If the cursorID is invalid the standard arrow will be displayed.<br>
+<br>
+Usually when you move the mouse cursor over an edit control or other control the mouse cursor changes shape.  The "override" option allows you to force the requested mouse cursor to be shown at all times.  Note: If you have changed a controls mouse cursor with GUICtrlSetCursor then this control mouse cursor will always be shown.<br>
+<br>
+For a list of valid cursor IDs see <a href="MouseGetCursor.html">MouseGetCursor</a>.<br>
+CursorId = 16 will hide the mouse cursor.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="GUICtrlSetCursor.html">GUICtrlSetCursor</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstants.au3&gt;</span><br>
+<br>
+<span class="S9">$IDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S9">$newIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<br>
+<span class="S4">HotkeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{Esc}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Increment"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Press Esc to Increment"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S3">0</span><span class="S8">,</span><span class="S3">0</span><span class="S8">,</span><span class="S3">0x04CF0000</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x00000110</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()&lt;&gt;</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$newIDC</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S9">$IDC</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$IDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$newIDC</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">GUISetCursor</span><span class="S8">(</span><span class="S9">$IDC</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"GUI Cursor #"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$IDC</span><span class="S8">)</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Increment</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$newIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$IDC</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$newIDC</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">15</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$newIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/GUISetCursor.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:59 GMT -->
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Chr.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function Chr</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Chr</font>
+<hr size="2">
+<p>Returns a character corresponding to an ASCII code.<br></p>
+
+<p class="codeheader">
+Chr ( ASCIIcode )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">ASCIIcode</td>
+    <td width="85%">An ASCII code in the range 0-255 (e.g., 65 returns the capital letter A).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a string containing the ASCII representation of the given code.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns a blank string and sets @error to 1 if the ASCIIcode is greater than 255.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Chr(48) == "0", Chr(57) == "9", Chr(65) == "A", Chr(90) == "Z", Chr(97) == "a", Chr(122) = "z", etc.<br>
+A complete ASCII table is in the Appendix.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Asc.html">Asc</a>, <a href="AscW.html">AscW</a>, <a href="ChrW.html">ChrW</a>, <a href="String.html">String</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">65</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">90</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$text</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Chr</span><span class="S8">(</span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Uppercase alphabet"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$text</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/Chr.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

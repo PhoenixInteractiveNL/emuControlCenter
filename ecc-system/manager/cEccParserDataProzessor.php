@@ -1,4 +1,6 @@
 <?php
+define('SLOW_CRC32_PARSING_FROM', 100663296);
+
 class EccParserDataProzessor{
 	
 	// objects
@@ -11,6 +13,9 @@ class EccParserDataProzessor{
 	private $_file_list = array();
 	private $_base_directory = false;
 	private $_known_extensions = array();
+	
+	private $connectedMetaOnlyEccident = false;
+	private $connectedMetaFilesizeCheck = false;
 	
 	// statistics
 	private $_parser_stats_cnt_notchanged = array();
@@ -31,6 +36,13 @@ class EccParserDataProzessor{
 		
 		$this->invalidFiles = $this->fileListObj->invalidFile;
 	}
+	
+	public function setConnectedMetaOnlyEccident($eccident){
+		$this->connectedMetaOnlyEccident = $eccident;
+	}
+	public function setConnectedMetaFilesizeCheck($state){
+		$this->connectedMetaFilesizeCheck = $state;
+	}	
 	
 	public function parse()
 	{
@@ -53,7 +65,7 @@ class EccParserDataProzessor{
 			// F�r jede file_extension daten parsen
 			$log .= LOGGER::add('romparse', "Search and Parse new romfiles!!!!", 1);
 			#$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME', 'PATH', 'PATH_PACK')));
-			$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME')));
+			$log .= LOGGER::add('romparse', join("\t", array('STATE', 'CRC32', 'EXT', 'NAME')));
 			
 			foreach($this->_file_list as $file_extension => $file_data) {
 				
@@ -63,8 +75,6 @@ class EccParserDataProzessor{
 				$cnt_current = 0;
 				
 				foreach($file_data as $file_name_info) {
-					
-					
 					
 					while (gtk::events_pending()) gtk::main_iteration();
 					
@@ -78,6 +88,16 @@ class EccParserDataProzessor{
 					$size_db = $this->dataParserObj->get_file_size($file_name_direct, $file_name_packed);	// from database
 					$size_fs = FileIO::get_file_size($file_name_direct, $file_name_packed, 'B');
 					
+					/*
+					 * HYPERFAST MODE!!!!!!!!!!!!!!!!!
+					 * THIS ONLY WORKS, IF THERE ARE FILESIZES AVAILABLE IN THE METADATA
+					 */
+					if ($this->connectedMetaOnlyEccident && $this->connectedMetaFilesizeCheck){
+						if ((isset($availFileSizes[$size_fs]) && $availFileSizes[$size_fs]) || $availFileSizes[$size_fs] = $this->dataParserObj->findMetaByFilesize($this->connectedMetaOnlyEccident, $size_fs));
+						else continue;
+						print "$size_fs $file_name_direct".LF;
+					}
+					
 					if (($size_db && $size_fs) && ($size_db == $size_fs)) {
 						if (!isset($this->_parser_stats_cnt_notchanged[$file_extension])) {
 							$this->_parser_stats_cnt_notchanged[$file_extension] = 0;
@@ -86,6 +106,19 @@ class EccParserDataProzessor{
 						$cntUnchanged++;
 					}
 					else {
+
+						if ($size_fs >= SLOW_CRC32_PARSING_FROM){
+							$fileSizeMB = round($size_fs/1024/1024, 1)." MB";
+							$fileName = ($file_name_packed) ? basename($file_name_packed) : basename($file_name_direct);
+							
+							$title = I18N::get('popup', 'parse_big_file_found_title');
+							$msg = sprintf(I18N::get('popup', 'parse_big_file_found_msg%s%s'), $fileName, $fileSizeMB);
+							
+							#$title = "Really parse this file?";
+							#$msg = "BIG FILE FOUND!!!\n\nThe found game\n\nName: ".$fileName."\nSize: ".$fileSizeMB."\n\nis very large. This can take a long time without direct feedback of emuControlCenter.\n\nDo you want parse this game?";
+							if(!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) continue;
+						}
+						
 						
 						$out = false;
 						
@@ -118,16 +151,27 @@ class EccParserDataProzessor{
 						}
 						
 						if ($out && $out['FILE_VALID']) {
+							
+							/*
+							 * HYPERFAST MODE!!!!!!!!!!!!!!!!!
+							 * THIS ONLY WORKS, IF THERE ARE FILESIZES AVAILABLE IN THE METADATA
+							 */
+							if ($this->connectedMetaOnlyEccident){
+								if ((isset($availFileCrc32[$out['FILE_CRC32']]) && $availFileCrc32[$out['FILE_CRC32']]) || $availFileCrc32[$out['FILE_CRC32']] = $this->dataParserObj->findMetaByCrc32($this->connectedMetaOnlyEccident, $out['FILE_CRC32']));
+								else continue;
+								#print $out['FILE_CRC32']." -> ".$out['FILE_NAME'].LF;
+							}
+							
 							// Db operations
 							$cntValid++;
 							$this->dataParserObj->add_file($out);
-							$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'])));
+							$log .= LOGGER::add('romparse', join("\t", array('OK ', $out['FILE_CRC32'], $file_extension, $out['FILE_NAME'])));
 							#$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'], $out['FILE_PATH'], $out['FILE_PATH_PACK'])));
 							
 						}
 						else {
+							$log .= LOGGER::add('romparse', join("\t", array('ERR', '________', $file_extension, $out['FILE_NAME'])));
 							$cntInvalid++;
-							print "invalid: ".$out['FILE_PATH']."\n";
 						}
 						
 						
@@ -148,7 +192,10 @@ class EccParserDataProzessor{
 					$this->fileListObj->status_obj->update_progressbar($current_percent, $file_extension.": ".round($current_percent*100)."% ".$progressbar_string);
 					$detail_header = sprintf(I18N::get('status', 'parse_rom_detail_header%s'), $this->format_results());
 					$this->fileListObj->status_obj->update_message($detail_header);
-					if ($this->fileListObj->status_obj->is_canceled()) return false;
+					if ($this->fileListObj->status_obj->is_canceled()){
+						#FACTORY::getDbms()->query('ROLLBACK TRANSACTION;');
+						return false;
+					}
 				}
 				$this->gui->update_treeview_nav();
 			}

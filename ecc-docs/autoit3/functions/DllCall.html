@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DllCall.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function DllCall</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllCall</font>
+<hr size="2">
+<p>Dynamically calls a function in a DLL.<br></p>
+
+<p class="codeheader">
+DllCall ( "dll", "return type", "function" [, "type1", param1 [, "type n", param n]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">dll</td>
+    <td width="85%">The filename of the DLL to use. e.g. "user32.dll". A handle obtained from DllOpen can also be used (See Remarks).</td>
+  </tr>
+  <tr>
+   <td>return type</td>
+   <td>The return type of the function (see below).</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>The name, eg. "MessageBox" or the ordinal value, e.g. 62, of the function in the DLL to call.</td>
+  </tr>
+  <tr>
+   <td>type</td>
+   <td>[optional] The type of the parameter (see remarks).</td>
+  </tr>
+  <tr>
+   <td>param</td>
+   <td>[optional] The actual parameter (see remarks).</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">@error = 0.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>@error = 1 unable to use the DLL file,</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>@error = 2 unknown "return type",</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>@error = 3 "function" not found in the DLL file.</td>
+  </tr>
+</table>See remarks.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If a dll filename is given then the DLL is automatically loaded and then closed at the end of the call. If you want to manually control the loading and unloading of the DLL then you should use DllOpen and DllClose and use a handle instead of a filename in this function.<br>
+<br>
+By default, AutoIt uses the 'stdcall' calling method. To use the 'cdecl' method place ':cdecl' after the return type.<br>
+DllCall("SQLite.dll", "int:cdecl", "sqlite3_open", "str", $sDatabase_Filename , "long_ptr", 0).<br>
+<br>
+You can have as many "types" and "param" as you like.  See the examples below that use a number of parameters.<br>
+<br>
+Valid Types are:<br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>Type</b></td>
+    <td width="85%"><b>Details</b></td>
+  </tr>
+  <tr>
+   <td>none</td>
+   <td>no value (only valid for return type - equivalent to void in C)</td>
+  </tr>
+  <tr>
+   <td>short</td>
+   <td>a 16 bit integer</td>
+  </tr>
+  <tr>
+   <td>ushort</td>
+   <td>an unsigned 16 bit integer</td>
+  </tr>
+  <tr>
+   <td>dword</td>
+   <td>a 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>int</td>
+   <td>a 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>long</td>
+   <td>a 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>udword</td>
+   <td>an unsigned 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>uint</td>
+   <td>an unsigned 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>short_ptr</td>
+   <td>a pointer to a 16 bit integer </td>
+  </tr>
+  <tr>
+   <td>int_ptr</td>
+   <td>a pointer to a 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>long_ptr</td>
+   <td>a pointer to a 32 bit integer</td>
+  </tr>
+  <tr>
+   <td>str</td>
+   <td>a string (cannot be more than 65536)</td>
+  </tr>
+  <tr>
+   <td>wstr</td>
+   <td>a wide character string (converted to/from an ANSI string during the call).  Cannot be more than 65536</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td>a window handle</td>
+  </tr>
+  <tr>
+   <td>ptr</td>
+   <td>a general pointer (void *)</td>
+  </tr>
+</table><br>
+If the function call fails then @error is set to 1.  Otherwise an array is returned that contains the function return value and a copy of all the parameters (including parameters that the function may have modified).<br>
+$return[0] = function return value<br>
+$return[1] = param1<br>
+$return[2] = param2<br>
+...<br>
+$return[n] = paramn<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="DllOpen.html">DllOpen</a>, <a href="DllClose.html">DllClose</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; *******************************************************</span><br>
+<span class="S1">; Example 1 - calling the MessageBox API directly</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$result</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MessageBox"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some text"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; Example 2 - calling a function that modifies parameters</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$hwnd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetHandle</span><span class="S8">(</span><span class="S7">"Untitled - Notepad"</span><span class="S8">)</span><br>
+<span class="S9">$result</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetWindowText"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hwnd</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32768</span><span class="S8">)</span><br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$result</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; number of chars returned</span><br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$result</span><span class="S8">[</span><span class="S3">2</span><span class="S8">])</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; Text returned in param 2</span><br>
+<br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; Example 3 - Show the Windows PickIconDlg</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$sFileName</span><span class="S0">&nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'\shell32.dll'</span><br>
+<br>
+<span class="S1">; Create a strcuture to store the icon index</span><br>
+<span class="S9">$stIcon</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> &nbsp;</span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int"</span><span class="S8">)</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@OSType</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"WIN32_NT"</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert and store the filename as a wide char string</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nBuffersize</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"kernel32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MultiByteToWideChar"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x00000001</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stString</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DLLStructCreate</span><span class="S8">(</span><span class="S7">"byte["</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S9">$nBuffersize</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"kernel32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MultiByteToWideChar"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x00000001</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBuffersize</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Win'9x</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stString</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DLLStructCreate</span><span class="S8">(</span><span class="S7">"char[260]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S1">; Run the PickIconDlg - '62' is the ordinal value for this function</span><br>
+<span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"none"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">62</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stIcon</span><span class="S8">))</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@OSType</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"WIN32_NT"</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the new selected filename back from a wide char string</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nBuffersize</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"kernel32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"WideCharToMultiByte"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x00000200</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stFile</span><span class="S0">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DLLStructCreate</span><span class="S8">(</span><span class="S7">"char["</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nBuffersize</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"kernel32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"WideCharToMultiByte"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x00000200</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stFile</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBuffersize</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sFileName</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stFile</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sFileName</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S9">$nIconIndex</span><span class="S0">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stIcon</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Show the new filename and icon index</span><br>
+<span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Info"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Last selected file: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Icon-Index: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nIconIndex</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$stBuffer</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S9">$stFile</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S9">$stIcon</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/DllCall.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

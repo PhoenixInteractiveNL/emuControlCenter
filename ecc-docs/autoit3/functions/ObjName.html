@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ObjName.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+<head>
+  <title>Function ObjName</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ObjName</font>
+<hr size="2">
+<p>Returns the name or interface description of an Object<br></p>
+
+<p class="codeheader">
+ObjName ( $Objectvariable [,Flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">$Objectvariable</td>
+    <td width="85%">A variable containing an Object whose name you want to retrieve</td>
+  </tr>
+  <tr>
+   <td>Flag</td>
+   <td>1 = Name of the dispatch interface being used (default)<br>
+       2 = Description of the (document) Object<br>
+       3 = The ProgID of the Object<br>
+       4 = The DLL file from with the Object was created (if supported)<br>
+       5 = Filename and position of the toolbox icon (if supported)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a string representing the name</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error and Returns "" </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+Not all Objects support flags 2 to 5. Always test for @error in these cases.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="IsObj.html">IsObj</a>, <a href="ObjGet.html">ObjGet</a>, <a href="ObjCreate.html">ObjCreate</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$oInternet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"InternetExplorer.Application"</span><span class="S8">)</span><br>
+<span class="S9">$oInternet</span><span class="S8">.</span><span class="S14">Navigate</span><span class="S8">(</span><span class="S0"> </span><span class="S7">"http://www.google.com"</span><span class="S0"> </span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Opening a web page that contains a form</span><br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">4000</span><span class="S8">)</span><span class="S0">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; Give the page time to load</span><br>
+<br>
+<span class="S9">$oDoc</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oInternet</span><span class="S8">.</span><span class="S14">document</span><span class="S0">&nbsp;</span><span class="S1">; Example object to test</span><br>
+<span class="S9">$oForm</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oDoc</span><span class="S8">.</span><span class="S14">forms</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp;&nbsp; &nbsp; </span><span class="S1">; Example object to test</span><br>
+<br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"Interface name of $oInternet is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oInternet</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oInternet is: &nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oInternet</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Interface name of $oDoc is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oDoc</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oDoc is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oDoc</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Interface name of $oForm is: &nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oForm</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oForm is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oForm</span><span class="S8">,</span><span class="S3">2</span><span class="S8">))</span><br>
+<br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/ObjName.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:29:01 GMT -->
+</html>

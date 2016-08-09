@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BlockInput.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+<head>
+  <title>Function BlockInput</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BlockInput</font>
+<hr size="2">
+<p>Disable/enable the mouse and keyboard.<br></p>
+
+<p class="codeheader">
+BlockInput ( flag )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">flag</td>
+    <td width="85%">1 = Disable user input<br>
+       0 = Enable user input</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+None.<br>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+If BlockInput is enabled, the Alt keypress cannot be sent!<br>
+The table below shows how BlockInput behavior depends on the Windows version; however, pressing <i>Ctrl+Alt+Del</i> on any platform will re-enable input due to a Windows API feature.<br>
+<br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b><i>Operating System</b></i></td>
+    <td width="85%"><b><i>"BlockInput" Results</b></i></td>
+  </tr>
+  <tr>
+   <td>Windows 95</td>
+   <td>No effect.</td>
+  </tr>
+  <tr>
+   <td>Windows 98/Me</td>
+   <td>User input is blocked but AutoIt is also unable to simulate input.</td>
+  </tr>
+  <tr>
+   <td>Windows NT 4 (Without ServicePack 6)</td>
+   <td>No effect.</td>
+  </tr>
+  <tr>
+   <td>Windows NT 4 (With ServicePack 6)</td>
+   <td>User input is blocked and AutoIt can simulate most input.</td>
+  </tr>
+  <tr>
+   <td>Windows 2000</td>
+   <td>User input is blocked and AutoIt can simulate most input.</td>
+  </tr>
+  <tr>
+   <td>Windows XP</td>
+   <td>User input is blocked and AutoIt can simulate most input.  See exceptions below.</td>
+  </tr>
+</table><br>
+If you are using Windows XP then you should be aware that a hotfix released inbetween SP1 and SP2 limited Blockinput so that the ALT key could NOT be sent.  This is fixed in XP SP2.<br>
+<br>
+Note that functions such as WinMove() or Send() will still work when BlockInput is enabled because BlockInput just affects <b>user interaction</b> with the keyboard or the mouse not what is done with AutoIt functions (aside from the exceptions in the table above).<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="Send.html">Send</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">If</span><span class="S0"> </span><span class="S6">@OSVersion</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S7">"WIN_98"</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S6">@OSVersion</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S7">"WIN_ME"</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">BlockInput</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">Run</span><span class="S8">(</span><span class="S7">"notepad"</span><span class="S8">)</span><br>
+<span class="S4">WinWaitActive</span><span class="S8">(</span><span class="S7">"Untitled - Notepad"</span><span class="S8">)</span><br>
+<span class="S4">Send</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{F5}</span><span class="S7">"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;pastes time and date</span><br>
+<br>
+<span class="S4">BlockInput</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/BlockInput.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:57 GMT -->
+</html>

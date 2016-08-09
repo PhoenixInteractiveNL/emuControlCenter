@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/PixelSearch.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+<head>
+  <title>Function PixelSearch</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">PixelSearch</font>
+<hr size="2">
+<p>Searches a rectangle of pixels for the pixel color provided.<br></p>
+
+<p class="codeheader">
+PixelSearch ( left, top, right, bottom, color [, shade-variation] [, step]]  )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>Parameters</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">left</td>
+    <td width="85%">left coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>top coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>right</td>
+   <td>right coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>bottom</td>
+   <td>bottom coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>colour</td>
+   <td>Colour value of pixel to find (in decimal or hex).</td>
+  </tr>
+  <tr>
+   <td>shade-variation</td>
+   <td>[optional] A number between 0 and 255 to indicate the allowed number of shades of variation of the red, green, and blue components of the colour. Default is 0 (exact match).</td>
+  </tr>
+  <tr>
+   <td>step</td>
+   <td>[optional] Instead of searching each pixel use a value larger than 1 to skip pixels (for speed).  E.g. A value of 2 will only check every other pixel.  Default is 1.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Return Value</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">Success:</td>
+    <td width="90%">Returns a two-element array of pixel's coordinates. (Array[0] = x, Array[1] = y)</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 1 if color is not found.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>Remarks</b></p>
+The search is performed left-to-right, top-to-bottom and the first match is returned.<br>
+<br>
+Earlier versions of AutoIt (prior to v3.0.102) used the BGR format for defining color - newer versions use RGB by default but this can be changed using the ColorMode option.<br>
+<br>
+Remember, a typical display at 1024 x 768 has 786432 pixels. Although PixelSearch is optimized, narrowing the search area helps speed up the result.<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>Related</b></p>
+<a href="AutoItSetOption.html#ColorMode">ColorMode (Option)</a>, <a href="PixelChecksum.html">PixelChecksum</a>, <a href="PixelGetColor.html">PixelGetColor</a>, <a href="AutoItSetOption.html#PixelCoordMode">PixelCoordMode (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Find a pure red pixel in the range 0,0-20,300</span><br>
+<span class="S9">$coord</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">PixelSearch</span><span class="S8">(</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xFF0000</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"X and Y are:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<br>
+<span class="S1">; Find a pure red pixel or a red pixel within 10 shades variations of pure red</span><br>
+<span class="S9">$coord</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">PixelSearch</span><span class="S8">(</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xFF0000</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"X and Y are:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<p>&nbsp;</p>
+
+</body>
+
+<!-- Mirrored from www.autoitscript.com/autoit3/docs/functions/PixelSearch.htm by HTTrack Website Copier/3.x [XR&CO'2006], Mon, 21 May 2007 15:28:56 GMT -->
+</html>

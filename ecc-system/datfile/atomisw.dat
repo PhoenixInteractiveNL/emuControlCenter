@@ -1,0 +1,207 @@
+clrmamepro (
+	name "SEGA-Sammy Atomiswave"
+	description "SEGA-Sammy Atomiswave (Demul 0.5.5)"
+	category "Standard DatFile"
+	version "Demul 0.5.5"
+	date "12/10/2009 16:41:46"
+	author "JacKc, splitted by wAw"
+)
+
+game (
+	name awbios
+	description "Atomiswave Bios"
+	year 2001
+	manufacturer "Sammy"
+	rom ( name bios.ic23_h-dolhpin_blue_settings size 65536 crc 5d5687c7 sha1 2600ce09c44872d1793f6b55bf44342673da5ad1 )
+	rom ( name bios.ic23_l size 65536 crc e5693ce3 sha1 1bde3ed87af64b0f675ebd47f12a53e1fc5709c1 )
+)
+
+game (
+	name demofist
+	description "Demolish Fist"
+	year 2003
+	manufacturer "Polygon Magic / Dimps"
+	rom ( name ax0601m01.ic11 size 16777216 crc 12fda2c7 sha1 3afbac221ffe249386e4cb50b4edd013d9a40062 )
+	rom ( name ax0601p01.ic18 size 8388608 crc 0efb38ad sha1 9400e37efe3e936474d74400ebdf28ad0869b67b )
+	rom ( name ax0602m01.ic12 size 16777216 crc aea61fdf sha1 0a088848bbf7a47df8b44b69bf72ed0d4a1088f8 )
+	rom ( name ax0603m01.ic13 size 16777216 crc d5879d35 sha1 977cd3b373c6f94eb21ffb24ff564971d3d633e5 )
+	rom ( name ax0604m01.ic14 size 16777216 crc a7b09048 sha1 229fa2332b58fec2a712c3ebd672662f35a9485a )
+	rom ( name ax0605m01.ic15 size 16777216 crc 18d8437e sha1 fe2e189e40a89141335e754268d29d46e3eb3bb8 )
+	rom ( name ax0606m01.ic16 size 16777216 crc 42c81617 sha1 1cc686af5e3fc56143836e3dcc0067893f82fcf9 )
+	rom ( name ax0607m01.ic17 size 16777216 crc 96e5aa84 sha1 e9841f550f2ef409d97004542bcadabb6b9e84af )
+)
+
+game (
+	name dolphin
+	description "Dolphin Blue"
+	year 2003
+	manufacturer "Sammy"
+	rom ( name ax0401m01.ic11 size 16777216 crc 5e5dca57 sha1 e0623c84f66cada37d4c9399a7a8fc6866933144 )
+	rom ( name ax0401p01.ic18 size 8388608 crc 195d6328 sha1 cf3b5699f81235919dd3b1974d2ecb0376cb4552 )
+	rom ( name ax0402m01.ic12 size 16777216 crc 77dd4771 sha1 dcd23b8ddc82eab2f325266ffd7ed3fbc1bcdf71 )
+	rom ( name ax0403m01.ic13 size 16777216 crc 911d0674 sha1 eec35badcfbfe412b7104a86c2111f5a1b5fb5cd )
+	rom ( name ax0404m01.ic14 size 16777216 crc f82a4ca3 sha1 da686d86e176a9f24874d2916b1932f03a99a52d )
+	rom ( name ax0405m01.ic15 size 16777216 crc b88298d7 sha1 490c3ec471018895b7268ee33498dddaccbbfd5a )
+)
+
+game (
+	name fotns
+	description "Fist Of The North Star"
+	year 2005
+	manufacturer "Arc System Works"
+	rom ( name ax1901m01.ic11 size 16777216 crc ff5a1642 sha1 49cefcce173f9a811fe9c0c07bee53aeba2bc3a8 )
+	rom ( name ax1901p01.ic18 size 8388608 crc a06998b0 sha1 d617691db5170f6db176e40fc732966d523fd8cf )
+	rom ( name ax1902m01.ic12 size 16777216 crc d9aae8a9 sha1 bf87034088be0847b6e297b7665e0ea4d8cba631 )
+	rom ( name ax1903m01.ic13 size 16777216 crc 1711b23d sha1 ab628b2ec678839c75245e245297818ef1592d3b )
+	rom ( name ax1904m01.ic14 size 16777216 crc 443bfb26 sha1 6f7751afa0ca55dd0679758b27bed92b31c1b050 )
+	rom ( name ax1905m01.ic15 size 16777216 crc eb1cada0 sha1 459d21d622c72606f1d3095e8a25b6c4adccf8ab )
+	rom ( name ax1906m01.ic16 size 16777216 crc fe6da168 sha1 d4ab6443383469bb5a4337005de917627a2e21cc )
+	rom ( name ax1907m01.ic17 size 16777216 crc 9d3a0520 sha1 78583fd171b34439f77a04a97ebe3c9d1bab61cc )
+)
+
+game (
+	name ggisuka
+	description "Guilty Gear Isuka"
+	year 2003
+	manufacturer "Sammy / Arc System Works"
+	rom ( name ax1201m01.ic10 size 16777216 crc df96ce30 sha1 25a9f743b1c2b11896d0c7a2dc1c198fc977aaca )
+	rom ( name ax1201p01.ic18 size 8388608 crc 0a78d52c sha1 e9006dc43cd11d5ba49a092a1dff31dc10700c28 )
+	rom ( name ax1202m01.ic11 size 16777216 crc dfc6fd67 sha1 f9d35b18a03d22f70feda42d314b0f9dd54eea55 )
+	rom ( name ax1203m01.ic12 size 16777216 crc bf623df9 sha1 8b9a8e8100ff6d2ce9a982ab8eb1d542f1c7af03 )
+	rom ( name ax1204m01.ic13 size 16777216 crc c80c3930 sha1 5c39fde36e2ebbfe72967d7d0202eb454a8d3bbe )
+	rom ( name ax1205m01.ic14 size 16777216 crc e99a269d sha1 a52148b82b0338b8bad8b52985302eaf81a4cfde )
+	rom ( name ax1206m01.ic15 size 16777216 crc 807ab795 sha1 17c86b1a56333c05b68ff84f83e964d013c1819c )
+	rom ( name ax1207m01.ic16 size 16777216 crc 6636d1b8 sha1 9bd8fc114557f6fbe772f85eeb246f7336d4255e )
+	rom ( name ax1208m01.ic17 size 16777216 crc 38bda476 sha1 0234a6f5fbaf5e958b3ba0db311dff157f80addc )
+)
+
+game (
+	name kofnw
+	description "The King of Fighters Neowave"
+	year 2005
+	manufacturer "Sammy / SNK Playmore"
+	rom ( name ax2201m01.ic11 size 16777216 crc 22ea665b sha1 292c92c9ae43eea2d1c27cedfb89c3956b8dea32 )
+	rom ( name ax2201p01.ic18 size 8388608 crc 27aab918 sha1 41c5ddd8bd4c91481750606ab44aa115b5fe01d0 )
+	rom ( name ax2202m01.ic12 size 16777216 crc 7fad1bea sha1 89f3f88af48973a4685955d86ef97a1487b8e7a8 )
+	rom ( name ax2203m01.ic13 size 16777216 crc 78986ca4 sha1 5a6c8c12955573f33361d2c6f20f85de35ac7bae )
+	rom ( name ax2204m01.ic14 size 16777216 crc 6ffbeb04 sha1 975062cf364589dbdd5c5cb5ca945f76d87fc120 )
+	rom ( name ax2205m01.ic15 size 16777216 crc 2851b791 sha1 566ef95ea066b7bf548986085670242be217befc )
+	rom ( name ax2206m01.ic16 size 16777216 crc e53eb965 sha1 f50cd53a5859f081d8a278d24a519c9d9b49ab96 )
+)
+
+game (
+	name kov7sprt
+	description "Knights of Valour - The Seven Spirits"
+	year 2004
+	manufacturer "Sammy / IGS"
+	rom ( name ax1301m01.ic11 size 16777216 crc 58ae7ca1 sha1 e91975697b797ea05488ace649cbb9964b4cd500 )
+	rom ( name ax1301m02.ic12 size 16777216 crc 871ea03f sha1 6806910832ca271a9240aca8e91279556e5b0cb7 )
+	rom ( name ax1301m03.ic13 size 16777216 crc abc328bc sha1 d9271d4e5abe76d31de0f60a5c106260338d42e9 )
+	rom ( name ax1301m04.ic14 size 16777216 crc 25a176d1 sha1 6d815bf6acb645fead060733660e24fb0d44282d )
+	rom ( name ax1301m05.ic15 size 16777216 crc e6573a93 sha1 0666e52d0088263f28938e4c8aae201e604ec1f2 )
+	rom ( name ax1301m06.ic16 size 16777216 crc cb8cacb4 sha1 5d008e8a934451b9bfa33fedfd492c86d9226ef5 )
+	rom ( name ax1301m07.ic17 size 16777216 crc 0ca92213 sha1 115c50fa55e6de3439de23e74621695510c6a7ba )
+	rom ( name ax1301p01.ic18 size 8388608 crc 6833a334 sha1 646aaa578e09ad23bc9c7f4fbdfb3c1486916fd3 )
+)
+
+game (
+	name rangrmsn
+	description "Ranger Mission"
+	year 2004
+	manufacturer "Sammy"
+	rom ( name ax1601m01.ic11 size 16777216 crc f34eed33 sha1 1c171fb8aa95877f81ed78652d4a9ff80f7713ff )
+	rom ( name ax1601p01.ic18 size 8388608 crc 00a74fbb sha1 57cc1eedd22d1f553956a825e69a597309ee2bef )
+	rom ( name ax1602m01.ic12 size 16777216 crc a7d59efb sha1 a40938ce1399babefc8cf02f579a86cf08e211ef )
+	rom ( name ax1603m01.ic13 size 16777216 crc 7c0aa241 sha1 3e0e5ff3307dcfa52998fb9b4b14bf54bd056a99 )
+	rom ( name ax1604m01.ic14 size 16777216 crc d2369144 sha1 da1eae9957d27d1682c4191780cf51b32dfe6659 )
+	rom ( name ax1605m01.ic15 size 16777216 crc 0c11c1f9 sha1 0585db60618c5b97f9b7c203baf7e5ac90883ca6 )
+)
+
+game (
+	name rumblef
+	description "The Rumble Fish"
+	year 2004
+	manufacturer "Sammy / Dimps"
+	rom ( name ax1801m01.ic11 size 16777216 crc c38aa61c sha1 e2f688a0aa8b0119f5fd3d53c8904e035d43a4b1 )
+	rom ( name ax1801p01.ic18 size 8388608 crc 2f7fb163 sha1 bf819d798d9a3a7bc754e111a3f53b9db6d6042a )
+	rom ( name ax1802m01.ic12 size 16777216 crc 72e0ebc8 sha1 e85300a405ea14c4c9d857eb9685c93faaca1d56 )
+	rom ( name ax1803m01.ic13 size 16777216 crc d0f59d98 sha1 b854796087e9f76a13a21da8249f7224e451e129 )
+	rom ( name ax1804m01.ic14 size 16777216 crc 15595cba sha1 8dd06d1f986cd21a58d20b662b11ed7ba8a6ff7a )
+	rom ( name ax1805m01.ic15 size 16777216 crc 3d3f8e0d sha1 364a0bda890722b9fb72171f96c742b8f3fef23e )
+	rom ( name ax1806m01.ic16 size 16777216 crc ac2751bb sha1 5070fa12bf109ab87e8f7ea46ac4ae78a73105da )
+	rom ( name ax1807m01.ic17 size 16777216 crc 3b2fbdb0 sha1 f9f7e06785d3a07282247aaedd9999aa7c2670b9 )
+)
+
+game (
+	name salmankt
+	description "Salary Man Kintarou"
+	year 2004
+	manufacturer "Sammy"
+	rom ( name ax1401m01.ic11 size 16777216 crc fd7af845 sha1 0c8f5a91662e46d5c187a0758af95082183cdf69 )
+	rom ( name ax1401p01.ic18 size 8388608 crc 28d779e0 sha1 dab785a595de5f474c18c713e672949176a5b1b5 )
+	rom ( name ax1402m01.ic12 size 16777216 crc 88d458a7 sha1 c661196d5a9640013995c8aa6a5bea057d984f87 )
+	rom ( name ax1403m01.ic13 size 16777216 crc 074f7c4b sha1 4955e4f333d15d5d9cc69bb9658f29a37e912012 )
+	rom ( name ax1404m01.ic14 size 16777216 crc af4e3829 sha1 18d9e8a8d8e930ad697b686a98f31ea175f5fd4a )
+	rom ( name ax1405m01.ic15 size 16777216 crc b548446f sha1 8b4661e601e36c067dff2530aff4f7ea76e1c21e )
+	rom ( name ax1406m01.ic16 size 16777216 crc 437673e6 sha1 66f7e5f246ebbb1bdbf074da41ec16bf32720a82 )
+	rom ( name ax1407m01.ic17 size 16777216 crc 6b6acc0a sha1 a8c692c875271a0806460caa79c67fd756231273 )
+)
+
+game (
+	name sprtshot
+	description "Sports Shooting USA"
+	year 2002
+	manufacturer "Sammy"
+	rom ( name ax0101m01.ic11 size 16777216 crc 1e39184d sha1 663e0cb9f43a0f89d9841e04b3d009f6c5e88d5e )
+	rom ( name ax0101p01.ic18 size 8388608 crc b3642b5d sha1 85eabd9551aefb825ae8eb6422092fb5a58d60f6 )
+	rom ( name ax0102m01.ic12 size 16777216 crc 700764d1 sha1 310f1606f7bbed1012c119f1ef5d89d231d8489e )
+	rom ( name ax0103m01.ic13 size 16777216 crc 6144e7a8 sha1 4d4341082f008dfd93ef5bf32a44c80869ef02a8 )
+	rom ( name ax0104m01.ic14 size 16777216 crc ccb72150 sha1 a1032d321c27f9ff43da41f20b8687bf1958ddc9 )
+)
+
+game (
+	name vfurlong
+	description "Net Select Keiba Victory Furlong"
+	year 2005
+	manufacturer "Sammy"
+	rom ( name ax2001m01.ic11 size 16777216 crc 64460b24 sha1 044857d6593897d303622e005a63ca7b3acd7453 )
+	rom ( name ax2001p01.ic18 size 8388608 crc 17ea9aa9 sha1 c68500e9b3407a9d4b20f2678718ce475f179f7d )
+	rom ( name ax2002m01.ic12 size 16777216 crc d4da357f sha1 c462cddec9a369a1a5595676de76499d56683ea9 )
+	rom ( name ax2003m01.ic13 size 16777216 crc ad046ad7 sha1 ac7c46e458595714e327526354e1111fb25b44e0 )
+	rom ( name ax2004m01.ic14 size 16777216 crc 4d555d7c sha1 a5eccc920bdb7ad9cf57c0e1ef6a905c6b9eee45 )
+	rom ( name ax2005m01.ic15 size 16777216 crc 785208e2 sha1 6ba5bd3901c5b1d71abcc8d833a011bd4abae6b6 )
+	rom ( name ax2006m01.ic16 size 16777216 crc 8134ec55 sha1 843e473d4f99237ded641cce9515b7802cfe3742 )
+	rom ( name ax2007m01.ic17 size 16777216 crc d0557e8a sha1 df8057597eb690bd18c5d26736f5d4f86e3b1225 )
+)
+
+game (
+	name xtrmhnt2
+	description "Extreme Hunting 2"
+	year 2006
+	manufacturer "Sega"
+	rom ( name 610-0752.u1 size 16777216 crc 3086bc47 sha1 eb7b04db90d296985528f0cfdd4545f184c40b64 )
+	rom ( name 610-0752.u14 size 16777216 crc ce83bcc7 sha1 e2d324a5a7eacbec7b0df9a4b9e276521bb9ab80 )
+	rom ( name 610-0752.u15 size 16777216 crc 864a6342 sha1 fb97532d5dd00f8520fdaf68dfcd1ea627bdf90a )
+	rom ( name 610-0752.u16 size 16777216 crc 8ac71c76 sha1 080e41e633bf082fc536781541c6031d1ac81939 )
+	rom ( name 610-0752.u17 size 16777216 crc a79fb1fa sha1 f75c5b574fd79677b926c595b369e95605a3c848 )
+	rom ( name 610-0752.u2 size 16777216 crc d3a88b31 sha1 ccf14367e4e7efbc2cc835f3b001fd6d64302a5e )
+	rom ( name 610-0752.u3 size 16777216 crc bab6182e sha1 4d25256c81941316887cbb4524a203922f5b7104 )
+	rom ( name 610-0752.u4 size 16777216 crc 9787f145 sha1 8445ede0477f70fbdc113810b80356945ce498d2 )
+	rom ( name flash128.ic4s size 16777216 crc 866ed675 sha1 2c4c06935b7ab1876e640cede51713b841833567 )
+	rom ( name fpr-24330a.ic2 size 4194304 crc 8d89877e sha1 6caafc49114eb0358e217bc2d1a3ab58a93c8d19 )
+)
+
+game (
+	name xtrmhunt
+	description "Extreme Hunting"
+	year 2005
+	manufacturer "Sammy"
+	rom ( name ax2401m01.ic11 size 16777216 crc 76dbc286 sha1 8f36ca94b8e67c76e0f90b21debc5ac7890f0da1 )
+	rom ( name ax2401p01.ic18 size 8388608 crc 8e2a11f5 sha1 b5106314fb8d4483254e83ac3982039bb60a78e8 )
+	rom ( name ax2402m01.ic12 size 16777216 crc cd590ea2 sha1 ee5e38bf68e95da665be478ebba9cc5ffed52bb7 )
+	rom ( name ax2403m01.ic13 size 16777216 crc 06f62eb5 sha1 f7e8d1dda6bb59ca2bc7cfa1105889b9e8e6d55d )
+	rom ( name ax2404m01.ic14 size 16777216 crc 759ef5cb sha1 27ac2d12c6fb358b3d631c017c7b693e5ad95fd7 )
+	rom ( name ax2405m01.ic15 size 16777216 crc 940d77f1 sha1 eefdfcb92873032dc7d9ff9310bf5ed715c8bf4f )
+	rom ( name ax2406m01.ic16 size 16777216 crc cbcf2c5d sha1 61362fabcbb3bfc01c996748a7ca65f8a0e02f2f )
+)
+

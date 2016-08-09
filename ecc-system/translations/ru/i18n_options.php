@@ -84,7 +84,6 @@ $i18n['languages'] = array(
 	/* 1.0.0 WIP 04 */
 	'[[hu]]' =>
 		"Hungarian",
-	/* */
 	'[[ru]]' =>
 		"Russian",
 );

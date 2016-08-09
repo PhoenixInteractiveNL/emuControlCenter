@@ -1,11 +1,11 @@
 ; ------------------------------------------------------------------------------
 ; Platform               : Sony Playstation 
 ; Script for             : pSX - tested with v1.13
-; Script version         : v1.0.0.0
-; Last changed           : 2009.02.07
+; Script version         : v1.0.0.1
+; Last changed           : 2009.10.12
 ;
 ;
-; Author: Sebastiaan Ebeltjes (aka Phoenix)
+; Author: Sebastiaan Ebeltjes (aka Phoenix) / Bigby
 ;
 ; NOTES:
 ; This script starts the game in full screen
@@ -23,6 +23,12 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
+
+;MOUNTING THE CD (by Bigby)
+;CDImage("mount")				; UNCOMMENT TO ACTIVATE
+;ShellExecuteWait( "psxfin.exe" , "-f h:" )	; UNCOMMENT TO ACTIVATE
+;CDImage("unmount")				; UNCOMMENT TO ACTIVATE
+;Exit						; UNCOMMENT TO ACTIVATE
 
 ; Start the emulator
 Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34))

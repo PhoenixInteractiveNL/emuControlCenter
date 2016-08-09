@@ -60,13 +60,11 @@ $i18n['languages'] = array(
 	'[[de]]' =>
 		"Deutsch",
 	'[[fr]]' =>
-		"Français",
+		"Francais",
 	'[[it]]' =>
 		"Italiano",
 	'[[es]]' =>
-		"Español",
-	'[[pt]]' =>
-	        "Português",
+		"Espanol",
 
 	/* 0.9.6 WIP 3 */
 	'[[jp]]' =>
@@ -84,5 +82,7 @@ $i18n['languages'] = array(
 	/* 1.0.0 WIP 04 */
 	'[[hu]]' =>
 		"Hungarian",
+	'[[ru]]' =>
+		"Russian",
 );
 ?>

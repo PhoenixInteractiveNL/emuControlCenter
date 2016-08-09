@@ -1,0 +1,1003 @@
+clrmamepro (
+   name PGM
+   description "PGM 20091016"
+   category "Polygame Master"
+   version 20090915
+   date 2009-09-15
+   author Logiqx
+   homepage "Logiqx Home Page"
+   url "http://www.logiqx.com/"
+   comment "Please report any data file issues at http://forum.logiqx.com/"
+   forcenodump ignore
+)
+resource (
+	name pgm
+	description "PGM (Polygame Master) System BIOS"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	rom ( name pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+)
+
+game (
+	name orlegend
+	description "Oriental Legend / Xi You Shi E Zhuan (ver. 126)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0103.rom size 2097152 crc d5e93543 sha1 f081edc26514ca8354c13c7f6f89aba8e4d3e7d2 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0100.rom size 4194304 crc 61425e1e sha1 20753b86fc12003cfd763d903f034dbba8010b32 )
+	rom ( name a0100.rom size 4194304 crc 8b3bd88a sha1 42db3a60c6ba9d83ebe2008c8047d094027f65a7 )
+	rom ( name a0101.rom size 4194304 crc 3b9e9644 sha1 5b95ec1d25c3bc3504c93547f5adb5ce24376405 )
+	rom ( name a0102.rom size 4194304 crc 069e2c38 sha1 9bddca8c2f5bd80f4abe4e1f062751736dc151dd )
+	rom ( name a0103.rom size 4194304 crc 4460a3fd sha1 cbebdb65c17605853f7d0b298018dd8801a25a58 )
+	rom ( name a0104.rom size 4194304 crc 5f8abb56 sha1 6c1ddc0309862a141aa0c0f63b641aec9257aaee )
+	rom ( name a0105.rom size 4194304 crc a17a7147 sha1 44eeb43c6b0ebb829559a20ae357383fbdeecd82 )
+	rom ( name b0100.rom size 4194304 crc 69d2e48c sha1 5b5f759007264c07b3b39be8e03a713698e1fc2a )
+	rom ( name b0101.rom size 4194304 crc 0d587bf3 sha1 5347828b0a6e4ddd7a263663d2c2604407e4d49c )
+	rom ( name b0102.rom size 4194304 crc 43823c1e sha1 e10a1a9a81b51b11044934ff702e35d8d7ab1b08 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0100.rom size 2097152 crc e5c36c83 sha1 50c6f66770e8faa3df349f7d68c407a7ad021716 )
+)
+
+game (
+	name orlegende
+	description "Oriental Legend / Xi You Shi E Zhuan (ver. 112)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof orlegend
+	romof orlegend
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0102.rom size 2097152 crc 4d0f6cc5 sha1 8d41f0a712fb11a1da865f5159e5e27447b4388a )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0100.rom merge t0100.rom size 4194304 crc 61425e1e sha1 20753b86fc12003cfd763d903f034dbba8010b32 )
+	rom ( name a0100.rom merge a0100.rom size 4194304 crc 8b3bd88a sha1 42db3a60c6ba9d83ebe2008c8047d094027f65a7 )
+	rom ( name a0101.rom merge a0101.rom size 4194304 crc 3b9e9644 sha1 5b95ec1d25c3bc3504c93547f5adb5ce24376405 )
+	rom ( name a0102.rom merge a0102.rom size 4194304 crc 069e2c38 sha1 9bddca8c2f5bd80f4abe4e1f062751736dc151dd )
+	rom ( name a0103.rom merge a0103.rom size 4194304 crc 4460a3fd sha1 cbebdb65c17605853f7d0b298018dd8801a25a58 )
+	rom ( name a0104.rom merge a0104.rom size 4194304 crc 5f8abb56 sha1 6c1ddc0309862a141aa0c0f63b641aec9257aaee )
+	rom ( name a0105.rom merge a0105.rom size 4194304 crc a17a7147 sha1 44eeb43c6b0ebb829559a20ae357383fbdeecd82 )
+	rom ( name b0100.rom merge b0100.rom size 4194304 crc 69d2e48c sha1 5b5f759007264c07b3b39be8e03a713698e1fc2a )
+	rom ( name b0101.rom merge b0101.rom size 4194304 crc 0d587bf3 sha1 5347828b0a6e4ddd7a263663d2c2604407e4d49c )
+	rom ( name b0102.rom merge b0102.rom size 4194304 crc 43823c1e sha1 e10a1a9a81b51b11044934ff702e35d8d7ab1b08 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0100.rom merge m0100.rom size 2097152 crc e5c36c83 sha1 50c6f66770e8faa3df349f7d68c407a7ad021716 )
+)
+
+game (
+	name orlegendc
+	description "Oriental Legend / Xi You Shi E Zhuan (ver. 112, Chinese Board)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof orlegend
+	romof orlegend
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0101.160 size 2097152 crc b24f0c1e sha1 a2cf75d739681f091c24ef78ed6fc13aa8cfe0c6 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0100.rom merge t0100.rom size 4194304 crc 61425e1e sha1 20753b86fc12003cfd763d903f034dbba8010b32 )
+	rom ( name a0100.rom merge a0100.rom size 4194304 crc 8b3bd88a sha1 42db3a60c6ba9d83ebe2008c8047d094027f65a7 )
+	rom ( name a0101.rom merge a0101.rom size 4194304 crc 3b9e9644 sha1 5b95ec1d25c3bc3504c93547f5adb5ce24376405 )
+	rom ( name a0102.rom merge a0102.rom size 4194304 crc 069e2c38 sha1 9bddca8c2f5bd80f4abe4e1f062751736dc151dd )
+	rom ( name a0103.rom merge a0103.rom size 4194304 crc 4460a3fd sha1 cbebdb65c17605853f7d0b298018dd8801a25a58 )
+	rom ( name a0104.rom merge a0104.rom size 4194304 crc 5f8abb56 sha1 6c1ddc0309862a141aa0c0f63b641aec9257aaee )
+	rom ( name a0105.rom merge a0105.rom size 4194304 crc a17a7147 sha1 44eeb43c6b0ebb829559a20ae357383fbdeecd82 )
+	rom ( name b0100.rom merge b0100.rom size 4194304 crc 69d2e48c sha1 5b5f759007264c07b3b39be8e03a713698e1fc2a )
+	rom ( name b0101.rom merge b0101.rom size 4194304 crc 0d587bf3 sha1 5347828b0a6e4ddd7a263663d2c2604407e4d49c )
+	rom ( name b0102.rom merge b0102.rom size 4194304 crc 43823c1e sha1 e10a1a9a81b51b11044934ff702e35d8d7ab1b08 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0100.rom merge m0100.rom size 2097152 crc e5c36c83 sha1 50c6f66770e8faa3df349f7d68c407a7ad021716 )
+)
+
+game (
+	name orlegend111c
+	description "Oriental Legend / Xi You Shi E Zhuan (ver. 111, Chinese Board)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof orlegend
+	romof orlegend
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name olv111ch.u6 size 524288 crc 5fb86373 sha1 2fc58eff1f38754c75819fde666244b867ca4f05 )
+	rom ( name olv111ch.u9 size 524288 crc 83cf09c8 sha1 959780b45326059517f3008a356657f4f3d2908f )
+	rom ( name olv111ch.u7 size 524288 crc 6ee79faf sha1 039b4b07b8577f0d3022ae01210c00375624cb3c )
+	rom ( name olv111ch.u11 size 524288 crc b80ddd3c sha1 55c700ce71ffdee392e03fd9d4719542c3527132 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0100.rom merge t0100.rom size 4194304 crc 61425e1e sha1 20753b86fc12003cfd763d903f034dbba8010b32 )
+	rom ( name a0100.rom merge a0100.rom size 4194304 crc 8b3bd88a sha1 42db3a60c6ba9d83ebe2008c8047d094027f65a7 )
+	rom ( name a0101.rom merge a0101.rom size 4194304 crc 3b9e9644 sha1 5b95ec1d25c3bc3504c93547f5adb5ce24376405 )
+	rom ( name a0102.rom merge a0102.rom size 4194304 crc 069e2c38 sha1 9bddca8c2f5bd80f4abe4e1f062751736dc151dd )
+	rom ( name a0103.rom merge a0103.rom size 4194304 crc 4460a3fd sha1 cbebdb65c17605853f7d0b298018dd8801a25a58 )
+	rom ( name a0104.rom merge a0104.rom size 4194304 crc 5f8abb56 sha1 6c1ddc0309862a141aa0c0f63b641aec9257aaee )
+	rom ( name a0105.rom merge a0105.rom size 4194304 crc a17a7147 sha1 44eeb43c6b0ebb829559a20ae357383fbdeecd82 )
+	rom ( name b0100.rom merge b0100.rom size 4194304 crc 69d2e48c sha1 5b5f759007264c07b3b39be8e03a713698e1fc2a )
+	rom ( name b0101.rom merge b0101.rom size 4194304 crc 0d587bf3 sha1 5347828b0a6e4ddd7a263663d2c2604407e4d49c )
+	rom ( name b0102.rom merge b0102.rom size 4194304 crc 43823c1e sha1 e10a1a9a81b51b11044934ff702e35d8d7ab1b08 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0100.rom merge m0100.rom size 2097152 crc e5c36c83 sha1 50c6f66770e8faa3df349f7d68c407a7ad021716 )
+)
+
+game (
+	name orlegend105k
+	description "Oriental Legend / Xi You Shi E Zhuan (ver. 105, Korean Board)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof orlegend
+	romof orlegend
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name olv105ko.u6 size 524288 crc b86703fe sha1 a3529b45efd400ecd5e76f764b528ebce46e24ab )
+	rom ( name olv105ko.u9 size 524288 crc 5a108e39 sha1 2033f4fe3f2dfd725dac535324f58348b9ac3914 )
+	rom ( name olv105ko.u7 size 524288 crc 5712facc sha1 2d95ebd1703874e89ac3a206f8c1f0ece6e833e0 )
+	rom ( name olv105ko.u11 size 524288 crc 40ae4d9e sha1 62d7a96438b7fe93f74753333f50e077d417971e )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0100.rom merge t0100.rom size 4194304 crc 61425e1e sha1 20753b86fc12003cfd763d903f034dbba8010b32 )
+	rom ( name a0100.rom merge a0100.rom size 4194304 crc 8b3bd88a sha1 42db3a60c6ba9d83ebe2008c8047d094027f65a7 )
+	rom ( name a0101.rom merge a0101.rom size 4194304 crc 3b9e9644 sha1 5b95ec1d25c3bc3504c93547f5adb5ce24376405 )
+	rom ( name a0102.rom merge a0102.rom size 4194304 crc 069e2c38 sha1 9bddca8c2f5bd80f4abe4e1f062751736dc151dd )
+	rom ( name a0103.rom merge a0103.rom size 4194304 crc 4460a3fd sha1 cbebdb65c17605853f7d0b298018dd8801a25a58 )
+	rom ( name a0104.rom merge a0104.rom size 4194304 crc 5f8abb56 sha1 6c1ddc0309862a141aa0c0f63b641aec9257aaee )
+	rom ( name a0105.rom merge a0105.rom size 4194304 crc a17a7147 sha1 44eeb43c6b0ebb829559a20ae357383fbdeecd82 )
+	rom ( name b0100.rom merge b0100.rom size 4194304 crc 69d2e48c sha1 5b5f759007264c07b3b39be8e03a713698e1fc2a )
+	rom ( name b0101.rom merge b0101.rom size 4194304 crc 0d587bf3 sha1 5347828b0a6e4ddd7a263663d2c2604407e4d49c )
+	rom ( name b0102.rom merge b0102.rom size 4194304 crc 43823c1e sha1 e10a1a9a81b51b11044934ff702e35d8d7ab1b08 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0100.rom merge m0100.rom size 2097152 crc e5c36c83 sha1 50c6f66770e8faa3df349f7d68c407a7ad021716 )
+)
+
+game (
+	name drgw2
+	description "Dragon World II (ver. 110X, Export)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v-110x.u2 size 524288 crc 1978106b sha1 af8a13d7783b755a58762c98bdc32cab845b2251 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name pgmt0200.u7 size 4194304 crc b0f6534d sha1 174cacd81169a0e0d14790ac06d03caed737e05d )
+	rom ( name pgma0200.u5 size 4194304 crc 13b95069 sha1 4888b06002afb18eab81c010e9362629045767af )
+	rom ( name pgmb0200.u9 size 4194304 crc 932d0f13 sha1 4b8e008f9c617cb2b95effeb81abc065b30e5c86 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+)
+
+game (
+	name drgw2c
+	description "Zhong Guo Long II (ver. 100C, China)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof drgw2
+	romof drgw2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v-100c.u2 size 524288 crc 67467981 sha1 58af01a3871b6179fe42ff471cc39a2161940043 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name pgmt0200.u7 merge pgmt0200.u7 size 4194304 crc b0f6534d sha1 174cacd81169a0e0d14790ac06d03caed737e05d )
+	rom ( name pgma0200.u5 merge pgma0200.u5 size 4194304 crc 13b95069 sha1 4888b06002afb18eab81c010e9362629045767af )
+	rom ( name pgmb0200.u9 merge pgmb0200.u9 size 4194304 crc 932d0f13 sha1 4b8e008f9c617cb2b95effeb81abc065b30e5c86 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+)
+
+game (
+	name drgw2j
+	description "Chuugokuryuu II (ver. 100J, Japan)"
+	year 1997
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof drgw2
+	romof drgw2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v-100j.u2 size 524288 crc f8f8393e sha1 ef0db668b4e4f661d4c1e95d57afe881bcdf13cc )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name pgmt0200.u7 merge pgmt0200.u7 size 4194304 crc b0f6534d sha1 174cacd81169a0e0d14790ac06d03caed737e05d )
+	rom ( name pgma0200.u5 merge pgma0200.u5 size 4194304 crc 13b95069 sha1 4888b06002afb18eab81c010e9362629045767af )
+	rom ( name pgmb0200.u9 merge pgmb0200.u9 size 4194304 crc 932d0f13 sha1 4b8e008f9c617cb2b95effeb81abc065b30e5c86 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+)
+
+game (
+	name drgw3
+	description "Dragon World 3 (ver. 100)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name dw3_v100.u12 size 524288 crc 47243906 sha1 9cd46e3cba97f049bcb238ceb6edf27a760ef831 )
+	rom ( name dw3_v100.u13 size 524288 crc b7cded21 sha1 c1ae2af2e42227503c81bbcd2bd6862aa416bd78 )
+	rom ( name dw3_v100.u15 size 65536 crc 03dc4fdf sha1 b329b04325d4f725231b1bb7862eedef2319b652 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name dw3t0400.u18 size 4194304 crc b70f3357 sha1 8733969d7d21f540f295a9f747a4bb8f0d325cf0 )
+	rom ( name dw3a0400.u9 size 4194304 crc dd7bfd40 sha1 fb7ec5bf89a413c5208716083762a725ff63f5db )
+	rom ( name dw3a0401.u10 size 4194304 crc cab6557f sha1 1904dd86645eea27ac1ab8a2462b20f6531356f8 )
+	rom ( name dw3b0400.u13 size 4194304 crc 4bb87cc0 sha1 71b2dc43fd11f7a6dffaba501e4e344b843583d8 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name dw3m0400.u1 size 4194304 crc 031eb9ce sha1 0673ec194732becc6648c2ae1396e894aa269f9a )
+)
+
+game (
+	name drgw3k
+	description "Dragon World 3 (ver. 106, Korean Board)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof drgw3
+	romof drgw3
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name dw3_v106.u12 size 524288 crc c3f6838b sha1 c135b1d4dd62af308139d40d03c29be7508fb1e7 )
+	rom ( name dw3_v106.u13 size 524288 crc 28284e22 sha1 4643a69881ddb7383ca10f3eb2aa2cf41be39e9f )
+	rom ( name dw3_v100.u15 merge dw3_v100.u15 size 65536 crc 03dc4fdf sha1 b329b04325d4f725231b1bb7862eedef2319b652 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name dw3t0400.u18 merge dw3t0400.u18 size 4194304 crc b70f3357 sha1 8733969d7d21f540f295a9f747a4bb8f0d325cf0 )
+	rom ( name dw3a0400.u9 merge dw3a0400.u9 size 4194304 crc dd7bfd40 sha1 fb7ec5bf89a413c5208716083762a725ff63f5db )
+	rom ( name dw3a0401.u10 merge dw3a0401.u10 size 4194304 crc cab6557f sha1 1904dd86645eea27ac1ab8a2462b20f6531356f8 )
+	rom ( name dw3b0400.u13 merge dw3b0400.u13 size 4194304 crc 4bb87cc0 sha1 71b2dc43fd11f7a6dffaba501e4e344b843583d8 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name dw3m0400.u1 merge dw3m0400.u1 size 4194304 crc 031eb9ce sha1 0673ec194732becc6648c2ae1396e894aa269f9a )
+)
+
+game (
+	name kov
+	description "Knights of Valour / Sangoku Senki (ver. 117)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0600.117 size 4194304 crc c4d19fe6 sha1 14ef31539bfbc665e76c9703ee01b12228344052 )
+	rom ( name kov_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name kovplus
+	description "Knights of Valour Plus / Sangoku Senki Plus (ver. 119)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0600.119 size 4194304 crc e4b0875d sha1 e8382e131b0e431406dc2a05cc1ef128302d987c )
+	rom ( name kov_igs027a.bin merge kov_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom merge a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom merge b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name kovplusa
+	description "Knights of Valour Plus / Sangoku Senki Plus (alt ver. 119)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v119.u3 size 524288 crc 6750388f sha1 869f4ad27f2992cc62baa9a78bf7984a43ec4cc5 )
+	rom ( name v119.u5 size 524288 crc d4101ffd sha1 a327fd56eec65b07df9305cd93ef2c46bf8e40f3 )
+	rom ( name v119.u4 size 524288 crc 8200ece6 sha1 97081d2e8aed2ac6fbe5951890aecea18af5ce2e )
+	rom ( name v119.u6 size 524288 crc 71e28f27 sha1 db382807e9185f0dc17124f210165fa1b36ca6ac )
+	rom ( name v119.u2 size 524288 crc 29588ef2 sha1 17d1a308d44434cf65224a24360cf4b6e32d28f3 )
+	rom ( name kov_igs027a.bin merge kov_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom merge a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom merge b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name kov115
+	description "Knights of Valour / Sangoku Senki (ver. 115)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0600.115 size 4194304 crc 527a2924 sha1 7e3b166dddc5245d7b408e78437c16fd2986d1d9 )
+	rom ( name kov_igs027a.bin merge kov_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom merge a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom merge b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name kovj
+	description "Knights of Valour / Sangoku Senki (ver. 100, Japanese Board)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name sav111.u4 size 524288 crc ae2f1b4e sha1 2ac9d84f5dee52f374941cfd68e2b98ecad436a8 )
+	rom ( name sav111.u7 size 524288 crc 95eedf0e sha1 582a54e9a1eda7ff73e20f0e69d2d50141772378 )
+	rom ( name sav111.u5 size 524288 crc 5fdd4aa8 sha1 43c96e21ad4f11148e1e94a59c53780b2edd43ba )
+	rom ( name sav111.u8 size 524288 crc 003cbf49 sha1 fb5bea47ecae025b1b425af52cd05e061f45e377 )
+	rom ( name sav111.u10 size 524288 crc d5536107 sha1 f963e015d99c1621323eecf63e773c0b9f4b6a43 )
+	rom ( name kov_igs027a.bin merge kov_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom merge a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom merge b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name kovsh
+	description "Knights of Valour Super Heroes / Sangoku Senki Super Heroes (ver. 104)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0600.322 size 4194304 crc 7c78e5f3 sha1 9b1e4bd63fb1294ebeb539966842273c8dc7683b )
+	rom ( name kovsh_v100_china.asic size 16384 crc 0f09a5c1 sha1 621b38c05f33277608d58b49822aebc930ae4870 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0603.rom merge a0603.rom size 4194304 crc ec31abda sha1 ee526655369bae63b0ef0730e9768b765c9950fc )
+	rom ( name a0604.rom size 4194304 crc 26b59fd3 sha1 53219376056f4766dc5236735599d982ceb56b84 )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0601.rom merge b0601.rom size 4194304 crc a0bb1c2f sha1 0542348c6e27779e0a98de16f04f9c18158f2b28 )
+	rom ( name b0602.rom size 1048576 crc 9df77934 sha1 99a3fe337c13702c9aa2373bcd1bb1befd0e2a13 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name photoy2k
+	description "Photo Y2K (ver. 104)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v104.16m size 2097152 crc e051070f sha1 a5a1a8dd7542a30632501af8d02fda07475fd9aa )
+	rom ( name photoy2k_v100_china.asic size 16384 crc 6dd7f257 sha1 1984f98a282d8b3264674f231c3b7def1757cf72 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0700.rom size 524288 crc 93943b4d sha1 3b439903853727d45d62c781af6073024eb3c5a3 )
+	rom ( name a0700.l size 4194304 crc 26a9ae9c sha1 c977c89db6fdf47ee260ff687b80375caeab975c )
+	rom ( name a0700.h size 4194304 crc 79bc1fc1 sha1 a09472a9b75704c1d31ab828f92c2a5007b2b4ed )
+	rom ( name a0701.l size 4194304 crc 23607f81 sha1 8b6dbcdce9b131370693847ed9771aa04b62711c )
+	rom ( name a0701.h size 4194304 crc 5f2efd37 sha1 9a5bd9751691bc085b0751b9fa8ede9eb97b1248 )
+	rom ( name a0702.rom size 524288 crc 42239e1b sha1 2b6d20958abf8a67ce525d5c8964b6d225ccaeda )
+	rom ( name b0700.l size 4194304 crc af096904 sha1 8e86b36cc44720ece68022e409279bf9144341ba )
+	rom ( name b0700.h size 4194304 crc 6d53de26 sha1 f3f93fd2f87adb815834ba0242b94073fbb5e333 )
+	rom ( name cgv101.rom size 131072 crc da02ec3e sha1 7ee21d748c9b932f53e790a9040167f904fecefc )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0700.rom size 524288 crc acc7afce sha1 ac2d344ebac336f0f363bb045dd8ea4e83d1fb50 )
+)
+
+game (
+	name raf102j
+	description "Real and Fake / Photo Y2K (ver. 102, Japanese Board)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof photoy2k
+	romof photoy2k
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v102.u4 size 524288 crc a65eda9f sha1 6307cacf4a262e781753eff14700a0455837780c )
+	rom ( name v102.u6 size 524288 crc b9ca5504 sha1 058cf01316f233236ca9861349f515935283b75e )
+	rom ( name v102.u5 size 524288 crc 9201621b sha1 1ca3ebe7eec40614bfa8b911657fa2b51f2c51a4 )
+	rom ( name v102.u8 size 524288 crc 3be22b8f sha1 03634fbd6a8a8369c6cb1fd6694a3784dac5bf59 )
+	rom ( name photoy2k_v100_china.asic merge photoy2k_v100_china.asic size 16384 crc 6dd7f257 sha1 1984f98a282d8b3264674f231c3b7def1757cf72 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0700.rom merge t0700.rom size 524288 crc 93943b4d sha1 3b439903853727d45d62c781af6073024eb3c5a3 )
+	rom ( name a0700.l merge a0700.l size 4194304 crc 26a9ae9c sha1 c977c89db6fdf47ee260ff687b80375caeab975c )
+	rom ( name a0700.h merge a0700.h size 4194304 crc 79bc1fc1 sha1 a09472a9b75704c1d31ab828f92c2a5007b2b4ed )
+	rom ( name a0701.l merge a0701.l size 4194304 crc 23607f81 sha1 8b6dbcdce9b131370693847ed9771aa04b62711c )
+	rom ( name a0701.h merge a0701.h size 4194304 crc 5f2efd37 sha1 9a5bd9751691bc085b0751b9fa8ede9eb97b1248 )
+	rom ( name a0702.rom merge a0702.rom size 524288 crc 42239e1b sha1 2b6d20958abf8a67ce525d5c8964b6d225ccaeda )
+	rom ( name b0700.l merge b0700.l size 4194304 crc af096904 sha1 8e86b36cc44720ece68022e409279bf9144341ba )
+	rom ( name b0700.h merge b0700.h size 4194304 crc 6d53de26 sha1 f3f93fd2f87adb815834ba0242b94073fbb5e333 )
+	rom ( name cgv101.rom merge cgv101.rom size 131072 crc da02ec3e sha1 7ee21d748c9b932f53e790a9040167f904fecefc )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0700.rom merge m0700.rom size 524288 crc acc7afce sha1 ac2d344ebac336f0f363bb045dd8ea4e83d1fb50 )
+)
+
+game (
+	name killbld
+	description "The Killing Blade (ver. 104)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name kb_u3_v104.u3 size 524288 crc 6db1d719 sha1 804002f014d275aaf0368fb7f904938fe4ac07ee )
+	rom ( name kb_u6_v104.u6 size 524288 crc 31ecc978 sha1 82666d534e4151775063af6d39f575faba0f1047 )
+	rom ( name kb_u4_v104.u4 size 524288 crc 1ed8b2e7 sha1 331c037640cfc1fe743cd0e65a1156c470b3303e )
+	rom ( name kb_u5_v104.u5 size 524288 crc a0bafc29 sha1 b20db7c16353c6f87ed3c08c9d037b07336711f1 )
+	rom ( name kb_u2_v104.u2 size 65536 crc c970f6d5 sha1 399fc6f80262784c566363c847dc3fdc4fb37494 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0300.u14 size 4194304 crc 0922f7d9 sha1 4302b4b7369e13f315fad14f7d6cad1321101d24 )
+	rom ( name a0300.u9 size 4194304 crc 3f9455d3 sha1 3718ce00ad93975383aafc14e5a74dc297b011a1 )
+	rom ( name a0301.u10 size 4194304 crc 92776889 sha1 6d677837fefff47bfd1c6166322f69f89989a5e2 )
+	rom ( name a0303.u11 size 4194304 crc 33f5cc69 sha1 9cacd5058d4bb25b77f71658bbbbd4b38d0a6b6a )
+	rom ( name a0306.u12 size 4194304 crc cc018a8e sha1 37752d46f238fb57c0ab5a4f96b1e013f2077347 )
+	rom ( name a0307.u2 size 4194304 crc bc772e39 sha1 079cc42a190cb916f02b59bca8fa90e524acefe9 )
+	rom ( name b0300.u13 size 4194304 crc 7f876981 sha1 43555a200929ad5ecc42137fc9aeb42dc4f50d20 )
+	rom ( name b0302.u14 size 4194304 crc eea9c502 sha1 04b3972c7111ea59a3cceab6ad124080c4ce3520 )
+	rom ( name b0303.u15 size 2097152 crc 77a9652e sha1 2342f643d37945fbda224a5034c013796e5134ca )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0300.u1 size 4194304 crc 93159695 sha1 50c5976c9b681bd3d1ebefa3bfa9fe6e72dcb96f )
+)
+
+game (
+	name killbldt
+	description "The Killing Blade (ver. 109, Chinese Board)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof killbld
+	romof killbld
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name kb.u9 size 2097152 crc 43da77d7 sha1 f99e89da4587d6c9e3c2ae66fa139830d893fdda flags baddump )
+	rom ( name kb.ram size 16384 crc 6994c507 sha1 8264c56709488b72282d6ddfce3a4b188c6cc109 )
+	rom ( name kb_u2.rom size 65536 crc de3eae63 sha1 03af767ef764055bda528b5cc6a24b9e1218cca8 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0300.u14 merge t0300.u14 size 4194304 crc 0922f7d9 sha1 4302b4b7369e13f315fad14f7d6cad1321101d24 )
+	rom ( name a0300.u9 merge a0300.u9 size 4194304 crc 3f9455d3 sha1 3718ce00ad93975383aafc14e5a74dc297b011a1 )
+	rom ( name a0301.u10 merge a0301.u10 size 4194304 crc 92776889 sha1 6d677837fefff47bfd1c6166322f69f89989a5e2 )
+	rom ( name a0303.u11 merge a0303.u11 size 4194304 crc 33f5cc69 sha1 9cacd5058d4bb25b77f71658bbbbd4b38d0a6b6a )
+	rom ( name a0306.u12 merge a0306.u12 size 4194304 crc cc018a8e sha1 37752d46f238fb57c0ab5a4f96b1e013f2077347 )
+	rom ( name a0307.u2 merge a0307.u2 size 4194304 crc bc772e39 sha1 079cc42a190cb916f02b59bca8fa90e524acefe9 )
+	rom ( name b0300.u13 merge b0300.u13 size 4194304 crc 7f876981 sha1 43555a200929ad5ecc42137fc9aeb42dc4f50d20 )
+	rom ( name b0302.u14 merge b0302.u14 size 4194304 crc eea9c502 sha1 04b3972c7111ea59a3cceab6ad124080c4ce3520 )
+	rom ( name b0303.u15 merge b0303.u15 size 2097152 crc 77a9652e sha1 2342f643d37945fbda224a5034c013796e5134ca )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0300.u1 merge m0300.u1 size 4194304 crc 93159695 sha1 50c5976c9b681bd3d1ebefa3bfa9fe6e72dcb96f )
+)
+
+game (
+	name puzlstar
+	description "Puzzle Star (ver. 100MG)"
+	year 1999
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v100mg.u1 size 524288 crc 5788b77d sha1 7770aae6e686da92b2623c977d1bc8f019f48267 )
+	rom ( name v100mg.u2 size 524288 crc 4c79d979 sha1 3b92052a35994f2b3dd164930154184c45d5e2d0 )
+	rom ( name puzlstar_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0800.u5 size 2097152 crc f9d84e59 sha1 80ec77025ac5bf355b1a60f2a678dd4c56071f6b )
+	rom ( name a0800.u1 size 4194304 crc e1e6ec40 sha1 390432431f144ef63424a426582b311765a61771 )
+	rom ( name b0800.u3 size 2097152 crc 52e7bef5 sha1 a678251b7e46a1016d0afc1d8d5c9928008ad5b1 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0800.u2 size 4194304 crc e1a46541 sha1 6fe9de5700d8638374734d80551dcedb62975140 )
+)
+
+game (
+	name olds
+	description "Oriental Legend Special / Xi You Shi E Zhuan Super (ver. 101, Korean Board)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name sp_v101.u2 size 524288 crc 08eb9661 sha1 105946e72e562adb1a9fd794ca0fd2c91967eb56 )
+	rom ( name sp_v101.u3 size 524288 crc 0a358c1e sha1 95c7c3f069c5d05001e22535750f6b3cd7de105f )
+	rom ( name sp_v101.u4 size 524288 crc 766570e0 sha1 e7c3f5664ec69b662b82c2e1375555db7305390c )
+	rom ( name sp_v101.u5 size 524288 crc 58662e12 sha1 2b39bd847e9c4968a8e77a2f3cec77cf323ceee3 )
+	rom ( name sp_v101.u1 size 524288 crc 2b2f4f1e sha1 67b97cf8cc7f517d67cd45588addd2ad8e24612a )
+	rom ( name sp_v101.u6 size 65536 crc 097046bc sha1 6d75db85cf4c79b63e837897785c253014b2126d )
+	rom ( name ram_dump size 16384 crc 280cfb4e sha1 cd2bdcaa21347952c2bf38b105a204d327fde39e )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0500.rom size 4194304 crc d881726c sha1 a82517e665996f7b7017c940f1fcf016fccb65c2 )
+	rom ( name t0501.rom size 2097152 crc d2106864 sha1 65d827135b87d82196433aea3279608ee263feca )
+	rom ( name a0500.rom size 4194304 crc 80a59197 sha1 7d0108e2f0d0347d43ace2d96c0388202c05fdfb )
+	rom ( name a0501.rom size 4194304 crc 98c931b1 sha1 9b70d1a7beb4c3a0c1436c25fd1fb76e47539538 )
+	rom ( name a0502.rom size 4194304 crc c3fcdf1d sha1 107585fd103fcd0af0fb7db283be4f7c7058aef7 )
+	rom ( name a0503.rom size 4194304 crc 066dffec sha1 f023032a7202b7090fb609a39e0f19018e664bf3 )
+	rom ( name a0504.rom size 4194304 crc 45337583 sha1 c954d0e5bf7fa99c90b0d154e7119d2b0c461f1c )
+	rom ( name a0505.rom size 4194304 crc 5b8cf3a5 sha1 856d1e47b5d9a66dcfbdc74a51ed646fd7d96a35 )
+	rom ( name a0506.rom size 4194304 crc 087ac60c sha1 3d5bf7dd40c8a3c1224cf82e12410ca904c0c5db )
+	rom ( name b0500.rom size 4194304 crc cde07f74 sha1 1fe90db7c57faa28f3a054b2c07909bef89e3efb )
+	rom ( name b0501.rom size 4194304 crc 1546c2e9 sha1 a7b9c8b44203db54a59d49fe469bb52bba807ba2 )
+	rom ( name b0502.rom size 4194304 crc e97b31c3 sha1 1a7ca4f6c8644e84a33ae41cd4637f21046b14c5 )
+	rom ( name b0503.u16 size 4194304 crc e41d98e4 sha1 f80b27fcee81762993e09bf1b3cad6e85274760c )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0500.rom size 2097152 crc 37928cdd sha1 e80498cabc2a6a54d4f3ebcb097d4b3fad96fe55 )
+)
+
+game (
+	name olds100
+	description "Oriental Legend Special / Xi You Shi E Zhuan Super (ver. 100)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof olds
+	romof olds
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v100-u2.040 size 524288 crc 517c2a06 sha1 bbf5b311fac9b0bb4d4129c0561e5e24f6963fa2 )
+	rom ( name v100-u3.040 size 524288 crc d0e2b741 sha1 2e671dbb4320d1f0c059b35efd33cdea26f12131 )
+	rom ( name v100-u4.040 size 524288 crc 32a6bdbd sha1 a93d7f4eae722a58eca9ec351ad5890cefda56f0 )
+	rom ( name v100-u5.040 size 524288 crc b4a1cafb sha1 b2fccd480ede93f58ad043387b18b898152f06ef )
+	rom ( name v100-u1.040 size 524288 crc 37ea4e75 sha1 a94fcb89da3394a43d360f885419677f511d2580 )
+	rom ( name ram_dump merge ram_dump size 16384 crc 280cfb4e sha1 cd2bdcaa21347952c2bf38b105a204d327fde39e )
+	rom ( name kd-u6.512 size 65536 crc e7613dda sha1 0d7c043b90e2f9a36a45066f22e3e305dc716676 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0500.rom merge t0500.rom size 4194304 crc d881726c sha1 a82517e665996f7b7017c940f1fcf016fccb65c2 )
+	rom ( name t0501.rom merge t0501.rom size 2097152 crc d2106864 sha1 65d827135b87d82196433aea3279608ee263feca )
+	rom ( name a0500.rom merge a0500.rom size 4194304 crc 80a59197 sha1 7d0108e2f0d0347d43ace2d96c0388202c05fdfb )
+	rom ( name a0501.rom merge a0501.rom size 4194304 crc 98c931b1 sha1 9b70d1a7beb4c3a0c1436c25fd1fb76e47539538 )
+	rom ( name a0502.rom merge a0502.rom size 4194304 crc c3fcdf1d sha1 107585fd103fcd0af0fb7db283be4f7c7058aef7 )
+	rom ( name a0503.rom merge a0503.rom size 4194304 crc 066dffec sha1 f023032a7202b7090fb609a39e0f19018e664bf3 )
+	rom ( name a0504.rom merge a0504.rom size 4194304 crc 45337583 sha1 c954d0e5bf7fa99c90b0d154e7119d2b0c461f1c )
+	rom ( name a0505.rom merge a0505.rom size 4194304 crc 5b8cf3a5 sha1 856d1e47b5d9a66dcfbdc74a51ed646fd7d96a35 )
+	rom ( name a0506.rom merge a0506.rom size 4194304 crc 087ac60c sha1 3d5bf7dd40c8a3c1224cf82e12410ca904c0c5db )
+	rom ( name b0500.rom merge b0500.rom size 4194304 crc cde07f74 sha1 1fe90db7c57faa28f3a054b2c07909bef89e3efb )
+	rom ( name b0501.rom merge b0501.rom size 4194304 crc 1546c2e9 sha1 a7b9c8b44203db54a59d49fe469bb52bba807ba2 )
+	rom ( name b0502.rom merge b0502.rom size 4194304 crc e97b31c3 sha1 1a7ca4f6c8644e84a33ae41cd4637f21046b14c5 )
+	rom ( name b0503.u16 merge b0503.u16 size 4194304 crc e41d98e4 sha1 f80b27fcee81762993e09bf1b3cad6e85274760c )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0500.rom merge m0500.rom size 2097152 crc 37928cdd sha1 e80498cabc2a6a54d4f3ebcb097d4b3fad96fe55 )
+)
+
+game (
+	name olds100a
+	description "Oriental Legend Special / Xi You Shi E Zhuan Super (alt ver. 100)"
+	year 1998
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof olds
+	romof olds
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0500.v10 size 4194304 crc 8981fc87 sha1 678d6705d06b99bca5951ff77708adadc4c4396b )
+	rom ( name ram_dump merge ram_dump size 16384 crc 280cfb4e sha1 cd2bdcaa21347952c2bf38b105a204d327fde39e )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0500.rom merge t0500.rom size 4194304 crc d881726c sha1 a82517e665996f7b7017c940f1fcf016fccb65c2 )
+	rom ( name t0501.rom merge t0501.rom size 2097152 crc d2106864 sha1 65d827135b87d82196433aea3279608ee263feca )
+	rom ( name a0500.rom merge a0500.rom size 4194304 crc 80a59197 sha1 7d0108e2f0d0347d43ace2d96c0388202c05fdfb )
+	rom ( name a0501.rom merge a0501.rom size 4194304 crc 98c931b1 sha1 9b70d1a7beb4c3a0c1436c25fd1fb76e47539538 )
+	rom ( name a0502.rom merge a0502.rom size 4194304 crc c3fcdf1d sha1 107585fd103fcd0af0fb7db283be4f7c7058aef7 )
+	rom ( name a0503.rom merge a0503.rom size 4194304 crc 066dffec sha1 f023032a7202b7090fb609a39e0f19018e664bf3 )
+	rom ( name a0504.rom merge a0504.rom size 4194304 crc 45337583 sha1 c954d0e5bf7fa99c90b0d154e7119d2b0c461f1c )
+	rom ( name a0505.rom merge a0505.rom size 4194304 crc 5b8cf3a5 sha1 856d1e47b5d9a66dcfbdc74a51ed646fd7d96a35 )
+	rom ( name a0506.rom merge a0506.rom size 4194304 crc 087ac60c sha1 3d5bf7dd40c8a3c1224cf82e12410ca904c0c5db )
+	rom ( name b0500.rom merge b0500.rom size 4194304 crc cde07f74 sha1 1fe90db7c57faa28f3a054b2c07909bef89e3efb )
+	rom ( name b0501.rom merge b0501.rom size 4194304 crc 1546c2e9 sha1 a7b9c8b44203db54a59d49fe469bb52bba807ba2 )
+	rom ( name b0502.rom merge b0502.rom size 4194304 crc e97b31c3 sha1 1a7ca4f6c8644e84a33ae41cd4637f21046b14c5 )
+	rom ( name b0503.u16 merge b0503.u16 size 4194304 crc e41d98e4 sha1 f80b27fcee81762993e09bf1b3cad6e85274760c )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0500.rom merge m0500.rom size 2097152 crc 37928cdd sha1 e80498cabc2a6a54d4f3ebcb097d4b3fad96fe55 )
+)
+
+game (
+	name kov2
+	description "Knights of Valour 2 / Sangoku Senki 2 (ver. 100)"
+	year 2000
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name igs_u18.rom size 4194304 crc 86205879 sha1 f73d5b70b41d39be1cac75e474b025de2cce0b01 )
+	rom ( name kov2_v100_hongkong.asic size 16384 crc e0d7679f sha1 e1c2d127eba4ddbeb8ad173c55b90ac1467e1ca8 )
+	rom ( name igs_u19.rom size 2097152 crc edd59922 sha1 09b14f20f685944a93292c83e5830849aade42c9 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1200.rom size 8388608 crc d7e26609 sha1 bdad810f82fcf1d50a8791bdc495374ec5a309c6 )
+	rom ( name a1200.rom size 8388608 crc ceeb81d8 sha1 5476729443fc1bc9593ae10fbf7cbc5d7290b017 )
+	rom ( name a1201.rom size 8388608 crc 82f0a878 sha1 ddd13e404252a71de1b2b3b974b910f899f51c38 )
+	rom ( name a1202.rom size 8388608 crc 4bb92fae sha1 f0b6d72ed425de1c69dc8f8d5795ea760a4a59b0 )
+	rom ( name a1203.rom size 8388608 crc e73cb627 sha1 4c6e48b845a5d1e8f9899010fbf273d54c2b8899 )
+	rom ( name a1204.rom size 8388608 crc 27527099 sha1 e23cf366bdeaca1e009a5cec6b13164310a34384 )
+	rom ( name b1200.rom size 8388608 crc bed7d994 sha1 019dfba8154256d64cd249eb0fa4c451edce34b8 )
+	rom ( name b1201.rom size 8388608 crc f251eb57 sha1 56a5fc14ab7822f83379cecb26638e5bb266349a )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1200.rom size 8388608 crc b0d88720 sha1 44ab137e3f8e15b7cb5697ffbd9b1143d8210c4f )
+)
+
+game (
+	name kov2106
+	description "Knights of Valour 2 / Sangoku Senki 2 (ver. 106)"
+	year 2000
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov2
+	romof kov2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name u18.106 size 4194304 crc 40051ad9 sha1 ba2ddf267fe688d5dfed575aeeccbab10135b37b )
+	rom ( name kov2_v100_hongkong.asic merge kov2_v100_hongkong.asic size 16384 crc e0d7679f sha1 e1c2d127eba4ddbeb8ad173c55b90ac1467e1ca8 )
+	rom ( name u19.102 size 2097152 crc 462e2980 sha1 3da7c3d2c65b59f50c78be1c25922b71d40f6080 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1200.rom merge t1200.rom size 8388608 crc d7e26609 sha1 bdad810f82fcf1d50a8791bdc495374ec5a309c6 )
+	rom ( name a1200.rom merge a1200.rom size 8388608 crc ceeb81d8 sha1 5476729443fc1bc9593ae10fbf7cbc5d7290b017 )
+	rom ( name a1201.rom merge a1201.rom size 8388608 crc 82f0a878 sha1 ddd13e404252a71de1b2b3b974b910f899f51c38 )
+	rom ( name a1202.rom merge a1202.rom size 8388608 crc 4bb92fae sha1 f0b6d72ed425de1c69dc8f8d5795ea760a4a59b0 )
+	rom ( name a1203.rom merge a1203.rom size 8388608 crc e73cb627 sha1 4c6e48b845a5d1e8f9899010fbf273d54c2b8899 )
+	rom ( name a1204.rom merge a1204.rom size 8388608 crc 27527099 sha1 e23cf366bdeaca1e009a5cec6b13164310a34384 )
+	rom ( name b1200.rom merge b1200.rom size 8388608 crc bed7d994 sha1 019dfba8154256d64cd249eb0fa4c451edce34b8 )
+	rom ( name b1201.rom merge b1201.rom size 8388608 crc f251eb57 sha1 56a5fc14ab7822f83379cecb26638e5bb266349a )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1200.rom merge m1200.rom size 8388608 crc b0d88720 sha1 44ab137e3f8e15b7cb5697ffbd9b1143d8210c4f )
+)
+
+game (
+	name kov2p
+	description "Knights of Valour 2 Plus - Nine Dragons / Sangoku Senki 2 Plus - Nine Dragons (ver. M204XX)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov2
+	romof kov2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v204-32m.rom size 4194304 crc 583e0650 sha1 2e5656dd9c6cba9f84af9baa3f5f70cdccf9db47 )
+	rom ( name kov2p_igs027a.bin size 16384 flags nodump )
+	rom ( name v200-16.rom size 2097152 crc 16a0c11f sha1 ce449cef76ebd5657d49b57951e2eb0f132e203e )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1200.rom merge t1200.rom size 8388608 crc d7e26609 sha1 bdad810f82fcf1d50a8791bdc495374ec5a309c6 )
+	rom ( name a1200.rom merge a1200.rom size 8388608 crc ceeb81d8 sha1 5476729443fc1bc9593ae10fbf7cbc5d7290b017 )
+	rom ( name a1201.rom_p size 8388608 crc 21063ca7 sha1 cf561b44902425a920d5cbea5bf65dd9530b2289 )
+	rom ( name a1202.rom merge a1202.rom size 8388608 crc 4bb92fae sha1 f0b6d72ed425de1c69dc8f8d5795ea760a4a59b0 )
+	rom ( name a1203.rom merge a1203.rom size 8388608 crc e73cb627 sha1 4c6e48b845a5d1e8f9899010fbf273d54c2b8899 )
+	rom ( name a1204.rom_p size 2097152 crc 14b4b5bb sha1 d7db5740eec971f2782fb2885ee3af8f2a796550 )
+	rom ( name b1200.rom merge b1200.rom size 8388608 crc bed7d994 sha1 019dfba8154256d64cd249eb0fa4c451edce34b8 )
+	rom ( name b1201.rom merge b1201.rom size 8388608 crc f251eb57 sha1 56a5fc14ab7822f83379cecb26638e5bb266349a )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1200.rom merge m1200.rom size 8388608 crc b0d88720 sha1 44ab137e3f8e15b7cb5697ffbd9b1143d8210c4f )
+)
+
+game (
+	name kov2p205
+	description "Knights of Valour 2 Plus - Nine Dragons / Sangoku Senki 2 Plus - Nine Dragons (ver. M205XX)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov2
+	romof kov2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name u8-27322.rom size 4194304 crc 3a2cc0de sha1 d7511478b34bfb03b2fb5b8268b60502d05b9414 )
+	rom ( name kov2p_igs027a.bin size 16384 flags nodump )
+	rom ( name v200-16.rom size 2097152 crc 16a0c11f sha1 ce449cef76ebd5657d49b57951e2eb0f132e203e )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1200.rom merge t1200.rom size 8388608 crc d7e26609 sha1 bdad810f82fcf1d50a8791bdc495374ec5a309c6 )
+	rom ( name a1200.rom merge a1200.rom size 8388608 crc ceeb81d8 sha1 5476729443fc1bc9593ae10fbf7cbc5d7290b017 )
+	rom ( name a1201.rom_p size 8388608 crc 21063ca7 sha1 cf561b44902425a920d5cbea5bf65dd9530b2289 )
+	rom ( name a1202.rom merge a1202.rom size 8388608 crc 4bb92fae sha1 f0b6d72ed425de1c69dc8f8d5795ea760a4a59b0 )
+	rom ( name a1203.rom merge a1203.rom size 8388608 crc e73cb627 sha1 4c6e48b845a5d1e8f9899010fbf273d54c2b8899 )
+	rom ( name a1204.rom_p size 2097152 crc 14b4b5bb sha1 d7db5740eec971f2782fb2885ee3af8f2a796550 )
+	rom ( name b1200.rom merge b1200.rom size 8388608 crc bed7d994 sha1 019dfba8154256d64cd249eb0fa4c451edce34b8 )
+	rom ( name b1201.rom merge b1201.rom size 8388608 crc f251eb57 sha1 56a5fc14ab7822f83379cecb26638e5bb266349a )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1200.rom merge m1200.rom size 8388608 crc b0d88720 sha1 44ab137e3f8e15b7cb5697ffbd9b1143d8210c4f )
+)
+
+game (
+	name ddp2
+	description "Bee Storm - DoDonPachi II (ver. 100)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v100.u8 size 2097152 crc 0c8aa8ea sha1 57e33224622607a1df8daabf26ba063cf8a6d3fc )
+	rom ( name ddp2_igs027a.bin size 16384 flags nodump )
+	rom ( name v100.u23 size 131072 crc 06c3dd29 sha1 20c9479f158467fc2037dcf162b6c6be18c91d46 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1300.u21 size 8388608 crc e748f0cb sha1 5843bee3a17c33648ce904af2b98c6a90aff7393 )
+	rom ( name a1300.u1 size 8388608 crc fc87a405 sha1 115c21ecc56997652e527c92654076870bc9fa51 )
+	rom ( name a1301.u2 size 8388608 crc 0c8520da sha1 390317857ae5baa94a4cc042874b00a811f06a63 )
+	rom ( name b1300.u7 size 8388608 crc ef646604 sha1 d737ff513792962f18df88c2caa9dd71de449079 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1300.u5 size 4194304 crc 82d4015d sha1 d4cdc1aec1c97cf23ff7a20ccaad822962e66ffa )
+)
+
+game (
+	name ddp2a
+	description "Bee Storm - DoDonPachi II (ver. 102)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof ddp2
+	romof ddp2
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v102.u8 size 2097152 crc 5a9ea040 sha1 51eaec46c368f7cfc5245e64896092f52b1193e0 )
+	rom ( name ddp2_igs027a.bin merge ddp2_igs027a.bin size 16384 flags nodump )
+	rom ( name v100.u23 merge v100.u23 size 131072 crc 06c3dd29 sha1 20c9479f158467fc2037dcf162b6c6be18c91d46 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1300.u21 merge t1300.u21 size 8388608 crc e748f0cb sha1 5843bee3a17c33648ce904af2b98c6a90aff7393 )
+	rom ( name a1300.u1 merge a1300.u1 size 8388608 crc fc87a405 sha1 115c21ecc56997652e527c92654076870bc9fa51 )
+	rom ( name a1301.u2 merge a1301.u2 size 8388608 crc 0c8520da sha1 390317857ae5baa94a4cc042874b00a811f06a63 )
+	rom ( name b1300.u7 merge b1300.u7 size 8388608 crc ef646604 sha1 d737ff513792962f18df88c2caa9dd71de449079 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1300.u5 merge m1300.u5 size 4194304 crc 82d4015d sha1 d4cdc1aec1c97cf23ff7a20ccaad822962e66ffa )
+)
+
+game (
+	name puzzli2
+	description "Puzzli 2 Super (ver. 200)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name 2sp_v200.u3 size 524288 crc 2a5ba8a6 sha1 4c87b849fd6f39152e3e2ef699b78ce24b3fb6d0 )
+	rom ( name 2sp_v200.u4 size 524288 crc fa5c86c1 sha1 11c219722b891b775c0f7f9bc8276cdd8f74d657 )
+	rom ( name puzzli2_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0900.u9 size 2097152 crc 70615611 sha1 a46d4aa71396947b427f9ba4ba0e636876c09d6b )
+	rom ( name a0900.u3 size 4194304 crc 14911251 sha1 e0d10ef50c408dbcf0907f81d4f0e49aeb651a6c )
+	rom ( name b0900.u4 size 2097152 crc 6f0638b6 sha1 14b315fe9e80b3314bb63487e6ea9ce04c9703bd )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0900.u2 size 4194304 crc 9ea7af2e sha1 d2593d391a93c5cf5a554750c32886dea6599b3d )
+)
+
+game (
+	name martmast
+	description "Martial Masters (ver. 102)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v104_32m.u9 size 4194304 crc cfd9dff4 sha1 328eaf6ac49a73265ee4e0f992b1b1312f49877b )
+	rom ( name martial_masters_v102_usa.asic size 16384 crc a6c0828c sha1 0a5bda56dca264c3c7ff7698b8f699563f203c4d flags baddump )
+	rom ( name v102_16m.u10 size 2097152 crc 18b745e6 sha1 7bcb58dd3a2d6072f492cf0dd7181cb061c1f49d )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1000.u3 size 8388608 crc bbf879b5 sha1 bd9a6aea34ad4001e89e62ff4b7a2292eb833c00 )
+	rom ( name a1000.u3 size 8388608 crc 43577ac8 sha1 6eea8b455985d5bac74dcc9943cdc3c0902de6cc )
+	rom ( name a1001.u4 size 8388608 crc fe7a476f sha1 a8c7f1f0dd3e53141aed6d927eb88a3ceebb81e4 )
+	rom ( name a1002.u6 size 8388608 crc 62e33d38 sha1 96163d583e25073594f8413ce263e56b66bd69a1 )
+	rom ( name a1003.u8 size 8388608 crc b2c4945a sha1 7b18287a2db56db3651cfd4deb607af53522fefd )
+	rom ( name a1004.u10 size 4194304 crc 9fd3f5fd sha1 057531f91062be51589c6cf8f4170089b9be6380 )
+	rom ( name b1000.u9 size 8388608 crc c5961f6f sha1 a68060b10edbd084cbde79d2ed1c9084777beb10 )
+	rom ( name b1001.u11 size 8388608 crc 0b7e1c06 sha1 545e15e0087f8621d593fecd8b4013f7ca311686 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1000.u5 size 8388608 crc ed407ae8 sha1 a6e9c09b39c13e8fb7fbc89fa9f823cbeb66e901 )
+	rom ( name m1001.u7 size 4194304 crc 662d2d48 sha1 2fcc3099d9c04456cae3b13035fb28eaf709e7d8 )
+)
+
+game (
+	name martmastc
+	description "Martial Masters (ver. 101, Chinese Board)"
+	year 2001
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof martmast
+	romof martmast
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v104_32m.u9 merge v104_32m.u9 size 4194304 crc cfd9dff4 sha1 328eaf6ac49a73265ee4e0f992b1b1312f49877b )
+	rom ( name martial_masters_v101_cn.asic size 16384 crc b3e25b7d sha1 6147d7ee2e11636521df1bb96ed5da8ad21b2a57 flags baddump )
+	rom ( name v102_16m.u10 merge v102_16m.u10 size 2097152 crc 18b745e6 sha1 7bcb58dd3a2d6072f492cf0dd7181cb061c1f49d )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t1000.u3 merge t1000.u3 size 8388608 crc bbf879b5 sha1 bd9a6aea34ad4001e89e62ff4b7a2292eb833c00 )
+	rom ( name a1000.u3 merge a1000.u3 size 8388608 crc 43577ac8 sha1 6eea8b455985d5bac74dcc9943cdc3c0902de6cc )
+	rom ( name a1001.u4 merge a1001.u4 size 8388608 crc fe7a476f sha1 a8c7f1f0dd3e53141aed6d927eb88a3ceebb81e4 )
+	rom ( name a1002.u6 merge a1002.u6 size 8388608 crc 62e33d38 sha1 96163d583e25073594f8413ce263e56b66bd69a1 )
+	rom ( name a1003.u8 merge a1003.u8 size 8388608 crc b2c4945a sha1 7b18287a2db56db3651cfd4deb607af53522fefd )
+	rom ( name a1004.u10 merge a1004.u10 size 4194304 crc 9fd3f5fd sha1 057531f91062be51589c6cf8f4170089b9be6380 )
+	rom ( name b1000.u9 merge b1000.u9 size 8388608 crc c5961f6f sha1 a68060b10edbd084cbde79d2ed1c9084777beb10 )
+	rom ( name b1001.u11 merge b1001.u11 size 8388608 crc 0b7e1c06 sha1 545e15e0087f8621d593fecd8b4013f7ca311686 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m1000.u5 merge m1000.u5 size 8388608 crc ed407ae8 sha1 a6e9c09b39c13e8fb7fbc89fa9f823cbeb66e901 )
+	rom ( name m1001.u7 merge m1001.u7 size 4194304 crc 662d2d48 sha1 2fcc3099d9c04456cae3b13035fb28eaf709e7d8 )
+)
+
+game (
+	name theglad
+	description "The Gladiator (ver. 100)"
+	year 2003
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name u6.rom size 524288 crc 14c85212 sha1 8d2489708e176a2c460498a13173be01f645b79e )
+	rom ( name theglad_igs027a.bin size 16384 flags nodump )
+	rom ( name u2.rom size 2097152 crc c7bcf2ae sha1 10bc012c83987f594d5375a51bc4be2e17568a81 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t04601.u33 size 8388608 crc e5dab371 sha1 2e3c93958eb0326b6b84b95c2168626f26bbac76 )
+	rom ( name a04601.u2 size 8388608 crc d9b2e004 sha1 8e1882b800fe9f12d7d49303e7417ba5b6f8ef85 )
+	rom ( name a04602.u4 size 8388608 crc 14f22308 sha1 7fad54704e8c97eab723f53dfb50fb3e7bb606d2 )
+	rom ( name a04603.u6 size 8388608 crc 8f621e17 sha1 b0f87f378e0115d0c95017ca0f1b0d508827a7c6 )
+	rom ( name b04601.u11 size 8388608 crc ee72bccf sha1 73c25fe659f6c903447066e4ef83d2f580449d76 )
+	rom ( name b04602.u12 size 4194304 crc 7dba9c38 sha1 a03d509274e8f6a500a7ebe2da5aab8bed4e7f2f )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w04601.u1 size 8388608 crc 5f15ddb3 sha1 c38dcef8e06802a84e42a7fc9fa505475fc3ac65 )
+)
+
+game (
+	name theglada
+	description "The Gladiator (ver. 101)"
+	year 2003
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof theglad
+	romof theglad
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v101.u6 size 524288 crc f799e866 sha1 dccc3c903357c40c3cf85ac0ae8fc12fb0f853a6 )
+	rom ( name theglad_igs027a.bin merge theglad_igs027a.bin size 16384 flags nodump )
+	rom ( name v107.u26 size 2097152 crc f7c61357 sha1 52d31c464dfc83c5371b078cb6b73c0d0e0d57e3 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t04601.u33 merge t04601.u33 size 8388608 crc e5dab371 sha1 2e3c93958eb0326b6b84b95c2168626f26bbac76 )
+	rom ( name a04601.u2 merge a04601.u2 size 8388608 crc d9b2e004 sha1 8e1882b800fe9f12d7d49303e7417ba5b6f8ef85 )
+	rom ( name a04602.u4 merge a04602.u4 size 8388608 crc 14f22308 sha1 7fad54704e8c97eab723f53dfb50fb3e7bb606d2 )
+	rom ( name a04603.u6 merge a04603.u6 size 8388608 crc 8f621e17 sha1 b0f87f378e0115d0c95017ca0f1b0d508827a7c6 )
+	rom ( name b04601.u11 merge b04601.u11 size 8388608 crc ee72bccf sha1 73c25fe659f6c903447066e4ef83d2f580449d76 )
+	rom ( name b04602.u12 merge b04602.u12 size 4194304 crc 7dba9c38 sha1 a03d509274e8f6a500a7ebe2da5aab8bed4e7f2f )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w04601.u1 merge w04601.u1 size 8388608 crc 5f15ddb3 sha1 c38dcef8e06802a84e42a7fc9fa505475fc3ac65 )
+)
+
+game (
+	name dmnfrnt
+	description "Demon Front (ver. 102)"
+	year 2002
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v102_16m.u5 size 2097152 crc 3d4d481a sha1 95953b8f31343389405cc722b4177ff5adf67b62 )
+	rom ( name dmnfrnt_igs027a.bin size 16384 flags nodump )
+	rom ( name v101_32m.u26 size 4194304 crc 93965281 sha1 89da198aaa7ca759cb96b5f18859a477e55fd590 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t04501.u29 size 8388608 crc 900eaaac sha1 4033cb7b28fcadb92d5af3ea7fdd1c22747618fd )
+	rom ( name a04501.u3 size 8388608 crc 9741bea6 sha1 e3e904249be228628c8c2bd3495cda23586dc048 )
+	rom ( name a04502.u4 size 8388608 crc e104f405 sha1 124b3deed3e838f8bae6c7d78bdd788859597585 )
+	rom ( name a04503.u6 size 8388608 crc bfd5cfe3 sha1 fbe4c0a2987c2036df707b86597d78124ee2e665 )
+	rom ( name b04501.u9 size 8388608 crc 29320b7d sha1 59c78805e666f912df201c34616744f46057937b )
+	rom ( name b04502.u11 size 2097152 crc 578c00e9 sha1 14235cc8b0f8c7dd659512f017a2d4aacd91d89d )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w04501.u5 size 8388608 crc 3ab58137 sha1 b221f7e551ff0bfa3fd97b6ebedbac69442a66e9 )
+)
+
+game (
+	name dmnfrnta
+	description "Demon Front (ver. 105)"
+	year 2002
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof dmnfrnt
+	romof dmnfrnt
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v105_16m.u5 size 2097152 crc bda083bd sha1 58d6438737a2c43aa8bbcb7f34fb51375b781b1c )
+	rom ( name dmnfrnt_igs027a.bin merge dmnfrnt_igs027a.bin size 16384 flags nodump )
+	rom ( name v105_32m.u26 size 4194304 crc d200ee63 sha1 3128c27c5f5a4361d31e7b4bb006de631b3a228c )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t04501.u29 merge t04501.u29 size 8388608 crc 900eaaac sha1 4033cb7b28fcadb92d5af3ea7fdd1c22747618fd )
+	rom ( name a04501.u3 merge a04501.u3 size 8388608 crc 9741bea6 sha1 e3e904249be228628c8c2bd3495cda23586dc048 )
+	rom ( name a04502.u4 merge a04502.u4 size 8388608 crc e104f405 sha1 124b3deed3e838f8bae6c7d78bdd788859597585 )
+	rom ( name a04503.u6 merge a04503.u6 size 8388608 crc bfd5cfe3 sha1 fbe4c0a2987c2036df707b86597d78124ee2e665 )
+	rom ( name b04501.u9 merge b04501.u9 size 8388608 crc 29320b7d sha1 59c78805e666f912df201c34616744f46057937b )
+	rom ( name b04502.u11 merge b04502.u11 size 2097152 crc 578c00e9 sha1 14235cc8b0f8c7dd659512f017a2d4aacd91d89d )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w04501.u5 merge w04501.u5 size 8388608 crc 3ab58137 sha1 b221f7e551ff0bfa3fd97b6ebedbac69442a66e9 )
+)
+
+game (
+	name kovshp
+	description "Knights of Valour Super Heroes Plus / Sangoku Senki Super Heroes Plus (ver. 100)"
+	year 2004
+	manufacturer "IGS"
+	sourcefile pgm.c
+	cloneof kov
+	romof kov
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p0600h.rom size 4194304 crc e251e8e4 sha1 af5b7c81632a39e1450d932951bed634c76b84e8 )
+	rom ( name kovshp_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t0600.rom merge t0600.rom size 8388608 crc 4acc1ad6 sha1 0668dbd5e856c2406910c6b7382548b37c631780 )
+	rom ( name a0600.rom merge a0600.rom size 8388608 crc d8167834 sha1 fa55a99629d03b2ea253392352f70d2c8639a991 )
+	rom ( name a0601.rom merge a0601.rom size 8388608 crc ff7a4373 sha1 7def9fca7513ad5a117da230bebd2e3c78679041 )
+	rom ( name a0602.rom merge a0602.rom size 8388608 crc e7a32959 sha1 3d0ed684dc5b269238890836b2ce7ef46aa5265b )
+	rom ( name a0540.rom size 8388608 crc 4fd3413e sha1 5e8f3e421342bf558c77e59635f9b5d713e825c2 )
+	rom ( name b0600.rom merge b0600.rom size 8388608 crc 7d3cd059 sha1 00cf994b63337e0e4ebe96453daf45f24192af1c )
+	rom ( name b0540.rom size 8388608 crc 60999757 sha1 118cf058e67858958bcb931e14f5d160c7de87cc )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m0600.rom merge m0600.rom size 4194304 crc 3ada4fd6 sha1 4c87adb25d31cbd41f04fbffe31f7bc37173da76 )
+)
+
+game (
+	name oldsplus
+	description "Oriental Legend Special Plus / Xi You Shi E Zhuan Super Plus"
+	year 2004
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name p05301.rom size 4194304 crc 923f7246 sha1 818ade79e9724f5a2b0cc5a647ae5d4ee0374799 )
+	rom ( name oldsplus_igs027a.bin size 16384 flags nodump )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t05301.rom size 8388608 crc 8257bbb0 sha1 b48067b7e7081a15fddf21739b641d677c2df3d9 )
+	rom ( name a05301.rom size 8388608 crc 57946fd2 sha1 5d79bc71a1881f3099821a9b255a5f271e0eeff6 )
+	rom ( name a05302.rom size 8388608 crc 3459a0b8 sha1 94ab6f980b5582f1db9bb12019d03f0b6e0a06df )
+	rom ( name a05303.rom size 8388608 crc 13475d85 sha1 4683a3bf304fdc15ffb1c61b7957ad68b023fa33 )
+	rom ( name a05304.rom size 8388608 crc f03ef7a6 sha1 c18b1b622b430d5e031e65daa6819b84c3e12ef5 )
+	rom ( name b05301.rom size 8388608 crc fd98f503 sha1 02046ab1aa89f63bff149003d9d61776e025a92a )
+	rom ( name b05302.rom size 8388608 crc 9f6094a8 sha1 69f6f2003ab975eae13ea6b5c2ffa40df6e6bdf6 )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name m05301.rom size 4194304 crc 86ec83bc sha1 067cb7ec449eacd1f49298f45a364368934db5dd )
+)
+
+game (
+	name killbldp
+	description "The Killing Blade Plus (ver. 300)"
+	year 2005
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name v300x.u6 size 524288 crc b7fb8ec9 sha1 e71b2d74269a82c7155b9818821156e128b68b28 )
+	rom ( name killbldp_igs027a.bin size 16384 crc 9a73bf7d sha1 2ce1311b01e1124ad00af172f0670141bcb7a030 flags baddump )
+	rom ( name v300x.u26 size 2097152 crc 144388c8 sha1 d7469df077c1a674129f18210584ba4d05a61888 )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t05701w032.bin size 4194304 crc 567c714f sha1 b25b20e1ec9f077d6f7b9d41723a68d0d461bef2 )
+	rom ( name a05701w064.bin size 8388608 crc 8c0c992c sha1 28391e50ca4400060676f1524bd49ede373292da )
+	rom ( name a05702w064.bin size 8388608 crc 7e5b0f27 sha1 9e8d69f34c30216925fcb7af87f8b37f703317e7 )
+	rom ( name a05703w064.bin size 8388608 crc accbdb44 sha1 d59b2452c7a5b4e666473dc973b73a0f2b4edc13 )
+	rom ( name b05701w064.bin size 8388608 crc a20cdcef sha1 029a49971adf1e72ab556a207172bdfbd0b86b03 )
+	rom ( name b05702w016.bin size 2097152 crc fe7457df sha1 d66b1b31102b0210f9faf40e1473cd1511ccaf1f )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w05701b032.bin size 4194304 crc 2d3ae593 sha1 b9c1d2994be95ba974bc134a3bf115bc9c9c9c16 )
+)
+
+game (
+	name svg
+	description "S.V.G. - Spectral vs Generation (ver. 200)"
+	year 2005
+	manufacturer "IGS"
+	sourcefile pgm.c
+	romof pgm
+	rom ( name pgm_p01s.rom merge pgm_p01s.rom size 131072 crc e42b166e sha1 2a9df9ec746b14b74fae48b1a438da14973702ea )
+	rom ( name u30.bin size 524288 crc 34c18f3f sha1 42d1edd0dcfaa5e44861c6a1d4cb24f51ba23de8 )
+	rom ( name svg_igs027a.bin size 16384 flags nodump )
+	rom ( name u26.bin size 4194304 crc 46826ec8 sha1 ad1daf6f615fb8d748ce7f98f19dd3bf22f79fba )
+	rom ( name u29.bin size 4194304 crc fa5f3901 sha1 8ab7c6763df4f752b50ed2197063f58046b32ddb )
+	rom ( name pgm_t01s.rom merge pgm_t01s.rom size 2097152 crc 1a7123a0 sha1 cc567f577bfbf45427b54d6695b11b74f2578af3 )
+	rom ( name t05601w016.bin size 2097152 crc 03e110dc sha1 41c8f286e9303b24ba6235b341371c298226fb6a )
+	rom ( name a05601w064.bin size 8388608 crc ea6453e4 sha1 b5c82edafa8008ad59b5f2219511947d078d446e )
+	rom ( name a05602w064.bin size 8388608 crc 6d00621b sha1 55a4bc357e14b975b0234a9cd49e2224f509dad9 )
+	rom ( name a05603w064.bin size 8388608 crc 7b71c64f sha1 bec7c7edf0634cf8351a54abb867c56af08ad2c3 )
+	rom ( name a05604w032.bin size 4194304 crc 9452a567 sha1 01fdb8e1f131603843ef4c49ab76d7a56b2d6414 )
+	rom ( name b05601w064.bin size 8388608 crc 35c0a489 sha1 a7d5527da01f8eaa7499fb6785b57094521bce97 )
+	rom ( name b05602w064.bin size 8388608 crc 8aad3f85 sha1 da6996d901d42b3a2ba7019ad014bb938a5e328b )
+	rom ( name pgm_m01s.rom merge pgm_m01s.rom size 2097152 crc 45ae7159 sha1 d3ed3ff3464557fd0df6b069b2e431528b0ebfa8 )
+	rom ( name w05601b064.bin size 8388608 crc bfe61a71 sha1 e682ca8d57ca51c4d72f64fc091161f3dbdce871 )
+	rom ( name w05602b032.bin size 4194304 crc 0685166d sha1 64dac49abd2a46d5fb58c678027aa5e23d672dc4 )
+)
+

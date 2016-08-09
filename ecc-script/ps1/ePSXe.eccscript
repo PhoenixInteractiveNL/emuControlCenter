@@ -1,14 +1,14 @@
 ; ------------------------------------------------------------------------------
-; Platform               : Visual Pinball
-; Script for             : VPinball.exe - tested with v0.8.9506
+; Platform               : Sony Playstation 
+; Script for             : EPSXe
 ; Script version         : v1.0.0.0
-; Last changed           : 2009.02.05
+; Last changed           : 2009.10.12
 ;
 ;
-; Author: Sebastiaan Ebeltjes (aka Phoenix)
+; Author:  Bigby
 ;
 ; NOTES:
-; 
+; This script mounts the game
 ; 
 ; 
 ; ------------------------------------------------------------------------------
@@ -23,13 +23,11 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-EmuWindowControl("Visual Pinball")
 
-Send("^o") ;CTRL+O (open)
-Sleep(500)
-Send($eccFileRomPath & $eccFileRomFile) ;the ROM path & file
-Send("!o") ;ALT+O (open)
-Send("{F5}") ;play the table
+;MOUNTING THE CD (by Bigby)
+CDImage("mount")
+ShellExecuteWait( "ePSXe.exe" , "-nogui" )
+CDImage("unmount")
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

@@ -325,6 +325,7 @@ class IniFile {
 	*
 	*/
 	public function write_ecc_histroy_ini($search_key, $new_path, $check_path=false) {
+		
 		// check for real path... valid?
 		if ($check_path) $new_path = realpath($new_path);
 		
@@ -381,7 +382,7 @@ class IniFile {
 		return $this->create_dirs_recursive($user_folder);
 	}
 	
-	private function create_dirs_recursive($strPath, $mode = 0777) {
+	public function create_dirs_recursive($strPath, $mode = 0777) {
 		#if (!$this->parentIsWritable($strPath)) return false;
 		return is_dir($strPath) or ($this->create_dirs_recursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
 	}

@@ -35,6 +35,50 @@
 ###############################################################################
 
 -------------------------------------------------------------------------------
+- Version 0.5.96
+-------------------------------------------------------------------------------
+* Update romdb - the internet rom/emu-metadatabase!
+** www.camya.com/eccdb/
+** Added search functions
+** optimized overview
+** added web2.0 clouds :-)
+* Added french languages files created by Cyrille
+* fixed EDIT-Window always up focus problem.
+* added default emulator
+** optimize the ini-files for all platforms
+* added commandline parameter support for emulators
+* added shortcuts
+* ALT-A or ALT-Ins = Add new roms
+* ALT-X or ALT-Del = Remove rom from database
+* ALT-E = Edit
+* ALT-B = Bookmark
+* ALT-F = search focus!
+* added simple listview (default 100 results)
+** fixed graphical bug on 1024x768 (FYEO V2)
+** reorderable
+** cols resizeable!
+** added toggle between detail and list view
+** added some more fiels for this view!
+*** because of an php-gtk2 bug, it is not possible to do this on the fly yet!
+* Fixed a little history ini bug!
+** Autoupdate was not saved if never used!
+* disable buttons in imagepreview when reached end
+* try to catch import bug (playstation 1)
+* Platforms
+** added Atari 8-bit Computers a8bit
+*** added ecc_platform_a8bit_info.ini 
+*** Removed A400/A800 (allready in a8bit)
+** extensions added for MSX, NES, Sharp X68000
+** changed image of PC Engine
+* Added categories:
+** "Action Adventure"
+** "Trading Simulation",
+** "3D Shooter",
+** "Ego Shooter",
+** "Sports/other",
+** "Jump n Run 3D",
+
+-------------------------------------------------------------------------------
 - Version 0.5.95
 -------------------------------------------------------------------------------
 * Implemented "user table"
@@ -93,6 +137,11 @@
 * Fixed a focus bug media-edit. Now it is possible to edit metadata.
 * Added some tooltips for eccdb, navigation and main rom-view!
 * Rename eccdb within ecc into eccdb_EMPTY for updates!
+* Added shortcuts
+** a = add new roms
+** e = edit media
+** b = bookmark
+** x = remove from eccdb
 * Implement new ini "ecc_navigation.ini" only for navigation
 ** This ini isnt transfered into user folder for updates!
 ** removed all nav-elements form ecc_general.ini

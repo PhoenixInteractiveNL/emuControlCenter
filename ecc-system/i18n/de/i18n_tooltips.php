@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/12/31 
+ * language:	de (german)
+ * author:	franz schneider
+ * date:	2007/01/12 
  * ------------------------------------------
  */
 $i18n['tooltips'] = array(
@@ -12,18 +12,20 @@ $i18n['tooltips'] = array(
 	// tooltips
 	// -------------------------------------------------------------
 	'opt_auto_nav' =>
-		"Toogle search-autoupdate for navigation",
+		"Wechsle Such-Autoupdate für die Navigation",
 	'opt_hide_nav_null' =>
-		"Show/Hide platforms without roms",
+		"Zeige/Verstecke Plattformen ohne ROMS",
 	'opt_hide_dup' =>
-		"Show/Hide duplicate roms",
+		"Zeige/Verstecke ROMS-Dublikate",
 	'opt_hide_img' =>
-		"Show/Hide images",
+		"Zeige/Verstecke Bilder",
 	'search_field_select' =>
-		"Where do you want to search in?",
+		"Worin möchtest du suchen?",
 	'search_operator' =>
-		"Select a search operator. ([ = EQUAL] [ | OR ] [ + AND])",
+		"Wähle einen Suchoperator. ([ = GLEICH] [ | ODER ] [ + UND])",
 	'search_rating' =>
-		"Only show roms RATED equal or lower selection",
+		"Zeige nur ROMS mit gleicher oder schlechterer Bewertung",
+	'optvis_mainlistmode' =>
+		"Wechsle zwischen Detail- und Listenansicht",
 );
 ?>

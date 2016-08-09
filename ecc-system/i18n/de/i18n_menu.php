@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/09/09 
+ * language:	de (german)
+ * author:	franz schneider
+ * date:	2007/01/12 
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -12,82 +12,82 @@ $i18n['menu'] = array(
 	// context menu navigation
 	// -------------------------------------------------------------
 	'lbl_platform%s' =>
-		"%s options",
+		"%s Optionen",
 	'lbl_roms_add%s' =>
-		"Add new ROMS",
+		"Neue ROMS hinzufügen",
 	'lbl_roms_optimize%s' =>
-		"Optimize ROMS",
+		"Optimiere ROMS",
 	'lbl_roms_remove%s' =>
-		"Remove ROMS",
+		"Entferne ROMS",
 	'lbl_emu_config' =>
-		"Edit/Assign emulator",
+		"Bearbeite/Verknüpfe Emulator",
 	'lbl_ecc_config' =>
-		"Configuration",
+		"Konfigurationen",
 	'lbl_dat_import_ecc' =>
-		"Import emuControlCenter Datfile",
+		"Importiere emuControlCenter Datfile",
 	'lbl_dat_import_rc' =>
-		"Import Romcenter Datfile",
+		"Importiere Romcenter Datfile",
 	'lbl_dat_export_ecc_full' =>
-		"Export ecc Datfile full",
+		"Exportiere ecc Datfile komplett",
 	'lbl_dat_export_ecc_user' =>
-		"Export ecc Datfile user",
+		"Exportiere ecc Datfile Nutzer",
 	'lbl_dat_export_ecc_esearch' =>
-		"Export ecc Datfile eSearch",
+		"Exportiere ecc Datfile eSearch",
 	'lbl_dat_empty' =>
-		"Empty Datfile database",
+		"Leere Datfile Datenbank",
 	'lbl_help' =>
-		"Help",
+		"Hilfe",
 	// -------------------------------------------------------------
 	// context menu main
 	// -------------------------------------------------------------
 	'lbl_start' =>
-		"Start ROM",
+		"Starte ROM",
 	'lbl_fav_remove' =>
-		"Remove this bookmark",
+		"Entferne dieses Lesezeichen",
 	'lbl_fav_all_remove' =>
-		"Remove ALL bookmarks",
+		"Entferne ALLE Lesezeichen",
 	'lbl_fav_add' =>
-		"Add to bookmarks",
+		"Lesezeichen hinzufügen",
 	'lbl_image_popup' =>
-		"Show all images",
+		"Zeige alle Bilder",
 	'lbl_img_reload' =>
-		"Reload images",
+		"Bilder neuladen",
 	'lbl_rom_remove' =>
-		"Remove ROM from DB",
+		"Entferne diesen ROM aus der Datenbank",
 	'lbl_meta_edit' =>
-		"EDIT",
+		"Infos Bearbeiten",
 	'lbl_roms_initial_add%s%s' =>
-		"No ROMS found for platform\n----------------------------------------\n%s (%s)\n----------------------------------------\nClick here to add new ROMS!",
+		"Keine ROMS für die Plattform gefunden\n----------------------------------------\n%s (%s)\n----------------------------------------\nClick here to add new ROMS!",
 	'lbl_meta_webservice_meta_get' =>
-		"Get data from eccdb (Internet)",
+		"Infos abrufen, von der eccdb (Internet)",
 	'lbl_meta_webservice_meta_set' =>
-		"Add your data to eccdb (Internet)",
+		"Infos zu ROMS zur ECCDB hochladen (Internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
-		"Shell operations",
+		"Ordner Operationen",
 	'lbl_shellop_browse_dir' =>
-		"Browse ROM directory",
+		"Durchsuche ROM Ordner",
 	'lbl_shellop_file_rename' =>
-		"Rename file on harddisk",
+		"Umbennenung der ROM-Datei",
 	'lbl_shellop_file_copy' =>
-		"Copy file on harddisk",
+		"Kopiere Datei auf Laufwerk",
 	'lbl_shellop_file_unpack' =>
-		"Unpack this file",
+		"Entpacke diese Datei",
 	'lbl_shellop_file_remove' =>
-		"Remove file from harddisk",
+		"Lösche Datei vom Laufwerk",
 	// Rating
 	'lbl_rating_submenu' =>
-		"Rate ROM",
+		"Bewerte ROM",
 	'lbl_import_submenu' =>
-		"Import Datfile",
+		"Importiere Datfile",
 	'lbl_export_submenu' =>
-		"Export Datfile",
+		"Exportiere Datfile",
 	'lbl_rom_rescan_folder' =>
-		"(Re)parse ROM-Directory",
+		"Vergleiche ROM-Ordner",
 	'lbl_meta_remove' =>
-		"Remove META from DB",
+		"Entferne META-Infos aus der DB",
 	'lbl_rating_unset' =>
-		"Unset ratings",
+		"Bewertung entfernen",
 		
 );
 ?>

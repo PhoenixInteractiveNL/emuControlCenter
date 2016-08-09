@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/09/09
+ * language:	de (german)
+ * author:	franz schneider
+ * date:	2007/01/12 
  * ------------------------------------------
  */
 $i18n['popup'] = array(

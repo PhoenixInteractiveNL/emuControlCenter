@@ -37,7 +37,7 @@
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function executeFileWithProgramm($filePathCommand, $filePathFile, $fileNameEscape=false, $fileName8dot3=false) {
+	public function executeFileWithProgramm($filePathCommand, $param=false, $filePathFile, $fileNameEscape=false, $fileName8dot3=false) {
 		
 		// ABS-PATH TO REL-PATH...
 		$exePathFull = realpath($filePathCommand);
@@ -68,8 +68,10 @@
 		// win98 needs "player". Otherwise, the file isnt started
 		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
 		
+		if (!$param) $param = '';
+		
 		// Compile start command
-		$command = 'start '.$start_ident.' "'.escapeshellcmd($exeFileName).'" '.($filePathFile);
+		$command = 'start '.$start_ident.' "'.escapeshellcmd($exeFileName).'" '.$param.' '.$filePathFile;
 
 		// create an backup of the curren cwd
 		$cwdBackup = getcwd();

@@ -25,5 +25,7 @@ $i18n['tooltips'] = array(
 		"Select a search operator. ([ = EQUAL] [ | OR ] [ + AND])",
 	'search_rating' =>
 		"Only show roms RATED equal or lower selection",
+	'optvis_mainlistmode' =>
+		"Toggle beween detail and listview",
 );
 ?>

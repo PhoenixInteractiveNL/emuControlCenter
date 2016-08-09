@@ -3,30 +3,30 @@
  * emuControlCenter language system file
  * ------------------------------------------
  * language:	de (german)
- * author:	andreas scheibel
- * date:	2006/09/09 
+ * author:	franz schneider
+ * date:	2007/01/12 
  * ------------------------------------------
  */
 $i18n['status'] = array(
 	'parse_rom_pbar_file%s%s%s' =>
-		"- FILE %s of %s %s",
+		"- Datei %s von %s %s",
 	'parse_rom_pbar_file_packed' =>
-		"(PACKED)",		
+		"(Gepackt)",		
 	'parse_rom_detail_header%s' =>
-		"New media added to ecc\n%s",
+		"Neue Medien zu ECC hinzugefügt\n%s",
 	'parse_rom_detail_added_header' =>
-		"Added ROMS:\n",
+		"Hinzugefügte ROMS:\n",
 	'parse_rom_detail_unchanged_header' =>
-		"No changes since last parsing:\n",
+		"Keine Veränderungen entdeckt seit letzter Änderung:\n",
 	'parse_rom_pbar_scan_count%s' =>
-		"Scanned: %s",
+		"Gescannt: %s",
 	'parse_rom_detail_scan_head' =>
-		"Found media by type and extension\n",
+		"Gefundene Medien nach Typ und Dateiendung\n",
 	'parse_rom_detail_scan_found_direct_head' =>
-		"Found direct (not packed)\n",
+		"Direkter Fund (nicht gepackt)\n",
 	'parse_rom_detail_scan_found_direct_head' =>
-		"Found packed (eg. zip)\n",
+		"Gepackte Funde(z.B. zip, rar)\n",
 	'reorg_prepare_data%s' =>
-		"Prepare data! %s",
+		"bereite Dateien vor! %s",
 );
 ?>

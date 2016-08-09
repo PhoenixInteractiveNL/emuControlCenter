@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/09/09 
+ * language:	de (german)
+ * author:	franz schneider
+ * date:	2007/01/12 
  * ------------------------------------------
  */
 $i18n['global'] = array(
@@ -12,16 +12,16 @@ $i18n['global'] = array(
 	// context menu navigation
 	// -------------------------------------------------------------
 	'restart_title' =>
-		"Restart ecc",
+		"ECC Neustarten",
 	'restart_msg' =>
-		"please restart ecc to see the changes!",
+		"Um die Änderungen wirksam zu machen, muss ECC neugestartet werden!",
 	'error_title' =>
-		"Error",
+		"Fehler",
 	'error_text' =>
-		"Error found!",
+		"Fehler gefunden!",
 	'done_title' =>
-		"Action done",
+		"Befehl ausgeführt",
 	'done_msg' =>
-		"This is done!",
+		"Arbeit ist erledigt!",
 );
 ?>

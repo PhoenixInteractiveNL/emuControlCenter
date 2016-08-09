@@ -302,6 +302,7 @@ class GuiEccConfig {
 	private function pf_tree_fill() {
 		$this->model_platform->clear();
 		$test = $this->gui->ini->get_ecc_platform_navigation(false, false, true);
+		$log = '<ul>';
 		foreach ($test as $eccident => $pf_name) {
 			if ($eccident!='null') {
 				$platform_data = $this->gui->ini->get_ecc_platform_ini($eccident);
@@ -311,6 +312,9 @@ class GuiEccConfig {
 					$pf_extensions = "*.".implode(",*.", array_keys($platform_data['EXTENSIONS']));
 				}
 				$state = ($this->ini_data['NAVIGATION'][$eccident]) ? true : false;
+				
+				$log .= '<li><strong>'.$pf_name.'</strong> ('.$pf_extensions.')</li>'.LF;
+				
 				$this->model_platform->append(
 					array(
 						$state,
@@ -321,6 +325,8 @@ class GuiEccConfig {
 				);
 			}
 		}
+		$log .= '</ul>';
+		//file_put_contents(dirname(__FILE__).'/../../platform_list.txt', $log);
 	}
 
 	/**

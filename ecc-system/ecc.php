@@ -30,6 +30,8 @@ require_once('manager/cValid.php');
 */
 class App extends GladeXml {
 	
+	public $optVisMainListMode = false;
+	
 	public $ini = false;
 	
 	public $os_env = "";
@@ -549,6 +551,32 @@ class App extends GladeXml {
 		$col = 0;
 		$row = 0;
 		
+		
+		$state = ($this->optVisMainListMode) ? 'a' : 'i'; 
+		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_optvis_listmode_'.$state.'.png';
+		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$oImage = new GtkImage();
+		$oImage->set_from_pixbuf($pixbuf);	
+
+		$oEvent = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'optvis_mainlistmode'));
+		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
+		$oEvent->add($oImage);
+		
+		$table->attach($oEvent, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+		
+		$col++;
+		//$row++;
+		
+		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_optvis_spacer.png';
+		$pixbuf = GdkPixbuf::new_from_file($imageFile);
+		$oImage = new GtkImage();
+		$oImage->set_from_pixbuf($pixbuf);	
+		$table->attach($oImage, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);
+		
+		$col++;
+		//$row++;
+		
 		$state = ($this->nav_autoupdate) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_auto_nav_'.$state.'.png';
 		$pixbuf = GdkPixbuf::new_from_file($imageFile);
@@ -616,6 +644,7 @@ class App extends GladeXml {
 		
 		$col++;
 		//$row++;
+
 		
 		$table->show_all();
 	}
@@ -627,16 +656,21 @@ class App extends GladeXml {
 		while (gtk::events_pending()) gtk::main_iteration();
 	}
 	
+	public function toggleMailListMode() {
+		if ($this->open_window_confirm('BETA', "The view cannot changed on the fly because of an php-gtk2 bug (maybe :-))\n\nThis i only a beta feature... you have to restart ecc to the the changes... sorry!\n\nRestart ecc?")) {
+			$this->optVisMainListMode = !$this->optVisMainListMode;
+			$this->ini->write_ecc_histroy_ini('optVisMainListMode', $this->optVisMainListMode);
+			FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open');
+			Gtk::main_quit();
+		}
+	}
+	
 	
 	/*
 	*
 	*/
 	public function __construct()
 	{
-		
-
-		
-		
 		// ----------------------------------------------------------------
 		// ABS-PATH TO REL-PATH...
 		// ----------------------------------------------------------------
@@ -716,6 +750,7 @@ class App extends GladeXml {
 		// is this an initialized history ini?
 		// use defaults if init-ini!
 		// ----------------------------		
+		
 		$initialHistroyIni = (count($this->ini->read_ecc_histroy_ini()) <= 1);
 		
 		$this->objTooltips = new GtkTooltips();
@@ -727,11 +762,27 @@ class App extends GladeXml {
 		// ----------------------------
 		$this->images_inactiv = $this->ini->read_ecc_histroy_ini('images_inactiv');
 		$this->nav_inactive_hidden = $this->ini->read_ecc_histroy_ini('nav_inactive_hidden');
-		$this->nav_autoupdate = (!$initialHistroyIni) ? $this->ini->read_ecc_histroy_ini('nav_autoupdate') : true;
+		
+		if (!$initialHistroyIni) {
+			$this->nav_autoupdate = $this->ini->read_ecc_histroy_ini('nav_autoupdate');
+		}
+		else {
+			$this->nav_autoupdate = true;
+			$this->ini->write_ecc_histroy_ini('nav_autoupdate', true);
+		}
+		
 		$this->toggle_show_doublettes = $this->ini->read_ecc_histroy_ini('toggle_show_doublettes');
+		
 		
 		$pp = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'show_media_pp');
 		if ($pp) $this->_results_per_page = $pp;
+		
+		// 20060108 hack for simle mediaview
+		if ($this->ini->read_ecc_histroy_ini('optVisMainListMode')) {
+			$this->optVisMainListMode = true;
+			$pp = $this->ini->get_ecc_ini_key('USER_SWITCHES', 'media_perpage_list');
+			$this->_results_per_page = ($pp) ? $pp : 100;
+		}
 		
 		$this->createEccOptBtnBar();
 
@@ -1618,10 +1669,27 @@ class App extends GladeXml {
 		
 		$media_name = ($this->current_media_info['path_pack']) ? $this->current_media_info['path_pack'] : $this->current_media_info['path'];
 		$ext = strtolower($this->get_ext_form_file($media_name));
-		$ini_player = $this->ini->get_ecc_ini_key('ECC_PLATFORM', strtolower($this->current_media_info['fd_eccident']));
-		$ini_player = (isset($ini_player['EMU.'.$ext])) ? $ini_player['EMU.'.$ext] : false;
+		$ini_player1 = $this->ini->get_ecc_ini_key('ECC_PLATFORM', strtolower($this->current_media_info['fd_eccident']));
+		$ini_player = (isset($ini_player1['EMU.'.$ext])) ? $ini_player1['EMU.'.$ext] : false;
 		
-		$emu = (isset($ini_player['path'])) ? $ini_player['path'] : "";
+		$playerDefault = (isset($ini_player1['EMU.GLOBAL'])) ? $ini_player1['EMU.GLOBAL'] : false;
+
+		$playerUsed = $playerDefault;
+		
+		if (isset($ini_player['path']) && trim($ini_player['path'])) $playerUsed['path'] = trim($ini_player['path']);
+		if (isset($ini_player['param']) && trim($ini_player['param'])) $playerUsed['param'] = trim($ini_player['param']);
+		
+		if ((isset($ini_player['path']) && trim($ini_player['path'])) || (isset($ini_player['param']) && trim($ini_player['param']))) {
+			if (isset($ini_player['escape']) && trim($ini_player['escape'])) $playerUsed['escape'] = trim($ini_player['escape']);
+			if (isset($ini_player['win8char']) && trim($ini_player['win8char'])) $playerUsed['win8char'] = trim($ini_player['win8char']);
+		}
+		
+		$emu = $playerUsed['path'];
+		$param = $playerUsed['param'];
+		
+		$emu_escape = ($playerUsed['escape']) ? $playerUsed['escape'] : 0 ;
+		$emu_win8char = ($playerUsed['win8char']) ? $playerUsed['win8char'] : 0 ;
+
 		if (!$emu) {
 			$title = I18N::get('popup', 'emu_miss_title');
 			$msg = I18N::get('popup', 'emu_miss_notset_msg');
@@ -1649,12 +1717,12 @@ class App extends GladeXml {
 			return false;
 		}
 		
-		$emu_escape = (isset($ini_player['escape'])) ? $ini_player['escape'] : 0 ;
-		$emu_win8char = (isset($ini_player['win8char'])) ? $ini_player['win8char'] : 0 ;
+		#$emu_escape = (isset($ini_player['escape'])) ? $ini_player['escape'] : 0 ;
+		#$emu_win8char = (isset($ini_player['win8char'])) ? $ini_player['win8char'] : 0 ;
 		
 		// execute the file with the assigned emulator		
 		$oOs = FACTORY::get('manager/Os');
-		if ($oOs->executeFileWithProgramm($emu, $path, $emu_escape, $emu_win8char)){
+		if ($oOs->executeFileWithProgramm($emu, $param, $path, $emu_escape, $emu_win8char)){
 			$this->_fileView->update_launch_time($this->current_media_info['id']);	
 		}
 		else {
@@ -1689,7 +1757,54 @@ class App extends GladeXml {
 	
 	public function handleShortcuts($widged, $event) {
 		
-		//print "$event->keyval && $event->state".LF;
+		#print "$event->keyval && $event->state".LF;
+		
+		// add rom
+		// strg A
+		if ($event->keyval == '97' && $event->state == '8') {
+			$this->parseMedia();
+			return true;
+		}
+		// add rom
+		// Einfg
+		if ($event->keyval == '65379' && ($event->state == '4' || $event->state == '8')) {
+			$this->parseMedia();
+			return true;
+		}
+		
+		// remove rom
+		// strg X
+		if ($event->keyval == '120' && $event->state == '8') {
+			$this->remove_media_from_fdata();
+			return true;
+		}
+		// remove rom
+		// Entf
+		if ($event->keyval == '65535' && ($event->state == '4' || $event->state == '8')) {
+			$this->remove_media_from_fdata();
+			return true;
+		}
+		
+		// bookmark
+		// strg B
+		if ($event->keyval == '98' && $event->state == '8') {
+			$this->add_bookmark_by_id();
+			return true;
+		}
+		
+		//edit meta
+		// strg E
+		if ($event->keyval == '101' && $event->state == '8') {
+			$this->edit_media();
+			return true;
+		}
+		
+		//search
+		// strg S
+		if ($event->keyval == '102' && ($event->state == '4' || $event->state == '8')) {
+			$this->search_input_txt->grab_focus();
+			return true;
+		}
 		
 		// F6 show media
 		if ($event->keyval == '65475' && $event->state == '0') {
@@ -1983,7 +2098,12 @@ class App extends GladeXml {
 				
 				$text .= $spacer;
 				$text_buf = new GtkTextBuffer();
-				$text_buf->set_text(trim($text));
+				try {
+					$text_buf->set_text($text);
+				}
+				catch(PhpGtkGErrorException $e) {
+					$text_buf->set_text("ERROR CATCHED! NO VALID INPUT!");
+				}
 				$this->textview1->set_buffer($text_buf);
 			}
 		}
@@ -2106,6 +2226,13 @@ class App extends GladeXml {
 			$this->img_media_btn_save->set_sensitive(true);
 			$this->img_media_btn_delete->set_sensitive(true);
 			$this->img_media_btn_count->set_sensitive(true);
+			
+			if ($this->_img_show_pos+1 >= $this->_img_show_count) {
+				$this->media_img_btn_next->set_sensitive(false);
+			}
+			if ($this->_img_show_pos == 0) {
+				$this->media_img_btn_prev->set_sensitive(false);
+			}
 		}
 		else {
 			if ($this->_img_show_count == 1) {
@@ -2441,9 +2568,8 @@ class App extends GladeXml {
 				$msg = I18N::get('popup', 'maint_empty_history_msg');
 				if (!$this->open_window_confirm($title, $msg)) return false; 
 				if ($this->ini->emptyEccHistory()) {
-					$title = I18N::get('global', 'restart_title');
-					$msg = I18N::get('global', 'restart_msg');
-					$this->open_window_info($title, $msg);
+					FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open');
+					Gtk::main_quit();
 				}
 				break;
 			case 'MAINT_UNSET_RATINGS':
@@ -2964,9 +3090,11 @@ class App extends GladeXml {
 		$store->set($iter, 0, $state);
 	}
 	
+	
 	/*
 	*
 	*/
+	#public $lastMetaEditChecksum = array();
 	public function edit_media($onlyShowIfOpened=false)
 	{
 		if ($onlyShowIfOpened && !$this->media_edit_is_opened) return false;
@@ -3132,7 +3260,7 @@ class App extends GladeXml {
 	/*
 	*
 	*/
-	public function edit_media_save($validate_title=true)
+	public function edit_media_save($validate_title=false)
 	{
 		$data['id'] = $this->current_media_info['md_id'];
 		$data['crc32'] = $this->edit_mdata['crc32'];
@@ -3239,8 +3367,19 @@ class App extends GladeXml {
 	/*
 	*
 	*/
-	public function init_treeview_main()
+	public function init_treeview_main($resetMode = false)
 	{
+		// 20060108 hack for simle mediaview
+		if ($this->optVisMainListMode) {
+			$this->initTreeviewMainSimple();
+		}
+		else {
+			$this->initTreeviewMainDetail();
+		}
+		return true; 
+	}
+	
+	public function initTreeviewMainDetail() {
 		// main model
 		$this->model = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT);
 		
@@ -3263,7 +3402,6 @@ class App extends GladeXml {
 		// TEXT INFO
 		$renderer_2 = new GtkCellRendererText();
 		$renderer_2->set_property('family',  'Verdana');
-//		$renderer_2->set_property('font',  'Verdana Bold 9');
 		
 		$renderer_2->set_property("yalign", 0);
 		$renderer_2->set_property('size-points',  '9');
@@ -3306,6 +3444,216 @@ class App extends GladeXml {
 		$this->sw_mainlist_tree->append_column($col_file_id);
 		$this->sw_mainlist_tree->append_column($col_mdata_id);
 		$this->sw_mainlist_tree->append_column($col_composite_id);
+	}
+	
+	// 20060108 hack for simle mediaview
+	public function initTreeviewMainSimple()
+	{
+		// main model
+		$this->model = new GtkListStore(
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING,
+			Gtk::TYPE_STRING
+		);
+		
+		$rendererText = new GtkCellRendererText();
+
+		// IMAGE
+		$rendererText->set_property('family',  'Verdana');
+		$rendererText->set_property("yalign", 0);
+		$rendererText->set_property('size-points',  '9');
+		$rendererText->set_property('foreground', '#ffffff');
+		$rendererText->set_property('cell-background', '#394D59');
+		
+		$colRunning = new GtkTreeViewColumn('run', $rendererText, 'text', 0);
+		$colRunning->set_expand(false);
+		$colRunning->set_resizable(true);
+		$colRunning->set_sort_indicator(true);
+		$colRunning->set_sort_column_id(0);
+		#$colRunning->set_sizing(Gtk::TREE_VIEW_COLUMN_AUTOSIZE);
+		#$colRunning->set_fixed_width(100);
+		#$colRunning->set_spacing(10);
+		$colRunning->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		
+		
+		
+		$colName = new GtkTreeViewColumn('name', $rendererText, 'text', 1);
+		$colName->set_expand(true);
+		$colName->set_resizable(true);
+		$colName->set_sort_indicator(true);
+		$colName->set_sort_column_id(1);
+		#$colName->set_spacing(10);
+		$colName->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$colYear = new GtkTreeViewColumn('year', $rendererText, 'text', 6);
+		$colYear->set_expand(false);
+		$colYear->set_resizable(true);
+		$colYear->set_sort_indicator(true);
+		$colYear->set_sort_column_id(6);
+		#$colYear->set_spacing(10);
+		$colYear->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$colCategory = new GtkTreeViewColumn('category', $rendererText, 'text', 7);
+		$colCategory->set_expand(false);
+		$colCategory->set_resizable(true);
+		$colCategory->set_sort_indicator(true);
+		$colCategory->set_sort_column_id(7);
+		#$colCategory->set_spacing(10);
+		$colCategory->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 8;
+		$colMulti = new GtkTreeViewColumn('multi', $rendererText, 'text', $idx);
+		$colMulti->set_expand(false);
+		$colMulti->set_resizable(true);
+		$colMulti->set_sort_indicator(true);
+		$colMulti->set_sort_column_id($idx);
+		#$colMulti->set_spacing(10);
+		$colMulti->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 9;
+		$colTrainer = new GtkTreeViewColumn('train', $rendererText, 'text', $idx);
+		$colTrainer->set_expand(false);
+		$colTrainer->set_resizable(true);
+		$colTrainer->set_sort_indicator(true);
+		$colTrainer->set_sort_column_id($idx);
+		#$colTrainer->set_spacing(10);
+		$colTrainer->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 10;
+		$colRating = new GtkTreeViewColumn('rate', $rendererText, 'text', $idx);
+		$colRating->set_expand(false);
+		$colRating->set_resizable(true);
+		$colRating->set_sort_indicator(true);
+		$colRating->set_sort_column_id($idx);
+		#$colRating->set_spacing(20);
+		$colRating->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 11;
+		$colBugs = new GtkTreeViewColumn('bugs', $rendererText, 'text', $idx);
+		$colBugs->set_expand(false);
+		$colBugs->set_resizable(true);
+		$colBugs->set_sort_indicator(true);
+		$colBugs->set_sort_column_id($idx);
+		#$colBugs->set_spacing(10);
+		$colBugs->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 12;
+		$colIntro = new GtkTreeViewColumn('intro', $rendererText, 'text', $idx);
+		$colIntro->set_expand(false);
+		$colIntro->set_resizable(true);
+		$colIntro->set_sort_indicator(true);
+		$colIntro->set_sort_column_id($idx);
+		#$colIntro->set_spacing(10);
+		$colIntro->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 13;
+		$colMod = new GtkTreeViewColumn('mod', $rendererText, 'text', $idx);
+		$colMod->set_expand(false);
+		$colMod->set_resizable(true);
+		$colMod->set_sort_indicator(true);
+		$colMod->set_sort_column_id($idx);
+		#$colMod->set_spacing(10);
+		$colMod->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 14;
+		$colFree = new GtkTreeViewColumn('free', $rendererText, 'text', $idx);
+		$colFree->set_expand(false);
+		$colFree->set_resizable(true);
+		$colFree->set_sort_indicator(true);
+		$colFree->set_sort_column_id($idx);
+		#$colFree->set_spacing(10);
+		$colFree->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$idx = 15;
+		$colNetplay = new GtkTreeViewColumn('net', $rendererText, 'text', $idx);
+		$colNetplay->set_expand(false);
+		$colNetplay->set_resizable(true);
+		$colNetplay->set_sort_indicator(true);
+		$colNetplay->set_sort_column_id($idx);
+		#$colNetplay->set_spacing(10);
+		$colNetplay->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+//		$idx = 16;
+//		$colLanguages = new GtkTreeViewColumn('languages', $rendererText, 'text', $idx);
+//		$colLanguages->set_expand(false);
+//		$colLanguages->set_resizable(true);
+//		$colLanguages->set_sort_indicator(true);
+//		$colLanguages->set_sort_column_id($idx);
+//		$colLanguages->set_spacing(10);
+//		$colLanguages->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		$colDeveloper = new GtkTreeViewColumn('developer', $rendererText, 'text', 2);
+		$colDeveloper->set_expand(false);
+		$colDeveloper->set_resizable(true);
+		$colDeveloper->set_sort_indicator(true);
+		$colDeveloper->set_sort_column_id(2);
+		#$colDeveloper->set_spacing(10);
+		$colDeveloper->set_cell_data_func($rendererText, array($this, "format_col"));
+		
+		## HIDDEN FIELDS!!!!
+		## HIDDEN FIELDS!!!!
+				
+		$colId = new GtkTreeViewColumn('ID', $rendererText, 'text', 3);
+		$colId->set_visible(false);
+		$colId->set_expand(false);
+		
+		$colMetaId = new GtkTreeViewColumn('MDATA_ID', $rendererText, 'text', 4);
+		$colMetaId->set_visible(false);
+		$colMetaId->set_expand(false);
+		
+		$colCompositeId = new GtkTreeViewColumn('COMPOSITE_ID', $rendererText, 'text', 5);
+		$colCompositeId->set_visible(false);
+		$colCompositeId->set_expand(false);
+		
+		## HIDDEN FIELDS!!!!
+		## HIDDEN FIELDS!!!!
+		
+		$this->sw_mainlist_tree->set_headers_visible(true);
+		#$this->sw_mainlist_tree->columns_autosize();
+		
+		// add model to GtkTreeView
+		$this->sw_mainlist_tree->set_model($this->model);
+		
+		$this->sw_mainlist_tree->modify_base(Gtk::STATE_NORMAL, GdkColor::parse('#445566'));
+		$this->sw_mainlist_tree->modify_base(Gtk::STATE_SELECTED, GdkColor::parse('#aabbcc'));
+		$this->sw_mainlist_tree->modify_base(Gtk::STATE_ACTIVE, GdkColor::parse('#aabbcc'));
+		$this->sw_mainlist_tree->modify_text(Gtk::STATE_SELECTED, GdkColor::parse('#000000'));
+		
+		$this->sw_mainlist_tree->append_column($colName);
+		$this->sw_mainlist_tree->append_column($colYear);
+		$this->sw_mainlist_tree->append_column($colDeveloper);
+		$this->sw_mainlist_tree->append_column($colCategory);	
+//		$this->sw_mainlist_tree->append_column($colLanguages);
+		$this->sw_mainlist_tree->append_column($colRating);		
+		$this->sw_mainlist_tree->append_column($colRunning);
+		$this->sw_mainlist_tree->append_column($colBugs);
+		$this->sw_mainlist_tree->append_column($colTrainer);
+		$this->sw_mainlist_tree->append_column($colIntro);
+		$this->sw_mainlist_tree->append_column($colMod);
+		$this->sw_mainlist_tree->append_column($colFree);
+		$this->sw_mainlist_tree->append_column($colMulti);
+		$this->sw_mainlist_tree->append_column($colNetplay);
+		
+		$this->sw_mainlist_tree->append_column($colId);
+		$this->sw_mainlist_tree->append_column($colMetaId);
+		$this->sw_mainlist_tree->append_column($colCompositeId);
+
+		
+		
 	}
 	
 	public function get_toggle_status($treeview)
@@ -3698,11 +4046,11 @@ class App extends GladeXml {
 		
 		$pini = $this->ini->get_ecc_platform_ini($eccident, false);
 		
-		$helpfiles = array();
-		$file = 'help/inline/edit_platform_'.$eccident.'.txt';
-		if (file_exists($file)) $helpfiles[] = $file;
-		$helpfiles[] = 'help/inline/edit_platform.txt';
-		$this->update_inline_help($this->nb_main_config_ihelp_txt, $helpfiles);
+//		$helpfiles = array();
+//		$file = 'help/inline/edit_platform_'.$eccident.'.txt';
+//		if (file_exists($file)) $helpfiles[] = $file;
+//		$helpfiles[] = 'help/inline/edit_platform.txt';
+//		$this->update_inline_help($this->nb_main_config_ihelp_txt, $helpfiles);
 		
 		$this->inicfg_gen_eccident->set_label($pini['GENERAL']['eccident']);
 		$this->inicfg_gen_title->set_text($pini['GENERAL']['navigation']);
@@ -3714,8 +4062,40 @@ class App extends GladeXml {
 		}
 		
 		if (isset($pini['EXTENSIONS'])) {
-			$cnt = 1;
 			
+			$path = (isset($pini["EMU.GLOBAL"]['path'])) ? $pini["EMU.GLOBAL"]['path'] : "" ;
+			$this->inicfg_emu_row_0_path->set_text($path);
+			$this->objTooltips->set_tip($this->inicfg_emu_row_0_path, 'Add the path to your emulator or use EMU-Button!');
+			
+			$param = (isset($pini["EMU.GLOBAL"]['param'])) ? $pini["EMU.GLOBAL"]['param'] : "" ;
+			$this->inicfg_emu_row_0_param->set_text($param);
+			$this->objTooltips->set_tip($this->inicfg_emu_row_0_param, 'Add the emulator commandline parameters, if needed!');
+			
+			$emu_escape = (isset($pini["EMU.GLOBAL"]['escape'])) ? (int)$pini["EMU.GLOBAL"]['escape'] : 1 ;
+			$this->inicfg_emu_row_0_escape->set_active($emu_escape);
+			$this->objTooltips->set_tip($this->inicfg_emu_row_0_escape, 'Most of the emulator needs escaped rompaths!');
+			
+			$emu_win8char = (isset($pini["EMU.GLOBAL"]['win8char'])) ? (int)$pini["EMU.GLOBAL"]['win8char'] : 0 ;
+			$this->inicfg_emu_row_0_win8char->set_active($emu_win8char);
+			$this->objTooltips->set_tip($this->inicfg_emu_row_0_win8char, 'Some emulators only support short 8.3 filenames!');
+			
+			$this->platform_edit_emu[$eccident][0] = array(
+				'extension' => $this->inicfg_emu_row_0_ext,
+				'path' => $this->inicfg_emu_row_0_path,
+				'param' => $this->inicfg_emu_row_0_param,
+				'escape' => $this->inicfg_emu_row_0_escape,
+				'win8char' => $this->inicfg_emu_row_0_win8char,
+			);
+			$this->set_platform_edit_path_settings($eccident, 'GLOBAL');
+
+			$inicfg_emu_btn = "inicfg_emu_row_btn_0";
+			$this->objTooltips->set_tip($this->$inicfg_emu_btn, 'Select your emulator executeable!');
+			if (!isset($this->inicfg_emu_btn_connected[$inicfg_emu_btn])) {
+				$this->$inicfg_emu_btn->connect('clicked', array($this, 'get_platform_edit_path'));
+				$this->inicfg_emu_btn_connected[$inicfg_emu_btn] = true;
+			}
+			
+			$cnt = 1;
 			foreach($pini['EXTENSIONS'] as $extension => $state) {
 				if ($state) {
 					
@@ -3731,23 +4111,39 @@ class App extends GladeXml {
 					$inicfg_emu_path = "inicfg_emu_row_".$cnt."_path";
 					$path = (isset($pini["EMU.".$extension]['path'])) ? $pini["EMU.".$extension]['path'] : "" ;
 					$this->$inicfg_emu_path->set_text($path);
+					
+					$this->objTooltips->set_tip($this->$inicfg_emu_path, 'Add the path to your emulator or use EMU-Button!');
+					
+					// params
+					$inicfg_emu_param = "inicfg_emu_row_".$cnt."_param";
+					$param = (isset($pini["EMU.".$extension]['param'])) ? $pini["EMU.".$extension]['param'] : "" ;
+					$this->$inicfg_emu_param->set_text($param);
+					
+					$this->objTooltips->set_tip($this->$inicfg_emu_param, 'Add the emulator commandline parameters, if needed!');
+					
 					// escape the path?
 					$inicfg_emu_escape = "inicfg_emu_row_".$cnt."_escape";
 					$emu_escape = (isset($pini["EMU.".$extension]['escape'])) ? (int)$pini["EMU.".$extension]['escape'] : 1 ;
 					$this->$inicfg_emu_escape->set_active($emu_escape);
+					
+					$this->objTooltips->set_tip($this->$inicfg_emu_escape, 'Most of the emulator needs escaped rompaths!');
+					
 					// only show testte~1
 					$inicfg_emu_win8char = "inicfg_emu_row_".$cnt."_win8char";
 					$emu_win8char = (isset($pini["EMU.".$extension]['win8char'])) ? (int)$pini["EMU.".$extension]['win8char'] : 0 ;
 					$this->$inicfg_emu_win8char->set_active($emu_win8char);
+					
+					$this->objTooltips->set_tip($this->$inicfg_emu_win8char, 'Some emulators only support short 8.3 filenames!');
+					
 					// is this emu-path valid
 					$inicfg_emu_path_state = "inicfg_emu_row_".$cnt."_path_state";
 					
-					if (is_dir(dirname($path))) {
+					if (file_exists($path)) {
 						$path_state_color = '#00CC00';
-						$path_state_label = 'DIR';
+						$path_state_label = 'EMU';
 					} else {
 						$path_state_color = '#CC0000';
-						$path_state_label = 'DIR';
+						$path_state_label = 'EMU';
 					}
 					
 					$markup='<span foreground="'.$path_state_color.'"><b>'.htmlspecialchars($path_state_label).'</b></span>';
@@ -3756,12 +4152,16 @@ class App extends GladeXml {
 					$this->platform_edit_emu[$eccident][$cnt] = array(
 						'extension' => $this->$inicfg_emu_ext,
 						'path' => $this->$inicfg_emu_path,
+						'param' => $this->$inicfg_emu_param,
 						'escape' => $this->$inicfg_emu_escape,
 						'win8char' => $this->$inicfg_emu_win8char,
 					);
 					$this->set_platform_edit_path_settings($eccident, $extension);
 					
 					$inicfg_emu_btn = "inicfg_emu_row_btn_".$cnt."";
+					
+					$this->objTooltips->set_tip($this->$inicfg_emu_btn, 'Select your emulator executeable!');
+					
 					if (!isset($this->inicfg_emu_btn_connected[$inicfg_emu_btn])) {
 						$this->$inicfg_emu_btn->connect('clicked', array($this, 'get_platform_edit_path'));
 						$this->inicfg_emu_btn_connected[$inicfg_emu_btn] = true;
@@ -3773,6 +4173,7 @@ class App extends GladeXml {
 		
 		if (!isset($this->inicfg_emu_btn_connected['inicfg_emu_btn_save'])) {
 			$this->inicfg_emu_btn_save->connect_simple('clicked', array($this, 'write_platform_ini'), $eccident);
+			$this->inicfg_emu_btn_save_top->connect_simple('clicked', array($this, 'write_platform_ini'), $eccident);
 			$this->inicfg_emu_btn_connected['inicfg_emu_btn_save'] = true;
 		}
 		
@@ -3783,9 +4184,10 @@ class App extends GladeXml {
 		$this->pedit_extension = $extension;
 	}
 	public function get_platform_edit_path($obj) {
+		
 		// dirty way to get the row to change! :-)
 		$pos = (int)substr($obj->get_name(), -1);
-		
+
 		$path_obj = $this->platform_edit_emu[$this->pedit_eccident][$pos]['path'];
 		$path = realpath($path_obj->get_text()); // set path for popup
 		
@@ -3811,9 +4213,12 @@ class App extends GladeXml {
 		
 		$this->platform_ini[$this->pedit_eccident]['GENERAL']['navigation'] = '"'.$this->inicfg_gen_title->get_text().'"';
 		$this->platform_ini[$this->pedit_eccident]['GENERAL']['category'] = '"'.$this->inicfg_gen_category->get_text().'"';
+		
 		foreach ($this->platform_edit_emu[$this->pedit_eccident] as $pos => $obj) {
+			
 			$ext = $obj['extension']->get_text();
 			$path = trim($obj['path']->get_text());
+			$param = trim($obj['param']->get_text());
 			$escape = trim($obj['escape']->get_active());
 			$win8char = trim($obj['win8char']->get_active());
 			
@@ -3823,6 +4228,7 @@ class App extends GladeXml {
 			
 			$this->platform_ini[$this->pedit_eccident]['EMU.'.$ext] = array(
 				'path' => '"'.$path.'"',
+				'param' => '"'.$param.'"',
 				'escape' => '"'.(int)$escape.'"',
 				'win8char' => '"'.(int)$win8char.'"',
 			);
@@ -4122,12 +4528,83 @@ class App extends GladeXml {
 		$this->cellRatingPixbufTank[$rating] = $obj;
 		return $obj;
 	}
+
+	// 20060108 hack for simle mediaview
+	public function fillMediaListSimple($file_list) {
+		
+		if ($file_list['count']!=0) {
+			foreach ($file_list['data'] as $id => $data) {
+				
+				$eccident = ($data['fd_eccident']) ? $data['fd_eccident'] : $data['md_eccident'];
+				$eccident = strtolower($eccident);
+				
+				$media_name = basename($data['path']);
+				
+				$media_name = ($data['md_name']) ? $data['md_name'] : $media_name;
+				$year = ($data['md_year']) ? $data['md_year'] : '';
+				$category = (isset($this->media_category[$data['md_category']])) ? $this->media_category[$data['md_category']] : '';
+				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : '';
+				$creator = (isset($data['md_creator'])) ? $data['md_creator'] : '';
+				$running = (isset($data['md_running'])) ? $data['md_running'] : '';
+				
+				$multiplayer = (isset($data['md_multiplayer'])) ? $data['md_multiplayer'] : '';
+				$trainer = (isset($data['md_trainer'])) ? $data['md_trainer'] : '';
+				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : '';
+				
+				$bugs = (isset($data['md_bugs'])) ? $data['md_bugs'] : '';
+				$free = (isset($data['md_freeware'])) ? $data['md_freeware'] : '';
+				$intro = (isset($data['md_intro'])) ? $data['md_intro'] : '';
+				$net = (isset($data['md_netplay'])) ? $data['md_netplay'] : '';
+				$mod = (isset($data['md_usermod'])) ? $data['md_usermod'] : '';
+				
+//				$languages = '';
+//				if ($lang_data = array_keys($this->_fileView->get_language_by_mdata_id($data['md_id']))) {
+//					$languages = implode("|",$lang_data);
+//				}
+				
+				// create model array for cell output
+				$item = array();
+				$item[] = $running;
+				$item[] = iconv('ISO-8859-1', 'UTF-8', $media_name);
+				$item[] = $creator;
+				$item[] = $data['id'];
+				$item[] = $data['md_id'];
+				$item[] = $id;
+				$item[] = $year;
+				$item[] = $category;
+				$item[] = $multiplayer;
+				$item[] = $trainer;
+				$item[] = $rating;
+				$item[] = $bugs;
+				$item[] = $free;
+				$item[] = $intro;
+				$item[] = $mod;
+				$item[] = $net;
+//				$item[] = $languages;
+								
+				$this->model->append($item);
+				
+				unset($lang_data);
+				unset($media);
+				unset($media_name);
+				unset($item);
+			}
+		}
+	}
+	
 	
 	/*
 	*
 	*/
 	function add_fileinfo_to_cell($file_list)
 	{
+		
+		// 20060108 hack for simle mediaview
+		if ($this->optVisMainListMode) {
+			$this->fillMediaListSimple($file_list);
+			return true;
+		}
+		
 		if ($file_list['count']!=0) {
 			foreach ($file_list['data'] as $id => $data) {
 				
@@ -4454,37 +4931,45 @@ class App extends GladeXml {
 		// is freeform search selected?
 		// get sql-snipplet
 		$search_like = $this->createSearchSqlLike();
-
-		$limit = array(0, $this->_results_per_page);
+		
+		// 20060108 hack for simle mediaview
+		if (!$this->_results_per_page) {
+			$limit = false;
+		}
+		else {
+			$limit = array(0, $this->_results_per_page);
+		}
 		
 		$file_list = $this->filelist_data_dispatcher($this->_eccident, $search_like, $limit, true, $order_by, $this->_search_language, $this->_search_category, $this->ext_search_selected);
 		
 		$this->the_file_list = isset($file_list['data']) ? $file_list['data'] : array();
 		$this->data_available = $file_list['count'];
 		
-		$pager_data = $this->media_treeview_pager->init($file_list['count'], 0, $this->_results_per_page);
-		
-		if ($pager_data->_pt > 0) {
-			$this->set_pager_position_label($this->media_pager_label, $pager_data->_p, $pager_data->_pt, $pager_data->_res_total);
+		// 20060108 hack for simle mediaview
+		if ($this->_results_per_page) {
+			$pager_data = $this->media_treeview_pager->init($file_list['count'], 0, $this->_results_per_page);
+			
+			if ($pager_data->_pt > 0) {
+				$this->set_pager_position_label($this->media_pager_label, $pager_data->_p, $pager_data->_pt, $pager_data->_res_total);
+			}
+			else {
+				$pager_txt = '<span foreground="#cc0000"><b>NO DATA!</b></span>';
+				$this->media_pager_label->set_markup($pager_txt);
+			}
+			
+			$this->media_pager_first->set_sensitive(true);
+			$this->media_pager_prev->set_sensitive(true);
+			$this->media_pager_last->set_sensitive(true);
+			$this->media_pager_next->set_sensitive(true);
+			if ($pager_data->_pfirst) {
+				$this->media_pager_first->set_sensitive(false);
+				$this->media_pager_prev->set_sensitive(false);
+			}
+			if ($pager_data->_plast) {
+				$this->media_pager_last->set_sensitive(false);
+				$this->media_pager_next->set_sensitive(false);
+			}
 		}
-		else {
-			$pager_txt = '<span foreground="#cc0000"><b>NO DATA!</b></span>';
-			$this->media_pager_label->set_markup($pager_txt);
-		}
-		
-		$this->media_pager_first->set_sensitive(true);
-		$this->media_pager_prev->set_sensitive(true);
-		$this->media_pager_last->set_sensitive(true);
-		$this->media_pager_next->set_sensitive(true);
-		if ($pager_data->_pfirst) {
-			$this->media_pager_first->set_sensitive(false);
-			$this->media_pager_prev->set_sensitive(false);
-		}
-		if ($pager_data->_plast) {
-			$this->media_pager_last->set_sensitive(false);
-			$this->media_pager_next->set_sensitive(false);
-		}
-		
 		
 		if (isset($file_list) && $file_list['count'] > 0) {
 			$this->add_fileinfo_to_cell($file_list);

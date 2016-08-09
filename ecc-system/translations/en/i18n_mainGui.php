@@ -44,7 +44,7 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbGetTitle' =>
 		"GET metadata",
 	'paneInfoEccDbGetText' =>
-		"At this moment, the GET functionality is not full implemented. The idea is, that you press the GET-Buttons, and your ROM-Metainformations are automaticly updated from the internet-database. You can visit the current eccdb/get page by clicking this button.",
+		"At this moment, the GET functionality is not full implemented. The idea is, that if you press the GET-Button, your ROM-Metainformations are automaticly updated from the internet-database. You can visit the current eccdb/get page by clicking on this button.",
 	'paneInfoEccDbGetButton' =>
 		"Show selected ROMS metadata online!",
 
@@ -53,7 +53,7 @@ $i18n['mainGui'] = array(
 	'romDetailTabPersonal' =>
 		"Personal",
 	'romDetailTabESearch' =>
-		"E-Search",
+		"e-Search",
 	'romDetailTabRomDB' =>
 		"RomDB",
 	'romDetailTabRomData' =>

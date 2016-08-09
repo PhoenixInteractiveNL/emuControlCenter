@@ -191,8 +191,8 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 		$win_style_temp->bg[Gtk::STATE_NORMAL] = GdkColor::parse($this->gui->background_color);
 		$dlg->set_style($win_style_temp);
 		
-		$dlg->set_icon($this->getPixbuf(ECC_DIR_SYSTEM.'/images/ecc_icon_small.ico'));
-		$dlg->set_logo($this->getPixbuf(ECC_DIR_SYSTEM.'/images/platform/ecc_ecc_teaser.png'));
+		$dlg->set_icon($this->getPixbuf(ECC_DIR_SYSTEM.'/images/internal/ecc_icon_small.ico'));
+		$dlg->set_logo($this->getPixbuf(ECC_DIR_SYSTEM.'/images/internal/ecc_teaser_small.png'));
 		
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];

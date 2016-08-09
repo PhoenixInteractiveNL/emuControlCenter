@@ -27,8 +27,8 @@ Desc: Malay translation for Notepad++
 <!-- Sub Menu Entries -->
 
 <SubEntries>
-<Item posX="3" posY="20" name="Lipat peringkat"/>
-<Item posX="3" posY="21" name="Bentang peringkat"/>
+<Item posX="3" posY = "16" name="Lipat peringkat"/>
+<Item posX="3" posY = "17" name="Bentang peringkat"/>
 </SubEntries>
 <!-- all menu item -->
 

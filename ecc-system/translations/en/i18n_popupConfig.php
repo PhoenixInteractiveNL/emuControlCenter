@@ -184,7 +184,7 @@ $i18n['popupConfig'] = array(
 	'emu_info_nodata' =>
 		"No informations available yet...",
 	'emu_info_footer%s' =>
-		"Maybe you know an good emulator for this platform!\nYou can add your infos to the Forum/Board at\n%s",
+		"Maybe you know a good emulator for this platform!\nYou can add your infos to the Forum/Board at\n%s",
 	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
@@ -314,7 +314,7 @@ $i18n['popupConfig'] = array(
 	'emuAssignGlobalCheckZipUnpackActive' =>
 		"automaticly unpack ZIP/7ZIP files",
 	'emuAssignGlobalCheckZipUnpackSkip' =>
-		"Skip allready unpacked files (faster)",
+		"Skip already unpacked files (faster)",
 	'emuAssignGlobalCheckZipUnpackClean' =>
 		"Cleanup ecc-unpack folder for platform",
 	'emuAssignGlobalCheckZipUnpackOpen' =>

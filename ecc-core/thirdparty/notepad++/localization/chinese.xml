@@ -21,8 +21,20 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-					<Item posX="3" posY="20" name="折疊層次"/>
-                    <Item posX="3" posY="21" name="伸展層次"/>
+					<Item posX = "1" posY = "9" name = "複製至剪貼簿"/>
+                    <Item posX = "1" posY = "10" name = "縮排"/>
+                    <Item posX = "1" posY = "11" name = "字母轉換"/>
+                    <Item posX = "1" posY = "12" name = "行列"/>
+                    <Item posX = "1" posY = "13" name = "註解"/>
+                    <Item posX = "1" posY = "14" name = "自動完成"/>
+                    <Item posX = "2" posY = "11" name = "顏色標記"/>
+                    <Item posX = "2" posY = "12" name = "清除顏色標記"/>
+					<Item posX = "3" posY = "4" name = "特殊字元"/>
+                    <Item posX = "3" posY = "5" name = "焦距"/>
+                    <Item posX = "3" posY = "6" name = "現行文件移動│拷貝"/>
+					<Item posX="3" posY="16" name="折疊層次"/>
+                    <Item posX="3" posY="17" name="伸展層次"/>
+					
                 </SubEntries>
 
                 <!-- all menu item -->
@@ -52,7 +64,7 @@
                     <Item id="42005" name="貼上(&amp;P)"/>
                     <Item id="42006" name="清除(&amp;D)"/>
                     <Item id="42007" name="全選(&amp;A)"/>
-                    <Item id="42008" name="嵌入 TAB TAB"/>
+                    <Item id="42008" name="嵌入 TAB"/>
                     <Item id="42009" name="移除 TAB"/>
                     <Item id="42010" name="複寫現行行列"/>
                     <Item id="42011" name="調換現行行列"/>
@@ -101,6 +113,17 @@
                     <Item id="43019" name="複製標籤列至剪貼簿"/>
                     <Item id="43020" name="貼上剪貼簿內容至標籤列"/>
                     <Item id="43021" name="清除標籤列"/>
+					<Item id = "43022" name = "使用第一格式上色"/>
+                    <Item id = "43023" name = "清除格式一顏色"/>
+                    <Item id = "43024" name = "使用第二格式上色"/>
+                    <Item id = "43025" name = "清除格式二顏色"/>
+                    <Item id = "43026" name = "使用第三格式上色"/>
+                    <Item id = "43027" name = "清除格式三顏色"/>
+                    <Item id = "43028" name = "使用第四格式上色"/>
+                    <Item id = "43029" name = "清除格式四顏色"/>
+                    <Item id = "43030" name = "使用第五格式上色"/>
+                    <Item id = "43031" name = "清除格式五顏色"/>
+                    <Item id = "43032" name = "清除所有格式顏色"/>
                     <Item id="44009" name="便條紙"/>
                     <Item id="44010" name="折疊所有層次"/>
                     <Item id="44011" name="自訂語法對話窗"/>
@@ -219,6 +242,9 @@
 			 	<Item id="1624" name="搜尋模式"/>
 			 	<Item id="1625" name="一般"/>
 			 	<Item id="1626" name="增強模式 (\n, \r, \t, \0, \x...)"/>
+				<Item id="1660" name="取代所有目錄"/>
+				<Item id="1641" name="現行文件找尋"/>
+				<Item id="1686" name="透明度"/>
             </Find>
             <GoToLine title="到那兒去溜搭溜搭">
                 <Item id = "2007" name = "列數"/>
@@ -242,6 +268,7 @@
 				<Item id="2" name="取消"/>
 				<Item id="2301" name="儲存 &amp;&amp; 關閉"/>
 				<Item id="2303" name="透明度"/>
+				<Item id="2306" name="主題選取："/>
                 <SubDialog>
                 	<Item id="2204" name="粗體"/>
                     <Item id="2205" name="斜體"/>
@@ -347,6 +374,7 @@
 					
 					<Item id = "6121" name = "選單欄"/>
 					<Item id = "6122" name = "隱藏 (使用 Alt 或 F10 鍵啟用)"/>
+					<Item id = "6123" name = "語言"/>
 
 				</Global>
                 <Scintillas title="編輯區">
@@ -400,6 +428,7 @@
 				<LangMenu title="程式語言選單">
 					<Item id="6505" name="有效項目"/>
 					<Item id="6506" name="隱藏項目"/>
+					<Item id = "6507" name = "簡化程式語言選單"/>
                 </LangMenu>
 				<Print1 title="列印：顏色與留邊設定">
 					<Item id="6601" name="列印列數邊行"/>
@@ -451,7 +480,7 @@
 					<Item id="6329" name="高亮度顯示相契合的 xml/html 標示 (tag)"/>
 					<Item id="6327" name="啟動"/>
 					<Item id="6328" name="高亮度顯示屬性 (tag attributes)"/>
-					<Item id="6330" name="高亮度顯示 php/asp 區域"/>
+					<Item id="6330" name="高亮度顯示 註解/php/asp 區域"/>
 					<Item id="6331" name="在標題列僅顯示檔案名稱〈無路徑〉"/>
 					<Item id="6114" name="啟動"/>
 					<Item id="6115" name="自動縮排"/>

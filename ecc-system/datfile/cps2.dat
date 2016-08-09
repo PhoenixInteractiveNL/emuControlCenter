@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-2
-	description "CPS-2 20090310"
+	description "CPS-2 20090426"
 	category "Capcom Play System 2"
-	version 20090310
-	date 2009-03-10
+	version 20090426
+	date 2009-04-26
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -2026,6 +2026,36 @@ game (
 	rom ( name vphb.08 size 524288 crc 42220f84 sha1 f6ef52b1dff86c25852aa05be4a5b39995c26dd7 )
 	rom ( name vphb.09 size 524288 crc 029e015d sha1 441d0ea36484cbffe783cb0a1133537c09783022 )
 	rom ( name vphb.10 size 524288 crc 37b3ce37 sha1 5919b44415e4d5b242fcdd69efd0ab1722e4da8c )
+	rom ( name vph.13m merge vph.13m size 4194304 crc c51baf99 sha1 2fb6642908e542e404391eb17392f8270e87bf48 )
+	rom ( name vph.15m merge vph.15m size 4194304 crc 3ce83c77 sha1 93369b23c6d7d834297434691bb047ee3dd9539c )
+	rom ( name vph.17m merge vph.17m size 4194304 crc 4f2408e0 sha1 cd49c6b3c7e6470c6058f98ccc5210b052bb13e2 )
+	rom ( name vph.19m merge vph.19m size 4194304 crc 9ff60250 sha1 d69ba4dc6bd37d003245f0cf3211d6e2623005b8 )
+	rom ( name vph.14m merge vph.14m size 4194304 crc 7a0e1add sha1 6b28a91bd59bba97886fdea30116a5b1071109ed )
+	rom ( name vph.16m merge vph.16m size 4194304 crc 2f41ca75 sha1 f4a67e60b62001e6fe75cb05b9c81040a8a09f54 )
+	rom ( name vph.18m merge vph.18m size 4194304 crc 64498eed sha1 d64e54a9ad1cbb927b7bac2eb16e1487834c5706 )
+	rom ( name vph.20m merge vph.20m size 4194304 crc 17f2433f sha1 0cbf8c96f92016fefb4a9c668ce5fd260342d712 )
+	rom ( name vph.01 merge vph.01 size 131072 crc 5045dcac sha1 fd1a6586fbdd48a707df1fa52309b4cf50e3cc4c )
+	rom ( name vph.02 merge vph.02 size 131072 crc 86b60e59 sha1 197d07ced8b9850729c83fa59b7afc283500bdee )
+	rom ( name vph.11m merge vph.11m size 2097152 crc e1837d33 sha1 e3cb69f64767bacbec7286d0b4cd0ce7a0ba13d8 )
+	rom ( name vph.12m merge vph.12m size 2097152 crc fbd3cd90 sha1 4813c25802ad71b77ca04fd8f3a86344f99f0d6a )
+)
+
+game (
+	name nwarra
+	description "Night Warriors: Darkstalkers' Revenge (Asia 950302)"
+	year 1995
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof nwarr
+	romof nwarr
+	rom ( name vpha.03b size 524288 crc 0a70cdd6 sha1 08d3f3892bfc8e741c59071150e6c3a8bf5ffbef )
+	rom ( name vpha.04b size 524288 crc 70ce62e4 sha1 8bc9066071585805b6420bcc40eb03e641e3f027 )
+	rom ( name vpha.05b size 524288 crc 5692a03f sha1 7c2ba1022ee4045d985477a6c9026140b7809234 )
+	rom ( name vpha.06b size 524288 crc b810fe66 sha1 787198f546a0d3dbf0f2d54a4328aaaf4e3cdcae )
+	rom ( name vpha.07b size 524288 crc 1be264f3 sha1 b08d0771963e6b8c1a2d32e6db3edd9bffea39e1 )
+	rom ( name vpha.08b size 524288 crc 86f1ed52 sha1 95095ef7037cf5f90f00b15f224e4b35e3ea675e )
+	rom ( name vpha.09b size 524288 crc 7e96bd0a sha1 f7750209b157a405710c0797e9eb30f980db582d )
+	rom ( name vpha.10b size 524288 crc 58bce2fd sha1 2df1460cb349d64ca84fd3372a9a64b6cdbe078f )
 	rom ( name vph.13m merge vph.13m size 4194304 crc c51baf99 sha1 2fb6642908e542e404391eb17392f8270e87bf48 )
 	rom ( name vph.15m merge vph.15m size 4194304 crc 3ce83c77 sha1 93369b23c6d7d834297434691bb047ee3dd9539c )
 	rom ( name vph.17m merge vph.17m size 4194304 crc 4f2408e0 sha1 cd49c6b3c7e6470c6058f98ccc5210b052bb13e2 )
@@ -5967,6 +5997,29 @@ game (
 	rom ( name mpn.01 size 131072 crc 90c7adb6 sha1 a2653e977e5e0457b249e098e5ca0abc93dac336 )
 	rom ( name mpn-simm.05a size 2097152 crc 318a2e21 sha1 c573cd88f8279a062c73ef1d79cd8421dbdcd93e )
 	rom ( name mpn-simm.05b size 2097152 crc 5462f4e8 sha1 299fbdab700e735e6395c5d9e3f079bb2e3dbd73 )
+)
+
+game (
+	name mpangr1
+	description "Mighty! Pang (Euro 000925)"
+	year 2000
+	manufacturer "Mitchell, distributed by Capcom"
+	sourcefile cps2.c
+	cloneof mpang
+	romof mpang
+	rom ( name mpne.03b size 524288 crc 6ef0f9b2 sha1 fd1c76e151466fe27b02a6d07683fdd9c6a4816d )
+	rom ( name mpne.04b size 524288 crc 30a468bb sha1 f2f8f600a079ff050c9a0c12e1a6368943bdc536 )
+	rom ( name mpn-simm.01c merge mpn-simm.01c size 2097152 crc 388db66b sha1 7416cce3d0dbea71c92ea9f72f5536146f757b45 )
+	rom ( name mpn-simm.01d merge mpn-simm.01d size 2097152 crc aff1b494 sha1 d376c02ce01e71a7707d3d3fe5b0ae59ce781686 )
+	rom ( name mpn-simm.01a merge mpn-simm.01a size 2097152 crc a9c4857b sha1 66f538105c710d1480141e48a15b1a760f5ce985 )
+	rom ( name mpn-simm.01b merge mpn-simm.01b size 2097152 crc f759df22 sha1 1678e3e819dd808f3a6fdd52b7c933eac4777b5b )
+	rom ( name mpn-simm.03c merge mpn-simm.03c size 2097152 crc dec6b720 sha1 331776e1cba3fb82071e7c2195dc4ae27b3613a2 )
+	rom ( name mpn-simm.03d merge mpn-simm.03d size 2097152 crc f8774c18 sha1 58e0ea4dd62e39bcfaa3a2be4ef08eb2f0bd3c00 )
+	rom ( name mpn-simm.03a merge mpn-simm.03a size 2097152 crc c2aea4ec sha1 f5e2a815fa802598611efa48e5de97e929155e77 )
+	rom ( name mpn-simm.03b merge mpn-simm.03b size 2097152 crc 84d6dc33 sha1 f5ababb479facc08c425381570644230c09334e7 )
+	rom ( name mpn.01 merge mpn.01 size 131072 crc 90c7adb6 sha1 a2653e977e5e0457b249e098e5ca0abc93dac336 )
+	rom ( name mpn-simm.05a merge mpn-simm.05a size 2097152 crc 318a2e21 sha1 c573cd88f8279a062c73ef1d79cd8421dbdcd93e )
+	rom ( name mpn-simm.05b merge mpn-simm.05b size 2097152 crc 5462f4e8 sha1 299fbdab700e735e6395c5d9e3f079bb2e3dbd73 )
 )
 
 game (

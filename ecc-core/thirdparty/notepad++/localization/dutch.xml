@@ -10,34 +10,36 @@
 					<Item id = "2" name = "&amp;Zoeken"/>
 					<Item id = "3" name = "Beel&amp;d"/>
 					<Item id = "4" name = "&amp;Codering"/>
-					<Item id = "5" name = "&amp;Opmaak"/>
+					<Item id = "5" name = "&amp;Syntaxis"/>
 					<Item id = "6" name = "&amp;Instellingen"/>
 					<Item id = "7" name = "&amp;Macro"/>
 					<Item id = "8" name = "&amp;Uitvoeren"/>
 					<Item idName = "Plugins" name = "&amp;Plugins"/>
-					<Item idName = "Window" name = "&amp;Venster"/>
+					<Item idName = "Window" name = "&amp;Vensters"/>
 				</Entries>
 				<!-- Sub Menu Entries -->
 				<SubEntries>
-					<Item posX = "3" posY = "20" name = "Sectie samenvouwen"/>
-					<Item posX = "3" posY = "21" name = "Sectie uitvouwen"/>
+					<Item posX = "3" posY = "16" name = "Sectie samenvouwen"/>
+					<Item posX = "3" posY = "17" name = "Sectie uitvouwen"/>
 				</SubEntries>
 				<!-- all menu item -->
 				<Commands>
 					<Item id = "1001"  name = "Bestand direct afdrukken"/>
+
 					<Item id = "10001" name = "Deelvenster groeperen"/>
 					<Item id = "10002" name = "Deelvenster klonen"/>
 					<Item id = "10003" name = "Naar een nieuw venster verplaatsen"/>
 					<Item id = "10004" name = "Naar een nieuw venster kopiëren"/>
-					<Item id = "41001" name = "&amp;Nieuw	Ctrl+N"/>
-					<Item id = "41002" name = "&amp;Openen	Ctrl+O"/>
-					<Item id = "41003" name = "Sluiten	Ctrl+W"/>
+
+					<Item id = "41001" name = "&amp;Nieuw"/>
+					<Item id = "41002" name = "&amp;Openen"/>
+					<Item id = "41003" name = "Sluiten"/>
 					<Item id = "41004" name = "Alles slui&amp;ten"/>
 					<Item id = "41005" name = "Overige tabbladen sluiten"/>
-					<Item id = "41006" name = "O&amp;pslaan	Ctrl+S"/>
-					<Item id = "41007" name = "Alles opslaan	Ctrl+Shift+S"/>
+					<Item id = "41006" name = "O&amp;pslaan"/>
+					<Item id = "41007" name = "Alles opslaan"/>
 					<Item id = "41008" name = "Ops&amp;laan als..."/>
-					<Item id = "41010" name = "Af&amp;drukken...	Ctrl+P"/>
+					<Item id = "41010" name = "Af&amp;drukken..."/>
 					<Item id = "41011" name = "Af&amp;sluiten"/>
 					<Item id = "41012" name = "Werkomgeving laden..."/>
 					<Item id = "41013" name = "Werkomgeving opslaan..."/>
@@ -45,83 +47,86 @@
 					<Item id = "41015" name = "Kopie opslaan..."/>
 					<Item id = "41016" name = "Verwijderen"/>
 					<Item id = "41017" name = "Hernoemen..."/>
-					<Item id = "42001" name = "K&amp;nippen	Ctrl+X"/>
-					<Item id = "42002" name = "&amp;Kopiëren	Ctrl+C"/>
-					<Item id = "42003" name = "&amp;Ongedaan maken	Ctrl+Z"/>
-					<Item id = "42004" name = "&amp;Herhalen	Ctrl+Y"/>
-					<Item id = "42005" name = "&amp;Plakken	Ctrl+V"/>
-					<Item id = "42006" name = "&amp;Verwijderen	Del"/>
-					<Item id = "42007" name = "&amp;Alles selecteren	Ctrl+A"/>
-					<Item id = "42008" name = "Insprong vergroten	Tab"/>
-					<Item id = "42009" name = "Insprong verkleinen	Shift+Tab"/>
-					<Item id = "42010" name = "Regel dupliceren	Ctrl+D"/>
-					<Item id = "42012" name = "Regels splitsen	Ctrl+I"/>
-					<Item id = "42013" name = "Regels samenvoegen	Ctrl+J"/>
-					<Item id = "42014" name = "Regel omhoog verplaatsen	Ctrl+Shift+Up"/>
-					<Item id = "42015" name = "Regel omlaag verplaatsen	Ctrl+Shift+Down"/>
-					<Item id = "42016" name = "Converteren naar &amp;hoofdletters	Ctrl+Shift+U"/>
-					<Item id = "42017" name = "Converteren naar &amp;kleine letters	Ctrl+U"/>
-					<Item id = "42018" name = "Opname &amp;starten	Ctrl+Shift+R"/>
-					<Item id = "42019" name = "Opname st&amp;oppen	Ctrl+Shift+R"/>
-					<Item id = "42021" name = "Macro &amp;afspelen	Ctrl+Shift+P"/>
+
+					<Item id = "42001" name = "K&amp;nippen"/>
+					<Item id = "42002" name = "&amp;Kopiëren"/>
+					<Item id = "42003" name = "&amp;Ongedaan maken"/>
+					<Item id = "42004" name = "&amp;Herhalen"/>
+					<Item id = "42005" name = "&amp;Plakken"/>
+					<Item id = "42006" name = "&amp;Verwijderen"/>
+					<Item id = "42007" name = "&amp;Alles selecteren"/>
+					<Item id = "42008" name = "Insprong vergroten"/>
+					<Item id = "42009" name = "Insprong verkleinen"/>
+					<Item id = "42010" name = "Regel dupliceren"/>
+					<Item id = "42012" name = "Regels splitsen"/>
+					<Item id = "42013" name = "Regels samenvoegen"/>
+					<Item id = "42014" name = "Regel omhoog verplaatsen"/>
+					<Item id = "42015" name = "Regel omlaag verplaatsen"/>
+					<Item id = "42016" name = "Converteren naar &amp;hoofdletters"/>
+					<Item id = "42017" name = "Converteren naar &amp;kleine letters"/>
+					<Item id = "42018" name = "Opname &amp;starten"/>
+					<Item id = "42019" name = "Opname st&amp;oppen"/>
+					<Item id = "42021" name = "Macro &amp;afspelen"/>
 					<Item id = "42022" name = "Markeren als commentaar / markering wissen"/>
 					<Item id = "42023" name = "Markeren als commentaar (doorlopend)"/>
 					<Item id = "42024" name = "Ruimte voor regeleinden verwijderen"/>
 					<Item id = "42025" name = "Macro opsl&amp;aan"/>
-					<Item id = "42026" name = "Tekstrichting rechts-links	Ctrl+Alt+R"/>
-					<Item id = "42027" name = "Tekstrichting links-rechts	Ctrl+Alt+L"/>
+					<Item id = "42026" name = "Tekstrichting rechts-links"/>
+					<Item id = "42027" name = "Tekstrichting links-rechts"/>
 					<Item id = "42028" name = "Alleen-lezen"/>
 					<Item id = "42029" name = "Bestandslocatie kopiëren"/>
 					<Item id = "42030" name = "Bestandsnaam kopiëren"/>
 					<Item id = "42031" name = "Maplocatie kopiëren"/>
 					<Item id = "42032" name = "Macro meerdere keren uitvoeren..."/>
 					<Item id = "42033" name = "Alleen-lezen opheffen"/>
-					<Item id = "42034" name = "Kolommen bewerken...	Alt+C"/>
+					<Item id = "42034" name = "Reeks bewerken..."/>
 					<Item id = "42035" name = "Markeren als commentaar"/>
 					<Item id = "42036" name = "Markering wissen"/>
 					<Item id = "42040" name = "Alle recentelijke bestanden openen"/>
 					<Item id = "42041" name = "Bestandsgeschiedenis wissen"/>
-					<Item id = "43001" name = "&amp;Zoeken...	Ctrl+F"/>
-					<Item id = "43002" name = "&amp;Volgende zoeken	F3"/>
-					<Item id = "43003" name = "Verv&amp;angen...	Ctrl+H"/>
-					<Item id = "43004" name = "&amp;Ga naar regel...	Ctrl+G"/>
-					<Item id = "43005" name = "&amp;Bladwijzer invoegen	Ctrl+F2"/>
-					<Item id = "43006" name = "V&amp;olgende bladwijzer	F2"/>
-					<Item id = "43007" name = "Vo&amp;rige bladwijzer 	Shift+F2"/>
+
+					<Item id = "43001" name = "&amp;Zoeken..."/>
+					<Item id = "43002" name = "&amp;Volgende zoeken"/>
+					<Item id = "43003" name = "Verv&amp;angen..."/>
+					<Item id = "43004" name = "&amp;Ga naar regel..."/>
+					<Item id = "43005" name = "&amp;Bladwijzer invoegen"/>
+					<Item id = "43006" name = "V&amp;olgende bladwijzer"/>
+					<Item id = "43007" name = "Vo&amp;rige bladwijzer"/>
 					<Item id = "43008" name = "Alle bladwijzers ver&amp;wijderen"/>
-					<Item id = "43009" name = "Ga naar overeenkomende &amp;accolade	Ctrl+B"/>
-					<Item id = "43010" name = "Vorig&amp;e zoeken	Shift+F3"/>
-					<Item id = "43011" name = "&amp;Snel zoeken...	Ctrl+Alt+I"/>
-					<Item id = "43013" name = "Zoeken in &amp;bestanden	Ctrl+Shift+F"/>
-					<Item id = "43014" name = "Volgende zoeken (globaal)	Ctrl+F3"/>
-					<Item id = "43015" name = "Vorige zoeken (globaal)	Ctrl+Shift+F3"/>
-					<Item id = "43016" name = "Zoekterm markeren	Ctrl+M"/>
-					<Item id = "43017" name = "Markering wissen	Ctrl+Shift+M"/>
+					<Item id = "43009" name = "Ga naar overeenkomende &amp;accolade"/>
+					<Item id = "43010" name = "Vorig&amp;e zoeken"/>
+					<Item id = "43011" name = "&amp;Snel zoeken..."/>
+					<Item id = "43013" name = "Zoeken in &amp;bestanden"/>
+					<Item id = "43014" name = "Volgende zoeken (globaal)"/>
+					<Item id = "43015" name = "Vorige zoeken (globaal)"/>
+					<Item id = "43016" name = "Zoekterm markeren"/>
+					<Item id = "43017" name = "Markering wissen"/>
 					<Item id = "43018" name = "Aan bladwijzer gekoppelde regels knippen"/>
 					<Item id = "43019" name = "Aan bladwijzer gekoppelde regels kopiëren"/>
 					<Item id = "43020" name = "Aan bladwijzer gekoppelde regels plakken"/>
 					<Item id = "43021" name = "Aan bladwijzer gekoppelde regels wissen"/>
-					<Item id = "44010" name = "Gegevensstructuur samenvouwen	Alt+0"/>
-					<Item id = "44011" name = "Opmaak aanpassen..."/>
+
+					<Item id = "44009" name = "Interface verbergen"/>
+					<Item id = "44010" name = "Gegevensstructuur samenvouwen"/>
+					<Item id = "44011" name = "Syntaxismarkering ontwerpen..."/>
 					<Item id = "44019" name = "Alle karakters weergeven"/>
 					<Item id = "44020" name = "Insprong weergeven"/>
 					<Item id = "44022" name = "Automatische terugloop"/>
-					<Item id = "44023" name = "Tekstgrootte vergroten	Ctrl-Muiswiel omhoog"/>
-					<Item id = "44024" name = "Tekstgrootte verkleinen	Ctrl-Muiswiel omlaag"/>
+					<Item id = "44023" name = "Tekstgrootte vergroten"/>
+					<Item id = "44024" name = "Tekstgrootte verkleinen"/>
 					<Item id = "44025" name = "Spaties en tabs weergeven"/>
 					<Item id = "44026" name = "Regeleindemarkering weergeven"/>
-					<Item id = "44029" name = "Gegevensstructuur uitvouwen	Alt+Shift+0"/>
-					<Item id = "44030" name = "Huidige sectie samenvouwen	Ctrl+Alt+F"/>
-					<Item id = "44031" name = "Huidige sectie uitvouwen	Ctrl+Alt+Shift+F"/>
-					<Item id = "44032" name = "Volledig scherm	F11"/>
-					<Item id = "44033" name = "Tekstgrootte herstellen	Ctrl+/(keypad)"/>
+					<Item id = "44029" name = "Gegevensstructuur uitvouwen"/>
+					<Item id = "44030" name = "Huidige sectie samenvouwen"/>
+					<Item id = "44031" name = "Huidige sectie uitvouwen"/>
+					<Item id = "44032" name = "Volledig scherm"/>
+					<Item id = "44033" name = "Tekstgrootte herstellen"/>
 					<Item id = "44034" name = "Altijd op voorgrond"/>
 					<Item id = "44035" name = "Verticaal scrollen koppelen"/>
 					<Item id = "44036" name = "Horizontaal scrollen koppelen"/>
 					<Item id = "44041" name = "Terugloopmarkering weergeven"/>
 					<Item id = "44042" name = "Regels verbergen"/>
-					<Item id = "44070" name = "Hoofdvenster activeren"/>
-					<Item id = "44071" name = "Subvenster activeren"/>
+					<Item id = "44072" name = "Actieve deelvenster wisselen"/>
 					<Item id = "45001" name = "Windows-indeling"/>
 					<Item id = "45002" name = "Unix-indeling"/>
 					<Item id = "45003" name = "Mac-indeling"/>
@@ -131,23 +136,28 @@
 					<Item id = "45007" name = "UCS-2 Little Endian"/>
 					<Item id = "45008" name = "UTF-8 (zonder BOM)"/>
 					<Item id = "45009" name = "Naar ANSI converteren"/>
-					<Item id = "45010" name = "Naar UTF-8 converteren"/>
-					<Item id = "45011" name = "Naar UCS-2 Big Endian converteren"/>
-					<Item id = "45012" name = "Naar UCS-2 Little Endian converteren"/>
-					<Item id = "45013" name = "Naar UTF-8 (zonder BOM) converteren"/>
-					<Item id = "46001" name = "Syntaxmarkering..."/>
+					<Item id = "45010" name = "Naar UTF-8 (zonder BOM) converteren"/>
+					<Item id = "45011" name = "Naar UTF-8 converteren"/>
+					<Item id = "45012" name = "Naar UCS-2 Big Endian converteren"/>
+					<Item id = "45013" name = "Naar UCS-2 Little Endian converteren"/>
+
+					<Item id = "46001" name = "Opmaak..."/>
 					<Item id = "46080" name = "Aangepast"/>
-					<Item id = "47000" name = "Over...	F1"/>
+					<Item id = "47000" name = "Over..."/>
 					<Item id = "47001" name = "Notepad++ website bezoeken"/>
 					<Item id = "47002" name = " » Project"/>
 					<Item id = "47003" name = " » Documentatie"/>
 					<Item id = "47004" name = " » Forum"/>
 					<Item id = "47005" name = "Meer plugins zoeken"/>
+					<Item id = "47008" name = "Handleiding voor Notepad++"/>
+
 					<Item id = "48009" name = "Sneltoetsen..."/>
 					<Item id = "48011" name = "Voorkeuren..."/>
+
 					<Item id = "49000" name = "&amp;Uitvoeren..."/>
-					<Item id = "50000" name = "Functies aanvullen	Ctrl+Space"/>
-					<Item id = "50001" name = "Woorden aanvullen	Ctrl+Shift+Space"/>
+
+					<Item id = "50000" name = "Functies aanvullen"/>
+					<Item id = "50001" name = "Woorden aanvullen"/>
 					<Item id = "50002" name = "Functie-argumenten weergeven"/>
 				</Commands>
 			</Main>
@@ -177,7 +187,7 @@
 				<Item id = "1" name = "&amp;Volgende zoeken"/>
 				<Item id = "2" name = "Sluiten"/>
 				<Item id = "1603" name = "Losse &amp;woorden"/>
-				<Item id = "1604" name = "&amp;Identieke hoofdletters/kleine letters"/>
+				<Item id = "1604" name = "&amp;Kapitalen onderscheiden"/>
 				<Item id = "1605" name = "Reguliere e&amp;xpressie"/>
 				<Item id = "1606" name = "&amp;Documenteinde negeren"/>
 				<Item id = "1608" name = "V&amp;ervangen"/>
@@ -186,13 +196,12 @@
 				<Item id = "1612" name = "Omhoog"/>
 				<Item id = "1613" name = "Omlaag"/>
 				<Item id = "1614" name = "Gevonden woorden &amp;tellen"/>
-				<Item id = "1615" name = "&amp;Alle vinden"/>
+				<Item id = "1615" name = "&amp;Alle zoeken"/>
 				<Item id = "1616" name = "Bladwijzer invoegen"/>
 				<Item id = "1617" name = "Gevonden zoekterm &amp;markeren"/>
 				<Item id = "1618" name = "Markering opnieuw instellen"/>
 				<Item id = "1620" name = "Zoeken naar:"/>
 				<Item id = "1621" name = "Richting"/>
-				<Item id = "1623" name = "Transparantie"/>
 				<Item id = "1624" name = "Zoekmethode"/>
 				<Item id = "1625" name = "Normaal"/>
 				<Item id = "1626" name = "Uitgebreid (\n, \r, \t, \0, \x...)"/>
@@ -207,6 +216,8 @@
 				<Item id = "1656" name = "Bestanden zoeken"/>
 				<Item id = "1658" name = "Submappen doorzoeken"/>
 				<Item id = "1659" name = "Verborgen bestanden en mappen"/>
+				<Item id = "1660" name = "Vervangen in bestanden"/>
+				<Item id = "1686" name = "Transparantie"/>
 				<Item id = "1687" name = "Bij focusverlies"/>
 				<Item id = "1688" name = "Altijd"/>
 			</Find>
@@ -225,7 +236,7 @@
 				<Item id = "2007" name = "Regelnummer"/>
 				<Item id = "2008" name = "Karakterpositie"/>
 			</GoToLine>
-			<ColumnEditor title = "Kolommen bewerken">
+			<ColumnEditor title = "Reeks bewerken">
 				<Item id = "1" name = "OK"/>
 				<Item id = "2" name = "Annuleren"/>
 				<Item id = "2023" name = "Tekst invoegen"/>
@@ -239,7 +250,7 @@
 				<Item id = "2033" name = "Nummer invoegen"/>
 				<Item id = "2035" name = "Voorloopnullen"/>
 			</ColumnEditor>
-			<StyleConfig title = "Syntaxmarkering">
+			<StyleConfig title = "Opmaak">
 				<Item id = "1" name = "&amp;Voorbeeld"/>
 				<Item id = "2" name = "&amp;Annuleren"/>
 				<Item id = "2301" name = "&amp;Opslaan"/>
@@ -262,7 +273,7 @@
 					<Item id = "2218" name = "Onderstrepen"/>
 					<Item id = "2219" name = "Standaard trefwoorden"/>
 					<Item id = "2221" name = "Extra trefwoorden"/>
-					<Item id = "2225" name = "Taal:"/>
+					<Item id = "2225" name = "Syntaxis:"/>
 					<Item id = "2226" name = "Voorgrondkleur vervangen"/>
 					<Item id = "2227" name = "Achtergrondkleur vervangen"/>
 					<Item id = "2228" name = "Normaal lettertype vervangen"/>
@@ -272,7 +283,7 @@
 					<Item id = "2232" name = "Onderstreept lettertype vervangen"/>
 				</SubDialog>
 			</StyleConfig>
-			<UserDefine title = "Opmaak">
+			<UserDefine title = "Syntaxismarkering ontwerpen">
 				<Item id = "0" name = "Kleur"/>
 				<Item id = "1" name = "Voorgrond"/>
 				<Item id = "2" name = "Achtergrond"/>
@@ -289,7 +300,7 @@
 				<Item id = "20007" name = "Opmaakprofiel:"/>
 				<Item id = "20009" name = "Extensies:"/>
 				<Item id = "20011" name = "Transparantie"/>
-				<Item id = "20012" name = "Hoofd- en kleine letters als hetzelfde beschouwen"/>
+				<Item id = "20012" name = "Kapitaal als onderkast"/>
 				<Folder title = "Algemeen">
 					<Item id = "21101" name = "Opmaak"/>
 					<Item id = "21201" name = "Markering sectie openen"/>
@@ -297,26 +308,26 @@
 				</Folder>
 				<Keywords title = "Trefwoorden">
 					<Item id = "22101" name = "1e groep"/>
-					<Item id = "22113" name = "Als prefix"/>
+					<Item id = "22113" name = "Als voorvoegsel"/>
 					<Item id = "22201" name = "2e groep"/>
-					<Item id = "22213" name = "Als prefix"/>
+					<Item id = "22213" name = "Als voorvoegsel"/>
 					<Item id = "22301" name = "3e groep"/>
-					<Item id = "22313" name = "Als prefix"/>
+					<Item id = "22313" name = "Als voorvoegsel"/>
 					<Item id = "22401" name = "4e groep"/>
-					<Item id = "22413" name = "Als prefix"/>
+					<Item id = "22413" name = "Als voorvoegsel"/>
 				</Keywords>
 				<Comment title = "Commentaar &amp;&amp; Getallen">
 					<Item id = "23101" name = "Commentaarblok"/>
-					<Item id = "23113" name = "Markering commentaarblok openen"/>
-					<Item id = "23115" name = "Markering commentaarblok sluiten"/>
-					<Item id = "23116" name = "Als prefix"/>
-					<Item id = "23117" name = "Als prefix"/>
+					<Item id = "23113" name = "Commentaarblok openen:"/>
+					<Item id = "23115" name = "Commentaarblok sluiten:"/>
+					<Item id = "23116" name = "Als operator"/>
+					<Item id = "23117" name = "Als operator"/>
 					<Item id = "23201" name = "Getallen"/>
 					<Item id = "23301" name = "Commentaarregel"/>
 				</Comment>
 				<Operator title = "Operators">
 					<Item id = "24101" name = "Geactiveerde operators"/>
-					<Item id = "24103" name = "Beschikbare symbolen"/>
+					<Item id = "24103" name = "Beschikbare operators"/>
 					<Item id = "24107" name = "Operator"/>
 					<Item id = "24201" name = "1e bereik"/>
 					<Item id = "24211" name = "Begin:"/>
@@ -350,7 +361,8 @@
 					<Item id = "6119" name = "Tabs in meerdere rijen weergeven"/>
 					<Item id = "6120" name = "Verticale tabs"/>
 					<Item id = "6121" name = "Menubalk"/>
-					<Item id = "6122" name = "Verbergen (Wissel zichtbaarheid met Alt of F10)"/>
+					<Item id = "6122" name = "Verbergen (Tonen met Alt of F10)"/>
+					<Item id = "6123" name = "Taal"/> 
 				</Global>
 				<Scintillas title = "Weergave">
 					<Item id = "6201" name = "Gegevensstructuur"/>
@@ -378,9 +390,8 @@
 				<MISC title = "Overige">
 					<Item id = "6114" name = "Wisselen tussen documenten activeren"/>
 					<Item id = "6115" name = "Insprong automatisch toepassen"/>
-					<Item id = "6116" name = "Laatst geopende map onthouden"/>
 					<Item id = "6117" name = "Volgorde van wisselen onthouden"/>
-					<Item id = "6304" name = "Recentelijke bestanden"/>
+					<Item id = "6304" name = "Recent geopende bestanden"/>
 					<Item id = "6305" name = "Niet controleren op wijzigingen"/>
 					<Item id = "6306" name = "Maximaal aantal bestanden in lijst:"/>
 					<Item id = "6307" name = "Wijzigingen detecteren"/>
@@ -388,7 +399,6 @@
 					<Item id = "6309" name = "Werkomgeving bewaren"/>
 					<Item id = "6312" name = "Document"/>
 					<Item id = "6313" name = "Automatisch bijwerken"/>
-					<Item id = "6314" name = "Reservekopie"/>
 					<Item id = "6318" name = "Hyperlinks"/>
 					<Item id = "6319" name = "Hyperlinks activeren"/>
 					<Item id = "6320" name = "Hyperlinks niet onderstrepen"/>
@@ -397,16 +407,14 @@
 					<Item id = "6324" name = "Wisselen tussen documenten (Ctrl+Tab)"/>
 					<Item id = "6325" name = "Ga naar laatste regel na wijziging"/>
 					<Item id = "6326" name = "Intelligente syntaxmarkering toepassen"/>
-					<Item id = "6327" name = "Open secties markeren"/> 
-					<Item id = "6328" name = "Argumenten markeren"/>
-					<Item id = "6329" name = "Markering gekoppelde elementen"/>
-					<Item id = "6327" name = "Activeren"/>
-					<Item id = "6328" name = "Element-attributen markeren"/>
+					<Item id = "6327" name = "Secties markeren"/>
+					<Item id = "6328" name = "Attributen markeren"/>
+					<Item id = "6329" name = "Syntaxis"/>
 					<Item id = "6330" name = "PHP/ASP-secties markeren"/>
 					<Item id = "6331" name = "Alleen de bestandsnaam in de titelbalk weergeven"/>
 				</MISC>
 				<NewDoc title = "Nieuw document">
-					<Item id = "6401" name = "Formaat"/>
+					<Item id = "6401" name = "Indeling"/>
 					<Item id = "6402" name = "Windows"/>
 					<Item id = "6403" name = "Unix"/>
 					<Item id = "6404" name = "Mac"/>
@@ -416,14 +424,16 @@
 					<Item id = "6408" name = "UTF-8"/>
 					<Item id = "6409" name = "UCS-2 Big Endian"/>
 					<Item id = "6410" name = "UCS-2 Little Endian"/>
-					<Item id = "6411" name = "Opmaak:"/>
+					<Item id = "6411" name = "Syntaxis:"/>
 					<Item id = "6413" name = "Bestandsmap voor openen en opslaan"/>
 					<Item id = "6414" name = "Huidige bestandsmap"/>
 					<Item id = "6415" name = "Laatst geopende bestandsmap"/>
 					<Item id = "6418" name = "..."/>
+					<Item id = "6419" name = "Nieuw document"/> (in instellingen -- nieuw document)
+					<Item id = "6420" name = "ANSI-codering negeren"/> (in instellingen -- nieuw document)
 				</NewDoc>
-				<LangMenu title = "Opmaak">
-					<Item id = "6505" name = "Opmaakstijlen:"/>
+				<LangMenu title = "Syntaxismarkering">
+					<Item id = "6505" name = "Ingeschakeld:"/>
 					<Item id = "6506" name = "Uitgeschakeld:"/>
 				</LangMenu>
 				<Print1 title = "Afdrukken: Kleur en marge">
@@ -437,7 +447,7 @@
 					<Item id = "6612" name = "Links"/>
 					<Item id = "6613" name = "Boven"/>
 					<Item id = "6614" name = "Rechts"/>
-					<Item id = "6615" name = "Beneden"/>
+					<Item id = "6615" name = "Onder"/>
 				</Print1>
 				<Print2 title = "Afdrukken: Kop- en voettekst">
 					<Item id = "6706" name = "Vet"/>

@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Recolher os níveis"/>
-                    <Item posX = "3" posY = "21" name = "Expandir os níveis"/>
+                    <Item posX = "3" posY = "16" name = "Recolher os níveis"/>
+                    <Item posX = "3" posY = "17" name = "Expandir os níveis"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -34,7 +34,7 @@
                     <Item id = "41006" name = "&amp;Salvar"/>
                     <Item id = "41007" name = "Salvar todos"/>
                     <Item id = "41008" name = "Salvar &amp;como..."/>
-                    <Item id = "41010" name = "Imprimir..."/>
+                    <Item id = "41010" name = "Imprimir..."/>					
                     <Item id = "1001"  name = "Imprimir já!"/>
                     <Item id = "41011" name = "Sai&amp;r"/>
 					<Item id = "41012" name = "Carregar sessão..."/>
@@ -50,19 +50,19 @@
                     <Item id = "42004" name = "&amp;Refazer"/>
                     <Item id = "42005" name = "C&amp;olar"/>
                     <Item id = "42006" name = "&amp;Apagar"/>
-                    <Item id = "42007" name = "Se&amp;lecionar tudo"/>
+                    <Item id = "42007" name = "Se&amp;lecionar tudo"/>					
                     <Item id = "42008" name = "Inserir tabulação"/>
                     <Item id = "42009" name = "Remover tabulação"/>
                     <Item id = "42010" name = "Duplicar linha atual"/>
                     <Item id = "42012" name = "Dividir linhas"/>
-                    <Item id = "42013" name = "Unir linhas"/>
+                    <Item id = "42013" name = "Unir linhas"/>					
                     <Item id = "42014" name = "Mover linha atual para cima"/>   
                     <Item id = "42015" name = "Mover linha atual para baixo"/>   
                     <Item id = "42016" name = "Converter em maiúsculo"/>
                     <Item id = "42017" name = "Converter em minúsculo"/>
                     <Item id = "42018" name = "Iniciar gravação"/>
                     <Item id = "42019" name = "Parar gravação"/>
-                    <Item id = "42021" name = "&amp;Reproduzir"/>
+                    <Item id = "42021" name = "&amp;Reproduzir"/>				
                     <Item id = "42022" name = "Inserir/remover comentário de bloco"/>
                     <Item id = "42023" name = "Inserir comentário simples"/>
                     <Item id = "42024" name = "Limpar espaços em excesso"/>
@@ -77,7 +77,7 @@
                     <Item id = "42033" name = "Desmarcar somente leitura"/>					
 					<Item id = "42035" name = "Inserir comentário de bloco"/>
 					<Item id = "42036" name = "Remover comentário de bloco"/>
-                 
+					
                     <Item id = "43001" name = "Localizar..."/>
                     <Item id = "43002" name = "Localizar próximo"/>
                     <Item id = "43003" name = "Substituir..."/>
@@ -98,7 +98,7 @@
                     <Item id = "43019" name = "Copiar linhas marcadas"/>
                     <Item id = "43020" name = "Colar (Substituir) linhas marcadas"/>
                     <Item id = "43021" name = "Apagar linhas marcadas"/>
-
+					<Item id = "44009" name = "Exibir somente o código"/>
                     <Item id = "44010" name = "Recolher todos níveis"/>
                     <Item id = "44011" name = "Definições do usuário"/>
                     <Item id = "44019" name = "Exibir todos os caracteres"/>
@@ -117,8 +117,7 @@
                     <Item id = "44035" name = "Sincronizar rolagem vertical"/>
                     <Item id = "44036" name = "Sincronizar rolagem horizontal"/>
                     <Item id = "44041" name = "Mostrar símbolo de quebra de linha"/>
-					<Item id = "44070" name = "Ativar visão principal"/>
-                    <Item id = "44071" name = "Ativar visão secundária"/>
+					<Item id = "44072" name = "Ativar visão principal"/>                    
                     
                     <Item id = "45001" name = "Converter para Windows"/>
                     <Item id = "45002" name = "Converter para UNIX"/>
@@ -139,15 +138,17 @@
 					<Item id = "10003" name = "Mandar para nova janela"/>
                     <Item id = "10004" name = "Abrir em uma nova janela"/>
                     
-                    <Item id = "46001" name = "Configurar estilos..."/>
+					
+                    
+					<Item id = "46001" name = "Configurar estilos..."/>
                     <Item id = "47000" name = "Sobre..."/>
                     <Item id = "47001" name = "HomePage Notepad++"/>
                     <Item id = "47002" name = "Página do Projeto Notepad++"/>
                     <Item id = "47003" name = "Ajuda Online"/>
                     <Item id = "47004" name = "Fórum"/>
 					<Item id = "47005" name = "Obter mais plugins"/>
-                    <Item id = "47006" name = "Atualizar o Notepad++"/>
-					
+                    <Item id = "47006" name = "Atualizar o Notepad++"/>					
+					<Item id = "47008" name = "Conteúdo da ajuda"/>
 					<Item id = "48009" name = "Mapa de atalhos..."/>
                     <Item id = "48011" name = "Preferências..."/>
                     <Item id = "49000" name = "Executa&amp;r..."/>
@@ -169,7 +170,7 @@
                     <Item order = "1" name = "Fechar todos exceto este"/>
                     <Item order = "2" name = "Salvar"/>
                     <Item order = "3" name = "Salvar como..."/>
-					<Item order = "10" name = "Ranomear"/>
+					<Item order = "10" name = "Renomear"/>
                     <Item order = "11" name = "Deletar"/>
                     <Item order = "4" name = "Imprimir"/>
 					<Item order="12" name="Somente leitura"/>
@@ -190,7 +191,7 @@
                 <Item id = "2" name = "Fechar"/>
                 <Item id = "1620" name = "Localizar :"/>
                 <Item id = "1603" name = "Coincidir palavra inteira"/>
-                <Item id = "1604" name = "Diferen&amp;ciar maiúsc/minúsc"/>
+                <Item id = "1604" name = "Diferen&amp;ciar maiúsculas/minúsculas"/>
                 <Item id = "1605" name = "&amp;Expressão regular"/>
                 <Item id = "1606" name = "&amp;Pesquisa circular"/>				
                 <Item id = "1612" name = "Acima"/>
@@ -204,25 +205,27 @@
                 <Item id = "1611" name = "Substituir por :"/>
                 <Item id = "1608" name = "Substitui&amp;r"/>
                 <Item id = "1609" name = "Substituir todos"/>
-			 	<Item id = "1623" name = "Transparência"/>				
+			 	<Item id = "1623" name = "Transparência"/>	
+				
+				<Item id = "1686" name = "Transparência"/>
 				<Item id = "1687" name = "Ao perder o foco"/>
 			 	<Item id = "1688" name = "Sempre"/>
 			 	<Item id = "1632" name = "Na seleção"/>
 			 	<Item id = "1633" name = "Limpar"/>
-			 	<Item id = "1635" name = "Substituir em todos os documentos abertos"/>
-			 	<Item id = "1636" name = "Localizar em todos os documentos abertos"/>
+			 	<Item id = "1635" name = "Substituir todos em todos documentos abertos"/>
+			 	<Item id = "1636" name = "Localizar todos em todos documentos abertos"/>
 			 	<Item id = "1637" name = "Localizar em arquivos"/>
 			 	<Item id = "1640" name = "Diálogo de troca"/>
+				<Item id = "1641" name = "Localizar todos no documento atual"/>
 			 	<Item id = "1654" name = "Filtros :"/>
 			 	<Item id = "1655" name = "Pasta :"/>
 			 	<Item id = "1656" name = "Localizar todos"/>
 			 	<Item id = "1658" name = "Incluir sub-pastas"/>
 				<Item id = "1659" name = "Incluir pastas ocultas"/>
+				<Item id = "1660" name = "&Substituir nos arquivos"/>
 				<Item id = "1624" name = "Modo de busca"/>
 				<Item id = "1625" name = "Normal"/>
-				<Item id = "1626" name = "Extendido  (\n, \r, \t, \0, \x...)"/>
-				
-				<Item id = "1660" name = "Parar busca"/>
+				<Item id = "1626" name = "Extendido  (\n, \r, \t, \0, \x...)"/>								
 			</Find>
             <GoToLine title = "Ir para linha #">
                 <Item id = "2007" name = "Linha"/>
@@ -354,7 +357,8 @@
 					<Item id = "6120" name = "Vertical"/>
 					
 					<Item id = "6121" name = "Barra de menus"/> 
-					<Item id = "6122" name = "Ocultar (use Alt ou F10 para alternar)"/> 
+					<Item id = "6122" name = "Ocultar (use Alt ou F10 para alternar)"/>
+					<Item id = "6123" name = "Idioma"/>
 					</Global>
                 <Scintillas title = "Editar Componentes">
 					<Item id = "6216" name = "Configurações do cursor"/>
@@ -399,6 +403,7 @@
                     <Item id = "6414" name = "Acompanhar o documento atual"/>
                     <Item id = "6415" name = "Lembrar a última pasta utilizada"/>
                     <Item id = "6418" name = "..."/>
+					<Item id = "6420" name = "Aplicar ao abrir arquivo ANSI"/>
                 </NewDoc>
 				<FileAssoc title = "Tipos de Arquivos">
 					<Item id = "4009" name = "Extensões suportadas :"/>
@@ -450,21 +455,19 @@
 					<Item id = "6325" name = "Ir para a última linha depois de atualizar"/>
 					<Item id = "6319" name = "Habilitar"/>
 					<Item id = "6320" name = "Não sublinhar"/>					
-					<Item id = "6323" name = "Habilitar auto-atualização do Notepad++"/>
-					<Item id = "6324" name = "Troca de documentos (Ctrl+Tab)"/>								
-					
-					<Item id = "6326" name = "Habilitar destaque inteligente"/>
-					<Item id = "6114" name = "Habilitar"/>
-					<Item id = "6115" name = "Auto-indentar"/>
-					<Item id = "6117" name = "Habilitar troca por MRU"/>
 					<Item id = "6322" name = "Extensão sessão :"/>
-					
+					<Item id = "6323" name = "Habilitar auto-atualização do Notepad++"/>					
+					<Item id = "6324" name = "Troca de documentos (Ctrl+Tab)"/>													
+					<Item id = "6326" name = "Habilitar destaque inteligente"/>
 					<Item id = "6329" name = "Destacador de tags"/>
 					<Item id = "6327" name = "Destacar tags"/>
 					<Item id = "6328" name = "Destacar atributos"/>
-					<Item id = "6330" name = "Destacar áreas php/asp"/>					
+					<Item id = "6330" name = "Destacar áreas php/asp"/>	
 					
 					<Item id = "6331" name = "Mostrar apenas o nome do arquivo no título"/>
+					<Item id = "6114" name = "Habilitar"/>
+					<Item id = "6115" name = "Auto-indentar"/>
+					<Item id = "6117" name = "Habilitar troca por MRU"/>
 					
                 </MISC>
 				<Backup title = "Backup/Auto Completar">
@@ -497,7 +500,7 @@
                 <Item id = "2" name = "OK"/>
                 <Item id = "7002" name = "Salvar"/>
                 <Item id = "7003" name = "Fechar janela(s)"/>
-                <Item id = "7004" name = "Exibir aba"/>
+                <Item id = "7004" name = "Ordenar abas"/>
             </Window>
 			<ColumnEditor title = "Editor de Coluna">
                 <Item id = "2023" name = "Texto para inserir"/>

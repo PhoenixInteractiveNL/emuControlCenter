@@ -20,8 +20,8 @@
 				</Entries>
 				<!-- Entradas de Sub-menú -->
 				<SubEntries>
-					<Item posX = "3" posY = "20" name = "Contraer Nivel"/>
-					<Item posX = "3" posY = "21" name = "Expandir Nivel"/>
+					<Item posX = "3" posY = "16" name = "Contraer Nivel"/>
+					<Item posX = "3" posY = "17" name = "Expandir Nivel"/>
 				</SubEntries>
 
 				<!-- Opciones del Menú Principal -->

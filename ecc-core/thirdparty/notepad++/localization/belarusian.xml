@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Згарнуць узровень"/>
-                    <Item posX = "3" posY = "21" name = "Разгарнуць узровень"/>
+                    <Item posX = "3" posY = "16" name = "Згарнуць узровень"/>
+                    <Item posX = "3" posY = "17" name = "Разгарнуць узровень"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

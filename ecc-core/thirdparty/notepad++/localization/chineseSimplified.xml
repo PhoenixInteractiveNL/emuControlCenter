@@ -1,9 +1,4 @@
 <?xml version = "1.0" encoding = "GB2312"?>
-<!--
-Simplified Chinese localization for Notepad ++
-Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
- based file: http://notepad-plus.sourceforge.net/commun/nativeLanguageFiles/english.xml
--->
 <NotepadPlus>
 	<Native-Langue name = "简体中文">
 		<Menu>
@@ -25,8 +20,21 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "折叠层次"/>
-                    <Item posX = "3" posY = "21" name = "展开层次"/>
+					<Item posX = "1" posY = "9" name = "复制到剪切板"/>
+					<Item posX = "1" posY = "10" name = "缩进"/>
+					<Item posX = "1" posY = "11" name = "转换视图"/>
+					<Item posX = "1" posY = "12" name = "执行行"/>
+					<Item posX = "1" posY = "13" name = "注释/取消注释"/>
+					<Item posX = "1" posY = "14" name = "自动完成"/>
+					
+					<Item posX = "2" posY = "11" name = "标记所有"/>
+					<Item posX = "2" posY = "12" name = "取消标记"/>
+					
+					<Item posX = "3" posY = "4" name = "显示符号"/>
+					<Item posX = "3" posY = "5" name = "缩放"/>
+					<Item posX = "3" posY = "6" name = "移动/复制当前文档"/>
+                    <Item posX = "3" posY = "16" name = "折叠层次"/>
+                    <Item posX = "3" posY = "17" name = "展开层次"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -103,7 +111,19 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
                     <Item id = "43019" name = "复制书签行"/>
                     <Item id = "43020" name = "粘贴(替换)书签行"/>
                     <Item id = "43021" name = "删除书签行"/>
-
+					<Item id = "43022" name = "使用格式1"/>
+					<Item id = "43023" name = "清除格式1"/>
+					<Item id = "43024" name = "使用格式2"/>
+					<Item id = "43025" name = "清除格式2"/>
+					<Item id = "43026" name = "使用格式3"/>
+					<Item id = "43027" name = "清除格式3"/>
+					<Item id = "43028" name = "使用格式4"/>
+					<Item id = "43029" name = "清除格式4"/>
+					<Item id = "43030" name = "使用格式5"/>
+					<Item id = "43031" name = "清除格式5"/>
+					<Item id = "43032" name = "清除所有格式"/>
+					
+					<Item id = "44009" name = "Post-it"/>
                     <Item id = "44010" name = "折叠所有层次"/>
                     <Item id = "44011" name = "自字义语言对话框"/>
                     <Item id = "44019" name = "显示所有字符"/>
@@ -121,9 +141,8 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
                     <Item id = "44034" name = "置顶模式"/>
                     <Item id = "44035" name = "垂直同步滚动"/>
                     <Item id = "44036" name = "水平同步滚动"/>
-                    <Item id = "44041" name = "显示换行符"/>
-                    <Item id = "44070" name = "激活主视图"/>
-                    <Item id = "44071" name = "激活从视图"/>
+                    <Item id = "44041" name = "显示换行符"/>					
+                    <Item id = "44072" name = "激活从视图"/>
                     
                     <Item id = "45001" name = "转换为 Windows 格式"/>
                     <Item id = "45002" name = "转换为 UNIX 格式"/>
@@ -141,7 +160,9 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 					
                     <Item id = "10001" name = "移动到另一视图"/>
                     <Item id = "10002" name = "复制到另一视图"/>
-                    
+                    <Item id = "10003" name = "移动到新窗口"/>
+					<Item id = "10004" name = "在新窗口中打开"/>
+					
                     <Item id = "46001" name = "语言格式设置..."/>
                     <Item id = "47000" name = "关于..."/>
                     <Item id = "47001" name = "Notepad++ 官方主页"/>
@@ -158,7 +179,7 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
                     <Item id = "50001" name = "单词自动完成"/>
                     <Item id = "50002" name = "函数参数提示"/>
                     <Item id = "42034" name = "列编辑..."/>
-                    <Item id = "44042" name = "行隐藏"/>
+                    <Item id = "44042" name = "隐藏行"/>
                     <Item id = "42040" name = "打开文件列表"/>
                     <Item id = "42041" name = "清除文件列表"/>
 					
@@ -174,6 +195,15 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
                     <Item order = "4" name = "打印当前文件"/>
                     <Item order = "5" name = "移动到另一视图"/>
                     <Item order = "6" name = "复制到另一视图"/>
+					<Item oeder = "7" name = "复制文件路径到剪切板"/>
+					<Item oeder = "8" name = "复制文件名到剪切板"/>
+					<Item oeder = "9" name = "复制当前路径到剪切板"/>
+					<Item oeder = "10" name = "当前文件重命名"/>
+					<Item oeder = "11" name = "删除当前文件"/>
+					<Item oeder = "12" name = "设置为只读"/>
+					<Item oeder = "13" name = "清除只读属性"/>
+					<Item oeder = "14" name = "打开新窗口"/>
+					<Item oeder = "15" name = "在新视图中打开"/>
             </TabBar>
         </Menu>
         
@@ -214,6 +244,9 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 			 	<Item id = "1624" name = "查找模式"/>
 			 	<Item id = "1625" name = "普通"/>
 			 	<Item id = "1626" name = "扩展 (\n, \r, \t, \0, \x...)"/>
+				<Item id = "1660" name = "在文章替换"/>
+				<Item id = "1641" name = "在当前文件中查找"/>
+				<Item id = "1686" name = "透明度"/>
             </Find>
             <GoToLine title = "定位行号">
                 <Item id = "2007" name = "行"/>
@@ -237,7 +270,7 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 				<Item id = "2" name = "取消"/>
 				<Item id = "2301" name = "保存并关闭"/>
 				<Item id = "2303" name = "透明度"/>		
-				
+				<Item id = "2306" name = "选择主题"/>
                 <SubDialog>
                 	<Item id = "2204" name = "粗体"/>
                     <Item id = "2205" name = "斜体"/>
@@ -324,7 +357,7 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
             </UserDefine>
 			<Preference title = "首选项">
                 <Item id = "6001" name = "关闭"/>
-				<Global title = "常规">
+				<Global title = "常用">
 					<Item id = "6101" name = "工具栏"/>
 					<Item id = "6102" name = "隐藏"/>
 					<Item id = "6103" name = "小图标"/>
@@ -346,11 +379,14 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 					
 					<Item id = "6121" name = "菜单栏"/>
 					<Item id = "6122" name = "隐藏 (按下 Alt 或 F10 显示)"/>
+					<Item id = "6123" name = "界面语言"/>
 				</Global>
                 <Scintillas title = "编辑">
 					<Item id = "6216" name = "插入符设置"/>
 					<Item id = "6217" name = "宽度 :"/>
 					<Item id = "6219" name = "闪烁频率 :"/>
+					<Item id = "6221" name = "F"/>
+					<Item id = "6222" name = "S"/>
 					
 					<Item id = "6301" name = "制表符设置"/>
 					<Item id = "6302" name = "以空格取代"/>
@@ -373,6 +409,7 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 					<Item id = "6214" name = "当前行高亮模式"/>
                 </Scintillas>
 				<NewDoc title = "新建">
+					<Item id = "6419" name = "新建文档"/>
 					<Item id = "6401" name = "格式"/>
 					<Item id = "6402" name = "Windows"/>
 					<Item id = "6403" name = "Unix"/>
@@ -384,6 +421,9 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 					<Item id = "6409" name = "UCS-2 Big endian"/>
 					<Item id = "6410" name = "UCS-2 Small endian"/>
 					<Item id = "6411" name = "默认语言 :"/>
+					<Item id = "6413" name = "文件打开/保存路径"/>
+					<Item id = "6414" name = "与当前文件一致"/>
+					<Item id = "6415" name = "记住最后的操作路径"/>
                 </NewDoc>
 				<FileAssoc title = "文件关联">
 					<Item id = "4009" name = "支持的扩展名 :"/>
@@ -392,6 +432,7 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 				<LangMenu title = "语言">
 					<Item id = "6505" name = "可用项"/>
 					<Item id = "6506" name = "禁用项"/>
+					<Item id = "6507" name = "紧凑语言菜单"/>
                 </LangMenu>
 				<Print1 title = "打印 - 色彩与边界">
 					<Item id = "6601" name = "打印行号"/>
@@ -435,15 +476,19 @@ Simplified Chinese - GB2312 - Update:20080727 - Notepad ++ v5.0.2
 					<Item id = "6325" name = "更新后定位到末行"/>
 					<Item id = "6319" name = "启用"/>
 					<Item id = "6320" name = "不显示下划线"/>
+					<Item id = "6322" name = "会话文件后缀名"/>
 					<Item id = "6323" name = "启用 Notepad++ 自动更新"/>
-					<Item id = "6324" name = "文档切换 (Ctrl+TAB)"/>
-					
+					<Item id = "6324" name = "文档切换 (Ctrl+TAB)"/>					
 					<Item id = "6326" name = "启用智能高亮"/>
-					<Item id = "6114" name = "启用文档切换"/>
+					<Item id = "6327" name = "启用"/>
+					<Item id = "6328" name = "高亮显示标签属性"/>
+					<Item id = "6329" name = "高亮显示匹配标签"/>
+					<Item id = "6330" name = "高亮显示 PHP/ASP 脚本区域"/>
+					
+					<Item id = "6331" name = "只在标签栏显示文件名"/>
+					<Item id = "6114" name = "启用"/>
 					<Item id = "6115" name = "自动缩进"/>
-					<Item id = "6116" name = "记住最后使用的目录"/>
 					<Item id = "6117" name = "启用 MRU (Most Recently Used) 功能"/>
-					<Item id = "6322" name = "会话文件扩展名 :"/>
 					
                 </MISC>
 				<Backup title = "备份与自动完成">

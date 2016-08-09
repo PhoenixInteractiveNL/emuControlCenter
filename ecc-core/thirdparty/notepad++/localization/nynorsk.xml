@@ -25,8 +25,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Skjul nivå"/>
-                    <Item posX = "3" posY = "21" name = "Vis nivå"/>
+                    <Item posX = "3" posY = "16" name = "Skjul nivå"/>
+                    <Item posX = "3" posY = "17" name = "Vis nivå"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

@@ -1,0 +1,63 @@
+; Platform       	: DEC PDP-7
+; Script for     	: SimH?
+; Script version 	: v1.0.0.1
+; Last changed   	: 2009.06.06
+;
+;
+; Author :  te_lanus (ECC forum member)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+; Load pdp7 decsys
+;
+EmuWindowControl("pdp7")
+;Check to see which tape to run
+;first decsys
+if $eccFileRomFile = "decsys.dtp" then
+     Send("att –e dt2 " & $eccFileRomPath & $eccFileRomFile)
+     Send("{ENTER}")
+     Sleep(10)
+     Send("att dt3 "  & $eccFileRomPath & "scratch.dtp" )
+     Send("{ENTER}")
+     Sleep(10)
+     Send("load " & $eccFileRomPath & "decsys.rim" & " 17640")
+     Send("{ENTER}")
+     Sleep(10)
+     Send("run")
+     Send("{ENTER}")
+endif
+; if not decsys see if sim8 is passed
+if $eccFileRomFile = "sim8.rim" then
+     Send("set tti fdx")
+     Send("{ENTER}")
+     Sleep(10)
+     Send("load "  & $eccFileRomPath & $eccFileRomFile )
+     Send("{ENTER}")
+     Sleep(10)
+     Send("run")
+     Send("{ENTER}")
+Else
+      MsgBox(0, "Selected OS/Program not currently supported")
+      Send("EXIT")
+      Send("{ENTER}")
+endif
+
+
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit 

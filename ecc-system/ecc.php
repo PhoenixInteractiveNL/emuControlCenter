@@ -1047,7 +1047,7 @@ class App extends GladeXml {
 		// ----------------------------
 		// EVENTBOXES CONNECT
 		// ----------------------------
-		$this->img_ecc_header_ebox->connect_simple_after('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
+		#$this->img_ecc_header_ebox->connect_simple_after('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
 		$this->img_plattform_ebox->connect_simple_after('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
 		#$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
 		
@@ -1246,7 +1246,7 @@ class App extends GladeXml {
 		// ----------------------------
 		// SETUP Imagepreview placeholder
 		// ----------------------------		
-		$obj_pixbuff = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/platform/ecc_ecc_teaser.png', 240, 160);
+		$obj_pixbuff = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/internal/ecc_teaser_small.png', 240, 160);
 		$this->media_img->set_from_pixbuf($obj_pixbuff);
 		
 		$this->initGameList(false);
@@ -3032,7 +3032,7 @@ class App extends GladeXml {
 				
 				# get rom icon, if available
 				if ($iconPath = $this->imageManager->getImageByType($eccident, $crc32, 'media_icon', false)) $iconPath = reset($iconPath); # because its an array
-				else $iconPath = dirname(__FILE__)."/".'images/ecc_icon_small.ico';
+				else $iconPath = dirname(__FILE__)."/".'images/internal/ecc_icon_small.ico';
 				$this->media_nb_info_icon->set_from_pixbuf($this->oHelper->getPixbuf($iconPath, false, false, false, 46, 46)); // create image with max width/height
 
 				// set file informations

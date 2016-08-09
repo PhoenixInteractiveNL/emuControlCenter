@@ -19,8 +19,8 @@
 				</Entries>
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Contrair nível"/>
-                    <Item posX = "3" posY = "21" name = "Expandir nível"/>
+                    <Item posX = "3" posY = "16" name = "Contrair nível"/>
+                    <Item posX = "3" posY = "17" name = "Expandir nível"/>
                 </SubEntries>
                 <!-- all menu item -->
                 <Commands>

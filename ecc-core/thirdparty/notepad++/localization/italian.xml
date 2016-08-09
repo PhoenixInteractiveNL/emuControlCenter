@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
+<!--
+	Italian translation for Notepad++ 5.4
+	Last modified Mon, 2 May 2009 9:20 GMT by Luca Leonardi.
+	Please e-mail errors, suggestions etc. to ices_eyes(at)users.sourceforge.net.
+	For updates, see https://sourceforge.net/forum/message.php?msg_id=4588171
+-->
 <NotepadPlus>
 	<Native-Langue name = "Italiano">
 		<Menu>
@@ -17,13 +23,22 @@
 					<Item idName = "Plugins" name = "Plugins"/>
 					<Item idName = "Window" name = "Finestra"/>
 				</Entries>
-
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Comprimi struttura"/>
-                    <Item posX = "3" posY = "21" name = "Espandi struttura"/>
+					<Item posX = "1" posY = "10" name = "Copia negli appunti"/>  
+					<Item posX = "1" posY = "11" name = "Indenta"/>  
+					<Item posX = "1" posY = "12" name = "Converti caratteri"/>  
+					<Item posX = "1" posY = "13" name = "Operazioni sulle linee"/>  
+					<Item posX = "1" posY = "14" name = "Commenta/Decommenta"/>  
+					<Item posX = "1" posY = "15" name = "Auto-completamento"/>  
+					<Item posX = "2" posY = "11" name = "Segna tutti"/>  
+					<Item posX = "2" posY = "12" name = "Rimuvi marcatura"/>  
+					<Item posX = "3" posY = "4" name = "Mostra simboli"/>  
+					<Item posX = "3" posY = "5" name = "Zoom"/>  
+					<Item posX = "3" posY = "6" name = "Sposta/Clona documento corrente"/>  
+					<Item posX = "3" posY = "16" name = "Collassa livello"/>  
+					<Item posX = "3" posY = "17" name = "Non collassare livello"/>
                 </SubEntries>
-
                 <!-- all menu item -->
                 <Commands>
                     <Item id = "41001" name = "&amp;Nuovo"/>
@@ -43,7 +58,6 @@
 					<Item id = "41015" name = "Salva una copia come..."/>
 					<Item id = "41016" name = "Elimina dal disco"/>
                     <Item id = "41017" name = "Rinomina..."/>
-
                     <Item id = "42001" name = "Tag&amp;lia"/>
                     <Item id = "42002" name = "&amp;Copia"/>
                     <Item id = "42003" name = "Ann&amp;ulla"/>
@@ -70,14 +84,16 @@
                     <Item id = "42026" name = "Direzione del testo RTL"/>
                     <Item id = "42027" name = "Direzione del testo LTR"/>
                     <Item id = "42028" name = "File in sola lettura"/>
-                    <Item id = "42029" name = "Copia percorso file corrente negli appunti"/>
-                    <Item id = "42030" name = "Copia nome file corrente negli appunti"/>
-                    <Item id = "42031" name = "Copia percorso cartella corrente negli appunti"/>
+                    <Item id = "42029" name = "Percorso file corrente"/>
+                    <Item id = "42030" name = "Nome file corrente"/>
+                    <Item id = "42031" name = "Cartella corrente"/>
                     <Item id = "42032" name = "Esegui una macro più volte..."/>
                     <Item id = "42033" name = "Pulisci il flag di sola lettura"/>
+					<Item id = "42034" name = "Editor a colonne..."/>
 					<Item id = "42035" name = "Commenta blocco (riga per riga)"/> 
 					<Item id = "42036" name = "Decommenta blocco (riga per riga)"/> 
-                    
+					<Item id = "42040" name = "Apri tutti i file recenti"/>
+					<Item id = "42041" name = "Pulisci lista file recenti"/>
                     <Item id = "43001" name = "&amp;Trova..."/>
                     <Item id = "43002" name = "Trova &amp;successivo"/>
                     <Item id = "43003" name = "Sostitu&amp;isci..."/>
@@ -98,7 +114,18 @@
 					<Item id = "43019" name = "Copia righe con segnalibri"/>
 					<Item id = "43020" name = "Incolla (sostituisci) righe con segnalibri "/>
 					<Item id = "43021" name = "Elimina righe con segnalibri"/>
-					
+					<Item id = "43022" name = "Usa 1° stile"/>
+					<Item id = "43024" name = "Usa 2° stile"/>
+					<Item id = "43026" name = "Usa 3° stile"/>
+					<Item id = "43028" name = "Usa 4° stile"/>
+					<Item id = "43030" name = "Usa 5° stile"/>
+					<Item id = "43023" name = "Cancella 1° stile"/>
+					<Item id = "43025" name = "Cancella 2° stile"/>
+					<Item id = "43027" name = "Cancella 3° stile"/>
+					<Item id = "43029" name = "Cancella 4° stile"/>
+					<Item id = "43031" name = "Cancella 5° stile"/>
+					<Item id = "43032" name = "Cancella tutti gli stili"/>  					
+					<Item id = "44009" name = "Post-it"/>
                     <Item id = "44010" name = "Comprimi tutte le strutture"/>
                     <Item id = "44011" name = "Finestra impostazioni personalizzate"/>
                     <Item id = "44019" name = "Mostra tutti i caratteri"/>
@@ -117,9 +144,8 @@
                     <Item id = "44035" name = "Sincronizza scorrimento verticale"/>
                     <Item id = "44036" name = "Sincronizza scorrimento orizzontale"/>
                     <Item id = "44041" name = "Mostra simbolo di wrap"/>
-					<Item id = "44070" name = "Attiva vista principale"/>
-                    <Item id = "44071" name = "Attiva vista secondaria"/>
-					
+					<Item id = "44042" name = "Nascondi righe"/>
+					<Item id = "44072" name = "Attiva altra vista"/>
                     <Item id = "45001" name = "Converti in formato Windows"/>
                     <Item id = "45002" name = "Converti in formato UNIX"/>
                     <Item id = "45003" name = "Converti in formato MAC"/>
@@ -133,15 +159,13 @@
 					<Item id = "45011" name = "Converti in UTF-8"/> 
 					<Item id = "45012" name = "Converti in UCS-2 Big Endian"/> 
 					<Item id = "45013" name = "Converti in UCS-2 Little Endian"/> 
-					
-					<Item id = "10001" name = "Cambia vista"/>
-                    <Item id = "10002" name = "Copia in un'altra vista"/>
-					<Item id = "10003" name = "Invia ad una nuova finestra"/>
-                    <Item id = "10004" name = "Apri in una nuova finestra"/>
-					
-					<Item id = "46080" name = "Definito dall'utente"/>
-					
+					<Item id = "10001" name = "Sposta nell&apos;altra vista"/>
+                    <Item id = "10002" name = "Copia nell&apos;altra vista"/>
+					<Item id = "10003" name = "Sposta in una nuova finestra"/>
+                    <Item id = "10004" name = "Copia in una nuova finestra"/>
                     <Item id = "46001" name = "Configura gli stili..."/>
+					<Item id = "46016" name = "Testo normale"/>
+					<Item id = "46080" name = "Definito dall&apos;utente"/>
                     <Item id = "47000" name = "Informazioni su..."/>
                     <Item id = "47001" name = "Pagina principale Notepad++"/>
                     <Item id = "47002" name = "Pagina progetto Notepad++"/>
@@ -149,42 +173,36 @@
                     <Item id = "47004" name = "Forum"/>
                     <Item id = "47005" name = "Ottieni altri plugin"/>
 					<Item id = "47006" name = "Aggiorna Notepad++"/>
-                    
+					<Item id = "47007" name = "Domande Frequenti"/>
+					<Item id = "47008" name = "Guida..."/>
 					<Item id = "48009" name = "Tasti di scelta rapida..."/>
                     <Item id = "48011" name = "Preferenze..."/>
 					<Item id = "49000" name = "E&amp;segui..."/>
-					
                     <Item id = "50000" name = "Completa funzione"/>
                     <Item id = "50001" name = "Completa parola"/>
 					<Item id = "50002" name = "Parametri funzione"/>
-					<Item id = "42034" name = "Editor a colonne..."/>
-					<Item id = "44042" name = "Nascondi righe"/>
-					<Item id = "42040" name = "Apri tutti i file recenti"/>
-					<Item id = "42041" name = "Pulisci lista file recenti"/>
                 </Commands>
             </Main>
-            <Splitter>
-            </Splitter>
+			<Splitter />
             <TabBar>
-                    <Item order = "0" name = "Chiudi"/>
-                    <Item order = "1" name = "Chiudi tutte tranne questa"/>
-                    <Item order = "2" name = "Salva"/>
-                    <Item order = "3" name = "Salva come..."/>
-					<Item order = "10" name = "Rinomina file"/>
-                    <Item order = "11" name = "Elimina file"/>
-                    <Item order = "4" name = "Stampa"/>
-					<Item order = "12" name = "Sola lettura"/>
-                    <Item order = "13" name = "Reimposta flag sola lettura"/>
-					<Item order = "7" name = "Copia percorso file"/>
-                    <Item order = "8" name = "Copia nome file"/>
-                    <Item order = "9" name = "Copia percorso cartella"/>
-                    <Item order = "5" name = "Vai in un&apos;altra vista"/>
-                    <Item order = "6" name = "Copia in un&apos;altra vista"/>
-					<Item order = "14" name = "Invia ad una nuova finestra"/>
-                    <Item order = "15" name = "Apri in una nuova finestra"/>
+				<Item order = "0" name = "Chiudi"/>
+				<Item order = "1" name = "Chiudi tutte tranne questa"/>
+				<Item order = "2" name = "Salva"/>
+				<Item order = "3" name = "Salva come..."/>
+				<Item order = "4" name = "Stampa"/>
+				<Item order = "5" name = "Sposta nell&apos;altra vista"/>
+				<Item order = "6" name = "Copia nell&apos;altra vista"/>
+				<Item order = "7" name = "Copia percorso file"/>
+				<Item order = "8" name = "Copia nome file"/>
+				<Item order = "9" name = "Copia percorso cartella"/>
+				<Item order = "10" name = "Rinomina file"/>
+				<Item order = "11" name = "Elimina file"/>
+				<Item order = "12" name = "Sola lettura"/>
+				<Item order = "13" name = "Reimposta flag sola lettura"/>
+				<Item order = "14" name = "Sposta in una nuova finestra"/>
+				<Item order = "15" name = "Copia in una nuova finestra"/>
             </TabBar>
         </Menu>
-
         <Dialog>
             <Find title = "Cerca..." titleFind = "Trova" titleReplace = "Sostituisci" titleFindInFiles = "Cerca nei file">
                 <Item id = "1" name = "Trova successivo"/>
@@ -205,7 +223,6 @@
                 <Item id = "1618" name = "Pulisci per ogni ricerca"/>
 				<Item id = "1620" name = "Trova:"/>
                 <Item id = "1621" name = "Direzione"/>
-                <Item id = "1623" name = "Trasparenza"/>
 				<Item id = "1624" name = "Tipo ricerca"/>
                 <Item id = "1625" name = "Normale"/>
                 <Item id = "1626" name = "Estesa (\n, \r, \t, \0, \x...)"/>
@@ -215,12 +232,15 @@
                 <Item id = "1636" name = "Cerca in tutti i documenti aperti"/>
                 <Item id = "1637" name = "Cerca nei file"/>
                 <Item id = "1640" name = "Alterna finestra"/>
+				<Item id = "1641" name = "Trova tutto nel documento corrente"/>
                 <Item id = "1654" name = "Filtri:"/>
                 <Item id = "1655" name = "Cartella:"/>
                 <Item id = "1656" name = "Trova tutti"/>
                 <Item id = "1658" name = "Nelle sottocartelle"/>
 				<Item id = "1659" name = "Nelle cartelle nascoste"/>
-				<Item id = "1687" name = "Se perde il fuoco"/>
+				<Item id = "1660" name = "&amp;Sostituisci nei file"/>
+				<Item id = "1686" name = "T&amp;rasparenza"/>
+				<Item id = "1687" name = "Se perde il focus"/>
                 <Item id = "1688" name = "Sempre"/>
             </Find>
             <GoToLine title = "Vai alla riga #">
@@ -232,20 +252,18 @@
 				<Item id = "2007" name = "Riga"/>
                 <Item id = "2008" name = "Offset"/>
             </GoToLine>
-
             <Run title = "Esegui...">
-                <Item id = "1903" name = "Scrivi il nome del programma che vuoi eseguire"/>
+                <Item id = "1903" name = "Programma da eseguire"/>
                 <Item id = "1" name = "Esegui!"/>
                 <Item id = "2" name = "Annulla"/>
                 <Item id = "1904" name = "Salva..."/>
             </Run>
-
             <StyleConfig title = "Configuratore di stili">
                 <Item id = "1" name = "Applica"/>
                 <Item id = "2" name = "Annulla"/>
                 <Item id = "2301" name = "Salva &amp;&amp; Chiudi"/>
                 <Item id = "2303" name = "Trasparenza"/>
-
+				<Item id = "2306" name = "Seleziona tema: "/>
                 <SubDialog>
                     <Item id = "2204" name = "Grassetto"/>
                     <Item id = "2205" name = "Corsivo"/>
@@ -260,7 +278,7 @@
                     <Item id = "2216" name = "Estensioni utente:"/>
                     <Item id = "2218" name = "Sottolineato"/>
                     <Item id = "2219" name = "Parole chiave predefinite"/>
-                    <Item id = "2221" name = "Parole chiave definite dall'utente"/>
+                    <Item id = "2221" name = "Parole chiave definite dall&apos;utente"/>
                     <Item id = "2225" name = "Linguaggio: "/>
                     <Item id = "2226" name = "Abilita colore globale in primo piano"/>
                     <Item id = "2227" name = "Abilita colore globale per lo sfondo"/>
@@ -270,18 +288,17 @@
                     <Item id = "2231" name = "Abilita stile globale per il corsivo"/>
                     <Item id = "2232" name = "Abilita stile globale per il sottolineato"/>
                 </SubDialog>
-
             </StyleConfig>
-
             <UserDefine title = "Impostazioni personalizzate">
+				<Item id = "20001" name = "Ancora"/>
 				<Item id = "20002" name = "Rinomina"/>
 				<Item id = "20003" name = "Crea nuovo..."/>
 				<Item id = "20004" name = "Rimuovi"/>
 				<Item id = "20005" name = "Salva come..."/>
 				<Item id = "20007" name = "Linguaggio personalizzato: "/>
 				<Item id = "20009" name = "Estensione:"/>
-				<Item id = "20012" name = "Ignora maiuscole/minuscole"/>
 				<Item id = "20011" name = "Trasparenza"/>
+				<Item id = "20012" name = "Ignora maiuscole/minuscole"/>
 				<Item id = "0" name = "Colore"/>
 				<Item id = "1" name = "Carattere"/>
 				<Item id = "2" name = "Sfondo"/>
@@ -291,7 +308,7 @@
 				<Item id = "6" name = "Grassetto"/>
 				<Item id = "7" name = "Corsivo"/>
 				<Item id = "8" name = "Sottolineato"/>
-				<Folder title = "Cartelle &app;&amp; Predefiniti">
+				<Folder title = "Cartelle &amp;&amp; Predefiniti">
 					<Item id = "21101" name = "Impostazioni stile predefinito"/>
 					<Item id = "21201" name = "Tasto rapido apertura cartella"/>
 					<Item id = "21301" name = "Tasto rapido chiusura cartella"/>
@@ -306,7 +323,7 @@
 					<Item id = "22313" name = "Prefisso"/>
 					<Item id = "22413" name = "Prefisso"/>
                 </Keywords>
-                <Comment title = "Numeri &amp;&amp; Commenti">
+                <Comment title = "Commenti &amp;&amp; Numeri">
 					<Item id = "23301" name = "Riga commentata"/>
 					<Item id = "23101" name = "Blocco di commenti"/>
 					<Item id = "23113" name = "Apertura commento:"/>
@@ -335,27 +352,27 @@
 					<Item id = "6103" name = "Icone piccole"/>
 					<Item id = "6104" name = "Icone grandi"/>
 					<Item id = "6105" name = "Icone piccole standard"/>
-					
-					<Item id = "6106" name = "Schede"/>
+					<Item id = "6106" name = "Barra delle schede"/>
 					<Item id = "6107" name = "Mostra schede piccole"/>
 					<Item id = "6108" name = "Blocca (trascinamento disabilitato)"/>
 					<Item id = "6109" name = "Differenzia le schede inattive"/>
-					<Item id = "6110" name = "Disegna l'evidenziazione arancione"/>
-					
+					<Item id = "6110" name = "Disegna l&apos;evidenziazione arancione"/>
 					<Item id = "6111" name = "Mostra la barra di stato"/>
 					<Item id = "6112" name = "Pulsante di chiusura su ogni scheda"/>
 					<Item id = "6113" name = "Doppio click chiude una scheda"/>
 					<Item id = "6118" name = "Nascondi"/>
 					<Item id = "6119" name = "Utilizza più righe"/>
-					<Item id = "6120" name = "Verticale"/>
-					
+					<Item id = "6120" name = "Verticale"/>					
 					<Item id = "6121" name = "Barra dei menu"/>
 					<Item id = "6122" name = "Nascondi (Alt o F10 per mostrare)"/>
+					<Item id = "6123" name = "Seleziona Lingua"/>
 				</Global>
 				<Scintillas title = "Personalizzazione componenti">
 					<Item id = "6216" name = "Impostazioni cursore"/>
 					<Item id = "6217" name = "Larghezza:"/>
 					<Item id = "6219" name = "Velocità:"/>
+					<Item id = "6221" name = "V"/>
+					<Item id = "6222" name = "L"/>
 					
 					<Item id = "6301" name = "Impostazioni tabulazioni"/>
 					<Item id = "6302" name = "Trasforma in spazi"/>
@@ -366,19 +383,16 @@
 					<Item id = "6203" name = "Freccia"/>
 					<Item id = "6204" name = "Cerchio"/>
 					<Item id = "6205" name = "Quadrato"/>
-
+					
 					<Item id = "6206" name = "Visualizza i numeri di riga"/>
 					<Item id = "6207" name = "Visualizza i segnalibri"/>
 					<Item id = "6208" name = "Visualizza il limite di colonna"/>
 					<Item id = "6209" name = "Numero di colonna: "/>
-
-					<Item id = "6211" name = "Impostazione del limite di colonna"/>
-					<Item id = "6212" name = "Modalità 'linea'"/>
-					<Item id = "6213" name = "Modalità 'sfondo'"/>
-					<Item id = "6214" name = "Evidenzia la riga corrente"/>
 					
-					<Item id = "6221" name = "V"/>
-					<Item id = "6222" name = "L"/>
+					<Item id = "6211" name = "Impostazione del limite di colonna"/>
+					<Item id = "6212" name = "Modalità &apos;linea&apos;"/>
+					<Item id = "6213" name = "Modalità &apos;sfondo&apos;"/>
+					<Item id = "6214" name = "Evidenzia la riga corrente"/>
                 </Scintillas>
 				<NewDoc title = "Nuovo documento">
 					<Item id = "6401" name = "Formato"/>
@@ -393,9 +407,8 @@
 					<Item id = "6410" name = "UCS-2 Little endian"/>
 					<Item id = "6411" name = "Linguaggio predefinito:"/>
 					<Item id = "6413" name = "Apri file/Salva cartella"/>
-                    <Item id = "6414" name = "Segui il documento corrente"/>
-                    <Item id = "6415" name = "Ricorda l'ultima cartella utilizzata"/>
-                    <Item id = "6418" name = "..."/>
+                    <Item id = "6414" name = "Secondo il documento corrente"/>
+                    <Item id = "6415" name = "Ricorda l&apos;ultima cartella utilizzata"/>
                 </NewDoc>
 				<FileAssoc title = "Associazione tipi di file">
 					<Item id = "4009" name = "Estensioni supportate:"/>
@@ -404,6 +417,7 @@
 				<LangMenu title = "Linguaggi">
 					<Item id = "6505" name = "Linguaggi disponibili"/>
 					<Item id = "6506" name = "Linguaggi disabilitati"/>
+					<Item id = "6507" name = "Compatta menu dei linguaggi"/> 
                 </LangMenu>
 				<Print1 title = "Stampa - colori e margini">
 					<Item id = "6601" name = "Numeri di riga"/>
@@ -433,19 +447,19 @@
 					<Item id = "6722" name = "Sezione di destra"/>
 					<Item id = "6723" name = "Aggiungi"/>
 					<Item id = "6725" name = "Variabile:"/>
+					<Item id = "6727" name = "Intestazione Sezione di sinistra"/>
                 </Print2>
 				<MISC title = "MISC">
 					<Item id = "6304" name = "Documenti recenti"/>
-					<Item id = "6305" name = "Non controllare all'avvio"/>
+					<Item id = "6305" name = "Non controllare all&apos;avvio"/>
 					<Item id = "6306" name = "Elementi usati di recente:"/>
 					<Item id = "6307" name = "Attiva autorilevamento"/>
-					<Item id = "6308" name = "Minimizza nell'area di notifica"/>
+					<Item id = "6308" name = "Minimizza nell&apos;area di notifica"/>
 					<Item id = "6309" name = "Ricorda la sessione corrente al prossimo avvio"/>
 					<Item id = "6312" name = "Autorilevamento dello stato del file"/>
 					<Item id = "6313" name = "Aggiorna senza notifica"/>
 					<Item id = "6114" name = "Abilita"/>
 					<Item id = "6115" name = "Indentazione automatica"/>
-					<Item id = "6116" name = "Ricorda l'ultima cartella operativa"/>
 					<Item id = "6117" name = "Abilita il comportamento MRU"/>
 					<Item id = "6318" name = "Impostazioni link cliccabili"/>
 					<Item id = "6319" name = "Abilita"/>
@@ -453,7 +467,7 @@
 					<Item id = "6322" name = "Est. file di sessione:"/>
 					<Item id = "6323" name = "Abilita aggiornamento automatico di Notepad++"/>
 					<Item id = "6324" name = "Cambia documento (CTRL+TAB)"/>
-					<Item id = "6325" name = "Vai all'ultima riga dopo l'aggiornamento"/>
+					<Item id = "6325" name = "Vai all&apos;ultima riga dopo l&apos;aggiornamento"/>
 					<Item id = "6326" name = "Evidenziazione intelligente"/>
 					<Item id = "6327" name = "Abilita"/>
 					<Item id = "6328" name = "Evidenzia attributi"/>
@@ -466,19 +480,18 @@
 					<Item id = "6803" name = "Cartella:"/>
 					<Item id = "6804" name = "Cartella di backup personalizzata:"/>
 					<Item id = "6807" name = "Auto-completamento"/>
-					<Item id = "6808" name = "Attiva l'auto-completamento su ogni input"/>
+					<Item id = "6808" name = "Attiva l&apos;auto-completamento su ogni input"/>
 					<Item id = "6809" name = "Completamento funzione"/>
 					<Item id = "6810" name = "Completamento parola"/>
 					<Item id = "6811" name = "Da"/> 
 					<Item id = "6813" name = "° carattere"/> 
 					<Item id = "6814" name = "Valori validi: 1 - 9"/>
-					<Item id = "6815" name = "Mostra parametri funzioni durante l'immissione"/>
+					<Item id = "6815" name = "Mostra parametri funzioni durante l&apos;immissione"/>
 					<Item id = "6315" name = "Nessuno"/>
 					<Item id = "6316" name = "Backup semplice"/>
 					<Item id = "6317" name = "Backup verboso"/>
                 </Backup>
             </Preference>
-
 			<MultiMacro title = "Esegui macro più volte">
                 <Item id = "1" name = "Esegui"/>
                 <Item id = "2" name = "Annulla"/>

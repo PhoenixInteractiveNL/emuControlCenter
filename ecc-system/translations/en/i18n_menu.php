@@ -34,7 +34,7 @@ $i18n['menu'] = array(
 	'lbl_dat_export_ecc_user' =>
 		"Export ecc Datfile user",
 	'lbl_dat_export_ecc_esearch' =>
-		"Export ecc Datfile eSearch",
+		"Export ecc Datfile e-search",
 	'lbl_dat_empty' =>
 		"Empty Datfile database",
 	'lbl_help' =>

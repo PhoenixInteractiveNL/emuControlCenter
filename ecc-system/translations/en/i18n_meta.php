@@ -55,7 +55,7 @@ $i18n['meta'] = array(
 	'lbl_trainer' =>
 		"Trainer",
 	'lbl_intro' =>
-		"Crack/Intro",
+		"Intro",
 	'lbl_usermod' =>
 		"User-Mod",
 	'lbl_freeware' =>
@@ -69,7 +69,7 @@ $i18n['meta'] = array(
 	'lbl_programmer' =>
 		"Programmer",
 	'lbl_musican' =>
-		"Musican",
+		"Musician",
 	'lbl_medium' =>
 		"Medium",
 

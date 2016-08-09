@@ -48,7 +48,7 @@ $i18n['metaEdit'] = array(
 	'mediaEditPersonalFrameMoreSettings' =>
 		"More personal things...",
 	'mEditUserPersonalHiscoresLabel' =>
-		"My hiscores",
+		"My High Scores",
 		
 	'mEditUserMissingTitle' =>
 		"You can only save, if you have given this rom a title!",

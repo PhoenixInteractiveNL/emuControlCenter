@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <NotepadPlus>
 	<Native-Langue name = "Dansk">
-	<!-- updated for ver. 5.1 -->
+	<!-- Updated for ver. 5.4 -->
 		<Menu>
 			<Main>
                 <!-- Main Menu Entries -->
 				<Entries>
-					<Item id = "0" name = "&amp;Fil"/>
+					<Item id = "0" name = "&amp;Filer"/>
 					<Item id = "1" name = "&amp;Rediger"/>
 					<Item id = "2" name = "&amp;Søg"/>
 					<Item id = "3" name = "&amp;Vis"/>
@@ -20,9 +20,20 @@
 				</Entries>
              
                 <!-- Sub Menu Entries -->
-                                <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Klap trin sammen"/>
-                    <Item posX = "3" posY = "21" name = "Udklap trin igen"/>
+                <SubEntries>
+					<Item posX = "1" posY = "9" name = "Kopier til udklipsholder"/>
+					<Item posX = "1" posY = "10" name = "Indryk"/>
+					<Item posX = "1" posY = "11" name = "Konverter versaltype"/>
+					<Item posX = "1" posY = "12" name = "Linjehandlinger"/>
+					<Item posX = "1" posY = "13" name = "Kommenter/afkommenter"/>
+					<Item posX = "1" posY = "14" name = "Autofuldførelse"/>
+					<Item posX = "2" posY = "11" name = "Marker alle"/>
+					<Item posX = "2" posY = "12" name = "Afmarker alle"/>
+					<Item posX = "3" posY = "4" name = "Vis symbol"/>
+					<Item posX = "3" posY = "5" name = "Zoom"/>
+					<Item posX = "3" posY = "6" name = "Gå til/klon pågældende dokument"/>
+                    <Item posX = "3" posY = "16" name = "Sammenklap trin"/>
+                    <Item posX = "3" posY = "17" name = "Udklap trin igen"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -31,7 +42,7 @@
                     <Item id = "41002" name = "&amp;Åbn"/>
                     <Item id = "41003" name = "Luk"/>
                     <Item id = "41004" name = "&amp;Luk alle"/>
-                    <Item id = "41005" name = "Luk alt &amp;undtagen dette dokument"/>
+                    <Item id = "41005" name = "Luk alle &amp;undtagen dette dokument"/>
                     <Item id = "41006" name = "&amp;Gem"/>
                     <Item id = "41007" name = "Gem &amp;alle"/>
                     <Item id = "41008" name = "Gem &amp;som..."/>
@@ -52,8 +63,8 @@
                     <Item id = "42005" name = "Sæt &amp;ind"/>
                     <Item id = "42006" name = "&amp;Slet"/>
                     <Item id = "42007" name = "Marker a&amp;lt"/>
-                    <Item id = "42008" name = "Indsæt TAB (indrykning)"/>
-                    <Item id = "42009" name = "Fjern TAB (fjern indrykning)"/>
+                    <Item id = "42008" name = "Forøg indrykning"/>
+                    <Item id = "42009" name = "Formindsk indrykning"/>
                     <Item id = "42010" name = "Dupliker denne linje"/>
                     <Item id = "42012" name = "Del linjer"/>
                     <Item id = "42013" name = "Sammenføj linjer"/>
@@ -70,12 +81,12 @@
                     <Item id = "42025" name = "Gem denne indpillede makro"/>
                     <Item id = "42026" name = "Tekstretning højre mod venstre"/>
                     <Item id = "42027" name = "Tekstretning venstre mod højre"/>
-                    <Item id = "42028" name = "Marker som skrivebeskyttet"/>
-                    <Item id = "42029" name = "Kopier denne fils sti til udklipsholder"/>
-                    <Item id = "42030" name = "Kopier denne fils navn til udklipsholder"/>
-                    <Item id = "42031" name = "Kopier denne mappes sti til udklipsholder"/>
+                    <Item id = "42028" name = "Skrivebeskyt"/>
+                    <Item id = "42029" name = "Denne fils sti"/>
+                    <Item id = "42030" name = "Denne fils navn"/>
+                    <Item id = "42031" name = "Denne mappes sti"/>
                     <Item id = "42032" name = "Kør en makro flere gange..."/>
-                    <Item id = "42033" name = "Ryd markeringen skrivebeskyttet"/>					
+                    <Item id = "42033" name = "Ryd skrivebeskyttelse"/>					
 					<Item id = "42035" name = "Blokkommentér"/>
 					<Item id = "42036" name = "Afkommentér"/>
 					
@@ -99,8 +110,19 @@
 					<Item id = "43019" name = "Kopier bogmærkede linjer"/>
 					<Item id = "43020" name = "Indsæt (erstat) bogmærkede linjer"/>
 					<Item id = "43021" name = "Slet bogmærkede linjer"/>
-					
-                    <Item id = "44010" name = "Sammenklap alt"/>
+					<Item id = "43022" name = "Med 1. stil"/>
+					<Item id = "43023" name = "Ryd 1. stil"/>
+					<Item id = "43024" name = "Med 2. stil"/>
+					<Item id = "43025" name = "Ryd 2. stil"/>
+					<Item id = "43026" name = "Med 3. stil"/>
+					<Item id = "43027" name = "Ryd 3. stil"/>
+					<Item id = "43028" name = "Med 4. stil"/>
+					<Item id = "43029" name = "Ryd 4. stil"/>
+					<Item id = "43030" name = "Med 5. stil"/>
+					<Item id = "43031" name = "Ryd 5. stil"/>
+					<Item id = "43032" name = "Ryd alle stile"/>
+					<Item id = "44009" name = "Post-it"/>
+                    <Item id = "44010" name = "Sammenklap alle trin"/>
 					<Item id = "44011" name = "Brugerdefineret"/>
                     <Item id = "44019" name = "Vis alle tegn"/>
                     <Item id = "44020" name = "Vis indrykningsguide"/>
@@ -108,9 +130,9 @@
                     <Item id = "44023" name = "Zoom &amp;ind"/>
                     <Item id = "44024" name = "Zoom &amp;ud"/>
                     <Item id = "44025" name = "Vis hvidt mellemrum og TAB"/>
-                    <Item id = "44026" name = "Vis enden af linje"/>
-                    <Item id = "44029" name = "Udklap alle"/>
-                    <Item id = "44030" name = "Klap dette trin sammen"/>
+                    <Item id = "44026" name = "Vis slutningen af linje"/>
+                    <Item id = "44029" name = "Udklap alle trin"/>
+                    <Item id = "44030" name = "Sammenklap dette trin"/>
                     <Item id = "44031" name = "Udklap dette trin"/>
                     <Item id = "44032" name = "Fuld skærm til/fra"/>
                     <Item id = "44033" name = "Gendan standard zoom indstilling"/>
@@ -118,10 +140,7 @@
                     <Item id = "44035" name = "Synkoniser lodret rulning"/>
                     <Item id = "44036" name = "Synkroniser vandret rulning"/>
                     <Item id = "44041" name = "Vis symbol for ombrydning"/>
-                    <Item id = "44070" name = "Aktiver overordnet visning"/>
-					<Item id = "44071" name = "Aktiver underordnet visning"/>
-					<Item id = "10003" name = "Gå til ny instans"/>
-					<Item id = "10004" name = "Åbn i en ny instans"/>
+					<Item id = "44072" name = "Fokuser på anden visning"/>
                     
                     <Item id = "45001" name = "Konverter til Windows format"/>
                     <Item id = "45002" name = "Konverter til UNIX format"/>
@@ -140,6 +159,10 @@
 					
                     <Item id = "10001" name = "Gå til anden visning"/>
                     <Item id = "10002" name = "Klon til anden visning"/>
+					<Item id = "10003" name = "Gå til ny instans"/>
+					<Item id = "10004" name = "Åbn i en ny instans"/>
+					
+					
                     <Item id = "46080" name = "Brugerdefineret"/>
                     <Item id = "46001" name = "Stilkonfigurator..."/>
                     <Item id = "47000" name = "Om..."/>
@@ -150,14 +173,15 @@
 					<Item id = "47005" name = "Hent flere plugins"/>
 					<Item id = "47006" name = "Opdater Notepad++"/>
 					<Item id = "47007" name = "Wiki OSS"/>
+					<Item id = "47008" name = "Emner i Hjælp"/>
 					
                     <Item id = "48009" name = "Genvejsoptegnelse..."/>
-                    <Item id = "48011" name = "Præference..."/>
+                    <Item id = "48011" name = "Præferencer..."/>
                     <Item id = "49000" name = "&amp;Kør..."/>
 					
 					<Item id = "50000" name = "Funktionsfuldførelse"/>
                     <Item id = "50001" name = "Ordfuldførelse"/>
-					<Item id = "50002" name = "Funktionsparametre"/>
+					<Item id = "50002" name = "Funktionsparametertip"/>
 					<Item id = "42034" name = "Kolonneeditor..."/>
 					<Item id = "44042" name = "Skjul linjer"/>
 					<Item id = "42040" name = "Åbn alle seneste filer"/>
@@ -172,16 +196,16 @@
                     <Item order = "1" name = "Luk alle undtagen mig"/>
                     <Item order = "2" name = "Gem mig"/>
                     <Item order = "3" name = "Gem mig som..."/>
-					<Item order = "10" name = "Omdøb mig"/>
-					<Item order = "11" name = "Slet mig"/>
                     <Item order = "4" name = "Udskriv mig"/>
-					<Item order = "12" name = "Marker som skrivebeskyttet"/>
-					<Item order = "13" name = "Ryd markeringen skrivebeskyttet"/>
-					<Item order = "7" name = "Kopier denne fils sti"/>
-					<Item order = "8" name = "Kopier filnavn"/>
-					<Item order = "9" name = "Kopier mappesti"/>
                     <Item order = "5" name = "Gå til anden visning"/>
                     <Item order = "6" name = "Klon til anden visning"/>
+					<Item order = "7" name = "Kopier denne fils sti"/>
+					<Item order = "8" name = "Kopier filnavn"/>
+					<Item order = "9" name = "Kopier mappesti"/>					
+					<Item order = "10" name = "Omdøb mig"/>
+					<Item order = "11" name = "Slet mig"/>
+					<Item order = "12" name = "Skrivebeskyt"/>
+					<Item order = "13" name = "Ryd skrivebeskyttelse"/>
 					<Item order = "14" name = "Gå til ny instans"/>
 					<Item order = "15" name = "Åbn i en ny instans"/>
             </TabBar>
@@ -189,38 +213,39 @@
         
         <Dialog>
             <Find title = "" titleFind = "Søg" titleReplace = "Erstat" titleFindInFiles = "Søg i filer">
-                <Item id = "1" name = "Find næste"/>
-                <Item id = "2" name = "Luk"/>
-				<Item id = "1620" name = "Søg efter :"/>
+                <Item id = "1" name = "&amp;Find næste"/>
+                <Item id = "2" name = "&amp;Luk"/>
+				<Item id = "1620" name = "S&amp;øg efter :"/>
                 <Item id = "1603" name = "Match &amp;kun hele ord"/>
-                <Item id = "1604" name = "Match &amp;store-små bogstaver"/>
+                <Item id = "1604" name = "&amp;Versalfølsom"/>
                 <Item id = "1605" name = "&amp;Regulært udtryk"/>
                 <Item id = "1606" name = "Start &amp;forfra"/>
                 <Item id = "1612" name = "&amp;Op"/>
                 <Item id = "1613" name = "Ne&amp;d"/>
-                <Item id = "1614" name = "Tæl"/>
-                <Item id = "1615" name = "Find alle"/>
-                <Item id = "1616" name = "Marker linje"/>
-                <Item id = "1617" name = "Funden stilafmærkning"/>
-                <Item id = "1618" name = "Ryd til hver ny søgning"/>
+                <Item id = "1614" name = "T&amp;æl"/>
+                <Item id = "1615" name = "Find &amp;alle"/>
+                <Item id = "1616" name = "&amp;Marker linje"/>
+                <Item id = "1617" name = "Funden &amp;stilafmærkning"/>
+                <Item id = "1618" name = "Ryd til &amp;hver ny søgning"/>
                 <Item id = "1621" name = "Retning"/>
 				<Item id = "1611" name = "Erstat &amp;med :"/>
 				<Item id = "1608" name = "&amp;Erstat"/>
                 <Item id = "1609" name = "Erstat &amp;alle"/>
-				<Item id = "1623" name = "Synlighed"/>
+				<Item id = "1686" name = "Synlighed"/>
 				<Item id = "1687" name = "Udenfor fokus"/>
 			 	<Item id = "1688" name = "Altid"/>
-			 	<Item id = "1632" name = "I det valgte"/>
-			 	<Item id = "1633" name = "Ryd"/>
-			 	<Item id = "1635" name = "Erstat i alle åbne dokumenter"/>
-			 	<Item id = "1636" name = "Søg alle i alle åbne dokumenter"/>
+			 	<Item id = "1632" name = "&amp;I det valgte"/>
+			 	<Item id = "1633" name = "R&amp;yd"/>
+			 	<Item id = "1635" name = "Erstat alle i alle &amp;åbne dokumenter"/>
+			 	<Item id = "1636" name = "Find alle i alle &amp;åbne dokumenter"/>
 			 	<Item id = "1637" name = "Søg i filer"/>
-			 	<Item id = "1640" name = "Skift dialog"/>
-			 	<Item id = "1654" name = "Filtre :"/>
-			 	<Item id = "1655" name = "Bibliotek :"/>
-			 	<Item id = "1656" name = "Find dem alle"/>
-			 	<Item id = "1658" name = "I alle undermapper"/>
-				<Item id = "1659" name = "I skjulte mapper"/>
+				<Item id = "1641" name = "Find alle i &amp;pågældende dokument"/>
+			 	<Item id = "1654" name = "&amp;Filtre :"/>
+			 	<Item id = "1655" name = "&amp;Bibliotek :"/>
+			 	<Item id = "1656" name = "Find dem &amp;alle"/>
+			 	<Item id = "1658" name = "&amp;I alle undermapper"/>
+				<Item id = "1659" name = "I &amp;skjulte mapper"/>
+				<Item id = "1660" name = "&amp;Erstat i filer"/>
 				<Item id = "1624" name = "Søgemåde"/>
 				<Item id = "1625" name = "&amp;Normal"/>
                 <Item id = "1626" name = "&amp;Udvidet (\n, \r, \t, \0, \x...)"/>
@@ -238,15 +263,16 @@
             <Run title = "Kør...">
 				<Item id = "1903" name = "Tast dit program til at køre her"/>
                 <Item id = "1" name = "Kør!"/>
-                <Item id = "2" name = "Fortryd"/>
+                <Item id = "2" name = "Annuller"/>
                 <Item id = "1904" name = "Gem..."/>
             </Run>
             
             <StyleConfig title = "Stilkonfigurator">
 				<Item id = "1" name = "Prøv det!"/>
-				<Item id = "2" name = "Fortryd"/>
+				<Item id = "2" name = "Annuller"/>
 				<Item id = "2301" name = "Gem &amp;&amp; Luk"/>
-				<Item id = "2303" name = "Synlighed"/>		
+				<Item id = "2303" name = "Synlighed"/>
+				<Item id = "2306" name = "Skift til tema:"/>				
 				
                 <SubDialog>
                 	<Item id = "2204" name = "Fed"/>
@@ -278,14 +304,14 @@
 				
             </StyleConfig>
             
-            <UserDefine title = "Brugerdefineret">
+            <UserDefine title = "Brugerdefiner">
 				<Item id = "20002" name = "Omdøb"/>
 				<Item id = "20003" name = "Opret nyt..."/>
 				<Item id = "20004" name = "Fjern"/>
 				<Item id = "20005" name = "Gem som..."/>
 				<Item id = "20007" name = "Brugersprog : "/>
 				<Item id = "20009" name = "Ext :"/>
-				<Item id = "20012" name = "Ignorer store og små bogstav"/>
+				<Item id = "20012" name = "Ikke versalfølsom"/>
 				<Item id = "20011" name = "Synlighed"/>
 				<Item id = "0" name = "Farvestil"/>
 				<Item id = "1" name = "Forgrundsfarve"/>
@@ -312,8 +338,8 @@
 					<Item id = "22413" name = "Præfiks tilstand"/>
                 </Keywords>
                 <Comment title = "Kommentar &amp;&amp; Nummer">
-					<Item id = "23301" name = "Kommentarlinje"/>
-					<Item id = "23101" name = "Bloker kommentar"/>
+					<Item id = "23301" name = "Linjekommentar"/>
+					<Item id = "23101" name = "Blokkommentar"/>
 					<Item id = "23113" name = "Åbn kommentar :"/>
 					<Item id = "23115" name = "Luk kommentar :"/>
 					<Item id = "23116" name = "Behandl nøgleord som symbol"/>
@@ -324,10 +350,10 @@
 					<Item id = "24107" name = "Operator"/>		
 					<Item id = "24103" name = "Tilgængelige symboler"/>
 					<Item id = "24101" name = "Aktiverede operatorer"/>
-					<Item id = "24201" name = "Ubegrænset 1"/>
+					<Item id = "24201" name = "Skilletegn 1"/>
 					<Item id = "24211" name = "Grænse åbn :"/>
 					<Item id = "24214" name = "Grænse luk :"/>
-					<Item id = "24301" name = "Ubegrænset 2"/>
+					<Item id = "24301" name = "Skilletegn 2"/>
 					<Item id = "24311" name = "Grænse åbn  :"/>
 					<Item id = "24314" name = "Grænse luk :"/>
                 </Operator>
@@ -356,6 +382,7 @@
 					
 					<Item id = "6121" name = "Menulinje"/>
 					<Item id = "6122" name = "Skjul (Brug Alt eller F10 til at slå til/fra)"/>
+					<Item id = "6123" name = "Lokalisering"/>
 				</Global>
                 <Scintillas title = "Rediger komponenter">
 					<Item id = "6216" name = "Markørindstillinger"/>
@@ -371,8 +398,8 @@
 					<Item id = "6201" name = "Mappe marginstil"/>
 					<Item id = "6202" name = "Simpel"/>
 					<Item id = "6203" name = "Pil"/>
-	                <Item id = "6204" name = "Cirkel træ"/>
-					<Item id = "6205" name = "Kasse træ"/>
+	                <Item id = "6204" name = "Cirkeltræ"/>
+					<Item id = "6205" name = "Kassetræ"/>
 					
 					<Item id = "6206" name = "Vis linjenummermargin"/>
 					<Item id = "6207" name = "Vis bogmærkemargin"/>
@@ -384,8 +411,8 @@
 					<Item id = "6213" name = "Baggrundstilstand"/>
 					<Item id = "6214" name = "Fremhæv aktiv linje"/>
                 </Scintillas>
-				<NewDoc title = "Nyt dokument">
-					<Item id = "-1" name = "Nyt dokument"/>
+				<NewDoc title = "Nyt dokument / Åbn Gem filmappe">
+					<Item id = "6419" name = "Nyt dokument"/>
 					<Item id = "6401" name = "Format"/>
 					<Item id = "6402" name = "Windows"/>
 					<Item id = "6403" name = "Unix"/>
@@ -400,6 +427,7 @@
 					<Item id = "6413" name = "Åbn/gem filmappe"/>
 					<Item id = "6414" name = "Følg det pågældende dokument"/>
 					<Item id = "6415" name = "Husk den seneste operationsmappe"/>
+					<Item id = "6420" name = "Anvend når ANSI-fil åbnes"/>
                 </NewDoc>
 				<FileAssoc title = "Filassociation">
 					<Item id = "4009" name = "Understøttede exts :"/>
@@ -408,6 +436,7 @@
 				<LangMenu title = "Sprogmenu">
 					<Item id = "6505" name = "Tilgængelige emner"/>
 					<Item id = "6506" name = "Deaktiverede emner"/>
+					<Item id = "6507" name = "Pak sprogmenu sammen"/>
                 </LangMenu>
 				<Print1 title = "Udskriv - Farve og margen">
 					<Item id = "6601" name = "Udskriv linjenumre"/>
@@ -455,16 +484,18 @@
 					<Item id = "6324" name = "Dokumentskifter (Ctrl+TAB)"/>
 					
 					<Item id = "6326" name = "Aktiver smart fremhævning"/>
+					<Item id = "6329" name = "Fremhæv matchende tags"/>
+					<Item id = "6327" name = "Fremhæv matchende tags"/>
+					<Item id = "6328" name = "Fremhæv attributter"/>
+					<Item id = "6330" name = "Fremhæv php/asp-zone"/>
+					<Item id = "6331" name = "Vis kun filnavn i titellinjen"/>					
 					<Item id = "6114" name = "Aktiver"/>
 					<Item id = "6115" name = "Autoindrykning"/>
 					<Item id = "6116" name = "Husk det sidste operationskatalog"/>
 					<Item id = "6117" name = "Aktiver MRU-adfærd for dokumentskifter"/>
 					<Item id = "6322" name = "Sessionsfil ext :"/>
-					<Item id = "6327" name = "Fremhæv matchende tags"/>
-					<Item id = "6328" name = "Fremhæv attributter"/>
-					<Item id = "6329" name = "Fremhæv matchende tags"/>
-					<Item id = "6330" name = "Fremhæv php/asp-zone"/>
-					<Item id = "6331" name = "Vis kun filnavne i titellinjen"/>					
+
+										
                 </MISC>
 				<Backup title = "Backup/Autoudførelse">
 					<Item id = "6801" name = "Backup"/>

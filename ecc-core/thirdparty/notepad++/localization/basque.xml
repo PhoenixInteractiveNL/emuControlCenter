@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX="3" posY="20" name="Maila itxi"/>
-                    <Item posX="3" posY="21" name="Maila zabaldu"/>
+                    <Item posX="3" posY = "16" name="Maila itxi"/>
+                    <Item posX="3" posY = "17" name="Maila zabaldu"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

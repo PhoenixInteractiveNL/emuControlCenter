@@ -1,494 +1,511 @@
-<?xml version="1.0" encoding="Windows-1252" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <NotepadPlus>
-	<Native-Langue name = "Slovenèina">
+	<Native-Langue name = "SlovenÄina">
 		<Menu>
 			<Main>
                 <!-- Main Menu Entries -->
 				<Entries>
-					<Item id = "0" name = "&amp;Súbor"/>
-					<Item id = "1" name = "&amp;Upravi"/>
-					<Item id = "2" name = "&amp;H¾ada"/>
-					<Item id = "3" name = "&amp;Zobrazi"/>
-					<Item id = "4" name = "For&amp;mát"/>
+					<Item id = "0" name = "&amp;SÃºbor"/>
+					<Item id = "1" name = "&amp;UpraviÅ¥"/>
+					<Item id = "2" name = "&amp;HÄ¾adaÅ¥"/>
+					<Item id = "3" name = "&amp;ZobraziÅ¥"/>
+					<Item id = "4" name = "For&amp;mÃ¡t"/>
 					<Item id = "5" name = "&amp;Jazyk"/>
 					<Item id = "6" name = "Na&amp;stavenia"/>
 					<Item id = "7" name = "Makro"/>
-					<Item id = "8" name = "Spusti"/>
-					<Item idName = "Plugins" name = "Rozšírenia"/>
+					<Item id = "8" name = "SpustiÅ¥"/>
+					<Item idName = "Plugins" name = "RozÅ¡Ã­renia"/>
 					<Item idName = "Window" name = "Okno"/>
 				</Entries>
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Zbali úroveò"/>
-                    <Item posX = "3" posY = "21" name = "Rozbali úroveò"/>
+                    <Item posX = "3" posY = "16" name = "ZbaliÅ¥ ÃºroveÅˆ"/>
+                    <Item posX = "3" posY = "17" name = "RozbaliÅ¥ ÃºroveÅˆ"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
                 <Commands>
-                    <Item id = "41001" name = "&amp;Nový"/>
-                    <Item id = "41002" name = "&amp;Otvori"/>
-                    <Item id = "41003" name = "Zatvori"/>
-                    <Item id = "41004" name = "Z&amp;atvori Všetko"/>
-                    <Item id = "41005" name = "Zatvori Všetko okrem aktuálneho dokumentu"/>
-                    <Item id = "41006" name = "&amp;Uloži"/>
-                    <Item id = "41007" name = "Ulo&amp;ži Všetko"/>
-                    <Item id = "41008" name = "Uloži &amp;Ako..."/>
-                    <Item id = "41010" name = "Tlaèi..."/>
-                    <Item id = "1001"  name = "Tlaèi Hneï!"/>
-                    <Item id = "41011" name = "U&amp;konèi"/>
-					<Item id = "41012" name = "Naèíta Reláciu..."/>
-                    <Item id = "41013" name = "Uloži Reláciu..."/>
-                    <Item id = "41014" name = "Znova naèíta z Disku"/>
-					<Item id = "41015" name = "Uloži Kópiu Ako..."/>
-                    <Item id = "41016" name = "Odstráni z Disku"/>
-                    <Item id = "41017" name = "Premenova..."/>
+                    <Item id = "41001" name = "&amp;NovÃ½"/>
+                    <Item id = "41002" name = "&amp;OtvoriÅ¥"/>
+                    <Item id = "41003" name = "ZatvoriÅ¥"/>
+                    <Item id = "41004" name = "Z&amp;atvoriÅ¥ vÅ¡etko"/>
+                    <Item id = "41005" name = "ZatvoriÅ¥ vÅ¡etko okrem aktuÃ¡lneho dokumentu"/>
+                    <Item id = "41006" name = "&amp;UloÅ¾iÅ¥"/>
+                    <Item id = "41007" name = "Ulo&amp;Å¾iÅ¥ vÅ¡etko"/>
+                    <Item id = "41008" name = "UloÅ¾iÅ¥ &amp;Ako..."/>
+                    <Item id = "41010" name = "TlaÄiÅ¥..."/>
+                    <Item id = "1001"  name = "TlaÄiÅ¥ hneÄ!"/>
+                    <Item id = "41011" name = "U&amp;konÄiÅ¥"/>
+					<Item id = "41012" name = "NaÄÃ­taÅ¥ relÃ¡ciu..."/>
+                    <Item id = "41013" name = "UloÅ¾iÅ¥ relÃ¡ciu..."/>
+                    <Item id = "41014" name = "Znova naÄÃ­taÅ¥ z disku"/>
+					<Item id = "41015" name = "UloÅ¾iÅ¥ kÃ³piu Ako..."/>
+                    <Item id = "41016" name = "OdstrÃ¡niÅ¥ z disku"/>
+                    <Item id = "41017" name = "PremenovaÅ¥..."/>
 					
-                    <Item id = "42001" name = "Vy&amp;strihnú"/>
-                    <Item id = "42002" name = "&amp;Kopírova"/>
-                    <Item id = "42003" name = "&amp;Spä"/>
-                    <Item id = "42004" name = "&amp;Obnovi"/>
-                    <Item id = "42005" name = "&amp;Prilepi"/>
-                    <Item id = "42006" name = "&amp;Odstráni"/>
-                    <Item id = "42007" name = "Vybra V&amp;šetko"/>
-                    <Item id = "42008" name = "Vloži TAB (Zväèši Odsadenie)"/>
-                    <Item id = "42009" name = "Odstráni TAB (Zmenši Odsadenie)"/>
-                    <Item id = "42010" name = "Duplikova aktuálny riadok"/>
-                    <Item id = "42012" name = "Rozdeli riadky"/>
-                    <Item id = "42013" name = "Spoji riadky"/>
-                    <Item id = "42014" name = "Posunú Hore aktuálny riadok"/>   
-                    <Item id = "42015" name = "Posunú Dole aktuálny riadok"/>   
-                    <Item id = "42016" name = "na Ve¾ké písmená"/>
-                    <Item id = "42017" name = "na Malé písmená"/>
-                    <Item id = "42018" name = "&amp;Zaèa Nahráva"/>
-                    <Item id = "42019" name = "&amp;Zastavi Nahrávanie"/>
-                    <Item id = "42021" name = "&amp;Prehra"/>
-                    <Item id = "42022" name = "Prida/Odstráni blokovú poznámku"/>
-                    <Item id = "42023" name = "Prida/Odstráni priebežnú poznámku"/>
-                    <Item id = "42024" name = "Oreza Koncovú Medzeru"/>
-                    <Item id = "42025" name = "Uloži aktuálne nahraté makro"/>
-                    <Item id = "42026" name = "Smer textu sprava do¾ava"/>
-                    <Item id = "42027" name = "Smer textu z¾ava doprava"/>
-                    <Item id = "42028" name = "Nastavi iba na èítanie"/>
-                    <Item id = "42029" name = "Aktuálnu celú cestu k súboru do Schránky"/>
-                    <Item id = "42030" name = "Aktuálny názov súboru do Schránky"/>
-                    <Item id = "42031" name = "Aktuálnu cestu k prieèinku do Schránky"/>
-                    <Item id = "42032" name = "Spusti makro viackrát..."/>
-                    <Item id = "42033" name = "Odstráni oznaèenie iba na èítanie"/>
-					<Item id = "42035" name = "Prida blokovú poznámku"/>
-					<Item id = "42036" name = "Odstráni blokovú poznámku"/>
+                    <Item id = "42001" name = "Vy&amp;strihnÃºÅ¥"/>
+                    <Item id = "42002" name = "&amp;KopÃ­rovaÅ¥"/>
+                    <Item id = "42003" name = "&amp;SpÃ¤Å¥"/>
+                    <Item id = "42004" name = "&amp;ObnoviÅ¥"/>
+                    <Item id = "42005" name = "&amp;PrilepiÅ¥"/>
+                    <Item id = "42006" name = "&amp;OdstrÃ¡niÅ¥"/>
+                    <Item id = "42007" name = "VybraÅ¥ v&amp;Å¡etko"/>
+                    <Item id = "42008" name = "VloÅ¾iÅ¥ TAB (zvÃ¤ÄÅ¡iÅ¥ odsadenie)"/>
+                    <Item id = "42009" name = "OdstrÃ¡niÅ¥ TAB (zmenÅ¡iÅ¥ odsadenie)"/>
+                    <Item id = "42010" name = "DuplikovaÅ¥ aktuÃ¡lny riadok"/>
+                    <Item id = "42012" name = "RozdeliÅ¥ riadky"/>
+                    <Item id = "42013" name = "SpojiÅ¥ riadky"/>
+                    <Item id = "42014" name = "PosunÃºÅ¥ hore aktuÃ¡lny riadok"/>   
+                    <Item id = "42015" name = "PosunÃºÅ¥ dole aktuÃ¡lny riadok"/>   
+                    <Item id = "42016" name = "na veÄ¾kÃ© pÃ­smenÃ¡"/>
+                    <Item id = "42017" name = "na malÃ© pÃ­smenÃ¡"/>
+                    <Item id = "42018" name = "&amp;ZaÄaÅ¥ nahrÃ¡vaÅ¥"/>
+                    <Item id = "42019" name = "&amp;ZastaviÅ¥ nahrÃ¡vanie"/>
+                    <Item id = "42021" name = "&amp;PrehraÅ¥"/>
+                    <Item id = "42022" name = "PridaÅ¥/OdstrÃ¡niÅ¥ blokovÃº poznÃ¡mku"/>
+                    <Item id = "42023" name = "PridaÅ¥/OdstrÃ¡niÅ¥ priebeÅ¾nÃº poznÃ¡mku"/>
+                    <Item id = "42024" name = "OrezaÅ¥ koncovÃº medzeru"/>
+                    <Item id = "42025" name = "UloÅ¾iÅ¥ aktuÃ¡lne nahratÃ© makro"/>
+                    <Item id = "42026" name = "Smer textu sprava doÄ¾ava"/>
+                    <Item id = "42027" name = "Smer textu zÄ¾ava doprava"/>
+                    <Item id = "42028" name = "NastaviÅ¥ iba na ÄÃ­tanie"/>
+                    <Item id = "42029" name = "AktuÃ¡lnu celÃº cestu k sÃºboru do schrÃ¡nky"/>
+                    <Item id = "42030" name = "AktuÃ¡lny nÃ¡zov sÃºboru do schrÃ¡nky"/>
+                    <Item id = "42031" name = "AktuÃ¡lnu cestu k prieÄinku do schrÃ¡nky"/>
+                    <Item id = "42032" name = "SpustiÅ¥ makro viackrÃ¡t..."/>
+                    <Item id = "42033" name = "OdstrÃ¡niÅ¥ oznaÄenie iba na ÄÃ­tanie"/>
+					<Item id = "42035" name = "PridaÅ¥ blokovÃº poznÃ¡mku"/>
+					<Item id = "42036" name = "OdstrÃ¡niÅ¥ blokovÃº poznÃ¡mku"/>
 					
-                    <Item id = "43001" name = "&amp;H¾ada..."/>
-                    <Item id = "43002" name = "H¾ada &amp;Ïalšie"/>
-                    <Item id = "43003" name = "Nahradi..."/>
-                    <Item id = "43004" name = "Prejs na riadok..."/>
-                    <Item id = "43005" name = "Prepnú Záložku"/>
-                    <Item id = "43006" name = "Ïalšia Záložka"/>
-                    <Item id = "43007" name = "Predchádzajúca Záložka"/>
-                    <Item id = "43008" name = "Odstráni všetky Záložky"/>
-                    <Item id = "43009" name = "Prejs na párovú svorkovú zátvorku"/>
-                    <Item id = "43010" name = "H¾ada Predchádzajúce"/>
-                    <Item id = "43011" name = "&amp;Prírastkové H¾adanie..."/>
-                    <Item id = "43013" name = "H¾ada v súboroch"/>
-                    <Item id = "43014" name = "H¾ada (nestále) Ïalšie"/>
-                    <Item id = "43015" name = "H¾ada (nestále) Predchádzajúce"/>
-                    <Item id = "43016" name = "Oznaèi všetko"/>
-                    <Item id = "43017" name = "Odznaèi všetko"/>
-					<Item id = "43018" name = "Vystrihnú založené riadky"/>
-                    <Item id = "43019" name = "Kopírova založené riadky"/>
-                    <Item id = "43020" name = "Vloži do (Nahradi) založené riadky"/>
-                    <Item id = "43021" name = "Odstráni založené riadky"/>
-
-                    <Item id = "44010" name = "Zbali všetko"/>
-                    <Item id = "44011" name = "Užívate¾om definované zvýrazòovanie"/>
-                    <Item id = "44019" name = "Zobrazi všetky znaky"/>
-                    <Item id = "44020" name = "Zobrazi pomocné èiary odsadenia"/>
-                    <Item id = "44022" name = "Zalomi"/>
-                    <Item id = "44023" name = "Priblíž&amp;i"/>
-                    <Item id = "44024" name = "Oddial&amp;i"/>
-                    <Item id = "44025" name = "Zobrazi Medzery a Tabulátory"/>
-                    <Item id = "44026" name = "Zobrazi Koniec Riadkov"/>
-                    <Item id = "44029" name = "Rozbali všetko"/>
-                    <Item id = "44030" name = "Zbali aktuálnu úroveò"/>
-                    <Item id = "44031" name = "Rozbali aktuálnu úroveò"/>
-                    <Item id = "44032" name = "Prepnú na Celoobrazovkový Mód"/>
-                    <Item id = "44033" name = "Obnovi východzie nastavenie približovania"/>
-                    <Item id = "44034" name = "Vždy navrchu"/>
-                    <Item id = "44035" name = "Synchronizova Vertikálne Skrolovanie"/>
-                    <Item id = "44036" name = "Synchronizova Horizontálne Skrolovanie"/>
-                    <Item id = "44041" name = "Zobrazi zalamovací symbol"/>
-					<Item id = "44070" name = "Aktivova hlavné zobrazenie"/>
-                    <Item id = "44071" name = "Aktivova ved¾ajšie zobrazenie"/>
-                    
-                    <Item id = "45001" name = "Prekonvertova na Windows Formát"/>
-                    <Item id = "45002" name = "Prekonvertova na UNIX Formát"/>
-                    <Item id = "45003" name = "Prekonvertova na MAC Formát"/>
-                    <Item id = "45004" name = "Kódova v ANSI"/>
-                    <Item id = "45005" name = "Kódova v UTF-8"/>
-                    <Item id = "45006" name = "Kódova v UCS-2 Big Endian"/>
-                    <Item id = "45007" name = "Kódova v UCS-2 Little Endian"/>
-                    <Item id = "45008" name = "Kódova v UTF-8 bez BOM"/>
-					<Item id = "45009" name = "Prekonvertova do ANSI"/>
-					<Item id = "45013" name = "Prekonvertova do UTF-8 bez BOM"/>
-                    <Item id = "45010" name = "Prekonvertova do UTF-8"/>
-                    <Item id = "45011" name = "Prekonvertova do UCS-2 Big Endian"/>
-                    <Item id = "45012" name = "Prekonvertova do UCS-2 Little Endian"/>
+                    <Item id = "43001" name = "&amp;HÄ¾adaÅ¥..."/>
+                    <Item id = "43002" name = "HÄ¾adaÅ¥ &amp;ÄalÅ¡ie"/>
+                    <Item id = "43003" name = "NahradiÅ¥..."/>
+                    <Item id = "43004" name = "PrejsÅ¥ na riadok..."/>
+                    <Item id = "43005" name = "PrepnÃºÅ¥ zÃ¡loÅ¾ku"/>
+                    <Item id = "43006" name = "ÄŽalÅ¡ia zÃ¡loÅ¾ka"/>
+                    <Item id = "43007" name = "PredchÃ¡dzajÃºca zÃ¡loÅ¾ka"/>
+                    <Item id = "43008" name = "OdstrÃ¡niÅ¥ vÅ¡etky zÃ¡loÅ¾ky"/>
+                    <Item id = "43009" name = "PrejsÅ¥ na pÃ¡rovÃº svorkovÃº zÃ¡tvorku"/>
+                    <Item id = "43010" name = "HÄ¾adaÅ¥ PredchÃ¡dzajÃºce"/>
+                    <Item id = "43011" name = "&amp;PrÃ­rastkovÃ© hÄ¾adanie..."/>
+                    <Item id = "43013" name = "HÄ¾adaÅ¥ v sÃºboroch"/>
+                    <Item id = "43014" name = "HÄ¾adaÅ¥ (nestÃ¡le) ÄalÅ¡ie"/>
+                    <Item id = "43015" name = "HÄ¾adaÅ¥ (nestÃ¡le) predchÃ¡dzajÃºce"/>
+                    <Item id = "43016" name = "OznaÄiÅ¥ vÅ¡etko"/>
+                    <Item id = "43017" name = "OdznaÄiÅ¥ vÅ¡etko"/>
+					<Item id = "43018" name = "VystrihnÃºÅ¥ zaloÅ¾enÃ© riadky"/>
+                    <Item id = "43019" name = "KopÃ­rovaÅ¥ zaloÅ¾enÃ© riadky"/>
+                    <Item id = "43020" name = "VloÅ¾iÅ¥ do (NahradiÅ¥) zaloÅ¾enÃ© riadky"/>
+                    <Item id = "43021" name = "OdstrÃ¡niÅ¥ zaloÅ¾enÃ© riadky"/>
+					<Item id = "44009" name = "Post-it"/>
+                    <Item id = "44010" name = "ZbaliÅ¥ vÅ¡etko"/>
+                    <Item id = "44011" name = "UÅ¾Ã­vateÄ¾om definovanÃ© zvÃ½razÅˆovanie"/>
+                    <Item id = "44019" name = "ZobraziÅ¥ vÅ¡etky znaky"/>
+                    <Item id = "44020" name = "ZobraziÅ¥ pomocnÃ© Äiary odsadenia"/>
+                    <Item id = "44022" name = "ZalomiÅ¥"/>
+                    <Item id = "44023" name = "PriblÃ­Å¾&amp;iÅ¥"/>
+                    <Item id = "44024" name = "Oddial&amp;iÅ¥"/>
+                    <Item id = "44025" name = "ZobraziÅ¥ medzery a tabulÃ¡tory"/>
+                    <Item id = "44026" name = "ZobraziÅ¥ koniec riadkov"/>
+                    <Item id = "44029" name = "RozbaliÅ¥ vÅ¡etko"/>
+                    <Item id = "44030" name = "ZbaliÅ¥ aktuÃ¡lnu ÃºroveÅˆ"/>
+                    <Item id = "44031" name = "RozbaliÅ¥ aktuÃ¡lnu ÃºroveÅˆ"/>
+                    <Item id = "44032" name = "PrepnÃºÅ¥ na celoobrazovkovÃ½ mÃ³d"/>
+                    <Item id = "44033" name = "ObnoviÅ¥ vÃ½chodzie nastavenie pribliÅ¾ovania"/>
+                    <Item id = "44034" name = "VÅ¾dy navrchu"/>
+                    <Item id = "44035" name = "SynchronizovaÅ¥ vertikÃ¡lne skrolovanie"/>
+                    <Item id = "44036" name = "SynchronizovaÅ¥ horizontÃ¡lne skrolovanie"/>
+                    <Item id = "44041" name = "ZobraziÅ¥ zalamovacÃ­ symbol"/>
+					<Item id = "44072" name = "AktivovaÅ¥ hlavnÃ© zobrazenie"/>
 					
+                    <Item id = "45001" name = "PrekonvertovaÅ¥ na Windows FormÃ¡t"/>
+                    <Item id = "45002" name = "PrekonvertovaÅ¥ na UNIX FormÃ¡t"/>
+                    <Item id = "45003" name = "PrekonvertovaÅ¥ na MAC FormÃ¡t"/>
+                    <Item id = "45004" name = "KÃ³dovaÅ¥ v ANSI"/>
+					<Item id = "45008" name = "KÃ³dovaÅ¥ v UTF-8 bez BOM"/>
+                    <Item id = "45005" name = "KÃ³dovaÅ¥ v UTF-8"/>
+                    <Item id = "45006" name = "KÃ³dovaÅ¥ v UCS-2 Big Endian"/>
+                    <Item id = "45007" name = "KÃ³dovaÅ¥ v UCS-2 Little Endian"/>
+            <Item id = "45009" name = "PrekonvertovaÅ¥ do ANSI"/>
+			<Item id = "45010" name = "PrekonvertovaÅ¥ do UTF-8 bez BOM"/>
+            <Item id = "45011" name = "PrekonvertovaÅ¥ do UTF-8"/>
+            <Item id = "45012" name = "PrekonvertovaÅ¥ do UCS-2 Big Endian"/>
+            <Item id = "45013" name = "PrekonvertovaÅ¥ do UCS-2 Little Endian"/>
+					
+                    <Item id = "10001" name = "PrejsÅ¥ na ÄalÅ¡ie zobrazenie"/>
+                    <Item id = "10002" name = "KlonovaÅ¥ na ÄalÅ¡ie zobrazenie"/>
+					<Item id = "10003" name = "PrejsÅ¥ na novÃº inÅ¡tanciu"/>
+                    <Item id = "10004" name = "OtvoriÅ¥ v novej inÅ¡tancii"/>
                     
-                    <Item id = "10001" name = "Prejs na ïalšie Zobrazenie"/>
-                    <Item id = "10002" name = "Klonova na ïalšie Zobrazenie"/>
-                    
-                    <Item id = "46001" name = "Upravi štýly..."/>
-					<Item id = "46080" name = "Definované užívate¾om"/>
+                    <Item id = "46001" name = "UpraviÅ¥ Å¡tÃ½ly..."/>
                     <Item id = "47000" name = "O programe..."/>
-                    <Item id = "47001" name = "Notepad++ Domovská stránka"/>
-                    <Item id = "47002" name = "Notepad++ Stránka projektu"/>
+                    <Item id = "47001" name = "Notepad++ DomovskÃ¡ strÃ¡nka"/>
+                    <Item id = "47002" name = "Notepad++ StrÃ¡nka projektu"/>
                     <Item id = "47003" name = "Online pomoc"/>
-                    <Item id = "47004" name = "Fórum"/>
-					<Item id = "47005" name = "Získa viac rozšírení"/>				
-                    <Item id = "48009" name = "Mapovaè skratiek..."/>
-                    <Item id = "48011" name = "Predvo¾by..."/>
-                    <Item id = "49000" name = "&amp;Spusti..."/>
+                    <Item id = "47004" name = "FÃ³rum"/>
+					<Item id = "47005" name = "ZÃ­skaÅ¥ viac rozÅ¡Ã­renÃ­"/>
 					
-					<Item id = "50000" name = "Dokonèovanie funkcií"/>
-                    <Item id = "50001" name = "Dokonèovanie slov"/>
+                    <Item id = "48009" name = "MapovaÄ skratiek..."/>
+                    <Item id = "48011" name = "PredvoÄ¾by..."/>
+                    <Item id = "49000" name = "&amp;SpustiÅ¥..."/>
+					
+					<Item id = "50000" name = "DokonÄovanie funkciÃ­"/>
+                    <Item id = "50001" name = "DokonÄovanie slov"/>
 					<Item id = "50002" name = "Tip na parametre funkcie"/>
-					<Item id = "42034" name = "Upravi Ståpce..."/>
-                    <Item id = "44042" name = "Skry riadky"/>
-                    <Item id = "42040" name = "Otvori Všetky Nedávno Otvorené Súbory"/>
-                    <Item id = "42041" name = "Vymaza Zoznam Nedávno Otvorených Súborov"/>
+					<Item id = "42034" name = "UpraviÅ¥ stÄºpce..."/>
+                    <Item id = "44042" name = "SkryÅ¥ riadky"/>
+                    <Item id = "42040" name = "OtvoriÅ¥ vÅ¡etky nedÃ¡vno otvorenÃ© sÃºbory"/>
+                    <Item id = "42041" name = "VymazaÅ¥ zoznam nedÃ¡vno otvorenÃ½ch sÃºborov"/>
 					
                 </Commands>
             </Main>
             <Splitter>
             </Splitter>
             <TabBar>
-                    <Item order = "0" name = "Zatvori ma"/>
-                    <Item order = "1" name = "Zatvori všetko okrem mòa"/>
-                    <Item order = "2" name = "Uloži ma"/>
-                    <Item order = "3" name = "Uloži ma ako..."/>
-                    <Item order = "4" name = "Tlaèi ma"/>
-                    <Item order = "5" name = "Prejs na ïalšie Zobrazenie"/>
-                    <Item order = "6" name = "Klonova na ïalšie Zobrazenie"/>
+                    <Item order = "0" name = "ZatvoriÅ¥ ma"/>
+                    <Item order = "1" name = "ZatvoriÅ¥ vÅ¡etko okrem mÅˆa"/>
+                    <Item order = "2" name = "UloÅ¾iÅ¥ ma"/>
+                    <Item order = "3" name = "UloÅ¾iÅ¥ ma ako..."/>
+                    <Item order = "4" name = "TlaÄiÅ¥ ma"/>
+                    <Item order = "5" name = "PrejsÅ¥ na ÄalÅ¡ie zobrazenie"/>
+                    <Item order = "6" name = "KlonovaÅ¥ na ÄalÅ¡ie zobrazenie"/>
+					<Item order = "7" name = "CelÃº cestu do schrÃ¡nky"/>
+					<Item order = "8" name = "NÃ¡zov sÃºboru do schrÃ¡nky"/>
+					<Item order = "9" name = "Cestu aktuÃ¡lneho prieÄinka do schrÃ¡nky"/>
+					<Item order = "10" name = "PremenovaÅ¥ ma"/>
+					<Item order = "11" name = "OdstrÃ¡niÅ¥ ma"/>
+					<Item order = "12" name = "Iba na ÄÃ­tanie"/>
+					<Item order = "13" name = "VymazaÅ¥ znaÄku iba na ÄÃ­tanie"/>
+					<Item order = "14" name = "PrejsÅ¥ na novÃº inÅ¡tanciu"/>
+					<Item order = "15" name = "OtvoriÅ¥ v novej inÅ¡tancii"/>
             </TabBar>
         </Menu>
         
         <Dialog>
-            <Find title = "" titleFind = "H¾ada" titleReplace = "Nahradi" titleFindInFiles = "H¾ada v súboroch">
-                <Item id = "1" name = "H¾ada ïalšie"/>
-                <Item id = "2" name = "Zatvori"/>
-                <Item id = "1620" name = "H¾ada text :"/>
-                <Item id = "1603" name = "Porovnáva &amp;iba celé slovo"/>
-                <Item id = "1604" name = "Rozlišova v&amp;e¾ké/malé písmená"/>
-                <Item id = "1605" name = "Pravidelné &amp;výrazy"/>
-                <Item id = "1606" name = "Zalomi okol&amp;o"/>
+            <Find title = "" titleFind = "HÄ¾adaÅ¥" titleReplace = "NahradiÅ¥" titleFindInFiles = "HÄ¾adaÅ¥ v sÃºboroch">
+                <Item id = "1" name = "HÄ¾adaÅ¥ ÄalÅ¡ie"/>
+                <Item id = "2" name = "ZatvoriÅ¥"/>
+                <Item id = "1620" name = "HÄ¾adaÅ¥ text:"/>
+                <Item id = "1603" name = "PorovnÃ¡vaÅ¥ &amp;iba celÃ© slovo"/>
+                <Item id = "1604" name = "RozliÅ¡ovaÅ¥ v&amp;eÄ¾kÃ©/malÃ© pÃ­smenÃ¡"/>
+                <Item id = "1605" name = "PravidelnÃ© &amp;vÃ½razy"/>
+                <Item id = "1606" name = "ZalomiÅ¥ okol&amp;o"/>
                 <Item id = "1612" name = "&amp;Hore"/>
                 <Item id = "1613" name = "&amp;Dole"/>
-                <Item id = "1614" name = "Poèet"/>
-                <Item id = "1615" name = "H¾ada všetky"/>
-                <Item id = "1616" name = "Oznaèi riadok"/>
-                <Item id = "1617" name = "Zvýrazni nájdený znak"/>
-                <Item id = "1618" name = "Vyèisti po každom h¾adaní"/>
+                <Item id = "1614" name = "PoÄet"/>
+                <Item id = "1615" name = "HÄ¾adaÅ¥ vÅ¡etky"/>
+                <Item id = "1616" name = "OznaÄiÅ¥ riadok"/>
+                <Item id = "1617" name = "ZvÃ½razniÅ¥ nÃ¡jdenÃ½ znak"/>
+                <Item id = "1618" name = "VyÄistiÅ¥ po kaÅ¾dom hÄ¾adanÃ­"/>
                 <Item id = "1621" name = "Smer"/>
-                <Item id = "1611" name = "Na&amp;hradi s :"/>
-                <Item id = "1608" name = "&amp;Nahradi"/>
-                <Item id = "1609" name = "Nahradi &amp;všetko"/>
-			 	<Item id = "1623" name = "Prieh¾adnos"/>
-				<Item id = "1687" name = "Pri nesústredení"/>
-			 	<Item id = "1688" name = "Vždy"/>
-			 	<Item id = "1632" name = "Vo výbere"/>
-			 	<Item id = "1633" name = "Vyèisti"/>
-			 	<Item id = "1635" name = "Nahradi všetko vo všetkých otvorených dok."/>
-			 	<Item id = "1636" name = "H¾ada všetko vo všetkých otvorených dok."/>
-			 	<Item id = "1637" name = "H¾ada v súboroch"/>
-			 	<Item id = "1640" name = "Prepnú dialógové okno"/>
-			 	<Item id = "1654" name = "Filtre :"/>
-			 	<Item id = "1655" name = "Prieèinok :"/>
-			 	<Item id = "1656" name = "H¾ada ich všetky"/>
-			 	<Item id = "1658" name = "Vo všetkých podadresároch"/>
-				<Item id = "1659" name = "V skrytých prieèinkoch"/> 
-				<Item id = "1659" name = "In hidden folders"/>
-			 	<Item id = "1624" name = "Mód h¾adania"/>
-			 	<Item id = "1625" name = "Normálny"/>
-			 	<Item id = "1626" name = "Rozšírený (\n, \r, \t, \0, \x...)"/>
+                <Item id = "1611" name = "Na&amp;hradiÅ¥ s:"/>
+                <Item id = "1608" name = "&amp;NahradiÅ¥"/>
+                <Item id = "1609" name = "NahradiÅ¥ &amp;vÅ¡etko"/>
+			 	<Item id = "1623" name = "PriehÄ¾adnosÅ¥"/>
+				<Item id = "1687" name = "Pri nesÃºstredenÃ­"/>
+			 	<Item id = "1688" name = "VÅ¾dy"/>
+			 	<Item id = "1632" name = "Vo vÃ½bere"/>
+			 	<Item id = "1633" name = "VyÄistiÅ¥"/>
+			 	<Item id = "1635" name = "NahradiÅ¥ vÅ¡etko vo vÅ¡etkÃ½ch otvorenÃ½ch dok."/>
+			 	<Item id = "1636" name = "HÄ¾adaÅ¥ vÅ¡etko vo vÅ¡etkÃ½ch otvorenÃ½ch dok."/>
+			 	<Item id = "1637" name = "HÄ¾adaÅ¥ v sÃºboroch"/>
+			 	<Item id = "1640" name = "PrepnÃºÅ¥ dialÃ³govÃ© okno"/>
+			 	<Item id = "1654" name = "Filtre:"/>
+			 	<Item id = "1655" name = "PrieÄinok:"/>
+			 	<Item id = "1656" name = "HÄ¾adaÅ¥ ich vÅ¡etky"/>
+			 	<Item id = "1658" name = "Vo vÅ¡etkÃ½ch podprieÄinkoch"/>
+				<Item id = "1659" name = "V skrytÃ½ch prieÄinkoch"/> 
+			 	<Item id = "1624" name = "MÃ³d hÄ¾adania"/>
+			 	<Item id = "1625" name = "NormÃ¡lny"/>
+			 	<Item id = "1626" name = "RozÅ¡Ã­renÃ½ (\n, \r, \t, \0, \x...)"/>
             </Find>
-            <GoToLine title = "Prejs na riadok #">
+            <GoToLine title = "PrejsÅ¥ na riadok #">
 				<Item id = "2007" name = "Riadok"/>
                 <Item id = "2008" name = "Odsadenie"/>
-                <Item id = "1" name = "&amp;Prejs !"/>
+                <Item id = "1" name = "&amp;PrejsÅ¥ !"/>
                 <Item id = "2" name = "Nejdem nikam"/>
-                <Item id = "2004" name = "Ste tu :"/>
-                <Item id = "2005" name = "Chcete prejs :"/>
-                <Item id = "2006" name = "Nemôžete ís ïalej ako :"/>
+                <Item id = "2004" name = "Ste tu:"/>
+                <Item id = "2005" name = "Chcete prejsÅ¥:"/>
+                <Item id = "2006" name = "NemÃ´Å¾ete Ã­sÅ¥ Äalej ako:"/>
             </GoToLine>
 
-            <Run title = "Spusti...">
-                <Item id = "1903" name = "Napíšte sem program, ktorý chcete spusti"/>
-                <Item id = "1" name = "Spusti!"/>
-                <Item id = "2" name = "Zruši"/>
-                <Item id = "1904" name = "Uloži..."/>
+            <Run title = "SpustiÅ¥...">
+                <Item id = "1903" name = "NapÃ­Å¡te sem program, ktorÃ½ chcete spustiÅ¥"/>
+                <Item id = "1" name = "SpustiÅ¥!"/>
+                <Item id = "2" name = "ZruÅ¡iÅ¥"/>
+                <Item id = "1904" name = "UloÅ¾iÅ¥..."/>
             </Run>
             
-            <StyleConfig title = "Upravi Štýl">
-				<Item id = "1" name = "Vyskúša!"/>
-				<Item id = "2" name = "Zruši"/>
-				<Item id = "2301" name = "Uloži &amp;&amp; Zatvori"/>
-				<Item id = "2303" name = "Prieh¾adnos"/>		
+            <StyleConfig title = "UpraviÅ¥ Å¡tÃ½l">
+				<Item id = "1" name = "VyskÃºÅ¡aÅ¥!"/>
+				<Item id = "2" name = "ZruÅ¡iÅ¥"/>
+				<Item id = "2301" name = "UloÅ¾iÅ¥ &amp;&amp; zatvoriÅ¥"/>
+				<Item id = "2303" name = "PriehÄ¾adnosÅ¥"/>		
 				
                 <SubDialog>
-                	<Item id = "2204" name = "Tuèné"/>
-                    <Item id = "2205" name = "Kurzíva"/>
+                	<Item id = "2204" name = "TuÄnÃ©"/>
+                    <Item id = "2205" name = "KurzÃ­va"/>
                     <Item id = "2206" name = "Farba popredia"/>
                     <Item id = "2207" name = "Farba pozadia"/>
-                    <Item id = "2208" name = "Názov písma :"/>
-                    <Item id = "2209" name = "Ve¾kos písma :"/>
+                    <Item id = "2208" name = "NÃ¡zov pÃ­sma:"/>
+                    <Item id = "2209" name = "VeÄ¾kosÅ¥ pÃ­sma:"/>
                     <!--
-                   <Item id = "2210" name = "Upozornenie : Definícia tohto štýlu bude východzou definíciou pre všetky nedefinované štýly"/>\
+                   <Item id = "2210" name = "Upozornenie: DefinÃ­cia tohto Å¡tÃ½lu bude vÃ½chodzou definÃ­ciou pre vÅ¡etky nedefinovanÃ© Å¡tÃ½ly"/>\
 					-->
-                    <Item id = "2211" name = "Popis štýlu :"/>
+                    <Item id = "2211" name = "Popis Å¡tÃ½lu:"/>
                     <Item id = "2212" name = "Typ farby"/>
-                    <Item id = "2213" name = "Typ písma"/>
-                    <Item id = "2214" name = "Východzia prípona :"/>
-                    <Item id = "2216" name = "Prípona užívate¾a :"/>
-                    <Item id = "2218" name = "Podèiarknuté"/>
-                    <Item id = "2219" name = "Východzie k¾úèové slová"/>
-                    <Item id = "2221" name = "Užívate¾om definované k¾úèové slová"/>
-                    <Item id = "2225" name = "Jazyk :"/>
-                    <Item id = "2226" name = "Povoli globálnu farbu popredia"/>
-                    <Item id = "2227" name = "Povoli globálnu farbu pozadia"/>
-                    <Item id = "2228" name = "Povoli globálne písmo"/>
-                    <Item id = "2229" name = "Povoli globálnu ve¾kos písma"/>
-                    <Item id = "2230" name = "Povoli globálne tuèné písmo"/>
-                    <Item id = "2231" name = "Povoli globálne kurzíva"/>
-                    <Item id = "2232" name = "Povoli globálne podèiarknuté písmo"/>
+                    <Item id = "2213" name = "Typ pÃ­sma"/>
+                    <Item id = "2214" name = "VÃ½chodzia prÃ­pona:"/>
+                    <Item id = "2216" name = "PrÃ­pona uÅ¾Ã­vateÄ¾a:"/>
+                    <Item id = "2218" name = "PodÄiarknutÃ©"/>
+                    <Item id = "2219" name = "VÃ½chodzie kÄ¾ÃºÄovÃ© slovÃ¡"/>
+                    <Item id = "2221" name = "UÅ¾Ã­vateÄ¾om definovanÃ© kÄ¾ÃºÄovÃ© slovÃ¡"/>
+                    <Item id = "2225" name = "Jazyk:"/>
+                    <Item id = "2226" name = "PovoliÅ¥ globÃ¡lnu farbu popredia"/>
+                    <Item id = "2227" name = "PovoliÅ¥ globÃ¡lnu farbu pozadia"/>
+                    <Item id = "2228" name = "PovoliÅ¥ globÃ¡lne pÃ­smo"/>
+                    <Item id = "2229" name = "PovoliÅ¥ globÃ¡lnu veÄ¾kosÅ¥ pÃ­sma"/>
+                    <Item id = "2230" name = "PovoliÅ¥ globÃ¡lne tuÄnÃ© pÃ­smo"/>
+                    <Item id = "2231" name = "PovoliÅ¥ globÃ¡lne kurzÃ­va"/>
+                    <Item id = "2232" name = "PovoliÅ¥ globÃ¡lne podÄiarknutÃ© pÃ­smo"/>
                 </SubDialog>
 				
             </StyleConfig>
             
-            <UserDefine title = "Užívate¾om definované">
-				<Item id = "20002" name = "Premenova"/>
-				<Item id = "20003" name = "Vytvori Nový..."/>
-				<Item id = "20004" name = "Odstráni"/>
-				<Item id = "20005" name = "Uloži Ako..."/>
-				<Item id = "20007" name = "Jazyk Užívate¾a : "/>
-				<Item id = "20009" name = "Prípona :"/>
-				<Item id = "20012" name = "Ignor. ve¾ké/malé písmená"/>
-				<Item id = "20011" name = "Prieh¾adnos"/>
+            <UserDefine title = "UÅ¾Ã­vateÄ¾om definovanÃ©">
+				<Item id = "20002" name = "PremenovaÅ¥"/>
+				<Item id = "20003" name = "VytvoriÅ¥ novÃ½..."/>
+				<Item id = "20004" name = "OdstrÃ¡niÅ¥"/>
+				<Item id = "20005" name = "UloÅ¾iÅ¥ ako..."/>
+				<Item id = "20007" name = "Jazyk uÅ¾Ã­vateÄ¾a: "/>
+				<Item id = "20009" name = "PrÃ­pona:"/>
+				<Item id = "20012" name = "Ignor. veÄ¾kÃ©/malÃ© pÃ­smenÃ¡"/>
+				<Item id = "20011" name = "PriehÄ¾adnosÅ¥"/>
 				<Item id = "0" name = "Typ farby"/>
 				<Item id = "1" name = "Farba popredia"/>
 				<Item id = "2" name = "Farba pozadia"/>
-				<Item id = "3" name = "Typ písma"/>
-				<Item id = "4" name = "Názov písma :"/>
-				<Item id = "5" name = "Ve¾kos písma :"/>
-				<Item id = "6" name = "Tuèné"/>
-				<Item id = "7" name = "Kurzíva"/>
-				<Item id = "8" name = "Podèiarknuté"/>
-                <Folder title = "Prieèinok &amp;&amp; Východzie">
-					<Item id = "21101" name = "Východzie nastavenie štýlu"/>
-					<Item id = "21201" name = "Nastavenie k¾úèových slov pre otvorenie prieèinka"/>
-					<Item id = "21301" name = "Nastavenie k¾úèových slov pre zatvorenie prieèinka"/>
+				<Item id = "3" name = "Typ pÃ­sma"/>
+				<Item id = "4" name = "NÃ¡zov pÃ­sma:"/>
+				<Item id = "5" name = "VeÄ¾kosÅ¥ pÃ­sma:"/>
+				<Item id = "6" name = "TuÄnÃ©"/>
+				<Item id = "7" name = "KurzÃ­va"/>
+				<Item id = "8" name = "PodÄiarknutÃ©"/>
+                <Folder title = "PrieÄinok &amp;&amp; vÃ½chodzie">
+					<Item id = "21101" name = "VÃ½chodzie nastavenie Å¡tÃ½lu"/>
+					<Item id = "21201" name = "Nastavenie kÄ¾ÃºÄovÃ½ch slov pre otvorenie prieÄinka"/>
+					<Item id = "21301" name = "Nastavenie kÄ¾ÃºÄovÃ½ch slov pre zatvorenie prieÄinka"/>
                 </Folder>
-                <Keywords title = "Zoznamy k¾úèových slov">
+                <Keywords title = "Zoznamy kÄ¾ÃºÄovÃ½ch slov">
 					<Item id = "22101" name = "1. Skupina"/>
 					<Item id = "22201" name = "2. Skupina"/>
 					<Item id = "22301" name = "3. Skupina"/>
 					<Item id = "22401" name = "4. Skupina"/>
-					<Item id = "22113" name = "Predponový mód"/>
-					<Item id = "22213" name = "Predponový mód"/>
-					<Item id = "22313" name = "Predponový mód"/>
-					<Item id = "22413" name = "Predponový mód"/>
+					<Item id = "22113" name = "PredponovÃ½ mÃ³d"/>
+					<Item id = "22213" name = "PredponovÃ½ mÃ³d"/>
+					<Item id = "22313" name = "PredponovÃ½ mÃ³d"/>
+					<Item id = "22413" name = "PredponovÃ½ mÃ³d"/>
                 </Keywords>
-                <Comment title = "Poznámka &amp;&amp; Èíslo">
-					<Item id = "23301" name = "Riadok s poznámkou"/>
-					<Item id = "23101" name = "Blok s poznámkou"/>
-					<Item id = "23113" name = "Zaèiatok Poznámky :"/>
-					<Item id = "23115" name = "Koniec Poznámky :"/>
-					<Item id = "23116" name = "Poklada k¾úè. slovo za symbol"/>
-					<Item id = "23117" name = "Poklada k¾úè. slová za symboly"/>
-					<Item id = "23201" name = "Èíslo"/>
+                <Comment title = "PoznÃ¡mka &amp;&amp; ÄŒÃ­slo">
+					<Item id = "23301" name = "Riadok s poznÃ¡mkou"/>
+					<Item id = "23101" name = "Blok s poznÃ¡mkou"/>
+					<Item id = "23113" name = "ZaÄiatok poznÃ¡mky:"/>
+					<Item id = "23115" name = "Koniec poznÃ¡mky:"/>
+					<Item id = "23116" name = "PokladaÅ¥ kÄ¾ÃºÄ. slovo za symbol"/>
+					<Item id = "23117" name = "PokladaÅ¥ kÄ¾ÃºÄ. slovÃ¡ za symboly"/>
+					<Item id = "23201" name = "ÄŒÃ­slo"/>
                 </Comment>
-                <Operator title = "Operátory">
-					<Item id = "24107" name = "Operátor"/>
-					<Item id = "24103" name = "Dostupné Symboly"/>
-					<Item id = "24101" name = "Aktivované Operátory"/>
-					<Item id = "24201" name = "Odde¾ovaè 1"/>
-					<Item id = "24211" name = "Zaèiatok ohranièenia :"/>
-					<Item id = "24214" name = "Koniec ohranièenia :"/>
-					<Item id = "24301" name = "Odde¾ovaè 2"/>
-					<Item id = "24311" name = "Zaèiatok ohranièenia :"/>
-					<Item id = "24314" name = "Koniec ohranièenia :"/>
+                <Operator title = "OperÃ¡tory">
+					<Item id = "24107" name = "OperÃ¡tor"/>
+					<Item id = "24103" name = "DostupnÃ© symboly"/>
+					<Item id = "24101" name = "AktivovanÃ© operÃ¡tory"/>
+					<Item id = "24201" name = "OddeÄ¾ovaÄ 1"/>
+					<Item id = "24211" name = "ZaÄiatok ohraniÄenia:"/>
+					<Item id = "24214" name = "Koniec ohraniÄenia:"/>
+					<Item id = "24301" name = "OddeÄ¾ovaÄ 2"/>
+					<Item id = "24311" name = "ZaÄiatok ohraniÄenia :"/>
+					<Item id = "24314" name = "Koniec ohraniÄenia:"/>
                 </Operator>
             </UserDefine>
-			<Preference title = "Predvo¾by">
-                <Item id = "6001" name = "Zatvori"/>
-				<Global title = "Globálne">
-					<Item id = "6101" name = "Panel s nástrojmi"/>
-					<Item id = "6102" name = "Skry"/>
-					<Item id = "6103" name = "Malé ikony"/>
-	                <Item id = "6104" name = "Ve¾ké ikony"/>
-					<Item id = "6105" name = "Malé štandardné ikony"/>
+			<Preference title = "PredvoÄ¾by">
+                <Item id = "6001" name = "ZatvoriÅ¥"/>
+				<Global title = "GlobÃ¡lne">
+					<Item id = "6101" name = "Panel s nÃ¡strojmi"/>
+					<Item id = "6102" name = "SkryÅ¥"/>
+					<Item id = "6103" name = "MalÃ© ikony"/>
+	                <Item id = "6104" name = "VeÄ¾kÃ© ikony"/>
+					<Item id = "6105" name = "MalÃ© Å¡tandardnÃ© ikony"/>
 					
-					<Item id = "6106" name = "Panel so záložkami"/>
-					<Item id = "6107" name = "Zmenši"/>
-					<Item id = "6108" name = "Zamknú (Vypne Drag N Drop)"/>
-					<Item id = "6109" name = "Vykresli neaktívne záložky"/>
-					<Item id = "6110" name = "Vykresli oranžový pruh na záložke"/>
+					<Item id = "6106" name = "Panel so zÃ¡loÅ¾kami"/>
+					<Item id = "6107" name = "ZmenÅ¡iÅ¥"/>
+					<Item id = "6108" name = "ZamknÃºÅ¥ (Vypne Drag N Drop)"/>
+					<Item id = "6109" name = "VykresliÅ¥ neaktÃ­vne zÃ¡loÅ¾ky"/>
+					<Item id = "6110" name = "VykresliÅ¥ oranÅ¾ovÃ½ pruh na zÃ¡loÅ¾ke"/>
 					
-					<Item id = "6111" name = "Zobrazi stavový riadok"/>
-					<Item id = "6112" name = "Zatváracie tlaèidlo na každej záložke"/>
-					<Item id = "6113" name = "Dvojkliknú na zatvorenie dokumentu"/>
-					<Item id = "6118" name = "Skry"/>
-					<Item id = "6119" name = "Viacriadkový"/>
-					<Item id = "6120" name = "Vertikálny"/>
+					<Item id = "6111" name = "ZobraziÅ¥ stavovÃ½ riadok"/>
+					<Item id = "6112" name = "ZatvÃ¡racie tlaÄidlo na kaÅ¾dej zÃ¡loÅ¾ke"/>
+					<Item id = "6113" name = "DvojkliknÃºÅ¥ na zatvorenie dokumentu"/>
+					<Item id = "6118" name = "SkryÅ¥"/>
+					<Item id = "6119" name = "ViacriadkovÃ½"/>
+					<Item id = "6120" name = "VertikÃ¡lny"/>
 					
-					<Item id = "6121" name = "Panel Menu"/>
-					<Item id = "6122" name = "Skry (Použite Alt alebo F10 na prepnutie)"/>
+					<Item id = "6121" name = "Panel menu"/>
+					<Item id = "6122" name = "SkryÅ¥ (PouÅ¾ite Alt alebo F10 na prepnutie)"/>
 				</Global>
-                <Scintillas title = "Upravi Komponenty">
+                <Scintillas title = "UpraviÅ¥ komponenty">
 					<Item id = "6216" name = "Nastavenia vsuvky"/>
-					<Item id = "6217" name = "Šírka :"/>
-					<Item id = "6219" name = "Rýchlos blikania :"/>
+					<Item id = "6217" name = "Å Ã­rka :"/>
+					<Item id = "6219" name = "RÃ½chlosÅ¥ blikania :"/>
+					<Item id = "6221" name = "R"/> <!-- fast -->
+					<Item id = "6222" name = "P"/> <!-- slow -->
 					
-					<Item id = "6301" name = "Nastavenie Tabulátora"/>
-					<Item id = "6302" name = "Nahradi medzerou"/>
-					<Item id = "6303" name = "Ve¾kos tabulátora : "/>
+					<Item id = "6301" name = "Nastavenie tabulÃ¡tora"/>
+					<Item id = "6302" name = "NahradiÅ¥ medzerou"/>
+					<Item id = "6303" name = "VeÄ¾kosÅ¥ tabulÃ¡tora : "/>
 					
-					<Item id = "6201" name = "Štýl okraja prieèinka"/>
-					<Item id = "6202" name = "Jednoduchý"/>
-					<Item id = "6203" name = "Šípka"/>
-	                <Item id = "6204" name = "Kruhový strom"/>
-					<Item id = "6205" name = "Krabicový strom"/>
+					<Item id = "6201" name = "Å tÃ½l okraja prieÄinka"/>
+					<Item id = "6202" name = "JednoduchÃ½"/>
+					<Item id = "6203" name = "Å Ã­pka"/>
+	                <Item id = "6204" name = "KruhovÃ½ strom"/>
+					<Item id = "6205" name = "Å tvorcovÃ½ strom"/>
 					
-					<Item id = "6206" name = "Zobrazi okraj s èíslom"/>
-					<Item id = "6207" name = "Zobrazi okraj so záložkami"/>
-					<Item id = "6208" name = "Zobrazi Vertikálny okraj"/>
-					<Item id = "6209" name = "Èíslo ståpca : "/>
+					<Item id = "6206" name = "ZobraziÅ¥ okraj s ÄÃ­slom"/>
+					<Item id = "6207" name = "ZobraziÅ¥ okraj so zÃ¡loÅ¾kami"/>
+					<Item id = "6208" name = "ZobraziÅ¥ vertikÃ¡lny okraj"/>
+					<Item id = "6209" name = "ÄŒÃ­slo stÄºpca : "/>
 					
-					<Item id = "6211" name = "Nastavenie Vertikálneho okraja"/>
-					<Item id = "6212" name = "Èiarový mód"/>
-					<Item id = "6213" name = "Na pozadí"/>
-					<Item id = "6214" name = "Zvýrazni aktuálne aktívny riadok"/>
+					<Item id = "6211" name = "Nastavenie vertikÃ¡lneho okraja"/>
+					<Item id = "6212" name = "ÄŒiarovÃ½ mÃ³d"/>
+					<Item id = "6213" name = "Na pozadÃ­"/>
+					<Item id = "6214" name = "ZvÃ½razniÅ¥ aktuÃ¡lne aktÃ­vny riadok"/>
                 </Scintillas>
-				<NewDoc title = "Nový Dokument">
-					<Item id = "6401" name = "Formát"/>
+				<NewDoc title = "NovÃ½ dokument/OtvÃ¡raco-ukladacÃ­ prieÄinok">
+					<Item id = "6419" name = "NovÃ½ dokument"/>
+					<Item id = "6401" name = "FormÃ¡t"/>
 					<Item id = "6402" name = "Windows"/>
 					<Item id = "6403" name = "Unix"/>
 	                <Item id = "6404" name = "Mac"/>
-					<Item id = "6405" name = "Kódovanie"/>
+					<Item id = "6405" name = "KÃ³dovanie"/>
 					<Item id = "6406" name = "ANSI"/>
 					<Item id = "6407" name = "UTF-8 bez BOM"/>
 					<Item id = "6408" name = "UTF-8"/>
 					<Item id = "6409" name = "UCS-2 Big endian"/>
 					<Item id = "6410" name = "UCS-2 small endian"/>
-					<Item id = "6411" name = "Východzí jazyk :"/>
+					<Item id = "6411" name = "VÃ½chodzÃ­ jazyk:"/>
+					<Item id = "6413" name = "PrieÄinok na otvÃ¡ranie/ukladanie sÃºborov"/>
+					<Item id = "6414" name = "NasledovaÅ¥ aktuÃ¡lny dokument"/>
+					<Item id = "6415" name = "ZapamÃ¤taÅ¥ si prieÄinok poslednej operÃ¡cie"/>
                 </NewDoc>
-				<FileAssoc title = "Asociácia Súborov">
-					<Item id = "4009" name = "Podporované prípony :"/>
-					<Item id = "4010" name = "Registrované prípony :"/>
+				<FileAssoc title = "AsociÃ¡cia sÃºborov">
+					<Item id = "4009" name = "PodporovanÃ© prÃ­pony:"/>
+					<Item id = "4010" name = "RegistrovanÃ© prÃ­pony:"/>
                 </FileAssoc>
-				<LangMenu title = "Jazykové Menu">
-					<Item id = "6505" name = "Dostupné položky"/>
-					<Item id = "6506" name = "Deaktivované položky"/>
+				<LangMenu title = "JazykovÃ© menu">
+					<Item id = "6505" name = "DostupnÃ© poloÅ¾ky"/>
+					<Item id = "6506" name = "DeaktivovanÃ© poloÅ¾ky"/>
                 </LangMenu>
-				<Print1 title = "Tlaè - Farba a Okraj">
-					<Item id = "6601" name = "Tlaèi èíslo riadka"/>
-					<Item id = "6602" name = "Nastavenie Farby"/>
+				<Print1 title = "TlaÄ - farba a okraj">
+					<Item id = "6601" name = "TlaÄiÅ¥ ÄÃ­slo riadka"/>
+					<Item id = "6602" name = "Nastavenie farby"/>
 					<Item id = "6603" name = "WYSIWYG"/>
-					<Item id = "6604" name = "Invertova"/>
-	                <Item id = "6605" name = "Èierne na bielom"/>
-					<Item id = "6606" name = "Žiadna farba na pozadí"/>
-					<Item id = "6607" name = "Nastavenie Okraja (v milimetroch)"/>
-					<Item id = "6612" name = "V¾avo"/>
+					<Item id = "6604" name = "InvertovaÅ¥"/>
+	                <Item id = "6605" name = "ÄŒierne na bielom"/>
+					<Item id = "6606" name = "Å½iadna farba na pozadÃ­"/>
+					<Item id = "6607" name = "Nastavenie okraja (v milimetroch)"/>
+					<Item id = "6612" name = "VÄ¾avo"/>
 					<Item id = "6613" name = "Hore"/>
 					<Item id = "6614" name = "Vpravo"/>
 					<Item id = "6615" name = "Dole"/>
                 </Print1>
-				<Print2 title = "Tlaè - Hlavièka a Päta">
-					<Item id = "6706" name = "Tuèné"/>
-					<Item id = "6707" name = "Kurzíva"/>
-					<Item id = "6708" name = "Hlavièka"/>
-					<Item id = "6709" name = "¼avá èas"/>
-	                <Item id = "6710" name = "Stredná èas"/>
-					<Item id = "6711" name = "Pravá èas"/>
-					<Item id = "6717" name = "Tuèné"/>
-					<Item id = "6718" name = "Kurzíva"/>
-					<Item id = "6719" name = "Päta"/>
-					<Item id = "6720" name = "¼avá èas"/>
-	                <Item id = "6721" name = "Stredná èas"/>
-					<Item id = "6722" name = "Pravá èas"/>
-	                <Item id = "6723" name = "Prida"/>
-					<Item id = "6725" name = "Možnosti :"/>
+				<Print2 title = "TlaÄ - hlaviÄka a pÃ¤ta">
+					<Item id = "6706" name = "TuÄnÃ©"/>
+					<Item id = "6707" name = "KurzÃ­va"/>
+					<Item id = "6708" name = "HlaviÄka"/>
+					<Item id = "6709" name = "Ä½avÃ¡ ÄasÅ¥"/>
+	                <Item id = "6710" name = "StrednÃ¡ ÄasÅ¥"/>
+					<Item id = "6711" name = "PravÃ¡ ÄasÅ¥"/>
+					<Item id = "6717" name = "TuÄnÃ©"/>
+					<Item id = "6718" name = "KurzÃ­va"/>
+					<Item id = "6719" name = "PÃ¤ta"/>
+					<Item id = "6720" name = "Ä½avÃ¡ ÄasÅ¥"/>
+	                <Item id = "6721" name = "StrednÃ¡ ÄasÅ¥"/>
+					<Item id = "6722" name = "PravÃ¡ ÄasÅ¥"/>
+	                <Item id = "6723" name = "PridaÅ¥"/>
+					<Item id = "6725" name = "MoÅ¾nosti:"/>
                 </Print2>
-				<MISC title = "Rôzne">
-					<Item id = "6304" name = "Nastavenie histórie súborov"/>
-	                <Item id = "6305" name = "Nekontrolova pri spúšaní"/>
-					<Item id = "6306" name = "Max. poèet súborov v histórii :"/>
-					<Item id = "6307" name = "Povoli"/>
-					<Item id = "6308" name = "Minimalizova do oznamovacej oblasti"/>
-					<Item id = "6309" name = "Pamäta si aktuálnu reláciu pre ïalšie spustenie"/>
-					<Item id = "6312" name = "Automatické zisovanie stavu súboru"/>
-					<Item id = "6313" name = "Potichu aktualizova"/>
-					<Item id = "6318" name = "Nastavenie kliknute¾ného odkazu"/>
-					<Item id = "6319" name = "Povoli"/>
-					<Item id = "6320" name = "Nepodèiarkova"/>
-					<Item id = "6322" name = "Prípona súboru v relácii :"/>
-					<Item id = "6323" name = "Zapnú auto-aktualizácie Notepad++"/>
-					<Item id = "6324" name = "Prepínaè dokumentov (Ctrl+TAB)"/>
-					<Item id = "6325" name = "Prejs na posledný riadok po aktualizovaní"/>
-					<Item id = "6327" name = "Zvýrazni zhodné znaky"/> 
-					<Item id = "6328" name = "Zvýrazni hodnoty znakov"/> 
+				<MISC title = "RÃ´zne">
+					<Item id = "6304" name = "Nastavenie histÃ³rie sÃºborov"/>
+	                <Item id = "6305" name = "NekontrolovaÅ¥ pri spÃºÅ¡Å¥anÃ­"/>
+					<Item id = "6306" name = "Max. poÄet sÃºborov v histÃ³rii:"/>
+					<Item id = "6307" name = "PovoliÅ¥"/>
+					<Item id = "6308" name = "MinimalizovaÅ¥ do oznamovacej oblasti"/>
+					<Item id = "6309" name = "PamÃ¤taÅ¥ si aktuÃ¡lnu relÃ¡ciu pre ÄalÅ¡ie spustenie"/>
+					<Item id = "6312" name = "AutomatickÃ© zisÅ¥ovanie stavu sÃºboru"/>
+					<Item id = "6313" name = "Potichu aktualizovaÅ¥"/>
+					<Item id = "6318" name = "Nastavenie kliknuteÄ¾nÃ©ho odkazu"/>
+					<Item id = "6319" name = "PovoliÅ¥"/>
+					<Item id = "6320" name = "NepodÄiarkovaÅ¥"/>
+					<Item id = "6322" name = "PrÃ­pona sÃºboru v relÃ¡cii:"/>
+					<Item id = "6323" name = "ZapnÃºÅ¥ auto-aktualizÃ¡cie Notepad++"/>
+					<Item id = "6324" name = "PrepÃ­naÄ dokumentov (Ctrl+TAB)"/>
+					<Item id = "6325" name = "PrejsÅ¥ na poslednÃ½ riadok po aktualizovanÃ­"/>
+					<Item id = "6326" name = "ZapnÃºÅ¥ inteligentnÃ© zvÃ½razÅˆovanie"/>
+					<Item id = "6329" name = "ZvÃ½razniÅ¥ zhodnÃ© znaky"/>
+					<Item id = "6327" name = "ZapnÃºÅ¥"/>
+					<Item id = "6328" name = "ZvÃ½razniÅ¥ hodnoty znakov"/>
+					<Item id = "6330" name = "ZvÃ½razniÅ¥ php/asp zÃ³nu"/>
 					
-					<Item id = "6326" name = "Zapnú inteligentné zvýrazòovanie"/>
-					<Item id = "6114" name = "Zapnú (Ctrl+Tab)"/>
+					<Item id = "6331" name = "ZobraziÅ¥ v titulovom paneli iba nÃ¡zov sÃºboru"/>
+					<Item id = "6114" name = "ZapnÃºÅ¥ (Ctrl+Tab)"/>
 					<Item id = "6115" name = "Auto-odsadzovanie"/>
-					<Item id = "6116" name = "Pamäta si prieèinok poslednej operácie"/>
-					<Item id = "6117" name = "Zap. MRU správanie pre prepínaè dokumentov"/>
+					<Item id = "6117" name = "Zap. MRU sprÃ¡vanie pre prepÃ­naÄ dokumentov"/>
+					
                 </MISC>
-				<Backup title = "Záloha/Automatické dokonèovanie">
-					<Item id = "6801" name = "Záloha"/>
-					<Item id = "6315" name = "Žiadna"/>
-					<Item id = "6316" name = "Jednoduchá Záloha"/>
-					<Item id = "6317" name = "Pokroèilá Záloha"/>
-					<Item id = "6804" name = "Užívate¾om urèený prieèinok pre zálohy"/>
-					<Item id = "6803" name = "Prieèinok :"/>
-					<Item id = "6807" name = "Automatické dokonèovanie"/>
-	                <Item id = "6808" name = "Povoli Autom. dokonè. pri každom vstupe"/>
-					<Item id = "6809" name = "Dokonèovanie funkcií"/>
-					<Item id = "6810" name = "Dokonèovanie slov"/>
+				<Backup title = "ZÃ¡loha/AutomatickÃ© dokonÄovanie">
+					<Item id = "6801" name = "ZÃ¡loha"/>
+					<Item id = "6315" name = "Å½iadna"/>
+					<Item id = "6316" name = "JednoduchÃ¡ zÃ¡loha"/>
+					<Item id = "6317" name = "PokroÄilÃ¡ zÃ¡loha"/>
+					<Item id = "6804" name = "UÅ¾Ã­vateÄ¾om urÄenÃ½ prieÄinok pre zÃ¡lohy"/>
+					<Item id = "6803" name = "PrieÄinok :"/>
+					<Item id = "6807" name = "AutomatickÃ© dokonÄovanie"/>
+	                <Item id = "6808" name = "PovoliÅ¥ autom. dokonÄ. pri kaÅ¾dom vstupe"/>
+					<Item id = "6809" name = "DokonÄovanie funkciÃ­"/>
+					<Item id = "6810" name = "DokonÄovanie slov"/>
 					<Item id = "6811" name = "Od"/>
 					<Item id = "6813" name = "znakov"/>
-					<Item id = "6814" name = "Platná hodnota : 1 - 9"/>
-					<Item id = "6815" name = "Tip na parametre funkcie pri zadávaní"/>
+					<Item id = "6814" name = "PlatnÃ¡ hodnota : 1 - 9"/>
+					<Item id = "6815" name = "Tip na parametre funkcie pri zadÃ¡vanÃ­"/>
                 </Backup>
             </Preference>
-			<MultiMacro title = "Spusti Makro Nieko¾kokrát">
-                <Item id = "1" name = "Spusti"/>
-                <Item id = "2" name = "Zruši"/>
-                <Item id = "8006" name = "Spusti makro :"/>
-                <Item id = "8001" name = "Spusti"/>
-                <Item id = "8005" name = "krát"/>
-                <Item id = "8002" name = "Spusti až do konca súboru"/>
+			<MultiMacro title = "SpustiÅ¥ makro viackrÃ¡t">
+                <Item id = "1" name = "SpustiÅ¥"/>
+                <Item id = "2" name = "ZruÅ¡iÅ¥"/>
+                <Item id = "8006" name = "SpustiÅ¥ makro :"/>
+                <Item id = "8001" name = "SpustiÅ¥"/>
+                <Item id = "8005" name = "krÃ¡t"/>
+                <Item id = "8002" name = "SpustiÅ¥ aÅ¾ do konca sÃºboru"/>
             </MultiMacro>
-			<Window title = "Okná">
-                <Item id = "1" name = "Aktivova"/>
+			<Window title = "OknÃ¡">
+                <Item id = "1" name = "AktivovaÅ¥"/>
                 <Item id = "2" name = "OK"/>
-                <Item id = "7002" name = "Uloži"/>
-                <Item id = "7003" name = "Zatvori Okno(á)"/>
-                <Item id = "7004" name = "Usporiada Záložky"/>
+                <Item id = "7002" name = "UloÅ¾iÅ¥"/>
+                <Item id = "7003" name = "ZatvoriÅ¥ okno(Ã¡)"/>
+                <Item id = "7004" name = "UsporiadaÅ¥ zÃ¡loÅ¾ky"/>
             </Window>
-			<ColumnEditor title = "Upravi Ståpce">
-                <Item id = "2023" name = "Text na vloženie"/>
-                <Item id = "2033" name = "Èíslo na vloženie"/>
-                <Item id = "2030" name = "Zaèiatoèné èíslo :"/>
-                <Item id = "2031" name = "Zvyšova po :"/>
-                <Item id = "2035" name = "Nuly na zaèiatku"/>
-                <Item id = "2032" name = "Formát"/>
+			<ColumnEditor title = "UpraviÅ¥ stÄºpce">
+                <Item id = "2023" name = "Text na vloÅ¾enie"/>
+                <Item id = "2033" name = "ÄŒÃ­slo na vloÅ¾enie"/>
+                <Item id = "2030" name = "ZaÄiatoÄnÃ© ÄÃ­slo:"/>
+                <Item id = "2031" name = "ZvyÅ¡ovaÅ¥ po:"/>
+                <Item id = "2035" name = "Nuly na zaÄiatku"/>
+                <Item id = "2032" name = "FormÃ¡t"/>
                 <Item id = "2024" name = "Dec"/>
                 <Item id = "2025" name = "Oct"/>
                 <Item id = "2026" name = "Hex"/>
                 <Item id = "2027" name = "Bin"/>
 				<Item id = "1" name = "OK"/>
-				<Item id = "2" name = "Zruši"/>
+				<Item id = "2" name = "ZruÅ¡iÅ¥"/>
             </ColumnEditor>
 		</Dialog>
     </Native-Langue>

@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "指定レベルで折りたたみ"/>
-                    <Item posX = "3" posY = "21" name = "指定レベルで展開"/>
+                    <Item posX = "3" posY = "16" name = "指定レベルで折りたたみ"/>
+                    <Item posX = "3" posY = "17" name = "指定レベルで展開"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

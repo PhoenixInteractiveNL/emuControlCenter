@@ -11,17 +11,29 @@
 					<Item id = "3" name = "&amp;Affichage"/>
 					<Item id = "4" name = "For&amp;mat"/>
 					<Item id = "5" name = "&amp;Langage"/>
-					<Item id = "6" name = "&amp;Paramètrage"/>
+					<Item id = "6" name = "&amp;Paramétrage"/>
 					<Item id = "7" name = "&amp;Macro"/>
 					<Item id = "8" name = "E&amp;xécution"/>
-					
+                    <Item idName = "Plugins" name = "Plugins"/>
 					<Item idName = "Window" name = "Document"/>
 				</Entries>
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
- 					<Item posX = "3" posY = "20" name = "Replier le niveau"/>
-                    <Item posX = "3" posY = "21" name = "Déplier le niveau"/>
+                    <Item posX = "1" posY = "9" name = "Copier dans le presse-papiers"/>
+                    <Item posX = "1" posY = "10" name = "Tabulation"/>
+                    <Item posX = "1" posY = "11" name = "MAJUSCULE/miniscule"/>
+                    <Item posX = "1" posY = "12" name = "Ligne"/>
+                    <Item posX = "1" posY = "13" name = "Commentaire"/>
+                    <Item posX = "1" posY = "14" name = "Auto-complétion"/>
+                    <Item posX = "2" posY = "11" name = "Marquer tout"/>
+                    <Item posX = "2" posY = "12" name = "Enlever tous les marques"/>
+                    <Item posX = "3" posY = "4" name = "Symbole spéciaux"/>
+                    <Item posX = "3" posY = "5" name = "Zoom"/>
+                    <Item posX = "3" posY = "6" name = "Déplacer/Cloner le document courant"/>
+					
+ 					<Item posX = "3" posY = "16" name = "Replier le niveau"/>
+                    <Item posX = "3" posY = "17" name = "Déplier le niveau"/>
                 </SubEntries>
 
                 <!-- all menu item -->
@@ -98,6 +110,17 @@
                     <Item id = "43019" name = "Copier les lignes marquées"/>
                     <Item id = "43020" name = "Coller pour remplacer les lignes marquées"/>
                     <Item id = "43021" name = "Supprimer les lignes marquées"/>
+                    <Item id = "43022" name = "Appliquer le 1er style"/>
+                    <Item id = "43023" name = "Dégager le 1er style"/>
+                    <Item id = "43024" name = "Appliquer le 2nd style"/>
+                    <Item id = "43025" name = "Dégager le 2nd style"/>
+                    <Item id = "43026" name = "Appliquer le 3ème style"/>
+                    <Item id = "43027" name = "Dégager le 3ème style"/>
+                    <Item id = "43028" name = "Appliquer le 4ème style"/>
+                    <Item id = "43029" name = "Dégager le 4ème style"/>
+                    <Item id = "43030" name = "Appliquer le 5ème style"/>
+                    <Item id = "43031" name = "Dégager le 5th style"/>
+                    <Item id = "43032" name = "Dégager tous les styles"/>
 					<Item id = "44009" name = "Post-it"/>
                     <Item id = "44010" name = "Replier tous les blocs"/>
                     <Item id = "44011" name = "Panneau de langage défini par l'utilisateur"/>
@@ -127,10 +150,10 @@
                     <Item id = "45007" name = "Encoder en UCS-2 Little Endian"/>
                     <Item id = "45008" name = "Encoder en UTF-8 (sans BOM)"/>
                     <Item id = "45009" name = "Convertir en ANSI"/>
+                    <Item id = "45010" name = "Convertir en UTF-8 (sans BOM)"/>
                     <Item id = "45011" name = "Convertir en UTF-8"/>
                     <Item id = "45012" name = "Convertir en UCS-2 Big Endian"/>
                     <Item id = "45013" name = "Convertir en UCS-2 Little Endian"/>
-                    <Item id = "45010" name = "Convertir en UTF-8 (sans BOM)"/>
 					                        
 					<Item id = "10001" name = "Aller à l'autre vue"/>
                     <Item id = "10002" name = "Cloner dans l'autre vue"/>
@@ -150,6 +173,7 @@
                     <Item id = "49000" name = "&amp;Exécuter..."/>
 					<Item id = "50000" name = "Complétion de fonction"/>
                     <Item id = "50001" name = "Complétion de mot"/>
+                    <Item id = "50002" name = "Info-bulle des Paramètres de fonction"/>
 					<Item id = "42034" name = "Edition en mode colonne..."/>
                     <Item id = "44042" name = "Cacher les lignes"/>
 					<Item id = "42040" name = "Ouvrir tous les fichiers de l'historique"/>
@@ -213,8 +237,12 @@
 			 	<Item id = "1656" name = "Trouvez-les"/>
 			 	<Item id = "1658" name = "Récursive"/>
 				<Item id = "1659" name = "Dans dossiers cachés"/>
+                <Item id = "1624" name = "Mode de recherche"/>
 				<Item id = "1625" name = "Mode normal"/>
 			 	<Item id = "1626" name = "Mode étendu (\n, \r, \t, \0, \x...)"/>
+			 	<Item id = "1660" name = "Remplacer-les"/>
+			 	<Item id = "1641" name = "Rechercher dans le document courant"/>
+			 	<Item id = "1686" name = "Transparenc"/>
             </Find>
             <GoToLine title = "Allez à la Ligne #">
                 <Item id = "1" name = "&amp;Zyva !"/>
@@ -234,21 +262,23 @@
             </Run>
 
             <StyleConfig title = "Configurateur de coloration syntaxique">
-				<Item id="1" name="Appliquer"/>
+				<Item id = "1" name="Appliquer"/>
 				<Item id = "2" name = "Annuler"/>
 				<Item id = "2301" name = "Enregistrer&amp;&amp;Fermer"/>
 				<Item id = "2303" name = "Transparence"/>
+				<Item id = "2306" name = "Thème : "/>
 
                 <SubDialog>
-                    <Item id = "2211" name = "Description :"/>
-                    <Item id = "2212" name = "Couleur"/>
-                    <Item id = "2213" name = "Police"/>
+                    <Item id = "2204" name = "Gras"/>
+                    <Item id = "2205" name = "Italique"/>
+
                     <Item id = "2206" name = "Premier plan"/>
                     <Item id = "2207" name = "Arrière-plan"/>
                     <Item id = "2208" name = "Nom :"/>
                     <Item id = "2209" name = "Taille :"/>
-                    <Item id = "2204" name = "Gras"/>
-                    <Item id = "2205" name = "Italique"/>
+                    <Item id = "2211" name = "Description :"/>
+                    <Item id = "2212" name = "Couleur"/>
+                    <Item id = "2213" name = "Police"/>
 					<Item id = "2214" name = "Ext par défaut :"/>
                     <Item id = "2216" name = "Ext ajouté :"/>
                     <Item id = "2218" name = "Souligné"/>
@@ -341,6 +371,7 @@
 
 					<Item id = "6121" name = "Barre de menu"/>
 					<Item id = "6122" name = "Cacher (Alt ou F10 pour afficher)"/>
+					<Item id = "6123" name = "Langue"/>
 				</Global>
                 <Scintillas title = "Zones d'édition">
 					<Item id = "6216" name = "Curseur"/>
@@ -391,6 +422,7 @@
 				<LangMenu title = "Menu langage">
 					<Item id = "6505" name = "Langages disponibles"/>
 					<Item id = "6506" name = "Langages cachés"/>
+					<Item id = "6507" name = "Compacter le menu langage"/>
                 </LangMenu>
 				<Print1 title = "Impression - couleur et marge">
 					<Item id = "6601" name = "Imprimer la numérotation de ligne"/>
@@ -437,18 +469,19 @@
 					<Item id = "6318" name = "Paramétrage de lien cliquable"/>
 					<Item id = "6319" name = "Activer"/>
 					<Item id = "6320" name = "Ne pas souligner"/>
+                    <Item id = "6322" name = "Ext fichier session:"/>
 					<Item id = "6323" name = "Activer la mise à jour automatique"/>
 					<Item id = "6324" name = "Commutateur de document (Ctrl+Tab)"/>
+                    <Item id = "6325" name = "Aller à la dernière ligne après mise à jour"/>
 					<Item id = "6326" name = "Activer le coloriage automatique"/>
 					<Item id = "6329" name = "Surligner les tags ouverture/fermeture"/>
 					<Item id = "6327" name = "Activer"/>
 					<Item id = "6328" name = "Surligner les attributs de tag"/>
-					<Item id = "6330" name = "Surligner dans la zone php/asp"/>
+					<Item id = "6330" name = "Surligner dans la zone commentaire/php/asp"/>
 					<Item id = "6331" name = "Afficher le nom du fichier seulement sur la barre de titre"/>
 					<Item id = "6114" name = "Activer"/>
 					<Item id = "6115" name = "Indentation Auto"/>
 					<Item id = "6117" name = "Activer la liste de MRU"/>
-					<Item id = "6322" name = "Ext fichier session:"/>
                 </MISC>
 				<Backup title = "Sauvegarde/Auto-complétion">
 					<Item id = "6801" name = "Sauvegarde"/>

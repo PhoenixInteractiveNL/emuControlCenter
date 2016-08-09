@@ -54,7 +54,7 @@ $i18n['romAudit'] = array(
 		"Repair rom name",
 
 	'popupRomRenameFailed' =>
-		"Could not rename this file. Looks like a file with an identical name is allready inplace!",
+		"Could not rename this file. Looks like a file with an identical name is already inplace!",
 	'popupRomRenameAllreadyDone' =>
 		"You has allready renamed the file.. please update this popup!",
 

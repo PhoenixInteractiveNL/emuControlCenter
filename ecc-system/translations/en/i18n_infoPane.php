@@ -11,7 +11,7 @@ $i18n['infoPane'] = array(
 	
 	/* PERSONAL */
 	'iPanePersHeadlineLbl' =>
-		"Personal Romdata/statistics",
+		"Personal Rom data/statistics",
 	'iPanePersTimesPlayedLbl' =>
 		"Times played",
 	'iPanePersLastPlayedLbl' =>
@@ -31,7 +31,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchHeadlineLbl' =>
 		"Extended Search",
 	'iPaneEsearchIntroTxt' =>
-		"You can hide content totaly by using the eseach. These seaches will saved to the history.ini, so everytime you start ecc, this esearch will used automaticlly",
+		"You can hide content totally by using the e-search. These seaches will be saved to the history.ini, so everytime you start ecc, this e-search will be used automatically",
 	'iPaneEsearchOptRunningLbl' =>
 		"Running",
 	'iPaneEsearchOptMultiplayLbl' =>
@@ -41,7 +41,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptTrainerLbl' =>
 		"Trainer",
 	'iPaneEsearchOptIntroLbl' =>
-		"Crack/Intro",
+		"Intro",
 	'iPaneEsearchOptBugsLbl' =>
 		"Bugs",
 	'iPaneEsearchOptUsermodLbl' =>

@@ -18,8 +18,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX="3" posY="20" name="დონეების აკეცვა"/>
-                    <Item posX="3" posY="21" name="დონეების ჩაკეცვა"/>
+                    <Item posX="3" posY = "16" name="დონეების აკეცვა"/>
+                    <Item posX="3" posY = "17" name="დონეების ჩაკეცვა"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

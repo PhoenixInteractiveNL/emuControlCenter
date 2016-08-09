@@ -1,0 +1,489 @@
+; Platform      : Microkey Primo
+; Script for      : Ultimo v1.5
+; Script version   : v1.0.1.2
+; Last changed      : 2009.05.11
+;
+; Author: Gruby, Phoenix
+;
+; 7Z commands:
+; x = eXtract files with full paths.
+; -o = set Output directory.
+; -y = assume Yes on all queries.
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+;
+; *******************************************************************************************************
+; FUNCTION: EmulatorControl(EmulatorWindowTitle, CommandLine) Modified Phoenix's EmuWindowControl Function
+; *******************************************************************************************************
+Func EmulatorControl($EmulatorWindowTitle, $CommandLine)
+
+; Start the emulator
+;Run($eccEmuEmulatorPath & $eccEmuEmulatorFile, $Switch)
+ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, $CommandLine)
+
+; Wait until emulator is active (window name) (has a 10 seconds timeout) 
+WinWaitActive($EmulatorWindowTitle, "", 10) 
+
+; Is the emulator active or not? 
+If WinExists($EmulatorWindowTitle) = 0 Then
+	MsgBox(0, $eccSystemName, "The emulator '" & $eccEmuEmulatorPath & $eccEmuEmulatorFile & "' did not respond!" & @CRLF & @CRLF & _
+	"eccScript searched for an window named '" & $EmulatorWindowTitle & "'but didn't find this!" & @CRLF & _
+	"Maybe the version has changed in the meantime, please check the window title-string again.")
+	Exit
+EndIf
+
+EndFunc
+
+; Set variables
+$NeedReset = "NO"
+$ProCDOS = "NO"
+$RunNeeded = "NO"
+$ExpansionFile = " "
+$ProgramFile = " "
+$FilePathBegin = " "
+$FilePathNext = " "
+$PlusProgram = "NO"
+$DisableAutostart = "NO"
+$RequiredExpansion = " "
+$PrimoType = "/ma64 "
+$MediaType = " "
+$ExtractFolder = $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
+$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & Chr(34)
+$PlainExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
+$PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
+
+; Extract the packed files to a temp folder.
+ShellExecuteWait($eccThirdParty7zip, "x -y " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+
+; MediaType Selector
+If StringInStr ( $eccFileRomNamePlain, "[PRI]", 1 ) > 0 Then $MediaType = "PRI"
+If StringInStr ( $eccFileRomNamePlain, "ZZZ_UNK", 1 ) > 0 Then $MediaType = "PRI"
+If StringInStr ( $eccFileRomNamePlain, "[Multipart]", 1 ) > 0 Then $MediaType = "Multipart"
+If $MediaType = " " Then $MediaType = "PTP"
+
+; Required PrimoType
+If StringInStr ( $eccFileRomNamePlain, "[Req 32K]", 1 ) > 0 Then $PrimoType = "/mb32 "
+If StringInStr ( $eccFileRomNamePlain, "[Req 48K]", 1 ) > 0 Then $PrimoType = "/mb48 "
+If StringInStr ( $eccFileRomNamePlain, "[Req 64K]", 1 ) > 0 Then $PrimoType = "/mb64 "
+If StringInStr ( $eccFileRomNamePlain, "[Primo B]", 1 ) > 0 Then $PrimoType = "/mb64 "
+If StringInStr ( $eccFileRomNamePlain, "[Pro-Primo]", 1 ) > 0 Then $PrimoType = "/mc64 "
+
+; Required Expansion Programs
+If StringInStr ( $eccFileRomNamePlain, "[Req CDOS]", 1 ) > 0 Then $RequiredExpansion = "cdos.pri"
+If StringInStr ( $eccFileRomNamePlain, "[Req CMD]", 1 ) > 0 Then $RequiredExpansion = "cmd.pri"
+If StringInStr ( $eccFileRomNamePlain, "[Req Expanded Basic]", 1 ) > 0 Then $RequiredExpansion = "expbas.pri"
+If StringInStr ( $eccFileRomNamePlain, "[Req Graphics '85]", 1 ) > 0 Then $RequiredExpansion = "graph85.pri"
+
+; Autostart Disable
+If $eccMetaInfoString == "AutoStart" Then $DisableAutostart = "YES"
+If $PlusProgram <> "NO" Then $DisableAutostart = "YES"
+
+; Plus Program in the beginning of the Tape
+If StringInStr ( $eccFileRomNamePlain, "[Plus Graphics '85]", 1 ) > 0 Then $PlusProgram = "Graphics"
+If StringInStr ( $eccFileRomNamePlain, "[Plus CDOS]", 1 ) > 0 Then $PlusProgram = "CDOS"
+If StringInStr ( $eccFileRomNamePlain, "[Plus CMD]", 1 ) > 0 Then $PlusProgram = "CMD"
+If StringInStr ( $eccFileRomNamePlain, "[Plus Expanded Basic]", 1 ) > 0 Then $PlusProgram = "Expanded"
+
+; Pro-Primo CDOS
+If StringInStr ( $eccFileRomNamePlain, "Commodore Serial Bus Handler 1.2", 1 ) > 0 Then $ProCDOS = "YES"
+
+; Run is Needed
+If $eccMetaInfoString == "Run" Then $RunNeeded = "YES"
+
+; Reset is Needed (F1)
+If $eccMetaInfoString == "Reset" Then $NeedReset = "YES"
+
+;
+; ------------------------------------------------------------------------------
+; Start the Programs
+; ------------------------------------------------------------------------------
+;
+If $ProCDOS = "YES" Then
+	$CommandLine = " /d /h " & $PrimoType
+	EmulatorControl("Ultimo", $CommandLine)
+	TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+	WinWaitActive("Ultimo - 100")
+	TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+	WinWaitClose("Ultimo")
+	Exit
+EndIf
+
+; Pro-Primo Tape Programs
+If $PrimoType = "/mc64 " And $MediaType = "PTP" Then
+	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
+	$CommandLine = " /d /h " & $PrimoType
+	EmulatorControl("Ultimo", $CommandLine)
+	TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+	WinWaitActive("Ultimo - 100")
+	; Wait until Pro-Primo CDOS is running
+	Sleep(6000)
+	; Attach PTP
+	Send("!{F5}")
+	Send($FilePathBegin)
+	Send("{#}")
+	Send($FilePathNext)
+	Send("{ENTER}")
+	AutoItSetOption("SendKeyDownDelay", 300)
+	Send("load")
+	Send("{ENTER}")
+	; Wait load program
+	Sleep(3000)
+	; RUN the program
+	If $DisableAutostart = "NO"	Then
+		AutoItSetOption("SendKeyDownDelay", 300)
+		Send("run")
+		Send("{ENTER}")
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	ElseIf $DisableAutostart = "YES" Then
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	EndIf ; AutostartSelector
+EndIf ; Pro-Primo PTP
+
+; Pro-Primo Program files
+If $PrimoType = "/mc64 " AND $MediaType = "PRI" Then
+	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
+	$CommandLine = " /d /h " & $PrimoType
+	EmulatorControl("Ultimo", $CommandLine)
+	TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+	WinWaitActive("Ultimo - 100")
+	; Wait until Pro-Primo CDOS is running
+	Sleep(6000)
+	; Autorun Program file
+	Send("!f")
+	Send("{ENTER}")
+	Sleep(1000)
+	Send($FilePathBegin)
+	Send("{#}")
+	Send($FilePathNext)
+	Send("{ENTER}")
+	;AutoItSetOption("SendKeyDownDelay", 300)
+	;Send("load")
+	;Send("{ENTER}")
+	; Wait load program
+	;Sleep(3000)
+	
+	; RUN the program
+	;AutoItSetOption("SendKeyDownDelay", 300)
+	;Send("run")
+	;Send("{ENTER}")
+	TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+	WinWaitClose("Ultimo")
+	$FilePathBegin = " "
+	$FilePathNext = " "
+	Exit
+EndIf ; Pro-Primo PRI
+
+; Need Reset
+If $NeedReset = "YES" Then
+	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
+	$CommandLine = " /d /h " & $PrimoType
+	EmulatorControl("Ultimo", $CommandLine)
+	TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+	WinWaitActive("Ultimo - 10")
+	; Autorun Program file
+	Send("!f")
+	Send("{ENTER}")
+	Sleep(1000)
+	Send($FilePathBegin)
+	Send("{#}")
+	Send($FilePathNext)
+	Send("{ENTER}")
+	; Wait load program
+	Sleep(3000)
+	Send("{F1}")
+	TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+	WinWaitClose("Ultimo")
+	$FilePathBegin = " "
+	$FilePathNext = " "
+	Exit
+EndIf
+
+; No Expansion needed
+If $RequiredExpansion = " " AND $PlusProgram = "NO" Then
+	; Run tape file (PTP).
+	If $MediaType = "PTP" AND $DisableAutostart = "NO" Then
+		ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, " /d /h " & $PrimoType & $PlainExtractFolder & $eccFileRomNamePlain & ".ptp")
+		WinWaitClose("Ultimo")
+		Exit
+	ElseIF $MediaType = "PTP" AND $DisableAutostart = "YES" Then
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
+		$CommandLine = " /d /h " & $PrimoType
+		EmulatorControl("Ultimo", $CommandLine)
+
+		; Attach PTP (Tape)
+		TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+		WinWaitActive("Ultimo - 10")
+		Send("!{F5}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		Sleep(1000)
+		AutoItSetOption("SendKeyDownDelay", 100)
+		Send("load")
+		Send("{ENTER}")
+
+		; Wait load program
+		Sleep(10000)
+
+		; RUN the program
+		Send("run")
+		Send("{ENTER}")
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	EndIf ; Run tape file NoAutostart(PTP).
+		
+	If $MediaType = "PRI" AND $DisableAutostart = "NO" Then ; Program file Autostart(PRI)
+		ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, " /d /h " & $PrimoType & $PlainExtractFolder & $eccFileRomNamePlain & ".pri")
+		WinWaitClose("Ultimo")
+		Exit
+		
+	ElseIF $MediaType = "PRI" AND $DisableAutostart = "YES" Then
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
+		$CommandLine = " /d /h " & $PrimoType
+		EmulatorControl("Ultimo", $CommandLine)
+		; AutoLoad Programfile
+		TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	Else ; Multifiles Autostart (0.pri)
+		ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, " /d /h " & $PrimoType & $PlainExtractFolder & "0.pri", "")
+		WinWaitClose("Ultimo")
+		Exit
+	EndIf ; PRI or Multifile start
+EndIf ; No Expansion Program needed
+
+; Expansion Program needed
+If StringInStr($RequiredExpansion, " ") = 0 Then
+	; Program file (PRI)
+	If $MediaType = "PRI" Then
+		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
+		$CommandLine = " /d /h " & $PrimoType
+		EmulatorControl("Ultimo", $CommandLine)
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
+
+		; AutoLoad Expansion file
+		TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		Sleep(4000)
+		$FilePathBegin = " "
+		$FilePathNext = " "
+
+		; AutoLoad Program file
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	ElseIf $MediaType = "Multipart" Then
+		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
+		$CommandLine = " /d /h " & $PrimoType
+		EmulatorControl("Ultimo", $CommandLine)
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
+
+		; AutoLoad Expansion file
+		TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		Sleep(4000)
+		$FilePathBegin = " "
+		$FilePathNext = " "
+
+		; AutoLoad Program file
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\0.pri"
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	Else ; Tape file
+		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
+		$CommandLine = " /d /h " & $PrimoType
+		EmulatorControl("Ultimo", $CommandLine)
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
+
+		; AutoLoad Expansion file
+		TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+		WinWaitActive("Ultimo - 10")
+		Send("!f")
+		Sleep(1000)
+		Send("{ENTER}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+
+		; Wait to load and initialize Expansion
+		If $PlusProgram == "CMD" Then
+			Sleep(5000)
+			Send("run")
+			Send("{ENTER}")
+			Sleep(5000)
+		ElseIf $PlusProgram <> "CMD" Then
+			Sleep(14000)
+		Endif ; Wait to load and initialize Expansion
+		$FilePathBegin = " "
+		$FilePathNext = " "
+
+		; Attach Tape file
+		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
+		Send("!{F5}")
+		Sleep(1000)
+		Send($FilePathBegin)
+		Send("{#}")
+		Send($FilePathNext)
+		Send("{ENTER}")
+		Sleep(2000)
+		AutoItSetOption("SendKeyDownDelay", 100)
+		Send("load")
+		Send("{ENTER}")
+
+		; Run needed
+		If $RunNeeded = "YES" Then
+			Sleep(8000)
+			Send("run")
+			Send("{ENTER}")
+		EndIf ; Run Needed
+
+		; Wait the End
+		TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+		WinWaitClose("Ultimo")
+		$FilePathBegin = " "
+		$FilePathNext = " "
+		Exit
+	EndIf ; PRI PTP or Multifile Mediatypes
+EndIf ; Required Expansion needed
+
+; Plus Program Special cases
+If $PlusProgram <> "NO" Then
+	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
+	$CommandLine = " /d /h " & $PrimoType
+	EmulatorControl("Ultimo", $CommandLine)
+
+	; Attach PTP (Tape)
+	TrayTip("ECC Microkey Primo", "Executing... Please wait the Running message!", 10, 1)
+	WinWaitActive("Ultimo - 10")
+	Send("!{F5}")
+	Sleep(1000)
+	Send($FilePathBegin)
+	Send("{#}")
+	Send($FilePathNext)
+	Send("{ENTER}")
+	Sleep(2000)
+	AutoItSetOption("SendKeyDownDelay", 100)
+	Send("load")
+	Send("{ENTER}")
+
+	; Wait to load and initialize Expansion
+	If $PlusProgram == "CMD" Then
+		Sleep(5000)
+		Send("run")
+		Send("{ENTER}")
+		Sleep(5000)
+	ElseIf $PlusProgram <> "CMD" Then
+		Sleep(14000)
+	Endif ; Wait to load and initialize Expansion
+
+	; RUN the next program in the tape
+	Send("load")
+	Send("{ENTER}")
+
+	; Run needed
+	If $RunNeeded = "YES" Then
+		Sleep(8000)
+		Send("run")
+		Send("{ENTER}")
+	EndIf ; Run Needed
+
+	; Wait the End
+	TrayTip("ECC Microkey Primo", "Selected Program is Running!", 5, 1)
+	WinWaitClose("Ultimo")
+	$FilePathBegin = " "
+	$FilePathNext = " "
+	Exit
+EndIf ; Plus Program Special cases
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

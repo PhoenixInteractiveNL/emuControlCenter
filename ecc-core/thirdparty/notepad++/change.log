@@ -1,20 +1,33 @@
-Notepad++ v5.3 new feature and fixed bugs (from v5.2) :
+Notepad++ v5.4 new features and fixed bugs (from v5.3.1) :
 
-1.  Add Line change state vertical bar.
-2.  Drop (or open in dos command line) a directory in Notepad++ to open all files in the directory recursively.
-3.  Add "Find all in current file" feature.
-4.  (Most of) Find/replace dialog settings are remembered. 
-5.  Add a hidden setting (dlgAlwaysVisible in config.xml) to allow user set it manually to not hide the Find/Replace dialog if any result found.
-6.  Fix uncomment block erasing first character bug.
-7.  Enlarge some strings displayed zone for the translation.
-8.  Fix ESC key for column mode behaviour.
-9.  Fix read only file SaveAs bug.
-10. Change behaviour : no popup dialog while closing an unsaved empty untitled document.
-11. Changing "Search result" stylers via Styler Configurator takes visual effect on the fly now.
-12. Fix for L_EXTERNAL in loadSession.
-13. Variable $(CURRENT_WORD) is enlarged to 2039 charraters.
-14. Fix the bug the Notepad++ is launched several instances but show nothing.
-15. Fix Find in files regression : The result panel doesn't show Unicode characters correctly.
+1.  Add theme selector to switch styles.xml on the fly, change styles.xml on one click.
+2.  Add google chrome drag and derop tab feature : drag out tab to create a new instance, transfer documents among several instances by drag and drop.
+3.  Add Mark all extension : user can mark any occurrence with 5 different colours.
+4.  Add new feature : column selection allows to insertion a string by typing characters in sequence (w/o column mode editor).
+5.  Detect UTF16 encoding (BE and LE) w/o BOM.
+6.  Fix crash bug : Double click a file associated with an older version of Notepad++ while a newer version of Notepad++ instance is running.
+7.  lmprove main menu structure (more compact). Language Menu can be compacted as well (optional, in Preference dialog).
+8.  Fine numbers margin width is changed dynamically according to the needed space (but keeping at least 3 digits).
+9.  File history list (under the File menu) is limited to 100 characters per item. Longer file names are fitted to 100 characters by replacing path components with ellipses.
+10. Update Scintilla from v1.75 to v1.77.
+11. Indent guideline can be shown w/o whitespace or tab symbol.
+12. Fixed two bugs when calculating the width of the TaskList (document list when pressing ctrl+tab or right-click + mouse wheel.
+13. Add an (hidden) option to make the "Filters" and "Directory" fields follow the current opened document in "Find in files" dialog. The new parameters are located in config.xml and are called: "fifFilterFollowsDoc" and "fifFolderFollowsDoc" (set to "yes"/"no")
+14. Add new command parameters : -c (column) -x et -y (startup position).
+15. Remove change line marker which does not work correctly. Include ChangeMarkers plugin instead.
+16. Fix bug "Switch to found results window" command now switches back to the current edit view if the focus is already on the found results.
+17. Fix the search result inaccurate colorization bug.
+18. Fix the Mark all in selection bug (while Find Replace Dialog loosing the focus).
+19. Add 2 plugins messages : NPPN_FILEBEFORELOAD and NPPN_FILELOADFAILED.
+20. Fix New document not be switched while double clicking in Find in files result panel.
+21. Fix conversion min to Maj and Maj to min (or vice et versa) in column selection bug.
+22. Fix bug when the find dialog was closed the translucaent shadow remained in Windows 7.
+23. Fix crash bug of find in files feature.
+24. Add "follow current doc" checkbox in Find in file dialog.
+25. Add the ability of tag match feature to not highlight comment zone in html/xml.
+26. Fix TCL language highlighting bug.
+
+
 
 Included plugins (Unicode):
 
@@ -26,15 +39,17 @@ Included plugins (Unicode):
 6.  NppExport v0.2.8
 7.  Doc Monitor v2.2
 8.  NppNetNote v0.1
+9.  ChangeMarkers 1.2.0
   
 Included plugins (ANSI):
 
-1.  TextFX v0.25
-2.  NppExec v0.3 RC1
-3.  Spell Checker v1.3.1
-4.  MIME Tools v1.5
-5.  FTP_synchronize v0.9.6
-6.  NppExport v0.2.8
-7.  Light Explorer v1.5
-8.  Doc Monitor v2.2
-9.  NppNetNote v0.1
+1.   TextFX v0.25
+2.   NppExec v0.3 RC1
+3.   Spell Checker v1.3.1
+4.   MIME Tools v1.5
+5.   FTP_synchronize v0.9.6
+6.   NppExport v0.2.8
+7.   Light Explorer v1.5
+8.   Doc Monitor v2.2
+9.   NppNetNote v0.1
+10.  ChangeMarkers 1.2.0

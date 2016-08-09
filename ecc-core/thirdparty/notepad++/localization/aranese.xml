@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Comprimir eth nivèu"/>
-                    <Item posX = "3" posY = "21" name = "Expandir eth nivèu"/>
+                    <Item posX = "3" posY = "16" name = "Comprimir eth nivèu"/>
+                    <Item posX = "3" posY = "17" name = "Expandir eth nivèu"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

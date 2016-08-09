@@ -18,8 +18,8 @@
 
 				<!-- Sub Menu Entries -->
 				 <SubEntries>
-					<Item posX = "3" posY = "20" name = "Mbylle palimin"/>
-					<Item posX = "3" posY = "21" name = "Hape palimin"/>
+					<Item posX = "3" posY = "16" name = "Mbylle palimin"/>
+					<Item posX = "3" posY = "17" name = "Hape palimin"/>
 				</SubEntries>
 
 				<!-- all menu item -->

@@ -18,8 +18,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Jabarkan levelnya"/>
-                    <Item posX = "3" posY = "21" name = "Ringkaskan levelnya"/>
+                    <Item posX = "3" posY = "16" name = "Jabarkan levelnya"/>
+                    <Item posX = "3" posY = "17" name = "Ringkaskan levelnya"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

@@ -81,7 +81,7 @@ $i18n['menuTop'] = array(
 	'mTopDatExportEccUser' =>
 		"Export ecc Datfile user",
 	'mTopDatExportEccEsearch' =>
-		"Export ecc Datfile eSearch",
+		"Export ecc Datfile e-search",
 	'mTopDatClear' =>
 		"Empty datfile database",
 	'mTopDatConfig' =>
@@ -194,5 +194,16 @@ $i18n['menuTop'] = array(
 	'mTopOptionBackupUserdata' =>
 		'Backup userdata (XML)',
 
+	/* 1.0.0 WIP 01 */
+	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
+		'  own metadata (edited or transfered)',
+	'mTopViewModeRomPersonalMetaEdited' =>
+		'  own metadata (edited only)',
+	'mTopViewModeRomPersonalMetaTransfered' =>
+		'  own metadata (transfered only)',
+
+	/* 1.0.0 WIP 02 */
+	'mTopFileSearch' =>
+		'Transfer by searchresult',
 );
 ?>

@@ -41,7 +41,7 @@ $i18n['tooltips'] = array(
 	'nbMediaInfoAuditStateEvent' =>
 		"Audit state for multifile roms",
 	'nbMediaInfoMetaEvent' =>
-		"Edit the metainformations for this game",
+		"Edit the META information for this game",
 
 	/* 0.9.7 WIP 14 */
 

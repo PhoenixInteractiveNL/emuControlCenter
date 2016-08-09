@@ -187,7 +187,7 @@ $i18n['global'] = array(
 	'edit' =>
 		"Edit",
 	'hiscore' =>
-		"Hiscore",
+		"High Score",
 		
 	/* 0.9.7 WIP 02 */
 	'of' =>
@@ -224,5 +224,23 @@ $i18n['global'] = array(
 	/* 0.9.9 FYEO 01 */
 	'assets' =>
 		"Documents",
+
+	/* 1.0.0 FYEO 02 */
+	'done' =>
+		"Done",
+	'ok' =>
+		"OK",
+	'move' =>
+		"Move",
+	'mode' =>
+		"Mode",
+	'location' =>
+		"Destination location",
+
+	/* 1.0.0 FYEO 03 */
+	'images' =>
+		"Images",
+	'metadata' =>
+		"Metadata",
 );
 ?>

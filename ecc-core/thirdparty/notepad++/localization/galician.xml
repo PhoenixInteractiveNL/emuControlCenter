@@ -23,8 +23,8 @@
              
                 <!-- Entradas de Sub-menú -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Encoller nivel"/>
-                    <Item posX = "3" posY = "21" name = "Expandir nivel"/>
+                    <Item posX = "3" posY = "16" name = "Encoller nivel"/>
+                    <Item posX = "3" posY = "17" name = "Expandir nivel"/>
                 </SubEntries>
                 
                 <!-- opcións de menú -->

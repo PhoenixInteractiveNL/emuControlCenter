@@ -21,8 +21,8 @@
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX="3" posY="20" name="אחד את השלב"/>
-                    <Item posX="3" posY="21" name="פצל את השלב"/>
+                    <Item posX="3" posY = "16" name="אחד את השלב"/>
+                    <Item posX="3" posY = "17" name="פצל את השלב"/>
                 </SubEntries>
 
                 <!-- all menu item -->

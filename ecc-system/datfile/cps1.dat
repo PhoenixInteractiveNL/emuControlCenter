@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-1
-	description "CPS-1 20090105"
+	description "CPS-1 20090608"
 	category "Capcom Play System 1"
-	version 20090106
-	date 2009-01-06
+	version 20090608
+	date 2009-06-08
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -13,45 +13,14 @@ clrmamepro (
 
 game (
 	name forgottn
-	description "Forgotten Worlds (US)"
+	description "Forgotten Worlds (World)"
 	year 1988
 	manufacturer "Capcom"
 	sourcefile cps1.c
-	rom ( name lwu_11a.14f size 131072 crc ddf78831 sha1 b9c815613efdfde933d4500b588798b7fb4c1854 )
-	rom ( name lwu_15a.14g size 131072 crc f7ce2097 sha1 44c06fabdb6de7d8afc2164458c90b0be9cf945d )
-	rom ( name lwu_10a.13f size 131072 crc 8cb38c81 sha1 1d36cab7d17ff778ee7dfcd9606a3a87f6906f21 )
-	rom ( name lwu_14a.13g size 131072 crc d70ef9fd sha1 b393aa2a7bea440fdcf057ffc6ff233fc0d35d4b )
-	rom ( name lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
-	rom ( name lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
-	rom ( name lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
-	rom ( name lw-05.9e size 524288 crc e4552fd7 sha1 11147afc475904848458425661473586dd6f60cc )
-	rom ( name lw-12.9g size 524288 crc 8e6a832b sha1 d63a1331fda2365f090fa31950098f321a720ea8 )
-	rom ( name lw-02.12d size 524288 crc 43e6c5c8 sha1 d3e6c971de0477ec4e178adc82508208dd8b397f )
-	rom ( name lw-09.12f size 524288 crc 899cb4ad sha1 95e61af338945e690f2a82746feba3871ea224eb )
-	rom ( name lw-06.12e size 524288 crc 5b9edffc sha1 6fd8f4a3ab070733b52365ab1945bf86acb2bf62 )
-	rom ( name lw-13.12g size 524288 crc 8e058ef5 sha1 00f2c0050fd106276ea5398511c5861ebfbc0d10 )
-	rom ( name lwu_00.14a size 65536 crc 59df2a63 sha1 dfe1fffc7a17179a80a2ae623e93b30a7d6df20d )
-	rom ( name lw-03u.14c size 131072 crc 807d051f sha1 720e4733787b9b11f4d1cdce0892b69475802844 )
-	rom ( name lw-04u.13c size 131072 crc e6cd098e sha1 667f6e5736f76a1c4c450c4e2035574ea89d7910 )
-	rom ( name buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
-	rom ( name ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
-	rom ( name prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
-	rom ( name rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
-	rom ( name sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
-)
-
-game (
-	name forgott1
-	description "Forgotten Worlds (World?)"
-	year 1988
-	manufacturer "Capcom"
-	sourcefile cps1.c
-	cloneof forgottn
-	romof forgottn
 	rom ( name lw_11.12f size 131072 crc 73e920b7 sha1 2df12fc1a66f488d06b0927db909da81466d7d07 )
-	rom ( name lw_15.12h size 131072 flags nodump )
-	rom ( name lw_10.13f size 131072 flags nodump )
-	rom ( name lw_14.13h size 131072 flags nodump )
+	rom ( name lw_15.12h size 131072 crc 50d7012d sha1 f82a28a835f0a83b26c2c8170b824447b1d7409f )
+	rom ( name lw_10.13f size 131072 crc bea45994 sha1 c419f65c5e0c11ae7508ec54412bf6b62fac4f72 )
+	rom ( name lw_14.13h size 131072 crc 539b2339 sha1 8a9e452ef8ed05e0b956d36990266657d3077470 )
 	rom ( name lw-07.10g size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
 	rom ( name lw_2.2b size 131072 crc 4bd75fee sha1 c27bfba951a0dc4f493937ceca335c50a1afeddf )
 	rom ( name lw_1.2a size 131072 crc 65f41485 sha1 fb05dffc87ee2f2b1b6646d54b13671f8eee0429 )
@@ -76,13 +45,44 @@ game (
 	rom ( name lw_00.13c size 65536 crc 59df2a63 sha1 dfe1fffc7a17179a80a2ae623e93b30a7d6df20d )
 	rom ( name lw-03u.12e size 131072 crc 807d051f sha1 720e4733787b9b11f4d1cdce0892b69475802844 )
 	rom ( name lw-04u.13e size 131072 crc e6cd098e sha1 667f6e5736f76a1c4c450c4e2035574ea89d7910 )
+	rom ( name buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
+	rom ( name ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
+	rom ( name prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
+	rom ( name rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
+	rom ( name sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+	rom ( name lw621.1a size 279 crc 5eec6ce9 sha1 5ec8b60f1f1bdba865b1fa2387987ce99ff4093a )
+	rom ( name lwio.12b size 279 crc ad52b90c sha1 f0fd6aeea515ee449320fe15684e6b3ab7f97bf4 )
+)
+
+game (
+	name forgottu
+	description "Forgotten Worlds (US)"
+	year 1988
+	manufacturer "Capcom"
+	sourcefile cps1.c
+	cloneof forgottn
+	romof forgottn
+	rom ( name lwu_11a.14f size 131072 crc ddf78831 sha1 b9c815613efdfde933d4500b588798b7fb4c1854 )
+	rom ( name lwu_15a.14g size 131072 crc f7ce2097 sha1 44c06fabdb6de7d8afc2164458c90b0be9cf945d )
+	rom ( name lwu_10a.13f size 131072 crc 8cb38c81 sha1 1d36cab7d17ff778ee7dfcd9606a3a87f6906f21 )
+	rom ( name lwu_14a.13g size 131072 crc d70ef9fd sha1 b393aa2a7bea440fdcf057ffc6ff233fc0d35d4b )
+	rom ( name lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
+	rom ( name lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
+	rom ( name lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
+	rom ( name lw-05.9e size 524288 crc e4552fd7 sha1 11147afc475904848458425661473586dd6f60cc )
+	rom ( name lw-12.9g size 524288 crc 8e6a832b sha1 d63a1331fda2365f090fa31950098f321a720ea8 )
+	rom ( name lw-02.12d size 524288 crc 43e6c5c8 sha1 d3e6c971de0477ec4e178adc82508208dd8b397f )
+	rom ( name lw-09.12f size 524288 crc 899cb4ad sha1 95e61af338945e690f2a82746feba3871ea224eb )
+	rom ( name lw-06.12e size 524288 crc 5b9edffc sha1 6fd8f4a3ab070733b52365ab1945bf86acb2bf62 )
+	rom ( name lw-13.12g size 524288 crc 8e058ef5 sha1 00f2c0050fd106276ea5398511c5861ebfbc0d10 )
+	rom ( name lwu_00.14a size 65536 crc 59df2a63 sha1 dfe1fffc7a17179a80a2ae623e93b30a7d6df20d )
+	rom ( name lw-03u.14c size 131072 crc 807d051f sha1 720e4733787b9b11f4d1cdce0892b69475802844 )
+	rom ( name lw-04u.13c size 131072 crc e6cd098e sha1 667f6e5736f76a1c4c450c4e2035574ea89d7910 )
 	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
 	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
 	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
-	rom ( name lw621.1a size 279 crc 5eec6ce9 sha1 5ec8b60f1f1bdba865b1fa2387987ce99ff4093a )
-	rom ( name lwio.12b size 279 crc ad52b90c sha1 f0fd6aeea515ee449320fe15684e6b3ab7f97bf4 )
 )
 
 game (
@@ -97,15 +97,15 @@ game (
 	rom ( name lw_15c.14g size 131072 crc 402e2a46 sha1 cbb7017e75a425706505717bf83c2615f53309f9 )
 	rom ( name lw_10c.13f size 131072 crc c46479d7 sha1 84fd9ef33ae7d0af2110e8dc299de25c0f039cee )
 	rom ( name lw_14c.13g size 131072 crc 97670f4a sha1 f249977c814abdff85007216d7fa57db5684be0f )
-	rom ( name lw-07.13e merge lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
-	rom ( name lw-01.9d merge lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
-	rom ( name lw-08.9f merge lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
-	rom ( name lw-05.9e merge lw-05.9e size 524288 crc e4552fd7 sha1 11147afc475904848458425661473586dd6f60cc )
-	rom ( name lw-12.9g merge lw-12.9g size 524288 crc 8e6a832b sha1 d63a1331fda2365f090fa31950098f321a720ea8 )
-	rom ( name lw-02.12d merge lw-02.12d size 524288 crc 43e6c5c8 sha1 d3e6c971de0477ec4e178adc82508208dd8b397f )
-	rom ( name lw-09.12f merge lw-09.12f size 524288 crc 899cb4ad sha1 95e61af338945e690f2a82746feba3871ea224eb )
-	rom ( name lw-06.12e merge lw-06.12e size 524288 crc 5b9edffc sha1 6fd8f4a3ab070733b52365ab1945bf86acb2bf62 )
-	rom ( name lw-13.12g merge lw-13.12g size 524288 crc 8e058ef5 sha1 00f2c0050fd106276ea5398511c5861ebfbc0d10 )
+	rom ( name lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
+	rom ( name lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
+	rom ( name lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
+	rom ( name lw-05.9e size 524288 crc e4552fd7 sha1 11147afc475904848458425661473586dd6f60cc )
+	rom ( name lw-12.9g size 524288 crc 8e6a832b sha1 d63a1331fda2365f090fa31950098f321a720ea8 )
+	rom ( name lw-02.12d size 524288 crc 43e6c5c8 sha1 d3e6c971de0477ec4e178adc82508208dd8b397f )
+	rom ( name lw-09.12f size 524288 crc 899cb4ad sha1 95e61af338945e690f2a82746feba3871ea224eb )
+	rom ( name lw-06.12e size 524288 crc 5b9edffc sha1 6fd8f4a3ab070733b52365ab1945bf86acb2bf62 )
+	rom ( name lw-13.12g size 524288 crc 8e058ef5 sha1 00f2c0050fd106276ea5398511c5861ebfbc0d10 )
 	rom ( name lw_00b.14a size 65536 crc 59df2a63 sha1 dfe1fffc7a17179a80a2ae623e93b30a7d6df20d )
 	rom ( name lw-03.14c size 131072 crc ce2159e7 sha1 77d564f8b768c1cbd6e5b334f7ee86c4c3f9d62e )
 	rom ( name lw-04.13c size 131072 crc 39305536 sha1 ad24d7b6df2dc5e84a35aecb9ba9b0aaa27ab6e5 )
@@ -1693,6 +1693,40 @@ game (
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
 	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
 	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
+	name sf2ebbl
+	description "Street Fighter II - The World Warrior (World 910214, TAB Austria bootleg)"
+	year 1992
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof sf2
+	romof sf2
+	rom ( name 12.bin size 262144 crc a258b4d5 sha1 3433b6493794c98bb35c1b27cc65bb5f13d52e9b )
+	rom ( name 09.bin size 262144 crc 59ccd474 sha1 7bb28c28ee722435fdbb18eb73e52bd65b419103 )
+	rom ( name 11.bin size 262144 crc 82097d63 sha1 881e7ffb78197f6794b5d41f5c2c87da35e8cb15 )
+	rom ( name 10.bin size 262144 crc 0c83844d sha1 4c25ba4a50d62c62789d026e3d304ed1dfb3c248 )
+	rom ( name 1b_yf082.bin size 524288 crc 22c9cc8e sha1 b9194fb337b30502c1c9501cd6c64ae4035544d4 )
+	rom ( name 1d_yf028.bin size 524288 crc 57213be8 sha1 3759b851ac0904ec79cbb67a2264d384b6f2f9f9 )
+	rom ( name 1a_yf087.bin size 524288 crc ba529b4f sha1 520840d727161cf09ca784919fa37bc9b54cc3ce )
+	rom ( name 1c_yf088.bin size 524288 crc 4b1b33a8 sha1 2360cff890551f76775739e2d6563858bff80e41 )
+	rom ( name 1f_yf085.bin size 524288 crc 2c7e2229 sha1 357c2275af9133fd0bd6fbb1fa9ad5e0b490b3a2 )
+	rom ( name 1h_yf115.bin size 524288 crc b5548f17 sha1 baa92b91cf616bc9e2a8a66adc777ffbf962a51b )
+	rom ( name 1e_yf111.bin size 524288 crc 14b84312 sha1 2eea16673e60ba7a10bd4d8f6c217bb2441a5b0e )
+	rom ( name 1g_yf002.bin size 524288 crc 5e9cd89a sha1 f787aab98668d4c2c54fc4ba677c0cb808e4f31e )
+	rom ( name 1j_yf117.bin size 524288 crc 994bfa58 sha1 5669b845f624b10e7be56bfc89b76592258ce48b )
+	rom ( name 1l_ye040.bin size 524288 crc 3e66ad9d sha1 9af9df0826988872662753e9717c48d46f2974b0 )
+	rom ( name 1i_yf038.bin size 524288 crc c1befaa8 sha1 a6a7f4725e52678cbd8d557285c01cdccb2c2602 )
+	rom ( name 1k_ye039.bin size 524288 crc 0627c831 sha1 f9a92d614e8877d648449de2612fc8b43c85e4c2 )
+	rom ( name 05.bin size 131072 crc a505621e sha1 8ffa8cedad54948870bbd8f629d927332dc9fcf6 )
+	rom ( name 07.bin size 131072 crc de6271fb sha1 574ec5d9992941a405fd00abe52da41aba4b29a7 )
+	rom ( name 06.bin size 131072 crc 23775344 sha1 0d6b54f66cd64c3f48c88c8e17a19fdb2002afb0 )
+	rom ( name 08.bin size 131072 crc 81c9550f sha1 2d75e329148caadfff35c8f2f91b352f14dbe08a )
+	rom ( name 03.bin size 65536 crc a4823a1b sha1 7b6bf59dfd578bfbbdb64c27988796783442d659 )
+	rom ( name 04.bin size 65536 crc 13ea1c44 sha1 5b05fe4c3920e33d94fac5f59e09ff14b3e427fe )
+	rom ( name 02.bin size 131072 crc 7f162009 sha1 346bf42992b4c36c593e21901e22c87ae4a7d86d )
+	rom ( name 01.bin size 131072 crc beade53f sha1 277c397dc12752719ec6b47d2224750bd1c07f79 )
 )
 
 game (

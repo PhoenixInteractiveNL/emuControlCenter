@@ -20,8 +20,20 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Collapse the level"/>
-                    <Item posX = "3" posY = "21" name = "Uncollapse the level"/>
+                    <Item posX = "1" posY = "9" name = "Copy to clipboard"/>
+                    <Item posX = "1" posY = "10" name = "Indent"/>
+                    <Item posX = "1" posY = "11" name = "Convert case"/>
+                    <Item posX = "1" posY = "12" name = "Line operations"/>
+                    <Item posX = "1" posY = "13" name = "Comment/Uncomment"/>
+                    <Item posX = "1" posY = "14" name = "Auto-completion"/>
+                    <Item posX = "2" posY = "11" name = "Mark all"/>
+                    <Item posX = "2" posY = "12" name = "Unmark all"/>
+                    <Item posX = "3" posY = "4" name = "Show Symbol"/>
+                    <Item posX = "3" posY = "5" name = "Zoom"/>
+                    <Item posX = "3" posY = "6" name = "Move/Clone current document"/>
+					
+                    <Item posX = "3" posY = "16" name = "Collapse level"/>
+                    <Item posX = "3" posY = "17" name = "Uncollapse level"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -51,19 +63,19 @@
                     <Item id = "42005" name = "&amp;Paste"/>
                     <Item id = "42006" name = "&amp;Delete"/>
                     <Item id = "42007" name = "Select A&amp;ll"/>
-                    <Item id = "42008" name = "Insert TAB (Indent)"/>
-                    <Item id = "42009" name = "Remove TAB (Outdent)"/>
+                    <Item id = "42008" name = "Increase Line Indent"/>
+                    <Item id = "42009" name = "Decrease Line Indent"/>
                     <Item id = "42010" name = "Duplicate current line"/>
                     <Item id = "42012" name = "Split lines"/>
                     <Item id = "42013" name = "Join lines"/>
                     <Item id = "42014" name = "Move Up current line"/>   
                     <Item id = "42015" name = "Move Down current line"/>   
-                    <Item id = "42016" name = "to Upper case"/>
-                    <Item id = "42017" name = "to Lower case"/>
+                    <Item id = "42016" name = "to UPPERCASE"/>
+                    <Item id = "42017" name = "to lowercase"/>
                     <Item id = "42018" name = "&amp;Start Recording"/>
                     <Item id = "42019" name = "&amp;Stop Recording"/>
                     <Item id = "42021" name = "&amp;Playback"/>
-                    <Item id = "42022" name = "Block comment/uncomment"/>
+                    <Item id = "42022" name = "Toggle block comment"/>
                     <Item id = "42023" name = "Stream comment"/>
                     <Item id = "42024" name = "Trim Trailing Space"/>
                     <Item id = "42025" name = "Save current recorded macro"/>
@@ -98,6 +110,17 @@
                     <Item id = "43019" name = "Copy bookmarked lines"/>
                     <Item id = "43020" name = "Paste to (Replace) bookmarked lines"/>
                     <Item id = "43021" name = "Delete bookmarked lines"/>
+                    <Item id = "43022" name = "Using 1st style"/>
+                    <Item id = "43023" name = "Clear 1st style"/>
+                    <Item id = "43024" name = "Using 2nd style"/>
+                    <Item id = "43025" name = "Clear 2nd style"/>
+                    <Item id = "43026" name = "Using 3rd style"/>
+                    <Item id = "43027" name = "Clear 3rd style"/>
+                    <Item id = "43028" name = "Using 4th style"/>
+                    <Item id = "43029" name = "Clear 4th style"/>
+                    <Item id = "43030" name = "Using 5th style"/>
+                    <Item id = "43031" name = "Clear 5th style"/>
+                    <Item id = "43032" name = "Clear all styles"/>
 					<Item id = "44009" name = "Post-it"/>
                     <Item id = "44010" name = "Fold all"/>
                     <Item id = "44011" name = "User Define Dialog"/>
@@ -109,15 +132,15 @@
                     <Item id = "44025" name = "Show White Space and TAB"/>
                     <Item id = "44026" name = "Show End Of Line"/>
                     <Item id = "44029" name = "Unfold all"/>
-                    <Item id = "44030" name = "Collapse the current level"/>
-                    <Item id = "44031" name = "Uncollapse the current level"/>
+                    <Item id = "44030" name = "Collapse current level"/>
+                    <Item id = "44031" name = "Uncollapse current level"/>
                     <Item id = "44032" name = "Toggle Full Screen Mode"/>
-                    <Item id = "44033" name = "Restore default zoom setting	Ctrl+/(keypad)"/>
+                    <Item id = "44033" name = "Restore default zoom"/>
                     <Item id = "44034" name = "Always on top"/>
                     <Item id = "44035" name = "Synchronize Vertical Scrolling"/>
                     <Item id = "44036" name = "Synchronize Horizontal Scrolling"/>
                     <Item id = "44041" name = "Show wrap symbol"/>
-                    <Item id = "44072" name = "Activate main view"/>
+                    <Item id = "44072" name = "Focus on other view"/>
                     
                     <Item id = "45001" name = "Convert to Windows Format"/>
                     <Item id = "45002" name = "Convert to UNIX Format"/>
@@ -133,9 +156,9 @@
 			<Item id = "45012" name = "Convert to UCS-2 Big Endian"/>
 			<Item id = "45013" name = "Convert to UCS-2 Little Endian"/>
 					
-                    <Item id = "10001" name = "Go to another View"/>
-                    <Item id = "10002" name = "Clone to another View"/>
-                    <Item id = "10003" name = "Go to new instance"/>
+                    <Item id = "10001" name = "Move to other view"/>
+                    <Item id = "10002" name = "Clone to other view"/>
+                    <Item id = "10003" name = "Move to new instance"/>
                     <Item id = "10004" name = "Open in new instance"/>
 
                     
@@ -220,6 +243,9 @@
 			 	<Item id = "1624" name = "Search mode"/>
 			 	<Item id = "1625" name = "Normal"/>
 			 	<Item id = "1626" name = "Extended (\n, \r, \t, \0, \x...)"/>
+			 	<Item id = "1660" name = "Replace in files"/>
+			 	<Item id = "1641" name = "Find all in current document"/>
+			 	<Item id = "1686" name = "Transparency"/>
             </Find>
             <GoToLine title = "Go To Line #">
                 <Item id = "2007" name = "Line"/>
@@ -243,7 +269,7 @@
 				<Item id = "2" name = "Cancel"/>
 				<Item id = "2301" name = "Save &amp;&amp; Close"/>
 				<Item id = "2303" name = "Transparency"/>		
-				
+				<Item id = "2306" name = "Select theme : "/>
                 <SubDialog>
                 	<Item id = "2204" name = "Bold"/>
                     <Item id = "2205" name = "Italic"/>
@@ -352,6 +378,7 @@
 					
 					<Item id = "6121" name = "Menu bar"/>
 					<Item id = "6122" name = "Hide (Use Alt or F10 key to toggle it)"/>
+					<Item id = "6123" name = "Localization"/>
 				</Global>
                 <Scintillas title = "Edit Components">
 					<Item id = "6216" name = "Caret settings"/>
@@ -404,6 +431,7 @@
 				<LangMenu title = "Language Menu">
 					<Item id = "6505" name = "Available items"/>
 					<Item id = "6506" name = "Disabled items"/>
+					<Item id = "6507" name = "Make Language Menu compact"/>
                 </LangMenu>
 				<Print1 title = "Print - Colour and Marge">
 					<Item id = "6601" name = "Print Line Number"/>
@@ -454,12 +482,12 @@
 					<Item id="6329" name="Highlight matching tags"/>
 					<Item id="6327" name="Enable"/>
 					<Item id="6328" name="Highlight tag attributes"/>
-					<Item id="6330" name="Highlight php/asp zone"/>
+					<Item id="6330" name="Highlight comment/php/asp zone"/>
 					
 					<Item id = "6331" name = "Show only filename in titlebar"/>
-					<Item id = "6114" name = "Enable document switcher (Ctrl+Tab)"/>
+					<Item id = "6114" name = "Enable"/>
 					<Item id = "6115" name = "Auto-indent"/>
-					<Item id = "6117" name = "Enable MRU behaviour for document switcher"/>
+					<Item id = "6117" name = "Enable MRU behaviour"/>
 					
                 </MISC>
 				<Backup title = "Backup/Auto-completion">

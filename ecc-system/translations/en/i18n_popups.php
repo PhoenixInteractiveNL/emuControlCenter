@@ -21,7 +21,7 @@ $i18n['popup'] = array(
 	'rom_remove_title%s' =>
 		"CLEAR DB FOR %s",
 	'rom_remove_msg%s' =>
-		"DO YOU WANT CLEAR THE DATABASE FOR \n\"%s\"-MEDIA?\n\nThis action wil remove all filedata of the selected media from the ecc database. This will NOT remove your datfile-informations or your media from your harddisc.",
+		"DO YOU WANT TO CLEAR THE DATABASE FOR \n\"%s\"MEDIA?\n\nThis action will remove all filedata of the selected media from the ecc database. This will NOT remove your datfile-information or your media from your hard drive!",
 	'rom_remove_done_title' =>
 		"DB Clear done",
 	'rom_remove_done_msg%s' =>
@@ -71,9 +71,9 @@ $i18n['popup'] = array(
 	'db_optimize_done_msg' =>
 		"Your ecc-database is now optimized!",
 	'export_esearch_error_title' =>
-		"No eSearch options selected",
+		"No e-search options selected",
 	'export_esearch_error_msg' =>
-		"You have to use the eSearch (extended search) to use this export-function. This will only export the search-result, you see in the mainview!",
+		"You have to use the e-search (extended search) to use this export-function. This will only export the search-result, you see in the mainview!",
 	'dat_export_filechooser_title%s' =>
 		"Select directory to save %s dat-file!",	
 	'dat_export_title%s' =>
@@ -81,7 +81,7 @@ $i18n['popup'] = array(
 	'dat_export_msg%s%s%s' =>
 		"Do you want to export a %s datfile for platform\n\n%s\n\ninto this directory?\n\n%s",
 	'dat_export_esearch_msg_add' =>
-		"\n\necc will use your eSearch selection to export!",
+		"\n\necc will use your e-search selection to export!",
 	'dat_export_done_title' =>
 		"Export done",
 	'dat_export_done_msg%s%s%s' =>
@@ -173,7 +173,7 @@ $i18n['popup'] = array(
 	'sys_filechooser_miss_title' =>
 		"?? TITLE MISSING ??",
 	'status_dialog_close' =>
-		"\n\nShould i close the status detail area?",
+		"\n\nShould I close the status detail area?",
 	'status_process_running_title' =>
 		"Process running",
 	'status_process_running_msg' =>
@@ -187,7 +187,7 @@ $i18n['popup'] = array(
 	'eccdb_title' =>
 		"eccdb/romdb",
 	'eccdb_statistics_msg%s%s%s%s%s' =>
-		"eccdb - Statistics:\n\n%s added\n%s allready inplace\n%s errors\n\n%s Datasets processed!%s",
+		"eccdb - Statistics:\n\n%s added\n%s already inplace\n%s errors\n\n%s Datasets processed!%s",
 	'eccdb_webservice_post_msg' =>
 		"eccdb/romdb - Metadatabase:\n\nTo support the emuControlCenter community, you can add your modified metadata (title, category, languages aso.) into the ECCDB (Internet Database).\n\nThis works like the well known CDDB for CD-Tracks.\n\nIf you confirm this, ecc will automaticly transfer you data into the eccdb!\n\nYou have to be connected to the internet to add your content!!!\n\nAfter 10 processed Metadatasets, you have to confirm to add more!",
 	'eccdb_error' =>
@@ -342,6 +342,30 @@ $i18n['popup'] = array(
 		"Download images",
 	'waitForImageInjectMessage' =>
 		"This task could take a little bit. If images are found, this window closes automaticly and you can see the images in the list!\n\nIf no images are found, this popup closes and the mainlist is not updated! :-)",
+
+	/* 1.0.0 FYEO 02 */
+	'copy_by_search_title' =>
+		"Really copy/move files by search result?",
+	'copy_by_search_msg_waring%s%s%s' =>
+		"This option will copy/rename ALL games found in your search result (Take care: If you dont have searched, all files are selected!)\n\nYou can select the destination in the next window.\n\nThere where found <b>%s games</b> in your searchresult\n\n<b>%s packed games</b> are skipped!\n\nDo you really want to copy/move these <b>%s</b> games to another location?",
+	'copy_by_search_msg_error_noplatform' =>
+		"You have to select a platform to use this feature. It is not possible to use this function for ALL FOUND!",
+	'copy_by_search_msg_error_notfound%s' =>
+		"No valid games are found in your searchresult. <b>%s packed games</b> skipped.",
+	'searchTab' =>
+		"Searchresult",
+	'searchDescription' =>
+		"Here you can copy or move files from their source folder to a specified one.\n<b>Source is your current search result.</b>\nIf you move, also the paths in your database are updated! Clean by checksum remove files that are 100% duplicate!",
+	'searchHeadlineMain' =>
+		"Introduction",
+	'searchHeadlineOptionSameName' =>
+		"same name",
+	'searchRadioDuplicateAddNumber' =>
+		"add number",
+	'searchRadioDuplicateOverwrite' =>
+		"overwrite",
+	'searchCheckCleanup' =>
+		"cleanup by checksum",
 
 );
 ?>

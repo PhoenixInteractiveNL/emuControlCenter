@@ -20,8 +20,8 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "20" name = "Estrechal el nivel"/>
-                    <Item posX = "3" posY = "21" name = "Espandil"/>
+                    <Item posX = "3" posY = "16" name = "Estrechal el nivel"/>
+                    <Item posX = "3" posY = "17" name = "Espandil"/>
                 </SubEntries>
                 
                 <!-- all menu item -->

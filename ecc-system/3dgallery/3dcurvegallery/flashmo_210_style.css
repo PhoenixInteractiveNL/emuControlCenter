@@ -1,0 +1,37 @@
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+
+a {
+	color: #CCFF00;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #FF6633;
+	text-decoration: none;
+}
+
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	color: #FFFFFF;
+}
+
+.subtitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #FFCC00;
+}
+
+.highlight {
+	color: #CC99FF;
+}
+
+.note {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #BBBBBB;
+}

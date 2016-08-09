@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -189,6 +189,8 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Durchsuche Dokumente",
 
-
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"PLATFORM bilder herunterladen",
 );
 ?>

@@ -340,7 +340,7 @@ $i18n['popupConfig'] = array(
 	'startConfThirdPartyHdl' =>
 		"Third Party",
 	'startConfThirdPartyXpadder' =>
-		"Start 'xpadder' at startup",
+		"Start 'Xpadder' bij het opstarten",
 
     /* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
@@ -348,5 +348,14 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_refresh_eccscript' =>
 		"Refresh",
 
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"Alle bestanden uitpakken met subfolders",
+
+	'emuUnpackNotelabel' =>
+		'Ps. in de TAB [start] kun je tijdelijke bestanden laten verwijderen als ECC gesloten wordt',
+
+	'startConfDeleteUnpacked' =>
+		"Maak folder met tijdelijke bestanden leeg bij afsluiten.",
 );
 ?>

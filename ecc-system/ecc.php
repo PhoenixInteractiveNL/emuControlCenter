@@ -1279,7 +1279,14 @@ class App extends GladeXml {
 		$this->btn_add_bookmark->connect("clicked", array($this, 'toggleBookmark'));
 		$this->btn_add_bookmark->set_sensitive(false);
 
-
+		// ----------------------------
+		// 3D GALLERY
+		// ----------------------------
+		// start 3D gallery
+		$this->btn_3dgallery_start->connect_simple('clicked', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_3DGALLERY');
+		// config 3D gallery
+		$this->btn_3dgallery_config->connect_simple('clicked', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_3DGALLERY_CONFIG');
+		
 		$this->mainImageListViewInit();
 
 		// ----------------------------
@@ -1604,18 +1611,20 @@ class App extends GladeXml {
 		// Startup
 		// ----------------------------
 		$this->mTopUpdateEccLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_LIVE']));
-
-		$this->mTopToolEccGtkts->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_GTKTS']));
-		$this->mTopToolEccDiagnostics->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_DIAGNOSTICS']));
-		// $this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images')); //Not used anymore (changed on 2011-12-22)
-		$this->mTopImageIPC->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_IPC']));
-		$this->mTopDatDFU->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DFU']));
-		$this->mTopDeveloperSQL->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DEV_SQL']));
-		$this->mTopDeveloperGUI->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DEV_GUI']));
-		$this->mTopAutoIt3GUI->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DEV_GUI_KODA']));
 		
+		$this->mTopToolEccGtkts->connect_simple('activate', array($this, 'executeCommands'), 'START_GTKTHEMESELECT');	
+		$this->mTopToolEccDiagnostics->connect_simple('activate', array($this, 'executeCommands'), 'START_ECCDIAGNOSTICS');
+		$this->mTopDatDFU->connect_simple('activate', array($this, 'executeCommands'), 'START_DATFILEUPDATE');
+		$this->mTopImageIPC->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEPACKCREATOR');	
+		$this->mTopOptionCreateStartmenuShortcuts->connect_simple('activate', array($this, 'executeCommands'), 'START_CREATESTARTMENUICONS');
+		$this->mTopServicesKameleonCode->connect_simple('activate', array($this, 'executeCommands'), 'START_KAMELEON');	
+		
+		// $this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images')); //Not used anymore (changed on 2011-12-22)
+		$this->mTopDeveloperSQL->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_SQL');	
+		$this->mTopDeveloperGUI->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_GUI');
+		$this->mTopAutoIt3GUI->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_GUI_KODA');	
+			
 		// View
-
 		$this->mTopViewRandomGame->connect_simple('activate', array($this, 'presentRandomGame'));
 		$this->mTopViewReload->connect_simple('activate', array($this, 'onReloadRecord'));
 
@@ -3477,6 +3486,11 @@ class App extends GladeXml {
 			$menuSubItem->connect_simple('activate', array($this, 'convertEccV1Images'));
 			$menuTop->append($menuSubItem);
 
+			// get platform images from internet
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_injectplatform'), $this->getThemeFolder('icon/ecc_image.png'));
+			$menuItem->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEINJECT_PLATFORM');
+			$menu->append($menuItem);
+						
 			$menu->append(new GtkSeparatorMenuItem());
 
 //			convertEccV1Images
@@ -4342,14 +4356,15 @@ class App extends GladeXml {
 
 				// get image from internet
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_inject'), $this->getThemeFolder('icon/ecc_image.png'));
-				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'GET_IMAGE');
+				//$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'GET_IMAGE'); //OLD!!, NOT USED ANYMORE!
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_IMAGEINJECT');
 				$menu->append($menuItem);
 
 				// open imageCenter
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_popup'), $this->getThemeFolder('icon/ecc_image.png'));
 				$menuItem->connect_simple('activate', array($this, 'openImageCenter'), false);
 				$menu->append($menuItem);
-
+			
 				// reload images
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_reload'), $this->getThemeFolder('icon/ecc_reload.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'RELOAD');
@@ -4651,7 +4666,128 @@ class App extends GladeXml {
 	private $directMediaEdit = false;
 
 	/**
-	 * Dispatcher for commands from context or top menus and buttons
+	 * Dispatcher for commands from context or top menus wich do not need any ROM data
+	 *
+	 * @param string $parameter
+	 */
+	
+	public function executeCommands($parameter=false) {
+			switch ($parameter) {
+
+			case 'START_GTKTHEMESELECT':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_GTKTHEMESELECT']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_ECCDIAGNOSTICS':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECCDIAGNOSTICS']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_DATFILEUPDATE':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_DATFILEUPDATE']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_IMAGEPACKCREATOR':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEPACKCREATOR']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);		
+				break;
+			case 'START_CREATESTARTMENUICONS':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_CREATESTARTMENUICONS']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_KAMELEON':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_KAMELEON']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_ECC_DEV_SQL':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_SQL']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;				
+			case 'START_ECC_DEV_GUI':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_GUI']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;					
+			case 'START_ECC_DEV_GUI_KODA':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_GUI_KODA']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_IMAGEINJECT_PLATFORM':
+				$sampleData = array( 
+				'ROMDATA' => array(
+					'rom_eccid' => ($this->_eccident), //write ECCid (console id)
+				));				
+				write_ini_file($sampleData, 'eccromdata.ini', true);
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEINJECT']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' fullplatform');
+				$this->onReloadRecord(); //Refresh images in main list
+				$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
+				$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
+				break;
+			}
+	}
+	
+	
+	/**
+	 * Dispatcher for commands from context or top menus and buttons (when ROM is selectged or ROM data can be aquired)
 	 *
 	 * @param Object $obj
 	 * @param string $parameter
@@ -4815,11 +4951,57 @@ class App extends GladeXml {
 				$this->parseMedia($systemIdent, dirname($romFile->getFilePath()));
 			break;
 			case 'SHELLOP':
-
 				switch ($parameter) {
-
+					case 'START_3DGALLERY':
+						$sampleData = array( 
+						'ROMDATA' => array(
+							'rom_name' => $rom->getName(), //write ROM name (title)
+							'rom_crc32' => $rom->getCrc32(), //write crc32
+							'rom_eccid' => $rom->getSystemIdent(), //write ECCid (console id)
+							'ecc_path' => realpath('../'), //write ECC path
+						));				
+						write_ini_file($sampleData, 'eccromdata.ini', true);
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_3DGALLERY']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+						break;
+					case 'START_3DGALLERY_CONFIG':
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_3DGALLERY']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' config');
+						break;
+					case 'START_IMAGEINJECT':
+						$sampleData = array( 
+						'ROMDATA' => array(
+							'rom_name' => $rom->getName(), //write ROM name (title)
+							'rom_crc32' => $rom->getCrc32(), //write crc32
+							'rom_eccid' => $rom->getSystemIdent(), //write ECCid (console id)
+							'ecc_path' => realpath('../'), //write ECC path
+						));				
+						write_ini_file($sampleData, 'eccromdata.ini', true);
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEINJECT']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+						$this->onReloadRecord(); //Refresh images in main list
+						$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
+						$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
+						break;				
 					case 'BROWSE_ASSET':
-
 						$assetPath = $this->ini->getUserFolder($rom->getSystemIdent(), '/assets/'.substr($rom->getCrc32(), 0, 2).'/'.$rom->getCrc32(), true);
 						foreach($this->rom_path_subfolder['assets'] as $subPath){
 							$assetSubPath = $assetPath.'/'.$subPath;
@@ -7732,7 +7914,11 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$path = 'images/platform/ecc_'.$eccident.'_cell'.$type.'.png';
 		if (!file_exists($path)) $path = 'images/platform/ecc_unknown_cell'.$type.'.png';
 
-		$obj_pixbuff = $this->oHelper->getPixbuf($path);
+		// 2012-03-20, Added these 2 lines to fix height problems in the main image view!
+		$width = ($width) ? $width : $this->_pixbuf_width;
+		$height = ($height) ? $height :$this->_pixbuf_height;
+		
+		$obj_pixbuff = $this->oHelper->getPixbuf($path, 20, $height);
 		$this->cell_ident_pixbuf[$cacheKey] = $obj_pixbuff;
 		return $obj_pixbuff;
 	}
@@ -7747,7 +7933,12 @@ current_build="'.$this->ecc_release['release_build'].'"
 		// get new
 		$path = dirname(__FILE__)."/".'images/rating/ecc_rating_'.$rating.'.png';
 		if (!file_exists($path)) $path = dirname(__FILE__)."/".'images/rating/ecc_rating_0.png';
-		$obj_pixbuff = $this->oHelper->getPixbuf($path);
+		
+		// 2012-03-20, Added these 2 lines to fix height problems in the main image view!
+		$width = ($width) ? $width : $this->_pixbuf_width;
+		$height = ($height) ? $height :$this->_pixbuf_height;
+		
+		$obj_pixbuff = $this->oHelper->getPixbuf($path, 8, $height);
 		//if ($obj_pixbuff !== null) $obj_pixbuff = $obj_pixbuff->scale_simple(5, 80, Gdk::INTERP_BILINEAR);
 		$this->cellRatingPixbufTank[$rating] = $obj_pixbuff;
 		return $obj_pixbuff;
@@ -7785,34 +7976,47 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 	private function translateGuiTopMenu(){
 
+		// Example to enable tooltip if this is nog set in the GLADE GUI
+		// $this->mTopEmuConfig->set_property('has-tooltip', true);
+	
 		# TOP-ROM
 		$this->mTopRom->get_child()->set_text(I18N::get('menuTop', 'mTopRom'));
-		$this->mTopRomOptimize->get_child()->set_text(I18N::get('menuTop', 'mTopRomOptimize'));
+		$this->menuTopRomAddNewRom->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'menuTopRomAddNewRomTooltip'));
 		$this->mMenuReparseFolder->get_child()->set_text(I18N::get('menuTop', 'mMenuReparseFolder'));
 		$this->mMenuReparseFolderAll->get_child()->set_text(I18N::get('menuTop', 'mMenuReparseFolderAll'));
+		$this->mTopRomOptimize->get_child()->set_text(I18N::get('menuTop', 'mTopRomOptimize'));
+		$this->mTopRomOptimize->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopRomOptimizeTooltip'));
 		$this->mTopRomRemoveDups->get_child()->set_text(I18N::get('menuTop', 'mTopRomRemoveDups'));
+		$this->mTopRomRemoveDups->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopRomRemoveDupsTooltip'));
 		$this->mTopRomRemoveRoms->get_child()->set_text(I18N::get('menuTop', 'mTopRomRemoveRoms'));
-
+		$this->mTopRomRemoveRoms->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopRomRemoveRomsTooltip'));
+		
 		# TOP-EMU
 		$this->mTopEmu->get_child()->set_text(I18N::get('menuTop', 'mTopEmu'));
 		$this->mTopEmuConfig->get_child()->set_text(I18N::get('menuTop', 'mTopEmuConfig'));
-
+		$this->mTopEmuConfig->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopEmuConfigTooltip'));
+		
 		# TOP-DAT
 		$this->mTopDat->get_child()->set_text(I18N::get('menuTop', 'mTopDat'));
-
 		$this->mTopDatImport->get_child()->set_text(I18N::get('menuTop', 'mTopDatImport'));
 		$this->mTopDatImportEcc->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportEcc'));
+		$this->mTopDatImportEcc->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatImportEccTooltip'));
 		$this->mTopDatImportCtrlMAME->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportCtrlMAME'));
+		$this->mTopDatImportCtrlMAME->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatImportCtrlMAMETooltip'));
 		$this->mTopDatImportRc->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportRc'));
-
+		$this->mTopDatImportRc->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatImportRcTooltip'));
 		$this->mTopDatExport->get_child()->set_text(I18N::get('menuTop', 'mTopDatExport'));
 		$this->mTopDatExportEccFull->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportEccFull'));
+		$this->mTopDatExportEccFull->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatExportEccFullTooltip'));
 		$this->mTopDatExportEccUser->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportEccUser'));
+		$this->mTopDatExportEccUser->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatExportEccUserTooltip'));
 		$this->mTopDatExportEccEsearch->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportEccEsearch'));
+		$this->mTopDatExportEccEsearch->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatExportEccEsearchTooltip'));
 		$this->mTopDatClear->get_child()->set_text(I18N::get('menuTop', 'mTopDatClear'));
+		$this->mTopDatClear->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatClearTooltip'));
 		$this->mTopDatConfig->get_child()->set_text(I18N::get('menuTop', 'mTopDatConfig'));
-
-		# ROMDB
+		
+		# TOP-ROMDB // Removed from GUI, Service is no longer online!(2012-06-10)
 		$this->mTopRomDB->get_child()->set_text(I18N::get('menuTop', 'mTopRomDB'));
 		$this->mTopDatImportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportOnlineRomdb'));
 		$this->mTopDatExportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportOnlineRomdb'));
@@ -7820,10 +8024,9 @@ current_build="'.$this->ecc_release['release_build'].'"
 		# ROM-AUDIT
 		$this->mTopRomAuditShow->get_child()->set_text(I18N::get('menuTop', 'mTopRomAuditShow'));
 
-		# TOP-IMG
-		//$this->mTopImage->get_child()->set_text(I18N::get('menuTop', 'mTopImage')); //Not used anymore (changed on 2011-12-22)
-		//$this->mTopImageConvert->get_child()->set_text(I18N::get('menuTop', 'mTopImageConvert')); //Not used anymore (changed on 2011-12-22)
-		$this->mTopImageIPC->get_child()->set_text(I18N::get('menuTop', 'mTopImageIPC'));
+		# TOP-IMG // Not used anymore (changed on 2011-12-22)
+		//$this->mTopImage->get_child()->set_text(I18N::get('menuTop', 'mTopImage'));
+		//$this->mTopImageConvert->get_child()->set_text(I18N::get('menuTop', 'mTopImageConvert'));
 
 		# TOP-FILES
 		$this->mTopFile->get_child()->set_text(I18N::get('menuTop', 'mTopFile'));
@@ -7832,8 +8035,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopFileRemove->get_child()->set_text(I18N::get('menuTop', 'mTopFileRemove'));
 		$this->mTopFileSearch->get_child()->set_text(I18N::get('menuTop', 'mTopFileSearch'));
 
-		# VIEW
-
+		# TOP-VIEW
 		$this->mTopView->get_child()->set_text(I18N::get('menuTop', 'mTopView'));
 		$this->mTopViewModeRomHave->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomHave'));
 		$this->mTopViewModeRomDontHave->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomDontHave'));
@@ -7844,50 +8046,74 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopViewModeRomMostPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomMostPlayed'));
 		$this->mTopViewModeRomNotPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomNotPlayed'));
 		$this->mTopViewModeRomBookmarks->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomBookmarks'));
-
 		$this->mTopViewListDetail->get_child()->set_text(I18N::get('menuTop', 'mTopViewListDetail'));
 		$this->mTopViewListSimple->get_child()->set_text(I18N::get('menuTop', 'mTopViewListSimple'));
-
 		$this->mTopViewRandomGame->get_child()->set_text(I18N::get('menuTop', 'mTopViewRandomGame'));
 		$this->mTopViewReload->get_child()->set_text(I18N::get('menuTop', 'mTopViewReload'));
-
 		$this->mTopViewOnlyRoms->get_child()->set_text(I18N::get('menuTop', 'mTopViewOnlyRoms'));
 		$this->mTopViewOnlyBookmarks->get_child()->set_text(I18N::get('menuTop', 'mTopViewOnlyBookmarks'));
 		$this->mTopViewOnlyPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewOnlyPlayed'));
-
 		$this->mTopViewToggleLeft->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleLeft'));
 		$this->mTopViewToggleRight->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleRight'));
 		$this->mTopViewToggleSearch->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleSearch'));
 
-		# TOP-OPT
+		# TOP-OPTIONS
 		$this->mTopOption->get_child()->set_text(I18N::get('menuTop', 'mTopOption'));
 		$this->mTopOptionDbVacuum->get_child()->set_text(I18N::get('menuTop', 'mTopOptionDbVacuum'));
+		$this->mTopOptionDbVacuum->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionDbVacuumTooltip'));
 		$this->mTopOptionCreateUserFolder->get_child()->set_text(I18N::get('menuTop', 'mTopOptionCreateUserFolder'));
+		$this->mTopOptionCreateUserFolder->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionCreateUserFolderTooltip'));
 		$this->mTopOptionCleanHistory->get_child()->set_text(I18N::get('menuTop', 'mTopOptionCleanHistory'));
-		$this->mTopOptionConfig->get_child()->set_text(I18N::get('menuTop', 'mTopOptionConfig'));
-
+		$this->mTopOptionCleanHistory->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionCleanHistoryTooltip'));
 		$this->mTopOptionBackupUserdata->get_child()->set_text(I18N::get('menuTop', 'mTopOptionBackupUserdata'));
+		$this->mTopOptionBackupUserdata->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionBackupUserdataTooltip'));		
+		$this->mTopOptionCreateStartmenuShortcuts->get_child()->set_text(I18N::get('menuTop', 'mTopOptionCreateStartmenuShortcuts'));
+		$this->mTopOptionCreateStartmenuShortcuts->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionCreateStartmenuShortcutsTooltip'));
+		$this->mTopOptionConfig->get_child()->set_text(I18N::get('menuTop', 'mTopOptionConfig'));
+		$this->mTopOptionConfig->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionConfigTooltip'));
 
-		# TOP-TOOL
+		# TOP-TOOLS
 		$this->mTopTool->get_child()->set_text(I18N::get('menuTop', 'mTopTool'));
-		#$this->mTopToolEccRomId->get_child()->set_text(I18N::get('menuTop', 'mTopToolEccRomId'));
 		$this->mTopToolEccGtkts->get_child()->set_text(I18N::get('menuTop', 'mTopToolEccGtkts'));
+		$this->mTopToolEccGtkts->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopToolEccGtktsTooltip'));
 		$this->mTopToolEccDiagnostics->get_child()->set_text(I18N::get('menuTop', 'mTopToolEccDiagnostics'));
+		$this->mTopToolEccDiagnostics->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopToolEccDiagnosticsTooltip'));
 		$this->mTopImageIPC->get_child()->set_text(I18N::get('menuTop', 'mTopImageIPC'));
+		$this->mTopImageIPC->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopImageIPCTooltip'));
 		$this->mTopDatDFU->get_child()->set_text(I18N::get('menuTop', 'mTopDatDFU'));
+		$this->mTopDatDFU->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatDFUTooltip'));
+		$this->mTopAutoIt3GUI->get_child()->set_text(I18N::get('menuTop', 'mTopAutoIt3GUI'));
+		$this->mTopAutoIt3GUI->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopAutoIt3GUITooltip'));
 
-		# TOP-HELP
-		$this->mTopHelp->get_child()->set_text(I18N::get('menuTop', 'mTopHelp'));
-		$this->mTopHelpWebsite->get_child()->set_text(I18N::get('menuTop', 'mTopHelpWebsite'));
-		$this->mTopHelpForum->get_child()->set_text(I18N::get('menuTop', 'mTopHelpForum'));
-		$this->mTopHelpDocOffline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOffline'));
-		$this->mTopHelpDocOnline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOnline'));
-		$this->mTopHelpAbout->get_child()->set_text(I18N::get('menuTop', 'mTopHelpAbout'));
+		# TOP-DEVELOPER
+		$this->mTopDeveloper->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloper'));
+		$this->mTopDeveloperSQL->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloperSQL'));
+		$this->mTopDeveloperSQL->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDeveloperSQLTooltip'));
+		$this->mTopDeveloperGUI->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloperGUI'));
+		$this->mTopDeveloperGUI->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDeveloperGUITooltip'));
 
 		# TOP-UPDATE
 		$this->mTopUpdate->get_child()->set_text(I18N::get('menuTop', 'mTopUpdate'));
 		$this->mTopUpdateEccLive->get_child()->set_text(I18N::get('menuTop', 'mTopUpdateEccLive'));
+		$this->mTopUpdateEccLive->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopUpdateEccLiveTooltip'));
 
+		# TOP-SERVICES
+		$this->mTopServices->get_child()->set_text(I18N::get('menuTop', 'mTopServices'));
+		$this->mTopServicesKameleonCode->get_child()->set_text(I18N::get('menuTop', 'mTopServicesKameleonCode'));
+		$this->mTopServicesKameleonCode->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopServicesKameleonCodeTooltip'));
+		
+		# TOP-HELP
+		$this->mTopHelp->get_child()->set_text(I18N::get('menuTop', 'mTopHelp'));
+		$this->mTopHelpWebsite->get_child()->set_text(I18N::get('menuTop', 'mTopHelpWebsite'));
+		$this->mTopHelpWebsite->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpWebsiteTooltip'));	
+		$this->mTopHelpForum->get_child()->set_text(I18N::get('menuTop', 'mTopHelpForum'));
+		$this->mTopHelpForum->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpForumTooltip'));		
+		$this->mTopHelpDocOffline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOffline'));
+		$this->mTopHelpDocOffline->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpDocOfflineTooltip'));
+		$this->mTopHelpDocOnline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOnline'));
+		$this->mTopHelpDocOnline->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpDocOnlineTooltip'));
+		$this->mTopHelpAbout->get_child()->set_text(I18N::get('menuTop', 'mTopHelpAbout'));
+		$this->mTopHelpAbout->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpAboutTooltip'));
 	}
 
 	private function guiInit(){
@@ -7904,6 +8130,8 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->btnMainShowBookmarkedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/heart.png', true)));
 		$this->btnMainShowLaunchedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/clock.png', true)));
 		$this->statusAreaIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_working.png', true)));
+		$this->btn_3dgallery_start_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_3dgallery_start.png', true)));
+		$this->btn_3dgallery_config_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_3dgallery_config.png', true)));
 	}
 
 	public function getThemeFolder($subfolder = '', $important = false){
@@ -7951,6 +8179,9 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mainlist_tab_help->set_label(I18N::get('mainGui', 'mainlist_tab_help'));
 		$this->mainlist_tab_images->set_label(I18N::get('mainGui', 'mainlist_tab_images'));
 
+		$this->btn_3dgallery_start_label->set_label(I18N::get('mainGui', '3dgalleryStart'));
+		$this->btn_3dgallery_config_label->set_label(I18N::get('mainGui', '3dgalleryConfig'));
+		
 		# images
 		$this->infoImageBtnMatchImageType->set_label(I18N::get('mainGui', 'infoImageBtnMatchImageType'));
 		$this->infoImageEditBtn->set_label(I18N::get('mainGui', 'infoImageEditBtn'));
@@ -8412,7 +8643,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->iconview1->set_pixbuf_column(1);
 		$this->iconview1->set_text_column(2);
 		$this->iconview1->set_selection_mode(Gtk::SELECTION_MULTIPLE);
-		$this->iconview1->set_item_width(120);
+		$this->iconview1->set_item_width($_pixbuf_width);
 	}
 
 	public function mainIconViewGetSelection($view)
@@ -8470,8 +8701,9 @@ current_build="'.$this->ecc_release['release_build'].'"
 				$searchNames = array($name_file, $name_packed, $romMeta->getName());
 				$media = $this->searchForImages($eccident, $crc32, $path, $extension, $searchNames, true);
 				$pixbuf = $this->get_pixbuf($filePath, $media, false, false, false, $eccident);
-
-				$this->mainIconViewModel->append(array($rom->getCompositeId(), $pixbuf, $rom->getName()));
+				$category = (isset($this->media_category[$romMeta->getCategory()])) ? $this->media_category[$romMeta->getCategory()] : '';
+				
+				$this->mainIconViewModel->append(array($rom->getCompositeId(), $pixbuf, $rom->getName().PHP_EOL.$category));
 
 			}
 		}
@@ -8484,4 +8716,47 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 }
 $obj_test = new App();
+
+function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
+// ADDED .PHP_EOL to the original function to give better Windows support
+    $content = "";
+    if ($has_sections) {
+        foreach ($assoc_arr as $key=>$elem) {
+            $content .= "[".$key."]\n".PHP_EOL;
+            foreach ($elem as $key2=>$elem2) {
+                if(is_array($elem2))
+                {
+                    for($i=0;$i<count($elem2);$i++)
+                    {
+                        $content .= $key2."[] = \"".$elem2[$i]."\"\n".PHP_EOL;
+                    }
+                }
+                else if($elem2=="") $content .= $key2." = \n".PHP_EOL;
+                else $content .= $key2." = \"".$elem2."\"\n".PHP_EOL;
+            }
+        }
+    }
+    else {
+        foreach ($assoc_arr as $key=>$elem) {
+            if(is_array($elem))
+            {
+                for($i=0;$i<count($elem);$i++)
+                {
+                    $content .= $key2."[] = \"".$elem[$i]."\"\n".PHP_EOL;
+                }
+            }
+            else if($elem=="") $content .= $key2." = \n".PHP_EOL;
+            else $content .= $key2." = \"".$elem."\"\n".PHP_EOL;
+        }
+    }
+ 
+    if (!$handle = fopen($path, 'w')) {
+        return false;
+    }
+    if (!fwrite($handle, $content)) {
+        return false;
+    }
+    fclose($handle);
+    return true;
+}
 ?>

@@ -189,6 +189,8 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Dokumentumok mappa tallózása",
 
-
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"Download PLATFORM images",
 );
 ?>

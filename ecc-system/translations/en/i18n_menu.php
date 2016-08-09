@@ -181,14 +181,16 @@ $i18n['menu'] = array(
 	'lbl_meta_edit_top' =>
 		"Edit meta",
 
+	/* 0.9.9 FYEO 01 */
+	'lblOpenAssetFolder' =>
+		"Browse documents folder",
+	
 	/* 0.9.8 FYEO 05 */
 	'lbl_image_inject' =>
 		"Download images",
 
-	/* 0.9.9 FYEO 01 */
-	'lblOpenAssetFolder' =>
-		"Browse documents folder",
-
-
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"Download PLATFORM images",
 );
 ?>

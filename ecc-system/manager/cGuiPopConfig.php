@@ -153,7 +153,7 @@ class GuiPopConfig extends GladeXml {
 		
 		$this->lbl_emu_platform_name->set_text(I18N::get('popupConfig', 'lbl_emu_platform_name'));
 		$this->lbl_emu_platform_category->set_text(I18N::get('popupConfig', 'lbl_emu_platform_category'));
-		$this->lbl_emu_platform_category->set_label(I18N::get('popupConfig', 'emuPlatformActiveState'));
+		$this->emuPlatformActiveState->set_label(I18N::get('popupConfig', 'emuPlatformActiveState'));
 	
 		$this->lbl_emu_assign_path->set_text(I18N::get('popupConfig', 'lbl_emu_assign_path'));
 		$this->emuStartButton->set_label(I18N::get('global', 'start').' '.I18N::get('global', 'emulator'));
@@ -178,6 +178,9 @@ class GuiPopConfig extends GladeXml {
 		$this->emuAssignGlobalCheckZipUnpackActive->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackActive'));
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackSkip'));
 		$this->emuAssignGlobalCheckZipUnpackOpen->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackOpen'));
+
+		$this->emuAssignGlobalCheckZipUnpackAll->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackAll'));
+		$this->emuUnpackNotelabel->set_label(I18N::get('popupConfig', 'emuUnpackNotelabel'));
 		
 		$this->emuAssignFileextLabel->set_markup('<b>'.I18N::get('popupConfig', 'emuAssignFileextLabel').'</b>');
 		$this->emuAssignPreviewLabel->set_markup('<b>'.I18N::get('popupConfig', 'emuAssignPreviewLabel').'</b>');
@@ -1282,10 +1285,9 @@ class GuiPopConfig extends GladeXml {
 		$iniManager = FACTORY::get('manager/IniFile');
 		
 		$this->imageSizes = array(
-			'30x20',
-			'60x40',
 			'120x80',
 			'240x160',
+			'360x240',
 		);
 		$selected =  $iniManager->getKey('USER_SWITCHES', 'image_mainview_size');
 		$index =  array_search($selected, $this->imageSizes);
@@ -1388,6 +1390,7 @@ class GuiPopConfig extends GladeXml {
 		$this->startConfOptHdl->set_markup('<b>'.I18N::get('popupConfig', 'startConfOptHdl').'</b>');
 		$this->startConfUpdate->set_label(I18N::get('popupConfig', 'startConfUpdate'));
 		$this->startConfMinimize->set_label(I18N::get('popupConfig', 'startConfMinimize'));
+		$this->startConfDeleteUnpacked->set_label(I18N::get('popupConfig', 'startConfDeleteUnpacked'));
 		$this->startConfBugreportSend->set_label(I18N::get('popupConfig', 'startConfBugreportSend'));
 		$this->startConfSoundSelect->set_label(I18N::get('popupConfig', 'startConfSoundSelect'));
 		$this->startConfSoundPreview->set_label(I18N::get('global', 'preview'));

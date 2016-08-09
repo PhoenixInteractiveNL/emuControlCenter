@@ -1,9 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter gtkThemeSelect (ECC-GTKTS)
 ;
-; Script version         : v1.0.0.0
-; Last changed           : 2011.05.04
-;
+; Script version         : v1.0.0.1
+; Last changed           : 2012.05.06
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,32 +10,25 @@
 ; NOTES: Nothing yet ;-)
 ;
 ; ------------------------------------------------------------------------------
+FileChangeDir(@ScriptDir)
+
 #include "..\thirdparty\autoit\include\ButtonConstants.au3"
 #include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
 #include "..\thirdparty\autoit\include\GUIListBox.au3"
 #include "..\thirdparty\autoit\include\StaticConstants.au3"
 #include "..\thirdparty\autoit\include\WindowsConstants.au3"
 
-Global $HostInfoIni = "..\..\ecc-system\system\info\ecc_local_host_info.ini"
-
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-; First we need to know where ecc is installed, this is stored in 'ecc_local_host_info.ini'
-If FileExists($HostInfoIni) <> 1 Then
-	MsgBox(64,"ECC-GTKTS", "Please make sure you have run ECC at least once!, aborting...")
-	Exit
-EndIf
-
-$eccPathTemp = IniRead($HostInfoIni, "ECC_HOST_INFO", "SCRIPT_NAME", "")
-Global $eccPath = StringReplace($eccPathTemp, "\ecc-system\ecc.php", "")
+$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
 Global $eccThemeFolder = $eccPath & "\ecc-core\php-gtk2\share\themes\"
 Global $NoPreviewImage = $eccPath & "\ecc-core\tools\gtkThemeSelect_nopreview.jpg"
 Global $GtkThemeFile = $eccPath & "\ecc-core\php-gtk2\etc\gtk-2.0\theme"
 Global $GtkEngineFolder = $eccPath & "\ecc-core\php-gtk2\lib\gtk-2.0\2.10.0\engines\"
 
 If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
-	MsgBox(64,"ECC-GTKTS", "No ECC software found!, aborting...")
+	MsgBox(64,"ECC gtkThemeSelect", "No ECC software found!, aborting...")
 	Exit
 EndIf
 
@@ -100,7 +92,7 @@ GUISetIcon (@ScriptDir & "\gtkThemeSelect.ico", "", $ECCGTKTS) ;Set proper icon 
 $eccThemeFolders = FileFindFirstFile($eccThemeFolder & "\*.*")
 
 If $eccThemeFolders = -1 Then ; Check if the search was successful.
-    MsgBox(0, "ECC-GTKTS", "An error has occured!, aborting...")
+    MsgBox(0, "ECC gtkThemeSelect", "An error has occured!, aborting...")
     Exit
 EndIf
 
@@ -113,7 +105,7 @@ WEnd
 ; Get active theme from 'ecc-core\php-gtk2\etc\gtk-2.0\theme'
 $oGtkThemeFile = FileOpen($GtkThemeFile, 0)
 If $oGtkThemeFile = -1 Then ; Check if file opened for reading OK.
-    MsgBox(0, "ECC-GTKTS", "An error has occured!, aborting...")
+    MsgBox(0, "ECC gtkThemeSelect", "An error has occured!, aborting...")
     Exit
 EndIf
 $CurrentGtkTheme = FileReadLine($oGtkThemeFile)
@@ -138,12 +130,12 @@ While 1
 		Case $ButtonSelect ;Button 'select' is pressed
 			$oGtkThemeFile = FileOpen($GtkThemeFile, 2)
 			If $oGtkThemeFile = -1 Then ; Check if file opened for reading OK.
-				MsgBox(0, "ECC-GTKTS", "An error has occured!, aborting...")
+				MsgBox(0, "ECC gtkThemeSelect", "An error has occured!, aborting...")
 				Exit
 			Else
 				FileWriteLine($oGtkThemeFile, "gtk-theme-name = " & Chr(34) & $SelectedTheme & Chr(34))
 				FileClose($oGtkThemeFile)
-				MsgBox(0, "ECC-GTKTS", "You have selected '" & $SelectedTheme & "' as your current theme!" & @CRLF & "To enable the theme you need to restart ECC!")
+				MsgBox(0, "ECC gtkThemeSelect", "You have selected '" & $SelectedTheme & "' as your current theme!" & @CRLF & "To enable the theme you need to restart ECC!")
 				Exit
 			EndIf
 	EndSwitch

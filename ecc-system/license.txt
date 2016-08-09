@@ -1,11 +1,11 @@
-*********************************************************************
+emuControlCenter
+Copyright(c) 2005-2012 by Andreas Scheibel
 
-emuControlCenter is Copyright(c) 2005-2008 by Andreas Scheibel
 
 This licence grants you the following:
 
 Permission to use, copy, and distribute emuControlCenter in its entirety, for
-NON-COMMERCIAL purposes, is hereby granted without fee, provided that
+non-commercial purposes, is hereby granted without fee, provided that
 this license information and copyright notice appear in all copies.
 
 If you redistribute emuControlCenter, the entire contents of this distribution
@@ -23,10 +23,9 @@ portions of the source in some other program, etc.), please contact
 the author.
 
 The author can be contacted via email at: eccas@camya.com
-emuControlCenter website: http://www.camya.com/ecc/
+emuControlCenter website: http://www.camya.com
 
-*********************************************************************
-
+********************************************************
 LIMITED WARRANTY
 
 NO WARRANTIES.

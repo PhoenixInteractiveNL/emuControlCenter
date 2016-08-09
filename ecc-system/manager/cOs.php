@@ -64,7 +64,7 @@
 	
 	public function executeCommand($command, $cwdPath = false, $returnCwdPath = false, $useExec = false){
 		
-		# widows start tool
+		# windows start tool
 		$commandWinStart  = 'start /B';
 		
 		# win98 needs "player". Otherwise, the file isnt started
@@ -73,7 +73,7 @@
 		# Compile start command
 		$executeCommand = $commandWinStart.' '.$command;
 
-		$cwdBackup = getcwd(); # create an backup of the curren cwd
+		$cwdBackup = getcwd(); # create an backup of the current cwd
 		
 		# change to given path
 		if($cwdPath) chdir($cwdPath); # change dir to the programs directory

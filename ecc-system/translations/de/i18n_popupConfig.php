@@ -350,5 +350,15 @@ $i18n['popupConfig'] = array(
 		"Optionen",
 	'lbl_emu_assign_refresh_eccscript' =>
 		"Aktualisieren",
+
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"unpack ALL files including subdirs",
+
+	'emuUnpackNotelabel' =>
+		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+
+	'startConfDeleteUnpacked' =>
+		"Empty ECC unpack folder on exit",
 );
 ?>

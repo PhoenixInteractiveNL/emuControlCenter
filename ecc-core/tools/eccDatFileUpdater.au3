@@ -1,9 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.2.5.5
-; Last changed           : 2012.02.26
-;
+; Script version         : v1.2.5.6
+; Last changed           : 2012.05.06
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,41 +10,33 @@
 ; NOTES: Nothing yet ;-)
 ;
 ; ------------------------------------------------------------------------------
-
-Global $HostInfoIni = "..\..\ecc-system\system\info\ecc_local_host_info.ini"
+FileChangeDir(@ScriptDir)
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-; First we need to know where ecc is installed, this is stored in 'ecc_local_host_info.ini'
-If FileExists($HostInfoIni) <> 1 Then
-	MsgBox(64,"ECC-DFU", "Please make sure you have run ECC at least once!, aborting...")
-	Exit
-EndIf
-
-$eccPathTemp = IniRead($HostInfoIni, "ECC_HOST_INFO", "SCRIPT_NAME", "")
-Global $eccPath = StringReplace($eccPathTemp, "\ecc-system\ecc.php", "")
+$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
 Global $7zaexe = $eccPath & "\ecc-core\thirdparty\7zip\7za.exe"
 Global $DATfileInfoINI = $eccPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
 Global $DATUtilExe = $eccPath & "\ecc-core\thirdparty\datutil\datutil.exe"
 
 If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
-	MsgBox(64,"ECC-DFU", "No ECC software found!, aborting...")
+	MsgBox(64,"ECC DatFileUpdater", "No ECC software found!, aborting...")
 	Exit
 EndIf
 
 If FileExists($7zaexe) <> 1 Then
-	MsgBox(64,"ECC-IPC", "7zip could not be found!, aborting...")
+	MsgBox(64,"ECC DatFileUpdater", "7zip could not be found!, aborting...")
 	Exit
 EndIf
 
 If FileExists($DATfileInfoINI) <> 1 or FileExists($DATUtilExe) <> 1 Then
-	MsgBox(64,"ECC-DFU", "Critical file(s) missing!, aborting...")
+	MsgBox(64,"ECC DatFileUpdater", "Critical file(s) missing!, aborting...")
 	Exit
 EndIf
 
 If DriveSpaceFree(@Scriptdir) < 100 Then
-	MsgBox(64,"ECC-DFU", "There is not enough drivespace to perform DATfile updates!" & @CRLF & "You need at least 100 MB for the temporally files." & @CRLF & "You have " & Round(DriveSpaceFree(@Scriptdir), -1) & " MB free, aborting...")
+	MsgBox(64,"ECC DatFileUpdater", "There is not enough drivespace to perform DATfile updates!" & @CRLF & "You need at least 100 MB for the temporally files." & @CRLF & "You have " & Round(DriveSpaceFree(@Scriptdir), -1) & " MB free, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -73,15 +64,15 @@ DirCreate($DATfileBackupPath)
 ;==============================================================================
 
 If FileExists($DATfileMameFile) <> 1 Then
-	$MameFile = FileOpenDialog("ECC-DFU - Select MAME.EXE where to update the DATfiles from:", $eccPath & "\ecc-user\mame\emus", "Program (mame.exe;mame64.exe;mamepp.exe)", 3)
+	$MameFile = FileOpenDialog("ECC DatFileUpdater - Select MAME.EXE where to update the DATfiles from:", $eccPath & "\ecc-user\mame\emus", "Program (mame.exe;mame64.exe;mamepp.exe)", 3)
 	If @error Then
 		Exit
 	Else
-		ToolTip("Retrieving information from '" & $MameFile & "', please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC-DFU", 1, 6)
+		ToolTip("Retrieving information from '" & $MameFile & "', please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 		ExecuteCMD(Chr(34) & $MameFile & Chr(34) & " -? > " & Chr(34) & $DATfileInfoFile & Chr(34))
 		If FileGetSize($DATfileInfoFile) < 500 Then ;Less then 500 bytes
 			ToolTip("")
-			Msgbox(64, "ECC-DFU", "The file '" & $MameFile & "' is corrupt or not a real MAME executable!")
+			Msgbox(64, "ECC DatFileUpdater", "The file '" & $MameFile & "' is corrupt or not a real MAME executable!")
 			Exit
 		EndIf
 		$MameTempFile = FileOpen($DATfileInfoFile, 0)
@@ -96,31 +87,31 @@ If FileExists($DATfileMameFile) <> 1 Then
 		ToolTip("")
 
 		If $MameVersion = $InstalledMameVersion Then
-			$UpdateBox = Msgbox(324, "ECC-DFU", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your DATfile versions are already UP-TO-DATE, an update is not nessesary!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your DATfile versions are already UP-TO-DATE, an update is not nessesary!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 		If $MameVersion < $InstalledMameVersion Then
-			$UpdateBox = Msgbox(324, "ECC-DFU", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is OLDER then the DATfiles already installed, it will be unwise to update!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is OLDER then the DATfiles already installed, it will be unwise to update!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 		If $MameVersion > $InstalledMameVersion Then
-			$UpdateBox = Msgbox(68, "ECC-DFU", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is NEWER then the DATfiles already installed, an update would be advisable!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(68, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is NEWER then the DATfiles already installed, an update would be advisable!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 
 		If $UpdateBox = 6 Then ;YES selected
-			$BackupBox = Msgbox(68, "ECC-DFU", "Do you want to create a backup of your existing DAT files before the update process? (recommended)")
+			$BackupBox = Msgbox(68, "ECC DatFileUpdater", "Do you want to create a backup of your existing DAT files before the update process? (recommended)")
 			If $BackupBox = 6 Then ;YES selected
-				ToolTip("Creating a backup of your existing DATfiles, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC-DFU", 1, 6)
+				ToolTip("Creating a backup of your existing DATfiles, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 				$7zfile = $DATfileBackupPath & "eccDATbackup_" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & @SEC & ".7z"
 				ShellExecuteWait($7zaexe, "a " & $7zfile & " " & Chr(34) & Chr(34) & $DATfilePath &  "\*.dat" & Chr(34), "", "", @SW_HIDE)
 				ToolTip("")
-				Msgbox(64, "ECC-DFU", "DATfile backup '" & $7zfile & "' created!")
+				Msgbox(64, "ECC DatFileUpdater", "DATfile backup '" & $7zfile & "' created!")
 			EndIf
 
-			ToolTip("Extracting main XML DATfile from " & $MameFile & "', please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC-DFU", 1, 6)
+			ToolTip("Extracting main XML DATfile from " & $MameFile & "', please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 			ExecuteCMD(Chr(34) & $MameFile & Chr(34) & " -listxml >" & Chr(34) & $DATfileMameFile & Chr(34))
 			ToolTip("")
 			UpdatePlatforms()
 			WriteIniData()
-			MsgBox(64, "ECC-DFU", "DATfiles updated to v" & $MameVersion & "!")
+			MsgBox(64, "ECC DatFileUpdater", "DATfiles updated to v" & $MameVersion & "!")
 		EndIf
 	EndIf
 Else
@@ -254,7 +245,7 @@ Func UpdatePlatforms()
 EndFunc ;UpdatePlatforms
 
 Func WriteDatFileWithHeader($Filename, $Name, $Category)
-	ToolTip("Creating '" & $Name & "' DATfile v" & $MameVersion & ", please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC-DFU", 1, 6)
+	ToolTip("Creating '" & $Name & "' DATfile v" & $MameVersion & ", please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 	$datfile = FileOpen($DATfilePath & $Filename, 2)
 	FileWriteLine($datfile, "clrmamepro (")
 	FileWriteLine($datfile, @TAB & "name " & Chr(34) & $Name & Chr(34))

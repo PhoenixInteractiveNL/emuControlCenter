@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2009/07/09 
+ * date:	2012/06/03 
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -179,16 +179,18 @@ $i18n['menu'] = array(
 
 	/* 0.9.8 FYEO 04 */
 	'lbl_meta_edit_top' =>
-		"Editar Meta-datos",
-
-	/* 0.9.8 FYEO 05 */
-	'lbl_image_inject' =>
-		"Descargar imágenes",
+		"Editar Meta-Datos",
 
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
 		"Buscar carpeta de Documentos",
+	
+	/* 0.9.8 FYEO 05 */
+	'lbl_image_inject' =>
+		"Descargar imágenes",
 
-
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"Descargar imágenes de la PLATAFORMA",
 );
 ?>

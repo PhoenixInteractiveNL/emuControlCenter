@@ -1,1 +1,0 @@
-autoit\AutoIt3.exe gladegui.au3

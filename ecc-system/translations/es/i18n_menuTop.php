@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2009/07/09 
+ * date:	2012/06/03 
  * ------------------------------------------
  */
 $i18n['menuTop'] = array(
@@ -16,9 +16,9 @@ $i18n['menuTop'] = array(
 	/* 0.9.2 FYEO 07 */	
 
 	'mTopViewModeRomHave' =>
-		"Todas (las que tengo)",
+		"todas (las que tengo)",
 	'mTopViewModeRomDontHave' =>
-		"Faltantes (las que no tengo)",
+		"faltantes (las que no tengo)",
 	'mTopViewModeRomAll' =>
 		"con meta-datos",
 	'mTopViewModeRomNoMeta' =>
@@ -71,17 +71,17 @@ $i18n['menuTop'] = array(
 	
 	/* DATFILE */
 	'mTopDat' =>
-		"Archivo de datos",
+		"Archivos DAT",
 	'mTopDatImportEcc' =>
-		"Importar archivo de emuControlCenter",
+		"Importar archivo DAT de emuControlCenter",
 	'mTopDatImportRc' =>
-		"Importar archivo de Romcenter",
+		"Importar archivo DAT de Romcenter",
 	'mTopDatExportEccFull' =>
-		"Exportar archivo ECC completo",
+		"Exportar archivo DAT de ECC completo",
 	'mTopDatExportEccUser' =>
-		"Exportar archivo ECC del usuario",
+		"Exportar archivo DAT de ECC del usuario",
 	'mTopDatExportEccEsearch' =>
-		"Exportar archivo ECC de búsqueda",
+		"Exportar archivo DAT de ECC de búsqueda",
 	'mTopDatClear' =>
 		"Vaciar archivo de la base de datos",
 	'mTopDatConfig' =>
@@ -109,9 +109,9 @@ $i18n['menuTop'] = array(
 	'mTopOptionDbVacuum' =>
 		"Optimizar base de datos",
 	'mTopOptionCreateUserFolder' =>
-		"Crear todas las carpetas ECC de usuario",
+		"Crear todas las carpetas de usuario de ECC",
 	'mTopOptionCleanHistory' =>
-		"Restablecer historial ECC",
+		"Reiniciar historial ECC",
 	'mTopOptionConfig' =>
 		"Configuración",
 
@@ -121,7 +121,7 @@ $i18n['menuTop'] = array(
 	'mTopToolEccGtkts' =>
 		"Selector de Temas",
 	'mTopToolEccDiagnostics' =>
-		"ECC Diagnostics",
+		"Diagnósticos de ECC",
 
 	/* HELP */
 	'mTopHelp' =>
@@ -169,9 +169,9 @@ $i18n['menuTop'] = array(
 		"RomDB",
 
 	'mTopDatImport' =>
-		"Importar archivos",
+		"Importar archivo DAT",
 	'mTopDatExport' =>
-		"Exportar archivos",
+		"Exportar archivo DAT",
 
 	/* 0.9.7 WIP 01*/
 	'mTopViewModeRomPlayed' =>
@@ -206,10 +206,34 @@ $i18n['menuTop'] = array(
 
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
-		'ImagePackCreator (IPC)',
+		'Creador de "packs" de Imágenes (IPC)',
 
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
-		'Manual DatFile Updater (DFU)',
+		'Actualizador Manual de Archivos DAT (DFU)',
+	
+	/* 1.11 BUILD 4 */
+	'mTopOptionCreateStartmenuShortcuts' =>
+		'Crear iconos de menú de inicio',
+
+	/* 1.11 BUILD 6 */
+	'mTopDeveloperSQL' =>
+		'Navegador SQlite',
+
+	'mTopDeveloperGUI' =>
+		'Editor GUI Glade',
+
+	'mTopAutoIt3GUI' =>
+		'Crear GUI Autoit3 (Koda)',
+
+	/* 1.11 BUILD 7 */
+	'mTopDeveloper' =>
+		'Desarrollo',
+
+	'mTopServices' =>
+		'Servicios',
+
+	'mTopServicesKameleonCode' =>
+		'Introduce Código Kameleon',
 );
 ?>

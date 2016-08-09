@@ -199,26 +199,28 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 		$email = $this->gui->ecc_release['email'];
 		
 		$dlg->set_translator_credits(trim(
-			'
-[EN] English translation
--------------------------------------- 
-done by ecc himself (ecc@camya.com)
-
-[DE] German translation 
+		'
+ECC Translations:
 --------------------------------------
-done by blackering (aa@aa.de)
-
-[FR] French translation 
+[DE] Blackering
+[EN] ECC & Phoenix
+[ES] Jarlaxe
+[FR] Cyrille
+[GR] Alkis30
+[HU] Gruby & Delirious
+[JP] Yoshi Matsu
+[NL] Sebastiaan Ebeltjes (Phoenix)
+[PT] Namnam
+[RU] ALLiGaToR
 --------------------------------------
-done by cyrille (aa@aa.fr)
-			'
+		'
 		));
 		
 		$dlg->set_name("");
 		$dlg->set_version($version);
 		$dlg->set_copyright($this->gui->ecc_release['info_copyright']);
 		$dlg->set_website($website);
-		$dlg->set_comments("This is a early beta-version of ecc.\nPlease look for updates at camya.com or email ".$email."\n\nSpecial thanks goes out to PHOENIX for his support!");
+		$dlg->set_comments("Please look for updates at camya.com or email ".$email."\n\nVisit the ECC forum if you need help or info!\nhttp://ecc.phoenixinteractive.mine.nu");
 		$dlg->set_license(file_get_contents("license.txt"));
 		
 		$dlg->run();

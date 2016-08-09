@@ -1,0 +1,1036 @@
+# Polycarbonate-One GTK2 Theme v1.0
+# Emrah  Ünal - 2007 
+# eunall@gmail.com
+
+style "default"
+{
+  
+  GtkRange       ::trough_border     = 2
+  GtkPaned       ::handle_size       = 6
+  GtkRange       ::slider_width      = 10
+  GtkScrollbar   ::min_slider_length = 32
+  GtkScrollbar	 ::slider_width		= 16
+  GtkScrollbar	::stepper_size	= 16
+  GtkCheckButton ::indicator_size    = 14
+  GtkRadioButton::indicator_size	= 14
+  GtkMenuBar     ::internal-padding  = 0
+  GtkTreeView    ::expander_size     = 14
+  GtkExpander    ::expander_size     = 16
+
+  xthickness = 1
+  ythickness = 1
+
+  
+
+  	fg[NORMAL]      	= "#000000"
+	fg[PRELIGHT]     	= "#000000"
+	fg[ACTIVE]        	= "#131313"
+	fg[SELECTED]     	= "#ffffff"
+	fg[INSENSITIVE]  	= "#9c9c9c"
+
+	bg[NORMAL]    		= "#D4d4d9"
+	bg[PRELIGHT]    	= "#c9c9c9"
+	bg[ACTIVE]       	= "#c5c5c9"
+	bg[SELECTED]   		= "#50586A"
+	bg[INSENSITIVE]		= "#e3e3e3"
+	
+	base[NORMAL] 		= "#efeff6"
+	base[PRELIGHT] 		= "#fefefe"
+	base[ACTIVE]   		= "#fcfcfc"
+	base[SELECTED] 		= "#92a1b5"
+	base[INSENSITIVE] 	= "#fcfcfc"
+	
+	text[NORMAL]   		= "#000000"
+	text[PRELIGHT]   	= "#000000"
+	text[ACTIVE]     	= "#292929"
+	text[SELECTED]  	= "#ffffff"
+	text[INSENSITIVE] 	= "#6c6c6c"
+	
+
+}
+
+style "default"  {
+  engine "pixmap"
+  {
+ 
+    
+    image
+    {
+      function          	= BOX
+      shadow            	= IN
+      file              	= "null.svg"
+      border           	= { 1, 1, 1, 1 }
+      stretch           	= TRUE
+    }
+    image
+    {
+      function          	= BOX
+      shadow            	= OUT
+      file              	= "null.svg"
+      border            	= { 1, 1, 1, 1 }
+      stretch           	= TRUE
+    }
+  
+    
+    
+    image
+    {
+      function			= FOCUS
+      file				= "null.svg"
+      border			= { 6, 6, 6, 6 }
+      stretch				= TRUE
+    }	
+    image
+    {
+      function			= ARROW
+      state				= NORMAL
+      file				= "arrow-up.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= UP
+    }
+    image
+    {
+      function		= ARROW
+      state				= PRELIGHT
+      file		= "arrow-up-pre.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= UP
+    }
+    image
+    {
+      function		= ARROW
+      state				= INSENSITIVE
+      file		= "arrow-up-ins.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= UP
+    }
+    image
+    {
+      function			= ARROW
+      state				= NORMAL
+      file		= "arrow-down.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= DOWN
+    }
+    image
+    {
+      function			= ARROW
+      state				= PRELIGHT
+      file		= "arrow-down-pre.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= DOWN
+    }
+    image
+    {
+      function			= ARROW
+      state				= INSENSITIVE
+      file		= "arrow-down-ins.png"
+      border	= { 0, 0, 0, 0 }
+      stretch	= TRUE
+      arrow_direction	= DOWN
+    }
+    image
+    {
+      function			= ARROW
+      file				= "null.svg"
+      state				= NORMAL
+      overlay_file		= "arrow-left.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= LEFT
+    }
+    image
+    {
+      function		= ARROW
+      state				= PRELIGHT
+      file				= "null.svg"
+      overlay_file		= "arrow-left-pre.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= LEFT
+    }
+    image
+    {
+      function			= ARROW
+     state				= INSENSITIVE
+      overlay_file		= "arrow-left-ins.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= LEFT
+    }
+    image
+    {
+      function			= ARROW
+      file				= "null.svg"
+      state				= NORMAL
+      overlay_file		= "arrow-right.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= RIGHT
+    }
+    image
+    {
+      function		= ARROW
+      state				= PRELIGHT
+      file				= "null.svg"
+      overlay_file		= "arrow-right-pre.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= RIGHT
+    }
+    image
+    {
+      function			= ARROW
+     state				= INSENSITIVE
+      overlay_file		= "arrow-right-ins.png"
+      overlay_border	= { 0, 0, 0, 0 }
+      overlay_stretch	= FALSE
+      arrow_direction	= RIGHT
+    }
+  }
+}
+class "GtkWidget"          style "default"
+
+style "button"			= "default"
+{
+  xthickness			= 2
+  ythickness			= 2
+  engine "pixmap"
+  {
+    
+    image 
+    {
+      function			= BOX
+      state				= NORMAL
+      file				= "button-normal.svg"
+      border			= { 15, 15, 8, 8 }
+      stretch			= TRUE
+    }	
+    image
+    {
+      function			= BOX
+      state				= PRELIGHT
+      file				= "button-prelight.svg"
+      border			= { 8, 8, 8, 8 }
+      stretch			= TRUE
+    }
+
+
+    image
+    {
+      function			= BOX
+      state				= ACTIVE
+      file				= "button-pressed.svg"
+      border			= { 8, 8, 8, 8 }
+      stretch			= TRUE
+    }	
+    image 
+   {
+     function			= BOX
+     state				= INSENSITIVE
+     file				= "button-insensitive.svg"
+     border			= { 8, 8, 8, 8 }
+     stretch			= TRUE
+    }
+image
+    {
+      function			= FOCUS
+      file              		= "null.svg"
+      border            		= { 8, 8, 8, 8 }
+      stretch           		= TRUE
+    }
+    image
+    {
+      function			= BOX
+      state				= SELECTED
+	shadow			= IN
+      file				= "button-prelight.svg"
+      border			= { 8, 8, 8, 8 }
+      stretch			= TRUE
+    }
+  }
+}
+
+style "optionmenu"		= "default"
+{
+  xthickness			= 2
+  ythickness			= 2
+  engine "pixmap"
+  {
+    image
+    {
+      function			= BOX
+      state				= NORMAL
+      file				= "button-normal.svg"
+      border			= { 8,8,8,8 }
+      stretch			= TRUE
+    }
+    image
+    {
+      function			= BOX
+      state				= PRELIGHT
+      file				= "button-prelight.svg"
+      border			= { 8,8,8,8 }
+      stretch			= TRUE
+    }
+    image
+    {
+      function			= BOX
+      state				= INSENSITIVE
+     file				= "button-insensitive.svg"
+      border			= { 8,8,8,8}
+      stretch			= TRUE
+    }
+
+image
+    {
+      function			= BOX
+      state				= INSENSITIVE
+     file				= "button-insensitive.svg"
+      border			= { 8,8,8,8}
+      stretch			= TRUE
+    }
+
+
+image
+    {
+      function				= TAB
+      state					= NORMAL
+      overlay_file			= "comboarrow.png"
+      overlay_stretch	= FALSE
+     }
+
+  }
+}
+
+
+
+
+
+style "scrollbar"
+{
+  engine "pixmap" 
+  {
+    image 
+   {
+   function				= BOX
+      detail				= "trough"
+      file					= "trough2.svg"
+      border				= { 2, 2, 22, 22 }
+      stretch				= TRUE
+      orientation			= VERTICAL
+    }
+    image 
+    {
+      function				= BOX
+      detail				= "trough"
+      file					= "trough2-h.svg"
+      border				= { 22,22,2,2 }
+      stretch				= TRUE
+      orientation			= HORIZONTAL
+    }
+    image 
+    {
+      function			= SLIDER
+      state           		= NORMAL
+      file				= "slider-h.svg" 
+      border			= { 7,7,2,2 }
+      stretch				= TRUE
+      orientation			= HORIZONTAL
+	
+      
+	
+    }
+    image 
+    {
+      function			= SLIDER
+      state           		= PRELIGHT
+      file				= "slider-h-pre.svg" 
+      border			= { 7,7,2,2 }
+      stretch				= TRUE
+      orientation			= HORIZONTAL
+      
+    }
+    image 
+    {
+      function			= SLIDER
+      state           		= INSENSITIVE
+      file				= "slider-h-ins.svg"
+      border			= { 7,7,2,2 }
+      stretch				= TRUE
+      orientation			= HORIZONTAL
+    }
+    image 
+    {
+      function			= SLIDER
+      state           		= NORMAL
+      file				= "slider-v.svg" 
+      border			= { 2, 2, 7, 7 }
+      stretch				= TRUE
+      orientation			= VERTICAL
+	
+	
+      
+    }
+    image 
+    {
+      function			= SLIDER
+      state           		= PRELIGHT
+      file				= "slider-v-pre.svg" 
+      border			= { 2, 2, 7, 7 }
+      stretch				= TRUE
+      orientation			= VERTICAL
+	
+	    }
+    image 
+    {
+      function			= SLIDER
+      state           		= INSENSITIVE
+      file				= "slider-v-ins.svg"
+      border			= { 2,2,7,7 }
+      stretch				= TRUE
+      orientation			= VERTICAL
+	
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= NORMAL
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= UP
+      overlay_file			= "arrow-up.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= PRELIGHT
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= UP
+      overlay_file			= "arrow-up-pre.png"
+      overlay_stretch		= FALSE
+    }
+    image
+    {
+      function				= STEPPER
+      state					= ACTIVE
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= UP
+      overlay_file			= "arrow-up.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= INSENSITIVE
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= UP
+      overlay_file			= "arrow-up-ins.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= NORMAL
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= DOWN
+      overlay_file			= "arrow-down.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= PRELIGHT
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= DOWN
+      overlay_file			= "arrow-down-pre.png"
+      overlay_stretch		= FALSE
+    }
+    image
+    {
+      function				= STEPPER
+      state					= ACTIVE
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= DOWN
+      overlay_file			= "arrow-down.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= INSENSITIVE
+      file					= "null.svg"
+      border				= { 1,1,4,4 }
+      stretch				= TRUE
+      arrow_direction		= DOWN
+      overlay_file			= "arrow-down-ins.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= NORMAL
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= RIGHT
+      overlay_file			= "arrow-right.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= PRELIGHT
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= RIGHT
+      overlay_file			= "arrow-right-pre.png"
+      overlay_stretch		= FALSE
+    }
+    image
+    {
+      function				= STEPPER
+      state					= ACTIVE
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= RIGHT
+      overlay_file			= "arrow-right.png"
+      overlay_stretch		= FALSE
+    }
+    image
+    {
+      function				= STEPPER
+      state					= INSENSITIVE
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= RIGHT
+      overlay_file			= "arrow-right-ins.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= NORMAL
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= LEFT
+      overlay_file			= "arrow-left.png"
+      overlay_stretch		= FALSE
+    }
+   image 
+    {
+      function				= STEPPER
+      state					= PRELIGHT
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= LEFT
+      overlay_file			= "arrow-left-pre.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= ACTIVE
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= LEFT
+      overlay_file			= "arrow-left.png"
+      overlay_stretch		= FALSE
+    }
+    image 
+    {
+      function				= STEPPER
+      state					= INSENSITIVE
+      file					= "null.svg"
+      border				= { 4,4,1,1 }
+      stretch				= TRUE
+      arrow_direction		= LEFT
+      overlay_file			= "arrow-left-ins.png"
+      overlay_stretch		= FALSE
+    }
+  }
+}
+
+style "range"			= "default"
+{
+  engine "pixmap" 
+  {
+    image
+    {
+      function			= FOCUS
+      file				= "null.svg"
+      stretch				= TRUE
+    }	
+    image 
+    {
+      function			= BOX
+      detail			= "trough"
+      file				= "pbtroughh.svg"
+      border			= { 6, 6, 6, 6 }
+      stretch			= TRUE
+      orientation		= HORIZONTAL
+    }	
+    image 
+    {
+      function			= BOX
+      detail			= "trough"
+      file				= "pbtroughv.svg"
+      border			= { 6, 6, 6, 6 }
+      stretch			= TRUE
+      orientation		= VERTICAL
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= NORMAL
+      file			= "slider-h.svg"
+      border		= { 7, 7, 7, 7 }
+      stretch		= TRUE
+      orientation	= HORIZONTAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+     state           	= PRELIGHT
+      file			= "slider-h-pre.svg"
+      border		= { 7, 7, 7, 7 }
+      stretch		= TRUE
+      orientation	= HORIZONTAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= ACTIVE
+      file			= "slider-h.svg"
+      border		= { 7, 7, 7, 7 }
+      stretch		= TRUE
+      orientation	= HORIZONTAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= INSENSITIVE
+      file			= "slider-h-ins.svg"
+      border		= { 7, 7, 7, 7 }
+      stretch		= TRUE
+      orientation	= HORIZONTAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= NORMAL
+      file			= "slider-v.svg"
+      border		= { 7, 7, 7, 7 }
+      stretch		= TRUE
+      orientation	= VERTICAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+     state           	= PRELIGHT
+      file			= "slider-v-pre.svg"
+      border		= { 7,7,7,7 }
+      stretch		= TRUE
+      orientation	= VERTICAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= ACTIVE
+      file			= "slider-v.svg"
+      border		= { 7,7,7,7 }
+      stretch		= TRUE
+      orientation	= VERTICAL
+	
+    }
+    image 
+    {
+      function		= SLIDER
+      state           	= INSENSITIVE
+      file			= "slider-h-ins.svg"
+      border		= { 7,7,7,7 }
+      stretch		= TRUE
+      orientation	= VERTICAL
+
+    }
+  }
+}
+
+
+
+style "menuitem"		= "default"
+{
+  xthickness			= 3
+  ythickness			= 3
+  engine "pixmap"
+  {
+    image
+    {
+      function			= BOX
+      file				= "slider-h.svg"
+      border			= { 8, 8, 8, 8 }
+      stretch			= TRUE
+    }
+    
+    image
+    {
+      function			= ARROW
+      state				= NORMAL
+      overlay_file		= "arrow-right.png"
+      overlay_stretch	= FALSE
+      arrow_direction	= RIGHT
+    }
+    image
+    {
+      function			= ARROW
+      state				= PRELIGHT
+      overlay_file		= "arrow-right-pre.png"
+      overlay_stretch	= FALSE
+      arrow_direction	= RIGHT
+    }
+	image
+    {
+       function		= VLINE
+       recolorable		= TRUE
+       file				= "linev.png"
+       border			= { 1, 1, 0, 0 }
+       stretch			= TRUE
+    }
+	image
+    {
+       function		= HLINE
+       recolorable		= TRUE
+       file				= "lineh.png"
+       border			= { 1, 1, 0, 0 }
+       stretch			= TRUE
+    }
+  }
+}
+
+style "menubar"
+ {
+	xthickness = 0
+ 	ythickness = 0
+  engine "pixmap"
+	{
+image
+    {
+      function			= BOX
+      state				= NORMAL
+      file				= "panelmenubar.svg"
+	border			= { 15,15,15,15 }
+      stretch			= TRUE
+    }	
+  }
+}
+class "GtkMenuBar" style "menubar"
+
+
+
+
+style "tearoffmenuitem"	= "menuitem"
+{
+  engine "pixmap"
+  {
+    image
+    {
+      function			= ARROW
+      state				= NORMAL
+      file				= "menu-arrow-left.png"
+      stretch			= TRUE
+      arrow_direction	= LEFT
+    }
+    image
+    {
+      function			= ARROW
+      state				= PRELIGHT
+      file				= "menu-arrow-left-pre.png"
+      stretch			= TRUE
+      arrow_direction	= LEFT
+    }
+  }
+}
+style "list-header"
+{
+   GtkTreeView::odd_row_color = "#F5F5F5"
+   GtkTreeView::even_row_color = "#FFFFFF"
+  xthickness			= 1
+  ythickness			= 1
+   engine "clearlooks" 
+{
+	
+}
+
+}
+
+style "shallow"
+{
+	xthickness=1
+	ythickness=1
+	engine "clearlooks"	
+	{
+
+	}
+}
+
+style "progressbar" 
+{
+	xthickness=1
+	ythickness=1
+	engine "clearlooks" 
+  
+	{
+	}
+}
+
+
+
+
+style "gtkentry" 
+{
+	xthickness=3
+	ythickness=3
+	
+	engine "clearlooks"	
+	{
+	
+	}
+}
+
+
+style "checkbox"
+{
+  engine "clearlooks" 
+    {
+        
+	
+    }
+}
+style "radiobutton"	= "default"
+{
+  engine "pixmap" 
+    {
+#unchecked radiobutton
+        image 
+	{
+            function        		= OPTION
+            state 				= NORMAL
+            shadow          		= OUT
+            overlay_file    		= "radio.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= OPTION
+            state 				= PRELIGHT
+            shadow          		= OUT
+            overlay_file    		= "radio-pre.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= OPTION
+            state 				= ACTIVE
+            shadow          		= OUT
+            overlay_file    		= "radio.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= OPTION
+            state 				= INSENSITIVE
+            shadow         		= OUT
+            overlay_file    		= "radio-ins.svg"
+            overlay_stretch 	= FALSE
+        }
+#checked radiobuttons
+
+        image 
+	{
+            function        		= OPTION
+	    	  state 				= NORMAL
+            shadow          		= IN
+            overlay_file    		= "radio-checked.svg"
+            overlay_stretch 	= FALSE
+        }
+ 
+ image 
+	{
+            function        		= OPTION
+	    	  state 			= ACTIVE
+            shadow          		= IN
+            overlay_file    		= "radio-checked.svg"
+            overlay_stretch 	= FALSE
+        }
+     image 
+	{
+            function        		= OPTION
+	    state 				= INSENSITIVE
+            shadow          		= IN
+            overlay_file    		= "radio-checked-ins.svg"
+            overlay_stretch 	= FALSE
+        }
+
+image 
+	{
+            function        		= OPTION
+	    state 				= PRELIGHT
+            shadow          		= IN
+            overlay_file    		= "radio-checked-pre.svg"
+            overlay_stretch 	= FALSE
+        }
+
+
+
+
+}
+}
+style "checkbox"
+{
+  engine "pixmap" 
+    {
+        image 
+	{
+            function        		= CHECK
+            state 				= NORMAL
+            shadow          		= OUT
+            overlay_file    		= "check.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= CHECK
+            state 				= PRELIGHT
+            shadow          		= OUT
+            overlay_file    		= "check-pre.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= CHECK
+            state 				= ACTIVE
+            shadow          		= OUT
+            overlay_file    		= "check.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= CHECK
+            state 				= INSENSITIVE
+            shadow          		= OUT
+            overlay_file    		= "check-ins.svg"
+            overlay_stretch 	= FALSE
+        }
+
+	
+
+        image 
+	{
+            function        		= CHECK
+	    state 				= NORMAL
+            overlay_file    		= "check-ok.svg"
+            overlay_stretch 	= FALSE
+        }
+  image 
+	{
+            function        		= CHECK
+	     state 				= PRELIGHT
+            overlay_file    		= "check-ok-pre.svg"
+            overlay_stretch 	= FALSE
+        }
+ image 
+	{
+            function        		= CHECK
+	    	  state 				= ACTIVE
+            overlay_file    		= "check-ok.svg"
+            overlay_stretch 	= FALSE
+        }
+     image 
+	{
+            function        		= CHECK
+            recolorable     		= TRUE
+	    	  state 				= INSENSITIVE
+            shadow          		= IN
+            overlay_file   		= "check-ok-ins.svg"
+            overlay_stretch 	= FALSE
+        }
+image 
+	{
+          function        		= FLAT_BOX
+          recolorable     		= TRUE
+      	stretch				= TRUE
+          file            			= "null.svg"
+          border          		= { 6, 4, 6, 4 }
+        }
+
+	
+    }
+}
+
+
+widget_class "*List" style "list-header"
+widget_class "*Tree*" style "list-header"
+widget_class "GtkCList" style "shallow"
+
+class "GtkButton"          			style "button"
+class "GtkOptionMenu"      			style "optionmenu"
+class "GtkRuler"           			style "shallow"
+class "GtkScrollbar"       			style "scrollbar"
+class "GtkProgressBar"     			style "progressbar"
+class "GtkRange"         			style "range"
+class "GtkMenu"       				style "progressbar"
+class "GtkItem"           			style "menuitem"
+class "GtkTearoffMenuItem"			style "tearoffmenuitem"
+class "GtkNotebook"      			style "shallow"			
+class "GtkHandleBox"    			style "gtkentry"
+class "GtkEventBox"    				style "shallow"
+class "GtkPaned"       				style "shallow"
+widget "gtk-tooltips"  				style "shallow"
+class "GtkWidget" 				style "shallow"
+class "GtkEntry"  				style "gtkentry"
+class "GtkFrame"  				style "shallow"
+class "GtkCheckButton"     			style "checkbox"
+class "GtkStatusbar"   				style "shallow"
+class "GtkSpinButton"   	 		style "gtkentry"
+class "GTKCombo" 				style 	"optionmenu"
+class "GTKComboEntry"				style	"gtkentry"
+class "*Tool*" 					style "shallow"
+widget_class "*.GtkFrame.GtkLabel" 		style "shallow"
+widget_class "*.GtkFrame.GtkLabel" 		style "shallow"
+widget_class "BasePWidget.GtkEventBox.GtkTable.GtkFrame" style "shallow"
+#widget_class "*Combo*" style "optionmenu"
+class "GtkRadioButton"     			style "radiobutton"
+class "GtkRadioMenuItem"    			style "radiobutton"
+class "GtkEditable"				style "gtkentry"
+widget "*Seperator*"				style "gtkentry"

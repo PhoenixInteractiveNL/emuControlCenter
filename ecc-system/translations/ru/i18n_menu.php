@@ -188,7 +188,9 @@ $i18n['menu'] = array(
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
 		"Просмотреть папку документов",
-
-
+		
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"Download PLATFORM images",
 );
 ?>

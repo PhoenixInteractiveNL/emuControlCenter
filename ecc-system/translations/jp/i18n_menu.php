@@ -1,4 +1,4 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -85,7 +85,7 @@ $i18n['menu'] = array(
 	'lbl_export_submenu' =>
 		"ï¿½fï¿½[ï¿½^ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÌƒGï¿½Nï¿½Xï¿½|ï¿½[ï¿½g",
 	'lbl_rom_rescan_folder' =>
-		"ROMï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½í –íºï¿½",
+		"ROMï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 	'lbl_meta_remove' =>
 		"DBï¿½ï¿½ï¿½ï¿½METAï¿½ï¿½íœ",
 	'lbl_rating_unset' =>
@@ -189,6 +189,8 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Browse documents folder",
 
-
+	/* 1.11 BUILD 06 */
+	'lbl_image_injectplatform' =>
+		"Download PLATFORM images",
 );
 ?>

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2009/07/09 
+ * date:	2012/06/03 
  * ------------------------------------------
  **/
 $i18n['dropdown_meta_storage'] = array(
@@ -65,15 +65,15 @@ $i18n['dropdown_meta_region'] = array(
 	'[[Japan]]' =>
 		"Japón",
 	'[[USA]]' =>
-		"U.S.A.",
+		"USA.",
 	'[[World]]' =>
 		"Mundial",
 	'[[Australia]]' =>
 		"Australia",
 	'[[USA-Europe]]' =>
-		"USA-Europe",
+		"USA-Europa",
 	'[[USA-Japan]]' =>
-		"USA-Japan",
+		"USA-Japón",
 );
 
 /* 0.9.8 FYEO 04 */
@@ -89,9 +89,9 @@ $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"1P Only",
+		"1P Sólo",
 	'[[01]]' =>
-		"2P Only",
+		"2P Sólo",
 	'[[02]]' =>
 		"2",
 	'[[03]]' =>

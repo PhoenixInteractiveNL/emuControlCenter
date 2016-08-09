@@ -1,1 +1,0 @@
-..\thirdparty\autoit\AutoIt3.exe eccDatFileUpdater.au3

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2009/07/09
+ * date:	2011/07/16
  * ------------------------------------------
  **/
 $i18n['meta'] = array(
@@ -29,7 +29,7 @@ $i18n['meta'] = array(
 	'lbl_category' =>
 		"Categoría",
 	'lbl_developer' =>
-		"Creador",
+		"Desarrollador",
 	'lbl_publisher' =>
 		"Editor",
 	'lbl_year' =>
@@ -130,14 +130,14 @@ $i18n['dropdownDumpType'] = array(
 
 	/* 1.1 WIP 02 */
 	'[misc_fav]' =>
-		"Favorite dump",
+		"Volcado favorito",
 	'[misc_amiga_WHD]' =>
-		"Amiga WHDLoad dump",
+		"Volcado Amiga WHDLoad",
 	'[misc_amiga_ADF]'=>
-		"Amiga ADF dump",
+		"Volcado Amiga ADF",
 	'[misc_amiga_IPF]' =>
-		"Amiga IPF dump",
+		"Volcado Amiga IPF",
 	'[misc_amiga_SPS]' =>
-		"Amiga SPS dump",
+		"Volcado Amiga SPS",
 );
 ?>

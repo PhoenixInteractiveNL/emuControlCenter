@@ -336,17 +336,36 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_usecuefile' =>
 		"use .cue file",
 
-    /* 0.9.9. WIP 01 */
+	/* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
 		"Third Party",
 	'startConfThirdPartyXpadder' =>
 		"Start 'xpadder' at startup",
 
-    /* 0.9.9. WIP 06 */
+	/* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
 		"Options",
 	'lbl_emu_assign_refresh_eccscript' =>
 		"Refresh",
 
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"unpack ALL files including subdirs",
+
+	'emuUnpackNotelabel' =>
+		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+
+	'startConfDeleteUnpacked' =>
+		"FIREMEL DE PIEMEL exit",
+
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"unpack ALL files including subdirs",
+
+	'emuUnpackNotelabel' =>
+		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+
+	'startConfDeleteUnpacked' =>
+		"Empty ECC unpack folder on exit",
 );
 ?>

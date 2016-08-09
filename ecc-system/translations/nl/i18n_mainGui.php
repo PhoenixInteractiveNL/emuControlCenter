@@ -84,5 +84,11 @@ $i18n['mainGui'] = array(
 	/* 1.1 WIP03 */
 	'mainlist_tab_images' =>
 		"PLAATJES",			
+
+	/* 1.11 BUILD 9 */
+	'3dgalleryStart' =>
+		"Start",
+	'3dgalleryConfig' =>
+		"Instellen",		
 );
 ?>

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (Spanish)
  * author:	Jarlaxe
- * date:	2009/07/09 
+ * date:	2011/07/16
  * ------------------------------------------
  */
 $i18n['popupConfig'] = array(
@@ -184,7 +184,7 @@ $i18n['popupConfig'] = array(
 	'emu_info_nodata' =>
 		"Información aún no disponible...",
 	'emu_info_footer%s' =>
-		"Quizás conoces un buen emulador para esta plataforma!\nPuedes añadir su información al Foro en\n%s",
+		"Quizás conozcas un buen emulador para esta plataforma!\nPuedes añadir su información al Foro en\n%s",
 	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
@@ -348,5 +348,14 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_refresh_eccscript' =>
 		"Actualizar",
 
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"unpack ALL files including subdirs",
+
+	'emuUnpackNotelabel' =>
+		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+
+	'startConfDeleteUnpacked' =>
+		"Empty ECC unpack folder on exit",
 );
 ?>

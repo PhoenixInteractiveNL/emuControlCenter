@@ -1,10 +1,10 @@
-<?
+п»ї<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	ru (russian)
- * author:	ALLiGaToR
- * date:	2009/07/09
+ * language:	es (Spanish)
+ * author:	Jarlaxe
+ * date:	2011/07/16
  * ------------------------------------------
  */
 $i18n['popupConfig'] = array(
@@ -14,339 +14,348 @@ $i18n['popupConfig'] = array(
 
 	/* ECC */
 	'lbl_ecc_hdl' =>
-		"Настроить emuControlCenter",
+		"Configura emuControlCenter",
 	'lbl_ecc_userfolder' =>
-		"Папки пользователя (для изображений и экспорта)",
+		"Carpeta de usuario (para imГЎgenes y exportaciones)",
 	'lbl_ecc_userfolder_button' =>
-		"Сменить папку",
+		"Cambiar carpeta",
 	'title_ecc_userfolder_popup' =>
-		"Выбрать новое местоположение папки",
+		"Elije la ruta de la nueva carpeta",
 	/* ECC-OPTIONS */
 	'lbl_ecc_otp_hdl' =>
-		"Опции",
+		"Opciones",
 	'lbl_ecc_opt_detail_pp' =>
-		"Детально на страницу",
+		"Lista detallada (por pГЎgina)",
 	'lbl_ecc_opt_list_pp' =>
-		"Листов на страницу",
+		"Lista simple (por pГЎgina)",
 	/* ECC-COLOR&FONTS */
 	'lbl_ecc_colfont_hdl' =>
-		"Цвета и шрифты",
+		"Colores y Fuentes",
 	'lbl_ecc_colfont_font_list' =>
-		"Список шрифтов и размеров",
+		"Fuente y tamaГ±o del listado",
 	'title_ecc_colfont_font_list_popup' =>
-		"Пожалуйста выюберите шрифт для просмотра списка",
+		"Por favor, elije una Fuente para lista Detallada/Simple",
 	'lbl_ecc_colfont_font_global' =>
-		"Общие шрифты и размеры",
+		"Fuente y tamaГ±o GLOBAL",
 	'title_ecc_colfont_font_global' =>
-		"Пожалуйста выберите общий шрифт",
+		"Por favor, elije una Fuente global",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
-		"Автозапуск",
+		"Inicio",
 	'btn_ecc_startup' =>
-		"Открыть настройки автозапуска",
-
+		"Abrir configuraciГіn de inicio",
+	
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
 		"%s (%s)",
 	'lbl_emu_platform_name' =>
-		"Имя системы",
+		"Nombre de la plataforma",
 	'lbl_emu_platform_category' =>
-		"Категория системы",
+		"CategorГ­a de la plataforma",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
-		"Назначение эмулятора (%s)",
+		"AsignaciГіn de emulador (%s)",
 	'lbl_emu_assign_path' =>
-		"Путь к эмулятору",
+		"Ruta del emulador",
 	'btn_emu_assign_path_select' =>
-		"Выбрать эмулятор",
+		"Seleccionar emulador",
 	'title_emu_assign_path_select_popup%s' =>
-		"Выбрать эмулятор для %s",
+		"Selecciona emulador para %s",
 	'lbl_emu_assign_parameter' =>
-		"Параметры командной строки",
+		"ParГЎmetros de la lГ­nea de comandos",
 	'lbl_emu_assign_escape' =>
-		"escape path",
+		"ruta de escape",
 	'lbl_emu_assign_eightdotthree' =>
-		"8.3 Filename",
+		"nombre de archivo 8.3",
 	'lbl_emu_assign_nameonly' =>
-		"только имя файла",
+		"sГіlo nombre de archivo",
 	'lbl_emu_assign_noextension' =>
-		"без расширения",
-
+		"sin extensiГіn",
+	
 	/* DAT */
 	'lbl_dat_hdl' =>
-		"Настроить файл информации",
+		"ConfiguraciГіn archivo de datos",
 	'lbl_dat_author' =>
-		"Автор",
+		"Autor",
 	'lbl_dat_website' =>
-		"Сайт",
+		"PГЎgina web",
 	'lbl_dat_email' =>
-		"Почта",
+		"Email",
 	'lbl_dat_comment' =>
-		"Комментарии",
+		"Comentario",
 	/* DAT-OPTIONS */
 	'lbl_dat_opt_hdl' =>
-		"Опции",
+		"Opciones",
 	'lbl_dat_opt_namestrip' =>
-		"Очистить файл информации romcenter",
-
+		"Limpiar archivo de datos",
+		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
-		"Опции - детали РОМа",
+		"Opciones - Detalles de la Rom",
 	'lbl_img_otp_list_imagesize' =>
-		"Размеры изображения",
+		"TamaГ±o de imagen",
 	'lbl_img_otp_list_aspectratio' =>
-		"Сохранить пропорции",
+		"RelaciГіn de aspecto",
 	/* 0.9 FYEO 4 */
 	'lbl_img_otp_list_fastrefresh' =>
-		"Быстрое обновление",
-
+		"ActualizaciГіn rГЎpida",
+		
 	/* 0.9 FYEO 9 */
 	'confEccStatusLogCheck' =>
-		"Включить ведение лога",
+		"Activar registro",
 	'confEccStatusLogOpen' =>
-		"Показать логфайл",
-
+		"Mostrar archivos de registro",
+		
 	/* 0.9.1 FYEO 5 */
 	'tab_label_emulators' =>
-		"Эмуляторы",
+		"Emuladores",
 	'tab_label_general' =>
-		"Основное",
+		"General",
 	'tab_label_datfiles' =>
-		"Файлы информации",
+		"Archivos DAT",
 	'tab_label_images' =>
-		"Изображения",
+		"ImГЎgenes",
 	'tab_label_colorsandfonts' =>
-		"Цвета и шрифты",
-
+		"Colores y fuentes",
+	
 	/* 0.9.2 FYEO 1 */
 	'lbl_emu_tips' =>
-		"Известные ссылки и информация по эмулятору",
+		"Enlaces e infos de emuladores",
 	'lbl_img_opt_conv' =>
-		"Опции - Конвертер изображений",
+		"Opciones - ImageConverter",
 	'lbl_img_opt_conv_quality' =>
-		"Качество превью",
+		"Calidad de las miniaturas",
 	'lbl_img_opt_conv_quality_def%s' =>
-		"(По умолчанию: %s)",
+		"(Por defecto: %s)",
 	'lbl_img_opt_conv_minsize' =>
-		"Минимальный размер",
+		"TamaГ±o original mГ­nimo",
 	'lbl_img_opt_conv_minsize_def%s' =>
-		"(По умолчанию: %s)",
+		"(Por defecto: %s)",
 	'lbl_col_opt_global' =>
-		"Основное",
+		"Global",
 	'lbl_col_opt_list' =>
-		"Лист",
+		"Lista",
 	'lbl_col_opt_options' =>
-		"Опции",
+		"Opciones",
 
 	/* 0.9.2 FYEO 3 */
 	'lbl_emu_assign_use_eccscript' =>
 		"eccScript",
-
+	
 	/* 0.9.2 FYEO 5 */
 	'lbl_emu_assign_edit_eccscript' =>
-		"Изменить eccScript",
+		"Editar eccScript",	
 	'lbl_emu_assign_edit_eccscript_error' =>
-		"Вы можете добавить скрипт только когда у добавлен эмулятор!",
+		"Puedes agregar un script, si has aГ±adido un emulador!",	
 
 	/* 0.9.2 FYEO 6 */
 	'lbl_emu_assign_eccscript_hdl' =>
-		"Опции eccScript",
+		"Opciones eccScript",
 	'lbl_emu_assign_delete_eccscript' =>
-		"удалить",
+		"Borrar",
 	'msg_emu_assign_delete_eccscript%s' =>
-		"Удалить eccScript\n\n%s\n\nВы уверены?",
+		"Eliminar eccScript\n\n%s\n\nEstГЎs seguro?",
 
 	/* 0.9.2 FYEO 8 */
 	'tab_label_startup' =>
-		"Запуск",
+		"Inicio",
 	'startConfHdl' =>
-		"Настройки запуска",
+		"ConfiguraciГіn de inicio",
 	'startConfSoundHdl' =>
-		"Проиграть звук",
+		"Reproducir sonido de inicio",
 	'startConfOptHdl' =>
-		"Опции",
+		"Opciones",
 	'startConfUpdate' =>
-		"Проверить на наличие обновлений",
+		"Buscar actualizaciones al iniciar",
 	'startConfMinimize' =>
-		"Минимизировать в трей",
+		"Minimizar a la bandeja",
 	'startConfSoundSelect' =>
-		"Выбрать звук",
-
+		"Elegir sonido",
+	
 	/* 0.9.2 FYEO 9 */
 	'lbl_preview_impossible' =>
-		"Предпросмотр не возможен. Настройки неправильные!",
+		"Vista previa no disponible. Falta o estГЎ mal configurada!",
 
 	/* 0.9.2 FYEO 10 */
 	'lbl_emu_assign_edit_eccscript_error_notfound' =>
-		"Не смогли найти эмулятор! Пожалуйста выберите сначала эмулятор!",
+		"No se pudo encontrar un emulador! Por favor, elige un emulador primero!",
 	'lbl_emu_assign_create_eccscript' =>
-		"Создать eccScript",
+		"Crear eccScript",
 	'emu_info_nodata' =>
-		"Пока нет информации...",
+		"InformaciГіn aГєn no disponible...",
 	'emu_info_footer%s' =>
-		"Возможно, вы знаете хороший эмулятор для этой системы?\nТогда сообщите пожалуйста нам на форум \n%s",
-
+		"QuizГЎs conozcas un buen emulador para esta plataforma!\nPuedes aГ±adir su informaciГіn al Foro en\n%s",
+	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
-		"Выбрать звук запуска",
+		"Elegir sonido de inicio",
 
 	/* 0.9.2 FYEO 14 */
 	'title_emu_assign_found_eccscript' =>
-		"eccScript найден",
+		"eccScript encontrado",
 	'msg_emu_assign_found_eccscript%s' =>
-		"eccScript был найден для выбранного эмулятора!\n\nАктивировать этот скрипт %s",
+		"Se ha encontrado un eccScript para el emulador seleccionado!\n\nActivar este eccScript %s",
 	'title_popup_save' =>
-		"перезапустить ECC",
+		"Reiniciar ecc",
 	'msg_popup_save' =>
-		"Перезапустить ECC чтобы увидеть изменения?",
-
+		"ВїReiniciar emuControlCenter para ver los cambios?",
+	
 	/* 0.9.2 FYEO 15 */
 	'title_emu_found_eccscript_preview' =>
-		"Информация:",
+		"InformaciГіn:",
 	'title_emu_found_eccscript_nopreview' =>
-		"Информации нет!",
+		"InformaciГіn no disponible!",
 
 	/* 0.9.6 FYEO 05 */
 	'lbl_emu_assign_executeinemufolder' =>
-		"Начать с папки эмуляторов",
+		"Iniciar desde la carpeta",
 	'lbl_preview_selectEmuFirst' =>
-		"Вы не выбрали эмулятор! Используйте кнопку выше!",
+		"No has elegido un emulador! Usa el botГіn para seleccionar uno!",
 
 	/* 0.9.6 FYEO 13 */
 	'winTitleConfiguration' =>
-		"Конфигурации",
+		"ConfiguraciГіn",
 
 	'colOptGlobalFont' =>
-		"Шрифт",
+		"Fuente",
 
 	'colOptListBg0' =>
-		"Задний план",
+		"Fondo",
 	'colOptListBg1' =>
-		"Задний план 1",
+		"Fondo 1",
 	'colOptListBg2' =>
-		"Задний план 2",
+		"Fondo 2",
 	'colOptListBgHilight' =>
-		"Задний план выбран",
+		"Fondo seleccionado",
 	'colOptListBgImage' =>
-		"Изображение на задний план",
+		"Imagen de fondo",
 	'colOptListText' =>
-		"Текст",
+		"Texto",
 	'colOptListTextHilight' =>
-		"Текст выбран",
+		"Texto seleccionado",
 	'colOptListFont' =>
-		"Шрифт",
+		"Fuente",
 
 	'colOptOptionsBg1' =>
-		"Задний план 1",
+		"Fondo 1",
 	'colOptOptionsBgHilight' =>
-		"Задний план выбран",
+		"Fondo seleccionado",
 	'colOptOptionsText' =>
-		"Текст",
+		"Texto",
 
 	/* 0.9.6 FYEO 17 */
 	'colImgSlotUnsetBg' =>
-		"Задний план не используется",
+		"Fondo no utilizado",
 	'colImgSlotSetSelect' =>
-		"Выбрано - задний план не используется",
+		"Fondo no utilizado seleccionado",
 	'colImgSlotSetBg' =>
-		"Задний план используется",
+		"Fondo usado",
 	'colImgSlotUnsetSelect' =>
-		"Выбрано - задний план используется",
+		"Fondo usado seleccionado",
 	'colImgSlotText' =>
-		"Текст",
+		"Texto",
 
 	'colOptOptionsBg2' =>
-		"Задний план 2",
+		"Fondo 2",
 
 	'tabEmuConfig' =>
-		"Настройки эмулятора",
+		"ConfiguraciГіn del emulador",
 	'tabEmuPlatformSettings' =>
-		"Настройки системы",
+		"Ajustes de plataforma",
 	'tab_label_platforms' =>
-		"Системы / Эмуляторы",
-
+		"Plataformas / Emuladores",
+	
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
-		"Сохранить настройки режима просмотра (только эксперты)",
-
+		"Guardar la configuraciГіn de visualizaciГіn (sГіlo expertos)",
+	
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
-		"Ссылки и информация",
-
+		"Enlaces e Infos",
+		
 	/* 0.9.6 WIP 20 */
 	'startConfBugreportSend' =>
-		"Автоматически послать файл ошибок при старте",
+		"Enviar automГЎticamente un informe de errores al iniciar",
 	'lbl_ecc_opt_language' =>
-		"Языковые настройки",
+		"Selecciona un idioma",
 	'tab_label_language' =>
-		"Язык",
-
+		"Idioma",
+	
 	/* 0.9.7 WIP 01 */
 	'confEccSilentParsing' =>
-		"Тихий анализ РОМов",
-
+		"BГєsqueda de Roms silenciosa (no muestra ventanas 'popup')",
+		
 	'emuAssignGlobalEnableEccScript' =>
-		"активировать eccScript",
+		"activar eccScript",
 	'emuAssignFileextLabel' =>
-		"Эмулятор для расширения файла",
+		"Emulador para esta extensiГіn",
 	'emuAssignPreviewLabel' =>
-		"Командная строка",
+		"Vista previa de la lГ­nea de comandos",
 	'emuAssignGlobalActive%s' =>
-		"Запуск РОМов с расширением '%s' через этот эмулятор",
+		"Ejecutar roms con extensiГіn '%s' con este emulador",
 	'emuAssignGlobalActiveGlobal%s' =>
-		"Активировать эмулятор '%s'",
+		"Activar todas las capturas del emulador '%s'",
 	'lbl_emu_tips_ecc' =>
-		"Ссылки ECC",
+		"enlaces ecc",	
 	'emuPlatformActiveState' =>
-		"активировать систему",
+		"activar plataforma",
 	'tabGeneralHlListOptions' =>
-		"Опции просмотра",
-
+		"Opciones de visualizaciГіn del listado",	
+		
 	/* 0.9.7 WIP 04 */
 	'tab_label_themes' =>
-		"Themes",
+		"Temas",
 	'lblThemeSelect' =>
-		"Select theme",
+		"Elige un tema",
 
 	/* 0.9.7 WIP 10 */
 	'emuAssignLabelZipUnpack' =>
-		"Автораспаковка ZIP/7ZIP",
+		"Auto-descomprimir ZIP/7ZIP",
 	'emuAssignGlobalCheckZipUnpackActive' =>
-		"автоматически распаковывать архивы ZIP/7ZIP",
+		"Descomprimir automГЎticamente archivos ZIP/7ZIP",
 	'emuAssignGlobalCheckZipUnpackSkip' =>
-		"Пропускать уже распакованные файлы",
+		"Saltarse archivos ya descomprimidos (rГЎpido)",
 	'emuAssignGlobalCheckZipUnpackClean' =>
-		"Очищать папку для распакованных файлов",
+		"Limpiar carpeta ecc-unpack",
 	'emuAssignGlobalCheckZipUnpackOpen' =>
-		"Открыть папку распакованных файлов",
+		"Abrir carpeta ecc-unpack",
 
 	/* 0.9.7 WIP 10 */
 	'conEccSaveGuiSettings' =>
-		"Сохранить настройки интерфейса",
+		"Save gui settings",
 
 	/* 0.9.8 WIP 02 */
 	'lbl_img_otp_list_imagesize_default' =>
-		"По умолчанию: 120x80",
+		"Por defecto: 120x80",
 	'lbl_img_otp_list_aspectratio_default' =>
-		"По умолчанию: выкл",
+		"Por defecto: desactivado",
 	'lbl_img_otp_list_fastrefresh_default' =>
-		"По умолчанию: выкл - экспериментно",
+		"Por defecto: desactivado - experimental",
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"используйте .cue файл",
+		"usar archivos .cue",
 
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
-		"Третьи стороны",
+		"Software de terceros",
 	'startConfThirdPartyXpadder' =>
-		"Запустить 'xpadder' при закрузке",
+		"Ejecutar 'xpadder' al iniciar",
 
     /* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
-		"Опции",
+		"Opciones",
 	'lbl_emu_assign_refresh_eccscript' =>
-		"Обновить",
+		"Actualizar",
 
+	/* 1.11 BUILD 6 */
+	'emuAssignGlobalCheckZipUnpackAll' =>
+		"Extraer TODOS los archivos incluyendo subdirectorios",
+
+	'emuUnpackNotelabel' =>
+		'Nota: En la pestaГ±a [Inicio] puedes purgar la carpeta de archivos extraidos cuando cierres ECC.',
+
+	'startConfDeleteUnpacked' =>
+		"Vaciar la carpeta de archivos extraidos al salir de ECC",
 );
 ?>

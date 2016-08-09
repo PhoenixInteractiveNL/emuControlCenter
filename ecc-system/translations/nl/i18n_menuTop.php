@@ -211,5 +211,29 @@ $i18n['menuTop'] = array(
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
 		'Handmatig DAT bestanden updaten (DFU)',
+
+	/* 1.11 BUILD 4 */
+	'mTopOptionCreateStartmenuShortcuts' =>
+		'Maak startmenu snelkoppelingen',
+
+	/* 1.11 BUILD 6 */
+	'mTopDeveloperSQL' =>
+		'SQlite bewerker',
+
+	'mTopDeveloperGUI' =>
+		'Glade GUI bewerker',
+
+	'mTopAutoIt3GUI' =>
+		'Maak een Autoit3 GUI (Koda)',
+
+	/* 1.11 BUILD 7 */
+	'mTopDeveloper' =>
+		'Ontwikkelen',
+
+	'mTopServices' =>
+		'Service',
+
+	'mTopServicesKameleonCode' =>
+		'Voer de Kameleon code in',
 );
 ?>

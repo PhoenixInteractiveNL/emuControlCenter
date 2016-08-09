@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   width="48pt"
+   height="48pt"
+   viewBox="0 0 256 256"
+   overflow="visible"
+   enable-background="new 0 0 256 256"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg153"
+   sodipodi:version="0.32pre"
+   sodipodi:docname="/home/cschalle/gnome-themes-extras/Nuvola/icons/scalable/stock/edit.svg"
+   sodipodi:docbase="/home/cschalle/gnome-themes-extras/Nuvola/icons/scalable/stock">
+  <defs
+     id="defs182" />
+  <sodipodi:namedview
+     id="base" />
+  <g
+     id="Layer_2"
+     stroke="#000000">
+    <path
+       fill="none"
+       stroke="none"
+       d="M256,256H0V0h256V256z"
+       id="path155" />
+  </g>
+  <g
+     id="Layer_1"
+     stroke="#000000">
+    <path
+       opacity="0.2"
+       stroke="none"
+       d="M50.867,22.925c-8.937,0-16.207,7.27-16.207,16.207v190.661    c0,8.937,7.27,16.207,16.207,16.207h167.783c8.937,0,16.206-7.271,16.206-16.207V39.132c0-8.937-7.27-16.207-16.206-16.207H50.867    z"
+       id="path157" />
+    <path
+       fill="#003366"
+       stroke="none"
+       d="M43.97,16.206c-8.937,0-16.207,7.27-16.207,16.206v190.663    c0,8.936,7.27,16.206,16.207,16.206h167.783c8.936,0,16.206-7.271,16.206-16.206V32.412c0-8.936-7.271-16.206-16.206-16.206H43.97    z"
+       id="path158" />
+    <path
+       fill="#3399FF"
+       stroke="none"
+       d="M32.53,223.074c0,6.317,5.122,11.439,11.44,11.439h167.783    c6.316,0,11.439-5.122,11.439-11.439V32.412c0-6.318-5.123-11.44-11.439-11.44H43.97c-6.318,0-11.44,5.122-11.44,11.44V223.074z"
+       id="path159" />
+    <linearGradient
+       id="XMLID_1_"
+       gradientUnits="userSpaceOnUse"
+       x1="86.395"
+       y1="86.2764"
+       x2="312.3286"
+       y2="312.2099">
+      <stop
+         offset="0"
+         style="stop-color:#FFFFFF"
+         id="stop161" />
+      <stop
+         offset="1"
+         style="stop-color:#99CCFF"
+         id="stop162" />
+      <a:midPointStop
+         offset="0"
+         style="stop-color:#FFFFFF"
+         id="midPointStop163" />
+      <a:midPointStop
+         offset="0.5"
+         style="stop-color:#FFFFFF"
+         id="midPointStop164" />
+      <a:midPointStop
+         offset="1"
+         style="stop-color:#99CCFF"
+         id="midPointStop165" />
+    </linearGradient>
+    <path
+       fill="url(#XMLID_1_)"
+       stroke="none"
+       d="M43.97,25.739c-3.679,0-6.673,2.994-6.673,6.673v190.663    c0,3.679,2.994,6.673,6.673,6.673h167.783c3.679,0,6.673-2.994,6.673-6.673V32.412c0-3.679-2.994-6.673-6.673-6.673H43.97z"
+       id="path166" />
+    <path
+       opacity="0.4"
+       fill="#FFFFFF"
+       stroke="none"
+       d="M161.228,106.77c17.724-16.617,39.026-24.792,61.965-28.852V32.412    c0-6.318-5.123-11.44-11.439-11.44H43.97c-6.318,0-11.44,5.122-11.44,11.44V168.99C79.797,172.557,124.503,139.668,161.228,106.77    z"
+       id="path167" />
+    <path
+       display="none"
+       fill="#CC6633"
+       stroke="none"
+       d="M199.466,44.37L174.48,31.817l-56.102,111.662c0,0,0.524,0.264,1.084,0.545    c10.732-2.683,21.618,2.015,25.293,11.405c0.204,0.518,0.374,1.041,0.525,1.566c0.544,0.273,1.027,0.517,1.027,0.517    l56.104-111.662L199.466,44.37z"
+       id="path168" />
+    <g
+       id="g169">
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         stroke-linejoin="round"
+         d="M50,67h25"
+         id="path170" />
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         stroke-linejoin="round"
+         d="M72.5,44.5v25"
+         id="path171" />
+    </g>
+    <g
+       id="g172">
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         d="M50,189h25"
+         id="path173" />
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         d="M72.5,211.5v-25"
+         id="path174" />
+    </g>
+    <g
+       id="g175">
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         stroke-linejoin="round"
+         d="M206,67h-25"
+         id="path176" />
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         stroke-linejoin="round"
+         d="M183.5,44.5v25"
+         id="path177" />
+    </g>
+    <g
+       id="g178">
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         d="M206,189h-25"
+         id="path179" />
+      <path
+         fill="none"
+         stroke="#003366"
+         stroke-width="8"
+         d="M183.5,211.5v-25"
+         id="path180" />
+    </g>
+  </g>
+</svg>

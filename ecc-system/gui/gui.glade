@@ -28,7 +28,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="menuTopRomAddNewRom">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">This will add roms for the selected platform!</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Add new ROMS</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_add_new_roms_to_ecc1_activate"/>
@@ -87,7 +87,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopRomOptimize">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">Optimize the ecc-Database for the selected platform e.g. if you move/remove files at your harddrive</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Optimize ROMS</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_optimize_roms_in_ecc1_activate"/>
@@ -109,7 +109,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopRomRemoveDups">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">This will remove all duplicate roms from your ecc database</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Remove duplicate ROMS from DB</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menubar_maint_duplicate_remove_all_activate"/>
@@ -125,7 +125,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopRomRemoveRoms">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">Remove all roms of the selected platform from the ecc-database</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Remove ROMS</property>
                         <property name="use_underline">True</property>
                         <accelerator key="R" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK" signal="activate"/>
@@ -159,7 +159,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopEmuConfig">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">Change the emulator assigned to the selected platform</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Configuration</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_edit/assign_emulator1_activate"/>
@@ -201,7 +201,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatImportEcc">
                                 <property name="visible">True</property>
-                                <property name="tooltip" translatable="yes">You can import emuControlCenter Datfiles (*.ecc)  into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="label" translatable="yes">Import emuControlCenter Datfile</property>
                                 <property name="use_underline">True</property>
                                 <signal name="activate" handler="on_import_emuControlCenter_datfile_activate"/>
@@ -217,6 +217,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatImportCtrlMAME">
                                 <property name="visible">True</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="label" translatable="yes">Import CtrlMame Datfile</property>
                                 <property name="use_underline">True</property>
                                 <signal name="activate" handler="on_mTopDatImportCtrlMAME_activate"/>
@@ -232,7 +233,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatImportRc">
                                 <property name="visible">True</property>
-                                <property name="tooltip" translatable="yes">You can import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="label" translatable="yes">Import Romcenter Datfile</property>
                                 <property name="use_underline">True</property>
                                 <signal name="activate" handler="on_import_ecc/romcenter_datfile1_activate"/>
@@ -259,7 +260,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatExportEccFull">
                                 <property name="visible">True</property>
-                                <property name="tooltip" translatable="yes">This will export all your meta-data of the selected platform to a Datfile (plaintext).</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="label" translatable="yes">Export ecc Datfile full</property>
                                 <property name="use_underline">True</property>
                                 <signal name="activate" handler="on_export_ecc_datfile_full1_activate"/>
@@ -275,6 +276,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatExportEccUser">
                                 <property name="visible">True</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="tooltip" translatable="yes">This will export only the data modified by you of the selected platform to a Datfile (plaintext).</property>
                                 <property name="label" translatable="yes">Export ecc Datfile user</property>
                                 <property name="use_underline">True</property>
@@ -291,7 +293,7 @@
                             <child>
                               <widget class="GtkImageMenuItem" id="mTopDatExportEccEsearch">
                                 <property name="visible">True</property>
-                                <property name="tooltip" translatable="yes">This will export only the search result of eSearch meta-data of the selected platform to a Datfile (plaintext).</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="label" translatable="yes">Export ecc Datfile eSearch</property>
                                 <property name="use_underline">True</property>
                                 <signal name="activate" handler="on_export_ecc_datfile_esearch1_activate"/>
@@ -311,7 +313,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopDatClear">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">Clear data from Datfiles from the selected Platform!</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Empty datfile database</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_empty_datfile_database1_activate"/>
@@ -370,7 +372,7 @@
                 <child internal-child="image">
                   <widget class="GtkImage" id="image15250">
                     <property name="visible">True</property>
-                    <property name="stock">gtk-justify-fill</property>
+                    <property name="stock">gtk-dnd</property>
                     <property name="icon_size">1</property>
                   </widget>
                 </child>
@@ -378,7 +380,7 @@
             </child>
             <child>
               <widget class="GtkImageMenuItem" id="mTopRomDB">
-                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Disabled!, service is no longer online!</property>
                 <property name="label" translatable="yes">RomDB</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_import/export1_activate"/>
@@ -386,7 +388,7 @@
                   <widget class="GtkMenu" id="mTopRomDB_menu">
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopDatImportOnlineRomdb">
-                        <property name="visible">True</property>
+                        <property name="tooltip" translatable="yes">Disabled!, service is no longer online!</property>
                         <property name="label" translatable="yes">Import from Internet (romdb)</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_mTopDatImportOnlineRomdb_activate"/>
@@ -401,7 +403,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopDatExportOnlineRomdb">
-                        <property name="visible">True</property>
+                        <property name="tooltip" translatable="yes">Disabled!, service is no longer online!</property>
                         <property name="label" translatable="yes">Export to Internet (romdb)</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_mTopDatExportOnlineRomdb_activate"/>
@@ -735,7 +737,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopOptionDbVacuum">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">Internal function to cleanup and shrink the database</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Optimize database</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menubar_maint_db_vacuum_activate"/>
@@ -749,14 +751,9 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator17">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
                       <widget class="GtkImageMenuItem" id="mTopOptionCreateUserFolder">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">This will create all ecc user-folders like emus, roms, exports aso. Use this option, if you have created a new platform!</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Create all ecc user-folders</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_create_all_ecc_user-folders1_activate"/>
@@ -770,14 +767,9 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator33">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
                       <widget class="GtkImageMenuItem" id="mTopOptionCleanHistory">
                         <property name="visible">True</property>
-                        <property name="tooltip" translatable="yes">This will clean up the ecc history.ini. Ecc stores data like selected Directories, selected Options aso. in this file.</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Reset ecc history</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menubarMaintCleanHistory_activate"/>
@@ -791,13 +783,9 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator43">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
                       <widget class="GtkImageMenuItem" id="mTopOptionBackupUserdata">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Backup userdata</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_mTopOptionBackupUserdata_activate"/>
@@ -811,13 +799,29 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator30">
+                      <widget class="GtkImageMenuItem" id="mTopOptionCreateStartmenuShortcuts">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Create startmenu shortcuts</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image58">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-redo</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separator43">
                         <property name="visible">True</property>
                       </widget>
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopOptionConfig">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Configuration</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menubar_config_ecc_config_activate"/>
@@ -851,6 +855,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopToolEccGtkts">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">GTK Theme Select</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_item2_activate"/>
@@ -866,6 +871,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopToolEccDiagnostics">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">ECC Diagnostics</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_send_bugreport1_activate"/>
@@ -881,6 +887,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopDatDFU">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Manual Datfile Updater (DFU)</property>
                         <property name="use_underline">True</property>
                         <child internal-child="image">
@@ -895,6 +902,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopAutoIt3GUI">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Create Autoit3 GUI (Koda)</property>
                         <property name="use_underline">True</property>
                         <child internal-child="image">
@@ -907,6 +915,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopImageIPC">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">ImagePackCreator (IPC)</property>
                         <property name="use_underline">True</property>
                         <child internal-child="image">
@@ -922,7 +931,123 @@
                 <child internal-child="image">
                   <widget class="GtkImage" id="image15274">
                     <property name="visible">True</property>
-                    <property name="stock">gtk-find</property>
+                    <property name="stock">gtk-execute</property>
+                    <property name="icon_size">1</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkImageMenuItem" id="mTopDeveloper">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Developer</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="mTopDeveloper_menu">
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopDeveloperSQL">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">SQLite Browser</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image52">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-find</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopDeveloperGUI">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Glade GUI Editor</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image56">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-fullscreen</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child internal-child="image">
+                  <widget class="GtkImage" id="menu-item-image53">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-preferences</property>
+                    <property name="icon_size">1</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkImageMenuItem" id="mTopUpdate">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Update</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_topMenuHelpToolsEccLiveDirect_activate"/>
+                <child>
+                  <widget class="GtkMenu" id="mTopUpdate_menu">
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopUpdateEccLive">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">ECC Live! Update</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_topMenuHelpUpdCheckLive_activate"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="image15285">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-goto-top</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child internal-child="image">
+                  <widget class="GtkImage" id="image15284">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-goto-top</property>
+                    <property name="icon_size">1</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkImageMenuItem" id="mTopServices">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Services</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="mTopServices_menu">
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopServicesKameleonCode">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Enter Kameleon Code</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image59">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-spell-check</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child internal-child="image">
+                  <widget class="GtkImage" id="menu-item-image61">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-apply</property>
                     <property name="icon_size">1</property>
                   </widget>
                 </child>
@@ -938,6 +1063,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpWebsite">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Official website</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_official_website1_activate"/>
@@ -953,6 +1079,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpForum">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Support forum</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_support_forum1_activate"/>
@@ -973,6 +1100,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpDocOffline">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Documentation</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_documentation1_activate"/>
@@ -988,6 +1116,7 @@
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpDocOnline">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">Documentation (Online)</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_documentation_(online)1_activate"/>
@@ -1003,11 +1132,13 @@
                     <child>
                       <widget class="GtkSeparatorMenuItem" id="separator22">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                       </widget>
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpAbout">
                         <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">About</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_about1_activate"/>
@@ -1026,86 +1157,6 @@
                   <widget class="GtkImage" id="image15278">
                     <property name="visible">True</property>
                     <property name="stock">gtk-help</property>
-                    <property name="icon_size">1</property>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkImageMenuItem" id="mTopUpdate">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Update</property>
-                <property name="use_underline">True</property>
-                <signal name="activate" handler="on_topMenuHelpToolsEccLiveDirect_activate"/>
-                <child>
-                  <widget class="GtkMenu" id="mTopUpdate_menu">
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopUpdateEccLive">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">ECC Live! Update</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_topMenuHelpUpdCheckLive_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="image15285">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-connect</property>
-                            <property name="icon_size">1</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-                <child internal-child="image">
-                  <widget class="GtkImage" id="image15284">
-                    <property name="visible">True</property>
-                    <property name="stock">gtk-connect</property>
-                    <property name="icon_size">1</property>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkImageMenuItem" id="mTopDeveloper">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Developer</property>
-                <property name="use_underline">True</property>
-                <child>
-                  <widget class="GtkMenu" id="mTopDeveloper_menu">
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopDeveloperSQL">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">SQLite Browser</property>
-                        <property name="use_underline">True</property>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image52">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-find</property>
-                            <property name="icon_size">1</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopDeveloperGUI">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Glade GUI Editor</property>
-                        <property name="use_underline">True</property>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image56">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-fullscreen</property>
-                            <property name="icon_size">1</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-                <child internal-child="image">
-                  <widget class="GtkImage" id="menu-item-image53">
-                    <property name="visible">True</property>
-                    <property name="stock">gtk-preferences</property>
                     <property name="icon_size">1</property>
                   </widget>
                 </child>
@@ -1533,7 +1584,6 @@
                                                 <property name="left_margin">5</property>
                                                 <property name="right_margin">5</property>
                                                 <property name="cursor_visible">False</property>
-                                                <property name="text" translatable="yes">fsdfsdfsdf</property>
                                               </widget>
                                             </child>
                                           </widget>
@@ -2626,7 +2676,6 @@ Visit www.camya.com for updates or use eccLive!</property>
                                                     <property name="response_id">0</property>
                                                   </widget>
                                                   <packing>
-                                                    <property name="fill">False</property>
                                                     <property name="padding">5</property>
                                                   </packing>
                                                 </child>
@@ -2691,7 +2740,6 @@ Visit www.camya.com for updates or use eccLive!</property>
                                                     <property name="response_id">0</property>
                                                   </widget>
                                                   <packing>
-                                                    <property name="fill">False</property>
                                                     <property name="padding">5</property>
                                                     <property name="position">2</property>
                                                   </packing>
@@ -2703,16 +2751,121 @@ Visit www.camya.com for updates or use eccLive!</property>
                                                 <property name="position">1</property>
                                               </packing>
                                             </child>
+                                            <child>
+                                              <widget class="GtkHSeparator" id="hseparator3">
+                                                <property name="visible">True</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="position">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkLabel" id="nbMediaInfoAssetLabel2">
+                                                <property name="height_request">15</property>
+                                                <property name="visible">True</property>
+                                                <property name="label" translatable="yes">3D Gallery</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="position">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkHBox" id="hbox10">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <widget class="GtkButton" id="btn_3dgallery_start">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="response_id">0</property>
+                                                    <child>
+                                                      <widget class="GtkHBox" id="hbox4">
+                                                        <property name="visible">True</property>
+                                                        <property name="spacing">2</property>
+                                                        <child>
+                                                          <widget class="GtkImage" id="btn_3dgallery_start_icon">
+                                                            <property name="width_request">18</property>
+                                                            <property name="height_request">18</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="stock">gtk-missing-image</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkLabel" id="btn_3dgallery_start_label">
+                                                            <property name="visible">True</property>
+                                                            <property name="xalign">0</property>
+                                                            <property name="label" translatable="yes">Start</property>
+                                                            <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                      </widget>
+                                                    </child>
+                                                  </widget>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkButton" id="btn_3dgallery_config">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="response_id">0</property>
+                                                    <child>
+                                                      <widget class="GtkHBox" id="hbox7">
+                                                        <property name="visible">True</property>
+                                                        <property name="spacing">2</property>
+                                                        <child>
+                                                          <widget class="GtkImage" id="btn_3dgallery_config_icon">
+                                                            <property name="width_request">18</property>
+                                                            <property name="height_request">18</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="stock">gtk-missing-image</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkLabel" id="btn_3dgallery_config_label">
+                                                            <property name="visible">True</property>
+                                                            <property name="xalign">0</property>
+                                                            <property name="label" translatable="yes">Config</property>
+                                                            <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                      </widget>
+                                                    </child>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </widget>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">4</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkHSeparator" id="hseparator2">
+                                                <property name="visible">True</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="padding">3</property>
+                                                <property name="position">5</property>
+                                              </packing>
+                                            </child>
                                           </widget>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkHSeparator" id="hseparator152">
-                                            <property name="visible">True</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                         <child>
                                           <widget class="GtkVBox" id="vbox99">
@@ -3947,6 +4100,15 @@ Visit www.camya.com for updates or use eccLive!</property>
                                             <property name="expand">False</property>
                                             <property name="fill">False</property>
                                             <property name="position">3</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkHSeparator" id="hseparator152">
+                                            <property name="visible">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="position">4</property>
                                           </packing>
                                         </child>
                                       </widget>

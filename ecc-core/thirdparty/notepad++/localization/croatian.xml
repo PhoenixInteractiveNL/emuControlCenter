@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1250" ?>
 <!--
-        Croatian localization for Notepad++ v.5.9.6.1
-        Last modified 11.11.2011 by Elvis Gambiraža
+        Croatian localization for Notepad++ v.5.9.8
+        Last modified 15.1.2012 by Elvis Gambiraža
 -->
 <NotepadPlus>
         <Native-Langue name="Hrvatski (Croatian)" filename="croatian.xml" >
@@ -605,10 +605,10 @@
             </ColumnEditor>
         </Dialog>
 		<MessageBox>
-			<ContextMenuXmlEditWaring title="Uređivanje contextMenu" message="Uređivanje contextMenu.xml omogućuje izmjenu Notepad++ skočnog kontekstnog izbornika.\rTrebate restartati Notepad++ kako bi se učitao izmijenjen contextMenu.xml."/>
-			<NppHelpAbsentWaring title="Datoteka ne postoji" message="\rne postoji. Molim preuzmite ju s Notepad++ web stranica."/>
-			<SaveCurrentModifWaring title="Snimi trenutne izmjene" message="Trebate snimiti trenutnu izmjenu.\rSnimljene izmjene ne mogu biti poništene.\r\rNastaviti?"/>
-			<LoseUndoAbilityWaring title="Upozorenje Nema povratka" message="Trebate snimiti trenutnu izmjenu.\rSnimljene izmjene ne mogu biti poništene.\r\rNastaviti?"/>
+			<ContextMenuXmlEditWarning title="Uređivanje contextMenu" message="Uređivanje contextMenu.xml omogućuje izmjenu Notepad++ skočnog kontekstnog izbornika.\rTrebate restartati Notepad++ kako bi se učitao izmijenjen contextMenu.xml."/>
+			<NppHelpAbsentWarning title="Datoteka ne postoji" message="\rne postoji. Molim preuzmite ju s Notepad++ web stranica."/>
+			<SaveCurrentModifWarning title="Snimi trenutne izmjene" message="Trebate snimiti trenutnu izmjenu.\rSnimljene izmjene ne mogu biti poništene.\r\rNastaviti?"/>
+			<LoseUndoAbilityWarning title="Upozorenje Nema povratka" message="Trebate snimiti trenutnu izmjenu.\rSnimljene izmjene ne mogu biti poništene.\r\rNastaviti?"/>
 			<CannotMoveDoc title="Premjesti u novu Notepad++ instancu" message="Dokument is izmijenjen, snimite ga i onda pokušajte ponovo."/>
 			<DocReloadWarning title="Ponovo učitaj" message="Jeste li sigurni da želite ponovo učitati trenutnu datoteku i izgubite sve izmjene koje ste učinili u Notepadu++?"/>
 			<FileLockedWarning title="Neuspjelo snimanje" message="Molim provjerite da ta datoteka nije otvorena u k+nekom drugom programu"/>
@@ -640,6 +640,8 @@
 					<Item id="3113" name="Dodaj datoteke..."/>
 					<Item id="3117" name="Dodaj datoteke iz mape..."/>
 					<Item id="3114" name="Ukloni"/>
+					<Item id="3118" name="Premjesti gore"/>
+					<Item id="3119" name="Premjesti dolje"/>
 				</ProjectMenu>
 				<FolderMenu>
 					<Item id="3111" name="Preimenuj"/>
@@ -647,14 +649,17 @@
 					<Item id="3113" name="Dodaj datoteke..."/>
 					<Item id="3117" name="Dodaj datoteke iz mape..."/>
 					<Item id="3114" name="Ukloni"/>
+					<Item id="3118" name="Premjesti gore"/>
+					<Item id="3119" name="Premjesti dolje"/>
 				</FolderMenu>
 				<FileMenu>
 					<Item id="3111" name="Preimenuj"/>
 					<Item id="3115" name="Ukloni"/>
 					<Item id="3116" name="Modificiraj put datoteke"/>
+					<Item id="3118" name="Premjesti gore"/>
+					<Item id="3119" name="Premjesti dolje"/>
 				</FileMenu>
 			</Menus>
 		</ProjectManager>
     </Native-Langue>
 </NotepadPlus>
-

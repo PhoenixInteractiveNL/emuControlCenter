@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccDiagnostics (ECC-DIAG)
 ;
-$ScriptVersion = "1.0.0.0"
-; Last changed           : 2011.05.11
+$ScriptVersion = "1.0.0.1"
+; Last changed           : 2012.05.06
 ;
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
@@ -11,6 +11,8 @@ $ScriptVersion = "1.0.0.0"
 ; NOTES: Nothing yet ;-)
 ;
 ; ------------------------------------------------------------------------------
+FileChangeDir(@ScriptDir)
+
 #include "..\thirdparty\autoit\include\ButtonConstants.au3"
 #include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
 #include "..\thirdparty\autoit\include\GUIListBox.au3"
@@ -18,19 +20,10 @@ $ScriptVersion = "1.0.0.0"
 #include "..\thirdparty\autoit\include\WindowsConstants.au3"
 #include "..\thirdparty\autoit\include\GuiRichEdit.au3"
 
-Global $HostInfoIni = "..\..\ecc-system\system\info\ecc_local_host_info.ini"
-
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-; First we need to know where ecc is installed, this is stored in 'ecc_local_host_info.ini'
-If FileExists($HostInfoIni) <> 1 Then
-	MsgBox(64,"ECC-DIAG", "Please make sure you have run ECC at least once!, aborting...")
-	Exit
-EndIf
-
-$eccPathTemp = IniRead($HostInfoIni, "ECC_HOST_INFO", "SCRIPT_NAME", "")
-Global $eccPath = StringReplace($eccPathTemp, "\ecc-system\ecc.php", "")
+$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
 Global $eccphpErrorLog = $eccPath & "\error.log"
 Global $eccStartupIni = $eccPath & "\ecc-core\php-gtk2\php.ini"
 Global $eccGeneralIni = $eccPath & "\ecc-user-configs\config\ecc_general.ini"
@@ -44,7 +37,7 @@ Global $NotepadExe = $eccPath & "\ecc-core\thirdparty\notepad++\notepad++.exe"
 Global $BackgroundRun = 0
 
 If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
-	MsgBox(64,"ECC-GTKTS", "No ECC software found!, aborting...")
+	MsgBox(64,"ECC Diagnostics", "No ECC software found!, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -95,7 +88,7 @@ GUICtrlSetState(-1, $GUI_DISABLE)
 ;==============================================================================
 ;END *** GUI
 ;==============================================================================
-GUISetIcon (@ScriptDir & "\gtkThemeSelect.ico", "", $eccDiagnostics) ;Set proper icon for the window.
+GUISetIcon (@ScriptDir & "\eccDiagnostics.ico", "", $eccDiagnostics) ;Set proper icon for the window.
 If $BackgroundRun = 0 Then GUISetState(@SW_SHOW)
 
 ;User CID info ================================================================
@@ -221,7 +214,7 @@ While 1
 			DumpFile()
 			GuiCtrlSetstate($ButtonDumpFile, $GUI_DISABLE) ; Disable the DUMP to file button.
 
-			Switch MsgBox(52, "eccDiagnostics", "File '" & @ScriptDir & "\eccDiagnostics.txt' created, " & @CRLF & "would you like to view it now?")
+			Switch MsgBox(52, "ECC Diagnostics", "File '" & @ScriptDir & "\eccDiagnostics.txt' created, " & @CRLF & "would you like to view it now?")
 			Case 6 ; YES
 				If FileExists($NotepadExe) Then ShellExecute($NotepadExe, @ScriptDir & "\eccDiagnostics.txt")
 				Exit

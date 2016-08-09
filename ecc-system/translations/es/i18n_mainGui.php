@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	es (spanish)
  * author:	Jarlaxe
- * date:	2009/07/09 
+ * date:	2011/07/16 
  * ------------------------------------------
  *
  * dd = dropdown
@@ -83,6 +83,12 @@ $i18n['mainGui'] = array(
 
 	/* 1.1 WIP03 */
 	'mainlist_tab_images' =>
-		"IMAGES",			
+		"IMÁGENES",			
+
+	/* 1.11 BUILD 9 */
+	'3dgalleryStart' =>
+		"Comenzar",
+	'3dgalleryConfig' =>
+		"Configurar",		
 );
 ?>

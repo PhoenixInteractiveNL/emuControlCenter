@@ -114,63 +114,6 @@
                                         <property name="column_spacing">5</property>
                                         <property name="row_spacing">5</property>
                                         <child>
-                                          <widget class="GtkEntry" id="emuAssignGlobalPath">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkButton" id="emuPathButton">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">select emulator</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="response_id">0</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkButton" id="emuStartButton">
-                                            <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">Start</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="response_id">0</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="right_attach">3</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="lbl_emu_assign_path">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Path to emulator</property>
-                                            <property name="single_line_mode">True</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="right_attach">3</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
                                           <widget class="GtkVBox" id="emuCliParamArea">
                                             <child>
                                               <widget class="GtkLabel" id="lbl_emu_assign_parameter">
@@ -204,6 +147,63 @@
                                             <property name="x_options">GTK_FILL</property>
                                           </packing>
                                         </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="lbl_emu_assign_path">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">Path to emulator</property>
+                                            <property name="single_line_mode">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="right_attach">3</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkButton" id="emuStartButton">
+                                            <property name="can_focus">True</property>
+                                            <property name="label" translatable="yes">Start</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="response_id">0</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">2</property>
+                                            <property name="right_attach">3</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkButton" id="emuPathButton">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="label" translatable="yes">select emulator</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="response_id">0</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkEntry" id="emuAssignGlobalPath">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
                                       </widget>
                                     </child>
                                     <child>
@@ -212,50 +212,39 @@
                                         <property name="n_columns">3</property>
                                         <property name="homogeneous">True</property>
                                         <child>
-                                          <widget class="GtkCheckButton" id="emuAssignGlobalEightDotThree">
+                                          <widget class="GtkCheckButton" id="emuAssignGlobalUseCueFile">
                                             <property name="width_request">23</property>
                                             <property name="height_request">23</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">8.3 Filename</property>
+                                            <property name="label" translatable="yes">use .cue file</property>
                                             <property name="relief">GTK_RELIEF_NONE</property>
                                             <property name="use_underline">True</property>
                                             <property name="response_id">0</property>
                                             <property name="draw_indicator">True</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
+                                            <property name="left_attach">2</property>
+                                            <property name="right_attach">3</property>
+                                            <property name="x_options">GTK_FILL</property>
                                             <property name="y_options"></property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkCheckButton" id="emuAssignGlobalEscape">
+                                          <widget class="GtkCheckButton" id="emuAssignGlobalExecuteInEmuFolder">
+                                            <property name="width_request">23</property>
                                             <property name="height_request">23</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">escape path</property>
+                                            <property name="label" translatable="yes">Start from Emufolder</property>
                                             <property name="relief">GTK_RELIEF_NONE</property>
                                             <property name="use_underline">True</property>
                                             <property name="response_id">0</property>
                                             <property name="draw_indicator">True</property>
                                           </widget>
                                           <packing>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkCheckButton" id="emuAssignGlobalFilenameOnly">
-                                            <property name="height_request">23</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">filename only</property>
-                                            <property name="relief">GTK_RELIEF_NONE</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="response_id">0</property>
-                                            <property name="draw_indicator">True</property>
-                                          </widget>
-                                          <packing>
+                                            <property name="left_attach">2</property>
+                                            <property name="right_attach">3</property>
                                             <property name="top_attach">1</property>
                                             <property name="bottom_attach">2</property>
                                             <property name="x_options">GTK_FILL</property>
@@ -284,20 +273,17 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkCheckButton" id="emuAssignGlobalExecuteInEmuFolder">
-                                            <property name="width_request">23</property>
+                                          <widget class="GtkCheckButton" id="emuAssignGlobalFilenameOnly">
                                             <property name="height_request">23</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">Start from Emufolder</property>
+                                            <property name="label" translatable="yes">filename only</property>
                                             <property name="relief">GTK_RELIEF_NONE</property>
                                             <property name="use_underline">True</property>
                                             <property name="response_id">0</property>
                                             <property name="draw_indicator">True</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="right_attach">3</property>
                                             <property name="top_attach">1</property>
                                             <property name="bottom_attach">2</property>
                                             <property name="x_options">GTK_FILL</property>
@@ -305,21 +291,35 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkCheckButton" id="emuAssignGlobalUseCueFile">
-                                            <property name="width_request">23</property>
+                                          <widget class="GtkCheckButton" id="emuAssignGlobalEscape">
                                             <property name="height_request">23</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">use .cue file</property>
+                                            <property name="label" translatable="yes">escape path</property>
                                             <property name="relief">GTK_RELIEF_NONE</property>
                                             <property name="use_underline">True</property>
                                             <property name="response_id">0</property>
                                             <property name="draw_indicator">True</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="right_attach">3</property>
-                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkCheckButton" id="emuAssignGlobalEightDotThree">
+                                            <property name="width_request">23</property>
+                                            <property name="height_request">23</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="label" translatable="yes">8.3 Filename</property>
+                                            <property name="relief">GTK_RELIEF_NONE</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="response_id">0</property>
+                                            <property name="draw_indicator">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
                                             <property name="y_options"></property>
                                           </packing>
                                         </child>
@@ -595,9 +595,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkLabel" id="label1">
+                                          <widget class="GtkLabel" id="emuUnpackNotelabel">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">note: in the TAB [start] you can purge the unpacked files folder when ECC closes      </property>
+                                            <property name="label" translatable="yes">note: in the TAB [start] you can purge the unpacked files folder when ECC closes</property>
                                             <property name="wrap">True</property>
                                           </widget>
                                           <packing>
@@ -784,26 +784,13 @@
                                         <property name="column_spacing">5</property>
                                         <property name="row_spacing">5</property>
                                         <child>
-                                          <widget class="GtkEntry" id="emuPlatformName">
+                                          <widget class="GtkLabel" id="lbl_emu_platform_name">
                                             <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">Platform name</property>
                                           </widget>
                                           <packing>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="y_options">GTK_FILL</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkEntry" id="emuPlatformCategory">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
+                                            <property name="x_options">GTK_FILL</property>
                                             <property name="y_options">GTK_FILL</property>
                                           </packing>
                                         </child>
@@ -821,13 +808,26 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkLabel" id="lbl_emu_platform_name">
+                                          <widget class="GtkEntry" id="emuPlatformCategory">
                                             <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Platform name</property>
+                                            <property name="can_focus">True</property>
                                           </widget>
                                           <packing>
-                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="y_options">GTK_FILL</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkEntry" id="emuPlatformName">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
                                             <property name="y_options">GTK_FILL</property>
                                           </packing>
                                         </child>
@@ -926,15 +926,15 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkEntry" id="confEccUserPath">
+                              <widget class="GtkLabel" id="lbl_ecc_userfolder">
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="can_focus">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">User folder (for images and exports)</property>
                               </widget>
                               <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="y_options"></property>
+                                <property name="right_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -955,15 +955,15 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="lbl_ecc_userfolder">
+                              <widget class="GtkEntry" id="confEccUserPath">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">User folder (for images and exports)</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">True</property>
                               </widget>
                               <packing>
-                                <property name="right_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="y_options"></property>
                               </packing>
                             </child>
                           </widget>
@@ -1003,14 +1003,26 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkLabel" id="lbl_ecc_opt_detail_pp">
+                              <widget class="GtkComboBox" id="cfgEccListPerPage">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Detail per page</property>
                               </widget>
                               <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
+                                <property name="y_options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="cfgEccDetailPerPage">
+                                <property name="visible">True</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1027,26 +1039,14 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkComboBox" id="cfgEccDetailPerPage">
+                              <widget class="GtkLabel" id="lbl_ecc_opt_detail_pp">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Detail per page</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkComboBox" id="cfgEccListPerPage">
-                                <property name="visible">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="y_options"></property>
                               </packing>
                             </child>
                           </widget>
@@ -1340,76 +1340,15 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkEntry" id="confEccDatWebsite">
+                              <widget class="GtkEntry" id="confEccDatComment">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_dat_website">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Website</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_dat_author">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Author</property>
-                              </widget>
-                              <packing>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkEntry" id="confEccDatAuthor">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_dat_email">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Email</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_dat_comment">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Comment</property>
-                              </widget>
-                              <packing>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
-                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -1427,15 +1366,76 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkEntry" id="confEccDatComment">
+                              <widget class="GtkLabel" id="lbl_dat_comment">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Comment</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_dat_email">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Email</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkEntry" id="confEccDatAuthor">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="top_attach">3</property>
-                                <property name="bottom_attach">4</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_dat_author">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Author</property>
+                              </widget>
+                              <packing>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_dat_website">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Website</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkEntry" id="confEccDatWebsite">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -1545,39 +1545,32 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkLabel" id="lbl_img_opt_conv_quality">
+                              <widget class="GtkSpinButton" id="cfgImgThumbMinBytes">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Thumb Quality</property>
+                                <property name="can_focus">True</property>
+                                <property name="adjustment">30000 0 120000 1000 1000 1000</property>
+                                <property name="climb_rate">1</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                               </widget>
                               <packing>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_img_opt_conv_minsize">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Min original size</property>
-                              </widget>
-                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="lbl_img_opt_conv_quality_def">
+                              <widget class="GtkComboBox" id="cfgImgThumbQuality">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">&lt;b&gt;%&lt;/b&gt; (Default: 80)</property>
-                                <property name="use_markup">True</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1595,32 +1588,39 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkComboBox" id="cfgImgThumbQuality">
+                              <widget class="GtkLabel" id="lbl_img_opt_conv_quality_def">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">&lt;b&gt;%&lt;/b&gt; (Default: 80)</property>
+                                <property name="use_markup">True</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_img_opt_conv_minsize">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Min original size</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkSpinButton" id="cfgImgThumbMinBytes">
+                              <widget class="GtkLabel" id="lbl_img_opt_conv_quality">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="adjustment">30000 0 120000 1000 1000 1000</property>
-                                <property name="climb_rate">1</property>
-                                <property name="snap_to_ticks">True</property>
-                                <property name="numeric">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Thumb Quality</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                           </widget>
@@ -1660,67 +1660,42 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkLabel" id="lbl_img_opt_list_imagesize">
+                              <widget class="GtkLabel" id="lbl_img_otp_list_fastrefresh_default">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Imagesize</property>
+                                <property name="label" translatable="yes">(Default: off - experimental)</property>
                               </widget>
                               <packing>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_img_opt_list_aspectratio">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Aspect ratio</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="cfgImgDetailImageAspectRatio">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="use_underline">True</property>
-                                <property name="response_id">0</property>
-                                <property name="draw_indicator">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkComboBox" id="cfgImgDetailImageSize">
-                                <property name="visible">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_img_otp_list_fastrefresh">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Fast list refresh</property>
-                              </widget>
-                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
                                 <property name="top_attach">2</property>
                                 <property name="bottom_attach">3</property>
-                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_img_otp_list_aspectratio_default">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">(Default: off)</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_img_otp_list_imagesize_default">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">(Default: 120x80)</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -1742,42 +1717,67 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="lbl_img_otp_list_imagesize_default">
+                              <widget class="GtkLabel" id="lbl_img_otp_list_fastrefresh">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">(Default: 120x80)</property>
+                                <property name="label" translatable="yes">Fast list refresh</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_img_otp_list_aspectratio_default">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">(Default: off)</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_img_otp_list_fastrefresh_default">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">(Default: off - experimental)</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
                                 <property name="top_attach">2</property>
                                 <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="cfgImgDetailImageSize">
+                                <property name="visible">True</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="cfgImgDetailImageAspectRatio">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="use_underline">True</property>
+                                <property name="response_id">0</property>
+                                <property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_img_opt_list_aspectratio">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Aspect ratio</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="lbl_img_opt_list_imagesize">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Imagesize</property>
+                              </widget>
+                              <packing>
+                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -1896,30 +1896,14 @@
                             <property name="column_spacing">5</property>
                             <property name="homogeneous">True</property>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListBg2">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
+                              <widget class="GtkLabel" id="colOptListFont">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListFont</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptListText">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListText</property>
-                              </widget>
-                              <packing>
+                                <property name="right_attach">5</property>
                                 <property name="top_attach">2</property>
                                 <property name="bottom_attach">3</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -1927,15 +1911,15 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListText">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
+                              <widget class="GtkFontButton" id="cfgEccColorListFont">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Schrift</property>
                               </widget>
                               <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">5</property>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -1943,68 +1927,80 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListBg1">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
+                              <widget class="GtkLabel" id="colOptListBgImage">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListBgImage</property>
+                                <property name="single_line_mode">True</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
+                                <property name="left_attach">4</property>
+                                <property name="right_attach">5</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListBg">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
+                              <widget class="GtkLabel" id="colOptListBgHilight">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListSelectionBg">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListBgHilight</property>
+                                <property name="single_line_mode">True</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">3</property>
                                 <property name="right_attach">4</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptListTextHilight">
+                              <widget class="GtkLabel" id="colOptListBg2">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListTextHilight</property>
+                                <property name="label" translatable="yes">colOptListBg2</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colOptListBg1">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListBg1</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colOptListBg0">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListBg0</property>
+                                <property name="single_line_mode">True</property>
+                              </widget>
+                              <packing>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkColorButton" id="cfgEccColorListBgImages">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="right_attach">5</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
@@ -2028,7 +2024,22 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorListBgImages">
+                              <widget class="GtkLabel" id="colOptListTextHilight">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptListTextHilight</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkColorButton" id="cfgEccColorListSelectionBg">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2037,8 +2048,8 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">4</property>
-                                <property name="right_attach">5</property>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2046,76 +2057,49 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptListBg0">
+                              <widget class="GtkColorButton" id="cfgEccColorListBg">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListBg0</property>
-                                <property name="single_line_mode">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptListBg1">
+                              <widget class="GtkColorButton" id="cfgEccColorListBg1">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListBg1</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptListBg2">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListBg2</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptListBgHilight">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListBgHilight</property>
-                                <property name="single_line_mode">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="right_attach">4</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptListBgImage">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListBgImage</property>
-                                <property name="single_line_mode">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="right_attach">5</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkFontButton" id="cfgEccColorListFont">
+                              <widget class="GtkColorButton" id="cfgEccColorListText">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Schrift</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">5</property>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2123,16 +2107,32 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptListFont">
+                              <widget class="GtkLabel" id="colOptListText">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptListFont</property>
+                                <property name="label" translatable="yes">colOptListText</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkColorButton" id="cfgEccColorListBg2">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="right_attach">5</property>
-                                <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
+                                <property name="right_attach">3</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
@@ -2176,23 +2176,53 @@
                             <property name="column_spacing">5</property>
                             <property name="homogeneous">True</property>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorOptSelectBg1">
-                                <property name="width_request">50</property>
-                                <property name="height_request">23</property>
+                              <widget class="GtkLabel" id="colOptOptionsText">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="response_id">0</property>
-                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptOptionsText</property>
                               </widget>
                               <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorOptSelectBg2">
+                              <widget class="GtkLabel" id="colOptOptionsBgHilight">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptOptionsBgHilight</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colOptOptionsBg2">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptOptionsBg2</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colOptOptionsBg1">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colOptOptionsBg1</property>
+                              </widget>
+                              <packing>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkColorButton" id="cfgEccColorOptSelectText">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2201,8 +2231,8 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2228,7 +2258,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="cfgEccColorOptSelectText">
+                              <widget class="GtkColorButton" id="cfgEccColorOptSelectBg2">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2237,8 +2267,8 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">3</property>
-                                <property name="right_attach">4</property>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2246,48 +2276,18 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colOptOptionsBg1">
+                              <widget class="GtkColorButton" id="cfgEccColorOptSelectBg1">
+                                <property name="width_request">50</property>
+                                <property name="height_request">23</property>
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptOptionsBg1</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptOptionsBg2">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptOptionsBg2</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptOptionsBgHilight">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptOptionsBgHilight</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colOptOptionsText">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colOptOptionsText</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="right_attach">4</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -2337,7 +2337,41 @@
                               <placeholder/>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="colImgSlotUnsetBgChooser">
+                              <widget class="GtkLabel" id="colImgSlotText">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colImgSlotText</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colImgSlotSetSelect">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colImgSlotSetSelect</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="colImgSlotUnsetBg">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">colImgSlotUnsetBg</property>
+                              </widget>
+                              <packing>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkColorButton" id="colImgSlotTextChooser">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2346,6 +2380,8 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2353,12 +2389,14 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colImgSlotSetBg">
+                              <widget class="GtkLabel" id="colImgSlotUnsetSelect">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colImgSlotSetBg</property>
+                                <property name="label" translatable="yes">colImgSlotUnsetSelect</property>
                               </widget>
                               <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
                                 <property name="top_attach">2</property>
                                 <property name="bottom_attach">3</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2366,7 +2404,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="colImgSlotSetBgChooser">
+                              <widget class="GtkColorButton" id="colImgSlotUnsetSelectChooser">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2375,6 +2413,8 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2400,7 +2440,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="colImgSlotUnsetSelectChooser">
+                              <widget class="GtkColorButton" id="colImgSlotSetBgChooser">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2409,8 +2449,6 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">3</property>
                                 <property name="bottom_attach">4</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2418,14 +2456,12 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="colImgSlotUnsetSelect">
+                              <widget class="GtkLabel" id="colImgSlotSetBg">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colImgSlotUnsetSelect</property>
+                                <property name="label" translatable="yes">colImgSlotSetBg</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">2</property>
                                 <property name="bottom_attach">3</property>
                                 <property name="x_options">GTK_FILL</property>
@@ -2433,7 +2469,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkColorButton" id="colImgSlotTextChooser">
+                              <widget class="GtkColorButton" id="colImgSlotUnsetBgChooser">
                                 <property name="width_request">50</property>
                                 <property name="height_request">23</property>
                                 <property name="visible">True</property>
@@ -2442,45 +2478,9 @@
                                 <property name="title" translatable="yes">Wählen Sie eine Farbe</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colImgSlotUnsetBg">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colImgSlotUnsetBg</property>
-                              </widget>
-                              <packing>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colImgSlotSetSelect">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colImgSlotSetSelect</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="colImgSlotText">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">colImgSlotText</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -2546,48 +2546,15 @@
                             <property name="column_spacing">5</property>
                             <property name="row_spacing">5</property>
                             <child>
-                              <widget class="GtkButton" id="startConfSoundSelect">
+                              <widget class="GtkLabel" id="startConfSoundHdl">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">change</property>
-                                <property name="use_underline">True</property>
-                                <property name="response_id">0</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Play startup sound</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
+                                <property name="right_attach">4</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkEntry" id="startConfSoundPath">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="startConfSoundCheck">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="use_underline">True</property>
-                                <property name="response_id">0</property>
-                                <property name="draw_indicator">True</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -2608,15 +2575,48 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="startConfSoundHdl">
+                              <widget class="GtkCheckButton" id="startConfSoundCheck">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Play startup sound</property>
+                                <property name="can_focus">True</property>
+                                <property name="use_underline">True</property>
+                                <property name="response_id">0</property>
+                                <property name="draw_indicator">True</property>
                               </widget>
                               <packing>
-                                <property name="right_attach">4</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkEntry" id="startConfSoundPath">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkButton" id="startConfSoundSelect">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="label" translatable="yes">change</property>
+                                <property name="use_underline">True</property>
+                                <property name="response_id">0</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
                               </packing>
                             </child>
                           </widget>
@@ -2919,31 +2919,7 @@
                                             <property name="column_spacing">10</property>
                                             <property name="row_spacing">5</property>
                                             <child>
-                                              <widget class="GtkLabel" id="lblThemeName">
-                                                <property name="visible">True</property>
-                                                <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">Name</property>
-                                              </widget>
-                                              <packing>
-                                                <property name="x_options">GTK_FILL</property>
-                                                <property name="y_options"></property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <widget class="GtkLabel" id="lblThemeAuthor">
-                                                <property name="visible">True</property>
-                                                <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">Author</property>
-                                              </widget>
-                                              <packing>
-                                                <property name="top_attach">1</property>
-                                                <property name="bottom_attach">2</property>
-                                                <property name="x_options">GTK_FILL</property>
-                                                <property name="y_options"></property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <widget class="GtkLabel" id="textThemeName">
+                                              <widget class="GtkLabel" id="textThemeWebsite">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="xalign">0</property>
@@ -2952,11 +2928,27 @@
                                               <packing>
                                                 <property name="left_attach">1</property>
                                                 <property name="right_attach">2</property>
+                                                <property name="top_attach">3</property>
+                                                <property name="bottom_attach">4</property>
+                                                <property name="x_options">GTK_FILL</property>
                                                 <property name="y_options"></property>
                                               </packing>
                                             </child>
                                             <child>
-                                              <widget class="GtkLabel" id="textThemeAuthor">
+                                              <widget class="GtkLabel" id="lblThemeWebsite">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Website</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="top_attach">3</property>
+                                                <property name="bottom_attach">4</property>
+                                                <property name="x_options">GTK_FILL</property>
+                                                <property name="y_options"></property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkLabel" id="textThemeDate">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="xalign">0</property>
@@ -2965,32 +2957,6 @@
                                               <packing>
                                                 <property name="left_attach">1</property>
                                                 <property name="right_attach">2</property>
-                                                <property name="top_attach">1</property>
-                                                <property name="bottom_attach">2</property>
-                                                <property name="x_options">GTK_FILL</property>
-                                                <property name="y_options"></property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <widget class="GtkLabel" id="lblThemeContact">
-                                                <property name="visible">True</property>
-                                                <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">Contact</property>
-                                              </widget>
-                                              <packing>
-                                                <property name="top_attach">4</property>
-                                                <property name="bottom_attach">5</property>
-                                                <property name="x_options">GTK_FILL</property>
-                                                <property name="y_options"></property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <widget class="GtkLabel" id="lblThemeDate">
-                                                <property name="visible">True</property>
-                                                <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">Date</property>
-                                              </widget>
-                                              <packing>
                                                 <property name="top_attach">2</property>
                                                 <property name="bottom_attach">3</property>
                                                 <property name="x_options">GTK_FILL</property>
@@ -3014,15 +2980,12 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <widget class="GtkLabel" id="textThemeDate">
+                                              <widget class="GtkLabel" id="lblThemeDate">
                                                 <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
                                                 <property name="xalign">0</property>
-                                                <property name="selectable">True</property>
+                                                <property name="label" translatable="yes">Date</property>
                                               </widget>
                                               <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="right_attach">2</property>
                                                 <property name="top_attach">2</property>
                                                 <property name="bottom_attach">3</property>
                                                 <property name="x_options">GTK_FILL</property>
@@ -3030,20 +2993,20 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <widget class="GtkLabel" id="lblThemeWebsite">
+                                              <widget class="GtkLabel" id="lblThemeContact">
                                                 <property name="visible">True</property>
                                                 <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">Website</property>
+                                                <property name="label" translatable="yes">Contact</property>
                                               </widget>
                                               <packing>
-                                                <property name="top_attach">3</property>
-                                                <property name="bottom_attach">4</property>
+                                                <property name="top_attach">4</property>
+                                                <property name="bottom_attach">5</property>
                                                 <property name="x_options">GTK_FILL</property>
                                                 <property name="y_options"></property>
                                               </packing>
                                             </child>
                                             <child>
-                                              <widget class="GtkLabel" id="textThemeWebsite">
+                                              <widget class="GtkLabel" id="textThemeAuthor">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="xalign">0</property>
@@ -3052,8 +3015,45 @@
                                               <packing>
                                                 <property name="left_attach">1</property>
                                                 <property name="right_attach">2</property>
-                                                <property name="top_attach">3</property>
-                                                <property name="bottom_attach">4</property>
+                                                <property name="top_attach">1</property>
+                                                <property name="bottom_attach">2</property>
+                                                <property name="x_options">GTK_FILL</property>
+                                                <property name="y_options"></property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkLabel" id="textThemeName">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="selectable">True</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="right_attach">2</property>
+                                                <property name="y_options"></property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkLabel" id="lblThemeAuthor">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Author</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="top_attach">1</property>
+                                                <property name="bottom_attach">2</property>
+                                                <property name="x_options">GTK_FILL</property>
+                                                <property name="y_options"></property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkLabel" id="lblThemeName">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Name</property>
+                                              </widget>
+                                              <packing>
                                                 <property name="x_options">GTK_FILL</property>
                                                 <property name="y_options"></property>
                                               </packing>

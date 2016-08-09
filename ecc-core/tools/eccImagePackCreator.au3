@@ -1,9 +1,8 @@
 ; ------------------------------------------------------------------------------
-; emuControlCenter ImagePackCreator (ECC-IPC)
+; emuControlCenter ImagePackCreator (ECC ImagePackCreator)
 ;
-; Script version         : v1.2.1.0
-; Last changed           : 2010.12.24
-;
+; Script version         : v1.2.1.1
+; Last changed           : 2012.05.06
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions: wAw (ecc forum member)
@@ -11,37 +10,27 @@
 ; NOTES: Nothing yet ;-)
 ;
 ; ------------------------------------------------------------------------------
-
-
-Global $HostInfoIni = "..\..\ecc-system\system\info\ecc_local_host_info.ini"
+FileChangeDir(@ScriptDir)
 Dim $infos, $PackStandardsNotice, $StandardsNotice
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-
-; First we need to know where ecc is installed, this is stored in 'ecc_local_host_info.ini'
-If FileExists($HostInfoIni) <> 1 Then
-	MsgBox(64,"ECC-IPC", "Please make sure you have run ECC at least once!, aborting...")
-	Exit
-EndIf
-
-$eccPathTemp = IniRead($HostInfoIni, "ECC_HOST_INFO", "SCRIPT_NAME", "")
-Global $eccPath = StringReplace($eccPathTemp, "\ecc-system\ecc.php", "")
+$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
 Global $7zaexe = $eccPath & "\ecc-core\thirdparty\7zip\7za.exe"
 
 If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
-	MsgBox(64,"ECC-IPC", "No ECC software found!, aborting...")
+	MsgBox(64,"ECC ImagePackCreator", "No ECC software found!, aborting...")
 	Exit
 EndIf
 
 If FileExists(@ScriptDir & "\eccImagePackCreator_readme.txt") <> 1 Then
-	MsgBox(64,"ECC-IPC", "IPC readme file could not be found!, aborting...")
+	MsgBox(64,"ECC ImagePackCreator", "ECC ImagePackCreator readme file could not be found!, aborting...")
 	Exit
 EndIf
 
 If FileExists($7zaexe) <> 1 Then
-	MsgBox(64,"ECC-IPC", "7zip could not be found!, aborting...")
+	MsgBox(64,"ECC ImagePackCreator", "7zip could not be found!, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -52,17 +41,16 @@ EndIf
 ;==============================================================================
 ;BEGIN *** BROWSE FOR IMAGEFOLDER
 ;==============================================================================
-$ImagePackFolder = FileSelectFolder("ECC-IPC - Select a platform to create imagepacks.", $eccPath & "\ecc-user", "", $eccPath & "\ecc-user")
+$ImagePackFolder = FileSelectFolder("ECC ImagePackCreator - Select a platform to create imagepacks.", $eccPath & "\ecc-user", "", $eccPath & "\ecc-user")
 
 If @error Then
-	MsgBox(48, "ECC-IPC", "User canceled!, aborting...")
-	Exit
+	Exit ; User pressed cancel
 Else
 	For $LineLocation = 1 to StringLen($ImagePackFolder)
 
 		; Check that the user didn't select #_AUTO_UNPACKED OR #_GLOBAL
 		If StringMid($ImagePackFolder, $LineLocation, 1) = "#" Then
-			MsgBox(48, "ECC-IPC", "No platform selected!, aborting...")
+			MsgBox(48, "ECC ImagePackCreator", "No platform selected!, aborting...")
 			Exit
 		EndIf
 
@@ -72,7 +60,7 @@ Else
 	Next
 
 	If $SelectedFolder = "" Then
-		MsgBox(48, "ECC-IPC", "No choice made!, aborting...")
+		MsgBox(48, "ECC ImagePackCreator", "No choice made!, aborting...")
 		Exit
 	EndIf
 EndIf
@@ -88,7 +76,7 @@ EndIf
 
 ; If the '$ECCid' is empty then something so go seriously wrong!
 If $ECCid = "" Then
-	MsgBox(48, "ECC-IPC", "An error has occured, aborting...")
+	MsgBox(48, "ECC ImagePackCreator", "An error has occured, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -99,10 +87,10 @@ EndIf
 ;==============================================================================
 ;BEGIN *** INPUT IMAGEPACKVERSION
 ;==============================================================================
-$VersionString = InputBox("ECC-IPC - Imagepack version string", "Enter the imagepack versionstring, suggested format: [YYYY]_v[N]_[N]", "2011_v1_0")
+$VersionString = InputBox("ECC ImagePackCreator - Imagepack version string", "Enter the imagepack versionstring, suggested format: [YYYY]_v[N]_[N]", "2011_v1_0")
 
 If $VersionString = "" Then
-	MsgBox(48, "ECC-IPC", "No version string entered!, aborting...")
+	MsgBox(48, "ECC ImagePackCreator", "No version string entered!, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -113,7 +101,7 @@ EndIf
 ;==============================================================================
 ;BEGIN *** SORT SLOT FILES INTO FOLDERS + CRC32 SORT
 ;==============================================================================
-TrayTip("ECC-IPC", "Sorting image files for platform '" & $ECCid & "'.", 10, 1)
+TrayTip("ECC ImagePackCreator", "Sorting image files for platform '" & $ECCid & "'.", 10, 1)
 
 ; Search for ALL PNG & JPG images and put this in an array: $RFSarray
 RecursiveFileSearch($eccPath & "\ecc-user\" & $ECCid, "(?i)\.(png|jpg)", "", 1, true, 0)
@@ -133,13 +121,12 @@ $jpg_good_array = StringSplit($jpg_temp, "|")
 
 $jpg_7zname_temp = "-cover-front-|-cover-back-|-cover-spine-|-cover-inlay-|-booklet-page-|-media-flyer-|-media-stor-"
 $jpg_good_7z_name = StringSplit($jpg_7zname_temp, "|")
-; end imagetype define
 
 For $ImageFile in $RFSarray
 
 ;Exit the progam is there are no images found for the specific platform
 If $ImageFile = "" Then
-	MsgBox(48, "ECC-IPC", "There are no images found for platform '" & $ECCid & "', aborting...")
+	MsgBox(48, "ECC ImagePackCreator", "There are no images found for platform '" & $ECCid & "', aborting...")
 	Exit
 EndIf
 
@@ -200,14 +187,14 @@ Next
 ;==============================================================================
 ;BEGIN *** COMPRESS FILES OF FOLDER TO 7Z FORMAT
 ;==============================================================================
-TrayTip("ECC-IPC", "Compressing image files for platform '" & $ECCid & "'...", 10, 1)
+TrayTip("ECC ImagePackCreator", "Compressing image files for platform '" & $ECCid & "'...", 10, 1)
 
 ; ==== PNG ====
 Global $progress = 0
 For $loop = 1 To $png_good_array[0]
 	If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\" & $ECCid & "\images") Then
-		ToolTip("Compressing PNG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
-		FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
+		ToolTip("Compressing PNG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC ImagePackCreator", 1, 6)
+		FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\readme.txt", 1)
 		$7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $png_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
 		ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\*.png" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
 		DirRemove($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $png_good_array[$loop], 1)
@@ -218,7 +205,7 @@ Next
 ; ==== JPG ====
 For $loop = 1 To $jpg_good_array[0]
 	If FileExists($eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\" & $ECCid & "\images") Then
-		ToolTip("Compressing JPG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
+		ToolTip("Compressing JPG image files for platform '" & $ECCid & "'...", @DesktopWidth/2, @DesktopHeight/2, "ECC ImagePackCreator", 1, 6)
 		FileCopy(@Scriptdir & "\eccImagePackCreator_readme.txt", $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt", 1)
 		$7zfile = Chr(34) & $eccPath & "\ecc-user-imagepacks\emucontrolcenter-" & $eccident & $jpg_good_7z_name[$loop] & $VersionString & ".7z" & Chr(34)
 		ShellExecuteWait($7zaexe, "a -r " & $7zfile & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\*.jpg" & Chr(34) & " " & Chr(34) & $eccPath & "\ecc-user-imagepacks\temp_" & $ECCid & $jpg_good_array[$loop] & "\readme.txt" & Chr(34), "", "", @SW_HIDE)
@@ -231,7 +218,7 @@ Next
 ;END *** COMPRESS FILES OF FOLDER TO 7Z FORMAT
 ;==============================================================================
 
-MsgBox(64, "ECC-IPC", "The imagepacks for platform '" & $ECCid & "' are stored in: '" & $eccPath & "\ecc-user-imagepacks'.")
+MsgBox(64, "ECC ImagePackCreator", "The imagepacks for platform '" & $ECCid & "' are stored in: '" & $eccPath & "\ecc-user-imagepacks'.")
 Exit
 
 ;==============================================================================

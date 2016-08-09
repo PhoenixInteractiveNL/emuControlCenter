@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Polaroid Gallery v.1.01</title>
+<script type="text/javascript" src="_inc/swfobject.js"></script>
+<link href="_inc/styles.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function updategallery() {
+	//<![CDATA[
+	var so = new SWFObject("polaroid.swf", "polaroid", "600px", "600px", "8", "#FFFFFF");
+	so.addVariable("flickrID",document.getElementById("flickrID").value);
+	so.write("demo");
+	//]]>
+}
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+    <h1>Polaroid Gallery v.1.01</h1>
+  </div>
+  <div id="left">
+  <div id="demo">
+  <strong>This site requires Flash Player 8.0 or greater</strong><br />
+  Please click <a href="http://www.adobe.com/products/flashplayer/">here</a> to download.<br />
+  If you are sure you have the required version, press this link: <a href="readme.html?detectflash=false">bypass the detection</a>.
+  </div>
+  <div id="flickr"><label for="flickrID">Enter your flickr ID: <input type="text" id="flickrID" /></label> <input value="Update gallery" type="button" onclick="updategallery()" />
+  <p>If you don't know your flickr id, go to <a href="http://idgettr.com/" target="_blank">http://idgettr.com/</a> and find out</p>
+  </div>
+  </div>
+  <div id="right">
+    <h2>Instructions</h2>
+    <p>Add your pictures to photos.xml and place the photos.xml and polaroid.swf file together with all your pictures in your website folder. Then you can just place polaroid.swf in your html code and you're ready to go.</p>
+	<p>You can pass along the variable "xmlURL" if you wish to load a different xml-file than the default "photos.xml"</p>
+	<p>If you want lo load pictures from your flickr account you can pass along the variable "flickrID". If you don't know your flickr id, go to <a href="http://idgettr.com/" target="_blank">http://idgettr.com/</a> and find out.</p><p>You can also make the app only get pictures with spesific tags by sending the parameter flickrTAGS when embedding the swf</p>
+	<p><a href="flickr_example.html" target="_blank">View fullscreen flickr example</a></p>
+	<h2>Updates</h2>
+	<ul>
+	<li>July 16, 2007
+	<ul>
+	<li>You can now pass the xml-file you wish to load as a parameter when embedding the flash.</li>
+	<li>You can specify your flickr ID and the gallery automatically loads the latest pictures from your flickr RSS feed</li>
+	<li>The loaded pictures is automatically scaled, centred and smoothed</li>
+	</ul>
+	</li>
+	</ul>
+	
+    <h2>Suggestions</h2>
+    <p>Comments, suggestions and questions can be sent to <a href="mailto:polaroid@no3dfx.com">polaroid@no3dfx.com</a></p>
+    
+	<h2>Licence</h2>
+	<!--Creative Commons License-->
+	<p>This work is licensed under a <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0  License</a>.<br /><a target="_blank" rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="Creative Commons License" style="border-width: 0" src="http://creativecommons.org/images/public/somerights20.png"/></a></p>
+  </div>
+</div>
+<script type="text/javascript">
+updategallery();
+</script>
+</body>
+</html>

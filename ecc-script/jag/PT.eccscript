@@ -1,7 +1,7 @@
 ; Platform               : Atari Jaguar
 ; Script for             : Project Tempest (tested with v0.95)
-; Script version         : v1.0.0.1
-; Last changed           : 2008.05.21
+; Script version         : v1.0.0.2
+; Last changed           : 2009.01.25
 ;
 ;
 ; Author :  Sebastiaan Ebeltjes, Phoenix Interactive
@@ -26,7 +26,6 @@ If @OSVersion <> "WIN_VISTA" Then
 	EmuWindowControl("Project Tempest")
 
 	; Load GAME ROM 
-	;
 	Send("{ALT}")
 	Sleep(100)
 	Send("{DOWN}")
@@ -40,7 +39,6 @@ If @OSVersion <> "WIN_VISTA" Then
 	Send("{ENTER}") 
 
 	; START emulator 
-	;
 	Sleep(100)
 	Send("{F2}")
 
@@ -50,7 +48,6 @@ Else
 	EmuWindowControl("Project Tempest")
 
 	; Load GAME ROM 
-	;
 	Sleep(100)
 	Send("{ALT}")
 	Sleep(100)
@@ -58,18 +55,29 @@ Else
 	Sleep(100)
 	Send("{ENTER}")
 	Sleep(1000)
-	send($eccFileRomFile)
+	send($eccFileRomPath & $eccFileRomFile)
 	Send("{TAB}") 
-
+	Send("{TAB}")
 	Sleep(100)
 	Send("{ENTER}") 
 
 	; START emulator 
-	;
 	Sleep(100)
 	Send("{F2}")
 
 EndIf
+
+Sleep(500)
+If WinExists("Enter download and start address") Then
+	MsgBox(64, "ECC PT Script", "This file is not supported by Project Temepest, or maybe corrupted!")
+
+	; Close the address box
+	Send("{TAB}")
+	Send("{ENTER}")	
+
+	; Exit PT
+	WinClose("Project Tempest")
+Endif
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

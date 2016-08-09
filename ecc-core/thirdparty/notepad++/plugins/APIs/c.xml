@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <NotepadPlus>
-	<AutoComplete>
+	<AutoComplete language="C">
 		<Environment ignoreCase="no" startFunc="(" stopFunc=")" paramSeparator="," terminal=";" />
 		<KeyWord name="#define" />
 		<KeyWord name="#elif" />
@@ -14,11 +14,1409 @@
 		<KeyWord name="#line" />
 		<KeyWord name="#pragma" />
 		<KeyWord name="#undef" />
+		<KeyWord name="abort" func="yes">
+			<Overload retVal="void" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="abs" func="yes">
+			<Overload retVal="int" >
+				<Param name="int i" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="absread" />
+		<KeyWord name="abswrite" />
+		<KeyWord name="access" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="int amode" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="acos" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="acosl" />
+		<KeyWord name="allocmem" />
+		<KeyWord name="arc" />
+		<KeyWord name="arg" />
+		<KeyWord name="asctime" func="yes">
+			<Overload retVal="char*" >
+				<Param name="const struct tm *timeptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="asin" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="asinl" />
+		<KeyWord name="assert" func="yes">
+			<Overload retVal="void" >
+				<Param name="int expression" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atan" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atan2" func="yes">
+			<Overload retVal="double" >
+				<Param name="double y" />
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atan2l" />
+		<KeyWord name="atanl" />
+		<KeyWord name="atexit" func="yes">
+			<Overload retVal="int" >
+				<Param name="void (*func)(void)" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atof" func="yes">
+			<Overload retVal="double" >
+				<Param name="const char *nptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atoi" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *nptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="atol" func="yes">
+			<Overload retVal="long int" >
+				<Param name="const char *nptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="auto" />
+		<KeyWord name="bar" />
+		<KeyWord name="bar3d" />
+		<KeyWord name="bcd" />
+		<KeyWord name="bdos" />
+		<KeyWord name="bdosptr" />
+		<KeyWord name="bioscom" />
+		<KeyWord name="biosdisk" />
+		<KeyWord name="biosequip" />
+		<KeyWord name="bioskey" />
+		<KeyWord name="biosmemory" />
+		<KeyWord name="biosprint" />
+		<KeyWord name="biostime" />
+		<KeyWord name="break" />
+		<KeyWord name="brk" />
+		<KeyWord name="bsearch" func="yes">
+			<Overload retVal="void *" >
+				<Param name="const void *key" />
+				<Param name="const void *base" />
+				<Param name="size_t nmemb" />
+				<Param name="size_t size" />
+				<Param name="int (*compar)(const void *, const void *)" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cabs" />
+		<KeyWord name="cabsl" />
+		<KeyWord name="calloc" func="yes">
+			<Overload retVal="void *" >
+				<Param name="size_t nmemb" />
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="case" />
+		<KeyWord name="ceil" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ceill" />
+		<KeyWord name="cerr" />
+		<KeyWord name="cgets" />
+		<KeyWord name="char" />
+		<KeyWord name="chdir" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chmod" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="mode_t mode" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chsize" />
+		<KeyWord name="cin" />
+		<KeyWord name="circle" />
+		<KeyWord name="cleardevice" />
+		<KeyWord name="clearerr" func="yes">
+			<Overload retVal="void" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="clearviewport" />
+		<KeyWord name="clock" func="yes">
+			<Overload retVal="clock_t" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="close" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="closedir" func="yes">
+			<Overload retVal="int" >
+				<Param name="DIR *dirp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="closegraph" />
+		<KeyWord name="clreol" />
+		<KeyWord name="clrscr" />
+		<KeyWord name="complex" />
+		<KeyWord name="conj" />
+		<KeyWord name="const" />
+		<KeyWord name="continue" />
+		<KeyWord name="coreleft" />
+		<KeyWord name="cos" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cosh" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="coshl" />
+		<KeyWord name="cosl" />
+		<KeyWord name="country" />
+		<KeyWord name="cprintf" />
+		<KeyWord name="cputs" />
+		<KeyWord name="creat" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="mode_t mode" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="creatnew" />
+		<KeyWord name="creattemp" />
+		<KeyWord name="cscanf" />
+		<KeyWord name="ctime" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const time_t *timer" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ctrlbrk" />
+		<KeyWord name="default" />
+		<KeyWord name="delay" />
+		<KeyWord name="delline" />
+		<KeyWord name="detectgraph" />
+		<KeyWord name="difftime" func="yes">
+			<Overload retVal="double" >
+				<Param name="time_t time1" />
+				<Param name="time_t time0" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable" />
+		<KeyWord name="div" func="yes">
+			<Overload retVal="div_t" >
+				<Param name="int numer" />
+				<Param name="int denom" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="dllexport" />
+		<KeyWord name="dllexport2" />
+		<KeyWord name="dllimport" />
+		<KeyWord name="dllimport2" />
+		<KeyWord name="do" />
+		<KeyWord name="dosexterr" />
+		<KeyWord name="dostounix" />
+		<KeyWord name="double" />
+		<KeyWord name="drawpoly" />
+		<KeyWord name="dup" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="dup2" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+				<Param name="int filedes2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ecvt" />
+		<KeyWord name="ellipse" />
+		<KeyWord name="else" />
+		<KeyWord name="enable" />
+		<KeyWord name="enum" />
+		<KeyWord name="eof" />
+		<KeyWord name="execl" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="const char *args" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execle" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="const char *args" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execlp" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *file" />
+				<Param name="const char *args" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execlpe" />
+		<KeyWord name="execv" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="char *const argv[]" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execve" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="char *const argv[]" />
+				<Param name="char *const *envp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execvp" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *file" />
+				<Param name="char *const argv[]" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="execvpe" />
+		<KeyWord name="exit" func="yes">
+			<Overload retVal="void" >
+				<Param name="int status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="exp" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="expl" />
+		<KeyWord name="extern" />
+		<KeyWord name="fabs" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fabsl" />
+		<KeyWord name="farcalloc" />
+		<KeyWord name="farcoreleft" />
+		<KeyWord name="farfree" />
+		<KeyWord name="farheapcheck" />
+		<KeyWord name="farheapcheckfree" />
+		<KeyWord name="farheapchecknode" />
+		<KeyWord name="farheapfillfree" />
+		<KeyWord name="farheapwalk" />
+		<KeyWord name="farmalloc" />
+		<KeyWord name="farrealloc" />
+		<KeyWord name="fclose" func="yes">
+			<Overload retVal="int" >
+				<Param name="File *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fcloseall" />
+		<KeyWord name="fcvt" />
+		<KeyWord name="fdopen" func="yes">
+			<Overload retVal="File *" >
+				<Param name="int filedes" />
+				<Param name="const char *type" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="feof" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ferror" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fflush" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fgetc" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fgetchar" />
+		<KeyWord name="fgetpos" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="fpos_t *pos" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fgets" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s" />
+				<Param name="int n" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="filelength" />
+		<KeyWord name="fileno" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fillellipse" />
+		<KeyWord name="fillpoly" />
+		<KeyWord name="findfirst" />
+		<KeyWord name="findnext" />
+		<KeyWord name="float" />
+		<KeyWord name="floodfill" />
+		<KeyWord name="floor" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="floorl" />
+		<KeyWord name="flushall" />
+		<KeyWord name="fmod" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+				<Param name="double y" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fmodl" />
+		<KeyWord name="fnmerge" />
+		<KeyWord name="fnsplit" />
+		<KeyWord name="fopen" func="yes">
+			<Overload retVal="FILE *" >
+				<Param name="const char *filename" />
+				<Param name="const char *mode" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="for" />
 		<KeyWord name="FP_OFF" />
 		<KeyWord name="FP_SEG" />
+		<KeyWord name="fprintf" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fputc" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fputchar" />
+		<KeyWord name="fputs" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fread" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="void *ptr" />
+				<Param name="size_t size" />
+				<Param name="size_t nmemb" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="free" func="yes">
+			<Overload retVal="void" >
+				<Param name="void *ptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="freemem" />
+		<KeyWord name="freopen" func="yes">
+			<Overload retVal="FILE *" >
+				<Param name="const char *filename" />
+				<Param name="const char *mode" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="frexp" func="yes">
+			<Overload retVal="double" >
+				<Param name="double value" />
+				<Param name="int *exp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="frexpl" />
+		<KeyWord name="friend" />
+		<KeyWord name="fscanf" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fseek" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="long int offset" />
+				<Param name="int whence" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fsetpos" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="const fpos_t * pos" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fstat" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+				<Param name="struct stat *buf" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ftell" func="yes">
+			<Overload retVal="long int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ftime" />
+		<KeyWord name="fwrite" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="const void *ptr" />
+				<Param name="size_t size" />
+				<Param name="size_t nmemb" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gcvt" />
+		<KeyWord name="geninterrupt" />
+		<KeyWord name="getarccoords" />
+		<KeyWord name="getaspectratio" />
+		<KeyWord name="getbkcolor" />
+		<KeyWord name="getc" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getcbrk" />
+		<KeyWord name="getch" />
+		<KeyWord name="getchar" func="yes">
+			<Overload retVal="int" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getche" />
+		<KeyWord name="getcolor" />
+		<KeyWord name="getcurdir" />
+		<KeyWord name="getcwd" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *buf" />
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getdate" />
+		<KeyWord name="getdefaultpalette" />
+		<KeyWord name="getdfree" />
+		<KeyWord name="getdisk" />
+		<KeyWord name="getdrivername" />
+		<KeyWord name="getdta" />
+		<KeyWord name="getenv" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const char *name" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getfat" />
+		<KeyWord name="getfatd" />
+		<KeyWord name="getfillpattern" />
+		<KeyWord name="getfillsettings" />
+		<KeyWord name="getftime" />
+		<KeyWord name="getgraphmode" />
+		<KeyWord name="getimage" />
+		<KeyWord name="getlinesettings" />
+		<KeyWord name="getmaxcolor" />
+		<KeyWord name="getmaxmode" />
+		<KeyWord name="getmaxx" />
+		<KeyWord name="getmaxy" />
+		<KeyWord name="getmodename" />
+		<KeyWord name="getmoderange" />
+		<KeyWord name="getpalette" />
+		<KeyWord name="getpalettesize" />
+		<KeyWord name="getpass" />
+		<KeyWord name="getpid" func="yes">
+			<Overload retVal="pid_t" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getpixel" />
+		<KeyWord name="getpsp" />
+		<KeyWord name="gets" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gettext" />
+		<KeyWord name="gettextinfo" />
+		<KeyWord name="gettextsettings" />
+		<KeyWord name="gettime" />
+		<KeyWord name="getvect" />
+		<KeyWord name="getverify" />
+		<KeyWord name="getviewsettings" />
+		<KeyWord name="getw" />
+		<KeyWord name="getx" />
+		<KeyWord name="gety" />
+		<KeyWord name="gmtime" func="yes">
+			<Overload retVal="struct tm *" >
+				<Param name="const time_t *timer" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="goto" />
+		<KeyWord name="gotoxy" />
+		<KeyWord name="graphdefaults" />
+		<KeyWord name="grapherrormsg" />
+		<KeyWord name="graphresult" />
+		<KeyWord name="harderr" />
+		<KeyWord name="hardresume" />
+		<KeyWord name="hardretn" />
+		<KeyWord name="heapcheck" />
+		<KeyWord name="heapcheckfree" />
+		<KeyWord name="heapchecknode" />
+		<KeyWord name="heapfillfree" />
+		<KeyWord name="heapwalk" />
+		<KeyWord name="highvideo" />
+		<KeyWord name="hypot" />
+		<KeyWord name="hypotl" />
+		<KeyWord name="if" />
+		<KeyWord name="imag" />
+		<KeyWord name="imagesize" />
+		<KeyWord name="initgraph" />
+		<KeyWord name="inp" />
+		<KeyWord name="inport" />
+		<KeyWord name="inportb" />
+		<KeyWord name="inpw" />
+		<KeyWord name="insline" />
+		<KeyWord name="installuserdriver" />
+		<KeyWord name="installuserfont" />
+		<KeyWord name="int" />
+		<KeyWord name="int86" />
+		<KeyWord name="int86x" />
+		<KeyWord name="intdos" />
+		<KeyWord name="intdosx" />
+		<KeyWord name="intr" />
+		<KeyWord name="ioctl" />
+		<KeyWord name="isalnum" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isalpha" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isascii" />
+		<KeyWord name="isatty" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="iscntrl" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isdigit" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isgraph" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="islower" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isprint" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ispunct" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isspace" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isupper" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isxdigit" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="itoa" />
+		<KeyWord name="kbhit" />
+		<KeyWord name="keep" />
+		<KeyWord name="labs" func="yes">
+			<Overload retVal="long int" >
+				<Param name="long int i" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ldexp" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+				<Param name="int exp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ldexpl" />
+		<KeyWord name="ldiv" func="yes">
+			<Overload retVal="ldiv_t" >
+				<Param name="long int numer" />
+				<Param name="long int denom" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="lfind" />
+		<KeyWord name="line" />
+		<KeyWord name="linerel" />
+		<KeyWord name="lineto" />
+		<KeyWord name="localeconv" func="yes">
+			<Overload retVal="struct lconv *" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="localtime" func="yes">
+			<Overload retVal="struct tm *" >
+				<Param name="const time_t *timer" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="lock" />
+		<KeyWord name="locking" />
+		<KeyWord name="log" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="log10" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="log10l" />
+		<KeyWord name="logl" />
+		<KeyWord name="long" />
+		<KeyWord name="longjmp" func="yes">
+			<Overload retVal="void" >
+				<Param name="jmp_buf env" />
+				<Param name="int val" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="lowvideo" />
+		<KeyWord name="lsearch" />
+		<KeyWord name="lseek" func="yes">
+			<Overload retVal="off_t" >
+				<Param name="int filedes" />
+				<Param name="off_t offset" />
+				<Param name="int whence" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ltoa" />
+		<KeyWord name="malloc" func="yes">
+			<Overload retVal="void" >
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="matherr" />
+		<KeyWord name="max" />
+		<KeyWord name="mblen" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="mbstowcs" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="wchar_t *pwcs" />
+				<Param name="const char *s" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="mbtowc" func="yes">
+			<Overload retVal="int" >
+				<Param name="wchar_t *pwc" />
+				<Param name="const char *s" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="memccpy" />
+		<KeyWord name="memchr" func="yes">
+			<Overload retVal="void *" >
+				<Param name="const void *s" />
+				<Param name="int c" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="memcmp" func="yes">
+			<Overload retVal="int" >
+				<Param name="const void *s1" />
+				<Param name="const void *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="memcpy" func="yes">
+			<Overload retVal="void *" >
+				<Param name="void *s1" />
+				<Param name="const void *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="memicmp" />
+		<KeyWord name="memmove" func="yes">
+			<Overload retVal="void *" >
+				<Param name="void * s1" />
+				<Param name="const void *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="memset" func="yes">
+			<Overload retVal="void *" >
+				<Param name="void *s" />
+				<Param name="int c" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="min" />
 		<KeyWord name="MK_FP" />
+		<KeyWord name="mkdir" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="mode_t mode" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="mktemp" />
+		<KeyWord name="mktime" func="yes">
+			<Overload retVal="time_t" >
+				<Param name="struct tm *timer" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="modf" func="yes">
+			<Overload retVal="double" >
+				<Param name="double value" />
+				<Param name="double *iptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="modfl" />
+		<KeyWord name="movedata" />
+		<KeyWord name="moverel" />
+		<KeyWord name="movetext" />
+		<KeyWord name="moveto" />
+		<KeyWord name="movmem" />
+		<KeyWord name="namespace" />
+		<KeyWord name="norm" />
+		<KeyWord name="normvideo" />
+		<KeyWord name="nosound" />
+		<KeyWord name="open" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="int oflag" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="opendir" func="yes">
+			<Overload retVal="DIR *" >
+				<Param name="const char *dirname" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="operator" />
+		<KeyWord name="outp" />
+		<KeyWord name="outport" />
+		<KeyWord name="outportb" />
+		<KeyWord name="outpw" />
+		<KeyWord name="outtext" />
+		<KeyWord name="outtextxy" />
+		<KeyWord name="parsfnm" />
+		<KeyWord name="peek" />
+		<KeyWord name="peekb" />
+		<KeyWord name="perror" func="yes">
+			<Overload retVal="void" >
+				<Param name="const char *s" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pieslice" />
+		<KeyWord name="poke" />
+		<KeyWord name="pokeb" />
+		<KeyWord name="polar" />
+		<KeyWord name="poly" />
+		<KeyWord name="polyl" />
+		<KeyWord name="pow" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+				<Param name="double y" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pow10" />
+		<KeyWord name="pow10l" />
+		<KeyWord name="powl" />
+		<KeyWord name="printf" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="private" />
+		<KeyWord name="protected" />
+		<KeyWord name="public" />
+		<KeyWord name="putc" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="putch" />
+		<KeyWord name="putchar" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="putenv" />
+		<KeyWord name="putimage" />
+		<KeyWord name="putpixel" />
+		<KeyWord name="puts" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="puttext" />
+		<KeyWord name="putw" />
+		<KeyWord name="qsort" func="yes">
+			<Overload retVal="void" >
+				<Param name="void *base" />
+				<Param name="size_t nmemb" />
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="raise" func="yes">
+			<Overload retVal="int" >
+				<Param name="int sig" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rand" func="yes">
+			<Overload retVal="int" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="randbrd" />
+		<KeyWord name="randbwr" />
+		<KeyWord name="random" />
+		<KeyWord name="randomize" />
+		<KeyWord name="read" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+				<Param name="void *buf" />
+				<Param name="unsigned int nbyte" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="readdir" func="yes">
+			<Overload retVal="struct dirent *" >
+				<Param name="DIR *dirp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="real" />
+		<KeyWord name="realloc" func="yes">
+			<Overload retVal="void" >
+				<Param name="void *ptr" />
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rectangle" />
+		<KeyWord name="register" />
+		<KeyWord name="registerbgidriver" />
+		<KeyWord name="registerbgifont" />
+		<KeyWord name="registerfarbgidriver" />
+		<KeyWord name="registerfarbgifont" />
+		<KeyWord name="remove" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *filename" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rename" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char * old" />
+				<Param name="const char *new" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="restorecrtmode" />
+		<KeyWord name="return" />
+		<KeyWord name="rewind" func="yes">
+			<Overload retVal="void" >
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rewinddir" func="yes">
+			<Overload retVal="void" >
+				<Param name="DIR *dirp" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rmdir" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="rmtmp" />
+		<KeyWord name="sbrk" />
+		<KeyWord name="scanf" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="searchpath" />
+		<KeyWord name="sector" />
+		<KeyWord name="segread" />
+		<KeyWord name="set_new_handler" />
+		<KeyWord name="setactivepage" />
+		<KeyWord name="setallpalette" />
+		<KeyWord name="setaspectratio" />
+		<KeyWord name="setbkcolor" />
+		<KeyWord name="setblock" />
+		<KeyWord name="setbuf" func="yes">
+			<Overload retVal="void" >
+				<Param name="FILE *stream" />
+				<Param name="char *buf" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setcbrk" />
+		<KeyWord name="setcolor" />
+		<KeyWord name="setdate" />
+		<KeyWord name="setdisk" />
+		<KeyWord name="setdta" />
+		<KeyWord name="setfillpattern" />
+		<KeyWord name="setfillstyle" />
+		<KeyWord name="setftime" />
+		<KeyWord name="setgraphbufsize" />
+		<KeyWord name="setgraphmode" />
+		<KeyWord name="setjmp" func="yes">
+			<Overload retVal="int" >
+				<Param name="jmp_buf env" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setlinestyle" />
+		<KeyWord name="setlocale" func="yes">
+			<Overload retVal="char *" >
+				<Param name="int category" />
+				<Param name="const char *locale" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setmem" />
+		<KeyWord name="setmode" />
+		<KeyWord name="setpalette" />
+		<KeyWord name="setrgbpalette" />
+		<KeyWord name="settextjustify" />
+		<KeyWord name="settextstyle" />
+		<KeyWord name="settime" />
+		<KeyWord name="setusercharsize" />
+		<KeyWord name="setvbuf" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="char *buf" />
+				<Param name="int mode" />
+				<Param name="size_t size" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setvect" />
+		<KeyWord name="setverify" />
+		<KeyWord name="setviewport" />
+		<KeyWord name="setvisualpage" />
+		<KeyWord name="setwritemode" />
+		<KeyWord name="short" />
+		<KeyWord name="signal" func="yes">
+			<Overload retVal="void" >
+				<Param name="int sig" />
+				<Param name="void *func(int sig)" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="signed" />
+		<KeyWord name="sin" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sinh" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sinhl" />
+		<KeyWord name="sinl" />
+		<KeyWord name="sizeof" />
+		<KeyWord name="sleep" func="yes">
+			<Overload retVal="unsigned int" >
+				<Param name="unsigned int seconds" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sopen" />
+		<KeyWord name="sound" />
+		<KeyWord name="spawnl" />
+		<KeyWord name="spawnle" />
+		<KeyWord name="spawnlp" />
+		<KeyWord name="spawnlpe" />
+		<KeyWord name="spawnv" />
+		<KeyWord name="spawnve" />
+		<KeyWord name="spawnvp" />
+		<KeyWord name="spawnvpe" />
+		<KeyWord name="sprintf" func="yes">
+			<Overload retVal="int" >
+				<Param name="char *s" />
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sqrt" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sqrtl" />
+		<KeyWord name="srand" func="yes">
+			<Overload retVal="void" >
+				<Param name="unsigned int seed" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sscanf" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s" />
+				<Param name="const char *format" />
+				<Param name="..." />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stackavail" />
+		<KeyWord name="stat" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="struct stat *buf" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="static" />
+		<KeyWord name="stime" />
+		<KeyWord name="stpcpy" />
+		<KeyWord name="strcat" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strchr" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const char *s" />
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strcmp" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strcmpi" />
+		<KeyWord name="strcoll" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strcpy" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strcspn" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strdup" />
+		<KeyWord name="strerror" func="yes">
+			<Overload retVal="char *" >
+				<Param name="int errnum" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strftime" func="yes">
+			<Overload retVal="size_t *" >
+				<Param name="char *s" />
+				<Param name="size_t maxsize" />
+				<Param name="const char *format" />
+				<Param name="const struct tm *timeptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stricmp" />
+		<KeyWord name="strlen" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="const char *s" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strlwr" />
+		<KeyWord name="strncat" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strncmp" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strncmpi" />
+		<KeyWord name="strncpy" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strnicmp" />
+		<KeyWord name="strnset" />
+		<KeyWord name="strpbrk" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strrchr" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const char *s" />
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strrev" />
+		<KeyWord name="strset" />
+		<KeyWord name="strspn" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strstr" func="yes">
+			<Overload retVal="char *" >
+				<Param name="const char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strtod" func="yes">
+			<Overload retVal="double" >
+				<Param name="const char *nptr" />
+				<Param name="char **endptr" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strtok" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strtol" func="yes">
+			<Overload retVal="long int" >
+				<Param name="const char *nptr" />
+				<Param name="char **endptr" />
+				<Param name="int base" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strtoul" func="yes">
+			<Overload retVal="unsigned long int" >
+				<Param name="const char *nptr" />
+				<Param name="char **endptr" />
+				<Param name="int base" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="struct" />
+		<KeyWord name="strupr" />
+		<KeyWord name="strxfrm" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="char *s1" />
+				<Param name="const char *s2" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="swab" />
+		<KeyWord name="switch" />
+		<KeyWord name="system" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *string" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="tan" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="tanh" func="yes">
+			<Overload retVal="double" >
+				<Param name="double x" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="tanhl" />
+		<KeyWord name="tanl" />
+		<KeyWord name="tell" />
+		<KeyWord name="template" />
+		<KeyWord name="tempnam" />
+		<KeyWord name="textattr" />
+		<KeyWord name="textbackground" />
+		<KeyWord name="textcolor" />
+		<KeyWord name="textheight" />
+		<KeyWord name="textmode" />
+		<KeyWord name="textwidth" />
+		<KeyWord name="thread" />
+		<KeyWord name="thread2" />
+		<KeyWord name="time" func="yes">
+			<Overload retVal="time_t" >
+				<Param name="time_t *timer" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="tmpfile" func="yes">
+			<Overload retVal="FILE *" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="tmpnam" func="yes">
+			<Overload retVal="char *" >
+				<Param name="char *s" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="toascii" />
+		<KeyWord name="tolower" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="toupper" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="try" />
+		<KeyWord name="typedef" />
+		<KeyWord name="tzset" func="yes">
+			<Overload retVal="void" >
+				<Param name="void" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ultoa" />
+		<KeyWord name="umask" func="yes">
+			<Overload retVal="mode_t" >
+				<Param name="mode_t cmask" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ungetc" func="yes">
+			<Overload retVal="int" >
+				<Param name="int c" />
+				<Param name="FILE *stream" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ungetch" />
+		<KeyWord name="union" />
+		<KeyWord name="unixtodos" />
+		<KeyWord name="unlink" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unlock" />
+		<KeyWord name="unsigned" />
+		<KeyWord name="using" />
+		<KeyWord name="utime" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *path" />
+				<Param name="const struct utimbuf *times" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_arg" func="yes">
+			<Overload retVal="type" >
+				<Param name="va_list ap" />
+				<Param name="type" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_end" func="yes">
+			<Overload retVal="void" >
+				<Param name="va_list ap" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_list" />
+		<KeyWord name="va_start" func="yes">
+			<Overload retVal="void" >
+				<Param name="va_list ap" />
+				<Param name="parmN" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="vfprintf" func="yes">
+			<Overload retVal="int" >
+				<Param name="FILE *stream" />
+				<Param name="const char *format" />
+				<Param name="va_list arg" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="vfscanf" />
+		<KeyWord name="virtual" />
+		<KeyWord name="void" />
+		<KeyWord name="volatile" />
+		<KeyWord name="vprintf" func="yes">
+			<Overload retVal="int" >
+				<Param name="const char *format" />
+				<Param name="va_list arg" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="vscanf" />
+		<KeyWord name="vsprintf" func="yes">
+			<Overload retVal="int" >
+				<Param name="char *s" />
+				<Param name="const char *format" />
+				<Param name="va_list arg" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="vsscanf" />
+		<KeyWord name="wcstombs" func="yes">
+			<Overload retVal="size_t" >
+				<Param name="char *s" />
+				<Param name="const wchar_t *pwcs" />
+				<Param name="size_t n" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="wctomb" func="yes">
+			<Overload retVal="int" >
+				<Param name="char *s" />
+				<Param name="wchar_t wchar" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="wherex" />
+		<KeyWord name="wherey" />
+		<KeyWord name="while" />
+		<KeyWord name="window" />
+		<KeyWord name="write" func="yes">
+			<Overload retVal="int" >
+				<Param name="int filedes" />
+				<Param name="const void *buf" />
+				<Param name="unsigned int nbyte" />
+			</Overload>
+		</KeyWord>
 		<KeyWord name="_OvrInitEms" />
-		<KeyWord name="_OvrInitExt" />
+		<KeyWord name="_OvrInitExt" />		
 		<KeyWord name="__asm" />
 		<KeyWord name="__based1" />
 		<KeyWord name="__cdecl" />
@@ -82,7 +1480,11 @@
 		<KeyWord name="_dos_setvect" />
 		<KeyWord name="_dos_write" />
 		<KeyWord name="_enable" />
-		<KeyWord name="_exit" />
+		<KeyWord name="_exit" func="yes">
+			<Overload retVal="void" >
+				<Param name="int status" />
+			</Overload>
+		</KeyWord>
 		<KeyWord name="_fmemccpy" />
 		<KeyWord name="_fmemchr" />
 		<KeyWord name="_fmemcmp" />
@@ -140,549 +1542,5 @@
 		<KeyWord name="_tolower" />
 		<KeyWord name="_toupper" />
 		<KeyWord name="_write" />
-		<KeyWord name="abort" />
-		<KeyWord name="abs" />
-		<KeyWord name="absread" />
-		<KeyWord name="abswrite" />
-		<KeyWord name="access" />
-		<KeyWord name="acos" />
-		<KeyWord name="acosl" />
-		<KeyWord name="allocmem" />
-		<KeyWord name="arc" />
-		<KeyWord name="arg" />
-		<KeyWord name="asctime" />
-		<KeyWord name="asin" />
-		<KeyWord name="asinl" />
-		<KeyWord name="assert" />
-		<KeyWord name="atan" />
-		<KeyWord name="atan2" />
-		<KeyWord name="atan2l" />
-		<KeyWord name="atanl" />
-		<KeyWord name="atexit" />
-		<KeyWord name="atof" />
-		<KeyWord name="atoi" />
-		<KeyWord name="atol" />
-		<KeyWord name="auto" />
-		<KeyWord name="bar" />
-		<KeyWord name="bar3d" />
-		<KeyWord name="bcd" />
-		<KeyWord name="bdos" />
-		<KeyWord name="bdosptr" />
-		<KeyWord name="bioscom" />
-		<KeyWord name="biosdisk" />
-		<KeyWord name="biosequip" />
-		<KeyWord name="bioskey" />
-		<KeyWord name="biosmemory" />
-		<KeyWord name="biosprint" />
-		<KeyWord name="biostime" />
-		<KeyWord name="break" />
-		<KeyWord name="brk" />
-		<KeyWord name="bsearch" />
-		<KeyWord name="cabs" />
-		<KeyWord name="cabsl" />
-		<KeyWord name="calloc" />
-		<KeyWord name="case" />
-		<KeyWord name="ceil" />
-		<KeyWord name="ceill" />
-		<KeyWord name="cerr" />
-		<KeyWord name="cgets" />
-		<KeyWord name="char" />
-		<KeyWord name="chdir" />
-		<KeyWord name="chmod" />
-		<KeyWord name="chsize" />
-		<KeyWord name="cin" />
-		<KeyWord name="circle" />
-		<KeyWord name="cleardevice" />
-		<KeyWord name="clearerr" />
-		<KeyWord name="clearviewport" />
-		<KeyWord name="clock" />
-		<KeyWord name="close" />
-		<KeyWord name="closedir" />
-		<KeyWord name="closegraph" />
-		<KeyWord name="clreol" />
-		<KeyWord name="clrscr" />
-		<KeyWord name="complex" />
-		<KeyWord name="conj" />
-		<KeyWord name="const" />
-		<KeyWord name="continue" />
-		<KeyWord name="coreleft" />
-		<KeyWord name="cos" />
-		<KeyWord name="cosh" />
-		<KeyWord name="coshl" />
-		<KeyWord name="cosl" />
-		<KeyWord name="country" />
-		<KeyWord name="cprintf" />
-		<KeyWord name="cputs" />
-		<KeyWord name="creat" />
-		<KeyWord name="creatnew" />
-		<KeyWord name="creattemp" />
-		<KeyWord name="cscanf" />
-		<KeyWord name="ctime" />
-		<KeyWord name="ctrlbrk" />
-		<KeyWord name="default" />
-		<KeyWord name="delay" />
-		<KeyWord name="delline" />
-		<KeyWord name="detectgraph" />
-		<KeyWord name="difftime" />
-		<KeyWord name="disable" />
-		<KeyWord name="div" />
-		<KeyWord name="dllexport" />
-		<KeyWord name="dllexport2" />
-		<KeyWord name="dllimport" />
-		<KeyWord name="dllimport2" />
-		<KeyWord name="do" />
-		<KeyWord name="dosexterr" />
-		<KeyWord name="dostounix" />
-		<KeyWord name="double" />
-		<KeyWord name="drawpoly" />
-		<KeyWord name="dup" />
-		<KeyWord name="dup2" />
-		<KeyWord name="ecvt" />
-		<KeyWord name="ellipse" />
-		<KeyWord name="else" />
-		<KeyWord name="enable" />
-		<KeyWord name="enum" />
-		<KeyWord name="eof" />
-		<KeyWord name="execl" />
-		<KeyWord name="execle" />
-		<KeyWord name="execlp" />
-		<KeyWord name="execlpe" />
-		<KeyWord name="execv" />
-		<KeyWord name="execve" />
-		<KeyWord name="execvp" />
-		<KeyWord name="execvpe" />
-		<KeyWord name="exit" />
-		<KeyWord name="exp" />
-		<KeyWord name="expl" />
-		<KeyWord name="extern" />
-		<KeyWord name="fabs" />
-		<KeyWord name="fabsl" />
-		<KeyWord name="farcalloc" />
-		<KeyWord name="farcoreleft" />
-		<KeyWord name="farfree" />
-		<KeyWord name="farheapcheck" />
-		<KeyWord name="farheapcheckfree" />
-		<KeyWord name="farheapchecknode" />
-		<KeyWord name="farheapfillfree" />
-		<KeyWord name="farheapwalk" />
-		<KeyWord name="farmalloc" />
-		<KeyWord name="farrealloc" />
-		<KeyWord name="fclose" />
-		<KeyWord name="fcloseall" />
-		<KeyWord name="fcvt" />
-		<KeyWord name="fdopen" />
-		<KeyWord name="feof" />
-		<KeyWord name="ferror" />
-		<KeyWord name="fflush" />
-		<KeyWord name="fgetc" />
-		<KeyWord name="fgetchar" />
-		<KeyWord name="fgetpos" />
-		<KeyWord name="fgets" />
-		<KeyWord name="filelength" />
-		<KeyWord name="fileno" />
-		<KeyWord name="fillellipse" />
-		<KeyWord name="fillpoly" />
-		<KeyWord name="findfirst" />
-		<KeyWord name="findnext" />
-		<KeyWord name="float" />
-		<KeyWord name="floodfill" />
-		<KeyWord name="floor" />
-		<KeyWord name="floorl" />
-		<KeyWord name="flushall" />
-		<KeyWord name="fmod" />
-		<KeyWord name="fmodl" />
-		<KeyWord name="fnmerge" />
-		<KeyWord name="fnsplit" />
-		<KeyWord name="fopen" />
-		<KeyWord name="for" />
-		<KeyWord name="fprintf" />
-		<KeyWord name="fputc" />
-		<KeyWord name="fputchar" />
-		<KeyWord name="fputs" />
-		<KeyWord name="fread" />
-		<KeyWord name="free" />
-		<KeyWord name="freemem" />
-		<KeyWord name="freopen" />
-		<KeyWord name="frexp" />
-		<KeyWord name="frexpl" />
-		<KeyWord name="friend" />
-		<KeyWord name="fscanf" />
-		<KeyWord name="fseek" />
-		<KeyWord name="fsetpos" />
-		<KeyWord name="fstat" />
-		<KeyWord name="ftell" />
-		<KeyWord name="ftime" />
-		<KeyWord name="fwrite" />
-		<KeyWord name="gcvt" />
-		<KeyWord name="geninterrupt" />
-		<KeyWord name="getarccoords" />
-		<KeyWord name="getaspectratio" />
-		<KeyWord name="getbkcolor" />
-		<KeyWord name="getc" />
-		<KeyWord name="getcbrk" />
-		<KeyWord name="getch" />
-		<KeyWord name="getchar" />
-		<KeyWord name="getche" />
-		<KeyWord name="getcolor" />
-		<KeyWord name="getcurdir" />
-		<KeyWord name="getcwd" />
-		<KeyWord name="getdate" />
-		<KeyWord name="getdefaultpalette" />
-		<KeyWord name="getdfree" />
-		<KeyWord name="getdisk" />
-		<KeyWord name="getdrivername" />
-		<KeyWord name="getdta" />
-		<KeyWord name="getenv" />
-		<KeyWord name="getfat" />
-		<KeyWord name="getfatd" />
-		<KeyWord name="getfillpattern" />
-		<KeyWord name="getfillsettings" />
-		<KeyWord name="getftime" />
-		<KeyWord name="getgraphmode" />
-		<KeyWord name="getimage" />
-		<KeyWord name="getlinesettings" />
-		<KeyWord name="getmaxcolor" />
-		<KeyWord name="getmaxmode" />
-		<KeyWord name="getmaxx" />
-		<KeyWord name="getmaxy" />
-		<KeyWord name="getmodename" />
-		<KeyWord name="getmoderange" />
-		<KeyWord name="getpalette" />
-		<KeyWord name="getpalettesize" />
-		<KeyWord name="getpass" />
-		<KeyWord name="getpid" />
-		<KeyWord name="getpixel" />
-		<KeyWord name="getpsp" />
-		<KeyWord name="gets" />
-		<KeyWord name="gettext" />
-		<KeyWord name="gettextinfo" />
-		<KeyWord name="gettextsettings" />
-		<KeyWord name="gettime" />
-		<KeyWord name="getvect" />
-		<KeyWord name="getverify" />
-		<KeyWord name="getviewsettings" />
-		<KeyWord name="getw" />
-		<KeyWord name="getx" />
-		<KeyWord name="gety" />
-		<KeyWord name="gmtime" />
-		<KeyWord name="goto" />
-		<KeyWord name="gotoxy" />
-		<KeyWord name="graphdefaults" />
-		<KeyWord name="grapherrormsg" />
-		<KeyWord name="graphresult" />
-		<KeyWord name="harderr" />
-		<KeyWord name="hardresume" />
-		<KeyWord name="hardretn" />
-		<KeyWord name="heapcheck" />
-		<KeyWord name="heapcheckfree" />
-		<KeyWord name="heapchecknode" />
-		<KeyWord name="heapfillfree" />
-		<KeyWord name="heapwalk" />
-		<KeyWord name="highvideo" />
-		<KeyWord name="hypot" />
-		<KeyWord name="hypotl" />
-		<KeyWord name="if" />
-		<KeyWord name="imag" />
-		<KeyWord name="imagesize" />
-		<KeyWord name="initgraph" />
-		<KeyWord name="inp" />
-		<KeyWord name="inport" />
-		<KeyWord name="inportb" />
-		<KeyWord name="inpw" />
-		<KeyWord name="insline" />
-		<KeyWord name="installuserdriver" />
-		<KeyWord name="installuserfont" />
-		<KeyWord name="int" />
-		<KeyWord name="int86" />
-		<KeyWord name="int86x" />
-		<KeyWord name="intdos" />
-		<KeyWord name="intdosx" />
-		<KeyWord name="intr" />
-		<KeyWord name="ioctl" />
-		<KeyWord name="isalnum" />
-		<KeyWord name="isalpha" />
-		<KeyWord name="isascii" />
-		<KeyWord name="isatty" />
-		<KeyWord name="iscntrl" />
-		<KeyWord name="isdigit" />
-		<KeyWord name="isgraph" />
-		<KeyWord name="islower" />
-		<KeyWord name="isprint" />
-		<KeyWord name="ispunct" />
-		<KeyWord name="isspace" />
-		<KeyWord name="isupper" />
-		<KeyWord name="isxdigit" />
-		<KeyWord name="itoa" />
-		<KeyWord name="kbhit" />
-		<KeyWord name="keep" />
-		<KeyWord name="labs" />
-		<KeyWord name="ldexp" />
-		<KeyWord name="ldexpl" />
-		<KeyWord name="ldiv" />
-		<KeyWord name="lfind" />
-		<KeyWord name="line" />
-		<KeyWord name="linerel" />
-		<KeyWord name="lineto" />
-		<KeyWord name="localeconv" />
-		<KeyWord name="localtime" />
-		<KeyWord name="lock" />
-		<KeyWord name="locking" />
-		<KeyWord name="log" />
-		<KeyWord name="log10" />
-		<KeyWord name="log10l" />
-		<KeyWord name="logl" />
-		<KeyWord name="long" />
-		<KeyWord name="longjmp" />
-		<KeyWord name="lowvideo" />
-		<KeyWord name="lsearch" />
-		<KeyWord name="lseek" />
-		<KeyWord name="ltoa" />
-		<KeyWord name="malloc" />
-		<KeyWord name="matherr" />
-		<KeyWord name="max" />
-		<KeyWord name="mblen" />
-		<KeyWord name="mbstowcs" />
-		<KeyWord name="mbtowc" />
-		<KeyWord name="memccpy" />
-		<KeyWord name="memchr" />
-		<KeyWord name="memcmp" />
-		<KeyWord name="memcpy" />
-		<KeyWord name="memicmp" />
-		<KeyWord name="memmove" />
-		<KeyWord name="memset" />
-		<KeyWord name="min" />
-		<KeyWord name="mkdir" />
-		<KeyWord name="mktemp" />
-		<KeyWord name="mktime" />
-		<KeyWord name="modf" />
-		<KeyWord name="modfl" />
-		<KeyWord name="movedata" />
-		<KeyWord name="moverel" />
-		<KeyWord name="movetext" />
-		<KeyWord name="moveto" />
-		<KeyWord name="movmem" />
-		<KeyWord name="namespace" />
-		<KeyWord name="norm" />
-		<KeyWord name="normvideo" />
-		<KeyWord name="nosound" />
-		<KeyWord name="open" />
-		<KeyWord name="opendir" />
-		<KeyWord name="operator" />
-		<KeyWord name="outp" />
-		<KeyWord name="outport" />
-		<KeyWord name="outportb" />
-		<KeyWord name="outpw" />
-		<KeyWord name="outtext" />
-		<KeyWord name="outtextxy" />
-		<KeyWord name="parsfnm" />
-		<KeyWord name="peek" />
-		<KeyWord name="peekb" />
-		<KeyWord name="perror" />
-		<KeyWord name="pieslice" />
-		<KeyWord name="poke" />
-		<KeyWord name="pokeb" />
-		<KeyWord name="polar" />
-		<KeyWord name="poly" />
-		<KeyWord name="polyl" />
-		<KeyWord name="pow" />
-		<KeyWord name="pow10" />
-		<KeyWord name="pow10l" />
-		<KeyWord name="powl" />
-		<KeyWord name="printf" />
-		<KeyWord name="private" />
-		<KeyWord name="protected" />
-		<KeyWord name="public" />
-		<KeyWord name="putc" />
-		<KeyWord name="putch" />
-		<KeyWord name="putchar" />
-		<KeyWord name="putenv" />
-		<KeyWord name="putimage" />
-		<KeyWord name="putpixel" />
-		<KeyWord name="puts" />
-		<KeyWord name="puttext" />
-		<KeyWord name="putw" />
-		<KeyWord name="qsort" />
-		<KeyWord name="raise" />
-		<KeyWord name="rand" />
-		<KeyWord name="randbrd" />
-		<KeyWord name="randbwr" />
-		<KeyWord name="random" />
-		<KeyWord name="randomize" />
-		<KeyWord name="read" />
-		<KeyWord name="readdir" />
-		<KeyWord name="real" />
-		<KeyWord name="realloc" />
-		<KeyWord name="rectangle" />
-		<KeyWord name="register" />
-		<KeyWord name="registerbgidriver" />
-		<KeyWord name="registerbgifont" />
-		<KeyWord name="registerfarbgidriver" />
-		<KeyWord name="registerfarbgifont" />
-		<KeyWord name="remove" />
-		<KeyWord name="rename" />
-		<KeyWord name="restorecrtmode" />
-		<KeyWord name="return" />
-		<KeyWord name="rewind" />
-		<KeyWord name="rewinddir" />
-		<KeyWord name="rmdir" />
-		<KeyWord name="rmtmp" />
-		<KeyWord name="sbrk" />
-		<KeyWord name="scanf" />
-		<KeyWord name="searchpath" />
-		<KeyWord name="sector" />
-		<KeyWord name="segread" />
-		<KeyWord name="set_new_handler" />
-		<KeyWord name="setactivepage" />
-		<KeyWord name="setallpalette" />
-		<KeyWord name="setaspectratio" />
-		<KeyWord name="setbkcolor" />
-		<KeyWord name="setblock" />
-		<KeyWord name="setbuf" />
-		<KeyWord name="setcbrk" />
-		<KeyWord name="setcolor" />
-		<KeyWord name="setdate" />
-		<KeyWord name="setdisk" />
-		<KeyWord name="setdta" />
-		<KeyWord name="setfillpattern" />
-		<KeyWord name="setfillstyle" />
-		<KeyWord name="setftime" />
-		<KeyWord name="setgraphbufsize" />
-		<KeyWord name="setgraphmode" />
-		<KeyWord name="setjmp" />
-		<KeyWord name="setlinestyle" />
-		<KeyWord name="setlocale" />
-		<KeyWord name="setmem" />
-		<KeyWord name="setmode" />
-		<KeyWord name="setpalette" />
-		<KeyWord name="setrgbpalette" />
-		<KeyWord name="settextjustify" />
-		<KeyWord name="settextstyle" />
-		<KeyWord name="settime" />
-		<KeyWord name="setusercharsize" />
-		<KeyWord name="setvbuf" />
-		<KeyWord name="setvect" />
-		<KeyWord name="setverify" />
-		<KeyWord name="setviewport" />
-		<KeyWord name="setvisualpage" />
-		<KeyWord name="setwritemode" />
-		<KeyWord name="short" />
-		<KeyWord name="signal" />
-		<KeyWord name="signed" />
-		<KeyWord name="sin" />
-		<KeyWord name="sinh" />
-		<KeyWord name="sinhl" />
-		<KeyWord name="sinl" />
-		<KeyWord name="sizeof" />
-		<KeyWord name="sleep" />
-		<KeyWord name="sopen" />
-		<KeyWord name="sound" />
-		<KeyWord name="spawnl" />
-		<KeyWord name="spawnle" />
-		<KeyWord name="spawnlp" />
-		<KeyWord name="spawnlpe" />
-		<KeyWord name="spawnv" />
-		<KeyWord name="spawnve" />
-		<KeyWord name="spawnvp" />
-		<KeyWord name="spawnvpe" />
-		<KeyWord name="sprintf" />
-		<KeyWord name="sqrt" />
-		<KeyWord name="sqrtl" />
-		<KeyWord name="srand" />
-		<KeyWord name="sscanf" />
-		<KeyWord name="stackavail" />
-		<KeyWord name="stat" />
-		<KeyWord name="static" />
-		<KeyWord name="stime" />
-		<KeyWord name="stpcpy" />
-		<KeyWord name="strcat" />
-		<KeyWord name="strchr" />
-		<KeyWord name="strcmp" />
-		<KeyWord name="strcmpi" />
-		<KeyWord name="strcoll" />
-		<KeyWord name="strcpy" />
-		<KeyWord name="strcspn" />
-		<KeyWord name="strdup" />
-		<KeyWord name="strerror" />
-		<KeyWord name="strftime" />
-		<KeyWord name="stricmp" />
-		<KeyWord name="strlen" />
-		<KeyWord name="strlwr" />
-		<KeyWord name="strncat" />
-		<KeyWord name="strncmp" />
-		<KeyWord name="strncmpi" />
-		<KeyWord name="strncpy" />
-		<KeyWord name="strnicmp" />
-		<KeyWord name="strnset" />
-		<KeyWord name="strpbrk" />
-		<KeyWord name="strrchr" />
-		<KeyWord name="strrev" />
-		<KeyWord name="strset" />
-		<KeyWord name="strspn" />
-		<KeyWord name="strstr" />
-		<KeyWord name="strtod" />
-		<KeyWord name="strtok" />
-		<KeyWord name="strtol" />
-		<KeyWord name="strtoul" />
-		<KeyWord name="struct" />
-		<KeyWord name="strupr" />
-		<KeyWord name="strxfrm" />
-		<KeyWord name="swab" />
-		<KeyWord name="switch" />
-		<KeyWord name="system" />
-		<KeyWord name="tan" />
-		<KeyWord name="tanh" />
-		<KeyWord name="tanhl" />
-		<KeyWord name="tanl" />
-		<KeyWord name="tell" />
-		<KeyWord name="template" />
-		<KeyWord name="tempnam" />
-		<KeyWord name="textattr" />
-		<KeyWord name="textbackground" />
-		<KeyWord name="textcolor" />
-		<KeyWord name="textheight" />
-		<KeyWord name="textmode" />
-		<KeyWord name="textwidth" />
-		<KeyWord name="thread" />
-		<KeyWord name="thread2" />
-		<KeyWord name="time" />
-		<KeyWord name="tmpfile" />
-		<KeyWord name="tmpnam" />
-		<KeyWord name="toascii" />
-		<KeyWord name="tolower" />
-		<KeyWord name="toupper" />
-		<KeyWord name="try" />
-		<KeyWord name="typedef" />
-		<KeyWord name="tzset" />
-		<KeyWord name="ultoa" />
-		<KeyWord name="umask" />
-		<KeyWord name="ungetc" />
-		<KeyWord name="ungetch" />
-		<KeyWord name="union" />
-		<KeyWord name="unixtodos" />
-		<KeyWord name="unlink" />
-		<KeyWord name="unlock" />
-		<KeyWord name="unsigned" />
-		<KeyWord name="using" />
-		<KeyWord name="utime" />
-		<KeyWord name="va_arg" />
-		<KeyWord name="va_end" />
-		<KeyWord name="va_list" />
-		<KeyWord name="va_start" />
-		<KeyWord name="vfprintf" />
-		<KeyWord name="vfscanf" />
-		<KeyWord name="virtual" />
-		<KeyWord name="void" />
-		<KeyWord name="volatile" />
-		<KeyWord name="vprintf" />
-		<KeyWord name="vscanf" />
-		<KeyWord name="vsprintf" />
-		<KeyWord name="vsscanf" />
-		<KeyWord name="wcstombs" />
-		<KeyWord name="wctomb" />
-		<KeyWord name="wherex" />
-		<KeyWord name="wherey" />
-		<KeyWord name="while" />
-		<KeyWord name="window" />
-		<KeyWord name="write" />
 	</AutoComplete>
 </NotepadPlus>

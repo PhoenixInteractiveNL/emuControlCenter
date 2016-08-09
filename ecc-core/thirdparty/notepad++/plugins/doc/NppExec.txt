@@ -1,7 +1,8 @@
+ 
  ****************************************************************************
- * NppExec plugin ver. 0.3 beta1 Unicode for Notepad++ 5.1 (and above)
- * by DV, December 2006 - July 2007
- * by DV & Nicolas Babled & Geert Vancompernolle, July 2007 - November 2008
+ * NppExec plugin ver. 0.3 RC1 for Notepad++ 5.1 (and above)
+ * by DV, December 2006 - January 2009
+ * Co-developers: Nicolas Babled & Geert Vancompernolle (since July 2007)
  ****************************************************************************
  *
  * Possibilities:
@@ -21,6 +22,9 @@
  *        set <var> - shows the value of user's variable <var>
  *        set <var> = <value> - sets the value of user's variable <var>
  *        unset <var> - removes user's variable <var>
+ *        env_set <var> - shows the value of environment variable <var>
+ *        env_set <var> = <value> - sets the value of environment variable <var>
+ *        env_unset <var> - removes/restores the environment variable <var>
  *        inputbox "message" - shows InputBox, sets $(INPUT)
  *        inputbox "message" : initial_value - InputBox, sets $(INPUT)
  *        con_loadfrom <file> - loads a file's content to the Console
@@ -67,6 +71,7 @@
  *        $(LEFT_VIEW_FILE)     : current file path-name in primary (left) view
  *        $(RIGHT_VIEW_FILE)    : current file path-name in second (right) view
  *        $(PLUGINS_CONFIG_DIR) : full path of the plugins configuration directory
+ *        $(CWD)                : current working directory of NppExec (use "cd" to change it)
  *        $(ARGC)               : number of arguments passed to the NPP_EXEC command
  *        $(ARGV)               : all arguments passed to the NPP_EXEC command after the script name
  *        $(ARGV[0])            : script name - first parameter of the NPP_EXEC command
@@ -79,12 +84,27 @@
  *
  ****************************************************************************
 
-
+ 
  *************
  *  HISTORY  *
  *************
 
 
+ v0.3 RC1 - January 2009
+ -----------------------
+ * thanks to John LaCasse for useful suggestions
+ + new environment variable: $(CWD)
+ + new commands: ENV_SET/ENV_UNSET
+ + new menu item: Toggle Console Dialog (Ctrl+~)
+ + now NPE_DEBUGLOG reports on Console double-clicked line's Highlight Filter
+ + NppExecPluginMsgTester has been re-designed and updated
+ + both Unicode and ANSI builds are supported
+ + now the "Execute..." dialog is resizable
+ + now NppExec supports remapped shortcut keys (requires Notepad++ >= 5.1.4)
+ + other improvements
+ + now NppExec has the manual (yes!)
+
+ 
  v0.3 beta1 - November 2008
  --------------------------
  + full Unicode compatibility (for Unicode version of Notepad++)

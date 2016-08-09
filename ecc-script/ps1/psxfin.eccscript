@@ -1,0 +1,37 @@
+; ------------------------------------------------------------------------------
+; Platform               : Sony Playstation 
+; Script for             : pSX - tested with v1.13
+; Script version         : v1.0.0.0
+; Last changed           : 2009.02.07
+;
+;
+; Author: Sebastiaan Ebeltjes (aka Phoenix)
+;
+; NOTES:
+; This script starts the game in full screen
+; 
+; 
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Start the emulator
+Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34))
+; Wait until emulator is active (window name) (has a 10 seconds timeout) 
+WinWaitActive("pSX", "", 10) 
+; Send keys
+Send("!{ENTER}") ;ALT+ENTER (full screen)
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

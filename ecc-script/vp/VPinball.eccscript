@@ -1,0 +1,37 @@
+; ------------------------------------------------------------------------------
+; Platform               : Visual Pinball
+; Script for             : VPinball.exe - tested with v0.8.9506
+; Script version         : v1.0.0.0
+; Last changed           : 2009.02.05
+;
+;
+; Author: Sebastiaan Ebeltjes (aka Phoenix)
+;
+; NOTES:
+; 
+; 
+; 
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("Visual Pinball")
+
+Send("^o") ;CTRL+O (open)
+Sleep(500)
+Send($eccFileRomPath & $eccFileRomFile) ;the ROM path & file
+Send("!o") ;ALT+O (open)
+Send("{F5}") ;play the table
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

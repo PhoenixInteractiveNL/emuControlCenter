@@ -1,9 +1,9 @@
 clrmamepro (
 	name Neo-Geo
-	description "Neo-Geo 20090105"
+	description "Neo-Geo 20090310"
 	category "SNK Neo-Geo"
-	version 20090106
-	date 2009-01-06
+	version 20090310
+	date 2009-03-10
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -841,7 +841,7 @@ game (
 )
 
 game (
-	name burningh
+	name burningfh
 	description "Burning Fight (set 2)"
 	year 1991
 	manufacturer "SNK"
@@ -1427,7 +1427,7 @@ game (
 )
 
 game (
-	name socbrala
+	name socbrawla
 	description "Soccer Brawl (set 2)"
 	year 1991
 	manufacturer "SNK"
@@ -2069,7 +2069,7 @@ game (
 )
 
 game (
-	name tophunta
+	name tophuntra
 	description "Top Hunter - Roddy & Cathy (set 2)"
 	year 1994
 	manufacturer "SNK"
@@ -2811,7 +2811,7 @@ game (
 )
 
 game (
-	name fightfva
+	name fightfeva
 	description "Fight Fever (set 2)"
 	year 1994
 	manufacturer "Viccom"
@@ -3708,7 +3708,7 @@ game (
 )
 
 game (
-	name pbobblna
+	name pbobblena
 	description "Puzzle Bobble / Bust-A-Move (Neo-Geo) (set 2)"
 	year 1994
 	manufacturer "Taito"
@@ -5820,7 +5820,7 @@ game (
 )
 
 game (
-	name lastbldh
+	name lastbladh
 	description "Last Blade / Bakumatsu Roman - Gekka no Kenshi, The (set 2)"
 	year 1997
 	manufacturer "SNK"
@@ -9578,7 +9578,7 @@ game (
 )
 
 game (
-	name samsh5sh
+	name samsh5sph
 	description "Samurai Shodown V Special / Samurai Spirits Zero Special (set 2, censored)"
 	year 2003
 	manufacturer "Yuki Enterprise / SNK Playmore"
@@ -9622,7 +9622,7 @@ game (
 )
 
 game (
-	name samsh5sn
+	name samsh5spn
 	description "Samurai Shodown V Special / Samurai Spirits Zero Special (set 3, less censored)"
 	year 2003
 	manufacturer "Yuki Enterprise / SNK Playmore"

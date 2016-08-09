@@ -1,0 +1,697 @@
+
+=== NppExec Manual ===
+
+
+--- NppExec Manual ---
+
+
+--- 1. What is NppExec ---
+
+
+--- 1.1. Introduction ---
+
+NppExec is a plugin for Notepad++ which allows you to run some commands/programs directly from Notepad++ and provides an output window (NppExec's Console).
+NppExec can be used for running other programs from Notepad++, passing text from Notepad++ to some external tool, compiling source files (using external compiler) etc. 
+When the NppExec plugin is installed, you can see its icon "Show Console Dialog" on Notepad++'es toolbar, and you can find NppExec's submenu under Plugins menu of Notepad++.
+You can always find the latest version of NppExec at https://sourceforge.net/projects/npp-plugins/ - it is there among other Notepad++'es plugins.
+
+
+--- 1.2. NppExec is... ---
+
++ NppExec is an intermediary between Notepad++ and external tool/compiler. It allows to run external tool/compiler directly from Notepad++.
++ NppExec is a Console window which can show the running process'es output, and can redirect the Console window's input to the running process (with some limitations).
++ NppExec is an interpreter of its own internal commands. NppExec can execute several commands one after another (so-called NppExec's script) from its "Execute..." dialog and can execute single command directly from its Console window.
+
+
+--- 1.3. NppExec is not... ---
+
+- NppExec is not a console emulator. NppExec redirects the running process'es output to its Console window, and can redirect the Console window's input to the running process (with some limitations). The NppExec's Console is not a "real" console window (actually, it uses RichEdit control for text input/output), it does not provide a console screen buffer. Thus, a console application which requires a "real" console screen buffer must be run in its own console window (using NPP_RUN command).
+- NppExec is not a command interpreter. NppExec does not understand such commands as 'copy', 'call', 'for' and so on because it is neither a "real" console nor a console emulator. However, NppExec has its own internal implementation of such commands as 'cls', 'cd', 'dir', 'echo', 'set' ('env_set') and introduces other, specific, commands. Also you can use "cmd /c <command>" to execute any cmd's command inside NppExec.
+- NppExec is not a compiler. NppExec allows you to use external tools and compilers to process/compile your current file, but it has no ability to do it by itself. No magic here :)
+
+
+--- 2. Installation ---
+
+
+--- 2.1. What? Installation? ---
+
+Usually latest stable version of NppExec is included in Notepad++'es package, so you don't have to do anything manually.
+However, you may want to know:
+- what actually is the NppExec plugin and how can it be installed or removed;
+- how can you install the latest version of NppExec;
+- how can you use several copies of NppExec.
+
+
+--- 2.2. The NppExec plugin (NppExec.dll) ---
+
+NppExec is a dynamic-link library (DLL) implemented as a plugin for Notepad++. Actually (physically) the NppExec plugin is one file named "NppExec.dll". This file ("NppExec.dll") must be placed (copied) to Notepad++'es Plugins subfolder in order to work with Notepad++.
+
+
+--- 2.3. Installing the latest version ---
+
+You can always find the latest version of NppExec at https://sourceforge.net/projects/npp-plugins/ - it is there among other Notepad++'es plugins.
+Once you download the archive containing the latest "NppExec.dll" file, unpack this file ("NppExec.dll") to your Notepad++'es Plugins subfolder (you may need to overwrite your existing "NppExec.dll" with the latest one). Also you may be interested in the documentation inside the archive as it always contains the latest information about NppExec's commands and variables, advanced options and changes.
+If you are not sure about the "Notepad++'es Plugins subfolder", do the following:
+1) locate the file "notepad++.exe" on your computer (usually it is located somewhere here: C:\Program Files\Notepad++\notepad++.exe);
+2) go to the folder which contains the file "notepad++.exe" (e.g. C:\Program Files\Notepad++);
+3) go to its subfolder "plugins" (e.g. C:\Program Files\Notepad++\plugins);
+4) you are there! :)
+
+
+--- 2.4. Using several copies of NppExec ---
+
+You can have several copies of "NppExec.dll" in your Notepad++'es Plugins subfolder in order to have several NppExec's Console windows. Each copy of NppExec saves its own options and its own console commands history (if it is enabled in NppExec's options). In the same time, saved NppExec's scripts are shared between several copies of NppExec.
+To have several copies of "NppExec.dll", just copy it with different name(s), for example, "NppExec2.dll", "NppExecCpp.dll", "NppExecWeb.dll" and so on. This will give you additional NppExec's Console windows with the corresponding titles: "Console2", "ConsoleCpp", "ConsoleWeb" and so on.
+
+
+--- 2.5. Unicode and ANSI version ---
+
+There are two builds of NppExec: the Unicode build and the ANSI build. The Unicode build is compatible with Unicode Notepad++ and the ANSI build is compatible with ANSI Notepad++. You can check your version of Notepad++ by pressing F1 or from its main menu (? -> About Notepad++). You will see something similar to "Notepad++ v5.1.3  (UNICODE)" or "Notepad++ v5.1.3  (ANSI)". The corresponding version of NppExec (Unicode or ANSI) is required. 
+I recommend you to use Unicode version of Notepad++. The ANSI version of Notepad++ exists just for compatibility with old non-Unicode systems (such as Windows 98 or Millenium) and with old non-Unicode plugins.
+Talking about NppExec, its Unicode build is more powerful because it has a full Unicode interface and supports ANSI, UTF-8, UCS-2 LE (Unicode wide characters in Windows) and UCS-2 BE input files. The ANSI version of NppExec supports just ANSI input files. It is caused by the following reason: conversion of UTF-8 or UCS-2 to ANSI may lead to loss of some Unicode characters which have no ANSI analogue.
+
+
+--- 3. Basic usage ---
+
+
+--- 3.1. Getting help ---
+
+The description of all commands and environment variables supported by current version of NppExec can be found in the file "NppExec.txt". Usually you can find this file in downloaded NppExec's archive [2.3] or in Notepad++'es Plugins subfolder [2.3] (in its "doc" subfolder).
+
+All advanced "hidden" settings of current version of NppExec are described in the file "NppExec_TechInfo.txt". Usually you can find this file in the same place where the file "NppExec.txt" is located. Remark: you can change some of the advanced settings using NppExec's Advanced Options dialog.
+
+The most recent and detailed information about all NppExec's commands and environment variables can be found in NppExec's built-in help. To use the built-in help, open NppExec's Console [3.5], type "help" and press Enter. You'll see a long list which contains:
+- NppExec's Console hotkeys;
+- NppExec's Console commands (which work in the Console only);
+- NppExec's general commands (which work everywhere in NppExec);
+- NppExec's predefined environment variables.
+To get detailed help about any NppExec's command, type "help <command>" and press Enter. For example, "help set", "help inputbox", "help npp_exec" etc. The detailed help usually contains the command description, examples and remarks. This is the most essential information.
+
+Some additional information can be found in NppExec's Help/About window. For example:
+- You can execute commands and scripts directly from the Console window;
+- Commands are case-insensitive (i.e. NPP_OPEN is the same as Npp_Open);
+- and so on.
+
+
+--- 3.2. Do something (intro) ---
+
+The main principle of NppExec is the same as Notepad++'es "Run..." command (F5): to execute a command given. Usually it means to run some program/tool with specified parameters which can be passed in a form of Notepad++'es environment variables. For example, it allows you to launch your current file in Internet Explorer or to compile your current file using certain compiler. NppExec provides additional abilities for this:
+- it has a Console window to show the console program's output
+- it allows you to execute several commands one after another
+- it supports all Notepad++'es environment variables plus several own variables
+- it has additional commands which allow you to do more than you expect :)
+- it is cool :)
+NppExec actually provides four different ways to execute some command(s):
+1) using NppExec's Console [3.5] - allows you to enter some command and execute it by pressing Enter;
+2) using NppExec's dialog "Execute..." [3.6] - allows you to enter several commands (which will be executed one after another) and to save these commands as NppExec's script;
+3) using NppExec's command "npp_exec <script>" - allows you to execute commands from existing script [3.7];
+4) using NppExec's command "npp_exec <file>" - allows you to execute commands from existing text file [3.7].
+By the way, NppExec uses the 3rd way (described above) for its menu items which allow you to execute some NppExec's script.
+
+Remarks:
+NppExec by itself understands only its own internal commands and environment variables. When you type another command, such as "copy", "cmd" or "calc", NppExec tries to run it as a child process - i.e. it performs CreateProcess(...) and waits until this process ends. When you type something like "npp_run cmd" or "npp_run calc", NppExec tries to run specified command (the argument of npp_run) as an external process - i.e. it performs ShellExecute(...) and does not care about this process.
+
+
+--- 3.3. Do something (how-to) ---
+
+To run some program (optionally, with parameters) as a child process of NppExec, just type the (path)name of this program (optionally, with parameters) in NppExec's Console [3.5] or in NppExec's "Execute..." dialog [3.6]. This makes NppExec to:
+1) run the program (optionally, with parameters) 
+2) show its output in NppExec's Console (if it is a console program)
+3) wait until the program exits
+For example, type
+
+  cmd
+
+to start the "cmd.exe". You will see the cmd's output in NppExec's Console. You can type some cmd's commands in order to cmd to execute them and, finally, type "exit" in order to exit cmd.
+Also you can type
+
+  calc
+
+in order to start the "calc.exe". NppExec will wait until you close the calc's window.
+Finally, here is an example with parameters:
+
+  cmd /c time /t
+
+The last example shows the output of cmd's command "time /t" in NppExec's Console - i.e. it shows current time.
+The same approach can be used to execute .bat and .cmd files - but the file extension (.bat or .cmd) can not be omitted in this case.
+
+To run some program (optionally, with parameters) as an external process (with respect to NppExec), type "npp_run " and the (path)name of this program (optionally, with parameters) in NppExec's Console [3.5] or in NppExec's "Execute..." dialog [3.6]. This makes NppExec to:
+1) run the program (optionally, with parameters)
+2) a console program is shown in its own console window
+3) NppExec does not wait until the program exits
+For example, type
+
+  npp_run cmd
+
+to start the "cmd.exe" in its own window.
+Also you can use "npp_run " to open specified file in its associated program. For example, "npp_run index.htm" opens the .htm file in your default internet browser.
+
+
+--- 3.4. NppExec's submenu ---
+
+You can access NppExec's submenu from Notepad++'es main menu: Plugins -> NppExec. This submenu contains the following items:
+
+Execute...
+  - shows NppExec's "Execute..." dialog [3.6];
+
+Direct Execute Previous
+  - executes previous NppExec's script [3.7] immediately;
+
+Show Console dialog
+  - shows/hides NppExec's Console [3.5];
+
+Toggle Console dialog
+  - activates/deactivates NppExec's Console [3.5] 
+    (depends on Console's option "hide toggled Console");
+
+Console Commands History
+  - enables/disables NppExec's Console's commands history;
+
+Console Output... {OEM/OEM}
+  - shows "Console Output/Input encoding" dialog;
+
+No internal messages
+  - disables command confirmations and so on in NppExec's Console;
+
+Save all files on execute
+  - (always) save all modified files before executing NppExec's script;
+
+Follow $(CURRENT_DIRECTORY)
+  - (always) set current directory to active file's path;
+
+Console Output Filters...
+  - shows "NppExec Console Filters" dialog;
+
+Advanced Options...
+  - shows "NppExec Advanced Options" dialog;
+
+Change Console Font...
+  - allows to change NppExec's Console's font;
+
+Help/About...
+  - shows some information about the plugin.
+
+
+--- 3.5. NppExec's Console ---
+
+NppExec's Console can be shown using the toolbar button "Show Console Dialog" or the menu item "Show Console Dialog" in NppExec's submenu (Plugins -> NppExec -> Show Console Dialog).
+* By the way, you can reassign the toolbar button or even disable it via NppExec's "Advanced options..." dialog.
+NppExec's Console is used to:
+1) show the running console process'es output; optionally, the Console Output Filters can be used. This happens when some child console process is being executed;
+2) show NppExec's internal messages (command confirmations and so on - can be disabled with "No internal messages" option). This happens when (also may be before or after) some command is executed;
+3) show NppExec's built-in help. This happens when you type "help" or "help <command>" (e.g. "help npp_run", "help set" etc.) in the Console;
+4) go to specified line in specified file by double-clicking the Console's line which contains the file (path)name and the line - using the Console Output Filters -> HighLight;
+5) execute a single command by typing it in the Console and pressing Enter;
+6) copy (Ctrl+C) some text from and paste (Ctrl+V) to the Console;
+7) and more; type "help" in the Console for details.
+
+
+--- 3.6. NppExec's "Execute..." ---
+
+NppExec's "Execute..." dialog can be shown using its hotkey (F6 by default) or the menu item "Execute..." in NppExec's submenu (Plugins -> NppExec -> Execute...).
+NppExec's "Execute..." dialog allows to specify several NppExec's commands (one command per one line) which will be executed one after another. Such set of commands forms so-called NppExec's script. The script can be saved using the "Save..." button of the "Execute..." dialog. For example, you can create NppExec's script which makes a reserve copy of current file:
+1) open the "Execute..." dialog and type the following:
+
+  // save current file
+  NPP_SAVE
+  // copy current file to C:\Backup
+  cmd /c copy "$(FULL_CURRENT_PATH)" "C:\Backup\$(FILE_NAME)" /Y
+
+2) press the "Save..." button, type "Reserve Copy" and press the "Save" button. 
+This example allows you to create and save NppExec's script named "Reserve Copy". You can call this script later from the "Execute..." dialog. Also you can create a menu item for this script using NppExec's Advanced Options (Plugins -> NppExec -> Advanced Options...).
+It is not necessary to save a new script each time you want to execute several commands. You can use the "<temporary script>" for commands you don't need to save. The temporary script is saved automatically when you close Notepad++. Also, if you modify commands of some saved script (e.g. if you modify the "Reserve Copy" script), it will be saved automatically when you close Notepad++. Or you can press the "Save" button to save it immediately.
+You can delete previously saved scripts using the "Execute..." dialog. Press the "Save..." button (yes, the irony :)), select a script name and press the "Delete" button.
+
+
+--- 3.7. NppExec's script ---
+
+NppExec's script is a set of NppExec's commands. NppExec's command can be an internal command such as "cls", "npp_save", "npe_debuglog" etc. or it can be a (path)name of an executable such as "cmd", "calc", "C:\tools\tcc\tcc.exe" etc. Each command, depending on its meaning, can have one or more parameters. For example:
+
+  INPUTBOX "Input something:" : something
+  NPP_EXEC "script name" "param 1" "param 2"
+  cmd /c copy /?
+  "C:\tools\tcc\tcc.exe" "$(FULL_CURRENT_PATH)" -run
+
+and so on. You can use "//" to comment a whole line or right part of a line (after "//"):
+
+  // this is a comment
+  ECHO You'll see this // but not this (comment)
+
+You can create and save NppExec's scripts using the "Execute..." dialog [3.6]. However, NppExec's script can also be located in a text file. I.e. you can create a text file which contains some NppExec's commands (one command per one line) and then execute this file (commands from this file) in NppExec. Such text file can be an ANSI file for ANSI version of NppExec and can be an ANSI or Unicode (UCS-2 LE/UCS-2 BE/UTF-8) file for Unicode version of NppExec. Note that Unicode text file must contain leading "BOM" bytes to be recognized by Unicode version of NppExec (by default, these bytes are present - until you force saving without "BOM"). To execute a script from a text file, use the "npp_exec" command. This command allows to execute commands from a previously saved (internal) script or from an (external) text file.
+As you can store your NppExec's script in a text file, you can edit such file directly in Notepad++ and execute it with the following command(s):
+
+  NPP_SAVE  // save current file (NppExec's script)...
+  NPP_EXEC "$(FULL_CURRENT_PATH)"  // ...and execute it
+
+With the Console Commands History enabled, you can type this command:
+
+  NPP_EXEC "$(FULL_CURRENT_PATH)"
+
+in NppExec's Console once, then use the Arrow Up key to repeat this command. However, be sure to save current file (with Ctrl+S) before executing it.
+To create a menu item for NppExec's script, use NppExec's Advanced Options dialog.
+
+
+--- 3.8. Environment variables ---
+
+
+--- 3.8.1. Predefined (read-only) variables ---
+
+NppExec supports all basic (predefined) environment variables of Notepad++ plus several its own (predefined) environment variables. See NppExec's help [3.1] for more details about supported predefined variables.
+Consider such predefined environment variables as "read-only": you can use these variables in NppExec's commands and scripts, but can not modify their values.
+These variables exist in NppExec's commands and scripts - actually, these variables are replaced with their current values by NppExec when you use them. These variables do not exist outside of NppExec (do not exist for child processes and so on). It means you can't use such variables as $(FULL_CURRENT_PATH), $(NPP_DIRECTORY), $(#1) and so on inside external programs or tools. However, you can:
+1) pass the values of these variables as input parameters of external programs/tools, e.g. 
+
+  // pass "$(FULL_CURRENT_PATH)" as a parameter of tcc
+  tcc "$(FULL_CURRENT_PATH)" -run
+
+2) use the command "env_set" to create a heritable environment variable [3.8.3] which will be accessed inside external programs/tools, e.g.
+
+  // create new environment variable NPPHOME
+  ENV_SET NPPHOME = $(NPP_DIRECTORY)
+  // start cmd.exe
+  cmd
+
+Now you can type something similar to "echo %NPPHOME%" inside cmd in order to use the value of this environment variable.
+
+
+--- 3.8.2. User (internal) variables ---
+
+NppExec allows you to create, modify and remove your own (user) variables using NppExec's commands "set" and "unset". See NppExec's help [3.1] for more details about the commands "set" and "unset".
+Consider such user variables as "internal": these variables exist only for NppExec. You can create, modify and remove such variables in NppExec's commands and scripts any time you need: to store some value, to set some value in one script in order to use it in another script etc. These variables do not exist outside of NppExec (do not exist for child processes and so on). It means you can't use these variables inside external programs or tools. However, you can: 1) pass the values of these variables as input parameters of external programs/tools (see [3.8.1]);
+2) use the command "env_set" to create a heritable environment variable [3.8.3] which will be accessed inside external programs/tools (see [3.8.1]).
+
+
+--- 3.8.3. Environment (heritable) variables ---
+
+NppExec (ver. 0.3 RC1 or higher) allows you to create and modify (heritable) environment variables using NppExec's commands "env_set" and "env_unset". See NppExec's help [3.1] for more details about the commands "env_set" and "env_unset".
+Consider such heritable environment variables as "real" environment variables: these variables exist both inside NppExec (in a form of $(SYS.<var>) which allows you to use the var's value inside NppExec) and outside NppExec (usually in a form of %<var>% which allows to use and modify the var's value inside external tool).
+NppExec allows to modify and restore a value of such existing environment variable, and to create, modify and remove such new environment variable (which did not exist before you create it in NppExec).
+
+
+--- 4. Advanced usage ---
+
+
+--- 4.1. NppExec's Console behaviour ---
+
+By default, NppExec's Console is automatically shown each time you execute some NppExec's script. The reason is simple: usually script execution assumes some output which is needed or at least may be usefull for user. 
+However, you may want some of your scripts to be executed silently (i.e. without showing NppExec's Console) or even want to force NppExec's Console to be closed. And NppExec allows you to do this using its command NPP_CONSOLE.
+You can use
+  
+  NPP_CONSOLE ?
+
+in the beginning of your script in order to keep current Console's state. It means that hidden (closed) Console remains hidden and shown (opened) Console remains shown.
+Also you can use
+
+  NPP_CONSOLE 0
+
+to hide the Console, and
+
+  NPP_CONSOLE 1
+
+to show the Console during script execution.
+Type "help npp_console" in NppExec's Console for more details.
+
+
+--- 4.2. Environment ---
+
+NppExec allows you to specify the environment (i.e. environment variables) for any program you start from NppExec. You can do it from NppExec's scripts or directly from NppExec's Console window. You can set or remove/restore such environment variables using NppExec's commands ENV_SET and ENV_UNSET.
+For example, you can set your own value of PATH:
+
+  ENV_SET PATH = C:\temp  // modified
+
+Now you can start cmd.exe (from NppExec's script or NppExec's console) and type "echo %PATH%" to ensure that the value of PATH is now "C:\temp". Type "exit" to exit cmd.exe and then execute this NppExec's command:
+
+  ENV_UNSET PATH  // restored
+
+This command restores the initial value of PATH. NppExec does not remove the PATH variable because this variable existed before it was modified with ENV_SET. In the same time, you can create and remove new environment variables:
+
+  ENV_SET new_environment_variable = Hello  // created
+  ENV_UNSET new_environment_variable        // removed
+
+Such environment variables can be used (and modified) by any program you start from NppExec. Also, values of such variables can be used by NppExec in a form of $(SYS.variable_name). For example:
+
+  ENV_SET a = My Variable  // created:  a=My Variable
+  echo $(SYS.a)            // prints:   My Variable
+  ENV_SET a = aaa          // modified: a=aaa
+  echo $(SYS.a)            // prints:   aaa
+  ENV_UNSET a              // removed
+
+I.e. you can use "$(SYS.variable_name)" to read the variable's value and use "ENV_SET variable_name = value" to set the variables's value.
+Type "help env_set" in NppExec's Console for more details.
+
+Good way to set your environment is to do it inside NppExec's start-up script. You can specify your start-up script in NppExec's Advanced Options. This script will be executed each time Notepad++ starts. For example, you can create similar script:
+
+  // don't show Console if it's hidden
+  NPP_CONSOLE ?
+  // set our environment variables
+  ENV_SET NPPHOME = $(NPP_DIRECTORY)
+  ENV_SET TCCHOME = C:\tools\tcc\tcc.exe
+  // restore initial value of PATH
+  ENV_UNSET PATH
+  // set our value of PATH
+  ENV_SET PATH = $(SYS.NPPHOME);$(SYS.TCCHOME);$(SYS.PATH)
+  // clear Console screen
+  CLS
+
+The first command ("NPP_CONSOLE ?") forbids the Console to be shown if it's hidden - this is usefull at Notepad++'es start-up. 
+The two following commands set new environment variables: NPPHOME and TCCHOME. These environment variables can be used by any program you start from NppExec. 
+The following command ("ENV_UNSET PATH") restores the initial value of PATH if it was previously modified by NppExec. Of course, it can not be modified by NppExec before its start-up script is executed, but you may execute the start-up script again (using NPP_EXEC or from NppExec's "Execute..." dialog), so it may be important to restore the initial value of PATH before modifying it. Otherwise, the value of PATH may grow again and again - each time you call the start-up script explicitly or execute another script which modifies the PATH variable.
+The next command sets the new value of the PATH variable. Now PATH includes   both NPPHOME and TCCHOME, so you can type just "notepad++" or "tcc" in order to use Notepad++'es command line switches or to run tcc.
+Finally, the last command ("CLS") clears NppExec's Console's output, so the Console will contain no text when you open it.
+
+
+--- 4.3. Run-time parameters ---
+
+NppExec supports several different ways to use run-time parameters which you can vary according to your needs.
+The first line of each section below shows how the run-time parameter(s) can be set, and the second line shows how these parameters can be used.
+
+1. Passing parameters to a script (to use them inside the script):
+
+    NPP_EXEC "my script" "param 1" "param 2"
+
+    -> $(ARGV), $(ARGV[1]), $(ARGV[2]), ...
+
+2. Run-time input (sets NppExec's variable $(INPUT) and so on):
+
+    INPUTBOX "Input some value:" : "default value"
+
+    -> $(INPUT), $(INPUT[1]), $(INPUT[2]), ...
+
+3. User's variables (internal NppExec's variables):
+
+    SET variable = value
+
+    -> $(variable)
+
+4. Environment variables (can be modified also outside of NppExec)
+
+    ENV_SET variable = value
+
+    -> $(SYS.variable)
+
+
+--- 4.4. Using cmd.exe ---
+
+NppExec by itself does not support standard console commands such as "copy", "move", "mkdir", "for" etc. Actually, these commands are part of system's command interpreter (cmd.exe). So, you can use cmd.exe to perform such commands. For example, you can type the following commands in NppExec's Console or inside NppExec's script:
+
+  // create a directory C:\Backup
+  cmd /c mkdir C:\Backup
+
+  // save current Notepad++'es file
+  NPP_SAVE
+
+  // copy current file to C:\Backup
+  cmd /c copy "$(FULL_CURRENT_PATH)" "C:\Backup\$(FILE_NAME)" /Y 
+
+  // change current directory
+  cd C:\Backup
+
+  // list all .txt files in C:\Backup
+  cmd /c for %f in (*.txt) do @echo %f
+
+NppExec by itself can not redirect console program's output into a text file. And, again, you can do it via cmd.exe:
+
+  cmd /c program.exe >program.txt
+
+or even
+
+  cmd /c for /? >for.txt
+
+By the way, cmd.exe allows to execute several commands one after another while each previous command is completed successfully. For example:
+
+  cmd /c for /? >for.txt && type for.txt
+  cmd /c C: && cd C:\Backup && for %f in (*.txt) do @echo %f
+
+You can always type
+
+  cmd /?
+
+for more details about cmd.exe and its commands. You'll be surprised how powerful it is :)
+
+Don't forget you can execute .bat and .cmd files in the same way as executable files [3.3] - but the file extension (.bat or .cmd) can not be omitted in this case. The batch files (.bat or .cmd) allow to implement sequences of commands with simple algorithms, so you can use them when single cmd's commands are not enough.
+
+
+--- 4.5. Console output redirection ---
+
+By default, when you run some console program using NppExec, the program's output is shown in NppExec's Console. It is possible because the console program is started as a child process of NppExec. NppExec uses pipes to redirect child process'es output to NppExec's Console window and to redirect user's input from NppExec's Console window to child process'es input. Such approach has several known limitations:
+- no output may be shown until child process ends (if this child process performs a lot of operations without explicit flushing of its output); 
+- no output may be shown while child process waits for initial input (this may happen with some interpreters, but does not happen with cmd.exe);
+- stdout and stderr output may be mixed (stdout and stderr are redirected into the same pipe);
+- no output or incorrect output may happen when child process requires "real" console screen buffer.
+The advantages:
++ NppExec's Console supports ANSI (Windows), OEM (DOS) and UTF-8 output and input (the standard console supports just OEM or ANSI);
++ NppExec's Console allows to change the console output using NppExec's Exclude/Include and Replacing filters;
++ NppExec's Console allows to highlight warnings/errors and process them using NppExec's Highlight filters.
+
+If you want your console program's output to be redirected into a text file, you can use something similar to the following: 
+ 
+  cmd /c program.exe >C:\temp\out.txt
+
+This will redirect the output of 'program.exe' into a text file 'out.txt' inside 'temp' folder on your drive C (this folder must exist).
+Then you can open this text file in Notepad++:
+
+  NPP_OPEN C:\temp\out.txt
+
+Thus, you can use the following NppExec's script:
+
+  SET OUTFILE = C:\temp\out.txt
+  cmd /c program.exe >$(OUTFILE)
+  NPP_OPEN $(OUTFILE)
+
+
+--- 4.6. Using external tools ---
+
+
+--- 4.6.1. Applying external tool to selected text ---
+
+Let's suppose you want to apply some AWK program to your selected text in Notepad++. 
+The first thing you require is NppExec plugin ;) 
+The second thing you require is an AWK executable, for example, "awk95.exe" or "gawk.exe". 
+ 
+When you want to apply some AWK program to your selected text, this AWK program must exists, isn't it? So, create a file "do.awk" in your Notepad++'s folder. The full path to this file is "$(NPP_DIRECTORY)\do.awk". 
+OK, the file is created, now you need some AWK program. Open the "do.awk" in Notepad++ and type your program, for example: 
+ 
+  { print $0 } 
+ 
+This simple AWK program will print each record (i.e. text line) from the input file given. 
+Now, open another file in Notepad++ and select some text (few lines, for example). 
+Now you have the selected text and a tool (awk95.exe or gawk.exe) you want to apply to this selected text. 
+The only thing remaining is NppExec's script which will allow you to do what you want. 
+ 
+Press F6 (or Plugins -> NppExec -> Execute...) and type: 
+ 
+  // full path to AWK executable 
+  set AWK_EXE = C:\tools\awk\awk95.exe 
+  // this temporary file name will be used 
+  set TEMP_FILE = $(SYS.TEMP)\npp_sel.txt 
+  // save current selection as ANSI text file 
+  SEL_SAVETO $(TEMP_FILE) :a 
+  // run do.awk for this file 
+  "$(AWK_EXE)" -f "$(NPP_DIRECTORY)\do.awk" "$(TEMP_FILE)" 
+ 
+Save this script as "do.awk on selected text" or whatever you want. 
+Press OK. 
+ 
+You will see the AWK's output in the NppExec's Console window. You can copy it from there with Ctrl+C. 
+ 
+As you understand, such approach can be used for any command-line external tool such as grep, php and so on. 
+Good luck! 
+
+
+--- 4.6.2. Calculating ---
+
+Of course, you can use external tools for calculations. All you need to do is to select the text which contains some mathematical expression and call NppExec's script which would allow to calculate it.
+For example:
+
+  set AWK_EXE = C:\tools\gawk\gawk.exe
+  "$(AWK_EXE)" "BEGIN { print $(CURRENT_WORD) }"
+
+This simple script allows you to calculate such expressions as "1 + sin(3)/4" or "(2 + 0x10)*3" etc.
+
+You can modify the file "do.awk" from previous example [4.6.1] in order to calculate an average value of numbers given as the following table:
+
+  1.  552
+  2.  554
+  3.  549
+  4.  551
+
+Here is the AWK script (i.e. the content of "do.awk") which calculates an average value of numbers in the second column:
+
+  BEGIN {
+      Sum = 0
+      N = 0
+  }
+
+  NF == 2 {
+      Sum += $2
+      ++N
+  }
+
+  END {
+      print "avg = " Sum/N " (Sum = " Sum ", N = " N ")"
+  }
+
+Now, all you have to do is to select the given table (see above) in Notepad++ and execute NppExec's script "do.awk on selected text". You will see the following output in NppExec's Console:
+
+  avg = 551.5 (Sum = 2206, N = 4)
+
+Of course, you can use other external tools for calculations of selected expressions or table data. The output of such external tools will be shown in NppExec's Console. Also you can redirect such output into a text file and then open that text file in Notepad++ [4.5].
+
+
+--- 4.7. Compiling ---
+
+
+--- 4.7.1. Compiling simple C-programs ---
+
+You can edit, compile & run simple C-programs directly from Notepad++. All you need is the following: 
+1) download tcc (tcc is a freeware C-compiler, about 1 MB in archive) 
+2) unpack tcc to "C:\tools\tcc" or create "tcc" subfolder in your Notepad++ folder (for example, "C:\Program Files\Notepad++\tcc") and unpack tcc there  
+3) run Notepad++ and call NppExec's "Execute..." dialog (Plugins -> NppExec -> Execute... - or just press F6). 
+4) type these commands in the "Execute..." dialog: 
+ 
+4.1) if tcc is placed in C:\tools\tcc 
+ 
+  // save current file 
+  NPP_SAVE 
+  // compile & run with tcc 
+  C:\tools\tcc\tcc.exe "$(FULL_CURRENT_PATH)" -run
+ 
+4.2) if tcc is placed in $(NPP_DIRECTORY)\tcc 
+ 
+  // save current file 
+  NPP_SAVE 
+  // compile & run with tcc 
+  "$(NPP_DIRECTORY)\tcc\tcc.exe" "$(FULL_CURRENT_PATH)" -run
+ 
+5) save these commands: press Save... button, type "tcc-run" (this is a name of your script) and press Save. 
+ 
+Now, when you have a C source file opened in Notepad++, you can call NppExec's "Execute..." dialog, select "tcc-run" and press OK to compile & run this C-file. In this case tcc works as an interpreter for your C source file (its command "-run" does it). 
+
+
+--- 4.7.2. Compiling Java ---
+
+[this article uses some text originally posted by Sam (sammi101082) in Notepad++'es Help forum]
+
+[ Sam: ]
+
+To compile a Java file, all you have to do is the following: 
+       
+1) Navigate to Plugins -> NppExec -> Execute. (Default Shortcut key is F6) 
+2) In the new popup window, type this  
+
+  cmd /c cd "$(CURRENT_DIRECTORY)" && "%JAVA_HOME%\bin\javac" "$(FULL_CURRENT_PATH)"  
+       
+3) Click on "Save" and give it a name say "Java Compile". 
+4) Bingo. You are there. Now any Java file you are editing in Notepad++ can be compiled by pressing F6 and choosing this script "Java Compile". It will compile the Java class for you. This is irrespective of which directory you are in. 
+       
+The NppExec plugin can be used to execute any executable as you would from a command prompt. For running the compiled Java class, the script is:
+ 
+  cmd /k cd "$(CURRENT_DIRECTORY)" && "%JAVA_HOME%\bin\java" "$(NAME_PART)" && exit 
+       
+P.S. Remember to set the JAVA_HOME environment variable. To check if it is set, open a command prompt and type java.
+
+[ DV: ]
+
+Actually, the same thing can be done without explicit usage of 'cmd.exe'. You can use several commands (one command per line) in NppExec's script, and these commands will be executed one by one. For example: 
+       
+  cd "$(CURRENT_DIRECTORY)" 
+  "$(SYS.JAVA_HOME)\bin\javac" "$(FULL_CURRENT_PATH)" 
+       
+Also you can use ENV_SET to set environment variables such as PATH or JAVA_HOME for any process (program) you start from Notepad++ [4.2]. 
+
+
+--- 4.7.3. Using Visual Studio's compiler (cl.exe) ---
+
+If you want to run 'cl.exe' from NppExec, it requires some additional environment. Such environment can be set using a batch file or using NppExec's command ENV_SET [4.2].
+
+1. Using a batch file
+
+To use a batch file, create a file 'cl.cmd' with similar text: 
+      
+  REM cl.cmd
+  REM Visual Studio 8.0 (2005) Express
+       
+  @echo off
+  Set VCDIR=C:\Program Files\Microsoft Visual Studio 8\VC
+  Set VSCOMMON=C:\Program Files\Microsoft Visual Studio 8\Common7\IDE
+  Set MSSDK=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2
+       
+  Set PATH=%VCDIR%\bin;%MSSDK%\bin;%VSCOMMON%;%PATH%
+  Set INCLUDE=%MSSDK%\include;%VCDIR%\include;%INCLUDE%
+  Set LIB=%MSSDK%\lib;%VCDIR%\lib;%LIB%
+       
+  cl.exe %*
+       
+Now, use something similar to 
+       
+  cl.cmd "$(FULL_CURRENT_PATH)"
+
+to compile your source file(s). 
+As you can see, the VC's environment is handled inside the 'cl.cmd' in this case. I.e. it is handled by the system (well, by cmd.exe) and not by NppExec.
+
+2. Using ENV_SET
+
+The initialization of environment variables for VC will look similar to the following: 
+ 
+  // setting NppExec's internal (user) variables 
+  SET VCDIR = C:\Program Files\Microsoft Visual Studio 8\VC
+  SET VSCOMMON = C:\Program Files\Microsoft Visual Studio 8\Common7\IDE
+  SET MSSDK = C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2
+  
+  // saving previous values of environment variables (just in case)
+  SET PATH_0 = $(SYS.PATH)
+  SET INCLUDE_0 = $(SYS.INCLUDE)
+  SET LIB_0 = $(SYS.LIB)
+
+  // setting NppExec's child process'es environment variables 
+  ENV_SET PATH = $(VCDIR)\bin;$(MSSDK)\bin;$(VSCOMMON);$(SYS.PATH)
+  ENV_SET INCLUDE = $(MSSDK)\include;$(VCDIR)\include;$(SYS.INCLUDE)
+  ENV_SET LIB = $(MSSDK)\lib;$(VCDIR)\lib;$(SYS.LIB)
+ 
+  // executing the child process with specified environment variables 
+  rc /r /Fo"$(CURRENT_DIRECTORY)\Resources.res" "$(CURRENT_DIRECTORY)\Resources.rc"
+  cl.exe "$(FULL_CURRENT_PATH)"
+ 
+  // restoring previous values of environment variables 
+  ENV_SET PATH = $(PATH_0)
+  ENV_SET INCLUDE = $(INCLUDE_0)
+  ENV_SET LIB = $(LIB_0)
+ 
+Don't forget that ENV_SET does not understand such form of existing environment variables as "%PATH%" because NppExec does not accept such declaration. "$(SYS.PATH)" should be used instead of "%PATH%".
+
+In general, it's not a good idea to set and then restore the environment every time it is needed by some tool. Instead, you can set all the required environment in NppExec's start-up script [4.2]. Such approach would allow you to use any of your tools without further specifying of full paths or additional environment variables.
+
+
+--- 4.7.4. Compiling ANY source file ---
+
+Compiling any source file using NppExec assumes the following:
+- usage of external compilers/interpreters to compile (and run) your source file(s);
+- creating specific NppExec's scripts for compiling (and running) specific source files;
+- creating general NppExec's script which would allow to use different compilers/interpreters for different source files;
+- usage of NppExec's Highlight filters to parse the compiler's/interpreter's output (warnings, errors etc).
+You can find all this information inside the file "NppExec_Guide.txt". Please refer to.
+
+
+--- 5. Other ---
+
+
+--- Questions/suggestions? ---
+
+Did not find an answer for your question? You can try the following:
+1) Read this manual once again ;)
+2) Visit https://sourceforge.net/projects/npp-plugins/ and search NppExec's forum for the answer or ask your question there.
+
+Have a suggestion?
+Visit NppExec's forum and let me know.
+
+
+--- About ---
+
+Notepad++ - generic source editor (text editor with advanced features for programmers) created by Don HO.
+
+NppExec - plugin for Notepad++ created by DV.
+
+NppExec_Manual.knt - user manual for NppExec written by DV using KeyNote 1.6.5 (saved as KeyNote file).
+
+NppExec_Manual.txt - user manual for NppExec written by DV using KeyNote 1.6.5 (exported as plain text).
+

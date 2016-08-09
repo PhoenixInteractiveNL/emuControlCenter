@@ -1,7 +1,7 @@
-; Platform		: ScummVM
-; Script for		: ScummVM 0.12.0
-; Script version	: v1.0.0.4
-; Last changed		: 2009.01.17
+; Platform        : ScummVM
+; Script for      : ScummVM 0.12.0
+; Script version  : v1.0.0.5
+; Last changed    : 2009.01.18
 ;
 ; Authors: S. Ebeltjes (aka Phoenix), DerMicha75
 ;
@@ -30,11 +30,11 @@ FileChangeDir(@ScriptDir)
 ; Check if the 'Meta-Info ID' field is filled in.
 ;
 If $eccMetaInfoId = "" Then
-	MsgBox(64, "ECC ScummVM", "This script only works if the 'Meta-Info ID' field is filled in with the gamename to start:" & @CRLF & _
-	"1. select the game in your list." & @CRLF & _
-	"2. click on 'EDIT' in the right panel." & @CRLF & _
-	"3. insert the (plain) gamename into the 'Meta-Info ID' field.")
-	Exit
+   MsgBox(64, "ECC ScummVM", "This script only works if the 'Meta-Info ID' field is filled in with the gamename to start:" & @CRLF & _
+   "1. select the game in your list." & @CRLF & _
+   "2. click on 'EDIT' in the right panel." & @CRLF & _
+   "3. insert the (plain) gamename into the 'Meta-Info ID' field.")
+   Exit
 EndIf
 
 ; Set some variables to make life easier ;)
@@ -45,8 +45,12 @@ $PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
 ; Extract the packed files to a temp folder.
 ;
 TrayTip("ECC ScummVM", "Extacting files to temporally folder...please wait...", 10, 1)
-ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
-
+If $eccMetaInfoId = "agi" or $eccMetaInfoId = "gob" or $eccMetaInfoId = "saga" then
+   ShellExecuteWait($eccThirdParty7zip, "x -y " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+else 
+   ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+EndIf
+   
 ; Run the emulator.
 ;
 TrayTip("ECC ScummVM", "Starting ScummVM...", 5, 1)

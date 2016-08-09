@@ -1,3 +1,6 @@
+v1.0.0.5 (DerMicha75)
+- Improved unpacking of agi/gob/saga files by overwriting existing files!
+
 v1.0.0.4 (Phoenix)
 - Removed ZIP checking due to Arcade import of ECC
 

@@ -1,4 +1,4 @@
-7-Zip Command line version 4.64
+7-Zip Command line version 4.65
 -------------------------------
 
 7-Zip is a file archiver with high compression ratio.
@@ -15,7 +15,7 @@ Features of 7za.exe:
   - Fast compression and decompression
   - Strong AES-256 encryption in 7z and ZIP formats.
 
-7za.exe is a free software distributed under the GNU LGPL + BSD LICENSE for AES part.
+7za.exe is a free software distributed under the GNU LGPL.
 Read license.txt for more information.
 
 Source code of 7za.exe and 7-Zip can be found at

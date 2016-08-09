@@ -1,3 +1,6 @@
-v1.0.0.1
+v1.0.0.2
+- Fixed support for Windows Vista (phoenix)
+- Added messagebox and handle when have to enter a start address.
 
+v1.0.0.1
 - Added support for Windows Vista (wayne69x)

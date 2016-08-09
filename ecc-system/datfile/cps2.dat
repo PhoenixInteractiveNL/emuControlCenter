@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-2
-	description "CPS-2 20090105"
+	description "CPS-2 20090310"
 	category "Capcom Play System 2"
-	version 20090106
-	date 2009-01-06
+	version 20090310
+	date 2009-03-10
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -6964,6 +6964,82 @@ game (
 	rom ( name pcf.02 merge pcf.02 size 131072 crc 6902f4f9 sha1 9bfe4ddade3c666076d26a2b545120f6d059fd7c )
 	rom ( name pcf.11m merge pcf.11m size 4194304 crc a5dea005 sha1 3ae79baf6ff5bd527f82b26f164c7e3c65423ae2 )
 	rom ( name pcf.12m merge pcf.12m size 4194304 crc 4ce235fe sha1 795b94557e954cc0e45fd3778b609064d57a34a2 )
+)
+
+game (
+	name armwar1d
+	description "Armored Warriors (Euro 941011 Phoenix Edition) (bootleg)"
+	year 1994
+	manufacturer "bootleg"
+	sourcefile cps2.c
+	cloneof armwar
+	romof armwar
+	rom ( name pwged.03b size 524288 crc 496bd483 sha1 c3a116ea019843aba666a0d7e7bd2975622306e3 )
+	rom ( name pwged.04b size 524288 crc 9bd6a38f sha1 da90162b7bff223df59ac362a5f61c580a86d967 )
+	rom ( name pwged.05a size 524288 crc 4c11d30f sha1 463ba1845b1239c839e9419cbc6762d52b7918db )
+	rom ( name pwg.06 merge pwg.06 size 524288 crc 87a60ce8 sha1 e2085c7c8c6792d055dbbb023c7f4e4aa38ae924 )
+	rom ( name pwg.07 merge pwg.07 size 524288 crc f7b148df sha1 f369669713cf647222094c570a2eacd48a8637cf )
+	rom ( name pwg.08 merge pwg.08 size 524288 crc cc62823e sha1 edaf9bebdfc65ae5414090abd6844176eec39a00 )
+	rom ( name pwg.09 size 524288 crc ddc85ca6 sha1 e794c679531632e2142c6a5e3b858494389ce65e )
+	rom ( name pwg.10 merge pwg.10 size 524288 crc 07c4fb28 sha1 58a1ff3d105be7df833dd4f32973766649efcbcf )
+	rom ( name pwg.13m merge pwg.13m size 4194304 crc ae8fe08e sha1 b6f09663dcda69b5d7ac13e4afaf1efd692fb61e )
+	rom ( name pwg.15m merge pwg.15m size 4194304 crc db560f58 sha1 0c3716b32eb24544ff5d16b5dcadce195cd10d00 )
+	rom ( name pwg.17m merge pwg.17m size 4194304 crc bc475b94 sha1 a157664450895a146a532581dd6f4b63dff21c86 )
+	rom ( name pwg.19m merge pwg.19m size 4194304 crc 07439ff7 sha1 f71e07c6d77c32828f5e319268b24b13a1a4b0c2 )
+	rom ( name pwg.14m merge pwg.14m size 1048576 crc c3f9ba63 sha1 66191a52c39daa89b17ede5804ee41c028036f14 )
+	rom ( name pwg.16m merge pwg.16m size 1048576 crc 815b0e7b sha1 549785daac3122253fb94f6541bc7016147f5306 )
+	rom ( name pwg.18m merge pwg.18m size 1048576 crc 0109c71b sha1 eb51284ee0c85ff8f605fe1d166b7aa202be1344 )
+	rom ( name pwg.20m merge pwg.20m size 1048576 crc eb75ffbe sha1 e9d1deca60be696ac5bff2017fb5de3525e5239a )
+	rom ( name pwg.01 merge pwg.01 size 131072 crc 18a5c0e4 sha1 bb1353dd74884aaeec9b5f1d0b284d9cad53c0ff )
+	rom ( name pwg.02 merge pwg.02 size 131072 crc c9dfffa6 sha1 64e71028befe9a2514074be765dd020e1d2ea70b )
+	rom ( name pwg.11m merge pwg.11m size 2097152 crc a78f7433 sha1 e47ffba7b9dac9d0dda985c5d966194be18260f7 )
+	rom ( name pwg.12m merge pwg.12m size 2097152 crc 77438ed0 sha1 733ca6c6a792e66e2aa12c5fc06dd459527afe4b )
+)
+
+game (
+	name dimahoud
+	description "Dimahoo (USA 000121 Phoenix Edition) (bootleg)"
+	year 2000
+	manufacturer "bootleg"
+	sourcefile cps2.c
+	cloneof dimahoo
+	romof dimahoo
+	rom ( name gmdud.03 size 524288 crc 12888435 sha1 38204359c505ae861341936cd0fd2517411b8995 )
+	rom ( name gmd.04 merge gmd.04 size 524288 crc 37485567 sha1 643c41fce6057bcaef0e0bedc62914c33d97eeaf )
+	rom ( name gmd.05 merge gmd.05 size 524288 crc da269ffb sha1 e99b04192030b6006cf67b563f40cea29c1b2e78 )
+	rom ( name gmdud.06 size 524288 crc d825efda sha1 7299f3629d5136f567f5cf373754ea13b2190533 )
+	rom ( name gmd.13m merge gmd.13m size 4194304 crc 80dd19f0 sha1 0fd8b1e8d73cc83e6c34f0d94487938da2344f76 )
+	rom ( name gmd.15m merge gmd.15m size 4194304 crc dfd93a78 sha1 c343d5ddcc25bd0739491e7439d7c0d0a8881a04 )
+	rom ( name gmd.17m merge gmd.17m size 4194304 crc 16356520 sha1 058713bef30c1b1d8b7dd0ceaaa57a3ab9751a70 )
+	rom ( name gmd.19m merge gmd.19m size 4194304 crc dfc33031 sha1 a1ceaeddc2a79d5b79f1b107cac2ef6a5e621e77 )
+	rom ( name gmd.01 merge gmd.01 size 131072 crc 3f9bc985 sha1 1616bbee82877b1052a07531066f5009a80706be )
+	rom ( name gmd.02 merge gmd.02 size 131072 crc 3fd39dde sha1 6a6e3ef9baa430ee83ab2312aa0221bae4d73dbd )
+	rom ( name gmd.11m merge gmd.11m size 4194304 crc 06a65542 sha1 a1b3df70c90055a3cd59d0149fd18a74eff5bcc9 )
+	rom ( name gmd.12m merge gmd.12m size 4194304 crc 50bc7a31 sha1 7283569fc646c39f4c693f14e0ce7ff2ee49111a )
+)
+
+game (
+	name mmatrixd
+	description "Mars Matrix: Hyper Solid Shooting (Japan 000412 Phoenix Edition) (bootleg)"
+	year 2000
+	manufacturer "bootleg"
+	sourcefile cps2.c
+	cloneof mmatrix
+	romof mmatrix
+	rom ( name mmxjd.03 size 524288 crc 36711e60 sha1 a192e786798f69320761017437ee4d2d47dc80c5 )
+	rom ( name mmxjd.04 size 524288 crc 4687226f sha1 b831582f578eb1e40bce1d1cbf231e4c27f510cd )
+	rom ( name mmxjd.05 size 524288 crc 52124398 sha1 0a18b9d2a7e3335ddf7ff9ac5c5f8298951f8c67 )
+	rom ( name mmx.13m merge mmx.13m size 4194304 crc 04748718 sha1 d2e84d9dcc779c08469d815ccd709f30705954b8 )
+	rom ( name mmx.15m merge mmx.15m size 4194304 crc 38074f44 sha1 2002c4862c156b314bc4f3372b713c48e0667ec3 )
+	rom ( name mmx.17m merge mmx.17m size 4194304 crc e4635e35 sha1 48ef7a82df83b981ddd6138c241ca129ab770e8e )
+	rom ( name mmx.19m merge mmx.19m size 4194304 crc 4400a3f2 sha1 d0aa805ccbb153896e5983da1c398d1df4f40371 )
+	rom ( name mmx.14m merge mmx.14m size 4194304 crc d52bf491 sha1 2398895cfdcf86fc485472e33df2cc446539e977 )
+	rom ( name mmx.16m merge mmx.16m size 4194304 crc 23f70780 sha1 691ee8964815b0ce54704e7feb59ca79b634f26d )
+	rom ( name mmx.18m merge mmx.18m size 4194304 crc 2562c9d5 sha1 e7defc3d33db632c4035ae069f2f2332c58afaf5 )
+	rom ( name mmx.20m merge mmx.20m size 4194304 crc 583a9687 sha1 1d0b08b1e88509245db3c2090f0201938fd750b4 )
+	rom ( name mmx.01 merge mmx.01 size 131072 crc c57e8171 sha1 dedb92af1910d38727f816e6f507d25148f31b74 )
+	rom ( name mmx.11m merge mmx.11m size 4194304 crc 4180b39f sha1 cabb1c358eae1bb6cfed07f5b92e4acd38650667 )
+	rom ( name mmx.12m merge mmx.12m size 4194304 crc 95e22a59 sha1 b3431d170c0a1a0d826ad0af21300b9180e3f114 )
 )
 
 game (

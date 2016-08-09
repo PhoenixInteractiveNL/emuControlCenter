@@ -9,3 +9,6 @@ include "theme"
 # Include Icon Theme file
 # For now this is just a small fix that replaces the (bad) 'save' iconlink due to engine upgrade!
 include "icon"
+
+# Configure the GTK 'Error bell' file, here you can enable/disable the GTK error-bell.
+gtk-error-bell = 0

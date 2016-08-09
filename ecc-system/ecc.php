@@ -2225,6 +2225,14 @@ class App extends GladeXml {
 		$ecc_unpacked_path = ($tempFilePath && realpath($tempFilePath)) ? dirname(realpath($tempFilePath)).DIRECTORY_SEPARATOR : '';
 		$emulator_path = (realpath($usedEmu['path'])) ? dirname(realpath($usedEmu['path'])).DIRECTORY_SEPARATOR : '';
 		
+//		echo '<pre>';
+//		print_r($romMeta);
+//		echo '</pre>';
+
+// [media_type:protected] => 3
+// [media_current:protected] => 1
+// [media_count:protected] => 3
+		
 		// get possible filenames
 		$possibleMediaNames = array();
 		$matches = array();
@@ -2302,6 +2310,8 @@ class App extends GladeXml {
 					$name = basename($fileData['path']);
 					$fileName = $fileData['path'];					
 				}
+				
+				$fileName = realpath($fileName);
 				
 				//$path = ($ecc_unpacked_path) ? $ecc_unpacked_path : dirname($romPath);
 				//$name = $path.DIRECTORY_SEPARATOR.$name.'.'.$romFile->getRomExtension();

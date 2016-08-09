@@ -179,11 +179,11 @@ $i18n['menu'] = array(
 
 	/* 0.9.8 FYEO 04 */
 	'lbl_meta_edit_top' =>
-		"Edit meta",
+		"Editer les données",
 
 	/* 0.9.8 FYEO 05 */
 	'lbl_image_inject' =>
-		"Download images",
+		"Télécharger des images",
 
 );
 ?>

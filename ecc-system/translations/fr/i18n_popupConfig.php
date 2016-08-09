@@ -326,14 +326,20 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 02 */
 	'lbl_img_otp_list_imagesize_default' =>
-		"Défaut: 120x80",
+		"Défaut : 120x80",
 	'lbl_img_otp_list_aspectratio_default' =>
-		"Défaut: Off",
+		"Défaut : Off",
 	'lbl_img_otp_list_fastrefresh_default' =>
-		"Défaut: Off - expérimental",
+		"Défaut : Off - expérimental",
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"use .cue file",
+		"Utiliser un fichier .cue",
+
+    /* 0.9.9. WIP 01 */
+	'startConfThirdPartyHdl' =>
+		"Third Party",
+	'startConfThirdPartyXpadder' =>
+		"Start 'xpadder' at startup",
 );
 ?>

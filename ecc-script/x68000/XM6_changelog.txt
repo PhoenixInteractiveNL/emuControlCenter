@@ -1,0 +1,9 @@
+v1.0.0.1
+
+Old:
+- Dim $aDiskNames[8]
+- If $iDiskCount == 8 Then
+
+New:
+- Dim $aDiskNames[10]
+- If $iDiskCount == 10 Then

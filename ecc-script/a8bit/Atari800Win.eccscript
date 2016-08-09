@@ -1,0 +1,46 @@
+; Platform               : Atari 8-bit
+; Script for             : Atari800Win Plus v4.0
+; Script version         : v1.0.0.0
+; Last changed           : 2008.09.07
+;
+;
+; Author :  S.Ebeltjes (aka Phoenix)
+;
+; NOTES:
+; - Make sure you have enabled the 'auto unpack' option if you want to use ZIPPED files.
+; - Does not work with ATM & COM files yet...
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+Dim $CmdParameter
+
+If $eccFileRomExtension = "xex" then $CmdParameter = " -run "
+If $eccFileRomExtension = "bas" then $CmdParameter = " -run "
+If $eccFileRomExtension = "cas" then $CmdParameter = " -boottape "
+If $eccFileRomExtension = "rom" then $CmdParameter = " -cart "
+If $eccFileRomExtension = "bin" then $CmdParameter = " -cart "
+
+If $eccFileRomFileIsPacked = "1" Then
+
+   ; The ROM is packed, run ROM from the ECC temporally unpack folder.
+   Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $CmdParameter & chr(34) & $eccFileEccUnpackedPath & $eccFileEccUnpackedFile & chr(34))
+
+Else
+
+   ; The ROM is unpacked, run ROM normally.
+   Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $CmdParameter & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+
+EndIf
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

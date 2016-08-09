@@ -1,10 +1,11 @@
-; Platform       	: Sega Dreamcast
-; Script for     	: NullDC v1.00b1.6
-; Script version 	: v1.0.0.0
-; Last changed   	: 2008.06.12
+; Platform          : Sega Dreamcast
+; Script for        : NullDC v1.00b1.6
+; Script version    : v1.0.0.1
+; Last changed      : 2008.09.26
 ;
 ;
 ; Author :  Howard Philips (ECC forum member)
+;           Wayne69x (ECC forum member)
 ;
 ; NOTES:
 ;
@@ -21,16 +22,46 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-EmuWindowControl("nullDC v1.0.0")
 
-; Load CD
-; 
-Send("{ALT}")
-Send("{DOWN}")
-Send("{ENTER}")
-Sleep(1000)
-Send($eccFileRomPath & $eccFileRomFile)
-Send("{ENTER}")
+
+If @OSVersion <> "WIN_VISTA" Then
+
+   EmuWindowControl("nullDC v")
+
+   ; Load CD
+   ; 
+   Send("{ALT}")
+   Send("{DOWN}")
+   Send("{ENTER}")
+   Sleep(1000)
+   Send($eccFileRomPath & $eccFileRomFile)
+   Send("{ENTER}")
+
+Else
+
+   ; NullDC for Windows Vista (by wayne69x)
+   EmuWindowControl("nullDC v")
+
+   Send("{ENTER}")
+   Sleep(300)
+   Send("{ALT}")
+   Sleep(300)
+   Send("{DOWN}")
+   Sleep(300)
+   Send("{ENTER}")
+   Sleep(300)
+   Send("{TAB}") 
+   Sleep(300)
+   Send("{TAB}") 
+   Sleep(1000)
+   send($eccFileRompath & $eccFileRomFile)
+   Send("{TAB}") 
+   Send("{TAB}") 
+   Send("{TAB}") 
+   Sleep(100)
+   Send("{ENTER}")  
+
+EndIf
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

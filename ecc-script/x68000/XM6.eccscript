@@ -1,0 +1,189 @@
+; Platform              : X68000
+; Script for            : XM6
+; Script version        : v1.0.0.1
+; Last changed          : 2008.09.26
+; 
+;
+; Author:  - Pacogf
+;          - Sebastiaan Ebeltjes (Phoenix Interactive)
+;          - TheCyberDruid
+;
+; 
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+
+FileChangeDir(@ScriptDir)
+
+#include "..\eccScriptSystem.au3"
+
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Generate an UAE file for this game.
+; Also overwrites the old content with new content.
+
+; First let's copy the WINAUE TEMPLATE INI to the UAE ROM NAME
+;
+
+$sUAEFilename = $eccEmuEmulatorPath & "XM6.ini"
+
+
+FileCopy(@Scriptdir & "XM6-template.ini", $sUAEFilename,9)
+
+$iDiskCount = 1
+Dim $aDiskNames[10]
+If IsArray( $eccMultiRoms ) Then
+   $iRomCount = UBound( $eccMultiRoms, 1 ) - 1
+   For $i = 1 To $iRomCount
+      If $eccMultiRoms[$i][1] <> '""' Then
+         If Not StringInStr( $eccMultiRoms[$i][0], "packed" ) Then
+            If StringInStr( $eccMultiRoms[$i][1], "\" ) Then
+               $sRomName = CleanRomName( $eccMultiRoms[$i][1] )
+            Else
+               $sRomName = $eccMultiRoms[$i][1]
+            EndIf
+            If Not FileExists( $eccFileRomPath & $sRomName ) Then
+               $sRomName = StringReplace( $sRomName, ".dim" )
+            EndIf
+            $aDiskNames[$iDiskCount] = $sRomName
+            $iDiskCount += 1
+            If $iDiskCount == 10 Then
+               ExitLoop
+            EndIf
+         EndIf
+      Else
+         ExitLoop
+      EndIf
+   Next
+   $iDiskCount -= 1
+Else
+   $aDiskNames[1] = $eccFileRomFile
+Endif
+
+$bConfigChange = False
+Dim $aRomSettings[30]
+$iSettingsCount = 1
+
+If FileExists( $eccScriptParamsFile ) Then
+   $bGoOn = True
+
+   $fileRomSettings = FileOpen( $eccScriptParamsFile, 0 )
+   While $bGoOn
+      $sLine = FileReadLine( $fileRomSettings )
+      If @error == -1 Then
+         $bGoOn = False
+      Else
+         $aRomSettings[$iSettingsCount] = $sLine
+         $iSettingsCount += 1
+      EndIf
+   WEnd
+   FileClose( $fileRomSettings )
+   ReDim $aRomSettings[$iSettingsCount]
+   $iSettingsCount -= 1
+   $bConfigChange = True
+EndIf
+
+; Now open the UAE file and write the ROM contents into it!
+;
+If $bConfigChange Then
+   Dim $aUAELines[30]
+   $iLineCount = 1
+   $bGoOn = True
+
+   $uae_file = FileOpen($sUAEFilename, 0)
+   While $bGoOn
+      $sLine = FileReadLine( $uae_file )
+      If @error == -1 Then
+         $bGoOn = False
+      Else
+         $aUAELines[$iLineCount] = $sLine
+         $iLineCount += 1
+      EndIf
+   WEnd
+   FileClose($uae_file)
+   ReDim $aUAELines[$iLineCount]
+   $iLineCount -= 1
+
+   $uae_file = FileOpen( $sUAEFilename, 2 )
+   For $i = 1 To $iLineCount
+      $iPos = StringInStr( $aUAELines[$i], "=" )
+      $sCheck = StringLeft( $aUAELines[$i], $iPos )
+      For $j = 1 To $iSettingsCount
+         $iPos = StringInStr( $aRomSettings[$j], "=" )
+         $sSetting = StringLeft( $aRomSettings[$j], $iPos )
+         If $sSetting == $sCheck Then
+            $aUAELines[$i] = $aRomSettings[$j]
+         EndIf
+      Next
+      FileWriteLine( $uae_file, $aUAELines[$i] )
+   Next
+   FileClose( $uae_file )
+EndIf
+
+$COMILLAS = '"'
+IniWrite($sUAEFilename, 'MRU0' , 'File0' , $COMILLAS & $eccFileRomPath & $aDiskNames[1] & $COMILLAS)
+        If $iDiskCount > 1 Then IniWrite($sUAEFilename, 'MRU1' , 'File0' , $COMILLAS & $eccFileRomPath & $aDiskNames[2] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File1' , $COMILLAS & $eccFileRomPath & $aDiskNames[2] & $COMILLAS)
+
+   If $iDiskCount > 2 Then IniWrite($sUAEFilename, 'MRU1' , 'File1' , $COMILLAS & $eccFileRomPath & $aDiskNames[3] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File2' , $COMILLAS & $eccFileRomPath & $aDiskNames[3] & $COMILLAS)
+
+   If $iDiskCount > 3 Then IniWrite($sUAEFilename, 'MRU1' , 'File2' , $COMILLAS & $eccFileRomPath & $aDiskNames[4] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File3' , $COMILLAS & $eccFileRomPath & $aDiskNames[4] & $COMILLAS)
+
+   If $iDiskCount > 4 Then IniWrite($sUAEFilename, 'MRU1' , 'File3' , $COMILLAS & $eccFileRomPath & $aDiskNames[5] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File4' , $COMILLAS & $eccFileRomPath & $aDiskNames[5] & $COMILLAS)
+
+   If $iDiskCount > 5 Then IniWrite($sUAEFilename, 'MRU1' , 'File4' , $COMILLAS & $eccFileRomPath & $aDiskNames[6] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File5' , $COMILLAS & $eccFileRomPath & $aDiskNames[6] & $COMILLAS)
+
+   If $iDiskCount > 6 Then IniWrite($sUAEFilename, 'MRU1' , 'File5' , $COMILLAS & $eccFileRomPath & $aDiskNames[7] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File6' , $COMILLAS & $eccFileRomPath & $aDiskNames[7] & $COMILLAS)
+
+   If $iDiskCount > 7 Then IniWrite($sUAEFilename, 'MRU1' , 'File6' , $COMILLAS & $eccFileRomPath & $aDiskNames[8] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File7' , $COMILLAS & $eccFileRomPath & $aDiskNames[8] & $COMILLAS)
+
+   If $iDiskCount > 8 Then IniWrite($sUAEFilename, 'MRU1' , 'File7' , $COMILLAS & $eccFileRomPath & $aDiskNames[9] & $COMILLAS)
+            IniWrite($sUAEFilename, 'MRU0' , 'File8' , $COMILLAS & $eccFileRomPath & $aDiskNames[9] & $COMILLAS)
+
+; Start the emulator
+
+$EMULADOR = Run($eccEmuEmulatorPath & $eccEmuEmulatorFile)
+Sleep (2500)
+
+Send ("{ALT}")
+Send ("{RIGHT}")
+Send ("{DOWN}")
+Send ("{1}")
+
+If $iDiskCount > 1 Then
+Send ("{ALT}")
+Send ("{RIGHT 2}")
+Send ("{DOWN}")
+Send ("{1}")
+EndIf
+
+ProcessWaitClose ( $EMULADOR )
+
+FileDelete($eccEmuEmulatorPath & "XM6.ini")
+
+Func CleanRomName( $sRomName )
+   While StringInStr( $sRomName, "\" )
+      $iPos = StringInStr( $sRomName, "\" ) + 1
+      $sRomName = StringMid( $sRomName, $iPos )
+   Wend
+   Return StringReplace( $sRomName, '"', "" )
+EndFunc
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

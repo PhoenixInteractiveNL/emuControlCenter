@@ -13,3 +13,6 @@ v1.0.0.4
 - Only make mounting possible for supported Deamontools LITE extensions.
 - Added ZIP support, where mouting happens from the temporally unpack folder.
 - Added strings for fileextensions, so you can see what daemontools is mouting.
+
+v1.0.0.5
+- Added '$eccScriptParamsFile' to locate the config file for a x68000 game. (Pacogf)

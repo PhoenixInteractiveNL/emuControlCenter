@@ -1,13 +1,13 @@
 ; Platform              : Commodore Amiga
 ; Script for            : WinUAE (tested with v1.4.4)
-; Script version        : v1.0.0.7
-; Last changed          : 2008.07.23
+; Script version        : v1.0.0.8
+; Last changed          : 2008.08.09
 ;
 ;
 ; Author:  - Sebastiaan Ebeltjes (Phoenix Interactive)
 ;          - TheCyberDruid
 ;
-; NOTES: Works only with 8.3 activated!
+; NOTES:
 ;
 ;
 ;
@@ -46,6 +46,7 @@ If IsArray( $eccMultiRoms ) Then
 				If Not FileExists( $eccFileRomPath & $sRomName ) Then
 					$sRomName = StringReplace( $sRomName, ".adf", ".zip" )
 				EndIf
+				$sRomName = StringReplace( $sRomName, '"', '' )
 				$aDiskNames[$iDiskCount] = $sRomName
 				$iDiskCount += 1
 				If $iDiskCount == 5 Then
@@ -58,7 +59,7 @@ If IsArray( $eccMultiRoms ) Then
 	Next
 	$iDiskCount -= 1
 Else
-	$aDiskNames[1] = $eccFileRomFile
+	$aDiskNames[1] = StringReplace( $eccFileRomFile, '"', '' )
 Endif
 
 $bConfigChange = False
@@ -123,12 +124,10 @@ EndIf
 
 $uae_file = FileOpen($sUAEFilename, 1)
 
-	FileWriteLine($uae_file, "floppy0=" & $eccFileRomPath & $aDiskNames[1])
-	If $iDiskCount > 1 Then FileWriteLine($uae_file, "floppy1=" & $eccFileRomPath & $aDiskNames[2])
-	If $iDiskCount > 2 Then FileWriteLine($uae_file, "floppy2=" & $eccFileRomPath & $aDiskNames[3])
-	If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & $aDiskNames[4])
-
-	;FileWriteLine($uae_file, "statefile=" & $eccFileRomNamePlain & ".uss" )
+FileWriteLine($uae_file, "floppy0=" & $eccFileRomPath & $aDiskNames[1])
+If $iDiskCount > 1 Then FileWriteLine($uae_file, "floppy1=" & $eccFileRomPath & $aDiskNames[2])
+If $iDiskCount > 2 Then FileWriteLine($uae_file, "floppy2=" & $eccFileRomPath & $aDiskNames[3])
+If $iDiskCount > 3 Then FileWriteLine($uae_file, "floppy3=" & $eccFileRomPath & $aDiskNames[4])
 
 FileClose($uae_file)
 

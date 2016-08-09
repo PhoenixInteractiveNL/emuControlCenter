@@ -73,15 +73,15 @@ $i18n['dropdown_meta_state_yes_no'] = array(
 	'[[empty]]' =>
 		"",
 	'[[YES]]' =>
-		"Yes",
+		"Oui",
 	'[[NO]]' =>
-		"No",
+		"Non",
 );
 $i18n['dropdown_meta_state_count'] = array(
 	'[[empty]]' =>
 		"",
 	'[[NO]]' =>
-		"No",
+		"Aucun",
 	'[[01]]' =>
 		"1",
 	'[[02]]' =>

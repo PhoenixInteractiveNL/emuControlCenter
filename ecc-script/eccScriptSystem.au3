@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.0.0.4 (2008.07.19)
+; Version: 1.0.0.5 (2008.09.04)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -83,6 +83,15 @@ $eccSystemEccFolder = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_folder", "
 If StringLower($eccEmuEmulatorFilePlain) == "winuae" Then
 	$eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\amiga\winuae\eccscript_" & $eccFileRomCrc32 & ".ini"
 	$eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
+EndIf
+; ============================================================
+
+;[EXTRA]
+; $eccScriptParamsFile (x68000 gameconfig INI) (Pacogf)
+; ============================================================
+If StringLower($eccEmuEmulatorFilePlain) == "xm6" Then
+   $eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\x68000\XM6\eccscript_" & $eccFileRomCrc32 & ".ini"
+   $eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
 EndIf
 ; ============================================================
 

@@ -344,9 +344,9 @@ $i18n['popup'] = array(
 	
 	/* 0.9.8 FYEO 05 */
 	'waitForImageInjectTitle' =>
-		"Download images",
+		"\nTELECHARGEMENT D'IMAGE(S)\n",
 	'waitForImageInjectMessage' =>
-		"This task could take a little bit. If images are found, this window closes automaticly and you can see the images in the list!\n\nIf no images are found, this popup closes and the mainlist is not updated! :-)",
+		"Cette tâche peut prendre un peu de temps. Si des images sont trouvées, cette fenêtre se fermera automatiquement et vous pourrez voir les images dans la liste !\n\nSi aucune image n'est trouvée, cette fenêtre se fermera et la liste ne sera pas mise à jour ! :-)",
 
 );
 ?>

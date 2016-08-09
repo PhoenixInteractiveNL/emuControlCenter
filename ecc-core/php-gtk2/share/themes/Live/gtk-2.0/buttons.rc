@@ -1,0 +1,54 @@
+#################### BUTTONS #######################
+
+style "button"		= "default"
+{
+
+fg[NORMAL]       = "#505050"
+
+  engine "pixmap"
+  {
+    image
+    {
+      function			= BOX
+      detail			= "buttondefault"
+      recolorable		= TRUE
+      file				= "Buttons/button-default.png"
+      border			= {7, 7, 7, 7}
+      stretch			= TRUE
+    }
+    image
+    {
+      function			= BOX
+      state				= PRELIGHT
+      recolorable		= TRUE
+      file				= "Buttons/button-prelight.png"
+      border			= { 7, 7, 7, 7 }
+      stretch			= TRUE
+    }
+    image
+    {
+      function			= BOX
+      state				= ACTIVE
+      file				= "Buttons/button-pressed.png"
+      border			= { 7, 7, 7, 7 }
+      stretch			= TRUE
+    }	
+    image 
+   {
+     function			= BOX
+     state				= INSENSITIVE
+     file				= "Buttons/button-insensitive.png"
+     border			= { 7, 7, 7, 7 }
+     stretch			= TRUE
+    }
+    image 
+    {
+      function			= BOX
+      file				= "Buttons/button-normal.png"		
+      border			= { 7, 7, 7, 7 }
+      stretch			= TRUE
+    }	
+  }
+}
+
+class "GtkButton"          			style "button"

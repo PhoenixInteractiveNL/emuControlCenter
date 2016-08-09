@@ -1,0 +1,186 @@
+style "notebook"		= "default"
+{
+
+ xthickness            			= 2
+  ythickness            			= 2
+  engine "pixmap" 
+    {
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= ACTIVE
+	file				= "Tabs/tab-bottom.png"
+	border			= { 4, 4, 4, 4}
+	stretch			= TRUE
+	gap_side			= TOP
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= ACTIVE
+	file				= "Tabs/tab-top.png"
+	border			= {  3, 3, 3, 3}
+	stretch			= TRUE
+	gap_side			= BOTTOM
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= ACTIVE
+	file				= "Tabs/tab-left.png"
+	border			= {  3, 3, 3, 3}
+	stretch			= TRUE
+	gap_side			= RIGHT
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= ACTIVE
+	file				= "Tabs/tab-right.png"
+	border			= { 4, 4, 4, 4}
+	stretch			= TRUE
+	gap_side			= LEFT
+      }	
+ 
+
+############################# NORMALS ################################
+
+   image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= NORMAL
+	file				= "Tabs/tab-top-active.png"
+	border			= { 3, 3, 3, 3}
+	stretch			= TRUE
+	gap_side			= BOTTOM
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= NORMAL
+	file				= "Tabs/tab-bottom-active.png"
+	border			= { 4, 4, 4, 4}
+	stretch			= TRUE
+	gap_side			= TOP
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= NORMAL
+	file				= "Tabs/tab-left-active.png"
+	border			= {  3, 3, 3, 3}
+	stretch			= TRUE
+	gap_side			= RIGHT
+      }
+    image 
+      {
+        function			= EXTENSION
+	recolorable		= TRUE
+	state			= NORMAL
+	file				= "Tabs/tab-right-active.png"
+	border			= {  4, 4, 4, 4}
+	stretch			= TRUE
+	gap_side			= LEFT
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# How to draw boxes with a gap on one side (ie the page of a notebook)
+#
+    image 
+      {
+        function			= BOX_GAP
+	recolorable		= TRUE
+	file				= "Tabs/notebook.png" 
+	border			= { 5, 5, 5, 5 }
+	stretch			= TRUE
+	gap_file			= "Others/null.png"
+	gap_border     	= { 0, 0, 0, 0 }
+	gap_start_file		= "Others/null.png"
+	gap_start_border	= { 0, 0, 0, 0 }
+	gap_end_file		= "Others/null.png"
+	gap_end_border	= { 0, 0, 0, 0 }
+	gap_side			= TOP
+      }
+    image 
+      {
+        function			= BOX_GAP
+	recolorable		= TRUE
+	file				= "Tabs/notebook.png"
+	border			= { 5, 5, 5, 5 }
+	stretch			= TRUE
+	gap_file			= "Others/null.png"
+	gap_border		= { 10, 10,5, 5 }
+	gap_start_file		= "Others/null.png"
+	gap_start_border	= { 10, 10, 5, 5 }
+	gap_end_file		= "Others/null.png"
+	gap_end_border	= { 10, 10, 5, 5 }
+	gap_side			= BOTTOM
+      }
+    image 
+      {
+        function			= BOX_GAP
+	recolorable		= TRUE
+	file				= "Tabs/notebook.png"
+	border			= { 5, 5, 5, 5 }
+	stretch			= TRUE
+	gap_file			= "Others/null.png"
+	gap_border		= { 0, 1, 0, 0 }
+	gap_start_file		= "Others/null.png"
+	gap_start_border	= { 0, 0, 2, 0 }
+	gap_end_file		= "Others/null.png"
+	gap_end_border	= { 0, 2, 1, 0 }
+	gap_side			= LEFT
+      }
+    image 
+      {
+        function			= BOX_GAP
+	recolorable		= TRUE
+	file				= "Tabs/notebook.png" 
+	border			= { 5, 5, 5, 5 }
+	stretch			= TRUE
+	gap_file			= "Others/null.png"
+	gap_border		= { 0, 0, 1, 0 }
+	gap_start_file		= "Others/null.png"
+	gap_start_border	= { 2, 0, 2, 0 }
+	gap_end_file		= "Others/null.png"
+	gap_end_border	= { 0, 0, 0, 2 }
+	gap_side			= RIGHT
+      }
+#
+# How to draw the box of a notebook when it isnt attached to a tab
+#
+    image 
+      {
+        function			= BOX
+	recolorable		= TRUE
+	file				= "Tabs/notebook.png"
+	border			= { 6,6,6,6 }
+	stretch			= TRUE
+	#gap_side			= TOP
+      }
+  }
+}
+
+class "GtkNotebook"      			style "notebook"

@@ -1,6 +1,6 @@
 ; Platform               : Atari Jaguar
 ; Script for             : Project Tempest (tested with v0.95)
-; Script version         : v1.0.0.0
+; Script version         : v1.0.0.1
 ; Last changed           : 2008.05.21
 ;
 ;
@@ -21,26 +21,55 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-EmuWindowControl("Project Tempest")
+If @OSVersion <> "WIN_VISTA" Then
 
-; Load GAME ROM 
-;
-Send("{ALT}")
-Sleep(100)
-Send("{DOWN}")
-Sleep(100)
-Send("{ENTER}")
-send($eccFileRomPath & $eccFileRomFile)
-Send("{TAB}") 
-Send("{TAB}") 
-Send("{TAB}")
-Sleep(100)
-Send("{ENTER}") 
+	EmuWindowControl("Project Tempest")
 
-; START emulator 
-;
-Sleep(100)
-Send("{F2}")
+	; Load GAME ROM 
+	;
+	Send("{ALT}")
+	Sleep(100)
+	Send("{DOWN}")
+	Sleep(100)
+	Send("{ENTER}")
+	send($eccFileRomPath & $eccFileRomFile)
+	Send("{TAB}") 
+	Send("{TAB}") 
+	Send("{TAB}")
+	Sleep(100)
+	Send("{ENTER}") 
+
+	; START emulator 
+	;
+	Sleep(100)
+	Send("{F2}")
+
+Else
+
+	; Project Tempest for Windows Vista (by wayne69x)
+	EmuWindowControl("Project Tempest")
+
+	; Load GAME ROM 
+	;
+	Sleep(100)
+	Send("{ALT}")
+	Sleep(100)
+	Send("{DOWN}")
+	Sleep(100)
+	Send("{ENTER}")
+	Sleep(1000)
+	send($eccFileRomFile)
+	Send("{TAB}") 
+
+	Sleep(100)
+	Send("{ENTER}") 
+
+	; START emulator 
+	;
+	Sleep(100)
+	Send("{F2}")
+
+EndIf
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

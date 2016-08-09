@@ -1334,6 +1334,9 @@ class GuiPopConfig extends GladeXml {
 		$this->startConfSoundSelect->set_label(I18N::get('popupConfig', 'startConfSoundSelect'));
 		$this->startConfSoundPreview->set_label(I18N::get('global', 'preview'));
 		
+		// Third Party
+		$this->startConfThirdPartyHdl->set_markup('<b>'.I18N::get('popupConfig', 'startConfThirdPartyHdl').'</b>');
+		$this->startConfThirdPartyXpadder->set_label(I18N::get('popupConfig', 'startConfThirdPartyXpadder'));
 		
 		$iniManager = FACTORY::get('manager/IniFile');
 
@@ -1358,6 +1361,12 @@ class GuiPopConfig extends GladeXml {
 		$optBugreportSend = (!$sectionExists) ? true : $optBugreportSend;
 		$this->startConfBugreportSend->set_active($optBugreportSend);
 		
+		// Third Party
+		$optStartExpadder = $iniManager->getKey('ECC_STARTUP', 'startup_xpadder');
+		
+		$optStartExpadder = ($optStartExpadder === false || !$sectionExists) ? true : $optStartExpadder;
+		$this->startConfThirdPartyXpadder->set_active($optStartExpadder);
+		
 		
 		$this->updateEccSoundState(true);
 	}
@@ -1367,6 +1376,7 @@ class GuiPopConfig extends GladeXml {
 		$this->globalIni['ECC_STARTUP']['startup_update_check'] = (int)$this->startConfUpdate->get_active();
 		$this->globalIni['ECC_STARTUP']['minimize_to_tray'] = (int)$this->startConfMinimize->get_active();
 		$this->globalIni['ECC_STARTUP']['startup_bugreport_check'] = (int)$this->startConfBugreportSend->get_active();
+		$this->globalIni['ECC_STARTUP']['startup_xpadder'] = (int)$this->startConfThirdPartyXpadder->get_active();
 	}
 	
 	public function updateEccSoundState($init=false){

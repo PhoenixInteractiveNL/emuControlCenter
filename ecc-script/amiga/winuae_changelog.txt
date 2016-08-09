@@ -2,4 +2,7 @@ v1.0.0.6
 - Better support for amiga games using the MULTI lines in the eccScriptRom file. (TheCyberDruid)
 
 v1.0.0.7
-- Adjusted the script to use new MULTI output with ZIP in eccScriptDat (TheCyberDruid)
+- Adjusted the script to use new MULTI output with ZIP in eccScriptDat. (TheCyberDruid)
+
+v1.0.0.8
+- Adjusted for LONG name support. (TheCyberDruid)

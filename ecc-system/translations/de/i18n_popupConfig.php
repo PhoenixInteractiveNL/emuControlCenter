@@ -339,5 +339,10 @@ $i18n['popupConfig'] = array(
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
 		"verwende .cue datei",
+    /* 0.9.9. WIP 01 */
+	'startConfThirdPartyHdl' =>
+		"Third Party",
+	'startConfThirdPartyXpadder' =>
+		"Öffne 'xpadder' beim Starten",
 );
 ?>

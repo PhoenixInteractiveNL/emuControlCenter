@@ -1,0 +1,74 @@
+#################### MENUBAR ###################
+
+
+style "menubar"		
+{
+#font_name = "Segoe UI Bold 9"
+#font_name = "Sans 10"
+
+  fg[NORMAL] = "#1F5BA4"
+  fg[PRELIGHT] = "#1F5BA4"
+  fg[ACTIVE] = "#1F5BA4"
+  fg[SELECTED] = "#1F5BA4"
+  fg[INSENSITIVE] = "#DDE4FF"
+
+  text[NORMAL] = "#1F5BA4"
+  text[PRELIGHT] = "#1F5BA4"
+
+
+
+
+ 
+
+xthickness			= 1
+ythickness			= 1
+	engine "pixmap"
+	{
+		image
+		{
+			function	= BOX
+			state = NORMAL
+			file		= "Menu-Menubar/menubar-light.png"
+			border	= { 5, 5, 5, 5 }
+			stretch	= TRUE
+    		}
+
+		image
+		{
+			function	= BOX
+			state = ACTIVE
+			file		= "Menu-Menubar/menubar-light.png"
+			border	= { 5, 5, 5, 5 }
+			stretch	= TRUE
+    		}
+
+		image
+		{
+			function	= BOX
+			state = INSENSITIVE
+			file		= "Menu-Menubar/menubar-inactive.png"
+			border	= { 5, 5, 5, 5 }
+			stretch	= TRUE
+    		}
+
+  image
+    {
+      function			= BOX
+      recolorable		= TRUE
+			state = PRELIGHT
+     file				= "Menu-Menubar/menubar-item.png"
+
+      border			= { 10, 10, 10, 10 }
+      stretch			= TRUE
+    }
+
+ 	}
+}
+
+class "*MenuBar*" 		        style "menubar"
+class "GtkMenuBar*" 		        style "menubar"
+widget_class "*MenuBar*" style "menubar"
+
+
+
+

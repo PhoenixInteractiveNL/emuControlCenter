@@ -89,34 +89,31 @@ class FileIO {
 		}
 	}
 	
-	public function fopen_zip($zipFileName, $zipEntryFileName) {	
-		
-		// ABS-PATH TO REL-PATH...
-		#$file_name_direct = realpath($zipFileName);
-		
-		$zip = new ZipArchive();
-		$zip->open($zipFileName);
-		$buf = $zip->getFromName($zipEntryFileName);
-		$zip->close();
-		
-		$tempFolder = getcwd().'/temp/';
-		if (!is_dir($tempFolder)) mkdir($tempFolder);
-		$tempFile = $tempFolder.basename($zipEntryFileName);
-		
-		$fhdl = fopen($tempFile, 'w+b');
-		fwrite($fhdl, $buf);
-		
-		# quick hack
-		# fsum cannot parse an file with open filehandle
-		# dont return an valid filehandle here, because the
-		# zips dont need an filehandle!
-		if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
-			fclose($fhdl);
-			return null;
-		}
-		
-		return $fhdl;
-	}
+   public function fopen_zip($zipFileName, $zipEntryFileName) {   
+      
+      $zip = new ZipArchive;
+      $res = $zip->open($zipFileName);
+      if($res !== true) return null;
+
+      $tempFolder = getcwd().'/temp/';
+      if (!is_dir($tempFolder)) mkdir($tempFolder);
+      
+      $zip->extractTo($tempFolder, array($zipEntryFileName));
+      
+      $tempFile = $tempFolder.$zipEntryFileName;
+      $fhdl = fopen($tempFile, 'r+b');
+      
+      # quick hack
+      # fsum cannot parse an file with open filehandle
+      # dont return an valid filehandle here, because the
+      # zips dont need an filehandle!
+      if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
+         fclose($fhdl);
+         return null;
+      }
+      
+      return $fhdl;
+   }
 	
 	public function extractZip($zipFile, $zipEntry, $destinationFolder = false){
 		

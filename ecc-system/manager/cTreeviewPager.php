@@ -40,6 +40,25 @@ class TreeviewPager {
 		$this->_plast = false;
 		$this->_pfirst = false;
 		
+		if ($this->_res_total > 0) {
+			if ($this->_p < 0) {
+				$this->_p = 0;
+			}
+			elseif ($this->_p >= $this->_pt) {
+				$this->_p = $this->_pt;
+				$this->_plast = true;
+				$this->_pfirst = false;
+			}
+			else {
+				$this->_p++;
+				$this->_res_offset += $this->_pp;	
+			}
+			if ($this->_p+1 > $this->_pt) {
+				$this->_plast = true;
+				$this->_pfirst = false;
+			}	
+		}
+
 //		print "_res_total<pre>";
 //		print_r($this->_res_total);
 //		print "</pre>\n";
@@ -61,34 +80,6 @@ class TreeviewPager {
 //		print "_res_offset<pre>";
 //		print_r($this->_res_offset);
 //		print "</pre>\n\n";
-		
-		if ($this->_res_total > 0) {
-			if ($this->_p < 0) {
-				$this->_p = 0;
-			}
-			elseif ($this->_p >= $this->_pt) {
-				$this->_p = $this->_pt;
-				$this->_plast = true;
-				$this->_pfirst = false;
-			}
-			else {
-				$this->_p++;
-				$this->_res_offset += $this->_pp;	
-			}
-			if ($this->_p+1 >= $this->_pt) {
-				$this->_plast = true;
-				$this->_pfirst = false;
-			}	
-		}
-
-//		if ($this->_p < $this->_pt) {
-//			if ($this->_res_total > 0) {
-//				$this->_p++;
-//			}
-//			if ($this->_p <= $this->_pt) {
-//				$this->_res_offset += $this->_pp;
-//			}
-//		}
 		
 		return $this;
 	}

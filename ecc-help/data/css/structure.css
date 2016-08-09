@@ -128,3 +128,7 @@ div.content div.contentQa .a  {
 	border: solid 1px #ddd;
 	padding: 5px;
 }
+
+pre {
+	font-size: 15px;
+}

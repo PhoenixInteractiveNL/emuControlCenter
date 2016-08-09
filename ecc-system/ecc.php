@@ -675,6 +675,11 @@ class App extends GladeXml {
 		// automaticly a dbms object assigned
 		FACTORY::setDbms($dbms);
 		
+		$mngrEccUpdate = FACTORY::get('manager/EccUpdate');
+		if (!$mngrEccUpdate->updateSystem($this->ecc_release['local_release_version'])) {
+			
+		}
+		
 		// ----------------------------------------------------------------
 		// I18N Initialize 
 		// ----------------------------------------------------------------
@@ -814,7 +819,7 @@ class App extends GladeXml {
 		
 		$this->img_ecc_header_ebox->connect_simple('button-press-event', array(FACTORY::get('manager/GuiHelper'), 'open_splash_screen'));
 		$this->img_plattform_ebox->connect_simple('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
-		$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
+		//$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
 		
 		// ----------------------------
 		// init main bombo for languages
@@ -4377,6 +4382,7 @@ class App extends GladeXml {
 		$this->media_pager_prev->set_sensitive(true);
 		$this->media_pager_last->set_sensitive(true);
 		$this->media_pager_next->set_sensitive(true);
+		
 		if ($pager_data->_plast) {
 			$this->media_pager_last->set_sensitive(false);
 			$this->media_pager_next->set_sensitive(false);
@@ -4639,6 +4645,7 @@ class App extends GladeXml {
 	
 	private function writeLocalReleaseInfo() {
 		$this->loadEccConfig();
+		
 		$versionInfos = "[GENERAL]\neccdate=\"".$this->ecc_release['local_release_date']."\"\neccversion=\"".$this->ecc_release['local_release_version']."\"";
 		file_put_contents(ECC_BASEDIR.'ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
 	}

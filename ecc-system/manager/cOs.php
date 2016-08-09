@@ -37,7 +37,7 @@
 	/** Opens the selected media in the assigned player
 	*
 	*/
-	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource, $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false) {
+	public function executeFileWithProgramm($exeFileSource, $param=false, $romFileSource = "", $fileNameEscape = false, $fileName8dot3 = false, $filenameOnly = false, $noExtension = false) {
 		
 		// if filenameOnly set, only use the basename (name.rom) without path!
 		if ($filenameOnly) {

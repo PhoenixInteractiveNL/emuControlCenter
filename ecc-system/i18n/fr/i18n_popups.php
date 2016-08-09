@@ -198,5 +198,9 @@ $i18n['popup'] = array(
 		"eccdb - Erreur :\n\nVous n'êtes peut-être pas connecté à Internet... vous pouvez ajouter des données dans eccdb seulement avec une connection Internet active !",
 	'eccdb_no_data' =>
 		"eccdb - Aucune information pouvant être ajoutée trouvée :\n\nVous devez éditer des meta-données pour les ajouter dans eccdb. Utilisez le bouton Editer et esseyez de nouveau !",
+		
+	/* 0.9 FYEO 9 */
+	'rom_dup_remove_msg_preview%s' =>
+		"This option will search for duplicate roms in your database and will output the found roms\n\nYou will also find the logfile in your ecc-logs folder!",
 );
 ?>

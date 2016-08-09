@@ -1,0 +1,150 @@
+-------------------------------------------------------------------------------
+- Version 0.9
+-------------------------------------------------------------------------------
+FYEO 9
+- imageCenter - fixed problem with + sign in image filepath
+- fixed Romlist refreshing fix bug :-)
+- fixed help documentation link
+- fixed ECC 0.5.887 Beta - ECC window goes to background (For config and about!) :-)
+- deactivated button for startup config because of focus problems
+- LOGGER
+-- implemented logger checkbox/openFolder in the ecc-config
+-- loging implemented for (logged to ecc-logs/logfiletype.txt)
+--- fileparsing
+--- datfile import ecc / rc
+--- find/remove duplicate roms from db
+--- files remove/rename/copy
+--- Images add/remove
+--- Webservice romdb transfer
+FYEO 8
+- implemented new database update mechanism for a easier database update
+-- added new database/eccdb.empty containing no data
+-- added backup folder for backups on version change!
+- Metaedit-Popup
+-- now 3 buttons available... save, save+close, save!
+-- removed year autocompletion :-)
+- fixed encoding problem if using ° signs in detail/list-view
+- fixed Romlist refreshing. Now the detail-list will not be resetet on platform (right)click.
+- reordering ecc-tools menu - adding ecc ROMid
+FYEO 7
+- Metaedit-Popup
+- Added error output, if there is no title set!
+-- Added autocompletion for Developer, Publisher, Year
+--- all rom meta-informations are used for autocompletion
+-- removed some buttons and move them to top
+-- Added rating tab - This feature isnt implemented now!
+- Added autocompletion for search-field-selector ([DE] DEVELOPER, [PU] PUBLISHER, [YE] YEAR)
+-- only rom meta-informations of available files are used for autocompletion
+- ImageCenter
+-- fixed problem, if you add images to an game, you dont have! (metadata only)
+- Search filter
+-- reset now also reset the search field/operator
+-- optimized reset mechanism
+- InfoPane
+-- Removed image-tab -> moved direct under the preview-image
+-- changed order... now personal is second tab, third is e(xtended)Search
+- Tools Menu
+-- Added ecc image coverter from V1 to V2 structure!
+- Configuration
+-- Added new color and themes tab
+-- Added image background-color
+- Fixed ordering in listview
+FYEO 6
+- Search filter (first menu item in rom context-menu (right mouse click))
+-- lets direct filter for a given value of the selected rom (good feature for listview with hidden panes)
+-- possiblility to reset the serach
+- imageCenter
+-- added new slot media_storage for and image of the media- cartridge, cd, disk aso.
+- added file-operations option to delete also the userimages for a deleted rom
+- info-pane
+-- added new ecc-star images for rating
+-- fileinfo, removed space, chaged Crc32 to CRC32 ;-)
+- media-edit popup
+- fixed taborder (but dont know how! :-))
+- optimized dropdown sizes
+FYEO 5
+- fixed Alphabetic listing bug in list and detail view
+- fixed import of ecc datfile version 0.7
+- added new eccTools menu (eccLive, eccBugreport, eccTheme)
+- fixed urlencode problem in imageCenter dragndrop
+- fixed Romlist does not refresh when search is empty
+- restructured fileinfo area
+FYEO 4
+- added fast list refresh to image config
+-- this is experimental... (paging problem) but works fine and is ULTRA FAST!!!!! :-)
+- fixed aspect ratio bug on next image in image-preview!
+- imageCenter
+-- added button to open the current image-folder
+-- fixed problem, if colors for dropzones are missing!
+FYEO 3
+- implemented image-converter for ecc-user-images (ecc-tools/convertUserImages.bat)
+-- moves the old images to the new folder structure and create thumbnails
+-- please backup your ecc-user folder before using this batch script!
+- imageCenter
+-- fixed problem with not removed thumbnails. (eg. if gif inserted = no thumbnail)
+-- changed colors of dropzones to option_select_* editable from ecc-configuration
+-- match option now only reset platform cache
+-- optimized caching
+- configuration - new image tab added
+-- moved imagesize from ecc-tab to imgage tab
+-- removed imagesize 480x320 from dropdown
+-- added aspect ratio ooption
+- system / performance
+-- remove duplicate call of update_treeview_nav
+FYEO 2
+- imageCenter
+-- added hilight of the current selected imagetype
+-- implemented autoselect of the choosen imgatype from info-pane image-tab
+FYEO 1
+- Imagehandeling
+-- completely refactured image handeling
+-- optimized imagefolder structure for better performance
+-- removed old type of unsaved image-search. (to be replaced)
+-- added new images match-button to show only matching images
+--- used to search for wrong image-assignments
+--- used to see, which images are missing!
+-- implemented new imageCenter with drag-n-drop tagets
+--- possibility to direct assign an image to an image-type using drag-n-drop
+--- automatical thumnail creation
+---- thumbs are only created if needed (gifs, small images <= 30 KB)
+---- thumbs are created as jpg quality 75% in 240x* (no aspect ratio)
+--- copy and move images from source implemented
+--- feature to remove images (including removing thumbnails)
+--- feature to copy/move/delete without confirmation popup
+--- optimized toggle image best fit
+- Topmenu
+-- added emu-menu for direct configuration
+-- added view-menu with view-data, view-type and show/hide areas
+
+- ECC Startup
+v1.4.1.2:
+- 'ECC Startup Config' can now only start once (fix) 
+- Tweaked the 'fixed' title a little bit
+v1.4.1.1:
+- The 'minimize-2-tray' function can now be configured!
+  - Run 'ecc.exe /config' to configure ECC startup!
+v1.4.1.0:
+- ECC gets a fixed title after capturing the window!
+- Added a nice 'minimize-2-tray' function!
+- Added an egg... ;)
+v1.4.0.3:
+- ECC not longer standing on TOPMOST window! (fix)
+v1.4.0.2:
+- Fixed the 'freeze' bug on startup, by improving the focusing of the ECC window
+
+ECC Installer
+v1.1.0.5 (ECC v0.9):
+- Compiled with new NSIS v2.25
+- Fixed the ECC Live! run on cancel/abort installation.
+- Enhanced the discription text visibility.
+- Disabled the components page (cannot unselect components).
+- Disabled the ECC exist checkup due to an idea of creating an empty/new eccdb when needed.
+- Added option to re-structure ECC imagecenter images.
+- Added option to add a ECC icon on the desktop.
+- Added ROMid startmenu icon.
+- Added extra startmenu subfolder 'links'
+- Added shortcut to ECC documentation in startmenu.
+- Added shortcut to ECC Theme download page in 'links'.
+- Added shortcut to ECC support forum in 'links'.
+- Added shortcut to imagecenter images v1 to v2 convertor in 'tools'.
+- Moved the Camya website link to startmenu folder 'links' 

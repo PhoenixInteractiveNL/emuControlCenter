@@ -19,7 +19,7 @@ class DbmsSqlite2 extends Dbms {
 
 	public function query($q) {
 		#print $q.LF;
-		return $this->dbms->query($q);
+		return $this->dbms->query(trim($q));
 	}
 
 	public function lastInsertRowid() {
@@ -30,6 +30,16 @@ class DbmsSqlite2 extends Dbms {
 		$sqliteerror = false;
 		$this->dbms = new SQLiteDatabase($this->connectionPath, $this->connectionMode, $sqliteerror);
 		if ($sqliteerror) return $sqliteerror;
+		
+		#$q = "PRAGMA cache = 6000;";
+		#$this->query($q);
+		
+		$q = "PRAGMA synchronous = OFF;";
+		$this->query($q);
+
+		$q = "PRAGMA temp_store = MEMORY;";
+		$this->query($q);
+
 		return $this->dbms;
 	}
 	

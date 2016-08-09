@@ -113,7 +113,9 @@ This folder is initial created with
 		$dlg = new GtkAboutDialog();
 		
 		$dlg->set_modal(true);
-		$dlg->set_transient_for($this->gui->wdo_main);
+		#$dlg->set_transient_for($this->gui->wdo_main);
+		$dlg->set_keep_above(true);
+		$dlg->present();
 			
 		$win_style_original = $dlg->get_style();
 		$win_style_temp = $win_style_original->copy();
@@ -126,6 +128,22 @@ This folder is initial created with
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];
 		$email = $this->gui->ecc_release['email'];
+		
+		$dlg->set_translator_credits(trim(
+			'
+[EN] English translation
+-------------------------------------- 
+done by ecc himself (ecc@camya.com)
+
+[DE] German translation 
+--------------------------------------
+done by blackering (aa@aa.de)
+
+[FR] French translation 
+--------------------------------------
+done by cyrille (aa@aa.fr)
+			'
+		));
 		
 		$dlg->set_name("");
 		$dlg->set_version($version);
@@ -140,21 +158,12 @@ This folder is initial created with
 		$this->gui->ini->storeHistoryKey('splashscreen_opened', true, false);
 	}
 	
-//	public function setBackgroundImage($window=false, $fileName=false, $mask=255) {
-//		if (!is_object($window)) return false;
-//		if (!$fileName) return false;
-//		
-//		$obj_pixbuff = $this->getPixbuf($fileName);
-//		list($pixmap, $mask) = $obj_pixbuff->render_pixmap_and_mask($mask);
-//		
-//		$style = $window->get_style();
-//		$style = $style->copy();
-//		
-//		$style->bg_pixmap[Gtk::STATE_NORMAL] = $pixmap;
-//		$window->set_style($style);
-//	}
-	
-	public function getPixbuf($imagePath, $width = false, $height = false) {
+	public function getPixbuf($imagePath, $width = false, $height = false, $aspectRatio = false) {
+		
+		if ($aspectRatio && $width && $height) {
+			return GdkPixbuf::new_from_file_at_size($imagePath, $width, $height);
+		}
+		
 		//if (!file_exists($imagePath)) return null;
 		try {
 			$oPixbuf = GdkPixbuf::new_from_file($imagePath);
@@ -168,7 +177,6 @@ This folder is initial created with
 			$type = Gdk::INTERP_BILINEAR;
 			$oPixbuf = $oPixbuf->scale_simple((int)$width, (int)$height, $type);
 		}
-		
 		return  $oPixbuf;
 	}
 }

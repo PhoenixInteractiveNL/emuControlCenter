@@ -14,6 +14,8 @@ class EccParser {
 	
 	public function __construct($eccident=false, $ini, $path, $statusbar, $statusbar_lbl_bottom, $status_obj, $gui) {
 		
+		$log = '';
+		
 		$this->gui = $gui;
 		
 		if ($status_obj->is_canceled()) return false;
@@ -84,7 +86,7 @@ class EccParser {
 
 			// parse files and write them to the dab
 			$dataProzessor = new EccParserDataProzessor($dataParser, $fileList, $directUnseted, $this->gui);
-			$dataProzessor->parse();
+			$log = $dataProzessor->parse();
 			$parser_stats = $dataProzessor->get_stats();
 			
 			// validate older files... are all in place?
@@ -93,6 +95,12 @@ class EccParser {
 		else {
 			#print "pfad oder keine extensions angegeben\n";
 		}
+		
+		$this->log = $log;
+	}
+	
+	public function getLog() {
+		return $this->log;
 	}
 }
 ?>

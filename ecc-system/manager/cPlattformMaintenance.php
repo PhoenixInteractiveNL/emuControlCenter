@@ -33,11 +33,12 @@ class PlattformMaintenance {
 	/*
 	* @author: ascheibel
 	*/
-	public function db_optimize()
+	public function optimizeDbForCurrenEccident()
 	{
+		
 		#$this->optimize_db_eccident();
-		$this->optimize_table_files();
-		$this->optimize_table_bookmarks();
+		$this->optimizeFileData();
+		$this->optimizeBookmarks();
 		#$this->vacuum_database();
 		return true;
 	}
@@ -45,7 +46,7 @@ class PlattformMaintenance {
 	/*
 	* @author: ascheibel
 	*/
-	public function db_clear()
+	public function removeRomsForCurrentEccident()
 	{
 		$where_snip = ($this->_ident) ? "WHERE eccident ='".sqlite_escape_string(strtolower($this->_ident))."'" : '';
 		
@@ -57,15 +58,15 @@ class PlattformMaintenance {
 		";
 		$this->dbms->query($q);
 		
-		// danach alte bookmarks löschen
-		$this->optimize_table_bookmarks();
+		# remove also now unused bookmarsk
+		$this->optimizeBookmarks();
 		return "database now cleared";
 	}
 	
 	/*
 	* @author: ascheibel
 	*/
-	public function db_clear_dat()
+	public function removeDatForCurrentEccident()
 	{
 		$where_snip = ($this->_ident) ? "WHERE eccident ='".sqlite_escape_string(strtolower($this->_ident))."'" : '';
 		$q = "
@@ -80,10 +81,15 @@ class PlattformMaintenance {
 		return true;
 	}
 	
-	/*
-	* löscht nicht mehr vorhandene files
-	*/
-	public function optimize_table_files() {
+
+	/**
+	 * Checks all files for a given eccident
+	 * If not existing on harddrive, remove rom from
+	 * filelist
+	 *
+	 * @return bool
+	 */
+	public function optimizeFileData() {
 		
 		if ($this->status_obj) $this->status_obj->update_progressbar(0, "gathering data");
 		if ($this->status_obj) $this->status_obj->update_message("search for files to optimize!");
@@ -148,7 +154,7 @@ class PlattformMaintenance {
 		}
 		
 		// danach alte bookmarks löschen
-		$this->optimize_table_bookmarks();
+		$this->optimizeBookmarks();
 		return true;
 	}
 	
@@ -157,7 +163,7 @@ class PlattformMaintenance {
 	* tabelle, die nicht mehr als file in ecc erfasst
 	* sind.
 	*/
-	public function optimize_table_bookmarks() {
+	public function optimizeBookmarks() {
 		$q = "
 			SELECT
 			*

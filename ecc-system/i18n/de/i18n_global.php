@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	de (german)
  * author:	franz schneider
- * date:	2007/01/12 
+ * date:	2007/03/04 
  * ------------------------------------------
  */
 $i18n['global'] = array(
@@ -22,6 +22,6 @@ $i18n['global'] = array(
 	'done_title' =>
 		"Befehl ausgeführt",
 	'done_msg' =>
-		"Arbeit ist erledigt!",
+		"Aufgabe wurde erfolgreich erledigt!",
 );
 ?>

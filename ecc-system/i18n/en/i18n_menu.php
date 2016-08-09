@@ -51,13 +51,13 @@ $i18n['menu'] = array(
 	'lbl_fav_add' =>
 		"Add to bookmarks",
 	'lbl_image_popup' =>
-		"Show all images",
+		"Open imageCenter",
 	'lbl_img_reload' =>
 		"Reload images",
 	'lbl_rom_remove' =>
 		"Remove ROM from DB",
 	'lbl_meta_edit' =>
-		"EDIT",
+		"EDIT METADATA",
 	'lbl_roms_initial_add%s%s' =>
 		"No ROMS found for platform\n----------------------------------------\n%s (%s)\n----------------------------------------\nClick here to add new ROMS!",
 	'lbl_meta_webservice_meta_get' =>
@@ -66,7 +66,7 @@ $i18n['menu'] = array(
 		"Add your data to eccdb (Internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
-		"Shell operations",
+		"File operations",
 	'lbl_shellop_browse_dir' =>
 		"Browse ROM directory",
 	'lbl_shellop_file_rename' =>
@@ -90,6 +90,12 @@ $i18n['menu'] = array(
 		"Remove META from DB",
 	'lbl_rating_unset' =>
 		"Unset ratings",
-		
+	
+	/* 0.9 FYEO 9*/
+	'lbl_roms_remove_dup_preview%s' =>
+		"Find duplicate ROMS",
+	/* 0.9 FYEO 9*/
+	'lbl_roms_dup' =>
+		"Duplicate ROMS",
 );
 ?>

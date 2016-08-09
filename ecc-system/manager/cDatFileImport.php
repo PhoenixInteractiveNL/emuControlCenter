@@ -9,6 +9,8 @@ class DatFileImport extends App {
 	
 	private $dat_filename = false;
 	
+	private $log = '';
+	
 	public function __construct($eccident=false, $status_obj, $ini)
 	{
 		$this->eccident = $eccident;
@@ -24,6 +26,10 @@ class DatFileImport extends App {
 	{
 		$this->dat_filename = $filename;
 		$this->find_dat_type();
+	}
+	
+	public function getLog() {
+		return $this->log;
 	}
 	
 	public function find_dat_type()
@@ -53,6 +59,17 @@ class DatFileImport extends App {
 			isset($dat_header['ECC']['DAT-TYPE']) &&
 			isset($dat_header['ECC']['DAT-VERSION'])
 		) {
+			
+			#if(LOGGER::$active) {
+				$msg  = "";
+				$msg .= "Import emuControlCenter datfile\r\n";
+				$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
+				$msg .= "ECC-VERSION:".$dat_header['ECC']['ECC-VERSION']."  / DAT-VERSION:".$dat_header['ECC']['DAT-VERSION']."\r\n";
+				$msg .= "FILE:".$this->dat_filename;
+				$this->log .= LOGGER::add('datiecc', $msg, 1);
+				$this->log .= LOGGER::add('datiecc', join("\t", array('ACTION', 'IHAVE', 'ECCIDENT', 'CRC32', 'name')));
+			#}
+			
 			$this->parse_dat_emucontrolcenter($dat_header['ECC']['DAT-VERSION']);
 		}
 		elseif (
@@ -71,6 +88,16 @@ class DatFileImport extends App {
 				$this->status_obj->update_message($message);
 			}
 			elseif ($this->validate_romcenter_format($dat_header['DAT']['VERSION'], $first_game)) {
+				
+				#if(LOGGER::$active) {
+					$msg  = "";
+					$msg .= "Import romcenter datfile\r\n";
+					$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
+					$msg .= "DAT-VERSION:".$dat_header['DAT']['VERSION']."  / AUTHOR:".$dat_header['CREDITS']['AUTHOR'];
+					$this->log .= LOGGER::add('datirc', $msg, 1);
+					$this->log .= LOGGER::add('datirc', join("\t", array('ACTION', 'IHAVE', 'ECCIDENT', 'CRC32', 'name')));
+				#}
+				
 				$this->parse_dat_romcenter($this->dat_filename);
 			}
 			else {
@@ -185,7 +212,6 @@ class DatFileImport extends App {
 		$ret['EMULATOR'] = $ini_data['EMULATOR'];
 		
 		$count_valid = 0;
-
 		$count_total = 0;
 		
 		$rc_status = array();
@@ -332,6 +358,8 @@ class DatFileImport extends App {
 				
 				$count_total++;
 				
+				
+				
 				if ($count_total >= 100) $count_total = 0;
 				
 				// status-area update
@@ -385,7 +413,9 @@ class DatFileImport extends App {
 		else {
 			$cnt_total = count($ret['GAMES']);
 			$cnt_current = 0;
-			foreach ($ret['GAMES'] as $crc32 => $infos) { 
+			$logCntHave = 0;
+			
+			foreach ($ret['GAMES'] as $crc32 => $infos) {
 				
 				while (gtk::events_pending()) gtk::main_iteration();
 				
@@ -427,6 +457,8 @@ class DatFileImport extends App {
 					#print $q."\n";
 					$hdl = $this->dbms->query($q);
 					$id = $res['id'];
+					
+					$log = 'U';
 				}
 				else {
 					
@@ -476,6 +508,8 @@ class DatFileImport extends App {
 					
 					$hdl = $this->dbms->query($q);
 					$id = $this->dbms->lastInsertRowid();
+					
+					$log = 'A';
 				}
 				
 				// process languages
@@ -501,6 +535,13 @@ class DatFileImport extends App {
 				$this->status_obj->update_message($message);
 				if ($this->status_obj->is_canceled()) return false;
 				// --------------------
+
+				#if(LOGGER::$active) {
+					$iHave = $this->fileAvailable($infos['ECCIDENT'], $infos['CRC32']);
+					if ($iHave) $logCntHave++;
+					$this->log .= LOGGER::add('datirc', join("\t", array($log, (int)$iHave, $infos['ECCIDENT'], $infos['CRC32'], $infos['NAME'])));
+				#}
+				
 			}
 			// ---------------
 			// ALL DONE
@@ -510,22 +551,35 @@ class DatFileImport extends App {
 			$message  = "Importing Romcenter-DAT!\n";
 			$message  = "from Dat-File (".basename($this->dat_filename).") for\n";
 			$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.") DONE! :-)\n\n";
-			$message .= "Statistics:\n";
+			$stats = "Statistics:\n";
 			if (isset($rc_status['EXT_ADDED'])) {
 				$msg_ext_added = array();
 				foreach ($rc_status['EXT_ADDED'] as $msg_ext => $msg_ext_count) {
 					$msg_ext_added[] = "*.".$msg_ext." (".$msg_ext_count.")";
 				}
-				$message .= "Added by extension: ".implode(", ", $msg_ext_added)."\n";
+				$stats .= "Added by extension: ".implode(", ", $msg_ext_added)."\n";
 			}
 			if (isset($rc_status['EXT_NOT_VALID'])) {
 				$msg_ext_added = array();
 				foreach ($rc_status['EXT_NOT_VALID'] as $msg_ext => $msg_ext_count) {
 					$msg_ext_added[] = "*.".$msg_ext." (".$msg_ext_count.")";
 				}
-				$message .= "Extensions dont match: ".implode("; ", $msg_ext_added)."\n";
+				$stats .= "Extensions dont match: ".implode("; ", $msg_ext_added)."\n";
 			}
-			if (isset($rc_status['CORRUPT'])) $message .= "Corrupt entries in DAT: ".$rc_status['CORRUPT'];
+			if (isset($rc_status['CORRUPT'])) $stats .= "Corrupt entries in DAT: ".$rc_status['CORRUPT'];
+			
+			$message .= $stats;
+			
+			
+			#if(LOGGER::$active) {
+				$msg  = "DONE: RC-Datfile import\r\n";
+				$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
+				$msg .= "--> IHAVE: ".$logCntHave." | DONTHAVE: ".($cnt_current-$logCntHave)." | TOTAL: ".$cnt_current."\r\n";
+				$msg .= "File: ".basename($this->dat_filename)."\r\n";
+				$msg .= "Processed: ".$cnt_current."\r\n";
+				$msg .= $stats;
+				$this->log .= LOGGER::add('datirc', $msg, 2);
+			#}
 			
 			$this->status_obj->update_message($message);
 			if ($this->status_obj->is_canceled()) return false;			
@@ -587,19 +641,23 @@ class DatFileImport extends App {
 		}
 		
 		$cnt_current = 0;
+		$logCntHave = 0;
 		foreach($this->dat['ECC_MEDIA'] as $mdata => $void) {
 			
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$res = explode(";", $mdata);
 			
+			$terminator = false;
 			switch ($version) {
+				case '0.7':
+				case '0.9':
 				case '0.95':
 					$terminator = 21;
-				break;
+					break;
 				case '0.96':
 					$terminator = 23;
-				break;
+					break;
 			}
 
 			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
@@ -659,12 +717,18 @@ class DatFileImport extends App {
 				if ($res = $hdl->fetch(SQLITE_ASSOC)) {
 					$id = $res['id'];
 					$this->update_mdata($id, $data);
-					#print "update\n";
+					$log = 'U';
 				}
 				else {
 					$id = $this->insert_mdata($data);
-					#print "insert\n";
+					$log = 'A';
 				}
+				
+				#if(LOGGER::$active) {
+					$iHave = $this->fileAvailable($data['eccident'], $data['crc32']);
+					if ($iHave) $logCntHave++;
+					$this->log .= LOGGER::add('datiecc', join("\t", array($log, (int)$iHave, $data['eccident'], $data['crc32'], $data['name'])));
+				#}
 				
 				// save images
 				if ($id !== false && $data['languages'] !== false) {
@@ -690,8 +754,26 @@ class DatFileImport extends App {
 			$message .= "Entry $cnt_current of $cnt_total processed\n";
 			$message .= $data['eccident']."\t".$data['name'].chr(13);
 			$this->status_obj->update_message($message);
+			
 			if ($this->status_obj->is_canceled()) return false;
 		}
+		
+		#if(LOGGER::$active) {
+			$msg  = "DONE: emuControlCenter Datfile import\r\n";
+			$msg .= "Platform: ".$this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\r\n";
+			$msg .= "--> IHAVE: ".$logCntHave." | DONTHAVE: ".($cnt_current-$logCntHave)." | TOTAL: ".$cnt_current."\r\n";
+			$msg .= "File: ".basename($this->dat_filename)."\r\n";
+			$msg .= "Processed: ".$cnt_total;
+			$this->log .= LOGGER::add('datiecc', $msg, 2);
+		#}
+		
+	}
+	
+	
+	public function fileAvailable($eccident, $crc32) {
+		$q = "SELECT id FROM fdata WHERE eccident = '".sqlite_escape_string($eccident)."' AND crc32 = '".sqlite_escape_string($crc32)."' LIMIT 1";
+		$hdl = $this->dbms->query($q);
+		return ($res = $hdl->fetch(SQLITE_ASSOC)) ? true : false; 
 	}
 	
 	public function insert_mdata($data)
@@ -745,7 +827,6 @@ class DatFileImport extends App {
 				".sqlite_escape_string($data['storage'])."
 			)
 		";
-		#print $q."\n";
 		$this->dbms->query($q);
 		return $this->dbms->lastInsertRowid();
 	}
@@ -776,7 +857,8 @@ class DatFileImport extends App {
 			creator = '".sqlite_escape_string($data['creator'])."',
 			publisher = '".sqlite_escape_string($data['publisher'])."',
 			storage = ".sqlite_escape_string($data['storage']).",
-			uexport = NULL
+			uexport = NULL,
+			cdate = NULL
 			WHERE
 			id = ".$id."
 		";

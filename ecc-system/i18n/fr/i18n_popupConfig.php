@@ -27,8 +27,6 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_opt_detail_pp' =>
 		"Eléments par page (images)",
 	'lbl_ecc_opt_list_pp' =>
-		"Eléments par page (mode liste)",
-	'lbl_ecc_opt_imagesize' =>
 		"Taille des images",
 	'lbl_ecc_opt_language' =>
 		"Langue",
@@ -92,5 +90,22 @@ $i18n['popupConfig'] = array(
 		"Options",
 	'lbl_dat_opt_namestrip' =>
 		"Effacer les fichiers de données romcenter",
+		
+	/* 0.9 FYEO 3 */
+	'lbl_img_otp_list_hdl' =>
+		"Options - Rom details",
+	'lbl_img_otp_list_imagesize' =>
+		"Imagesize",
+	'lbl_img_otp_list_aspectratio' =>
+		"Aspect ratio",
+	/* 0.9 FYEO 4 */
+	'lbl_img_otp_list_fastrefresh' =>
+		"Fast refresh",
+		
+	/* 0.9 FYEO 9 */
+	'confEccStatusLogCheck' =>
+		"Activate logging",
+	'confEccStatusLogOpen' =>
+		"Show logfiles",
 );
 ?>

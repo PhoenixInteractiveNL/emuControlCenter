@@ -38,6 +38,12 @@ class EccUpdate {
 					$errorVersion = '0.7.1';
 					break;
 				}
+			case $eccDbVersion < '0.8.6':
+				if ($this->updateEccFromConfig('0.8.6')) $this->updateEccDbVersion('0.8.6');
+				else {
+					$errorVersion = '0.8.6';
+					break;
+				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
 		#print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
@@ -73,7 +79,9 @@ class EccUpdate {
 	}
 	
 	private function backupEccDb() {
-		return copy('database/eccdb', 'database/eccdb_bak_'.date("Ymd_His", time()));
+		$backupDir = 'database/backup';
+		if (!is_dir($backupDir)) mkdir($backupDir);
+		return copy('database/eccdb', $backupDir.'/eccdb_'.date("Y-m-d_His", time()));
 	}
 }
 ?>

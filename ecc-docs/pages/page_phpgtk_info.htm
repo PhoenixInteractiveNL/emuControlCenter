@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>emuControlCenter - Documentation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="title" content="emuControlCenter - emulator rom-management" />
+		<link rel="stylesheet" type="text/css" href="../data/css/structure.css" />
+		<style type="text/css"><!-- ## --></style>
+	</head>
+	<body>
+
+	<div class="content wide">
+		
+		<div class="header"><a href="http://www.camya.com/ecc/" target="_blank">&nbsp;</a></div>
+	
+		<div class="return"><a href="page_ecc_techinfo.htm">&laquo; BACK</a><br /></div>
+		<h1>Info - PHP-GTK</h1>
+		<ul class="level1">
+			<li><h1><font size="1">What is PHP-GTK?</font></h1></li>
+			<li>
+				<br>
+				<span style="font-weight: 400">Personally, I&#39;d call PHP-GTK an 
+				excellent set of classes that can be used to build applications 
+				that contain buttons, windows, toolbars, menus, scroll bars, 
+				database access, lists and more. The team that developed PHP-GTK 
+				defines it as a PHP extension that allows us to easily write 
+				cross-platform GUI based applications. <br>
+				<br>
+				Funnily enough, PHP-GTK was written to prove that PHP could 
+				actually be used to build stuff other that Web pages, and let me 
+				tell you that they&#39;ve succeeded. <br>
+				<br>
+				No doubt you&#39;re familiar with the PHP acronym, but what does GTK 
+				mean? GTK stands for GIMP Tool Kit, and it&#39;s basically just a 
+				set of widgets that we can use to create applications. A widget 
+				is the equivalent of a control (such as a button, list box, 
+				frame or radio button) in &quot;Linux speak&quot;. <br>
+				<br>
+				SITEPOINT BOOKS Build Your Own Database-Driven Website Using PHP 
+				&amp; MySQL <br>
+				By Kevin Yank <br>
+				<br>
+				&quot;Many Websites feel locked into a dry, outdated design because 
+				rewriting those hundreds of HTML files to reflect a new look 
+				would take forever. The solution to these headaches is 
+				database-driven site design.&quot; <br>
+				<br>
+				Download the free sample now! <br>
+				GIMP is an acronym for GNU Image Manipulation Program, and is a 
+				fully featured graphics editing program that runs on Linux. It 
+				has many (if not all) of the features of popular Windows 
+				programs such as Photoshop and Paintshop. It&#39;s the graphics 
+				editor of choice for most Linux users. <br>
+				<br>
+				GTK is actually part of a set of libraries that was written in 
+				C, called GTK+. GTK+ was built up over time and is now a main 
+				part of Gnome, which is a Linux GUI desktop environment. GTK+ 
+				has an object-oriented nature and also includes two other 
+				libraries: <br>
+				<br>
+				GLib: A library of tools that can be used to help developers 
+				create applications with GTK+. <br>
+				<br>
+				GDK: Similar to GDI for Win32, GDK is the standard for GIMP 
+				drawing kit and wraps a set of lower level drawing functions 
+				into classes that make developing applications with GTK+ easier. 
+				If you&#39;re thinking along the lines of MFC for C++ then you&#39;re 
+				making a fair comparison: MFC wraps several controls and hides 
+				the calls to the underlying Windows API&#39;s from the developer. 
+				GDK does the same thing for GTK+. <br>
+				<br>
+				Although GTK is used in many other applications and projects, in 
+				terms of PHP-GTK, it&#39;s an advanced set of classes which can be 
+				referenced to create widgets that we can then manipulate 
+				programmatically. PHP-GTK&#39;s programming style is similar to 
+				event driven programming languages such as Visual Basic and C++, 
+				in that it fires off signals. These signals can be captured and 
+				specific functions (called callback functions) can be defined to 
+				handle them. <br>
+				<br>
+				I know that we haven&#39;t even looked at PHP-GTK yet, but consider 
+				the following PHP code:<br>
+				<br>
+&nbsp;</span></li>
+			<li><h1><font size="1">Code: <br>
+			<br>
+			$button = &amp;new GtkButton(&quot;Click me&quot;); <br>
+			<br>
+			$button-&gt;connect(&quot;clicked&quot;, &quot;buttonClicked&quot;); </font></h1></li>
+			<li>
+				<span style="font-weight: 400"><br>
+				In the code above I&#39;ve instantiated a new GtkButton class. I&#39;ve 
+				then called its connect function passing in two parameters: the 
+				name of the signal to capture (clicked) as well as the name of a 
+				call-back function to execute when this signal is caught (buttonClicked). 
+				This tells PHP-GTK that when the button emits a &quot;clicked&quot; 
+				signal, the buttonClicked function should be called. <br>
+				<br>
+				So if we added a buttonClicked function like this:<br>
+&nbsp;</span></li>
+			<li></li>
+			<li><h1><font size="1">Code: <br>
+			<br>
+			function buttonClicked() <br>
+			{ <br>
+			echo &quot;You clicked the button&quot;; <br>
+			} </font></h1></li>
+			<li>
+				<span style="font-weight: 400"><br>
+				Then &quot;You clicked the button&quot; would be echoed to the screen when 
+				the button was clicked on.<br>
+				<br>
+				That brings me to another point: PHP-GTK apps are run by calling 
+				them up with the normal PHP interpreter. The console window in 
+				which you called the PHP-GTK GUI app sits in the background and 
+				the app sits on top. While the app is running you can still 
+				output to the console window using echo, print, etc. <br>
+				<br>
+				In my opinion this is excellent, because it means you can set a 
+				debug flag and treat the console window as a debug window, 
+				outputting debugging statements while you build your PHP GTK GUI 
+				app. When you&#39;re ready to distribute the app, simply set the 
+				debug flag to false or remove the echo commands. <br>
+				<br>
+				Hopefully now you have a bit of an understanding of what PHP-GTK 
+				is.</span></li>
+		</ul>
+		<div class="return"><a href="page_ecc_techinfo.htm">&laquo; BACK</a><br /></div>
+		<div class="footer">(c) 2007 <a href="http://www.camya.com/ecc/">emuControlCenter</a> / design by ecc</div>
+	</div>
+	
+	</body>
+</html>

@@ -1,11 +1,46 @@
+--------------------------------------------------------------------------------
 emuControlCenter - Console/Computer Rom-Manager (Windows)
--------------------------------------------
+--------------------------------------------------------------------------------
+
 emuControlCenter is a start- and searchcenter for various older and newer
 consoles/handhelds/computer games. ecc have extended search functions build in,
 so everything rom every rom-releated metainformation could be searched from
 within ecc. It supports bookmarks, ratings and a history for roms. Also
 integrated is update mechanism to add/get roms metadata from a
-internet database. (http://www.camya.com/eccdb/)
 
-By A.Scheibel (eccas at camya.com)
+Easy and intuitive!
+emuControlCenter is build for people who want's to play games quick 'n' easy,
+without searching to much, ECC supports images and previews them directy in
+the 'Resultview'. Also there is a 'ImageCenter' build-in for a fullsize preview!
+
+Advanced Datfile-Format
+The emuControlCenter datfiles are containing informations about languages,
+state of the rom, developer and more. This informations could easly transfered
+via ecc-datfiles (plain text files, .csv / .xls (experimental))
+
+romdb - internet database integration
+With emuControlCenter, you can directly add roms to the internet database,
+called 'ecc-romdb'. In the next releases, you can get these informations back
+in 'live' mode from the internet, into your emuControlCenter-installation
+without any datfile!
+
+Gtk Theme-Support
+It's possible to costumize how your ECC looks!, by giving it a Gtk+ 2.0 theme.
+You can browse and download these themes
+
+ZIP-Support
+emuControlCenter can get the checksums directly without unpacking compressed
+files (ZIP). It's also possible to parse one ore more roms from a single ZIP-File! 
+
+--------------------------------------------------------------------------------
+
+WEBSITE:
 http://www.camya.com/ecc/
+
+BOARD/FORUM:
+http://ecc.phoenixinteractive.mine.nu/
+
+AUTHOR:
+Andreas Scheibel (ecc@camya.com)
+
+--------------------------------------------------------------------------------

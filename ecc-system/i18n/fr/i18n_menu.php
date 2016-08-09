@@ -90,6 +90,12 @@ $i18n['menu'] = array(
 		"Supprimer les META-données",
 	'lbl_rating_unset' =>
 		"Supprimer les votes",
-		
+	
+	/* 0.9 FYEO 9*/
+	'lbl_roms_remove_dup_preview%s' =>
+		"Find duplicate ROMS",
+	/* 0.9 FYEO 9*/
+	'lbl_roms_dup' =>
+		"Duplicate ROMS",
 );
 ?>

@@ -13,7 +13,9 @@ class GuiPopFileOperations extends GladeXml {
 	private function prepareGui() {
 		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiPopFileOperations.glade');
 		$this->signal_autoconnect_instance($this);
-		$this->guiFileOperations->set_keep_above(true);
+		
+		$this->guiFileOperations->set_modal(true);
+		#$this->guiFileOperations->set_keep_above(true);
 		$this->guiFileOperations->present();
 	}
 	
@@ -112,6 +114,9 @@ class GuiPopFileOperations extends GladeXml {
     	
     	$oFileOperations = FACTORY::get('manager/FileIO');
     	if ($oFileOperations->copyFile($fileNameSource, $fileNameDestination)) {
+    		
+    		if(LOGGER::$active) LOGGER::add('files', "file copy: ".$fileNameSource." -> ".$fileNameDestination, 0);
+    		
     	    if (FACTORY::get('manager/TreeviewData')->updatePathById($fdataId, $fileNameDestination)) {
     			$this->hideWindow();
     			$this->mainGui->onReloadRecord(false);
@@ -138,6 +143,21 @@ class GuiPopFileOperations extends GladeXml {
     	$oFileOperations = FACTORY::get('manager/FileIO');
     	if ($oFileOperations->deleteFileByFilename($pathSource.DIRECTORY_SEPARATOR.$fileName)) {
     	   	if (FACTORY::get('manager/TreeviewData')->deleteFdataById($fdataId)) {
+				
+    	   		if(LOGGER::$active) LOGGER::add('files', "file remove: ".$pathSource.DIRECTORY_SEPARATOR.$fileName, 0);
+    	   		
+    	   		# remove images from ecc-user folder
+				$removeUserImages = $this->deleteCheckUserImages->get_active();
+		    	if ($removeUserImages) {
+		    		$fileData = FACTORY::get('manager/TreeviewData')->getFdataById($fdataId);
+		    		if ($fileData['eccident'] && $fileData['crc32']) {
+		    			FACTORY::get('manager/Image')->removeUserImageFolder($fileData['eccident'], $fileData['crc32']);
+		    			
+		    			if(LOGGER::$active) LOGGER::add('files', "-> img remove: ".$fileData['eccident']." -> ".$fileData['crc32'], 0);
+		    			
+		    		}
+		    	}
+    	   		
     			$this->hideWindow();
     			$this->mainGui->onReloadRecord(false);
     		}
@@ -170,6 +190,9 @@ class GuiPopFileOperations extends GladeXml {
     	$oFileOperations = FACTORY::get('manager/FileIO');
     	if ($oFileOperations->renameFile($fileNameSource, $fileNameDestination)) {
     		if (FACTORY::get('manager/TreeviewData')->updatePathById($fdataId, $fileNameDestination)) {
+    			
+    			if(LOGGER::$active) LOGGER::add('files', "file rename: ".$fileNameSource." -> ".$fileNameDestination, 0);
+    			
     			$this->hideWindow();
     			$this->mainGui->onReloadRecord(false);
     		}

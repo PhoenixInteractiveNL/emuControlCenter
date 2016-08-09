@@ -45,11 +45,26 @@ class EccParserDataProzessor{
 			*/
 			
 			// F�r jede file_extension daten parsen
+
+			$log = '';
+			
+			$log .= LOGGER::add('romparse', "Search and Parse new romfiles!!!!", 1);
+			$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME', 'PATH', 'PATH_PACK')));
+
+			$cntValid = 0;
+			$cntInvalid = 0;
+			$cntOverall = 0;
+			
 			foreach($this->_file_list as $file_extension => $file_data) {
+				
+				$log .= LOGGER::add('romparse', "Adding roms for $file_extension");
 				
 				$cnt_total = count($file_data);
 				$cnt_current = 0;
+				
 				foreach($file_data as $file_name_info) {
+					
+					
 					
 					while (gtk::events_pending()) gtk::main_iteration();
 					
@@ -72,21 +87,6 @@ class EccParserDataProzessor{
 					else {
 						
 						$out = false;
-						
-//						$parserClassNamePlain = $this->_known_extensions[$file_extension][0];
-//						if (in_array($file_extension, $this->dispatchExtensions)) {
-//							$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
-//							$dispatcher = FACTORY::get($dispatcherClassName);
-//							$dispatchedParser = $dispatcher->getValidParser();
-//							if ($dispatchedParser) $parserClassNamePlain = $dispatchedParser;
-//						}
-//						
-//						$parameter = false;
-//						if (FALSE !== $position = strpos($parserClassNamePlain, "#")) {
-//							$className = substr($parserClassNamePlain, 0, $position);
-//							$parameter = substr($parserClassNamePlain, $position+1);
-//						}
-//						$parser = FACTORY::getStrict('parser/'.$className, $parameter);
 						
 						// Hier beginnt das eigentliche parsen
 						// File operations
@@ -118,12 +118,16 @@ class EccParserDataProzessor{
 						
 						if ($out && $out['FILE_VALID']) {
 							// Db operations
+							$cntValid++;
 							$this->dataParserObj->add_file($out);
+							$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'], $out['FILE_PATH'], $out['FILE_PATH_PACK'])));
+							
 						}
 						else {
+							$cntInvalid++;
 							print "invalid: ".$out['FILE_PATH']."\n";
-
 						}
+						
 						
 						if (!isset($this->_parser_stats_cnt_add[$file_extension])) {
 							$this->_parser_stats_cnt_add[$file_extension] = 0;
@@ -134,6 +138,7 @@ class EccParserDataProzessor{
 					// update statusbar
 					// ------------------
 					$cnt_current++;
+					$cntOverall++;
 					
 					$packed_txt = ($file_name_packed) ? I18N::get('status', 'parse_rom_pbar_file_packed') : "";
 					$current_percent = (float)$cnt_current/$cnt_total;
@@ -149,9 +154,17 @@ class EccParserDataProzessor{
 		else {
 		}
 		
+		$logStats  = '';
+		$logStats .= "Statistics\r\n";
+		$logStats .= "Parsed: ".$cntOverall."\r\n";
+		$logStats .= "Added: ".$cntValid."\r\n";
+		$logStats .= "Invalid: ".$cntInvalid;
+		$log .= LOGGER::add('romparse', $logStats, 2);
+		
 		$detail_header = $this->format_results(true);
 		$this->fileListObj->status_obj->update_message($detail_header);
 		
+		return $log;
 	}
 	
 	private function getParser($file_extension, $fileHandle) {

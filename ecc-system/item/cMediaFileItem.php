@@ -20,7 +20,7 @@ class MediaFileItem extends Item {
 	public $sizeKb = false;
 	public $cdate = 'NULL';
 	
-	protected $_test = array('test1');
+	public $_meta;
 	
 	public function __construct(){}
 	

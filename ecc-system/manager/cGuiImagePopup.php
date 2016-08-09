@@ -1,9 +1,15 @@
 <?
 class GuiImagePopup {
 	
+	private $eccident;
+	private $crc32;
+	
 	private $gui = false;
 	private $oImage;
 	private $imagePosition = 0;
+	private $imageTypes; // contains the given imagetypes as array
+	
+	private $selectedImageType = false;
 	
 	private $imageTank = array();
 	private $mediaInfo = array();
@@ -14,6 +20,12 @@ class GuiImagePopup {
 	
 	private $error = false;
 	
+	private $fileIoManager;
+	
+	private $dropZoneBgColor;
+	private $dropZoneBgColor2;
+	private $dropZoneBgColorSelected;
+	
 	/**
 	 * 
 	 */	
@@ -21,31 +33,215 @@ class GuiImagePopup {
 		if (!$gui_obj) return false;
 		$this->gui = $gui_obj;
 		
-//		$this->oImage = new EccImage();
-		$this->oImage = FACTORY::get('manager/EccImage');
-		
+		$this->fileIoManager = FACTORY::get('manager/FileIO');
+		$this->imageManager = FACTORY::get('manager/Image');
+		$this->iniManager = FACTORY::get('manager/IniFile');
+
+		$this->initEnviroment();
 		$this->connect_signals();
 		$this->twImageInit();
 		$this->imageFit = !$this->gui->ini->getHistoryKey('imageCenterDefaultSize');
-		
 	}
 	
-	public function show($imageTank, $mediaInfo, $pos=0) {
-		$this->imageTank = $imageTank;
+	public function initEnviroment() {
+		# dropzone default background
+		$this->dropZoneBgColor = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_1');
+		if (!$this->dropZoneBgColor) $this->dropZoneBgColor = '#CCDDEE';
+		# dropzone image set background
+		$this->dropZoneBgColor2 = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_2');
+		if (!$this->dropZoneBgColor2) $this->dropZoneBgColor2 = '#DDEEFF';
+		# dropzone selected background
+		$this->dropZoneBgColorSelected = $this->iniManager->getKey('GUI_COLOR', 'option_select_bg_active');
+		if (!$this->dropZoneBgColorSelected) $this->dropZoneBgColorSelected = '#00BB00';
+	}
+	
+	public function updateImages($mediaInfo, $imageType = false){
+		$filePath = dirname($mediaInfo['path']);
+		$nameFile = $this->fileIoManager->get_plain_filename($mediaInfo['path']);
+		$fileExtension = ($mediaInfo['path_pack']) ? $this->fileIoManager->get_ext_form_file($mediaInfo['path_pack']) : $this->fileIoManager->get_ext_form_file($mediaInfo['path']);
+		$nameFilePacked = $mediaInfo['path_pack'];
+		$datName = $mediaInfo['md_name'];
+		
+		$onlyFirstFound = false;
+		$searchNames = array($nameFile, $nameFilePacked, $datName);
+		$imageTank = $this->imageManager->searchForRomImages('SAVED', $this->eccident, $this->crc32, $filePath, $fileExtension, $searchNames, $imageType, $onlyFirstFound);
+		
+		// add selected imagetype to front of the array!
+		if (isset($imageTank[$imageType])) {
+			$this->selectedImageType = $imageType;
+			$imageTank=array($imageType=>$imageTank[$imageType]) + $imageTank;
+		}
+		
+		// quickhack to get an indexed array
+		$this->imageTankFlat = $imageTank;
+		$this->imageTank = array();
+		if (count($imageTank)) {
+			$pos = 0;
+			foreach($imageTank as $type => $path) {
+				$this->imageTank[$pos]['type'] = $type;
+				$this->imageTank[$pos]['path'] = $path;
+				$pos++;
+			}
+		}
+	}
+	
+	public function show($mediaInfo, $imageType) {
+		
+		$this->eccident = ($mediaInfo['fd_eccident']) ? strtolower($mediaInfo['fd_eccident']) : strtolower($mediaInfo['md_eccident']);
+		$this->crc32 = ($mediaInfo['crc32']) ? $mediaInfo['crc32'] : $mediaInfo['md_crc32'];
+		
+		$this->updateImages($mediaInfo, $imageType);
+		
 		$this->mediaInfo = $mediaInfo;
 		
 		$this->eccident = ($this->mediaInfo['md_eccident']) ? $this->mediaInfo['md_eccident'] : $this->mediaInfo['fd_eccident'];
 
-		$this->gui->win_imagePopup->show();	
+		$this->gui->win_imagePopup->show();
 		
-		$this->imagePosition = $pos;
+		// only some rom output!!
+		$name = ($mediaInfo['md_name']) ? $mediaInfo['md_name'] : '???';
+		$title = basename($mediaInfo['path']);
+		$infoString = '<b>Platfom:</b> '.$this->eccident.' | <b>Name:</b> '.htmlspecialchars($name).' | <b>crc32:</b> '.$mediaInfo['crc32'].' | <b>Romfile:</b> '.htmlspecialchars($title).'';
+		$this->gui->mediaCenterInfo->set_markup($infoString);
+		
+		$this->imagePosition = 0;
 		$this->updateImagePosition();
 		$this->twImageFill();
 		$this->updateImage();
 		
 		$this->gui->win_imagePopup->set_keep_above(true);
 		$this->opened_state = true;
+		
+		$this->createImageDataArray();
+		$this->createExtensionTable();
+		
+		
+		
 	}
+
+	private function createImageDataArray() {
+		foreach ($this->gui->image_type as $key => $value) {
+			$split = explode('_', $key);
+			if (isset($split[2])) $this->imageTypes[$split[0]][$split[1]][(int)$split[2]]['pos'] = (int)$split[2];
+			$this->imageTypes[$split[0]][$split[1]][(int)@$split[2]]['label'] = $value;
+			$this->imageTypes[$split[0]][$split[1]][(int)@$split[2]]['key'] = $key;
+		}
+	}
+	
+	private function createExtensionTable() {
+
+		$frameChild = $this->gui->imageTypeSelector->child;
+		if ($frameChild) $this->gui->imageTypeSelector->remove($frameChild);
+		
+		$table = new GtkTable();
+		$table->set_homogeneous(true);
+		$this->gui->imageTypeSelector->add($table);
+		
+		$currentCol = 0;
+		$currentRow = 0;
+		foreach($this->imageTypes as $key => $value) {
+			
+			// set current type label for row			
+			$widged = new GtkLabel();
+			$widged->set_markup(ucfirst($key));
+			$table->attach($widged, $currentCol, $currentCol+1, $currentRow, $currentRow+1, Gtk::EXPAND, Gtk::EXPAND, 0, 0);
+			$currentCol++;
+			
+			// process image-types for current type
+			foreach($value as $key2 => $value2) {
+				foreach($value2 as $key3 => $value3) {
+					
+					// get current label
+					$label = ucfirst($key2);
+					if (isset($value3['pos'])) $label .= ' '.sprintf("%02d", $value3['pos']);
+					
+					$widged = new GtkLabel();
+					$widged->set_markup($label);
+					
+					$bgColor = $this->dropZoneBgColor;
+					if (isset($this->imageTankFlat[$value3['key']])) {
+						$bgColor = ($this->selectedImageType == $value3['key']) ? $this->dropZoneBgColorSelected : $this->dropZoneBgColor2;
+					}
+					
+					$oEvent = new GtkEventBox();
+					$oEvent->set_size_request(50, 21);
+					$oEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($bgColor));
+
+					$oEvent->drag_dest_set(Gtk::DEST_DEFAULT_ALL, array(array('text/uri-list', 0, 0)), Gdk::ACTION_COPY);
+					$oEvent->connect("drag-data-received", array($this, 'onDropDragData'), $value3['key']);
+					
+					$oEvent->connect_simple_after('button-press-event', array($this, 'onItemSelect'), $value3['key']);
+					$oEvent->add($widged);
+					$widged = $oEvent;
+					
+					$table->attach($widged, $currentCol, $currentCol+1, $currentRow, $currentRow+1, Gtk::EXPAND, Gtk::EXPAND, 0, 0);
+					$currentCol++;
+				}
+			}
+			$currentCol = 0;
+			$currentRow++;
+		}
+
+		$table->set_homogeneous(true);
+		$table->set_row_spacings(5);
+		$table->set_col_spacings(5);
+		
+		$this->gui->imageTypeSelector->show_all();
+		
+	}
+
+	public function onDropDragData($widged, $context, $x, $y, $data, $info, $time, $destImageType) {
+		
+		$uriList = explode("\n", $data->data);
+		if (isset($uriList[0]) && $uriList[0]) {
+			
+			$filename = $uriList[0];
+			
+			# hack, because + signs are not urlencoded!!!
+			$filename = str_replace('+', '%2B', $filename);
+			$sourceImagePath = urldecode(trim(str_replace('file:///', '', $filename)));
+			
+			if (file_exists($sourceImagePath)) {
+				
+				$transferModeState = $this->gui->mediaCenterOptRadioCopy->get_active();
+				$transferMode = ($transferModeState) ? 'COPY' : 'MOVE';
+				
+				if ($this->gui->mediaCenterOptConfirm->get_active()) {
+					$title =  "Transfer media to slot";
+					$msg =  "Should i store (".$transferMode.")\n\n".basename($sourceImagePath)."\n\ninto media-slot\n\n".$destImageType." ???";
+					if (!$this->gui->open_window_confirm($title, $msg)) return false;
+				}
+				
+				$this->imageManager = FACTORY::get('manager/Image');
+				if ($sourceImagePath && $this->imageManager->storeUserImage($transferMode, $this->eccident, $this->crc32, $sourceImagePath, $destImageType)) {
+					
+					if(LOGGER::$active) LOGGER::add('images', "img add: ".$this->eccident."\t".$this->crc32."\t".$sourceImagePath, 0);
+					
+					$this->updateImages($this->mediaInfo, $destImageType);
+					$this->twImageFill();
+					$this->createExtensionTable();
+				}
+				if ($this->imageManager->hasErrors()) {
+					$title =  "ERRORS!";
+					$msg = '';
+					$errors = $this->imageManager->getErrors();
+					foreach ($errors as $error) $msg .= $error;
+					if (!$this->gui->open_window_confirm($title, $msg)) return false;
+				}
+			}
+		}
+	}
+	
+	public function onItemSelect($key) {
+		foreach($this->imageTank as $index => $value){
+			if ($value['type'] == $key) {
+				$this->imgPopupTreeSelection->select_path($index);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	public function is_opened() {
 		return $this->opened_state;
@@ -55,6 +251,7 @@ class GuiImagePopup {
 	 * 
 	 */
 	private function connect_signals() {
+		
 		$this->gui->imgPopup_btn_prev->connect('clicked', array($this, 'updateImagePosition'));
 		$this->gui->imgPopup_btn_prev_top->connect('clicked', array($this, 'updateImagePosition'));
 		$this->gui->imgPopup_btn_next->connect('clicked', array($this, 'updateImagePosition'));
@@ -70,6 +267,14 @@ class GuiImagePopup {
 		
 		$this->gui->imgPopup_tree->connect('button-release-event', array($this, 'showContextMenu'));
 		
+		$this->gui->mediaCenterOptBtnFolder->connect_simple('clicked', array($this, 'onOpenImageFolder'));
+		
+		
+	}
+	
+	public function onOpenImageFolder() {
+		$imagePath = $this->imageManager->getUserImageCrc32Folder($this->eccident, $this->crc32);
+		FACTORY::get('manager/Os')->executeProgramDirect($imagePath, 'open');
 	}
 	
 	public function setImageSizeMode($obj) {
@@ -79,48 +284,63 @@ class GuiImagePopup {
 	}
 	
 	private function twImageInit() {
-		$this->imgPopup_model = new GtkListStore(Gtk::TYPE_STRING, GdkPixbuf::gtype, Gtk::TYPE_STRING);
+		$this->imgPopup_model = new GtkListStore(Gtk::TYPE_STRING, GdkPixbuf::gtype, Gtk::TYPE_STRING, Gtk::TYPE_STRING);
 		
 		// set index
-		$rIndex = new GtkCellRendererText();
-		$cIndex = new GtkTreeViewColumn('index', $rIndex, 'text', 0);
+		$rendererText = new GtkCellRendererText();		// set index
+
+		$cIndex = new GtkTreeViewColumn('index', $rendererText, 'text', 0);
 		$cIndex->set_visible(false);
 		
 		// set image
 		$rImage = new GtkCellRendererPixbuf();
 		$cImage = new GtkTreeViewColumn('image', $rImage, 'pixbuf', 1);
 
-		// set index
-		$rImagePath = new GtkCellRendererText();
-		$cImagePath = new GtkTreeViewColumn('imagepath', $rImagePath, 'text', 2);
+		$cImagePath = new GtkTreeViewColumn('imagepath', $rendererText, 'text', 2);
 		$cImagePath->set_visible(false);
+		
+		$cImageType = new GtkTreeViewColumn('imagetype', $rendererText, 'text', 2);
+		$cImageType->set_visible(false);
 		
 		$this->gui->imgPopup_tree->set_model($this->imgPopup_model);
 		$this->gui->imgPopup_tree->append_column($cIndex);
 		$this->gui->imgPopup_tree->append_column($cImage);
 		$this->gui->imgPopup_tree->append_column($cImagePath);
+		$this->gui->imgPopup_tree->append_column($cImageType);
 	}
 	
 	private function twImageFill() {
 		if (!isset($this->imageTank)) return false;
 		$this->imgPopup_model->clear();
-		foreach ($this->imageTank as $index => $imagePath) {
+		
+		foreach ($this->imageTank as $index => $data) {
+			
+			$fileName = $data['path'];
+			if (!file_exists($fileName)) continue;
+			
+			// use thumbnail, if available
+			$imageThumb = $this->imageManager->getImageThumbFile($fileName);
+			$pixbufFile = (file_exists($imageThumb)) ? $imageThumb : $fileName;
+			
+			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($pixbufFile, 80, 60);
+			$this->imgPopup_model->append(array($index, $oPixbuf, $fileName, $data['type']));
+
 			while (gtk::events_pending()) gtk::main_iteration();
-			if (!file_exists($imagePath)) continue;
-			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($imagePath, 80, 60);
-//			if ($oPixbuf !== null) {
-//				$oPixbuf = $oPixbuf->scale_simple(80, 60, Gdk::INTERP_BILINEAR);
-//			}
-			$this->imgPopup_model->append(array($index, $oPixbuf, $imagePath));
 		}
 	}
 	
 	public function twImageSetIndex($tree) {
-		list($m, $iter) = $tree->get_selected();
+		
+		list($model, $iter) = $tree->get_selected();
 		if (!$iter) return false;
-		$this->imagePosition = $m->get_value($iter, 0);
+		$this->imagePosition = $model->get_value($iter, 0);
+		
+		# current image-type
+		$this->selectedImageType = $model->get_value($iter, 3);
+		
 		$this->updateImagePosition();
 		$this->updateImage();
+		$this->createExtensionTable();
 	}
 	
 	public function hidePopup() {
@@ -129,8 +349,10 @@ class GuiImagePopup {
 	}
 	
 	public function updateImagePosition($obj=false) {
+		
 		// get current count
 		$imageCount = count($this->imageTank);
+		if (!$imageCount) return false;
 		
 		// dispatch the buttons
 		if (is_object($obj)) {
@@ -152,9 +374,11 @@ class GuiImagePopup {
 			}
 		}
 		
-		$this->imgPopupTreeSelection->select_path((int)$this->imagePosition);
+		$this->imgPopupTreeSelection->select_path($this->imagePosition);
 		
-		$text = sprintf("<b>Image %s of %s</b>", $this->imagePosition+1, $imageCount);
+		$imageType = $this->imageTank[$this->imagePosition]['type'];
+		
+		$text = sprintf("<b>Image %s of %s (%s)</b>", $this->imagePosition+1, $imageCount, $imageType);
 		$this->gui->imgPopup_pos_state->set_markup($text);
 		
 		
@@ -172,10 +396,14 @@ class GuiImagePopup {
 	/**
 	 * 
 	 */
-	private function updateImage() {
-		if (isset($this->imageTank[$this->imagePosition]) && file_exists($this->imageTank[$this->imagePosition])) {
+	public function updateImage() {
+		
+		$imageCount = count($this->imageTank);
+		if (!$imageCount) $this->gui->imgPopup_image->set_from_pixbuf(new GdkPixbuf(Gdk::COLORSPACE_RGB, false, 8, 1, 1));
+		
+		if (isset($this->imageTank[$this->imagePosition]) && file_exists($this->imageTank[$this->imagePosition]['path'])) {
 			
-			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($this->imageTank[$this->imagePosition]);
+			$oPixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($this->imageTank[$this->imagePosition]['path']);
 
 			// autofit image
 			if ($oPixbuf !== null && $this->imageFit) {
@@ -188,9 +416,10 @@ class GuiImagePopup {
 				// get original image size
 				$imageOriginalWidth = $oPixbuf->get_width();
 				$imageOriginalHeight = $oPixbuf->get_height();
-				
+
 				// calculate new size
 				list($imageNewWidth, $imageNewHeight) = $this->calculateMaxSize($maxViewportWidth, $maxViewportHeight, $imageOriginalWidth, $imageOriginalHeight);
+				
 				// set new size
 				$objImage = $oPixbuf->scale_simple($imageNewWidth, $imageNewHeight, Gdk::INTERP_BILINEAR);
 			}
@@ -200,31 +429,43 @@ class GuiImagePopup {
 			$this->gui->imgPopup_image->set_from_pixbuf($objImage);			
 			
 		}
-		$this->gui->imgPopup_statusbar->push($this->statusbar_context_id, $this->imageTank[$this->imagePosition]);
+	
+		if (isset($this->imageTank[$this->imagePosition]['path'])) $this->gui->imgPopup_statusbar->push($this->statusbar_context_id, $this->imageTank[$this->imagePosition]['path']);
+	}
+	
+	public function getImageTypeFromEccImage($file) {
+		$split = explode('_', basename($this->fileIoManager->get_plain_filename($file)));
+		$imageType = $split[3].'_'.$split[4];
+		if (isset($split[5])) $imageType .= '_'.$split[5];
+		if (isset($this->gui->image_type[$imageType])) return $imageType;
+		return false;
 	}
 	
 	private function calculateMaxSize($maxViewportWidth, $maxViewportHeight, $imageOriginalWidth, $imageOriginalHeight) {
 		$maxPercent =  $maxViewportWidth * 100 / $imageOriginalWidth;
 		$maxHeight = $maxPercent * $imageOriginalHeight / 100;
-
+		$maxWidth = $maxViewportWidth;
+		
+		if ($maxHeight > $maxViewportHeight) {
+			$newMaxPercent = $maxViewportHeight * 100 / $maxHeight;
+			$maxWidth = $newMaxPercent * $maxWidth / 100;
+			$maxHeight = $newMaxPercent * $maxHeight / 100;
+		}
+		
 		$size = array();
-		$size[0] = $maxViewportWidth;
+		$size[0] = $maxWidth;
 		$size[1] = $maxHeight;
 		return $size;
 	}
 	
 	public function showContextMenu($obj, $event) {
-		
-		if ( $event->button == 3) {
-
+		if (!count($this->imageTank)) return false;
+		if ($event->button == 3) {
 			$selection = $obj->get_selection();
 			list($model, $iter) = $selection->get_selected();
-			if ($iter) {
-				$path = $model->get_value($iter, 2);
-			}
+			$path = ($iter) ? $model->get_value($iter, 2) : false;
 
 			$menu = new GtkMenu();
-
 //			$miHeader = new GtkMenuItem('ONLY DUMMY! WILL NOT WORK!');
 //			$menu->append($miHeader);
 //			$menu->append(new GtkSeparatorMenuItem());
@@ -257,31 +498,28 @@ class GuiImagePopup {
 		}
 	}
 	
-	private function removeImage($file) {
-		$title = I18N::get('popup', 'img_remove_title');
-		$msg = sprintf(I18N::get('popup', 'img_remove_msg%s'), $file);
-		if ($this->gui->open_window_confirm($title, $msg)){
-			if($this->oImage->remove($file)) {
-				$this->twImageFill();
-			}
-			else {
-				$title = I18N::get('popup', 'img_remove_error_title');
-				$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), $file);
-				if($this->gui->open_window_info($title, $msg)) return false;
-			}
+	private function removeImage($imageFile) {
+		
+		if ($this->gui->mediaCenterOptConfirm->get_active()) {
+			$title = I18N::get('popup', 'img_remove_title');
+			$msg = sprintf(I18N::get('popup', 'img_remove_msg%s'), basename($imageFile));
+			if (!$this->gui->open_window_confirm($title, $msg)) return false;
+		}
+		
+		if($this->imageManager->removeUserImage($imageFile)) {
+			
+			if(LOGGER::$active) LOGGER::add('images', "img remove: ".$imageFile, 0);
+			
+			$this->updateImages($this->mediaInfo, false);
+			$this->twImageFill();
+			$this->createExtensionTable();
+			$this->updateImage();
+		}
+		else {
+			$title = I18N::get('popup', 'img_remove_error_title');
+			$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), $file);
+			if($this->gui->open_window_info($title, $msg)) return false;
 		}
 	}
-	
-	/*
-	private function saveImage($prefix, $file) {
-		$convertImage = $this->gui->ini->getKey('USER_SWITCHES', 'image_convert_to_jpg');
-		$user_folder_images = $this->ini->getUserFolder($this->eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR, true);
-		if ($user_folder_images===false) return false;
-		$res = $this->oImage->save($this->eccident, $prefix, $file, $convertImage);
-		print "<pre>";
-		print_r($this->mediaInfo);
-		print "</pre>\n";
-	}
-	*/
 }
 ?>

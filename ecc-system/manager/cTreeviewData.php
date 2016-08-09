@@ -133,13 +133,13 @@ class TreeviewData {
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
 		$snip_join_sql = implode(" ", $snip_join);
 
-		$sqlOrderBy[] = "coalesce(md.name, 'ZZZ') ".$order_by;
-		$sqlOrderBy[] = "fd.title ".$order_by;
+		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$order_by;
 		
 		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
 		
 		$q = "
 			SELECT
+			md.crc32 as md_crc32,
 			md.id as md_id,
 			md.eccident as md_eccident,
 			md.name as md_name,
@@ -158,11 +158,9 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
-
 			md.publisher as md_publisher,
 			md.storage as md_storage,
 			md.region as md_region,
-
 			md.cdate as md_cdate,
 			md.uexport as md_uexport,
 			fd.id as id,
@@ -184,7 +182,7 @@ class TreeviewData {
 			". $this->get_sql_limit($limit)."
 		";
 		
-		//print $q."\n";
+		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
 			$ret['data'][$res['id']."|".$res['md_id']] = $res;
@@ -268,13 +266,13 @@ class TreeviewData {
 		// language
 		$snipplet_language_join = ($language) ? " left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
 		
-		$sqlOrderBy[] = "coalesce(md.name, 'ZZZ') ".$order_by;
-		$sqlOrderBy[] = "fd.title ".$order_by;
+		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$order_by;
 		
 		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
 		
 		$q = "
 			SELECT
+			md.crc32 as md_crc32,
 			md.id as md_id,
 			md.eccident as md_eccident,
 			md.name as md_name,
@@ -421,6 +419,7 @@ class TreeviewData {
 		
 		$q = "
 			SELECT
+			md.crc32 as md_crc32,
 			md.id as md_id,
 			md.name as md_name,
 			md.info as md_info,
@@ -505,7 +504,7 @@ class TreeviewData {
 	public function addRatingByMdataId($mdataId, $rating)
 	{
 		if (!$mdataId || $rating > 6) return false;
-		$q = "UPDATE mdata set rating = ".(int)$rating.", uexport = NULL WHERE id = ".(int)$mdataId."";
+		$q = "UPDATE mdata set rating = ".(int)$rating.", cdate = ".time().", uexport = NULL WHERE id = ".(int)$mdataId."";
 		$this->dbms->query($q);
 		return true;
 	}
@@ -518,7 +517,7 @@ class TreeviewData {
 	 */
 	public function unsetRatingsByEccident($eccIdent) {
 		$sqlWhere = ($eccIdent) ? " WHERE eccident = '".sqlite_escape_string($eccIdent)."'" : '';
-		$q = "UPDATE mdata SET rating = NULL, uexport = NULL ".$sqlWhere."";
+		$q = "UPDATE mdata SET rating = NULL, cdate = ".time().", uexport = NULL ".$sqlWhere."";
 		$this->dbms->query($q);
 		return true;
 	}
@@ -567,11 +566,15 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 
-	public function get_duplicates_all($eccident) {
+	public function get_duplicates_all($eccident, $remove = false) {
+		
 		$snip_where = array();
 		if ($eccident) $snip_where[] = "eccident='".sqlite_escape_string($eccident)."'";
 		$snip_where[] = "duplicate=1";
 		$sql_snip = implode(" AND ", $snip_where);
+		
+		$removeString = ($remove) ? 'and removed (database only)' : 'your';
+		$msg = LOGGER::add('romparse', "Find $removeString duplicate roms\r\nPlatform: $eccident", 1);
 		
 		$q = "
 			SELECT
@@ -587,14 +590,36 @@ class TreeviewData {
 			eccident";
 		$hdl = $this->dbms->query($q);
 		$out = array();
+		$msgRoms = '';
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			$out[$res['eccident']] = $res['cnt'];
+				
+			$msgRoms .= LOGGER::add('romparse', $res['eccident']." (".$res['cnt'].")");
+			
+			$log = array();
+			$q2 = "select crc32 from fdata where eccident = '".$res['eccident']."' AND duplicate=1 ORDER BY crc32";
+			$hdl2 = $this->dbms->query($q2);
+			$lastEccident = false;
+			while($res2 = $hdl2->fetch(SQLITE_ASSOC)) {
+
+				$msgRoms .= LOGGER::add('romparse', $res2['crc32']);
+				$msgRoms .= LOGGER::add('romparse', "STATE\tCRC32\tTITLE\tPATH");
+				
+				$q3 = "SELECT crc32, title, path, duplicate FROM fdata WHERE eccident='".sqlite_escape_string($res['eccident'])."' AND crc32='".sqlite_escape_string($res2['crc32'])."' ORDER BY duplicate, title ASC";
+				$hdl3 = $this->dbms->query($q3);
+				while($res3 = $hdl3->fetch(SQLITE_ASSOC)) {
+					$state = ($res3['duplicate']) ? '-' : '=';
+					$msgRoms .= LOGGER::add('romparse', $state."\t".$res3['crc32']."\t".$res3['title']."\t".$res3['path']);
+				}
+			}
+		}
+		$msg .= ($msgRoms) ? $msgRoms : 'congratulation - no duplicates found! :-)' ;
+		
+		if ($remove) {
+			$q = "DELETE FROM fdata WHERE ".$sql_snip."";
+			$hdl = $this->dbms->query($q);
 		}
 		
-		$q = "DELETE FROM	fdata WHERE ".$sql_snip."";
-		$hdl = $this->dbms->query($q);
-		
-		return $out;
+		return $msg;
 	}
 	
 	/* ------------------------------------------------------------------------
@@ -895,7 +920,6 @@ class TreeviewData {
 		//$search_like = $this->createSearchSqlLike();
 		if ($sqlLike) $snip_where[] = $sqlLike;
 		
-		
 		$eccIdents = '"'.implode('","', $extension).'"';
 		$snip_where[] = "fd.eccident in (".sqlite_escape_string($eccIdents).")";
 		
@@ -928,7 +952,7 @@ class TreeviewData {
 			".$sql_where."
 			group by fd.eccident
 		";
-		//print $q."\n";
+		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		$ret = array();
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
@@ -1051,6 +1075,14 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 	
+	/**
+	 * change the path in the dataset to a new
+	 * position. used in fileoperations like rename and copy
+	 *
+	 * @param int $fdataId
+	 * @param string $path_destination
+	 * @return bool
+	 */
 	public function updatePathById($fdataId, $path_destination) {
 		
 //		$path_destination = realpath($path_destination);
@@ -1108,6 +1140,25 @@ class TreeviewData {
 		return ($hdl->fetchSingle()) ? true : false;
 	}
 	
+	public function getFdataById($id) {
+		$q = "SELECT * FROM fdata WHERE id = ".(int)$id."";
+		$hdl = $this->dbms->query($q);
+		return $hdl->fetch(SQLITE_ASSOC);
+	}
+	
+	public function getAutoCompleteData($field = false, $onlyHaving = true) {
+		$ret = array();
+		if (!$field || !in_array($field, array('name', 'publisher', 'creator', 'year'))) return $ret;
+		$join = ($onlyHaving) ? "INNER JOIN fdata AS fd ON (fd.eccident=md.eccident AND fd.crc32=md.crc32)" : '';
+		$q="SELECT md.id as id, md.".$field." as ".$field." FROM mdata AS md ".$join." GROUP BY ".$field." ORDER BY ".$field." ASC";
+		#print $q.LF;
+		$hdl = $this->dbms->query($q);
+		while($res = $hdl->fetch(SQLITE_ASSOC)) {
+			if ($res[$field] && $res[$field] !== 'NULL') $ret[$res['id']] = $res[$field];
+		}
+		return $ret;
+		
+	}
 
 }
 

@@ -2,8 +2,11 @@
 define('TAB_EMU', 0);
 define('TAB_ECC', 1);
 define('TAB_DAT', 2);
-define('TAB_STARTUP', 3);
-define('TAB_TOOL', 4);
+define('TAB_IMG', 3);
+define('TAB_GUI', 4);
+
+define('TAB_STARTUP', 5);
+define('TAB_TOOL', 6);
 
 class GuiPopConfig extends GladeXml {
 	
@@ -18,6 +21,8 @@ class GuiPopConfig extends GladeXml {
 
 	private $eccDataInit = false;
 	private $datDataInit = false;
+	private $imgDataInit = false;
+	
 	
 	public function __construct($gui = false) {
 		if ($gui) $this->mainGui = $gui;
@@ -29,14 +34,20 @@ class GuiPopConfig extends GladeXml {
 		if ($eccident) $this->initialEccident = $eccident;
 		
 		switch ($tab) {
-			case 'EMU':
+			case 'EMU': # USED
 				$tab = TAB_EMU;
 			break;
-			case 'ECC':
+			case 'ECC': # USED
 				$tab = TAB_ECC;
 			break;
-			case 'DAT':
+			case 'DAT': # USED
 				$tab = TAB_DAT;
+			break;
+			case 'IMG': # USED
+				$tab = TAB_DAT;
+			break;
+			case 'GUI': # USED
+				$tab = TAB_GUI;
 			break;
 			case 'STARTUP':
 				$tab = TAB_STARTUP;
@@ -96,6 +107,11 @@ class GuiPopConfig extends GladeXml {
 		# get gui!
 		parent::__construct(ECC_BASEDIR.'ecc-system/gui2/guipopupconfig.glade');
 		$this->signal_autoconnect_instance($this);
+		
+		$this->guiPopConfig->set_modal(true);
+		#$this->guiPopConfig->set_keep_above(true);
+		$this->guiPopConfig->present();
+		
 		$this->gui = $this->guiPopConfig;
 		//$this->gui->set_keep_above(true);
 		//$this->gui->set_modal(true);
@@ -119,6 +135,8 @@ class GuiPopConfig extends GladeXml {
 		
 		$this->initEccData();
 		$this->initDatData();
+		$this->initImgData();
+		$this->initGuiData();
 	}
 
 	private function initPlatformTreeview() {
@@ -432,6 +450,8 @@ class GuiPopConfig extends GladeXml {
 		
 		$this->storeEccData();
 		$this->storeDatData();
+		$this->storeImgData();
+		$this->storeGuiData();
 		
 		$newMd5 = md5(print_r($this->globalIni, true));
 		
@@ -532,19 +552,13 @@ class GuiPopConfig extends GladeXml {
 		$this->lbl_ecc_userfolder->set_text(I18N::get('popupConfig', 'lbl_ecc_userfolder'));
 		$this->confEccUserPathButton->set_label(I18N::get('popupConfig', 'lbl_ecc_userfolder_button'));
 		
-		
-			
 		$this->lbl_ecc_otp_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_ecc_otp_hdl').'</b>');
 		$this->lbl_ecc_opt_detail_pp->set_text(I18N::get('popupConfig', 'lbl_ecc_opt_detail_pp'));
 		$this->lbl_ecc_opt_list_pp->set_text(I18N::get('popupConfig', 'lbl_ecc_opt_list_pp'));
-		$this->lbl_ecc_opt_imagesize->set_text(I18N::get('popupConfig', 'lbl_ecc_opt_imagesize'));
 		$this->lbl_ecc_opt_language->set_text(I18N::get('popupConfig', 'lbl_ecc_opt_language'));
 		
-		$this->lbl_ecc_colfont_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_ecc_colfont_hdl').'</b>');
-		$this->lbl_ecc_colfont_font_list->set_text(I18N::get('popupConfig', 'lbl_ecc_colfont_font_list'));
-		$this->cfgEccColorListFont->set_title(I18N::get('popupConfig', 'title_ecc_colfont_font_list_popup'));
-		$this->lbl_ecc_colfont_font_global->set_text(I18N::get('popupConfig', 'lbl_ecc_colfont_font_global'));
-		$this->cfgEccColorListFontGlobal->set_title(I18N::get('popupConfig', 'title_ecc_colfont_font_global'));
+		$this->confEccStatusLogCheck->set_label(I18N::get('popupConfig', 'confEccStatusLogCheck'));
+		$this->confEccStatusLogOpen->set_label(I18N::get('popupConfig', 'confEccStatusLogOpen'));
 		
 		$this->lbl_ecc_startup_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_ecc_startup_hdl').'</b>');
 		$this->cfgEccStartupConf->set_label(I18N::get('popupConfig', 'btn_ecc_startup'));
@@ -563,6 +577,69 @@ class GuiPopConfig extends GladeXml {
 		$selectedLanguage =  $iniManager->getKey('USER_DATA', 'language');
 		$languageId =  array_search($selectedLanguage, $this->languages);
 		$void = new IndexedCombobox($this->confEccLanguage, false, $this->languages, false, $languageId);
+
+		$this->confEccUserPathButton->connect_simple('clicked', array($this, 'onSelectUserPath'));
+		
+		$this->perPage = array(
+			'10',
+			'25',
+			'50',
+			'100',
+			'250',
+			'500',
+			'1000',
+		);
+		$selected =  $iniManager->getKey('USER_SWITCHES', 'show_media_pp');
+		$index =  array_search($selected, $this->perPage);
+		$void = new IndexedCombobox($this->cfgEccDetailPerPage, false, $this->perPage, false, $index);
+		
+		$selected =  $iniManager->getKey('USER_SWITCHES', 'media_perpage_list');
+		$index =  array_search($selected, $this->perPage);
+		$void = new IndexedCombobox($this->cfgEccListPerPage, false, $this->perPage, false, $index);
+
+		$mngrValidator = FACTORY::get('manager/Validator');
+		$eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
+		$this->cfgEccStartupConf->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$eccHelpLocations['ECC_EXE_START'], false, '/config');
+		
+		$logDetails = $iniManager->getKey('USER_SWITCHES', 'log_details');
+		$this->confEccStatusLogCheck->set_active($logDetails);
+		
+		$logFileDir = ECC_BASEDIR.$eccHelpLocations['LOG_DIR'];
+		if (is_dir($logFileDir)) {
+			$this->confEccStatusLogOpen->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $logFileDir, false);
+		}
+		else {
+			$this->confEccStatusLogOpen->set_sensitive(false);
+		}
+	}
+
+			
+	public function storeEccData($hidePopup = true) {
+		
+		# USER_DATA
+		$this->globalIni['USER_DATA']['base_path'] = $this->confEccUserPath->get_text();
+		$this->globalIni['USER_DATA']['language'] = $this->languages[$this->confEccLanguage->get_active_text()];
+
+		# USER_SWITCHES
+		$this->globalIni['USER_SWITCHES']['show_media_pp'] = $this->perPage[$this->cfgEccDetailPerPage->get_active_text()];
+		$this->globalIni['USER_SWITCHES']['media_perpage_list'] = $this->perPage[$this->cfgEccListPerPage->get_active_text()];
+		$this->globalIni['USER_SWITCHES']['log_details'] = $this->confEccStatusLogCheck->get_active();
+
+		
+	}
+	
+	
+	public function initGuiData() {
+		if (!$this->guiDataInit) $this->guiDataInit = true;
+		else return true;
+		
+		$this->lbl_ecc_colfont_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_ecc_colfont_hdl').'</b>');
+		$this->lbl_ecc_colfont_font_list->set_text(I18N::get('popupConfig', 'lbl_ecc_colfont_font_list'));
+		$this->cfgEccColorListFont->set_title(I18N::get('popupConfig', 'title_ecc_colfont_font_list_popup'));
+		#$this->lbl_ecc_colfont_font_global->set_text(I18N::get('popupConfig', 'lbl_ecc_colfont_font_global'));
+		$this->cfgEccColorListFontGlobal->set_title(I18N::get('popupConfig', 'title_ecc_colfont_font_global'));
+		
+		$iniManager = FACTORY::get('manager/IniFile');
 		
 		$colorBg = $iniManager->getKey('GUI_COLOR', 'treeview_color_bg');
 		if (!$colorBg) $colorBg = '#FFFFFF';
@@ -575,6 +652,10 @@ class GuiPopConfig extends GladeXml {
 		$colorBg2 = $iniManager->getKey('GUI_COLOR', 'treeview_color_row2');
 		if (!$colorBg2) $colorBg2 = '#EEEEEE';
 		$this->cfgEccColorListBg2->set_color(GdkColor::parse($colorBg2));			
+
+		$colorBgImages = $iniManager->getKey('GUI_COLOR', 'treeview_color_bg_images');
+		if (!$colorBgImages) $colorBgImages = '#FFFFFF';
+		$this->cfgEccColorListBgImages->set_color(GdkColor::parse($colorBgImages));
 		
 		$colorText = $iniManager->getKey('GUI_COLOR', 'treeview_color_text');
 		if (!$colorText) $colorText = '#000000';
@@ -610,67 +691,33 @@ class GuiPopConfig extends GladeXml {
 		
 		$colorText = $iniManager->getKey('GUI_COLOR', 'option_select_text');
 		if (!$colorText) $colorText = '#000000';
-		$this->cfgEccColorOptSelectText->set_color(GdkColor::parse($colorText));	
-
-		$this->confEccUserPathButton->connect_simple('clicked', array($this, 'onSelectUserPath'));
+		$this->cfgEccColorOptSelectText->set_color(GdkColor::parse($colorText));
 		
-		$this->perPage = array(
-			'10',
-			'25',
-			'50',
-			'100',
-			'250',
-			'500',
-			'1000',
-		);
-		$selected =  $iniManager->getKey('USER_SWITCHES', 'show_media_pp');
-		$index =  array_search($selected, $this->perPage);
-		$void = new IndexedCombobox($this->cfgEccDetailPerPage, false, $this->perPage, false, $index);
 		
-		$selected =  $iniManager->getKey('USER_SWITCHES', 'media_perpage_list');
-		$index =  array_search($selected, $this->perPage);
-		$void = new IndexedCombobox($this->cfgEccListPerPage, false, $this->perPage, false, $index);
-		
-		$this->imageSizes = array(
-			'30x20',
-			'60x40',
-			'120x80',
-			'240x160',
-			'480x320',
-		);
-		$selected =  $iniManager->getKey('USER_SWITCHES', 'image_mainview_size');
-		$index =  array_search($selected, $this->imageSizes);
-		$void = new IndexedCombobox($this->cfgEccDetailImageSize, false, $this->imageSizes, false, $index);
-
-		$mngrValidator = FACTORY::get('manager/Validator');
-		$eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
-		$this->cfgEccStartupConf->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), ECC_BASEDIR.$eccHelpLocations['ECC_EXE_START'], false, '/config');
 	}
-			
-	public function storeEccData($hidePopup = true) {
+	public function storeGuiData($hidePopup = true) {
 		
-		$this->globalIni['USER_DATA']['base_path'] = $this->confEccUserPath->get_text();
-		$this->globalIni['USER_DATA']['language'] = $this->languages[$this->confEccLanguage->get_active_text()];
-
+		# treeview
 		$this->globalIni['GUI_COLOR']['treeview_color_bg'] = $this->getGdkColorHex($this->cfgEccColorListBg->get_color());
 		$this->globalIni['GUI_COLOR']['treeview_color_row1'] = $this->getGdkColorHex($this->cfgEccColorListBg1->get_color());
 		$this->globalIni['GUI_COLOR']['treeview_color_row2'] = $this->getGdkColorHex($this->cfgEccColorListBg2->get_color());
+		$this->globalIni['GUI_COLOR']['treeview_color_bg_images'] = $this->getGdkColorHex($this->cfgEccColorListBgImages->get_color());
+		
+		
 		$this->globalIni['GUI_COLOR']['treeview_color_text'] = $this->getGdkColorHex($this->cfgEccColorListText->get_color());
 		
 		$this->globalIni['GUI_COLOR']['treeview_color_bg_selection'] = $this->getGdkColorHex($this->cfgEccColorListSelectionBg->get_color());
 		$this->globalIni['GUI_COLOR']['treeview_color_fg_selection'] = $this->getGdkColorHex($this->cfgEccColorListSelectionText->get_color());
 		
+		# option
 		$this->globalIni['GUI_COLOR']['option_select_bg_1'] = $this->getGdkColorHex($this->cfgEccColorOptSelectBg1->get_color());
 		$this->globalIni['GUI_COLOR']['option_select_bg_2'] = $this->getGdkColorHex($this->cfgEccColorOptSelectBg2->get_color());
 		$this->globalIni['GUI_COLOR']['option_select_bg_active'] = $this->getGdkColorHex($this->cfgEccColorOptSelectBgActive->get_color());
 		$this->globalIni['GUI_COLOR']['option_select_text'] = $this->getGdkColorHex($this->cfgEccColorOptSelectText->get_color());
-
+		
+		# fonts
 		$this->globalIni['GUI_COLOR']['treeview_font_type'] = $this->cfgEccColorListFont->get_font_name();
 		$this->globalIni['GUI_COLOR']['global_font_type'] = $this->cfgEccColorListFontGlobal->get_font_name();
-		
-		$this->globalIni['USER_SWITCHES']['show_media_pp'] = $this->perPage[$this->cfgEccDetailPerPage->get_active_text()];
-		$this->globalIni['USER_SWITCHES']['media_perpage_list'] = $this->perPage[$this->cfgEccListPerPage->get_active_text()];
-		$this->globalIni['USER_SWITCHES']['image_mainview_size'] = $this->imageSizes[$this->cfgEccDetailImageSize->get_active_text()];
 	}
 	
 	public function getGdkColorHex($colorObject) {
@@ -679,6 +726,40 @@ class GuiPopConfig extends GladeXml {
 		$b = sprintf("%02s", dechex((int)($colorObject->blue * 255 / 65535)));
 		return strtoupper('#'.$r.$g.$b);
 	}
+	
+	
+	public function initImgData() {
+		if (!$this->imgDataInit) $this->imgDataInit = true;
+		else return true;
+		
+		$this->lbl_img_otp_list_hdl->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_hdl'));
+		$this->lbl_img_opt_list_imagesize->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_imagesize'));
+		$this->lbl_img_opt_list_aspectratio->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_aspectratio'));
+		
+		$iniManager = FACTORY::get('manager/IniFile');
+		
+		$this->imageSizes = array(
+			'30x20',
+			'60x40',
+			'120x80',
+			'240x160',
+		);
+		$selected =  $iniManager->getKey('USER_SWITCHES', 'image_mainview_size');
+		$index =  array_search($selected, $this->imageSizes);
+		$void = new IndexedCombobox($this->cfgImgDetailImageSize, false, $this->imageSizes, false, $index);
+		
+		$imgAspectRatio = $iniManager->getKey('USER_SWITCHES', 'image_aspect_ratio');
+		$this->cfgImgDetailImageAspectRatio->set_active($imgAspectRatio);
+		
+		$imgFastRefresh = $iniManager->getKey('USER_SWITCHES', 'image_fast_refresh');
+		$this->cfgImgDetailImageFastRefresh->set_active($imgFastRefresh);
+	}
+	public function storeImgData($hidePopup = true) {
+		$this->globalIni['USER_SWITCHES']['image_mainview_size'] = $this->imageSizes[$this->cfgImgDetailImageSize->get_active_text()];
+		$this->globalIni['USER_SWITCHES']['image_aspect_ratio'] = (int)$this->cfgImgDetailImageAspectRatio->get_active();
+		$this->globalIni['USER_SWITCHES']['image_fast_refresh'] = (int)$this->cfgImgDetailImageFastRefresh->get_active();
+	}
+	
 	
 	public function onSelectUserPath() {
 		$oOs = FACTORY::get('manager/Os');

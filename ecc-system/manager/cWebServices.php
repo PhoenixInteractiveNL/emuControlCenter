@@ -70,7 +70,14 @@ class WebServices {
 		$state['inplace'] = 0;
 		$state['error'] = 0;
 		
-		$message = "Transfert data into eccdb/romdb:\n\n";
+		$message = "Transfert data into eccdb/romdb:";
+		
+		if(LOGGER::$active) {
+			LOGGER::add('romdbadd', $message, 1);
+			LOGGER::add('romdbadd', join("\t", array('STATE', 'ECCIDENT', 'CRC32', 'TITLE')));
+		}
+		
+		$message .= "\n";
 		
 		$position = 1;
 		foreach($urls as $mid => $urlData) {
@@ -104,6 +111,12 @@ class WebServices {
 				$statusProcess = '(ERROR)';
 			}
 			
+			$info = explode('|', $urlData['title']);
+			
+			if(LOGGER::$active) {
+				LOGGER::add('romdbadd', join("\t", array(substr($statusProcess, 1, 1), $info[0], $info[1], $info[2])));
+			}
+			
 			if (!$error) $this->setExportedSession($mid, $sessionKey);
 			
 			usleep(200000);
@@ -117,7 +130,7 @@ class WebServices {
 			$this->status_obj->update_progressbar($percent, $msg);
 			// STATUS BAR MESSAGE
 			// ---------------------------------
-			$message .= "transfer ... ".$urlData['title']." ".$statusProcess."\n";
+			$message .= "transfer... ".$info[2]." (".$info[0]."/".$info[1].") ".$statusProcess."\n";
 			$this->status_obj->update_message($message);
 			// STATUS BAR OBSERVER CANCEL
 			// ---------------------------------
@@ -126,6 +139,11 @@ class WebServices {
 			
 			$position++;
 		}
+		
+		if(LOGGER::$active) {
+			LOGGER::add('romdbadd', "DONE: transfered ".($position-1)." roms", 2);
+		}
+		
 		return $state;
 	}
 	
@@ -158,7 +176,7 @@ class WebServices {
 			$date = ($modData['fd.launchtime']) ? date('Ymd-His', $modData['fd.launchtime']) : 0;
 			$stats = (int)$modData['fd.launchcnt'].'.'.$date;
 			
-			$urlData[$modData['md.id']]['title'] = $title;
+			$urlData[$modData['md.id']]['title'] = $eccident."|".$crc32."|".$title;
 			$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."&pub=".urlencode($publisher)."&sto=".urlencode($storage)."&stat=".urlencode($stats)."";
 		}
 		
@@ -211,7 +229,7 @@ class WebServices {
 	}
 	
 	public function setExportedSession($id, $sessionKey) {
-		$q = 'UPDATE mdata SET uexport="'.sqlite_escape_string($sessionKey).'" WHERE id = '.(int)$id;
+		$q = 'UPDATE mdata SET cdate = NULL, uexport="'.sqlite_escape_string($sessionKey).'" WHERE id = '.(int)$id;
 		$this->dbms->query($q);
 	}
 	

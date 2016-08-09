@@ -198,14 +198,18 @@ class EccParserFileListDir implements FileList {
 		return false;
 	}
 	
-	/*
-	* ermittelt die file-extension, z.b. 
-	* zip, smc, mp3 aus einem pfad
-	* oder file_name
-	*/
-	public function get_file_ext($file_name)
-	{
-		return strtolower(array_pop(explode('.', basename($file_name))));
+//	public function get_file_ext($file_name)
+//	{
+//		return strtolower(array_pop(explode('.', basename($file_name))));
+//	}
+	
+	public function get_file_ext($file) {
+		$extension = '';
+		if (false !== strpos($file, ".")) {
+			$split = explode(".", $file);
+			$extension = array_pop($split);
+		}
+		return strtolower($extension);
 	}
 	
 	/*

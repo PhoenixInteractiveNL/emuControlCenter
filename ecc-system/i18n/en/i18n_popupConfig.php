@@ -28,8 +28,6 @@ $i18n['popupConfig'] = array(
 		"Detail per page",
 	'lbl_ecc_opt_list_pp' =>
 		"List per page",
-	'lbl_ecc_opt_imagesize' =>
-		"Imagesize",
 	'lbl_ecc_opt_language' =>
 		"Language",
 	/* ECC-COLOR&FONTS */
@@ -92,5 +90,22 @@ $i18n['popupConfig'] = array(
 		"Options",
 	'lbl_dat_opt_namestrip' =>
 		"Clean romcenter datfiles",
+		
+	/* 0.9 FYEO 3 */
+	'lbl_img_otp_list_hdl' =>
+		"Options - Rom details",
+	'lbl_img_otp_list_imagesize' =>
+		"Imagesize",
+	'lbl_img_otp_list_aspectratio' =>
+		"Aspect ratio",
+	/* 0.9 FYEO 4 */
+	'lbl_img_otp_list_fastrefresh' =>
+		"Fast refresh",
+		
+	/* 0.9 FYEO 9 */
+	'confEccStatusLogCheck' =>
+		"Activate logging",
+	'confEccStatusLogOpen' =>
+		"Show logfiles",
 );
 ?>

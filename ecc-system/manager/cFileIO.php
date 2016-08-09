@@ -9,6 +9,15 @@ class FileIO {
 	*/
 	public function __construct() {}
 	
+	
+	/**
+	 * replace the fileextension of a given file with the replacement!
+	 */
+	public function replaceFileExtension($fileName, $newExtension) {
+		$fileNamePlain = $this->get_plain_filename($fileName);
+		return dirname($fileName).'/'.$fileNamePlain.'.'.$newExtension;
+	}
+	
 	/*
 	* Sucht informationen zu file
 	* ext extension
@@ -280,6 +289,18 @@ class FileIO {
 	
 	public function deleteFileByFilename($fileName) {
 		return (@unlink($fileName));
+	}
+	
+	public function rmdirr($dirName) {
+		if(empty($dirName) || !file_exists($dirName)) return false;
+		$dir = dir($dirName);
+		while($file = $dir->read()) {
+			if($file != '.' && $file != '..') {
+				if(is_dir($dirName.'/'.$file)) $this->rmdirr($dirName.'/'.$file);
+				else @unlink($dirName.'/'.$file);
+			}
+		}
+		@rmdir($dirName.'/'.$file);
 	}
 	
 	/*

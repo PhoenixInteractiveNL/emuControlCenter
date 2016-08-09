@@ -9,33 +9,6 @@ class Item {
 	protected $_errors = array();
 	
 	/**
-	 * magic function - used to support the syntax
-	 * $item->setName('test') and $item->getName()
-	 *
-	 * @param string $function
-	 * @param mixed $param
-	 * @return unknown
-	 */
-	public function __call($function, $param) {
-		assert(is_string($function));
-		
-		print "$function, $param".LF;
-		
-		$type = substr($function, 0, 3);
-		if (!in_array($type, array('set', 'get'))) return false;
-		$variable = strtolower(substr($function, 3));
-		
-		switch ($type) {
-			case 'set':
-				if (isset($this->$variable)) $this->$variable = $param[0];
-				break;
-			case 'get':
-				return $this->$variable;
-				break;
-		}
-	}
-	
-	/**
 	 * Enter description here...
 	 *
 	 * @return unknown
@@ -53,8 +26,8 @@ class Item {
 		print $q;
 		
 		$test = array(
-			'name' => 'testname',
-			'crc32' => 'aaaaaa',
+			'name' => 'aa',
+			'crc32' => 'bb',
 		);
 		
 		return $this->createItemByRow($test);
@@ -135,9 +108,36 @@ class Item {
 	 *
 	 */
 	public function __to_string() {
-		print "<pre>";
-		print_r($this);
-		print "</pre>";
+//		print "<pre>";
+//		print_r($this);
+//		print "</pre>";
+	}
+	
+	/**
+	 * magic function - used to support the syntax
+	 * $item->setName('test') and $item->getName()
+	 *
+	 * @param string $function
+	 * @param mixed $param
+	 * @return unknown
+	 */
+	public function __call($function, $param) {
+		assert(is_string($function));
+		
+		print "$function, $param".LF;
+		
+		$type = substr($function, 0, 3);
+		if (!in_array($type, array('set', 'get'))) return false;
+		$variable = strtolower(substr($function, 3));
+		
+		switch ($type) {
+			case 'set':
+				if (isset($this->$variable)) $this->$variable = $param[0];
+				break;
+			case 'get':
+				return $this->$variable;
+				break;
+		}
 	}
 }
 ?>

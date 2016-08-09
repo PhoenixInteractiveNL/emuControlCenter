@@ -242,5 +242,9 @@ $i18n['global'] = array(
 		"Bilder",
 	'metadata' =>
 		"Metadaten",
+
+	/* ECC 1.13 build 10 */
+	'media_pager_number' =>
+		"Jump to page:"
 );
 ?>

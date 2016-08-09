@@ -339,6 +339,7 @@ $i18n['popupConfig'] = array(
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
 		"verwende .cue datei",
+		
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
 		"Third Party",
@@ -354,11 +355,43 @@ $i18n['popupConfig'] = array(
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
 		"Entpacke ALLE Dateien inklusive der Unterverzeichnisse",
-
 	'emuUnpackNotelabel' =>
 		'Hinweis: Im Register [Start] kannst du den "unpack" Ordner leeren, wenn ECC beendet wird.',
-
 	'startConfDeleteUnpacked' =>
 		"Leere den ECC 'unpack' Ordner beim Beenden.",
+
+	/* 1.13 BUILD 4-8 */
+	'lbl_ecc_videoplayer' =>	
+	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
+	'lbl_ecc_videoplayer_note' =>	
+	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
+	'eccVideoPlayer_enable' =>
+		"Enable Video Player",
+	'eccVideoPlayer_sound' =>
+		"Enable sound",
+	'eccVideoPlayer_soundvolume' =>
+		"Volume (0-200%) =",
+	'eccVideoPlayer_loop' =>
+		"Loop video",
+	'eccVideoPlayer_resolution' =>
+		"Resolution (pixels): ",
+	'eccVideoPlayer_padding' =>
+		"Padding from rightbottom corner (pixels): ",
+
+	/* 1.13 BUILD 12 */		
+	'lbl_ecc_opt_hdl' =>
+		"Other options",
+	'tabGeneralImageTabOptions' =>
+		"IMAGE TAB in main view options",
+	'tabGeneralImageTabTcuttLabel' =>	
+		"Text cuttoff length (characters):",
+	'tabGeneralParsingOptions' =>	
+		"Parsing options:",
+	'tabGeneralParsingTriggerLabel' =>	
+		"Big file parser trigger size (MB)",
+	'tabGeneralParsingTriggerNoteLabel' =>	
+		"(experimental, PHP could crash if set to high)",
+	'ThemeSelectLabel' =>
+		"Theme:",
 );
 ?>

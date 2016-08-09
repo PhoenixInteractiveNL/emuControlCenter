@@ -5,35 +5,35 @@
 			<Main>
 				<!--  Main Menu Entries -->
 				<Entries>
-					<Item id = "0" name = "&amp;Fil" />
-					<Item id = "1" name = "&amp;Rediger" /> 
-					<Item id = "2" name = "&amp;Søk" /> 
-					<Item id = "3" name = "&amp;Vis" /> 
-					<Item id = "4" name = "&amp;Format" /> 
-					<Item id = "5" name = "&amp;Språk" /> 
-					<Item id = "6" name = "&amp;Oppsett" /> 
-					<Item id = "7" name = "Makro" /> 
-					<Item id = "8" name = "Utfør"/>
+					<Item menuId="file" name = "&amp;Fil" />
+					<Item menuId="edit" name = "&amp;Rediger" /> 
+					<Item menuId="search" name = "&amp;Søk" /> 
+					<Item menuId="view" name = "&amp;Vis" /> 
+					<Item menuId="encoding" name = "&amp;Format" /> 
+					<Item menuId="language" name = "&amp;Språk" /> 
+					<Item menuId="settings" name = "&amp;Oppsett" /> 
+					<Item menuId="macro" name = "Makro" /> 
+					<Item menuId="run" name = "Utfør"/>
 					<Item idName  =  "Plugins" name  =  "Tillegg"/>
 					<Item idName  =  "Window" name  =  "Vindu"/>
 				</Entries>
 
 				<!--  Sub Menu Entries -->
 				<SubEntries>
-				      <Item posX = "1" posY = "9" name = "Kopier til utklippstavle"/>
-                    <Item posX = "1" posY = "10" name = "Innrykk"/>
-                    <Item posX = "1" posY = "11" name = "Konverter til"/>
-                    <Item posX = "1" posY = "12" name = "Linjeoperasjoner"/>
-                    <Item posX = "1" posY = "13" name = "Kommenter/avkommenter"/>
-                    <Item posX = "1" posY = "14" name = "Autofullfør"/>
-                    <Item posX = "2" posY = "11" name = "Merk alle"/>
-                    <Item posX = "2" posY = "12" name = "Avmerk alle"/>
-                    <Item posX = "3" posY = "4" name = "Vis symbol"/>
-                    <Item posX = "3" posY = "5" name = "Forstørr"/>
-                    <Item posX = "3" posY = "6" name = "Flytt/klon gjeldende dokument"/>
+				      <Item subMenuId="edit-copyToClipboard" name = "Kopier til utklippstavle"/>
+                    <Item subMenuId="edit-indent" name = "Innrykk"/>
+                    <Item subMenuId="edit-convertCaseTo" name = "Konverter til"/>
+                    <Item subMenuId="edit-lineOperations" name = "Linjeoperasjoner"/>
+                    <Item subMenuId="edit-comment" name = "Kommenter/avkommenter"/>
+                    <Item subMenuId="edit-autoCompletion" name = "Autofullfør"/>
+                    <Item subMenuId="search-markAll" name = "Merk alle"/>
+                    <Item subMenuId="search-unmarkAll" name = "Avmerk alle"/>
+                    <Item subMenuId="view-showSymbol" name = "Vis symbol"/>
+                    <Item subMenuId="view-zoom" name = "Forstørr"/>
+                    <Item subMenuId="view-moveCloneDocument" name = "Flytt/klon gjeldende dokument"/>
 					
-                    <Item posX = "3" posY = "16" name = "Skjul nivå"/>
-                    <Item posX = "3" posY = "17" name = "Vis nivå"/>
+                    <Item subMenuId="view-collapseLevel" name = "Skjul nivå"/>
+                    <Item subMenuId="view-uncollapseLevel" name = "Vis nivå"/>
 				</SubEntries>
 
 				<!--  all menu item -->
@@ -187,22 +187,22 @@
 			<Splitter> 
 			</Splitter> 
 			<TabBar>
-				<Item order = "0" name = "Lukk meg" /> 
-				<Item order = "1" name = "Lukk alle andre enn meg" /> 
-				<Item order = "2" name = "Lagre meg" /> 
-				<Item order = "3" name = "Lagre meg som ..." /> 
-				<Item order = "4" name = "Skriv ut meg" /> 
-				<Item order = "5" name = "Bytt til annen visning" /> 
-				<Item order = "6" name = "Kopier til et annet vindu" /> 
-				<Item order = "7" name = "Full filsti til utklippsbordet"/>
-				<Item order = "8" name = "Filnavn til utklippsbordet"/>
-				<Item order = "9" name = "Nåværende katalog sti til utklippsbordet"/>
-				<Item order = "10" name = "Gi meg nytt navn"/>
-				<Item order = "11" name = "Slett meg"/>
-				<Item order = "12" name = "Bare les"/>
-				<Item order = "13" name = "Slett skrivebeskyttede flagg"/>
-				<Item order = "14" name = "Gå til ny instans"/>
-				<Item order = "15" name = "Åpen i ny instans"/>
+				<Item CMID = "0" name = "Lukk meg" /> 
+				<Item CMID = "1" name = "Lukk alle andre enn meg" /> 
+				<Item CMID = "2" name = "Lagre meg" /> 
+				<Item CMID = "3" name = "Lagre meg som ..." /> 
+				<Item CMID = "4" name = "Skriv ut meg" /> 
+				<Item CMID = "5" name = "Bytt til annen visning" /> 
+				<Item CMID = "6" name = "Kopier til et annet vindu" /> 
+				<Item CMID = "7" name = "Full filsti til utklippsbordet"/>
+				<Item CMID = "8" name = "Filnavn til utklippsbordet"/>
+				<Item CMID = "9" name = "Nåværende katalog sti til utklippsbordet"/>
+				<Item CMID = "10" name = "Gi meg nytt navn"/>
+				<Item CMID = "11" name = "Slett meg"/>
+				<Item CMID = "12" name = "Bare les"/>
+				<Item CMID = "13" name = "Slett skrivebeskyttede flagg"/>
+				<Item CMID = "14" name = "Gå til ny instans"/>
+				<Item CMID = "15" name = "Åpen i ny instans"/>
 			</TabBar>
 		</Menu>
 

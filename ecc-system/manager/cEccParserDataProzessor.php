@@ -1,6 +1,14 @@
 <?php
-define('SLOW_CRC32_PARSING_FROM', 104857600);
-#define('SLOW_CRC32_PARSING_FROM', 0);
+$iniManager = FACTORY::get('manager/IniFile');
+
+// Variable for trigger size, added 2012-12-07 (ECC v1.13 build 12)
+$ExtParserTriggerSizeMB = $iniManager->getKey('USER_SWITCHES', 'ext_parser_trigger_size');
+if ($ExtParserTriggerSizeMB < 1 or $ExtParserTriggerSizeMB > 99999 or $ExtParserTriggerSizeMB == "" or !is_numeric($ExtParserTriggerSizeMB)) $ExtParserTriggerSizeMB = 100; //default value
+$ExtParserTriggerSize = $ExtParserTriggerSizeMB * 1024 * 1024; // convert MB to bytes
+// --->
+
+
+define('ExtParserTriggerSize', $ExtParserTriggerSize);
 
 class EccParserDataProzessor{
 	
@@ -21,7 +29,7 @@ class EccParserDataProzessor{
 	// statistics
 	private $_parser_stats_cnt_notchanged = array();
 	private $_parser_stats_cnt_add = array();
-	
+
 	public function __construct($dataParserObj, $fileListObj, $dispatchExtensions, $gui)
 	{
 		$this->gui = $gui;
@@ -49,14 +57,13 @@ class EccParserDataProzessor{
 	   return strcmp($a, $b);
 	}
 	
-	public function parse($eccident = false)
-	{
+	public function parse($eccident = false){
 		$log = '';
 		$cntValid = 0;
 		$cntInvalid = 0;
 		$cntUnchanged = 0;
 		$cntOverall = 0;
-		
+
 		if ($this->_file_list) {
 			
 			/*
@@ -112,7 +119,7 @@ class EccParserDataProzessor{
 					}
 					else {
 
-						if ($size_fs >= SLOW_CRC32_PARSING_FROM){
+						if ($size_fs >= $ExtParserTriggerSize){
 							$fileSizeMB = round($size_fs/1024/1024, 1)." MB";
 							$fileName = ($file_name_packed) ? basename($file_name_packed) : basename($file_name_direct);
 							$title = I18N::get('popup', 'parse_big_file_found_title');
@@ -252,13 +259,8 @@ class EccParserDataProzessor{
 										unlink($tempFile);
 										
 									}
-									
-
 									break;
 							}
-							
-							
-
 						}
 						else {
 							$fhdl = fopen($file_name_direct, 'rb');

@@ -132,5 +132,9 @@ $i18n['tooltips'] = array(
 		"Ez megnyitja az ECC dokumentációs oldalát az internetböngészõdben.",
 	'mTopHelpAboutTooltip' =>
 		"Ezzel felugrik az ECC névjegy box.",
+
+	/* 1.13 BUILD 8 */
+	'mTopServicesEmuMoviesADTooltip' =>
+		"This will open a window where you can enter your EmuMovies account data to use their services. (registered forum members)",
 );
 ?>

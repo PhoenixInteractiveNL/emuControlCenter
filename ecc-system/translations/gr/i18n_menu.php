@@ -181,10 +181,6 @@ $i18n['menu'] = array(
 	'lbl_meta_edit_top' =>
 		"Επεξεργασία meta",
 
-	/* 0.9.8 FYEO 05 */
-	'lbl_image_inject' =>
-		"Κατέβασμα εικόνων",
-
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
 		"Browse φακέλου εγγράφων",
@@ -201,5 +197,29 @@ $i18n['menu'] = array(
 
 	'lbl_image_platform_export_local' =>
 		"Create platform imagepack (ecc, no-intro, emumovies)",
+		
+	/* 1.13 BUILD 02 */
+	'lbl_emulator' =>
+		"Platform emulators",
+		
+	'lbl_emulator_import_online' =>
+		"Download emulators online (kameleon code needed)",	
+		
+	'lbl_emulator_information' =>
+		"Open info file where to get emulators",
+
+	/* 1.13 BUILD 03 */
+	'lbl_image_platform_import_emumovies' =>
+		"Download platform images online from EmuMovies (forum account needed)",
+
+	/* 1.13 BUILD 04 */
+	'lbl_rom_content' =>
+		"ROM Content/Media",	
+	'lbl_image_inject' =>
+		"Download images online from ICC server (kameleon code needed)",
+	'lbl_rom_video_add' =>
+		"Add videofile",
+	'lbl_rom_video_delete' =>
+		"Delete videofile(s)",	
 );
 ?>

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:es (Spanish)
  * author:	Jarlaxe
- * date:	2012/07/09 
+ * date:	2012/11/10 
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -185,10 +185,6 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Buscar carpeta de Documentos",
 	
-	/* 0.9.8 FYEO 05 */
-	'lbl_image_inject' =>
-		"Descargar imágenes",
-
 	/* 1.12 BUILD 06 */
 	'lbl_image_platform' =>
 		"Imágenes de la plataforma",	
@@ -201,5 +197,29 @@ $i18n['menu'] = array(
 
 	'lbl_image_platform_export_local' =>
 		"Crear un 'imagepack' de esta plataforma (ecc, no-intro, emumovies)",
+		
+	/* 1.13 BUILD 02 */
+	'lbl_emulator' =>
+		"Emuladores de la plataforma",
+		
+	'lbl_emulator_import_online' =>
+		"Descargar emuladores online (necesita código kameleon)",	
+		
+	'lbl_emulator_information' =>
+		"Abrir archivo de información de donde conseguir emuladores",
+
+	/* 1.13 BUILD 03 */
+	'lbl_image_platform_import_emumovies' =>
+		"Descargar imágenes online de la plataforma desde EmuMovies (necesita cuenta en el foro)",
+
+	/* 1.13 BUILD 04 */
+	'lbl_rom_content' =>
+		"ROM Contenido/Medios",	
+	'lbl_image_inject' =>
+		"Descargar imágenes online desde ICC server (necesita código kameleon)",
+	'lbl_rom_video_add' =>
+		"Añadir archivo de video",
+	'lbl_rom_video_delete' =>
+		"Eliminar archivo(s) de video",	
 );
 ?>

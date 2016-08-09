@@ -1,3 +1,11 @@
+v2.2.0.1
+- Added: Better support for multilanguage keyboard layouts in the script.
+- Added: Tooltip on screen when the script is still busy.
+
+v2.2.0.0 (Phoenix)
+- Added: MultiROM support! (META ID needs to have [multi])
+- Added: Roms with SYS value support! (example META ID = [sys7424])
+
 v2.1.0.0 (Phoenix)
 - Fixed: The script can now determine the right memorysetting when the romfile is unpacked to a TEMP folder (using Prginfo).
 - Fixed: Now displays correctly the path to 'Prginfo.exe' when this program is not found.

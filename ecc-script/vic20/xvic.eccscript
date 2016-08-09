@@ -1,15 +1,13 @@
 ; Platform               : Commodore VIC-20
-; Script for             : VICE emulator (xvic.exe) (tested with v2.2.x)
-; Script version         : v2.1.0.0
-; Last changed           : 2012.01.14
-;
+; Script for             : VICE emulator (xvic.exe) (tested with v2.3.x)
+; Script version         : v2.2.0.1
+; Last changed           : 2012.11.06
 ;
 ; Author :  Sebastiaan Ebeltjes (aka Phoenix)
 ;
 ; NOTES:
 ;
-;
-;
+; Nothing yet!
 ;
 ; ==============================================================================
 ; You need to implent this block in every script, this changes the workfolder to
@@ -21,7 +19,6 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-
 ; SET additional variables for script
 Global $VicIni = $eccEmuEmulatorPath & "vice.ini"
 Global $VicCommandline = " "
@@ -94,20 +91,83 @@ Else
 	If StringInStr($eccMetaInfoId, "[8k]") Then $VicCommandline = $VicCommandline & "-memory 8k "
 	If StringInStr($eccMetaInfoId, "[16k]") Then $VicCommandline = $VicCommandline & "-memory 16k "
 	If StringInStr($eccMetaInfoId, "[24k]") Then $VicCommandline = $VicCommandline & "-memory 24k "
+	If StringInStr($eccMetaInfoId, "[Block1,5]") Then $VicCommandline = $VicCommandline & "-memory 1,5 "
 
-	; Settings for catridges (no memory settings needed...?)
-	If StringInStr($eccMetaInfoId, "[a0]") Then $VicCommandline = $VicCommandline & "-cartA "
-	If StringInStr($eccMetaInfoId, "[b0]") Then $VicCommandline = $VicCommandline & "-cartB "
-	If StringInStr($eccMetaInfoId, "[20]") Then $VicCommandline = $VicCommandline & "-cart2 "
-	If StringInStr($eccMetaInfoId, "[40]") Then $VicCommandline = $VicCommandline & "-cart4 "
-	If StringInStr($eccMetaInfoId, "[60]") Then $VicCommandline = $VicCommandline & "-cart6 "
+	If StringInStr($eccMetaInfoId, "[multi]") Then
+		; Settings for MULTI catridges
+		If StringInStr($eccFileEccUnpackedFile, "[A000]") Then $MultiStringAvailable = "[A000]"
+		If StringInStr($eccFileEccUnpackedFile, "[B000]") Then $MultiStringAvailable = "[B000]"
+		If StringInStr($eccFileEccUnpackedFile, "[2000]") Then $MultiStringAvailable = "[2000]"
+		If StringInStr($eccFileEccUnpackedFile, "[4000]") Then $MultiStringAvailable = "[4000]"
+		If StringInStr($eccFileEccUnpackedFile, "[6000]") Then $MultiStringAvailable = "[6000]"
+
+		If StringInStr($eccMetaInfoId, "[a0]") Then
+			Global $RomFile_a0 = StringReplace($eccFileEccUnpackedFile, $MultiStringAvailable, "[A000]")
+			$VicCommandline = $VicCommandline & "-cartA " & Chr(34) & $eccFileEccUnpackedPath & $RomFile_a0 & Chr(34) & " "
+		EndIf
+
+		If StringInStr($eccMetaInfoId, "[b0]") Then
+			Global $RomFile_b0 = StringReplace($eccFileEccUnpackedFile, $MultiStringAvailable, "[B000]")
+			$VicCommandline = $VicCommandline & "-cartB " & Chr(34) & $eccFileEccUnpackedPath & $RomFile_b0 & Chr(34) & " "
+		EndIf
+
+		If StringInStr($eccMetaInfoId, "[20]") Then
+			Global $RomFile_20 = StringReplace($eccFileEccUnpackedFile, $MultiStringAvailable, "[2000]")
+			$VicCommandline = $VicCommandline & "-cart2 " & Chr(34) & $eccFileEccUnpackedPath & $RomFile_20 & Chr(34) & " "
+		EndIf
+
+		If StringInStr($eccMetaInfoId, "[40]") Then
+			Global $RomFile_40 = StringReplace($eccFileEccUnpackedFile, $MultiStringAvailable, "[4000]")
+			$VicCommandline = $VicCommandline & "-cart4 " & Chr(34) & $eccFileEccUnpackedPath & $RomFile_40 & Chr(34) & " "
+		EndIf
+
+		If StringInStr($eccMetaInfoId, "[60]") Then
+			Global $RomFile_60 = StringReplace($eccFileEccUnpackedFile, $MultiStringAvailable, "[6000]")
+			$VicCommandline = $VicCommandline & "-cart6 " & Chr(34) & $eccFileEccUnpackedPath & $RomFile_60 & Chr(34) & " "
+		EndIf
+
+	Else
+		; Settings for SINGLE catridges
+		If StringInStr($eccMetaInfoId, "[a0]") Then $VicCommandline = $VicCommandline & "-cartA "
+		If StringInStr($eccMetaInfoId, "[b0]") Then $VicCommandline = $VicCommandline & "-cartB "
+		If StringInStr($eccMetaInfoId, "[20]") Then $VicCommandline = $VicCommandline & "-cart2 "
+		If StringInStr($eccMetaInfoId, "[40]") Then $VicCommandline = $VicCommandline & "-cart4 "
+		If StringInStr($eccMetaInfoId, "[60]") Then $VicCommandline = $VicCommandline & "-cart6 "
+		$VicCommandline = $VicCommandline & $RomFile
+	EndIf
 EndIf
 
-; Run the rom
-Run($Emulator & " " & $VicCommandline & $RomFile)
+Run($Emulator & " " & $VicCommandline)
+ToolTip("Running script, please wait...", @DesktopWidth/2, @DesktopHeight/2, "XVIC Script", 1, 6)
 
+If StringInStr($eccMetaInfoId, "[sys") Then ;Autoload the ROM
+	;Get the SYS value
+	$SysValueRaw1 = StringSplit($eccMetaInfoId, "[sys", 1)
+	$SysValueRaw2 = StringSplit($SysValueRaw1[2], "]", 1)
+	Global $SysValue = $SysValueRaw2[1]
+
+	AutoItSetOption("SendKeyDownDelay", 300)
+	EmuWindowControl("VICE: VIC20", 0)
+
+	; Load GAME ROM
+	If $eccFileRomExtension = "crt" Then
+		Sleep(4000) ;CRT load faster.
+	Else
+		Sleep(8000)	;PRG (and others?) load slower.
+	EndIf
+
+	Global $KBLayout = GetActiveKeyboardLayout(WinGetHandle(''))
+	If $KBLayout = "0407" Or $KBLayout = "1407" Or $KBLayout = "1007" Or $KBLayout = "807" Then
+		Send("szs" & $SysValue) ;Keyboardsetting for Germany, QWERTZ keyboard layout (Z=Y)
+	Else
+		Send("sys" & $SysValue) ;Keyboardsetting for most users, QWERTY keyboard layout
+	EndIf
+
+	Send("{ENTER}")
+EndIf
+
+ToolTip("")
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT
 ; ------------------------------------------------------------------------------
 Exit
-

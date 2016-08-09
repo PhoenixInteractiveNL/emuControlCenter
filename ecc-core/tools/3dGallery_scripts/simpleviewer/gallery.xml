@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<simpleviewergallery galleryStyle="MODERN" title="SimpleViewer Gallery" textColor="FFFFFF" frameColor="FFFFFF" frameWidth="20" thumbPosition="LEFT" thumbColumns="4" thumbRows="4" showOpenButton="TRUE" showFullscreenButton="TRUE" maxImageWidth="950" maxImageHeight="950" useFlickr="false" flickrUserName="" flickrTags="" languageCode="AUTO" languageList="" imagePath="" thumbPath="">
+<image imageURL="D:\emuControlCenter (DEV)\ecc-user\gen\images\A3\A30EBDB1\ecc_gen_A30EBDB1_ingame_play_01.png" thumbURL="D:\emuControlCenter (DEV)\ecc-user\gen\images\A3\A30EBDB1\ecc_gen_A30EBDB1_ingame_play_01.png" linkURL="http://www.camya.com/ecc" linkTarget="_blank">
+<caption>Ingame Play of  [gen]</caption>
+</image>
+<image imageURL="D:\emuControlCenter (DEV)\ecc-user\gen\images\A3\A30EBDB1\ecc_gen_A30EBDB1_ingame_title.png" thumbURL="D:\emuControlCenter (DEV)\ecc-user\gen\images\A3\A30EBDB1\ecc_gen_A30EBDB1_ingame_title.png" linkURL="http://www.camya.com/ecc" linkTarget="_blank">
+<caption>Ingame Title of  [gen]</caption>
+</image>
+</simpleviewergallery>

@@ -11,23 +11,23 @@
 			<Main>
                 <!-- Entradas de menú principal -->
 				<Entries>
-					<Item id = "0" name = "A&amp;rquivo"/>
-					<Item id = "1" name = "&amp;Editar"/>
-					<Item id = "2" name = "&amp;Buscar"/>
-					<Item id = "3" name = "&amp;Ver"/>
-					<Item id = "4" name = "For&amp;mato"/>
-					<Item id = "5" name = "&amp;Linguaxe"/>
-					<Item id = "6" name = "C&amp;onfigurar"/>
-					<Item id = "7" name = "Macro"/>
-					<Item id = "8" name = "Executar"/>
+					<Item menuId="file" name = "A&amp;rquivo"/>
+					<Item menuId="edit" name = "&amp;Editar"/>
+					<Item menuId="search" name = "&amp;Buscar"/>
+					<Item menuId="view" name = "&amp;Ver"/>
+					<Item menuId="encoding" name = "For&amp;mato"/>
+					<Item menuId="language" name = "&amp;Linguaxe"/>
+					<Item menuId="settings" name = "C&amp;onfigurar"/>
+					<Item menuId="macro" name = "Macro"/>
+					<Item menuId="run" name = "Executar"/>
 					<Item idName = "Plugins" name = "Engadidos"/>
 					<Item idName = "Window" name = "Xanelas"/>
 				</Entries>
              
                 <!-- Entradas de Sub-menú -->
                 <SubEntries>
-                    <Item posX = "3" posY = "16" name = "Encoller nivel"/>
-                    <Item posX = "3" posY = "17" name = "Expandir nivel"/>
+                    <Item subMenuId="view-collapseLevel" name = "Encoller nivel"/>
+                    <Item subMenuId="view-uncollapseLevel" name = "Expandir nivel"/>
                 </SubEntries>
                 
                 <!-- opcións de menú -->
@@ -160,13 +160,13 @@
             <Splitter>
             </Splitter>
             <TabBar>
-                    <Item order = "0" name = "Pechar"/>
-                    <Item order = "1" name = "Pechar todos excepto o actual"/>
-                    <Item order = "2" name = "Gardar"/>
-                    <Item order = "3" name = "Gardar como..."/>
-                    <Item order = "4" name = "Imprimir"/>
-                    <Item order = "5" name = "Abrir noutra vista"/>
-                    <Item order = "6" name = "Clonar noutra vista"/>
+                    <Item CMID = "0" name = "Pechar"/>
+                    <Item CMID = "1" name = "Pechar todos excepto o actual"/>
+                    <Item CMID = "2" name = "Gardar"/>
+                    <Item CMID = "3" name = "Gardar como..."/>
+                    <Item CMID = "4" name = "Imprimir"/>
+                    <Item CMID = "5" name = "Abrir noutra vista"/>
+                    <Item CMID = "6" name = "Clonar noutra vista"/>
             </TabBar>
         </Menu>
         

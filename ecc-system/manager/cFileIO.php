@@ -1,14 +1,6 @@
 <?php
-/*
-*
-*/
 class FileIO {
-	
-	/*
-	*
-	*/
 	public function __construct() {}
-	
 	
 	/**
 	 * replace the fileextension of a given file with the replacement!
@@ -22,7 +14,7 @@ class FileIO {
 	* Sucht informationen zu file
 	* ext extension
 	* name filename ohne extension
-	* size grÃ¶Ãe in byte
+	* size groBe in byte
 	*/	
 	public function ecc_file_get_info($path) {
 		
@@ -36,14 +28,14 @@ class FileIO {
 		// filename
 		$ret['NAME'] = trim($file_name);
 		
-		// filezisz kb
+		// filesize bytes
 		$ret['SIZE'] = FileIO::get_file_size($path, false, 'B');
 		
 		return $ret;
 	}
 	
 	/*
-	* ermittelt die grÃ¶Ãe der datei
+	* ermittelt die groBe der datei
 	*/
 	public function get_file_size($file_direct, $file_packed=false, $size='KB')
 	{
@@ -55,18 +47,19 @@ class FileIO {
 		}
 		
 		switch($size) {
-			// 'KB' kilobytes
-			case 'KB':
+			case 'KB': // 'KB' kilobytes (default)
 				return (integer) ($size_b/1024);
 				break;
 			
-			// 'MB' megabytes
-			case 'MB':
+			case 'MB': // 'MB' megabytes
 				return (integer) ($size_b/1024/1024);
 				break;
-			
-			// default bytes
-			case 'B':
+
+			case 'GB': // 'MB' megabytes
+				return (integer) ($size_b/1024/1024/1024);
+				break;
+				
+			case 'B': // 'B' bytes
 				return (integer) $size_b;
 				break;
 		}
@@ -119,7 +112,7 @@ class FileIO {
 		# fsum cannot parse an file with open filehandle
 		# dont return an valid filehandle here, because the
 		# zips dont need an filehandle!
-		if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
+		if(filesize($tempFile) >= ExtParserTriggerSize){
 			fclose($fhdl);
 			return null;
 		}
@@ -255,7 +248,7 @@ class FileIO {
 		switch($type_result) {
 			
 			// 'DEZ'
-			// gibt den ascii-wert (integer) des strings zurÃ¼ck
+			// gibt den ascii-wert (integer) des strings zuruck
 			case 'DEZ':
 				$out = 0;
 				$data = fread($fhdl, $read_bytes);
@@ -281,21 +274,21 @@ class FileIO {
 	}
 	
 	/*
-	* List die Datei unter berÃ¼cksichtigung eines
+	* List die Datei unter bericksichtigung eines
 	* start und end offsets ein
 	*/	
 	public function ecc_read_file($fhdl, $start_offset=false, $end_offset=false, $file_name=false) {
 		
 		// Beispiel MP3
 		// id3v1 (die letzten 128 bytes im mp3) darf nicht in die
-		// kalkulation der checksumme einflieÃen
+		// kalkulation der checksumme einflieBen
 		// $file_content = FileIO::ecc_read_file($fhdl, 0, -128, $file_name);
 		// liest file von byte 0 bis filesize-128
 		//
 		// Beispiel SNES
-		// Hat manchmal einen 512 kb groÃen Rom-Header, der von
-		// kopierstationen in das rom geschrieben wird. Er ist fÃ¼r die chcksumme nicht
-		// relevant und muÃ ausgelassen werden.
+		// Hat manchmal einen 512 kb groBen Rom-Header, der von
+		// kopierstationen in das rom geschrieben wird. Er ist fur die chcksumme nicht
+		// relevant und muB ausgelassen werden.
 		// $file_content = FileIO::ecc_read_file($fhdl, 512, false, $file_name);
 		// liest datei ab byte 512 bis zum ende der datei.
 		//
@@ -304,7 +297,7 @@ class FileIO {
 		// $file_content = FileIO::ecc_read_file($fhdl, 100, 50, $file_name);
 		
 		// Wenn der file_name gesetzt ist sowie der offset nicht
-		// benÃ¶tigt wird, kann auch direkt eingeladen werden.
+		// benotigt wird, kann auch direkt eingeladen werden.
 		// Das ist performanter
 		if (
 			$file_name !== false &&
@@ -312,22 +305,21 @@ class FileIO {
 			$end_offset === false
 		) {
 			# fastest way to get the data
-			if (filesize($file_name) < SLOW_CRC32_PARSING_FROM) {
+			if (filesize($file_name) < ExtParserTriggerSize) {
 				return file_get_contents($file_name);
 			}
 			else {
 				$handle = fopen($file_name, "rb");
 				$contents = '';
 				$count = 0;
-				$bytesPerRun = SLOW_CRC32_PARSING_FROM/4;
+				$bytesPerRun = ExtParserTriggerSize/4;
 				$bytesTotal = filesize($file_name);
 				$currentFileName = basename($file_name);
 				while(!feof($handle)){
 					$contents .= fread($handle, $bytesPerRun);
 					
 					#$test = fread($handle, $bytesPerRun);
-					#$contents .= substr(trim($test), 0, 10);
-					
+					#$contents .= substr(trim($test), 0, 10);				
 					#file_put_contents('c:/test.cdi', $contents, FILE_APPEND);
 					
 					$bytesTotal -= $bytesPerRun;
@@ -376,16 +368,10 @@ class FileIO {
 		
 	}
 	
-	/*
-	*
-	*/	
 	public function ecc_get_md5_from_string($string) {
 		return strtoupper(md5($string));
 	}
 	
-	/*
-	*
-	*/	
 	public function ecc_get_crc32_from_string($string) {
 		return str_pad(strtoupper(dechex(crc32($string))), 8, '0', STR_PAD_LEFT);
 	}
@@ -398,9 +384,6 @@ class FileIO {
 		return self::ecc_get_crc32_from_string($combinedCrc32String);
 	}
 	
-	/*
-	*
-	*/	
 	public function eccGetCrc32FromFile($fileName) {
 		return str_pad (strtoupper(dechex(crc32(file_get_contents($fileName)))), 8, '0', STR_PAD_LEFT);
 	}
@@ -486,85 +469,62 @@ class FileIO {
 		return iconv('ISO-8859-1', 'UTF-8//TRANSLIT', $string);		
 	}
 	
-	public function getFsumCrc32($filename){
+	public function getExternalCrc32($filename){
+	// Removed FSUM support because the COM object cannot
+	// handle parameters like 'fsum.exe file.rom >crc32.txt'
+	// so i made this AutoIt3 CRC32 wrapper, somewhat slower
+	// but working perfect!, tested with 10GB file, all OK!
 		
 		if(is_dir($filename)) return false;
 		
 		$fileSize = filesize($filename);
-		
 		if(!$fileSize) return false;
 		
-		# configuration
-		$crcGeneratorFile = realpath('../ecc-core/thirdparty/fsum/fsum.exe');
-		if(!$crcGeneratorFile) return false;
-		
-		$crcGeneratorParams = '-crc32';
-		$logFile = realpath('../ecc-core/thirdparty/fsum/').'eccCrc32.chk';
-		
-		# create command for execution
-		#$execCommand = '"'.$crcGeneratorFile.'" '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);
-		$execCommand = '"'.$crcGeneratorFile.'" '.$crcGeneratorParams.' "'.basename($filename).'" > "'.$logFile.'"';
-		
-		# get manager os
-		$mngrOs = FACTORY::getManager('Os');
-		
-		$commandIsExecuted = false; # set true, if command is executed
-		$count = 0; # try counter
-		$crc32 = false; # result
+		$logFileTemp = realpath('../ecc-core/tools/getCRC32.au3');
+		$logFile = str_replace(".au3", ".dat", $logFileTemp);
+
+		$validator = FACTORY::get('manager/Validator');
+		$coreKey = $validator->getEccCoreKey('eccHelpLocations');
+		$AutoitExe = realpath(ECC_DIR.'/'.$coreKey['ECC_EXE_SCRIPT']);
+		$ScriptToRun = realpath(ECC_DIR.'/'.$coreKey['SCRIPT_GETCRC32']);		
+		$objFSO = new COM("Scripting.FileSystemObject"); 
+		$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+		$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+		$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+		$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;	
+	
+		$mngrOs = FACTORY::getManager('Os'); //get manager os
+		$commandIsExecuted = false; // set true, if command is executed
+		$count = 0; // try counter
+		$crc32 = false; // result
 		$error = false;
 		while(true){
-			
-			# first execute the given command
-			# set $commandIsExecuted = true, if executed
-			# then read logfile to get the right crc32
-			if(!$commandIsExecuted){
-				
-				# first remove old logfile!
-				@unlink($logFile); # now remove chk logfile
-				
-				$commandCwdPath = $mngrOs->executeCommand($execCommand, dirname($filename), $returnCwdPath = true);
+			// first execute the given command
+			// set $commandIsExecuted = true, if executed
+			// then read logfile to get the right crc32
+			if(!$commandIsExecuted){			
+				@unlink($logFile); // first remove old logfile!
+				$shell = new COM("WScript.Shell");
+				$shell->run($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' "'.realpath($filename).'"', 0, false);
 				$commandIsExecuted = true;
 			}
 			else{
-				
-				# sleep 0.1 second (100000)
-				$setSleep = 100000;
+				$setSleep = 100000; // sleep 0.1 second (100000)
 				#usleep($setSleep);
 				
 				$count++;
 				
 				# some status informations for gui progress!
-				FACTORY::get('manager/GuiStatus')->update_message('Parsing (fsum) '.basename($filename).' ('.round($fileSize/1024/1024, 1).' MB)... pass '.$count);
+				FACTORY::get('manager/GuiStatus')->update_message('Parsing (external) '.basename($filename).' ('.round($fileSize/1024/1024, 1).' MB)... pass '.$count);
 				while (gtk::events_pending()) gtk::main_iteration();
 				
-				#print "wait for result... $count".chr(13);
+				clearstatcache(); // needed to clear php filesize values
+				if (filesize($logFile) < 8) continue; //AutoIt3 not done yet!, continue loop
 				
-				# read logfile
-				$logFileText = file_get_contents($logFile);
-				
-				# if empty, next try!
-				if(!trim($logFileText)) continue;
-					
-				# logfile contains 4 lines... frist three are comments (;)
-				$data = explode("\n", trim($logFileText));
-				
-				# result contains 5 rows of log-data... otherwise next try!
-				if (count($data) != 5) continue;
-				
-				# all fine now, try to get crc32 from result
-					
-				# get the crc32 from found line 4
-				# fum-format: 7634c61e ?CRC32*romfileBasename.ext
-				$data2 = explode('?', $data[4]);
-				$crc32 = trim($data2[0]);
-				
-				# now remove the logfile!
-				unlink($logFile); # now remove chk logfile
-				
-				# now change back to old location!
+				$logFileText = file_get_contents($logFile); // read logfile
+				$crc32 = substr($logFileText, 0, 8);
+				unlink($logFile); //remove logfile!
 				chdir($commandCwdPath);
-				
-				# all done, return function
 				return strtoupper($crc32);
 			}
 		}

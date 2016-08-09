@@ -181,10 +181,6 @@ $i18n['menu'] = array(
 	'lbl_meta_edit_top' =>
 		"Bewerk meta gegevens",
 
-	/* 0.9.8 FYEO 05 */
-	'lbl_image_inject' =>
-		"Download plaatjes",
-
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
 		"Bekijk documenten folder",
@@ -194,12 +190,36 @@ $i18n['menu'] = array(
 		"Platform plaatjes",	
 
 	'lbl_image_platform_import_online' =>
-		"Importeer platform plaatjes van internet (kameleon code vereist)",	
+		"Download platform plaatjes van internet van ICC (kameleon code vereist)",	
 
 	'lbl_image_platform_import_local' =>
 		"Importeer platform plaatjes vanuit een lokale folder (niet ecc, zoals no-intro)",
 
 	'lbl_image_platform_export_local' =>
 		"Creeer platform plaatjespakket (ecc, no-intro, emumovies)",
+		
+	/* 1.13 BUILD 02 */
+	'lbl_emulator' =>
+		"Platform emulators",
+		
+	'lbl_emulator_import_online' =>
+		"Download emulators van internet (kameleon code nodig)",	
+		
+	'lbl_emulator_information' =>
+		"Open informatiebestand waar emulators te downloaden",
+
+	/* 1.13 BUILD 03 */
+	'lbl_image_platform_import_emumovies' =>
+		"Download platform plaatjes via internet van EmuMovies (forum registratie vereist)",
+
+	/* 1.13 BUILD 04 */
+	'lbl_rom_content' =>
+		"ROM Content/Media",	
+	'lbl_image_inject' =>
+		"Download plaatjes online van de ICC server (kameleon code nodig)",
+	'lbl_rom_video_add' =>
+		"Een videobestand toevoegen",
+	'lbl_rom_video_delete' =>
+		"Videobestand(en) verwijderen",	
 );
 ?>

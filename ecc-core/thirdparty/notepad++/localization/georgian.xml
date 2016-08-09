@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	Georgian localization for Notepad++ 5.9.6.2
-	Last modified 22.dec.2011 by UGLT (Giorgi Maghlakelidze).
+	Georgian localization for Notepad++ 6.1.5
+	Last modified 07.jul.2012 by UGLT (Giorgi Maghlakelidze).
 	Please e-mail errors, suggestions etc. to acidlabz@gmail.com
 -->
 <NotepadPlus>
@@ -10,60 +10,59 @@
 			<Main>
                 <!-- Main Menu Entries -->
                 <Entries>
-                    <Item id="0" name="&amp;ფაილი"/>
-                    <Item id="1" name="&amp;დამუშავება"/>
-                    <Item id="2" name="&amp;ძიება"/>
-                    <Item id="3" name="&amp;ხედი"/>
-                    <Item id="4" name="&amp;კოდირება"/>
-                    <Item id="5" name="&amp;სინტაქსი"/>
-                    <Item id="6" name="&amp;გამართვა"/>
-                    <Item id="7" name="მაკრო"/>
-                    <Item id="8" name="გაშვება"/>
+                    <Item menuId="file" name="&amp;ფაილი"/>
+                    <Item menuId="edit" name="&amp;დამუშავება"/>
+                    <Item menuId="search" name="&amp;ძიება"/>
+                    <Item menuId="view" name="&amp;ხედი"/>
+                    <Item menuId="encoding" name="&amp;კოდირება"/>
+                    <Item menuId="language" name="&amp;სინტაქსი"/>
+                    <Item menuId="settings" name="&amp;გამართვა"/>
+                    <Item menuId="macro" name="მაკრო"/>
+                    <Item menuId="run" name="გაშვება"/>
                     <Item idName="Plugins" name="დანამატები"/>
                     <Item idName="Window" name="ფანჯარა"/>
                 </Entries>
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-					     <Item posX="0" posY="19" name="ახლახანს გახსნილი ფაილები"/> 
-                    <Item posX="1" posY="9"  name="ბუფერში ჩასმა"/>
-                    <Item posX="1" posY="10" name="დაშორება"/>
-                    <Item posX="1" posY="11" name="რეგისტრის გადაყვანა"/>
-                    <Item posX="1" posY="12" name="მოქმედებები სტრიქონებზე"/>
-                    <Item posX="1" posY="13" name="კომენტარი/მოხსნა"/>
-                    <Item posX="1" posY="14" name="ავტო-დასრულება"/>
-                    <Item posX="1" posY="15" name="EOL კონვერსია"/>
-					     <Item posX="1" posY="16" name="მოქმედებები ჰარებზე"/>
-					     <Item posX="1" posY="17" name="განსაკუთრებული ჩასმა"/>
-                    <Item posX="2" posY="16" name="ყველას მონიშვნა"/>
-                    <Item posX="2" posY="17" name="მონიშვნის მოხსნა"/>
-					     <Item posX="2" posY="18" name="გადასვლა ზემოთ"/>
-					     <Item posX="2" posY="19" name="გადასვლა ქვემოთ"/>
-                    <Item posX="2" posY="21" name="სანიშნე"/>
-					     <Item posX="3" posY="4"  name="სიმბოლოს ჩვენება"/>
-                    <Item posX="3" posY="5"  name="მასშტაბი"/>
-                    <Item posX="3" posY="6"  name="მიმდინარე დოკუმენტის გადატანა/კლონირება"/>
-                    <Item posX="3" posY="16" name="დონის გაშლა"/>
-                    <Item posX="3" posY="17" name="დონის აკეცვა"/>
-                    <Item posX="3" posY="21" name="პროექტი"/>
-                    <Item posX="4" posY="5"  name="კოდირებები"/>
-                    <Item posX="4" posY="5"  posZ="0"  name="არაბული"/>
-                    <Item posX="4" posY="5"  posZ="1"  name="ბალტიური"/>
-                    <Item posX="4" posY="5"  posZ="2"  name="კელტური"/>
-                    <Item posX="4" posY="5"  posZ="3"  name="კირილიცა"/>
-                    <Item posX="4" posY="5"  posZ="4"  name="ცენტრალური ევროპული"/>
-                    <Item posX="4" posY="5"  posZ="5"  name="ჩინური"/>
-                    <Item posX="4" posY="5"  posZ="6"  name="აღმოსავლური ევროპული"/>
-                    <Item posX="4" posY="5"  posZ="7"  name="ბერძნული"/>
-                    <Item posX="4" posY="5"  posZ="8"  name="ებრაული"/>
-                    <Item posX="4" posY="5"  posZ="9"  name="იაპონური"/>
-                    <Item posX="4" posY="5"  posZ="10" name="კორეული"/>
-                    <Item posX="4" posY="5"  posZ="11" name="ჩრდილო ევროპული"/>
-                    <Item posX="4" posY="5"  posZ="12" name="თაი"/>
-                    <Item posX="4" posY="5"  posZ="13" name="თურქული"/>
-                    <Item posX="4" posY="5"  posZ="14" name="დასავლურ-ევროპული"/>
-                    <Item posX="4" posY="5"  posZ="15" name="ვიეტნამური"/>
-                    <Item posX="6" posY="4"  name="შემოტანა"/>
+                    <Item subMenuId="edit-copyToClipboard"  name="ბუფერში ჩასმა"/>
+                    <Item subMenuId="edit-indent" name="დაშორება"/>
+                    <Item subMenuId="edit-convertCaseTo" name="რეგისტრის გადაყვანა"/>
+                    <Item subMenuId="edit-lineOperations" name="მოქმედებები სტრიქონებზე"/>
+                    <Item subMenuId="edit-comment" name="კომენტარი/მოხსნა"/>
+                    <Item subMenuId="edit-autoCompletion" name="ავტო-დასრულება"/>
+                    <Item subMenuId="edit-eolConversion" name="EOL კონვერსია"/>
+					     <Item subMenuId="edit-blankOperations" name="მოქმედებები ჰარებზე"/>
+					     <Item subMenuId="edit-pasteSpecial" name="განსაკუთრებული ჩასმა"/>
+                    <Item subMenuId="search-markAll" name="ყველას მონიშვნა"/>
+                    <Item subMenuId="search-unmarkAll" name="მონიშვნის მოხსნა"/>
+					     <Item subMenuId="search-jumpUp" name="გადასვლა ზემოთ"/>
+					     <Item subMenuId="search-jumpDown" name="გადასვლა ქვემოთ"/>
+                    <Item subMenuId="search-bookmark" name="სანიშნე"/>
+					     <Item subMenuId="view-showSymbol"  name="სიმბოლოს ჩვენება"/>
+                    <Item subMenuId="view-zoom"  name="მასშტაბი"/>
+                    <Item subMenuId="view-moveCloneDocument"  name="მიმდინარე დოკუმენტის გადატანა/კლონირება"/>
+                    <Item subMenuId="view-collapseLevel" name="დონის გაშლა"/>
+                    <Item subMenuId="view-uncollapseLevel" name="დონის აკეცვა"/>
+                    <Item subMenuId="view-project" name="პროექტი"/>
+                    <Item subMenuId="encoding-characterSets"  name="კოდირებები"/>
+                    <Item subMenuId="encoding-arabic"  name="არაბული"/>
+                    <Item subMenuId="encoding-baltic"  name="ბალტიური"/>
+                    <Item subMenuId="encoding-celtic"  name="კელტური"/>
+                    <Item subMenuId="encoding-cyrillic"  name="კირილიცა"/>
+                    <Item subMenuId="encoding-centralEuropean"  name="ცენტრალური ევროპული"/>
+                    <Item subMenuId="encoding-chinese"  name="ჩინური"/>
+                    <Item subMenuId="encoding-easternEuropean"  name="აღმოსავლური ევროპული"/>
+                    <Item subMenuId="encoding-greek"  name="ბერძნული"/>
+                    <Item subMenuId="encoding-hebrew"  name="ებრაული"/>
+                    <Item subMenuId="encoding-japanese"  name="იაპონური"/>
+                    <Item subMenuId="encoding-korean" name="კორეული"/>
+                    <Item subMenuId="encoding-northEuropean" name="ჩრდილო ევროპული"/>
+                    <Item subMenuId="encoding-thai" name="თაი"/>
+                    <Item subMenuId="encoding-turkish" name="თურქული"/>
+                    <Item subMenuId="encoding-westernEuropean" name="დასავლურ-ევროპული"/>
+                    <Item subMenuId="encoding-vietnamese" name="ვიეტნამური"/>
+                    <Item subMenuId="settings-import"  name="შემოტანა"/>
                 </SubEntries>
 
                 <!-- all menu item -->
@@ -204,7 +203,7 @@
                     <Item id="44035" name="ვერტიკალური გადახვევის სინქრონიზება"/>
                     <Item id="44036" name="ჰორიზონტალური გადახვევის სინქრონიზება"/>
                     <Item id="44041" name="გადატანის სიმბოლოს ჩვენება"/>
-					     <Item id="44049" name="ფაილის სტატისტიკა..."/>
+					     <Item id="44049" name="სტატისტიკა..."/>
                     <Item id="44072" name="სხვა ხედზე ფოკუსირება"/>
                     <Item id="44081" name="საპროექტო პანელი 1"/>
 					     <Item id="44082" name="საპროექტო პანელი 2"/>
@@ -251,8 +250,8 @@
                     <Item id="44042" name="ხაზების დამალვა"/>
                     <Item id="42040" name="ყველა ახლახან გამოყენებული ფაილის გახსნა"/>
                     <Item id="42041" name="ახლახან გამოყენებული ფაილების სიის გაწმენდა"/>
-					     <Item id="48016" name="მალსახმოვის ჩასწორება/მაკროს წაშლა..."/>
-						  <Item id="48017" name="მალსახმოვის ჩასწორება/ბრძანების წაშლა..."/>
+					     <Item id="48016" name="მალსახმობის ჩასწორება/მაკროს წაშლა..."/>
+						  <Item id="48017" name="მალსახმობის ჩასწორება/ბრძანების წაშლა..."/>
 						  <Item id="48018" name="კონტექსტური მენიუს დამუშავება"/>
                     <Item id="46019" name="MS INI ფაილი"/>
                     <Item id="46015" name="MS-DOS სტილი"/>
@@ -263,27 +262,28 @@
             <Splitter>
             </Splitter>
             <TabBar>
-                    <Item order="0" name="დახურვა"/>
-                    <Item order="1" name="ყველას დახურვა ამის *გარდა*"/>
-                    <Item order="2" name="შენახვა"/>
-                    <Item order="3" name="შენახვა როგორც..."/>
-                    <Item order="4" name="ამობეჭდვა"/>
-                    <Item order="5" name="გადატანა სხვა ხედში"/>
-                    <Item order="6" name="კლონირება სხვა ხედში"/>
-                    <Item order="7" name="ფაილის გზა ბუფერში"/>
-                    <Item order="8" name="ფაილის სახელი ბუფერში"/>
-                    <Item order="9" name="მიმდინარე საქაღალდის გზა ბუფერში"/>
-                    <Item order="10" name="გადარქმევა"/>
-                    <Item order="11" name="წაშლა"/>
-                    <Item order="12" name="მხოლოდ-წაკითხვადი"/>
-                    <Item order="13" name="მხოლოდ-წაკითხვადის მოხსნა"/>
-                    <Item order="14" name="გადატანა ახალ ფანჯარაში"/>
-                    <Item order="15" name="გახსნა ახალ ფანჯარაში"/>
+                    <Item CMID="0" name="დახურვა"/>
+                    <Item CMID="1" name="ყველას დახურვა ამის *გარდა*"/>
+                    <Item CMID="2" name="შენახვა"/>
+                    <Item CMID="3" name="შენახვა როგორც..."/>
+                    <Item CMID="4" name="ამობეჭდვა"/>
+                    <Item CMID="5" name="გადატანა სხვა ხედში"/>
+                    <Item CMID="6" name="კლონირება სხვა ხედში"/>
+                    <Item CMID="7" name="ფაილის გზა ბუფერში"/>
+                    <Item CMID="8" name="ფაილის სახელი ბუფერში"/>
+                    <Item CMID="9" name="მიმდინარე საქაღალდის გზა ბუფერში"/>
+                    <Item CMID="10" name="გადარქმევა"/>
+                    <Item CMID="11" name="წაშლა"/>
+                    <Item CMID="12" name="მხოლოდ-წაკითხვადი"/>
+                    <Item CMID="13" name="მხოლოდ-წაკითხვადის მოხსნა"/>
+                    <Item CMID="14" name="გადატანა ახალ ფანჯარაში"/>
+                    <Item CMID="15" name="გახსნა ახალ ფანჯარაში"/>
+						  <Item CMID="16" name="განახლება"/>
             </TabBar>
         </Menu>
         
         <Dialog>
-            <Find title="" titleFind="ძიება" titleReplace="ჩანაცვლება" titleFindInFiles="ძიება ფაილებში">
+            <Find title="" titleFind="ძიება" titleReplace="ჩანაცვლება" titleFindInFiles="ძიება ფაილებში" titleMark="გამოყოფა">
                 <Item id="1"    name="შემდეგის ძიება"/>
                 <Item id="2"    name="დახურვა"/>
                 <Item id="1620" name="საძებნი: "/>
@@ -454,7 +454,7 @@
                     
                     <Item id="6121" name="მენიუს პანელი"/>
                     <Item id="6122" name="დამალვა (გადართვისთვის Alt ან F10)"/>
-                    <Item id="6123" name="ლოკალიზაცია"/>
+                    <Item id="6123" name="ენის არჩევა"/>
 					<Item id="6125" name="გახსნილი ფაილების ჩამონათვალი"/>
 					<Item id="6126" name="ჩვენება"/>
                 </Global>
@@ -579,7 +579,6 @@
                     <Item id="6114" name="გამოყენება"/>
                     <Item id="6115" name="ავტო-დაშორება"/>
                     <Item id="6117" name="გამოიყენე MRU ქცევები"/>
-                    
                 </MISC>
                
 					<Backup title="ასლები/ავტო-დასრულება">
@@ -650,6 +649,9 @@
 			<FileLockedWarning title="შენახვა ჩაიშალა" message="შეამოწმეთ, ხომ არ იყენბს რაიმე სხვა პროგრამა მიმდინარე ფაილს."/>
 			<FileAlreadyOpenedInNpp title="" message="ეს ფაილი უკვე გახსნილია Notepad++'ში."/>
 			<DeleteFileFailed title="ფაილის წაშლა" message="ფაილის წაშლა ჩაიშალა"/>
+		
+		<!-- $INT_REPLACE$ is a place holder, don't translate it -->
+			<NbFileToOpenImportantWarning title="გასახსნელად გადაცემულია მეტისმეტად ბევრი ფაილი" message="გაიხსნება $INT_REPLACE$ ფაილი.\rნამდვილად გსურთ გახსნათ ისინი?"/>
 		</MessageBox>
 		<ProjectManager>
 			<PanelTitle name="პროექტი"/>
@@ -676,18 +678,24 @@
 					<Item id="3113" name="ფაილის დამატება..."/>
 					<Item id="3117" name="ყველა ფაილი საქაღალდიდან..."/>
 					<Item id="3114" name="მოშორება"/>
+					<Item id="3118" name="აწევა"/>
+					<Item id="3119" name="დაწევა"/>
 				</ProjectMenu>
 				<FolderMenu>
 					<Item id="3111" name="გადარქმევა"/>
 					<Item id="3112" name="საქაღალდის დამატება"/>
 					<Item id="3113" name="ფაილის დამატება..."/>
 					<Item id="3117" name="ყველა ფაილი საქაღალდიდან..."/>
-					<Item id="3114" name="Remove"/>
+					<Item id="3114" name="მოშორება"/>
+					<Item id="3118" name="აწევა"/>
+					<Item id="3119" name="დაწევა"/>
 				</FolderMenu>
 				<FileMenu>
 					<Item id="3111" name="გადარქმევა"/>
 					<Item id="3114" name="მოშორება"/>
 					<Item id="3116" name="ფაილის მდებარეობის შეცვლა"/>
+					<Item id="3118" name="აწევა"/>
+					<Item id="3119" name="დაწევა"/>
 				</FileMenu>
 			</Menus>
 		</ProjectManager>

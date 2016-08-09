@@ -77,8 +77,7 @@ class TreeviewPager {
 			if ($this->_res_offset < 0 ) {
 				$this->_res_offset = 0;
 			}
-		}
-		
+		}	
 		return $this;
 	}
 	
@@ -99,8 +98,34 @@ class TreeviewPager {
 		$this->_pfirst = false;
 		
 		$this->_p = $this->_pt;
-		$this->_res_offset = ($this->_pp*$this->_p)-$this->_pp;
+		$this->_res_offset = ($this->_pp*$this->_pt)-$this->_pp;
 		
+		return $this;
+	}
+	
+	// Extra function to jump to a page, added 2012-11-19
+	public function page($page)
+	{
+		$this->_p = 1;
+	
+		if ($page >= $this->_pt) {
+			$this->_plast = true;
+			$this->_pfirst = false;
+			$this->_p = $this->_pt; //Jump to LAST page if number > max pages
+		}	
+		elseif ($page <= 1) {
+			$this->_plast = false;
+			$this->_pfirst = true;
+			$this->_p = 1;  //Jump to FIRST page if number <= 0
+		}
+		else {
+			$this->_plast = false;
+			$this->_pfirst = false;
+			$this->_p = $page; //Jump TO pagenumber
+		}
+		
+		$this->_res_offset = ($this->_pp*$this->_p)-$this->_pp;
+	
 		return $this;
 	}
 	

@@ -42,7 +42,7 @@ class FileParserMp3 implements FileParser {
 		
 		$ret['FILE_MD5'] = NULL;
 		
-		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
+		if (filesize($file_name) >= ExtParserTriggerSize) {
 			$ret['FILE_VALID'] = false;
 			$ret['FILE_CRC32'] = false;	
 		}

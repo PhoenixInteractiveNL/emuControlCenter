@@ -283,7 +283,7 @@ $i18n['popupConfig'] = array(
 	
 	/* 0.9.7 WIP 01 */
 	'confEccSilentParsing' =>
-		"ROM toevoegen in achtergrons (geen meldingen)",
+		"ROM toevoegen in achtergrond (geen meldingen)",
 		
 	'emuAssignGlobalEnableEccScript' =>
 		"activeer eccScript",
@@ -334,7 +334,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"gebruik .cue bestand",
+		"gebruik .cue bestand wanneer aanwezig",
 
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
@@ -351,11 +351,43 @@ $i18n['popupConfig'] = array(
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
 		"Alle bestanden uitpakken met subfolders",
-
 	'emuUnpackNotelabel' =>
 		'Ps. in de TAB [start] kun je tijdelijke bestanden laten verwijderen als ECC gesloten wordt',
-
 	'startConfDeleteUnpacked' =>
 		"Maak folder met tijdelijke bestanden leeg bij afsluiten.",
+
+	/* 1.13 BUILD 4-8 */
+	'lbl_ecc_videoplayer' =>	
+	"ECC Video Player gebruikt VLC player deze moet je installeren!, download @ http://www.videolan.org/vlc",
+	'lbl_ecc_videoplayer_note' =>	
+	"LET OP: 1) Gebruik VideoLAN VLC v2.0.4+  2) Installeer het ActiveX component!",
+	'eccVideoPlayer_enable' =>
+		"Video Player aanzetten",
+	'eccVideoPlayer_sound' =>
+		"Geluid inschakelen",
+	'eccVideoPlayer_soundvolume' =>
+		"Volume (0-200%) =",		
+	'eccVideoPlayer_loop' =>
+		"Video herhalen",
+	'eccVideoPlayer_resolution' =>
+		"Resolutie (pixels): ",
+	'eccVideoPlayer_padding' =>
+		"Afstand van rechter onderhoek (pixels): ",
+
+	/* 1.13 BUILD 12 */		
+	'lbl_ecc_opt_hdl' =>
+		"Other options",
+	'tabGeneralImageTabOptions' =>
+		"IMAGE TAB in main view options",
+	'tabGeneralImageTabTcuttLabel' =>	
+		"Text cuttoff length (characters):",
+	'tabGeneralParsingOptions' =>	
+		"Parsing options:",
+	'tabGeneralParsingTriggerLabel' =>	
+		"Big file parser trigger size (MB)",
+	'tabGeneralParsingTriggerNoteLabel' =>	
+		"(experimental, PHP could crash if set to high)",
+	'ThemeSelectLabel' =>
+		"Theme:",
 );
 ?>

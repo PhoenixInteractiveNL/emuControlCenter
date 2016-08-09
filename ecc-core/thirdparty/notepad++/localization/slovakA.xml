@@ -5,23 +5,23 @@
 			<Main>
                 <!-- Main Menu Entries -->
 				<Entries>
-					<Item id = "0" name = "&amp;Súbor"/>
-					<Item id = "1" name = "&amp;Upravi"/>
-					<Item id = "2" name = "&amp;H¾ada"/>
-					<Item id = "3" name = "&amp;Zobrazi"/>
-					<Item id = "4" name = "For&amp;mát"/>
-					<Item id = "5" name = "&amp;Jazyk"/>
-					<Item id = "6" name = "Na&amp;stavenia"/>
-					<Item id = "7" name = "Makro"/>
-					<Item id = "8" name = "Spusti"/>
+					<Item menuId="file" name = "&amp;Súbor"/>
+					<Item menuId="edit" name = "&amp;Upravi"/>
+					<Item menuId="search" name = "&amp;H¾ada"/>
+					<Item menuId="view" name = "&amp;Zobrazi"/>
+					<Item menuId="encoding" name = "For&amp;mát"/>
+					<Item menuId="language" name = "&amp;Jazyk"/>
+					<Item menuId="settings" name = "Na&amp;stavenia"/>
+					<Item menuId="macro" name = "Makro"/>
+					<Item menuId="run" name = "Spusti"/>
 					<Item idName = "Plugins" name = "Rozšírenia"/>
 					<Item idName = "Window" name = "Okno"/>
 				</Entries>
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "16" name = "Zbali úroveò"/>
-                    <Item posX = "3" posY = "17" name = "Rozbali úroveò"/>
+                    <Item subMenuId="view-collapseLevel" name = "Zbali úroveò"/>
+                    <Item subMenuId="view-uncollapseLevel" name = "Rozbali úroveò"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -163,22 +163,22 @@
             <Splitter>
             </Splitter>
             <TabBar>
-                    <Item order = "0" name = "Zatvori ma"/>
-                    <Item order = "1" name = "Zatvori všetko okrem mòa"/>
-                    <Item order = "2" name = "Uloži ma"/>
-                    <Item order = "3" name = "Uloži ma ako..."/>
-                    <Item order = "4" name = "Tlaèi ma"/>
-                    <Item order = "5" name = "Prejs na ïalšie Zobrazenie"/>
-                    <Item order = "6" name = "Klonova na ïalšie Zobrazenie"/>
-					<Item order = "7" name = "Celú cestu do schránky"/>
-					<Item order = "8" name = "Názov súboru do schránky"/>
-					<Item order = "9" name = "Cestu aktuálneho prieèinka do schránky"/>
-					<Item order = "10" name = "Premenova ma"/>
-					<Item order = "11" name = "Odstráni ma"/>
-					<Item order = "12" name = "Iba na èítanie"/>
-					<Item order = "13" name = "Vymaza znaèku iba na èítanie"/>
-					<Item order = "14" name = "Prejs na novú inštanciu"/>
-					<Item order = "15" name = "Otvori v novej inštancii"/>
+                    <Item CMID = "0" name = "Zatvori ma"/>
+                    <Item CMID = "1" name = "Zatvori všetko okrem mòa"/>
+                    <Item CMID = "2" name = "Uloži ma"/>
+                    <Item CMID = "3" name = "Uloži ma ako..."/>
+                    <Item CMID = "4" name = "Tlaèi ma"/>
+                    <Item CMID = "5" name = "Prejs na ïalšie Zobrazenie"/>
+                    <Item CMID = "6" name = "Klonova na ïalšie Zobrazenie"/>
+					<Item CMID = "7" name = "Celú cestu do schránky"/>
+					<Item CMID = "8" name = "Názov súboru do schránky"/>
+					<Item CMID = "9" name = "Cestu aktuálneho prieèinka do schránky"/>
+					<Item CMID = "10" name = "Premenova ma"/>
+					<Item CMID = "11" name = "Odstráni ma"/>
+					<Item CMID = "12" name = "Iba na èítanie"/>
+					<Item CMID = "13" name = "Vymaza znaèku iba na èítanie"/>
+					<Item CMID = "14" name = "Prejs na novú inštanciu"/>
+					<Item CMID = "15" name = "Otvori v novej inštancii"/>
             </TabBar>
         </Menu>
         

@@ -43,8 +43,8 @@ cover_inlay_01_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ec
 cover_inlay_02		=cover_inlay_02
 cover_inlay_02_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
 
-cover_inlay_03		=cover_inlay_03
-cover_inlay_03_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+cover_3d		=cover_3d
+cover_3d_location	=cover_3d\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
 
 
 

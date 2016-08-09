@@ -219,21 +219,21 @@ $i18n['menuTop'] = array(
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
 		'SQlite Browser',
-
 	'mTopDeveloperGUI' =>
 		'Glade GUI Editor',
-
 	'mTopAutoIt3GUI' =>
 		'Create Autoit3 GUI (Koda)',
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
 		'Fejlesztõ',
-
 	'mTopServices' =>
 		'Szolgáltatások',
-
 	'mTopServicesKameleonCode' =>
 		'Kérem a Kameleon kódot',
+
+	/* 1.13 BUILD 8 */
+	'mTopServicesEmuMoviesAD' =>
+		'Enter EmuMovies Account Data',
 );
 ?>

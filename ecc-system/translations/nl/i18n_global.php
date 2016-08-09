@@ -242,5 +242,9 @@ $i18n['global'] = array(
 		"Plaatjes",
 	'metadata' =>
 		"META informatie",
+
+	/* ECC 1.13 build 10 */
+	'media_pager_number' =>
+		"Ga naar pagina:"
 );
 ?>

@@ -12,23 +12,23 @@ Desc: Malay translation for Notepad++
 <!-- Main Menu Entries -->
 
 <Entries>
-<Item id="0" name="&amp;Fail"/>
-<Item id="1" name="&amp;Sunting"/>
-<Item id="2" name="&amp;Carian"/>
-<Item id="3" name="&amp;Pandangan"/>
-<Item id="4" name="For&amp;mat"/>
-<Item id="5" name="&amp;Bahasa"/>
-<Item id="6" name="&amp;Ketetapan"/>
-<Item id="7" name="Mak&amp;ro"/>
-<Item id="8" name="&amp;Jalan"/>
+<Item menuId="file" name="&amp;Fail"/>
+<Item menuId="edit" name="&amp;Sunting"/>
+<Item menuId="search" name="&amp;Carian"/>
+<Item menuId="view" name="&amp;Pandangan"/>
+<Item menuId="encoding" name="For&amp;mat"/>
+<Item menuId="language" name="&amp;Bahasa"/>
+<Item menuId="settings" name="&amp;Ketetapan"/>
+<Item menuId="macro" name="Mak&amp;ro"/>
+<Item menuId="run" name="&amp;Jalan"/>
 <Item idName="Plugins" name="Plu&amp;gin"/>
 <Item idName="Window" name="&amp;Tetingkap"/>
 </Entries>
 <!-- Sub Menu Entries -->
 
 <SubEntries>
-<Item posX="3" posY = "16" name="Lipat peringkat"/>
-<Item posX="3" posY = "17" name="Bentang peringkat"/>
+<Item subMenuId="view-collapseLevel" name="Lipat peringkat"/>
+<Item subMenuId="view-uncollapseLevel" name="Bentang peringkat"/>
 </SubEntries>
 <!-- all menu item -->
 
@@ -161,13 +161,13 @@ Desc: Malay translation for Notepad++
             </Splitter>
 
 <TabBar>
-<Item order="0" name="Tutup saya"/>
-<Item order="1" name="Tutup semua kecuali saya"/>
-<Item order="2" name="Simpan saya"/>
-<Item order="3" name="Simpan saya Sebagai..."/>
-<Item order="4" name="Cetak saya"/>
-<Item order="5" name="Pergi ke Pandangan seterusnya"/>
-<Item order="6" name="Klonkan ke Pandangan seterusnya"/>
+<Item CMID="0" name="Tutup saya"/>
+<Item CMID="1" name="Tutup semua kecuali saya"/>
+<Item CMID="2" name="Simpan saya"/>
+<Item CMID="3" name="Simpan saya Sebagai..."/>
+<Item CMID="4" name="Cetak saya"/>
+<Item CMID="5" name="Pergi ke Pandangan seterusnya"/>
+<Item CMID="6" name="Klonkan ke Pandangan seterusnya"/>
 </TabBar>
 </Menu>
 

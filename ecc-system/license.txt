@@ -1,5 +1,5 @@
 emuControlCenter
-Copyright(c) 2005-2012 by Andreas Scheibel
+Copyright(c) 2005-2012 by Andreas Scheibel(DE) and Sebastiaan Ebeltjes(NL)
 
 
 This licence grants you the following:

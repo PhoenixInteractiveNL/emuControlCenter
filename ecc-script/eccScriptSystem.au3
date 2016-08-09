@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.0.7 (2012.09.01)
+; Version: 1.2.1.0 (2012.12.07)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -73,7 +73,6 @@ Global $eccSystemEccFolder = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_fo
 $eccSystemEccFolder = 					StringMid($eccSystemEccFolder, 1, Stringlen($eccSystemEccFolder)-1) ;remove last slash
 ;[THIRDPARTY]
 Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7z.exe" & Chr(34)
-Global $eccThirdPartyFsum = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\fsum\fsum.exe" & Chr(34)
 Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
 Global $eccThirdPartyXpadder = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\xpadder\xpadder.exe" & Chr(34)
 ;[ECCCONFIG]
@@ -84,6 +83,7 @@ Global $eccUserPath =					IniRead($eccConfigFile, "USER_DATA", "base_path", $ecc
 $eccUserPath =							StringReplace($eccUserPath, "..", $eccSystemEccFolder)
 ; Fix path with 'windows' slashes (seems the path settings in 'cIniFile.php' don't like the '\' string (makes ecc crash), so we do it here...
 $eccUserPath =							StringReplace($eccUserPath, "/", "\")
+Global $DaemonTools =					IniRead($eccConfigFile, "DAEMONTOOLS", "daemontools_exe", "")
 
 ;[EXTRA]
 ; $eccScriptParamsFile (amiga gameconfig INI) (TheCyberDruid)
@@ -199,26 +199,16 @@ EndFunc ;EmuWindowControl
 ; FUNCTION: CDImage(CDaction)
 ; ************************************************************
 Func CDImage($CDaction)
-Global $DaemonTools
 Global $RomExtensionInfo
 Global $DTsupport
 
-$DaemonTools = IniRead($eccSystemEccFolder & "\ecc-script\eccScriptDaemonTools.ini", "GENERAL", "DaemonTools", "")
-
 ; Check if Daemontools is already configured, if not then let user select the program first.
 If FileExists($DaemonTools) = 0 Then
-
-	$DaemonTools = FileOpenDialog("CONFIG - Please locate Daemon Tools", "", "Daemon Tools (*.exe)", 3)
-
-	If @error Then
-		; Show user a messagebox that Daemontools is needed.
-		MsgBox(48, "ECC Script", "You need 'Daemon Tools' to mount an CD Image with Scripts." & @CRLF & @CRLF & _
-		"you can find this software at: http://www.disc-tools.com/download/daemon")
-		Exit
-	Else
-		IniWrite($eccSystemEccFolder & "\ecc-script\eccScriptDaemonTools.ini", "GENERAL", "DaemonTools", chr(34) & $DaemonTools & chr(34))
-	EndIf
-
+	; Show user a messagebox that Daemontools is needed.
+	MsgBox(48, "ECC Script", "You need 'Daemon Tools' to mount an CD Image with scripts." & @CRLF & @CRLF & _
+	"You can find this software at: http://www.disc-tools.com/download/daemon" & @CRLF & _
+	"After installation select the executable in the ECC config!")
+	Exit
 EndIf
 
 ; Check
@@ -283,9 +273,11 @@ Select
 
 EndSelect
 
-
 If $DTsupport <> "1" Then
-        MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & $eccFileRomExtension & "' is not supported by 'Daemon Tools', abort...")
+        MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & StringUpper($eccFileRomExtension) & "' is not supported by 'Daemon Tools'," & @CRLF & _
+		"It's possible you need a .CUE file to run this image, this should be" & @CRLF & _
+		"placed in he same folder!, Also make sure you enabled the" & @CRLF & _
+		"'use .cue' option in the ECC configuration!")
 	Exit
 EndIf
 
@@ -302,3 +294,17 @@ Select
 EndSelect
 
 EndFunc
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: GetActiveKeyboardLayout() Function
+; Description ...: Get Active keyboard layout
+
+; Author ........: Fredj A. Jad (DCCD)
+; MSDN  .........: GetWindowThreadProcessId Function  ,http://msdn.microsoft.com/en-us/library/ms633522(VS.85).aspx
+; MSDN  .........: GetKeyboardLayout Function         ,http://msdn.microsoft.com/en-us/library/ms646296(VS.85).aspx
+; ===============================================================================================================================
+Func GetActiveKeyboardLayout($hWnd)
+    Local $aRet = DllCall('user32.dll', 'long', 'GetWindowThreadProcessId', 'hwnd', $hWnd, 'ptr', 0)
+    $aRet = DllCall('user32.dll', 'long', 'GetKeyboardLayout', 'long', $aRet[0])
+    Return Hex($aRet[0], 4)
+EndFunc   ;==>GetActiveKeyboardLayout

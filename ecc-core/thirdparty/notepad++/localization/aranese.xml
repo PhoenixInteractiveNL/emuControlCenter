@@ -5,23 +5,23 @@
 			<Main>
                 <!-- Main Menu Entries -->
 				<Entries>
-					<Item id = "0" name = "&amp;Archiu"/>
-					<Item id = "1" name = "&amp;Editar"/>
-					<Item id = "2" name = "&amp;Cercar"/>
-					<Item id = "3" name = "&amp;Veir"/>
-					<Item id = "4" name = "Fo&amp;rmat"/>
-					<Item id = "5" name = "&amp;Lenguatge"/>
-					<Item id = "6" name = "Con&amp;figuracions"/>
-					<Item id = "7" name = "&amp;Macro"/>
-					<Item id = "8" name = "La&amp;nçar"/>
+					<Item menuId="file" name = "&amp;Archiu"/>
+					<Item menuId="edit" name = "&amp;Editar"/>
+					<Item menuId="search" name = "&amp;Cercar"/>
+					<Item menuId="view" name = "&amp;Veir"/>
+					<Item menuId="encoding" name = "Fo&amp;rmat"/>
+					<Item menuId="language" name = "&amp;Lenguatge"/>
+					<Item menuId="settings" name = "Con&amp;figuracions"/>
+					<Item menuId="macro" name = "&amp;Macro"/>
+					<Item menuId="run" name = "La&amp;nçar"/>
 					<Item idName = "Plugins" name = "&amp;Pedaçi"/>
 					<Item idName = "Window" name = "&amp;Hiestra"/>
 				</Entries>
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-                    <Item posX = "3" posY = "16" name = "Comprimir eth nivèu"/>
-                    <Item posX = "3" posY = "17" name = "Expandir eth nivèu"/>
+                    <Item subMenuId="view-collapseLevel" name = "Comprimir eth nivèu"/>
+                    <Item subMenuId="view-uncollapseLevel" name = "Expandir eth nivèu"/>
                 </SubEntries>
                 
                 <!-- all menu item -->
@@ -125,13 +125,13 @@
             <Splitter>
             </Splitter>
             <TabBar>
-                    <Item order = "0" name = "Barrar aguesta"/>
-                    <Item order = "1" name = "Barrar totes excepte aguesta"/>
-                    <Item order = "2" name = "Sauvar aguesta"/>
-                    <Item order = "3" name = "Sauvar aguesta coma..."/>
-                    <Item order = "4" name = "Imprimir aguesta"/>
-                    <Item order = "5" name = "Anar a d'auta Vista"/>
-                    <Item order = "6" name = "Duplicar en auta Vista"/>
+                    <Item CMID = "0" name = "Barrar aguesta"/>
+                    <Item CMID = "1" name = "Barrar totes excepte aguesta"/>
+                    <Item CMID = "2" name = "Sauvar aguesta"/>
+                    <Item CMID = "3" name = "Sauvar aguesta coma..."/>
+                    <Item CMID = "4" name = "Imprimir aguesta"/>
+                    <Item CMID = "5" name = "Anar a d'auta Vista"/>
+                    <Item CMID = "6" name = "Duplicar en auta Vista"/>
             </TabBar>
         </Menu>
         

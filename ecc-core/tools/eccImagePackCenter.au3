@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter ImagePackCenter (IPC)
 ;
-; Script version         : v2.2.0.0
-; Last changed           : 2012.08.28
+; Script version         : v2.2.0.8
+; Last changed           : 2012.11.19
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -40,9 +40,9 @@ Global $EccUserPathTemp = StringReplace(IniRead($EccGeneralIni, "USER_DATA", "ba
 Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
 
 ; Read in ECC dumped values of the platform
-Global $EccPlatformIni	= $EccInstallFolder & "\ecc-system\eccplatformdata.ini"
-Global $PlatformId		= IniRead($EccPlatformIni, "PLATFORMDATA", "platform_eccid", "") ; %PLATFORMID% variable
-Global $PlatformName	= IniRead($EccPlatformIni, "PLATFORMDATA", "platform_name", "") ; %PLATFORMNAME% variable
+Global $EccPlatformIni	= $EccInstallFolder & "\ecc-system\selectedrom.ini"
+Global $PlatformId		= IniRead($EccPlatformIni, "ROMDATA", "rom_platformid", "") ; %PLATFORMID% variable
+Global $PlatformName	= IniRead($EccPlatformIni, "ROMDATA", "rom_platformname", "") ; %PLATFORMNAME% variable
 Global $EccImageFolder	= $EccUserPath & $PlatformId & "\images"
 Global $ProcessResult, $IpcSettingsFile, $AutoSave, $AutoLoad, $RomListRetrieved, $TrueFileName, $AbortProcess, $ImagesProcessed = 0
 Global $SelectedFolder, $SelectedRCFile
@@ -180,9 +180,9 @@ Global $Label24 = GUICtrlCreateLabel("media_storage", 448, 336, 89, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $media_storage = GUICtrlCreateInput("", 560, 336, 121, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $cover_inlay_03 = GUICtrlCreateInput("", 560, 312, 121, 21)
+Global $cover_3d = GUICtrlCreateInput("", 560, 312, 121, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $Label25 = GUICtrlCreateLabel("cover_inlay_03", 448, 312, 91, 17)
+Global $Label25 = GUICtrlCreateLabel("cover_3d", 448, 312, 57, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $Label26 = GUICtrlCreateLabel("cover_inlay_02", 448, 288, 91, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
@@ -284,7 +284,7 @@ Global $cover_inlay_01_location = GUICtrlCreateInput("", 688, 264, 369, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $cover_inlay_02_location = GUICtrlCreateInput("", 688, 288, 369, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $cover_inlay_03_location = GUICtrlCreateInput("", 688, 312, 369, 21)
+Global $cover_3d_location = GUICtrlCreateInput("", 688, 312, 369, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $media_flyer_04_location = GUICtrlCreateInput("", 688, 504, 369, 21)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
@@ -447,15 +447,15 @@ Func StartImport()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $ECCIPCIMPORT = GUICreate("ECC ImagePackCenter [IMPORT]", 361, 498, -1, -1)
+Global $ECCIPCIMPORT = GUICreate("ECC ImagePackCenter [IMPORT]", 361, 511, -1, -1)
 GUISetBkColor(0xFFFFFF)
-Global $Label1 = GUICtrlCreateLabel("Processing:", 8, 280, 84, 15)
+Global $Label1 = GUICtrlCreateLabel("Processing:", 8, 288, 84, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $ImportProcessingLabel = GUICtrlCreateLabel("-", 8, 296, 236, 15)
+Global $ImportProcessingLabel = GUICtrlCreateLabel("-", 8, 312, 236, 15)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $ButtonImport = GUICtrlCreateButton("IMPORT TO ECC!", 248, 272, 107, 41, $BS_MULTILINE)
+Global $ButtonImport = GUICtrlCreateButton("IMPORT TO ECC!", 248, 288, 107, 41, $BS_MULTILINE)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
 GUICtrlSetTip(-1, "Start importing images.")
 Global $Label3 = GUICtrlCreateLabel("Platform:", 8, 8, 60, 15)
@@ -470,11 +470,11 @@ GUICtrlSetColor(-1, 0x000080)
 Global $eccidLabel = GUICtrlCreateLabel("-", 304, 8, 44, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
-Global $Group1 = GUICtrlCreateGroup(" SETTINGS ", 8, 24, 345, 241)
+Global $Group1 = GUICtrlCreateGroup(" SETTINGS ", 8, 24, 345, 257)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x800000)
 Global $ImportImageType = GUICtrlCreateCombo("", 125, 123, 215, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "ingame_title|ingame_play_01|ingame_play_02|ingame_play_03|ingame_play_boss|ingame_loading|cover_front|cover_back|cover_spine|cover_inlay_01|cover_inlay_02|cover_inlay_03|media_storage|media_stor_02|media_stor_03|media_stor_04|media_flyer|media_flyer_02|media_flyer_03|media_flyer_04|media_icon|booklet_page_01|booklet_page_02|booklet_page_03|booklet_page_04|booklet_page_05|booklet_page_06|booklet_page_07|booklet_page_08|booklet_page_09|booklet_page_10")
+GUICtrlSetData(-1, "ingame_title|ingame_play_01|ingame_play_02|ingame_play_03|ingame_play_boss|ingame_loading|cover_front|cover_back|cover_spine|cover_inlay_01|cover_inlay_02|cover_3d|media_storage|media_stor_02|media_stor_03|media_stor_04|media_flyer|media_flyer_02|media_flyer_03|media_flyer_04|media_icon|booklet_page_01|booklet_page_02|booklet_page_03|booklet_page_04|booklet_page_05|booklet_page_06|booklet_page_07|booklet_page_08|booklet_page_09|booklet_page_10")
 Global $ImportDumpType = GUICtrlCreateCombo("", 125, 147, 215, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "CRC32 Based (like No-Intro)|NAME Based (like EmuMovies)")
 Global $Label5 = GUICtrlCreateLabel("Define dumptype:", 13, 147, 105, 17)
@@ -495,9 +495,12 @@ GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $SelectedRCFileLabel = GUICtrlCreateLabel("", 13, 235, 329, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
+Global $CheckBoxStripper = GUICtrlCreateCheckbox("Remove unnecessary metadata (junk) from images", 16, 256, 329, 17)
+GUICtrlSetState(-1, $GUI_CHECKED)
+GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $VariableInfo = GUICtrlCreateEdit("", 8, 320, 345, 169, BitOR($GUI_SS_DEFAULT_EDIT,$ES_READONLY))
-GUICtrlSetData(-1, StringFormat("ECC-IPC import information:\r\n\r\n1) Original files wil l be copied, not moved!\r\n2) All files in the folder will be processed\r\n    (except those with no extension).\r\n3) Subfolders are not processed.\r\n4) When importing namebased imagefiles, a CRC32 code\r\n    has to be retrieved from a RomCenter DAT file.\r\n\r\nExpected file structures:\r\nCRC32 BASED: [CRC32].[EXTENSION]\r\nNAME BASED: [ROMNAME].[EXTENSION]"))
+Global $VariableInfo = GUICtrlCreateEdit("", 8, 336, 345, 169, BitOR($GUI_SS_DEFAULT_EDIT,$ES_READONLY))
+GUICtrlSetData(-1, StringFormat("ECC-IPC import information:\r\n\r\n1) Original files wil l be copied, not moved!\r\n2) All files in the folder will be processed\r\n    (except those with no extension).\r\n3) Subfolders are not processed.\r\n4) When importing namebased imagefiles, a CRC32 code\r\n    has to be retrieved from a RomCenter DAT file.\r\n\r\nExpected file structures:\r\nCRC32 BASED: [CRC32].[EXTENSION]\r\nNAME BASED: [ROMNAME].[EXTENSION]\r\n\r\nRemoving unnecessary metadata (junk):\r\n1) Stripper will remove uncessary metadata (junk) like EXIF, IPTC\r\nand comments out of the imagefile.\r\n2) This method could save loads of unessesary MB"&Chr(39)&"s for the imagepack\r\nand slink it nicely without loss of imagequality!\r\n3) This does NOT affect your original imagefiles!"))
 GUICtrlSetFont(-1, 7, 400, 0, "Verdana")
 ;==============================================================================
 ;END *** GUI
@@ -586,7 +589,6 @@ While 1
 
 		GUICtrlSetData($ImportProcessingLabel, $ImageFileName)
 		FileCopy_IPC($RFSstartDir & $RFSnext, $EccUserPath & $PlatformId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $PlatformId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
-		$ImagesProcessed = $ImagesProcessed + 1
 	EndIf
 
 	If GUICtrlRead($ImportDumpType) = "NAME Based (like EmuMovies)" Then
@@ -604,7 +606,6 @@ While 1
 					Global $ImageFileCrc32Short = StringMid($ImageFileCrc32, 1, 2)
 					GUICtrlSetData($ImportProcessingLabel, $ImageFileName)
 					FileCopy_IPC($RFSstartDir & $RFSnext, $EccUserPath & $PlatformId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $PlatformId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
-					$ImagesProcessed = $ImagesProcessed + 1
 				EndIf
 			Else
 				ToolTip("This RomCenter DAT version is not supported!", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
@@ -752,9 +753,9 @@ While 1
 								FileCopy_IPC($RFSstartDir & $RFSnext, $ImageExportFolder & "\" & $ProcessResult)
 						EndIf
 
-						If $ImageFileType = "cover_inlay_03" And GUICtrlRead($cover_inlay_03) <> "" And GUICtrlRead($cover_inlay_03_location) <> "" Then
-								$ImageFileType = StringReplace($ImageFileType, "cover_inlay_03", GUICtrlRead($cover_inlay_03))
-								$ProcessResult = ProcessVariables(GUICtrlRead($cover_inlay_03_location))
+						If $ImageFileType = "cover_3d" And GUICtrlRead($cover_3d) <> "" And GUICtrlRead($cover_3d_location) <> "" Then
+								$ImageFileType = StringReplace($ImageFileType, "cover_3d", GUICtrlRead($cover_3d))
+								$ProcessResult = ProcessVariables(GUICtrlRead($cover_3d_location))
 								FileCopy_IPC($RFSstartDir & $RFSnext, $ImageExportFolder & "\" & $ProcessResult)
 						EndIf
 
@@ -985,7 +986,7 @@ GUICtrlSetData($cover_back, IniRead($ipcfilename, "IMAGETYPES", "cover_back", ""
 GUICtrlSetData($cover_spine, IniRead($ipcfilename, "IMAGETYPES", "cover_spine", ""))
 GUICtrlSetData($cover_inlay_01, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_01", ""))
 GUICtrlSetData($cover_inlay_02, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_02", ""))
-GUICtrlSetData($cover_inlay_03, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_03", ""))
+GUICtrlSetData($cover_3d, IniRead($ipcfilename, "IMAGETYPES", "cover_3d", ""))
 GUICtrlSetData($media_storage, IniRead($ipcfilename, "IMAGETYPES", "media_storage", ""))
 GUICtrlSetData($media_stor_02, IniRead($ipcfilename, "IMAGETYPES", "media_stor_02", ""))
 GUICtrlSetData($media_stor_03, IniRead($ipcfilename, "IMAGETYPES", "media_stor_03", ""))
@@ -1017,7 +1018,7 @@ GUICtrlSetData($cover_back_location, IniRead($ipcfilename, "IMAGETYPES", "cover_
 GUICtrlSetData($cover_spine_location, IniRead($ipcfilename, "IMAGETYPES", "cover_spine_location", ""))
 GUICtrlSetData($cover_inlay_01_location, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_01_location", ""))
 GUICtrlSetData($cover_inlay_02_location, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_02_location", ""))
-GUICtrlSetData($cover_inlay_03_location, IniRead($ipcfilename, "IMAGETYPES", "cover_inlay_03_location", ""))
+GUICtrlSetData($cover_3d_location, IniRead($ipcfilename, "IMAGETYPES", "cover_3d_location", ""))
 GUICtrlSetData($media_storage_location, IniRead($ipcfilename, "IMAGETYPES", "media_storage_location", ""))
 GUICtrlSetData($media_stor_02_location, IniRead($ipcfilename, "IMAGETYPES", "media_stor_02_location", ""))
 GUICtrlSetData($media_stor_03_location, IniRead($ipcfilename, "IMAGETYPES", "media_stor_03_location", ""))
@@ -1074,7 +1075,7 @@ IniWrite($ipcfilename, "IMAGETYPES", "cover_back", GUICtrlRead($cover_back))
 IniWrite($ipcfilename, "IMAGETYPES", "cover_spine", GUICtrlRead($cover_spine))
 IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_01", GUICtrlRead($cover_inlay_01))
 IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_02", GUICtrlRead($cover_inlay_02))
-IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_03", GUICtrlRead($cover_inlay_03))
+IniWrite($ipcfilename, "IMAGETYPES", "cover_3d", GUICtrlRead($cover_3d))
 IniWrite($ipcfilename, "IMAGETYPES", "media_storage", GUICtrlRead($media_storage))
 IniWrite($ipcfilename, "IMAGETYPES", "media_stor_02", GUICtrlRead($media_stor_02))
 IniWrite($ipcfilename, "IMAGETYPES", "media_stor_03", GUICtrlRead($media_stor_03))
@@ -1106,7 +1107,7 @@ IniWrite($ipcfilename, "IMAGETYPES", "cover_back_location", GUICtrlRead($cover_b
 IniWrite($ipcfilename, "IMAGETYPES", "cover_spine_location", GUICtrlRead($cover_spine_location))
 IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_01_location", GUICtrlRead($cover_inlay_01_location))
 IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_02_location", GUICtrlRead($cover_inlay_02_location))
-IniWrite($ipcfilename, "IMAGETYPES", "cover_inlay_03_location", GUICtrlRead($cover_inlay_03_location))
+IniWrite($ipcfilename, "IMAGETYPES", "cover_3d_location", GUICtrlRead($cover_3d_location))
 IniWrite($ipcfilename, "IMAGETYPES", "media_storage_location", GUICtrlRead($media_storage_location))
 IniWrite($ipcfilename, "IMAGETYPES", "media_stor_02_location", GUICtrlRead($media_stor_02_location))
 IniWrite($ipcfilename, "IMAGETYPES", "media_stor_03_location", GUICtrlRead($media_stor_03_location))

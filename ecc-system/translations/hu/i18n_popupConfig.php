@@ -351,11 +351,43 @@ $i18n['popupConfig'] = array(
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
 		"Minden fájl kicsomagolása az almappákkal együtt",
-
 	'emuUnpackNotelabel' =>
 		'Megjegyzés: A TAB [start] törli a kicsomagolt fájlokat ha az ECC bezárul.',
-
 	'startConfDeleteUnpacked' =>
 		"ECC unpack mappa törlése kilépéskor",
+
+	/* 1.13 BUILD 4-8 */
+	'lbl_ecc_videoplayer' =>	
+	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
+	'lbl_ecc_videoplayer_note' =>	
+	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
+	'eccVideoPlayer_enable' =>
+		"Enable Video Player",
+	'eccVideoPlayer_sound' =>
+		"Enable sound",
+	'eccVideoPlayer_soundvolume' =>
+		"Volume (0-200%) =",
+	'eccVideoPlayer_loop' =>
+		"Loop video",
+	'eccVideoPlayer_resolution' =>
+		"Resolution (pixels): ",
+	'eccVideoPlayer_padding' =>
+		"Padding from rightbottom corner (pixels): ",
+
+	/* 1.13 BUILD 12 */		
+	'lbl_ecc_opt_hdl' =>
+		"Other options",
+	'tabGeneralImageTabOptions' =>
+		"IMAGE TAB in main view options",
+	'tabGeneralImageTabTcuttLabel' =>	
+		"Text cuttoff length (characters):",
+	'tabGeneralParsingOptions' =>	
+		"Parsing options:",
+	'tabGeneralParsingTriggerLabel' =>	
+		"Big file parser trigger size (MB)",
+	'tabGeneralParsingTriggerNoteLabel' =>	
+		"(experimental, PHP could crash if set to high)",
+	'ThemeSelectLabel' =>
+		"Theme:",
 );
 ?>

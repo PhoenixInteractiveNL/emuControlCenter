@@ -5,35 +5,35 @@
 			<Main>
                 <!-- Main Menu Entries -->
 				<Entries>
-					<Item id="0" name="&amp;קובץ"/>
-					<Item id="1" name="&amp;עריכה"/>
-					<Item id="2" name="&amp;חיפוש"/>
-					<Item id="3" name="&amp;תצוגה"/>
-					<Item id="4" name="&amp;פורמט"/>
-					<Item id="5" name="&amp;שפה"/>
-					<Item id="6" name="&amp;הגדרות"/>
-					<Item id="7" name="מאקרו מקשים"/>
-					<Item id="8" name="הפעלה"/>
-					<Item id="9" name="תוספים"/>
-					<Item id="10" name="תמיכה"/>
+					<Item menuId="file" name="&amp;קובץ"/>
+					<Item menuId="edit" name="&amp;עריכה"/>
+					<Item menuId="search" name="&amp;חיפוש"/>
+					<Item menuId="view" name="&amp;תצוגה"/>
+					<Item menuId="encoding" name="&amp;פורמט"/>
+					<Item menuId="language" name="&amp;שפה"/>
+					<Item menuId="settings" name="&amp;הגדרות"/>
+					<Item menuId="macro" name="מאקרו מקשים"/>
+					<Item menuId="run" name="הפעלה"/>
+					<Item idName="Plugins" name="תוספים"/>
+					<Item idName="Window"  name="תמיכה"/>
 					
 				</Entries>
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
-					<Item posX="1" posY = "9" name="העתק לזיכרון"/>
-					<Item posX="1" posY = "10" name="רווח"/>
-					<Item posX="1" posY = "11" name="המר משפט"/>
-					<Item posX="1" posY = "12" name="פעולות בשורה"/>
-					<Item posX="1" posY = "13" name="הערה/חוסר הערה"/>
-					<Item posX="1" posY = "14" name="השלמה אוטומטית"/>
-					<Item posX="2" posY = "11" name="סמן הכול"/>
-					<Item posX="2" posY = "12" name="בטל סמן הכול"/>
-					<Item posX="3" posY = "4" name="הראה סמל"/>
-					<Item posX="3" posY = "5" name="התמקד"/>
-					<Item posX="3" posY = "6" name="העבר/שכפל מסמך נוכחי"/>
-                    <Item posX="3" posY = "16" name="אחד את השלב"/>
-                    <Item posX="3" posY = "17" name="פצל את השלב"/>
+					<Item subMenuId="edit-copyToClipboard" name="העתק לזיכרון"/>
+					<Item subMenuId="edit-indent" name="רווח"/>
+					<Item subMenuId="edit-convertCaseTo" name="המר משפט"/>
+					<Item subMenuId="edit-lineOperations" name="פעולות בשורה"/>
+					<Item subMenuId="edit-comment" name="הערה/חוסר הערה"/>
+					<Item subMenuId="edit-autoCompletion" name="השלמה אוטומטית"/>
+					<Item subMenuId="search-markAll" name="סמן הכול"/>
+					<Item subMenuId="search-unmarkAll" name="בטל סמן הכול"/>
+					<Item subMenuId="view-showSymbol" name="הראה סמל"/>
+					<Item subMenuId="view-zoom" name="התמקד"/>
+					<Item subMenuId="view-moveCloneDocument" name="העבר/שכפל מסמך נוכחי"/>
+                    <Item subMenuId="view-collapseLevel" name="אחד את השלב"/>
+                    <Item subMenuId="view-uncollapseLevel" name="פצל את השלב"/>
 
 				</SubEntries>
 
@@ -244,22 +244,22 @@
 			<Splitter>
 			</Splitter>
             <TabBar>
-                	<Item order="0" name="סגור אותי"/>
-					<Item order="1" name="סגור את הכל חוץ ממני"/>
-					<Item order="2" name="שמור אותי"/>
-					<Item order="3" name="שמור אותי בשם..."/>
-					<Item order="4" name="הדפס אותי"/>
-					<Item order="5" name="עבור לתצוגה אחרת"/>
-					<Item order="6" name="שכפל לתצוגה אחרת"/>
-					<Item order="7" name="מסלול קובץ מלא לזיכרון"/>
-					<Item order="8" name="שם קובץ לזיכרון"/>
-					<Item order="9" name="מסלול תיקיה נוכחית לזיכרון"/>
-					<Item order="10" name="שנה את שמי"/>
-					<Item order="11" name="מחק אותי"/>
-					<Item order="12" name="קריאה בלבד"/>
-					<Item order="13" name="נקה דגל קריאה בלבד"/>
-					<Item order="14" name="העבר לחלון חדש"/>
-					<Item order="15" name="פתח בחלון חדש"/>
+                	<Item CMID="0" name="סגור אותי"/>
+					<Item CMID="1" name="סגור את הכל חוץ ממני"/>
+					<Item CMID="2" name="שמור אותי"/>
+					<Item CMID="3" name="שמור אותי בשם..."/>
+					<Item CMID="4" name="הדפס אותי"/>
+					<Item CMID="5" name="עבור לתצוגה אחרת"/>
+					<Item CMID="6" name="שכפל לתצוגה אחרת"/>
+					<Item CMID="7" name="מסלול קובץ מלא לזיכרון"/>
+					<Item CMID="8" name="שם קובץ לזיכרון"/>
+					<Item CMID="9" name="מסלול תיקיה נוכחית לזיכרון"/>
+					<Item CMID="10" name="שנה את שמי"/>
+					<Item CMID="11" name="מחק אותי"/>
+					<Item CMID="12" name="קריאה בלבד"/>
+					<Item CMID="13" name="נקה דגל קריאה בלבד"/>
+					<Item CMID="14" name="העבר לחלון חדש"/>
+					<Item CMID="15" name="פתח בחלון חדש"/>
 			</TabBar>
 		</Menu>
 

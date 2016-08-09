@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccDiagnostics (ECC-DIAG)
 ;
-$ScriptVersion = "1.0.0.1"
-; Last changed           : 2012.05.06
+$ScriptVersion = "1.0.0.2"
+; Last changed           : 2012.11.19
 ;
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
@@ -271,13 +271,14 @@ While 1
 	If @error Then ExitLoop
 	$FullFilePath = $SourceFolder & "\" & $File
 	$FileAttributes = FileGetAttrib($FullFilePath)
-
-	If StringInStr($FileAttributes, "D") Then ; Is this a folder?
-		ScanFolder($FullFilePath)
-	Else
-		If FileGetVersion($FullFilePath) <> "0.0.0.0" Then ; Legit file wich contains a fileversion
-			If StringRight($File, 3) = "exe" Or StringRight($File, 3) = "ocx" Or StringRight($File, 3) = "dll" Then ; Only EXE / OCX / DLL files
-				$FoundFileVersions = $FoundFileVersions & StringSpace(StringReplace($FullFilePath, $eccPath & "\", "")) & " v" & FileGetVersion($FullFilePath) & Chr(13) & Chr(10)
+	If StringInStr($FullFilePath, "ecc-core") Then ; Only scan the ecc-core folder!
+		If StringInStr($FileAttributes, "D") Then ; Is this a folder?
+			ScanFolder($FullFilePath)
+		Else
+			If FileGetVersion($FullFilePath) <> "0.0.0.0" Then ; Legit file wich contains a fileversion
+				If StringRight($File, 3) = "exe" Or StringRight($File, 3) = "ocx" Or StringRight($File, 3) = "dll" Then ; Only EXE / OCX / DLL files
+					$FoundFileVersions = $FoundFileVersions & StringSpace(StringReplace($FullFilePath, $eccPath & "\", "")) & " v" & FileGetVersion($FullFilePath) & Chr(13) & Chr(10)
+				EndIf
 			EndIf
 		EndIf
 	EndIf

@@ -11,7 +11,8 @@
   3.3 Administrator rights
   3.4 More instances of ECC running
   3.5 Minimal width resolution of 1000 pixels
-4. Links
+4. ECC Video Player
+5. Links
 
 
 1. What is emuControlCenter
@@ -126,7 +127,23 @@ does not work at all !
 (this may occur when you have set the taskbar on the side @ 1024x768)
 
 
-4. Links
+4. ECC Video Player
+********************************************************************************
+The ECC Video Player needs VLC VideoLAN player to work, wich you can download here:
+Download VLC Player: http://www.videolan.org/vlc/
+
+The Video Player will be started in the rightbottom corner of the screen.
+Pressing ESCAPE in ECC will close the Video Player
+
+Other things:
+- The ECC titlebar may blink a bit while loading a video.
+- When clicking to fast on ROMS the Video Player may start on center screen for a moment.
+- You cannot use the ROM context menu directly after clicking a ROM, please wait until the video has started!
+
+Ps. The ECC video player is still experimental, so please post bugs to the forum!
+
+
+5. Links
 ********************************************************************************
 Website and download: http://www.camya.com/ecc
 Forum and support: http://ecc.phoenixinteractive.mine.nu/

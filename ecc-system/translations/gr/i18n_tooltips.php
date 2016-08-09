@@ -132,5 +132,9 @@ $i18n['tooltips'] = array(
 		"This will open the ECC documentation site in your internetbrowser.",
 	'mTopHelpAboutTooltip' =>
 		"This will pop-up the ECC about box.",
+
+	/* 1.13 BUILD 8 */
+	'mTopServicesEmuMoviesADTooltip' =>
+		"This will open a window where you can enter your EmuMovies account data to use their services. (registered forum members)",
 );
 ?>

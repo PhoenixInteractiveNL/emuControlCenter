@@ -1,13 +1,12 @@
 ﻿<?php
-
 // if this parameter "create_userfolder" is given, ecc will create
 // all needed userfolder and then exit the application with the
 // string 'ecc userfolders created'!
 define('ECC_CREATE_USERFOLDER_BY_TOOL', trim($argv[1]) == 'create_userfolder');
 
-echo '<pre>';
-print_r($argv[1]);
-echo '</pre>';
+//echo '<pre>';
+//print_r($argv[1]);
+//echo '</pre>';
 
 define('LF', "\n");
 
@@ -15,20 +14,20 @@ chdir(dirname(__FILE__));
 define("MY_MASK", Gdk::BUTTON_PRESS_MASK);
 if(!defined('DEBUG')) define('DEBUG', true);
 
-if(!defined('ECC_DIR_OFFSET')) define('ECC_DIR_OFFSET', "..".DIRECTORY_SEPARATOR); # needed for relative paths
+if(!defined('ECC_DIR_OFFSET')) define('ECC_DIR_OFFSET', "..".DIRECTORY_SEPARATOR); // needed for relative paths
 
-//# Workaround for non iso paths like russian or greek user folder
+//Workaround for non iso paths like russian or greek user folder
 //require_once('manager/cOs.php');
 //$eccBaseFile = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_DIR_OFFSET.'/ecc.exe');
 //$eccBaseDirectory = dirname(Os::getEightDotThreePath($eccBaseFile));
-//if(!defined('ECC_DIR')) define('ECC_DIR', $eccBaseDirectory); # contains basepath of ecc
-if(!defined('ECC_DIR')) define('ECC_DIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_DIR_OFFSET)); # contains basepath of ecc
+//if(!defined('ECC_DIR')) define('ECC_DIR', $eccBaseDirectory); // contains basepath of ecc
+if(!defined('ECC_DIR')) define('ECC_DIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_DIR_OFFSET)); // contains basepath of ecc
 
-if(!defined('ECC_DIR_SYSTEM')) define('ECC_DIR_SYSTEM', ECC_DIR.'/ecc-system/'); # contains ecc-system dir
+if(!defined('ECC_DIR_SYSTEM')) define('ECC_DIR_SYSTEM', ECC_DIR.'/ecc-system/'); // contains ecc-system dir
 
 define('SZIP_UNPACK_EXE', '../ecc-core/thirdparty/7Zip/7z.exe');
 
-# write ini for external ecc tools
+// write ini for external ecc tools
 include(ECC_DIR_SYSTEM.'/manager/fStartupHelper.php');
 EccExtHelper::writeLocalHostInfo(ECC_DIR_SYSTEM.'/system/info/ecc_local_host_info.ini');
 
@@ -39,17 +38,17 @@ require_once 'manager/model/RomMeta.php';
 require_once 'manager/model/RomAudit.php';
 require_once 'manager/model/ParserFile.php';
 
-# static class for generating comboboxes
+// static class for generating comboboxes
 require_once('manager/cIndexedCombobox.php');
-# new singleton factory
+// new singleton factory
 require_once('manager/cFactory.php');
-# static class for translation
+// static class for translation
 require_once('manager/ci18n.php');
-# static class for translation
+// static class for translation
 require_once('manager/cValid.php');
-# needed for char enconding converting and detecting tasks
+// needed for char enconding converting and detecting tasks
 require_once('manager/cMultiByte.php');
-# loggs to the logs folder!
+// loggs to the logs folder!
 require_once('manager/cLogger.php');
 
 /**
@@ -62,11 +61,9 @@ class App extends GladeXml {
 
 	/**
 	 * contains object of the current selected rom
-	 *
 	 * @var Rom contains RomFile, RomMeta, RomAudit
 	 */
 	private $selectedRom;
-
 
 	private $comletionData = array();
 	public $optVisMainListMode = false;
@@ -142,7 +139,7 @@ class App extends GladeXml {
 	private $visibleNavigation = true;
 	private $visibleMedia = true;
 	private $visibleSearch = true;
-
+	
 	/**
 	 * if set, dont update data
 	 *
@@ -290,7 +287,7 @@ class App extends GladeXml {
 				$text .= file_get_contents($file)."\n\n";
 			}
 			else {
-				$text .= '\n### Missing inline-help-file "'.$file.'" ###\n';
+				$text .= '\n##// Missing inline-help-file "'.$file.'" ###\n';
 			}
 		}
 		$buffer = new GtkTextBuffer();
@@ -665,7 +662,7 @@ class App extends GladeXml {
 		$oEvent->set_property('has-tooltip', true);
 		$oEvent->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'opt_only_disk'));
 
-		# context menu for main navigation button ROMS
+		// context menu for main navigation button ROMS
 		$contextRoms = array(
 			'optionContextOnlyDiskAll' => 'TOGGLE_VIEWMODE_DISK_ALL',
 			'optionContextOnlyDiskOne' => 'TOGGLE_VIEWMODE_DISK_ONE',
@@ -742,7 +739,7 @@ class App extends GladeXml {
 		// which having a method setDbms() implemented gets automaticly a dbms object assigned
 		FACTORY::setDbms($dbms);
 
-		# max release 99 is allowed!
+		// max release 99 is allowed!
 		$mngrEccUpdate = FACTORY::get('manager/EccUpdate');
 		$release = $this->ecc_release['local_release_version'].$this->ecc_release['release_build'];
 		$mngrEccUpdate->updateSystem($release);
@@ -766,7 +763,7 @@ class App extends GladeXml {
 
 		FACTORY::get('manager/IniFile')->setThemColors(FACTORY::get('manager/GuiTheme')->getColorIniPath());
 
-		# initialize logger to get status reports
+		// initialize logger to get status reports
 		LOGGER::setActiveState($this->ini->getKey('USER_SWITCHES', 'log_details'));
 
 		$this->set_ecc_image_size_from_ini();
@@ -833,9 +830,9 @@ class App extends GladeXml {
 		// ----------------------------------------------------------------
 		parent::__construct(ECC_DIR_SYSTEM.'/gui/gui.glade');
 
-		# !!!!!!
-		# the window is default invisible! $wdo_main->show() is called add end of constructor!
-		# !!!!!!
+		// !!!!!!
+		// the window is default invisible! $wdo_main->show() is called add end of constructor!
+		// !!!!!!
 
 		$this->wdo_main->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->background_color));
 
@@ -894,7 +891,7 @@ class App extends GladeXml {
 			$this->_results_per_page = ($pp) ? $pp : 100;
 		}
 
-		# context menu for main navigation button ROMS
+		// context menu for main navigation button ROMS
 		$contextRoms = array(
 			'mTopViewModeRomHave' => 'TOGGLE_MAINVIEV_ALL',
 			'mTopViewModeRomDontHave' => 'TOGGLE_VIEWMODE_DONTHAVE',
@@ -908,7 +905,7 @@ class App extends GladeXml {
 		);
 		$this->btnMainShowAllRomsButton->connect_simple_after('pressed', array($this, 'contextViewMode'), $contextRoms);
 
-		# context menu for main navigation button HISTORY
+		// context menu for main navigation button HISTORY
 		$contextHistory = array(
 			'mTopViewModeRomPlayed' => 'TOGGLE_MAINVIEV_DISPLAY_PLAYED',
 			'mTopViewModeRomMostPlayed' => 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED',
@@ -921,7 +918,7 @@ class App extends GladeXml {
 		$this->dropdownStateYesNo = I18n::translateArray('dropdown_meta_state_yes_no', $this->dropdownStateYesNo);
 		$this->dropdownStateCount = I18n::translateArray('dropdown_meta_state_count', $this->dropdownStateCount);
 
-		# left
+		// left
 		$this->nbMediaInfoStateRunningEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_running').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setRunning');
 		$this->nbMediaInfoStateRunningEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 
@@ -934,7 +931,7 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateBuggyEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_buggy').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setBugs');
 		$this->nbMediaInfoStateBuggyEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
-		# right
+		// right
 		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_multiplay').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setMultiplayer');
 		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 
@@ -947,12 +944,12 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateIntroEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_intro').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setIntro');
 		$this->nbMediaInfoStateIntroEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
-		# storage
+		// storage
 		$this->dropdownStorage = I18n::translateArray('dropdown_meta_storage', $this->dropdownStorage);
 		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_storage').'?', $this->dropdownStorage, 'metaEditDirectUpdate', 'setStorage', true);
 		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 
-		# dump type
+		// dump type
 		$this->dropdownDumpType = I18n::translateArray('dropdownDumpType', $this->dropdownDumpType);
 		$this->nbMediaInfoStateDumpEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_dump_type').'?', $this->dropdownDumpType, 'metaEditDirectUpdate', 'setDump_type', true);
 		$this->nbMediaInfoStateDumpEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
@@ -960,7 +957,7 @@ class App extends GladeXml {
 		// region
 		$this->dropdownRegion = I18n::translateArray('dropdown_meta_region', $this->dropdownRegion);
 
-		# icons for rating, reviews, bookmarks and notes
+		// icons for rating, reviews, bookmarks and notes
 		$this->nbMediaInfoStateRatingEvent->connect_simple('button-press-event', array($this, 'metaEditPopupOpen'), false, 1);
 		$this->nbMediaInfoStateRatingEvent->set_property('has-tooltip', true);
 		$this->nbMediaInfoStateRatingEvent->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'nbMediaInfoStateRatingEvent'));
@@ -1008,7 +1005,7 @@ class App extends GladeXml {
 
 		$first = key($this->freeformSearchFields);
 		$this->freeformSearchFields = I18n::translateArray('dropdown_search_fields', $this->freeformSearchFields);
-		#$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
+		//$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
 		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first.'</b></span>');
 		$this->searchSelectorFfType->set_property('has-tooltip', true);
 		$this->searchSelectorFfType->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'search_field_select'));
@@ -1056,21 +1053,22 @@ class App extends GladeXml {
 		// ----------------------------
 		$this->connectSignalsForTopMenu();
 
-		# init popup menus
+		// init popup menus
 		$this->initPopupMetaEdit();
 		$this->initPopupImageCenter();
 
 		// ----------------------------
 		// EVENTBOXES CONNECT
 		// ----------------------------
-		#$this->img_ecc_header_ebox->connect_simple_after('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
+		//$this->img_ecc_header_ebox->connect_simple_after('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
 		$this->img_plattform_ebox->connect_simple_after('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
-		#$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
+		//$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
 
 		// ----------------------------
 		// init preselected imagetype
 		// ----------------------------
-				// ----------------------------
+		
+		// ----------------------------
 		// MEDIA-INFOS Image init
 		// ----------------------------
 
@@ -1150,7 +1148,7 @@ class App extends GladeXml {
 		// navigation_last for database
 		$this->_eccident = $this->ini->getHistoryKey('navigation_last');
 		$ident = ($this->_eccident) ? $this->_eccident : 'null';
-		# rem
+		// rem
 		$platform_name = $this->ini->getPlatformName($ident);
 		$this->setEccident($this->_eccident, false);
 		// set also platform name
@@ -1161,10 +1159,8 @@ class App extends GladeXml {
 		// ----------------------------
 		// platform context menu init
 		// ----------------------------
-
 		$this->treeview1->connect('button-press-event', array($this, 'show_popup_menu_platform_doubleclick'));
 		$this->treeview1->connect('button-release-event', array($this, 'show_popup_menu_platform'));
-
 
 		// ----------------------------
 		// Init main view with roms!
@@ -1250,6 +1246,7 @@ class App extends GladeXml {
 		// ----------------------------
 		// ROM-NAV BUTTONS NXT-PREV aso
 		// ----------------------------
+		$this->media_pager_number->connect_simple('clicked', array($this, 'onNumberRecord'));
 		$this->media_pager_next->connect_simple('clicked', array($this, 'onNextRecord'));
 		$this->media_pager_prev->connect_simple('clicked', array($this, 'onPrevRecord'));
 		$this->media_pager_first->connect_simple('clicked', array($this, 'onFirstRecord'));
@@ -1326,7 +1323,7 @@ class App extends GladeXml {
 			#$this->onInitialRecord(true);
 		}
 
-		# now saved by default!
+		// now saved by default!
 		$leftPanelState = $this->ini->getHistoryKey('vis_hide_panel_nav');
 		$this->visibleNavigation = $leftPanelState;
 		$this->toogleNavPanel();
@@ -1342,11 +1339,11 @@ class App extends GladeXml {
 		$navigationWidth = $this->ini->getHistoryKey('vis_navigation_width');
 		if($navigationWidth) $this->hpaned1->set_position($navigationWidth);
 
-		# get the ids of the last selected game!
+		// get the ids of the last selected game!
 		$lastSelectedGame = $this->ini->getHistoryKey('last_selected_game');
 		if($lastSelectedGame) $this->updateRomInfoPanel(false, $lastSelectedGame);
 
-		# get last state of the window before it closes!
+		// get last state of the window before it closes!
 		$guiState = $this->ini->getHistoryKey('gui_main_state');
 		if($guiState == 4){
 			$this->wdo_main->maximize();
@@ -1355,7 +1352,7 @@ class App extends GladeXml {
 //			$this->wdo_main->fullscreen();
 //		}
 		else{
-			# get the ids of the last selected game!
+			// get the ids of the last selected game!
 			$guiSize = $this->ini->getHistoryKey('gui_main_size');
 			if($guiSize){
 				list ($width, $height) = explode('x', $guiSize);
@@ -1363,7 +1360,7 @@ class App extends GladeXml {
 				#$this->navPanelMainSize = array((int)$width, (int)$height);
 			}
 
-			# move the gui to the last stored coordinates
+			// move the gui to the last stored coordinates
 			$guiPosition = $this->ini->getHistoryKey('gui_main_position');
 			if ($guiPosition) {
 				list($width, $height) = explode('x', $guiPosition);
@@ -1436,20 +1433,20 @@ class App extends GladeXml {
 
 		$selection = $widget->get_selection();
 
-		# get the source
+		// get the source
 		list($model, $iter) = $selection->get_selected();
 		if ($iter === null) return false;
 		#$sourceFileId = $model->get_value($iter, 3);
 		$sourceCompoundId = $model->get_value($iter, 5);
 
-		# get the destination
+		// get the destination
 		$pathData = $widget->get_path_at_pos($x, $y);
 		if(!is_array($pathData)) return false;
 
-		# hotfix "ECC 0.9.6 WIP21 list comparing bug"
-		# the coordinates are wrong in the listview, so
-		# the next entry is selected! path -1 selects the
-		#  right one in list mode
+		// hotfix "ECC 0.9.6 WIP21 list comparing bug"
+		// the coordinates are wrong in the listview, so
+		// the next entry is selected! path -1 selects the
+		// right one in list mode
 		if($this->optVisMainListMode){
 			$path = $pathData[0][0]-1;
 			if($path < 1) $path = 0;
@@ -1564,9 +1561,9 @@ class App extends GladeXml {
 		$this->mTopFileSearch->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
 		$this->mTopFileSearch->set_sensitive(false);
 
-		# 20070628 deactivated
-		# $this->menubar_filesys_organize_roms_preview->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE_PREVIEW');
-		# $this->menubar_filesys_organize_roms->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE');
+		// 20070628 deactivated
+		// $this->menubar_filesys_organize_roms_preview->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE_PREVIEW');
+		// $this->menubar_filesys_organize_roms->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE');
 
 		// ----------------------------
 		// MAINTENANCE
@@ -1595,11 +1592,11 @@ class App extends GladeXml {
 		$this->mTopViewModeRomNotPlayed->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED');
 		$this->mTopViewModeRomBookmarks->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');
 
-		# List Detail / Simple
-		# First init selected state
+		// List Detail / Simple
+		// First init selected state
 		if ($this->optVisMainListMode) $this->mTopViewListSimple->set_active(true);
 		else $this->mTopViewListDetail->set_active(true);
-		# connect the signals
+		// connect the signals
 		$this->mTopViewListDetail->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 		$this->mTopViewListSimple->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 
@@ -1615,8 +1612,8 @@ class App extends GladeXml {
 		$this->mTopDatDFU->connect_simple('activate', array($this, 'executeCommands'), 'START_DATFILEUPDATE');
 		$this->mTopOptionCreateStartmenuShortcuts->connect_simple('activate', array($this, 'executeCommands'), 'START_CREATESTARTMENUICONS');
 		$this->mTopServicesKameleonCode->connect_simple('activate', array($this, 'executeCommands'), 'START_KAMELEON');	
+		$this->mTopServicesEmuMoviesAD->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUMOVIES_ACCOUNTDATA');	
 		
-		// $this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images')); //Not used anymore (changed on 2011-12-22)
 		$this->mTopDeveloperSQL->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_SQL');	
 		$this->mTopDeveloperGUI->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_GUI');
 		$this->mTopAutoIt3GUI->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_GUI_KODA');	
@@ -1638,46 +1635,6 @@ class App extends GladeXml {
 		$this->mTopHelpWebsite->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
 		$this->mTopHelpForum->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_FORUM'], 'open');
 		$this->mTopHelpAbout->connect_simple('activate', array(FACTORY::get('manager/GuiHelper'), 'open_splash_screen'));
-	}
-
-	public function convertEccV1Images() {
-
-		$data = $this->imageManager->convertAllOldEccImages(false);
-		if (!in_array(1, $data)) return $this->guiManager->openDialogInfo('DONE', 'Found no old ecc images!', false, $this->getThemeFolder('icon/ecc_mbox_error.png', true));
-		$out = array();
-		foreach($data as $eccident => $state){
-			if ($state) $out[] = $eccident;
-		}
-
-		if (FACTORY::get('manager/Gui')->openDialogConfirm('Confirm', "Found some old emuControlCenter images for...\n\n\"".join('", "', $out)."\"\n\nshould i convert them?")){
-
-			if ($this->status_obj->init()) {
-
-				$this->status_obj->set_label(i18n::get('popup', 'stateLabelConvertOldImages'));
-				$this->status_obj->set_popup_cancel_msg();
-				$this->status_obj->show_main();
-				$this->status_obj->show_output();
-
-				$res = $this->imageManager->convertAllOldEccImages(true, $this->status_obj);
-
-				$out = "";
-				foreach($res as $eccident => $count){
-					if ($count) {
-						# rem
-						$platformName = $this->ini->getPlatformName($eccident);
-						if (is_array($platformName)) $platformName = '';
-						$out .= "$count images for $platformName ($eccident)".LF;
-					}
-				}
-
-				$log = "Converted images statistic:\n\n".$out."";
-				$this->status_obj->update_message($log);
-				$this->status_obj->update_progressbar(1, 'DONE');
-				$title = 'DONE';
-				$msg = "All found images converted";
-				$this->status_obj->open_popup_complete($title, $msg);
-			}
-		}
 	}
 
 	public function DatFileExport($user_only=false, $userfoder_path=true, $verbose=true, $use_esearch=false)
@@ -1794,8 +1751,8 @@ class App extends GladeXml {
 //
 //				if (isset($statistics['ISSET']) && count($statistics['ISSET'])) {
 //					$msg .= "########################################\n";
-//					$msg .= "# CONFLICT!!!!\n";
-//					$msg .= "# Rom with same name allready in folder!\n";
+//					$msg .= "// CONFLICT!!!!\n";
+//					$msg .= "// Rom with same name allready in folder!\n";
 //					$msg .= "########################################\n";
 //					foreach ($statistics['ISSET'] as $category => $value) {
 //						$msg .= "$category\n";
@@ -1835,7 +1792,7 @@ class App extends GladeXml {
 //
 //				if (isset($statistics['DONE']) && count($statistics['DONE'])) {
 //					$msg .= "########################################\n";
-//					$msg .= "# NEW STRUCTURE PREVIEW:\n";
+//					$msg .= "// NEW STRUCTURE PREVIEW:\n";
 //					$msg .= "########################################\n";
 //					foreach ($statistics['DONE'] as $category => $value) {
 //						$msg .= "$category\n";
@@ -1873,7 +1830,7 @@ class App extends GladeXml {
 		$status = $this->status_obj;
 
 		if ($status->init()) {
-			# rem
+			// rem
 			$platfom = $this->ini->getPlatformName($eccident);
 			$lastSelected = $this->ini->getHistoryKey('ImportDatCmLast_'.$eccident);
 			if (!$lastSelected) $lastSelected = realpath(ECC_DIR_SYSTEM.'/datfile/'.strtolower($eccident).'.dat');
@@ -1963,7 +1920,7 @@ class App extends GladeXml {
 			$import = new DatFileImport($this->_eccident, $this->status_obj, $this->ini);
 			$import->setDbms($this->dbms);
 
-			# direct add internet datfile
+			// direct add internet datfile
 			if($eccDatfileData) $import->setDirectDatfileContent($eccDatfileData);
 
 			$import->parse($path);
@@ -2012,7 +1969,7 @@ class App extends GladeXml {
 
 				if (!$media_type) $media_type = $this->_eccident;
 
-				# re,
+				// re,
 				#$platformName = ($media_type) ? $this->ini->getPlatformNavigation($media_type) : strtoupper(i18n::get('global', 'allFound'));
 				$platformName = $this->ini->getPlatformName($media_type);
 
@@ -2129,9 +2086,6 @@ class App extends GladeXml {
 		return true;
 	}
 
-	/*
-	*
-	*/
 	public function onResetSearch()
 	{
 		$this->breakSearchReset = true;
@@ -2166,6 +2120,20 @@ class App extends GladeXml {
 	 * @return boolean
 	 */
 	public function startRom($alternateEmuName = false) {
+		
+		// TRIGGER - VIDEOPLAYER - 'emulatorrun' | config setting: eccVideoPlayer_enable
+		$eccVideoPlayer_enable = $this->ini->getKey('VIDEOPLAYER', 'eccVideoPlayer_enable');
+		if ($eccVideoPlayer_enable == "1"){
+			$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+			$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_VIDEOPLAYER']);
+			$objFSO = new COM("Scripting.FileSystemObject"); 
+			$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+			$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+			$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+			$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+			$shell = new COM("WScript.Shell"); // Using COM object to disable waiting for the script to finish! (start /b doens't work for all computers and OS'es)
+			$shell->run($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' emulatorrun', 0, false);
+		}
 
 		// get RomX object
 		$rom = $this->getSelectedRom();
@@ -2220,7 +2188,7 @@ class App extends GladeXml {
 			$unpackFolder = $this->ini->getUnpackFolder($systemIdent, true);
 
 
-			// if unpack is needed, because the file isn�t already unpacked, do it now!
+			// if unpack is needed, because if the file isn't already unpacked, do it now!
 			switch($romFile->getFileExtension()){
 				case 'zip':
 
@@ -2259,7 +2227,7 @@ class App extends GladeXml {
 					if(@$usedEmu['enableZipUnpackSkip']){
 						if(file_exists($tempFilePath)) $unpackFileNeeded = false;
 					}
-					// Unpack a single file or ALL?
+					// unpack a single file or ALL?
 					if(@$usedEmu['enableZipUnpackAll']){
 						if($unpackFileNeeded) FileIO::extractSzipAll($romFile->getFilePath(), $romFile->getFilePathPacked(), $unpackFolder);
 						}
@@ -2301,9 +2269,9 @@ class App extends GladeXml {
 //		print_r($romMeta);
 //		echo '</pre>';
 
-// [media_type:protected] => 3
-// [media_current:protected] => 1
-// [media_count:protected] => 3
+//		[media_type:protected] => 3
+//		[media_current:protected] => 1
+//		[media_count:protected] => 3
 
 		// get possible filenames
 		$possibleMediaNames = array();
@@ -2500,7 +2468,6 @@ class App extends GladeXml {
 					$emuParameter = str_replace($searchString, $replaceString, $emuParameter);
 				}
 			}
-
 		}
 
 		$eccScriptRomDat = '';
@@ -2536,9 +2503,7 @@ class App extends GladeXml {
 		$this->oGuiConfig->open($type, $eccident, $errorMessage);
 	}
 
-	/*
-	*
-	*/
+
 	public function set_style($text_obj, $size=14000, $color="#cc0000")
 	{
 		$font = new PangoFontDescription();
@@ -2572,36 +2537,36 @@ class App extends GladeXml {
 
 	public function handleShortcuts($widged, $event) {
 
-		# only for debug output
-//		print "$event->keyval && $event->state".LF;
-//		return true;
+		// only for debug output
+		// print "$event->keyval && $event->state".LF;
+		// return true;
 
 		switch ($event->keyval){
 
-			case '65535': # DEL
+			case '65535': // DEL
 
-				# only delete, if main treeview is focused and data is selected!
+				// only delete, if main treeview is focused and data is selected!
 				$searchFocusState = $this->newTreeView->is_focus();
 				if(!$searchFocusState || !$this->getSelectedRom()) return false;
 
 				switch ($event->state){
-					case '0': # DIRECT
-						# remove rom from database
+					case '0': // DIRECT
+						// remove rom from database
 						$this->executeRomMenuCommands('REMOVE_MEDIA');
 						return true;
 						break;
-					case '1': # SHIFT
-						# remove from disk
+					case '1': // SHIFT
+						// remove from disk
 						$this->executeRomMenuCommands('SHELLOP', 'FILE_REMOVE');
 						return true;
 						break;
-					case '4': # CTRL (STRG in Germany)
-						# remove metadata for selected rom
+					case '4': // CTRL (STRG in Germany)
+						// remove metadata for selected rom
 						$this->executeRomMenuCommands('REMOVE_META_SINGLE');
 						return true;
 						break;
-					case '8': # ALT
-						# remove all images from this rom
+					case '8': // ALT
+						// remove all images from this rom
 						$this->executeRomMenuCommands('IMG_REMOVE_ALL');
 						return true;
 						break;
@@ -2776,7 +2741,6 @@ class App extends GladeXml {
 		return true;
 	}
 
-	##TEST
 	public function selectViewModeBookmarks(){
 		$this->view_mode = 'BOOKMARK';
 		$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');
@@ -2846,7 +2810,7 @@ class App extends GladeXml {
 			$this->visibleNavigation = true;
 		}
 
-		# store this information to history ini
+		// store this information to history ini
 		$this->ini->storeHistoryKey('vis_hide_panel_nav', !$this->visibleNavigation, false);
 
 		return true;
@@ -2871,7 +2835,7 @@ class App extends GladeXml {
 			$this->visibleMedia = true;
 		}
 
-		# store this information to history ini
+		// store this information to history ini
 		$this->ini->storeHistoryKey('vis_hide_panel_info', !$this->visibleMedia, false);
 
 		return true;
@@ -2889,7 +2853,7 @@ class App extends GladeXml {
 			$this->visibleSearch = true;
 		}
 
-		# store this information to history ini
+		// store this information to history ini
 		$this->ini->storeHistoryKey('vis_hide_panel_search', !$this->visibleSearch, false);
 
 		return true;
@@ -2972,7 +2936,7 @@ class App extends GladeXml {
 
 		if (!$managerImportCM->auditBySystemDat($eccident)){
 
-			# rem
+			// rem
 			$platfom = $this->ini->getPlatformName($eccident);
 			$lastSelected = $this->ini->getHistoryKey('ImportDatCmLast_'.$eccident);
 			$shorcutFolder = $this->ini->getShortcutPaths($eccident);
@@ -2995,8 +2959,8 @@ class App extends GladeXml {
 	// break, to avoid refresh of this data
 	private $lastSelectedRom = false;
 
-	public function updateRomInfoPanel($obj=false, $directCompositeId = false)
-	{
+	public function updateRomInfoPanel($obj=false, $directCompositeId = false) {
+		global $triggerstart;
 		// get the composite id (fileId|metaId)
 		$compositeId = false;
 		if ($directCompositeId) {
@@ -3092,22 +3056,22 @@ class App extends GladeXml {
 				// set the rom title
 				$this->set_style($this->media_nb_info_title, 10000);
 				$this->media_nb_info_title->set_text($rom->getFormatedName());
-
+				
 				// set the file info string
 				$metaInfo = ($romMeta->getInfo()) ? str_replace('|', ' ', $romMeta->getInfo()) : '';
 				$this->setSpanMarkup($this->media_nb_info_infos, $metaInfo, '#334455');
 
-				// set the filesize as formated string!
+				// set the filesize as formated string!;'
 				$this->setSpanMarkup($this->media_nb_info_file_size, $romFile->getFileSizeString(), '#334455');
 
 				// set the crc32 value
 				$this->setSpanMarkup($this->media_nb_info_file_crc32, $crc32, '#334455');
-
+		
 				// set the info-id value
 				$this->setSpanMarkup($this->media_nb_info_infoid, $romMeta->getInfo_id(), '');
 
-				# get rom icon, if available
-				if ($iconPath = $this->imageManager->getImageByType($eccident, $crc32, 'media_icon', false)) $iconPath = reset($iconPath); # because its an array
+				// get rom icon, if available
+				if ($iconPath = $this->imageManager->getImageByType($eccident, $crc32, 'media_icon', false)) $iconPath = reset($iconPath); // because its an array
 				else $iconPath = dirname(__FILE__)."/".'images/internal/ecc_icon_small.ico';
 				$this->media_nb_info_icon->set_from_pixbuf($this->oHelper->getPixbuf($iconPath, false, false, false, 46, 46)); // create image with max width/height
 
@@ -3182,7 +3146,6 @@ class App extends GladeXml {
 				#$this->mainImageListViewUpdate();
 				Gtk::timeout_add(100, array($this, 'mainImageListViewUpdate'));
 				#Gtk::idle_add(array($this, 'mainImageListViewUpdate'));
-
 				// update the flag icons for languages
 				$this->updateMediaInfoFlags(array_keys($romMeta->getLanguages()));
 
@@ -3198,15 +3161,39 @@ class App extends GladeXml {
 //				#$this->obj_image_type->fill($availableImageTypes);
 //				$this->obj_image_type = new IndexedCombobox($this->cb_image_type, false, $availableImageTypes, false, $this->image_type_selected);
 
+				// Write INI file for SELECTED ROM (added 2012.10.15)
+				if ($triggerstart) { // prevent trigger when ECC fills the variables on startup of ECC
+					$sampleData = array( 
+					'ROMDATA' => array(
+						'rom_platformid' => $rom->getSystemIdent(),
+						'rom_platformname' => $this->ini->getPlatformName($this->_eccident),
+						'rom_name' => $rom->getName(),
+						'rom_crc32' => $rom->getCrc32(),
+					));	
+					write_ini_file($sampleData, 'selectedrom.ini', true);
+
+					// TRIGGER - VIDEOPLAYER - 'romselected' | config setting: eccVideoPlayer_enable
+					$eccVideoPlayer_enable = $this->ini->getKey('VIDEOPLAYER', 'eccVideoPlayer_enable');
+					if ($eccVideoPlayer_enable == "1"){
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_VIDEOPLAYER']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						$shell = new COM("WScript.Shell"); // Using COM object to disable waiting for the script to finish! (start /b doens't work for all computers and OS'es)
+						$shell->run($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' romselected', 0, false);
+					}
+				}
+				$triggerstart = 1;
 			}
 		}
-
 		// this will update the imagepopup on the fly
 		$this->openImageCenter(true);
 
 		// this will update the mediaedit popup on the fly if the popup is opened
 		$this->metaEditPopupOpen(true);
-
 	}
 
 	/**
@@ -3391,7 +3378,7 @@ class App extends GladeXml {
 
 	public function show_popup_menu_platform_doubleclick($obj, $event){
 
-		# not possible for all found!
+		// not possible for all found!
 		if (!$this->_eccident) return false;
 
 		if ($event->button == 1 && $event->type == 5) {
@@ -3481,7 +3468,26 @@ class App extends GladeXml {
 			$menu->append($menuItem);
 
 			$menu->append(new GtkSeparatorMenuItem());
-	
+
+			// ----------------------------------------------------------------
+			// EMULATORS
+			// ----------------------------------------------------------------			
+
+			$menuTop = new GtkMenu();
+			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator'), $this->getThemeFolder('icon/ecc_computer.png'));
+			$menuTopItem->set_submenu($menuTop);
+			$menu->append($menuTopItem);
+			
+			// download emulators from internet
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_import_online'), $this->getThemeFolder('icon/ecc_download.png'));
+			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER');
+			$menuTop->append($menuSubItem);
+
+			// open emulator info
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_information'), $this->getThemeFolder('icon/ecc_comment.png'));
+			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER_INFO');
+			$menuTop->append($menuSubItem);
+		
 			// ----------------------------------------------------------------
 			// Platform Images
 			// ----------------------------------------------------------------		
@@ -3491,11 +3497,16 @@ class App extends GladeXml {
 			$menuTopItem->set_submenu($menuTop);
 			$menu->append($menuTopItem);
 
-			// get platform images from internet
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_online'), $this->getThemeFolder('icon/ecc_download.png'));
+			// download platform images from internet (ICC)
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_online'), $this->getThemeFolder('icon/ecc_icc.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEINJECT_PLATFORM');
 			$menuTop->append($menuSubItem);
 
+			// download platform images from internet (EmuMovies)
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_emumovies'), $this->getThemeFolder('icon/ecc_emumovies.png'));
+			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUMOVIES');
+			$menuTop->append($menuSubItem);
+			
 			// import images from local folder (non ECC).
 			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_local'), $this->getThemeFolder('icon/ecc_download_folder.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEPACKCENTER_IMPORT');	
@@ -3527,11 +3538,6 @@ class App extends GladeXml {
 			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveAllThumbnails'), $this->getThemeFolder('icon/ecc_remove.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveAllThumbnails', $this->_eccident));
 			$menuTop->append($menuSubItem);
-			
-			// 2012-07-03 Feature Disabled, this is not needed anymore and was an old function
-			//$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackConvertEccV1Images'));
-			//$menuSubItem->connect_simple('activate', array($this, 'convertEccV1Images'));
-			//$menuTop->append($menuSubItem);		
 			
 			$menu->append(new GtkSeparatorMenuItem());
 
@@ -4156,7 +4162,7 @@ class App extends GladeXml {
 					if (count($reparsePaths)) {
 
 						$title = I18N::get('popup', 'romReparseAllTitle');
-						# rem
+						// rem
 						$msg = sprintf(I18N::get('popup', 'romReparseAllMsg%s'), $this->ini->getPlatformName($eccident))."\n";
 						if (!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) return false;
 
@@ -4172,7 +4178,7 @@ class App extends GladeXml {
 					if (count($allReparsePaths)) {
 
 						$platformNames = array();
-						# rem
+						// rem
 						foreach($allReparsePaths as $key => $void) $platformNames[] = $this->ini->getPlatformName($key);
 
 						if (!$silentReparse){
@@ -4324,7 +4330,7 @@ class App extends GladeXml {
 				}
 				$menu->append($menuItem);
 
-				# configure emulator
+				// configure emulator
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/ecc_settings.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'OPEN_CONFIG',  'EMU', $romFile->getSystemIdent());
 				$menu->append($menuItem);
@@ -4402,17 +4408,36 @@ class App extends GladeXml {
 
 				$menu->append(new GtkSeparatorMenuItem());
 
-				// download images from internet
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_inject'), $this->getThemeFolder('icon/ecc_download.png'));
-				//$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'GET_IMAGE'); //OLD!!, NOT USED ANYMORE!
-				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_IMAGEINJECT');
+				
+				// ----------------------------------------------------------------
+				// ROM content options
+				// ----------------------------------------------------------------
+				$subMenu = new GtkMenu();
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_content'), $this->getThemeFolder('icon/ecc_download_folder.png'));
+				$menuItem->set_submenu($subMenu);
 				$menu->append($menuItem);
 
+				// download images from internet
+				//$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'GET_IMAGE'); //OLD!!, NOT USED ANYMORE!
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_inject'), $this->getThemeFolder('icon/ecc_icc.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_IMAGEINJECT');
+				$subMenu->append($menuItem);
+				
+				// add videofile for ROM
+				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_rom_video_add'), $rom->getName()), $this->getThemeFolder('icon/ecc_video.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_VIDEOPLAYER_VIDEOADD');
+				$subMenu->append($menuItem);
+	
+				// delete videofile(s) for ROM
+				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_rom_video_delete'), $rom->getName()), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_VIDEOPLAYER_VIDEODELETE');
+				$subMenu->append($menuItem);
+	
 				// open ecc imageCenter
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_popup'), $this->getThemeFolder('icon/ecc_image.png'));
 				$menuItem->connect_simple('activate', array($this, 'openImageCenter'), false);
-				$menu->append($menuItem);
-			
+				$menu->append($subMenuContent);
+				
 				// reload images
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_reload'), $this->getThemeFolder('icon/ecc_reload.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'RELOAD');
@@ -4501,28 +4526,28 @@ class App extends GladeXml {
 				$menu->append($menuItem);
 
 				// remove rom file
-				$menuItemRemRom = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
-				$menuItemRemRom->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_MEDIA');
-				$menuItemRemRom->set_sensitive($romFile->getId());
-				$subMenu->append($menuItemRemRom);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_MEDIA');
+				$menuItem->set_sensitive($romFile->getId());
+				$subMenu->append($menuItem);
 
 				// remove rom meta
-				$menuItemRemMeta = $this->createImageMenuItem(I18N::get('menu', 'lContextMetaRemove'), $this->getThemeFolder('icon/ecc_remove.png'));
-				$menuItemRemMeta->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_META_SINGLE');
-				$menuItemRemMeta->set_sensitive($romMeta->getId());
-				$subMenu->append($menuItemRemMeta);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lContextMetaRemove'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_META_SINGLE');
+				$menuItem->set_sensitive($romMeta->getId());
+				$subMenu->append($menuItem);
 
 				// remove rom file and meta and images
-				$menuItemRemImages = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_remove_all'), $this->getThemeFolder('icon/ecc_remove.png'));
-				$menuItemRemImages->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'IMG_REMOVE_ALL');
-				$subMenu->append($menuItemRemImages);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_remove_all'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'IMG_REMOVE_ALL');
+				$subMenu->append($menuItem);
 
 				$subMenu->append(new GtkSeparatorMenuItem());
 
 				// remove all roms
-				$menuItemRemRomsForPlatform = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($rom->getSystemIdent())), $this->getThemeFolder('icon/ecc_remove.png'));
-				$menuItemRemRomsForPlatform->connect_simple('activate', array($this, 'MediaMaintDb'), 'CLEAR_MEDIA', $rom->getSystemIdent());
-				$subMenu->append($menuItemRemRomsForPlatform);
+				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($rom->getSystemIdent())), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->connect_simple('activate', array($this, 'MediaMaintDb'), 'CLEAR_MEDIA', $rom->getSystemIdent());
+				$subMenu->append($menuItem);
 
 				$menu->append(new GtkSeparatorMenuItem());
 
@@ -4530,9 +4555,9 @@ class App extends GladeXml {
 				// File operations menu
 				// ----------------------------------------------------------------
 				
-				$menuShellOperations = new GtkMenu();
+				$subMenu = new GtkMenu();
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_submenu'), $this->getThemeFolder('icon/ecc_save.png'));
-				$menuItem->set_submenu($menuShellOperations);
+				$menuItem->set_submenu($subMenu);
 				$menu->append($menuItem);
 
 				if (!$romFile->getId() || !file_exists($romFile->getFilePath())) {
@@ -4542,36 +4567,28 @@ class App extends GladeXml {
 					$menuItem->set_sensitive(true);
 
 					// rename file
-					$miFileRename = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_rename'), $this->getThemeFolder('icon/ecc_how_to.png'));
-					$miFileRename->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_RENAME');
-					$menuShellOperations->append($miFileRename);
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_rename'), $this->getThemeFolder('icon/ecc_how_to.png'));
+					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_RENAME');
+					$subMenu->append($menuItem);
 
 					// copy file
-					$miFileCopy = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_copy'), $this->getThemeFolder('icon/ecc_copy.png'));
-					$miFileCopy->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_COPY');
-					$menuShellOperations->append($miFileCopy);
-
-					// unpack file
-					$miFileUnpack = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_unpack'), $this->getThemeFolder('icon/ecc_unpack.png'));
-					$miFileUnpack->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_UNPACK');
-					$menuShellOperations->append($miFileUnpack);
-					$miFileUnpack->set_sensitive(false);
-
-					$menuShellOperations->append(new GtkSeparatorMenuItem());
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_copy'), $this->getThemeFolder('icon/ecc_copy.png'));
+					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_COPY');
+					$subMenu->append($menuItem);
 
 					// remove file
-					$miFileRemove = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
-					$miFileRemove->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_REMOVE');
-					$menuShellOperations->append($miFileRemove);
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
+					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_REMOVE');
+					$subMenu->append($menuItem);
 				}
 
 				$menu->append(new GtkSeparatorMenuItem());
 
-				// copy file
-				$miFileSearch = $this->createImageMenuItem(I18N::get('menuTop', 'mTopFileSearch'), $this->getThemeFolder('icon/ecc_sync.png'));
-				$miFileSearch->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
-				$menuShellOperations->append($miFileSearch);
-				$miFileSearch->set_sensitive($this->_eccident);
+				// search file
+				$menuItem = $this->createImageMenuItem(I18N::get('menuTop', 'mTopFileSearch'), $this->getThemeFolder('icon/ecc_sync.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
+				$subMenu->append($menuItem);
+				$menuItem->set_sensitive($this->_eccident);
 
 				// multifile rom audit options
 				$systemIdent = $rom->getSystemIdent();
@@ -4580,14 +4597,14 @@ class App extends GladeXml {
 					$menu->append(new GtkSeparatorMenuItem());
 
 					// show rom audit info
-					$echo4 = new GtkMenuItem(I18N::get('menu', 'labelRomAuditInfo'));
-					$echo4->connect_simple('activate', array($this, 'openRomAuditPopup'));
-					$menu->append($echo4);
+					$menuItem = new GtkMenuItem(I18N::get('menu', 'labelRomAuditInfo'));
+					$menuItem->connect_simple('activate', array($this, 'openRomAuditPopup'));
+					$menu->append($menuItem);
 
 					// update rom audit informains
-					$echo4 = new GtkMenuItem(I18N::get('menu', 'labelRomAuditReparse'));
-					$echo4->connect_simple('activate', array($this, 'romAuditReparse'), $systemIdent);
-					$menu->append($echo4);
+					$menuItem = new GtkMenuItem(I18N::get('menu', 'labelRomAuditReparse'));
+					$menuItem->connect_simple('activate', array($this, 'romAuditReparse'), $systemIdent);
+					$menu->append($menuItem);
 
 					$menu->append(new GtkSeparatorMenuItem());
 				}
@@ -4771,12 +4788,6 @@ class App extends GladeXml {
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
 				break;
 			case 'START_IMAGEPACKCENTER_EXPORT':
-				$sampleData = array( 
-				'PLATFORMDATA' => array(
-					'platform_eccid' => ($this->_eccident), //write ECCid (console id)
-					'platform_name' => ($this->ini->getPlatformName($this->_eccident)),
-				));					
-				write_ini_file($sampleData, 'eccplatformdata.ini', true);
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEPACKCENTER']);
 				$objFSO = new COM("Scripting.FileSystemObject"); 
@@ -4787,12 +4798,6 @@ class App extends GladeXml {
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' export');		
 				break;
 			case 'START_IMAGEPACKCENTER_IMPORT':
-				$sampleData = array( 
-				'PLATFORMDATA' => array(
-					'platform_eccid' => ($this->_eccident), //write ECCid (console id)
-					'platform_name' => ($this->ini->getPlatformName($this->_eccident)),
-				));					
-				write_ini_file($sampleData, 'eccplatformdata.ini', true);
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEPACKCENTER']);
 				$objFSO = new COM("Scripting.FileSystemObject"); 
@@ -4822,6 +4827,16 @@ class App extends GladeXml {
 				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
 				break;
+			case 'START_EMUMOVIES_ACCOUNTDATA':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_EMUMOVIES']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' accountdata');
+				break;
 			case 'START_ECC_DEV_SQL':
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_SQL']);
@@ -4831,7 +4846,7 @@ class App extends GladeXml {
 				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
 				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
-				break;				
+				break;	
 			case 'START_ECC_DEV_GUI':
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_GUI']);
@@ -4841,7 +4856,7 @@ class App extends GladeXml {
 				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
 				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
-				break;					
+				break;		
 			case 'START_ECC_DEV_GUI_KODA':
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_GUI_KODA']);
@@ -4853,11 +4868,6 @@ class App extends GladeXml {
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
 				break;
 			case 'START_IMAGEINJECT_PLATFORM':
-				$sampleData = array( 
-				'ROMDATA' => array(
-					'rom_eccid' => ($this->_eccident), //write ECCid (console id)
-				));				
-				write_ini_file($sampleData, 'eccromdata.ini', true);
 				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEINJECT']);
 				$objFSO = new COM("Scripting.FileSystemObject"); 
@@ -4870,9 +4880,38 @@ class App extends GladeXml {
 				$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
 				$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
 				break;
+			case 'START_EMUMOVIES':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_EMUMOVIES']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				$this->onReloadRecord(); //Refresh images in main list
+				$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
+				$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
+				break;
+			case 'START_EMUDOWNLOADCENTER':
+				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+ 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_EMUDOWNLOADCENTER']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				break;
+			case 'START_EMUDOWNLOADCENTER_INFO':
+				$NotepadExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT_EDITOR']);
+				$objFSO = new COM("Scripting.FileSystemObject"); 
+				$NotepadExe_ = $objFSO->GetFile($NotepadExe);
+				$NotepadExe_DosPath = $NotepadExe_->ShortPath;
+				exec($NotepadExe_DosPath.' '.realpath(ECC_DIR.'/ecc-core/tools/emuDownloadCenter.txt'));
+				break;
 			}
 	}
-	
 	
 	/**
 	 * Dispatcher for commands from context or top menus and buttons (when ROM is selectged or ROM data can be aquired)
@@ -4916,21 +4955,17 @@ class App extends GladeXml {
 				}
 				break;
 			case 'REMOVE_META_SINGLE': // remove single meta data
-
 				$metaId = $romMeta->getId();
 				if (!$metaId) return false;
-
 				// show confirm popup
 				$title = I18N::get('popup', 'metaRemoveSingleTitle');
 				$msg = I18N::get('popup', 'metaRemoveSingleMsg');
 				if (!$this->guiManager->openDialogConfirm($title, $msg, array('dhide_remove_meta_single'))) return false;
-
 				// now remove from db, unset romMeta object and create new compound id
 				$this->_fileView->removeSingleMetaData($metaId);
 				unset($romMeta);
 				$this->onReloadRecord();
 				$this->updateRomInfoPanel(false, $romFile->getId().'|');
-
 				break;
 			case 'GET_IMAGE': // ecc inject internet image download
 				$this->getImagesByEccInject();
@@ -4947,7 +4982,7 @@ class App extends GladeXml {
 				elseif($parameter == 'GET_ROMDB_DATFILE'){
 
 					$title = I18N::get('popup', 'eccdb_webservice_get_datfile_title');
-					# rem
+					// rem
 					$msg = sprintf(I18N::get('popup', 'eccdb_webservice_get_datfile_msg%s'), '<b>'.$this->ini->getPlatformName($this->_eccident).'</b>');
 					if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
 
@@ -4970,7 +5005,7 @@ class App extends GladeXml {
 						return false;
 					}
 
-					# save before add
+					// save before add
 					if ($parameter2) $this->metaEditPopupSave();
 
 					$title = I18N::get('popup', 'eccdb_title');
@@ -5041,16 +5076,6 @@ class App extends GladeXml {
 			case 'SHELLOP':
 				switch ($parameter) {
 					case 'START_3DGALLERY':
-						$sampleData = array( 
-						'ROMDATA' => array(
-							// 2012-07-24 not used (yet)
-							// 'rom_name' => $rom->getName(), //write ROM name (title)
-							'rom_crc32' => $rom->getCrc32(), //write crc32
-							'rom_eccid' => $rom->getSystemIdent(), //write ECCid (console id)
-							// 2012-07-24 ecc_path not needed anymore, done in autoit3 script.
-							// 'ecc_path' => realpath('../'), //write ECC path
-						));				
-						write_ini_file($sampleData, 'eccromdata.ini', true);
 						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_3DGALLERY']);
 						$objFSO = new COM("Scripting.FileSystemObject"); 
@@ -5071,16 +5096,6 @@ class App extends GladeXml {
 						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' config');
 						break;
 					case 'START_IMAGEINJECT':
-						$sampleData = array( 
-						'ROMDATA' => array(
-							// 2012-07-24 not used (yet)
-							// 'rom_name' => $rom->getName(), //write ROM name (title)
-							'rom_crc32' => $rom->getCrc32(), //write crc32
-							'rom_eccid' => $rom->getSystemIdent(), //write ECCid (console id)
-							// 2012-07-24 ecc_path not needed anymore, done in autoit3 script.
-							// 'ecc_path' => realpath('../'), //write ECC path
-						));				
-						write_ini_file($sampleData, 'eccromdata.ini', true);
 						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_IMAGEINJECT']);
 						$objFSO = new COM("Scripting.FileSystemObject"); 
@@ -5092,7 +5107,27 @@ class App extends GladeXml {
 						$this->onReloadRecord(); //Refresh images in main list
 						$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
 						$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
-						break;				
+						break;
+					case 'START_VIDEOPLAYER_VIDEOADD':
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_VIDEOPLAYER']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' videoadd');
+						break;
+					case 'START_VIDEOPLAYER_VIDEODELETE':
+						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_VIDEOPLAYER']);
+						$objFSO = new COM("Scripting.FileSystemObject"); 
+						$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+						$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+						$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+						$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+						exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' videodelete');
+						break;
 					case 'BROWSE_ASSET':
 						$assetPath = $this->ini->getUserFolder($rom->getSystemIdent(), '/assets/'.substr($rom->getCrc32(), 0, 2).'/'.$rom->getCrc32(), true);
 						foreach($this->rom_path_subfolder['assets'] as $subPath){
@@ -5135,9 +5170,6 @@ class App extends GladeXml {
 						$pGuiFileOp->setSourceFileName($romFile->getFilePath());
 						$pGuiFileOp->setDestinationFileName(false);
 						$pGuiFileOp->openDeleteDialog();
-						break;
-					case 'FILE_UNPACK':
-						print "NOT IMPLEMENTED!!! FILE_UNPACK\n";
 						break;
 
 					/*
@@ -5249,10 +5281,10 @@ class App extends GladeXml {
 
 	public function initPopupMetaEdit(){
 
-		# windows
+		// windows
 		$this->win_media_edit->connect('delete-event', array($this, 'metaEditPopupHide'));
 
-		# rating
+		// rating
 		$this->mEditUserRatingFunScale->connect('value-changed', array($this, 'processChangedUserRating'));
 		$this->mEditUserRatingGameplayScale->connect('value-changed', array($this, 'processChangedUserRating'));
 		$this->mEditUserRatingGraphicsScale->connect('value-changed', array($this, 'processChangedUserRating'));
@@ -5292,7 +5324,7 @@ class App extends GladeXml {
 	 */
 	public function metaEditPopupOpen($onlyShowIfOpened=false, $openTab = false)
 	{
-		# open tab
+		// open tab
 		if($openTab !== false) $this->mEditUserNotebook->set_current_page($openTab);
 
 		if ($onlyShowIfOpened && !$this->media_edit_is_opened) return false;
@@ -5321,7 +5353,7 @@ class App extends GladeXml {
 		$infoString = '<b>'.i18n::get('global', 'platform').':</b> '.$romSystemIdent.' | <b>'.i18n::get('global', 'crc32').':</b> '.$romCrc32.' | <b>'.i18n::get('global', 'fileNameShort').':</b> '.htmlspecialchars($romFile->getRomFilename()).'';
 		$this->metaEditFileinfo->set_markup($infoString);
 
-		# reset text
+		// reset text
 		$this->media_edit_help->set_text('');
 		$this->media_edit_help->set_visible(false);
 
@@ -5436,7 +5468,7 @@ class App extends GladeXml {
 		$this->cb_dump_type->set_active($dump_type);
 
 
-		# media type / current / count (if ($mdata['md_media_type'] === null) $mdata['md_media_type'] = 0;)
+		// media type / current / count (if ($mdata['md_media_type'] === null) $mdata['md_media_type'] = 0;)
 		if (!$this->obj_media_type){
 			$this->dropdownMediaType = I18n::translateArray('dropdownMedium', $this->dropdownMediaType);
 			$this->obj_media_type = new IndexedCombobox($this->cb_media_type, false, $this->dropdownMediaType);
@@ -5451,52 +5483,52 @@ class App extends GladeXml {
 		if (!$this->obj_category) $this->obj_category = FACTORY::get('manager/IndexedCombo')->set($this->cbe_category, $this->media_category, 4);
 		FACTORY::get('manager/IndexedCombo')->set_active_key($this->cbe_category, $romMeta->getCategory());
 
-		# set autocompletion
+		// set autocompletion
 		$autoCompletion = FACTORY::get('manager/AutoCompletion');
 
-		# creator
+		// creator
 		$field = 'creator';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->cbe_creator, $this->comletionData[$field]);
 		}
 
-		# publisher
+		// publisher
 		$field = 'publisher';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->cbe_publisher, $this->comletionData[$field]);
 		}
 
-		# programmer
+		// programmer
 		$field = 'programmer';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->cbe_programmer, $this->comletionData[$field]);
 		}
 
-		# musican
+		// musican
 		$field = 'musican';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->cbe_musican, $this->comletionData[$field]);
 		}
 
-		# info
+		// info
 		$field = 'info';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->media_edit_info, $this->comletionData[$field]);
 		}
 
-		# info_id
+		// info_id
 		$field = 'info_id';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->media_edit_info_id, $this->comletionData[$field]);
 		}
 
-		# graphics
+		// graphics
 		$field = 'graphics';
 		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
@@ -5529,7 +5561,7 @@ class App extends GladeXml {
 		$this->mediaEditPersonalFrameMoreSettings->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameMoreSettings').'</b>');
 		$this->mEditUserPersonalHiscoresLabel->set_label(i18n::get('metaEdit', 'mEditUserPersonalHiscoresLabel'));
 
-		# now handle user data
+		// now handle user data
 		if($userData = FACTORY::get('manager/UserData')->getUserdata($romSystemIdent, $romCrc32)){
 
 			// fill all fields
@@ -5868,21 +5900,21 @@ class App extends GladeXml {
 		$rating_music = $this->mEditUserRatingMusicScale->get_value();
 		$rating = $this->getRating($rating_fun, $rating_gameplay, $rating_graphics, $rating_music);
 		$userData = array(
-			# general data
+			// general data
 			'eccident' => $romSystemIdent,
 			'crc32' => $romCrc32,
-			# rating
+			// rating
 			'rating' => $rating,
 			'rating_fun' => $rating_fun,
 			'rating_gameplay' => $rating_gameplay,
 			'rating_graphics' => $rating_graphics,
 			'rating_music' => $rating_music,
 			'difficulty' => $this->mEditUserRatingDifficultyScale->get_value(),
-			# review
+			// review
 			'review_title' => $romReviewTitle,
 			'review_body' => $mEditUserReviewBody,
 			'review_export_allowed' => (int)$this->mEditUserReviewExportAllow->get_active(),
-			# personal tab
+			// personal tab
 			'hiscore' => $romHiscore,
 			'notes' => $mEditUserPersonalNotes,
 		);
@@ -5985,7 +6017,7 @@ class App extends GladeXml {
 //		$this->media_edit_help->set_markup("<span foreground='#00aa00'><b>$status</b></span>");
 //		$this->media_edit_help->set_visible(true);
 
-		# save rating from selection
+		// save rating from selection
 		$this->_fileView->addRatingByMdataId($romMeta->getId(), $this->getEccRatingIntegerByPercent((int)$userData['rating']));
 
 		$this->directMediaEdit = true;
@@ -6239,7 +6271,7 @@ class App extends GladeXml {
 
 		// main model
 
-		# repository fix
+		// repository fix
 		$this->model = new GtkListStore(
 			GObject::TYPE_STRING,
 			GObject::TYPE_OBJECT,
@@ -6438,7 +6470,7 @@ class App extends GladeXml {
 				$name_packed = ($filePathPacked) ? $this->get_plain_filename($filePathPacked) : false;
 				$extension = ($filePathPacked) ? $this->get_ext_form_file($filePathPacked) : $this->get_ext_form_file($filePath);
 
-				# only search for the first found image!!!
+				// only search for the first found image!!!
 				$searchNames = array($name_file, $name_packed, $romMeta->getName());
 				$media = $this->searchForImages($eccident, $crc32, $path, $extension, $searchNames, true);
 
@@ -6649,7 +6681,7 @@ class App extends GladeXml {
 
 		$this->treeview1->set_model($this->model_navigation);
 
-		# change colors to user-selected values
+		// change colors to user-selected values
 		$this->setModifiedTreeviewColors($this->treeview1);
 
 		$this->treeview1->append_column($column_0);
@@ -6658,7 +6690,7 @@ class App extends GladeXml {
 		$this->treeview1->append_column($column_3);
 		$this->treeview1->append_column($column_count);
 
-		# 20070310 - removed double call!
+		// 20070310 - removed double call!
 		$this->updateBreak = true;
 		$this->update_treeview_nav(true);
 	}
@@ -6808,8 +6840,8 @@ class App extends GladeXml {
 
 			$eccident = $model->get_value($iter, 3);
 
-			# update break!!!!!
-			# dont reset view, if allready selected this platorm!
+			// update break!!!!!
+			// dont reset view, if allready selected this platorm!
 			if (!is_null($this->selectedEccidentBreak) && $this->selectedEccidentBreak == $eccident) return false;
 			else $this->selectedEccidentBreak = $eccident;
 
@@ -6857,6 +6889,7 @@ class App extends GladeXml {
 
 
 	public function update_platform_info($eccident) {
+	
 		$pini = $this->ini->getPlatformInfo($eccident);
 
 		$name = (isset($pini['GENERAL']['name'])) ? $pini['GENERAL']['name'] : '';
@@ -6890,6 +6923,15 @@ class App extends GladeXml {
 		$this->pf_info_resources->modify_font(new PangoFontDescription($this->os_env['FONT']." 10"));
 		$this->pf_info_resources->set_wrap_mode(Gtk::WRAP_WORD);
 
+		// Write INI file for SELECTED PLATFORM (added 2012.11.10)
+		$sampleData = array( 
+		'ROMDATA' => array(
+			'rom_platformid' => $eccident,
+			'rom_platformname' => $this->ini->getPlatformName($this->_eccident),
+			'rom_name' => "",
+			'rom_crc32' => "",
+			));	
+		write_ini_file($sampleData, 'selectedrom.ini', true);	
 	}
 
 	public function setEccident($extension=false, $reload=true)
@@ -6912,7 +6954,7 @@ class App extends GladeXml {
 			$state = true;
 			#$platformName = $this->ini->getPlatformNavigation($this->_eccident);
 		}
-		# rem
+		// rem
 		$platformName = $this->ini->getPlatformName($this->_eccident);
 
 		// Only works, if a eccident is selected!
@@ -6924,11 +6966,11 @@ class App extends GladeXml {
 		$isMultiRomPlatform = $this->ini->isMultiRomPlatform($this->_eccident);
 		$this->mTopRomAuditShow->set_sensitive($isMultiRomPlatform);
 
-# 20070628 deactivated
-# $this->menubar_filesys_organize_roms_preview->set_sensitive($state);
-# $this->menubar_filesys_organize_roms->set_sensitive($state);
+// 20070628 deactivated
+// $this->menubar_filesys_organize_roms_preview->set_sensitive($state);
+// $this->menubar_filesys_organize_roms->set_sensitive($state);
 
-		# ROM
+		// ROM
 
 		$this->menuTopRomAddNewRom->set_sensitive($state);
 		if ($state) $this->menuTopRomAddNewRom->get_child()->set_text(sprintf(I18N::get('menuTop', 'romAddNewRom%s'), $platformName));
@@ -7011,17 +7053,17 @@ class App extends GladeXml {
 		$this->cb_search_mameDriver->set_visible(true);
 		$this->cb_search_mameDriver->clear();
 
-		# get mame driver to realname translation
+		// get mame driver to realname translation
 		$translate = $this->ini->getDriverTranslation('mame');
 		$driverNames = $translate['names'];
 		$driverUnset = $translate['unset'];
 
-		# unset drivers used for multi driver queries
+		// unset drivers used for multi driver queries
 		foreach($driverUnset as $unset) {
 			unset($availableMameDrivers[$unset]);
 		}
 
-		# now try to translate some entries
+		// now try to translate some entries
 		$mameDriver = array();
 		foreach($availableMameDrivers as $driverName => $driverCount) {
 			if (!$driverName) continue;
@@ -7048,7 +7090,7 @@ class App extends GladeXml {
 		$key = FACTORY::get('manager/IndexedCombo')->getKey($combo);
 		$value = FACTORY::get('manager/IndexedCombo')->getValue($combo);
 
-		# get mame driver to realname translation
+		// get mame driver to realname translation
 		$translate = $this->ini->getDriverTranslation('mame');
 
 		if (!$key) $selectedQuery = '';
@@ -7075,6 +7117,20 @@ class App extends GladeXml {
 	 */
 	public function deleteRomFromDatabase()
 	{
+		// TRIGGER - VIDEOPLAYER - 'romdelete' | config setting: eccVideoPlayer_enable
+		$eccVideoPlayer_enable = $this->ini->getKey('VIDEOPLAYER', 'eccVideoPlayer_enable');
+		if ($eccVideoPlayer_enable == "1"){
+			$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
+			$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_VIDEOPLAYER']);
+			$objFSO = new COM("Scripting.FileSystemObject"); 
+			$AutoitExe_ = $objFSO->GetFile($AutoitExe);
+			$AutoitExe_DosPath = $AutoitExe_->ShortPath;
+			$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
+			$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
+			$shell = new COM("WScript.Shell"); // Using COM object to disable waiting for the script to finish! (start /b doens't work for all computers and OS'es)
+			$shell->run($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' romdelete', 0, false);
+		}
+	
 		// get RomX object
 		$rom = $this->getSelectedRom();
 		if(!$rom) return false;
@@ -7211,7 +7267,7 @@ class App extends GladeXml {
 
 		$this->set_pager_position_label($this->media_pager_label, $pager_data->_p, $pager_data->_pt, $pager_data->_res_total);
 
-		# 20070620 - hotfix
+		// 20070620 - hotfix
 		#$limit = array($pager_data->_res_offset, $pager_data->_pp);
 		$limit = array($pager_data->_res_offset, $this->_results_per_page);
 
@@ -7298,12 +7354,12 @@ class App extends GladeXml {
 		// fake fuzzy search for name! :-)
 		$fuzzySearch = explode(' ', $searchWords);
 
-		# only use the first 10 words for this mode... remove duplicate words
+		// only use the first 10 words for this mode... remove duplicate words
 		array_splice($fuzzySearch, 15);
 		$fuzzySearch = array_unique($fuzzySearch);
 
-		# dont use or, because i think, thats not, what the user want!
-		# otherwise, the user searches for an impossible combination
+		// dont use or, because i think, thats not, what the user want!
+		// otherwise, the user searches for an impossible combination
 		if ((!$like_pre || !$like_post) && $type == 'AND' && count($fuzzySearch) > 1) {
 			$fuzzySearch = array($searchWords);
 		}
@@ -7342,10 +7398,10 @@ class App extends GladeXml {
 	public function onInitialRecord($updateCategories=false)
 	{
 
-		# get last selected page from history!
+		// get last selected page from history!
 		$page = 0;
 		$lastSelectedPage = $this->ini->getHistoryKey('last_selected_page');
-		# if there was an last selected page, reset this page now!
+		// if there was an last selected page, reset this page now!
 		if($lastSelectedPage){
 			$page = $lastSelectedPage-1;
 			$this->ini->storeHistoryKey('last_selected_page', false, false);
@@ -7378,10 +7434,10 @@ class App extends GladeXml {
 		$this->the_file_list = isset($romRecords['data']) ? $romRecords['data'] : array();
 		$this->data_available = $romRecords['count'];
 
-		// 20060108 hack for simle mediaview
+		// 2006-01-08 Hack for simle mediaview
 		if ($this->_results_per_page) {
 
-			# init pager
+			// init pager
 			$pager_data = $this->media_treeview_pager->init($romRecords['count'], $page, $this->_results_per_page);
 
 			if ($pager_data->_pt > 0) {
@@ -7531,6 +7587,29 @@ class App extends GladeXml {
 		$this->onReloadRecord(false);
 	}
 
+	// Extra function to jump to a page, added 2012-11-19 (using manager\cTreeviewPager.php)
+	public function onNumberRecord()
+	{
+		$pager_data = $this->media_treeview_pager->page($this->media_pager_number_input->get_text());
+		$this->media_pager_number_input->set_text("");
+
+		$this->media_pager_first->set_sensitive(true);
+		$this->media_pager_prev->set_sensitive(true);
+		$this->media_pager_last->set_sensitive(true);
+		$this->media_pager_next->set_sensitive(true);
+	
+		if ($pager_data->_pfirst) {
+			$this->media_pager_first->set_sensitive(false);
+			$this->media_pager_prev->set_sensitive(false);
+		}
+		if ($pager_data->_plast) {
+			$this->media_pager_last->set_sensitive(false);
+			$this->media_pager_next->set_sensitive(false);
+		}
+		$this->onReloadRecord(false);
+	}
+	
+	
 	public function parseMedia($directEccIdent = false, $directParseDirectory = false, $openFileChooser = false) {
 
 		$eccIdent = $this->_eccident;
@@ -7539,7 +7618,7 @@ class App extends GladeXml {
 
 			if ($directEccIdent && $directParseDirectory) {
 				$eccIdent = $directEccIdent;
-				# rem
+				// rem
 				$platfom = $this->ini->getPlatformName($directEccIdent);
 				if ($openFileChooser){
 					if (!$this->setPathForEccParser($platfom, $directParseDirectory)) {
@@ -7590,7 +7669,7 @@ class App extends GladeXml {
 
 			$eccparser = new EccParser($eccIdent, $this->ini, $parseDirectoryFixed, $this->pbar_parser, $this->statusbar_lbl_bottom, $this->status_obj, $this, $connectedMetaFilesizeCheck);
 
-			# only for multirom platforms!
+			// only for multirom platforms!
 			if ($this->ini->isMultiRomPlatform($eccIdent) && !$this->status_obj->is_canceled()) FACTORY::get('manager/ImportDatControlMame')->updateCloneState($eccIdent);
 
 			if ($eccIdent) $this->status_obj->update_message($eccparser->getLog());
@@ -7617,12 +7696,12 @@ class App extends GladeXml {
 
 		if (!$path || !realpath($path)) $path = $this->ini->getHistoryKey($historyKey);
 
-		# if no path is given, try to get the last selected path
+		// if no path is given, try to get the last selected path
 		if(!$path || !realpath($path)) $path = FACTORY::get('manager/IniFile')->getUserFolder($eccident, 'roms');
 
 		$title = sprintf(I18N::get('popup', 'rom_add_filechooser_title%s'), $platfom);
 
-		# used for assigned emulators
+		// used for assigned emulators
 		$shorcutFolder = $this->ini->getShortcutPaths($eccident);
 		$paths = FACTORY::get('manager/Os')->openChooseFolderDialog($path, $title, true, $shorcutFolder);
 		if ($paths && count($paths)) {
@@ -7681,7 +7760,7 @@ class App extends GladeXml {
 		$this->dropdownStorage = $mngrValidator->getEccCoreKey('dropdownStorage');
 		$this->dropdownRegion = $mngrValidator->getEccCoreKey('dropdownRegion');
 		$this->dropdownDumpType = $mngrValidator->getEccCoreKey('dropdownDumpType');
-		$this->dropdownMediaType = $mngrValidator->getEccCoreKey('dropdownMediaType'); # meta -> dropdownMedium
+		$this->dropdownMediaType = $mngrValidator->getEccCoreKey('dropdownMediaType'); // meta -> dropdownMedium
 		$this->eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
 		$this->eccdb = $mngrValidator->getEccCoreKey('eccdb');
 		$this->cs = $mngrValidator->getEccCoreKey('cs');
@@ -7707,7 +7786,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 	/**
 	 * Cleanup emuControlCenter inis, if this version is copied!
-	 *
 	 */
 	private function cleanupConfigsIfCopied() {
 		$ciString = @$_SERVER['USERDOMAIN']."|".@$_SERVER['TEMP']."|".@$_SERVER['TMP']."|".@$_SERVER['APPDATA']."|".@$_SERVER['COMPUTERNAME']."|".@$_SERVER['HOMEPATH'];
@@ -7724,30 +7802,21 @@ current_build="'.$this->ecc_release['release_build'].'"
 		@file_put_contents($ciDatPath, $ciCheck);
 	}
 
-	/**
-	 * Opens the romdb online page for this rom to show meta informations!
-	 *
-	 */
+	// Opens the romdb online page for this rom to show meta informations!
 	public function onlineEccRomdbShowWebInfo(Rom $rom) {
 		$url = $this->eccdb['META_GET_URL'].'?gameident='.$rom->getSystemIdent().'|'.$rom->getCrc32();
 		FACTORY::get('manager/Os')->executeProgramDirect($url, 'open');
 	}
 
-	/**
-	 * Search for this rom on google!
-	 *
-	 */
+	// Search for this rom on google!
 	public function onlineSearchForRom(Rom $rom) {
 		$url = $this->eccdb['GOOGLE_ROM_SEARCH'].urlencode($rom->getName());
 		FACTORY::get('manager/Os')->executeProgramDirect($url, 'open');
 	}
 
-
-	/* ---------------------------------------------------
-	* IMAGE METHODS
-	* ----------------------------------------------------
-	*/
-
+	// ---------------------------------------------------
+	// IMAGE METHODS
+	// ----------------------------------------------------
 	public function setMatchImageType() {
 		$this->imageManager->setMatchImageType($this->infoImageBtnMatchImageType->get_active());
 		$this->imageManager->resetCachedImages($this->_eccident);
@@ -7892,7 +7961,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		unset($this->image_type[$needle]);
 		$this->image_type = array_merge($temp, $this->image_type);
 
-		# only reset current eccident images
+		// only reset current eccident images
 		$this->imageManager->resetCachedImages($this->_eccident);
 
 		if ($obj) $this->onReloadRecord();
@@ -7971,7 +8040,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 				$obj_pixbuff = $this->oHelper->getPixbuf($file_path, $width, $height, $this->imagesAspectRatio);
 
-				# if pixbuf not found, return the default pixbuf for platform
+				// if pixbuf not found, return the default pixbuf for platform
 				if($obj_pixbuff !== null) return $obj_pixbuff;
 			}
 		}
@@ -8071,7 +8140,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		// Example to enable tooltip if this is nog set in the GLADE GUI
 		// $this->mTopEmuConfig->set_property('has-tooltip', true);
 	
-		# TOP-ROM
+		// TOP-ROM
 		$this->mTopRom->get_child()->set_text(I18N::get('menuTop', 'mTopRom'));
 		$this->menuTopRomAddNewRom->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'menuTopRomAddNewRomTooltip'));
 		$this->mMenuReparseFolder->get_child()->set_text(I18N::get('menuTop', 'mMenuReparseFolder'));
@@ -8083,12 +8152,12 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopRomRemoveRoms->get_child()->set_text(I18N::get('menuTop', 'mTopRomRemoveRoms'));
 		$this->mTopRomRemoveRoms->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopRomRemoveRomsTooltip'));
 		
-		# TOP-EMU
+		// TOP-EMU
 		$this->mTopEmu->get_child()->set_text(I18N::get('menuTop', 'mTopEmu'));
 		$this->mTopEmuConfig->get_child()->set_text(I18N::get('menuTop', 'mTopEmuConfig'));
 		$this->mTopEmuConfig->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopEmuConfigTooltip'));
 		
-		# TOP-DAT
+		// TOP-DAT
 		$this->mTopDat->get_child()->set_text(I18N::get('menuTop', 'mTopDat'));
 		$this->mTopDatImport->get_child()->set_text(I18N::get('menuTop', 'mTopDatImport'));
 		$this->mTopDatImportEcc->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportEcc'));
@@ -8108,26 +8177,26 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopDatClear->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatClearTooltip'));
 		$this->mTopDatConfig->get_child()->set_text(I18N::get('menuTop', 'mTopDatConfig'));
 		
-		# TOP-ROMDB // Removed from GUI, Service is no longer online!(2012-06-10)
+		// TOP-ROMDB // Removed from GUI, Service is no longer online!(2012-06-10)
 		$this->mTopRomDB->get_child()->set_text(I18N::get('menuTop', 'mTopRomDB'));
 		$this->mTopDatImportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportOnlineRomdb'));
 		$this->mTopDatExportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportOnlineRomdb'));
 
-		# ROM-AUDIT
+		// ROM-AUDIT
 		$this->mTopRomAuditShow->get_child()->set_text(I18N::get('menuTop', 'mTopRomAuditShow'));
 
-		# TOP-IMG // Not used anymore (changed on 2011-12-22)
+		// TOP-IMG // Not used anymore (changed on 2011-12-22)
 		//$this->mTopImage->get_child()->set_text(I18N::get('menuTop', 'mTopImage'));
 		//$this->mTopImageConvert->get_child()->set_text(I18N::get('menuTop', 'mTopImageConvert'));
 
-		# TOP-FILES
+		// TOP-FILES
 		$this->mTopFile->get_child()->set_text(I18N::get('menuTop', 'mTopFile'));
 		$this->mTopFileRename->get_child()->set_text(I18N::get('menuTop', 'mTopFileRename'));
 		$this->mTopFileCopy->get_child()->set_text(I18N::get('menuTop', 'mTopFileCopy'));
 		$this->mTopFileRemove->get_child()->set_text(I18N::get('menuTop', 'mTopFileRemove'));
 		$this->mTopFileSearch->get_child()->set_text(I18N::get('menuTop', 'mTopFileSearch'));
 
-		# TOP-VIEW
+		// TOP-VIEW
 		$this->mTopView->get_child()->set_text(I18N::get('menuTop', 'mTopView'));
 		$this->mTopViewModeRomHave->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomHave'));
 		$this->mTopViewModeRomDontHave->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomDontHave'));
@@ -8149,7 +8218,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopViewToggleRight->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleRight'));
 		$this->mTopViewToggleSearch->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleSearch'));
 
-		# TOP-OPTIONS
+		// TOP-OPTIONS
 		$this->mTopOption->get_child()->set_text(I18N::get('menuTop', 'mTopOption'));
 		$this->mTopOptionDbVacuum->get_child()->set_text(I18N::get('menuTop', 'mTopOptionDbVacuum'));
 		$this->mTopOptionDbVacuum->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionDbVacuumTooltip'));
@@ -8164,7 +8233,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopOptionConfig->get_child()->set_text(I18N::get('menuTop', 'mTopOptionConfig'));
 		$this->mTopOptionConfig->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopOptionConfigTooltip'));
 
-		# TOP-TOOLS
+		// TOP-TOOLS
 		$this->mTopTool->get_child()->set_text(I18N::get('menuTop', 'mTopTool'));
 		$this->mTopToolEccGtkts->get_child()->set_text(I18N::get('menuTop', 'mTopToolEccGtkts'));
 		$this->mTopToolEccGtkts->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopToolEccGtktsTooltip'));
@@ -8175,24 +8244,26 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopAutoIt3GUI->get_child()->set_text(I18N::get('menuTop', 'mTopAutoIt3GUI'));
 		$this->mTopAutoIt3GUI->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopAutoIt3GUITooltip'));
 
-		# TOP-DEVELOPER
+		// TOP-DEVELOPER
 		$this->mTopDeveloper->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloper'));
 		$this->mTopDeveloperSQL->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloperSQL'));
 		$this->mTopDeveloperSQL->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDeveloperSQLTooltip'));
 		$this->mTopDeveloperGUI->get_child()->set_text(I18N::get('menuTop', 'mTopDeveloperGUI'));
 		$this->mTopDeveloperGUI->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDeveloperGUITooltip'));
 
-		# TOP-UPDATE
+		// TOP-UPDATE
 		$this->mTopUpdate->get_child()->set_text(I18N::get('menuTop', 'mTopUpdate'));
 		$this->mTopToolEccUpdate->get_child()->set_text(I18N::get('menuTop', 'mTopUpdateEccLive'));
 		$this->mTopToolEccUpdate->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopUpdateEccLiveTooltip'));
 
-		# TOP-SERVICES
+		// TOP-SERVICES
 		$this->mTopServices->get_child()->set_text(I18N::get('menuTop', 'mTopServices'));
 		$this->mTopServicesKameleonCode->get_child()->set_text(I18N::get('menuTop', 'mTopServicesKameleonCode'));
 		$this->mTopServicesKameleonCode->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopServicesKameleonCodeTooltip'));
+		$this->mTopServicesEmuMoviesAD->get_child()->set_text(I18N::get('menuTop', 'mTopServicesEmuMoviesAD'));
+		$this->mTopServicesEmuMoviesAD->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopServicesEmuMoviesADTooltip'));
 		
-		# TOP-HELP
+		// TOP-HELP
 		$this->mTopHelp->get_child()->set_text(I18N::get('menuTop', 'mTopHelp'));
 		$this->mTopHelpWebsite->get_child()->set_text(I18N::get('menuTop', 'mTopHelpWebsite'));
 		$this->mTopHelpWebsite->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpWebsiteTooltip'));	
@@ -8247,7 +8318,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->translateGuiTopMenu();
 
 
-		# romdetail tabs
+		// romdetail tabs
 		$this->media_nb_info_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabInfo')));
 		$this->infoPersonalLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabPersonal')));
 		$this->infoEsearchLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabESearch')));
@@ -8255,7 +8326,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 //		$this->media_nb_mdata_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomData')));
 		$this->media_nb_header_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomHeader')));
 
-		# main gui buttons
+		// main gui buttons
 		$this->gui_main_btn_rom_start->set_text(I18N::get('mainGui', 'gui_main_btn_rom_start'));
 		$this->gui_main_btn_rom_bookmark->set_text(I18N::get('mainGui', 'gui_main_btn_rom_bookmark'));
 
@@ -8272,11 +8343,11 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->btn_3dgallery_start_label->set_label(I18N::get('mainGui', '3dgalleryStart'));
 		$this->btn_3dgallery_config_label->set_label(I18N::get('mainGui', '3dgalleryConfig'));
 		
-		# images
+		// images
 		$this->infoImageBtnMatchImageType->set_label(I18N::get('mainGui', 'infoImageBtnMatchImageType'));
 		$this->infoImageEditBtn->set_label(I18N::get('mainGui', 'infoImageEditBtn'));
 
-		# romdb
+		// romdb
 		$this->media_nb_info_eccdb_info->set_label(I18N::get('mainGui', 'media_nb_info_eccdb_info'));
 		$this->paneInfoEccDbAddTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbAddTitle').'</b>');
 		$this->paneInfoEccDbAddText->set_text(i18n::get('mainGui', 'paneInfoEccDbAddText'));
@@ -8287,7 +8358,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->paneInfoEccDbGetDatfileTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetDatfileTitle').'</b>');
 		$this->paneInfoEccDbGetDatfileButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetDatfileButton'));
 
-		# metaoptions
+		// metaoptions
 
 		$this->setSpanMarkup($this->infotab_lbl_category, I18N::get('meta', 'lbl_category'), false, 'b', false);
 		#$this->infotab_lbl_category->set_markup('<b>'.I18N::get('meta', 'lbl_category').'</b>');
@@ -8327,7 +8398,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->setSpanMarkup($this->infotab_lbl_dump, I18N::get('meta', 'lbl_dump_type'), false, 'b', false);
 		$this->setSpanMarkup($this->infotab_lbl_infoid, I18N::get('meta', 'lbl_infoid'), false, 'b', false);
 
-		# Fileinfos
+		// Fileinfos
 		#$this->infotab_frame_fileinfo->set_markup('<b>'.I18N::get('global', 'fileInfo').'</b>');
 		#$this->setSpanMarkup($this->infotab_frame_fileinfo, I18N::get('global', 'fileInfo'), false, 'b');
 
@@ -8337,7 +8408,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->infotab_lbl_zip->set_markup('<b><span size="small">'.I18N::get('global', 'packed').':</span></b>');
 		$this->infotab_lbl_crc32->set_markup('<b><span size="small">'.I18N::get('global', 'crc32').':</span></b>');
 
-		# PERSONAL
+		// PERSONAL
 		$this->iPanePersHeadlineLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersHeadlineLbl').':</b>');
 		$this->iPanePersTimesPlayedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersTimesPlayedLbl').':</b>');
 		$this->iPanePersLastPlayedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersLastPlayedLbl').':</b>');
@@ -8348,7 +8419,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 		$this->iPanePersMetaNotesLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaNotesLbl').':</b>');
 
-		# ESEARCH
+		// ESEARCH
 		$this->iPaneEsearchHeadlineLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHeadlineLbl').':</b>');
 		$this->iPaneEsearchIntroTxt->set_text(I18N::get('infoPane', 'iPaneEsearchIntroTxt'));
 
@@ -8365,15 +8436,16 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->iPaneEsearchOptResetBtn->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptResetBtn').':</b>');
 		$this->iPaneEsearchHelpLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHelpLbl').':</b>');
 
-		# DATA
+		// DATA
 //		$this->iPaneDataLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneDataLbl').':</b>');
 
-		# HEADER
+		// HEADER
 		$this->iPaneHeadLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneHeadLbl').':</b>');
 
-		# SEARCH AREA
+		// SEARCH AREA
 		$this->search_input_reset_label->set_label(i18n::get('global', 'reset'));
-
+		$this->media_pager_number->set_label(i18n::get('global', 'media_pager_number'));
+		
 		$this->setSpanMarkup($this->mainAreaPanelRightTabImages, strtoupper(I18N::get('global', 'images')), false, 'b', 'medium');
 		$this->setSpanMarkup($this->mainAreaPanelRightTabMeta, strtoupper(I18N::get('global', 'metadata')), false, 'b', 'medium');
 
@@ -8398,30 +8470,30 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->iconview1->connect('item-activated', array($this, 'startRom'));
 		$this->iconview1->connect('button-release-event', array($this, 'mainIconViewGetContexMenuRom'));
 
-		# init treeview
+		// init treeview
 		$treeView = FACTORY::get('manager/Treeview');
 		$this->newTreeView = $treeView->init($this->gameListScroll);
 
-		# configuration
+		// configuration
 		$this->newTreeView->set_enable_search(false);
 
-		# connect selection
+		// connect selection
 		$selection = $treeView->getSelection();
 		$selection->connect('changed', array($this, 'updateRomInfoPanel'));
 
-		# handle left-right arrow keys
+		// handle left-right arrow keys
 		$treeView->connect('key-press-event', array($this, 'onMainlistCursorNavigation'), $selection);
 
-		# start selected rom
+		// start selected rom
 		$treeView->connect('row-activated', array($this, 'startRom'));
 
-		# update metaInformations
+		// update metaInformations
 		$treeView->connect('button-release-event', array($this, 'openContexMenuRom'));
 
-		# init drag-n-drop
+		// init drag-n-drop
 		$this->mainListDragAndDropInit($this->newTreeView);
 
-		# init the model and assign it to the treeview!
+		// init the model and assign it to the treeview!
 		$this->init_treeview_main();
 
 		if ($reload) $this->onInitialRecord();
@@ -8738,15 +8810,15 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 	public function mainIconViewGetSelection($view)
 	{
-			$items = $view->get_selected_items();
-			if (!$items) return false;
-			$items = reset($items);
-			if (!$items) return false;
-			$compositeId = $this->mainIconViewModel[$items][0];
-			if (!$compositeId) return false;
+		$items = $view->get_selected_items();
+		if (!$items) return false;
+		$items = reset($items);
+		if (!$items) return false;
+		$compositeId = $this->mainIconViewModel[$items][0];
+		if (!$compositeId) return false;
 
-			// updated the right game info panel
-			$this->updateRomInfoPanel($false, $compositeId);
+		// updated the right game info panel
+		$this->updateRomInfoPanel($false, $compositeId);
 	}
 
 	public function mainIconViewGetContexMenuRom($view, $event)
@@ -8764,10 +8836,13 @@ current_build="'.$this->ecc_release['release_build'].'"
 	public function mainIconViewUpdate($romRecords)
 	{
 		$this->iconview1->hide();
-
 		$this->mainIconViewModel->clear();
 
 		if ($romRecords['count']!=0) {
+
+			// Cut off rom names for images tabviews, added 2012-11-25 (ECC v1.13 build 12)		
+			$textcuttoff = $this->ini->getKey('USER_SWITCHES', 'text_cuttoff');
+			if ($textcuttoff < 0 or $textcuttoff > 100 or $textcuttoff == "" or !is_numeric($textcuttoff)) $textcuttoff = 50; //set default
 
 			// get Rom object
 			$romObjects = $romRecords['rom'];
@@ -8793,8 +8868,15 @@ current_build="'.$this->ecc_release['release_build'].'"
 				$pixbuf = $this->get_pixbuf($filePath, $media, false, false, false, $eccident);
 				$category = (isset($this->media_category[$romMeta->getCategory()])) ? $this->media_category[$romMeta->getCategory()] : '';
 				
-				$this->mainIconViewModel->append(array($rom->getCompositeId(), $pixbuf, $rom->getName().PHP_EOL.$category));
-
+				// Cut off rom names for images tabviews, added 2012-11-25 (ECC v1.13 build 12)					
+				if (strlen($rom->getFormatedName()) > $textcuttoff) $imagesTabName = substr($rom->getFormatedName(), 0, $textcuttoff).'...';
+				else $imagesTabName = $rom->getFormatedName();
+				
+				if (strlen($category) > $textcuttoff) $categoryTabName = substr($category, 0, $textcuttoff).'...';
+				else $categoryTabName = $category;
+				// --->
+				
+				$this->mainIconViewModel->append(array($rom->getCompositeId(), $pixbuf, $imagesTabName.PHP_EOL.$categoryTabName));
 			}
 		}
 		while (gtk::events_pending()) gtk::main_iteration();

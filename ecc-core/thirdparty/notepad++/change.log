@@ -1,11 +1,10 @@
-Notepad++ v6.1.3 enhancement and fixed bugs:
+Notepad++ v6.2.3 fixed bugs and added features:
 
-1.  Enhance the performance issue for xml matching tags highlighting and for displaying clickable links.
-2.  While the amount of file to open is larger than 200, a dialog will be shown to warn user.
-3.  Fix Notepad++ close bug while move one cloned new empty document into another view, in the destination contained only this new empty document.
-4.  Fix hanging problem while double-click on a project folder then (immediately) drag it.
-5.  Fix a bug while command argument contain an empty string ("").
-6.  Fix mouse cursor disappearing bug on right click while a project item is dragging.
+1. Fix find "\r\n" bug in RegExpr mode.
+2. Change "Delete file" command to "Move to Recycle Bin".
+3. Add Remove empty lines feature.
+4. Change document default value from ANSI to UTF8 w/o BOM.
+5. Enable Word-completion under CJK environment for unicode document.
 
 
 Included plugins:

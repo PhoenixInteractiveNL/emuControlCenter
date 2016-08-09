@@ -25,8 +25,8 @@ class FileParserGeneric implements FileParser {
 		
 		# use fsum to get the right crc32 for larger files!
 		# only usable for platforms without offsets!!!!
-		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
-			$ret['FILE_CRC32'] = FileIO::getFsumCrc32($file_name, 1);
+		if (filesize($file_name) >= ExtParserTriggerSize) {
+			$ret['FILE_CRC32'] = FileIO::getExternalCrc32($file_name, 1);
 		}
 		else{
 			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));

@@ -1028,6 +1028,21 @@
                         </child>
                       </widget>
                     </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopServicesEmuMoviesAD">
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="label" translatable="yes">Enter EmuMovies Account Data</property>
+                        <property name="use_underline">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image57">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-spell-check</property>
+                            <property name="icon_size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
                   </widget>
                 </child>
                 <child internal-child="image">
@@ -2033,6 +2048,32 @@
                                             <property name="expand">False</property>
                                             <property name="fill">False</property>
                                             <property name="position">4</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkButton" id="media_pager_number">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="label" translatable="yes">jump to page:</property>
+                                            <property name="response_id">0</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="padding">3</property>
+                                            <property name="position">5</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkEntry" id="media_pager_number_input">
+                                            <property name="width_request">40</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="max_length">4</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="position">6</property>
                                           </packing>
                                         </child>
                                       </widget>
@@ -7658,7 +7699,7 @@ Card</property>
       </widget>
     </child>
   </widget>
-  <widget class="GtkWindow" id="window1">
+  <widget class="GtkWindow" id="win_firstStart">
     <property name="sensitive">False</property>
     <property name="title" translatable="yes">Welcome - First start</property>
     <property name="modal">True</property>

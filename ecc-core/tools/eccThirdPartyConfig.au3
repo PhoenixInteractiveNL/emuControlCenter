@@ -9,7 +9,7 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-#include "..\..\ecc-core\thirdparty\autoit\include\XMLDomWrapper.au3"
+#include "..\thirdparty\autoit\include\XMLDomWrapper.au3"
 
 Global $ECCInstallPath = StringReplace(@ScriptDir, "\ecc-core\tools", "")
 Global $ThirdPartyConfigIni = $ECCInstallPath & "\ecc-core\tools\eccThirdPartyConfig.ini"

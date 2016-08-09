@@ -14,7 +14,7 @@ $i18n['popupConfig'] = array(
 
 	/* ECC */
 	'lbl_ecc_hdl' =>
-		"Configure emuControlCenter",
+		"Language and Userfolder",
 	'lbl_ecc_userfolder' =>
 		"User folder (for images and exports)",
 	'lbl_ecc_userfolder_button' =>
@@ -22,15 +22,13 @@ $i18n['popupConfig'] = array(
 	'title_ecc_userfolder_popup' =>
 		"Select the new userfolder postion",
 	/* ECC-OPTIONS */
-	'lbl_ecc_otp_hdl' =>
-		"Options",
 	'lbl_ecc_opt_detail_pp' =>
-		"Detail per page",
+		"Items per page (detail view):",
 	'lbl_ecc_opt_list_pp' =>
-		"List per page",
+		"Items per page (list view):",
 	/* ECC-COLOR&FONTS */
 	'lbl_ecc_colfont_hdl' =>
-		"Colors  and Fonts",
+		"Colors and Fonts",
 	'lbl_ecc_colfont_font_list' =>
 		"List Font and Size",
 	'title_ecc_colfont_font_list_popup' =>
@@ -91,7 +89,7 @@ $i18n['popupConfig'] = array(
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
-		"Options - Rom details",
+		"Detail list",
 	'lbl_img_otp_list_imagesize' =>
 		"Imagesize",
 	'lbl_img_otp_list_aspectratio' =>
@@ -122,7 +120,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_tips' =>
 		"Known emulator links and infos",
 	'lbl_img_opt_conv' =>
-		"Options - ImageConverter",
+		"ImageConverter",
 	'lbl_img_opt_conv_quality' =>
 		"Thumb Quality",
 	'lbl_img_opt_conv_quality_def%s' =>
@@ -159,12 +157,10 @@ $i18n['popupConfig'] = array(
 	/* 0.9.2 FYEO 8 */
 	'tab_label_startup' =>
 		"Startup",
-	'startConfHdl' =>
-		"Startup configuration",
 	'startConfSoundHdl' =>
 		"Play startup sound",
 	'startConfOptHdl' =>
-		"Options",
+		"Startup options",
 	'startConfUpdate' =>
 		"Check for updates on startup",
 	'startConfMinimize' =>
@@ -217,7 +213,7 @@ $i18n['popupConfig'] = array(
 		"Configuration",
 
 	'colOptGlobalFont' =>
-		"Font",
+		"Font:",
 
 	'colOptListBg0' =>
 		"Background",
@@ -300,7 +296,7 @@ $i18n['popupConfig'] = array(
 	'emuPlatformActiveState' =>
 		"activate platform",
 	'tabGeneralHlListOptions' =>
-		"List view options",	
+		"List/Detail view options",
 		
 	/* 0.9.7 WIP 04 */
 	'tab_label_themes' =>
@@ -334,7 +330,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"use .cue file",
+		"use .cue file if available",
 
 	/* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
@@ -351,21 +347,43 @@ $i18n['popupConfig'] = array(
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
 		"unpack ALL files including subdirs",
-
 	'emuUnpackNotelabel' =>
-		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
-
-	'startConfDeleteUnpacked' =>
-		"FIREMEL DE PIEMEL exit",
-
-	/* 1.11 BUILD 6 */
-	'emuAssignGlobalCheckZipUnpackAll' =>
-		"unpack ALL files including subdirs",
-
-	'emuUnpackNotelabel' =>
-		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
-
+		"note: in the TAB [start] you can purge the unpacked files folder when ECC closes.",
 	'startConfDeleteUnpacked' =>
 		"Empty ECC unpack folder on exit",
+
+	/* 1.13 BUILD 4-8 */
+	'lbl_ecc_videoplayer' =>	
+	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
+	'lbl_ecc_videoplayer_note' =>	
+	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
+	'eccVideoPlayer_enable' =>
+		"Enable Video Player",
+	'eccVideoPlayer_sound' =>
+		"Enable sound",
+	'eccVideoPlayer_soundvolume' =>
+		"Volume (0-200%) =",
+	'eccVideoPlayer_loop' =>
+		"Loop video",
+	'eccVideoPlayer_resolution' =>
+		"Resolution (pixels): ",
+	'eccVideoPlayer_padding' =>
+		"Padding from rightbottom corner (pixels): ",
+
+	/* 1.13 BUILD 12 */		
+	'lbl_ecc_opt_hdl' =>
+		"Other options",
+	'tabGeneralImageTabOptions' =>
+		"IMAGE TAB in main view options",
+	'tabGeneralImageTabTcuttLabel' =>	
+		"Text cuttoff length (characters):",
+	'tabGeneralParsingOptions' =>	
+		"Parsing options:",
+	'tabGeneralParsingTriggerLabel' =>	
+		"Big file parser trigger size (MB)",
+	'tabGeneralParsingTriggerNoteLabel' =>	
+		"(experimental, PHP could crash if set to high)",
+	'ThemeSelectLabel' =>
+		"Theme:",
 );
 ?>

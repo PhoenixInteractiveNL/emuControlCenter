@@ -63,10 +63,10 @@ class GuiTheme {
 		else{
 			$fullPath = $this->baseFolder.$theme.'/'.$fileName;
 			if($theme != $this->defaultTheme){
-				if(!file_exists($fullPath)) $fullPath = $this->baseFolder.$theme.'/'.$fileName;;
+				if(!file_exists($fullPath)) $fullPath = $this->baseFolder.$this->defaultTheme.'/'.$fileName;
 			}
 		}		
-		
+
 		return $fullPath;
 	}
 	

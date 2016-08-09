@@ -7,6 +7,7 @@ class GuiImagePopup {
 	
 	private $imageTank = array();
 	private $mediaInfo = array();
+	private $imageFit = true;
 	private $statusbar_context_id;
 	
 	private $opened_state = false;
@@ -32,12 +33,14 @@ class GuiImagePopup {
 		$this->mediaInfo = $mediaInfo;
 		
 		$this->eccident = ($this->mediaInfo['md_eccident']) ? $this->mediaInfo['md_eccident'] : $this->mediaInfo['fd_eccident'];
+
+		$this->gui->win_imagePopup->show();	
 		
 		$this->imagePosition = $pos;
 		$this->updateImagePosition();
 		$this->twImageFill();
 		$this->updateImage();
-		$this->gui->win_imagePopup->show();
+		
 		$this->gui->win_imagePopup->set_keep_above(true);
 		$this->opened_state = true;
 	}
@@ -57,12 +60,19 @@ class GuiImagePopup {
 		$this->gui->imgPopup_btn_close->connect_simple('clicked', array($this, 'hidePopup'));
 		$this->statusbar_context_id = $this->gui->imgPopup_statusbar->get_context_id('imageUpdate');
 		
+		$this->gui->imgPopup_tglbtn_size_fit->connect('clicked', array($this, 'setImageSizeMode'));
+		
 		$this->imgPopupTreeSelection = $this->gui->imgPopup_tree->get_selection(); 
 		$this->imgPopupTreeSelection->set_mode(Gtk::SELECTION_BROWSE); 
 		$this->imgPopupTreeSelection->connect('changed', array($this, 'twImageSetIndex'));
 		
 		$this->gui->imgPopup_tree->connect('button-release-event', array($this, 'showContextMenu'));
 		
+	}
+	
+	public function setImageSizeMode($obj) {
+		$this->imageFit = $obj->get_active();
+		$this->updateImage();
 	}
 	
 	private function twImageInit() {
@@ -158,11 +168,44 @@ class GuiImagePopup {
 	 * 
 	 */
 	private function updateImage() {
+		
 		if (isset($this->imageTank[$this->imagePosition]) && file_exists($this->imageTank[$this->imagePosition])) {
+			
 			$obj_pixbuff = GdkPixbuf::new_from_file($this->imageTank[$this->imagePosition]);
-			$this->gui->imgPopup_image->set_from_pixbuf($obj_pixbuff);			
+			
+			// autofit image
+			if ($this->imageFit) {
+				// get viewport size
+				$size = $this->gui->viewport2->window->get_size();
+				$maxViewportWidth = $size[0]-4;
+				$maxViewportHeight = $size[1]-4;
+				
+				// get original image size
+				$imageOriginalWidth = $obj_pixbuff->get_width();
+				$imageOriginalHeight = $obj_pixbuff->get_height();
+				
+				// calculate new size
+				list($imageNewWidth, $imageNewHeight) = $this->calculateMaxSize($maxViewportWidth, $maxViewportHeight, $imageOriginalWidth, $imageOriginalHeight);
+				// set new size
+				$objImage = $obj_pixbuff->scale_simple($imageNewWidth, $imageNewHeight, Gdk::INTERP_BILINEAR);
+			}
+			else {
+				$objImage = $obj_pixbuff;
+			}
+			$this->gui->imgPopup_image->set_from_pixbuf($objImage);			
+			
 		}
 		$this->gui->imgPopup_statusbar->push($this->statusbar_context_id, $this->imageTank[$this->imagePosition]);
+	}
+	
+	private function calculateMaxSize($maxViewportWidth, $maxViewportHeight, $imageOriginalWidth, $imageOriginalHeight) {
+		$maxPercent =  $maxViewportWidth * 100 / $imageOriginalWidth;
+		$maxHeight = $maxPercent * $imageOriginalHeight / 100;
+
+		$size = array();
+		$size[0] = $maxViewportWidth;
+		$size[1] = $maxHeight;
+		return $size;
 	}
 	
 	public function showContextMenu($obj, $event) {

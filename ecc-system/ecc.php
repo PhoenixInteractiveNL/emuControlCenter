@@ -105,6 +105,11 @@ class App extends GladeXml {
 	private $sessionKey = false;
 	
 	private $objTooltips;
+	private $objLinkCursor;
+	
+	private $visibleNavigation = true;
+	private $visibleMedia = true;
+	
 	
 	public function create_combo_lanugages()
 	{
@@ -554,8 +559,9 @@ class App extends GladeXml {
 		$this->objTooltips->set_tip($oEvent1, I18N::get('tooltips', 'opt_auto_nav'));
 		$oEvent1->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'nav_autoupdate', 'dispatch_menu_context_platform', 'NAVIGATION_TOGGLE_AUTOUPDATE');
 		$oEvent1->add($oImage);
-		
+				
 		$table->attach($oEvent1, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+//		$oEvent1->window->set_cursor($this->objLinkCursor);
 		
 		$col++;
 		//$row++;
@@ -572,6 +578,7 @@ class App extends GladeXml {
 		$oEvent->add($oImage);
 		
 		$table->attach($oEvent, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+//		$oEvent->window->set_cursor($this->objLinkCursor);
 		
 		$col++;
 		//$row++;
@@ -588,6 +595,7 @@ class App extends GladeXml {
 		$oEvent->add($oImage);
 		
 		$table->attach($oEvent, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+//		$oEvent->window->set_cursor($this->objLinkCursor);
 		
 		$col++;
 		//$row++;
@@ -604,6 +612,7 @@ class App extends GladeXml {
 		$oEvent->add($oImage);
 		
 		$table->attach($oEvent, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+//		$oEvent->window->set_cursor($this->objLinkCursor);
 		
 		$col++;
 		//$row++;
@@ -694,6 +703,9 @@ class App extends GladeXml {
 		//$this->signal_autoconnect();
 		$this->wdo_main->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->background_color));
 		
+		
+		$this->wdo_main->connect('key-press-event', array($this, 'handleShortcuts'));
+		
 //		if (count($this->ini->read_ecc_histroy_ini()) <= 1) {
 //			print "<pre>";
 //			print_r($this->ini->read_ecc_histroy_ini());
@@ -707,6 +719,8 @@ class App extends GladeXml {
 		$initialHistroyIni = (count($this->ini->read_ecc_histroy_ini()) <= 1);
 		
 		$this->objTooltips = new GtkTooltips();
+		$this->objLinkCursor = new GdkCursor(Gdk::DRAFT_SMALL); // note 1
+		
 		
 		// ----------------------------
 		// get saved data from hist ini
@@ -1660,6 +1674,62 @@ class App extends GladeXml {
 		$ret['fdata_id'] = $split[0];
 		$ret['mdata_id'] = $split[1];
 		return $ret;
+	}
+	
+	
+	public function handleShortcuts($widged, $event) {
+		
+		//print "$event->keyval && $event->state".LF;
+		
+		// F6 show media
+		if ($event->keyval == '65475' && $event->state == '0') {
+			$this->view_mode = 'MEDIA';
+			$platformName = $this->ini->get_ecc_platform_navigation($this->_eccident);
+			$txt = '<b>'.htmlspecialchars($platformName).'</b>';
+			$this->nb_main_lbl_media->set_markup($txt);
+			$this->onInitialRecord();
+			return true;
+		}
+		
+		// F7 show bookmark
+		if ($event->keyval == '65476' && $event->state == '0') {
+			//print "shift B";
+			$this->get_media_bookmarks();
+			return true;
+		}
+
+		// F8 show history
+		if ($event->keyval == '65477' && $event->state == '0') {
+			//print "shift History";
+			$this->get_media_last_launched();
+			return true;
+		}
+		
+		// F11 hide navigation
+		if ($event->keyval == '65480' && $event->state == '0') {
+			if ($this->visibleNavigation) {
+				$this->vbox_nav->hide();
+				$this->visibleNavigation = false;
+			}
+			else {
+				$this->vbox_nav->show();
+				$this->visibleNavigation = true;
+			}
+			return true;
+		}
+		
+		// F12 hide mediainfo
+		if ($event->keyval == '65481' && $event->state == '0') {
+			if ($this->visibleMedia) {
+				$this->vbox_media->hide();
+				$this->visibleMedia = false;
+			}
+			else {
+				$this->vbox_media->show();
+				$this->visibleMedia = true;
+			}
+			return true;
+		}
 	}
 	
 	public function onMainlistCursorNavigation($widged, $event, $selection) {

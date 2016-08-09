@@ -37,12 +37,20 @@
 -------------------------------------------------------------------------------
 - Version 0.5.901
 -------------------------------------------------------------------------------
+* Implemented "best fit" in imageCenter
+* Shortcuts implemented
+** F6 Show media
+** F7 Show bookmarks
+** F8 Show history
+** F11 Hide navigation area
+** F12 Hide mediainfo area
 * implemented internal database updator for eccLive updates!
 * fixed "Number of pages error"
 * deactivated support-banner (support banner bug)
 * adding platforms
 ** Amstrad CPC
 ** Panasonic 3DO
+** Sharp X68000
 
 -------------------------------------------------------------------------------
 - Version 0.5.9

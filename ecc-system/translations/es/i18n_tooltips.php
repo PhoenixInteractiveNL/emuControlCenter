@@ -139,9 +139,9 @@ $i18n['tooltips'] = array(
 	
 	/* 1.14 BUILD 4 */
 	'mTopToolNotepadEditorTooltip' =>
-		"This will open the notepad editor where you can edit text files and scripts if needed.",
+		"Esto abrirá el bloc de notas donde puedes editar archivos de texto y scripts si fuese necesario.",
 	'mTopToolHexEditorTooltip' =>
-		"This will open a HEX editor where you can edit binary files if needed.",
+		"Esto abrirá un editor hexadecimal que permite editar archivos binarios si fuese necesario.",
 		
 	);
 ?>

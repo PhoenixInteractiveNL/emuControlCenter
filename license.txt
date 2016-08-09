@@ -1,5 +1,5 @@
 emuControlCenter
-Copyright(c) 2005-2013 by Andreas Scheibel(DE) and Sebastiaan Ebeltjes(NL)
+Copyright(c) 2005-2014 by Andreas Scheibel(DE) and Sebastiaan Ebeltjes(NL)
 
 
 This licence grants you the following:
@@ -23,7 +23,7 @@ portions of the source in some other program, etc.), please contact
 the author.
 
 The author can be contacted via email at: phoenixinteractive@hotmail.com
-emuControlCenter website: http://ecc.phoenixinteractive.mine.nu
+emuControlCenter website: http://ecc.phoenixinteractive.nl
 
 ********************************************************
 LIMITED WARRANTY

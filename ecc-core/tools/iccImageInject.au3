@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC ImageInject!
-; Script version         : v1.1.0.7
+; Script version         : v1.1.0.8
 Global $ServerScriptVersion = "1100"
-; Last changed           : 2012-11-09
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -10,42 +10,9 @@ Global $ServerScriptVersion = "1100"
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
+#include "eccToolVariables.au3"
 
-;GUI INCLUDES
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\GuiListView.au3"
-#include "..\thirdparty\autoit\include\File.au3"
-
-;Global Variables
-Global $ICCServerUrl = "http://icc.phoenixinteractive.mine.nu/"
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $EccDataBaseFile = $EccInstallFolder & "\ecc-system\database\eccdb"
-Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $RomName = IniRead($EccRomDataFile, "ROMDATA", "rom_name", "")
-Global $RomCrc32 = IniRead($EccRomDataFile, "ROMDATA", "rom_crc32", "")
-Global $RomEccId = IniRead($EccRomDataFile, "ROMDATA", "rom_platformid", "")
-Global $EccIdtFile = $EccInstallFolder & "\ecc-system\idt\cicheck.idt"
-Global $EccKameleonCode = Iniread($EccInstallFolder & "\ecc-core\tools\eccKameleonCode.code", "kameleon", "code", "NOT FOUND")
-Global $EccKameleon = $EccInstallFolder & "\ecc-core\tools\eccKameleonCode.au3"
-Global $AutoitExe = $EccInstallFolder & "\ecc-core\thirdparty\autoit\AutoIt3.exe"
-Global $SQliteExe = $EccInstallFolder & "\ecc-core\thirdparty\sqlite\sqlite.exe"
-Global $SQLInstructionFile = @Scriptdir & "\sqlcommands.inst"
-Global $SQLcommandFile = @Scriptdir & "\sqlcommands.cmd"
-Global $ImagesINI = "images.ini"
-Global $PlatFormImagesFile = "platformimages.txt"
 Global $FullPlatformFlag, $CanceledFlag, $ImageCount
-
-;Determine USER folder (set in ECC config)
-
-Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
-Global $EccUserPathTemp = StringReplace(Iniread($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
-Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
-
 
 Global $TotalImageFileSize = 0
 Global $AlreadyDownloaded = 0
@@ -65,7 +32,7 @@ If $EccUserPath = "" Then
 	Exit
 EndIf
 
-$IdtRead = FileOpen($EccIdtFile)
+$IdtRead = FileOpen($eccUserCidFile)
 Global $EccIdt = FileRead($IdtRead)
 FileClose($IdtRead)
 
@@ -320,7 +287,7 @@ If $sData = "ERROR2" Then
 	Exit
 EndIf
 If $sData = "ERROR3" Then ; Code is invalid
-	Run(Chr(34) & $AutoitExe & Chr(34) & " " & Chr(34) & $EccKameleon & Chr(34))
+	Run(Chr(34) & $Autoit3Exe & Chr(34) & " " & Chr(34) & $EccKameleon & Chr(34))
 	Exit
 EndIf
 If $sData = "ERROR4" Then ; No imagefiles found.

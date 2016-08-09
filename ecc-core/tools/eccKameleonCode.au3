@@ -1,20 +1,15 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC Kameleon Code
-; Script version         : v1.0.0.1
-; Last changed           : 2012-09-27
+; Script version         : v1.0.0.2
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
 ; NOTES: Kameleon Code to make usage of several ECC services on the internet.
 ;
 ; ------------------------------------------------------------------------------
-;GUI INCLUDES
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
+FileChangeDir(@ScriptDir)
+#include "eccToolVariables.au3"
 
 ;==============================================================================
 ;BEGIN *** GUI

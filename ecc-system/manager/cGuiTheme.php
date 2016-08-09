@@ -31,7 +31,6 @@ class GuiTheme {
 			if ($file == '.' || $file == '..') continue;
 			if(is_dir($this->baseFolder.$file)) $themes[] = $file;
 		}
-		$themes[] = 'none';
 		return $themes;
 	}
 	
@@ -56,17 +55,12 @@ class GuiTheme {
 	public function getThemeFolder($fileName = '', $important = false, $themeOverwrite = false){
 		
 		$theme = ($themeOverwrite) ? $themeOverwrite : $this->theme;
+		$fullPath = $this->baseFolder.$theme.'/'.$fileName;
 		
-		if($theme == 'none' && !$important){
-			$fullPath = $this->baseFolder.'/eccThemeNone.png';
+		if($theme != $this->defaultTheme){
+			if(!file_exists($fullPath)) $fullPath = $this->baseFolder.$this->defaultTheme.'/'.$fileName;
 		}
-		else{
-			$fullPath = $this->baseFolder.$theme.'/'.$fileName;
-			if($theme != $this->defaultTheme){
-				if(!file_exists($fullPath)) $fullPath = $this->baseFolder.$this->defaultTheme.'/'.$fileName;
-			}
-		}		
-
+		
 		return $fullPath;
 	}
 	

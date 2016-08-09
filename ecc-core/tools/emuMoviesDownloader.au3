@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : EmuMoviesDownloader (EMD)
-; Script version         : v1.2.1.0
-; Last changed           : 2013-12-01
+; Script version         : v1.2.1.1
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -9,45 +9,11 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
+#include "eccToolVariables.au3"
 
-;GUI INCLUDES
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\GuiListView.au3"
-#include "..\thirdparty\autoit\include\GuiEdit.au3"
-#include "..\thirdparty\autoit\include\File.au3"
-#include "..\thirdparty\autoit\include\String.au3"
-#include "..\thirdparty\autoit\include\XMLDomWrapper.au3"
-#include "..\thirdparty\autoit\include\URLStrings.au3"
-
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $7zExe = $EccInstallFolder & "\ecc-core\thirdparty\7zip\7z.exe"
-Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $EccDataBaseFile = $EccInstallFolder & "\ecc-system\database\eccdb"
-Global $eccUserCidFile = $EccInstallFolder & "\ecc-system\idt\cicheck.idt"
-Global $RomEccId = IniRead($EccRomDataFile, "ROMDATA", "rom_platformid", "")
-Global $eccSig = "3AC741E3A76D7BD5B31256A1B67A7D6A238D" ;Please do NOT alter!
-
-Global $SQliteExe = $EccInstallFolder & "\ecc-core\thirdparty\sqlite\sqlite.exe"
-Global $SQLInstructionFile = @Scriptdir & "\sqlcommands.inst"
-Global $SQLcommandFile = @Scriptdir & "\sqlcommands.cmd"
-Global $PlatformDataFile = "platformdata.txt"
-
-Global $EmuMoviesServer = "http://api.gamesdbase.com/"
-Global $EmuMoviesWebsite = "http://emumovies.com/"
-Global $EmuMoviesList = @ScriptDir & "\emuMoviesDownloader.list"
-Global $EmuMoviesName = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), GetCID(), 5)
-Global $EmuMoviesPass = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), GetCID(), 5)
+Global $EmuMoviesName 		= _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), GetCID(), 5)
+Global $EmuMoviesPass 		= _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), GetCID(), 5)
 Global $EmuMoviesId
-
-;Determine USER folder (set in ECC config)
-Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
-Global $EccUserPathTemp = StringReplace(Iniread($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
-Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
 
 Select
 	Case $CmdLine[0] = 0
@@ -87,12 +53,12 @@ EndIf
 ; Check: writable media...
 ToolTip("Check if media is writable...!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
 
-Global $EccDummyFile = @ScriptDir & "\emuMoviesDownloader.dummy"
-$FileToWrite = FileOpen($EccDummyFile, 10)
+Global $eccDummyFile = @ScriptDir & "\emuMoviesDownloader.dummy"
+$FileToWrite = FileOpen($eccDummyFile, 10)
 FileWrite($FileToWrite, "Dummy")
 FileClose($FileToWrite)
-If FileExists($EccDummyFile) Then
-	If FileGetSize($EccDummyFile) < 4 Then
+If FileExists($eccDummyFile) Then
+	If FileGetSize($eccDummyFile) < 4 Then
 		ToolTip("This media is not writable!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
 		Sleep(1500)
 		Exit
@@ -105,7 +71,7 @@ EndIf
 
 ; Check if 7zip is working...
 ToolTip("Check if 7zip is working...!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
-ShellExecuteWait($7zexe, "a eccUpdate.7z " & Chr(34) & $EccDummyFile & Chr(34) & " -o" & Chr(34) & @ScriptDir & Chr(34) & " -y", "", "", @SW_HIDE)
+ShellExecuteWait($7zexe, "a eccUpdate.7z " & Chr(34) & $eccDummyFile & Chr(34) & " -o" & Chr(34) & @ScriptDir & Chr(34) & " -y", "", "", @SW_HIDE)
 If FileExists(@ScriptDir & "\eccUpdate.7z") Then
 	If FileGetSize(@ScriptDir & "\eccUpdate.7z") < 100 Then
 		ToolTip("7Zip is not working properly!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
@@ -117,7 +83,7 @@ Else
 	Sleep(1500)
 	Exit
 EndIf
-FileDelete($EccDummyFile)
+FileDelete($eccDummyFile)
 FileDelete(@ScriptDir & "\eccUpdate.7z")
 
 ; Retrieve ROMlist from ECC
@@ -130,11 +96,11 @@ FileWriteLine($INSTFile, "SELECT crc32, title FROM fdata WHERE eccident='" & $Ro
 FileClose($INSTFile)
 
 ; It's not possible to execute the sqlite.exe with these command's, so we have to create a .BAT or .CMD file and then run that file.
-; ShellExecuteWait($SQliteExe, Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
-; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; ShellExecuteWait($SQliteExe, Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
 
 $CMDFile = Fileopen($SQLcommandFile, 10)
-FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
 
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
@@ -393,7 +359,7 @@ While 1
 					$ReadRomData = StringSplit(FileReadLine($RomDataFile, $imagecount), ";") ;$ReadRomData[1] = CRC32, $ReadRomData[2] = ROM Filename
 					If @error = -1 Then ExitLoop
 					AddNote("searching for: " & FixRomName($ReadRomData[2]) & " {Media: " & StringReplace($SelectedMedia, "_", "") & "}...")
-					Global $ImageFolderLocal = $EccUserPath & $RomEccId & "\" & $MediaPath & "\" & StringLeft($ReadRomData[1], 2) & "\" & $ReadRomData[1] & "\" ;Constuct local image folder
+					Global $ImageFolderLocal = $eccUserPath & $RomEccId & "\" & $MediaPath & "\" & StringLeft($ReadRomData[1], 2) & "\" & $ReadRomData[1] & "\" ;Constuct local image folder
 					Global $FileNameToSaveJPG = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".jpg" ;Construct JPG image filename
 					Global $FileNameToSavePNG = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".png" ;Construct PNG image filename
 					Global $FileNameToSaveMP4 = "ecc_" & $RomEccId & "_" & $ReadRomData[1] & $eccMediaType & ".mp4" ;Construct MP4 video filename

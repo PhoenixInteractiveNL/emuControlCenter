@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.2.5.7
-; Last changed           : 2012.07.04
+; Script version         : v1.2.5.8
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,26 +11,22 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
+#include "eccVariables.au3"
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $7zexe = $eccPath & "\ecc-core\thirdparty\7zip\7z.exe"
-Global $DATfileInfoINI = $eccPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
-Global $DATUtilExe = $eccPath & "\ecc-core\thirdparty\datutil\datutil.exe"
-
-If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
+If FileExists($eccInstallPath & "\ecc.exe") <> 1 or FileExists($eccInstallPath & "\ecc-system\ecc.php") <> 1 Then
 	MsgBox(64,"ECC DatFileUpdater", "No ECC software found!, aborting...")
 	Exit
 EndIf
 
-If FileExists($7zexe) <> 1 Then
+If FileExists($7zExe) <> 1 Then
 	MsgBox(64,"ECC DatFileUpdater", "7zip could not be found!, aborting...")
 	Exit
 EndIf
 
-If FileExists($DATfileInfoINI) <> 1 or FileExists($DATUtilExe) <> 1 Then
+If FileExists($eccDatfileInfoIni) <> 1 or FileExists($DATUtilExe) <> 1 Then
 	MsgBox(64,"ECC DatFileUpdater", "Critical file(s) missing!, aborting...")
 	Exit
 EndIf
@@ -48,15 +44,15 @@ EndIf
 ;BEGIN *** SET VARIABLES & PREPERATION
 ;==============================================================================
 Global $MameUpdateFileVersion
-Global $DATfilePath = $eccPath & "\ecc-system\datfile\"
-Global $DATfileTempPath = $eccPath & "\ecc-system\datfile\temp\"
-Global $DATfileBackupPath = $eccPath & "\ecc-system\datfile\backup\"
+Global $DATfilePath = $eccInstallPath & "\ecc-system\datfile\"
+Global $DATfileTempPath = $eccInstallPath & "\ecc-system\datfile\temp\"
+Global $DATfileBackupPath = $eccInstallPath & "\ecc-system\datfile\backup\"
 Global $DATfileInfoFile = $DATfileTempPath & "mameinfo.dat"
 Global $DATfileMameFile = $DATfileTempPath & "mamelist.dat"
 Global $DATfileMameFetch = $DATfileTempPath & "mamefetch.cmd"
-Global $InstalledMameVersion = IniRead($DATfileInfoINI, "GENERAL", "datfile_mame_version", "")
-Global $InstalledMameDateStr = IniRead($DATfileInfoINI, "GENERAL", "datfile_mame_date_str", "")
-Global $InstalledMameDateYmd = IniRead($DATfileInfoINI, "GENERAL", "datfile_mame_date_ymd", "")
+Global $InstalledMameVersion = IniRead($eccDatfileInfoIni, "GENERAL", "datfile_mame_version", "")
+Global $InstalledMameDateStr = IniRead($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_str", "")
+Global $InstalledMameDateYmd = IniRead($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_ymd", "")
 DirCreate($DATfileTempPath)
 DirCreate($DATfileBackupPath)
 ;==============================================================================
@@ -64,7 +60,7 @@ DirCreate($DATfileBackupPath)
 ;==============================================================================
 
 If FileExists($DATfileMameFile) <> 1 Then
-	$MameFile = FileOpenDialog("ECC DatFileUpdater - Select MAME.EXE where to update the DATfiles from:", $eccPath & "\ecc-user\mame\emus", "Program (mame.exe;mame64.exe;mamepp.exe)", 3)
+	$MameFile = FileOpenDialog("ECC DatFileUpdater - Select MAME.EXE where to update the DATfiles from:", $eccInstallPath & "\ecc-user\mame\emus", "Program (mame.exe;mame64.exe;mamepp.exe)", 3)
 	If @error Then
 		Exit
 	Else
@@ -144,9 +140,9 @@ FileDelete($DATfileInfoFile)
 Exit
 
 Func WriteIniData()
-	IniWrite($DATfileInfoINI, "GENERAL", "datfile_mame_version", $MameVersion)
-	IniWrite($DATfileInfoINI, "GENERAL", "datfile_mame_date_str", $MameDate)
-	IniWrite($DATfileInfoINI, "GENERAL", "datfile_mame_date_ymd", $MameCPUDateYear & $MameCPUDateMonth & $MameCPUDateDay)
+	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_version", $MameVersion)
+	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_str", $MameDate)
+	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_ymd", $MameCPUDateYear & $MameCPUDateMonth & $MameCPUDateDay)
 EndFunc
 
 

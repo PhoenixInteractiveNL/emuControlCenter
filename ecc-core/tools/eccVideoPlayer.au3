@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter Video Player
 ;
-; Script version         : v1.1.0.3
-; Last changed           : 2012.11.11
+; Script version         : v1.1.0.4
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -22,41 +22,23 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\VLCPlayer.au3"
-#include "..\thirdparty\autoit\include\IE.au3"
+#include "eccToolVariables.au3"
 
 _VLCErrorHandlerRegister()
 HotKeySet("{ESC}", "Terminate")
 
-;Global Variables
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $AutoIt3Exe = $EccInstallFolder & "\ecc-core\thirdparty\autoit\autoit3.exe"
-Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $RomPlatformId = IniRead($EccRomDataFile, "ROMDATA", "rom_platformid", "")
-Global $RomCrc32 = IniRead($EccRomDataFile, "ROMDATA", "rom_crc32", "")
-Global $eccLocalVersionInfo = $EccInstallFolder & "\ecc-system\system\info\ecc_local_version_info.ini"
-Global $eccLocalUpdateInfo = $EccInstallFolder & "\ecc-system\system\info\ecc_local_update_info.ini"
-
-;Determine USER folder (set in ECC config)
-Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
-Global $EccUserPathTemp = StringReplace(Iniread($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
-Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ;Add full path to variable if it's an directory within the ECC structure
-
 ;Get ECC Video Player settings
-Global $VideoPlayerEnableFlag = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_enable", "1")
-Global $VideoPlayerSoundFlag = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_sound", "1")
-Global $VideoPlayerSoundVolume = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_soundvolume", "70")
-Global $VideoPlayerLoopFlag = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_loop", "1")
-Global $VideoPlayerResX = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_resx", "300")
-Global $VideoPlayerResY = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_resy", "300")
-Global $VideoPlayerPadX = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_padx", "30")
-Global $VideoPlayerPadY = Iniread($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_pady", "20")
+Global $VideoPlayerEnableFlag = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_enable", "1")
+Global $VideoPlayerSoundFlag = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_sound", "1")
+Global $VideoPlayerSoundVolume = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_soundvolume", "70")
+Global $VideoPlayerLoopFlag = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_loop", "1")
+Global $VideoPlayerResX = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_resx", "300")
+Global $VideoPlayerResY = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_resy", "300")
+Global $VideoPlayerPadX = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_padx", "30")
+Global $VideoPlayerPadY = Iniread($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_pady", "20")
 
-Global $RomVideoFolder = $EccUserPath & $RomPlatformId & "\videos\" & StringLeft($RomCrc32, 2) & "\" & $RomCrc32
-Global $RomVideoFile = $RomVideoFolder & "\ecc_" & $RomPlatformId & "_" & $RomCrc32
+Global $RomVideoFolder = $eccUserPath & $RomEccId & "\videos\" & StringLeft($RomCrc32, 2) & "\" & $RomCrc32
+Global $RomVideoFile = $RomVideoFolder & "\ecc_" & $RomEccId & "_" & $RomCrc32
 Global $RomVideoFileExt
 If FileExists($RomVideoFile & ".flv") Then $RomVideoFileExt = $RomVideoFile & ".flv" ;Secondary
 If FileExists($RomVideoFile & ".mp4") Then $RomVideoFileExt = $RomVideoFile & ".mp4" ;Primary
@@ -82,14 +64,14 @@ If $CmdLine[0] > 0 Then
 										"Make sure VLC, and the ActiveX component is installed!" & @CRLF & _
 										"The Video Player has been disabled!" & @CRLF & _
 										"You can enable it again in the ECC config!")
-				IniWrite($EccGeneralIni, "VIDEOPLAYER", "eccVideoPlayer_enable", "0")
+				IniWrite($eccConfigFileGeneralUser, "VIDEOPLAYER", "eccVideoPlayer_enable", "0")
 				Exit
 			EndIf
 
-			Global $eccMainVersion =	IniRead($eccLocalVersionInfo, "GENERAL", "current_version", "x.x")
-			Global $eccMainBuild =		IniRead($eccLocalVersionInfo, "GENERAL", "current_build", "xxx")
-			Global $eccMainBuildDate =	IniRead($eccLocalVersionInfo, "GENERAL", "date_build", "xxxx.xx.xx")
-			Global $eccLastUpdate =		IniRead($eccLocalUpdateInfo, "UPDATE", "last_update", "xxxxx")
+			Global $eccMainVersion =	IniRead($eccVersionInfoIni, "GENERAL", "current_version", "x.x")
+			Global $eccMainBuild =		IniRead($eccVersionInfoIni, "GENERAL", "current_build", "xxx")
+			Global $eccMainBuildDate =	IniRead($eccVersionInfoIni, "GENERAL", "date_build", "xxxx.xx.xx")
+			Global $eccLastUpdate =		IniRead($eccLocalUpdateIni, "UPDATE", "last_update", "xxxxx")
 			Global $eccGeneratedTitle =	"emuControlCenter" & " v" & $eccMainVersion & " build:" & $eccMainBuild & " (" & $eccMainBuildDate & ")" & " upd:" & $eccLastUpdate
 
 			;Failsave if ECC window is not found!

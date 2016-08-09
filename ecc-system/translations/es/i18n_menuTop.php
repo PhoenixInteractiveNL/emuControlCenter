@@ -238,8 +238,8 @@ $i18n['menuTop'] = array(
 
 	/* 1.14 BUILD 4 */
 	'mTopToolNotepadEditor' =>
-		'Start Notepad editor (Notepad++)',
+		'Iniciar Notepad (Notepad++)',
 	'mTopToolHexEditor' =>
-		'Start Hex Editor (HxD)',
+		'Iniciar Hex Editor (HxD)',
 	);
 ?>

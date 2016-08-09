@@ -224,9 +224,9 @@ $i18n['menu'] = array(
 	
 	/* 1.14 BUILD 4 */
 	'lbl_rom_moby_import_manual' =>
-		"Import ROM information from MobyGames.com (manual)",
+		"Importar información de la ROM desde MobyGames.com (manual)",
 	'lbl_rom_moby_import_fullauto' =>
-		"Import ROM information from MobyGames.com (full auto)",
+		"Importar información de la ROM desde MobyGames.com (automático)",
 
 	);
 ?>

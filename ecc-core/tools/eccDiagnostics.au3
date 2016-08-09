@@ -1,9 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccDiagnostics (ECC-DIAG)
 ;
-$ScriptVersion = "1.0.0.2"
-; Last changed           : 2012.11.19
-;
+$ScriptVersion = "1.0.0.3"
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -12,31 +11,19 @@ $ScriptVersion = "1.0.0.2"
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\GuiRichEdit.au3"
+#include "eccToolVariables.au3"
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $eccphpErrorLog = $eccPath & "\error.log"
-Global $eccStartupIni = $eccPath & "\ecc-core\php-gtk2\php.ini"
-Global $eccGeneralIni = $eccPath & "\ecc-user-configs\config\ecc_general.ini"
-Global $eccHistoryIni = $eccPath & "\ecc-user-configs\config\ecc_history.ini"
-Global $eccDATfileIni = $eccPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
-Global $eccVersionInfoIni = $eccPath & "\ecc-system\system\info\ecc_local_version_info.ini"
-Global $eccUpdateInfoIni = $eccPath & "\ecc-system\system\info\ecc_local_update_info.ini"
-Global $eccHostInfoIni = $eccPath & "\ecc-system\system\info\ecc_local_host_info.ini"
-Global $eccUserCidFile = $eccPath & "\ecc-system\idt\cicheck.idt"
-Global $NotepadExe = $eccPath & "\ecc-core\thirdparty\notepad++\notepad++.exe"
+Global $eccphpErrorLog = $eccInstallPath & "\error.log"
+Global $eccStartupIni = $eccInstallPath & "\ecc-core\php-gtk2\php.ini"
+Global $eccGeneralIni = $eccInstallPath & "\ecc-user-configs\config\ecc_general.ini"
+Global $eccHistoryIni = $eccInstallPath & "\ecc-user-configs\config\ecc_history.ini"
+
 Global $BackgroundRun = 0
 
-If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
+If FileExists($eccInstallPath & "\ecc.exe") <> 1 or FileExists($eccInstallPath & "\ecc-system\ecc.php") <> 1 Then
 	MsgBox(64,"ECC Diagnostics", "No ECC software found!, aborting...")
 	Exit
 EndIf
@@ -109,10 +96,10 @@ $MainInfoContents = $MainInfoContents & "[EMUCONTROLCENTER INFO]" & Chr(13) & Ch
 $MainInfoContents = $MainInfoContents & "Version  : " & IniRead($eccVersionInfoIni, "GENERAL", "current_version", "x.x.x") & " "
 $MainInfoContents = $MainInfoContents & "build: " & IniRead($eccVersionInfoIni, "GENERAL", "current_build", "x.x") & " "
 $MainInfoContents = $MainInfoContents & "(" & IniRead($eccVersionInfoIni, "GENERAL", "date_build", "xxxx.xx.xx") & ") "
-$MainInfoContents = $MainInfoContents & "upd: " & IniRead($eccUpdateInfoIni, "UPDATE", "last_update", "xxxxx") & Chr(13) & Chr(10)
-$MainInfoContents = $MainInfoContents & "Startup  : v" & FileGetVersion($eccPath & "\ecc.exe") & Chr(13) & Chr(10)
-$MainInfoContents = $MainInfoContents & "Core     : ECC is using PHP v" & FileGetVersion($eccPath & "\ecc-core\php-gtk2\php5.dll") & " and "
-$MainInfoContents = $MainInfoContents & "GTK v" & FileGetVersion($eccPath & "\ecc-core\php-gtk2\libgtk-win32-2.0-0.dll") & Chr(13) & Chr(10)
+$MainInfoContents = $MainInfoContents & "upd: " & IniRead($eccLocalUpdateIni, "UPDATE", "last_update", "xxxxx") & Chr(13) & Chr(10)
+$MainInfoContents = $MainInfoContents & "Startup  : v" & FileGetVersion($eccInstallPath & "\ecc.exe") & Chr(13) & Chr(10)
+$MainInfoContents = $MainInfoContents & "Core     : ECC is using PHP v" & FileGetVersion($eccInstallPath & "\ecc-core\php-gtk2\php5.dll") & " and "
+$MainInfoContents = $MainInfoContents & "GTK v" & FileGetVersion($eccInstallPath & "\ecc-core\php-gtk2\libgtk-win32-2.0-0.dll") & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & "User CID : " & $iEccUserCidFile  & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & "[LOCAL ENVIRONMENT]" & Chr(13) & Chr(10)
@@ -179,9 +166,9 @@ EndIf
 
 ;DAT Info ==================================================================
 If $BackgroundRun = 0 Then ToolTip("Gathering DATfile INI Info...", @DesktopWidth/2, @DesktopHeight/2, "eccDiagnostics", 1, 6)
-$oEccDATfileIni = FileOpen($eccDATfileIni, 0) ; Open file.
+$oEccDATfileIni = FileOpen($eccDatfileInfoIni, 0) ; Open file.
 If $oEccDATfileIni = -1 Then ; Check if file opened for reading OK.
-	GUICtrlSetData($GeneralIniText, "The file '" & $eccDATfileIni & " could not be found!") ; File is not found
+	GUICtrlSetData($GeneralIniText, "The file '" & $eccDatfileInfoIni & " could not be found!") ; File is not found
 Else
 	$iEccDATfileIni = FileRead($oEccDATfileIni) ; Read-in data from file.
 	GUICtrlSetData($DatInfoText, $iEccDATfileIni) ; Put data into the editbox.
@@ -193,7 +180,7 @@ EndIf
 If $BackgroundRun = 0 Then ToolTip("Gathering Version Info...", @DesktopWidth/2, @DesktopHeight/2, "eccDiagnostics", 1, 6)
 Global $FoundFileVersions, $String
 GUICtrlSetData($VersionInfoText, "Scanning...") ; Put data into the editbox.
-$GetVersions = ScanFolder($eccPath)
+$GetVersions = ScanFolder($eccInstallPath)
 GUICtrlSetData($VersionInfoText, $GetVersions) ; Put data into the editbox.
 ;Version Info ==================================================================
 
@@ -277,7 +264,7 @@ While 1
 		Else
 			If FileGetVersion($FullFilePath) <> "0.0.0.0" Then ; Legit file wich contains a fileversion
 				If StringRight($File, 3) = "exe" Or StringRight($File, 3) = "ocx" Or StringRight($File, 3) = "dll" Then ; Only EXE / OCX / DLL files
-					$FoundFileVersions = $FoundFileVersions & StringSpace(StringReplace($FullFilePath, $eccPath & "\", "")) & " v" & FileGetVersion($FullFilePath) & Chr(13) & Chr(10)
+					$FoundFileVersions = $FoundFileVersions & StringSpace(StringReplace($FullFilePath, $eccInstallPath & "\", "")) & " v" & FileGetVersion($FullFilePath) & Chr(13) & Chr(10)
 				EndIf
 			EndIf
 		EndIf

@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : MobyGamesImporter (MGI)
-; Script version         : v1.0.0.1
-; Last changed           : 2013-11-09
+; Script version         : v1.0.0.2
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -9,46 +9,10 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
+#include "eccToolVariables.au3"
 
-;GUI INCLUDES
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\GuiListView.au3"
-#include "..\thirdparty\autoit\include\GuiEdit.au3"
-#include "..\thirdparty\autoit\include\File.au3"
-#include "..\thirdparty\autoit\include\String.au3"
-#include "..\thirdparty\autoit\include\URLStrings.au3"
-
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $EccDataBaseFile = $EccInstallFolder & "\ecc-system\database\eccdb"
-Global $eccUserCidFile = $EccInstallFolder & "\ecc-system\idt\cicheck.idt"
-Global $RomEccId = IniRead($EccRomDataFile, "ROMDATA", "rom_platformid", "")
-Global $RomName = IniRead($EccRomDataFile, "ROMDATA", "rom_name", "")
-Global $RomPlatformName = IniRead($EccRomDataFile, "ROMDATA", "rom_platformname", "")
-Global $RomCrc32 = IniRead($EccRomDataFile, "ROMDATA", "rom_crc32", "")
-Global $RomMetaData = IniRead($EccRomDataFile, "ROMDATA", "rom_meta_data", "")
-Global $RomUserData = IniRead($EccRomDataFile, "ROMDATA", "rom_user_data", "")
-Global $SQliteExe = $EccInstallFolder & "\ecc-core\thirdparty\sqlite\sqlite.exe"
-Global $SQLInstructionFile = @Scriptdir & "\sqlcommands.inst"
-Global $SQLcommandFile = @Scriptdir & "\sqlcommands.cmd"
-Global $PlatformDataFileRomList = "platformdata_romlist.txt"
-Global $PlatformDataFileRomMeta = "platformdata_meta.txt"
-Global $PlatformDataFileRomUser = "platformdata_user.txt"
-
-Global $MobyGamesWebsite = "http://www.mobygames.com/"
-Global $MobyGamesList = @ScriptDir & "\MobyGamesImporter.list"
 Global $String, $Mode, $PlatFormRomCountUserList, $PlatFormRomCountUserMeta
 Global $NameToSearchFor, $RomNameBack
-
-;Determine USER folder (set in ECC config)
-Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
-Global $EccUserPathTemp = StringReplace(Iniread($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
-Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
 
 Select
 	Case $CmdLine[0] = 0
@@ -152,11 +116,11 @@ FileWriteLine($INSTFile, "SELECT crc32, title FROM fdata WHERE eccident='" & $Ro
 FileClose($INSTFile)
 
 ; It's not possible to execute the sqlite.exe with these command's, so we have to create a .BAT or .CMD file and then run that file.
-; ShellExecuteWait($SQliteExe, Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
-; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; ShellExecuteWait($SQliteExe, Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
 
 $CMDFile = Fileopen($SQLcommandFile, 10)
-FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
 
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
@@ -176,11 +140,11 @@ FileWriteLine($INSTFile, "SELECT crc32, name FROM mdata WHERE eccident='" & $Rom
 FileClose($INSTFile)
 
 ; It's not possible to execute the sqlite.exe with these command's, so we have to create a .BAT or .CMD file and then run that file.
-; ShellExecuteWait($SQliteExe, Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
-; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; ShellExecuteWait($SQliteExe, Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
 
 $CMDFile = Fileopen($SQLcommandFile, 10)
-FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
 
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
@@ -201,11 +165,11 @@ FileWriteLine($INSTFile, "SELECT crc32 FROM udata WHERE eccident='" & $RomEccId 
 FileClose($INSTFile)
 
 ; It's not possible to execute the sqlite.exe with these command's, so we have to create a .BAT or .CMD file and then run that file.
-; ShellExecuteWait($SQliteExe, Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
-; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; ShellExecuteWait($SQliteExe, Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
 
 $CMDFile = Fileopen($SQLcommandFile, 10)
-FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
 
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
@@ -560,7 +524,7 @@ EndIf
 
 ; Write data into database
 $CMDFile = Fileopen($SQLcommandFile, 10)
-FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
 

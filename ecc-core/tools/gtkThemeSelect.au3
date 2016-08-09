@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter gtkThemeSelect (ECC-GTKTS)
 ;
-; Script version         : v1.0.0.1
-; Last changed           : 2012.05.06
+; Script version         : v1.0.0.2
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,23 +11,12 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
+#include "eccToolVariables.au3"
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-$eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $eccThemeFolder = $eccPath & "\ecc-core\php-gtk2\share\themes\"
-Global $NoPreviewImage = $eccPath & "\ecc-core\tools\gtkThemeSelect_nopreview.jpg"
-Global $GtkThemeFile = $eccPath & "\ecc-core\php-gtk2\etc\gtk-2.0\theme"
-Global $GtkEngineFolder = $eccPath & "\ecc-core\php-gtk2\lib\gtk-2.0\2.10.0\engines\"
-
-If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\ecc.php") <> 1 Then
+If FileExists($eccInstallPath  & "\ecc.exe") <> 1 or FileExists($eccInstallPath  & "\ecc-system\ecc.php") <> 1 Then
 	MsgBox(64,"ECC gtkThemeSelect", "No ECC software found!, aborting...")
 	Exit
 EndIf

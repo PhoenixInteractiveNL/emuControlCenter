@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : 3D Gallery for viewing images!
-; Script version         : v1.1.0.7
-; Last changed           : 2012-11-19
+; Script version         : v1.1.0.8
+; Last changed           : 2014-03.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -19,31 +19,15 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-#include "..\thirdparty\autoit\include\XMLDomWrapper.au3"
-
-;GUI INCLUDES
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\GUIListBox.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
+#include "eccToolVariables.au3"
 
 HotKeySet("{ESC}", "Terminate")
 
 ;Global Variables
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $EccRomDataFile = $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $GalleryImageUrl = "http://ecc.phoenixinteractive.mine.nu"
-Global $RomName = IniRead($EccRomDataFile, "ROMDATA", "rom_name", "")
-Global $RomCrc32 = IniRead($EccRomDataFile, "ROMDATA", "rom_crc32", "")
-Global $RomCrc32short = StringLeft($RomCrc32, 2)
-Global $RomEccId = IniRead($EccRomDataFile, "ROMDATA", "rom_platformid", "")
-Global $FullPathToImageFolder = $EccInstallFolder & "\ecc-user\" & $RomEccId & "\images\" & $RomCrc32short & "\" & $RomCrc32 & "\"
 Global $Teller = 0
 Global $RomTypeContents
 
-If FileExists($EccRomDataFile) <> 1 Then
+If FileExists($eccRomDataFile) <> 1 Then
 	ToolTip("ECC ROM datafile not found!, aborting...", @DesktopWidth/2, @DesktopHeight/2, "3D Gallery", 1, 6)
 	Sleep(1500)
 	Exit
@@ -118,15 +102,15 @@ EndFunc ;IsFileOk
 Func ShowGallery($GalleryTitle, $GalleryResolutionX, $GalleryResolutionY)
 $objExplorer = ObjCreate("shell.Explorer.2")
 
-$ECCGallery = GUICreate($GalleryTitle, $GalleryResolutionX - 20, $GalleryResolutionY - 10, -1, -1) ;added -values to remove the scrollbars
+$eccGallery = GUICreate($GalleryTitle, $GalleryResolutionX - 20, $GalleryResolutionY - 10, -1, -1) ;added -values to remove the scrollbars
 GUICtrlCreateObj($objExplorer, 0, 0, $GalleryResolutionX, $GalleryResolutionY)
 $objExplorer.navigate($GalleryStartFileFull)
-GUISetIcon(@ScriptDir & "\3dgallery.ico", "", $ECCGallery) ;Set proper icon for the window.
-GUISetState(@SW_SHOW, $ECCGallery)
+GUISetIcon(@ScriptDir & "\3dgallery.ico", "", $eccGallery) ;Set proper icon for the window.
+GUISetState(@SW_SHOW, $eccGallery)
 
 
 While 1
-     $nMsg = GUIGetMsg($ECCGallery)
+     $nMsg = GUIGetMsg($eccGallery)
      Switch $nMsg
          Case $GUI_EVENT_CLOSE
              Exit
@@ -140,7 +124,7 @@ Func GalleryConfig()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $ECC3DGALCONF = GUICreate("ECC 3D Gallery configuration", 342, 246, -1, -1)
+Global $ecc3DGALCONF = GUICreate("ECC 3D Gallery configuration", 342, 246, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Group1 = GUICtrlCreateGroup(" Select a 3D gallery ", 8, 0, 329, 169)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
@@ -179,8 +163,8 @@ Global $ButtonSelect = GUICtrlCreateButton("Select / Save", 216, 176, 121, 65)
 ;==============================================================================
 ;END *** GUI
 ;==============================================================================
-GUISetState(@SW_SHOW, $ECC3DGALCONF)
-GUISetIcon(@ScriptDir & "\3dgallery.ico", "", $ECC3DGALCONF) ;Set proper icon for the window.
+GUISetState(@SW_SHOW, $ecc3DGALCONF)
+GUISetIcon(@ScriptDir & "\3dgallery.ico", "", $ecc3DGALCONF) ;Set proper icon for the window.
 
 ; Fill the gallerylist
 $FoundGallerys = IniReadSectionNames($GalleryConfigFile)

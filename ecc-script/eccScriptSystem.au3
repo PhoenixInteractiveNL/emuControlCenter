@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.1.2 (2013.10.04)
+; Version: 1.2.1.5 (2013.12.29)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -145,7 +145,7 @@ If $eccEmuExecuteInEmufolder = "1" Then $RomPath = $eccEmuEmulatorPath
 ; Autounpack active?, then set rompath to the auto unpack folder (overrides execute in emulator folder)
 If $eccEmuEnableZipUnpackActive = "1" Then $RomPath = $eccFileEccUnpackedPath
 
-; Use 8.3 Dosfile names on unpacked files? (only affects the FILEname of the ROM)
+; Use 8.3 "DOS" file naming on unpacked files? (only affects the FILEname of the ROM)
 If $eccFileRomFileIsPacked = "1" And $eccEmuWin8char = "1" Then
 	$RomFile = FileGetShortName($RomPath & $eccFileRomFilePacked)
 	$RomFileDivided = Stringsplit($RomFile, "\")
@@ -153,12 +153,16 @@ If $eccFileRomFileIsPacked = "1" And $eccEmuWin8char = "1" Then
 	$RomFile = $RomFileDivided[$RomFileArray]
 EndIf
 
-; Use .cue file if available (detect if the .cue file exist and use it if available) (overrides filename only)
+; Use .cue/.m3u (track-info) file if available (detect if the file exist and use it if available) (overrides filename only)
 If $eccEmuUseCueFile = "1" Then
-	If FileExists($RomPath & $eccFileRomNamePlain & ".cue") Then
-		$RomFile = $eccFileRomNamePlain & ".cue"
-		$eccFileRomExtension = "cue"
-	EndIf
+    Select
+        Case FileExists($RomPath & $eccFileRomNamePlain & ".cue")
+			$RomFile = $eccFileRomNamePlain & ".cue"
+			$eccFileRomExtension = "cue"
+        Case FileExists($RomPath & $eccFileRomNamePlain & ".m3u")
+			$RomFile = $eccFileRomNamePlain & ".m3u"
+			$eccFileRomExtension = "m3u"
+    EndSelect
 EndIf
 
 ; Add path to the romfile?
@@ -202,99 +206,105 @@ EndFunc ;EmuWindowControl
 ; FUNCTION: CDImage(CDaction)
 ; ************************************************************
 Func CDImage($CDaction)
-Global $RomExtensionInfo
-Global $DTsupport
+	Global $RomExtensionInfo
+	Global $DTsupport
 
-; Check if Daemontools is already configured, if not then let user select the program first.
-If FileExists($DaemonTools) = 0 Then
-	; Show user a messagebox that Daemontools is needed.
-	MsgBox(48, "ECC Script", "You need 'Daemon Tools' to mount an CD Image with scripts." & @CRLF & @CRLF & _
-	"You can find this software at: http://www.disc-tools.com/download/daemon" & @CRLF & _
-	"After installation select the executable in the ECC config!")
-	Exit
-EndIf
-
-; Check
-
-If $eccEmuEnableZipUnpackActive = "0" Then
-	If $eccFileRomFileIsPacked = "1" Then
-	        MsgBox(48, "ECC Script - Daemon tools", "'Daemon Tools' does not support packed files '" & $eccFileRomFileExtension & "'." & @CRLF & @CRLF & _
-		"To run this rom properly, enable the 'auto unpack' option in the ECC emulator config to extract files before mounting them!")
+	; Check if Daemontools is already configured, if not then let user select the program first.
+	If FileExists($DaemonTools) = 0 Then
+		; Show user a messagebox that Daemontools is needed.
+		MsgBox(48, "ECC Script", "You need 'Daemon Tools' to mount an CD Image with scripts." & @CRLF & @CRLF & _
+		"You can find this software at: http://www.disc-tools.com/download/daemon" & @CRLF & _
+		"After installation select the executable in the ECC config!")
 		Exit
 	EndIf
-EndIf
 
+	; Check if the file is packed.
+	If $eccEmuEnableZipUnpackActive = "0" Then
+		If $eccFileRomFileIsPacked = "1" Then
+				MsgBox(48, "ECC Script - Daemon tools", "'Daemon Tools' does not support packed files '" & $eccFileRomFileExtension & "'." & @CRLF & @CRLF & _
+			"To run this rom properly, enable the 'auto unpack' option in the ECC emulator config to extract files before mounting them!")
+			Exit
+		EndIf
+	EndIf
 
-; Check if the extension is supported by Daemon Tools, and set extensions info tag.
-$DTsupport = "0"
+	; Check if the extension is supported by Daemon Tools, and set extensions info tag.
+	
+	; $DTsupport = 0 (not supported)
+	; $DTsupport = 1 (supported)
+	; $DTsupport = 2 (can be supported, but possibly needs .cue (track-info) file to assist) --> ONE-TIME MESSAGE
+	
+	$DTsupport = 0
+		
+	Select
+		Case $eccFileRomExtension = "cue"
+			$RomExtensionInfo = "CUE sheet"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "img"
+			$RomExtensionInfo = "Binary image file"
+			$DTsupport = 2
+		Case $eccFileRomExtension = "bin"
+			$RomExtensionInfo = "Binary file"
+			$DTsupport = 2
+		Case $eccFileRomExtension = "iso"
+			$RomExtensionInfo = "ISO image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "mds"
+			$RomExtensionInfo = "Media Discriptor file"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "b5t"
+			$RomExtensionInfo = "BlindWrite image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "b6t"
+			$RomExtensionInfo = "BlindWrite image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "bwt"
+			$RomExtensionInfo = "Blindread image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "ccd"
+			$RomExtensionInfo = "Clone CD image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "isz"
+			$RomExtensionInfo = "Compressed ISO image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "nrg"
+			$RomExtensionInfo = "Nero image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "pdi"
+			$RomExtensionInfo = "Instand CD/DVD image"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "cdi"
+			$RomExtensionInfo = "DiscJuggler image"
+			$DTsupport = 1
+	EndSelect
 
-Select
+	Select
+		Case $DTsupport = 0
+			MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & StringUpper($eccFileRomExtension) & "' is not supported by 'Daemon Tools'," & @CRLF & _
+			"It's possible you need a .CUE file to run this image, this should be" & @CRLF & _
+			"placed in he same folder!, Also make sure you enabled the" & @CRLF & _
+			"'use .cue' option for this platform/script in the ECC configuration!")
+			Exit
+		Case $DTsupport = 2
+			If IniRead($eccConfigFile, "DAEMONTOOLS", "daemontools_warning", "") = "" Then ; One-time message
+				MsgBox(48, "ECC Script - Daemon tools - ONE TIME MESSAGE", "The current extension '" & StringUpper($eccFileRomExtension) & "' is not supported by 'Daemon Tools'," & @CRLF & _
+				"It's possible you need a .CUE file to run this image, this should be" & @CRLF & _
+				"placed in he same folder!, Also make sure you enabled the" & @CRLF & _
+				"'use .cue' option for this platform/script in the ECC configuration!")
+				IniWrite($eccConfigFile, "DAEMONTOOLS", "daemontools_warning", "1")
+			EndIf
+		Exit
+	EndIf
 
-	Case $eccFileRomExtension = "cue"
-		$RomExtensionInfo = "CUE sheet"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "iso"
-		$RomExtensionInfo = "ISO image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "mds"
-		$RomExtensionInfo = "Media Discriptor file"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "b5t"
-		$RomExtensionInfo = "BlindWrite image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "b6t"
-		$RomExtensionInfo = "BlindWrite image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "bwt"
-		$RomExtensionInfo = "Blindread image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "ccd"
-		$RomExtensionInfo = "Clone CD image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "isz"
-		$RomExtensionInfo = "Compressed ISO image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "nrg"
-		$RomExtensionInfo = "Nero image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "pdi"
-		$RomExtensionInfo = "Instand CD/DVD image"
-		$DTsupport = "1"
-
-	Case $eccFileRomExtension = "cdi"
-		$RomExtensionInfo = "DiscJuggler image"
-		$DTsupport = "1"
-
-EndSelect
-
-If $DTsupport <> "1" Then
-        MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & StringUpper($eccFileRomExtension) & "' is not supported by 'Daemon Tools'," & @CRLF & _
-		"It's possible you need a .CUE file to run this image, this should be" & @CRLF & _
-		"placed in he same folder!, Also make sure you enabled the" & @CRLF & _
-		"'use .cue' option in the ECC configuration!")
-	Exit
-EndIf
-
-
-Select
-	Case $CDaction = "mount" ; Mount a CD image
-	TrayTip($eccSystemName, "mounting '" & $RomExtensionInfo & "' please wait...", 1, 1)
-	ShellExecuteWait($DaemonTools, " -mount 0, " & $RomFile, "")
-
-	Case $CDaction = "unmount"; Unmount a CD image
-	TrayTip($eccSystemName, "unmounting CD image...please wait...", 1, 1)
-	ShellExecuteWait($DaemonTools, " -unmount 0", "")
-
-EndSelect
+	Select
+		Case $CDaction = "mount" ; Mount a CD image
+			ToolTip($eccSystemName, "mounting '" & $RomExtensionInfo & "' please wait...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+			ShellExecuteWait($DaemonTools, " -mount 0, " & $RomFile, "")
+			ToolTip("")
+		Case $CDaction = "unmount"; Unmount a CD image
+			ToolTip($eccSystemName, "unmounting CD image...please wait...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
+			ShellExecuteWait($DaemonTools, " -unmount 0", "")
+			ToolTip("")
+	EndSelect
 
 EndFunc
 

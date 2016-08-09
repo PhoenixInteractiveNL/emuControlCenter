@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter getCRC32
 ;
-; Script version         : v1.0.0.0
-; Last changed           : 2012.11.29
+; Script version         : v1.0.0.1
+; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,10 +11,7 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-
-#include "..\thirdparty\autoit\include\GetCRC32.au3"
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $CRCfile = @ScriptDir & "\getCRC32.dat"
+#include "eccToolVariables.au3"
 
 If $CmdLine[0] = 0 Then Exit
 If FileExists($CmdLine[1]) = False Then Exit

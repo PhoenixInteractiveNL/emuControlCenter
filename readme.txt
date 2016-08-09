@@ -145,5 +145,5 @@ Ps. The ECC video player is still experimental, so please post bugs to the forum
 
 5. Links
 ********************************************************************************
-Website and download: http://ecc.phoenixinteractive.mine.nu
-Forum and support: http://eccforum.phoenixinteractive.mine.nu/
+Website and download: http://ecc.phoenixinteractive.nl
+Forum and support: http://eccforum.phoenixinteractive.nl/

@@ -91,8 +91,14 @@ class FileIO {
 				$current_entry =  zip_entry_name($zip_entry);
 				if ($file_name_packed == $current_entry) {
 					if (zip_entry_open($zip, $zip_entry, "r")) {
+						
+						$tempFolder = getcwd().'/temp/';
+						
 						$buf = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-						$file_temp = getcwd().'/temp/'.basename($file_name_packed);
+						$file_temp = $tempFolder.basename($file_name_packed);
+						
+						if (!is_dir($tempFolder)) mkdir($tempFolder);
+						
 						$fhdl = fopen($file_temp, 'w+b');
 						fwrite($fhdl, $buf);
 						return $fhdl;

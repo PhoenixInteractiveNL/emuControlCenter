@@ -158,6 +158,8 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+			md.cdate as md_cdate,
+			md.uexport as md_uexport,
 			fd.id as id,
 			fd.title as title,
 			fd.path as path,
@@ -166,6 +168,8 @@ class TreeviewData {
 			fd.md5 as md5,
 			fd.size as size,
 			fd.eccident as fd_eccident,
+			fd.launchtime as fd_launchtime,
+			fd.launchcnt as fd_launchcnt,
 			fd.mdata as fd_mdata
 			FROM
 			".$snip_join_sql."
@@ -284,6 +288,8 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+			md.cdate as md_cdate,
+			md.uexport as md_uexport,
 			fd.id as id,
 			fd.title as title,
 			fd.path as path,
@@ -292,6 +298,8 @@ class TreeviewData {
 			fd.md5 as md5,
 			fd.size as size,
 			fd.eccident as fd_eccident,
+			fd.launchtime as fd_launchtime,
+			fd.launchcnt as fd_launchcnt,
 			fd.mdata as fd_mdata
 			FROM
 			fdata_bookmarks as b
@@ -421,6 +429,8 @@ class TreeviewData {
 			md.rating as md_rating,
 			md.category as md_category,
 			md.creator as md_creator,
+			md.cdate as md_cdate,
+			md.uexport as md_uexport,
 			fd.id as id,
 			fd.title as title,
 			fd.path as path,
@@ -429,6 +439,8 @@ class TreeviewData {
 			fd.md5 as md5,
 			fd.size as size,
 			fd.eccident as fd_eccident,
+			fd.launchtime as fd_launchtime,
+			fd.launchcnt as fd_launchcnt,
 			fd.mdata as fd_mdata
 			FROM
 			fdata AS fd
@@ -1060,6 +1072,17 @@ class TreeviewData {
 		$this->remove_bookmark_by_id($id);
 		
 		return true;
+	}
+	
+	/**
+	 * NEEDS A NEW TABLE!!!!!
+	 */
+	public function getRomPersonalData() {}
+	
+	public function hasBookmark($fileId) {
+		$q = "SELECT * from fdata_bookmarks WHERE file_id = ".(int)$fileId."";
+		$hdl = $this->dbms->query($q);
+		return ($hdl->fetchSingle()) ? true : false;
 	}
 	
 

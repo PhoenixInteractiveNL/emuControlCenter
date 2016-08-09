@@ -69,12 +69,20 @@
 		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
 		
 		// Compile start command
-		$command = 'start '.$start_ident.' '.escapeshellcmd($exeFileName).' '.($filePathFile);
+		$command = 'start '.$start_ident.' "'.escapeshellcmd($exeFileName).'" '.($filePathFile);
 
 		// create an backup of the curren cwd
 		$cwdBackup = getcwd();
 		// change dir to the programs directory
+
+		//print "exeFileName $exeFileName".LF;
+		//print "escapeshellcmd ".escapeshellcmd($exeFileName)." //// $exeFileName".LF;
+		//print "filePathFile $filePathFile".LF;
+		//print "exePathFull $exePathFull".LF;
+		//print "command $command".LF;
+		
 		chdir(dirname($exePathFull));
+		
 		// STANDARD WORKING ECC WAY!
 		// execute command
 		pclose(popen($command, "r"));

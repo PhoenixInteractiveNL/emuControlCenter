@@ -6,16 +6,82 @@
 # Email:	eccas@camya.com
 #
 # Homepage: http://www.camya.com/ecc/
-# Donate: http://www.camya.com/ecc/support/
+# Forum: http://ecc.phoenixinteractive.mine.nu/
+# Support: http://www.camya.com/ecc/support/
 #
 ###############################################################################
 #             DO NOT ASK ME FOR CARTRIDGE IMAGES / ROMS.
 #         (I WILL NOT REPLY TO ANY EMAIL ON THIS SUBJECT)
 ###############################################################################
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!
+!! PROBLEMS WITH emuControlCenter
+!!
+!! If emuControlCenter is NOT RUNNING or you find some BUGS, please register
+!! to the ecc SUPORT FORUM and report theses Bugs
+!!
+!! ECC SUPPORT FORUM: http://ecc.phoenixinteractive.mine.nu/
+!!
+!! Forum registration problems:
+!! If you havent got an confirm mail write a mail to regprob@camya.com
+!!
+!! You can also visit the forum to look, whats going on with ecc! :-)
+!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ###############################################################################
 # emuControlCenter - CHANGELOG
 ###############################################################################
+
+-------------------------------------------------------------------------------
+- Version 0.5.9
+-------------------------------------------------------------------------------
+* Include new Tab PERSONAL
+** Rom played count
+** Rom played last time
+** Rom rating
+** Rom bookmark status
+* Improve config updates. Please resave you genesis/megadrive config!
+* Improvements in ROMDB
+** Now all platforms supported by ecc will be accepted
+** Limit length of filename for non breaking divs.
+** Update statistics (platfom, categories)
+
+-------------------------------------------------------------------------------
+- Version 0.5.899
+-------------------------------------------------------------------------------
+* ROMDB-GET now search for the selected ROM! (online website)
+* rearange some widgeds on the right info pane (tabbed)
+** Added DATA-View to pane
+** Moved esearch to pane
+** Moved romdb to pane
+** Moved image-handling to pane
+** Added some helptexts for images and romdb
+* changed split for romdb to '.'
+* updated the temp-folder create
+* Added some more tooltips
+* Navigation area now fixed.
+
+-------------------------------------------------------------------------------
+- Version 0.5.898
+-------------------------------------------------------------------------------
+* fixed space error - emulator could not be started if spaces in filename!
+* Fixed a focus bug media-edit. Now it is possible to edit metadata.
+* Added some tooltips for eccdb, navigation and main rom-view!
+* Rename eccdb within ecc into eccdb_EMPTY for updates!
+* Implement new ini "ecc_navigation.ini" only for navigation
+** This ini isnt transfered into user folder for updates!
+** removed all nav-elements form ecc_general.ini
+* Added ecc.ex v1.3.9.2
+* Try to improved gui for Resolution 1024x768 (Open Status-Detail area)
+* Added new platforms
+** Thomson MO5
+** Sega Megadrive 32X (also remove 32x from genesis/megadrive config)
+** Atari 400
+** Atari 800
+** Playstation 1
+** Added Wonderswan nav image
 
 -------------------------------------------------------------------------------
 - Version 0.5.897

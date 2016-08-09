@@ -12,6 +12,7 @@ class IniFile {
 	
 	# general ini file - ecc configuration
 	private $eccIniGeneralName = 'ecc_general.ini';
+	private $eccIniNavigationName = 'ecc_navigation.ini';
 	private $eccIniGeneralFile = false;
 	
 	# history ini file - ecc runtime config
@@ -51,6 +52,9 @@ class IniFile {
 		if (!$this->ini) {
 			$ini = @parse_ini_file($this->getGeneralIniPath(), true);
 			$this->ini = (count($ini)) ? $ini : false;
+
+			$this->ini['NAVIGATION'] = reset(@parse_ini_file($this->eccDefaultConfigPath.$this->eccIniNavigationName, true));
+			
 			$this->ini['ECC_PLATFORM'] = $this->get_ecc_platform_data();
 		}
 		return $this->ini;
@@ -72,6 +76,11 @@ class IniFile {
 		if (!$file) return false;
 		$iniData = $this->parse_ini_file_quotes_safe($file);
 		$this->cachePlatformIniData[$eccident] = $iniData;
+		
+		$systemIni = $this->parse_ini_file_quotes_safe($this->eccDefaultConfigPath.'ecc_platform_'.$eccident.'.ini');
+		$iniData['EXTENSIONS'] = $systemIni['EXTENSIONS'];
+		$iniData['PARSER'] = $systemIni['PARSER'];
+
 		return $iniData;
 	}
 	
@@ -107,7 +116,13 @@ class IniFile {
 	
 	public function write_ini_global($assoc_array) {
 		if (!is_array($assoc_array) || !count($assoc_array)) return false;
-		return $this->write_ini_file($this->getGeneralIniPath(true), $assoc_array);
+		
+		$saveArray = $assoc_array;
+		$eccNavigation['NAVIGATION'] = $saveArray['NAVIGATION'];
+		unset($saveArray['NAVIGATION']);
+		$this->write_ini_file($this->eccDefaultConfigPath.$this->eccIniNavigationName, $eccNavigation);
+
+		return $this->write_ini_file($this->getGeneralIniPath(true), $saveArray);
 	}
 	
 	public function get_ecc_platform_data($show_all=false) {

@@ -104,6 +104,8 @@ class App extends GladeXml {
 	
 	private $sessionKey = false;
 	
+	private $objTooltips;
+	
 	public function create_combo_lanugages()
 	{
 		$combobox = new IndexedCombobox();
@@ -207,7 +209,8 @@ class App extends GladeXml {
 	public function get_ext_search_state() {
 		foreach ($this->ext_search_selected as $ident => $state) {
 			if ($state) {
-				$this->ext_search_expander_lbl->set_markup('<b>eSearch - more search options</b> <span color="#cc0000">(eSearch active!!!)</span>');
+				//$this->ext_search_expander_lbl->set_markup('<b>eSearch - more search options</b> <span color="#cc0000">(eSearch active!!!)</span>');
+				$this->infoEsearchLbl->set_markup('<span color="#cc0000"><b>ESEARCH</b></span>');
 				return true;
 			}
 		}
@@ -219,7 +222,8 @@ class App extends GladeXml {
 		}
 		$this->ext_search_reset->set_sensitive(false);
 		
-		$this->ext_search_expander_lbl->set_markup('<b>eSearch - more search options</b>');
+//		$this->ext_search_expander_lbl->set_markup('<b>eSearch - more search options</b>');
+		$this->infoEsearchLbl->set_markup('ESEARCH');
 		
 		$this->ext_search_selected = array();
 	}
@@ -547,6 +551,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);
 
 		$oEvent1 = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent1, I18N::get('tooltips', 'opt_auto_nav'));
 		$oEvent1->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'nav_autoupdate', 'dispatch_menu_context_platform', 'NAVIGATION_TOGGLE_AUTOUPDATE');
 		$oEvent1->add($oImage);
 		
@@ -562,6 +567,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);
 		
 		$oEvent = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_nav_null'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'nav_inactive_hidden', 'dispatch_menu_context_platform', 'PLATFORM_TOGGLE_INACTIVE');
 		$oEvent->add($oImage);
 		
@@ -577,6 +583,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);
 
 		$oEvent = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_dup'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'toggle_show_doublettes', 'dispatch_menu_context_platform', 'TOGGLE_MAINVIEV_DOUBLETTES');
 		$oEvent->add($oImage);
 		
@@ -592,6 +599,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);	
 
 		$oEvent = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_img'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'images_inactiv', 'dispatch_menu_context_platform', 'IMG_TOGGLE');
 		$oEvent->add($oImage);
 		
@@ -617,7 +625,9 @@ class App extends GladeXml {
 	public function __construct()
 	{
 		
-				
+
+		
+		
 		// ----------------------------------------------------------------
 		// ABS-PATH TO REL-PATH...
 		// ----------------------------------------------------------------
@@ -626,6 +636,20 @@ class App extends GladeXml {
 		
 
 		$this->writeLocalReleaseInfo();
+
+// TEST ONLY!	
+// CONVERTER FOR IMAGES FROM NO-INTRO!!!	
+//$imgConvert = FACTORY::get('manager/ImageConvertNoIntro');
+//$imagePathIn = 'D:/Development_emuControlCenter/incomming/no-intro/gg/';
+//$imagePathOut = 'D:/Development_emuControlCenter/incomming/no-intro/gg/emuControlCenter_images/';
+//$imgConvert->setSourceFolder($imagePathIn);
+//$imgConvert->setDestinationFolder($imagePathOut);
+//$eccImageName = $imgConvert->covertImages();
+//print "<pre>";
+//print_r($eccImageName);
+//print "</pre>";
+//die;
+// TEST ONLY!
 		
 		// ----------------------------------------------------------------
 		// Sort media category array!
@@ -677,6 +701,8 @@ class App extends GladeXml {
 		// ----------------------------		
 		$initialHistroyIni = (count($this->ini->read_ecc_histroy_ini()) <= 1);
 		
+		$this->objTooltips = new GtkTooltips();
+		
 		// ----------------------------
 		// get saved data from hist ini
 		// ----------------------------
@@ -718,12 +744,15 @@ class App extends GladeXml {
 		
 		$this->searchSelectorFfType->connect('button-press-event', array($this, 'dispatchSearchFfType'));
 		$this->searchSelectorFfType->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->objTooltips->set_tip($this->searchSelectorFfType, I18N::get('tooltips', 'search_field_select'));
 
 		$this->searchSelectorRating->connect('button-press-event', array($this, 'dispatchSearchSelectory'));
 		$this->searchSelectorRating->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->objTooltips->set_tip($this->searchSelectorRating, I18N::get('tooltips', 'search_rating'));
 		
 		$this->searchSelectorOperator->connect('button-press-event', array($this, 'dispatchSearchFfOperator'));
 		$this->searchSelectorOperator->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#99aabb'));
+		$this->objTooltips->set_tip($this->searchSelectorOperator, I18N::get('tooltips', 'search_operator'));
 		
 		// ----------------------------------------------------------------
 		// Get current operating system
@@ -812,7 +841,7 @@ class App extends GladeXml {
 		$state = $this->get_ext_search_state();
 		$this->ext_search_reset->set_sensitive($state);
 		$this->ext_search_reset->connect_simple("clicked", array($this, 'reset_ext_search_state'));
-		$this->ext_search_expander->set_expanded(false);
+		//$this->ext_search_expander->set_expanded(false);
 		
 		// ----------------------------
 		// TreeviewData init
@@ -899,12 +928,14 @@ class App extends GladeXml {
 		
 		// Webservices eccdb
 		$this->media_nb_info_eccdb->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
-		$this->media_nb_info_eccdb->hide();
+		//$this->media_nb_info_eccdb->hide();
 		
-		$this->media_nb_info_eccdb_get->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccdb['META_GET_URL'], 'open');
-		$this->media_nb_info_eccdb_get->hide();
+//		$this->media_nb_info_eccdb_get->connect_simple('clicked', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccdb['META_GET_URL'], 'open');
+		$this->media_nb_info_eccdb_get->connect_simple('clicked', array($this, 'openRomdbGetUrl'));
+		//$this->media_nb_info_eccdb_get->hide();
 		
-		
+		$this->media_nb_info_eccdb_get_info->connect_simple('clicked', array($this, 'openRomdbGetUrl'));
+		$this->media_nb_info_eccdb_get_info->hide();
 		
 		
 		// ----------------------------
@@ -1689,8 +1720,8 @@ class App extends GladeXml {
 			if ($composite_id) {
 				// edit-button anzeigen
 				$this->media_nb_info_edit->show();
-				$this->media_nb_info_eccdb->show();
-				$this->media_nb_info_eccdb_get->show();
+				//$this->media_nb_info_eccdb->show();
+				$this->media_nb_info_eccdb_get_info->show();
 				$this->btn_start_media->show();
 				$this->btn_add_bookmark->show();
 				
@@ -1707,6 +1738,8 @@ class App extends GladeXml {
 				$info = (isset($file_list['data'][$composite_id])) ? $file_list['data'][$composite_id] : false ;
 				
 				if ($info) {
+					
+					$this->updateTabPersonal($info, $info['fd_eccident'], $info['crc32']);
 					
 					// ------------
 					// update also the top menus for files
@@ -1772,7 +1805,6 @@ class App extends GladeXml {
 					$this->media_nb_info_intro->set_markup(''.$this->get_dropdown_string($info['md_intro']).'');
 					$this->media_nb_info_usermod->set_markup(''.$this->get_dropdown_string($info['md_usermod']).'');
 					$this->media_nb_info_freeware->set_markup(''.$this->get_dropdown_string($info['md_freeware']).'');
-					
 					$this->media_nb_info_multiplayer->set_markup(''.$this->get_dropdown_string($info['md_multiplayer']).'');
 					$this->media_nb_info_netplay->set_markup(''.$this->get_dropdown_string($info['md_netplay']).'');
 					
@@ -1880,6 +1912,38 @@ class App extends GladeXml {
 		// if the popup is opened
 		$this->edit_media(true);
 		
+	}
+	
+	private function updateTabPersonal($info, $eccIdent, $crc32) {
+		
+		// PLAY COUNT
+		$count = ($info['fd_launchcnt']) ? '<span foreground="#000000"><b>'.$info['fd_launchcnt'].'</b></span>' : '<span foreground="#aaaaaa"><b>0</b></span>';
+		$this->media_nb_pers_played_count->set_markup($count);
+		
+		// PLAY TIME
+		$date = ($info['fd_launchtime']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['fd_launchtime']).'</b></span>' : '<span foreground="#aaaaaa"><b>never</b></span>';
+		$this->media_nb_pers_played_time->set_markup($date);
+
+		// RATING
+		$rating = ($info['md_rating']) ? '<span foreground="#000000"><b>'.$info['md_rating'].'</b></span>' : '<span foreground="#aaaaaa"><b>not rated</b></span>';
+		$this->media_nb_pers_rating->set_markup($rating);
+
+		// BOOKMARKED
+		$hasBookmark = $this->_fileView->hasBookmark($info['id']);
+		$bookmarked = ($hasBookmark) ? '<span foreground="#000000"><b>YES</b></span>' : '<span foreground="#aaaaaa"><b>NO</b></span>';
+		$this->media_nb_pers_bookmarked->set_markup($bookmarked);
+		
+		// META CHANGED
+		$metaChangeDate = ($info['md_cdate']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['md_cdate']).'</b></span>' : '<span foreground="#aaaaaa"><b>not changed</b></span>';
+		$this->media_nb_pers_metachange->set_markup($metaChangeDate);
+
+		// ROMDB EXPORT
+		$romdbExport = ($info['md_uexport']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['md_uexport']).'</b></span>' : '<span foreground="#aaaaaa"><b>possible</b></span>';
+		$this->media_nb_pers_romdb->set_markup($romdbExport);
+		
+		// implement later--- needs new database table!!!!
+		//print "$eccIdent, $crc32".LF;
+		//$personalData = $this->_fileView->getRomPersonalData($eccIdent, $crc32);
 	}
 	
 	/*
@@ -2856,11 +2920,12 @@ class App extends GladeXml {
 		$this->edit_mdata = $mdata;
 		unset($mdata);
 
-		$this->win_media_edit->set_position(Gtk::WIN_POS_CENTER);
+		
 		$this->win_media_edit->show();
 		$this->media_edit_is_opened = true;
 		$this->win_media_edit->set_keep_above(true);
 		$this->win_media_edit->present();
+		$this->win_media_edit->set_position(Gtk::WIN_POS_CENTER);
 	}
 	
 	public function create_mdata_checksum($data=false) {
@@ -4267,7 +4332,7 @@ class App extends GladeXml {
 			$this->set_pager_position_label($this->media_pager_label, $pager_data->_p, $pager_data->_pt, $pager_data->_res_total);
 		}
 		else {
-			$pager_txt = '<span foreground="#cc0000"><b>NO DATA FOUND!</b></span>';
+			$pager_txt = '<span foreground="#cc0000"><b>NO DATA!</b></span>';
 			$this->media_pager_label->set_markup($pager_txt);
 		}
 		
@@ -4570,7 +4635,6 @@ class App extends GladeXml {
 		$this->sessionTime = time();
 		
 		$this->cleanupConfigsIfCopied();
-		
 	}
 	
 	private function writeLocalReleaseInfo() {
@@ -4591,6 +4655,13 @@ class App extends GladeXml {
 			}
 		}
 		@file_put_contents($ciDatPath, $ciCheck);
+	}
+	
+	public function openRomdbGetUrl() {
+		$eccIdent = (@$this->current_media_info['md_eccident']) ? $this->current_media_info['md_eccident'] : $this->current_media_info['fd_eccident'];
+		$crc32 = @$this->current_media_info['crc32'];
+		$getParam = ($eccIdent && $crc32) ? '?mid='.$eccIdent.'.'.$crc32 : '';
+		FACTORY::get('manager/Os')->executeProgramDirect($this->eccdb['META_GET_URL'].$getParam, 'open');
 	}
 	
 }

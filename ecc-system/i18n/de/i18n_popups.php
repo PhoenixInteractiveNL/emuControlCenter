@@ -120,6 +120,8 @@ $i18n['popup'] = array(
 		"The assigned emulator\n\n%s\n\nwas not found!\nPlease check the path in CONFIG/EMULATOR",
 	'emu_miss_notset_msg' =>
 		"Missing emulator!\n\nPlease add an emulator for this platform/extension! Please check the path in CONFIG/EMULATOR",
+	'emu_miss_dir_msg%s' =>
+		"No emulator! (Only directory given!)\n\nPlease add an emulator for this platform/extension!\n\nPlease locate the emulators executeable (exe, bat, jar aso.). Only a directory will not work!",
 	'rom_miss_title' =>
 		"Error - Media not found!",
 	'rom_miss_msg' =>
@@ -186,5 +188,15 @@ $i18n['popup'] = array(
 		"Unset ratings for platform?",
 	'maint_unset_ratings_msg' =>
 		"This will reset all ratings in the database... should i do it?",
+	'eccdb_title' =>
+		"eccdb/romdb",
+	'eccdb_statistics_msg%s%s%s%s%s' =>
+		"eccdb - Statistics:\n\n%s added\n%s allready inplace\n%s errors\n\n%s Datasets processed!%s",
+	'eccdb_webservice_post_msg' =>
+		"eccdb/romdb - Metadatabase:\n\nTo support the emuControlCenter community, you can add your modified metadata (title, category, languages aso.) into the ECCDB (Internet Database).\n\nThis works like the well known CDDB for CD-Tracks.\n\nIf you confirm this, ecc will automaticly transfer you data into the eccdb!\n\nYou have to be connected to the internet to add your content!!!\n\nAfter 10 processed Metadatasets, you have to confirm to add more!",
+	'eccdb_error' =>
+		"eccdb - Errors:\n\nMaybe you are not connected to the internet... only with an active internet connection, you can add data into the eccdb!",
+	'eccdb_no_data' =>
+		"eccdb - No data to add found:\n\nYou have to edit some of your metadata to add this into the eccdb. Use the edit button and try again!",
 );
 ?>

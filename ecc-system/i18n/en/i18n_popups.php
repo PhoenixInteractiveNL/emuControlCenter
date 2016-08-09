@@ -1,4 +1,4 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -35,7 +35,7 @@ $i18n['popup'] = array(
 	'rom_remove_single_dupfound_msg%d%s' =>
 		"%d DUPLICATE ROMS FOUND\n\nShould i also remove all duplicates of\n\n%s\n\n from the ecc database?\n\nSee HELP for more informations!",
 	'rom_optimize_title' =>
-		"Optimize database",
+		"Optimize game database",
 	'rom_optimize_msg' =>
 		"Do you want to optimize your ROMS in ecc-database?\n\nYou should optimize the database, if you have moved or removed files from your harddrive\necc will automaticly search for this database-entries and bookmarks and will remove them from the database!\nThis options only edit the database.",
 	'rom_optimize_done_title' =>
@@ -53,7 +53,7 @@ $i18n['popup'] = array(
 	'rom_reorg_nocat_title' =>
 		"There are no categories!",
 	'rom_reorg_nocat_msg%s' =>
-		"You haven´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
+		"You havenÂ´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
 	'rom_reorg_title' =>
 		"Reorganize your ROMS on Harddisk?",
 	'rom_reorg_msg%s%s%s' =>
@@ -63,7 +63,7 @@ $i18n['popup'] = array(
 	'rom_reorg_done__msg%s' =>
 		"Take a look at your filesystem into folder\n\n%s\n\nto validate the copy",
 	'db_optimize_title' =>
-		"Optimize database",
+		"Optimize database system",
 	'db_optimize_msg' =>
 		"Do you want to optimize the database?\nThis will decrease the physical size of the emuControlCenter-DatabaseYou should use Vacuum, if you often Parsed and remove Media in emuControlCenter!\n\nThis operation will freeze the application for some seconds - please wait! :-)",
 	'db_optimize_done_title' =>
@@ -147,7 +147,7 @@ $i18n['popup'] = array(
 	'conf_userfolder_notset_title' =>
 		"ERROR: Could not find userfolder!!!",
 	'conf_userfolder_notset_msg%s' =>
-		"You have altered the base_path in your ecc_general.ini. This folder isn´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
+		"You have altered the base_path in your ecc_general.ini. This folder isnÂ´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
 	'conf_userfolder_error_readonly_title' =>
 		"ERROR: Could not create folder!!!",
 	'conf_userfolder_error_readonly_msg%s' =>
@@ -212,7 +212,6 @@ $i18n['popup'] = array(
 	/* 0.9.1 FYEO 6 */
 	'sys_dialog_miss_title' =>
 		"confirm",
-
 	/* 0.9.2 WIP 11 */
 	'parse_big_file_found_title' =>
 		"Really parse this file?",
@@ -233,8 +232,89 @@ $i18n['popup'] = array(
 	'bookmark_removed_all_msg' =>
 		"All bookmarks has been removed!",
 
+	/* 0.9.6 FYEO 1 */
+	'eccdb_webservice_get_datfile_title' =>
+		"Update datfile from internet",
+	'eccdb_webservice_get_datfile_msg%s' =>
+		"Do you really want to update the Platform\n\n%s\n\nwith the data from the online emuControlCenter romDB?\n\nAn internet connection has to be established for this feature",
 
+	'eccdb_webservice_get_datfile_error_title' =>
+		"Could not import datfile",
+	'eccdb_webservice_get_datfile_error_msg' =>
+		"You have to be connected with the internet. Please connect and try again!",
 
+	'romparser_fileext_problem_title%s' =>
+		"EXTENSION %s PROBLEM FOUND",
+	'romparser_fileext_problem_msg%s%s%s%s%s%s' =>
+		"emuControlCenter found, that more than one platform uses the fileextension %s to search for roms!\n\n%s\nAre you shure, that only %s games  are located in the selected folder %s\n\n<b>OK</b>: Search for %s in this folder / platform!\n\n<b>CANCEL</b>: Skip the extension %s for this folder / platform!\n",
 
+	/* 0.9.6 FYEO 8 */
+	'rom_dup_remove_title_preview' =>
+		"Search for duplicate ROMS",
+	'rom_dup_remove_done_title_preview' => 
+		"Searching done",
+	'rom_dup_remove_done_msg_preview' =>
+		"Take a look at the status area for details!",
+	'metaRemoveSingleTitle' =>
+		"Remove metadata for rom",
+	'metaRemoveSingleMsg' =>
+		"Do you want to remove the metadata for this rom?",
+
+	/* 0.9.6 FYEO 11 */
+
+	'importDatCMFilechooseTitle%s' =>
+		"Select an CtrlMAME dat!\n",
+	'importDatCMConfirmTitle' =>
+		"Import ctrlMAME dat",
+	'importDatCMConfirmMsg%s%s%s' =>
+		"Do you really want to import data for platform\n\n%s (%s)\n\nfrom datfile\n\n%s?",
+
+	/* 0.9.6 FYEO 13 */
+	'romAuditReparseTitle' =>
+		"Update rom audit informations",
+	'romAuditReparseMsg%s' =>
+		"This will update the stored informations like complete state of an multifile rom\n\nUpdate this data?",
+	'romAuditInfoNotPossibelTitle' =>
+		"No rom audit informations available",
+	'romAuditInfoNotPossibelMsg' =>
+		"Audit informations are only available for multirom platforms like the Arcade platforms!",
+
+	'romReparseAllTitle' =>
+		"Reparse your rom folder",
+	'romReparseAllMsg%s' =>
+		"Search for new roms for the selected platform(s)?\n\n%s",
+
+	/* 0.9.6 FYEO 15 */
+	'parserUnsetExtTitle' =>
+		"Unset these extensions",
+	'parserUnsetExtMsg%s' =>
+		"Because you have selected '#All found', ecc have to exclude duplicate extensions from search to prevent wrong assignment in the database!\n\nemuControlCenter do not search for: %s\n\nPlease select the right Platform to parse these extensions!\n\n",
+
+	'stateLabelDatExport%s%s' =>
+		"Export %s datfile for %s",
+	'stateLabelDatImport%s' =>
+		"Import datfile for %s",
+
+	'stateLabelOptimizeDB' =>
+		"Optimize database",
+	'stateLabelVacuumDB' =>
+		"Vacuum database",
+	'stateLabelRemoveDupRoms' =>
+		"Remove duplicate roms",
+	'stateLabelRomDBAdd' =>
+		"Add infos to romDB",
+	'stateLabelParseRomsFor%s' =>
+		"Parsing roms for %s",
+	'stateLabelConvertOldImages' =>
+		"Now converting images...",
+
+	'processCancelConfirmTitle' =>
+		"Cancel current process?",
+	'processCancelConfirmMsg' =>
+		"Do you really want to cancel this running process?",
+	'processDoneTitle' =>
+		"Process completed!",
+	'processDoneMsg' =>
+		"The process has been completed!",
 );
 ?>

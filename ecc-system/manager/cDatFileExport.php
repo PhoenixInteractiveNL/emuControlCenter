@@ -81,7 +81,8 @@ class DatFileExport {
 			$user_folder_export = $path;
 		}
 		else {
-			$user_folder_export = $this->ini->getUserFolder($this->exportHeader['export_ident'].DIRECTORY_SEPARATOR."exports".DIRECTORY_SEPARATOR, true);
+			# 20070810 refactoring userfolder
+			$user_folder_export = $this->ini->getUserFolder($this->exportHeader['export_ident'], DIRECTORY_SEPARATOR."exports".DIRECTORY_SEPARATOR, true);
 		}
 		
 		if ($user_folder_export!==false) {
@@ -119,7 +120,7 @@ class DatFileExport {
 					break;
 				default:
 					$header = $this->createEccDatHeader();
-					$exportTypeFileExtension = '.ecc';
+					$exportTypeFileExtension = '.eccDat';
 					break;
 			}
 			$export_file = $user_folder_export."/eccdat_".$this->exportHeader['export_ident']."_".$this->exportHeader['export_type'].".".$this->exportHeader['export_date'].$exportTypeFileExtension;			
@@ -148,8 +149,8 @@ class DatFileExport {
 					
 					$fileSize = $this->getFileSize($v['eccident'], $v['crc32']);
 					
-					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";#\n";
-					#print $line."\n";
+					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";#\r\n";
+					#print $line."\r\n";
 					fwrite($fhdl, $line);
 					$line = "";
 					$cnt_current++;
@@ -163,8 +164,8 @@ class DatFileExport {
 					$this->status_obj->update_progressbar($percent, $msg);
 					// STATUS BAR MESSAGE
 					// ---------------------------------
-					$message  = "Current expoting:\n";
-					$message .= "Entry $cnt_current of $cnt_total\n";
+					$message  = "Current expoting:\r\n";
+					$message .= "Entry $cnt_current of $cnt_total\r\n";
 					$message .= $v['eccident']."\t".$v['name'].chr(13);
 					$this->status_obj->update_message($message);
 					// STATUS BAR OBSERVER CANCEL
@@ -180,8 +181,8 @@ class DatFileExport {
 				$this->status_obj->update_progressbar(1, "Export DONE");
 				// STATUS BAR MESSAGE
 				// ---------------------------------
-				$message  = "Export done:\n";
-				$message .= "$cnt_total Entries exported to \n";
+				$message  = "Export done:\r\n";
+				$message .= "$cnt_total Entries exported to \r\n";
 				$message .= realpath($export_file);
 				$this->status_obj->update_message($message);
 				// STATUS BAR OBSERVER CANCEL
@@ -191,7 +192,7 @@ class DatFileExport {
 			}
 		}
 		else {
-			#print "error - wrong filepath: $export_file\n";
+			#print "error - wrong filepath: $export_file\r\n";
 		}
 		
 		$ret['file'] = realpath($export_file);
@@ -206,26 +207,27 @@ class DatFileExport {
 		$this->exportHeader['title_short'] = $this->ecc_release['title_short'];
 		
 		$line  = "";
-		$line .= "[ECC]\n";
-		$line .= "DAT-TYPE=\teccMediaDat\n";
-		$line .= "DAT-VERSION=\t".$this->exportHeader['eccdat_version']."\n";
-		$line .= "GENERATOR=\t".$this->exportHeader['title']." (".$this->exportHeader['title_short'].")\n";
-		$line .= "ECC-VERSION=\t".$this->exportHeader['local_release_version']."\n";
-		$line .= "\n";
-		$line .= "[ECC_DAT]\n";
-		$line .= "ECCIDENT=\t".$this->exportHeader['export_ident']."\n";
-		$line .= "TYPE=\t".$this->exportHeader['export_type']."\n";
-		$line .= "ESEARCH=\t".$this->exportHeader['export_esearch']."\n";
-		$line .= "DATE=\t".$this->exportHeader['export_date']."\n";
-		$line .= "\n";
-		$line .= "[ECC_DAT_CREDITS]\n";
-		$line .= "AUTHOR=\t".$this->exportHeader['author']."\n";
-		$line .= "WEBSITE=\t".$this->exportHeader['website']."\n";
-		$line .= "EMAIL=\t".$this->exportHeader['email']."\n";
-		$line .= "COMMENT=\t".$this->exportHeader['comment']."\n";
-		$line .= "\n";
-		$line .= "[ECC_MEDIA]\n";
-		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;#\n";
+		$line .= "[ECC]\r\n";
+		$line .= "DAT-TYPE=\teccMediaDat\r\n";
+		$line .= "DAT-VERSION=\t".$this->exportHeader['eccdat_version']."\r\n";
+		$line .= "GENERATOR=\t".$this->exportHeader['title']." (".$this->exportHeader['title_short'].")\r\n";
+		$line .= "ECC-VERSION=\t".$this->exportHeader['local_release_version']."\r\n";
+		$line .= "LANGUAGE=\t".i18n::getLanguageIdent()."\r\n";
+		$line .= "\r\n";
+		$line .= "[ECC_DAT]\r\n";
+		$line .= "ECCIDENT=\t".$this->exportHeader['export_ident']."\r\n";
+		$line .= "TYPE=\t".$this->exportHeader['export_type']."\r\n";
+		$line .= "ESEARCH=\t".$this->exportHeader['export_esearch']."\r\n";
+		$line .= "DATE=\t".$this->exportHeader['export_date']."\r\n";
+		$line .= "\r\n";
+		$line .= "[ECC_DAT_CREDITS]\r\n";
+		$line .= "AUTHOR=\t".$this->exportHeader['author']."\r\n";
+		$line .= "WEBSITE=\t".$this->exportHeader['website']."\r\n";
+		$line .= "EMAIL=\t".$this->exportHeader['email']."\r\n";
+		$line .= "COMMENT=\t".$this->exportHeader['comment']."\r\n";
+		$line .= "\r\n";
+		$line .= "[ECC_MEDIA]\r\n";
+		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;#\r\n";
 		return $line;
 	}
 	
@@ -287,7 +289,7 @@ class DatFileExport {
 		
 		$lin5 = "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;#";
 		
-		$line = $head1."\n".$line1."\n".$head2."\n".$line2."\n".$head3."\n".$line3."\n\n".$lin5."\n";
+		$line = $head1."\r\n".$line1."\r\n".$head2."\r\n".$line2."\r\n".$head3."\r\n".$line3."\r\n\r\n".$lin5."\r\n";
 		
 		return $line;
 	}

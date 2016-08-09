@@ -1,9 +1,9 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
+ * language:	fr (franÃ§ais)
+ * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/30 
  * ------------------------------------------
  *
@@ -12,13 +12,13 @@
  **/
 $i18n['mainGui'] = array(
 	'gui_main_btn_rom_start' =>
-		"Démarrer la ROM",
+		"DÃ©marrer la ROM",
 	'gui_main_btn_rom_bookmark' =>
 		"Ajouter aux favoris",
 	'gui_main_btn_list_bookmark' =>
 		"Afficher les favoris",
 	'gui_main_btn_list_history' =>
-		"Historique des médias lancés",
+		"Historique des mÃ©dias lancÃ©s",
 	'media_nb_info_edit' =>
 		"Editer",
 	'mainlist_tab_factsheet' =>
@@ -30,22 +30,37 @@ $i18n['mainGui'] = array(
 	'infoImageEditBtn' =>
 		"Voir / Ajouter",
 	'media_nb_info_eccdb_get_info' =>
-		"Obtenir les données",
+		"Obtenir les donnÃ©es",
 	'media_nb_info_eccdb_info' =>
-		"Transfert de données",
+		"Transfert de donnÃ©es",
 
 	/* 0.9.2 FYEO 17 */
 	'paneInfoEccDbAddTitle' =>
-		"Ajouter vos données",
+		"Ajouter vos donnÃ©es",
 	'paneInfoEccDbAddText' =>
-		"eccdb/romdb est une base de données sur Internet pour ROMs et émulateurs. (Nom, année, créateur, etc...). Vous pouvez ajouter ou recevoir des informations de cette source. Pour nous supporter, SVP ajoutez des données valides !",
+		"eccdb/romdb est une base de donnÃ©es sur Internet pour ROMS et Ã©mulateurs. (Nom, annÃ©e, crÃ©ateur, etc...). Vous pouvez ajouter ou recevoir des informations de cette source. Pour nous supporter, SVP ajoutez des donnÃ©es correctes !",
 	'paneInfoEccDbAddButton' =>
-		"Cliquer ici pour ajouter vos données !",
+		"Cliquer ici pour ajouter vos donnÃ©es !",
 	'paneInfoEccDbGetTitle' =>
-		"Obtenir des données",
+		"Obtenir des donnÃ©es",
 	'paneInfoEccDbGetText' =>
-		"Pour le moement la fonction Recevoir n'est pas implémentée. L'idée est que, vous appuyez sur le Bouton Recevoir, et les informations sont automatiquement téléchargées de la base de données Internet. Vous pouvez visiter la base de données actuelle en cliquant sur ce bouton.",
+		"Pour le moment la fonction Recevoir n'est pas implÃ©mentÃ©e. L'idÃ©e est que, vous appuyez sur le Bouton Recevoir, et les informations sont automatiquement tÃ©lÃ©chargÃ©es de la base de donnÃ©es Internet (eccdb). Vous pouvez visiter la base de donnÃ©es actuelle en cliquant sur ce bouton.",
 	'paneInfoEccDbGetButton' =>
-		"Voir la base de données Internet",
+		"Voir la base de donnÃ©es Internet (eccdb)",
+
+	'romDetailTabInfo' =>
+		"Infos",
+	'romDetailTabPersonal' =>
+		"Personnel",
+	'romDetailTabESearch' =>
+		"eSearch",
+	'romDetailTabRomDB' =>
+		"RomDB",
+	'romDetailTabRomData' =>
+		"DonnÃ©es",
+	'romDetailTabRomHeader' =>
+		"En-tete",
+	'romDetailTabRomHeaderJad' =>
+		"Jad",
 );
 ?>

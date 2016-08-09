@@ -6,6 +6,7 @@ class DatFileImport extends App {
 	public $dat = array();
 	private $status_obj = false;
 	private $count_eccident = 0;
+	private $datfileContent = false;
 	
 	private $dat_filename = false;
 	
@@ -22,10 +23,14 @@ class DatFileImport extends App {
 		$this->dbms = $dbmsObject;
 	}
 	
-	public function parse($filename)
+	public function parse($filename=false)
 	{
 		$this->dat_filename = $filename;
 		$this->find_dat_type();
+	}
+	
+	public function setDirectDatfileContent($datfileContent){
+		$this->datfileContent = $datfileContent;
 	}
 	
 	public function getLog() {
@@ -133,7 +138,7 @@ class DatFileImport extends App {
 	
 	public function validate_romcenter_format($rc_dat_version=false, $first_game = array()) {
 		
-		$split_row = explode("¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
+		$split_row = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
 		
 		switch ($rc_dat_version) {
 			case '2.00':
@@ -205,7 +210,7 @@ class DatFileImport extends App {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			// get data for a row
-			$split = explode("¬", iconv('ISO-8859-1', 'UTF-8', $key));
+			$split = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $key));
 			
 			// corrupt data... jump to next entry and log!
 			if (!isset($split[$name_from_field]) || !isset($split[$extension_from_field])) {
@@ -220,7 +225,7 @@ class DatFileImport extends App {
 				
 				// einige felder sind in lowercase
 				// hier kann angegeben werden, welches feld
-				// f�r den file_namen genutzt werden soll
+				// fï¿½r den file_namen genutzt werden soll
 				if ($extension_from_field !== false) {
 					
 					// there is no extension
@@ -384,7 +389,7 @@ class DatFileImport extends App {
 			$message = "No matches in Dat-File\n(".basename($this->dat_filename).")\n";
 			$message .= "found for ".$platform_name." (".$this->eccident.")\n\n";
 			$message .= "Search for this extensions: *.".implode("; *.", array_keys($possible_extensions))." - and found nothing :-(\n";
-			$message .= "Maybe this wasn�t the right dat-file? :-)\n";
+			$message .= "Maybe this wasnt the right dat-file? :-)\n";
 			$message .= "Please use a Dat-File for $platform_name\n";
 			$this->status_obj->update_message($message);
 			
@@ -515,6 +520,7 @@ class DatFileImport extends App {
 				$message .= "Search for: *.".implode("; *.", array_keys($possible_extensions))."\n";
 				$message .= "File $cnt_current of $cnt_total\n";
 				$message .= $infos['ECCIDENT']."\t".$infos['NAME'].chr(13);
+				
 				$this->status_obj->update_message($message);
 				if ($this->status_obj->is_canceled()){
 					$this->dbms->query('ROLLBACK TRANSACTION;');
@@ -604,7 +610,7 @@ class DatFileImport extends App {
 	}
 	
 	/*
-	* F�R DAT-VERSION 0.5.0
+	* Fï¿½R DAT-VERSION 0.5.0
 	* $res[20] == '*'
 	* wenn *, dann valid.
 	*/
@@ -895,7 +901,13 @@ class DatFileImport extends App {
 		$header_section = "";
 		
 		//Read to end of file with the newlines still attached into $f
-		$f=file($f);
+
+		if ($this->datfileContent) {
+			$f = explode("\r\n", $this->datfileContent);
+		}
+		else {
+			$f=file($f);
+		}
 		
 		$row_count = ($row_count_limit) ? $row_count_limit : count($f);
 		
@@ -906,6 +918,9 @@ class DatFileImport extends App {
 			
 			$newsec=0;
 			$w=@trim($f[$i]);
+			
+			if ($w) $w = MultiByte::convertToUtf8($w);
+			
 			$first_char = @substr($w,0,1);
 			if ($w) {
 				if ((!$r) or ($sec)) {

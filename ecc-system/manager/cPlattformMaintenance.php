@@ -38,7 +38,7 @@ class PlattformMaintenance {
 		
 		#$this->optimize_db_eccident();
 		$this->optimizeFileData();
-		$this->optimizeBookmarks();
+		$this->optimizeReparsePathData();
 		#$this->vacuum_database();
 		return true;
 	}
@@ -50,12 +50,7 @@ class PlattformMaintenance {
 	{
 		$where_snip = ($this->_ident) ? "WHERE eccident ='".sqlite_escape_string(strtolower($this->_ident))."'" : '';
 		
-		$q = "
-			DELETE
-			FROM
-			fdata
-			".$where_snip."
-		";
+		$q = "DELETE FROM fdata ".$where_snip."";
 		$this->dbms->query($q);
 		
 		# remove also now unused bookmarsk
@@ -97,13 +92,7 @@ class PlattformMaintenance {
 		$where_snip = ($this->_ident) ? "WHERE eccident ='".sqlite_escape_string(strtolower($this->_ident))."'" : '';
 		
 		// get count total
-		$q = "
-			SELECT
-			count(*) as cnt
-			FROM
-			fdata
-			".$where_snip."
-		";
+		$q = "SELECT count(*) as cnt FROM fdata ".$where_snip."";
 		$hdl = $this->dbms->query($q);
 		
 		$cnt_total = $hdl->fetchSingle();
@@ -111,14 +100,7 @@ class PlattformMaintenance {
 		$count_removed = 0;
 		
 		// get all files for snipplet
-		$q = "
-			SELECT
-			*
-			FROM
-			fdata
-			".$where_snip."
-		";
-		#print $q."\n";
+		$q = "SELECT * FROM fdata ".$where_snip."";
 		$hdl = $this->dbms->query($q);
 		
 		while($res = $hdl->fetch(1)) {
@@ -126,13 +108,7 @@ class PlattformMaintenance {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			if (!file_exists($res['path'])) {
-				$q_del = "
-					DELETE
-					FROM
-					fdata
-					WHERE
-					id=".(int)$res['id']."
-				";
+				$q_del = "DELETE FROM fdata WHERE id=".(int)$res['id']."";
 				$this->dbms->query($q_del);
 				$count_removed++;
 			}
@@ -153,24 +129,62 @@ class PlattformMaintenance {
 			######
 		}
 		
-		// danach alte bookmarks löschen
+		// danach alte bookmarks lÃ¶schen
 		$this->optimizeBookmarks();
 		return true;
 	}
 	
+	public function optimizeReparsePathData() {
+		
+		if ($this->status_obj) $this->status_obj->update_progressbar(0, "gathering data");
+		if ($this->status_obj) $this->status_obj->update_message("search for history paths to optimize!");
+		
+		$where_snip = ($this->_ident) ? "WHERE eccident ='".sqlite_escape_string(strtolower($this->_ident))."'" : '';
+		
+		// get count total
+		$q = "SELECT count(*) as cnt FROM fdata_reparse ".$where_snip."";
+		$hdl = $this->dbms->query($q);
+		
+		$cnt_total = $hdl->fetchSingle();
+		$cnt_current = 0;
+		$count_removed = 0;
+		
+		// get all files for snipplet
+		$q = "SELECT * FROM fdata_reparse ".$where_snip."";
+		$hdl = $this->dbms->query($q);
+		
+		while($res = $hdl->fetch(1)) {
+			
+			while (gtk::events_pending()) gtk::main_iteration();
+			
+			if (!file_exists($res['path'])) {
+				$q_del = "DELETE FROM fdata_reparse WHERE id=".(int)$res['id']."";
+				$this->dbms->query($q_del);
+				$count_removed++;
+			}
+			$cnt_current++;
+			
+			if ($this->status_obj) {
+				$percent_string = sprintf("%02d", $cnt_current*100/$cnt_total);
+				$msg = "check paths: ".$percent_string."%";
+				$percent = (float)$cnt_current/$cnt_total;
+				$this->status_obj->update_progressbar($percent, $msg);
+				$message  = "check paths\n";
+				$message  = "checked $cnt_current of $cnt_total - removed from ecc-database: $count_removed files \n";
+				$this->status_obj->update_message($message);
+				if ($this->status_obj->is_canceled()) return false;
+			}
+		}
+		return true;
+	}
+	
 	/*
-	* löscht einträge auser der bookmark
+	* lÃ¶scht eintrÃ¤ge auser der bookmark
 	* tabelle, die nicht mehr als file in ecc erfasst
 	* sind.
 	*/
 	public function optimizeBookmarks() {
-		$q = "
-			SELECT
-			*
-			FROM
-			fdata_bookmarks AS b
-			left join fdata AS fd on b.file_id=fd.id
-		";
+		$q = "SELECT * FROM fdata_bookmarks AS b left join fdata AS fd on b.file_id=fd.id";
 		$hdl = $this->dbms->query($q);
 		
 		$cnt_current = 0;
@@ -181,13 +195,7 @@ class PlattformMaintenance {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			if (!$res['fd.id']) {
-				$q_del = "
-					DELETE
-					FROM
-					fdata_bookmarks
-					WHERE
-					id=".(int)$res['b.id']."
-				";
+				$q_del = "DELETE FROM fdata_bookmarks WHERE id=".(int)$res['b.id']."";
 				$this->dbms->query($q_del);
 			}
 			
@@ -280,26 +288,16 @@ class PlattformMaintenance {
 	
 	/*
 	* DEVEL-METHODE
-	* stellt alle großgeschriebenen file-extensions auf
+	* stellt alle groÃŸgeschriebenen file-extensions auf
 	* kleinschreibung um
 	*/
 	public function optimize_db_eccident() {
-		$q = "
-			SELECT
-			*
-			FROM
-			mdata
-		";
-		#print $q;
-		
+		$q = "SELECT * FROM mdata";
 		$hdl = $this->dbms->query($q);
 		$out = array();
 		while($res = $hdl->fetch(1)) {
-			
 			while (gtk::events_pending()) gtk::main_iteration();
-			
 			$q_upd = "update mdata set eccident='".strtolower($res['eccident'])."' where id=".$res['id'];
-			#print $q_upd."\n";
 			$this->dbms->query($q_upd);
 		}
 	}

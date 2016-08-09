@@ -1,4 +1,4 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -10,7 +10,6 @@
  * dd = dropdown
  *
  **/
-
 $i18n['dropdown_lang'] = array(
 	// -------------------------------------------------------------
 	// context menu navigation
@@ -22,7 +21,7 @@ $i18n['dropdown_lang'] = array(
 	'[[german]]' =>
 		"Deutsch",
 	'[[french]]' =>
-		"Französisch",
+		"FranzÃ¶sisch",
 	'[[italian]]' =>
 		"Italienisch",
 	'[[spanish]]' =>
@@ -36,9 +35,9 @@ $i18n['dropdown_lang'] = array(
 	'[[polish]]' =>
 		"Polnisch",
 	'[[danish]]' =>
-		"Dänisch",
+		"DÃ¤nisch",
 	'[[dutch]]' =>
-		"Holländisch",
+		"HollÃ¤ndisch",
 	'[[norway]]' =>
 		"Norwegisch",
 	'[[swedish]]' =>
@@ -47,6 +46,9 @@ $i18n['dropdown_lang'] = array(
 		"Finnisch",
 );
 
+/*
+ * PLEASE ONLY CHANGE YOUR OWN LANGUAGE TO YOUR LANGUAGE :-)
+ */
 $i18n['languages'] = array(
 
 	'[[en]]' =>
@@ -54,11 +56,19 @@ $i18n['languages'] = array(
 	'[[de]]' =>
 		"Deutsch",
 	'[[fr]]' =>
-		"Français",
+		"FranÃ§ais",
 	'[[it]]' =>
 		"Italiano",
 	'[[es]]' =>
-		"Spanish",
-);
+		"EspaÃ±ol",
 
+	/* 0.9.6 WIP 3 */
+	'[[jp]]' =>
+		"Japanese",
+
+	/* 0.9.6 WIP 13 */
+	'[[nl]]' =>
+		"Nederlands",
+
+);
 ?>

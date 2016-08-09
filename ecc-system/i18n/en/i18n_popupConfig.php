@@ -28,8 +28,6 @@ $i18n['popupConfig'] = array(
 		"Detail per page",
 	'lbl_ecc_opt_list_pp' =>
 		"List per page",
-	'lbl_ecc_opt_language' =>
-		"Language",
 	/* ECC-COLOR&FONTS */
 	'lbl_ecc_colfont_hdl' =>
 		"Colors  and Fonts",
@@ -185,8 +183,8 @@ $i18n['popupConfig'] = array(
 		"Create eccScript",
 	'emu_info_nodata' =>
 		"No informations available yet...",
-	'emu_info_footer' =>
-		"Maybe you know an good emulator for this platform!\nYou can add your infos to the Forum/Board at\nhttp://ecc.phoenixinteractive.mine.nu/",
+	'emu_info_footer%s' =>
+		"Maybe you know an good emulator for this platform!\nYou can add your infos to the Forum/Board at\n%s",
 	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
@@ -208,5 +206,83 @@ $i18n['popupConfig'] = array(
 	'title_emu_found_eccscript_nopreview' =>
 		"No informations available!",
 
+	/* 0.9.6 FYEO 05 */
+	'lbl_emu_assign_executeinemufolder' =>
+		"Start from Emufolder",
+	'lbl_preview_selectEmuFirst' =>
+		"You havent selected an emulator! Use the select emulator button above!",
+
+	/* 0.9.6 FYEO 13 */
+
+
+	'winTitleConfiguration' =>
+		"Configuration",
+
+	'colOptGlobalFont' =>
+		"Font",
+
+	'colOptListBg0' =>
+		"Background",
+	'colOptListBg1' =>
+		"Background 1",
+	'colOptListBg2' =>
+		"Background 2",
+	'colOptListBgHilight' =>
+		"Background selected",
+	'colOptListBgImage' =>
+		"Image background",
+	'colOptListText' =>
+		"Text",
+	'colOptListTextHilight' =>
+		"Text selected",
+	'colOptListFont' =>
+		"Font",
+
+	'colOptOptionsBg1' =>
+		"Background 1",
+	'colOptOptionsBg1' =>
+		"Background 1",
+	'colOptOptionsBgHilight' =>
+		"Background selected",
+	'colOptOptionsText' =>
+		"Text",
+
+	/* 0.9.6 FYEO 17 */
+	'colImgSlotUnsetBg' =>
+		"Background unused",
+	'colImgSlotSetSelect' =>
+		"Background unused selected",
+	'colImgSlotSetBg' =>
+		"Background used",
+	'colImgSlotUnsetSelect' =>
+		"Background used selected",
+	'colImgSlotText' =>
+		"Text",
+
+	'colOptOptionsBg2' =>
+		"Background 2",
+
+	'tabEmuConfig' =>
+		"Emulator config",
+	'tabEmuPlatformSettings' =>
+		"Platform settings",
+	'tab_label_platforms' =>
+		"Platforms / Emulators",
+	
+	/* 0.9.6 WIP 18 */
+	'confEccSaveViewSettings' =>
+		"Save View-Mode settings (only experts)",
+	
+	/* 0.9.6 WIP 19 */
+	'tabEmuInfos' =>
+		"Links & Infos",
+		
+	/* 0.9.6 WIP 20 */
+	'startConfBugreportSend' =>
+		"Send automatic bugreport at startup",
+	'lbl_ecc_opt_language' =>
+		"Language settings",
+	'tab_label_language' =>
+		"Language",
 );
 ?>

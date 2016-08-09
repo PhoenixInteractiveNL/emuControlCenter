@@ -19,9 +19,9 @@ $i18n['meta'] = array(
 	'lbl_directory_short' =>
 		"Verzeichnis",
 	'lbl_filesize' =>
-		"Dateigröße",
+		"DateigrÃ¶ÃŸe",
 	'lbl_filesize_short' =>
-		"Größe",
+		"GrÃ¶ÃŸe",
 	
 	/* META FIELDS */
 	'lbl_title' =>
@@ -49,7 +49,7 @@ $i18n['meta'] = array(
 		
 	/* META OPTIONS */
 	'lbl_running' =>
-		"Läuft",
+		"LÃ¤uft",
 	'lbl_buggy' =>
 		"Fehler",
 	'lbl_trainer' =>
@@ -63,6 +63,6 @@ $i18n['meta'] = array(
 	'lbl_multiplay' =>
 		"Mehrspieler",
 	'lbl_netplay' =>
-		"Netzfähig",
+		"NetzfÃ¤hig",
 );
 ?>

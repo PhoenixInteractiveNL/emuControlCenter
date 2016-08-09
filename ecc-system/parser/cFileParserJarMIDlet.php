@@ -35,21 +35,23 @@ class FileParserJarMIDlet implements FileParser {
 			return $ret;
 		}
 		else {
-
-			# valid midlet manifest found!
 			
-			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));
+			# use fsum to get the right crc32 for larger files!
+			# only usable for platforms withou offsets!!!!
+			if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
+				$ret['FILE_CRC32'] = FileIO::getFsumCrc32($file_name, 1);
+			}
+			else{
+				$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));
+			}
+
+			# valid midlet manifest found!			
 			$ret['FILE_MD5'] = NULL;
 			$ret['FILE_VALID'] = true;
 			
 			# on success set the data from handleMIDletManifest
 			$ret['MDATA'] = $eccMIDletReader->getManifest();
-
-# !!!
-#$export = "celljar;".@$ret['MDATA']['MIDlet-Name'].";jar;".@$ret['FILE_CRC32'].";1;0;0;0;0;0;0;0;;;;;".@$ret['MDATA']['MIDlet-Vendor'].";;;".@$ret['MDATA']['MIDlet-Description'].";;;;".@$ret['FILE_SIZE'].";#\n";
-#print $export;
-# !!!
-			
+		
 			# try to copy the midlet icon, if available
 			$eccMIDletReader->copyIconIfAvailable($this->_file_ext, $ret['FILE_CRC32']);
 			

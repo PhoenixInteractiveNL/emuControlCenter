@@ -39,13 +39,21 @@ class FileParserMp3 implements FileParser {
 			$ret['MDATA']['ID3_ALBUM'] = FileIO::ecc_read($fhdl, $offset+63, 30, false);
 			$ret['MDATA']['ID3_YEAR'] = FileIO::ecc_read($fhdl, $offset+93, 4, false);
 			$ret['MDATA']['ID3_COMMENT'] = FileIO::ecc_read($fhdl, $offset+97, 29, false);
-			// genre nutzt eine �bersetzungstabelle
+			// genre nutzt eine ersetzungstabelle
 			$ret['MDATA']['ID3_GENRE'] = FileIO::ecc_read($fhdl, $offset+127, 1, 'DEZ');
 		}
 		
 		$ret['FILE_MD5'] = NULL;
-		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, 0, $offset, $file_name));
-		$ret['FILE_VALID'] = true;
+		
+		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
+			$ret['FILE_VALID'] = false;
+			$ret['FILE_CRC32'] = false;	
+		}
+		else{
+			# fsum not possible here, because of offset!
+			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, 0, $offset, $file_name));
+			$ret['FILE_VALID'] = true;
+		}
 		
 		while (gtk::events_pending()) gtk::main_iteration();
 		

@@ -44,6 +44,12 @@ class EccUpdate {
 					$errorVersion = '0.8.6';
 					break;
 				}
+//			case $eccDbVersion < '0.9.613':
+//				if ($this->updateEccFromConfig('0.9.613')) $this->updateEccDbVersion('0.9.613');
+//				else {
+//					$errorVersion = '0.9.613';
+//					break;
+//				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
 		#print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
@@ -69,10 +75,10 @@ class EccUpdate {
 	private function getEccDbVersion() {
 		$q = "SELECT name FROM sqlite_master WHERE type='table' and name='eccdb_state' LIMIT 1";
 		$hdl = $this->dbms->query($q);
-		if (!$hdl->fetchSingle()) {
-			$q = 'CREATE TABLE "eccdb_state" ( "version" VARCHAR(7)  NOT NULL, "date" INTEGER(10)  NOT NULL)';
-			$this->dbms->query($q);
-		}
+		#if (!$hdl->fetchSingle()) {
+			$q = 'CREATE TABLE "eccdb_state" ( "version" VARCHAR(9)  NOT NULL, "date" INTEGER(10)  NOT NULL)';
+			@$this->dbms->query($q);
+		#}
 		$q = "SELECT version FROM eccdb_state";
 		$hdl = $this->dbms->query($q);
 		return ($eccDbVersion = $hdl->fetchSingle()) ? $eccDbVersion : false;

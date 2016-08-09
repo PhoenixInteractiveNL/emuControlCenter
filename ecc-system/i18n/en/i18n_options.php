@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -46,6 +46,9 @@ $i18n['dropdown_lang'] = array(
 		"Finnish",
 );
 
+/*
+ * PLEASE ONLY CHANGE YOUR OWN LANGUAGE TO YOUR LANGUAGE :-)
+ */
 $i18n['languages'] = array(
 
 	'[[en]]' =>
@@ -53,10 +56,19 @@ $i18n['languages'] = array(
 	'[[de]]' =>
 		"Deutsch",
 	'[[fr]]' =>
-		"Fran�ais",
+		"Français",
 	'[[it]]' =>
 		"Italiano",
 	'[[es]]' =>
-		"Spanish",
+		"Español",
+
+	/* 0.9.6 WIP 3 */
+	'[[jp]]' =>
+		"Japanese",
+
+	/* 0.9.6 WIP 13 */
+	'[[nl]]' =>
+		"Nederlands",
+
 );
 ?>

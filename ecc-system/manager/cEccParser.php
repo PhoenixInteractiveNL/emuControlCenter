@@ -29,32 +29,35 @@ class EccParser {
 		
 		$useExtDispatcher = $ini->getKey('USER_SWITCHES', 'useExtensionDispatcher');
 		
-		$dataParser = FACTORY::get('manager/EccParserMedia', $path);
+		$dataParser = FACTORY::get('manager/EccParserMedia', dirname($path[0]));
 		
 		// parse only eccident, if set. else parse everything found
 		$wanted_extensions = $ini->getPlatformExtensionParser($eccident);
-		$all_extensions = $ini->getPlatformExtensionParser();
+
+		$all_extensions = $ini->getAllPlatformExtensionParser();
+		
+		clearstatcache();
+		# check paths
+		# unset invalid ones
+		foreach($path as $idx => $aPath){
+			if (!is_dir($path[$idx])) unset($path[$idx]);
+		}
+		
+		# store paths for global reparse feature like in mame (F5)
+		$dataParser->storeSelectedBasePaths($eccident, $path);
 		
 		$directUnseted = array();
-		foreach ($wanted_extensions as $fileExtension => $eccParser) {
+		foreach ($wanted_extensions as $fileExtension => $void) {
+			
 			if (count($all_extensions[$fileExtension])>1) {
-				$platformNames = "- ".implode("\n- ", $this->gui->ini->getPlatformsByFileExtension($fileExtension));
+
+				$platformNames = join(" | ", $this->gui->ini->getPlatformsByFileExtension($fileExtension))."\n";
+				
 				if ($eccident) {
-					$title = 'PROBLEM FOUND';
-					$message = "";
-					$message .= "##################################################\n";
-					$message .= "$fileExtension EXTENSION PROBLEM FOUND!\n";
-					$message .= "##################################################\n\n";
-					$message .= "emuControlCenter found, that more than one platform uses the same fileextension *.".$fileExtension." to search for roms!\n\n";
-					$message .= $platformNames."\n\n";
-					$message .= "Your selected platform is: '".$this->gui->ecc_platform_name."'\n\n";
-					$message .= "The selected path is:\n'".$path."'\n\n";
-					$message .= "Are you really shure, that the selected folder contains Roms for the current selected platform?\n\n";
-					$dispatcherState = ($useExtDispatcher) ? 'ENABLED' : 'DISABLED';
-					$message .= "The ecc fileetension dispatcher is ".$dispatcherState."\n\n";
-					$message .= "##################################################\n\n";
-					$message .= "-> YES: Search for '*.".$fileExtension."' in this folder / platform!\n\n";
-					$message .= "-> NO: Skip the extension '*.".$fileExtension."' for this folder / platform!\n";
+					$fileExtensionOutput = '*.'.$fileExtension;
+					$title = sprintf(I18N::get('popup', 'romparser_fileext_problem_title%s'), '"<b>'.$fileExtensionOutput.'</b>"');
+					$message = sprintf(I18N::get('popup', 'romparser_fileext_problem_msg%s%s%s%s%s%s'), '"<b>'.$fileExtensionOutput.'</b>"', '<span color="#6C6C6C">'.$platformNames.'</span>', '"<b>'.$this->gui->ecc_platform_name.'</b>"', '"'.join("\n", $path).'"', $fileExtensionOutput, $fileExtensionOutput);
+					
 					if (!$guiManager->openDialogConfirm($title, $message)) {
 						unset($wanted_extensions[$fileExtension]);
 					}
@@ -67,25 +70,27 @@ class EccParser {
 		}
 
 		if (!$eccident && count($directUnseted)) {
+			$directUnseted[] = 'zip';
 			$removedExtensions = "*.".implode(", *.", $directUnseted)."";
-			$title = 'UNSET EXTENSIONS!';
-			$message = "";
-			$message .= "##################################################\n";
-			$message .= "EXTENSION PROBLEM FOUND!\n";
-			$message .= "##################################################\n\n";
-			$message .= "Because you have selected '#All found', ecc have to exclude duplicate extensions from search to prevent wrong assignment in the database!\n\n";
-			$message .= "emuControlCenter do not search for: ";
-			$message .= "".$removedExtensions."\n\n";
-			$message .= "Please select the right Platform to parse these extensions!\n\n";
-			$dispatcherState = ($useExtDispatcher) ? 'ENABLED' : 'DISABLED';
-			$message .= "The ecc fileetension dispatcher is ".$dispatcherState."\n\n";
+			$title = i18n::get('popup', 'parserUnsetExtTitle');
+			$message = sprintf(i18n::get('popup', 'parserUnsetExtMsg%s'), $removedExtensions);
 			$guiManager->openDialogInfo($title, $message, array('dhide_parser_unset_extension_info'));
 		}
 		
-		if (is_dir($path) && count($wanted_extensions)) {
-			
+		if (count($path) && count($wanted_extensions)) {
+
 			// retrieve list from filesystem
-			$fileList = new EccParserFileListDir($path, $wanted_extensions, $statusbar, $statusbar_lbl_bottom, $status_obj);
+			$excludedZipExtensions = false;
+			if ($eccident) {
+				$parserOptions = $ini->getParserOptions($eccident);
+				$excludedZipExtensions = @$parserOptions['excludeExtensions'];
+				if ($excludedZipExtensions){
+					$excludedZipExtensions = explode(',', $excludedZipExtensions);
+					foreach($excludedZipExtensions as $key => $ext) $excludedZipExtensions[$key] = trim($ext);
+				}
+				else $excludedZipExtensions = false;
+			}
+			$fileList = new EccParserFileListDir($path, $wanted_extensions, $statusbar, $statusbar_lbl_bottom, $status_obj, $excludedZipExtensions);
 			$file_stats = $fileList->get_stats();
 			
 			if (!$useExtDispatcher) $directUnseted = array();

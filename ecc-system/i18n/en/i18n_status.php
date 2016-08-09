@@ -28,5 +28,18 @@ $i18n['status'] = array(
 		"Found packed (eg. zip)\n",
 	'reorg_prepare_data%s' =>
 		"Prepare data! %s",
+
+	/* 0.9.6 FYEO 15 */
+	'eccIsWorking%s' =>
+		"%s is working",
+	'pending' =>
+		"Pending",
+	'parse_rom_detail_invalidZip' =>
+		"Found invalid zip-files... please repack!",
+	'searchAndParseNewRoms' =>
+		"Search and Parse new romfiles",
+	'addingRomsFor%s' =>
+		"Adding roms for %s",
+
 );
 ?>

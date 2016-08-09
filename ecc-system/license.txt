@@ -5,7 +5,7 @@ emuControlCenter is Copyright(c) 2005-2007 by Andreas Scheibel
 This licence grants you the following:
 
 Permission to use, copy, and distribute emuControlCenter in its entirety, for
-non-commercial purposes, is hereby granted without fee, provided that
+NON-COMMERCIAL purposes, is hereby granted without fee, provided that
 this license information and copyright notice appear in all copies.
 
 If you redistribute emuControlCenter, the entire contents of this distribution

@@ -72,9 +72,9 @@ class FileParserSnes implements FileParser {
 		}
 		$ret['MDATA']['HDR_BACKUP_UNIT'] = $backup_unit;
 		
-		// HI/LO-ROM mu� ermittelt werden, da diese unterschiedliche
-		// offsets verursachen. F�hrt man diesen check nicht aus, werden
-		// falsche checksummen ermittelt und die Header-Infos k�nnen nicht
+		// HI/LO-ROM muï¿½ ermittelt werden, da diese unterschiedliche
+		// offsets verursachen. Fï¿½hrt man diesen check nicht aus, werden
+		// falsche checksummen ermittelt und die Header-Infos kï¿½nnen nicht
 		// extrahiert werden.
 		
 		#// ROM makeup (1 byte)
@@ -108,9 +108,17 @@ class FileParserSnes implements FileParser {
 		#// ROM makeup (1 byte)
 		#$ret['ROM_MAKEUP_hi'] = trim(FileIO::ecc_read($fhdl, $starting_offset+65493+$snes_rom_header_offset, 1, false));
 		
-		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, $snes_rom_header_offset, false, $file_name));
+		# fsum not possible here, because of offset!
+		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
+			$ret['FILE_VALID'] = false;
+			$ret['FILE_CRC32'] = false;	
+		}
+		else{
+			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, $snes_rom_header_offset, false, $file_name));
+			$ret['FILE_VALID'] = true;
+		}
+		
 		$ret['FILE_MD5'] = NULL;
-		$ret['FILE_VALID'] = true;
 
 		while (gtk::events_pending()) gtk::main_iteration();
 		

@@ -14,13 +14,13 @@ $i18n['menu'] = array(
 	'lbl_platform%s' =>
 		"%s Optionen",
 	'lbl_roms_add%s' =>
-		"Spiele hinzufügen",
+		"Spiele hinzufÃ¼gen",
 	'lbl_roms_optimize%s' =>
 		"Spiele DB optimieren",
 	'lbl_roms_remove%s' =>
 		"Spiele entfernen",
 	'lbl_roms_remove_dup%s' =>
-		"Suche und LÖSCHE doppelte Spiele aus der Datenbank",
+		"Suche und LÃ–SCHE doppelte Spiele aus der Datenbank",
 	'lbl_emu_config' =>
 		"Emulator Konfigurieren",
 	'lbl_ecc_config' =>
@@ -30,7 +30,7 @@ $i18n['menu'] = array(
 	'lbl_dat_import_rc' =>
 		"Romcenter Datfile importieren",
 	'lbl_dat_export_ecc_full' =>
-		"ecc Datfile vollständig exportieren",
+		"ecc Datfile vollstÃ¤ndig exportieren",
 	'lbl_dat_export_ecc_user' =>
 		"ecc Datfile exportieren ",
 	'lbl_dat_export_ecc_esearch' =>
@@ -49,7 +49,7 @@ $i18n['menu'] = array(
 	'lbl_fav_all_remove' =>
 		"ALLE Bookmarks entfernen",
 	'lbl_fav_add' =>
-		"Bookmark hinzufügen",
+		"Bookmark hinzufÃ¼gen",
 	'lbl_image_popup' =>
 		"Zeige alle Bilder",
 	'lbl_img_reload' =>
@@ -59,7 +59,7 @@ $i18n['menu'] = array(
 	'lbl_meta_edit' =>
 		"Metadaten des Spiels bearbeiten",
 	'lbl_roms_initial_add%s%s' =>
-		"Keine Spiele für die Plattform gefunden\n----------------------------------------\n%s (%s)\n----------------------------------------\nHier klicken um neue Spiele hinzuzufügen!",
+		"Keine Spiele fÃ¼r die Plattform gefunden\n----------------------------------------\n%s (%s)\n----------------------------------------\nHier klicken um neue Spiele hinzuzufÃ¼gen!",
 	'lbl_meta_webservice_meta_get' =>
 		"Metainformation des Spiels abrufen (Internet)",
 	'lbl_meta_webservice_meta_set' =>
@@ -68,7 +68,7 @@ $i18n['menu'] = array(
 	'lbl_shellop_submenu' =>
 		"Dateisystem Operationen",
 	'lbl_shellop_browse_dir' =>
-		"Öffne den Spiele Ordner",
+		"Ã–ffne den Spiele Ordner",
 	'lbl_shellop_file_rename' =>
 		"Spiel umbenennen",
 	'lbl_shellop_file_copy' =>
@@ -76,7 +76,7 @@ $i18n['menu'] = array(
 	'lbl_shellop_file_unpack' =>
 		"Spiel entpacken",
 	'lbl_shellop_file_remove' =>
-		"Spiel löschen",
+		"Spiel lÃ¶schen",
 	// Rating
 	'lbl_rating_submenu' =>
 		"Spiel bewerten",
@@ -87,7 +87,7 @@ $i18n['menu'] = array(
 	'lbl_rom_rescan_folder' =>
 		"Spiele im Ordner erneut Parsen",
 	'lbl_meta_remove' =>
-		"Metainformation aus der DB löschen",
+		"Metainformation aus der DB lÃ¶schen",
 	'lbl_rating_unset' =>
 		"Bewertung entfernen",
 	
@@ -100,10 +100,10 @@ $i18n['menu'] = array(
 	
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
-		"Lösche ALLE Bilder des Spiels",
+		"LÃ¶sche ALLE Bilder des Spiels",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"Vergleiche - Wähle Spiel für die linke Seite",		
+		"Vergleiche - WÃ¤hle Spiel fÃ¼r die linke Seite",		
 	'lbl_meta_compare_right%s' =>
 		"Vergleiche dieses Spiel mit \"%s\"",		
 
@@ -115,9 +115,38 @@ $i18n['menu'] = array(
 	'lbl_quickfilter' =>
 		"quickFilter",
 	'lbl_quickfilter_reset' =>
+
 		"quickFilter entfernen",
-
 	
+	/* 0.9.6 FYEO 1 */
+	'lbl_dat_import_ecc_romdb' =>
+		"Online Datfile importieren",
 
+	/* 0.9.6 FYEO 8 */
+	'lContextRomSelectionAddNewRoms%s' =>
+		"FÃ¼ge neue %s Roms hinzu",
+	'lContextRomSelectionRemoveRoms%s' =>
+		"Entferne alle %s Roms",
+	'lContextMetaRemove' =>
+		"Entferne Rom-Metadaten",
+
+	/* 0.9.6 FYEO 11 */
+	'lbl_importDatCtrlMAME' =>
+		"Importiere CtrlMAME datfile",
+
+	/* 0.9.6 FYEO 13 */
+	'labelRomAuditInfo' =>
+		"Zeige Rom-Audit infos",
+	'labelRomAuditReparse' =>
+		"Aktualisiere Rom-Audit infos",
+	'lbl_roms_rescan_all' =>
+		"Aktualisiere alle Rom-Verzeichnisse",
+	'lbl_roms_add' =>
+		"Neue Roms hinzufÃ¼gen",
+	
+	/* 0.9.6 FYEO 11 */
+	'lbl_open_eccuser_folder%s' =>
+		"Ã–ffne eccUser-Folder (%s)",
+		
 );
 ?>

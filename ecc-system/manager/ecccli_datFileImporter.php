@@ -817,14 +817,14 @@ class DatParser {
 			$count_total = 0;
 			
 			foreach ($ini['GAMES'] as $key => $value) {
-				$split = explode('�', $key);
+				$split = explode('¬', $key);
 				
 
 				
 				if (isset($split[1]) && isset($split[4]) && isset($split[5])) {
 					// einige felder sind in lowercase
 					// hier kann angegeben werden, welches feld
-					// f�r den file_namen genutzt werden soll
+					// fï¿½r den file_namen genutzt werden soll
 					if ($extension_from_field !== false) {
 
 						if (false === strpos($split[$extension_from_field], ".")) {

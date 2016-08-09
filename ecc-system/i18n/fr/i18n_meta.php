@@ -1,9 +1,9 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
+ * language:	fr (franÃ§ais)
+ * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/30 
  * ------------------------------------------
  **/
@@ -13,27 +13,27 @@ $i18n['meta'] = array(
 	'lbl_filename' =>
 		"Nom de fichier",
 	'lbl_filename_short' =>
-		"Fichier",
+		"Fichier ",
 	'lbl_directory' =>
 		"Chemin",
 	'lbl_directory_short' =>
-		"Cible",
+		"Cible ",
 	'lbl_filesize' =>
 		"Taille du fichier",
 	'lbl_filesize_short' =>
-		"Taille",
+		"Taille ",
 	
 	/* META FIELDS */
 	'lbl_title' =>
 		"Titre",
 	'lbl_category' =>
-		"Catégorie",
+		"CatÃ©gorie",
 	'lbl_developer' =>
-		"Créateur",
+		"CrÃ©ateur",
 	'lbl_publisher' =>
 		"Editeur",
 	'lbl_year' =>
-		"Année",
+		"AnnÃ©e",
 	'lbl_usk' =>
 		"USK",
 	'lbl_storage' =>
@@ -45,24 +45,24 @@ $i18n['meta'] = array(
 	'lbl_languages' =>
 		"Langues",
 	'lbl_rating' =>
-		"Vote",
+		"Note",
 		
 	/* META OPTIONS */
 	'lbl_running' =>
 		"Jouable",
 	'lbl_buggy' =>
-		"Bogué",
+		"BoguÃ©e",
 	'lbl_trainer' =>
 		"Trainer",
 	'lbl_intro' =>
-		"Intro hackée",
+		"Hack intro",
 	'lbl_usermod' =>
-		"Traduit-hack",
+		"Traduit",
 	'lbl_freeware' =>
 		"Gratuit",
 	'lbl_multiplay' =>
 		"Multijoueur",
 	'lbl_netplay' =>
-		"En réseau",
+		"En rÃ©seau",
 );
 ?>

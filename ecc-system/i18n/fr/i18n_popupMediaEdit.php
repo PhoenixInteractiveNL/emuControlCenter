@@ -1,8 +1,8 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (fran�ais)
+ * language:	fr (français)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/09
  * ------------------------------------------

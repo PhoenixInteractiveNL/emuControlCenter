@@ -1,8 +1,8 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (français)
+ * language:	fr (franÃ§ais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/12/31 
  * ------------------------------------------
@@ -20,11 +20,11 @@ $i18n['tooltips'] = array(
 	'opt_hide_img' =>
 		"Montrer/Cacher les images",
 	'search_field_select' =>
-		"Choix du critère de recherche",
+		"Choix du critÃ¨re de recherche",
 	'search_operator' =>
-		"Selectionnez une opération de recherche ([ = EQUAL] [ | OR ] [ + AND])",
+		"Selectionnez une opÃ©ration de recherche ([ = EQUAL] [ | OR ] [ + AND])",
 	'search_rating' =>
-		"Montrer seulement les ROMS votées par égal ou plus basse sélection",
+		"Montrer seulement les ROMS votÃ©es par Ã©gal ou plus basse sÃ©lection",
 	'optvis_mainlistmode' =>
 		"Basculer le mode d'affichage des jeux : par liste/avec images",
 );

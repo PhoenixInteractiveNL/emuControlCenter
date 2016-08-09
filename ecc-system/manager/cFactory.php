@@ -62,7 +62,11 @@ class FACTORY {
 	*/
 	private static function register_instance($className, $classPath, $parameter=false, $strictHash="") {
 		$classFileName = $classPath."c".$className.".php";
+		
+		$cwdBackup = getcwd();
+		chdir(ECC_BASEDIR.'/ecc-system/');
 		require_once($classFileName);
+		chdir($cwdBackup);
 		
 		if ($parameter != false) {
 			FACTORY::$_instances[$classPath.$className.$strictHash] = new $className($parameter);

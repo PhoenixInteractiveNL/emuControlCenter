@@ -48,5 +48,19 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbGetButton' =>
 		"Show selected ROMS metadata online!",
 
+	'romDetailTabInfo' =>
+		"Info",
+	'romDetailTabPersonal' =>
+		"Personal",
+	'romDetailTabESearch' =>
+		"E-Search",
+	'romDetailTabRomDB' =>
+		"RomDB",
+	'romDetailTabRomData' =>
+		"Data",
+	'romDetailTabRomHeader' =>
+		"Header",
+	'romDetailTabRomHeaderJad' =>
+		"Jad",
 );
 ?>

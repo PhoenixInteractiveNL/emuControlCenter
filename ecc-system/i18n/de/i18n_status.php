@@ -13,11 +13,11 @@ $i18n['status'] = array(
 	'parse_rom_pbar_file_packed' =>
 		"(Gepackt)",		
 	'parse_rom_detail_header%s' =>
-		"Neue Spiele hinzugef�gt\n%s",
+		"Neue Spiele hinzugefügt\n%s",
 	'parse_rom_detail_added_header' =>
-		"Hinzugef�gte Spiele:\n",
+		"Hinzugefügte Spiele:\n",
 	'parse_rom_detail_unchanged_header' =>
-		"Unver�nderte Datein:\n",
+		"Unveränderte Datein:\n",
 	'parse_rom_pbar_scan_count%s' =>
 		"Gescannt: %s",
 	'parse_rom_detail_scan_head' =>
@@ -28,5 +28,18 @@ $i18n['status'] = array(
 		"Gepackt (z.B. zip, rar)\n",
 	'reorg_prepare_data%s' =>
 		"bereite Dateien vor! %s",
+
+	/* 0.9.6 FYEO 15 */
+	'eccIsWorking%s' =>
+		"%s arbeitet nun",
+	'pending' =>
+		"Warten",
+	'parse_rom_detail_invalidZip' =>
+		"Unzulässige ZIP-Datei gefunden... bitte neu packen!",
+	'searchAndParseNewRoms' =>
+		"Suche und parse neue Spiele",
+	'addingRomsFor%s' =>
+		"Füge Spiele für %s hinzu",
+
 );
 ?>

@@ -17,6 +17,14 @@ class Gui extends GladeXml{
 // -1	Gtk::RESPONSE_NONE	Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
 	
 	/**
+	 * This constructor is only needed to avoid an GladeXml warning!
+	 *
+	 */
+	public function __construct(){
+		$this->initGlade(false);
+	}
+	
+	/**
 	 * Opens an Dialog window
 	 *
 	 * @param string $title
@@ -118,18 +126,20 @@ class Gui extends GladeXml{
 	}
 	
 	/**
-	 * Enter description here...
+	 * Store the hide dialog selection to the history.ini
 	 *
-	 * @param unknown_type $historyKey
+	 * @param string $historyKey
 	 */
 	private function writeHistoryKey($historyKey){
 		FACTORY::get('manager/IniFile')->storeHistoryKey($historyKey[0], $this->checkboxHideDialog->get_active());		
 	}
 	
 	/**
-	 * Enter description here...
+	 * Wait for user action in a infinite while loop
 	 *
-	 * @return unknown
+	 * return state on user click
+	 * 
+	 * @return bool
 	 */
 	private function getResponse($historyKey){
 		while(1){
@@ -143,8 +153,10 @@ class Gui extends GladeXml{
 	}
 	
 	/**
-	 * Enter description here...
-	 *
+	 * Initialize the Popup.
+	 * 
+	 * If the dialog is allready created, only init
+	 * the dialog with the given parameters
 	 */
 	private function init(){
 		if(!$this->dialogIsset) $this->initGlade();
@@ -153,35 +165,48 @@ class Gui extends GladeXml{
 	
 	/**
 	 * Initializes the Dialog and reset variables
-	 *
 	 */
-	private function initDialog(){
-		$this->guiDialog->show();
+	private function initDialog($show = true){
+		
+		# glade needs to execute an constructor
+		# so, the first time, the popup isnts opened via $show
+		if ($show) $this->guiDialog->show();
+		
 		$this->guiDialog->set_keep_above(true);
 		unset($this->response);
 	}
 	
 	/**
 	 * Load Glade file and initialize the Dialog
-	 *
 	 */
-	private function initGlade(){
+	private function initGlade($show = true){
+		
+		# glade needs to execute an constructor
+		# so, the first time, the popup isnts opened via $show
+		if (!$show) return false;
+		
 		$path = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR).'/gui2/guiDialog.glade';
 		parent::__construct($path);
 		
 		$this->guiDialog->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
-		$this->guiDialog->set_position(Gtk::WIN_POS_CENTER);
+		$this->guiDialog->set_position(Gtk::WIN_POS_CENTER_ALWAYS);
+
+		$this->guiDialog->connect('destroy', array($this, 'destroyed'));
 		
 		$this->guiDialog->connect('key-press-event', array($this, 'handleKeyboardShortcuts'));
 		
 		# connect buttons
 		$this->buttonCancel->connect_simple('clicked', array($this, 'onClick'), Gtk::RESPONSE_CANCEL);
 		$this->buttonOk->connect_simple('clicked', array($this, 'onClick'), Gtk::RESPONSE_OK);
-		
-		$dialogIsset = true;
+
+		$this->dialogIsset = true;
 		
 		# initialize the dialog
-		$this->initDialog();
+		$this->initDialog($show);
+	}
+	
+	public function destroyed(){
+		
 	}
 	
 	/**

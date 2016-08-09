@@ -22,7 +22,9 @@ class GuiStatus {
 			return false;
 		}
 		
-		$this->update_message("Pending...");
+		$this->gui->status_area_working_lbl->set_markup('<b>'.sprintf(I18N::get('status', 'eccIsWorking%s'), 'emuControlCenter').'</b>');
+		
+		$this->update_message(I18N::get('status', 'pending').'...');
 		
 		$this->status_status_running = true;
 		$this->status_cancel = false;
@@ -43,7 +45,6 @@ class GuiStatus {
 	
 	public function update_message($txt="") {
 		if (!$this->txtbuf_output) $this->txtbuf_output = new GtkTextBuffer();
-
 		try{
 			$this->txtbuf_output->set_text(trim($txt));
 		}
@@ -110,16 +111,22 @@ class GuiStatus {
 	}
 	
 	public function set_popup_cancel_msg($title="", $msg="") {
+		
+		if (!$title) $title = i18n::get('popup', 'processCancelConfirmTitle');
+		if (!$msg) $msg = i18n::get('popup', 'processCancelConfirmMsg');
+		
 		$this->cancel_title = $title;
 		$this->cancel_msg = $msg;
 	}
 	
-	public function open_popup_complete($title="", $msg="") {
+	public function open_popup_complete($title="", $msg="", $hideOption = false) {
 		if (!$this->status_cancel) {
-			$msg .= I18N::get('popup', 'status_dialog_close');
-			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) $this->hide_main();
-#			if (FACTORY::get('manager/GuiDialog')->openDialogConfirm($title, $msg)) $this->hide_main();
 			
+			if (!$title) $title = i18n::get('popup', 'processDoneTitle');
+			if (!$msg) $msg = i18n::get('popup', 'processDoneMsg');
+			
+			$msg .= I18N::get('popup', 'status_dialog_close');
+			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg, $hideOption)) $this->hide_main();
 		}
 		$this->reset1();
 	}
@@ -128,6 +135,7 @@ class GuiStatus {
 		$this->status_complete = true;
 		$this->status_status_running = false;
 		$this->status_cancel = false;
+		return false;
 	}
 }
 ?>

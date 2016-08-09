@@ -22,7 +22,7 @@ class FileIO {
 	* Sucht informationen zu file
 	* ext extension
 	* name filename ohne extension
-	* size größe in byte
+	* size grÃ¶Ãe in byte
 	*/	
 	public function ecc_file_get_info($path) {
 		
@@ -43,7 +43,7 @@ class FileIO {
 	}
 	
 	/*
-	* ermittelt die größe der datei
+	* ermittelt die grÃ¶Ãe der datei
 	*/
 	public function get_file_size($file_direct, $file_packed=false, $size='KB')
 	{
@@ -89,34 +89,33 @@ class FileIO {
 		}
 	}
 	
-	public function fopen_zip($file_name_direct, $file_name_packed) {	
+	public function fopen_zip($zipFileName, $zipEntryFileName) {	
 		
 		// ABS-PATH TO REL-PATH...
-		$file_name_direct = realpath($file_name_direct);
-		$zip = zip_open($file_name_direct);
-		#$zip = zip_open($file_name_direct);
-		if ($zip) {
-			while ($zip_entry = zip_read($zip)) {
-				$current_entry =  zip_entry_name($zip_entry);
-				if ($file_name_packed == $current_entry) {
-					if (zip_entry_open($zip, $zip_entry, "r")) {
-						
-						$tempFolder = getcwd().'/temp/';
-						
-						$buf = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-						$file_temp = $tempFolder.basename($file_name_packed);
-						
-						if (!is_dir($tempFolder)) mkdir($tempFolder);
-						
-						$fhdl = fopen($file_temp, 'w+b');
-						fwrite($fhdl, $buf);
-						return $fhdl;
-						zip_entry_close($zip_entry);
-					}
-				}
-			}
-			zip_close($zip);
+		$file_name_direct = realpath($zipFileName);
+		
+		$zip = new ZipArchive();
+		$res = $zip->open($zipFileName);
+		$buf = $zip->getFromName($zipEntryFileName);
+		$zip->close();
+		
+		$tempFolder = getcwd().'/temp/';
+		if (!is_dir($tempFolder)) mkdir($tempFolder);
+		$tempFile = $tempFolder.basename($zipEntryFileName);
+		
+		$fhdl = fopen($tempFile, 'w+b');
+		fwrite($fhdl, $buf);
+		
+		# quick hack
+		# fsum cannot parse an file with open filehandle
+		# dont return an valid filehandle here, because the
+		# zips dont need an filehandle!
+		if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
+			fclose($fhdl);
+			return null;
 		}
+		
+		return $fhdl;
 	}
 	
 	public function fclose_zip($fhdl, $path) {
@@ -126,6 +125,43 @@ class FileIO {
 	
 	public function ecc_reset($fhdl) {
 		fseek($fhdl, 0);
+	}
+	
+	public function getFileDataFromZip($filename, $include = false, $exclude = false){
+		
+		$data = array();
+		$zip_hdl = zip_open(realpath($filename));
+		if ($zip_hdl === false || is_int($zip_hdl)) return false;
+		else {
+			while ($zip_entry = zip_read($zip_hdl)) {
+				
+				$entryName = zip_entry_name($zip_entry);
+				$fileExt = FileIO::get_ext_form_file($entryName);
+				
+				if (count($include) && !isset($include[strtolower($fileExt)])) {
+					$fileValid = false;
+				}
+				else {
+					$fileValid = true;
+					if ($exclude){
+						foreach($exclude as $ext){
+							if (false !== stripos($fileExt, $ext)){
+								$fileValid = false;
+								break;
+							}
+						}
+					}
+				}
+				
+				if ($fileValid) $data[] = $entryName;
+			}
+			zip_close($zip_hdl);
+		}
+//		print "\n<pre>";
+//		print_r($data);
+//		print "</pre>\n";
+
+		return $data;
 	}
 	
 	/*
@@ -164,7 +200,7 @@ class FileIO {
 		switch($type_result) {
 			
 			// 'DEZ'
-			// gibt den ascii-wert (integer) des strings zurück
+			// gibt den ascii-wert (integer) des strings zurÃ¼ck
 			case 'DEZ':
 				$out = 0;
 				$data = fread($fhdl, $read_bytes);
@@ -190,21 +226,21 @@ class FileIO {
 	}
 	
 	/*
-	* List die Datei unter berücksichtigung eines
+	* List die Datei unter berÃ¼cksichtigung eines
 	* start und end offsets ein
 	*/	
 	public function ecc_read_file($fhdl, $start_offset=false, $end_offset=false, $file_name=false) {
 		
 		// Beispiel MP3
 		// id3v1 (die letzten 128 bytes im mp3) darf nicht in die
-		// kalkulation der checksumme einfließen
+		// kalkulation der checksumme einflieÃen
 		// $file_content = FileIO::ecc_read_file($fhdl, 0, -128, $file_name);
 		// liest file von byte 0 bis filesize-128
 		//
 		// Beispiel SNES
-		// Hat manchmal einen 512 kb großen Rom-Header, der von
-		// kopierstationen in das rom geschrieben wird. Er ist für die chcksumme nicht
-		// relevant und muß ausgelassen werden.
+		// Hat manchmal einen 512 kb groÃen Rom-Header, der von
+		// kopierstationen in das rom geschrieben wird. Er ist fÃ¼r die chcksumme nicht
+		// relevant und muÃ ausgelassen werden.
 		// $file_content = FileIO::ecc_read_file($fhdl, 512, false, $file_name);
 		// liest datei ab byte 512 bis zum ende der datei.
 		//
@@ -213,7 +249,7 @@ class FileIO {
 		// $file_content = FileIO::ecc_read_file($fhdl, 100, 50, $file_name);
 		
 		// Wenn der file_name gesetzt ist sowie der offset nicht
-		// benötigt wird, kann auch direkt eingeladen werden.
+		// benÃ¶tigt wird, kann auch direkt eingeladen werden.
 		// Das ist performanter
 		if (
 			$file_name !== false &&
@@ -232,16 +268,28 @@ class FileIO {
 				$bytesTotal = filesize($file_name);
 				$currentFileName = basename($file_name);
 				while(!feof($handle)){
-					$contents += fread($handle, $bytesPerRun);
+					$contents .= fread($handle, $bytesPerRun);
+					
+					#$test = fread($handle, $bytesPerRun);
+					#$contents .= substr(trim($test), 0, 10);
+					
+					#file_put_contents('c:/test.cdi', $contents, FILE_APPEND);
+					
 					$bytesTotal -= $bytesPerRun;
 					$bytesLeft = round($bytesTotal/1024/1224, 1);
 					if($bytesLeft<0) $bytesLeft = 0; 
+					
 					FACTORY::get('manager/GuiStatus')->update_message('Parsing '.$currentFileName.'... '.$bytesLeft.' MB left');
 					
 					while (gtk::events_pending()) gtk::main_iteration();
-					$count++;	 
+					$count++;
+					
+					
 				}
 				fclose($handle);
+				
+				
+				
 				return $contents;
 			}
 		}
@@ -287,6 +335,14 @@ class FileIO {
 		return str_pad(strtoupper(dechex(crc32($string))), 8, '0', STR_PAD_LEFT);
 	}
 	
+	public function createMergedEccCrc32($crc32Array){
+		if (!is_array($crc32Array)) return false;
+		if (count($crc32Array) == 1) return reset($crc32Array);
+		asort($crc32Array);
+		$combinedCrc32String = join(",", $crc32Array);
+		return self::ecc_get_crc32_from_string($combinedCrc32String);
+	}
+	
 	/*
 	*
 	*/	
@@ -312,16 +368,26 @@ class FileIO {
 		return (@unlink($fileName));
 	}
 	
+	
+	public function rmDirComplete($dirName){
+		if(empty($dirName) || !file_exists($dirName)) return false;
+		$command = "RMDIR /S /Q ".escapeshellarg($dirName.'/')."";
+		exec ($command);		
+	}
+	
 	public function rmdirr($dirName) {
 		if(empty($dirName) || !file_exists($dirName)) return false;
 		$dir = dir($dirName);
 		while($file = $dir->read()) {
 			if($file != '.' && $file != '..') {
 				if(is_dir($dirName.'/'.$file)) $this->rmdirr($dirName.'/'.$file);
-				else @unlink($dirName.'/'.$file);
+				else{
+					@unlink($dirName.'/'.$file);
+				}
 			}
 		}
-		@rmdir($dirName.'/'.$file);
+		$path = realpath($dirName.'/'.$file);
+		if ($path) @rmdir($path);
 	}
 	
 	public function dirIsEmpty($dirName){
@@ -351,10 +417,98 @@ class FileIO {
 		$file = basename($file);
 		if (false !== strpos($file, ".")) {
 			$split = explode(".", $file);
-			return array_shift($split);
+			#return FileIO::covertStringToUtf8(array_shift($split));
+			return FileIO::covertStringToUtf8(array_shift($split));
 		}
 		return "";
 	}
+
+	public function covertStringToUtf8($string){
+		// TODO Detect encoding using mbstring functions
+		return iconv('ISO-8859-1', 'UTF-8//TRANSLIT', $string);		
+	}
+	
+	public function getFsumCrc32($filename){
+		
+		if(is_dir($filename)) return false;
+		
+		$fileSize = filesize($filename);
+		
+		if(!$fileSize) return false;
+		
+		# configuration
+		$crcGeneratorFile = realpath("../ecc-core/thirdparty/fsum/fsum.exe");
+		$crcGeneratorParams = '-crc32';
+		$logFile = realpath('../ecc-core/thirdparty/fsum/').'eccCrc32.chk';
+		
+		# create command for execution
+		$execCommand = $crcGeneratorFile.' '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);
+		
+		# get manager os
+		$mngrOs = FACTORY::getManager('Os');
+		
+		$commandIsExecuted = false; # set true, if command is executed
+		$count = 0; # try counter
+		$crc32 = false; # result
+		$error = false;
+		while(true){
+			
+			# first execute the given command
+			# set $commandIsExecuted = true, if executed
+			# then read logfile to get the right crc32
+			if(!$commandIsExecuted){
+				
+				# first remove old logfile!
+				unlink($logFile); # now remove chk logfile
+				
+				$commandCwdPath = $mngrOs->executeCommand($execCommand, dirname($filename), $returnCwdPath = true);
+				$commandIsExecuted = true;
+			}
+			else{
+				
+				# sleep 0.1 second (100000)
+				$setSleep = 100000;
+				#usleep($setSleep);
+				
+				$count++;
+				
+				# some status informations for gui progress!
+				FACTORY::get('manager/GuiStatus')->update_message('Parsing (fsum) '.basename($filename).' ('.round($fileSize/1024/1024, 1).' MB)... pass '.$count);
+				while (gtk::events_pending()) gtk::main_iteration();
+				
+				#print "wait for result... $count".chr(13);
+				
+				# read logfile
+				$logFileText = file_get_contents($logFile);
+				
+				# if empty, next try!
+				if(!trim($logFileText)) continue;
+					
+				# logfile contains 4 lines... frist three are comments (;)
+				$data = explode("\n", trim($logFileText));
+				
+				# result contains 5 rows of log-data... otherwise next try!
+				if (count($data) != 5) continue;
+				
+				# all fine now, try to get crc32 from result
+					
+				# get the crc32 from found line 4
+				# fum-format: 7634c61e ?CRC32*romfileBasename.ext
+				$data2 = explode('?', $data[4]);
+				$crc32 = trim($data2[0]);
+				
+				# now remove the logfile!
+				unlink($logFile); # now remove chk logfile
+				
+				# now change back to old location!
+				chdir($commandCwdPath);
+				
+				# all done, return function
+				return strtoupper($crc32);
+			}
+		}
+		return false;
+	}	
 }
 
 ?>

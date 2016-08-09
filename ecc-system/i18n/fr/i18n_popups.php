@@ -1,8 +1,8 @@
-<?
+Ôªø<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (franÁais)
+ * language:	fr (fran√ßais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/09
  * ------------------------------------------
@@ -11,227 +11,311 @@ $i18n['popup'] = array(
 	'rom_add_filechooser_title%s' =>
 		"%s : localisation du chemin des ROMS",
 	'rom_add_parse_title%s' =>
-		"Ajouter des ROMS de %s",
+		"\nAJOUT DE ROMS DE %s\n",
 	'rom_add_parse_msg%s%s' =>
 		"Ajouter des ROMS de\n\n%s\n\ndu dossier et des sous-dossier(s)\n\n%s ?",
 	'rom_add_parse_done_title' =>
-		"Scan effectuÈ",
+		"\nSCAN TERMINE\n",
 	'rom_add_parse_done_msg%s' =>
-		"Scan de nouvelles ROMS de\n\n%s\n\neffectuÈ !",
+		"Scan de nouvelles ROMS de\n\n%s\n\neffectu√© !",
 	'rom_remove_title%s' =>
-		"Effacer la liste de ROMS de %s",
+		"\nEFFACEMENT DE LA LISTE DES ROMS DE %s\n",
 	'rom_remove_msg%s' =>
-		"Voulez-vous effacer la liste de ROMS de \n\"%s\" ?\n\nCette action supprimera toutes les ROMS sÈlectionnÈe de ecc. Ceci ne supprimera PAS les donnÈes ou la/les ROMS du disque dur.",
+		"Voulez-vous effacer la liste de ROMS de \n\"%s\" ?\n\nCette action supprimera toutes les ROMS s√©lectionn√©es de ecc. Ceci ne supprimera PAS les donn√©es ou la/les ROMS du disque dur.\n",
 	'rom_remove_done_title' =>
-		"Effacement de la liste de ROMS effectuÈ",
+		"\nEFFACEMENT DE LA LISTE DES ROMS TERMINE\n",
 	'rom_remove_done_msg%s' =>
-		"Toutes les ROMS de %s sont supprimÈes de la liste",
+		"Toutes les ROMS de %s sont supprim√©es de la liste.",
 	'rom_remove_single_title' =>
-		"Supprimer la ROM de la liste",
+		"\nSUPPRESSION DE LA ROM DE LA LISTE\n",
 	'rom_remove_single_msg%s' =>
-		"Voulez-vous supprimer de la liste\n\n%s ?\n\nCeci ne supprimera pas les donnÈes de la ROM.",
+		"Voulez-vous supprimer de la liste\n\n%s ?\n\nCeci ne supprimera pas les donn√©es de la ROM.\n",
 	'rom_remove_single_dupfound_title' =>
-		"ROM(S) en double trouvÈes !!!",
+		"\nROM(S) EN DOUBLE TROUVEES !!!\n",
 	'rom_remove_single_dupfound_msg%d%s' =>
-		"%d ROM(S) en double trouvÈe(s)\n\nVoulez-vous supprimer tous les doublons de\n\n%s\n\n de la liste ?\n\nVoir l'aide pour plus d'informations !",
+		"%d ROM(S) en double trouv√©e(s)\n\nVoulez-vous supprimer tous les doublons de\n\n%s\n\n de la liste ?\n\nVoir l'aide pour plus d'informations !\n",
 	'rom_optimize_title' =>
-		"Nettoyer la base de donnÈes",
+		"\nNETTOYAGE DE LA BASE DE DONNEES\n",
 	'rom_optimize_msg' =>
-		"Voulez-vous nettoyer la base de donnÈes des ROMS de ecc ?\n\nVous devez nettoyer la base de donnÈes si vous avez dÈplacÈ ou supprimÈ des ROMS de votre disque dur.\necc cherchera alors automatiquement leurs donnÈes et les favoris associÈs, et les supprimera de la base de donnÈes !\nCes options modifient seulement la base de donnÈes.",
+		"Voulez-vous nettoyer la base de donn√©es des ROMS de ecc ?\n\nVous devez nettoyer la base de donn√©es si vous avez d√©plac√© ou supprim√© des ROMS de votre disque dur.\necc cherchera alors automatiquement leurs donn√©es et les favoris associ√©s, et les supprimera de la base de donn√©es !\nCes options modifient seulement la base de donn√©es.\n",
 	'rom_optimize_done_title' =>
-		"Nettoyage effectuÈ",
+		"\nNETTOYAGE TERMINE\n",
 	'rom_optimize_done_msg%s' =>
-		"La base de donnÈes de la plateforme\n\n%s\n\nest maintenant nettoyÈe !",
+		"La base de donn√©es de la plateforme\n\n%s\n\nest maintenant nettoy√©e !",
 	'rom_dup_remove_title' =>
-		"Supprimer les ROMS en double de la liste",
+		"\nSUPPRESSION DES ROMS EN DOUBLE DE LA LISTE\n",
 	'rom_dup_remove_msg%s' =>
-		"Voulez-vous supprimer toutes les ROMS en double de\n\n%s\n\nde la liste ?\n\nCette opÈration travaille seulement dans le cadre de la liste des ROMS....\n\nCeci ne supprimera AUCUN fichier du disque dur !!!",
+		"Voulez-vous supprimer toutes les ROMS en double de\n\n%s\n\nde la liste ?\n\nCette op√©ration travaille seulement dans le cadre de la liste des ROMS....\n\nCeci ne supprimera AUCUN fichier du disque dur !!!",
 	'rom_dup_remove_done_title' =>
-		"Suppression effectuÈe",
+		"\nSUPPRESSION TERMINEE\n",
 	'rom_dup_remove_done_msg%s' =>
-		"Tous les doublons de ROMS de\n\n%s\n\nont ÈtÈ supprimÈs de la liste avec succËs.",
+		"Tous les doublons de ROMS de\n\n%s\n\nont √©t√© supprim√©s de la liste avec succ√®s.",
 	'rom_reorg_nocat_title' =>
-		"Il n'y a aucune catÈgorie !",
+		"\nIL N'Y A AUCUNE CATEGORIE !\n",
 	'rom_reorg_nocat_msg%s' =>
-		"Vous avez assignÈ aucune catÈgorie aux ROMS\n\n%s !\n\nSVP utilisez la fonction Editer pour ajouter des catÈgories ou importer des donnÈes !",
+		"Vous avez assign√© aucune cat√©gorie aux ROMS de\n\n%s !\n\nSVP utilisez la fonction Editer pour ajouter des cat√©gories ou importer des donn√©es !\n",
 	'rom_reorg_title' =>
-		"RÈorganiser vos ROMS sur le disque dur",
+		"\nREORGANISATION DE VOS ROMS SUR LE DISQUE DUR\n",
 	'rom_reorg_msg%s%s%s' =>
-		"------------------------------------------------------------------------------------------Cette option rÈorganisera vos ROMS sur le disque dur !!!\nSVP SUPPRIMEZ D'ABORD LES ROMS EN DOUBLE DE LA LISTE !!!\nLE MODE SELECTIONNE EST : #%s#\n------------------------------------------------------------------------------------------\n\nVoulez-vous rÈorganiser vos ROMS de\n\n%s\n\npar cÈtÈgorie dans le dossier principal d'ecc ? ecc organisera vos ROMS dans le dossier ecc sous\n\n%s/roms/organized/\n\nSVP vÈrifiez s'il y a assez d'espace libre sur votre disque dur.\nVOULEZ-VOUS CONTINUER ? (A VOS RISQUES  :-) )",
+		"------------------------------------------------------------------------------------------Cette option r√©organisera vos ROMS sur le disque dur !!!\nSVP SUPPRIMEZ D'ABORD LES ROMS EN DOUBLE DE LA LISTE !!!\nLE MODE SELECTIONNE EST : #%s#\n------------------------------------------------------------------------------------------\n\nVoulez-vous r√©organiser vos ROMS de\n\n%s\n\npar c√©t√©gorie dans le dossier principal d'ecc ? ecc organisera vos ROMS dans le dossier ecc sous\n\n%s/roms/organized/\n\nSVP v√©rifiez s'il y a assez d'espace libre sur votre disque dur.\nVOULEZ-VOUS CONTINUER ? (A VOS RISQUES  :-) )\n",
 	'rom_reorg_done_title' =>
-		"RÈorganisation effectuÈe",
+		"\nREORGANISATION TERMINEE\n",
 	'rom_reorg_done__msg%s' =>
 		"Regardez le dossier d'ecc au bout du chemin \n\n%s\n\npour valider la copie.",
 	'db_optimize_title' =>
-		"Nettoyage de la base de donnÈes",
+		"\nOPTIMISATION DE LA BASE DE DONNEES\n",
 	'db_optimize_msg' =>
-		"Voulez-vous nettoyer la base de donnÈes ?\nCeci diminuera la taille physique de la base de donnÈes d'emuControlCenter. Vous devriez le faire si vous scannez et supprimez souvent des ROMS avec emuControlCenter !\n\nCette opÈration gËlera l'application quelques secondes - SVP attendez ! :-)",
+		"Voulez-vous optimiser la base de donn√©es ?\n\nCeci diminuera la taille physique de la base de donn√©es d'emuControlCenter. Vous devriez le faire si vous scannez et supprimez souvent des ROMS avec emuControlCenter !\n\nCette op√©ration g√®lera l'application quelques secondes - SVP attendez ! :-)\n",
 	'db_optimize_done_title' =>
-		"Base de donnÈes nettoyÈe",
+		"\nOPTIMISATION DE LA BASE DE DONNEES TERMINE\n",
 	'db_optimize_done_msg' =>
-		"La base de donnÈes d'ecc est nettoyÈ !",
+		"La base de donn√©es d'ecc est nettoy√©e !",
 	'export_esearch_error_title' =>
-		"Aucune option eSearch sÈlÈctionnÈe",
+		"\nAUNCUNE OPTION ESEARCH SELECTIONNEE\n",
 	'export_esearch_error_msg' =>
-		"Vous devez utilisez eSearch (recherche Ètendue) pour utiliser cette fonction d'exportation. Ceci exportera le rÈsultat de la recherche seulement que vous voyez dans la vue principale !",
+		"Vous devez utiliser la recherche √©tendue eSearch pour pouvoir utiliser cette fonction d'exportation. Ceci exportera les donn√©es des toutes les donn√©es des ROMS issues du r√©sultat de cette recherche, qui sera affich√© dans la vue principale seulement !\n",
 	'dat_export_filechooser_title%s' =>
-		"Choix du dossier pour sauvegarder le fichier de donnÈes %s",	
+		"Choix du dossier pour sauvegarder le fichier de donn√©es %s",	
 	'dat_export_title%s' =>
-		"Exportation du fichier de donnÈes %s",
+		"\nEXPORTATION DU FICHIER DE DONNEES %s\n",
 	'dat_export_msg%s%s%s' =>
-		"Voulez-vous exporter un fichier de donnÈes %s de la plateforme\n\n%s\n\ndans ce dossier ?\n\n%s",
+		"Voulez-vous exporter un fichier de donn√©es %s de la plateforme\n\n%s\n\ndans ce dossier ?\n\n%s\n",
 	'dat_export_esearch_msg_add' =>
-		"\n\necc utilisera votre sÈlection eSearch pour exporter !",
+		"\nCeci exportera les donn√©es des ROMS issues du r√©sultat de votre recherche √©tendue eSearch !\n",
 	'dat_export_done_title' =>
-		"Exportation effectuÈe",
+		"\nEXPORTATION TERMINEE\n",
 	'dat_export_done_msg%s%s%s' =>
-		"Exportation du fichier de donnÈes %s pour\n\n%s\n\ndans la cible\n\n%s\n\neffectuÈ !",
+		"Exportation du fichier de donn√©es %s pour\n\n%s\n\ndans la cible\n\n%s\n\neffectu√©e !",
 	'dat_import_filechooser_title%s' =>
-		"Importation d'un fichier de donnÈes %s",
+		"Importation d'un fichier de donn√©es %s",
 	'rom_import_backup_title' =>
-		"CrÈer une sauvegarde",
+		"\nCREATION D'UNE SAUVEGARDE\n",
 	'rom_import_backup_msg%s%s' =>
-		"Voulez-vous crÈer une sauvegarde dans le dossier ecc-user de\n\n%s (%s)\n\navant que vous importiez de nouvelles donnÈes ?",
+		"Voulez-vous cr√©er une sauvegarde dans le dossier ecc-user de\n\n%s (%s)\n\navant que vous importiez de nouvelles donn√©es ?\n",
 	'rom_import_title' =>
-		"Importer le fichier de donnÈes",
+		"\nIMPORTATION DU FICHIER DE DONNEES\n",
 	'rom_import_msg%s%s%s' =>
-		"Voulez-vous vraiment importer des donnÈes de la plateforme\n\n%s (%s)\n\ndu fichier de donnÈes\n\n%s ?",
+		"Voulez-vous vraiment importer les donn√©es de la plateforme\n\n%s (%s)\n\ndu fichier de donn√©es\n\n%s ?\n",
 	'rom_import_done_title' =>
-		"Importation effectuÈe",
+		"\nIMPORTATION TERMINEE\n",
 	'rom_import_done_msg%s' =>
-		"Importation du fichier de donnÈes de\n\n%s\n\neffectuÈe !",
+		"Importation du fichier de donn√©es de\n\n%s\n\neffectu√©e !",
 	'dat_clear_title%s' =>
-		"EFFACER LA BASE DE DONNEES POUR %s",
+		"\nEFFACEMENT DE LA BASE DE DONNEES POUR %s\n",
 	'dat_clear_msg%s%s' =>
-		"VOULEZ-VOUS EFFACER TOUTES LES DONNEES POUR LES ROMS DE\n\n%s (%s) ?\n\nCeci effacera toutes les informations de la base de donnÈes de ecc comme la categorie, le statut, les langues, etc... pour la plateforme sÈlectionnÈe ! A l'Ètape suivante, VOUS POURREZ CREER UNE SAUVERGARDE DE CES INFORMATIONS (qui sera automatiquement enregistrÈe dans le dossier ecc-user !).\n\nLa base de donnÈes sera automatiquement nettoyÈe !",
+		"Voulez-vous effacer toutes les donn√©es des ROMS de\n%s (%s) ?\n\nCeci effacera toutes les informations de la base de donn√©es de ecc comme la categorie, le statut, les langues, etc... pour la plateforme s√©lectionn√©e !\nA l'√©tape suivante, VOUS POURREZ CREER UNE SAUVERGARDE DE CES INFORMATIONS (qui sera automatiquement enregistr√©e dans le dossier ecc-user).\n\nLa base de donn√©es sera automatiquement optimis√©e !\n",
 	'dat_clear_backup_title%s' =>
-		"Sauvegarde de %s",
+		"\nSAUVEGARDE DE %s\n",
 	'dat_clear_backup_msg%s%s' =>
-		"Voulez-vous crÈer une sauvegarde de la plateforme\n\n%s (%s) ?",
+		"Voulez-vous cr√©er une sauvegarde de la plateforme\n\n%s (%s) ?\n",
 	'dat_clear_done_title%s' =>
-		"Effacement de la base de donnÈes effectuÈ",
+		"\nEFFACEMENT DE LA BASE DE DONNEES TERMINE\n",
 	'dat_clear_done_msg%s%s' =>
-		"Toutes les donnÈes des ROMS de\n\n%s (%s)\n\nsont supprimÈes de la base de donnÈes d'ecc !",
+		"Toutes les donn√©es des ROMS de\n\n%s (%s)\n\nsont supprim√©es de la base de donn√©es d'ecc !",
 	'dat_clear_done_ifbackup_msg%s' =>
-		"\n\necc a sauvegardÈ vos donnÈes dans le dossier %s-User.",
+		"\n\nVos donn√©es sont sauvagard√©es dans le dossier %s-User.",
 	'emu_miss_title' =>
-		"Erreur - Emulateur non trouvÈ",
+		"\nERREUR - EMULATEUR NON TROUVE\n",
 	'emu_miss_notfound_msg%s' =>
-		"L'Èmulateur assignÈ \n\n%s \n\nn'a pas ÈtÈ trouvÈ !\nSVP Choisissez le chemin dans Menu/Configuration/Emulateurs.",
+		"L'√©mulateur assign√© n'a pas √©t√© trouv√© !\n\nSVP Choisissez le chemin dans Menu/Emulateurs/Configuration.\n",
 	'emu_miss_notset_msg' =>
-		"Emulateur manquant !\n\nSVP ajoutez un Èmulateur pour cette plateforme/extension ! SVP choisissez le chemin dans Menu/Configuration/Emulateurs.",
+		"Emulateur manquant !\n\nSVP ajoutez un √©mulateur pour cette plateforme/extension ! SVP choisissez le chemin dans Menu/Emulateurs/Configuration.",
 	'emu_miss_dir_msg%s' =>
-		"Pas d'Èmulateur ! (Seul un dossier est enregistrÈ !)\n\nSVP ajoutez un Èmulateur pour cette plateforme/extension !\n\nSVP localisez l'exÈcutable de l'Èmulateur (exe, bat, jar, etc...). Un chemin de dossier seul ne suffit pas !",
+		"Pas d'√©mulateur ! (Seul un dossier est enregistr√© !)\n\nSVP ajoutez un √©mulateur pour cette plateforme/extension !\n\nSVP localisez l'ex√©cutable de l'√©mulateur (exe, bat, jar, etc...). Un chemin de dossier seul ne suffit pas !",
 	'rom_miss_title' =>
-		"Erreur - Aucune ROM trouvÈe",
+		"\nERREUR - AUCUNE ROM TROUVEE\n",
 	'rom_miss_msg' =>
-		"Le fichier sÈlectionnÈ n'a pas ÈtÈ trouvÈ !\n\nSVP utilisez l'option 'Plateforme->Actualiser la liste des ROMS'.\nSVP choisissez aussi si vous utilisez des options comme 'Mode Escape' ou 'Mode 8.3 filename' conformes",
+		"Le fichier s√©lectionn√© n'a pas √©t√© trouv√© !\n\nSVP rescannez le dossier des ROMS ou nettoyez la base de donn√©es.\nSVP choisissez aussi si vous utilisez des options comme 'Mode Escape' ou 'Mode 8.3 filename' conformes.\n",
 	'img_overwrite_title' =>
-		"Remplacer l'image",
+		"\nREMPLACEMENT DE L'IMAGE\n",
 	'img_overwrite_msg%s%s' =>
-		"L'image\n\n%s\n\nexiste dÈj‡.\n\nVoulez-vous vraiment remplacer cette image par\n\n%s ?",	
+		"L'image\n\n%s\n\nexiste d√©j√†.\n\nVoulez-vous vraiment remplacer cette image par\n\n%s ?\n",	
 	'img_remove_title' =>
-		"Supprimer l'image",
+		"\nSUPPRESSION DE L'IMAGE\n",
 	'img_remove_msg%s' =>
-		"Voulez-vous rÈellement supprimer l'image %s ?",
+		"Voulez-vous r√©ellement supprimer l'image %s ?\n",
 	'img_remove_error_title' =>
-		"Erreur - Suppression d'image impossible",
+		"\nERREUR - SUPPRESSION DE L'IMAGE IMPOSSIBLE\n",
 	'img_remove_error_msg%s' =>
-		"L'image %s ne peut pas Ítre effacÈe !",
+		"L'image %s ne peut pas √™tre effac√©e !\n",
 	'conf_platform_update_title' =>
-		"Sauvegarder l'INI de la plateforme",
+		"\nSAUVEGARDE DE L'INI DE LA PLATEFORME\n",
 	'conf_platform_update_msg%s' =>
-		"Voulez-vous vraiment enregistrer les modifications de l'INI de la plateforme %s ?",
+		"Voulez-vous vraiment enregistrer les modifications de l'INI de la plateforme %s ?\n",
 	'conf_platform_emu_filechooser_title%s' =>
-		"Selectionnez un Èmulateur pour l'extension '%s'",
+		"Selectionnez un √©mulateur pour l'extension '%s'.",
 	'conf_userfolder_notset_title' =>
-		"ERREUR : Dossier user introuvable",
+		"\nERREUR - DOSSIER USER INTROUVABLE\n",
 	'conf_userfolder_notset_msg%s' =>
-		"Vous avez altÈrÈ la liste des chemins dans votre ecc_general.ini. Ce dossier n'existe pas.\n\nDois-je crÈer le dossier\n\n%s\n\npour vous ?\n\nSi vous voulez choisir un autre chemin, cliquez NON et utilisez \n'Options'->'Configuration'\npour crÈer votre dossier User !",
+		"Vous avez alt√©r√© la liste des chemins dans votre ecc_general.ini. Ce dossier n'existe pas.\n\nDois-je cr√©er le dossier\n\n%s\n\npour vous ?\n\nSi vous voulez choisir un autre chemin, cliquez NON et utilisez \n'Options'->'Configuration'\npour cr√©er votre dossier User !\n",
 	'conf_userfolder_error_readonly_title' =>
-		"ERREUR : Impossible de crÈer le dossier",
+		"\nERREUR - IMPOSSIBLE DE CREER LE DOSSIER\n",
 	'conf_userfolder_error_readonly_msg%s' =>
-		"Le dossier %s ne peux pas Ítre crÈÈ parce que vous avez sÈlectionnÈ un chemin en lecture seule (CD ?).\n\nSi vous voulez choisir un autre chemin, cliquez OK et choisissez \n'Options'->'Configuration'\npour choisir votre dossier user !",
+		"Le dossier %s ne peux pas √™tre cr√©√© parce que vous avez s√©lectionn√© un chemin en lecture seule (CD ?).\n\nSi vous voulez choisir un autre chemin, cliquez OK et choisissez \n'Options'->'Configuration'\npour choisir votre dossier user !\n",
 	'conf_userfolder_created_title' =>
-		"Dossier User crÈÈ",
+		"\nDOSSIER USER CREE\n",
 	'conf_userfolder_created_msg%s%s' =>
-		"Les sous-dossiers\n\n%s\n\nsont crÈÈs dans votre dossier User sÈlectionnÈ\n\n%s",
+		"Les sous-dossiers\n\n%s\n\nsont cr√©√©s dans votre dossier User s√©lectionn√©\n\n%s\n",
 	'conf_ecc_save_title' =>
-		"Sauvegarder le GLOBAL-INI d'emuControlCenter",
+		"\nSAUVEGARDE DU GLOBAL-INI\n",
 	'conf_ecc_save_msg' =>
-		"Ceci enregistrera vos changements dans ecc_global.ini.\n\nCeci crÈera aussi le dossier user choisi et tous les sous-dossiers.\n\nVoulez-vous continuer ?",
+		"Ceci enregistrera vos changements dans ecc_global.ini.\n\nCeci cr√©era aussi le dossier user choisi et tous les sous-dossiers.\n\nVoulez-vous continuer ?\n",
 	'conf_ecc_userfolder_filechooser_title' =>
-		"SÈlectionnez le chemin pour vos donnÈes User",
+		"S√©lectionnez le chemin pour vos donn√©es User",
 	'fav_remove_all_title' =>
-		"Supprimer tous les favoris",
+		"\nSUPPRESSION DE TOUS LES FAVORIS\n",
 	'fav_remove_all_msg' =>
-		"Voulez-vous vraiment supprimer TOUS les favoris ?",
+		"Voulez-vous vraiment supprimer TOUS les favoris ?\n",
 	'maint_empty_history_title' =>
-		'RÈinitialiser ecc history.ini',
+		"\nREINITIALISATION DE ecc_history.ini\n",
 	'maint_empty_history_msg' =>
-		'Ceci videra le fichier ecc history.ini. Ce fichier enregistre toutes vos sÈlections dans ecc comme les options (ex : Cacher les ROMS en double) et les chemins sÈlectionnÈs. Voulez-vous rÈinitialiser ce fichier ?',
+		"Ceci videra le fichier ecc history.ini. Ce fichier enregistre toutes vos s√©lections dans ecc comme les options (ex : Cacher les ROMS en double) et les chemins s√©lectionn√©s. Voulez-vous r√©initialiser ce fichier ?\n",
 	'sys_dialog_info_miss_title' =>
-		"?? TITRE MANQUANT ??",
+		"\n?? TITRE MANQUANT ??\n",
 	'sys_dialog_info_miss_msg' =>
-		"?? MESSAGE MANQUANT ??",
+		"\n?? MESSAGE MANQUANT ??\n",
 	'sys_filechooser_miss_title' =>
-		"?? TITRE MANQUANT ??",
+		"\n?? TITRE MANQUANT ??\n",
 	'status_dialog_close' =>
-		"\n\nVoulez-vous fermer le panneau d'affichage de l'Ètat d'avancement du processus ?",
+		"\n\nVoulez-vous fermer le panneau d'affichage de l'√©tat d'avancement du processus ?\n",
 	'status_process_running_title' =>
-		"Processus en cours",
+		"\nPROCESSUS EN COURS D'EXECUTION\n",
 	'status_process_running_msg' =>
-		"Un autre processus est en cours.\nVous pouvez seulement dÈmarrer un autre processus comme scan/importation/exportation ! SVP attendez que le processus en cours se termine !",
+		"Un autre processus est en cours d'ex√©cution.\nVous pouvez seulement d√©marrer un autre processus comme scan/importation/exportation ! SVP attendez que le processus en cours se termine !\n",
 	'meta_rating_add_error_msg' =>
-		"Vous pouvez seulement voter une ROM qui a des donnÈes enregistrÈes.\n\nSVP utilisez Editer et enregistrez ces informations !",
+		"Vous pouvez seulement voter une ROM qui a des donn√©es enregistr√©es.\n\nSVP utilisez la fonction Editer et enregistrez ces informations !\n",
 	'maint_unset_ratings_title' =>
-		"Supprimer les votes pour la plateforme",
+		"\nSUPPRESSION DES VOTES DE LA PLATEFORME\n",
 	'maint_unset_ratings_msg' =>
-		"Ceci rÈinitialisera tous les votes dans la base de donnÈes... Voulez-vous continuer ?",
+		"Ceci r√©initialisera tous les votes dans la base de donn√©es... Voulez-vous continuer ?\n",
 	'eccdb_title' =>
-		"eccdb/romdb",
+		"\nECCDB / ROMDB\n",
 	'eccdb_statistics_msg%s%s%s%s%s' =>
-		"eccdb - Statistiques :\n\n%s ajoutÈe(s),\n%s toujours en place,\n%s erreur(s),\n\n%s fichier(s) de donnÈes traitÈ(s) !%s",
+		"eccdb - Statistiques :\n\n%s ajout√©e(s),\n%s toujours en place,\n%s erreur(s),\n\n%s fichier(s) de donn√©es trait√©(s) !%s",
 	'eccdb_webservice_post_msg' =>
-		"eccdb/romdb - Fichier de base de donnÈes :\n\nPour supporter la communautÈ d'emuControlCenter, vous pouvez ajouter vos donnÈes (titre, categorie, langues etc...) dans eccdb (Internet Database).\n\nCeci fonctionne comme le CDDB (CD DataBase) pour les CD de musique.\n\nSi vous confirmez ceci, ecc transfÈrera automatiquement vos donnÈes vers eccdb !\n\nVous devez Ítre connectÈ sur Internet pour envoyer vos donnÈes !!!\n\nAprËs 10 envois de donnÈes, vous devez confirmer pour en transmettre plus !",
+		"eccdb/romdb - Fichier de base de donn√©es :\n\nPour supporter la communaut√© d'emuControlCenter, vous pouvez ajouter vos donn√©es (titre, categorie, langues etc...) dans eccdb (Internet Database).\n\nCeci fonctionne comme le CDDB (CD DataBase) pour les CD de musique.\n\nSi vous confirmez ceci, ecc transf√©rera automatiquement vos donn√©es vers eccdb !\n\nVous devez √™tre connect√© sur Internet pour envoyer vos donn√©es !!!\n\nApr√®s 10 envois de donn√©es, vous devez confirmer pour en transmettre plus !\n",
 	'eccdb_error' =>
-		"eccdb - Erreur :\n\nVous n'Ítes peut-Ítre pas connectÈ sur Internet... vous pouvez ajouter des donnÈes dans eccdb seulement avec une connection Internet active !",
+		"eccdb - Erreur :\n\nVous n'√™tes peut-√™tre pas connect√© sur Internet... vous pouvez ajouter des donn√©es dans eccdb seulement avec une connection Internet active !\n",
 	'eccdb_no_data' =>
-		"eccdb - Aucune information pouvant Ítre ajoutÈe trouvÈe :\n\nVous devez Èditer des donnÈes pour les ajouter dans eccdb. Utilisez le bouton Editer et esseyez de nouveau !",
+		"eccdb - Aucune information pouvant √™tre ajout√©e trouv√©e :\n\nVous devez √©diter des donn√©es pour les ajouter dans eccdb. Utilisez le bouton Editer et esseyez de nouveau !\n",
 		
 	/* 0.9 FYEO 9 */
 	'rom_dup_remove_msg_preview%s' =>
-		"Cette option cherchera les ROMS en double dans votre base de donnÈes et les affichera.\n\nVous pourrez ainsi les retrouver dans l'historique des t‚ches (si activÈ) dans le dossier ecc-logs !",
+		"Cette option cherchera les ROMS en double dans votre base de donn√©es et les affichera.\n\nVous pourrez ainsi les retrouver dans l'historique des t√¢ches (si activ√©) dans le dossier ecc-logs !",
 	
 	/* 0.9.1 FYEO 3 */
 	'img_remove_all_title' =>
-		"Supprimer toutes le images ?",
+		"\nSUPPRESSION DES IMAGES\n",
 	'img_remove_all_msg%s' =>
-		"Ceci supprimera toutes les images de la ROM sÈlectionnÈe !\n\nSupprimer toutes les images de la ROM\n\n%s ?",
+		"Ceci supprimera toutes les images de la ROM s√©lectionn√©e !\n\nSupprimer toutes les images de la ROM\n\n%s ?\n",
 	
 	/* 0.9.1 FYEO 6 */
 	'sys_dialog_miss_title' =>
-		"Confirmer",
+		"\nCONFIRMATION\n",
 
 	/* 0.9.2 WIP 11 */
 	'parse_big_file_found_title' =>
-		"Voulez-vous analyser ce fichier ?",
+		"\nFICHIER ENORME TROUVE !!!\n",
 	'parse_big_file_found_msg%s%s' =>
-		"FICHIER ENORME TROUVEE !!!\n\nLe jeu trouvÈ\n\nNom : %s\nTaille : %s\n\nest vraiment volumineux. Ceci peut prendre beaucoup de temps sans rÈponse d'emuControlCenter.\n\nVoulez-vous vraiment analyser ce fichier ?",
+		"Voulez-vous analyser ce fichier ?\nLe jeu trouv√©\n\nNom : %s\nTaille : %s\n\nest vraiment volumineux. Ceci peut prendre beaucoup de temps sans r√©ponse d'emuControlCenter.\n\nVoulez-vous vraiment analyser ce fichier ?\n",
 
 	/* 0.9.5 WIP 19 */
 	'bookmark_added_title' =>
-		"Favori sauvegardÈ",
+		"\nFAVORI AJOUTE\n",
 	'bookmark_added_msg' =>
-		"Ce mÈdia a ÈtÈ ajoutÈ aux favoris !",
+		"Ce m√©dia a √©t√© ajout√© aux favoris !",
 	'bookmark_removed_single_title' =>
-		"Favori supprimÈ",
+		"\nSUPPRESSION DU FAVORI TERMINEE\n",
 	'bookmark_removed_single_msg' =>
-		"Ce favori a ÈtÈ supprimÈ !",
+		"Ce favori a √©t√© supprim√© !\n",
 	'bookmark_removed_all_title' =>
-		"Favoris supprimÈs",
+		"\nSUPPRESSION DES FAVORIS TERMINEE\n",
 	'bookmark_removed_all_msg' =>
-		"Tous les favoris ont ÈtÈ supprimÈs !",
+		"Tous les favoris ont √©t√© supprim√©s !\n",
 
+	/* 0.9.6 FYEO 1 */
+	'eccdb_webservice_get_datfile_title' =>
+		"\nMISE A JOUR DES DONNEES A PARTIR D'INTERNET\n",
+	'eccdb_webservice_get_datfile_msg%s' =>
+		"Voulez-vous vraiment mettre √† jour la plateforme\n\n%s\n\navec les donn√©es en ligne emuControlCenter romDB ?\n\nUne connection √† Internet est n√©cessaire pour cette requ√™te !\n",
+	
+	'eccdb_webservice_get_datfile_error_title' =>
+		"\nIMPORTATION DES DONNEES IMPOSSIBLE\n",
+	'eccdb_webservice_get_datfile_error_msg' =>
+		"Vous devez √™tre connect√©s √† Internet. SVP connectez-vous et r√©essayez !\n",
+
+	'romparser_fileext_problem_title%s' =>
+		"\nPROBLEME D'EXTENSION %s\n",
+	'romparser_fileext_problem_msg%s%s%s%s%s%s' =>
+		"emuControlCenter a remarqu√© que plus d'une plateforme utilise l'extension %s pour trouver des ROMS !\n\nVoici la liste des plateformes :\n%s\nEtes-vous s√ªrs qu'il n'y ait que des jeux de %s dans le dossier sp√©cifi√© %s.\n\n<b>Ok</b> : Rechercher des %s dans ce dossier.\n\n<b>Non</b> : Ne pas rechercher des %s.\n",
+
+	/* 0.9.6 FYEO 8 */
+	'rom_dup_remove_title_preview' =>
+		"\n RECHERCHE DE ROMS EN DOUBLE\n",
+	'rom_dup_remove_done_title_preview' => 
+		"\n RECHERCHE DE ROMS EN DOUBLE TERMINEE\n",
+	'rom_dup_remove_done_msg_preview' =>
+		"Jetez un coup d'oeil au panneau d'affichage pour plus de d√©tails !",
+	'metaRemoveSingleTitle' =>
+		"\nSUPPRESSION DES DONNEES DE LA ROMS\n",
+	'metaRemoveSingleMsg' =>
+		"Voulez vous vraiment supprimer toutes les donn√©es de cette ROM ?",
+
+	/* 0.9.6 FYEO 11 */
+
+	'importDatCMFilechooseTitle%s' =>
+		"S√©lectionner un fichier CtrlMAME",
+	'importDatCMConfirmTitle' =>
+		"\nIMPORTATION D'UN FICHIER CtrlMAME\n",
+	'importDatCMConfirmMsg%s%s%s' =>
+		"Voulez-vous vraiment importer les donn√©es pour la plateforme \n\n%s (%s)\n\n√† partir du fichier de donn√©es\n\n%s ?\n",
+
+	/* 0.9.6 FYEO 13 */
+	'romAuditReparseTitle' =>
+		"\nACTUALISER LES INFORMATIONS DE L'AUDIT DE LA ROM\n",
+	'romAuditReparseMsg%s' =>
+		"Ceci va mettre √† jour les informations d'√©tat d'une ROM multi-fichiers (compl√®te ou non).\n\nVoulez-vou continuez ?",
+	'romAuditInfoNotPossibelTitle' =>
+		"\nAUCUNE INFORMATION D'AUDIT DISPONIBLE\n",
+	'romAuditInfoNotPossibelMsg' =>
+		"Les informations d'audit d'une ROM sont seulement disponibles pour des ROMS compos√©es de plusieurs fichiers, comme par exemple les ROMS des plateformes d'arcade !\n",
+
+	'romReparseAllTitle' =>
+		"\nSCAN DE VOS DOSSIERS DE ROMS\n",
+	'romReparseAllMsg%s' =>
+		"Rechercher de nouvelles ROMS pour la plateforme\n\n%s\n\ndans les dossiers contenant les ROMS de cette plateforme ?\n",
+
+	/* 0.9.6 FYEO 15 */
+	'parserUnsetExtTitle' =>
+		"\nEXTENSION MULTI-PLATEFORMES\n",
+	'parserUnsetExtMsg%s' =>
+		"Comme vous avez s√©lectionn√© '#All found', ECC doit exclure de la recherche les extensions pr√©sentes sur plusieurs plateformes pour √©viter de mauvais assignements dans la base de donn√©es !\n\nemuControlCenter ne cherchera pas : %s\n\nSVP s√©lectionnez chaque plateforme utilisant ces extensions une par une pour pouvoir les rechercher !\n",
+
+	'stateLabelDatExport%s%s' =>
+		"Exportation d'un fichier de donn√©es %s de %s",
+	'stateLabelDatImport%s' =>
+		"Importation d'un fichier de donn√©es de %s",
+
+	'stateLabelOptimizeDB' =>
+		"Optimisation de la base de donn√©es",
+	'stateLabelVacuumDB' =>
+		"Nettoyage de la base de donn√©es",
+	'stateLabelRemoveDupRoms' =>
+		"Suppression des ROMS en double",
+	'stateLabelRomDBAdd' =>
+		"Ajouter des infos √† la base de donn√©es des ROMS",
+	'stateLabelParseRomsFor%s' =>
+		"Recherche de ROMS de %s",
+	'stateLabelConvertOldImages' =>
+		"Conversion d'images...",
+
+	'processCancelConfirmTitle' =>
+		"\nARRET DU PROCESSUS EN COURS\n",
+	'processCancelConfirmMsg' =>
+		"Voulez-vous vraiment arr√™ter le processus en cours ?\n",
+	'processDoneTitle' =>
+		"\nPROCESSUS TERMINE\n",
+	'processDoneMsg' =>
+		"Le processus est termin√© !\n",
 );
 ?>

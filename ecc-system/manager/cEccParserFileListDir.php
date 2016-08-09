@@ -24,40 +24,50 @@ class EccParserFileListDir implements FileList {
 	
 	public $invalidFile = array();
 	
+	private $excludedZipExtensions = false;
+	
 	#public $pbar_parser;
 	#public $statusbar_lbl_bottom;
 	
 	/*
 	*
 	*/
-	public function __construct($base_directory=false, $known_extensions=array(), $pbar_parser, $statusbar_lbl_bottom, $status_obj) {
+	public function __construct($base_directory=false, $known_extensions=array(), $pbar_parser, $statusbar_lbl_bottom, $status_obj, $excludedZipExtensions = false) {
 		$this->status_obj = $status_obj;
-		foreach ($known_extensions as $key => $value) {
-			$this->_known_extensions[strtoupper($key)] = $value[0];
-		}
+		$this->excludedZipExtensions = $excludedZipExtensions;
 		$this->_known_extensions = $known_extensions;
 		$this->_base_directory = $base_directory;
-		$this->_create_file_list();
+		
+		foreach($base_directory as $aDirectory) {
+			$this->_create_file_list($aDirectory);	
+		}
 	}
 	
 	/*
 	*
 	*/
-	private function _create_file_list($base_directory=false)
-	{
+	private function _create_file_list($base_directory=false) {
+		
 		if ($base_directory===false) {
 			$base_directory = $this->_base_directory;
 		}
+		
 		// verzeichnis einlesen
 		if ($dhdl = @opendir($base_directory)) {
+			
+			$test = array();
+			
 			while (false !== ($file = readdir($dhdl))) {
 				
 				while (gtk::events_pending()) gtk::main_iteration();
 				
 				$found = "";
 				if ($file != "." && $file != "..") {
-					
+
 					$full_file_path = $base_directory."/".$file;
+					
+					#print "$full_file_path\n";
+					
 					if (is_dir($full_file_path)) {
 						$this->_create_file_list($full_file_path);
 					}
@@ -67,13 +77,33 @@ class EccParserFileListDir implements FileList {
 						// 20061116 as
 						$full_file_path = FACTORY::get('manager/Os')->eccSetRelativeFile($full_file_path);
 						
-						if ($this->is_packed_file($full_file_path)) {
+						if (isset($this->_known_extensions['zip']) && $this->get_file_ext($file) == 'zip'){
+							
+							# get list from zip
+							$file_extension = 'zip';
+							$fileList = FileIO::getFileDataFromZip($full_file_path, @$this->_known_extensions['zip']['inZip'], $this->excludedZipExtensions);
+
+							# only add, if file exists
+							if (count($fileList)) {
+								$this->_file[$file_extension][] = array(
+									'DIRECT_FILE' => $this->normalize_path($full_file_path),
+									'LIST' => $fileList,
+								);
+								
+								if (!isset($this->_stats_direct[$file_extension])) $this->_stats_direct[$file_extension] = 0;
+								$this->_stats_direct[$file_extension]++;
+							}
+							else {
+								print "No data found in Zip: $full_file_path\n";
+							}
+						}
+						elseif ($this->is_packed_file($full_file_path)) {
 						}
 						else {
 							// nur in liste, wenn die extension
 							// bekannt ist und geparst werden soll
 							$file_extension = $this->get_file_ext($file);
-							if (isset($this->_known_extensions[$file_extension][0])) {
+							if (isset($this->_known_extensions[$file_extension]['parser'])) {
 								
 								#$this->_file[$file_extension][]['FILE'] = $this->normalize_path($full_file_path);
 								$this->_file[$file_extension][] = array(
@@ -83,33 +113,25 @@ class EccParserFileListDir implements FileList {
 									'PACKED_FILE' => false,
 								);
 								
-								if (!isset($this->_stats_direct[$file_extension])) {
-									$this->_stats_direct[$file_extension] = 0;
-								}
+								if (!isset($this->_stats_direct[$file_extension])) $this->_stats_direct[$file_extension] = 0;
 								$this->_stats_direct[$file_extension]++;
-							}
-							else {
-								
 							}
 						}
 					}
 					
 					$this->_stats_total++;
 					
-					if ($this->_progress_count < 1000) {
-						$this->_progress_count++;
-					}
-					else {
-						$this->_progress_count = 1;
-					}
+					if ($this->_progress_count < 1000) $this->_progress_count++;
+					else $this->_progress_count = 1;
+
 					$progressbar_string = sprintf(I18N::get('status', 'parse_rom_pbar_scan_count%s'), $this->_stats_total);
 					$this->status_obj->update_progressbar($this->_progress_count/1000, $progressbar_string);
 					$this->status_obj->update_message($this->format_results());
 					if ($this->status_obj->is_canceled()) return false;
-					
 				}
 			}
 			closedir($dhdl);
+			
 			return $this->_file;
 		}
 	}
@@ -171,7 +193,7 @@ class EccParserFileListDir implements FileList {
 			while ($zip_entry = zip_read($zip_hdl)) {
 				$file = zip_entry_name($zip_entry);
 				$file_extension = $this->get_file_ext($file);
-				if (isset($this->_known_extensions[$file_extension][0])) {
+				if (isset($this->_known_extensions[$file_extension]['parser'])) {
 					$this->_file[$file_extension][] = array(
 						'FILE' => $this->normalize_path($file),
 						'PACKED' => $this->normalize_path($zip_file),

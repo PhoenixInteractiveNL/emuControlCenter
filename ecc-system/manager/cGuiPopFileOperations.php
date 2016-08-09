@@ -5,6 +5,8 @@ define('TAB_DELETE', 2);
 
 class GuiPopFileOperations extends GladeXml {
 	
+	public $done = NULL;
+	
 	public function __construct($gui = false) {
 		if ($gui) $this->mainGui = $gui;
 		$this->prepareGui();
@@ -13,9 +15,11 @@ class GuiPopFileOperations extends GladeXml {
 	private function prepareGui() {
 		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiPopFileOperations.glade');
 		$this->signal_autoconnect_instance($this);
-		
+		$this->guiFileOperations->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->guiFileOperations->set_modal(true);
-		#$this->guiFileOperations->set_keep_above(true);
+		
+		$this->translateGui();
+		
 		$this->guiFileOperations->present();
 	}
 	
@@ -34,7 +38,7 @@ class GuiPopFileOperations extends GladeXml {
 	}
 	
 	
-	public function openRenameDialog() {
+	public function openRenameDialog($hideOnFail = false) {
 		$this->prepareDialogFor(TAB_RENAME);
 	}
 
@@ -48,7 +52,9 @@ class GuiPopFileOperations extends GladeXml {
 	
 	
 	private function prepareDialogFor($tabName) {
-
+		
+		$this->done = NULL;
+		
 		$this->selectNotebookTab($tabName);
 		
 		// rename
@@ -59,10 +65,14 @@ class GuiPopFileOperations extends GladeXml {
 		$this->renameTxtSourcePath->set_text(dirname($this->sourceFileName));
 		$this->renameTxtSourceFileName->set_text(basename($this->sourceFileName));
 		
-		//$renameDestinationFileName = ($this->destinationFileName) ? $this->destinationFileName : $this->sourceFileName;
-		$renameDestinationFileName = $this->sourceFileName;
-		$renameDestinationFileName = str_ireplace($fileExtension, '', $renameDestinationFileName);
-		$this->renameTxtDestinationFileName->set_text(basename($renameDestinationFileName));
+		if ($this->destinationFileName){
+			$renameDestinationFileName = $this->destinationFileName;
+		}
+		else {
+			$renameDestinationFileName = $this->sourceFileName;
+			$renameDestinationFileName = basename(str_ireplace($fileExtension, '', $renameDestinationFileName));
+		}
+		$this->renameTxtDestinationFileName->set_text($renameDestinationFileName);
 		
 		// destination
 		$this->renameTxtDestinationExtension->set_text(strtolower($fileExtension));
@@ -92,7 +102,7 @@ class GuiPopFileOperations extends GladeXml {
 	}
     
 	public function onCopyChooseFolder() {
-		$selectedPath = FACTORY::get('manager/Os')->openChooseFolderDialog($this->copyTxtSourcePath->get_text(), 'Please select destination');
+		$selectedPath = FACTORY::get('manager/Os')->openChooseFolderDialog($this->copyTxtSourcePath->get_text(), 'Please select destination', false);
 		if ($selectedPath) $this->copyTxtDestinationFileName->set_text($selectedPath);
 	}
 	
@@ -117,14 +127,14 @@ class GuiPopFileOperations extends GladeXml {
     		
     	    if (FACTORY::get('manager/TreeviewData')->updatePathById($fdataId, $fileNameDestination)) {
     			$this->hideWindow();
-    			$this->mainGui->onReloadRecord(false);
+    			if ($this->mainGui) $this->mainGui->onReloadRecord(false);
     		}
     		else {
-    			$this->addError('could not rename file in database!');
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!');
     		}
     	}
     	else {
-    		$this->addError('could not copy file!');
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not copy file!');
     	}
         
         $this->copyTxtSourcePath->get_text();
@@ -150,21 +160,18 @@ class GuiPopFileOperations extends GladeXml {
 		    		$fileData = FACTORY::get('manager/TreeviewData')->getFdataById($fdataId);
 		    		if ($fileData['eccident'] && $fileData['crc32']) {
 		    			FACTORY::get('manager/Image')->removeUserImageFolder($fileData['eccident'], $fileData['crc32']);
-		    			
 		    			if(LOGGER::$active) LOGGER::add('files', "-> img remove: ".$fileData['eccident']." -> ".$fileData['crc32'], 0);
-		    			
 		    		}
 		    	}
-    	   		
     			$this->hideWindow();
-    			$this->mainGui->onReloadRecord(false);
+    			if ($this->mainGui) $this->mainGui->onReloadRecord(false);
     		}
     		else {
-    			$this->addError('could not remove file in database!');
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file in database!');
     		}
     	}
     	else {
-    		$this->addError('could not remove file!');
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not remove file!');
     	}
     }
     
@@ -192,15 +199,18 @@ class GuiPopFileOperations extends GladeXml {
     			if(LOGGER::$active) LOGGER::add('files', "file rename: ".$fileNameSource." -> ".$fileNameDestination, 0);
     			
     			$this->hideWindow();
-    			$this->mainGui->onReloadRecord(false);
+    			if ($this->mainGui) $this->mainGui->onReloadRecord(false);
     		}
     		else {
-    			$this->addError('could not rename file in database!');
+    			$this->done = false;
+    			FACTORY::get('manager/Gui')->openDialogInfo('Error', 'could not rename file in database!');
     		}
     	}
     	else {
-    		$this->addError('could not rename file!');
+    		$this->done = false;
+    		FACTORY::get('manager/Gui')->openDialogInfo('Error', "could not rename file!\nFilename allready exists!");
     	}
+    	$this->done = true;
     }
     
     public function hideWindow() {
@@ -218,6 +228,44 @@ class GuiPopFileOperations extends GladeXml {
     public function addError($errorMessage) {
     	print $errorMessage;
     	$this->guiFileOperations->set_sensitive(false);
+    }
+    
+    public function translateGui(){
+    	
+    	# WINDOW
+    	$this->guiFileOperations->set_title(i18n::get('file', 'winTitle'));
+    	
+    	# RENAME
+    	$this->tabLabelRename->set_label(i18n::get('global', 'rename'));
+    	$this->tabRenameHl->set_markup('<b>'.i18n::get('file', 'tabRenameHl').'</b>');
+    	$this->tabRenameDesc->set_text(i18n::get('file', 'tabRenameDesc'));
+    	$this->lblPathRename->set_markup('<b>'.i18n::get('global', 'filePath').'</b>');
+    	$this->lblOriginalFilenameRename->set_markup('<b>'.i18n::get('file', 'lblOriginalFilename').'</b>');
+    	$this->lblNewFilenameRename->set_markup('<b>'.i18n::get('file', 'lblNewFilename').'</b>');
+    	$this->btnDoRename->set_text(i18n::get('file', 'btnDoRename'));
+    	$this->btnDoRenameCancel->set_text(i18n::get('global', 'cancel'));
+    	
+    	# COPY
+    	$this->tabLabelCopy->set_label(i18n::get('global', 'copy'));
+    	$this->tabCopyHl->set_markup('<b>'.i18n::get('file', 'tabCopyHl').'</b>');
+    	$this->tabCopyDesc->set_text(i18n::get('file', 'tabCopyDesc'));
+    	$this->lblPathCopy->set_markup('<b>'.i18n::get('global', 'filePath').'</b>');
+    	$this->lblOriginalFilenameCopy->set_markup('<b>'.i18n::get('file', 'lblOriginalFilename').'</b>');
+    	$this->lblNewLocation->set_markup('<b>'.i18n::get('file', 'lblNewLocation').'</b>');
+    	$this->btnSelectFolder->set_label(i18n::get('global', 'selectFolder'));
+    	$this->btnDoCopy->set_text(i18n::get('file', 'btnDoCopy'));
+    	$this->btnDoCopyCancel->set_text(i18n::get('global', 'cancel'));
+    	
+    	# REMOVE
+    	$this->tabLabelRemove->set_label(i18n::get('global', 'remove'));
+    	$this->tabRemoveHl->set_markup('<b>'.i18n::get('file', 'tabRemoveHl').'</b>');
+    	$this->tabRemoveDesc->set_text(i18n::get('file', 'tabRemoveDesc'));
+    	$this->lblPathRemove->set_markup('<b>'.i18n::get('global', 'filePath').'</b>');
+    	$this->lblFileToRemove->set_markup('<b>'.i18n::get('file', 'lblFileToRemove').'</b>');
+    	$this->deleteCheckUserImages->set_label(i18n::get('file', 'deleteCheckUserImages'));
+    	$this->btnDoRemove->set_text(i18n::get('file', 'btnDoRemove'));
+    	$this->btnDoRemoveCancel->set_text(i18n::get('global', 'cancel'));
+    	
     }
 }
 ?>

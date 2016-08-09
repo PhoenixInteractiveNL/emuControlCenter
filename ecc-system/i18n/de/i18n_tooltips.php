@@ -20,9 +20,9 @@ $i18n['tooltips'] = array(
 	'opt_hide_img' =>
 		"Blende alle Bilder aus",
 	'search_field_select' =>
-		"Wähle das Suchfeld aus",
+		"WÃ¤hle das Suchfeld aus",
 	'search_operator' =>
-		"Wie soll deine Suche verknüpft sein? [ '=' GLEICH, '|' ODER, '+' UND ]",
+		"Wie soll deine Suche verknÃ¼pft sein? [ '=' GLEICH, '|' ODER, '+' UND ]",
 	'search_rating' =>
 		"Zeige alle Roms sortiert nach dieser Bewertung",
 	'optvis_mainlistmode' =>

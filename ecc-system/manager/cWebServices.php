@@ -245,5 +245,9 @@ class WebServices {
 		$this->eccDbSessionKey = $romdbSessionKey;
 	}
 	
+	public function getRomdbDatfile(){
+		return @file_get_contents($this->serviceUrl.'/eccdat_all_complete.'.date('Ymd', time()).'.eccDat');
+	}
+	
 }
 ?>

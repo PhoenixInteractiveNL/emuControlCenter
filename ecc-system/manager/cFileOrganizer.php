@@ -82,7 +82,8 @@ class FileOrganizer extends App{
 	* @author ascheibel
 	*/
 	public function set_destination_path() {
-		$destination_path = $this->ini->getUserFolder($this->eccident.DIRECTORY_SEPARATOR."roms".DIRECTORY_SEPARATOR."organized".DIRECTORY_SEPARATOR, true);
+		# 20070810 refactoring userfolder
+		$destination_path = $this->ini->getUserFolder($this->eccident, DIRECTORY_SEPARATOR."roms".DIRECTORY_SEPARATOR."organized".DIRECTORY_SEPARATOR, true);
 		if (!$destination_path || !is_dir($destination_path)) return false;
 		$this->destination_path = $destination_path;
 	}
@@ -388,7 +389,9 @@ class FileOrganizer extends App{
 		$out = array();
 		$q = "
 			select
-			count(*) as cnt, m.category as cat_id, sum(fd.size) as size
+			count(*) as cnt,
+			m.category as cat_id,
+			sum(fd.size) as size
 			from
 			fdata as fd, mdata as m
 			where
@@ -408,7 +411,7 @@ class FileOrganizer extends App{
 
 	
 	private function createDirectoryRecursive($strPath, $mode = 0777) {
-		return is_dir($strPath) or ($this->createDirectoryRecursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
+		return is_dir($strPath) or ($this->createDirectoryRecursive(dirname($strPath), $mode) and mkdir($strPath) );
 	}
 }
 ?>

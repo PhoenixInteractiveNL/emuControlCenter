@@ -28,7 +28,7 @@ $i18n['mainGui'] = array(
 	'infoImageBtnMatchImageType' =>
 		"nur Treffer",
 	'infoImageEditBtn' =>
-		"Bild hinzufügen",
+		"Bild hinzufÃ¼gen",
 	'media_nb_info_eccdb_get_info' =>
 		"RomDB get",
 	'media_nb_info_eccdb_info' =>
@@ -36,16 +36,31 @@ $i18n['mainGui'] = array(
 
 	/* 0.9.2 FYEO 17 */
 	'paneInfoEccDbAddTitle' =>
-		"Meine Metadaten online hinzufügen",
+		"Meine Metadaten online hinzufÃ¼gen",
 	'paneInfoEccDbAddText' =>
-		"Die eccdb/romdb ist eine Internet Datenbank für Metainformationen aller Spiele und Emulatoren, die du im emuControlCenter verwaltest. Wenn du Informationen zu einem Spiel hinzugefügt hast, so kannst du diese Informationen in die eccdb/romdb übertragen. Auf der Website kannst du dann eine aktuelles Datfile mit allen hinzugefügten informationen herunterladen. Dieses kannst du in das emuControlCenter importieren!",
+		"Die eccdb/romdb ist eine Internet Datenbank fÃ¼r Metainformationen aller Spiele und Emulatoren, die du im emuControlCenter verwaltest. Wenn du Informationen zu einem Spiel hinzugefÃ¼gt hast, so kannst du diese Informationen in die eccdb/romdb Ã¼bertragen. Auf der Website kannst du dann eine aktuelles Datfile mit allen hinzugefÃ¼gten informationen herunterladen. Dieses kannst du in das emuControlCenter importieren!",
 	'paneInfoEccDbAddButton' =>
 		"Jetzt meine Daten eintragen!",
 	'paneInfoEccDbGetTitle' =>
-		"Metadaten für Spiel anzeigen",
+		"Metadaten fÃ¼r Spiel anzeigen",
 	'paneInfoEccDbGetText' =>
-		"Wähle diesen Button, und dir werden die Informationen des gerade ausgewählten Spiels angezeigt. Sollten noch keine Informationen verfügbar sein kannst du der Community deine herausgefundenn Metainformationen zur Verfügung stellen.",
+		"WÃ¤hle diesen Button, und dir werden die Informationen des gerade ausgewÃ¤hlten Spiels angezeigt. Sollten noch keine Informationen verfÃ¼gbar sein kannst du der Community deine herausgefundenn Metainformationen zur VerfÃ¼gung stellen.",
 	'paneInfoEccDbGetButton' =>
 		"Metadaten online anzeigen!",
+
+	'romDetailTabInfo' =>
+		"Info",
+	'romDetailTabPersonal' =>
+		"PersÃ¶nlich",
+	'romDetailTabESearch' =>
+		"E-Search",
+	'romDetailTabRomDB' =>
+		"RomDB",
+	'romDetailTabRomData' =>
+		"Daten",
+	'romDetailTabRomHeader' =>
+		"Header",
+	'romDetailTabRomHeaderJad' =>
+		"Jad",
 );
 ?>

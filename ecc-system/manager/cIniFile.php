@@ -17,9 +17,13 @@ class IniFile {
 	private $eccIniHistoryName = 'ecc_history.ini';
 	private $eccIniHistoryFile = false;
 	
+	# used for translation of the mame driver dropdown
+	private $driverTranslation = array();
+	
 	public function __construct()	{
 		# create userconfig-path, if needed
 		$this->createUserConfigFolder();
+		$this->createUserFolder();
 		# get the current history ini file
 		$this->createHistoryIni();
 		# get complete ini data
@@ -39,10 +43,22 @@ class IniFile {
 		else return mkdir($this->eccUserConfigPath);
 	}
 	
+	public function createUserFolder() {
+		if (is_dir($this->eccDefaultUserFolder)) return true;
+		else return mkdir($this->eccDefaultUserFolder);
+	}
+	
 	public function createHistoryIni() {
 		$this->eccIniHistoryFile = $this->eccUserConfigPath.$this->eccIniHistoryName;
 		if (file_exists($this->eccIniHistoryFile)) return true;
 		else return file_put_contents($this->eccIniHistoryFile, '');
+	}
+	
+	public function setI18nStringAllFound($string){
+		$platformNullName = '# '.$string;
+
+		$this->ini['ECC_PLATFORM']['null'] = $platformNullName;
+		$this->cachedPlatformIni['null']['PLATFORM']['name'] = $platformNullName;
 	}
 	
 	/*
@@ -72,7 +88,8 @@ class IniFile {
 			}
 		}
 		## SORT ##
-		natcasesort($out);
+		#natcasesort($out);
+		asort($out);
 		return $out;
 	}
 	
@@ -213,7 +230,7 @@ class IniFile {
 	public function storeIniPlatformUser($eccident, $ini) {
 		$file = $this->getPlatformIniPathByFolderDispatcher('ecc_'.$eccident.'_user.ini', true);
 		if (!$file) return false;
-		$this->backupFile($file);
+		#$this->backupFile($file);
 		$newIni = $this->storeIniFile($file, $ini);
 		return $newIni;
 	}
@@ -311,10 +328,16 @@ class IniFile {
 	* get userfolder from ini and create subfolder, if needed.
 	* @return mixed (new) userpath | false
 	*/
-	public function getUserFolder($subFolder = false, $createRecursive = false) {
+	public function getUserFolder($eccident = '', $subFolder = '', $createRecursive = false) {
 		// get user-folder from ecc.ini
 		$userFolderBase = $this->getKey('USER_DATA', 'base_path');
 		if (!($userFolderBase && realpath($userFolderBase))) return false;
+		
+		# 20070810 refactoring userfolder
+
+		if ($eccident) $eccident = $this->getPlatformFolderName($eccident);
+		
+		$subFolder = $eccident.DIRECTORY_SEPARATOR.$subFolder;
 		
 		// only if user folder is selected, create subfolder if needed
 		if ($subFolder) {
@@ -380,7 +403,7 @@ class IniFile {
 			if ($parser && $extensions) {
 				$data = $this->getExtensionParser($extensions, $parser);
 				foreach ($data as $eccId => $eccParser) {
-					$ret[$eccId][] = $eccParser;
+					$ret[$eccId] = $eccParser;
 				}
 			}
 		}
@@ -391,10 +414,26 @@ class IniFile {
 				$parser = @$this->cachedPlatformIni[$eccident]['PARSER'];
 				$data = $this->getExtensionParser($extensions, $parser);
 				foreach ($data as $eccId => $eccParser) {
-					$ret[$eccId][] = $eccParser;
+					$ret[$eccId] = $eccParser;
 				}
 			}
 		}
+		return $ret;
+	}
+	
+	public function getAllPlatformExtensionParser() {
+		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
+		
+		$ret = array();
+		foreach($this->cachedPlatformIni as $eccident => $data) {
+			$extensions = @$this->cachedPlatformIni[$eccident]['EXTENSIONS'];
+			$parser = @$this->cachedPlatformIni[$eccident]['PARSER'];
+			$data = $this->getExtensionParser($extensions, $parser);
+			foreach ($data as $eccId => $eccParser) {
+				$ret[$eccId][] = $eccParser;
+			}
+		}
+
 		return $ret;
 	}
 	
@@ -406,20 +445,52 @@ class IniFile {
 		return array();
 	}
 	
+	public function getSystemIni($eccident=false){
+		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
+		if (isset($this->cachedPlatformIni[$eccident])){
+			return $this->cachedPlatformIni[$eccident];
+		}
+		return false;
+	}
+	
+	public function isMultiRomPlatform($eccident){
+		if (!$this->cachedPlatformIni) $this->getCompletePlatformData();
+		if (isset($this->cachedPlatformIni[$eccident]['EXTENSIONS']['zip']) && $this->cachedPlatformIni[$eccident]['EXTENSIONS']['zip']){
+			return true;
+		}
+		return false;
+	}
+	
 	/*
 	* Baut ein array auf, in dem der key die extension und die value
 	* der parser ist. Im FileList Object wird dann die extension
 	* gematcht und der richtige parser instanziiert.
 	*/
 	public function getExtensionParser($selected_extensions, $file_parser) {
+		
 		$wanted_extensions = array();
+		$searchInZip = array();
+		
 		if (isset($file_parser)) {
 			foreach ($file_parser as $parser_name => $extensions) {
+				
+				# get zipIncludes, if zip is handeled
+				$zipIncludedFiles = '';
+				if (false !== strpos($extensions, '|INCLUDES_ONLY|')) list($extensions, $zipIncludedFiles) = explode("|INCLUDES_ONLY|", $extensions);
+				
 				$extensions_array = explode(",",$extensions);
 				foreach ($extensions_array as $ext) {
 					$ext = trim($ext);
 					if (isset($selected_extensions[$ext]) && $selected_extensions[$ext]) {
-						$wanted_extensions[$ext] = $parser_name;
+						
+						$wanted_extensions[$ext]['parser'] = $parser_name;
+						
+						if($ext == 'zip' && $zipIncludedFiles){
+							$zipIncludedFiles = explode(",", $zipIncludedFiles);
+							foreach($zipIncludedFiles as $data){
+								$wanted_extensions[$ext]['inZip'][trim($data)] = true;								
+							}
+						}
 					}
 				}
 			}
@@ -510,13 +581,33 @@ class IniFile {
 		return $languages;
 	}
 	
+	public function getShortcutPaths($eccident = false){
+		
+		$platformValid = false;
+		$platformIni = $this->getPlatformIni($eccident);
+		if ($platformIni) $platformValid = true;
+		if (!$platformValid) return false;
+		
+		$shorcutFolder = array();
+		#$eccSubFolder = ($eccident) ? DIRECTORY_SEPARATOR.$this->getPlatformFolderName($eccident).DIRECTORY_SEPARATOR : '';
+		$shorcutFolder[] = $this->getUserFolder($eccident);
+		foreach ($platformIni as $key => $value) {
+			if (substr($key, 0, 4) !== 'EMU.') continue;
+			if ($dirName = dirname(realpath($value['path']))) {
+				$shorcutFolder[basename($value['path'])] = $dirName;
+			}
+		}
+		sort($shorcutFolder);
+		return $shorcutFolder;
+	}
+	
 ### ADD TO MANAGER FOR FILES ###
 ### ADD TO MANAGER FOR FILES ###
 ### ADD TO MANAGER FOR FILES ###
 
 	# @todo better name, recursive param
 	public function createDirectoryRecursive($strPath, $mode = 0777) {
-		return is_dir($strPath) or ($this->createDirectoryRecursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
+		return is_dir($strPath) or ($this->createDirectoryRecursive(dirname($strPath), $mode) and mkdir($strPath) );
 	}
 
 	# @todo better name, recursive param	
@@ -534,6 +625,69 @@ class IniFile {
 		if (!is_writable($parentPath)) $this->setDefaultEccBasePath();
 		return true;
 	}
+	
+	public function getPlatformFolderName($eccident){
+		$systemOptions = $this->getSystemIni($eccident);
+		if (!isset($systemOptions['ECCUSER']['folder'])) return $eccident;
+		return $systemOptions['ECCUSER']['folder'].' ('.$eccident.')';
+	}
+	
+	public function convertPlatformFolder($eccident){
+		
+		if (!$eccident || false === $newName = $this->getPlatformFolderName($eccident)) return false;
+		
+		if ($eccident == $newName) return false;
+		
+		$shortFolderName = $this->getUserFolder().DIRECTORY_SEPARATOR.$eccident;
+		$longFolderName = $this->getUserFolder().DIRECTORY_SEPARATOR.$newName;
+		
+		#print "$shortFolderName --> $longFolderName\n";
+		
+		if (realpath($shortFolderName) && !realpath($longFolderName)) rename($shortFolderName, $longFolderName);
+		else print "Folder ".realpath($longFolderName)." allready exists!\n";
+		
+		return "$shortFolderName -> $longFolderName\n";
+	}
+	
+	public function getDriverTranslation($eccident){
+		
+		if (isset($this->driverTranslation[$eccident])) return $this->driverTranslation[$eccident];
+		
+		$path = $this->eccDefaultConfigPath.DIRECTORY_SEPARATOR.$eccident.DIRECTORY_SEPARATOR.'driver.ini';
+		$translation = $this->parse_ini_file_quotes_safe($path);
+		if (!$translation) return array();
+		
+		
+		$names = array();
+		$query = array();
+		$exclude = array();
+		foreach($translation as $mainDriver => $driverInfo){
+			
+			$names[trim($mainDriver)] = trim($driverInfo['name']);
+			
+			if (isset($driverInfo['includes'])) {
+				$queryTemp = array();
+				$queryTemp[] = trim($mainDriver);
+				$split = explode(',', $driverInfo['includes']);
+				foreach($split as $value){
+					$exclude[] = trim($value);
+					$queryTemp[] = trim($value);
+				}
+				$query[$mainDriver] = '"'.join('", "', $queryTemp).'"';
+			}
+		}
+		
+		$out = array(
+			'names' => $names,
+			'query' => $query,
+			'unset' => $exclude,
+		);
+		
+		$this->driverTranslation[$eccident] = $out;
+		
+		return $out;
+	}
+	
 	
 ### ADD TO MANAGER FOR FILES ###
 ### ADD TO MANAGER FOR FILES ###

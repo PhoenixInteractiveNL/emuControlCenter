@@ -1,5 +1,6 @@
 <?php
 define('SLOW_CRC32_PARSING_FROM', 100663296);
+#define('SLOW_CRC32_PARSING_FROM', 0);
 
 class EccParserDataProzessor{
 	
@@ -44,6 +45,10 @@ class EccParserDataProzessor{
 		$this->connectedMetaFilesizeCheck = $state;
 	}	
 	
+	public function sortMixedData($a, $b){
+	   return strcmp($a, $b);
+	}
+	
 	public function parse()
 	{
 		$log = '';
@@ -62,14 +67,13 @@ class EccParserDataProzessor{
 			print "#######################\n";
 			*/
 			
-			// F�r jede file_extension daten parsen
-			$log .= LOGGER::add('romparse', "Search and Parse new romfiles!!!!", 1);
+			$log .= LOGGER::add('romparse', i18n::get('status', 'searchAndParseNewRoms'), 1);
 			#$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME', 'PATH', 'PATH_PACK')));
 			$log .= LOGGER::add('romparse', join("\t", array('STATE', 'CRC32', 'EXT', 'NAME')));
 			
 			foreach($this->_file_list as $file_extension => $file_data) {
 				
-				$log .= LOGGER::add('romparse', "Adding roms for $file_extension");
+				$log .= LOGGER::add('romparse', sprintf(i18n::get('status', 'addingRomsFor%s'), $file_extension));
 				
 				$cnt_total = count($file_data);
 				$cnt_current = 0;
@@ -82,8 +86,8 @@ class EccParserDataProzessor{
 					$file_name_packed = isset($file_name_info['PACKED_FILE']) ? $file_name_info['PACKED_FILE'] : false;
 					
 					// Preparse, damit nur neu geparst wird,
-					// wenn eine �nderung der Filesize (bytes) aufgetreten
-					// ist. Soll verhindern, das zu oft unn�tig geparst wird.
+					// wenn eine ï¿½nderung der Filesize (bytes) aufgetreten
+					// ist. Soll verhindern, das zu oft unnï¿½tig geparst wird.
 					// Sobald ein byte unterschied vorhanden ist, wird geparst.
 					$size_db = $this->dataParserObj->get_file_size($file_name_direct, $file_name_packed);	// from database
 					$size_fs = FileIO::get_file_size($file_name_direct, $file_name_packed, 'B');
@@ -95,7 +99,6 @@ class EccParserDataProzessor{
 					if ($this->connectedMetaOnlyEccident && $this->connectedMetaFilesizeCheck){
 						if ((isset($availFileSizes[$size_fs]) && $availFileSizes[$size_fs]) || $availFileSizes[$size_fs] = $this->dataParserObj->findMetaByFilesize($this->connectedMetaOnlyEccident, $size_fs));
 						else continue;
-						print "$size_fs $file_name_direct".LF;
 					}
 					
 					if (($size_db && $size_fs) && ($size_db == $size_fs)) {
@@ -110,21 +113,94 @@ class EccParserDataProzessor{
 						if ($size_fs >= SLOW_CRC32_PARSING_FROM){
 							$fileSizeMB = round($size_fs/1024/1024, 1)." MB";
 							$fileName = ($file_name_packed) ? basename($file_name_packed) : basename($file_name_direct);
-							
 							$title = I18N::get('popup', 'parse_big_file_found_title');
 							$msg = sprintf(I18N::get('popup', 'parse_big_file_found_msg%s%s'), $fileName, $fileSizeMB);
-							
-							#$title = "Really parse this file?";
-							#$msg = "BIG FILE FOUND!!!\n\nThe found game\n\nName: ".$fileName."\nSize: ".$fileSizeMB."\n\nis very large. This can take a long time without direct feedback of emuControlCenter.\n\nDo you want parse this game?";
-							if(!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) continue;
+							if(!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg, array('dhide_big_file_warning'))) continue;
 						}
-						
 						
 						$out = false;
 						
 						// Hier beginnt das eigentliche parsen
 						// File operations
-						if ($file_name_packed) {
+						$out['IS_MULTIFILE'] = false;
+						if ($file_extension == 'zip'){
+							
+							$zipName = $file_name_info['DIRECT_FILE'];
+							$zipFileList = $file_name_info['LIST'];
+							
+							$completeFileSize = 0;
+							$combinedCrc32String = '';
+							$inZipFilesChecksums = array();
+							$fileValid = true;
+							
+							foreach($zipFileList as $inZipFile){
+								
+								
+								$fhdl = FileIO::fopen_zip($zipName, $inZipFile);
+
+								$file_temp = realpath(getcwd().'/temp/'.basename($inZipFile));
+								
+								$out = $this->getParser('zip', $fhdl)->parse($fhdl, $file_temp, $zipName, false);
+								$fileExt = $out['FILE_EXT'];
+								$inZipFilesChecksums[$inZipFile] = $out['FILE_CRC32'];
+								$inZipFilesChecksums[$inZipFile] = $out['FILE_CRC32'];
+								$completeFileSize += $out['FILE_SIZE'];
+
+								FileIO::fclose_zip($fhdl, $file_temp);
+								
+								if (!$out['FILE_VALID']){
+									$fileValid = false;
+									break;
+								}
+								
+								FACTORY::get('manager/GuiStatus')->update_message('Parsed file '.FileIO::get_plain_filename($zipName).' -> '.$inZipFile.' ('.$out['FILE_SIZE'].' bytes)');
+								
+							}
+							asort($inZipFilesChecksums);
+							
+							$out['FILE_VALID'] = $fileValid;
+							$out['FILE_NAME'] = FileIO::get_plain_filename($zipName);
+							$out['FILE_PATH'] = $zipName;
+							$out['FILE_EXT'] = $fileExt;
+
+							$out['FILE_SIZE'] = filesize($zipName);
+							
+							$out['MDATA'] = $inZipFilesChecksums;
+							
+							$out['IS_MULTIFILE'] = true;
+							
+							$out['ROM_STATE'] = array();
+							$managerImportCM = FACTORY::get('manager/ImportDatControlMame');							
+							if (!isset($datHandled[$out['FILE_EXT']])){
+								
+								$managerImportCM->resetDatfileContent();
+								
+								$datfile = 'datfile/'.strtolower($out['FILE_EXT']).'.dat';
+								$datfileExists = (file_exists($datfile));
+								
+								if ($datfileExists){
+									if (!isset($managerImportCM)) $managerImportCM->setStatusHandler($this->fileListObj->status_obj);
+									$managerImportCM->setFromFile($datfile);
+								}
+							}
+							$datHandled[$out['FILE_EXT']] = true;
+							
+							$data = $managerImportCM->searchForRom(array_flip($out['MDATA']), $out['FILE_PATH']);
+							$out['ROM_STATE'] = $data;
+							$bestMatch = $managerImportCM->getBestMatch($data, false);
+							
+							# write crc from datfile, if available
+							if (isset($bestMatch['info']['mergedEccCrc32'])){
+								$out['FILE_CRC32'] = $bestMatch['info']['mergedEccCrc32'];
+								#print $out['FILE_CRC32']." -> ".$out['FILE_PATH']."\n";
+							}
+							else {
+								$combinedCrc32String = join(",", $out['MDATA']);
+								$out['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string($combinedCrc32String);								
+							}
+						}
+						elseif ($file_name_packed) {
+							
 							$fhdl = FileIO::fopen_zip($file_name_direct, $file_name_packed);
 							$file_temp = realpath(getcwd().'/temp/'.basename($file_name_packed));
 							
@@ -203,12 +279,18 @@ class EccParserDataProzessor{
 		else {
 		}
 		
+		$txtStatistics = I18N::get('global', 'statistics');
+		$txtParsed = I18N::get('global', 'parsed');
+		$txtAdded = I18N::get('global', 'added');
+		$txtInvalid = I18N::get('global', 'invalid');
+		$txtUnchanged = I18N::get('global', 'unchanged');
+		
 		$logStats  = '';
-		$logStats .= "Statistics\r\n";
-		$logStats .= "Parsed: ".$cntOverall."\r\n";
-		$logStats .= "Added: ".$cntValid."\r\n";
-		$logStats .= "Invalid: ".$cntInvalid."\r\n";
-		$logStats .= "Unchanged: ".$cntUnchanged;
+		$logStats .= $txtStatistics."\r\n";
+		$logStats .= $txtParsed.": ".$cntOverall."\r\n";
+		$logStats .= $txtAdded.": ".$cntValid."\r\n";
+		$logStats .= $txtInvalid.": ".$cntInvalid."\r\n";
+		$logStats .= $txtUnchanged.": ".$cntUnchanged;
 		$log .= LOGGER::add('romparse', $logStats, 2);
 		
 		$detail_header = $this->format_results(true);
@@ -219,7 +301,7 @@ class EccParserDataProzessor{
 	
 	private function getParser($file_extension, $fileHandle) {
 		
-		$parserClassNamePlain = $this->_known_extensions[$file_extension][0];
+		$parserClassNamePlain = $this->_known_extensions[$file_extension]['parser'];
 		
 		if (in_array($file_extension, $this->dispatchExtensions)) {
 			#$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
@@ -270,7 +352,7 @@ class EccParserDataProzessor{
 		}
 		
 		if ($addFinalNote && count($this->invalidFiles)) {
-			$txt .= "\nFound invalid zip-files... please repack!\n";
+			$txt .= "\n".I18N::get('status', 'parse_rom_detail_invalidZip')."\n";
 			foreach ($this->invalidFiles as $key => $value) {
 				$txt .=  "$value\n";
 			}
@@ -284,5 +366,6 @@ class EccParserDataProzessor{
 		$this->_stats['CHANGED'] = $this->_parser_stats_cnt_add;
 		return $this->_stats;
 	}
+
 }
 ?>

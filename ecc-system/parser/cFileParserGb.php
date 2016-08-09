@@ -67,7 +67,15 @@ class FileParserGb implements FileParser {
 		// C0h - Game works on CGB only (physically the same as 80h).
 		$ret['SGB_FEATURES'] = FileIO::ecc_read($fhdl, 323, 1, 'HEX');
 
-		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));
+		# use fsum to get the right crc32 for larger files!
+		# only usable for platforms withou offsets!!!!
+		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
+			$ret['FILE_CRC32'] = FileIO::getFsumCrc32($file_name, 1);
+		}
+		else{
+			$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string(FileIO::ecc_read_file($fhdl, false, false, $file_name));
+		}
+		
 		$ret['FILE_MD5'] = NULL;
 		$ret['FILE_VALID'] = true;
 		

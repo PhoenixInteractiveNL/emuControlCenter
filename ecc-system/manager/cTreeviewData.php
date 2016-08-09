@@ -8,6 +8,9 @@ class TreeviewData {
 	private $showOnlyPersonal = false;
 	private $showOnlyDontHave = false;
 	
+	# search parameter
+	private $searchMameDriver = false;
+	
 	private $sqlFields = '
 		md.crc32 as md_crc32,
 		md.id as md_id,
@@ -43,7 +46,19 @@ class TreeviewData {
 		fd.eccident as fd_eccident,
 		fd.launchtime as fd_launchtime,
 		fd.launchcnt as fd_launchcnt,
-		fd.mdata as fd_mdata
+		fd.isMultiFile as fd_isMultiFile,
+		fd.mdata as fd_mdata,
+		fa.fDataId as fa_fDataId,
+		fa.isMatch as fa_isMatch,
+		fa.fileName as fa_fileName,
+		fa.isValidFileName as fa_isValidFileName,
+		fa.isValidNonMergedSet as fa_isValidNonMergedSet,
+		fa.isValidSplitSet as fa_isValidSplitSet,
+		fa.isValidMergedSet as fa_isValidMergedSet,
+		fa.hasTrashfiles as fa_hasTrashfiles,
+		fa.cloneOf as fa_cloneOf,
+		fa.romOf as fa_romOf,
+		fa.mameDriver as fa_mameDriver
 	';
 	
 	// called by FACTORY
@@ -96,6 +111,8 @@ class TreeviewData {
 			if ($extension) $snip_where[] = "md.eccident='".sqlite_escape_string($extension)."'";
 		}
 		
+		if ($this->searchMameDriver && $extension = 'mame') $snip_where[] = "fa.mameDriver IN (".$this->searchMameDriver.")";
+		
 		if ($searchRating) {
 			$snip_where[] = "md.rating<=".(int)$searchRating."";
 			$rateOrder = ($orderBy == 'DESC') ? 'ASC' : 'DESC';
@@ -122,6 +139,8 @@ class TreeviewData {
 		}
 		
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
+		
+		$snip_join[] = "left join fdata_audit AS fa on fd.id=fa.fDataId";
 
 		if ($randomGame) {
 			$sqlOrderBy = array('random(*)');
@@ -148,10 +167,21 @@ class TreeviewData {
 		#print $q;
 		$hdl = $this->dbms->query($q);
 		$ret = array();
+		$this->foundMameDriver = array();
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
 			$ret['data'][$res['id']."|".$res['md_id']] = $res;
 			$ret['data'][$res['id']."|".$res['md_id']]['composite_id'] = $res['id']."|".$res['md_id'];
+			
+			if ($res['fa_mameDriver']) $this->foundMameDriver[trim($res['fa_mameDriver'])] = trim($res['fa_mameDriver']);
+			
+			if (!isset($mameDrivers[trim($res['fa_mameDriver'])])) $mameDrivers[trim($res['fa_mameDriver'])] = 1;
+			else $mameDrivers[trim($res['fa_mameDriver'])]++;
 		}
+		
+		if (isset($mameDrivers)) {
+			foreach ($mameDrivers as $aMameDriver => $count) $this->foundMameDriver[$aMameDriver] = $count;
+		}
+		
 		if ($return_count===true) {
 			$q = "SELECT count(*) FROM ".$snipSqlJoin." WHERE ".$snipSqlWhere."";
 			#print $q."\n";
@@ -199,6 +229,8 @@ class TreeviewData {
 		if (!$onlyFiles) if ($extension) $snip_where[] = "fd.eccident='".sqlite_escape_string($extension)."'";
 		else if ($extension) $snip_where[] = "md.eccident='".sqlite_escape_string($extension)."'";
 		
+		if ($this->searchMameDriver && $extension = 'mame') $snip_where[] = "fa.mameDriver IN (".$this->searchMameDriver.")";
+		
 		if ($searchRating) {
 			$snip_where[] = "md.rating<=".(int)$searchRating."";
 			$rateOrder = ($orderBy == 'DESC') ? 'ASC' : 'DESC';
@@ -215,6 +247,8 @@ class TreeviewData {
 
 		$snip_join = array();
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
+		
+		$snip_join[] = "left join fdata_audit AS fa on fd.id=fa.fDataId";
 		
 		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$orderBy;
 		
@@ -303,8 +337,12 @@ class TreeviewData {
 		if ($esearch = SqlHelper::createSqlExtSearch($search_ext)) $snip_where[] = $esearch;
 		$snip_where[] = 'launchtime != ""';
 		
+		if ($this->searchMameDriver && $extension = 'mame') $snip_where[] = "fa.mameDriver IN (".$this->searchMameDriver.")";
+		
 		$snip_join = array();
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
+		
+		$snip_join[] = "left join fdata_audit AS fa on fd.id=fa.fDataId";
 		
 		$sqlOrderBy[] = "launchtime ".$orderBy;
 		
@@ -402,13 +440,7 @@ class TreeviewData {
 	*/
 	public function remove_bookmark_by_id($id) {
 		if ($id) {
-			$q = '
-				DELETE FROM
-				fdata_bookmarks
-				WHERE
-				file_id = '.(int)$id.'
-			';
-			#print $q."\n";
+			$q = 'DELETE FROM fdata_bookmarks WHERE file_id = '.(int)$id.'';
 			$hdl = $this->dbms->query($q);
 		}
 	}
@@ -417,10 +449,7 @@ class TreeviewData {
 	*
 	*/
 	public function remove_bookmark_all() {
-		$q = '
-			DELETE FROM
-			fdata_bookmarks
-		';
+		$q = 'DELETE FROM fdata_bookmarks';
 		$hdl = $this->dbms->query($q);
 	}
 
@@ -488,13 +517,7 @@ class TreeviewData {
 	public function remove_media_from_fdata($id, $eccident, $crc32) {
 		if (!$id) return false;
 		
-		$q = '
-			DELETE FROM
-			fdata
-			WHERE
-			id = '.(int)$id.'
-		';
-		#print $q."\n";
+		$q = 'DELETE FROM fdata WHERE id = '.(int)$id;
 		$hdl = $this->dbms->query($q);
 		
 		$duplicates = $this->get_duplicates($eccident, $crc32);
@@ -510,17 +533,16 @@ class TreeviewData {
 		return true;
 	}
 	
+	public function removeSingleMetaData($mdataId){
+		$q = 'DELETE FROM mdata WHERE id = '.(int)$mdataId;
+		$hdl = $this->dbms->query($q);
+		$q = "DELETE FROM mdata_language WHERE mdata_id = ".(int)$mdataId;
+		$hdl = $this->dbms->query($q);
+	}
+	
+	
 	public function get_duplicates($eccident, $crc32) {
-		$q = "
-			SELECT
-			*
-			FROM
-			fdata
-			WHERE
-			eccident='".sqlite_escape_string($eccident)."' AND
-			crc32='".sqlite_escape_string($crc32)."'
-		";
-		#print $q."\n";
+		$q = "SELECT * FROM fdata WHERE eccident='".sqlite_escape_string($eccident)."' AND crc32='".sqlite_escape_string($crc32)."'";
 		$hdl = $this->dbms->query($q);
 		$out = array();
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
@@ -530,27 +552,12 @@ class TreeviewData {
 	}
 	
 	public function update_duplicate($id) {
-		$q = "
-			UPDATE
-			fdata
-			SET
-			duplicate = NULL
-			WHERE
-			id = ".$id."
-		";
-		#print $q."\n";
+		$q = "UPDATE fdata SET duplicate = NULL WHERE id = ".$id."";
 		$hdl = $this->dbms->query($q);
 	}
 	
 	public function remove_media_duplicates($eccident, $crc32) {
-		$q = "
-			DELETE FROM
-			fdata
-			WHERE
-			eccident='".sqlite_escape_string($eccident)."' AND
-			crc32='".sqlite_escape_string($crc32)."'
-		";
-		#print $q."\n";
+		$q = "DELETE FROM fdata WHERE eccident='".sqlite_escape_string($eccident)."' AND crc32='".sqlite_escape_string($crc32)."'";
 		$hdl = $this->dbms->query($q);
 	}
 	
@@ -834,35 +841,6 @@ class TreeviewData {
 		return $ret;
 	}
 		
-	public function find_duplicate_by_id($id) {
-		if (!$id) return false;
-		$q="
-			select
-			md.id as md_id,
-			md.name as md_name,
-			md.crc32 as md_crc32
-			from
-			mdata_duplicate AS mdd left join mdata AS md on mdd.mdata_id_duplicate=md.id
-			where
-			mdd.mdata_id in (select mdata_id from mdata_duplicate where mdata_id_duplicate=".(int)$id.")
-			group by mdd.mdata_id_duplicate
-		";
-		#print $q."\n";
-		$hdl = $this->dbms->query($q);
-		$ret = array();
-		while($res = $hdl->fetch(SQLITE_ASSOC)) {
-			$ret[] = $res;
-		}
-		if (false && count($ret)) {
-			#print "<pre>";
-			#print_r($ret);
-			#print "</pre>\n";
-		}
-	}
-	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function vacuum_database() {
 		$q = "VACUUM";
 		$hdl = $this->dbms->query($q);
@@ -967,6 +945,78 @@ class TreeviewData {
 		
 	}
 
+	public function getReparsePathsByEccident($eccident){
+		
+		$osManager = FACTORY::get('manager/Os');
+
+		$ret = array();
+		$eccUserPath = FACTORY::get('manager/IniFile')->getUserFolder($eccident, 'roms');
+		$ret[realpath($eccUserPath)] = $osManager->eccSetRelativeDir($eccUserPath);
+		
+		$q = 'SELECT * FROM fdata_reparse WHERE eccident = "'.sqlite_escape_string($eccident).'"';
+		$hdl = $this->dbms->query($q);
+		while($res = $hdl->fetch(SQLITE_ASSOC)) {
+			# all fine, parse roms
+			if (is_dir($res['path'])) $ret[realpath($res['path'])] = $res['path'];
+			else {
+				# clean up database, if path is not available
+				$remPath = $osManager->eccSetRelativeFile($res['path']);
+				$q = 'DELETE FROM fdata_reparse WHERE path = "'.sqlite_escape_string($remPath).'"';
+				$this->dbms->query($q);
+			}
+		}
+		return $ret;
+	}
+	
+	public function getReparsePathsAll(){
+		$q = 'SELECT * FROM fdata_reparse';
+		$hdl = $this->dbms->query($q);
+		while($res = $hdl->fetch(SQLITE_ASSOC)) {
+			# all fine, parse roms
+			if (is_dir($res['path'])) $ret[$res['eccident']][] = $res['path'];
+			else {
+				# clean up database, if path is not available
+				$remPath = FACTORY::get('manager/Os')->eccSetRelativeFile($res['path']);
+				$q = 'DELETE FROM fdata_reparse WHERE path = "'.sqlite_escape_string($remPath).'"';
+				$this->dbms->query($q);
+			}
+		}
+		return $ret;
+	}
+	
+	public function getMameDriver($searchActive = false, $reset = false){
+		
+		if (!$searchActive && !$reset) {
+			
+			$this->foundMameDriver = array();
+			
+			$q = "
+			SELECT
+			count(*) AS theCnt, fa.mameDriver
+			FROM
+			fdata AS fd left join fdata_audit AS fa ON fd.id=fa.fDataId
+			WHERE
+			fd.eccident='mame'
+			AND fa.isMatch
+			/*AND (fa.isValidSplitSet = 1 OR fa.isValidNonMergedSet = 1 OR fa.isValidMergedSet)*/
+			GROUP BY fa.mameDriver
+			";
+			#print $q;
+			$hdl = $this->dbms->query($q);
+			while($res = $hdl->fetch(SQLITE_ASSOC)) {
+				$this->foundMameDriver[trim($res['fa.mameDriver'])] = (int)$res['theCnt'];
+			}
+		}
+
+		ksort($this->foundMameDriver);
+		return $this->foundMameDriver;
+	}
+	public function setSearchMameDriver($mameDriver = false){
+		$this->searchMameDriver = $mameDriver;
+	}
+	public function getSearchMameDriver(){
+		return $this->searchMameDriver;
+	}
 }
 
 ?>

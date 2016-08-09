@@ -1,8 +1,8 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (français)
+ * language:	fr (franÃ§ais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/09 
  * ------------------------------------------
@@ -16,34 +16,34 @@ $i18n['menu'] = array(
 	'lbl_roms_add%s' =>
 		"Ajouter des ROMS",
 	'lbl_roms_optimize%s' =>
-		"Nettoyer la base de données des ROMS",
+		"Nettoyer la base de donnÃ©es des ROMS",
 	'lbl_roms_remove%s' =>
 		"Supprimer les ROMS de la liste",
 	'lbl_roms_remove_dup%s' =>
-		"Supprimer les ROMS en double de la base de données",
+		"Supprimer les ROMS en double de la base de donnÃ©es",
 	'lbl_emu_config' =>
-		"Editer/Assigner un émulateur",
+		"Editer/Assigner un Ã©mulateur",
 	'lbl_ecc_config' =>
 		"Configuration",
 	'lbl_dat_import_ecc' =>
-		"Importer un fichier de données emuControlCenter",
+		"Importer un fichier de donnÃ©es emuControlCenter",
 	'lbl_dat_import_rc' =>
-		"Importer un fichier de données Romcenter",
+		"Importer un fichier de donnÃ©es Romcenter",
 	'lbl_dat_export_ecc_full' =>
-		"Exporter un fichier de données ecc complet",
+		"Exporter un fichier de donnÃ©es ecc complet",
 	'lbl_dat_export_ecc_user' =>
-		"Exporter un fichier de données ecc-user",
+		"Exporter un fichier de donnÃ©es ecc-user",
 	'lbl_dat_export_ecc_esearch' =>
-		"Exporter un fichier de données ecc eSearch",
+		"Exporter un fichier de donnÃ©es ecc eSearch",
 	'lbl_dat_empty' =>
-		"Vider le fichier de données",
+		"Vider le fichier de donnÃ©es",
 	'lbl_help' =>
 		"Aide",
 	// -------------------------------------------------------------
 	// context menu main
 	// -------------------------------------------------------------
 	'lbl_start' =>
-		"Démarrer la ROM",
+		"DÃ©marrer la ROM",
 	'lbl_fav_remove' =>
 		"Supprimer ce favori",
 	'lbl_fav_all_remove' =>
@@ -55,45 +55,45 @@ $i18n['menu'] = array(
 	'lbl_img_reload' =>
 		"Recharger les images",
 	'lbl_rom_remove' =>
-		"Supprimer de la liste globale des ROMS",
+		"Supprimer de la liste des ROMS",
 	'lbl_meta_edit' =>
 		"Editer",
 	'lbl_roms_initial_add%s%s' =>
-		"Aucune ROM trouvée pour la plateforme\n----------------------------------------\n%s (%s)\n----------------------------------------\nCliquer ici pour ajouter des ROMS !",
+		"Aucune ROM trouvÃ©e pour la plateforme\n----------------------------------------\n%s (%s)\n----------------------------------------\nCliquer ici pour ajouter des ROMS !",
 	'lbl_meta_webservice_meta_get' =>
-		"Obtenir des données de eccdb (Internet)",
+		"Obtenir des donnÃ©es de eccdb (Internet)",
 	'lbl_meta_webservice_meta_set' =>
-		"Ajouter vos données dans eccdb (Internet)",
+		"Ajouter vos donnÃ©es dans eccdb (Internet)",
 	// File operations
 	'lbl_shellop_submenu' =>
 		"Operations sur le disque dur",
 	'lbl_shellop_browse_dir' =>
-		"Ouvrir le dossier contenant les ROMS",
+		"Ouvrir le dossier contenant cette ROM",
 	'lbl_shellop_file_rename' =>
 		"Renommer ce fichier sur le disque dur",
 	'lbl_shellop_file_copy' =>
 		"Copier ce fichier sur le disque dur",
 	'lbl_shellop_file_unpack' =>
-		"Décompresser ce fichier",
+		"DÃ©compresser ce fichier",
 	'lbl_shellop_file_remove' =>
 		"Supprimer ce fichier du disque dur",
 	// Rating
 	'lbl_rating_submenu' =>
 		"Noter la ROM",
 	'lbl_import_submenu' =>
-		"Importer un fichier de données",
+		"Importer des donnÃ©es",
 	'lbl_export_submenu' =>
-		"Exporter un fichier de données",
+		"Exporter des donnÃ©es",
 	'lbl_rom_rescan_folder' =>
-		"(Re)scanner le dossier des ROMS",
+		"(Re)scanner le dossier de cette ROM",
 	'lbl_meta_remove' =>
-		"Supprimer les données",
+		"Supprimer les donnÃ©es",
 	'lbl_rating_unset' =>
 		"Supprimer les votes",
 	
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
-		"Trouver les ROMS en double",
+		"Chercher les ROMS en double",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
 		"ROMS en double",
@@ -103,21 +103,49 @@ $i18n['menu'] = array(
 		"Supprimer les images de la ROM",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"Comparaison - Sélection initiale",		
+		"Comparaison - SÃ©lection initiale",		
 	'lbl_meta_compare_right%s' =>
 		"Comparer avec \"%s\"",	
 
 	/* 0.9.2 FYEO 2*/
 	'lbl_start_with' =>
-		"Démarrer la ROM avec",
+		"DÃ©marrer la ROM avec",
 	'lbl_emu_config' =>
-		"Configurer un émulateur",
+		"Configurer un Ã©mulateur",
 	'lbl_quickfilter' =>
 		"Filtre rapide",
 	'lbl_quickfilter_reset' =>
 		"Supprimer le filtre rapide",
 
-	
+	/* 0.9.6 FYEO 1 */
+	'lbl_dat_import_ecc_romdb' =>
+		"Importation de donnÃ©es en ligne",
 
+	/* 0.9.6 FYEO 8 */
+	'lContextRomSelectionAddNewRoms%s' =>
+		"Ajouter de nouvelles ROMS de %s",
+	'lContextRomSelectionRemoveRoms%s' =>
+		"Supprimer les ROMS de la liste de %s",
+	'lContextMetaRemove' =>
+		"Supprimer les donnÃ©es de la ROM",
+
+	/* 0.9.6 FYEO 11 */
+	'lbl_importDatCtrlMAME' =>
+		"Importer un fichier de donnÃ©es CtrlMAME",
+
+	/* 0.9.6 FYEO 13 */
+	'labelRomAuditInfo' =>
+		"Montrer les infos de l'audit de la ROM",
+	'labelRomAuditReparse' =>
+		"Actualiser les infos de l'audit de la ROM",
+	'lbl_roms_rescan_all' =>
+		"(Re)scanner le dossier de chaque ROM",
+	'lbl_roms_add' =>
+		"Ajouter des ROMS",
+		
+	/* 0.9.6 FYEO 11 */
+	'lbl_open_eccuser_folder%s' =>
+		"Open eccUser-Folder (%s)",
+		
 );
 ?>

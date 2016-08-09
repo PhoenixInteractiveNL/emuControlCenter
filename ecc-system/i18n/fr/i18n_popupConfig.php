@@ -1,8 +1,8 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (français)
+ * language:	fr (franÃƒÂ§ais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/12/31 
  * ------------------------------------------
@@ -16,36 +16,34 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_hdl' =>
 		"Configuration d'emuControlCenter",
 	'lbl_ecc_userfolder' =>
-		"Chemin du dossier User (pour images et exports)",
+		"Chemin du dossier utilisateur (dossier User pour images et exports)",
 	'lbl_ecc_userfolder_button' =>
-		"Parcourir",
+		" Parcourir ",
 	'title_ecc_userfolder_popup' =>
-		"Sélectionner le nouveau dossier User",
+		"SÃ©lectionner le nouveau dossier User",
 	/* ECC-OPTIONS */
 	'lbl_ecc_otp_hdl' =>
 		"Options",
 	'lbl_ecc_opt_detail_pp' =>
-		"Eléments par page (images)",
+		"Nombre d'images par page",
 	'lbl_ecc_opt_list_pp' =>
 		"Taille des images",
-	'lbl_ecc_opt_language' =>
-		"Langue",
 	/* ECC-COLOR&FONTS */
 	'lbl_ecc_colfont_hdl' =>
 		"Couleurs et polices",
 	'lbl_ecc_colfont_font_list' =>
 		"Taille et police des listes",
 	'title_ecc_colfont_font_list_popup' =>
-		"Sélectionner une police pour les listes",
+		"SÃ©lectionner une police pour les listes",
 	'lbl_ecc_colfont_font_global' =>
-		"Taille et police générales",
+		"Taille et police gÃ©nÃ©rales",
 	'title_ecc_colfont_font_global' =>
-		"Sélectionner une police globale",
+		"SÃ©lectionner une police globale",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
-		"Démarrage",
+		"DÃ©marrage",
 	'btn_ecc_startup' =>
-		"Changer la configuration de démarrage",
+		"Changer la configuration de dÃ©marrage",
 	
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
@@ -53,16 +51,16 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_platform_name' =>
 		"Nom de la plateforme",
 	'lbl_emu_platform_category' =>
-		"Categorie de la plateforme",
+		"CatÃ©gorie de la plateforme",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
-		"Assignement d'émulateur (%s)",
+		"Assignement d'Ã©mulateur (%s)",
 	'lbl_emu_assign_path' =>
-		"Chemin de l'émulateur",
+		"Chemin de l'Ã©mulateur",
 	'btn_emu_assign_path_select' =>
-		"Sélectionner l'émulateur",
+		"SÃ©lectionner l'Ã©mulateur",
 	'title_emu_assign_path_select_popup%s' =>
-		"Sélectionner l'émulateur pour %s",
+		"SÃ©lectionner l'Ã©mulateur pour %s",
 	'lbl_emu_assign_parameter' =>
 		"Ligne de commande",
 	'lbl_emu_assign_escape' =>
@@ -76,7 +74,7 @@ $i18n['popupConfig'] = array(
 	
 	/* DAT */
 	'lbl_dat_hdl' =>
-		"Configurer le fichier de données",
+		"Configurer le fichier de donnÃ©es",
 	'lbl_dat_author' =>
 		"Auteur",
 	'lbl_dat_website' =>
@@ -89,22 +87,22 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"Options",
 	'lbl_dat_opt_namestrip' =>
-		"Effacer les fichiers de données romcenter",
+		"Effacer les fichiers de donnÃ©es romcenter",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
-		"Options - Détails de la ROM",
+		"Options - DÃ©tails de la ROM",
 	'lbl_img_otp_list_imagesize' =>
 		"Taille de l'image",
 	'lbl_img_otp_list_aspectratio' =>
 		"Aspect ratio",
 	/* 0.9 FYEO 4 */
 	'lbl_img_otp_list_fastrefresh' =>
-		"Rafraîchissement rapide",
+		"RafraÃ®chissement rapide",
 		
 	/* 0.9 FYEO 9 */
 	'confEccStatusLogCheck' =>
-		"Enregistrer l'historique des tâches",
+		"Enregistrer l'historique des tÃ¢ches",
 	'confEccStatusLogOpen' =>
 		"Montrer l'historique",
 		
@@ -112,9 +110,9 @@ $i18n['popupConfig'] = array(
 	'tab_label_emulators' =>
 		"Emulateurs",
 	'tab_label_general' =>
-		"Général",
+		"GÃ©nÃ©ral",
 	'tab_label_datfiles' =>
-		"Fichiers de données",
+		"Fichiers de donnÃ©es",
 	'tab_label_images' =>
 		"Images",
 	'tab_label_colorsandfonts' =>
@@ -122,17 +120,17 @@ $i18n['popupConfig'] = array(
 	
 	/* 0.9.2 FYEO 1 */
 	'lbl_emu_tips' =>
-		"Liens vers émulateurs connus et infos",
+		"Liens vers Ã©mulateurs connus et infos",
 	'lbl_img_opt_conv' =>
 		"Conversion d'images en miniatures",
 	'lbl_img_opt_conv_quality' =>
-		"Qualité du fichier Thumb",
+		"QualitÃ© du fichier Thumb",
 	'lbl_img_opt_conv_quality_def%s' =>
-		"(Défaut: %s)",
+		"(DÃ©faut: %s)",
 	'lbl_img_opt_conv_minsize' =>
 		"Taille minimale de l'originale",
 	'lbl_img_opt_conv_minsize_def%s' =>
-		"(Défaut: %s)",
+		"(DÃ©faut: %s)",
 	'lbl_col_opt_global' =>
 		"Global",
 	'lbl_col_opt_list' =>
@@ -148,7 +146,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_edit_eccscript' =>
 		"Editer l'eccScript",	
 	'lbl_emu_assign_edit_eccscript_error' =>
-		"Vous pouvez ajouter des scripts, si vous avez ajouté des émulateurs !",
+		"Vous pouvez ajouter des scripts, si vous avez ajoutÃ© des Ã©mulateurs !",
 
 	/* 0.9.2 FYEO 6 */
 	'lbl_emu_assign_eccscript_hdl' =>
@@ -160,54 +158,129 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.2 FYEO 8 */
 	'tab_label_startup' =>
-		"Démarrage",
+		"DÃ©marrage",
 	'startConfHdl' =>
-		"Configuration de démarrage d'ecc",
+		"Configuration du dÃ©marrage d'ecc",
 	'startConfSoundHdl' =>
 		"Jouer un son",
 	'startConfOptHdl' =>
 		"Options",
 	'startConfUpdate' =>
-		"Chercher des mises à jour au démarrage.",
+		"Chercher des mises Ã  jour au dÃ©marrage.",
 	'startConfMinimize' =>
-		"Réduire dans la barre des tâches",
+		"RÃ©duire dans la barre des tÃ¢ches",
 	'startConfSoundSelect' =>
-		"Sélectionner un son",
+		"SÃ©lectionner un son",
 
 	/* 0.9.2 FYEO 9 */
 	'lbl_preview_impossible' =>
-		"Aperçu non possible. Configuration manquante ou inexacte !",
+		"AperÃ§u non possible. Configuration manquante ou inexacte !",
 
 	/* 0.9.2 FYEO 10 */
 	'lbl_emu_assign_edit_eccscript_error_notfound' =>
-		"Impossible de trouver un émulateur ! SVP d'abord choisir un émulateur !",
+		"Impossible de trouver un Ã©mulateur ! SVP d'abord choisir un Ã©mulateur !",
 	'lbl_emu_assign_create_eccscript' =>
-		"Créer un eccScript",
+		"CrÃ©er un eccScript",
 	'emu_info_nodata' =>
 		"Aucune information disponible pour le moment...",
-	'emu_info_footer' =>
-		"Peut-être connaissez-vous un bon émulateur pour cette plate-forme !\nVous pouvez ajouter vos infos dans le Forum à l'adresse\nhttp://ecc.phoenixinteractive.mine.nu/",
+	'emu_info_footer%s' =>
+		"Peut-Ãªtre connaissez-vous un bon Ã©mulateur pour cette plate-forme!\nVous pouvez ajouter vos infos dans le Forum Ã  l'adresse\n%s",
 	
 	/* 0.9.2 FYEO 10 */
 	'title_startup_select_sound' =>
-		"Sélectionner un son pour le démarrage",
+		"SÃ©lectionner un son pour le dÃ©marrage",
 
 
 	/* 0.9.2 FYEO 14 */
 	'title_emu_assign_found_eccscript' =>
-		"eccScript trouvé",
+		"eccScript trouvÃ©",
 	'title_emu_assign_found_eccscript' =>
-		"Un eccScript a été trouvé pour l'émulateur sélectionné !\n\nActiver ce eccScript %s",
+		"Un eccScript a Ã©tÃ© trouvÃ© pour l'Ã©mulateur sÃ©lectionnÃ© !\n\nActiver ce eccScript %s",
 	'title_popup_save' =>
-		"Redémarrage d'ecc",
+		"\nREDEMARRAGE D'ECC\n",
 	'msg_popup_save' =>
-		"Redémarrer emuControlCenter pour voir les changements ?",
+		"RedÃ©marrer emuControlCenter pour voir les changements ?\n",
 
 	/* 0.9.2 FYEO 15 */
 	'title_emu_found_eccscript_preview' =>
-		"Informations:",
+		"Informations :",
 	'title_emu_found_eccscript_nopreview' =>
 		"Auncune informations disponible !",
 
+	/* 0.9.6 FYEO 05 */
+	'lbl_emu_assign_executeinemufolder' =>
+		"DÃ©marrer Ã  partir du dossier Ã©mulateur source",
+	'lbl_preview_selectEmuFirst' =>
+		"Vous n'avez pas sÃ©lectionnÃ© d'Ã©mulateur ! Pour ce faire, utilisez le bouton plus haut !",
+
+	/* 0.9.6 FYEO 13 */
+	'winTitleConfiguration' =>
+		"Configuration",
+
+	'colOptGlobalFont' =>
+		"Police",
+
+	'colOptListBg0' =>
+		"Fond principal",
+	'colOptListBg1' =>
+		"Fond ROM 1",
+	'colOptListBg2' =>
+		"Fond ROM 2",
+	'colOptListBgHilight' =>
+		"Fond SÃ©lection   ",
+	'colOptListBgImage' =>
+		"Fond Image",
+	'colOptListText' =>
+		"Texte",
+	'colOptListTextHilight' =>
+		"Texte SÃ©lection",
+	'colOptListFont' =>
+		"Police",
+
+	'colOptOptionsBg1' =>
+		"Fond 1",
+	'colOptOptionsBgHilight' =>
+		"Fond SÃ©lection",
+	'colOptOptionsText' =>
+		"Texte",
+
+	/* 0.9.6 FYEO 17 */
+	'colImgSlotUnsetBg' =>
+		"Fond inutilisÃ©",
+	'colImgSlotSetSelect' =>
+		"Fond sÃ©lection inutilisÃ©e",
+	'colImgSlotSetBg' =>
+		"Fond utilisÃ©",
+	'colImgSlotUnsetSelect' =>
+		"Fond sÃ©lection utilisÃ©e",
+	'colImgSlotText' =>
+		"Texte",
+
+	'colOptOptionsBg2' =>
+		"Fond 2",
+
+	'tabEmuConfig' =>
+		"Emulateur",
+	'tabEmuPlatformSettings' =>
+		"Plateforme",
+	'tab_label_platforms' =>
+		"Plateformes / Emulateurs",
+	
+	/* 0.9.6 WIP 18 */
+	'confEccSaveViewSettings' =>
+		"Save View-Mode settings (only experts)",
+	
+	/* 0.9.6 WIP 19 */
+	'tabEmuInfos' =>
+		"Links & Infos",
+		
+	/* 0.9.6 WIP 20 */
+	'startConfBugreportSend' =>
+		"Send automatic bugreport at startup",
+	'lbl_ecc_opt_language' =>
+		"Language settings",
+	'tab_label_language' =>
+		"Language",
+		
 );
 ?>

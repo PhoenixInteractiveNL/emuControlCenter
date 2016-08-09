@@ -18,6 +18,8 @@ class GuiDataCombiner extends GladeXml {
 	private function prepareGui() {
 		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiDataCombiner.glade');
 		$this->signal_autoconnect_instance($this);
+		
+		$this->dataCombiner->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->dataCombiner->set_modal(true);
 		$this->dataCombiner->set_keep_above(true);
 		
@@ -276,7 +278,8 @@ class CompareItem{
 		$this->data['eccident'][$side] = ($data['fd.eccident']) ? $data['fd.eccident'] : $data['md.eccident'];
 		
 		$this->data['name'][$side] = ($data['md.name']) ? $data['md.name'] : $data['fd.title'];
-		$platformName = FACTORY::get('manager/IniFile')->getPlatformNavigation($this->data['eccident'][$side]);
+		# rem
+		$platformName = FACTORY::get('manager/IniFile')->getPlatformName($this->data['eccident'][$side]);
 		$this->data['platform'][$side] = trim($platformName);		
 		
 		$filename = ($data['fd.path_pack']) ? $data['fd.path_pack'] : $data['fd.path'];

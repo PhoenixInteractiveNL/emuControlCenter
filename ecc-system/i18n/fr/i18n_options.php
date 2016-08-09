@@ -1,8 +1,8 @@
-<?
+ï»¿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (français)
+ * language:	fr (franÃƒÂ§ais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/09/30 
  * ------------------------------------------
@@ -21,7 +21,7 @@ $i18n['dropdown_lang'] = array(
 	'[[german]]' =>
 		"Allemand",
 	'[[french]]' =>
-		"Français",
+		"FranÃ§ais",
 	'[[italian]]' =>
 		"Italien",
 	'[[spanish]]' =>
@@ -29,7 +29,7 @@ $i18n['dropdown_lang'] = array(
 	'[[chinese]]' =>
 		"Chinois",
 	'[[korean]]' =>
-		"Coréen",
+		"CorÃ©en",
 	'[[portugese]]' =>
 		"Portugais",
 	'[[polish]]' =>
@@ -37,25 +37,38 @@ $i18n['dropdown_lang'] = array(
 	'[[danish]]' =>
 		"Danois",
 	'[[dutch]]' =>
-		"Néerlandais",
+		"NÃ©erlandais",
 	'[[norway]]' =>
-		"Norvégien",
+		"NorvÃ©gien",
 	'[[swedish]]' =>
 		"Suisse",
 	'[[finnish]]' =>
 		"Finlandais",
 );
+
+/*
+ * PLEASE ONLY CHANGE YOUR OWN LANGUAGE TO YOUR LANGUAGE :-)
+ */
 $i18n['languages'] = array(
 
 	'[[en]]' =>
-		"Anglais",
+		"English",
 	'[[de]]' =>
-		"Allemand",
+		"Deutsch",
 	'[[fr]]' =>
-		"Français",
+		"FranÃ§ais",
 	'[[it]]' =>
-		"Italien",
+		"Italiano",
 	'[[es]]' =>
-		"Espagnol",
+		"EspaÃ±ol",
+
+	/* 0.9.6 WIP 3 */
+	'[[jp]]' =>
+		"Japanese",
+
+	/* 0.9.6 WIP 13 */
+	'[[nl]]' =>
+		"Nederlands",
+
 );
 ?>

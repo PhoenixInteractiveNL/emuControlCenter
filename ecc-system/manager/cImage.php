@@ -11,7 +11,7 @@ class Image {
 	protected $supportedExtensions;
 	protected $eccImageTypes;
 	
-	private $errors;
+	private $errors = NULL;
 	
 	public $cachedRomImages = array();
 	
@@ -28,6 +28,10 @@ class Image {
 		if ($originalMinSize) $this->imageThumbSourceMinSizeKb = $originalMinSize;
 		$imageThumbQuality = $this->iniManager->getKey('USER_SWITCHES', 'image_thumb_quality');
 		if ($imageThumbQuality) $this->imageThumbQuality = $imageThumbQuality;
+		
+		$valid = FACTORY::get('manager/Validator');
+		$this->supportedExtensions = $valid->getEccCoreKey('supported_images');
+		$this->eccImageTypes = $valid->getEccCoreKey('image_type');
 	}
 	
 	public function getCachedImages($eccident, $crc32) {
@@ -59,16 +63,12 @@ class Image {
 		$this->matchImageType = $state;
 	}
 	
-	public function setSupportedExtensions($supportedExtensions){
-		$this->supportedExtensions = $supportedExtensions;
-	}
-	
 	public function setThumbQuality($imageThumbQuality){
 		$this->imageThumbQuality = $imageThumbQuality;
 	}
 	
-	public function setEccImageTypes($eccImageTypes){
-		$this->eccImageTypes = $eccImageTypes;
+	public function getEccImageTypes(){
+		return $this->eccImageTypes;
 	}
 	
 	public function getImageByType($eccident, $crc32, $imageType, $useThumb=true){
@@ -119,13 +119,13 @@ class Image {
 		
 		# get image destination file path
 		$fileExtension = $this->fileIoManager->get_ext_form_file(basename($sourceImagePath));
-		
+
 		# test if extension is supported!
 		if (!isset($this->supportedExtensions[strtolower($fileExtension)])) {
 			$this->setError('image', 'type_not_supported');
 			return false;
 		}
-
+		
 		# is the destination typ allowed?
 		if (!isset($this->eccImageTypes[strtolower($destImageType)])) return false;
 		
@@ -163,7 +163,7 @@ class Image {
 	
 	public function removeUserImageFolder($eccident, $crc32) {
 		$imageFolder = $this->getUserImageCrc32Folder($eccident, $crc32);
-		if (is_dir($imageFolder)) FACTORY::get('manager/FileIO')->rmdirr($imageFolder);
+		if (is_dir($imageFolder)) FACTORY::get('manager/FileIO')->rmDirComplete($imageFolder);
 	}
 	
 	public function searchAndRemoveOldImages($eccident, $crc32, $imageType) {
@@ -176,7 +176,9 @@ class Image {
 	 * old system to get userimage path
 	 */
 	public function getUserImageFolder($eccident, $createOnDemand = false){
-		return realpath($this->iniManager->getUserFolder($this->getUserImageFolderSubdir($eccident), $createOnDemand));
+		
+		# 20070810 refactoring userfolder
+		return realpath($this->iniManager->getUserFolder(false, $this->getUserImageFolderSubdir($eccident), $createOnDemand));
 	}
 	
 	/**
@@ -187,7 +189,7 @@ class Image {
 	}
 	
 	public function getUserImageFolderSubdir($eccident){
-		return $eccident.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR;
+		return $this->iniManager->getPlatformFolderName($eccident).DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR;
 	}
 	
 	/**
@@ -195,13 +197,16 @@ class Image {
 	 */
 	public function getUserImageCrc32Folder($eccident, $crc32, $createOnDemand = false){
 		if (!$eccident || !$crc32) return false;
-		$imageDestFolder = $this->iniManager->getUserFolder($eccident.'/images/'.substr($crc32, 0, 2).'/'.$crc32, $createOnDemand);
+		
+		# 20070810 refactoring userfolder
+		$imageDestFolder = $this->iniManager->getUserFolder($eccident, '/images/'.substr($crc32, 0, 2).'/'.$crc32, $createOnDemand);
+		
 		return $imageDestFolder;
 	}
 	
 	public function isEmptyUserImageCrc32Folder($eccident, $crc32){
 		$imageFolder = $this->getUserImageCrc32Folder($eccident, $crc32);
-		print "$imageFolder".LF;
+		if (!$imageFolder) return true;
 		return FACTORY::get('manager/FileIO')->dirIsEmpty($imageFolder);
 	}
 	
@@ -224,7 +229,7 @@ class Image {
 	
 	public function getImageThumbFile($destImagePath, $createDir = false){
 		$destThumbPath = dirname($destImagePath).'/'.$this->imageThumbSubfolder;
-		if ($createDir && !is_dir($destThumbPath)) mkdir($destThumbPath, 0777);
+		if ($createDir && !is_dir($destThumbPath)) mkdir($destThumbPath);
 		return $this->fileIoManager->replaceFileExtension($destThumbPath.basename($destImagePath), $this->imageThumbType);
 	}
 	
@@ -286,18 +291,16 @@ class Image {
 	}
 	
 	
-	public function searchForRomImages($source = 'SAVED', $eccident, $crc32, $filePath = false, $fileExtension = false, $searchNames = false, $imageType = false, $onlyFirstFound = true) {
+	public function searchForRomImages($source = 'SAVED', $eccident, $crc32, $filePath = false, $fileExtension = false, $searchNames = false, $imageType = false, $onlyFirstFound = true, $cacheImages = true) {
 		if (!in_array($source, array('SAVED', 'UNSAVED'))) return false;
-		if ($source == 'SAVED') return $this->searchForSavedRomImagesExtended($eccident, $crc32, $imageType, $onlyFirstFound);
+		if ($source == 'SAVED') return $this->searchForSavedRomImagesExtended($eccident, $crc32, $imageType, $onlyFirstFound, false, $cacheImages);
 		#else return $this->searchForUnavedRomImages($eccident, $crc32, $filePath, $fileExtension, $searchNames, $onlyFirstFound);
 	}
 	
 	/***
 	 * @todo remove UNK! :-)
 	 */
-	public function searchForSavedRomImagesExtended($eccident, $crc32, $imageType = false, $onlyFirstFound = true, $searchForThumb = false){
-		
-		$cacheImages = true;
+	public function searchForSavedRomImagesExtended($eccident, $crc32, $imageType = false, $onlyFirstFound = true, $searchForThumb = false, $cacheImages = true){
 		
 		$imageDestFolder = $this->getUserImageCrc32Folder($eccident, $crc32, false);
 		if (!$imageDestFolder || !is_dir($imageDestFolder)) return array();
@@ -425,7 +428,8 @@ class Image {
 			if ($eccident == 'NULL') continue;
 			
 			if ($convert && $statusObject) {
-				$platformName = $this->iniManager->getPlatformNavigation($eccident);
+				# rem
+				$platformName = $this->iniManager->getPlatformName($eccident);
 				if (is_array($platformName)) $platformName = '';
 				$message = "Converting images for $platformName ($eccident)".chr(13);
 				$statusObject->update_message($message);
@@ -433,6 +437,35 @@ class Image {
 			$data[$eccident] = $this->convertOldEccImages($eccident, $convert, $statusObject);
 		}
 		return $data;
+	}
+	
+	public function correctImageCrc32($eccident, $arrayOfImages){
+		if (!is_array($arrayOfImages) || !count($arrayOfImages)) return false;
+		foreach($arrayOfImages as $sourceCrc32 => $destCrc32){
+			
+			# folder available?
+			$sourceFolder = $this->getUserImageCrc32Folder($eccident, $sourceCrc32);
+			if (!$sourceFolder) continue;
+			
+			if ($this->isEmptyUserImageCrc32Folder($eccident, $sourceCrc32)) {
+				$this->removeUserImageFolder($eccident, $sourceCrc32);
+				continue;
+			}
+			
+			#$destIsEmpty = $this->isEmptyUserImageCrc32Folder($eccident, $destCrc32);
+			
+			$dHdl = opendir($sourceFolder);
+			while(false !== $file = readdir($dHdl)) {
+
+				$filename = $sourceFolder.DIRECTORY_SEPARATOR.$file;
+				if (is_dir($filename) || in_array($filename, array('.', '..'))) continue;
+				$imageType = $this->exctractPossibleEccImageType($filename);
+				
+				# now move the old ones
+				$this->storeUserImage('MOVE', $eccident, $destCrc32, $filename, $imageType, true);
+			}
+		}
+		return true;		
 	}
 	
 	/**
@@ -445,7 +478,7 @@ class Image {
 	}
 	
 	public function hasErrors(){
-		if (count($this->errors)) return true;
+		if (isset($this->errors)) return true;
 	}
 	
 	public function getErrorByKey($key){
@@ -457,7 +490,7 @@ class Image {
 	}
 	
 	public function resetErrors(){
-		$this->errors = array();
+		$this->errors = NULL;
 	}
 }
 ?>

@@ -115,9 +115,38 @@ $i18n['menu'] = array(
 	'lbl_quickfilter' =>
 		"quickFilter",
 	'lbl_quickfilter_reset' =>
+
 		"quickFilter entfernen",
 
-	
+	/* 0.9.6 FYEO 1 */
+	'lbl_dat_import_ecc_romdb' =>
+		"Import romDB Datfile (internet)",
 
+	/* 0.9.6 FYEO 8 */
+	'lContextRomSelectionAddNewRoms%s' =>
+		"Add new %s roms",
+	'lContextRomSelectionRemoveRoms%s' =>
+		"Remove all %s roms",
+	'lContextMetaRemove' =>
+		"Remove ROM metadata",
+
+	/* 0.9.6 FYEO 11 */
+	'lbl_importDatCtrlMAME' =>
+		"Import CtrlMAME datfile",
+
+	/* 0.9.6 FYEO 13 */
+	'labelRomAuditInfo' =>
+		"Show rom audit info",
+	'labelRomAuditReparse' =>
+		"Updated rom audit infos",
+	'lbl_roms_rescan_all' =>
+		"Rescan all rom folders",
+	'lbl_roms_add' =>
+		"Add new roms",
+		
+	/* 0.9.6 FYEO 11 */
+	'lbl_open_eccuser_folder%s' =>
+		"Open eccUser-Folder (%s)",
+		
 );
 ?>

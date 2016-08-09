@@ -1,0 +1,99 @@
+; Platform          : Thomson MO5
+; Script for        : DCMOTO v10.1
+; Script version    : v1.0.0.1
+; Last changed      : 2008.11.19
+;
+;
+; Author :  Phoenix Interactive
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("DCMOTO")
+
+; Set window in top left corner so the mouse coordinates are the same in
+; every resolution
+WinMove("DCMOTO", "", 0, 0)
+
+; Wait some seconds to let the emulator has loaded BASIC
+Sleep(2000)
+
+
+Select
+
+Case $eccFileRomExtension = "k7" ;tape/cassette
+
+   ; Click on 'File'
+   MouseMove(17,41)
+   MouseDown("left")
+   MouseUp("left")
+
+   ; Load TAPE into emulator
+   ;
+   Send("{DOWN}")
+   Send("{ENTER}")
+   Send($eccFileRomPath & $eccFileRomFile)
+   Send("{ENTER}")
+
+   AutoItSetOption("SendKeyDownDelay", 200)
+
+   ; Load Tape
+   ; 
+   Send("LOQD") ;Letter Q = A in DCMOTO
+   Send("{ENTER}")
+
+   ; Give the emulator ssome time to load-in the tape
+   Sleep(3000)
+exit
+   Send("RUN")
+   Send("{ENTER}")
+
+Case $eccFileRomExtension <> "rom" ;catridge
+
+   ; Click on 'File'
+   MouseMove(17,41)
+   MouseDown("left")
+   MouseUp("left")
+
+   ; Load TAPE into emulator
+   ;
+   Send("{DOWN}")
+   Send("{DOWN}")
+   Send("{DOWN}")
+   Send("{DOWN}")
+   Send("{DOWN}")
+   Send("{ENTER}")
+   Send($eccFileRomPath & $eccFileRomFile)
+   Send("{ENTER}")
+
+   AutoItSetOption("SendKeyDownDelay", 200)
+
+   ; Load catridge
+   ; 
+   Send("LOQD") ;Letter Q = A in DCMOTO
+   Send("{ENTER}")
+
+   ; Give the emulator ssome time to load-in the catridge
+   Sleep(3000)
+
+   Send("RUN")
+   Send("{ENTER}")
+
+EndSelect
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

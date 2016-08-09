@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL|E_STRICT);
 
 define('LF', "\n");
 define('DEBUG', true);

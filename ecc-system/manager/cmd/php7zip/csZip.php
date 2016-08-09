@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 
 require_once 'item/sZipListItem.php';
 require_once 'item/sZipInfoItem.php';

@@ -3,7 +3,12 @@ clrmamepro (
 	description "ZiNc v1.1"
 	category "Playstation based arcade games"
 	version 20050731
-	author "Logiqx, http://www.logiqx.com/"
+	date 2005-07-31
+	author Logiqx
+	homepage "Logiqx Home Page"
+	url "http://www.logiqx.com/"
+	comment "Please report any data file issues at http://forum.logiqx.com/"
+	forcepacking zip
 )
 
 game (

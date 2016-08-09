@@ -1,0 +1,890 @@
+;------------------------------------------------------------------------------
+; Xpadder Language File v2007.08
+;
+; If this file is named "English.xpadderlanguage" then
+;  rename this file as "YourLanguage.xpadderlanguage" BEFORE editing
+;
+; Usage: EnglishText=YourText
+;
+; To use the English text leave YourText empty
+;------------------------------------------------------------------------------
+
+[Dialog]
+Yes=是
+No=否
+Ok=确定
+Cancel=取消
+Close=关闭
+Information=信息
+Confirmation=确认
+Warning=警告
+Error=错误
+Do not Save=不保存
+Overwrite=覆盖
+Do not Overwrite=不覆盖
+
+;------------------------------------------------------------------------------
+
+[Menus]
+New=新建
+Open=打开
+Save=保存
+Save As=另存
+Properties=属性
+
+;------------------------------------------------------------------------------
+
+[Files]
+Image=图片
+Images=图片
+Location=位置
+Profile File=配置集
+Controller File=手柄参数
+
+;------------------------------------------------------------------------------
+
+[Directions]
+Up=上
+Down=下
+Left=左
+Right=右
+
+;------------------------------------------------------------------------------
+
+[Controller Parts]
+Stick=小摇杆
+Sticks=小摇杆
+Button=按键
+Buttons=按键
+Trigger=扳机
+Triggers=扳机
+DPad=十字方向键
+DPads=十字方向键
+
+;------------------------------------------------------------------------------
+
+[Axis]
+Axis=轴
+Axes=轴
+Slider=滑杆
+Inverted=反转
+Full=满
+
+;------------------------------------------------------------------------------
+
+[Auto-Assign]
+Auto-Assign=自动分配
+W,S,A,D=
+Arrows=键盘方向键
+Mouse=鼠标
+Normal=正常
+Inverted X=X反转
+Inverted Y=Y反转
+Inverted Y+X=X+Y反转
+NumPad=数字键区
+None=无
+
+;------------------------------------------------------------------------------
+
+[Diagonals]
+Diagonals=对角线
+Allow=允许
+Prioritize Left/Right=左右优先
+Prioritize Up/Down=上下优先
+Ignore=忽略
+
+;------------------------------------------------------------------------------
+
+[Common]
+Settings=设定
+Options=选项
+Start=启动
+Set=按键方案序列
+Status=状态
+Name=名称
+Delete=删除
+Details=详情
+Profile=配置集
+Controller=手柄
+send an email to=发送邮件到
+
+;------------------------------------------------------------------------------
+
+[Other]
+Shutting Down=关机
+
+;------------------------------------------------------------------------------
+
+[Xpadder Settings]
+Start with Windows (auto-minimized)=随Windows启动并最小化
+Minimized (if started by user)=程序运行后自动最小化
+AutoOpen last used profile=使用上次配置集文件
+Scan for XInput (requires restart)=扫描XInput(下次运行生效)
+Running=运行
+Show controller and button animations=手柄和按钮动画效果
+Process non-selected controllers=处理所有手柄(双打时需要)
+Window=窗口
+Minimize when closing main window=关闭按钮最小化程序
+Auto-minimize when profile opened=打开配置集文件后最小化
+Return to Set 1 after minimize/restore=最小化/恢复后选中按键方案序列1
+Remember assignment window position=记住按键设定窗口位置
+Taskbar=任务栏
+Show icon in notification area=在系统托盘区显示图标
+Show taskbar button when minimized=最小化后在任务栏显示
+Values=参数值
+Default DeadZones=默认死区
+Theme=界面配色
+Interface=程序主界面
+Background=背景
+Random=随机值
+Controllers=手柄
+Order=顺序
+Found=找到
+Move Up=上移
+Move Down=下移
+Automatic controller file selection added=已添加自动手柄参数文件选择
+This controller file will automatically open for this controller when it is detected.=下次连接这个手柄时手柄参数文件将自动加载
+Automatic controller file selection updated=已更新自动手柄参数文件选择
+This new controller file will automatically open for this controller when it is detected.=下次连接这个手柄时新建的手柄参数文件将自动加载
+Cannot delete a controller link that is in use=无法删除正在使用的手柄连接
+This controller link is being used by one or more controllers.=该手柄连接正被一个或多个手柄使用
+Controller details=手柄详情
+Recent Profile=最近配置集
+
+;------------------------------------------------------------------------------
+
+[Controller Properties]
+Controller Properties=手柄属性
+ID=
+Force Feedback=力反馈
+Rumble via XInput=通过XInput震动
+Yes - using ID=是的使用ID
+Unknown. Press a button, trigger or DPad direction=未知。请按任意键、扳机或方向键
+XInput scanning was disabled in the Xpadder settings window=XInput扫描已被Xpadder设置禁用
+XInput not found. Click the Help button for more information=XInput未找到。点击帮助按钮查看详情
+XInput is not supported in this version of Windows=本版Windows不支持XInput
+XInput Compatible=XInput兼容
+Control Panel=控制面板
+
+;------------------------------------------------------------------------------
+
+[Stick Settings]
+Distance=距离
+Bearing=方向
+DeadZone (Sensitivity)=死区(灵敏度)
+More Responsive=反应更快
+Less Responsive=反应更慢
+
+;------------------------------------------------------------------------------
+
+[Mouse Settings]
+Mouse Settings=鼠标设定
+Mode=模式
+Look/Camera=查看、视角
+Cursor=鼠标箭头
+Spring=弹簧
+Emulation Speed=模拟速度
+Slower=慢
+Faster=快
+Move Together=同步
+Test=测试
+
+;------------------------------------------------------------------------------
+
+[Controller Settings]
+Click "Save As" to save layout=点击“另存为...”保存布局
+Click "New" to create layout or "Open"=点击“新建”创建布局或“打开”
+Controller Settings=手柄设定
+Finish=搞定！
+To create a controller layout, select each tab and create the settings.=创建手柄布局：请依次选择每个页面进行设置
+To edit a controller layout, select any tab and edit the settings.=编辑手柄布局：选择特定页面修改设置
+Each tab has a Help button with detailed instructions.=每个页面都有详细的帮助信息，可以点击“帮助”按钮获得
+Option=选项
+Clear=清除
+Open=打开
+Download=下载
+Export=导出
+Draw=绘制
+Pen=笔
+Fill=填充
+Erase=擦除
+Enabled=生效
+Detect=侦测
+Direction Names=方向名
+Add=添加
+Press a button on the gamepad to add it to the layout=请按下你手柄上的按键，它将出现在窗口中
+Move=移动
+Drag the new button on the layout to move it=用鼠标拖动新出现的按钮到布局适当位置
+Rename/Delete=改名、删除
+Click a button on the layout to rename or delete it=点击布局上的按钮以改名或删除
+Analog Triggers=模拟扳机
+If this controller is Xbox 360 compatible then click the Help button for more information=如果该手柄兼容Xbox360请点击帮助按钮查看详情
+All settings have been updated to the main window but have not been saved yet.=所有设定已和主窗口一致，但尚未保存。
+To return to the main window to save the layout, close this Controller Settings window.=关闭手柄设定窗口返回到主窗口保存布局。
+This Finish tab is for information only. It is not necessary to visit after every change.=本页仅为显示信息，不必每次改动后访问。
+
+; Detection Commands ("Push" is for the stick directions, "Press" is for the DPad directions, "Hold" is for analog triggers)
+Push=推
+Press=按
+Hold=扣
+
+Invalid image detected=无效图片规格
+Image must be=图片必须是
+8-bit (256 colours) or 24-bit (16 million colours)=8位(256色)或24位(16万色)
+512 pixels wide and 256 pixels high=512像素宽256像素高
+uncompressed bitmap=非压缩位图BMP
+I have not added Direct Downloads yet!=我还没添加直接下载呢！
+To download controller images, visit=下载手柄图片请访问
+
+Non-analog stick detected=侦测到非模拟小摇杆
+This stick is not analog. Add as a DPad.=该小摇杆不是模拟摇杆，添加为十字方向键。
+Non-analog trigger detected=侦测到非模拟扳机
+This trigger is not analog. Add as a button.=该扳机不是模拟扳机，添加为按钮。
+
+;------------------------------------------------------------------------------
+
+[Assignments]
+Assignment=按键设定
+Special=特殊
+Cycle Stop=循环停止
+Pause=暂停
+Toggle=自锁
+Turbo=连发
+Rumble=震动
+Set Selector=按键方案选择
+ON=开
+Delay=延迟
+Rate=速率
+seconds=秒
+per second=每秒
+Strength=力度
+This key is currently not supported=尚未支持该键
+Slot=键位
+Click to assign=点击以设定
+set to=设为
+Click again to close=再点击关闭
+default assignment slot=默认按键设定slot
+Click to select=点击选中
+selected=选中
+Rumble availability undetermined. Press a button, trigger or DPad direction=震动功能不确定，请按钮、扳机或十字方向键。
+Rumble unavailable. Click the Help button for more information=震动不可用，点击帮助按钮查看详情。
+Selects Set=选择按键方案序列
+while held=当按下时
+
+;------------------------------------------------------------------------------
+
+[Profiles]
+All=全部
+Profile Name=配置集名
+Controller Name=手柄名
+Open Profile=打开配置集
+Untitled profile=未命名配置集
+Opening profile=正打开配置集
+Profiles=配置集
+;Controller=
+Save new profile before creating a new profile?=新建前先保存新配置集？
+Save profile changes before creating a new profile?=新建前先保存对配置集作的改动？
+Save new profile before opening another profile?=打开前先保存新配置集？
+Save profile changes before opening another profile?=打开前先保存对配置集作的改动？
+Save new profile before closing?=关闭前先保存新配置集？
+Save profile changes before closing?=关闭前先保存对配置集作的改动？
+The profile on this controller will need to be created again if you do not save.=不保存则下次必须再次创建该手柄配置集。
+Any changes will be lost if you do not save.=不保存所有改动都将丢失。
+
+Cannot open newer profile file=无法打开更高版本配置集文件
+This profile file was saved by a newer version of Xpadder and cannot be opened.=无法打开，配置集文件是由高版本Xpadder保存的。
+Bad DPad mode value found in profile=配置集文件中的十字方向键参数无效
+Bad Stick mode value found in profile=配置集文件中的小摇杆模式参数无效
+Value=值
+This is not a valid value. The DPad mode has loaded as "Allow".=无效参数，十字方向键模式设为“允许”。
+This is not a valid value. The Stick mode has loaded as "Standard".=无效参数，小摇杆模式设为“标准”。
+Bad slot code value found in profile=配置集参数“slot”无效
+This is not a valid value. The slot code has been loaded as "None".=无效参数，slot代码设为“无”。
+Bad mouse mode value found in profile=配置集文件参数“鼠标模式”无效
+This is not a valid value. The mouse mode has been loaded as "Look/Camera".=
+Cannot open requested or last used profile=
+This profile cannot be opened. If it exists in the recent list it will now be removed.=
+Invalid binary profile version number=
+This profile cannot be opened.=无法打开该配置集。
+
+Old registry profiles found=
+Opening is no longer available for old registry profiles.=
+To request the conversion/deletion tool (that you only need to be use once)=
+
+;------------------------------------------------------------------------------
+
+[Controller]
+No controllers found - connect one now=未找到手柄 － 请连接
+Initializing Controller=初始化手柄
+Opening controller file=打开手柄参数文件
+Swapping Controller=交换手柄
+Save new controller before creating a new controller?=新建前保存新的手柄设置？
+Save controller changes before creating a new controller?=新建前保存手柄更改？
+Save new controller before opening another controller?=打开手柄参数文件前保存新的手柄设置？
+Save controller changes before opening another controller?=打开手柄参数文件前保存手柄更改？
+Save new controller before closing?=退出前保存新的手柄设置？
+Save controller changes before closing?=退出前保存手柄更改？
+The controller file for this controller will need to be created again if you do not save.=如果不保存则下次必须重新创建该手柄的参数文件。
+Any changes will be lost if you do not save.=不保存则所有更改将会丢失。
+
+Invalid controller file=无效手柄参数文件
+This controller file is not a valid Xpadder controller file and cannot be opened.=无法打开，无效的手柄参数文件。
+Cannot open newer controller file=
+This controller file was saved by a newer version of Xpadder and cannot be opened.=无法打开，手柄参数文件是由高版本Xpadder保存的。
+Cannot auto-open controller file=无法自动加载手柄参数文件
+This controller file cannot be opened.=无法打开该手柄参数文件
+
+;------------------------------------------------------------------------------
+
+[Menus]
+Getting Started=入门向导
+Assignments=按键设定
+Layout Settings=布局设定
+Names=名称
+Advanced Starting=高级启动参数
+About=关于
+Restore (Left Mouse Button)=还原(鼠标左键)
+Minimize (Left Mouse Button)=最小化(鼠标左键)
+Close (Middle Mouse Button/Wheel Click)=退出(鼠标中键、滚轮)
+Clear (Middle Mouse Button/Wheel Click)=清除(鼠标中键、滚轮)
+
+;------------------------------------------------------------------------------
+
+[Technical]
+
+DirectX incompatible=DirectX兼容
+DirectX 8 or later is required. Please update DirectX.=请升级到DirectX 8或以上
+Last version of DirectX compatible with this version of Windows=最新DirectX和该版本Windows兼容
+DirectInput Error=DirectInput错误
+Command=命令
+A debug version of DINPUT has been detected.=DINPUT的debug版本
+Search for and rename "dinputd.dll" as "_dinputd.dll".=查找"dinputd.dll"改名为"_dinputd.dll"。
+
+Function initialization failed=函数初始化失败
+Function=函数
+Library=库
+Missing library=缺少库
+Missing function=缺少函数
+For assistance, send an email to=技术支持请发送邮件到
+
+Invalid shortcut=无效的快捷方式
+This shortcut cannot be found and so cannot be launched.=无法找到快捷方式，运行失败
+
+Windows version detection error=Windows版本侦测错误
+An error has occurred while trying to determine the version of Windows.=侦测Windows版本时出错。
+Windows 95 is not currently supported.=不支持Windows 95
+Windows NT 4.0 is not currently supported.=不支持Windows NT 4.0
+Unknown Windows version is not currently supported.=不支持该未知版本Windows
+Unsupported Windows version detected=侦测到未知Windows版本
+To register your interest for supporting this version of Windows=
+
+Sticky Keys are currently on=
+This can cause problems with key emulation.=会造成按键模拟出错。
+Sticky Keys will now be turned off to prevent any problems.=
+They will automatically be turned back on when this program is closed.=
+
+File cannot be found or cannot be opened=找不到或无法打开文件
+File Type=文件类型
+File cannot be saved=无法保存文件
+File may be read-only or open elsewhere. Folder may not exist. Drive may be full.=文件可能只读或正被其他程序打开、文件夹不存在、磁盘满。
+
+INI file line too long=INI文件行太长
+Line=行
+Maximum INI file line characters=INI文件每行最多字符
+INI file too large to open=靠！INI文件肥的咬不动。
+Maximum INI file lines=INI文件最多行
+Overwrite existing file?=覆盖已存在的文件？
+
+Current Resolution=当前分辨率
+pixels=像素
+Designed Resolution=设计分辨率
+Required Resolution=必须分辨率
+To register your interest for supporting the current resolution=
+Insufficient desktop resolution detected=侦测到桌面分辨率不够
+The main window cannot fit this screen.=屏幕放不下主窗口
+The Controller Settings window will appear unoptimized.=手柄设定窗口可能会显示不正常
+The Assignment window will appear unoptimized.=按键设定窗口可能会显示不正常
+
+;------------------------------------------------------------------------------
+
+[Help - Help Menu]
+
+;Getting Started=
+This program simulates key presses and mouse actions using a gamepad.=本程序使得游戏手柄可以模拟键盘按键或鼠标动作。
+If you have not connected a controller do so now.=如果系统中没有手柄请马上连接
+You will see a blank screen and a white tab in the top left corner.=
+There may also be grey tabs if you have more than one controller connected.=
+To use your controller you must first create a layout.=
+Click the controller button (just below the white tab) and click "New..." to open the Controller Settings window.=
+Use the Controller Settings window to create a new layout for your controller.=
+Detailed Help is available in the Controller Settings window.=
+
+;Controllers=
+All the scanned controllers are shown as tabs in the top left of the window.=
+Any known controllers are shown first based on the order that you have selected in the Settings window.=
+Unknown controllers are shown last in alphabetical order.=
+Connected controllers are shown with a white background and disconnected controllers are shown with a red background.=
+The currently selected controller is shown with a brighter background than any other controllers.=
+Click the icon of the current controller to view the properties of that controller.=
+Click the icon of another controller to select that controller.=
+
+;Profiles=
+A profile is a collection of assignments and controller settings.="配置集"是不同“按键设定方案”和相应“手柄设定”的集合。
+Each controller has its own profile.=每个手柄都对应自己的配置集。
+A New blank profile is automatically created when this program is started.=程序启动时会自动创建一个空白配置集。
+Click the Profile button to the left of the profile name to access the Profile menu.=点击配置集左侧的按钮可以打开相应菜单。
+The current profile is shown to the right of the Profile button.=当前配置集显示在该按钮的右侧。
+New=新建
+Creates a blank profile.=
+If there are any changes to the current profile, you will be asked if you want to save them.=
+Open=打开
+Opens a saved profile.=
+If there are any changes to the current profile, you will be asked if you want to save them.=
+;Settings=
+Displays the profile settings window.=
+All settings are associated with the current profile and are saved along with the button assignments.=
+Detailed Help is available in the Profile Settings window.=
+Save=保存
+Saves any changes made to the current profile.=
+This option is only available when unsaved changes have been made.=
+Save As=另存为
+Prompts you for a new name before saving.=
+
+;Settings=
+Click the Settings icon at the top right of the window to display the Settings windows.=
+The Settings window allows you to alter the program settings.=
+
+;Assignments=
+To assign a keyboard key or mouse function to the controller click on a button in the layout picture.=
+The Assignments window will be displayed for that button.=
+To quickly change assignment options right-click the button.=
+To assign a key in a different set first select that set by clicking the number set button in the lower right of the window.=
+Detailed Help is available in the Assignments window.=
+
+Layout Settings=
+This button will appear next to each DPad, Stick and Trigger.=
+It gives you access to the settings for that group of buttons.=
+;Settings=
+Displays the settings window.=
+;Auto-Assign=
+Allows you to quickly set the assignments based on popular groups.=
+Diagonals=
+Allows you to quickly alter the diagonal setting for the group.=
+;Mouse Settings=
+Displays the mouse settings window.=
+
+Names=
+When a profile is created or opened the buttons in the layout will show the key or mouse action assigned to that button.=
+To view the names of the assignments click the Names button in the bottom left of the window.=
+This will show any assignment names in the buttons in the layout or an empty button if the assignment has no name.=
+The assignment name can be altered by clicking the button in the layout picture to open the Assignments window.=
+Detailed Help is available in the Assignments window.=
+
+Sets=按键方案序列
+What are sets?=什么是按键方案序列？
+Each profile contains 4 sets of assignments - the default is set 1.=每个配置集包含四套按键设定方案：默认为第一套。
+The currently selected set is highlighted in the lower right of the window.=当前使用的序列会在窗口的右下角高亮显示。
+How do I select a set?=如何选定按键方案序列？
+The sets can be manually selected by clicking one of the set buttons (1 to 4).=点击代表不同按键方案序列(从1到4)的按钮。
+You can also click the Set button and select a set from the list.=还可以点击“按键方案序列”按钮从列表中选择。
+Any controller button can automatically select a set.=
+Click a button in the layout picture and select the action from the Set Selector list.=
+Detailed help is available in the Assignments window.=
+
+;Advanced Starting=
+The command line options can be used with the command prompt, a batch file or a shortcut.=
+All options can be combined in any order.=
+Switches (for example; /M) can be in upper or lower case.=
+If filenames and/or paths include spaces then they must be enclosed in quotes.=
+If no command line options are listed and this program is already running then the main window will restore or minimize.=
+Starts this program and automatically opens the profile(s) onto each controller.=
+If this program is already running then the profiles will be automatically opened.=
+If no controllers are connected then the profile(s) will open when a controller is connected=
+If only one profile is specified and more than one controller is connected then the selected controller will open the profile=
+If more than one profile is specified and more than one controller is connected then the first profile will be opened by the first controller and so on=
+If the profile extension is omitted it will be automatically added=
+Starts this program (if it is not already running) and launches the shortcut.=
+The shortcut must be a ".lnk" file and you must include the ".lnk" extension=
+To launch an executable first create a shortcut to it and use the name of that shortcut=
+Shortcuts will only launch when at least one controller is found, all controllers are connected and all profiles have successfully opened=
+Starts this program minimized.=
+If this program is already running it will be minimized if necessary.=
+Closes this program if it is already running - if this program is not already running then it will not start.=
+Displays this help window=
+
+;------------------------------------------------------------------------------
+
+[Help - Settings]
+
+Options=选项
+START=启动
+Start with Windows=随Windows自动启动
+Start automatically and minimized when Windows starts.=
+Minimized=最小化
+Start minimized when started by the user.=
+;AutoOpen last used profile=
+Automatically open the last profile that was used by each controller when it is detected.=
+Scan for XInput=扫描XInput
+Scan for XInput when started. XInput can only be used by Xbox 360 compatible controllers.=
+If you do not use a Xbox 360 compatible controller you can safely disable this option.=
+RUNNING=运行
+;Show controller and button animations=
+Animate the displaying of controllers and buttons.=
+;Process non-selected controllers=
+Process all controllers at the same time.=
+This allows for multiplayer support.=
+If you only have one controller or have more than one controller but only use one at a time then you can safely disable this option.=
+If this option is disabled then only the currently selected controller will be processed.=
+WINDOW=窗口
+;Minimize when closing main window=
+When the main window is closed, minimize instead of closing.=
+To close, right-click the notification area icon (next to the clock).=
+Auto-minimize when profile opened=
+Automatically minimize after opening a profile.=
+Return To Set 1 After Minimize/Restore=最小化/恢复后选中按键方案序列1
+Automatically select Set 1 for the currently selected controller, when minimizing or restoring, to prevent confusion.=
+;Remember assignment window position=
+Show the assignment window in the last place that it was positioned.=
+If this option is disabled then automatically position the assignment window.=
+TASKBAR=任务栏
+;Show icon in notification area=
+Show an icon in the notification area (next to the clock).=
+;Show taskbar button when minimized=
+Show the taskbar button even when minimized.=
+
+;Values=
+;Default DeadZones=
+When creating a new profile these deadzones are used by default.=
+
+;Theme=
+;Interface=
+This is the surrounding area of the main window.=
+;Background=
+This is the background of the controller layout.=
+How to change the colours=如何更改颜色
+Click one of number buttons.=
+Click the palette on the right to select the colour to use.=
+Hold the mouse button and move the mouse to try different colours.=
+Click the Random button to select three random colours.=
+The colours in the interface and background will change instantly.=
+
+;Controllers=
+Information is stored for all current and previous controllers.=
+A list of these controllers is shown here.=
+The list displays the order that the controller will appear in the tabs, the name of the controller and how many controllers are found.=
+Any number in brackets shows the number of controllers that have been disconnected.=
+Move Up/Down=上移、下移
+To alter the order that the controllers appear in the tabs, select a controller from the list.=
+Use the "Move Up" or "Move Down" buttons to alter the order.=
+Details=详情
+Displays all controller link details for the controller selected from the list.=
+Delete=删除
+To remove a controller from the list, select the controller from the list and click the "Delete" button.=
+Deleting a controller from the list will not delete the controller file.=
+It will only delete the automatic link to it.=
+
+;------------------------------------------------------------------------------
+
+[Help - Controller Properties]
+
+Controller Properties=手柄属性
+Details=详情
+Shows details of the current controller.=
+If XInput is unavailable then you must install the latest version of DirectX.=
+XInput only works with controllers that are Xbox 360 compatible and are using official drivers.=
+It provides ring-of-light illumination, independent triggers and vibration.=
+If your controller is not Xbox 360 compatible then you do not need XInput and do not need to update DirectX.=
+DirectInput=
+The raw data from the controller.=
+XInput=
+If XInput is available and the controller and driver are XInput compatible then the XInput raw data will be displayed here.=
+Control Panel=
+Opens the control panel for the current controller.=
+
+;------------------------------------------------------------------------------
+
+[Help - Controller Settings]
+
+Start=
+To create a controller layout, select each tab and create the settings.=
+To edit a controller layout, select any tab and edit the settings.=
+Each tab has a Help button with detailed instructions.=
+
+Image=
+This is the background image that the buttons are placed on.=
+The pink colour shows transparent areas.=
+Clear=
+Clears the background image (this will not remove any buttons).=
+Open=
+Opens an image.=
+Images much be:=
+8-bit (256 colours) or 24-bit (16 million colours)=
+512 pixels wide and 256 pixels high=
+uncompressed bitmap=
+Download=
+Downloads ready-made images from the Xpadder website.=
+Export=
+Saves the background image to a file so you can alter it in an image program.=
+Draw=
+Select the Pen, Fill or Erase mode to alter the drawing tool.=
+The slider changes the tool size and the palette changes the colour used.=
+
+Sticks=
+Sticks are either thumbsticks or joysticks.=
+If your controller has two sticks then Stick 1 is the left stick and Stick 2 is the right stick.=
+You can only enable Stick 2 if Stick 1 is enabled.=
+Tick the Stick 1 or Stick 2 box to add the stick.=
+You will be asked to move the stick so that the settings can be detected.=
+The Detect button also detects all the settings.=
+The arrow buttons detect only the direction on the button.=
+You can also select the axis yourself.=
+The name of the stick and the directions can be changed from the default.=
+In the picture drag the stick to the proper location.=
+
+Direction Pad=
+The DPad is the cross or plus-shaped control on your controller.=
+Tick the DPad box to add a DPad.=
+You will be asked to press the DPad so that the settings can be detected.=
+The Detect button also detects all the settings.=
+The arrow buttons detect only the direction on the button.=
+You can also select the input axis or data yourself.=
+The name of the DPad and the directions can be changed from the default.=
+In the picture drag the DPad to the proper location.=
+
+Buttons=
+Follow the instructions to add, move, rename or delete a button.=
+
+Triggers=
+This represents analog triggers only.=
+If you have added triggers as buttons you may not need to add Triggers.=
+Analog triggers will be disabled if they are detected as buttons.=
+Tick the Analog Triggers box to add 2 triggers.=
+You will be asked to hold the triggers so that the settings can be detected.=
+The Detect button also detects all the settings.=
+The arrow buttons detect only the trigger on the button.=
+You can also select the axis yourself.=
+The names of the triggers can be changed from the default.=
+In the picture drag the triggers to the proper locations.=
+Xbox 360 compatible controllers=
+If you are using the official drivers then Windows needs XInput to allow both triggers to be used at the same time.=
+To get XInput you must install the latest version of DirectX.=
+XInput only works with controllers that are Xbox 360 compatible.=
+It provides ring-of-light illumination, independent triggers and vibration.=
+
+Finish=
+All settings have been updated to the main window but have not been saved yet.=
+To return to the main window to save the layout, close this Controller Settings window.=
+This Finish tab is for information only. It is not necessary to visit after every change.=
+
+;------------------------------------------------------------------------------
+
+[Help - Layout Settings]
+
+Direction Pad Settings=
+Status=
+This is a visual representation of the current state of the DPad.=
+The colour Red shows a direction which is being pressed but filtered out due to the current mode.=
+The colour Green shows a direction which is being pressed and is active.=
+The colours correspond with the button colours shown in the main layout picture.=
+;Auto-Assign=
+Selecting one of the listed key groups will automatically assign those keys to the DPad.=
+Each direction of the DPad can also be individually assigned by clicking the main layout buttons.=
+Diagonals=
+;Allow=
+Allows diagonals to occur.=
+This option is best when controlling movement or emulating the mouse pointer.=
+Prioritize Left/Right or Up/Down=
+Filters out unwanted directions so that only the preferred direction is activated.=
+These options are best when making selections as they prevent accidental diagonals.=
+;Ignore=
+Ignores any diagonals.=忽略所有对角线。
+This option is best when making 4-way selections (such as dancing) when you want total control of the direction.=该选项当你需要对方向的完全控制比如4向选择(跳舞)时特别有用。
+Auto-Assigning a key group will automatically allow diagonals but the diagonal mode can then be altered if you prefer.=
+;Mouse Settings=
+Displays the mouse settings window for the DPad.=
+
+Stick Settings=
+Status=
+This is a visual representation of the current state of the ThumbStick.=
+The small black circle is the current ThumbStick position.=
+The red circle is the DeadZone.=
+The white areas are horizontal or vertical locations.=
+The diagonal locations are shown in grey if diagonals are allowed, blue if diagonals have a priority or red if diagonals are ignored.=
+The numbers represent horizontal X co-ordinate, vertical Y co-ordinate, Bearing in degrees and Distance from the centre.=
+Sensitivity (DeadZone)=
+This refers to the distance the ThumbStick needs to be moved before the assigned key press or mouse action occurs.=
+All ThumbSticks require a DeadZone to compensate for sensitivity.=
+It is recommended not to reduce the value to lower than 25%.=
+Increase the value if you find the ThumbStick too sensitive to movement.=
+The DeadZone is shown in the Status image as a red circle and the effect can be seen in the main layout picture.=
+A button is red when it has not reached the sensitivity point and green when it is active.=
+;Auto-Assign=
+Selecting one of the listed key groups will automatically assign those keys to the ThumbStick.=
+Each direction of the ThumbStick can also be individually assigned by clicking the main layout buttons.=
+Diagonals=
+;Allow=
+Allows diagonals to occur.=
+This option is best when controlling movement or emulating the mouse pointer.=
+Prioritize Left/Right or Up/Down=
+Filters out unwanted directions so that only the preferred direction is activated.=
+These options are best when making selections as they prevent accidental diagonals.=
+;Ignore=
+;Ignores any diagonals.=
+;This option is best when making 4-way selections (such as dancing) when you want total control of the direction.=
+;Auto-Assigning a key group will automatically allow diagonals but the diagonal mode can then be altered if you prefer.=
+;Mouse Settings=
+Displays the mouse settings window for the stick.=
+
+Trigger Settings=
+Each Trigger has individual settings.=
+Sensitivity (DeadZone)=
+This refers to the distance the Trigger needs to be pushed before the assigned key press or mouse action occurs.=
+This is useful if you find the Trigger too sensitive.=
+Status=
+This is a visual representation of the current state of the Trigger.=
+The bar is green where the Trigger is active or red where it is still in the DeadZone.=
+The colours correspond with the button colour shown in the main layout picture.=
+
+;Mouse Settings=
+;Auto-Assign=
+Selecting one of the listed key groups will automatically assign those mouse directions.=
+Each direction can also be individually assigned by clicking the main layout buttons.=
+Mode=
+Look/Camera=
+Filters out accidental diagonals when moving the mouse horizontally or vertically to prevent drifting.=
+Cursor=
+Applies no filters so that the cursor can be emulated accurately.=
+Spring=
+Matches the cursor position with the position of the stick.=
+Emulation Speed=
+If mouse movement is assigned to a part of the controller then the speed of the mouse can be  adjusted using these two sliders.=
+Check the "Move Together" checkbox to automatically move both sliders at the same time.=
+The graph shows the speed of the mouse based on how far the ThumbStick is pushed or the Trigger is held.=
+The red line shows the horizontal speed and the green line shows the vertical speed.=
+If the mouse movement is assigned to a Button or a DPad direction then the mouse speed will accelerate until the top speed is reached.=
+Test=
+This picture is based on the currently selected mode.=
+After assigning the mouse to a control, the effect of the speed and other options can be seen in this test image.=
+Status=
+The internal mouse co-ordinates and speed (in Pixels-Per-Second) are displayed here.=
+
+;------------------------------------------------------------------------------
+
+[Help - Assignments]
+
+;Assignment=
+The Assignment window shows all the possible assignments.=按键设定窗口显示所有可能的按键供分配。
+The current assignment is shown as yellow.=当前按键设定显示为黄色。
+Assignments already in use are shown as blue (these can be used more than once).=已占用的按键显示为蓝色(但可以多次使用)
+Assignments in other Slots (if any) are shown as light-blue.=其他Slot里的按键设定(如存在)显示为浅蓝色。
+;Name=
+This is the name of the assignment.=
+Examples of names are "Fire", "Activate" or "Jump".=
+The name will be displayed when the Names button is clicked in the lower left of the main window.=
+Names are useful to remind you of the function of the button.=
+It also helps when sharing the profile file with other users.=
+One assignment=
+Click on the key or mouse action in the keyboard and mouse picture.=
+The assignment will appear in the slot box at the bottom of the window.=
+The key will be pressed or mouse action performed while you press the gamepad button.=
+To close the assignment window click the assignment again or close the window as usual.=
+Right-click an assignment to instantly close the window.=
+Combination=组合键
+A combination is a collection of two or more assignments.=组合键就是同时按下多个键。
+To assign a combination such as Shift+X assign the "Shift" key as a normal assignment.=
+A new slot will appear in the slot box at the bottom of the window.=
+It will appear to the right of the slot that is now assigned as "Shift".=
+Click this slot to select it.=
+This is Slot 2.=
+Assign "X" to this slot as normal.=
+This combination will be performed while you press the gamepad button.=
+Sequence=
+A sequence is a collection of two or more assignments and/or combinations separated by pauses.=
+To add a pause into the selected slot use the special buttons below the slot box.=
+For example, to perform the sequence of Shift+X, 1 second delay, Y, 1 second delay, Z:=
+Slot 1: Shift=
+Slot 2: X=
+Slot 3: Pause 1.00s=
+Slot 4: Y=
+Slot 5: Pause 1.00s=
+Slot 6: Z=
+The sequence will start when you press the gamepad button.=
+The sequence cannot be restarted until it is finished.=
+The gamepad button can be released after pressing it as the sequence only needs one button press to start.=
+The outside of the button in the controller layout picture will show a light blue square to indicate that a Sequence is assigned.=
+Cycle=
+A Cycle is a collection of two or more assignments and/or combinations and/or sequences separated by Cycle Stops.=
+To add a Cycle Stop into the selected slot use the special button below the slot box.=
+Each time you press the gamepad button, the next assignment, combination or sequence in the cycle will be performed.=
+For example, to perform "X" on the first gamepad button press, "Y" on the second press and "Z" on the third press:=
+Slot 1: X=
+Slot 2: Cycle Stop=
+Slot 3: Y=
+Slot 4: Cycle Stop=
+Slot 5: Z=
+Any assignment or combination will be performed while you press the gamepad button.=
+Any sequence will be started when you press the gamepad button.=
+The next cycle will be automatically selected when you release the gamepad button or when the sequence has finished.=
+The outside of the button in the controller layout picture will show a black hashed square to indicate that a Cycle is assigned.=
+Clear=
+To clear the selected slot select the None area in the keyboard image.=
+
+;Toggle=
+What does it do?=这是干什么的？
+Toggle automatically holds the button for you after you have pressed it and let go.=当你按下并放开按钮后，自锁自动帮你按住这个按钮。
+Press the button again to release the automatic hold.=再按一次按钮释放自锁。
+;Enabled=
+Check the Enabled box to enable Toggle.=勾选打开自锁。
+Toggle mode can quickly be changed by right-clicking the button in the controller layout picture.=鼠标右键点击布局上的图片快速更改自锁状态。
+The bottom of the button in the controller layout picture will turn blue to indicate that Toggle mode is on.=
+
+;Turbo=
+;What does it do?=
+Turbo automatically presses and releases the button repeatedly while you hold the button.=
+;Enabled=
+Check the Enabled box to enable Turbo.=
+Turbo mode can quickly be changed by right-clicking the button in the controller layout picture.=
+It can be used with Toggle which will automatically hold the button for you.=
+The top of the button in the controller layout picture will turn pink to indicate that Turbo mode is on.=
+Delay=
+Sets the delay between each automatic button press.=
+The delay can be between 0.02 seconds and 2.50 seconds.=
+Rate=
+Shows the rate of automatic button presses per second based on the delay you have selected.=
+If Turbo is enabled then Speccy Robocop will give you a demo of the rate.=
+
+;Rumble=
+;What does it do?=
+Rumble mode rumbles the controller while the button is held.=
+Does my controller support rumbling?=
+Rumble is only available if your driver supports force feedback.=
+If your controller is Xbox 360 compatible and you are using an official driver then XInput is needed.=
+To get XInput you must install the latest version of DirectX.=
+XInput only works with controllers that are Xbox 360 compatible.=
+It provides ring-of-light illumination, independent triggers and vibration.=
+;Enabled=
+Check the Enabled box to enable Rumble.=
+Rumble mode can quickly be changed by right-clicking the button in the controller layout picture.=
+The sides of the button in the controller layout picture will turn yellow to indicate that Rumble mode is on.=
+Left/Right Strength=
+Compatible gamepads contain two motors which vibrate in different ways.=
+Use the sliders to alter the strengths of the rumble.=
+Click the None or Max icons to quickly set the rumble.=
+If Rumble is enabled then you will feel the changes instantly.=
+
+Set Selector=
+;What does it do?=
+;Each profile contains 4 sets of assignments - the default is set 1.=
+Enabling the Set Selector allows the button to select a set.=
+The selected set will become active after pressing and releasing the gamepad button.=
+To return to the previous set press and release the button again.=
+If you choose to select the set while held then the set will only be active while the gamepad button is held.=
+The previous set will return when the gamepad button is released.=
+;Enabled=
+Select the set to be selected and the selection method from the list or select "No" to disable Set Selecting.=
+The currently selected set is displayed in the lower right corner of the controller layout picture.=
+Sets can also be selected by clicking the required number button.=
+The bottom of the button in the controller layout picture will show a number of dots indicating which set the button selects.=
+
+;------------------------------------------------------------------------------
+

@@ -1,9 +1,13 @@
 clrmamepro (
 	name "Capcom Play System 3 Emulator"
-	description "Capcom Play System 3 Emulator v1.0"
+	description "Capcom Play System 3 Emulator v1.0a"
 	category "CPS-3 Emulator"
-	version 20070709
-	author "neoforma, http://various.ru/"
+	version 20070710
+	date 2007-07-10
+	author neoforma
+	homepage "Neoforma Dats"
+	url "http://various.ru/dats/"
+	comment "Please report any data file issues at http://forum.logiqx.com/"
 )
 
 game (

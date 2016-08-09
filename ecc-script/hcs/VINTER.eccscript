@@ -1,0 +1,38 @@
+; Platform               : Interact Home Computer System
+; Script for             : VINTER (tested with v0.01)
+; Script version         : v1.0.0.0
+; Last changed           : 2008.10.25
+;
+;
+; Author :  S. Ebeltjes (aka Phoenix Interactive)
+;
+; NOTES:
+;
+;
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("VINTER")
+
+; Load ROM file
+Send("L")
+
+; Wait 2 seconds for the 'file open' window.
+Sleep(2000)
+
+Send($eccFileRomPath & $eccFileRomFile)
+Send("{ENTER}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

@@ -3,23 +3,13 @@ clrmamepro (
 	description "Daphne v0.99.7"
 	category "Laserdisk Emulator"
 	version 20051002
-	author "Logiqx, http://www.logiqx.com/"
+	date 2005-10-02
+	author Logiqx
+	homepage "Logiqx Home Page"
+	url "http://www.logiqx.com/"
+	comment "Please report any data file issues at http://forum.logiqx.com/"
 	forcemerging full
 )
-
-// Notes for astronp:
-//   ROM from astron: 5284
-//   ROM from astron: 5284
-//   ROM from astron: 5285
-//   ROM from astron: 5280
-//   ROM from astron: 5281
-//   ROM from astron: 5286
-//   ROM from astron: 5338
-//   ROM from astron: 5279
-//   ROM from astron: pr-5278.bin
-//   ROM from astron: pr-5277.bin
-//   ROM from astron: pr-5276.bin
-//   ROM from astron: pr-5275.bin
 
 game (
 	name astronp
@@ -61,22 +51,6 @@ game (
 	rom ( name pr-5275.bin size 32 crc 0c872a9b sha1 eaabce5d867a4e896bd356abc94429f9a4eec372 )
 )
 
-// Notes for blazer:
-//   ROM from galaxy: gr5592.bin
-//   ROM from galaxy: gr5592.bin
-//   ROM from galaxy: gr5593.bin
-//   ROM from galaxy: gr5594.bin
-//   ROM from galaxy: gr5611.bin
-//   ROM from galaxy: gr5595.bin
-//   ROM from galaxy: gr5612.bin
-//   ROM from astron: 5280
-//   ROM from astron: 5281
-//   ROM from astron: 5279
-//   ROM from astron: pr-5278.bin
-//   ROM from astron: pr-5277.bin
-//   ROM from astron: pr-5276.bin
-//   ROM from astron: pr-5275.bin
-
 game (
 	name blazer
 	description "Star Blazer (Pioneer)"
@@ -99,12 +73,6 @@ game (
 	rom ( name pr-5275.bin size 32 crc 0c872a9b sha1 eaabce5d867a4e896bd356abc94429f9a4eec372 )
 )
 
-// Notes for cobraab:
-//   ROM from astron: pr-5278.bin
-//   ROM from astron: pr-5277.bin
-//   ROM from astron: pr-5276.bin
-//   ROM from astron: pr-5275.bin
-
 game (
 	name cobraab
 	description "Cobra Command (Astron Belt Hardware)"
@@ -122,15 +90,6 @@ game (
 	rom ( name pr-5276.bin size 32 crc 91267e8a sha1 ae5bd8efea5322c4d9986d06680a781392f9a642 )
 	rom ( name pr-5275.bin size 32 crc 0c872a9b sha1 eaabce5d867a4e896bd356abc94429f9a4eec372 )
 )
-
-// Notes for galaxy:
-//   ROM from astron: 5280
-//   ROM from astron: 5281
-//   ROM from astron: 5279
-//   ROM from astron: pr-5278.bin
-//   ROM from astron: pr-5277.bin
-//   ROM from astron: pr-5276.bin
-//   ROM from astron: pr-5275.bin
 
 game (
 	name galaxy
@@ -153,22 +112,6 @@ game (
 	rom ( name pr-5276.bin size 32 crc 91267e8a sha1 ae5bd8efea5322c4d9986d06680a781392f9a642 )
 	rom ( name pr-5275.bin size 32 crc 0c872a9b sha1 eaabce5d867a4e896bd356abc94429f9a4eec372 )
 )
-
-// Notes for galaxyp:
-//   ROM from galaxy: gr5592.bin
-//   ROM from galaxy: gr5592.bin
-//   ROM from galaxy: gr5593.bin
-//   ROM from galaxy: gr5594.bin
-//   ROM from galaxy: gr5611.bin
-//   ROM from galaxy: gr5595.bin
-//   ROM from galaxy: gr5612.bin
-//   ROM from astron: 5280
-//   ROM from astron: 5281
-//   ROM from astron: 5279
-//   ROM from astron: pr-5278.bin
-//   ROM from astron: pr-5277.bin
-//   ROM from astron: pr-5276.bin
-//   ROM from astron: pr-5275.bin
 
 game (
 	name galaxyp
@@ -198,9 +141,9 @@ game (
 	year 1984
 	manufacturer "Konami (USA) / Centuri, United Artists (USA)"
 	rom ( name bl_hit_7a.bin size 8192 crc a135e444 sha1 7ef5394c698a5867aef200f577b8708df455b653 )
-	rom ( name bl_hit_6a.bin size 8192 crc 4c287f37 )
+	rom ( name bl_hit_6a.bin size 8192 crc 4c287f37 sha1 b6b6b64174f1fd014b6c808015f1b0e65b56d24b )
 	rom ( name bl_hit_9c.bin size 8192 crc 44c3441e sha1 6b42961d31e5d025758cdfdc573648a83004577d )
-	rom ( name bl_hit_4f.bin size 32 crc 0226f881 )
+	rom ( name bl_hit_4f.bin size 32 crc 0226f881 sha1 b17c5681fca5ae65128793cf263725e2fe1314de )
 )
 
 game (
@@ -410,9 +353,6 @@ game (
 	rom ( name 136026.106 size 16384 crc c5d8d417 sha1 6a29595b2c091bbcf413c7213c6577eaf9c507d1 )
 	rom ( name 136026.125 size 8192 crc 8a32f9f1 sha1 f899174f55cd4a24a3be4a0f4bb44d3e8e938586 )
 )
-
-// Notes for firefoxa:
-//   ROM from firefox: 136026.125
 
 game (
 	name firefoxa
@@ -843,10 +783,6 @@ game (
 	rom ( name prog2.bin size 113 crc 0c6c8ce9 sha1 1b962199ae130c2c6f83de5ae92f88342b987f43 )
 )
 
-// Notes for sdqshort:
-//   ROM from sdq: sdq-char.bin
-//   ROM from sdq: sdq-cprm.bin
-
 game (
 	name sdqshort
 	description "Super Don Quix-ote (Shorter Scenes)"
@@ -856,10 +792,6 @@ game (
 	rom ( name sdq-char.bin size 8192 crc 5fb0e440 sha1 267413aeb36b661458b7229d65d7b1d03562a1d3 )
 	rom ( name sdq-cprm.bin size 32 crc 96701569 sha1 b0f40373735d1af0c62e5ab06045a064b4eb1794 )
 )
-
-// Notes for sdqshortalt:
-//   ROM from sdq: sdq-char.bin
-//   ROM from sdq: sdq-cprm.bin
 
 game (
 	name sdqshortalt

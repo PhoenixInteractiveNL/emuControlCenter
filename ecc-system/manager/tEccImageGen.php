@@ -1,5 +1,4 @@
 <?
-error_reporting(E_ALL|E_STRICT);
 define('LF', "\n");
 
 $possibleArgs = array('source filepath (absolute)', 'color (#hex)', 'amount (percent)', 'destination filename (absolute)', 'greyscale first (optional) [0|1]');

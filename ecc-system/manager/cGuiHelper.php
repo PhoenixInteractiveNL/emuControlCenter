@@ -18,7 +18,7 @@ class GuiHelper {
 		return $this->gui->ecc_release['title']." ".$this->gui->ecc_release['local_release_version']." build ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
 	}
 	
-	public function createUserfolderIfNeeded() {
+	public function createUserfolderIfNeeded($updateIfExists = false) {
 		
 		$user_folder = $this->gui->ini->getKey('USER_DATA', 'base_path');
 		
@@ -31,7 +31,7 @@ class GuiHelper {
 		// if directory not found - create default!
 		if (!is_dir($user_folder)) $this->gui->ini->setDefaultEccBasePath();
 		
-		if (is_dir($user_folder) && !is_dir($user_folder.'null/')) {
+		if ((is_dir($user_folder) && !is_dir($user_folder.'null/')) || $updateIfExists === true) {
 			try {
 				$this->gui->ini->createFolder($user_folder);
 				$this->rebuildEccUserFolder(false);

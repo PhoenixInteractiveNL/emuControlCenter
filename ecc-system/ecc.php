@@ -1,8 +1,12 @@
 <?php
 
-define('LF', "\n");
+// if this parameter "create_userfolder" is given, ecc will create
+// all needed userfolder and then exit the application with the
+// string 'ecc userfolders created'! 
+define('ECC_CREATE_USERFOLDER_BY_TOOL', trim($argv[1]) == 'create_userfolder');
 
-error_reporting(E_ALL);
+
+define('LF', "\n");
 
 chdir(dirname(__FILE__));
 define("MY_MASK", Gdk::BUTTON_PRESS_MASK);
@@ -829,7 +833,13 @@ class App extends GladeXml {
 		// get ecc header image
 		$this->oHelper->set_eccheader_image();
 
-		$this->oHelper->createUserfolderIfNeeded();
+		if(ECC_CREATE_USERFOLDER_BY_TOOL) {
+			$this->oHelper->createUserfolderIfNeeded($updateIfExists = true);
+			die('ecc userfolders created'); 
+		}
+		else {
+			$this->oHelper->createUserfolderIfNeeded();	
+		}
 		
 		FACTORY::get('manager/GuiTheme');
 		$this->translateGui();

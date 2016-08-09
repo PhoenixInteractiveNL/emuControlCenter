@@ -220,9 +220,23 @@ class FileIO {
 			$start_offset === false &&
 			$end_offset === false
 		) {
-			if (is_file($file_name)) {
-				return file_get_contents($file_name);
+			if (!is_file($file_name)) return false;
+			
+			# fastest way to get the data
+			if ($content = file_get_contents($file_name)) {
+				return $content;
 			}
+			else {
+				# slower than file_get_contents!
+				if ($fileSize = filesize($file_name)) {
+					$handle = fopen($file_name, "rb");
+					$contents = fread($handle, $fileSize);
+					fclose($handle);
+					return $contents;
+				}
+			}
+			// run in problems parsing very big files
+			#return file_get_contents($file_name);
 		}
 		else {
 			// Startposition verschieben zum lesen!
@@ -302,6 +316,22 @@ class FileIO {
 		}
 		@rmdir($dirName.'/'.$file);
 	}
+	
+	public function dirIsEmpty($dirName){
+		if (!$dirName) die("No path given in dirIsEmpty");
+		$dir = dir($dirName);
+		while($file = $dir->read()) {
+			if($file != '.' && $file != '..') return false;
+		}
+		return true;
+	}
+	
+//	function rmdirr($path){ 
+//		$dir = new RecursiveDirectoryIterator($path);
+//		foreach(new RecursiveIteratorIterator($dir) as $file) unlink($file);
+//		foreach($dir as $subDir) if(!@rmdir($subDir)) recursiveRemoveDirectory($subDir);
+//		rmdir($path);
+//	}
 	
 	/*
 	*

@@ -1,0 +1,596 @@
+#
+# Variance	by Kyle Davis
+#
+# A nice, clean theme for GTK, loosely based on Eugenia Loli's mock-ups
+#
+style "default"{
+	fg[NORMAL]		= "#111122"
+	fg[PRELIGHT]	= "#333344"
+	fg[ACTIVE]		= "#333355"
+	fg[SELECTED]	= "#222244"
+	fg[INSENSITIVE]= "#666677"
+
+	#TODO:  Probably want to switch to hex only for consistancy
+	bg[NORMAL]		= {0.968,0.968,0.9375}
+	bg[PRELIGHT]	= {0.940,0.940,0.9175}
+	bg[ACTIVE]		= {0.980,0.980,0.9475}
+	bg[SELECTED]	= "#AACCFF"
+	bg[INSENSITIVE]	= {0.875,0.860,0.845}
+
+  base[NORMAL]      = "#F0F1EF"
+  base[ACTIVE]     = "#F0F1EF"
+ # base[ACTIVE]     = "#E8E8E8"
+ # base[PRELIGHT]   = "#FFFFFF"
+ # base[INSENSITIVE]= "#f0f0f0"
+
+#	text[NORMAL]		= "#000000"
+#	text[SELECTED]		= "#222244"
+#	text[ACTIVE]		= "#ffffff"
+#	text[INSENSITIVE]	= "#A3A380"
+
+
+
+  text[ACTIVE]     = "#222244"
+
+
+
+	GtkPaned::handle_size = 7
+	GtkCheckButton::indicator_size = 16
+	GtkCheckButton::indicator_spacing = 4
+	GtkScrollbar::min_slider_length = 16
+
+
+ # GtkTreeView::odd_row_color = "#ffffff"
+ # GtkTreeView::even_row_color = "#ffffff"
+  GtkComboBox::appears-as-list = 1
+
+	engine "pixmap" {
+		image {
+			function			= FOCUS
+			overlay_file	= "focus.png"
+			overlay_border	= {2,2,2,2}
+			overlay_stretch= TRUE
+		}
+		image {
+			function			= CHECK
+			state				= INSENSITIVE
+			shadow			= OUT
+			overlay_file	= "check-out-insensitive.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= CHECK
+			state				= INSENSITIVE
+			shadow			= IN
+			overlay_file	= "check-in-insensitive.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= CHECK
+			shadow			= OUT
+			overlay_file	= "check-out.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= CHECK
+			shadow			= IN
+			overlay_file	= "check-in.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= OPTION
+			state				= INSENSITIVE
+			shadow			= OUT
+			overlay_file	= "radio-out-insensitive.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= OPTION
+			state				= INSENSITIVE
+			shadow			= IN
+			overlay_file	= "radio-in-insensitive.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= OPTION
+			shadow			= OUT
+			overlay_file	= "radio-out.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= OPTION
+			shadow			= IN
+			overlay_file	= "radio-in.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= TAB
+			state				= INSENSITIVE
+			overlay_file	= "option-arrow-insensitive.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function			= TAB
+			overlay_file	= "option-arrow.png"
+			overlay_stretch= FALSE
+		}
+		image {
+			function		= FLAT_BOX
+			detail		= "tooltip"
+			file			= "tooltip.png"
+			border		= {2,2,2,2}
+			stretch		= TRUE
+		}
+		image {
+			function	= HLINE
+			file		= "hline.png"
+			border	= {0,0,0,0}
+			stretch	= TRUE
+		}
+		image {
+			function	= VLINE
+			file		= "vline.png"
+			border	= {0,0,0,0}
+			stretch	= TRUE
+		}
+		image {
+			function	= SHADOW
+			file		= "tooltip.png"
+			border	= {2,2,2,2}
+			stretch	= TRUE
+		}
+		image {
+			function		= HANDLE
+			orientation	= HORIZONTAL
+			file			= "hhandle.png"
+			border		= {3,3,3,3}
+			stretch		= TRUE
+		}
+		image {
+			function		= HANDLE
+			orientation	= VERTICAL
+			file			= "vhandle.png"
+			border		= {3,3,3,3}
+			stretch		= TRUE
+		}
+	}
+}class "*" style "default"
+
+style "spin"{
+	engine "pixmap" {
+		image {
+			function	= BOX
+			state		= PRELIGHT
+			file		= "vbutton-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			state		= ACTIVE
+			file		= "vbutton-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			state		= INSENSITIVE
+			file		= "vbutton-insensitive.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			file		= "vbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+	}
+}class "GtkSpinButton" style "spin"
+
+style "button"{
+	engine "pixmap" {
+		image {
+			function	= BOX
+			state		= PRELIGHT
+			file		= "button-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			state		= ACTIVE
+			file		= "button-active.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			state		= INSENSITIVE
+			file		= "button-insensitive.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= BOX
+			file		= "button.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+	}
+}class "GtkButton" style "button"
+class "GtkToggleButton" style "button"
+
+style "range"{
+	GtkRange::slider_width = 16
+	GtkRange::stepper_size = 16
+	engine "pixmap" {
+		image {
+			function	= BOX
+			file		= "vtrough.png"
+			detail		= "trough"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+	    }
+		image {
+			function	= BOX
+			state		= PRELIGHT
+			file		= "vbutton-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= BOX
+			state		= ACTIVE
+			file		= "vbutton-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= BOX
+			state		= INSENSITIVE
+			file		= "vbutton-insensitive.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= BOX
+			file		= "vbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= BOX
+			file		= "htrough.png"
+			detail		= "trough"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+	    }
+		image {
+			function	= BOX
+			state		= PRELIGHT
+			file		= "hbutton-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= BOX
+			state		= ACTIVE
+			file		= "hbutton-active.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= BOX
+			state		= INSENSITIVE
+			file		= "hbutton-insensitive.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= BOX
+			file		= "hbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= SLIDER
+			file		= "hbutton-prelight.png"
+			state		= PRELIGHT
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= SLIDER
+			file		= "hbutton-insensitive.png"
+			state		= INSENSITIVE
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+		}
+		image {
+			function	= SLIDER
+			file		= "hbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = HORIZONTAL
+	    }
+		image {
+			function	= SLIDER
+			file		= "vbutton-prelight.png"
+			state		= PRELIGHT
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= SLIDER
+			file		= "vbutton-insensitive.png"
+			state		= INSENSITIVE
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+		}
+		image {
+			function	= SLIDER
+			file		= "vbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+			orientation = VERTICAL
+	    }
+	}
+}class "GtkRange" style "range"
+widget_class "*.GtkRange.*" style "range"
+
+style "frame"{
+	bg[NORMAL]		= "#AFBFDF"
+}class "GtkFrame" style "frame"
+
+style "menu"{
+	bg[NORMAL]	= "#FEFEF6"
+}class "GtkMenu" style "menu"
+
+style "menuitem"{
+	engine "pixmap" {
+		image {
+			function	= BOX
+			state		= PRELIGHT
+			file		= "hbutton.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+	}
+}class "GtkMenuItem" style "menuitem"
+class "GtkCheckMenuItem" style "menuitem"
+class "GtkRadioMenuItem" style "menuitem"
+class "GtkImageMenuItem" style "menuitem"
+widget_class "*.GtkMenuItem.*" style "menuitem"
+
+style "toolbar"{
+	engine "pixmap" {
+		image {
+			function	= BOX
+			file		= "toolbar.png"
+			border		= {3,3,3,3}
+			stretch		= TRUE
+		}
+	}
+}class "GtkToolbar" style "toolbar"
+
+##I liked it but whatever...
+#style "checkradio"{
+#	engine "pixmap" {
+#		image {
+#			function	= FLAT_BOX
+#			file		= "button.png"
+#			border		= {8,8,8,8}
+#			stretch		= TRUE
+#		}
+#	}
+#}class "GtkCheckButton" style "checkradio"
+#class "GtkRadioButton" style "checkradio"
+
+style "item"{
+	text[NORMAL]		= "#000000"
+	text[SELECTED]		= "#222244"
+	text[ACTIVE]		= "#222244"
+	text[INSENSITIVE]	= "#A3A380"
+	engine "pixmap" {
+		image {
+			function	= FLAT_BOX
+			state		= PRELIGHT
+			file		= "list-prelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= FLAT_BOX
+			state		= SELECTED
+			file		= "listprelight.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+		image {
+			function	= FLAT_BOX
+			state		= INSENSITIVE
+			file		= "hbutton-insensitive.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+	}
+}class "GtkTreeView" style "item"
+class "GtkListView" style "item"
+class "GtkTreeItem" style "item"
+class "GtkCTreeRow" style "item"
+class "GtkListItem" style "item"
+class "GtkCListItem" style "item"
+
+style "column-header"{
+	engine "pixmap" {
+		image {
+			function	= BOX
+			file		= "column-header.png"
+			border		= {8,8,8,8}
+			stretch		= TRUE
+		}
+	}
+}widget_class "*.GtkTreeView.*" style "column-header"
+
+style "progress"{
+	engine "pixmap"{
+		image{
+			function	= BOX
+			detail	= "bar"
+			file		= "progress-bar.png"
+			border	= {1,1,1,1}
+			stretch	= TRUE
+		}
+		image{
+			function	= BOX
+			file		= "progress.png"
+			border	= {8,8,8,8}
+			stretch	= TRUE
+		}
+	}
+}class "GtkProgressBar" style "progress"
+
+style "notebook"{
+	engine "pixmap" {
+		image {
+			function        = EXTENSION
+			state           = ACTIVE
+			file            = "half-top-active.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = BOTTOM
+		}
+		image {
+			function        = EXTENSION
+			state           = ACTIVE
+			file            = "half-bottom-active.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = TOP
+		}
+		image {
+			function        = EXTENSION
+			state           = ACTIVE
+			file            = "half-left-active.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = RIGHT
+		}
+		image {
+			function        = EXTENSION
+			state           = ACTIVE
+			file            = "half-right-active.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = LEFT
+		}
+		image {
+			function        = EXTENSION
+			file            = "half-top.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = BOTTOM
+		}
+		image {
+			function        = EXTENSION
+			file            = "half-bottom.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = TOP
+		}
+		image {
+			function        = EXTENSION
+			file            = "half-left.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = RIGHT
+		}
+		image {
+			function        = EXTENSION
+			file            = "half-right.png"
+			border          = {8,8,8,8}
+			stretch         = TRUE
+			gap_side        = LEFT
+		}
+		image {
+			function			= BOX_GAP
+			file				= "half-bottom-plain.png"
+			border			= {8,8,8,8}
+			stretch			= TRUE
+			gap_start_file	= "gap-top-start.png"
+			gap_start_border= {1,1,1,1}
+			gap_end_file	= "gap-top-end.png"
+			gap_end_border	= {1,1,1,1}
+			gap_side			= TOP
+    	}
+		image {
+			function			= BOX_GAP
+			file				= "half-top-plain.png"
+			border			= {8,8,8,8}
+			stretch			= TRUE
+			gap_start_file	= "gap-bottom-start.png"
+			gap_start_border= {1,1,1,1}
+			gap_end_file	= "gap-bottom-end.png"
+			gap_end_border	= {1,1,1,1}
+			gap_side			= BOTTOM
+		}
+		image {
+			function			= BOX_GAP
+			file				= "half-right-plain.png"
+			border			= {8,8,8,8}
+			stretch			= TRUE
+			gap_start_file	= "gap-left-start.png"
+			gap_start_border= {1,1,1,1}
+			gap_end_file	= "gap-left-end.png"
+			gap_end_border	= {1,1,1,1}
+			gap_side			= LEFT
+		}
+		image {
+			function			= BOX_GAP
+			file				= "half-left-plain.png"
+			border			= {8,8,8,8}
+			stretch			= TRUE
+			gap_start_file	= "gap-right-start.png"
+			gap_start_border= {1,1,1,1}
+			gap_end_file	= "gap-right-end.png"
+			gap_end_border	= {1,1,1,1}
+			gap_side			= RIGHT
+		}
+# How to draw the box of a notebook when it isnt attached to a tab
+    image {
+        function        = FLAT_BOX
+        file            = "button.png"
+        border          = {8,8,8,8}
+        stretch         = TRUE
+    }
+  }
+}class "GtkNotebook" style "notebook"
+
+
+
+
+
+style "item"{
+      base[NORMAL]      = "#F0F1EF"
+            }
+class "GtkTreeView" style "item"
+class "GtkListView" style "item"
+class "GtkTreeItem" style "item"
+class "GtkCTreeRow" style "item"
+class "GtkListItem" style "item"
+class "GtkCListItem" style "item"

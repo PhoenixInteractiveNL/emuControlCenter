@@ -656,7 +656,12 @@ class DatFileImport extends App {
 					$terminator = 21;
 					break;
 				case '0.96':
+					# publisher and storage added
 					$terminator = 23;
+					break;
+				case '0.97':
+					# filesize added (isnt added to database)
+					$terminator = 24;
 					break;
 			}
 
@@ -694,7 +699,8 @@ class DatFileImport extends App {
 				
 				$data['publisher'] = "";
 				$data['storage'] = "NULL";
-				if ($terminator == 23) {
+				#if ($terminator == 23) {
+				if ($version >= '0.96') {
 					$data['publisher'] = (($res[21] != "")) ? $res[21] : "" ;
 					$data['storage'] = (($res[22] != "")) ? $res[22] : "NULL" ;				
 				}
@@ -752,7 +758,7 @@ class DatFileImport extends App {
 			$message .= $this->ini->getPlatformName($this->eccident)." (".$this->eccident.")\n\n";
 			$message .= "Import only data for Platform: '".$this->eccident."'\n";
 			$message .= "Entry $cnt_current of $cnt_total processed\n";
-			$message .= $data['eccident']."\t".$data['name'].chr(13);
+			if ($data) $message .= $data['eccident']."\t".$data['name'].chr(13);
 			$this->status_obj->update_message($message);
 			
 			if ($this->status_obj->is_canceled()) return false;

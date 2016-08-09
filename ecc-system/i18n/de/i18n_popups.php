@@ -203,5 +203,11 @@ $i18n['popup'] = array(
 	/* 0.9 FYEO 9 */
 	'rom_dup_remove_msg_preview%s' =>
 		"This option will search for duplicate roms in your database and will output the found roms\n\nYou will also find the logfile in your ecc-logs folder!",
+	
+	/* 0.9.1 FYEO 3 */
+	'img_remove_all_title' =>
+		"Remove all images?",
+	'img_remove_all_msg%s' =>
+		"This will remove all images for the selected Game!\n\nShould the images for\n\n%s?",
 );
 ?>

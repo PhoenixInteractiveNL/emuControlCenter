@@ -34,6 +34,12 @@ class EccParserDataProzessor{
 	
 	public function parse()
 	{
+		$log = '';
+		$cntValid = 0;
+		$cntInvalid = 0;
+		$cntUnchanged = 0;
+		$cntOverall = 0;
+		
 		if ($this->_file_list) {
 			
 			/*
@@ -45,15 +51,9 @@ class EccParserDataProzessor{
 			*/
 			
 			// F�r jede file_extension daten parsen
-
-			$log = '';
-			
 			$log .= LOGGER::add('romparse', "Search and Parse new romfiles!!!!", 1);
-			$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME', 'PATH', 'PATH_PACK')));
-
-			$cntValid = 0;
-			$cntInvalid = 0;
-			$cntOverall = 0;
+			#$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME', 'PATH', 'PATH_PACK')));
+			$log .= LOGGER::add('romparse', join("\t", array('CRC32', 'EXT', 'NAME')));
 			
 			foreach($this->_file_list as $file_extension => $file_data) {
 				
@@ -83,6 +83,7 @@ class EccParserDataProzessor{
 							$this->_parser_stats_cnt_notchanged[$file_extension] = 0;
 						}
 						$this->_parser_stats_cnt_notchanged[$file_extension]++;
+						$cntUnchanged++;
 					}
 					else {
 						
@@ -120,7 +121,8 @@ class EccParserDataProzessor{
 							// Db operations
 							$cntValid++;
 							$this->dataParserObj->add_file($out);
-							$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'], $out['FILE_PATH'], $out['FILE_PATH_PACK'])));
+							$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'])));
+							#$log .= LOGGER::add('romparse', join("\t", array($out['FILE_CRC32'], $file_extension, $out['FILE_NAME'], $out['FILE_PATH'], $out['FILE_PATH_PACK'])));
 							
 						}
 						else {
@@ -158,7 +160,8 @@ class EccParserDataProzessor{
 		$logStats .= "Statistics\r\n";
 		$logStats .= "Parsed: ".$cntOverall."\r\n";
 		$logStats .= "Added: ".$cntValid."\r\n";
-		$logStats .= "Invalid: ".$cntInvalid;
+		$logStats .= "Invalid: ".$cntInvalid."\r\n";
+		$logStats .= "Unchanged: ".$cntUnchanged;
 		$log .= LOGGER::add('romparse', $logStats, 2);
 		
 		$detail_header = $this->format_results(true);

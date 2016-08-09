@@ -14,6 +14,8 @@ class EccParser {
 	
 	public function __construct($eccident=false, $ini, $path, $statusbar, $statusbar_lbl_bottom, $status_obj, $gui) {
 		
+		$guiManager = FACTORY::get('manager/Gui');
+		
 		$log = '';
 		
 		$this->gui = $gui;
@@ -49,7 +51,7 @@ class EccParser {
 					$message .= "##################################################\n\n";
 					$message .= "-> YES: Search for '*.".$fileExtension."' in this folder / platform!\n\n";
 					$message .= "-> NO: Skip the extension '*.".$fileExtension."' for this folder / platform!\n";
-					if (!$this->gui->open_window_confirm($title, $message)) {
+					if (!$guiManager->openDialogConfirm($title, $message)) {
 						unset($wanted_extensions[$fileExtension]);
 					}
 				}
@@ -73,7 +75,7 @@ class EccParser {
 			$message .= "Please select the right Platform to parse these extensions!\n\n";
 			$dispatcherState = ($useExtDispatcher) ? 'ENABLED' : 'DISABLED';
 			$message .= "The ecc fileetension dispatcher is ".$dispatcherState."\n\n";
-			$this->gui->open_window_info($title, $message);
+			$guiManager->openDialogInfo($title, $message);
 		}
 		
 		if (is_dir($path) && count($wanted_extensions)) {

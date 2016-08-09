@@ -171,8 +171,13 @@
 				Gtk::RESPONSE_OK
 			)
 		);
-		$dialog->set_position(Gtk::WIN_POS_CENTER);
 
+		#$dialog->set_modal(true);
+		$dialog->set_keep_above(true);
+		#$dialog->present();
+		
+		$dialog->set_position(Gtk::WIN_POS_CENTER);
+		
 		if (!realpath($path)) {
 			$path = (dirname($path)) ? dirname($path) : false;
 		}

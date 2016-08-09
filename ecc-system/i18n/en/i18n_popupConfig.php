@@ -107,5 +107,17 @@ $i18n['popupConfig'] = array(
 		"Activate logging",
 	'confEccStatusLogOpen' =>
 		"Show logfiles",
+		
+	/* 0.9.1 FYEO 5 */
+	'tab_label_emulators' =>
+		"Emulators",
+	'tab_label_general' =>
+		"General",
+	'tab_label_datfiles' =>
+		"DAT files",
+	'tab_label_images' =>
+		"Images",
+	'tab_label_colorsandfonts' =>
+		"Colors and Fonts",
 );
 ?>

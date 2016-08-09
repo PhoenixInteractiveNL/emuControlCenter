@@ -25,8 +25,9 @@
 				<li>
 				<h1><a href="#B">Contents</a></h1></li>
 				<li><br>
-				<a href="#about">1. About</a></li>
-				<li><a href="#changelog">2. Changelog</a></li>
+				<a href="#commandline">1. About</a><br>
+				<b><a href="#commandline">2. Commandline parameters</a></b></li>
+				<li><a href="#changelog">3. Changelog</a></li>
 			</ul>
 			</li>
 		</ul>
@@ -48,9 +49,137 @@
 		</div>
 
 		<div class="contentQa">
-			<h2><a name="changelog"></a>2. Changelog</h2>
+			<h2><a name="commandline"></a>2. Commandline parameters</h2>
 			<div class="qaBlock">
 				<ul class="level1">
+			<li>
+				<span style="font-weight: 400"><font size="1">Syntax</font><font size="1">: 
+				</font> </span><font size="1">ECC.EXE [/option] 
+				[-s]</font><span style="font-weight: 400"><font size="1"><br>
+				<br>
+				-s = Silent mode (no pop-up)<br>
+				<br>
+&nbsp;</font></span><table border="0" width="94%" id="table1" cellspacing="0" cellpadding="3">
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/about</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Displays ecc.exe information and current 
+						ecc.exe version.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/</font></b><font size="1"><b>config</b></font></td>
+						<td width="566"><span style="font-weight: 400"><font size="1">Brings up the ECC startup 
+						config screen, to config &#39;sound&#39; and &#39;minimize-2-tray&#39; 
+						options.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/windows
+						</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Startup ECC &#39;normally&#39; using &#39;php-win.exe&#39;, 
+						this startup has shell command window popups&nbsp; (ecc.exe 
+						v1.1 at normal startup)</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">
+						/developer</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Startup ECC &#39;normally&#39; using &#39;php.exe&#39; 
+						(developer mode), this leaves a &#39;php&#39; shell window to 
+						view, here you can see errors &amp; glitches</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/deskicon 
+						[-s]</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Creates a desktop shotcut of ECC, uses &#39;ecc-system\ecc.ico&#39; 
+						as icon, when no icon found it uses the icon within &#39;ecc.exe&#39;.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/verify</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Verify&#39;s PHP.EXE &amp; PHP-WIN.EXE if they 
+						are original &#39;ECC&#39; files.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/website</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Startup the DEFAULT browser and go to 
+						CAMYA website.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/phpversion</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Displays current PHP version.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/phpinfo
+						</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Displays ECC PHP information.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/regreset 
+						[-s]</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Resets all &#39;ecc&#39; registry values!, so 
+						that ONE-TIME window&#39;s will popup again.</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/regclean 
+						[-s]</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Delete all &#39;emuControlcenter&#39; registery 
+						keys and sub-keys!</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/unload 
+						[-s]</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Unload &#39;Startup&#39; and the PHP engine (use 
+						this when ecc.exe crashed), do not use this function on 
+						a server machine!</font></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left"><b><font size="1">/?</font></b></td>
+						<td width="566"><span style="font-weight: 400">
+						<font size="1">Displays ECC commandline HELP!</font></span></td>
+					</tr>
+				</table>
+			</li>
+			<li></li>
+		</ul>
+			</div>
+		</div>
+
+		<div class="contentQa">
+			<h2><a name="changelog"></a>3. Changelog</h2>
+			<div class="qaBlock">
+				<ul class="level1">
+					<li>
+					<h1><font size="1">Version 1.4.2.1<span style="font-weight: 400"> 
+			(2007.05.05)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Auto update check 
+					on startup in total silent mode!<br>
+&nbsp;&nbsp; - Not even an error message will be shown, in some cases there is a 
+					error caused by ECC when writing</span></li>
+					<li><span style="font-weight: 400">&nbsp;&nbsp;&nbsp;&nbsp; 
+					new ini at fresh installation.<br>
+&nbsp;&nbsp; - And you will not get bothered of error messages showing up when 
+					something goes wrong</span><br>
+					<span style="font-weight: 400">
+					<br>
+&nbsp;</span></li>
+					<li>
+					<h1><font size="1">Version 1.4.2.0<span style="font-weight: 400"> 
+			(2007.05.05)</span></font></h1></li>
+					<li><br><span style="font-weight: 400">* Added &#39;auto update 
+					check&#39; on startup!<br>
+					* This will notify the user if there is an update available!<br>
+					* Speed up the splashscreen a little bit.<br>
+					* Sound now start playing when splashscreen is shown.</span><br>
+					<br>
+&nbsp;</li>
 					<li>
 					<h1><font size="1">Version 1.4.1.2<span style="font-weight: 400"> 
 			(2007.03.11)</span></font></h1></li>

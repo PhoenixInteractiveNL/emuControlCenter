@@ -89,7 +89,7 @@ This folder is initial created with
 			$user_folder = $this->gui->ini->getKey('USER_DATA', 'base_path');
 			$title = I18N::get('popup', 'conf_userfolder_created_title');
 			$msg = sprintf(I18N::get('popup', 'conf_userfolder_created_msg%s%s'), '"'.implode('", "', array_keys($user_path_subfolder_merged)).'"', $user_folder);
-			$choice = $this->gui->open_window_info($title, $msg);
+			$choice = FACTORY::get('manager/Gui')->openDialogInfo($title, $msg);
 		}
 	}
 	
@@ -159,6 +159,8 @@ done by cyrille (aa@aa.fr)
 	}
 	
 	public function getPixbuf($imagePath, $width = false, $height = false, $aspectRatio = false) {
+		
+		if (!is_file($imagePath)) return null;
 		
 		if ($aspectRatio && $width && $height) {
 			return GdkPixbuf::new_from_file_at_size($imagePath, $width, $height);

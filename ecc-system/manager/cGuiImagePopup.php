@@ -26,6 +26,9 @@ class GuiImagePopup {
 	private $dropZoneBgColor2;
 	private $dropZoneBgColorSelected;
 	
+	# array only used to unset unselected eventboxes
+	private $slotEventObjects = array();
+	
 	/**
 	 * 
 	 */	
@@ -36,6 +39,7 @@ class GuiImagePopup {
 		$this->fileIoManager = FACTORY::get('manager/FileIO');
 		$this->imageManager = FACTORY::get('manager/Image');
 		$this->iniManager = FACTORY::get('manager/IniFile');
+		$this->guiManager = FACTORY::get('manager/Gui');
 
 		$this->initEnviroment();
 		$this->connect_signals();
@@ -110,6 +114,7 @@ class GuiImagePopup {
 		$this->updateImage();
 		
 		$this->gui->win_imagePopup->set_keep_above(true);
+		
 		$this->opened_state = true;
 		
 		$this->createImageDataArray();
@@ -151,6 +156,8 @@ class GuiImagePopup {
 			foreach($value as $key2 => $value2) {
 				foreach($value2 as $key3 => $value3) {
 					
+					$available = false;
+					
 					// get current label
 					$label = ucfirst($key2);
 					if (isset($value3['pos'])) $label .= ' '.sprintf("%02d", $value3['pos']);
@@ -160,6 +167,7 @@ class GuiImagePopup {
 					
 					$bgColor = $this->dropZoneBgColor;
 					if (isset($this->imageTankFlat[$value3['key']])) {
+						$available = true;
 						$bgColor = ($this->selectedImageType == $value3['key']) ? $this->dropZoneBgColorSelected : $this->dropZoneBgColor2;
 					}
 					
@@ -168,10 +176,16 @@ class GuiImagePopup {
 					$oEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($bgColor));
 
 					$oEvent->drag_dest_set(Gtk::DEST_DEFAULT_ALL, array(array('text/uri-list', 0, 0)), Gdk::ACTION_COPY);
+					$oEvent->connect("button-press-event", array($this, 'dispatchSlotSelection'), $value3['key'], $available);
 					$oEvent->connect("drag-data-received", array($this, 'onDropDragData'), $value3['key']);
 					
 					$oEvent->connect_simple_after('button-press-event', array($this, 'onItemSelect'), $value3['key']);
 					$oEvent->add($widged);
+					
+					# only for unsetting
+					$this->slotEventObjects[$value3['key']]['object'] = $oEvent;
+					$this->slotEventObjects[$value3['key']]['color'] = $bgColor;
+					
 					$widged = $oEvent;
 					
 					$table->attach($widged, $currentCol, $currentCol+1, $currentRow, $currentRow+1, Gtk::EXPAND, Gtk::EXPAND, 0, 0);
@@ -201,35 +215,75 @@ class GuiImagePopup {
 			$filename = str_replace('+', '%2B', $filename);
 			$sourceImagePath = urldecode(trim(str_replace('file:///', '', $filename)));
 			
-			if (file_exists($sourceImagePath)) {
-				
-				$transferModeState = $this->gui->mediaCenterOptRadioCopy->get_active();
-				$transferMode = ($transferModeState) ? 'COPY' : 'MOVE';
-				
-				if ($this->gui->mediaCenterOptConfirm->get_active()) {
-					$title =  "Transfer media to slot";
-					$msg =  "Should i store (".$transferMode.")\n\n".basename($sourceImagePath)."\n\ninto media-slot\n\n".$destImageType." ???";
-					if (!$this->gui->open_window_confirm($title, $msg)) return false;
-				}
-				
-				$this->imageManager = FACTORY::get('manager/Image');
-				if ($sourceImagePath && $this->imageManager->storeUserImage($transferMode, $this->eccident, $this->crc32, $sourceImagePath, $destImageType)) {
-					
-					if(LOGGER::$active) LOGGER::add('images', "img add: ".$this->eccident."\t".$this->crc32."\t".$sourceImagePath, 0);
-					
-					$this->updateImages($this->mediaInfo, $destImageType);
-					$this->twImageFill();
-					$this->createExtensionTable();
-				}
-				if ($this->imageManager->hasErrors()) {
-					$title =  "ERRORS!";
-					$msg = '';
-					$errors = $this->imageManager->getErrors();
-					foreach ($errors as $error) $msg .= $error;
-					if (!$this->gui->open_window_confirm($title, $msg)) return false;
-				}
-			}
+			$this->addImageToSlot($sourceImagePath, $destImageType);
 		}
+	}
+	
+	private function addImageToSlot($sourceImagePath, $slotName = false){
+		if (!file_exists($sourceImagePath)) return false;
+		
+		$this->gui->win_imagePopup->set_keep_below(true);
+		
+		$transferModeState = $this->gui->mediaCenterOptRadioCopy->get_active();
+		$transferMode = ($transferModeState) ? 'COPY' : 'MOVE';
+		
+		if ($this->gui->mediaCenterOptConfirm->get_active()) {
+			$title =  "Transfer media to slot";
+			$msg =  "Should i store (".$transferMode.")\n\n".basename($sourceImagePath)."\n\ninto media-slot\n\n".$slotName." ???";
+			if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
+		}
+		
+		$this->imageManager = FACTORY::get('manager/Image');
+		if ($sourceImagePath && $this->imageManager->storeUserImage($transferMode, $this->eccident, $this->crc32, $sourceImagePath, $slotName)) {
+			
+			if(LOGGER::$active) LOGGER::add('images', "img add: ".$this->eccident."\t".$this->crc32."\t".$sourceImagePath, 0);
+			
+			$this->updateImages($this->mediaInfo, $slotName);
+			$this->twImageFill();
+			$this->createExtensionTable();
+		}
+		if ($this->imageManager->hasErrors()) {
+			$title =  "ERRORS!";
+			$msg = '';
+			$errors = $this->imageManager->getErrors();
+			foreach ($errors as $error) $msg .= $error;
+			if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
+		}
+		$this->gui->win_imagePopup->set_keep_above(true);
+	}
+	
+	
+	public function removeImageFromSlot($imageFile = false, $slotName = false){
+		
+		$this->gui->win_imagePopup->set_keep_below(false);
+		
+		# used, if remove from slot context menu is selected
+		if ($imageFile == false && $slotName && isset($this->imageTankFlat[$slotName])) {
+			$imageFile = $this->imageTankFlat[$slotName];
+		}
+		
+		if ($this->gui->mediaCenterOptConfirm->get_active()) {
+			$title = I18N::get('popup', 'img_remove_title');
+			$msg = sprintf(I18N::get('popup', 'img_remove_msg%s'), basename($imageFile));
+			if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
+		}
+		
+		if($this->imageManager->removeUserImage($imageFile)) {
+			
+			if(LOGGER::$active) LOGGER::add('images', "img remove: ".$imageFile, 0);
+			
+			$this->updateImages($this->mediaInfo, false);
+			$this->twImageFill();
+			$this->createExtensionTable();
+			$this->updateImage();
+		}
+		else {
+			$title = I18N::get('popup', 'img_remove_error_title');
+			$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), $file);
+			if(FACTORY::get('manager/Gui')->openDialogInfo($title, $msg)) return false;
+		}
+		
+		$this->gui->win_imagePopup->set_keep_above(true);
 	}
 	
 	public function onItemSelect($key) {
@@ -273,6 +327,7 @@ class GuiImagePopup {
 	}
 	
 	public function onOpenImageFolder() {
+		$this->gui->win_imagePopup->set_keep_below(false);
 		$imagePath = $this->imageManager->getUserImageCrc32Folder($this->eccident, $this->crc32);
 		FACTORY::get('manager/Os')->executeProgramDirect($imagePath, 'open');
 	}
@@ -466,15 +521,6 @@ class GuiImagePopup {
 			$path = ($iter) ? $model->get_value($iter, 2) : false;
 
 			$menu = new GtkMenu();
-//			$miHeader = new GtkMenuItem('ONLY DUMMY! WILL NOT WORK!');
-//			$menu->append($miHeader);
-//			$menu->append(new GtkSeparatorMenuItem());
-//			foreach ($this->gui->image_type as $imageIndex => $value) {
-//				$miSaveType = new GtkMenuItem("save as '$value'");
-//				$miSaveType->connect_simple('activate', array($this, 'dispatchContexMenu'), 'save', $imageIndex, $path);
-//				$menu->append($miSaveType);
-//			}
-//			$menu->append(new GtkSeparatorMenuItem());
 
 			$miRemove = new GtkMenuItem('Remove this image');
 			$miRemove->connect_simple('activate', array($this, 'dispatchContexMenu'), 'remove', $path);
@@ -488,38 +534,84 @@ class GuiImagePopup {
 	
 	public function dispatchContexMenu($type, $param1=false, $param2=false) {
 		switch($type) {
-			case 'save':
-				$this->saveImage($param1, $param2);
-				break;
 			case 'remove':
-				$this->removeImage($param1);
+				$this->removeImageFromSlot($param1);
 				break;
 			default:
 		}
 	}
+
 	
-	private function removeImage($imageFile) {
+	public function dispatchSlotSelection($oEvent, $event, $slotName, $available){
 		
-		if ($this->gui->mediaCenterOptConfirm->get_active()) {
-			$title = I18N::get('popup', 'img_remove_title');
-			$msg = sprintf(I18N::get('popup', 'img_remove_msg%s'), basename($imageFile));
-			if (!$this->gui->open_window_confirm($title, $msg)) return false;
+		# right or doubleclick
+		if ($event->button == 3 || ($event->button == 1 && $event->type == 5)) {
+			$this->hilightSlot($oEvent, $slotName, $available);
+			$this->showSlotContextMenu($slotName, $available);
 		}
-		
-		if($this->imageManager->removeUserImage($imageFile)) {
-			
-			if(LOGGER::$active) LOGGER::add('images', "img remove: ".$imageFile, 0);
-			
-			$this->updateImages($this->mediaInfo, false);
-			$this->twImageFill();
-			$this->createExtensionTable();
-			$this->updateImage();
-		}
-		else {
-			$title = I18N::get('popup', 'img_remove_error_title');
-			$msg = sprintf(I18N::get('popup', 'img_remove_error_msg%s'), $file);
-			if($this->gui->open_window_info($title, $msg)) return false;
+		elseif($event->button == 1) {
+			$this->hilightSlot($oEvent, $slotName, $available);
 		}
 	}
+	
+	private function showSlotContextMenu($slotName, $available){
+		$menu = new GtkMenu();
+
+		# header
+		$subMenu = new GtkMenuItem("Image: ".$slotName);
+		$subMenu->set_sensitive(false);
+		$menu->append($subMenu);
+		
+		$menu->append(new GtkSeparatorMenuItem());
+		
+		if ($available) {
+			# add new image
+			$subMenu = new GtkMenuItem('Replace with other image');
+			$subMenu->connect_simple('activate', array($this, 'addImageByFileDialog'), $slotName);
+			$menu->append($subMenu);
+			
+			# remove image
+			$subMenu = new GtkMenuItem('Remove this image');
+			$subMenu->connect_simple('activate', array($this, 'removeImageFromSlot'), false, $slotName);
+			$menu->append($subMenu);
+		}
+		else {
+			# add new image
+			$subMenu = new GtkMenuItem('Add image to this slot');
+			$subMenu->connect_simple('activate', array($this, 'addImageByFileDialog'), $slotName);
+			$menu->append($subMenu);
+		}
+		
+		# footer
+		$menu->append(new GtkSeparatorMenuItem());
+		$subMenu = new GtkMenuItem("You can also use drag-n-drop!");
+		$subMenu->set_sensitive(false);
+		$menu->append($subMenu);
+		
+		$menu->show_all();
+		$menu->popup();
+	}
+	
+	private function hilightSlot($oEvent, $slotName, $available){
+		foreach($this->slotEventObjects as $eventObjectData){
+			$eventObjectData['object']->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($eventObjectData['color']));
+		}
+		$bgColor = ($available) ? $this->dropZoneBgColorSelected : '#FFFFFF';
+		$oEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($bgColor));
+	}
+	
+	public function addImageByFileDialog($slotName){
+		$this->gui->win_imagePopup->set_keep_below(false);
+		$iniManager = FACTORY::get('manager/IniFile');
+		$path = realpath($iniManager->getHistoryKey('selPathImageCenter'));
+		$title = "Add image for slot: ".$slotName."";
+		$sourceImagePath = FACTORY::get('manager/Os')->openChooseFileDialog($path, $title);
+		if ($sourceImagePath && realpath($sourceImagePath)) {
+			$this->addImageToSlot($sourceImagePath, $slotName);
+			$iniManager->storeHistoryKey('selPathImageCenter', realpath($sourceImagePath));
+		}
+		$this->gui->win_imagePopup->set_keep_above(true);
+	}
+	
 }
 ?>

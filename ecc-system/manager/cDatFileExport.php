@@ -13,59 +13,38 @@ class DatFileExport {
 	private $ecc_release = array();
 	
 	private $exportType = 'CSV';
-	
-	/*
-	* @author: ascheibel
-	*/
-	public function __construct($ini, $status_obj, $ecc_release)
-	{
+
+	public function __construct($ini, $status_obj, $ecc_release){
 		$this->status_obj = $status_obj;
 		$this->ini = $ini;
 		$this->ecc_release = $ecc_release;
 	}
 	
-	public function setDbms($dbmsObject) {
+	public function setDbms($dbmsObject){
 		$this->dbms = $dbmsObject;
 	}
-	
-	/*
-	* @author: ascheibel
-	*/
-	public function set_eccident($identifier)
-	{
+
+	public function set_eccident($identifier){
 		$this->_ident = strtolower($identifier);
 	}
 	
-	public function setExportType($type='ECC') {
+	public function setExportType($type='ECC'){
 		$this->exportType = $type;
 	}
-	
-	/*
-	* @author: ascheibel
-	*/
-	public function export_user_only($state=true)
-	{
+
+	public function export_user_only($state=true){
 		$this->_export_user_only = $state;
 	}
 	
-	public function set_sqlsnipplet_esearch($sql_snipplet=false) {
+	public function set_sqlsnipplet_esearch($sql_snipplet=false){
 		$this->sql_snipp_esearch = $sql_snipplet;
 	}
-	
-	/*
-	* @author: ascheibel
-	*/
-	public function export_data($path=false)
-	{
-		#$user_folder_images = $this->ini->getUserFolder($this->_ident.DIRECTORY_SEPARATOR."export_backup".DIRECTORY_SEPARATOR, true);
+
+	public function export_data($path=false){
 		return $this->save_dat_file_to_fs($path);
 	}
-	
-	/*
-	* @author: ascheibel
-	*/
-	public function get_dbhdl_for_export_data()
-	{
+
+	public function get_dbhdl_for_export_data(){
 		$sql_snipp = array();
 		if ($this->_ident) $sql_snipp[] =  "eccident = '".$this->_ident."'";
 		if ($this->_export_user_only) $sql_snipp[] =  "cdate not null";
@@ -73,42 +52,26 @@ class DatFileExport {
 		$sql_snipp = implode(" AND ", $sql_snipp);
 		if ($sql_snipp) $sql_snipp = "WHERE ".$sql_snipp;
 		
-		$q = '
-			SELECT
-			*
-			FROM
-			mdata
-			'.$sql_snipp.'
-			ORDER BY
-			eccident,
-			name,
-			crc32
-		';
-		//print $q;
+		$q = 'SELECT * FROM mdata '.$sql_snipp.' ORDER BY eccident, name, crc32';
 		return $this->dbms->query($q);
 	}
 	
-	/*
-	* @author: ascheibel
-	*/
-	public function get_language_data($mdat_id)
-	{
+	public function get_language_data($mdat_id){
 		$ret = array();
-		
 		$q = "SELECT lang_id FROM mdata_language WHERE mdata_id=".$mdat_id;
-		#print $q;
 		$hdl = $this->dbms->query($q);
-		while ($v = $hdl->fetch(1)) {
-			$ret[$v['lang_id']] = $v['lang_id'];
-		}
+		while ($v = $hdl->fetch(1)) $ret[$v['lang_id']] = $v['lang_id'];
 		return $ret;
 	}
 	
-	/*
-	* @author: ascheibel
-	*/
-	public function save_dat_file_to_fs($path=false)
-	{
+	public function getFileSize($eccident, $crc32){
+		$q = "SELECT size FROM fdata WHERE eccident='".$eccident."' AND crc32='".$crc32."'";
+		$hdl = $this->dbms->query($q);
+		if($row = $hdl->fetch(1)) return $row['size'];
+		return '';		
+	}
+	
+	public function save_dat_file_to_fs($path=false){
 		
 		$dbhdl = $this->get_dbhdl_for_export_data();
 		
@@ -183,7 +146,9 @@ class DatFileExport {
 					$languages = $this->get_language_data($v['id']);
 					$languages = implode("|", $languages);
 					
-					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";#\n";
+					$fileSize = $this->getFileSize($v['eccident'], $v['crc32']);
+					
+					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";#\n";
 					#print $line."\n";
 					fwrite($fhdl, $line);
 					$line = "";
@@ -235,11 +200,10 @@ class DatFileExport {
 		return $ret;
 	}
 	
-	private function createEccDatHeader() {
+	private function createEccDatHeader(){
 
-$this->exportHeader['title'] = $this->ecc_release['title'];
-			$this->exportHeader['title_short'] = $this->ecc_release['title_short'];
-		
+		$this->exportHeader['title'] = $this->ecc_release['title'];
+		$this->exportHeader['title_short'] = $this->ecc_release['title_short'];
 		
 		$line  = "";
 		$line .= "[ECC]\n";
@@ -261,11 +225,11 @@ $this->exportHeader['title'] = $this->ecc_release['title'];
 		$line .= "COMMENT=\t".$this->exportHeader['comment']."\n";
 		$line .= "\n";
 		$line .= "[ECC_MEDIA]\n";
-		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;#\n";
+		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;#\n";
 		return $line;
 	}
 	
-	private function createCsvDatHeader() {
+	private function createCsvDatHeader(){
 		
 		$head1 = "";
 		$line1  = "";
@@ -327,7 +291,5 @@ $this->exportHeader['title'] = $this->ecc_release['title'];
 		
 		return $line;
 	}
-
-	
 }
 ?>

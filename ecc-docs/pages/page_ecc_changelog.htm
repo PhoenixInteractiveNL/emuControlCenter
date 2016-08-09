@@ -16,8 +16,157 @@
 		<div class="return"><a href="page_content_eccinfo.html">&laquo; BACK</a><br /></div>
 		<h1><font size="1">ECC Documentation - ECC info - Changelog</font></h1>
 		<ul class="level1">
-			<li>
-				</li>
+			<li><h1><font size="1">Version 0.9.1</font></h1><br>
+			FYEO 06<br>
+			<span style="font-weight: 400">- platformNav contextmenu &quot;configuration&quot; 
+			now opens the emuconfig + selected platform<br>
+			- fixed &quot;show only roms w/o meta&quot;<br>
+			- Compare/Merge now also for roms you dont have possible (metadata 
+			only!)</span><br>
+			<br>
+			FYEO 05<span style="font-weight: 400"><br>
+			- removed option &quot;navigation autoupdate&quot; Now activated by default!<br>
+			- removed the tooltips from navigation and mainlist...<br>
+			- optimized search<br>
+			-- decrease timeout for freeform search<br>
+			-- fixed the strange behavior of &quot;match beginning of searchword&quot;<br>
+			- ConfigPopup - added i18n entries for all tab-names<br>
+			- updated ecc-datfile format (v0.97) filesize added!<br>
+			- fixed open compare popup only, if different roms are selected.<br>
+			- Topmenu<br>
+			-- now, &quot;Add new ROMS&quot; is deactivated, if no platform is selected!<br>
+			--- Also, if a platform is selected, this is shown as &quot;Add new ROMS 
+			for Platform&quot;<br>
+			--- Better, because the most new user dont know how &quot;All found works&quot; 
+			:-(<br>
+			--- new i18n file for topmenu translation<br>
+			</span><br>
+			FYEO 4<br>
+			<span style="font-weight: 400">- Doubleclick on Platform-Navigation 
+			opens &quot;Add ROM&quot; <br>
+			- optimized contextmenu - &#39;Start ROM with&#39; - Now begins with 
+			emulator-name <br>
+			- romCombiner (Compare/Merge) <br>
+			-- added FULL merge functionallity to merge eg. title, developer to 
+			an other rom! <br>
+			--- Use the arrows in popup to merge data! <br>
+			-- added mainlist contextmenu &#39;Compare - Select left side&#39; -&gt; 
+			&#39;Compare to &quot;romname&quot;&#39; <br>
+			--- First select a rom with &#39;Compare - Select left side&#39; <br>
+			--- Then a second with &#39;Compare to &quot;romname&quot;&#39; <br>
+			--- OR use drag´n´drop!!!! </span><br>
+			<br>
+			FYEO 3<br>
+			<span style="font-weight: 400">- Added option &quot;show all roms with 
+			personal notes!&quot; <br>
+			- romCombiner <br>
+			-- as first step added rom-compare - use drag-n-drop in maint 
+			listview! <br>
+			- ConfigPopup <br>
+			-- images: Added Thumbnail quality / min original size selector <br>
+			-- emucontrolcenter: reactivate startup-config <br>
+			- imageCenter <br>
+			-- Added 3 additional slots for storage images (like cds, 
+			cartdridges aso) <br>
+			- hopefully fixed problem with parsing PS1 Files. <br>
+			- mainlist context-menu <br>
+			-- added Remove ROM images (also automaticlly called after Remove 
+			ROM from database) </span><br>
+			<br>
+			</li>
+			FYEO 2<br>
+			<span style="font-weight: 400">- emuConfig <br>
+			-- added new info area for emulator infos/config-tips/weblink <br>
+			- Top-Menu <br>
+			-- added &quot;feel lucky&quot;, showing a single random game (F4) <br>
+			-- added &quot;reload&quot;, reloading roms in view (F5) <br>
+			-- added new main-menu item for update! (eccLive!) <br>
+			- imageCenter <br>
+			-- Add/Remove popup dont put imageCenter in background <br>
+			- Personal-Tab <br>
+			-- added save/delete-confirmation! <br>
+			-- Empty note will remove entry in database <br>
+			- center all confirm/info/browser popups <br>
+			- added some info-popups on add/remove </span><br>
+			<br>
+			FYEO 1<br>
+			<span style="font-weight: 400">- added nav-autoupdate for &quot;show all 
+			available metadata&quot; <br>
+			- imageCenter <br>
+			-- added contextmenu to add/remove images (rightclick on a imageSlot)
+			<br>
+			-- added hilighting on selection <br>
+			- optimized listviews performance <br>
+			- removed logging from allfound romparsing. To many results freezes 
+			ecc <br>
+			- better integration of ecc imageConverter + statistcs in 
+			status-area<br>
+			<br>
+			</span>Documenatation<span style="font-weight: 400"><br>
+			</span>2007.05.06:<span style="font-weight: 400"><br>
+			- Updated Changelists<br>
+			- New section: Troubleshooting<br>
+&nbsp; - Added &quot;OCX Outdated&quot; <br>
+&nbsp; - Added &quot;File is hacked&quot; <br>
+			</span>2007.04.29:<br>
+			<span style="font-weight: 400">- Updated Changelist <br>
+			- Updated ECC Tools Changelists <br>
+			- Updated ECC Tools Screenshots (white editions) <br>
+			- Updated supported filetypes <br>
+			- Fixed empty lines between links <br>
+			- New section: Getting started <br>
+			&nbsp; - Added &quot;Adding ROMS to ECC&quot; <br>
+			&nbsp; - Added &quot;Emulator assignment for platform&quot; <br>
+			&nbsp; - Added &quot;Add/Edit ROM media info&quot; <br>
+			&nbsp; - Added &quot;Adding images to a ROM&quot; <br>
+			<br>
+			</span>- Added platforms<span style="font-weight: 400"><br>
+			-- NEC PC-6001<br>
+			-- NEC PC-8801<br>
+			-- Fujitsu FM-7<br>
+			<br>
+			</span>- ECC Startup<br>
+				<span style="font-weight: 400"> v1.4.2.0:<br>
+				- Added &#39;auto update check&#39; on startup!<br>
+			- This will notify the user if there is an update available!<br>
+			- Speed up the splashscreen a little bit.<br>
+			- Sound now start playing when splashscreen is shown.<br>
+			v1.4.2.1:<br>
+			- Auto update check on startup in total silent mode!<br>
+			-- Not even an error message will be shown, in some cases there is a 
+			error<br>
+			-- caused by ECC when writing new ini at fresh installation.<br>
+			-- And you will not get bothered of error messages showing up when 
+			something goes wrong<br>
+			<br>
+			</span>- ECC Live!<span style="font-weight: 400"><br>
+			v2.1.0.5<br>
+			- Added better connection messages.<br>
+			- Added a row for &#39;lastupdate&#39;.<br>
+			- Added &#39;ecc start&#39; after updating, this is only when updating from 
+			&#39;autoupdatecheck&#39;.<br>
+			- Resized the updatelist.<br>
+			<br>
+			</span>- Tools GLOBAL<span style="font-weight: 400"><br>
+			-- White edition<br>
+			-- Added XP look<br>
+			-- Added tooltips on the buttons<br>
+			-- Updated the OCX components!<br>
+			-- Fixed &#39;HALT&#39; on Japanese / Chinese systems.<br>
+			--- The &#39;self validation&#39; check on the tools that where 
+			incompatible/conflicting<br>
+			--- with japanese / chinese charsets, hopefully this is fixed now!<br>
+			<br>
+			</span>- Core components<span style="font-weight: 400"><br>
+			- ECC Core update from 2.10.7.0 to v2.10.11.0<br>
+			- Pixbufloaders from 2005.08.02 to 2007.03.26<br>
+			- Immodules from 2005.08.02 to 2007.03.26<br>
+			- Pango 1.5.0 to 1.6.0<br>
+			- Updated some graphical engines<br>
+			<br>
+			</span>
+			<br>
+			
 			<li><h1><font size="1">Version 0.9</font></h1></li>
 			<li>
 				<br>
@@ -209,7 +358,6 @@
 				<span style="font-weight: 400">- Fixed the &#39;freeze&#39; bug on 
 				startup, by improving the focusing of the ECC window<br>
 				<br>
-				<br>
 				</span>ECC Installer<br>
 				<span style="font-weight: 400"><font size="1">v1.1.0.5 (ECC 
 				v0.9):</font><br>
@@ -231,7 +379,8 @@
 				&#39;tools&#39;.<br>
 				- Moved the Camya website link to startmenu folder &#39;links&#39;</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.8</font></h1></li>
 			<li>
 				<br>
@@ -346,7 +495,8 @@
 				won&#39;t send the report (fix) <br>
 				- Adjusted some text messages. </span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.71</font></h1></li>
 			<li>
 				<br>
@@ -359,6 +509,7 @@
 				* fixed romcenter datfile import bug <br>
 				* fixed missing indices to database for better performance
 				</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.7</font></h1></li>
 			<li>
@@ -408,7 +559,8 @@
 				* fixed predifined best emu for 32X<br>
 				* fixed open zip files bug</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.6</font></h1></li>
 			<li>
 				<br>
@@ -457,7 +609,8 @@
 				** &quot;Sports/other&quot;, <br>
 				** &quot;Jump n Run 3D&quot;.</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.96</font></h1></li>
 			<li>
 				<br>
@@ -503,7 +656,8 @@
 				** &quot;Sports/other&quot;,<br>
 				** &quot;Jump n Run 3D&quot;</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.95</font></h1></li>
 			<li>
 				<br>
@@ -527,7 +681,8 @@
 				** Panasonic 3DO<br>
 				** Sharp X68000</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.9</font></h1></li>
 			<li>
 				<br>
@@ -543,7 +698,8 @@
 				** Limit length of filename for non breaking divs.<br>
 				** Update statistics (platfom, categories)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.899</font></h1></li>
 			<li>
 				<br>
@@ -560,7 +716,8 @@
 				* Added some more tooltips<br>
 				* Navigation area now fixed.</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.898</font></h1></li>
 			<li>
 				<br>
@@ -590,7 +747,8 @@
 				** Playstation 1<br>
 				** Added Wonderswan nav image</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.897</font></h1></li>
 			<li>
 				<br>
@@ -601,7 +759,8 @@
 				** sega sc3000<br>
 				** Splitted wonderswan to b/w and color platform</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.896 <font color="#008000">PUBLIC 
 			RELEASE</font></font></h1></li>
 			<li>
@@ -611,7 +770,8 @@
 				</span>
 				<img border="0" src="../data/img/img_misc_champagne.jpg" width="256" height="212"></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.895</font></h1></li>
 			<li>
 				<br>
@@ -619,6 +779,7 @@
 				** implemented status-area update<br>
 				* Fixed category dropdown bug - on change emu-config!<br>
 				* Cleaned all platform configs</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.894</font></h1></li>
 			<li>
@@ -630,7 +791,8 @@
 				* Added file_id.diz<br>
 				* Update some copyright notes</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.893</font></h1></li>
 			<li>
 				<br>
@@ -658,7 +820,8 @@
 				* Remove some debug-outputs!<br>
 				* Add some ecc_readme.txt</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.892</font></h1></li>
 			<li>
 				<br>
@@ -667,7 +830,8 @@
 				* Optimized ecc-configuration area<br>
 				* Temporarily removed webservices</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.891</font></h1></li>
 			<li>
 				<br>
@@ -675,6 +839,7 @@
 				* Optimize navigation<br>
 				* optimized icons<br>
 				* removed some option-menu-items from top menu<br>
+				<br>
 &nbsp;</span></li>
 			<li><h1><font size="1">Version 0.5.89</font></h1></li>
 			<li>
@@ -691,6 +856,7 @@
 				**** Hide duplicate roms<br>
 				**** Hide images<br>
 				* Fixed a little bug in eventbox for language-edit<br>
+				<br>
 &nbsp;</span></li>
 			<li><h1><font size="1">Version 0.5.8899</font></h1></li>
 			<li>
@@ -704,7 +870,8 @@
 				** implemented /verify<br>
 				** implemented /reset</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8898</font></h1></li>
 			<li>
 				<br>
@@ -719,7 +886,8 @@
 				direct!<br>
 				* Added support button!</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8897</font></h1></li>
 			<li>
 				<br>
@@ -729,7 +897,8 @@
 				* removed direct rating in to... now build in media-info area!<br>
 				* implement auto-update-ini for emuDownloadCenter</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8896</font></h1></li>
 			<li>
 				<br>
@@ -748,7 +917,8 @@
 				* Fixed a big bug in relative-path handeling.<br>
 				** refactor methods to create relative paths</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8895</font></h1></li>
 			<li>
 				<span style="font-weight: 400">
@@ -776,14 +946,16 @@
 				*** New folder ecc-help/ with offline documentation<br>
 				*** Added a documentation css style and sample-pages</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8894</font></h1></li>
 			<li>
 				<br>
 				<span style="font-weight: 400">* Freeform-Search<br>
 				** Added timeout for keystrokes for better search performace</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8893</font></h1></li>
 			<li>
 				<br>
@@ -794,7 +966,8 @@
 				*** + AND search<br>
 				*** | OR search</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8892</font></h1></li>
 			<li>
 				<br>
@@ -814,13 +987,15 @@
 				* Implemented new direct media-edit bar<br>
 				** Implemented direct rate</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8891</font></h1></li>
 			<li>
 				<br>
 				<span style="font-weight: 400">* Fixed a big bug in parsing roms.</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.889</font></h1></li>
 			<li>
 				<br>
@@ -838,7 +1013,8 @@
 				** if you change the platform while paring, it shows the wrong 
 				pf in popups :-)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.888</font></h1></li>
 			<li>
 				<br>
@@ -861,13 +1037,15 @@
 				** Research in other tools for interesting features :-)<br>
 				** Found many but also found, that ecc will be a cool tool :-)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8879</font></h1></li>
 			<li>
 				<br>
 				<span style="font-weight: 400">* Updated ecc to PHP 5.1.4</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8878</font></h1></li>
 			<li>
 				<br>
@@ -889,7 +1067,8 @@
 				* Updated images for platform &quot;commodore c64&quot; (by phoenix)<br>
 				* Added msx nav image! (by phoenix)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8877</font></h1></li>
 			<li>
 				<br>
@@ -904,7 +1083,8 @@
 				* create buggy :-( FileParserGen for genesis roms (only to 
 				validate!)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.8875</font></h1></li>
 			<li>
 				<br>
@@ -919,7 +1099,8 @@
 				parse rom!<br>
 				*** Better implementation in 888 ;-)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.887</font></h1></li>
 			<li>
 				<br>
@@ -942,7 +1123,8 @@
 				* fixed bug in &quot;Configuration&quot; i18n-language dropdown!<br>
 				* fixed missing lang &quot;parse_rom_detail_headers&quot;</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.886</font></h1></li>
 			<li>
 				<br>
@@ -958,7 +1140,8 @@
 				** MSX (by phoenix)<br>
 				** Colorgenie (by phoenix)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.885</font></h1></li>
 			<li>
 				<br>
@@ -980,6 +1163,7 @@
 				ecc_general.ini<br>
 				* Added experimental webservice for meta/get meta/send (not 
 				really working :-))</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.884</font></h1></li>
 			<li>
@@ -994,6 +1178,7 @@
 				** ecc-dev.bat (shows debug output)<br>
 				* fixed translation in context menu<br>
 				* Remove save to history for hide images</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.883</font></h1></li>
 			<li>
@@ -1005,6 +1190,7 @@
 				** GCE Vectrex<br>
 				** Mattel Intellivision<br>
 				* Added new version of platform/media images (by phoenix)</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.882</font></h1></li>
 			<li>
@@ -1015,6 +1201,7 @@
 				** Shows only Platforms for the selected Category<br>
 				* Imagepopup<br>
 				** remove images in contex-menu</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.881</font></h1></li>
 			<li>
@@ -1022,6 +1209,7 @@
 				<span style="font-weight: 400">* imagepopup<br>
 				** added imageselect by preview image in scrollable area! :) 
 				Cool! :-)</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.880</font></h1></li>
 			<li>
@@ -1045,6 +1233,7 @@
 				** ecc-config dropdown for changing languages<br>
 				** i18n parser statusarea<br>
 				* Platform images / emuControlCenter-Logo clickable</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.879</font></h1></li>
 			<li>
@@ -1052,6 +1241,7 @@
 				<span style="font-weight: 400">* Added gif support<br>
 				* saving title screens as ecc_crc32_ingame_title.ext<br>
 				* first version of image-popup for full images.</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.878</font></h1></li>
 			<li>
@@ -1059,6 +1249,7 @@
 				<span style="font-weight: 400">* fixed bugs:<br>
 				** problem with escaped string in getEightDotThreePath()<br>
 				** writing NULL into db if a ecc-datfile is imported!</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.865/0.5.866/0.5.877</font></h1></li>
 			<li>
@@ -1095,6 +1286,7 @@
 				* Added 8.3 Filename-Support for Watara-Supervision emulator<br>
 				* Emus without commandline-support could be used using the 
 				RomRunner-PT [phoenix]</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.085</font></h1></li>
 			<li>
@@ -1131,6 +1323,7 @@
 				*** ingame_play_2 = second ingame playing screenshot<br>
 				*** ingame_play_3 = third ingame playing screenshot<br>
 				* Added platform &quot;Watara Supervision&quot; [by phoenix]</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.08</font></h1></li>
 			<li>
@@ -1184,6 +1377,7 @@
 				*** Atari 2600<br>
 				*** Atari 5200<br>
 				*** Atari 7800</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.07</font></h1></li>
 			<li>
@@ -1204,7 +1398,8 @@
 				** Add Platform-Nav context menu<br>
 				** Inline-Help system restructured!</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.06</font></h1></li>
 			<li>
 				<br>
@@ -1259,7 +1454,8 @@
 				** Add Splash-Screen at startup<br>
 				*** only shown first time, you open ecc (saved to history.ini)</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.05</font></h1></li>
 			<li>
 				<br>
@@ -1278,7 +1474,8 @@
 				*** insert credits from ecc.ini (author, web, email, comment)<br>
 				*** save export now use new user-folder structure</span></li>
 			<li>
-				</li>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.04</font></h1></li>
 			<li>
 				<br>
@@ -1303,7 +1500,9 @@
 				** Internal windows<br>
 				*** media-edit popup changed to splash-screen mode<br>
 				*** parser popup changed to splash-screen mode<br>
-				** temp. removed md5 support. ecc dont need md5 by now :-)</span><br>&nbsp;</li>
+				** temp. removed md5 support. ecc dont need md5 by now :-)</span><br>
+				<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.03</font></h1></li>
 			<li>
 				<br>
@@ -1321,6 +1520,7 @@
 				*** function optimize db also optimize bookmarks<br>
 				*** function clear db also optimize bookmarks<br>
 				** internal refactoring manager</span><br>
+				<br>
 &nbsp;</li>
 			<li><h1><font size="1">Version 0.5.02</font></h1></li>
 			<li>
@@ -1336,7 +1536,8 @@
 				** ContextMenu<br>
 				*** item remove from eccdb</span></li>
 			<li>
-			</li>
+			<br>
+&nbsp;</li>
 			<li><h1><font size="1">Version 0.5.01</font></h1></li>
 			<li>
 				<br>

@@ -1,7 +1,7 @@
 <?php
 class Image {
 	
-	private $imageThumbQuality = 75;
+	private $imageThumbQuality = 80;
 	private $imageThumbType = 'jpg';
 	private $imageThumbSourceMinSizeKb = '30000';
 	private $imageThumbSubfolder = 'thumb/';
@@ -23,6 +23,11 @@ class Image {
 		$this->fileIoManager = FACTORY::get('manager/FileIO');
 		$this->iniManager = FACTORY::get('manager/IniFile');
 		$this->resetErrors();
+		
+		$originalMinSize = $this->iniManager->getKey('USER_SWITCHES', 'image_thumb_original_min_size');
+		if ($originalMinSize) $this->imageThumbSourceMinSizeKb = $originalMinSize;
+		$imageThumbQuality = $this->iniManager->getKey('USER_SWITCHES', 'image_thumb_quality');
+		if ($imageThumbQuality) $this->imageThumbQuality = $imageThumbQuality;
 	}
 	
 	public function getCachedImages($eccident, $crc32) {
@@ -156,6 +161,12 @@ class Image {
 		if (!$eccident || !$crc32) return false;
 		$imageDestFolder = $this->iniManager->getUserFolder($eccident.'/images/'.substr($crc32, 0, 2).'/'.$crc32, $createOnDemand);
 		return $imageDestFolder;
+	}
+	
+	public function isEmptyUserImageCrc32Folder($eccident, $crc32){
+		$imageFolder = $this->getUserImageCrc32Folder($eccident, $crc32);
+		print "$imageFolder".LF;
+		return FACTORY::get('manager/FileIO')->dirIsEmpty($imageFolder);
 	}
 	
 	public function getUserImageFileName($imageDestFolder, $eccident, $crc32, $imageType, $fileExtension = ''){
@@ -307,44 +318,6 @@ class Image {
 		 
 	}
 	
-	
-//	public function searchForSavedRomImagesExtended2($eccident, $crc32, $imageType = false, $onlyFirstFound = true){
-//		
-//		$imageDestFolder = $this->getUserImageCrc32Folder($eccident, $crc32, false);
-//		if (!$imageDestFolder || !is_dir($imageDestFolder)) return array();
-//		
-//		$imageData = array();
-//		
-//		$dHdl = opendir($imageDestFolder);
-//		while(false !== $file = readdir($dHdl)) {
-//			if ($file == '.' || $file == '..') continue;
-//			
-//			$fileExtension = $this->fileIoManager->get_ext_form_file(basename($file));
-//			if (!$fileExtension) continue;
-//
-//			if (isset($this->supportedExtensions[strtolower($fileExtension)]) || false !== strpos($file, $crc32)) {
-//				# get imagetype from filename
-//				$possibleEccImageType = $this->exctractPossibleEccImageType($file);
-//				if ($onlyFirstFound) {
-//					if ($possibleEccImageType != $imageType) continue;
-//					return $this->cachedRomImages[$eccident][$crc32] = array(realpath($imageDestFolder.'/'.$file));
-//				}
-//				if (isset($this->eccImageTypes[$possibleEccImageType])) $imageData[$possibleEccImageType] = array(realpath($imageDestFolder.'/'.$file));
-//			}
-//		}
-//		
-//		# sort the selected image-type to front!
-//		if ($imageType && isset($imageData[$imageType])) {
-//			$tmp = array();
-//			$tmp[$imageType] = $imageData[$imageType];
-//			unset($imageData[$imageType]);
-//			foreach($imageData as $key => $value) $tmp[$key] = $value;
-//			$imageData = $tmp;
-//		}
-//		
-//		return $this->cachedRomImages[$eccident][$crc32] = @$imageData;
-//	}
-	
 	public function exctractPossibleEccImageType($fileName) {
 		$plainName = $this->fileIoManager->get_plain_filename($fileName);
 		$split = explode('_', $plainName);
@@ -364,7 +337,7 @@ class Image {
 		return false;
 	}
 	
-	public function convertOldEccImages($eccident) {
+	public function convertOldEccImages($eccident, $convert = true, $statusObject = false){
 		
 		if (!$eccident) return false;
 		
@@ -374,26 +347,56 @@ class Image {
 		$dHdl = opendir($sourceFolder);
 		$count = 0;
 		$char = '-';
+		$progress = 0;
 		while(false !== $file = readdir($dHdl)) {
+			
+			if ($convert && $statusObject) {
+				if ($progress < 1000) $progress++;
+				else $progress = 1;
+				$statusObject->update_progressbar($progress/1000, $count);
+				if ($statusObject->is_canceled()) return false;
+			}
 			
 			if ($file == '.' || $file == '..') continue;
 			$split = explode('_', $file);
 			if ($split[0] != 'ecc') continue;
-
+			
 			$eccident = $split[1];
 			$crc32 = $split[2];
 			$sourceImagePath = $sourceFolder.'/'.$file;
 			$destImageType = $this->exctractPossibleEccImageType($file);
 			if (!$destImageType) continue;
 			
-			$this->storeUserImage('MOVE', $eccident, $crc32, $sourceImagePath, $destImageType, false);
-			$char = (!isset($char) || $char == '--') ? '||' : '--';
-			print $char." (".$count.") \r";
-			
-			
-			$count++;
+			if($convert) {
+				while (gtk::events_pending()) gtk::main_iteration();
+				$this->storeUserImage('MOVE', $eccident, $crc32, $sourceImagePath, $destImageType, false);
+				$char = (!isset($char) || $char == '--') ? '||' : '--';
+				print $char." (".$count.") \r";
+				$count++;
+			}
+			else {
+				return true;
+			}
 		}
-		return $count;
+		return ($convert) ? $count : false;
+	}
+	
+	public function convertAllOldEccImages($convert = true, $statusObject = false){
+		$navigation = FACTORY::get('manager/IniFile')->getPlatformNavigation(false, false, true);
+		$data = array();
+		
+		foreach ($navigation as $eccident => $platformName) {
+			if ($eccident == 'NULL') continue;
+			
+			if ($convert && $statusObject) {
+				$platformName = $this->iniManager->getPlatformNavigation($eccident);
+				if (is_array($platformName)) $platformName = '';
+				$message = "Converting images for $platformName ($eccident)".chr(13);
+				$statusObject->update_message($message);
+			}
+			$data[$eccident] = $this->convertOldEccImages($eccident, $convert, $statusObject);
+		}
+		return $data;
 	}
 	
 	/**

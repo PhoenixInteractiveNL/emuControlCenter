@@ -4,6 +4,16 @@ class FACTORY {
 	public static $_instances = array();
 	private static $dbms;
 	
+	public function getModule($className, $parameter=false, $strictHash=""){
+		return self::get('modules/'.'mod_'.$className, $parameter, $strictHash);
+	}
+	public function getManager($className, $parameter=false, $strictHash=""){
+		return self::get('manager/'.$className, $parameter, $strictHash);
+	}
+	public function getItem($className, $parameter=false, $strictHash=""){
+		return self::get('items/'.$className, $parameter, $strictHash);
+	}
+	
 	public static function get($classNameIdent, $parameter=false, $strictHash="") {
 		
 		$className = $classNameIdent;
@@ -15,8 +25,8 @@ class FACTORY {
 			$classPath = substr($classNameIdent, 0, $postition+1);
 		}
 	
-		if (isset(FACTORY::$_instances[$className.$strictHash])) {
-			return FACTORY::$_instances[$className.$strictHash];
+		if (isset(FACTORY::$_instances[$classPath.$className.$strictHash])) {
+			return FACTORY::$_instances[$classPath.$className.$strictHash];
 		}
 		else {
 			return FACTORY::register_instance($className, $classPath, $parameter, $strictHash);
@@ -55,19 +65,19 @@ class FACTORY {
 		require_once($classFileName);
 		
 		if ($parameter != false) {
-			FACTORY::$_instances[$className.$strictHash] = new $className($parameter);
+			FACTORY::$_instances[$classPath.$className.$strictHash] = new $className($parameter);
 		}
 		else {
-			FACTORY::$_instances[$className.$strictHash] = new $className();
+			FACTORY::$_instances[$classPath.$className.$strictHash] = new $className();
 		}
 		
 		// if a manager has a class setDbms,
 		// factory also sets the dbms!
-		if (FACTORY::$dbms && method_exists(FACTORY::$_instances[$className.$strictHash], 'setDbms')) {
-			FACTORY::$_instances[$className.$strictHash]->setDbms(FACTORY::$dbms);
+		if (FACTORY::$dbms && method_exists(FACTORY::$_instances[$classPath.$className.$strictHash], 'setDbms')) {
+			FACTORY::$_instances[$classPath.$className.$strictHash]->setDbms(FACTORY::$dbms);
 		}
 		
-		return FACTORY::$_instances[$className.$strictHash];
+		return FACTORY::$_instances[$classPath.$className.$strictHash];
 	}
 	
 	public function status() {

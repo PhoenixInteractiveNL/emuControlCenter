@@ -23,6 +23,7 @@ class GuiPopConfig extends GladeXml {
 	private $datDataInit = false;
 	private $imgDataInit = false;
 	
+	private $emuInfoBuffer = array();
 	
 	public function __construct($gui = false) {
 		if ($gui) $this->mainGui = $gui;
@@ -272,7 +273,34 @@ class GuiPopConfig extends GladeXml {
 		
 		# set data to fields
 		//$this->emuAssignLabel->set_markup('<b>Emulator assignment ('.$fileExt.')</b>');
-		$this->emuAssignLabel->set_text(sprintf(I18N::get('popupConfig', 'lbl_emu_assign_hdl%s'), $fileExt));
+		$this->emuAssignLabel->set_markup('<b>'.sprintf(I18N::get('popupConfig', 'lbl_emu_assign_hdl%s'), $fileExt).'</b>');
+		
+		if (!isset($this->emuInfoBuffer[$eccident])) {
+			$spacer = str_repeat('-', 80)."\n";
+			$buffer = new GtkTextBuffer();
+			if (file_exists('infos/ecc_platform_'.$eccident.'_emu.ini')) {
+				$iniManager = FACTORY::get('manager/IniFile');
+				$emuData = $iniManager->parse_ini_file_quotes_safe('infos/ecc_platform_'.$eccident.'_emu.ini');
+				$text = '';
+				foreach($emuData as $section => $sectionData) {
+					$text .= trim($sectionData['name'])."\n";
+					$text .= $spacer;
+					foreach($sectionData as $key => $value) {
+						if ($key == 'name') continue;
+						$text .= $key.': '.trim($value)."\n";
+					}
+					$text .= "\n";
+				}
+			}
+			else {
+				$text = "No informations available yet...\n\n";
+			}
+			$text .= "Maybe you know an good emulator for this platform!\n".$spacer."You can add your infos to the Forum/Board at\nhttp://ecc.phoenixinteractive.mine.nu/\n";
+
+			$buffer->set_text($text);
+			$this->emuInfoBuffer[$eccident] = $buffer;
+		}
+		$this->emuInfo->set_buffer($this->emuInfoBuffer[$eccident]);
 		
 		$this->emuAssignGlobalActive->set_active($activeEmu);
 		$this->emuAssignGlobalPath->set_text($path);
@@ -281,8 +309,6 @@ class GuiPopConfig extends GladeXml {
 		$this->emuAssignGlobalEightDotThree->set_active($eightDotThree);
 		$this->emuAssignGlobalFilenameOnly->set_active($filenameOnly);
 		$this->emuAssignGlobalNoExtension->set_active($noExtension);
-		
-		
 	}
 	
 	public function storeTempEmulatorData($onlyReturn = false) {
@@ -459,7 +485,7 @@ class GuiPopConfig extends GladeXml {
 			$iniManager = FACTORY::get('manager/IniFile');
 			$iniManager->storeIniGlobal($this->globalIni);
 			$iniManager->storeGlobalFont($this->globalIni['GUI_COLOR']['global_font_type']);
-			if ($this->mainGui->open_window_confirm('restart ecc', 'Restart emuControlCenter to see the changes?')) {
+			if (FACTORY::get('manager/Gui')->openDialogConfirm('restart ecc', 'Restart emuControlCenter to see the changes?')) {
 				FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../../ecc.exe', 'open');
 				Gtk::main_quit();
 			}
@@ -580,6 +606,17 @@ class GuiPopConfig extends GladeXml {
 
 		$this->confEccUserPathButton->connect_simple('clicked', array($this, 'onSelectUserPath'));
 		
+		$this->perPageDetail = array(
+			'10',
+			'25',
+			'50',
+			'100',
+		);
+		$selected =  $iniManager->getKey('USER_SWITCHES', 'show_media_pp');
+		if ($selected > 100) $selected = 100;
+		$index =  array_search($selected, $this->perPageDetail);
+		$void = new IndexedCombobox($this->cfgEccDetailPerPage, false, $this->perPageDetail, false, $index);
+		
 		$this->perPage = array(
 			'10',
 			'25',
@@ -589,10 +626,6 @@ class GuiPopConfig extends GladeXml {
 			'500',
 			'1000',
 		);
-		$selected =  $iniManager->getKey('USER_SWITCHES', 'show_media_pp');
-		$index =  array_search($selected, $this->perPage);
-		$void = new IndexedCombobox($this->cfgEccDetailPerPage, false, $this->perPage, false, $index);
-		
 		$selected =  $iniManager->getKey('USER_SWITCHES', 'media_perpage_list');
 		$index =  array_search($selected, $this->perPage);
 		$void = new IndexedCombobox($this->cfgEccListPerPage, false, $this->perPage, false, $index);
@@ -621,7 +654,7 @@ class GuiPopConfig extends GladeXml {
 		$this->globalIni['USER_DATA']['language'] = $this->languages[$this->confEccLanguage->get_active_text()];
 
 		# USER_SWITCHES
-		$this->globalIni['USER_SWITCHES']['show_media_pp'] = $this->perPage[$this->cfgEccDetailPerPage->get_active_text()];
+		$this->globalIni['USER_SWITCHES']['show_media_pp'] = $this->perPageDetail[$this->cfgEccDetailPerPage->get_active_text()];
 		$this->globalIni['USER_SWITCHES']['media_perpage_list'] = $this->perPage[$this->cfgEccListPerPage->get_active_text()];
 		$this->globalIni['USER_SWITCHES']['log_details'] = $this->confEccStatusLogCheck->get_active();
 
@@ -732,7 +765,7 @@ class GuiPopConfig extends GladeXml {
 		if (!$this->imgDataInit) $this->imgDataInit = true;
 		else return true;
 		
-		$this->lbl_img_otp_list_hdl->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_hdl'));
+		$this->lbl_img_otp_list_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_img_otp_list_hdl').'</b>');
 		$this->lbl_img_opt_list_imagesize->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_imagesize'));
 		$this->lbl_img_opt_list_aspectratio->set_text(I18N::get('popupConfig', 'lbl_img_otp_list_aspectratio'));
 		
@@ -753,11 +786,34 @@ class GuiPopConfig extends GladeXml {
 		
 		$imgFastRefresh = $iniManager->getKey('USER_SWITCHES', 'image_fast_refresh');
 		$this->cfgImgDetailImageFastRefresh->set_active($imgFastRefresh);
+		
+		$this->thumbQuality = array(
+			'90',
+			'80',
+			'70',
+			'60',
+			'50',
+			'40',
+			'30',
+			'30',
+			'10',
+		);
+		$selected =  $iniManager->getKey('USER_SWITCHES', 'image_thumb_quality');
+		if (!$selected) $selected = '80';
+		$index =  array_search($selected, $this->thumbQuality);
+		$void = new IndexedCombobox($this->cfgImgThumbQuality, false, $this->thumbQuality, false, $index);
+		
+		$originalMinSize =  $iniManager->getKey('USER_SWITCHES', 'image_thumb_original_min_size');
+		if (!$originalMinSize) $originalMinSize = 30000;
+		$this->cfgImgThumbMinBytes->set_value($originalMinSize);
+		
 	}
 	public function storeImgData($hidePopup = true) {
 		$this->globalIni['USER_SWITCHES']['image_mainview_size'] = $this->imageSizes[$this->cfgImgDetailImageSize->get_active_text()];
 		$this->globalIni['USER_SWITCHES']['image_aspect_ratio'] = (int)$this->cfgImgDetailImageAspectRatio->get_active();
 		$this->globalIni['USER_SWITCHES']['image_fast_refresh'] = (int)$this->cfgImgDetailImageFastRefresh->get_active();
+		$this->globalIni['USER_SWITCHES']['image_thumb_quality'] = $this->thumbQuality[$this->cfgImgThumbQuality->get_active_text()];
+		$this->globalIni['USER_SWITCHES']['image_thumb_original_min_size'] = (int)$this->cfgImgThumbMinBytes->get_value();
 	}
 	
 	

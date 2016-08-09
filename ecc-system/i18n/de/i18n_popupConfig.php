@@ -16,11 +16,11 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_hdl' =>
 		"Konfiguriere emuControlCenter",
 	'lbl_ecc_userfolder' =>
-		"User Ordner (für Bilder und Exportdateien)",
+		"User Ordner (fï¿½r Bilder und Exportdateien)",
 	'lbl_ecc_userfolder_button' =>
-		"Ordner ändern",
+		"Ordner ï¿½ndern",
 	'title_ecc_userfolder_popup' =>
-		"Ordner Position wählen",
+		"Ordner Position wï¿½hlen",
 	/* ECC-OPTIONS */
 	'lbl_ecc_otp_hdl' =>
 		"Optionen",
@@ -36,16 +36,16 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_colfont_font_list' =>
 		"Listen Schriftart",
 	'title_ecc_colfont_font_list_popup' =>
-		"Bitte wähle eine Schriftart für die Listen/Detailansicht.",
+		"Bitte wï¿½hle eine Schriftart fï¿½r die Listen/Detailansicht.",
 	'lbl_ecc_colfont_font_global' =>
 		"GLOBALE Schriftart",
 	'title_ecc_colfont_font_global' =>
-		"Bitte wähle eine GLOBALE Schriftart ",
+		"Bitte wï¿½hle eine GLOBALE Schriftart ",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
-		"Startvorgänge",
+		"Startvorgï¿½nge",
 	'btn_ecc_startup' =>
-		"Startvorgänge einstellen",
+		"Startvorgï¿½nge einstellen",
 	
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
@@ -56,13 +56,13 @@ $i18n['popupConfig'] = array(
 		"Platform Kategorie",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
-		"Emulator verknüpfen (%s)",
+		"Emulator verknï¿½pfen (%s)",
 	'lbl_emu_assign_path' =>
 		"Ordner -> Emulator",
 	'btn_emu_assign_path_select' =>
-		"Emulator auswählen",
+		"Emulator auswï¿½hlen",
 	'title_emu_assign_path_select_popup%s' =>
-		"Emulator auswählen für %s",
+		"Emulator auswï¿½hlen fï¿½r %s",
 	'lbl_emu_assign_parameter' =>
 		"Komandozeilen-Parameter",
 	'lbl_emu_assign_escape' =>
@@ -107,5 +107,17 @@ $i18n['popupConfig'] = array(
 		"Activate logging",
 	'confEccStatusLogOpen' =>
 		"Show logfiles",
+		
+	/* 0.9.1 FYEO 5 */
+	'tab_label_emulators' =>
+		"Emulatoren",
+	'tab_label_general' =>
+		"General",
+	'tab_label_datfiles' =>
+		"DAT files",
+	'tab_label_images' =>
+		"Bilder",
+	'tab_label_colorsandfonts' =>
+		"Farben und Schrift",
 );
 ?>

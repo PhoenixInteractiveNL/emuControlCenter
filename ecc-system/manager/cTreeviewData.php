@@ -4,6 +4,8 @@ class TreeviewData {
 	
 	private $dbms = false;
 	
+	private $showOnlyPersonal = false;
+	
 	/* ------------------------------------------------------------------------
 	*
 	*/
@@ -23,6 +25,10 @@ class TreeviewData {
 			return 'LIMIT '.(int)$limit[0].', '.(int)$limit[1].'';
 		}
 		return "";
+	}
+	
+	public function showOnlyPersonal($state){
+		$this->showOnlyPersonal = $state;
 	}
 	
 	
@@ -80,7 +86,8 @@ class TreeviewData {
 		$show_files_only=true,
 		$toggle_show_doublettes=false,
 		$toggle_show_metaless_roms_only=false,
-		$searchRating = false
+		$searchRating = false,
+		$randomGame = false
 	)
 	{
 		$ret = array();
@@ -125,17 +132,26 @@ class TreeviewData {
 		if (!$snip_where_sql) $snip_where_sql = " 1 ";
 		
 		$snip_join = array();
-		if (!$show_files_only) {
+		if ($this->showOnlyPersonal) {
+			$snip_join[] = "udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
+		}
+		elseif (!$show_files_only) {
 			$snip_join[] = "fdata AS fd left join mdata AS md on (fd.eccident=md.eccident and fd.crc32=md.crc32)";
 		} else {
 			$snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
 		}
+		
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
 		$snip_join_sql = implode(" ", $snip_join);
 
 		$sqlOrderBy[] = "UPPER(coalesce(md.name, fd.title)) COLLATE NOCASE ".$order_by;
 		
 		$snipSqlOrderBy = "ORDER BY ".implode(", ", $sqlOrderBy);
+		
+		if ($randomGame) {
+			$snipSqlOrderBy = "ORDER BY random(*)";
+			$limit = array(0,1);
+		}
 		
 		$q = "
 			SELECT
@@ -181,7 +197,6 @@ class TreeviewData {
 			".$snipSqlOrderBy."
 			". $this->get_sql_limit($limit)."
 		";
-		
 		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		while($res = $hdl->fetch(SQLITE_ASSOC)) {
@@ -910,7 +925,7 @@ class TreeviewData {
 	*
 	*/
 	
-	public function getNavPlatformCounts($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false)
+	public function getNavPlatformCounts($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false, $show_files_only=false)
 	{
 		// CREATE WHERE-CLAUSE
 		$snip_where = array();
@@ -937,16 +952,20 @@ class TreeviewData {
 		// concat strings to snipplet
 		$sql_where = implode(" AND ", $snip_where);
 		
-		// CREATE JOIN, IF NEEDED
+		// inner = count only roms with metadata
+		$joinType = ($show_files_only) ? 'inner' : 'left';
+		
 		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
+		
+		$personalJoin = ($this->showOnlyPersonal) ? " udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) " : 'fdata AS fd';
 		
 		// GET COUNT
 		$q = "
 			SELECT
 			fd.eccident as eccident, count(fd.id) as cnt
 			FROM
-			fdata AS fd
-			left join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
+			".$personalJoin."
+			".$joinType." join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
 			".$sql_join."
 			WHERE
 			".$sql_where."
@@ -964,7 +983,7 @@ class TreeviewData {
 	/* ------------------------------------------------------------------------
 	*
 	*/
-	public function get_media_count_for_eccident_search($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false)
+	public function get_media_count_for_eccident_search($extension, $toggle_show_doublettes, $language=false, $category=false, $search_ext=false, $toggle_show_metaless_roms_only=false, $sqlLike=false, $show_files_only=false)
 	{
 		// CREATE WHERE-CLAUSE
 		$snip_where = array();
@@ -993,21 +1012,26 @@ class TreeviewData {
 		// concat strings to snipplet
 		$sql_where = implode(" AND ", $snip_where);
 		
+		// inner = count only roms with metadata
+		$joinType = ($show_files_only) ? 'inner' : 'left';
+		
+		$personalJoin = ($this->showOnlyPersonal) ? " udata AS ud inner join fdata AS fd on (ud.eccident=fd.eccident and ud.crc32=fd.crc32) " : 'fdata AS fd';
+
 		// CREATE JOIN, IF NEEDED
-		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
+		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";		
 		
 		// GET COUNT
 		$q = "
 			SELECT
 			count(fd.id)
 			FROM
-			fdata AS fd
-			left join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
+			".$personalJoin."
+			".$joinType." join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident
 			".$sql_join."
 			WHERE
 			".$sql_where."
 		";
-		//print $q."\n";
+		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		return $hdl->fetchSingle();
 	}

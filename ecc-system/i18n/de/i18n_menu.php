@@ -97,5 +97,14 @@ $i18n['menu'] = array(
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
 		"Duplicate ROMS",
+	
+	/* 0.9.1 FYEO 3*/
+	'lbl_img_remove_all' =>
+		"Remove ROM images",
+	/* 0.9.1 FYEO 4*/
+	'lbl_meta_compare_left' =>
+		"COMPARE - Select left side",		
+	'lbl_meta_compare_right%s' =>
+		"COMPARE to \"%s\"",		
 );
 ?>

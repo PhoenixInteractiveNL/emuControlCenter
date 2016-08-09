@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	fr (français)
+ * language:	fr (franï¿½ais)
  * author:	Scheibel Andreas - Traduit par Belin Cyrille
  * date:	2006/12/31 
  * ------------------------------------------
@@ -25,7 +25,7 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_otp_hdl' =>
 		"Options",
 	'lbl_ecc_opt_detail_pp' =>
-		"Eléments par page (images)",
+		"Elï¿½ments par page (images)",
 	'lbl_ecc_opt_list_pp' =>
 		"Taille des images",
 	'lbl_ecc_opt_language' =>
@@ -36,16 +36,16 @@ $i18n['popupConfig'] = array(
 	'lbl_ecc_colfont_font_list' =>
 		"Taille et police des listes",
 	'title_ecc_colfont_font_list_popup' =>
-		"Sélectionner une police pour les listes",
+		"Sï¿½lectionner une police pour les listes",
 	'lbl_ecc_colfont_font_global' =>
-		"Taille et police générales",
+		"Taille et police gï¿½nï¿½rales",
 	'title_ecc_colfont_font_global' =>
-		"Sélectionner une police globale",
+		"Sï¿½lectionner une police globale",
 	/* ECC-STARTUP */
 	'lbl_ecc_startup_hdl' =>
-		"Démarrage",
+		"Dï¿½marrage",
 	'btn_ecc_startup' =>
-		"Changer la configuration de démarrage",
+		"Changer la configuration de dï¿½marrage",
 	
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
@@ -56,15 +56,15 @@ $i18n['popupConfig'] = array(
 		"Categorie de la plateforme",
 	/* EMU-ASSING */
 	'lbl_emu_assign_hdl%s' =>
-		"Assignement d'émulateur (%s)",
+		"Assignement d'ï¿½mulateur (%s)",
 	'lbl_emu_assign_path' =>
-		"Chemin de l'émulateur",
+		"Chemin de l'ï¿½mulateur",
 	'btn_emu_assign_path_select' =>
-		"Sélectionner l'émulateur",
+		"Sï¿½lectionner l'ï¿½mulateur",
 	'title_emu_assign_path_select_popup%s' =>
-		"Sélectionner l'émulateur pour %s",
+		"Sï¿½lectionner l'ï¿½mulateur pour %s",
 	'lbl_emu_assign_parameter' =>
-		"Paramètre de ligne de commande",
+		"Paramï¿½tre de ligne de commande",
 	'lbl_emu_assign_escape' =>
 		"Mode Escape path",
 	'lbl_emu_assign_eightdotthree' =>
@@ -76,7 +76,7 @@ $i18n['popupConfig'] = array(
 	
 	/* DAT */
 	'lbl_dat_hdl' =>
-		"Configurer le fichier de données",
+		"Configurer le fichier de donnï¿½es",
 	'lbl_dat_author' =>
 		"Auteur",
 	'lbl_dat_website' =>
@@ -89,7 +89,7 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"Options",
 	'lbl_dat_opt_namestrip' =>
-		"Effacer les fichiers de données romcenter",
+		"Effacer les fichiers de donnï¿½es romcenter",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
@@ -107,5 +107,17 @@ $i18n['popupConfig'] = array(
 		"Activate logging",
 	'confEccStatusLogOpen' =>
 		"Show logfiles",
+		
+	/* 0.9.1 FYEO 5 */
+	'tab_label_emulators' =>
+		"Emulators",
+	'tab_label_general' =>
+		"General",
+	'tab_label_datfiles' =>
+		"DAT files",
+	'tab_label_images' =>
+		"Images",
+	'tab_label_colorsandfonts' =>
+		"Colors and Fonts",
 );
 ?>

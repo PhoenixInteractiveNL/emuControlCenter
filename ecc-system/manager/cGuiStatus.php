@@ -18,7 +18,7 @@ class GuiStatus {
 		if ($this->status_status_running === true) {
 			$title = I18N::get('popup', 'status_process_running_title');
 			$msg = I18N::get('popup', 'status_process_running_msg');
-			$this->gui->open_window_info($title, $msg);
+			FACTORY::get('manager/Gui')->openDialogInfo($title, $msg);
 			return false;
 		}
 		
@@ -91,7 +91,7 @@ class GuiStatus {
 			$this->reset1();
 		}
 		else {
-			if ($this->gui->open_window_confirm($this->cancel_title, $this->cancel_msg)) {;
+			if (FACTORY::get('manager/Gui')->openDialogConfirm($this->cancel_title, $this->cancel_msg)) {;
 				$this->status_cancel = true;
 				$this->hide_main();
 				#$this->reset1();
@@ -112,7 +112,7 @@ class GuiStatus {
 	public function open_popup_complete($title="", $msg="") {
 		if (!$this->status_cancel) {
 			$msg .= I18N::get('popup', 'status_dialog_close');
-			if ($this->gui->open_window_confirm($title, $msg)) $this->hide_main();
+			if (FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) $this->hide_main();
 		}
 		$this->reset1();
 	}

@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
  * date:	2007/05/13
  * ------------------------------------------
@@ -44,7 +44,7 @@ $i18n['popupConfig'] = array(
 		"Startup Konfiguration",
 	'btn_ecc_startup' =>
 		"Konfiguration öffnen",
-	
+
 	/* EMU-PLATFORM */
 	'lbl_emu_hdl%s%s' =>
 		"%s (%s)",
@@ -71,7 +71,7 @@ $i18n['popupConfig'] = array(
 		"Nur Dateinamen",
 	'lbl_emu_assign_noextension' =>
 		"Keine Dateierweiterungen",
-	
+
 	/* DAT */
 	'lbl_dat_hdl' =>
 		"Datfile Konfiguration",
@@ -83,29 +83,31 @@ $i18n['popupConfig'] = array(
 		"Email",
 	'lbl_dat_comment' =>
 		"Kommentar",
+
 	/* DAT-OPTIONS */
 	'lbl_dat_opt_hdl' =>
 		"Optionen",
 	'lbl_dat_opt_namestrip' =>
 		"Bereinige Romcenter Dateien",
-		
+
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
-		"Option - Rom Details",
+		"Optionen - Rom Details",
 	'lbl_img_otp_list_imagesize' =>
 		"Bildgröße",
 	'lbl_img_otp_list_aspectratio' =>
 		"Originalformat",
+
 	/* 0.9 FYEO 4 */
 	'lbl_img_otp_list_fastrefresh' =>
 		"Listen schnell aufbauen",
-		
+
 	/* 0.9 FYEO 9 */
 	'confEccStatusLogCheck' =>
 		"Aktiviere logging",
 	'confEccStatusLogOpen' =>
 		"Öffne Logfiles",
-		
+
 	/* 0.9.1 FYEO 5 */
 	'tab_label_emulators' =>
 		"Emulatoren",
@@ -117,7 +119,7 @@ $i18n['popupConfig'] = array(
 		"Bilder",
 	'tab_label_colorsandfonts' =>
 		"Farben und Schrift",
-	
+
 	/* 0.9.2 FYEO 1 */
 	'lbl_emu_tips' =>
 		"Emulatoren Tips / Tricks / Downloads",
@@ -146,13 +148,13 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_edit_eccscript' =>
 		"eccScript ändern",
 	'lbl_emu_assign_edit_eccscript_error' =>
-		"Du kannst erst dann ein eccScript anlegen, wenn du bereits ein Emulator ausgewählt hast!",
+		"Es kann erst ein ECC-Script angelegt werden, wenn zuvor ein Emulator gewählt wurde!",
 
 	/* 0.9.2 FYEO 6 */
 	'lbl_emu_assign_eccscript_hdl' =>
 		"eccScript Optionen",
 	'lbl_emu_assign_delete_eccscript' =>
-		"löschen",
+		"Löschen",
 	'msg_emu_assign_delete_eccscript%s' =>
 		"Willst Du das eccScript\n\n%s\n\nwirklich löschen?",
 
@@ -166,7 +168,7 @@ $i18n['popupConfig'] = array(
 	'startConfOptHdl' =>
 		"Optionen",
 	'startConfUpdate' =>
-		"Beim starten nach updates suchen",
+		"Beim starten nach Updates suchen",
 	'startConfMinimize' =>
 		"Minimieren in die Schnellstartleiste",
 	'startConfSoundSelect' =>
@@ -180,15 +182,15 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_edit_eccscript_error_notfound' =>
 		"Es wurde kein Emulator gefunden! Bitte zuerst einen Emulator auswählen!",
 	'lbl_emu_assign_create_eccscript' =>
-		"Neues eccScript",
+		"Neuer eccScript",
 	'emu_info_nodata' =>
 		"Zur Zeit sind noch keine informationen verfügbar ...",
 	'emu_info_footer%s' =>
 		"Kennst Du weitere Emulatoren?\nBesuche das ecc-Forum\n%s\nund teile sie uns mit!",
-	
+
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
-		"Select a startup sound",
+		"Wähle einen Startsound!",
 
 	/* 0.9.2 FYEO 14 */
 	'title_emu_assign_found_eccscript' =>
@@ -268,7 +270,7 @@ $i18n['popupConfig'] = array(
 		"Platform Einstellungen",
 	'tab_label_platforms' =>
 		"Platform / Emulator",
-	
+
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
 		"Speichere Ansicht-Einstellungen (fur für Experten)",
@@ -276,7 +278,7 @@ $i18n['popupConfig'] = array(
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
 		"Links & Infos",
-		
+
 	/* 0.9.6 WIP 20 */
 	'startConfBugreportSend' =>
 		"Fehlerbricht automatisch versenden",
@@ -284,6 +286,6 @@ $i18n['popupConfig'] = array(
 		"Spracheinstellungen",
 	'tab_label_language' =>
 		"Sprache",
-		
+
 );
 ?>

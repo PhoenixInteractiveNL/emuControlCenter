@@ -35,7 +35,7 @@ $i18n['dropdown_search_fields'] = array(
 	'[[filepath]]' =>
 		"Bestandspad",
 	'[[eccident]]' =>
-		"eccident",
+		"ECCident",
 	'[[crc32]]' =>
 		"CRC32",
 );

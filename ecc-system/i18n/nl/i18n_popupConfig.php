@@ -267,7 +267,7 @@ $i18n['popupConfig'] = array(
 	
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
-		"Save View-Mode settings (only experts)",
+		"Bewaar lijst/detail instellingen (alleen voor experts)",
 	
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
@@ -275,10 +275,10 @@ $i18n['popupConfig'] = array(
 		
 	/* 0.9.6 WIP 20 */
 	'startConfBugreportSend' =>
-		"Send automatic bugreport at startup",
+		"Verstuur automatisch een foutenrapport bij opstarten",
 	'lbl_ecc_opt_language' =>
-		"Language settings",
+		"Taal instellingen",
 	'tab_label_language' =>
-		"Language",
+		"Taal",
 );
 ?>

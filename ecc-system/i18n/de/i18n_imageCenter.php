@@ -2,13 +2,13 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
+ * language:	de (deutsch)    
  * author:	andreas scheibel
- * date:	2007/08/12 
+ * date:	2007/08/12
  * ------------------------------------------
  **/
 $i18n['imageCenter'] = array(
-	
+
 	'imagePositionInfo%s%s%s' =>
 		"Bild %s von %s (%s)",
 	'imageSlotLabel' =>

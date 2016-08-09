@@ -1,8 +1,8 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
  * date:	2007/05/13
  * ------------------------------------------

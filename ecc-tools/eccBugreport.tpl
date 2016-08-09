@@ -241,7 +241,8 @@
 		</tr>
 		<tr>
 			<td bgcolor="#E2E2D2">
-			<p align="center"><font size="2">IP bugsender: %ip_bugsender%</font></p>
+			<p align="center"><font size="2">IP bugsender: %ip_bugsender% / user 
+			CID: %ecc_user_cid%</font></p>
 			</td>
 		</tr>
 	</table>
@@ -249,7 +250,7 @@
 <div style="font-size: 0.8em; text-align: center; margin-top: 1.0em; margin-bottom: 1.0em;">
 	<font size="2" color="#C0C0C0">emuControlCenter Bugreport - (c) 2007 Phoenix 
 	Interactive<br>
-	(template &#39;lite&#39; v1.12-en)</font></div>
+	(template &#39;lite&#39; v1.13-en)</font></div>
 </a>
 
 </body>

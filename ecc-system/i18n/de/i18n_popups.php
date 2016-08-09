@@ -1,8 +1,8 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
  * date:	2007/05/13
  * ------------------------------------------
@@ -75,9 +75,9 @@ $i18n['popup'] = array(
 	'export_esearch_error_msg' =>
 		"Du musst zuerst eSearch-Optionen auswählen um diese Funktion zu nutzen. Es wird dann nur das Ergebnis deiner eSearch Einstellung exportiert!",
 	'dat_export_filechooser_title%s' =>
-		"Wähle das Verzeichnis zur Speicherung der %s Datfiles!",	
+		"Wähle das Verzeichnis zur Speicherung der %s Datfiles!",
 	'dat_export_title%s' =>
-		"Export %s datfile",
+		"Exportiere %s datfile",
 	'dat_export_msg%s%s%s' =>
 		"%s Datfile für die Platform\n\n%s\n\n in das Verzeichniss\n\n%s\n\nerstellen?",
 	'dat_export_esearch_msg_add' =>
@@ -129,7 +129,7 @@ $i18n['popup'] = array(
 	'img_overwrite_title' =>
 		"Bild überschreiben?",
 	'img_overwrite_msg%s%s' =>
-		"Das Bild\n\n%s\n\nexistiert bereits\n\nSoll das Bild durch das neue ersetzt werden\n\n%s?",	
+		"Das Bild\n\n%s\n\nexistiert bereits\n\nSoll das Bild durch das neue ersetzt werden\n\n%s?",
 	'img_remove_title' =>
 		"Bild löschen?",
 	'img_remove_msg%s' =>
@@ -198,11 +198,11 @@ $i18n['popup'] = array(
 		"eccdb - Fehler:\n\nEs konnte keine Verbindung zum Internet herstellen. Bitte überprüfe, ob Du Online bist oder Deine Firewall die Verbindung untersagt!",
 	'eccdb_no_data' =>
 		"eccdb - Keine Daten gefunden:\n\nDu musst die Metainformationen deiner Spiele bearbeiten um sie hochladen zu können.",
-		
+
 	/* 0.9 FYEO 9 */
 	'rom_dup_remove_msg_preview%s' =>
 		"Diese Option durchsucht die Datenbank nach doppelten Spielen. Diese werden dann im Statusbereich mit Pfadangaben ausgebenen. Wenn du das Logging aktiviert hast, wirst du eine Textdate in deinem Log-Verzeichnis finden.!",
-	
+
 	/* 0.9.1 FYEO 3 */
 	'img_remove_all_title' =>
 		"Alle Bilder löschen?",
@@ -217,7 +217,7 @@ $i18n['popup'] = array(
 		"Datei parsen?",
 	'parse_big_file_found_msg%s%s' =>
 		"GROßE DATEI GEFUNDEN!!!\n\nDas Spiel\n\nName: %s\nSize: %s\n\nist sehr groß. Das parsen kann einige Zeit in Anspruch nehmen, in der das emuControlCenter nicht reagiert.\n\nSoll das Spiel trotzdem geparst werden?",
-	
+
 	/* 0.9.5 WIP 19 */
 	'bookmark_added_title' =>
 		"Bookmark gespeichert",
@@ -251,7 +251,7 @@ $i18n['popup'] = array(
 	/* 0.9.6 FYEO 8 */
 	'rom_dup_remove_title_preview' =>
 		"Suche nach doppleten Spielen",
-	'rom_dup_remove_done_title_preview' => 
+	'rom_dup_remove_done_title_preview' =>
 		"Suche abgeschlossen",
 	'rom_dup_remove_done_msg_preview' =>
 		"Bitte beachte die Status-Area für Details!",

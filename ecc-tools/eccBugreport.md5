@@ -1,108 +1,75 @@
 [GENERAL]
-current_version="0.9.5"
-date_build="2007.06.16"
-current_build="018"
-last_update="00160"
+current_version="0.9.6"
+date_build="2007.12.11"
+current_build="024"
+last_update="00189"
 
-
-262b2c89fe1adbfb15ac45468056af18 *..\ecc-system\database\eccdb.empty
+a5ebc47b8f8d3def04c5db949af952b0 *..\ecc-system\ecc.ico
+03f2b4767283049f3077c84d7c85120d *..\ecc-system\ecc.php
+e98240b657f597246a6fa2f649b51610 *..\ecc-system\ecccore.dat
+37d63e989cf5e23bf1e64d31e48ad114 *..\ecc-system\game.rom
+173b084808f411f28cd1a209998b498d *..\ecc-system\license.txt
+0ee8851912e7b37ea0cd13a0808b8d0e *..\ecc-system\conf\mame\driver.ini
 c314a9fb6e0a341ed1a754ab5c7b8995 *..\ecc-system\gui2\ecc_dialog_logo.png
-0bf2f320253f4df32b898a4a6d9b6bc4 *..\ecc-system\gui2\gui.glade
-5e50f9d0f80439e2cee2bdd18af4cd9a *..\ecc-system\gui2\guiDataCombiner.glade
-82799300737146972dd031c629ba312e *..\ecc-system\gui2\guiDialog.glade
+6873a9f133e93adc0d301751503e1c13 *..\ecc-system\gui2\gui.glade
+b47b8408aff0cff556fabbe0a8d5e8d0 *..\ecc-system\gui2\guiDataCombiner.glade
+d33a372a13b135c040da60c027b9d14e *..\ecc-system\gui2\guiDialog.glade
 14d05f6836b40adec62aa560142f6418 *..\ecc-system\gui2\guiImageImporter.glade
-afab8a6362704b23e17b66e0ca4add5f *..\ecc-system\gui2\guiPopFileOperations.glade
+63c0a76ebb35c8b56c8b337f3d588d1f *..\ecc-system\gui2\guiPopFileOperations.glade
 75a0206adf0dfff28b351202a717d0a6 *..\ecc-system\gui2\guiPopImages.glade
 f2e3e12c137ddbbf3e8386c7a1155508 *..\ecc-system\gui2\guiPopMetaMerge.glade
-66e52bea15aae73d901c5f02d5b12418 *..\ecc-system\gui2\guipopupconfig.glade
+44abb27eb012f966ddbaaaeb582f1c21 *..\ecc-system\gui2\guipopupconfig.glade
+00ac6eb9e9916153a976450f19feb7ab *..\ecc-system\gui2\guiRomAudit.glade
 8eece9cc616084e69299f7f1a53a6404 *..\ecc-system\gui2\pixmaps\ecc_dialog_logo.png
-
-fed8542841cc20a22e9b058b0ac961a9 *..\ecc-system\i18n\de\i18n_global.php
-a1a19e024135753339f458b2cf0bd372 *..\ecc-system\i18n\de\i18n_mainGui.php
-c79a986615e06ae1b6c952b50dca5040 *..\ecc-system\i18n\de\i18n_menu.php
-40eb0092c265687e751874243616c0cf *..\ecc-system\i18n\de\i18n_menuTop.php
-92c6183e5ad448988e836b97bcccfc3a *..\ecc-system\i18n\de\i18n_meta.php
-c4cf3ede3be5ea3f4397605d9693307e *..\ecc-system\i18n\de\i18n_meta_storage.php
-7c52632a3a8e3c2ddc0fb207c8dc6924 *..\ecc-system\i18n\de\i18n_options.php
-3363c07cccfb3079201d2bfe3e21e901 *..\ecc-system\i18n\de\i18n_popupConfig.php
-0259a3ac224082c0002250fc90a84f68 *..\ecc-system\i18n\de\i18n_popupMediaEdit.php
-47ff5f09bf7add3decebb81fe5384579 *..\ecc-system\i18n\de\i18n_popups.php
-6cd144448e11dabc892c29068462decf *..\ecc-system\i18n\de\i18n_status.php
-e447b6e9de41a58108e850e129665094 *..\ecc-system\i18n\de\i18n_status.php.bak
-4f26c2701ee4e422f9045d6463afaa0a *..\ecc-system\i18n\de\i18n_tooltips.php
-39572f3d8aa79b80205577d03cfdaa0e *..\ecc-system\i18n\en\i18n_global.php
-8daf352daa6d1398a21ab12c09700b58 *..\ecc-system\i18n\en\i18n_mainGui.php
-29cb9a63b0dfb52ef47fc3a6e8c7d97e *..\ecc-system\i18n\en\i18n_menu.php
-e7823caa93e024c3485112341b9e7783 *..\ecc-system\i18n\en\i18n_menuTop.php
-4b31cf3d93029d4bf4080caa8ebe211e *..\ecc-system\i18n\en\i18n_meta.php
-d3a442ec518d4ffeb5d67345dda03e70 *..\ecc-system\i18n\en\i18n_meta_storage.php
-40cc1a0f16651156193c43ad4497b2c3 *..\ecc-system\i18n\en\i18n_options.php
-ad910f8ceeab40746a42862e0cde8bce *..\ecc-system\i18n\en\i18n_popupConfig.php
-d3079d2757075d887e11a3936a5f80ca *..\ecc-system\i18n\en\i18n_popupMediaEdit.php
-c9b8f6d729591b893748d9401c47b833 *..\ecc-system\i18n\en\i18n_popups.php
-4ad69ef3b501c3bc45cf3a578ddb84ce *..\ecc-system\i18n\en\i18n_status.php
-26b3a8be9f81026a166c9eaffce3ad7a *..\ecc-system\i18n\en\i18n_tooltips.php
-f063f551476b5049b26328b398b4484d *..\ecc-system\i18n\fr\i18n_global.php
-ec721dbcf09a13e8d033cdae60900e10 *..\ecc-system\i18n\fr\i18n_mainGui.php
-19ab513e194320beadf70043c8e03fd5 *..\ecc-system\i18n\fr\i18n_menu.php
-0cea36e5624bdb76b41923b40a6f8acc *..\ecc-system\i18n\fr\i18n_menuTop.php
-d9edf1122e514a25891a8168293a8b53 *..\ecc-system\i18n\fr\i18n_meta.php
-46cbca3f77fec7785d0bea98cdb88d87 *..\ecc-system\i18n\fr\i18n_meta_storage.php
-cd9cfef1589b075787aff5f674705580 *..\ecc-system\i18n\fr\i18n_options.php
-a26a48bfbdc8026dfb37e8a9a6707a2c *..\ecc-system\i18n\fr\i18n_popupConfig.php
-54a19dd12c05569bacb5de211ee40c33 *..\ecc-system\i18n\fr\i18n_popupMediaEdit.php
-83b6e2abd2dbdf132943c5728c38a9a2 *..\ecc-system\i18n\fr\i18n_popups.php
-cfed2229625559b1e591e2d6ea8775b7 *..\ecc-system\i18n\fr\i18n_status.php
-2ad0488ff56f9d8c97cc34c5db8db02f *..\ecc-system\i18n\fr\i18n_tooltips.php
-917d8980797db1b79a2ce808925504c4 *..\ecc-system\i18n_gettext\locale\de\LC_MESSAGES\glade_strings.mo
-6f6f28835e2799cbc15512e66546efa6 *..\ecc-system\i18n_gettext\locale\de\LC_MESSAGES\glade_strings.po
-
-85e9363a5ea6cbb92408935a97cf7951 *..\ecc-system\idt\cicheck.idt
-
 263f9d25f116f7c342aec223931a98d1 *..\ecc-system\manager\add_slot_120px.php
 a9cc86d4e6b206500f01b43f06c24e41 *..\ecc-system\manager\cAutoCompletion.php
-080de47141f1cf1e0b3cac4e92b096e1 *..\ecc-system\manager\cDatFileExport.php
-47769b3912095032ae44cc561a473c81 *..\ecc-system\manager\cDatFileImport.php
+e78a9a5a0c7444bf072cc95ee2720f3e *..\ecc-system\manager\cDatFileExport.php
+2b9d96977d21b9b54675b37f091ea243 *..\ecc-system\manager\cDatFileImport.php
 7fd80a5f683f46646345b007e821cfc1 *..\ecc-system\manager\cDbms.php
-ed9d9c9a9108b5ebb30407d008478311 *..\ecc-system\manager\cDbmsSqlite2.php
+6f712193b8b81710da920bd15894af0a *..\ecc-system\manager\cDbmsSqlite2.php
 b339f8df9b3ce42de6c58cfd2fd43f3e *..\ecc-system\manager\cDbmsSqlite3.php
 23639338e34474efc54ccb336cb0f103 *..\ecc-system\manager\cEccImage.php
-bda4d22745f9f323c2d9f74f3708e48e *..\ecc-system\manager\cEccParser.php
-ab0422351d35edd04745a1a00b074397 *..\ecc-system\manager\cEccParserDataProzessor.php
-24cc69dcb5a88c67ae56aa88b48c86b0 *..\ecc-system\manager\cEccParserFileListDir.php
-70e79dc0ea783bf1f63779af359d2af2 *..\ecc-system\manager\cEccParserMedia.php
-58c40b355f4e43dca0d87f8ef05d0b76 *..\ecc-system\manager\cEccUpdate.php
-b605881d86f6fcea7924712c2f02e182 *..\ecc-system\manager\cFactory.php
-0e8624ebf48b9b6322ef930f19351318 *..\ecc-system\manager\cFileIO.php
+d386349ba5222be4b6bf466f65b69cc5 *..\ecc-system\manager\cEccParser.php
+bb9386cafda75eb95657f947a90632ee *..\ecc-system\manager\cEccParserDataProzessor.php
+25c46fea69704e4a1b23ba53b80f30b7 *..\ecc-system\manager\cEccParserFileListDir.php
+80446ad2f6e67cb9761193e1c6c9ea59 *..\ecc-system\manager\cEccParserMedia.php
+547d5e07c8f7505bc470a596ed7d80b6 *..\ecc-system\manager\cEccUpdate.php
+d37f77385ece29538323b9a8cefe91d7 *..\ecc-system\manager\cFactory.php
+adabbc9326c6cc5a0ff408d6ddf13881 *..\ecc-system\manager\cFileIO.php
 b8b1044b2f2750030f8909416de5feca *..\ecc-system\manager\cFileIOCrc32.php
-b1b6d0231d211f87d45aabd2d886b1f5 *..\ecc-system\manager\cFileOrganizer.php
-6b93c0dc37156f71362506acc4fda610 *..\ecc-system\manager\cGui.php
-20f44a0da63ae978a9392713a8fa0a45 *..\ecc-system\manager\cGuiDataCombiner.php
+8362a9dca7428bc892db56824d26dd55 *..\ecc-system\manager\cFileOrganizer.php
+19355c72fca918e3517861b48ee380e7 *..\ecc-system\manager\cGui.php
+bb178881f65807989ac98616453e269c *..\ecc-system\manager\cGuiDataCombiner.php
 612500b17e4be5ddb65233eca4e7be73 *..\ecc-system\manager\cGuiEccConfig.php
-01f5781feb6a50a2c98163b9da24c835 *..\ecc-system\manager\cGuiHelper.php
+df7392d0261147a1d6930da73ed33206 *..\ecc-system\manager\cGuiHelper.php
 04f29a9deccb2d3a00c065e86236cf92 *..\ecc-system\manager\cGuiImageImporter.php
-be49c5f646cd84c9c6924f5cb97aff9f *..\ecc-system\manager\cGuiImagePopup.php
-26e4e793f0c0b0e5091d7849180b16cf *..\ecc-system\manager\cGuiPopConfig.php
-716ac1b0d14ce6ba580208160fe437ef *..\ecc-system\manager\cGuiPopFileOperations.php
-7c3a0e9f03763d87de03c9afcd42604f *..\ecc-system\manager\cGuiStatus.php
-c4e684e1545542694e1d82b49615f15d *..\ecc-system\manager\ci18n.php
-50bc4816246f763b58a17691713382e6 *..\ecc-system\manager\cImage.php
+51e81623d2c8d1dd6604193185e54580 *..\ecc-system\manager\cGuiImagePopup.php
+f3df1e61dc6b4c3de1720ade22963719 *..\ecc-system\manager\cGuiPopConfig.php
+e48d61411eae1e469da79c932f6c0bce *..\ecc-system\manager\cGuiPopFileOperations.php
+d37b977f600b1ede710667753c66ef56 *..\ecc-system\manager\cGuiRomAudit.php
+c8c9f08865db2aa6dbc4edd5e5ff9da6 *..\ecc-system\manager\cGuiStatus.php
+0f614726495587eae88c70ccd5c1fc7f *..\ecc-system\manager\ci18n.php
+7adbfbda024413682a6f4b40d15f35f3 *..\ecc-system\manager\cImage.php
 e4fc7a2f8194e532b387a7035a929c8a *..\ecc-system\manager\cImageConvert.php
 999ac5a8be0f7643e1aa88db2c7ab210 *..\ecc-system\manager\cImageConvertNoIntro.php
 1bc4d92700c2cc0159e0223af6d86212 *..\ecc-system\manager\cImageConvertRomdb.php
+19b0fb6d979051f51bbd71fe24cf31ef *..\ecc-system\manager\cImportDat.php
+3277c1d4e12c72b31a5182e8a9ea6768 *..\ecc-system\manager\cImportDatControlMame.php
 83e296a693ae0511491a31560b115672 *..\ecc-system\manager\cIndexedCombo.php
 15d40e378db5a205a6550a5dc07f1e2d *..\ecc-system\manager\cIndexedCombobox.php
-f49078306458ca3aa59adafbd9dd348a *..\ecc-system\manager\cIniFile.php
+684827982097f4cba87c1c5bdb4d9283 *..\ecc-system\manager\cIniFile.php
 bc3bc17737b91561981833338e610825 *..\ecc-system\manager\cLogger.php
-60455875451e25a8181fcb2123158bc6 *..\ecc-system\manager\cOs.php
-0681f55e804b33e3ce1178401304c8ca *..\ecc-system\manager\cPlattformMaintenance.php
-9430cf3eb2f2ec40949ec74843c55400 *..\ecc-system\manager\cTreeviewData.php
+5c1a4106796812bdb8337728320d0ab7 *..\ecc-system\manager\cMultiByte.php
+7f8a2a2ae57519515ec81054705e4acc *..\ecc-system\manager\cOs.php
+0f614f15706faaf0e604cae33eba14f3 *..\ecc-system\manager\cPlattformMaintenance.php
+1818a9c3c2b7239938179d8b7c46cf9b *..\ecc-system\manager\cTreeview.php
+efb43ce44a20ac1068a201d224fd531e *..\ecc-system\manager\cTreeviewData.php
 bc7214d65b1cf4a5a65563b9719ed2ff *..\ecc-system\manager\cTreeviewPager.php
 b0a14f6b38a205923a4564f184c7a08b *..\ecc-system\manager\cUserData.php
 9844c0609b1871b5c2cf41d343978c31 *..\ecc-system\manager\cValid.php
 5fec175bf412cfd8189bef3ff2161de8 *..\ecc-system\manager\cValidator.php
-96d034d8d43d5804d3dd8d1ad746535b *..\ecc-system\manager\cWebServices.php
-eab0887a10404d053704dc2e0d687f90 *..\ecc-system\manager\ecccli_datFileImporter.php
+20ca022d92661a9b73c483f66a514fa3 *..\ecc-system\manager\cWebServices.php
+811a330bea56cf30ffce2cb46c29ac98 *..\ecc-system\manager\ecccli_datFileImporter.php
 a34d8595670117c8b0186d644bf39556 *..\ecc-system\manager\ecccli_EmptyDatabase.php
 5b9e2fd265fbdaa4c7640826b46133df *..\ecc-system\manager\ecccli_ImageConverterEcc.php
 b54aa313cfa2dfccba2c301eb2ba17af *..\ecc-system\manager\ecccli_ImageConvertNoIntro.php
@@ -113,33 +80,16 @@ b6db21c8bc74bf2bead16fa9e41bc777 *..\ecc-system\manager\SqlHelper.php
 511794633ccf061a08420c855ec64f06 *..\ecc-system\manager\thirdParty\cPhpGtkEntryCompletion.php
 b01793eca0da1aea94931151aecff1b5 *..\ecc-system\manager\thirdParty\IndexedComboBox.php
 48d128222fe61698cfbf534d87d48893 *..\ecc-system\manager\thirdParty\IndexedComboBox\Model.php
-
 87dba0daf6ce07f935ba1a0207b14523 *..\ecc-system\modules\cmod_Image.php
-
-8725a6ff6f0bdc37e6d2fe8982fd5690 *..\ecc-system\parser\cFileParserGb.php
-96ec695d5c1c1518e5645b1a26a8a7fc *..\ecc-system\parser\cFileParserGen.php
-05a2f96a283e9d0f389b574d22774744 *..\ecc-system\parser\cFileParserGeneric.php
-4a02d2d0466bc7918a69d31cf481d226 *..\ecc-system\parser\cFileParserJarMIDlet.php
-436a46c0aa6dfd8c84d4d7aadc301ef2 *..\ecc-system\parser\cFileParserMp3.php
-ba51586216804e497686f52e80f2e18e *..\ecc-system\parser\cFileParserSnes.php
+d62252c3ee422f6c518300df006d9b8d *..\ecc-system\parser\cFileParserGb.php
+43581e1acff2498c2789e44a8b6a3f1e *..\ecc-system\parser\cFileParserGen.php
+ebbcfa92103c0f4358dba29829253d4e *..\ecc-system\parser\cFileParserGeneric.php
+edbddd5fca507441599bcbe3abfe25a1 *..\ecc-system\parser\cFileParserJarMIDlet.php
+0ee14dbb65bcc8b518c6eb2124a6028f *..\ecc-system\parser\cFileParserMp3.php
+16b81627d5a972b8c914c19937c64cfe *..\ecc-system\parser\cFileParserSnes.php
+9a2b2fee9f76cb36569408e98d478656 *..\ecc-system\parser\cFileParserZip.php
 bab2d8f82ed0843ac9816e8ebe0f1a3b *..\ecc-system\parser\dispatch\cDispatch.php
 f65f6d5f7ad1d939aa3a4824fdbd4672 *..\ecc-system\parser\dispatch\cDispatchBin.php
 62c519ad28409b71c531134a874dc46a *..\ecc-system\parser\dispatch\bin\cValidatorA26.php
 37ed2c2fd996a5846d84945ed1693a68 *..\ecc-system\parser\dispatch\bin\cValidatorGen.php
-
-05a4a1bdf334ea16e3493523890ad5c9 *..\ecc-system\translations\de\ecc_bugreport.ini
-f08e268f21fbf088229644799a93b10a *..\ecc-system\translations\de\ecc_startup.ini
-fd7199447995bf97426c098c566b4d41 *..\ecc-system\translations\en\ecc_bugreport.ini
-d6c7e9a71209ebc31a23e5e7e18e4fa7 *..\ecc-system\translations\en\ecc_startup.ini
-dfe930f54af35eee1f07d6ac9dc31040 *..\ecc-system\translations\fr\ecc_bugreport.ini
-073cb64ce78a9947568c7f00534de7d9 *..\ecc-system\translations\fr\ecc_startup.ini
-4c34b99a7e2650b66f3e6e69b1415173 *..\ecc-system\translations\jp\ecc_bugreport.ini
-d7320687366707658d88f5c0a32775b6 *..\ecc-system\translations\jp\ecc_startup.ini
-04031008c046e22d53f4ac28a6857138 *..\ecc-system\translations\nl\ecc_bugreport.ini
-61e2287178449e38ffec879e180e921c *..\ecc-system\translations\nl\ecc_startup.ini
-
-ab4223ccd19900b96ec6ec6a61378ba5 *..\ecc-system\updates\update_0.5.901.php
-dc576ca380518af136cdb2e911ffd37d *..\ecc-system\updates\update_0.7.0.php
-a4670101b3e5673804848d9a04b9f293 *..\ecc-system\updates\update_0.7.1.php
-38563661b3be40f02474343bb9997523 *..\ecc-system\updates\update_0.8.6.php
 

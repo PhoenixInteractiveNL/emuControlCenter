@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
- * date:	2007/05/13
+ * date:	2007/12/27
  * ------------------------------------------
  */
 $i18n['global'] = array(
@@ -47,7 +47,7 @@ $i18n['global'] = array(
 		"Alle",
 	'dialog_button_none' =>
 		"Keinen",
-	
+
 	/* 0.9.2 WIP 19 */
 	'dialog_dont_show_again' =>
 		"Diesen Dialog nicht mehr anzeigen!",
@@ -137,14 +137,14 @@ $i18n['global'] = array(
 		"Suchoperator",
 	'searchRatings' =>
 		"Suche nach Bewertung",
-	
+
 	'change' =>
 		"Ändern",
 	'options' =>
 		"Optionen",
 
 	'emuNotFound' =>
-		"Emu nicht gefunden",
+		"Emulator nicht gefunden",
 
 	'statistics' =>
 		"Statistik",
@@ -173,7 +173,7 @@ $i18n['global'] = array(
 
 	/* 0.9.6 WIP 16 */
 	'rateRom' =>
-		"Bewerte dieses Spiel",
+		"Dieses Spiel bewerten",
 
 );
 ?>

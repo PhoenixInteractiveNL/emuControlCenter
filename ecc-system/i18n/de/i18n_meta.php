@@ -4,11 +4,11 @@
  * ------------------------------------------
  * language:	de (deutsch)
  * author:	andreas scheibel
- * date:	2006/09/30 
+ * date:	2007/12/27
  * ------------------------------------------
  **/
 $i18n['meta'] = array(
-	
+
 	/* FILES */
 	'lbl_filename' =>
 		"Dateiname",
@@ -22,7 +22,7 @@ $i18n['meta'] = array(
 		"Dateigröße",
 	'lbl_filesize_short' =>
 		"Größe",
-	
+
 	/* META FIELDS */
 	'lbl_title' =>
 		"Title",
@@ -31,7 +31,7 @@ $i18n['meta'] = array(
 	'lbl_developer' =>
 		"Entwickler",
 	'lbl_publisher' =>
-		"Herausgeber",
+		"Publisher",
 	'lbl_year' =>
 		"Jahr",
 	'lbl_usk' =>
@@ -46,7 +46,7 @@ $i18n['meta'] = array(
 		"Sprachen",
 	'lbl_rating' =>
 		"Bewertung",
-		
+
 	/* META OPTIONS */
 	'lbl_running' =>
 		"Läuft",

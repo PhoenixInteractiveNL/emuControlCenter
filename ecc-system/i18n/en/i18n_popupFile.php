@@ -2,13 +2,13 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	en (english)    
  * author:	andreas scheibel
- * date:	2007/08/13 
+ * date:	2007/08/13
  * ------------------------------------------
  */
 $i18n['file'] = array(
-	
+
 	'winTitle' =>
 		"File operations",
 

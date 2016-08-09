@@ -268,19 +268,19 @@ $i18n['popupConfig'] = array(
 	
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
-		"Save View-Mode settings (only experts)",
+		"Sauver les propriétés d'affichage (experts seulement)",
 	
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
-		"Links & Infos",
+		"Liens & Infos",
 		
 	/* 0.9.6 WIP 20 */
 	'startConfBugreportSend' =>
-		"Send automatic bugreport at startup",
+		"Envoyer automatiquement le rapport d'erreur au démarrage",
 	'lbl_ecc_opt_language' =>
-		"Language settings",
+		"Options de langue",
 	'tab_label_language' =>
-		"Language",
+		"Langue",
 		
 );
 ?>

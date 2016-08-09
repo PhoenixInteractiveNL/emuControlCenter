@@ -2,16 +2,16 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	en (english)    
  * author:	andreas scheibel
- * date:	2006/09/09 
+ * date:	2006/09/09
  * ------------------------------------------
  */
 $i18n['status'] = array(
 	'parse_rom_pbar_file%s%s%s' =>
 		"- FILE %s of %s %s",
 	'parse_rom_pbar_file_packed' =>
-		"(PACKED)",		
+		"(PACKED)",
 	'parse_rom_detail_header%s' =>
 		"New media added to ecc\n%s",
 	'parse_rom_detail_added_header' =>

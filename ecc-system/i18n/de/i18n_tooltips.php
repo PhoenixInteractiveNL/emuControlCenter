@@ -1,10 +1,10 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
- * date:	2007/05/13
+ * date:	2007/12/27
  * ------------------------------------------
  */
 $i18n['tooltips'] = array(
@@ -14,18 +14,18 @@ $i18n['tooltips'] = array(
 	'opt_auto_nav' =>
 		"Navigation automatisch aktualisieren",
 	'opt_hide_nav_null' =>
-		"Blende alle Platformen ohne Spiele aus",
+		"Alle Platformen ohne Spiele ausblenden",
 	'opt_hide_dup' =>
-		"Blende doppelte Spiele aus",
+		"Doppelte Spiele ausblenden",
 	'opt_hide_img' =>
-		"Blende alle Bilder aus",
+		"Alle Bilder ausblenden",
 	'search_field_select' =>
 		"Wähle das Suchfeld aus",
 	'search_operator' =>
-		"Wie soll deine Suche verknüpft sein? [ '=' GLEICH, '|' ODER, '+' UND ]",
+		"Wie soll die Suche verknüpft sein? [ '=' GLEICH, '|' ODER, '+' UND ]",
 	'search_rating' =>
-		"Zeige alle Roms sortiert nach dieser Bewertung",
+		"Alle ROMs nach Bewertung sortieren",
 	'optvis_mainlistmode' =>
-		"Wechsle zwischen Detail- und Listenansicht",
+		"Zwischen Detail- und Listenansicht wechseln",
 );
 ?>

@@ -165,7 +165,7 @@ $i18n['menuTop'] = array(
 
 	/* 0.9.6 WIP 15*/
 	'mMenuReparseFolderAll' =>
-		"Ververk alle ROM folders",
+		"Verwerk alle ROM folders",
 	
 	'mTopRomDB' =>
 		"RomDB",

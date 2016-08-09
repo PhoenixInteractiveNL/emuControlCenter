@@ -59,7 +59,7 @@ $i18n['mainGui'] = array(
 	'romDetailTabRomData' =>
 		"Données",
 	'romDetailTabRomHeader' =>
-		"En-tete",
+		"En-tête",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
 );

@@ -1,8 +1,8 @@
 clrmamepro (
 	name CPS-1
-	description "CPS-1 20060724"
+	description "CPS-1 20070922"
 	category "Capcom Play System 1"
-	version 20060724
+	version 20070922
 	author "Logiqx, http://www.logiqx.com/"
 )
 
@@ -495,6 +495,28 @@ game (
 
 game (
 	name ffightu
+	description "Final Fight (US)"
+	year 1989
+	manufacturer "Capcom"
+	sourcefile cps1.c
+	cloneof ffight
+	romof ffight
+	rom ( name ff30-36.bin merge ff30-36.bin size 131072 crc f9a5ce83 sha1 0756ae576a1f6d5b8b22f8630dca40ef38567ea6 )
+	rom ( name ff35-42.bin merge ff35-42.bin size 131072 crc 65f11215 sha1 5045a467f3e228c02b4a355b52f58263ffa90113 )
+	rom ( name ff31-37.bin merge ff31-37.bin size 131072 crc e1033784 sha1 38f44434c8befd623953ae23d6e5ff4e201d6627 )
+	rom ( name ff43.rom size 131072 crc 4ca65947 sha1 74ffe00df96273770a24d9a46f13e53ea8812670 )
+	rom ( name ff32-32m.bin merge ff32-32m.bin size 524288 crc c747696e sha1 d3362dadded31ccb7eaf71ef282d698d18edd722 )
+	rom ( name ff05-05m.bin merge ff05-05m.bin size 524288 crc 9c284108 sha1 7868f5801347340867720255f8380548ad1a65a7 )
+	rom ( name ff07-07m.bin merge ff07-07m.bin size 524288 crc a7584dfb sha1 f7b00a3ca8cb85264ab293089f9f540a8292b49c )
+	rom ( name ff01-01m.bin merge ff01-01m.bin size 524288 crc 0b605e44 sha1 5ce16af72858a57aefbf6efed820c2c51935882a )
+	rom ( name ff03-03m.bin merge ff03-03m.bin size 524288 crc 52291cd2 sha1 df5f3d3aa96a7a33ff22f2a31382942c4c4f1111 )
+	rom ( name ff09-09.bin merge ff09-09.bin size 65536 crc b8367eb5 sha1 ec3db29fdd6200e9a8f4f8073a7e34aef731354f )
+	rom ( name ff18-18.bin merge ff18-18.bin size 131072 crc 375c66e7 sha1 36189e23209ce4ae5d9cbabd1574540d0591e7b3 )
+	rom ( name ff19-19.bin merge ff19-19.bin size 131072 crc 1ef137f9 sha1 974b5e72aa28b87ebfa7438efbdfeda769dedf5e )
+)
+
+game (
+	name ffightua
 	description "Final Fight (US 900112)"
 	year 1989
 	manufacturer "Capcom"
@@ -516,7 +538,7 @@ game (
 )
 
 game (
-	name ffightua
+	name ffightub
 	description "Final Fight (US 900613)"
 	year 1989
 	manufacturer "Capcom"

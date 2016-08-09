@@ -2,13 +2,13 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/09/30 
+ * language:	de (deutsch)
+ * author:	franz schneider / andreas scheibel
+ * date:	2006/12/27
  * ------------------------------------------
  **/
 $i18n['infoPane'] = array(
-	
+
 	/* PERSONAL */
 	'iPanePersHeadlineLbl' =>
 		"Statistik",
@@ -19,14 +19,14 @@ $i18n['infoPane'] = array(
 	'iPanePersRatingLbl' =>
 		"Bewertung",
 	'iPanePersBookmarkedLbl' =>
-		"Bookmarked",
+		"Favorisiert",
 	'iPanePersMetaEditedLbl' =>
 		"Meta bearbeitet",
 	'iPanePersMetaExportLbl' =>
 		"ROMDB Export",
 	'iPanePersMetaNotesLbl' =>
-		"Deine Notizen",
-	
+		"Eigene Notizen",
+
 	/* ESEARCH */
 	'iPaneEsearchHeadlineLbl' =>
 		"Erweiterte Suche (eSearch)",
@@ -49,7 +49,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptNetplayLbl' =>
 		"Netzfähig",
 	'iPaneEsearchOptResetBtn' =>
-		"Resete diese Einstellungen!",
+		"Diese Einstellungen zurück nehmen!",
 	'iPaneEsearchHelpLbl' =>
 		"Hilfe - Wie eSearch funktioniert!",
 
@@ -57,7 +57,7 @@ $i18n['infoPane'] = array(
 	'iPaneDataLbl' =>
 		"Datei- und Meta-Informationen",
 
-	/* HEADER */		
+	/* HEADER */
 	'iPaneHeadLbl' =>
 		"Extrahierte Header-Informationen",
 

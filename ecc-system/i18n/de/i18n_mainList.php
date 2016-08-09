@@ -1,10 +1,10 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
+ * language:	de (deutsch)
  * author:	andreas scheibel
- * date:	2006/12/31 
+ * date:	2006/12/31
  * ------------------------------------------
  */
 $i18n['mainList'] = array(

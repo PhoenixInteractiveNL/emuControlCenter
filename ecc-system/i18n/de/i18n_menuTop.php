@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
- * date:	2007/05/13
+ * date:	2007/12/27
  * ------------------------------------------
  */
 $i18n['menuTop'] = array(
@@ -13,7 +13,7 @@ $i18n['menuTop'] = array(
 	'romAddNewRomUnselected' =>
 		"Füge neue Spiele hinzu",
 
-	/* 0.9.2 FYEO 07 */	
+	/* 0.9.2 FYEO 07 */
 
 	'mTopViewModeRomHave' =>
 		"alle vorhandenen Spiele (HAVE)",
@@ -24,8 +24,8 @@ $i18n['menuTop'] = array(
 	'mTopViewModeRomNoMeta' =>
 		"Spiele ohne Metainfos",
 	'mTopViewModeRomPersonal' =>
-		"Spiele mit persönlichen Notes",
-	
+		"Spiele mit persönlichen Eingaben",
+
 	'mTopViewRandomGame' =>
 		"Zufälliges Spiel",
 	'mTopViewReload' =>
@@ -34,7 +34,7 @@ $i18n['menuTop'] = array(
 	'mTopViewOnlyRoms' =>
 		"Spiele",
 	'mTopViewOnlyBookmarks' =>
-		"Deine Bookmarks",
+		"Deine Favoriten",
 	'mTopViewOnlyPlayed' =>
 		"Zuletzt gespielt",
 
@@ -42,8 +42,8 @@ $i18n['menuTop'] = array(
 		"Linke Seite anzeigen",
 	'mTopViewToggleRight' =>
 		"Rechte Seite anzeigen",
-	
-	/* 0.9.6 WIP 01 */	
+
+	/* 0.9.6 WIP 01 */
 	'mTopViewListDetail' =>
 		"Spieleliste Details",
 	'mTopViewListSimple' =>
@@ -62,13 +62,13 @@ $i18n['menuTop'] = array(
 		"Entferne doppelte Spiele",
 	'mTopRomRemoveRoms' =>
 		"Entferne Spiele",
-	
+
 	/* EMULATOR */
 	'mTopEmu' =>
 		"Emulatoren",
 	'mTopEmuConfig' =>
 		"Konfiguration",
-	
+
 	/* DATFILE */
 	'mTopDat' =>
 		"Datfiles",
@@ -137,14 +137,14 @@ $i18n['menuTop'] = array(
 	'mTopHelpDocOnline' =>
 		"Dokumentation (Online)",
 	'mTopHelpAbout' =>
-		"About",
+		"Über eCC",
 
 	/* UPDATE */
 	'mTopUpdate' =>
 		"Updates",
 	'mTopUpdateEccLive' =>
 		"ECC Live! Update",
-	
+
 	/* 0.9.6 WIP 08*/
 	'mTopDatImportOnlineRomdb' =>
 		"Importiere aus der romDB (Internet)",
@@ -153,11 +153,11 @@ $i18n['menuTop'] = array(
 
 	/* 0.9.6 WIP 13*/
 	'mTopRomAudit' =>
-		"Rom audit",
+		"ROM audit",
 	'mTopRomAuditShow' =>
-		"Zeige Romset-Infos",
+		"Zeige ROMset-Infos",
 	'mTopRomAuditUpdate' =>
-		"Aktualisiere Romset-Infos",
+		"Aktualisiere ROMset-Infos",
 	'mTopDatImportCtrlMAME' =>
 		"Importiere CtrlMAME Datfile",
 	'mTopView' =>
@@ -165,8 +165,8 @@ $i18n['menuTop'] = array(
 
 	/* 0.9.6 WIP 15*/
 	'mMenuReparseFolderAll' =>
-		"Alle Rom-Verzeichnisse neu einlesen",
-	
+		"Alle Dateiordner auf Veränderungen überprüfen",
+
 	'mTopRomDB' =>
 		"RomDB",
 

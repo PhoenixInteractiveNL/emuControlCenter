@@ -2,31 +2,31 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
- * author:	andreas scheibel
- * date:	2006/12/31 
+ * language:	de (deutsch)
+ * author:	franz schneider / andreas scheibel
+ * date:	2007/12/27
  * ------------------------------------------
  */
 $i18n['romAudit'] = array(
 
 	'winRomAudit' =>
-		"Rom-Status informationen",
+		"ROM-Status Informationen",
 
 	'tabLabelRomAudit' =>
-		"Rom Audit/Reparatur",
+		"ROM Audit/Reparatur",
 
 	'isValidNonMergedSet' =>
-		"Valides NonMergedSet",
+		"Gültiges NonMergedSet",
 	'isValidMergedSet' =>
-		"Valides MergedSet",
+		"Gültiges MergedSet",
 	'isValidSplitSet' =>
-		"Valides SplitSet",
+		"Gültiges SplitSet",
 	'isNotMatched' =>
-		"Kein Treffer / unbekanntest Set (läuft wahrscheinlich nicht!)",
+		"Kein Treffer / Unbekanntest Set (läuft wahrscheinlich nicht!)",
 	'isIncompleteSet' =>
 		"Kein vollständiges Set (läuft nicht!)",
 	'isSingle' =>
-		"Einzelne Datei (keine Rom-Infos verfügbar)",
+		"Einzelne Datei (keine ROM-Infos verfügbar)",
 	'auditMiss' =>
 		"Wurde noch nicht überprüft!",
 
@@ -36,11 +36,11 @@ $i18n['romAudit'] = array(
 	'labelCloneOf' =>
 		"Clone von",
 	'labelRomOf' =>
-		"Rom von",
+		"ROM von",
 	'labelMameDriver' =>
 		"MAME Treiber",
 	'labelLastAuditTime' =>
-		"Letzte aktualisierung",
+		"Letzte Aktualisierung",
 	'labelHasTrashfiles' =>
 		"Falsche Dateien",
 
@@ -56,7 +56,7 @@ $i18n['romAudit'] = array(
 	'popupRomRenameFailed' =>
 		"Die Datei konnte nicht umbenannt werden. Sieht so aus, als ob eine Datei mit dem selben Namen vorhanden ist!",
 	'popupRomRenameAllreadyDone' =>
-		"Du hast diese Datei schon umbenannt... bitte aktualisiere das Fester!",
+		"Die aktuelle Datei wurde bereits umbenannt... bitte aktualisiere das Fenster!",
 
 );
 ?>

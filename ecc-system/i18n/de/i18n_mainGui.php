@@ -1,10 +1,10 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
- * date:	2007/05/13
+ * date:	2007/12/27
  * ------------------------------------------
  *
  * dd = dropdown
@@ -14,9 +14,9 @@ $i18n['mainGui'] = array(
 	'gui_main_btn_rom_start' =>
 		"Spiel starten",
 	'gui_main_btn_rom_bookmark' =>
-		"Spiel bookmarken",
+		"Spiel favorisieren",
 	'gui_main_btn_list_bookmark' =>
-		"Deine Bookmarks",
+		"Deine Favoriten",
 	'gui_main_btn_list_history' =>
 		"History: Zuletzt gespielt",
 	'media_nb_info_edit' =>
@@ -30,9 +30,9 @@ $i18n['mainGui'] = array(
 	'infoImageEditBtn' =>
 		"Bild hinzufügen",
 	'media_nb_info_eccdb_get_info' =>
-		"RomDB get",
+		"ROMDB get",
 	'media_nb_info_eccdb_info' =>
-		"Web RomDB",
+		"Web ROMDB",
 
 	/* 0.9.2 FYEO 17 */
 	'paneInfoEccDbAddTitle' =>

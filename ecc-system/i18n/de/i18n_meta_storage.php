@@ -3,8 +3,8 @@
  * emuControlCenter language system file
  * ------------------------------------------
  * language:	de (deutsch)
- * author:	andreas scheibel
- * date:	2006/09/30 
+ * author:	franz schneider / andreas scheibel
+ * date:	2006/09/30
  * ------------------------------------------
  **/
 $i18n['dropdown_meta_storage'] = array(

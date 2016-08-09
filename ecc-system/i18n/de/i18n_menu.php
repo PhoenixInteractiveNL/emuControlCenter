@@ -1,10 +1,10 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	franz schneider / andreas scheibel
- * date:	2007/05/13 
+ * date:	2007/05/13
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -45,11 +45,11 @@ $i18n['menu'] = array(
 	'lbl_start' =>
 		"Spiel starten",
 	'lbl_fav_remove' =>
-		"Bookmark entfernen",
+		"Favorit entfernen",
 	'lbl_fav_all_remove' =>
-		"ALLE Bookmarks entfernen",
+		"ALLE Favoriten entfernen",
 	'lbl_fav_add' =>
-		"Bookmark hinzufügen",
+		"Favorit hinzufügen",
 	'lbl_image_popup' =>
 		"Zeige alle Bilder",
 	'lbl_img_reload' =>
@@ -85,27 +85,27 @@ $i18n['menu'] = array(
 	'lbl_export_submenu' =>
 		"Datfile exportieren",
 	'lbl_rom_rescan_folder' =>
-		"Spiele im Ordner erneut Parsen",
+		"Dateiordner auf Ver&auml;nderungen &uuml;berpr&uuml;fen",
 	'lbl_meta_remove' =>
 		"Metainformation aus der DB löschen",
 	'lbl_rating_unset' =>
 		"Bewertung entfernen",
-	
+
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
 		"Suche und ZEIGE doppelte Spiele",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
 		"Doppelte Spiele finden",
-	
+
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
 		"Lösche ALLE Bilder des Spiels",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"Vergleiche - Wähle Spiel für die linke Seite",		
+		"Vergleiche - Wähle Spiel für die linke Seite",
 	'lbl_meta_compare_right%s' =>
-		"Vergleiche dieses Spiel mit \"%s\"",		
+		"Vergleiche dieses Spiel, mit \"%s\"",
 
 	/* 0.9.2 FYEO 2*/
 	'lbl_start_with' =>
@@ -115,20 +115,19 @@ $i18n['menu'] = array(
 	'lbl_quickfilter' =>
 		"quickFilter",
 	'lbl_quickfilter_reset' =>
-
 		"quickFilter entfernen",
-	
+
 	/* 0.9.6 FYEO 1 */
 	'lbl_dat_import_ecc_romdb' =>
 		"Online Datfile importieren",
 
 	/* 0.9.6 FYEO 8 */
 	'lContextRomSelectionAddNewRoms%s' =>
-		"Füge neue %s Roms hinzu",
+		"Füge neue %s ROMs hinzu",
 	'lContextRomSelectionRemoveRoms%s' =>
-		"Entferne alle %s Roms",
+		"Entferne alle %s ROMs",
 	'lContextMetaRemove' =>
-		"Entferne Rom-Metadaten",
+		"Entferne ROM-Metadaten",
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
@@ -136,17 +135,17 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
-		"Zeige Rom-Audit infos",
+		"Zeige ROM-Audit infos",
 	'labelRomAuditReparse' =>
-		"Aktualisiere Rom-Audit infos",
+		"Aktualisiere ROM-Audit infos",
 	'lbl_roms_rescan_all' =>
-		"Aktualisiere alle Rom-Verzeichnisse",
+		"Aktualisiere alle ROM-Verzeichnisse",
 	'lbl_roms_add' =>
 		"Neue Roms hinzufügen",
-	
+
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Öffne eccUser-Folder (%s)",
-		
+
 );
 ?>

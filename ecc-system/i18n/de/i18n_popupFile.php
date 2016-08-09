@@ -2,16 +2,15 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	de (deutsch)
  * author:	andreas scheibel
- * date:	2007/08/13 
+ * date:	2007/08/13
  * ------------------------------------------
  */
 $i18n['file'] = array(
-	
+
 	'winTitle' =>
 		"Datei Operationen",
-
 	'tabRenameHl' =>
 		"Datei umbenennen",
 	'tabRenameDesc' =>

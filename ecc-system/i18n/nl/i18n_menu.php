@@ -145,7 +145,7 @@ $i18n['menu'] = array(
 		
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
-		"Open eccUser-Folder (%s)",
+		"Open ECC gebruikers folder (%s)",
 		
 );
 ?>

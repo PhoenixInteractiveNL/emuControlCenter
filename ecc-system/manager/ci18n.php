@@ -39,7 +39,7 @@ class i18n {
 		}
 	}
 	
-	public static function translate($category, $languageArray) {
+	public static function translateArray($category, $languageArray) {
 		$ret = array();
 		foreach($languageArray as $key => $placeholder) {
 			$ret[$key] = htmlspecialchars(I18n::get($category, $placeholder));

@@ -7,6 +7,40 @@ A. CHANGELOG
 ###############################################################################
 
 -------------------------------------------------------------------------------
+* Version 0.5.887
+-------------------------------------------------------------------------------
+* Parsing: Build in extension for many platform problem finder! :-)
+** Added info-popup and exclude direct at #all found
+** Ask for every dup extensions for Platform parse!
+*** Added platform names for better overview!
+* Added missing image for msx
+* removed some debug output :-)
+* Added [EXPERIMENTAL] section to ecc_general.ini
+** Added switch to use standard win filssystem dialogs
+** This mode cant remember the last selected folder/file from histroy :-( 
+** win32Dialogs = [0|1]
+* Added latest version of ecc.exe 1.12 (by phoenix)
+* Set main window title to "emuControlCenter"
+* fixed a BIG bug in show unsaved images. Now search also in emu/screenshots
+* fixed bug "rebuild_user_folder" in ecc config.
+* fixed bug in "Configuration" i18n-language dropdown!
+* fixed missing lang "parse_rom_detail_header%s"
+
+-------------------------------------------------------------------------------
+* Version 0.5.886
+-------------------------------------------------------------------------------
+* Refactoring
+** Start media / os detection
+** glade constructor
+* Menu->options: Radios for select view-mode in romlist (Default 1)
+** 1. Show all Roms
+** 2. Show all available metadata
+** 3. Show only roms without metadata
+* Added new Platforms
+** MSX (by phoenix)
+** Colorgenie (by phoenix)
+
+-------------------------------------------------------------------------------
 * Version 0.5.885
 -------------------------------------------------------------------------------
 * Menu options -> show only roms with metadata

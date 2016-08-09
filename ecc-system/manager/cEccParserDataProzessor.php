@@ -37,7 +37,7 @@ class EccParserDataProzessor{
 			print "#######################\n";
 			*/
 			
-			// Für jede file_extension daten parsen
+			// Fï¿½r jede file_extension daten parsen
 			foreach($this->_file_list as $file_extension => $file_data) {
 				
 				$cnt_total = count($file_data);
@@ -49,23 +49,25 @@ class EccParserDataProzessor{
 					$file_name_direct = $file_name_info['DIRECT_FILE'];
 					$file_name_packed = isset($file_name_info['PACKED_FILE']) ? $file_name_info['PACKED_FILE'] : false;
 					
-					// Parser für extensions suchen
+					// Parser fÃ¼r extensions suchen
 					#$parser = Singleton::get_instance($this->_known_extensions[$file_extension], "parser/");
 					
-					$className = $this->_known_extensions[$file_extension];
+					$className = $this->_known_extensions[$file_extension][0];
 					$parameter = false;
-					if (FALSE !== $position = strpos($this->_known_extensions[$file_extension], "#")) {
-						$className = substr($this->_known_extensions[$file_extension], 0, $position);
-						$parameter = substr($this->_known_extensions[$file_extension], $position+1);
+					if (FALSE !== $position = strpos($this->_known_extensions[$file_extension][0], "#")) {
+						$className = substr($this->_known_extensions[$file_extension][0], 0, $position);
+						$parameter = substr($this->_known_extensions[$file_extension][0], $position+1);
 					}
+					
+//					print "-> ".get_class($parser)." -> ".$className." -- ".$parameter."\n";					
 					
 					$parser = FACTORY::getStrict('parser/'.$className, $parameter);
 					
-					print "-> ".get_class($parser)." -> ".$className." -- ".$parameter."\n";
+
 					
 					// Preparse, damit nur neu geparst wird,
-					// wenn eine änderung der Filesize (bytes) aufgetreten
-					// ist. Soll verhindern, das zu oft unnötig geparst wird.
+					// wenn eine ï¿½nderung der Filesize (bytes) aufgetreten
+					// ist. Soll verhindern, das zu oft unnï¿½tig geparst wird.
 					// Sobald ein byte unterschied vorhanden ist, wird geparst.
 					$size_db = $this->dataParserObj->get_file_size($file_name_direct, $file_name_packed);	// from database
 					$size_fs = FileIO::get_file_size($file_name_direct, $file_name_packed, 'B');

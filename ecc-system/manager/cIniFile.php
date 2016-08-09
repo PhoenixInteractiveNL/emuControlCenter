@@ -184,13 +184,24 @@ class IniFile {
 		if ($eccident) {
 			$extensions = @$this->ini_platform[$eccident]['EXTENSIONS'];
 			$parser = @$this->ini_platform[$eccident]['PARSER'];
-			if ($parser && $extensions) $ret = $this->get_parser_from_ini($extensions, $parser);
+			if ($parser && $extensions) {
+				$data = $this->get_parser_from_ini($extensions, $parser);
+				foreach ($data as $eccId => $eccParser) {
+					$ret[$eccId][] = $eccParser;
+				}
+			}
 		}
 		else {
+			$ret111 = array();
 			foreach($this->ini_platform as $eccident => $data) {
 				$extensions = @$this->ini_platform[$eccident]['EXTENSIONS'];
 				$parser = @$this->ini_platform[$eccident]['PARSER'];
-				$ret = array_merge($ret, $this->get_parser_from_ini($extensions, $parser));
+				//$ret = array_merge($ret, $this->get_parser_from_ini($extensions, $parser));
+				
+				$data = $this->get_parser_from_ini($extensions, $parser);
+				foreach ($data as $eccId => $eccParser) {
+					$ret[$eccId][] = $eccParser;
+				}
 			}
 		}
 		return $ret;
@@ -399,6 +410,22 @@ class IniFile {
 			}
 		}
 		return $r;
+	}
+	
+	public function getPlatformsByFileExtension($extesion) {
+		if (!$this->ini) $this->get_ecc_ini();
+		
+		$platform = array();
+		foreach ($this->ini['NAVIGATION'] as $eccident => $state) {
+			if (!$state) continue;
+			if ($this->ini['ECC_PLATFORM'][$eccident]['EXTENSIONS']) {
+				if (isset($this->ini['ECC_PLATFORM'][$eccident]['EXTENSIONS'][$extesion])) {
+					$platform[$eccident] = $this->ini['ECC_PLATFORM'][$eccident]['GENERAL']['navigation'];
+				}
+			}
+		}
+		return $platform;
+
 	}
 }
 ?>

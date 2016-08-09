@@ -42,6 +42,9 @@ class IndexedCombobox {
 		
 		if (!$combobox) return false;
 		$this->combobox = $combobox;
+
+		// TODO really working fix???
+		$this->combobox->clear();
 		
 		$col_cnt = 0;
 		$create = array();

@@ -232,11 +232,6 @@ class TreeviewData {
 		$snip_where_sql = implode(" AND ", $snip_where);
 		if (!$snip_where_sql) $snip_where_sql = " 1 ";
 		
-		print "<pre>";
-		print_r($snip_where_sql);
-		print "</pre>\n";
-		
-		
 		// language
 		$snipplet_language_join = ($language) ? " left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
 		
@@ -720,15 +715,17 @@ class TreeviewData {
 		$ret = false;
 		
 		$snip_where = array();
-		$snip_where[] = "1";
 		if ($eccident) $snip_where[] = "eccident='".sqlite_escape_string($eccident)."'";
 		if ($toggle_show_doublettes) $snip_where[] = "duplicate is null";
-		$where_snip = implode(" AND ", $snip_where);
+		// BUILD WHERE SNIPPLET STRING
+		$snip_where_sql = implode(" AND ", $snip_where);
+		if (!$snip_where_sql) $snip_where_sql = " 1 ";
 		
-		$q = "SELECT count(*) as cnt FROM fdata where ".$where_snip."";
+		$q = "SELECT count(*) as cnt FROM fdata WHERE ".$snip_where_sql."";
 		#print $q."\n";
 		$hdl = $this->dbms->query($q);
 		$ret = $hdl->fetchSingle();
+		
 		return $ret;
 	}
 	
@@ -764,21 +761,6 @@ class TreeviewData {
 		
 		// CREATE JOIN, IF NEEDED
 		$sql_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
-		
-		/*
-		#$snipplet_extension = "  ";
-		// eccident
-		#$snipplet_extension .= ($extension) ? " fd.eccident='".sqlite_escape_string($extension)."' " : "1";
-		// doublettes
-		#$snipplet_extension .= ($toggle_show_doublettes) ? " and fd.duplicate is null " : "";
-		// category
-		#$snipplet_extension .= ($category !== false && $category != "-1") ? "AND md.category=".$category."" : "" ;
-		// language
-		#$snipplet_language_join = ($language) ? "left join mdata_language AS mdl on md.id=mdl.mdata_id " : "";
-		#$snipplet_language_where = ($language) ? "and mdl.lang_id='".$language."'" : "";
-		#$esearch = $this->get_search_ext_snipplet($search_ext);
-		#if ($esearch) $snipplet_extension .= " AND ".$esearch;
-		*/
 		
 		// GET COUNT
 		$q = "

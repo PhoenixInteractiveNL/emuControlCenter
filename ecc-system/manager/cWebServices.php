@@ -7,9 +7,17 @@
  */
 class WebServices {
 	
+	private $dbms;
+	
 	private $serviceUrl = false;
 	
+	
 	public function __construct() {
+	}
+	
+	// called by FACTORY
+	public function setDbms($dbmsObject) {
+		$this->dbms = $dbmsObject;
 	}
 	
 	public function setServiceUrl($url) {

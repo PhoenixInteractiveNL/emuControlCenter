@@ -81,9 +81,12 @@ class GuiStatus {
 		$this->gui->status_area_output->show();
 	}
 	
-	public function set_canceled() {
-		if ($this->status_complete) {
-			#$this->status_cancel = true;
+	public function set_canceled($cancelDirect=false) {
+		if($cancelDirect) {
+			$this->status_cancel = true;
+			$this->hide_main();
+		}
+		elseif ($this->status_complete) {
 			$this->hide_main();
 			$this->reset1();
 		}

@@ -49,7 +49,8 @@ class GuiEccConfig {
 	public function create_user_folder() {
 		$user_folder = $this->gui->gconf_ud_folder->get_text();
 		if ($this->gui->ini->create_folder($user_folder)) {
-			$this->gui->rebuild_user_folder(false);
+			FACTORY::get('manager/GuiHelper')->rebuildEccUserFolder(false);
+			#$this->gui->rebuild_user_folder(false);
 			$this->init();
 		}
 	}
@@ -173,7 +174,9 @@ class GuiEccConfig {
 		// get path from textarea
 		$path = realpath($this->gui->gconf_ud_folder->get_text());
 		$title = I18N::get('popup', 'conf_ecc_userfolder_filechooser_title');
-		$path_new = $this->gui->openFileChooserDialog($title, $path, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+		
+		#$path_new = $this->gui->openFileChooserDialog($title, $path, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+		$path_new = FACTORY::get('manager/Os')->openChooseFolderDialog($path, $title);
 		
 		// ABS-PATH TO REL-PATH...		
 		if ($path_new) {

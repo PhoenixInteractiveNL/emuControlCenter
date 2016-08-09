@@ -31,7 +31,7 @@ class EccParserFileListDir implements FileList {
 	public function __construct($base_directory=false, $known_extensions=array(), $pbar_parser, $statusbar_lbl_bottom, $status_obj) {
 		$this->status_obj = $status_obj;
 		foreach ($known_extensions as $key => $value) {
-			$this->_known_extensions[strtoupper($key)] = $value;
+			$this->_known_extensions[strtoupper($key)] = $value[0];
 		}
 		$this->_known_extensions = $known_extensions;
 		$this->_base_directory = $base_directory;
@@ -72,7 +72,7 @@ class EccParserFileListDir implements FileList {
 							// nur in liste, wenn die extension
 							// bekannt ist und geparst werden soll
 							$file_extension = $this->get_file_ext($file);
-							if (isset($this->_known_extensions[$file_extension])) {
+							if (isset($this->_known_extensions[$file_extension][0])) {
 								
 								#$this->_file[$file_extension][]['FILE'] = $this->normalize_path($full_file_path);
 								$this->_file[$file_extension][] = array(
@@ -169,7 +169,7 @@ class EccParserFileListDir implements FileList {
 			while ($zip_entry = zip_read($zip_hdl)) {
 				$file = zip_entry_name($zip_entry);
 				$file_extension = $this->get_file_ext($file);
-				if (isset($this->_known_extensions[$file_extension])) {
+				if (isset($this->_known_extensions[$file_extension][0])) {
 					$this->_file[$file_extension][] = array(
 						'FILE' => $this->normalize_path($file),
 						'PACKED' => $this->normalize_path($zip_file),

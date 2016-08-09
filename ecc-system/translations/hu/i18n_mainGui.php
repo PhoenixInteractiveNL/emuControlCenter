@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  *
  * dd = dropdown
@@ -59,7 +59,7 @@ $i18n['mainGui'] = array(
 	'romDetailTabRomData' =>
 		"Adat",
 	'romDetailTabRomHeader' =>
-		"Header",
+		"Fejléc",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
 	
@@ -83,12 +83,12 @@ $i18n['mainGui'] = array(
 
 	/* 1.1 WIP03 */
 	'mainlist_tab_images' =>
-		"IMAGES",			
+		"KÉPEK",			
 
 	/* 1.11 BUILD 9 */
 	'3dgalleryStart' =>
-		"Start",
+		"Indítás",
 	'3dgalleryConfig' =>
-		"Config",		
+		"Beállítás",		
 );
 ?>

@@ -59,78 +59,78 @@ $i18n['tooltips'] = array(
 	/* 1.11 BUILD 8 */
 	// # TOP-ROM
 	'menuTopRomAddNewRomTooltip' =>
-		"This will add roms for the selected platform!",
+		"Hiermee voeg je ROMS toe voor het geselecteerde platform!",
 	'mTopRomOptimizeTooltip' =>
-		"Optimize the ecc-Database for the selected platform e.g. if you move/remove files at your harddrive",
+		"Optimalizeer de ECC database voor het geselecteerde platform (bijvoorbeeld als je bestanden (ROMS) hebt verplaatst of verwijderd.",
 	'mTopRomRemoveDupsTooltip' =>
-		"This will remove all duplicate roms from your ecc database",
+		"Deze optie zal alle dubbele ROMS uit je database verwijderen.",
 	'mTopRomRemoveRomsTooltip' =>
-		"Remove all roms of the selected platform from the ecc-database",		
+		"Deze optie zal ALLE ROMS verwijderen uit de database",		
 	'mTopDatImportRcTooltip' =>
-		"You can import Romcenter Datfiles (*.dat) into ecc. You have to select the right platform! RC-Datfiles contain the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",
+		"Je kan RomCenter DAT bestanden importeren (*.dat) als je de juiste platform selecteerd! RomCenter DAT bestanden bevatten een bestandsnaam, checksum en meta-informatie verbonden aan de bestandsnaam. emuControlCenter zal deze informatie gebruiken en automatisch importeren als ecc-metadata!",
 	// # TOP-EMU
 	'mTopEmuConfigTooltip' =>
-		"Change the emulator assigned to the selected platform",
+		"Wijzig de emulator welke is gekoppeld aan dit platform.",
 	// # TOP-DAT
 	'mTopDatImportEccTooltip' =>
-		"Import emuControlCenter Datfiles (*.ecc) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
+		"Importeer emuControlCenter DAT bestanden (*.eccDat) in ecc. Als je een platform geselecteerd hebt wordt alleen data van dit platform geimporteerd! Het ECC DAT bestands formaat heeft uitgebreide meta-informatie zoals categorieen, ontwikkelaars, staat, talen, etc.",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Import CTRL MAME Datfiles (*.dat) into ecc.",
+		"Importeer CLR MAME DAT bestanden (*.dat) in ecc.",
 	'mTopDatImportRcTooltip' =>
-		"Import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
+		"Importeer RomCenter DAT bestanden (*.dat) in ECC. Je moet het juiste platform selecteren! RomCenter DAT bestanden bevatten een bestandsnaam, checksum en meta-informatie verbonden aan de bestandsnaam. emuControlCenter zal deze informatie gebruiken en automatisch importeren als ecc-metadata!",
 	'mTopDatExportEccFullTooltip' =>
-		"This will export all your meta-data of the selected platform to a Datfile (plaintext).",
+		"Dit zal al je meta-data exporteren van het geselecteerde platform naar een DAT bestand (puur tekst).",
 	'mTopDatExportEccUserTooltip' =>
-		"This will export only the data modified by you of the selected platform to a Datfile (plaintext).",
+		"Dit zal al je data exporteren welke is veranderd door jou van het geselecteerde platform naar een DAT bestand (puur tekst).",
 	'mTopDatExportEccEsearchTooltip' =>
-		"This will export only the search result of eSearch meta-data of the selected platform to a Datfile (plaintext).",
+		"Dit zal alleen de data exporteren van de zoekresultaten (eSearch meta-gegevens) van het geselecteerde platform naar een DAT bestand (puur tekst).",
 	'mTopDatClearTooltip' =>
-		"Clear data from DATfiles of the selected platform!",
+		"Verwijder data van DATfiles van het geselecteerde platform!",
 	// # TOP-OPTIONS
 	'mTopOptionDbVacuumTooltip' =>
-		"Internal function to cleanup and shrink the database.",	
+		"Interne functie om de database op te schonen en te laten slinken.",	
 	'mTopOptionCreateUserFolderTooltip' =>
-		"This will create all ecc user-folders like emus, roms, exports aso. Use this option, if you have created a new platform!",
+		"Dit zal ECC gebruikersfolders aanmaken, zoals emus, roms, exports, etc. Gebruik deze optie als je een nieuw platform gecreeerd hebt!",
 	'mTopOptionCleanHistoryTooltip' =>
-		"This will clean up the ecc history.ini. Ecc stores data like selected Directories, selected Options aso. in this file.",
+		"Deze optie zal de 'history.ini' opschonen. ECC slaat gegevens op in dit bestand zoals geselecteerde folders, opties, etc.",
 	'mTopOptionBackupUserdataTooltip' =>
-		"This will backup all your userdata like notes, highscore and time played to an XML file",
+		"Dit zal een backup maken van alle gebruikersdata zoals notities, hoogste score en tijd gespeeld naar een XML bestand.",
 	'mTopOptionCreateStartmenuShortcutsTooltip' =>
-		"This will create ECC shortcuts in the windows startmenu",
+		"Dit zal startmenu snelkoppelingen maken.",
 	'mTopOptionConfigTooltip' =>
-		"This will open the configuration window of ECC",
+		"Dit zal het configuratiescherm van ECC openen.",
 	// # TOP-TOOLS
 	'mTopToolEccGtktsTooltip' =>
-		"Select various GTK themes to use with ECC, you can make a nice combination when used with proper ECC themes.",	
+		"Selecteer een van de GTK thema's, je kan een leuke combinatie maken als je gebruik maakt van de juiste ECC thema.",	
 	'mTopToolEccDiagnosticsTooltip' =>
-		"This will diagnose and give you information about your ECC installation.",
+		"Dit zal een diagnose rapport maken van je ECC installatie.",
 	'mTopDatDFUTooltip' =>
-		"Manually update your DATfiles from MAME DAT.",
+		"Handmatig je DAT bestanden bijwerken met MAME(DAT).",
 	'mTopAutoIt3GUITooltip' =>
-		"This will open KODA where you can create end export your own AutoIt3 GUI for use with scripts if needed.",
+		"Dit zal het programma KODA openen waarmee je Autoit3 GUI kunt maken voor je scripts als het nodig is.",
 	'mTopImageIPCTooltip' =>
-		"Create imagepacks of your platforms, so you can share it easily with us.",
+		"Creeer plaatjespakketten van platformen, zodat je het gemakkelijk met ons kunt delen.",
 	// # TOP-DEVELOPER
 	'mTopDeveloperSQLTooltip' =>
-		"This will open a SQL browser wich you can use to view and edit the ECC database (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Dit zal een SQL browser openen waarmee je de ECC database kun bekijken en bewerken (alleen voor profs!, wees er altijd zeker van dat je een backup van je eigen veranderingen maakt!, want deze kunnen overschreven worden door veranderingen met ECC update!)",
 	'mTopDeveloperGUITooltip' =>
-		"This will open the GLADE GUI editor where you can edit and adjust the ECC GUI (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Dit zal de GLADE GUI bewerker openen, waarmee je de GUI kan bewerken (alleen voor profs!, wees er altijd zeker van dat je een backup van je eigen veranderingen maakt!, want deze kunnen overschreven worden door veranderingen met ECC update!)",
 	// # TOP-UPDATE
 	'mTopUpdateEccLiveTooltip' =>
-		"This will check if there are updates available for ECC.",
+		"Hiermee word gekeken of er aanvullende ECC updates aanwezig zijn.",
 	// # TOP-SERVICES
 	'mTopServicesKameleonCodeTooltip' =>
-		"This will open a window where you can enter the kameleon code to use ECC services. (registered forum members)",
+		"Dit zal een venster openen waar je de Kameleon code kunt invoeren om gebruik te maken van diverse ECC diensten. (voor geregistreerde forum leden)",
 	// # TOP-HELP
 	'mTopHelpWebsiteTooltip' =>
-		"This will open the ECC website in your internetbrowser.",
+		"Dit zal de ECC website openen in je internetbrowser.",
 	'mTopHelpForumTooltip' =>
-		"This will open the ECC support forum in your internetbrowser.",
+		"Dit zal de ECC hulp forum openen in je internetbrowser.",
 	'mTopHelpDocOfflineTooltip' =>
-		"This will open the ECC documentation locally.",
+		"Dit zal de lokale ECC documentatie openen.",
 	'mTopHelpDocOnlineTooltip' =>
-		"This will open the ECC documentation site in your internetbrowser.",
+		"Dit zal de ECC documentatie openen in je internetbrowser.",
 	'mTopHelpAboutTooltip' =>
-		"This will pop-up the ECC about box.",
+		"Dit zal de 'over ECC' box laten zien",
 );
 ?>

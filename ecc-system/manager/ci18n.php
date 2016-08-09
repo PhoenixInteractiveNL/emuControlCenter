@@ -47,7 +47,7 @@ class i18n {
 		$dirHdl = opendir(self::$langDir);
 		while($file = readdir($dirHdl)) {
 			
-			if ($file=='.' || $file=='..' || self::$langDir.'/'.$file == $charsetIniFile || substr($file, -4) == '.ini' ) continue;
+			if ($file=='.' || $file=='..' || self::$langDir.'/'.$file == $charsetIniFile || substr($file, -4) == '.ini' || substr($file, -4) == '.ico' || substr($file, -4) == '.txt') continue;
 			include(self::$langDir.$file);
 			if (isset($i18n) && is_array($i18n)) {
 				foreach($i18n as $type => $i18nData){
@@ -58,20 +58,14 @@ class i18n {
 						else {
 							$i18n[$type][$key] = $value;							
 						}
-						
 						#$i18n[$type][$key] = htmlspecialchars($i18n[$type][$key]);
-						
-
 					}
 				}
-
 				self::$langData = array_merge(self::$langData, $i18n);
 				$i18n = false;
 			}
-		}
-		
-		#file_put_contents('testi18n.html', print_r(self::$langData, true));
-		
+		}		
+		#file_put_contents('testi18n.html', print_r(self::$langData, true));		
 	}
 	
 	public static function translateArray($category, $languageArray, $createPlaceholder=false, $valueAsIndex=false) {

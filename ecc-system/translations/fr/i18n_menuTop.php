@@ -157,7 +157,7 @@ $i18n['menuTop'] = array(
 	'mTopRomAuditUpdate' =>
 		"Re-auditer les fichiers",
 	'mTopDatImportCtrlMAME' =>
-		"Importer un fichier de données CtrlMAME",
+		"Importer un fichier de données ClrMAME",
 	'mTopView' =>
 		"Affichage",
 
@@ -210,30 +210,30 @@ $i18n['menuTop'] = array(
 
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
-		'Manual DatFile Updater (DFU)',
+		'Manuel du DatFile Updater (DFU)',
 
 	/* 1.11 BUILD 4 */
 	'mTopOptionCreateStartmenuShortcuts' =>
-		'Create startmenu icons',
+		'Créer des raccourcis dans le menu Démarrer',
 
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
-		'SQlite Browser',
+		'Explorateur SQlite',
 
 	'mTopDeveloperGUI' =>
-		'Glade GUI Editor',
+		'Editeur Glade GUI',
 
 	'mTopAutoIt3GUI' =>
-		'Create Autoit3 GUI (Koda)',
+		'Créer un GUI Autoit3 (Koda)',
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
-		'Developer',
+		'Développeur',
 
 	'mTopServices' =>
 		'Services',
 
 	'mTopServicesKameleonCode' =>
-		'Enter Kameleon Code',
+		'Entrer un code Kameleon',
 );
 ?>

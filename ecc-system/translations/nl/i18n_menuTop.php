@@ -6,7 +6,7 @@
  * author:	Sebastiaan Ebeltjes
  * date:	2006/06/26
  * ------------------------------------------
- */
+ **/
 $i18n['menuTop'] = array(
 	'romAddNewRom%s' =>
 		"Nieuwe ROMS toevoegen voor %s",
@@ -157,7 +157,7 @@ $i18n['menuTop'] = array(
 	'mTopRomAuditUpdate' =>
 		"Hercontroleer bestanden",
 	'mTopDatImportCtrlMAME' =>
-		"Importeer CtrlMAME DAT-Bestand",
+		"Importeer CLR MAME DAT-Bestand",
 	'mTopView' =>
 		"Bekijk",
 

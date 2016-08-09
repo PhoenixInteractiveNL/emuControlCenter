@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	hu (hungarian)
+ * language:hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -189,8 +189,17 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Dokumentumok mappa tallózása",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Download PLATFORM images",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Platform képek",	
+
+	'lbl_image_platform_import_online' =>
+		"Platform képek online importálása (kameleon kód szükséges)",	
+
+	'lbl_image_platform_import_local' =>
+		"Platform képek importálása helyi mappából (nem ecc, pl. no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Platform képcsomag készítése (ecc, no-intro, emumovies)",
 );
 ?>

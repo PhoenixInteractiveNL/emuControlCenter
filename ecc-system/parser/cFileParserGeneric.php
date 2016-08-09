@@ -1,9 +1,4 @@
 <?php
-/*
-* Nintendo N64 Parser
-* Dieser Parser kann informationen aus N64-Roms
-* extrahieren.
-*/
 class FileParserGeneric implements FileParser {
 	
 	private $_file_ext = false;
@@ -29,7 +24,7 @@ class FileParserGeneric implements FileParser {
 		$ret['FILE_SIZE'] = $file_info['SIZE'];
 		
 		# use fsum to get the right crc32 for larger files!
-		# only usable for platforms withou offsets!!!!
+		# only usable for platforms without offsets!!!!
 		if (filesize($file_name) >= SLOW_CRC32_PARSING_FROM) {
 			$ret['FILE_CRC32'] = FileIO::getFsumCrc32($file_name, 1);
 		}

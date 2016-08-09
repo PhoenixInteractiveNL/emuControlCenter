@@ -61,7 +61,7 @@ $i18n['dropdown_meta_region'] = array(
 	'[[Europe]]' =>
 		"Européen",
 	'[[Hispanic]]' =>
-		"Hispanique",
+		"Espagnole",
 	'[[Japan]]' =>
 		"Japonais",
 	'[[USA]]' =>
@@ -69,11 +69,11 @@ $i18n['dropdown_meta_region'] = array(
 	'[[World]]' =>
 		"Monde",
 	'[[Australia]]' =>
-		"Australia",
+		"Australie",
 	'[[USA-Europe]]' =>
 		"USA-Europe",
 	'[[USA-Japan]]' =>
-		"USA-Japan",
+		"USA-Japon",
 );
 
 /* 0.9.8 FYEO 04 */

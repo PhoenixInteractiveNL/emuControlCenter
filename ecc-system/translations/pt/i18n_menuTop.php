@@ -157,7 +157,7 @@ $i18n['menuTop'] = array(
 	'mTopRomAuditUpdate' =>
 		"Reauditar arquivos",
 	'mTopDatImportCtrlMAME' =>
-		"Importar clrMAME datfile",
+		"Importar ClrMAME datfile",
 	'mTopView' =>
 		"Visualizar",
 

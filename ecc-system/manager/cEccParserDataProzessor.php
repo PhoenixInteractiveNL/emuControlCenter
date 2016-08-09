@@ -1,5 +1,5 @@
 <?php
-define('SLOW_CRC32_PARSING_FROM', 100663296);
+define('SLOW_CRC32_PARSING_FROM', 104857600);
 #define('SLOW_CRC32_PARSING_FROM', 0);
 
 class EccParserDataProzessor{

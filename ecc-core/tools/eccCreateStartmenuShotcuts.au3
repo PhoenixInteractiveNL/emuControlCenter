@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Create ECC startmenu shortcuts
-; Script version         : v1.0.0.1
-; Last changed           : 2012-05-06
+; Script version         : v1.0.0.2
+; Last changed           : 2012-08-11
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -60,12 +60,12 @@ FileCreateShortcut($FileNametoLink, $LinkFileName, $WorkingDirectory, "", $Descr
 DirCreate(@ProgramsDir & "\" & $StartFolderName & "\Tools")
 
 ; Create shortcut to start ECC Live!
-$FileNameToLink = $ECCInstallPath & "\ecc-core\tools\eccLive.exe"
+$FileNameToLink = $ECCInstallPath & "\ecc-core\tools\eccUpdate.bat"
 $WorkingDirectory = $ECCInstallPath & "\ecc-core\tools\"
 $LinkFileName = @ProgramsDir & "\" & $StartFolderName & "\Tools\" & "Check for updates!"
 $Description = "Check for updates with ECC Live!"
 $State = @SW_SHOWNORMAL ;Can be @SW_SHOWNORMAL or @SW_SHOWMINNOACTIVE
-$Icon = $ECCInstallPath & "\ecc-core\tools\eccLive.exe"
+$Icon = $ECCInstallPath & "\ecc-core\tools\eccUpdate.ico"
 $IconNumber = 0
 FileCreateShortcut($FileNametoLink, $LinkFileName, $WorkingDirectory, "", $Description, $Icon, "", $IconNumber,$State)
 

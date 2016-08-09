@@ -1286,7 +1286,9 @@ class GuiPopConfig extends GladeXml {
 		
 		$this->imageSizes = array(
 			'120x80',
+			'180x120',
 			'240x160',
+			'300x200',
 			'360x240',
 		);
 		$selected =  $iniManager->getKey('USER_SWITCHES', 'image_mainview_size');

@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.2.5.6
-; Last changed           : 2012.05.06
+; Script version         : v1.2.5.7
+; Last changed           : 2012.07.04
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -16,7 +16,7 @@ FileChangeDir(@ScriptDir)
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
 $eccPath = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $7zaexe = $eccPath & "\ecc-core\thirdparty\7zip\7za.exe"
+Global $7zexe = $eccPath & "\ecc-core\thirdparty\7zip\7z.exe"
 Global $DATfileInfoINI = $eccPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
 Global $DATUtilExe = $eccPath & "\ecc-core\thirdparty\datutil\datutil.exe"
 
@@ -25,7 +25,7 @@ If FileExists($eccPath & "\ecc.exe") <> 1 or FileExists($eccPath & "\ecc-system\
 	Exit
 EndIf
 
-If FileExists($7zaexe) <> 1 Then
+If FileExists($7zexe) <> 1 Then
 	MsgBox(64,"ECC DatFileUpdater", "7zip could not be found!, aborting...")
 	Exit
 EndIf
@@ -101,7 +101,7 @@ If FileExists($DATfileMameFile) <> 1 Then
 			If $BackupBox = 6 Then ;YES selected
 				ToolTip("Creating a backup of your existing DATfiles, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 				$7zfile = $DATfileBackupPath & "eccDATbackup_" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & @SEC & ".7z"
-				ShellExecuteWait($7zaexe, "a " & $7zfile & " " & Chr(34) & Chr(34) & $DATfilePath &  "\*.dat" & Chr(34), "", "", @SW_HIDE)
+				ShellExecuteWait($7zexe, "a " & $7zfile & " " & Chr(34) & Chr(34) & $DATfilePath &  "\*.dat" & Chr(34), "", "", @SW_HIDE)
 				ToolTip("")
 				Msgbox(64, "ECC DatFileUpdater", "DATfile backup '" & $7zfile & "' created!")
 			EndIf

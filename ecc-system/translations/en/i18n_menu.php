@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	en (english)
+ * language:en (english)
  * author:	andreas scheibel
  * date:	2006/09/09 
  * ------------------------------------------
@@ -26,15 +26,15 @@ $i18n['menu'] = array(
 	'lbl_ecc_config' =>
 		"Configuration",
 	'lbl_dat_import_ecc' =>
-		"Import emuControlCenter Datfile",
+		"Import emuControlCenter DATfile",
 	'lbl_dat_import_rc' =>
-		"Import Romcenter Datfile",
+		"Import RomCenter DATfile",
 	'lbl_dat_export_ecc_full' =>
-		"Export ecc Datfile full",
+		"Export ECC DATfile full",
 	'lbl_dat_export_ecc_user' =>
-		"Export ecc Datfile user",
+		"Export ECC DATfile user",
 	'lbl_dat_export_ecc_esearch' =>
-		"Export ecc Datfile e-search",
+		"Export ECC DATfile e-search",
 	'lbl_dat_empty' =>
 		"Empty Datfile database",
 	'lbl_help' =>
@@ -81,9 +81,9 @@ $i18n['menu'] = array(
 	'lbl_rating_submenu' =>
 		"Rate ROM",
 	'lbl_import_submenu' =>
-		"Import Datfile",
+		"Import DAT file",
 	'lbl_export_submenu' =>
-		"Export Datfile",
+		"Export DAT file",
 	'lbl_rom_rescan_folder' =>
 		"(Re)parse ROM-Directory",
 	'lbl_meta_remove' =>
@@ -113,9 +113,9 @@ $i18n['menu'] = array(
 	'lbl_emu_config' =>
 		"Configure emulator",
 	'lbl_quickfilter' =>
-		"quickFilter",
+		"QuickFilter",
 	'lbl_quickfilter_reset' =>
-		"quickFilter entfernen",
+		"Reset quickFilter",
 
 	/* 0.9.6 FYEO 1 */
 	'lbl_dat_import_ecc_romdb' =>
@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Import CtrlMAME datfile",
+		"Import CLR MAME DATfile",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -181,16 +181,25 @@ $i18n['menu'] = array(
 	'lbl_meta_edit_top' =>
 		"Edit meta",
 
-	/* 0.9.9 FYEO 01 */
-	'lblOpenAssetFolder' =>
-		"Browse documents folder",
-	
 	/* 0.9.8 FYEO 05 */
 	'lbl_image_inject' =>
 		"Download images",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Download PLATFORM images",
+	/* 0.9.9 FYEO 01 */
+	'lblOpenAssetFolder' =>
+		"Browse documents folder",
+
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Platform images",	
+
+	'lbl_image_platform_import_online' =>
+		"Import platform images online (kameleon code needed)",	
+
+	'lbl_image_platform_import_local' =>
+		"Import platform images from local folder (non ecc, like no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Create platform imagepack (ecc, no-intro, emumovies)",
 );
-?>
+?>>

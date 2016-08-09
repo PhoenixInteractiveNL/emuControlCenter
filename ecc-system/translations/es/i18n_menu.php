@@ -2,9 +2,9 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	es (Spanish)
+ * language:es (Spanish)
  * author:	Jarlaxe
- * date:	2012/06/03 
+ * date:	2012/07/09 
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Importar datos de CtrlMAME",
+		"Importar datos de CRL MAME",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -189,8 +189,17 @@ $i18n['menu'] = array(
 	'lbl_image_inject' =>
 		"Descargar imágenes",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Descargar imágenes de la PLATAFORMA",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Imágenes de la plataforma",	
+
+	'lbl_image_platform_import_online' =>
+		"Importar imágenes online para esta plataforma (necesita código kameleon)",	
+
+	'lbl_image_platform_import_local' =>
+		"Importar imágenes para esta plataforma desde una carpeta local (no ecc, como no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Crear un 'imagepack' de esta plataforma (ecc, no-intro, emumovies)",
 );
 ?>

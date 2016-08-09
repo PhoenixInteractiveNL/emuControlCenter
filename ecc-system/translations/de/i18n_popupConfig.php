@@ -353,12 +353,12 @@ $i18n['popupConfig'] = array(
 
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
-		"unpack ALL files including subdirs",
+		"Entpacke ALLE Dateien inklusive der Unterverzeichnisse",
 
 	'emuUnpackNotelabel' =>
-		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+		'Hinweis: Im Register [Start] kannst du den "unpack" Ordner leeren, wenn ECC beendet wird.',
 
 	'startConfDeleteUnpacked' =>
-		"Empty ECC unpack folder on exit",
+		"Leere den ECC 'unpack' Ordner beim Beenden.",
 );
 ?>

@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.0.5 (2012.01.15)
+; Version: 1.2.0.7 (2012.09.01)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -72,7 +72,7 @@ Global $eccSystemLanguage = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "languag
 Global $eccSystemEccFolder = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_folder", "")
 $eccSystemEccFolder = 					StringMid($eccSystemEccFolder, 1, Stringlen($eccSystemEccFolder)-1) ;remove last slash
 ;[THIRDPARTY]
-Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7za.exe" & Chr(34)
+Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7z.exe" & Chr(34)
 Global $eccThirdPartyFsum = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\fsum\fsum.exe" & Chr(34)
 Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
 Global $eccThirdPartyXpadder = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\xpadder\xpadder.exe" & Chr(34)
@@ -208,7 +208,7 @@ $DaemonTools = IniRead($eccSystemEccFolder & "\ecc-script\eccScriptDaemonTools.i
 ; Check if Daemontools is already configured, if not then let user select the program first.
 If FileExists($DaemonTools) = 0 Then
 
-	$DaemonTools = FileOpenDialog("CONFIG - Please locate Daemon Tools", "", "Daemon Tools (daemon.exe)", 3)
+	$DaemonTools = FileOpenDialog("CONFIG - Please locate Daemon Tools", "", "Daemon Tools (*.exe)", 3)
 
 	If @error Then
 		; Show user a messagebox that Daemontools is needed.
@@ -285,7 +285,7 @@ EndSelect
 
 
 If $DTsupport <> "1" Then
-        MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & $eccFileRomExtension & "'is not supported by 'Daemon Tools', abort...")
+        MsgBox(48, "ECC Script - Daemon tools", "The current extension '" & $eccFileRomExtension & "' is not supported by 'Daemon Tools', abort...")
 	Exit
 EndIf
 

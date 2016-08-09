@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+		<title>flShow - Carousel</title>
+		<meta name="Author" content="Saverio Caminiti" />
+
+        <script type="text/javascript" src="swfobject.js"></script>
+
+		<style type="text/css">
+			html, body {
+				height: 100%;
+				margin: 0px;
+				border: 0px;
+				padding: 0px;
+				color: white;
+				background-color: black;
+			}
+			.carousel_container {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+<body>
+
+<div class="carousel_container">
+	<div id="carousel1">
+		<p>This slideshow requires <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 9.0</a> (or higher). JavaScript must be enabled.</p>
+	</div>
+</div>
+<script type="text/javascript">
+	swfobject.embedSWF("Carousel.swf", "carousel1", "100%", "100%", "9.0.0", false, {xmlfile:"default.xml", loaderColor:"0xCCCCCC"});
+</script>
+
+</body>
+</html>

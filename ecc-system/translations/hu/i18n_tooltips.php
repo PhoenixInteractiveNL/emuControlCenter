@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  */
 $i18n['tooltips'] = array(
@@ -59,13 +59,13 @@ $i18n['tooltips'] = array(
 	/* 1.11 BUILD 8 */
 	// # TOP-ROM
 	'menuTopRomAddNewRomTooltip' =>
-		"This will add roms for the selected platform!",
+		"Ez hozzáadja a ROMokat a kiválasztott platformhoz!",
 	'mTopRomOptimizeTooltip' =>
-		"Optimize the ecc-Database for the selected platform e.g. if you move/remove files at your harddrive",
+		"Ecc-Adatabázis optimalizálása a kiválasztott platformhoz pl. ha mozgattál/töröltél fájlokat a merevlemezeden",
 	'mTopRomRemoveDupsTooltip' =>
-		"This will remove all duplicate roms from your ecc database",
+		"Ez töröl minden duplikált romot az ecc adatbázisból",
 	'mTopRomRemoveRomsTooltip' =>
-		"Remove all roms of the selected platform from the ecc-database",		
+		"A kiválasztott platform összes romját törli az ecc-adatbázisból",		
 	'mTopDatImportRcTooltip' =>
 		"You can import Romcenter Datfiles (*.dat) into ecc. You have to select the right platform! RC-Datfiles contain the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",
 	// # TOP-EMU
@@ -75,7 +75,7 @@ $i18n['tooltips'] = array(
 	'mTopDatImportEccTooltip' =>
 		"Import emuControlCenter Datfiles (*.ecc) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Import CTRL MAME Datfiles (*.dat) into ecc.",
+		"Import CLR MAME Datfiles (*.dat) into ecc.",
 	'mTopDatImportRcTooltip' =>
 		"Import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
 	'mTopDatExportEccFullTooltip' =>
@@ -117,20 +117,20 @@ $i18n['tooltips'] = array(
 		"This will open the GLADE GUI editor where you can edit and adjust the ECC GUI (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
 	// # TOP-UPDATE
 	'mTopUpdateEccLiveTooltip' =>
-		"This will check if there are updates available for ECC.",
+		"Ellenõrzi hogy elérhetõek e frissítések az ECC-hez.",
 	// # TOP-SERVICES
 	'mTopServicesKameleonCodeTooltip' =>
-		"This will open a window where you can enter the kameleon code to use ECC services. (registered forum members)",
+		"Ezzel megnyílik egy ablak ahol megadhatod a kameleon kódot az ECC szolgáltatások használatához. (regisztrált fórum tagoknak)",
 	// # TOP-HELP
 	'mTopHelpWebsiteTooltip' =>
-		"This will open the ECC website in your internetbrowser.",
+		"Ez megnyitja az ECC honlapját az internetböngészõdben.",
 	'mTopHelpForumTooltip' =>
-		"This will open the ECC support forum in your internetbrowser.",
+		"Ez megnyitja az ECC támogatói fórumát az internetböngészõdben.",
 	'mTopHelpDocOfflineTooltip' =>
-		"This will open the ECC documentation locally.",
+		"Ez megnyitja az ECC helyi dokumentációját.",
 	'mTopHelpDocOnlineTooltip' =>
-		"This will open the ECC documentation site in your internetbrowser.",
+		"Ez megnyitja az ECC dokumentációs oldalát az internetböngészõdben.",
 	'mTopHelpAboutTooltip' =>
-		"This will pop-up the ECC about box.",
+		"Ezzel felugrik az ECC névjegy box.",
 );
 ?>

@@ -912,20 +912,6 @@
                         </child>
                       </widget>
                     </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopImageIPC">
-                        <property name="visible">True</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="label" translatable="yes">ImagePackCreator (IPC)</property>
-                        <property name="use_underline">True</property>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image57">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-convert</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
                   </widget>
                 </child>
                 <child internal-child="image">
@@ -994,7 +980,7 @@
                 <child>
                   <widget class="GtkMenu" id="mTopUpdate_menu">
                     <child>
-                      <widget class="GtkImageMenuItem" id="mTopUpdateEccLive">
+                      <widget class="GtkImageMenuItem" id="mTopToolEccUpdate">
                         <property name="visible">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="label" translatable="yes">ECC Live! Update</property>
@@ -3871,7 +3857,6 @@ Visit www.camya.com for updates or use eccLive!</property>
                                                 <property name="spacing">2</property>
                                                 <child>
                                                   <widget class="GtkButton" id="media_nb_info_eccdb_info">
-                                                    <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="label" translatable="yes">RomDB add</property>
                                                     <property name="use_underline">True</property>
@@ -4930,7 +4915,6 @@ Show all roms havent an info by now!</property>
                                     </child>
                                     <child>
                                       <widget class="GtkVBox" id="vbox100">
-                                        <property name="visible">True</property>
                                         <property name="border_width">5</property>
                                         <property name="spacing">5</property>
                                         <child>
@@ -5053,7 +5037,6 @@ Show all roms havent an info by now!</property>
                                     </child>
                                     <child>
                                       <widget class="GtkLabel" id="infoRomDBLbl">
-                                        <property name="visible">True</property>
                                         <property name="label" translatable="yes">ROMDB</property>
                                         <property name="single_line_mode">True</property>
                                         <property name="angle">90</property>

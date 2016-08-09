@@ -12,7 +12,7 @@ $i18n['tooltips'] = array(
 	// tooltips
 	// -------------------------------------------------------------
 	'opt_auto_nav' =>
-		"Auto chargement pendant la navigation",
+		"Auto-chargement pendant la navigation",
 	'opt_hide_nav_null' =>
 		"Montrer/Cacher les plateformes sans ROMS",
 	'opt_hide_dup' =>
@@ -59,78 +59,78 @@ $i18n['tooltips'] = array(
 	/* 1.11 BUILD 8 */
 	// # TOP-ROM
 	'menuTopRomAddNewRomTooltip' =>
-		"This will add roms for the selected platform!",
+		"Ceci va ajouter des ROMS pour la plateforme sélectionnée !",
 	'mTopRomOptimizeTooltip' =>
-		"Optimize the ecc-Database for the selected platform e.g. if you move/remove files at your harddrive",
+		"Optimiser la base de données d'ECC pour la plateforme sélectionnée, par exemple en effaçant les données liées à des fichiers déplacés ou supprimés du disque dur.",
 	'mTopRomRemoveDupsTooltip' =>
-		"This will remove all duplicate roms from your ecc database",
+		"Ceci va supprimer toutes les ROMS en double dans la base de données d'ECC.",
 	'mTopRomRemoveRomsTooltip' =>
-		"Remove all roms of the selected platform from the ecc-database",		
+		"Supprimer toutes les données des ROMS sélectionnées de la base de données d'ECC",		
 	'mTopDatImportRcTooltip' =>
-		"You can import Romcenter Datfiles (*.dat) into ecc. You have to select the right platform! RC-Datfiles contain the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",
+		"Vous pouvez importer une base de données Romcenter (*.dat) dans ECC. Pour cela vous devez sélectionner la bonne plateforme ! Ces bases de données contiennent le nom de fichier, la somme de contrôle du fichier et les métadonnées assignées à ce nom de fichier. emuControlCenter va trouver automatiquement ces informations et les ajouter dans sa base de données !",
 	// # TOP-EMU
 	'mTopEmuConfigTooltip' =>
-		"Change the emulator assigned to the selected platform",
+		"Changer d'émulateur assigné à cette plateforme",
 	// # TOP-DAT
 	'mTopDatImportEccTooltip' =>
-		"Import emuControlCenter Datfiles (*.ecc) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
+		"Importer une base de données ECC (*.ecc) dans ecc. Si vous avez sélectionné une plateforme, seules les données de celle-ci seront importées! Le format ECC a des métadonnées étendues comme la catégorie, le développeur, le pays, la langue, etc.",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Import CTRL MAME Datfiles (*.dat) into ecc.",
+		"Importer une base de données CTRL MAME (*.dat) dans ecc.",
 	'mTopDatImportRcTooltip' =>
-		"Import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
+		"Importer une base de données Romcenter (*.dat) dans ecc. Vous devez sélectionner la bonne plateforme ! Ces bases de données contiennent le nom de fichier, la somme de contrôle du fichier et les métadonnées assignées à ce nom de fichier. emuControlCenter va trouver automatiquement ces informations et les ajouter dans sa base de données !",		
 	'mTopDatExportEccFullTooltip' =>
-		"This will export all your meta-data of the selected platform to a Datfile (plaintext).",
+		"Ceci va exporter toutes vos métadonnées de la plateforme sélectionnée dans un fichier (plaintext).",
 	'mTopDatExportEccUserTooltip' =>
-		"This will export only the data modified by you of the selected platform to a Datfile (plaintext).",
+		"Ceci va exporter seulement les métadonnées que vous avez modifiées pour la plateforme sélectionnée dans un fichier (plaintext).",
 	'mTopDatExportEccEsearchTooltip' =>
-		"This will export only the search result of eSearch meta-data of the selected platform to a Datfile (plaintext).",
+		"Ceci va exporter seulement les métadonnées du résultat de recherche avec eSearch pour la plateforme sélectionnée dans un fichier (plaintext).",
 	'mTopDatClearTooltip' =>
-		"Clear data from DATfiles of the selected platform!",
+		"Effacer les données issues de fichiers de base de données pour la plateforme sélectionnée !",
 	// # TOP-OPTIONS
 	'mTopOptionDbVacuumTooltip' =>
-		"Internal function to cleanup and shrink the database.",	
+		"Fonction interne de nettoyage et compression de la base de données.",	
 	'mTopOptionCreateUserFolderTooltip' =>
-		"This will create all ecc user-folders like emus, roms, exports aso. Use this option, if you have created a new platform!",
+		"Ceci va créer tous les sous-dossiers d'ecc comme emus, ROMS, exports, etc. Utilisez cette option si vous avez créé une nouvelle plateforme !",
 	'mTopOptionCleanHistoryTooltip' =>
-		"This will clean up the ecc history.ini. Ecc stores data like selected Directories, selected Options aso. in this file.",
+		"Ceci va nettoyer le fichier history.ini d'ecc. Ecc sauvegarde des données dans ce dossier, par exemple les dossiers sélectionnées, les options choisies, etc.",
 	'mTopOptionBackupUserdataTooltip' =>
-		"This will backup all your userdata like notes, highscore and time played to an XML file",
+		"Ceci va sauvegarder toutes vos données uilisateur dans un fichier XML. Par exemple les notes, les scores, les temps de jeu, etc.",
 	'mTopOptionCreateStartmenuShortcutsTooltip' =>
-		"This will create ECC shortcuts in the windows startmenu",
+		"Ceci va créer des raccoucis ECC dans le menu Démarrer de Windows.",
 	'mTopOptionConfigTooltip' =>
-		"This will open the configuration window of ECC",
+		"Ceci va ouvrir la fenêtre de configuration d'ECC",
 	// # TOP-TOOLS
 	'mTopToolEccGtktsTooltip' =>
-		"Select various GTK themes to use with ECC, you can make a nice combination when used with proper ECC themes.",	
+		"Sélectionner des thèmes GTK à utiliser avec ECC, vous pouvez créer de belles apparences si le thème convient bien à ECC.",	
 	'mTopToolEccDiagnosticsTooltip' =>
-		"This will diagnose and give you information about your ECC installation.",
+		"Ceci va diagnostiquer et vous donner les informations relatives à l'installation d'ECC.",
 	'mTopDatDFUTooltip' =>
-		"Manually update your DATfiles from MAME DAT.",
+		"Mettre à jour manuellement votre base de données à partir de données MAME.",
 	'mTopAutoIt3GUITooltip' =>
-		"This will open KODA where you can create end export your own AutoIt3 GUI for use with scripts if needed.",
+		"Ceci va ouvrir KODA qui vous permettra de créer et exporter vos propres interfaces GUI AutoIt3 si besoin d'une utilisation de script.",
 	'mTopImageIPCTooltip' =>
-		"Create imagepacks of your platforms, so you can share it easily with us.",
+		"Créer des packs d'images de vos plateformes, ainsi vous pourrez les partager plus facilement avec nous.",
 	// # TOP-DEVELOPER
 	'mTopDeveloperSQLTooltip' =>
-		"This will open a SQL browser wich you can use to view and edit the ECC database (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Ceci va ouvrir un navigateur SQL qui vous permettra de visualiser et éditer la base de données d'ECC (uniquement pour les utilisateurs chevronnés, pensez à créer une sauvegarde de vos modifications car elles pourront être écrasées lors d'une mise à jour !)",
 	'mTopDeveloperGUITooltip' =>
-		"This will open the GLADE GUI editor where you can edit and adjust the ECC GUI (for experts only, make sure you create a backup of your changes bacause it can be overwritten with a ECC update!)",
+		"Ceci va ouvrir l'éditeur de GUI GLADE qui vous permettra de modifier et ajuster le GUI d'ECC (uniquement pour les utilisateurs chevronnés, pensez à créer une sauvegarde de vos modifications car elles pourront être écrasées lors d'une mise à jour !)",
 	// # TOP-UPDATE
 	'mTopUpdateEccLiveTooltip' =>
-		"This will check if there are updates available for ECC.",
+		"Ceci va vérifier si une mise à jour est disponible.",
 	// # TOP-SERVICES
 	'mTopServicesKameleonCodeTooltip' =>
-		"This will open a window where you can enter the kameleon code to use ECC services. (registered forum members)",
+		"Ceci va ouvrir une fenêtre pour entrer le code Kameleon pour utiliser les services d'ECC. (membres enregistrées sur le forum d'ECC)",
 	// # TOP-HELP
 	'mTopHelpWebsiteTooltip' =>
-		"This will open the ECC website in your internetbrowser.",
+		"Ceci va ouvrir le site Internet d'ECC dans votre navigateur par défaut.",
 	'mTopHelpForumTooltip' =>
-		"This will open the ECC support forum in your internetbrowser.",
+		"Ceci va ouvrir le forum de support pour ECC dans votre navigateur par défaut.",
 	'mTopHelpDocOfflineTooltip' =>
-		"This will open the ECC documentation locally.",
+		"Ceci va ouvrir la documentation d'ECC enregistrée sur votre ordinateur.",
 	'mTopHelpDocOnlineTooltip' =>
-		"This will open the ECC documentation site in your internetbrowser.",
+		"Ceci va ouvrir la documentation en ligne d'ECC dans votre navigateur par défaut.",
 	'mTopHelpAboutTooltip' =>
-		"This will pop-up the ECC about box.",
+		"Ceci va afficher le pop-up de présentation d'ECC.",
 );
 ?>

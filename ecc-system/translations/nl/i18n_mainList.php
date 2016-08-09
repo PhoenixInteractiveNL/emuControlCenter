@@ -6,7 +6,7 @@
  * author:	Sebastiaan Ebeltjes
  * date:	2006/06/26
  * ------------------------------------------
- */
+ **/
 $i18n['mainList'] = array(
 
 	'simpleHeadTitle' =>

@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Importer un fichier de données CtrlMAME",
+		"Importer un fichier de données ClrMAME",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -189,8 +189,17 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Parcourir le dossier des documents",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Download PLATFORM images",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Images de la plateforme",	
+
+	'lbl_image_platform_import_online' =>
+		"Importer les images de la plateforme à partir d'Internet (nécessite d'enregistrer le code Kameleon)",	
+
+	'lbl_image_platform_import_local' =>
+		"Importer les images de la plateforme à partir d'un dossier (non ecc, par exemple non-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Créer un pack d'images de cette plateforme (ecc, non-intro, emumovies)",
 );
 ?>

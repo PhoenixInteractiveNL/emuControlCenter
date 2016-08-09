@@ -91,7 +91,7 @@ $i18n['metaEdit'] = array(
 		"Aucun eccScript trouvé !",
 
 	'mEditUserWrongCharacters' =>
-		"Caractères invalides trouvés dans le texte. SVP nettoyez le !",
+		"Caractères invalides trouvés dans le texte. SVP nettoyez-le !",
 
 
 );

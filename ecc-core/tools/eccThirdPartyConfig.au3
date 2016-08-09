@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC Thirdparty config
-; Script version         : v1.0.0.0
-; Last changed           : 2012-05-13
+; Script version         : v1.0.0.1
+; Last changed           : 2012-07-04
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -54,7 +54,8 @@ If $eccLanguageCurrent <> $eccLanguageSaved Then ; Language has been changed (co
 			_XMLCreateChildNode("configuration/global", "language", $KodaLanguageData)
 		EndIf
 	EndIf
-	IniWrite($ThirdPartyConfigIni, "SELECTED", "selected", $eccLanguageCurrent) ; Save selected language to INI
+
+	IniWrite($ThirdPartyConfigIni, "ECC", "language", $eccLanguageCurrent) ; Save selected language to INI
 EndIf
 
 Exit

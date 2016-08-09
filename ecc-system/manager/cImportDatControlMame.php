@@ -103,6 +103,9 @@ class ImportDatControlMame extends ImportDat {
 			# update status and handle cancelation
 			if ('FAIL' === $this->updateStatusProgress('Import', $statusCount, $statusCurrent++, true, 10)) return false;
 		}
+		//2012-07-08, Added to fix the counting BUG in the GUI
+		$this->updateStatusProgress('Import', $statusCount, $statusCurrent++);
+		
 		$this->dbms->query('COMMIT TRANSACTION;');
 		
 		LOGGER::add('datimportcm', trim($multiFileDatOut), 1, $eccident, 'w');

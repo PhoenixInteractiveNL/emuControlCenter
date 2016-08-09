@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Importiere CtrlMAME datfile",
+		"Importiere CLR MAME DATfile",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -167,7 +167,7 @@ $i18n['menu'] = array(
 	'imagepackCreateAllThumbnails' =>
 		"Erstelle Thumbnails für schnelleren Zugriff",
 	'imagepackRemoveAllThumbnails' =>
-		"Entferne alle Thumnails für die Weitergabe des imagepacks",
+		"Entferne alle Thumbnails für die Weitergabe des imagepacks",
 	'imagepackConvertEccV1Images' =>
 		"Konvertiere flaches imagepack in imagepack Struktur! (V1->V2)",
 
@@ -189,8 +189,17 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Durchsuche Dokumente",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"PLATFORM bilder herunterladen",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Plattform Bilder",	
+
+	'lbl_image_platform_import_online' =>
+		"Importiere Plattform Bilder online (kameleon code benötigt)",	
+
+	'lbl_image_platform_import_local' =>
+		"Importiere Plattform Bilder vom lokalem Ordner (kein ecc, wie no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Erstelle Plattform Imagepack (ecc, no-intro, emumovies)",
 );
 ?>

@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  */
 $i18n['popupConfig'] = array(
@@ -350,12 +350,12 @@ $i18n['popupConfig'] = array(
 
 	/* 1.11 BUILD 6 */
 	'emuAssignGlobalCheckZipUnpackAll' =>
-		"unpack ALL files including subdirs",
+		"Minden fájl kicsomagolása az almappákkal együtt",
 
 	'emuUnpackNotelabel' =>
-		'note: in the TAB [start] you can purge the unpacked files folder when ECC closes.',
+		'Megjegyzés: A TAB [start] törli a kicsomagolt fájlokat ha az ECC bezárul.',
 
 	'startConfDeleteUnpacked' =>
-		"Empty ECC unpack folder on exit",
+		"ECC unpack mappa törlése kilépéskor",
 );
 ?>

@@ -19,7 +19,7 @@ $i18n['dropdown_meta_storage'] = array(
 	'[[not_memory_card]]' =>
 		"Geheugen kaart",
 	'[[on_harddrive]]' =>
-		"Harddrive",
+		"Hardeschijf",
 );
 $i18n['dropdown_search_fields'] = array(
 	'[[name]]' =>

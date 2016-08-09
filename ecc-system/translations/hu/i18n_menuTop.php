@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  */
 $i18n['menuTop'] = array(
@@ -117,7 +117,7 @@ $i18n['menuTop'] = array(
 
 	/* TOOLS */
 	'mTopTool' =>
-		"eszközök",
+		"Eszközök",
 	'mTopToolEccGtkts' =>
 		"témaválasztó",
 	'mTopToolEccDiagnostics' =>
@@ -206,15 +206,15 @@ $i18n['menuTop'] = array(
 
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
-		'ImagePackCreator (IPC)',
+		'Képcsomag készítõ (IPC)',
 
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
-		'Manual DatFile Updater (DFU)',
+		'Kézi adatfájl frissítõ (DFU)',
 
 	/* 1.11 BUILD 4 */
 	'mTopOptionCreateStartmenuShortcuts' =>
-		'Create startmenu icons',
+		'Startmenü ikonok készítése',
 
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
@@ -228,12 +228,12 @@ $i18n['menuTop'] = array(
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
-		'Developer',
+		'Fejlesztõ',
 
 	'mTopServices' =>
-		'Services',
+		'Szolgáltatások',
 
 	'mTopServicesKameleonCode' =>
-		'Enter Kameleon Code',
+		'Kérem a Kameleon kódot',
 );
 ?>

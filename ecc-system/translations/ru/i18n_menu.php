@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	ru (russian)
+ * language:ru (russian)
  * author:	ALLiGaToR
  * date:	2009/07/09
  * ------------------------------------------
@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Импорт файла информации CtrlMAME",
+		"Импорт файла информации ClrMAME",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -189,8 +189,17 @@ $i18n['menu'] = array(
 	'lblOpenAssetFolder' =>
 		"Просмотреть папку документов",
 		
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Download PLATFORM images",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Platform images",	
+
+	'lbl_image_platform_import_online' =>
+		"Import platform images online (kameleon code needed)",	
+
+	'lbl_image_platform_import_local' =>
+		"Import platform images from local folder (non ecc, like no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Create platform imagepack (ecc, no-intro, emumovies)",
 );
 ?>

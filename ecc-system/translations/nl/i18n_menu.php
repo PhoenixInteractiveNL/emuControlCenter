@@ -2,11 +2,11 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	nl (dutch)
+ * language:nl (dutch)
  * author:	Sebastiaan Ebeltjes
  * date:	2006/06/26
  * ------------------------------------------
- */
+ **/
 $i18n['menu'] = array(
 	// -------------------------------------------------------------
 	// context menu navigation
@@ -131,7 +131,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.6 FYEO 11 */
 	'lbl_importDatCtrlMAME' =>
-		"Importeer CtrlMAME DAT-bestand",
+		"Importeer CLR MAME DAT-bestand",
 
 	/* 0.9.6 FYEO 13 */
 	'labelRomAuditInfo' =>
@@ -179,7 +179,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.8 FYEO 04 */
 	'lbl_meta_edit_top' =>
-		"Edit meta gegevens",
+		"Bewerk meta gegevens",
 
 	/* 0.9.8 FYEO 05 */
 	'lbl_image_inject' =>
@@ -187,10 +187,19 @@ $i18n['menu'] = array(
 
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
-		"Browse documents folder",
+		"Bekijk documenten folder",
 
-	/* 1.11 BUILD 06 */
-	'lbl_image_injectplatform' =>
-		"Download PLATFORM images",
+	/* 1.12 BUILD 06 */
+	'lbl_image_platform' =>
+		"Platform plaatjes",	
+
+	'lbl_image_platform_import_online' =>
+		"Importeer platform plaatjes van internet (kameleon code vereist)",	
+
+	'lbl_image_platform_import_local' =>
+		"Importeer platform plaatjes vanuit een lokale folder (niet ecc, zoals no-intro)",
+
+	'lbl_image_platform_export_local' =>
+		"Creeer platform plaatjespakket (ecc, no-intro, emumovies)",
 );
 ?>

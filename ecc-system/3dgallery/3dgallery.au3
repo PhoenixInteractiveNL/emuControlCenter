@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : 3D Gallery for viewing images!
-; Script version         : v1.1.0.2
-; Last changed           : 2012-05-06
+; Script version         : v1.1.0.4
+; Last changed           : 2012-07-06
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -9,17 +9,17 @@
 ;
 ; Supported gallery's:
 ;
-; tiltviewer		http://www.simpleviewer.net/products
-; postcardviewer	http://www.simpleviewer.net/products
-; simpleviewer		http://www.simpleviewer.net/products
-; 3dtouchring		http://www.flashmo.com
-; 3dcurvegallery	http://www.flashmo.com
-; polaroid gallery	http://www.no3dfx.com/polaroid
+; tiltviewer			http://www.simpleviewer.net/products
+; postcardviewer		http://www.simpleviewer.net/products
+; simpleviewer			http://www.simpleviewer.net/products
+; 3dtouchring			http://www.flashmo.com
+; 3dcurvegallery		http://www.flashmo.com
+; polaroidgallery		http://www.no3dfx.com/polaroid
+; flshowcarouselblack	http://www.flshow.net
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-
-#include "..\..\ecc-core\thirdparty\autoit\include\GUIConstantsEx.au3"
+;XML Wrapper
 #include "..\..\ecc-core\thirdparty\autoit\include\XMLDomWrapper.au3"
 
 ;GUI INCLUDES
@@ -86,454 +86,6 @@ EndSelect
 Exit
 
 
-Func BuildDataFile($Gallery)
-;=========================================================================================
-;=========================================================================================
-;
-;[tiltviewer]
-;datafile="gallery.xml"
-;startfile="index.html"
-;engine="Java & Flash"
-;source="http://www.simpleviewer.net/products/"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;<tiltviewergallery>
-;	<photos>
-;		<photo imageurl="image.jpg" linkurl="http://www.site.com">
-;			<title>[TITLE]</title>
-;			<description>[DESCRIPTION]</description>
-;		</photo>
-;		<photo imageurl="image.jpg" linkurl="http://www.site.com">
-;			<title>[TITLE]</title>
-;			<description>[DESCRIPTION]</description>
-;		</photo>
-;	</photos>
-;</tiltviewergallery>
-
-If $Gallery = "tiltviewer" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "tiltviewergallery")
-	_XMLFileOpen($GalleryDataFileFull)
-	_XMLCreateChildNode("tiltviewergallery", "photos")
-
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("tiltviewergallery/photos", "photo")
-			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "imageurl", $FullPathToImageFolder & $file)
-			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "linkurl", $GalleryImageUrl)
-			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "title", GetRomTypeContents($file))
-			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "description", $RomName & " [" & $RomEccId & "]")
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-;
-;[postcardviewer]
-;datafile="gallery.xml"
-;startfile="index.html"
-;engine="Java & Flash"
-;source="http://www.simpleviewer.net/products/"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;<gallery
-;	cellDimension="800"
-;	columns="4"
-;	zoomOutPerc="15"
-;	zoomInPerc="100"
-;	frameWidth="20"
-;	frameColor="0xFFFFFF"
-;	captionColor="0xFFFFFF"
-;	enableRightClickOpen="true"
-;>
-;	<image>
-;		<url>image.jpg</url>
-;		<caption>[CAPTION]</caption>
-;	</image>
-;	<image>
-;		<url>image.jpg</url>
-;		<caption>[CAPTION]</caption>
-;	</image>
-;</gallery>
-
-If $Gallery = "postcardviewer" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "gallery")
-	_XMLFileOpen($GalleryDataFileFull)
-	_XMLSetAttrib("gallery", "cellDimension", "1000")
-	_XMLSetAttrib("gallery", "columns", "4")
-	_XMLSetAttrib("gallery", "zoomOutPerc", "15")
-	_XMLSetAttrib("gallery", "zoomInPerc", "100")
-	_XMLSetAttrib("gallery", "frameWidth", "20")
-	_XMLSetAttrib("gallery", "frameColor", "0xFFFFFF")
-	_XMLSetAttrib("gallery", "captionColor", "0xFFFFFF")
-	_XMLSetAttrib("gallery", "enableRightClickOpen", "true")
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("gallery", "image")
-			_XMLCreateChildNode("gallery/image[" & $Teller & "]", "url", $FullPathToImageFolder & $file)
-			_XMLCreateChildNode("gallery/image[" & $Teller & "]", "caption", GetRomTypeContents($file))
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-;
-;[simpleviewer]
-;datafile="gallery.xml"
-;startfile="index.html"
-;engine="Java & Flash"
-;source="http://www.simpleviewer.net/products/"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;
-;
-;<simpleviewergallery
-;	galleryStyle="MODERN"
-;	title="SimpleViewer Gallery"
-;	textColor="FFFFFF"
-;	frameColor="FFFFFF"
-;	frameWidth="20"
-;	thumbPosition="LEFT"
-;	thumbColumns="3"
-;	thumbRows="3"
-;	showOpenButton="TRUE"
-;	showFullscreenButton="TRUE"
-;	maxImageWidth="640"
-;	maxImageHeight="640"
-;	useFlickr="false"
-;	flickrUserName=""
-;	flickrTags=""
-;	languageCode="AUTO"
-;	languageList=""
-;	imagePath="images/"
-;	thumbPath="thumbs/"
-;>
-;	<image imageURL="image.jpg" thumbURL="image.jpg" linkURL="http://www.site.com" linkTarget="_blank" >
-;		<caption>[CAPTION]</caption>
-;	</image>
-;	<image imageURL="image.jpg" thumbURL="image.jpg" linkURL="http://www.site.com" linkTarget="_blank" >
-;		<caption>[CAPTION]</caption>
-;	</image>
-;</simpleviewergallery>
-
-If $Gallery = "simpleviewer" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "simpleviewergallery")
-	_XMLFileOpen($GalleryDataFileFull)
-	_XMLSetAttrib("simpleviewergallery", "galleryStyle", "MODERN")
-	_XMLSetAttrib("simpleviewergallery", "title", "SimpleViewer Gallery")
-	_XMLSetAttrib("simpleviewergallery", "textColor", "FFFFFF")
-	_XMLSetAttrib("simpleviewergallery", "frameColor", "FFFFFF")
-	_XMLSetAttrib("simpleviewergallery", "frameWidth", "20")
-	_XMLSetAttrib("simpleviewergallery", "thumbPosition", "LEFT")
-	_XMLSetAttrib("simpleviewergallery", "thumbColumns", "4")
-	_XMLSetAttrib("simpleviewergallery", "thumbRows", "4")
-	_XMLSetAttrib("simpleviewergallery", "showOpenButton", "TRUE")
-	_XMLSetAttrib("simpleviewergallery", "showFullscreenButton", "TRUE")
-	_XMLSetAttrib("simpleviewergallery", "maxImageWidth", "950")
-	_XMLSetAttrib("simpleviewergallery", "maxImageHeight", "950")
-	_XMLSetAttrib("simpleviewergallery", "useFlickr", "false")
-	_XMLSetAttrib("simpleviewergallery", "flickrUserName", "")
-	_XMLSetAttrib("simpleviewergallery", "flickrTags", "")
-	_XMLSetAttrib("simpleviewergallery", "languageCode", "AUTO")
-	_XMLSetAttrib("simpleviewergallery", "languageList", "")
-	_XMLSetAttrib("simpleviewergallery", "imagePath", "")
-	_XMLSetAttrib("simpleviewergallery", "thumbPath", "")
-
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("simpleviewergallery", "image")
-			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "imageURL", $FullPathToImageFolder & $file)
-			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "thumbURL", $FullPathToImageFolder & $file)
-			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkURL", $GalleryImageUrl)
-			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkTarget", "_blank")
-			_XMLCreateChildNode("simpleviewergallery/image[" & $Teller & "]", "caption", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-;
-;[3dtouchring]
-;datafile="flashmo_247_photo_list.xml"
-;startfile="index.html"
-;engine="Java & Flash"
-;source="http://www.flashmo.com/"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;
-;<photos>
-;	<config
-;		folder="photos/"
-;		enable_fullscreen="true"
-;		galaxy_background="true"
-;		show_tooltip="true"
-;		radius="440"
-;		default_zoom="5"
-;		thumbnail_width="100"
-;		thumbnail_height="100"
-;		thumbnail_back_alpha="0.25"
-;		photo_border_size="10"
-;		photo_border_color="#FFFFFF"
-;		close_button="true"
-;		previous_button="true"
-;		next_button="true"
-;		description="true"
-;		description_bg_color="#000000"
-;		description_bg_alpha="0.6"
-;		css_file="flashmo_210_style.css"
-;		tween_duration="0.5"
-;	</config>
-;	<photo>
-;		<thumbnail>image.jpg</thumbnail>
-;		<filename>image.jpg</filename>
-;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
-;	</photo>
-;	<photo>
-;		<thumbnail>image.jpg</thumbnail>
-;		<filename>image.jpg</filename>
-;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
-;	</photo>
-;</photos>
-
-If $Gallery = "3dtouchring" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "photos")
-	_XMLFileOpen($GalleryDataFileFull)
-	_XMLCreateChildNode("photos", "config")
-	_XMLSetAttrib("photos/config", "folder", $FullPathToImageFolder)
-	_XMLSetAttrib("photos/config", "enable_fullscreen", "true")
-	_XMLSetAttrib("photos/config", "galaxy_background", "true")
-	_XMLSetAttrib("photos/config", "show_tooltip", "true")
-	_XMLSetAttrib("photos/config", "radius", "440")
-	_XMLSetAttrib("photos/config", "default_zoom", "5")
-	_XMLSetAttrib("photos/config", "thumbnail_width", "150")
-	_XMLSetAttrib("photos/config", "thumbnail_height", "150")
-	_XMLSetAttrib("photos/config", "thumbnail_back_alpha", "0.25")
-	_XMLSetAttrib("photos/config", "photo_border_size", "10")
-	_XMLSetAttrib("photos/config", "photo_border_color", "#FFFFFF")
-	_XMLSetAttrib("photos/config", "close_button", "true")
-	_XMLSetAttrib("photos/config", "previous_button", "true")
-	_XMLSetAttrib("photos/config", "next_button", "true")
-	_XMLSetAttrib("photos/config", "description", "true")
-	_XMLSetAttrib("photos/config", "description_bg_color", "#000000")
-	_XMLSetAttrib("photos/config", "description_bg_alpha", "0.6")
-	_XMLSetAttrib("photos/config", "css_file", "flashmo_210_style.css")
-	_XMLSetAttrib("photos/config", "tween_duration", "0.5")
-
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("photos", "photo")
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "thumbnail", $file)
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "filename", $file)
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "tooltip", GetRomTypeContents($file))
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "description", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-;
-;[3dcurvegallery]
-;datafile="flashmo_236_photo_list.xml"
-;startfile="index.html"
-;engine="Java & Flash"
-;source="http://www.flashmo.com/"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;
-;<photos>
-;	<config
-;		folder="photos/"
-;		enable_fullscreen="true"
-;		galaxy_background="true"
-;		no_of_rings="3"
-;		radius="228"
-;		vertical_spacing="5"
-;		default_zoom="6"
-;		show_tooltip="true"
-;		thumbnail_width="100"
-;		thumbnail_height="100"
-;		thumbnail_border_size="0"
-;		thumbnail_border_color="#FFFFFF"
-;		thumbnail_border_alpha="1"
-;		photo_border_size="10"
-;		photo_border_color="#FFFFFF"
-;		close_button="true"
-;		previous_button="true"
-;		next_button="true"
-;		description="true"
-;		description_bg_color="#000000"
-;		description_bg_alpha="0.6"
-;		css_file="flashmo_210_style.css"
-;		tween_duration="0.6"
-;	</config>
-;	<photo>
-;		<thumbnail>image.jpg</thumbnail>
-;		<filename>image.jpg</filename>
-;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
-;	</photo>
-;	<photo>
-;		<thumbnail>image.jpg</thumbnail>
-;		<filename>image.jpg</filename>
-;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
-;	</photo>
-;</photos>
-
-If $Gallery = "3dcurvegallery" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "photos")
-	_XMLFileOpen($GalleryDataFileFull)
-	_XMLCreateChildNode("photos", "config")
-	_XMLSetAttrib("photos/config", "folder", $FullPathToImageFolder)
-	_XMLSetAttrib("photos/config", "enable_fullscreen", "true")
-	_XMLSetAttrib("photos/config", "galaxy_background", "true")
-	_XMLSetAttrib("photos/config", "no_of_rings", "1")
-	_XMLSetAttrib("photos/config", "radius", "228")
-	_XMLSetAttrib("photos/config", "vertical_spacing", "5")
-	_XMLSetAttrib("photos/config", "default_zoom", "6")
-	_XMLSetAttrib("photos/config", "show_tooltip", "true")
-	_XMLSetAttrib("photos/config", "thumbnail_width", "150")
-	_XMLSetAttrib("photos/config", "thumbnail_height", "150")
-	_XMLSetAttrib("photos/config", "thumbnail_border_size", "0")
-	_XMLSetAttrib("photos/config", "thumbnail_border_color", "#FFFFFF")
-	_XMLSetAttrib("photos/config", "thumbnail_border_alpha", "1")
-	_XMLSetAttrib("photos/config", "photo_border_size", "10")
-	_XMLSetAttrib("photos/config", "photo_border_color", "#FFFFFF")
-	_XMLSetAttrib("photos/config", "close_button", "true")
-	_XMLSetAttrib("photos/config", "previous_button", "true")
-	_XMLSetAttrib("photos/config", "next_button", "true")
-	_XMLSetAttrib("photos/config", "description", "true")
-	_XMLSetAttrib("photos/config", "description_bg_color", "#000000")
-	_XMLSetAttrib("photos/config", "description_bg_alpha", "0.6")
-	_XMLSetAttrib("photos/config", "css_file", "flashmo_210_style.css")
-	_XMLSetAttrib("photos/config", "tween_duration", "0.6")
-
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("photos", "photo")
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "thumbnail", $file)
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "filename", $file)
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "tooltip", GetRomTypeContents($file))
-			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "description", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-;
-;[polaroidgallery]
-;datafile="photos.xml"
-;startfile="fullscreen.html"
-;engine="Java & Flash"
-;source="http://www.no3dfx.com/polaroid"
-;
-;Default datafile structure:
-;
-;<?xml version="1.0"?>
-;<photos>
-;	<photo desc="DISCRIPTION" url="image.jpg" />
-;	<photo desc="DISCRIPTION" url="image.jpg" />
-;</photos>
-
-If $Gallery = "polaroidgallery" Then
-	FileDelete($GalleryDataFileFull)
-	_XMLCreateFile($GalleryDataFileFull, "photos")
-	_XMLFileOpen($GalleryDataFileFull)
-
-	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
-	If $search = -1 Then
-		MsgBox(0, "Error", "No images found for this Rom!")
-		Exit
-	EndIf
-
-	While 1
-		$file = FileFindNextFile($search)
-		If @error Then ExitLoop
-
-		If IsFileOk($file) = 1 Then
-			$Teller = $Teller + 1
-			_XMLCreateChildNode("photos", "photo")
-			_XMLSetAttrib("photos/photo[" & $Teller & "]", "desc", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
-			_XMLSetAttrib("photos/photo[" & $Teller & "]", "url", $FullPathToImageFolder & $file)
-		EndIf
-	WEnd
-FileClose($search)
-EndIf
-;=========================================================================================
-;=========================================================================================
-EndFunc ;BuildDataFile
-
 Func GetRomTypeContents($RomName) ;Determine "type of contents" for file
 	$RomTypeContents = "Unknown"
 	If StringInStr($RomName, "ingame_title") Then $RomTypeContents = "Ingame Title"
@@ -566,8 +118,9 @@ $objExplorer = ObjCreate("shell.Explorer.2")
 $ECCGallery = GUICreate($GalleryTitle, $GalleryResolutionX - 20, $GalleryResolutionY - 10, -1, -1) ;added -values to remove the scrollbars
 GUICtrlCreateObj($objExplorer, 0, 0, $GalleryResolutionX, $GalleryResolutionY)
 $objExplorer.navigate($GalleryStartFileFull)
-GUISetState(@SW_SHOW, $ECCGallery)
 GUISetIcon(@ScriptDir & "\3dgallery.ico", "", $ECCGallery) ;Set proper icon for the window.
+GUISetState(@SW_SHOW, $ECCGallery)
+
 
 While 1
      $nMsg = GUIGetMsg($ECCGallery)
@@ -692,3 +245,503 @@ Else
 EndIf
 
 EndFunc ;UpdateGalleryData
+
+
+Func BuildDataFile($Gallery)
+;=========================================================================================
+;=========================================================================================
+;
+;[tiltviewer]
+;datafile="gallery.xml"
+;startfile="index.html"
+;engine="Java & Flash"
+;source="http://www.simpleviewer.net/products/"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;<tiltviewergallery>
+;	<photos>
+;		<photo imageurl="image.jpg" linkurl="http://www.site.com">
+;			<title>[TITLE]</title>
+;			<description>[DESCRIPTION]</description>
+;		</photo>
+;		<photo imageurl="image.jpg" linkurl="http://www.site.com">
+;			<title>[TITLE]</title>
+;			<description>[DESCRIPTION]</description>
+;		</photo>
+;	</photos>
+;</tiltviewergallery>
+
+If $Gallery = "tiltviewer" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "tiltviewergallery")
+	_XMLFileOpen($GalleryDataFileFull)
+	_XMLCreateChildNode("tiltviewergallery", "photos")
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("tiltviewergallery/photos", "photo")
+			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "imageurl", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "linkurl", $GalleryImageUrl)
+			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "title", GetRomTypeContents($file))
+			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "description", $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[postcardviewer]
+;datafile="gallery.xml"
+;startfile="index.html"
+;engine="Java & Flash"
+;source="http://www.simpleviewer.net/products/"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;<gallery
+;	cellDimension="800"
+;	columns="4"
+;	zoomOutPerc="15"
+;	zoomInPerc="100"
+;	frameWidth="20"
+;	frameColor="0xFFFFFF"
+;	captionColor="0xFFFFFF"
+;	enableRightClickOpen="true"
+;>
+;	<image>
+;		<url>image.jpg</url>
+;		<caption>[CAPTION]</caption>
+;	</image>
+;	<image>
+;		<url>image.jpg</url>
+;		<caption>[CAPTION]</caption>
+;	</image>
+;</gallery>
+
+If $Gallery = "postcardviewer" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "gallery")
+	_XMLFileOpen($GalleryDataFileFull)
+	_XMLSetAttrib("gallery", "cellDimension", "1000")
+	_XMLSetAttrib("gallery", "columns", "4")
+	_XMLSetAttrib("gallery", "zoomOutPerc", "15")
+	_XMLSetAttrib("gallery", "zoomInPerc", "100")
+	_XMLSetAttrib("gallery", "frameWidth", "20")
+	_XMLSetAttrib("gallery", "frameColor", "0xFFFFFF")
+	_XMLSetAttrib("gallery", "captionColor", "0xFFFFFF")
+	_XMLSetAttrib("gallery", "enableRightClickOpen", "true")
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("gallery", "image")
+			_XMLCreateChildNode("gallery/image[" & $Teller & "]", "url", $FullPathToImageFolder & $file)
+			_XMLCreateChildNode("gallery/image[" & $Teller & "]", "caption", GetRomTypeContents($file))
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[simpleviewer]
+;datafile="gallery.xml"
+;startfile="index.html"
+;engine="Java & Flash"
+;source="http://www.simpleviewer.net/products/"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;
+;
+;<simpleviewergallery
+;	galleryStyle="MODERN"
+;	title="SimpleViewer Gallery"
+;	textColor="FFFFFF"
+;	frameColor="FFFFFF"
+;	frameWidth="20"
+;	thumbPosition="LEFT"
+;	thumbColumns="3"
+;	thumbRows="3"
+;	showOpenButton="TRUE"
+;	showFullscreenButton="TRUE"
+;	maxImageWidth="640"
+;	maxImageHeight="640"
+;	useFlickr="false"
+;	flickrUserName=""
+;	flickrTags=""
+;	languageCode="AUTO"
+;	languageList=""
+;	imagePath="images/"
+;	thumbPath="thumbs/"
+;>
+;	<image imageURL="image.jpg" thumbURL="image.jpg" linkURL="http://www.site.com" linkTarget="_blank" >
+;		<caption>[CAPTION]</caption>
+;	</image>
+;	<image imageURL="image.jpg" thumbURL="image.jpg" linkURL="http://www.site.com" linkTarget="_blank" >
+;		<caption>[CAPTION]</caption>
+;	</image>
+;</simpleviewergallery>
+
+If $Gallery = "simpleviewer" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "simpleviewergallery")
+	_XMLFileOpen($GalleryDataFileFull)
+	_XMLSetAttrib("simpleviewergallery", "galleryStyle", "MODERN")
+	_XMLSetAttrib("simpleviewergallery", "title", "SimpleViewer Gallery")
+	_XMLSetAttrib("simpleviewergallery", "textColor", "FFFFFF")
+	_XMLSetAttrib("simpleviewergallery", "frameColor", "FFFFFF")
+	_XMLSetAttrib("simpleviewergallery", "frameWidth", "20")
+	_XMLSetAttrib("simpleviewergallery", "thumbPosition", "LEFT")
+	_XMLSetAttrib("simpleviewergallery", "thumbColumns", "4")
+	_XMLSetAttrib("simpleviewergallery", "thumbRows", "4")
+	_XMLSetAttrib("simpleviewergallery", "showOpenButton", "TRUE")
+	_XMLSetAttrib("simpleviewergallery", "showFullscreenButton", "TRUE")
+	_XMLSetAttrib("simpleviewergallery", "maxImageWidth", "950")
+	_XMLSetAttrib("simpleviewergallery", "maxImageHeight", "950")
+	_XMLSetAttrib("simpleviewergallery", "useFlickr", "false")
+	_XMLSetAttrib("simpleviewergallery", "flickrUserName", "")
+	_XMLSetAttrib("simpleviewergallery", "flickrTags", "")
+	_XMLSetAttrib("simpleviewergallery", "languageCode", "AUTO")
+	_XMLSetAttrib("simpleviewergallery", "languageList", "")
+	_XMLSetAttrib("simpleviewergallery", "imagePath", "")
+	_XMLSetAttrib("simpleviewergallery", "thumbPath", "")
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("simpleviewergallery", "image")
+			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "imageURL", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "thumbURL", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkURL", $GalleryImageUrl)
+			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkTarget", "_blank")
+			_XMLCreateChildNode("simpleviewergallery/image[" & $Teller & "]", "caption", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[3dtouchring]
+;datafile="flashmo_247_photo_list.xml"
+;startfile="index.html"
+;engine="Java & Flash"
+;source="http://www.flashmo.com/"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;
+;<photos>
+;	<config
+;		folder="photos/"
+;		enable_fullscreen="true"
+;		galaxy_background="true"
+;		show_tooltip="true"
+;		radius="440"
+;		default_zoom="5"
+;		thumbnail_width="100"
+;		thumbnail_height="100"
+;		thumbnail_back_alpha="0.25"
+;		photo_border_size="10"
+;		photo_border_color="#FFFFFF"
+;		close_button="true"
+;		previous_button="true"
+;		next_button="true"
+;		description="true"
+;		description_bg_color="#000000"
+;		description_bg_alpha="0.6"
+;		css_file="flashmo_210_style.css"
+;		tween_duration="0.5"
+;	</config>
+;	<photo>
+;		<thumbnail>image.jpg</thumbnail>
+;		<filename>image.jpg</filename>
+;		<tooltip>{TOOLTIP]</tooltip>
+;		<description>[DISCRIPTION]</description>
+;	</photo>
+;	<photo>
+;		<thumbnail>image.jpg</thumbnail>
+;		<filename>image.jpg</filename>
+;		<tooltip>{TOOLTIP]</tooltip>
+;		<description>[DISCRIPTION]</description>
+;	</photo>
+;</photos>
+
+If $Gallery = "3dtouchring" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "photos")
+	_XMLFileOpen($GalleryDataFileFull)
+	_XMLCreateChildNode("photos", "config")
+	_XMLSetAttrib("photos/config", "folder", $FullPathToImageFolder)
+	_XMLSetAttrib("photos/config", "enable_fullscreen", "true")
+	_XMLSetAttrib("photos/config", "galaxy_background", "true")
+	_XMLSetAttrib("photos/config", "show_tooltip", "true")
+	_XMLSetAttrib("photos/config", "radius", "440")
+	_XMLSetAttrib("photos/config", "default_zoom", "5")
+	_XMLSetAttrib("photos/config", "thumbnail_width", "150")
+	_XMLSetAttrib("photos/config", "thumbnail_height", "150")
+	_XMLSetAttrib("photos/config", "thumbnail_back_alpha", "0.25")
+	_XMLSetAttrib("photos/config", "photo_border_size", "10")
+	_XMLSetAttrib("photos/config", "photo_border_color", "#FFFFFF")
+	_XMLSetAttrib("photos/config", "close_button", "true")
+	_XMLSetAttrib("photos/config", "previous_button", "true")
+	_XMLSetAttrib("photos/config", "next_button", "true")
+	_XMLSetAttrib("photos/config", "description", "true")
+	_XMLSetAttrib("photos/config", "description_bg_color", "#000000")
+	_XMLSetAttrib("photos/config", "description_bg_alpha", "0.6")
+	_XMLSetAttrib("photos/config", "css_file", "flashmo_210_style.css")
+	_XMLSetAttrib("photos/config", "tween_duration", "0.5")
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "thumbnail", $file)
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "filename", $file)
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "tooltip", GetRomTypeContents($file))
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "description", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[3dcurvegallery]
+;datafile="flashmo_236_photo_list.xml"
+;startfile="index.html"
+;engine="Java & Flash"
+;source="http://www.flashmo.com/"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;
+;<photos>
+;	<config
+;		folder="photos/"
+;		enable_fullscreen="true"
+;		galaxy_background="true"
+;		no_of_rings="3"
+;		radius="228"
+;		vertical_spacing="5"
+;		default_zoom="6"
+;		show_tooltip="true"
+;		thumbnail_width="100"
+;		thumbnail_height="100"
+;		thumbnail_border_size="0"
+;		thumbnail_border_color="#FFFFFF"
+;		thumbnail_border_alpha="1"
+;		photo_border_size="10"
+;		photo_border_color="#FFFFFF"
+;		close_button="true"
+;		previous_button="true"
+;		next_button="true"
+;		description="true"
+;		description_bg_color="#000000"
+;		description_bg_alpha="0.6"
+;		css_file="flashmo_210_style.css"
+;		tween_duration="0.6"
+;	</config>
+;	<photo>
+;		<thumbnail>image.jpg</thumbnail>
+;		<filename>image.jpg</filename>
+;		<tooltip>{TOOLTIP]</tooltip>
+;		<description>[DISCRIPTION]</description>
+;	</photo>
+;	<photo>
+;		<thumbnail>image.jpg</thumbnail>
+;		<filename>image.jpg</filename>
+;		<tooltip>{TOOLTIP]</tooltip>
+;		<description>[DISCRIPTION]</description>
+;	</photo>
+;</photos>
+
+If $Gallery = "3dcurvegallery" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "photos")
+	_XMLFileOpen($GalleryDataFileFull)
+	_XMLCreateChildNode("photos", "config")
+	_XMLSetAttrib("photos/config", "folder", $FullPathToImageFolder)
+	_XMLSetAttrib("photos/config", "enable_fullscreen", "true")
+	_XMLSetAttrib("photos/config", "galaxy_background", "true")
+	_XMLSetAttrib("photos/config", "no_of_rings", "1")
+	_XMLSetAttrib("photos/config", "radius", "228")
+	_XMLSetAttrib("photos/config", "vertical_spacing", "5")
+	_XMLSetAttrib("photos/config", "default_zoom", "6")
+	_XMLSetAttrib("photos/config", "show_tooltip", "true")
+	_XMLSetAttrib("photos/config", "thumbnail_width", "150")
+	_XMLSetAttrib("photos/config", "thumbnail_height", "150")
+	_XMLSetAttrib("photos/config", "thumbnail_border_size", "0")
+	_XMLSetAttrib("photos/config", "thumbnail_border_color", "#FFFFFF")
+	_XMLSetAttrib("photos/config", "thumbnail_border_alpha", "1")
+	_XMLSetAttrib("photos/config", "photo_border_size", "10")
+	_XMLSetAttrib("photos/config", "photo_border_color", "#FFFFFF")
+	_XMLSetAttrib("photos/config", "close_button", "true")
+	_XMLSetAttrib("photos/config", "previous_button", "true")
+	_XMLSetAttrib("photos/config", "next_button", "true")
+	_XMLSetAttrib("photos/config", "description", "true")
+	_XMLSetAttrib("photos/config", "description_bg_color", "#000000")
+	_XMLSetAttrib("photos/config", "description_bg_alpha", "0.6")
+	_XMLSetAttrib("photos/config", "css_file", "flashmo_210_style.css")
+	_XMLSetAttrib("photos/config", "tween_duration", "0.6")
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "thumbnail", $file)
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "filename", $file)
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "tooltip", GetRomTypeContents($file))
+			_XMLCreateChildNode("photos/photo[" & $Teller & "]", "description", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[polaroidgallery]
+;datafile="photos.xml"
+;startfile="fullscreen.html"
+;engine="Java & Flash"
+;source="http://www.no3dfx.com/polaroid"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;<photos>
+;	<photo desc="DISCRIPTION" url="image.jpg" />
+;	<photo desc="DISCRIPTION" url="image.jpg" />
+;</photos>
+
+If $Gallery = "polaroidgallery" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "photos")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("photos", "photo")
+			_XMLSetAttrib("photos/photo[" & $Teller & "]", "desc", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
+			_XMLSetAttrib("photos/photo[" & $Teller & "]", "url", $FullPathToImageFolder & $file)
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[flshowcarouselblack]
+;datafile="default.xml"
+;startfile="fullpage.html"
+;engine="Java / Flash"
+;website="http://www.flshow.net"
+;
+;Default datafile structure:
+;
+;<?xml version="1.0"?>
+;
+;<slide_show>
+;	<photo href="http://website.com" target="_self">image.jpg</photo>
+;	<photo href="http://website.com" target="_self">image.jpg</photo>
+;	<photo href="http://website.com" target="_self">image.jpg</photo>
+;</slide_show>
+
+If $Gallery = "flshowcarouselblack" Then
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "slide_show")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		MsgBox(0, "Error", "No images found for this Rom!")
+		Exit
+		FileClose($search)
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("slide_show", "photo", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("slide_show/photo[" & $Teller & "]", "href", "")
+			_XMLSetAttrib("slide_show/photo[" & $Teller & "]", "target", "_self")
+		EndIf
+	WEnd
+FileClose($search)
+EndIf
+
+EndFunc ;BuildDataFile
+;=========================================================================================
+;=========================================================================================

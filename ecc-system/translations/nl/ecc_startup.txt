@@ -1,0 +1,18 @@
+Welkom bij ECC, dit is de eerste keer dat je ECC start.
+
+NOTITIES:
+
+- Nadat je op de OK knop hebt gedrukt, gaat ECC gebruikersfolders
+en media plaatjes aanmaken, dit kan even duren.
+Wees er zeker van dat je minimaal 50MB vrije schijfruimte hebt!
+
+- Administratie rechten:
+Als je geen Admin rechten hebt kan er "alleen lezen" gedrag
+opreden bij het gebruik van ECC.
+
+- Minimale resolutie van 1000 pixels:
+Je bruikbare BREEDTE van het scherm moet meer dan 1000 pixels
+bedragen, anders kan de GUI van ECC bugs vertonen of helemaal
+niet werken!
+(dit kan gebeuren als je de taakbalk aan de zijkant hebt gezet
+bij een resolutie van 1024x768 pixels)

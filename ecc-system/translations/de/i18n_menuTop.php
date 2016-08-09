@@ -157,7 +157,7 @@ $i18n['menuTop'] = array(
 	'mTopRomAuditUpdate' =>
 		"Aktualisiere ROMset-Infos",
 	'mTopDatImportCtrlMAME' =>
-		"Importiere CtrlMAME Datfile",
+		"Importiere CLR MAME DATfile",
 	'mTopView' =>
 		"Ansicht",
 
@@ -194,11 +194,11 @@ $i18n['menuTop'] = array(
 
 	/* 1.0.0 WIP 01 */
 	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
-		'  own metadata (edited or transfered)',
+		'  eigene Metadaten (bearbeitete oder übernommene)',
 	'mTopViewModeRomPersonalMetaEdited' =>
-		'  own metadata (edited only)',
+		'  eigene Metadaten (nur bearbeitete)',
 	'mTopViewModeRomPersonalMetaTransfered' =>
-		'  own metadata (transfered only)',
+		'  eigene Metadaten (nur übernommene)',
 
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
@@ -214,7 +214,7 @@ $i18n['menuTop'] = array(
 	
 	/* 1.11 BUILD 4 */
 	'mTopOptionCreateStartmenuShortcuts' =>
-		'Create startmenu icons',
+		'Erstelle startmenu icons',
 
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
@@ -224,16 +224,16 @@ $i18n['menuTop'] = array(
 		'Glade GUI Editor',
 
 	'mTopAutoIt3GUI' =>
-		'Create Autoit3 GUI (Koda)',
+		'Erstelle Autoit3 GUI (Koda)',
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
-		'Developer',
+		'Entwickler',
 
 	'mTopServices' =>
 		'Services',
 
 	'mTopServicesKameleonCode' =>
-		'Enter Kameleon Code',
+		'Gebe den Kameleon Code ein',
 );
 ?>

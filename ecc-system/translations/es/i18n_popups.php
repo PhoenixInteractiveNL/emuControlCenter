@@ -259,9 +259,9 @@ $i18n['popup'] = array(
 	/* 0.9.6 FYEO 11 */
 
 	'importDatCMFilechooseTitle%s' =>
-		"Elegir un archivo 'dat' de CtrlMAME!\n",
+		"Elegir un archivo 'dat' de CRL MAME!\n",
 	'importDatCMConfirmTitle' =>
-		"Importar 'dat' de ctrlMAME",
+		"Importar 'dat' de CRL MAME",
 	'importDatCMConfirmMsg%s%s%s' =>
 		"¿Quieres realmente importar datos para la plataforma\n\n%s (%s)\n\ndesde el archivo 'dat'\n\n%s?",
 

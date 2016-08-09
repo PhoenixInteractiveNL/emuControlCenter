@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC ImageInject!
-; Script version         : v1.1.0.3
+; Script version         : v1.1.0.6
 Global $ServerScriptVersion = "1100"
-; Last changed           : 2012-06-17
+; Last changed           : 2012-07-04
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -40,6 +40,13 @@ Global $ImagesINI = "images.ini"
 Global $PlatFormImagesFile = "platformimages.txt"
 Global $FullPlatformFlag, $CanceledFlag, $ImageCount
 
+;Determine USER folder (set in ECC config)
+
+Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
+Global $EccUserPathTemp = StringReplace(Iniread($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
+Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
+
+
 Global $TotalImageFileSize = 0
 Global $AlreadyDownloaded = 0
 Global $ImagesDownloaded = 0
@@ -50,6 +57,11 @@ Global $TotalImageFileSize, $ErrorFlag, $PlatformRomCountUser
 
 If FileExists($EccRomDataFile) <> 1 Then
 	MsgBox(64,"ECC ImageInject", "ECC ROM datafile not found!, aborting...")
+	Exit
+EndIf
+
+If $EccUserPath = "" Then
+	MsgBox(64,"ECC ImageInject", "Please make sure you have ECC run once!, aborting...")
 	Exit
 EndIf
 
@@ -158,7 +170,7 @@ For $i = 1 To $ImagesInIni[0]
 	$ImageFileType = IniRead(@Scriptdir & "\" & $ImagesINI, $ImagesInIni[$i], "filetype", "")
 	$FileToDownload = "ecc_" & $iRomEccId & "_" & $iRomCrc32 & "_" & $ImagesInIni[$i] & "." & $ImageFileType ;Construct image filename
 	$RomCrc32short = StringLeft($iRomCrc32, 2)
-	$ImageFolderLocal = $EccInstallFolder & "\ecc-user\" & $RomEccId & "\images\" & $RomCrc32short & "\" & $iRomCrc32 & "\"
+	$ImageFolderLocal = $EccUserPath & $RomEccId & "\images\" & $RomCrc32short & "\" & $iRomCrc32 & "\"
 	$ImageCount = $ImageCount + 1
 
 	GUICtrlSetData($DownloadBarTotalPlatform, (100 / $PlatFormRomCountUser) * $PlatformRomCount)

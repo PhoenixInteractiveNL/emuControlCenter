@@ -74,7 +74,7 @@ class EccParserFileListDir implements FileList {
 					else {
 
 						// ABS-PATH TO REL-PATH...
-						// 20061116 as
+						// 2006-11-16 as
 						$full_file_path = FACTORY::get('manager/Os')->eccSetRelativeFile($full_file_path);
 						
 						// arcade roms in one zip file
@@ -193,16 +193,12 @@ class EccParserFileListDir implements FileList {
 				break;
 			case '7z':
 			case '7zip':
+			case 'rar':
 				if ($this->handle7ZipFile($full_file_path)) {
 					return true;
 				};
 				break;
-			case 'rar':
-				if ($this->handle_rar_file($full_file_path)) {
-					return true;
-				};
-				break;
-			
+	
 			default:
 				break;
 		}
@@ -293,11 +289,6 @@ class EccParserFileListDir implements FileList {
 		}
 		
 		return true;
-	}
-	
-	public function handle_rar_file($full_file_path) {
-		// not supported yet
-		return false;
 	}
 	
 	public function get_file_ext($file) {

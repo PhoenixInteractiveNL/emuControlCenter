@@ -87,8 +87,8 @@ $i18n['mainGui'] = array(
 
 	/* 1.11 BUILD 9 */
 	'3dgalleryStart' =>
-		"Start",
+		"Démarrer",
 	'3dgalleryConfig' =>
-		"Config",		
+		"Configurer",		
 );
 ?>

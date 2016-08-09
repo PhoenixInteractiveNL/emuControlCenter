@@ -264,9 +264,9 @@ $i18n['popup'] = array(
 	/* 0.9.6 FYEO 11 */
 
 	'importDatCMFilechooseTitle%s' =>
-		"Sélectionner un fichier CtrlMAME",
+		"Sélectionner un fichier ClrMAME",
 	'importDatCMConfirmTitle' =>
-		"\nIMPORTATION D'UN FICHIER CtrlMAME\n",
+		"\nIMPORTATION D'UN FICHIER ClrMAME\n",
 	'importDatCMConfirmMsg%s%s%s' =>
 		"Voulez-vous vraiment importer les données pour la plateforme \n\n%s (%s)\n\nà partir du fichier de données\n\n%s ?\n",
 
@@ -354,7 +354,7 @@ $i18n['popup'] = array(
 	'copy_by_search_msg_waring%s%s%s' =>
 		"cette option va copier/déplacer TOUS les fichiers de la recherche. (Attention ! Si vous n'avez pas fait de recherche, tous les fichiers sont sélectionnés!)\n\nVous pourrez sélectionner le dossier de destination dans la fenêtre suivante.\n\nOnt été trouvés <b>%s games</b> dans votre résultat de recherche.\n\n<b>%s packed games</b> ne sont pas pris en compte !\n\nVoulez-vous vraiment copier/déplacer ces <b>%s</b> jeux dans un autre dossier ?",
 	'copy_by_search_msg_error_noplatform' =>
-		"You have to select a platform to use this feature. It is not possible to use this function for ALL FOUND!",
+		"Vous devez sélectionner une plateforme pour utiliser cette fonction. Ce n'est pas possible de l'appliquer pour TOUS !",
 	'copy_by_search_msg_error_notfound%s' =>
 		"Des jeux non valides ont été trouvés dans le résultat de la recherche. <b>%s packed games</b> n'ont pas été pris en compte.",
 	'searchTab' =>

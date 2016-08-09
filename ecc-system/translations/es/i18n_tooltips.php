@@ -73,9 +73,9 @@ $i18n['tooltips'] = array(
 		"Cambia el emulador asignado de la plataforma seleccionada",
 	// # TOP-DAT
 	'mTopDatImportEccTooltip' =>
-		"Importa emuControlCenter Datfiles (*.ecc) a ECC. Si has seleccionado una plataforma, solo las roms de esta plataforma serán importadas! el formato de datos .ecc contiene información como Categorías, Desarrolladores, Estado, Idiomas...",
+		"Importa emuControlCenter Datfiles (*.eccDat) a ECC. Si has seleccionado una plataforma, solo las roms de esta plataforma serán importadas! el formato de datos .ecc contiene información como Categorías, Desarrolladores, Estado, Idiomas...",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Importa CTRL MAME Datfiles (*.dat) a ECC.",
+		"Importa CLR MAME Datfiles (*.dat) a ECC.",
 	'mTopDatImportRcTooltip' =>
 		"Importa Romcenter Datfiles (*.dat) a ECC. Debes seleccionar la plataforma adecuada! los Datfiles contienen checksum y metainfos asignados al nombre del archivo. ECC extrae esa información y crea un fichero de Meta-Datos ECC automáticamente!",		
 	'mTopDatExportEccFullTooltip' =>

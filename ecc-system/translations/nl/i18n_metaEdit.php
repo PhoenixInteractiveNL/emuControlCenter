@@ -91,8 +91,6 @@ $i18n['metaEdit'] = array(
 		"Geen eccScript gevonden!",
 
 	'mEditUserWrongCharacters' =>
-		"Invalid characters found in text. Please clean the text!",
-
-
+		"Onjuiste karakters gevonden in de tekst, pas deze aan!",
 );
 ?>

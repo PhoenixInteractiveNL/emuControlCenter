@@ -73,11 +73,11 @@ $i18n['tooltips'] = array(
 		"Change the emulator assigned to the selected platform",
 	// # TOP-DAT
 	'mTopDatImportEccTooltip' =>
-		"Import emuControlCenter Datfiles (*.ecc) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
+		"Import emuControlCenter Datfiles (*.eccDat) into ecc. If you have selected a platform, only roms for this platform will be imported! ecc-datfile-format has extended metainformations like categories, developer, state, languages aso.",
 	'mTopDatImportCtrlMAMETooltip' =>
-		"Import CTRL MAME Datfiles (*.dat) into ecc.",
+		"Import CLR MAME Datfiles (*.dat) into ecc.",
 	'mTopDatImportRcTooltip' =>
-		"Import Romcenter Datfiles (*.dat) into ecc. You have to selected the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
+		"Import Romcenter Datfiles (*.dat) into ecc. You have to select the right platform! RC-Datfiles contains the filename, checksum and metainfos assigned to the filename. emuControlCenter will strip this informations and automaticlly create ecc-metadata!",		
 	'mTopDatExportEccFullTooltip' =>
 		"This will export all your meta-data of the selected platform to a Datfile (plaintext).",
 	'mTopDatExportEccUserTooltip' =>

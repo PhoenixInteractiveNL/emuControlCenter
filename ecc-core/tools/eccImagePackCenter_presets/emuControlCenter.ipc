@@ -1,0 +1,107 @@
+; ECC-IPC (eccImagePackCenter) Config file
+;
+; Template for: emuControlCenter
+
+[SETTINGS]
+ExportName	=emuControlCenter
+Extensions	=jpg|png|bmp|gif|ico
+
+
+[IMAGETYPES]
+ingame_title		=ingame_title
+ingame_title_location	=ingame_title\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+ingame_play_01		=ingame_play_01
+ingame_play_01_location	=ingame_play\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+ingame_play_02		=ingame_play_02
+ingame_play_02_location	=ingame_play\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+ingame_play_03		=ingame_play_03
+ingame_play_03_location	=ingame_play\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+ingame_play_boss	=ingame_boss
+ingame_play_boss_location=ingame_play\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+ingame_loading		=ingame_loading
+ingame_loading_location	=ingame_loading\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+
+
+cover_front		=cover_front
+cover_front_location	=cover_front\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+cover_back		=cover_back
+cover_back_location	=cover_back\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+cover_spine		=cover_spine
+cover_spine_location	=cover_spine\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+cover_inlay_01		=cover_inlay_01
+cover_inlay_01_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+cover_inlay_02		=cover_inlay_02
+cover_inlay_02_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+cover_inlay_03		=cover_inlay_03
+cover_inlay_03_location	=cover_inlay\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+
+
+media_storage		=media_storage
+media_storage_location	=media_storage\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_stor_02		=media_stor_02
+media_stor_02_location	=media_storage\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_stor_03		=media_stor_03
+media_stor_03_location	=media_storage\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_stor_04		=media_stor_04
+media_stor_04_location	=media_storage\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_flyer		=media_flyer
+media_flyer_location	=media_flyer\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_flyer_02		=media_flyer_02
+media_flyer_02_location	=media_flyer\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_flyer_03		=media_flyer_03
+media_flyer_03_location	=media_flyer\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_flyer_04		=media_flyer_04
+media_flyer_04_location	=media_flyer\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+media_icon		=media_icon
+media_icon_location	=media_icon\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+
+booklet_page_01		=booklet_page_01
+booklet_page_01_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_02		=booklet_page_02
+booklet_page_02_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_03		=booklet_page_03
+booklet_page_03_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_04		=booklet_page_04
+booklet_page_04_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_05		=booklet_page_05
+booklet_page_05_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_06		=booklet_page_06
+booklet_page_06_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_07		=booklet_page_07
+booklet_page_07_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_08		=booklet_page_08
+booklet_page_08_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_09		=booklet_page_09
+booklet_page_09_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%
+
+booklet_page_10		=booklet_page_10
+booklet_page_10_location=booklet_page\%PLATFORMID%\images\%CRC32SHORT%\%CRC32%\ecc_%PLATFORMID%_%CRC32%_%IMAGETYPE%.%IMAGEEXT%

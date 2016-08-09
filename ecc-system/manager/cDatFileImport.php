@@ -78,10 +78,41 @@ class DatFileImport extends App {
 			$this->parse_dat_emucontrolcenter($dat_header['ECC']['DAT-VERSION']);
 		}
 		elseif (
+		
+			// EXAMPLE ROMCENTER DAT HEADER v2.00
+			//
+			// [CREDITS]
+			// Author=SolidSnake
+			// Version=20040710
+			// Comment=no-intro romset
+			// [DAT]
+			// version=2.00
+			// [EMULATOR]
+			// refname=Atari Jaguar
+			// version=Atari Jaguar
+			// [GAMES]
+	
+			// EXAMPLE ROMCENTER DAT HEADER v2.50
+			//	
+			// [CREDITS]
+			// url=www.no-intro.org
+			// version=20120223-000000
+			// [DAT]
+			// version=2.50
+			// [EMULATOR]
+			// refname=Atari - Jaguar
+			// version=Atari - Jaguar
+			// [GAMES]
+		
 			//(isset($dat_header['DAT']['version']) && $dat_header['DAT']['version'] == "2.00") &&
 			isset($dat_header['DAT']['VERSION']) &&
-			isset($dat_header['CREDITS']['AUTHOR']) &&
-			isset($dat_header['CREDITS']['VERSION'])
+			isset($dat_header['EMULATOR']['REFNAME']) &&
+			isset($dat_header['EMULATOR']['VERSION'])
+			
+			// 2012-07-19 Disabled/Changed due to RomCenter headerdata could differ, new solution above!
+			//isset($dat_header['CREDITS']['AUTHOR']) &&
+			//isset($dat_header['CREDITS']['VERSION'])
+			
 		) {
 			$first_game = key($dat_header['GAMES']);
 
@@ -229,7 +260,7 @@ class DatFileImport extends App {
 
 				// einige felder sind in lowercase
 				// hier kann angegeben werden, welches feld
-				// fï¿½r den file_namen genutzt werden soll
+				// fur den file_namen genutzt werden soll
 				if ($extension_from_field !== false) {
 
 					// there is no extension
@@ -391,7 +422,7 @@ class DatFileImport extends App {
 			$message = "No matches in Dat-File\n(".basename($this->dat_filename).")\n";
 			$message .= "found for ".$platform_name." (".$this->eccident.")\n\n";
 			$message .= "Search for this extensions: *.".implode("; *.", array_keys($possible_extensions))." - and found nothing :-(\n";
-			$message .= "Maybe this wasnt the right dat-file? :-)\n";
+			$message .= "Maybe this was not the right dat-file? :-)\n";
 			$message .= "Please use a Dat-File for $platform_name\n";
 			$this->status_obj->update_message($message);
 
@@ -612,7 +643,7 @@ class DatFileImport extends App {
 	}
 
 	/*
-	* Fï¿½R DAT-VERSION 0.5.0
+	* FOR DAT-VERSION 0.5.0
 	* $res[20] == '*'
 	* wenn *, dann valid.
 	*/
@@ -631,9 +662,11 @@ class DatFileImport extends App {
 					$this->count_eccident++;
 				}
 			}
-			$cnt_total = $this->count_eccident;
+			//2012-07-08, Added -1 to the value to fix the counting BUG in the GUI (1st line of dat-data is the commentline ;-))
+			$cnt_total = $this->count_eccident -1;
 		} else {
-			$cnt_total = count($this->dat['ECC_MEDIA']);
+			//2012-07-08, Added -1 to the value to fix the counting BUG in the GUI (1st line of dat-data is the commentline ;-))
+			$cnt_total = count($this->dat['ECC_MEDIA']) -1;
 		}
 
 		$cnt_current = 0;
@@ -802,7 +835,10 @@ class DatFileImport extends App {
 				return false;
 			}
 		}
-
+		//2012-07-08, Added to fix the counting BUG in the GUI		
+		$msg = "Import: 100 % ($cnt_total/$cnt_total)";
+		$this->status_obj->update_progressbar($percent, $msg);
+		
 		####
 		$this->dbms->query('COMMIT TRANSACTION;');
 		####

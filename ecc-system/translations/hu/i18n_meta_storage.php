@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:	hu (hungarian)
  * author:	Gruby & Delirious
- * date:	2009/03/20
+ * date:	2012/07/22
  * ------------------------------------------
  **/
 $i18n['dropdown_meta_storage'] = array(
@@ -69,11 +69,11 @@ $i18n['dropdown_meta_region'] = array(
 	'[[World]]' =>
 		"Világ",
 	'[[Australia]]' =>
-		"Australia",
+		"Ausztrália",
 	'[[USA-Europe]]' =>
-		"USA-Europe",
+		"USA-Európa",
 	'[[USA-Japan]]' =>
-		"USA-Japan",
+		"USA-Japán",
 );
 
 /* 0.9.8 FYEO 04 */

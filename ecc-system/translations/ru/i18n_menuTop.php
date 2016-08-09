@@ -1,239 +1,241 @@
-п»ї<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	es (Spanish)
- * author:	Jarlaxe
- * date:	2012/06/03 
+ * language:	ru (russian)
+ * author:	ALLiGaToR
+ * date:	2009/07/09
  * ------------------------------------------
  */
 $i18n['menuTop'] = array(
 	'romAddNewRom%s' =>
-		"AГ±adir nuevas ROMs de %s",
+		"Добавить новые РОМы для %s",
 	'romAddNewRomUnselected' =>
-		"AГ±adir nueva ROM",
+		"Добавить новые РОМы",
 
-	/* 0.9.2 FYEO 07 */	
+	/* 0.9.2 FYEO 07 */
 
 	'mTopViewModeRomHave' =>
-		"todas (las que tengo)",
+		"все (которые имеются)",
 	'mTopViewModeRomDontHave' =>
-		"faltantes (las que no tengo)",
+		"нету (не имеются)",
 	'mTopViewModeRomAll' =>
-		"con meta-datos",
+		"с метаданными",
 	'mTopViewModeRomNoMeta' =>
-		"sin meta-datos",
+		"без метаданных",
 	'mTopViewModeRomPersonal' =>
-		"con notas personales",
-	
+		"с личными заметками",
+
 	'mTopViewRandomGame' =>
-		"Buena suerte! (Rom aleatoria)",
+		"Мне повезет! (Случайный РОМ)",
 	'mTopViewReload' =>
-		"Recargar",
+		"Обновить",
 
 	'mTopViewOnlyRoms' =>
-		"Roms",
+		"РОМы",
 	'mTopViewOnlyBookmarks' =>
-		"Favoritos",
+		"Закладки",
 	'mTopViewOnlyPlayed' =>
-		"Historial de jugados",
+		"Сыгранные",
 
 	'mTopViewToggleLeft' =>
-		"Mostrar panel Izquierdo",
+		"Показать левую панель",
 	'mTopViewToggleRight' =>
-		"Mostrar panel Derecho",
-	
-	/* 0.9.6 WIP 01 */	
+		"Показать правую панель",
+
+	/* 0.9.6 WIP 01 */
 	'mTopViewListDetail' =>
-		"Listado de juegos Detallado",
+		"Показать детально",
 	'mTopViewListSimple' =>
-		"Listado de juegos Simple",
+		"Показать упрощенно",
 
 	/* 0.9.6 WIP 04 */
 
 	/* ROMS */
 	'mTopRom' =>
-		"Roms",
+		"РОМы",
 	'mTopRomOptimize' =>
-		"Optimizar ROMs",
+		"Оптимизировать РОМы",
 	'mMenuReparseFolder' =>
-		"(Re)escanear carpeta de ROMs seleccionada",
+		"Сканировать выбранную папку РОМов",
 	'mTopRomRemoveDups' =>
-		"Eliminar ROMs duplicadas de DB",
+		"Убрать одинаковые РОМы из базы",
 	'mTopRomRemoveRoms' =>
-		"Eliminar ROMs",
-	
+		"Убрать РОМы",
+
 	/* EMULATOR */
 	'mTopEmu' =>
-		"Emuladores",
+		"Эмуляторы",
 	'mTopEmuConfig' =>
-		"ConfiguraciГіn",
-	
+		"Настройки",
+
 	/* DATFILE */
 	'mTopDat' =>
-		"Archivos DAT",
+		"Файлы информации",
 	'mTopDatImportEcc' =>
-		"Importar archivo DAT de emuControlCenter",
+		"Импорт файла информации ECC",
 	'mTopDatImportRc' =>
-		"Importar archivo DAT de Romcenter",
+		"Импорт файла информации Romcenter",
 	'mTopDatExportEccFull' =>
-		"Exportar archivo DAT de ECC completo",
+		"Экспорт всего файла информации ECC",
 	'mTopDatExportEccUser' =>
-		"Exportar archivo DAT de ECC del usuario",
+		"Экспорт файла информации ECC пользователя",
 	'mTopDatExportEccEsearch' =>
-		"Exportar archivo DAT de ECC de bГєsqueda",
+		"Экспорт файла информации eSearch",
 	'mTopDatClear' =>
-		"Vaciar archivo de la base de datos",
+		"Очистить файл информации",
 	'mTopDatConfig' =>
-		"ConfiguraciГіn",
+		"Настройки",
 
 	/* IMAGES */
 	'mTopImage' =>
-		"ImГЎgenes",
+		"Изображения",
 	'mTopImageConvert' =>
-		"Conversor de imГЎgenes",
+		"Конвертер изображений",
 
 	/* FILES */
 	'mTopFile' =>
-		"Archivos",
+		"Файлы",
 	'mTopFileRename' =>
-		"Renombrar archivo",
+		"Переименовать файл",
 	'mTopFileCopy' =>
-		"Copiar archivo",
+		"Копировать файл",
 	'mTopFileRemove' =>
-		"Eliminar archivo",
+		"Удалить файл",
 
 	/* OPTIONS */
 	'mTopOption' =>
-		"Opciones",
+		"Опции",
 	'mTopOptionDbVacuum' =>
-		"Optimizar base de datos",
+		"Оптимизировать базу данных",
 	'mTopOptionCreateUserFolder' =>
-		"Crear todas las carpetas de usuario de ECC",
+		"Создать папки пользователя",
 	'mTopOptionCleanHistory' =>
-		"Reiniciar historial ECC",
+		"Удалить историю",
 	'mTopOptionConfig' =>
-		"ConfiguraciГіn",
+		"Настройки",
 
 	/* TOOLS */
 	'mTopTool' =>
-		"Herramientas",
+		"Утилиты ECC",
+	'mTopToolEccRomId' =>
+		"ECC ROMid",
 	'mTopToolEccGtkts' =>
-		"Selector de Temas",
+		"Выбрать тему ECC",
 	'mTopToolEccDiagnostics' =>
-		"DiagnГіsticos de ECC",
+		"Отчет об ошибках ECC",
 
 	/* HELP */
 	'mTopHelp' =>
-		"Ayuda",
+		"Помощь",
 	'mTopHelpWebsite' =>
-		"PГЎgina oficial",
+		"Официальный сайт",
 	'mTopHelpForum' =>
-		"Foro de soporte",
+		"Форум поддержки",
 	'mTopHelpDocOffline' =>
-		"DocumentaciГіn",
+		"Документация",
 	'mTopHelpDocOnline' =>
-		"DocumentaciГіn (Online)",
+		"Документация (Онлайн)",
 	'mTopHelpAbout' =>
-		"Acerca de...",
+		"О программе",
 
 	/* UPDATE */
 	'mTopUpdate' =>
-		"Actualizaciones",
+		"Обновление",
 	'mTopUpdateEccLive' =>
-		"Actualizar con ECC Live!",
-	
+		"Обновить через ECC Live!",
+
 	/* 0.9.6 WIP 08*/
 	'mTopDatImportOnlineRomdb' =>
-		"Importar desde Internet (romdb)",
+		"Импорт из Интернета (romdb)",
 	'mTopDatExportOnlineRomdb' =>
-		"Exportar a Internet (romdb)",
+		"Экспорт в Интернет (romdb)",
 
 	/* 0.9.6 WIP 13*/
 	'mTopRomAudit' =>
-		"Auditar ROMs",
+		"Проверка РОМов",
 	'mTopRomAuditShow' =>
-		"Mostrar informaciГіn de ROMs",
+		"Показать информацию о РОМах",
 	'mTopRomAuditUpdate' =>
-		"(Re)auditar archivos",
+		"Перепроверить файлы",
 	'mTopDatImportCtrlMAME' =>
-		"Importar archivo de CtrlMAME",
+		"Импорт файла информации CtrlMAME",
 	'mTopView' =>
-		"Mostrar",
+		"Просмотр",
 
 	/* 0.9.6 WIP 15*/
 	'mMenuReparseFolderAll' =>
-		"(Re)escanear carpeta de ROMs",
-	
+		"Сканировать все папки РОМов",
+
 	'mTopRomDB' =>
-		"RomDB",
+		"База данных РОМов",
 
 	'mTopDatImport' =>
-		"Importar archivo DAT",
+		"Импорт файла информации",
 	'mTopDatExport' =>
-		"Exportar archivo DAT",
+		"Экспорт фала информации",
 
 	/* 0.9.7 WIP 01*/
 	'mTopViewModeRomPlayed' =>
-		"Гєltimos jugados",
+		"недавние игры",
 	'mTopViewModeRomNotPlayed' =>
-		"nunca jugados",
+		"неигранные",
 	'mTopViewModeRomBookmarks' =>
-		"favoritos",		
+		"в закладках",
 	'mTopViewModeRomMostPlayed' =>
-		'mГЎs jugados',
+		'популярные',
 	'mTopViewModeRomPersonalReviews' =>
-		'con anГЎlisis personal',
+		'с описаниями',
 
 	'mTopViewToggleSearch' =>
-		'Mostrar panel de bГєsqueda',
+		'Показать панель поиска',
 
 	/* 0.9.7 WIP 11*/
 	'mTopOptionBackupUserdata' =>
-		'Copia de seguridad datos de usuario (XML)',
+		'Резервировать файлы пользователя (XML)',
 
 	/* 1.0.0 WIP 01 */
 	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
-		'  meta-datos propios (editados o transferidos)',
+		'  свои метаданные (измененные или перенесенные)',
 	'mTopViewModeRomPersonalMetaEdited' =>
-		'  meta-datos propios (solo editados)',
+		'  свои метаданные (измененные только)',
 	'mTopViewModeRomPersonalMetaTransfered' =>
-		'  meta-datos propios (solo transferidos)',
+		'  свои метаданные (перенесенные только)',
 
 	/* 1.0.0 WIP 02 */
 	'mTopFileSearch' =>
-		'Transferir por resultado de bГєsqueda',
+		'Переместить результат поиска',
 
 	/* 1.1 WIP 06 */
 	'mTopImageIPC' =>
-		'Creador de "packs" de ImГЎgenes (IPC)',
+		'ImagePackCreator (IPC)',
 
 	/* 1.1 WIP 06 DFU */
 	'mTopDatDFU' =>
-		'Actualizador Manual de Archivos DAT (DFU)',
-	
+		'Manual DatFile Updater (DFU)',
+		
 	/* 1.11 BUILD 4 */
 	'mTopOptionCreateStartmenuShortcuts' =>
-		'Crear iconos de menГє de inicio',
+		'Create startmenu shortcuts',
 
 	/* 1.11 BUILD 6 */
 	'mTopDeveloperSQL' =>
-		'Navegador SQlite',
+		'SQlite Browser',
 
 	'mTopDeveloperGUI' =>
-		'Editor GUI Glade',
+		'Glade GUI Editor',
 
 	'mTopAutoIt3GUI' =>
-		'Crear GUI Autoit3 (Koda)',
+		'Create Autoit3 GUI (Koda)',
 
 	/* 1.11 BUILD 7 */
 	'mTopDeveloper' =>
-		'Desarrollo',
+		'Developer',
 
 	'mTopServices' =>
-		'Servicios',
+		'Services',
 
 	'mTopServicesKameleonCode' =>
-		'Introduce CГіdigo Kameleon',
+		'Enter Kameleon Code',
 );
 ?>

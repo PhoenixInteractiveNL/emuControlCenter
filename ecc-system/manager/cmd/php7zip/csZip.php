@@ -30,7 +30,7 @@ class sZip {
 	 * Extracts a file from an archive to a given directory
 	 *  
 	 * Command
-	 * 7za.exe e -y -bd -otemp/ 7z457_extra.7z Installer\cr.bat
+	 * 7z.exe e -y -bd -otemp/ 7z457_extra.7z Installer\cr.bat
 	 * 
 	 * @param string $sZipFile
 	 * @param string $fileName
@@ -57,7 +57,7 @@ class sZip {
 	 * Extracts ALL files from an archive to a given directory including subdirs!
 	 *  
 	 * Command
-	 * 7za.exe x -y -bd -otemp/ 7z457_extra.7z
+	 * 7z.exe x -y -bd -otemp/ 7z457_extra.7z
 	 * 
 	 * @param string $sZipFile
 	 * @param string $fileName

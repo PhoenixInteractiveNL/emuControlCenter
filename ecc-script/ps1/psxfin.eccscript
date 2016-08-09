@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Platform               : Sony Playstation 
 ; Script for             : pSX - tested with v1.13
-; Script version         : v1.0.0.1
-; Last changed           : 2009.10.12
+; Script version         : v1.0.0.2
+; Last changed           : 2009.11.30
 ;
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix) / Bigby
@@ -30,8 +30,9 @@ FileChangeDir(@ScriptDir)
 ;CDImage("unmount")				; UNCOMMENT TO ACTIVATE
 ;Exit						; UNCOMMENT TO ACTIVATE
 
-; Start the emulator
-Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34))
+
+Run($Emulator & " " & $RomFile)
+
 ; Wait until emulator is active (window name) (has a 10 seconds timeout) 
 WinWaitActive("pSX", "", 10) 
 ; Send keys

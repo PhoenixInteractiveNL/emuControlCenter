@@ -29,7 +29,7 @@ Send("L")
 ; Wait 2 seconds for the 'file open' window.
 Sleep(2000)
 
-Send($eccFileRomPath & $eccFileRomFile)
+Send($RomFile)
 Send("{ENTER}")
 
 ; ------------------------------------------------------------------------------

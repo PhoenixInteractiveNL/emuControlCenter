@@ -23,7 +23,7 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
-
+AutoItSetOption("SendKeyDownDelay", 100)
 EmuWindowControl("DCVG5K")
 
 ; Wait some seconds to let the emulator has loaded BASIC
@@ -34,18 +34,8 @@ Sleep(1000)
    Send("{ALT}")
    Send("{DOWN}")
    Send("{ENTER}")
-   
-   If $eccFileRomFileIsPacked = "1" Then
-   ;The ROM is packed, run ROM from the ECC temporally unpack folder.
-   Send($eccFileEccUnpackedPath & $eccFileEccUnpackedFile, 1)
-Else
-   ;The ROM is unpacked, run ROM normally.
-   Send($eccFileRomPath & $eccFileRomFile)
-EndIf
-   ;Send($eccFileRomPath & $eccFileRomFile)
+   Send($RomFile)
    Send("{ENTER}")
-
-   AutoItSetOption("SendKeyDownDelay", 100)
 
    ; Load Tape
    ; 

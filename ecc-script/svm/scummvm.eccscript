@@ -39,7 +39,7 @@ EndIf
 
 ; Set some variables to make life easier ;)
 ;
-$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\svm\" & $eccMetaInfoId & Chr(34)
+$TempExtractFolder = Chr(34) & $eccFileEccUnpackedPath & $eccMetaInfoId & Chr(34)
 $PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
 
 ; Extract the packed files to a temp folder.
@@ -54,7 +54,7 @@ EndIf
 ; Run the emulator.
 ;
 TrayTip("ECC ScummVM", "Starting ScummVM...", 5, 1)
-ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, "-p " & $TempExtractFolder & " " & $eccMetaInfoId, "", "")
+ShellExecute($Emulator, "-p " & $TempExtractFolder & " " & $eccMetaInfoId, "", "")
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

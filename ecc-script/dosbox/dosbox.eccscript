@@ -1,0 +1,276 @@
+; ------------------------------------------------------------------------------
+; Platform               : DOSBox (DOS Games)
+; Script for             : DOSBox (tested with) 0.73
+; Script version         : v1.0.0.1
+; Last changed           : 2010.02.02
+;
+; Author: S. Ebeltjes (Phoenix Interactive)
+;
+; NOTES:
+; - Does not save changed files in subfolders (yet!).
+;
+; HOTKEYS:
+; SHIFT+S > Re-configure gamestartup settings.
+; SHIFT+D > Re-configure game dosbox config.
+; SHIFT+E > Edit game dosbox config.
+; SHIFT+R > Reset ALL game settings (startup & dosbox).
+; SHIFT+X > Delete gamesettings files (startup, dosbox, changedfiles).
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; === CHECK & VALIDATIONS ===
+If $eccFileRomFileIsPacked <> "1" Then
+	MsgBox(64, "ECC DOSBox script", "The game you want to play is not imported as a ZIP file, aborting...")
+	Exit
+EndIf
+
+; === FOLDER CREATION ===
+; even if they aready exist...just to prevent errors later on...
+DirCreate($eccSystemEccFolder & "\ecc-script\dosbox\bin")
+DirCreate($eccSystemEccFolder & "\ecc-script\dosbox\configs")
+DirCreate($eccSystemEccFolder & "\ecc-script\dosbox\configs-templates")
+DirCreate($eccSystemEccFolder & "\ecc-script\dosbox\gamesettings")
+DirCreate($eccSystemEccFolder & "\ecc-script\dosbox\changedfiles")
+
+; === VARIABLES ===
+Global $GameOutputFolder 	= $eccUserPath & "#_AUTO_UNPACKED\dosbox\" & $eccFileRomCrc32
+Global $eccZipFile 			= chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34)
+Global $ScriptSettingsINI 	= $eccSystemEccFolder & "\ecc-script\dosbox\dosboxscript.ini"
+Global $ConfTemplateFolder 	= $eccSystemEccFolder & "\ecc-script\dosbox\configs-templates"
+Global $ConfTemplatePCjrIMG = $ConfTemplateFolder & "\20. IBM PCjr game (IMG).conf"
+Global $ChangedFilesZipFile = $eccSystemEccFolder & "\ecc-script\dosbox\changedfiles\" & $eccFileRomCrc32 & ".zip"
+Global $GameSettingsINI 	= $eccSystemEccFolder & "\ecc-script\dosbox\gamesettings\" & $eccFileRomCrc32 & ".ini"
+Global $GameConfFile		= $eccSystemEccFolder & "\ecc-script\dosbox\configs\" & $eccFileRomCrc32 & ".conf"
+Global $ClientRes = WinGetClientSize("")
+Global $RomType
+Global $RFSarray
+
+; === FIRST STARTUP MESSAGE (HOTKEYS) ===
+If IniRead($ScriptSettingsINI , "GENERAL", "firststartup", "") = "" Then
+	Msgbox(64,"ECC DOSBOX HOTKEYS", "ONE-TIME MESSAGE" & @CRLF & @CRLF & _
+	"SHIFT+S > Re-configure gamestartup settings." & @CRLF & _
+	"SHIFT+D > Re-configure game dosbox config." & @CRLF & _
+	"SHIFT+E > Edit game dosbox config." & @CRLF & _
+	"SHIFT+R > Reset ALL game settings (startup & dosbox)." & @CRLF & _
+	"SHIFT+X > Delete gamesettings files (startup, dosbox, changedfiles).")
+	IniWrite($ScriptSettingsINI, "GENERAL", "firststartup", "no")
+EndIf
+
+; === HOTKEYS ===
+If _IsPressed('44') = 1 Then ;SHIFT+D > Re-configure game dosbox config.
+	FileDelete($GameConfFile)
+	ConfigDosbox()
+	Exit
+EndIf
+If _IsPressed('45') = 1 Then ;SHIFT+E > Edit game dosbox config.
+	If FileExists($GameConfFile) Then
+		Run("notepad.exe " & $GameConfFile)
+	Else
+		Msgbox(64,"ECC DOSBOX", "There is no dosbox config set for '" & $eccFileRomNamePlain &  "' to edit!", 6)
+	EndIf
+	Exit
+EndIf
+If _IsPressed('52') = 1 Then ;SHIFT+R > Reset ALL game settings (startup & dosbox)
+	IniWrite($GameSettingsINI, "STARTUPDATA", "gamestart", "")
+	IniWrite($GameSettingsINI, "STARTUPDATA", "gamesetup", "")
+	IniWrite($GameSettingsINI, "STARTUPDATA", "dosboxconf", "")
+	Msgbox(64,"ECC DOSBOX", "ALL settings for '" & $eccFileRomNamePlain &  "' are now cleared!", 6)
+	Exit
+EndIf
+If _IsPressed('58') = 1 Then ;SHIFT+X > Delete gamesettings files (startup, dosbox, changedfiles)
+	FileDelete($ChangedFilesZipFile)
+	FileDelete($GameSettingsINI)
+	FileDelete($GameConfFile)
+	Msgbox(64,"ECC DOSBOX", "ALL files for '" & $eccFileRomNamePlain &  "' have been deleted!", 6)
+	Exit
+EndIf
+If _IsPressed('53') = 1 Then ;SHIFT+S > Re-configure gamestartup settings.
+	IniWrite($GameSettingsINI, "STARTUPDATA", "gamestart", "")
+	IniWrite($GameSettingsINI, "STARTUPDATA", "gamesetup", "")
+	ConfigStartup()
+	Exit
+EndIf
+
+; === UNPACK GAMEDATA ===
+ToolTip("Unpacking game data...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox", 1, 2)
+ShellExecuteWait($eccThirdParty7zip, " x " & $eccZipFile & " -y -o" & $GameOutputFolder, "", "", "")
+ToolTip("")
+
+; === DETERMINE ROM TYPE ===
+ToolTip("Determing ROM type...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox", 1, 2)
+RecursiveFileSearch($GameOutputFolder, "(?i)\.(img)", "", 1, true, 0) ;Search only for .IMG files.
+If Ubound($RFSarray) = 2 Then ;When there is only 1 IMG file found (+1) = 2.
+	$RomType = "img"
+Else
+	$RomType = "dos"
+EndIf
+
+; === SETTING FILE ATTRIBUTES ===
+ToolTip("Setting attributes...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox", 1, 2)
+FileSetAttrib($GameOutputFolder & "\*.*", "-RH", 1)
+FileSetTime($GameOutputFolder & "\*.*", "20000101", 0, 1)
+ToolTip("")
+
+; === UNPACK CHANGED FILES ===
+If FileExists($ChangedFilesZipFile) Then
+	ToolTip("Unpacking changed files...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox", 1, 2)
+	ShellExecuteWait($eccThirdParty7zip, " x " & $ChangedFilesZipFile & " -y -o" & $GameOutputFolder, "", "", "")
+	ToolTip("")
+EndIf
+
+; === CONFIGURATION ===
+If $RomType = "dos" Then ;Start configuration for plain dosgame.
+	ConfigStartup()
+	ConfigDosbox()
+EndIf
+If $RomType = "img" Then ;Start configuration PCjr IMG dosgame.
+	If IniRead($GameSettingsINI, "STARTUPDATA", "dosboxconf", "") <> "yes" Then
+		FileCopy($ConfTemplatePCjrIMG, $GameConfFile, 1) ;Copy PCjr IMG template.
+		IniWrite($GameSettingsINI, "STARTUPDATA", "dosboxconf", "yes")
+		$GameStartIMG = StringSplit($RFSarray[1], $eccFileRomCrc32 & "\", 1) ;Get only the filename from $RFSarray[1]
+		IniWrite($GameSettingsINI, "STARTUPDATA", "gamestart", $GameStartIMG[2])
+	EndIf
+EndIf
+
+; === (RE)READ ALL GAME SETTINGS ===
+$DosBoxGameStart = IniRead($GameSettingsINI, "STARTUPDATA", "gamestart", "")
+$DosBoxGameSetup = IniRead($GameSettingsINI, "STARTUPDATA", "gamesetup", "")
+$DosBoxConf = IniRead($GameSettingsINI, "STARTUPDATA", "dosboxconf", "")
+
+; === PLACE [CRC32].CONF AS DOSBOX.CONF IN DOSBOX FOLDER ===
+If $DosBoxConf = "yes" Then FileCopy($GameConfFile, $eccEmuEmulatorPath & "dosbox.conf", 1)
+		
+; === RUN THE GAME ===
+If $RomType = "dos" Then RunWait($Emulator & " " & $GameOutputFolder & "\" & $DosBoxGameStart) ;Start plain dosgame.
+If $RomType = "img" Then RunWait($Emulator & " -c boot " & $GameOutputFolder & "\" & $DosBoxGameStart & " -l a") ;Start PCjr IMG dosgame.
+
+; === CHECK FOR CHANGED FILES ===
+ToolTip("Saving changed files...", $ClientRes[0]/2, $ClientRes[1]/2, "ECC DOSBox", 1, 2)
+; Search for all files and put these in an array: $RFSarray
+RecursiveFileSearch($GameOutputFolder, "(?i)\.(?)", "", 1, true, 0)
+For $DOSFile in $RFSarray
+	$FileTime = FileGetTime($DOSFile, 0, 0)
+	If Not @error Then
+		If $FileTime[0] & $FileTime[1] & $FileTime[2] <> "20000101" Then
+		ShellExecuteWait($eccThirdParty7zip, " a -tzip -r " & $ChangedFilesZipFile & " " & $DOSFile & " -w" & Chr(34) & $GameOutputFolder & Chr(34), "", "", "")
+		EndIf
+	EndIf
+Next
+ToolTip("")
+
+; === REMOVE OLD FILES ===
+FileDelete($eccEmuEmulatorPath & "dosbox.conf") ;dosbox.conf file
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+
+
+; ------------------------------------------------------------------------------
+; FUNCTIONS
+; ------------------------------------------------------------------------------
+; === CONFIGURE GAMESETTINGS (STARTUP) ===
+Func ConfigStartup()
+	Global $DosBoxGameStart = IniRead($GameSettingsINI, "STARTUPDATA", "gamestart", "")
+	If $DosBoxGameStart = "" Then
+		If $DosBoxGameStart <> "NotAvailable" Then
+			$GameSelectStart = FileOpenDialog("Select the file to [START] the game", $GameOutputFolder, "Executables (*.exe;*.com;*.bat)", 1)
+			If @error Then ;user canceled
+				Msgbox(64,"ECC DOSBOX", "There is no START file set for '" & $eccFileRomNamePlain &  "', this is a nessesary setting, this script wil end now, please re-start to try again!", 6)
+				Exit
+			Else
+				$GameSelectStart = StringSplit($GameSelectStart, "\")
+				$GameSelectStart = $GameSelectStart[UBound($GameSelectStart)-1]
+				IniWrite($GameSettingsINI, "STARTUPDATA", "gamestart", $GameSelectStart)
+			EndIf
+		EndIf
+	EndIf
+; === CONFIGURE GAMESETTINGS (SETUP/CONFIG) ===
+	Global $DosBoxGameSetup = IniRead($GameSettingsINI, "STARTUPDATA", "gamesetup", "")
+	If $DosBoxGameSetup = "" Then
+		If $DosBoxGameSetup <> "NotAvailable" Then
+			$GameSelectSetup = FileOpenDialog("Select the file to [CONFIG/SETUP] the game", $GameOutputFolder, "Executables (*.exe;*.com;*.bat)", 1)
+			If @error Then ;user canceled
+				IniWrite($GameSettingsINI, "STARTUPDATA", "gamesetup", "NotAvailable")
+			Else
+				$GameSelectSetup = StringSplit($GameSelectSetup, "\")
+				$GameSelectSetup = $GameSelectSetup[UBound($GameSelectSetup)-1]
+				IniWrite($GameSettingsINI, "STARTUPDATA", "gamesetup", $GameSelectSetup)
+			EndIf
+		EndIf
+	EndIf
+EndFunc ;ConfigSetup
+
+; === CONFIGURE DOSBOX SETUP (.CONF) ===
+Func ConfigDosbox()
+	Global $DosBoxConf = IniRead($GameSettingsINI, "STARTUPDATA", "dosboxconf", "")
+	If $DosBoxConf = "" Then
+		$GameSelectConf = FileOpenDialog("select a [DOSBOX CONFIG] file for the game", $ConfTemplateFolder, "DosBox config (*.conf)", 1)
+		If @error Then ;user canceled
+			IniWrite($GameSettingsINI, "STARTUPDATA", "dosboxconf", "no")
+		Else ;copy the .conf file to the 'configs' folder and rename to CRC32
+			FileCopy($GameSelectConf, $GameConfFile, 1)
+			IniWrite($GameSettingsINI, "STARTUPDATA", "dosboxconf", "yes")
+		EndIf
+	EndIf
+EndFunc ;ConfigDosbox
+
+Func RecursiveFileSearch($RFSstartDir, $RFSFilepattern = ".", $RFSFolderpattern = ".", $RFSFlag = 0, $RFSrecurse = true, $RFSdepth = 0)
+;AutoIt Version: 3.2.10.0, Author: WeaponX, Updated: 2/21/08, Script Function: Recursive file search
+     If StringRight($RFSstartDir, 1) <> "\" Then $RFSstartDir &= "\"
+
+     If $RFSdepth = 0 Then
+         $RFSfilecount = DirGetSize($RFSstartDir, 1)      
+         Global $RFSarray[$RFSfilecount[1] + $RFSfilecount[2] + 1]
+     EndIf
+     
+     $RFSsearch = FileFindFirstFile($RFSstartDir & "*.*")
+     If @error Then Return
+     While 1
+         $RFSnext = FileFindNextFile($RFSsearch)
+         If @error Then ExitLoop
+         If StringInStr(FileGetAttrib($RFSstartDir & $RFSnext), "D") Then
+             
+             If $RFSrecurse AND StringRegExp($RFSnext, $RFSFolderpattern, 0) Then
+                 RecursiveFileSearch($RFSstartDir & $RFSnext, $RFSFilepattern, $RFSFolderpattern, $RFSFlag, $RFSrecurse, $RFSdepth + 1)
+                 If $RFSFlag <> 1 Then
+                   $RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
+                 EndIf
+             EndIf
+         ElseIf StringRegExp($RFSnext, $RFSFilepattern, 0) AND $RFSFlag <> 2 Then
+             $RFSarray[$RFSarray[0] + 1] = $RFSstartDir & $RFSnext
+             $RFSarray[0] += 1
+         EndIf
+     WEnd
+     FileClose($RFSsearch)
+
+     If $RFSdepth = 0 Then
+         Redim $RFSarray[$RFSarray[0] + 1]
+         Return $RFSarray
+     EndIf
+EndFunc ;RecursiveFileSearch
+
+Func _IsPressed($hexKey)
+;Author: ezzetabi
+   Local $aR, $bO
+   
+   $hexKey = '0x' & $hexKey
+   $aR = DllCall("user32", "int", "GetAsyncKeyState", "int", $hexKey)
+   If Not @error And BitAND($aR[0], 0x8000) = 0x8000 Then
+      $bO = 1
+   Else
+      $bO = 0
+   EndIf
+   
+   Return $bO
+EndFunc  ;==>_IsPressed

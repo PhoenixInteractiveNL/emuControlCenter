@@ -22,7 +22,7 @@ FileChangeDir(@ScriptDir)
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
 
-Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " " & $eccFileRomNamePlain & " vldp -framefile " & _
+Run($Emulator & " " & $eccFileRomNamePlain & " vldp -framefile " & _
 chr(34) & $eccFileRomPath & $eccFileRomNamePlain & "_framefile.txt" & chr(34) & " -fullscreen")
 
 ; ------------------------------------------------------------------------------

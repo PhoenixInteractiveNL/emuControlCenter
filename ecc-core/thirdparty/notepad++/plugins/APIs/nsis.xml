@@ -12,6 +12,7 @@
 		<KeyWord name="!endif" />
 		<KeyWord name="!error" />
 		<KeyWord name="!execute" />
+		<KeyWord name="!if" />
 		<KeyWord name="!ifdef" />
 		<KeyWord name="!ifmacrodef" />
 		<KeyWord name="!ifmacrondef" />
@@ -21,6 +22,8 @@
 		<KeyWord name="!macro" />
 		<KeyWord name="!macroend" />
 		<KeyWord name="!packhdr" />
+		<KeyWord name="!searchparse" />
+		<KeyWord name="!searchreplace" />
 		<KeyWord name="!system" />
 		<KeyWord name="!tempfile" />
 		<KeyWord name="!undef" />
@@ -148,6 +151,7 @@
 		<KeyWord name="Reboot" />
 		<KeyWord name="RegDLL" />
 		<KeyWord name="Rename" />
+		<KeyWord name="RequestExecutionLevel" />
 		<KeyWord name="ReserveFile" />
 		<KeyWord name="Return" />
 		<KeyWord name="RMDir" />
@@ -186,6 +190,7 @@
 		<KeyWord name="SetOverwrite" />
 		<KeyWord name="SetPluginUnload" />
 		<KeyWord name="SetRebootFlag" />
+		<KeyWord name="SetRegView" />
 		<KeyWord name="SetShellVarContext" />
 		<KeyWord name="SetSilent" />
 		<KeyWord name="ShowInstDetails" />

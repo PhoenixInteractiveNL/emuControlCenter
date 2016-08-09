@@ -45,7 +45,7 @@ Credits:
             <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="FFAA00" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="DEFAULT" styleID="11" fgColor="F8F8F8" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="INSTRUCTION WORD" styleID="5" fgColor="F6F080" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" keywordClass="instre1" />
-            <WordsStyle name="TYPEWORD" styleID="16" fgColor="FFAA00" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" keywordClass="type1">toto titi</WordsStyle>
+            <WordsStyle name="TYPEWORD" styleID="16" fgColor="FFAA00" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" keywordClass="type1" />
             <WordsStyle name="NUMBER" styleID="4" fgColor="FF3A83" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="STRING" styleID="6" fgColor="55E439" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="CHARACTER" styleID="7" fgColor="55E439" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
@@ -185,6 +185,7 @@ Credits:
             <WordsStyle name="DOUBLESTRING" styleID="6" fgColor="80FF80" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="SINGLESTRING" styleID="7" fgColor="55E439" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="TAG" styleID="1" fgColor="37A8ED" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
+            <WordsStyle name="TAGEND" styleID="11" fgColor="37A8ED" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="TAGUNKNOWN" styleID="2" fgColor="FF0000" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="ATTRIBUTE" styleID="3" fgColor="E5C138" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
             <WordsStyle name="ATTRIBUTEUNKNOWN" styleID="4" fgColor="FF0080" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
@@ -736,7 +737,7 @@ Credits:
         <WidgetStyle name="Global override" styleID="0" fgColor="BDAE9D" bgColor="2A211C" fontName="DejaVu Sans Mono" fontStyle="0" fontSize="10" />
         <WidgetStyle name="Default Style" styleID="32" fgColor="BDAE9D" bgColor="2A211C" fontName="DejaVu Sans Mono" fontStyle="0" fontSize="10" />
         <WidgetStyle name="Indent guideline style" styleID="37" fgColor="888A85" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
-        <WidgetStyle name="Brace highlight style" styleID="34" fgColor="2A211C" bgColor="E5C138" fontName="" fontStyle="1" fontSize="10" />
+        <WidgetStyle name="Brace highlight style" styleID="34" fgColor="E5C138" bgColor="2A211C" fontName="" fontStyle="1" fontSize="10" />
         <WidgetStyle name="Bad brace colour" styleID="35" fgColor="EF2929" bgColor="2A211C" fontName="" fontStyle="0" fontSize="10" />
         <WidgetStyle name="Current line background colour" styleID="0" bgColor="4B3C34" fgColor="CCFF33" fontSize="" fontStyle="0" />
         <WidgetStyle name="Mark colour" styleID="0" fgColor="CC0000" bgColor="EDD400" />
@@ -747,20 +748,20 @@ Credits:
         <WidgetStyle name="Line number margin" styleID="33" fgColor="E5C138" bgColor="4C4A41" fontName="" fontStyle="0" fontSize="8" />
         <WidgetStyle name="Fold" styleID="0" fgColor="2E3436" bgColor="EEEEEC" fontSize="" fontStyle="0" />
         <WidgetStyle name="Fold margin" styleID="0" fgColor="2E3436" bgColor="6A5448" />
-        <WidgetStyle name="White space symbol" styleID="0" fgColor="FCAF3E" bgColor="00FF40" />
+        <WidgetStyle name="White space symbol" styleID="0" fgColor="FCAF3E" bgColor="00FF40" fontSize="" fontStyle="1" />
         <WidgetStyle name="Smart HighLighting" styleID="29" bgColor="FF0080" fgColor="555753" fontSize="10" fontStyle="0" />
         <WidgetStyle name="Find Mark Style" styleID="31" bgColor="EDD400" fgColor="CC0000" fontName="" fontSize="10" fontStyle="0" />
         <WidgetStyle name="Mark Style 1" styleID="25" bgColor="00FFFF" />
         <WidgetStyle name="Mark Style 2" styleID="24" bgColor="FF8000" fgColor="FAAA3C" />
         <WidgetStyle name="Mark Style 3" styleID="23" bgColor="FFFF00" fgColor="FFFF80" fontSize="10" fontStyle="0" />
         <WidgetStyle name="Mark Style 4" styleID="22" bgColor="8000FF" fgColor="000000" fontSize="10" fontStyle="0" />
-        <WidgetStyle name="Mark Style 5" styleID="21" bgColor="008000" />
+        <WidgetStyle name="Mark Style 5" styleID="21" bgColor="008000" fgColor="808080" />
         <WidgetStyle name="Incremental highlight all" styleID="28" bgColor="0080FF" fgColor="FFCAB0" />
-        <WidgetStyle name="Tags match highlighting" styleID="27" bgColor="7E7E7E" fgColor="000000" />
+        <WidgetStyle name="Tags match highlighting" styleID="27" bgColor="808000" fgColor="000000" />
         <WidgetStyle name="Tags attribute" styleID="26" bgColor="808080" fgColor="8080C0" />
         <WidgetStyle name="Active tab focused indicator" styleID="0" fgColor="FAAA3C" bgColor="FF0000" />
         <WidgetStyle name="Active tab unfocused indicator" styleID="0" fgColor="FFCAB0" bgColor="80FF00" />
-        <WidgetStyle name="Active tab text" styleID="0" fgColor="000000" />
+        <WidgetStyle name="Active tab text" styleID="0" fgColor="000000" bgColor="8000FF" />
         <WidgetStyle name="Inactive tabs" styleID="0" fgColor="808080" bgColor="C0C0C0" />
     </GlobalStyles>
 </NotepadPlus>

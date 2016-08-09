@@ -56,9 +56,9 @@ $DisableAutostart = "NO"
 $RequiredExpansion = " "
 $PrimoType = "/ma64 "
 $MediaType = " "
-$ExtractFolder = $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
-$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & Chr(34)
-$PlainExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
+$ExtractFolder = $eccSystemEccFolder & "\ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
+$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "\ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & Chr(34)
+$PlainExtractFolder = Chr(34) & $eccSystemEccFolder & "\ecc-user\#_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\"
 $PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
 
 ; Extract the packed files to a temp folder.
@@ -119,7 +119,7 @@ EndIf
 
 ; Pro-Primo Tape Programs
 If $PrimoType = "/mc64 " And $MediaType = "PTP" Then
-	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
 	$CommandLine = " /d /h " & $PrimoType
 	EmulatorControl("Ultimo", $CommandLine)
@@ -159,7 +159,7 @@ EndIf ; Pro-Primo PTP
 
 ; Pro-Primo Program files
 If $PrimoType = "/mc64 " AND $MediaType = "PRI" Then
-	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
 	$CommandLine = " /d /h " & $PrimoType
 	EmulatorControl("Ultimo", $CommandLine)
@@ -194,7 +194,7 @@ EndIf ; Pro-Primo PRI
 
 ; Need Reset
 If $NeedReset = "YES" Then
-	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
 	$CommandLine = " /d /h " & $PrimoType
 	EmulatorControl("Ultimo", $CommandLine)
@@ -226,7 +226,7 @@ If $RequiredExpansion = " " AND $PlusProgram = "NO" Then
 		WinWaitClose("Ultimo")
 		Exit
 	ElseIF $MediaType = "PTP" AND $DisableAutostart = "YES" Then
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
 		$CommandLine = " /d /h " & $PrimoType
 		EmulatorControl("Ultimo", $CommandLine)
@@ -264,7 +264,7 @@ If $RequiredExpansion = " " AND $PlusProgram = "NO" Then
 		Exit
 		
 	ElseIF $MediaType = "PRI" AND $DisableAutostart = "YES" Then
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
 		$CommandLine = " /d /h " & $PrimoType
 		EmulatorControl("Ultimo", $CommandLine)
@@ -298,7 +298,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
 		$CommandLine = " /d /h " & $PrimoType
 		EmulatorControl("Ultimo", $CommandLine)
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
 
 		; AutoLoad Expansion file
@@ -317,7 +317,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		$FilePathNext = " "
 
 		; AutoLoad Program file
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".pri"
 		WinWaitActive("Ultimo - 10")
 		Send("!f")
@@ -337,7 +337,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
 		$CommandLine = " /d /h " & $PrimoType
 		EmulatorControl("Ultimo", $CommandLine)
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
 
 		; AutoLoad Expansion file
@@ -356,7 +356,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		$FilePathNext = " "
 
 		; AutoLoad Program file
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\0.pri"
 		WinWaitActive("Ultimo - 10")
 		Send("!f")
@@ -376,7 +376,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		FileCopy(@Scriptdir & "\" & $RequiredExpansion, $ExtractFolder & $RequiredExpansion, 1)
 		$CommandLine = " /d /h " & $PrimoType
 		EmulatorControl("Ultimo", $CommandLine)
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $RequiredExpansion
 
 		; AutoLoad Expansion file
@@ -404,7 +404,7 @@ If StringInStr($RequiredExpansion, " ") = 0 Then
 		$FilePathNext = " "
 
 		; Attach Tape file
-		$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+		$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 		$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
 		Send("!{F5}")
 		Sleep(1000)
@@ -435,7 +435,7 @@ EndIf ; Required Expansion needed
 
 ; Plus Program Special cases
 If $PlusProgram <> "NO" Then
-	$FilePathBegin = $eccSystemEccFolder & "ecc-user\"
+	$FilePathBegin = $eccSystemEccFolder & "\ecc-user\"
 	$FilePathNext = "_AUTO_UNPACKED\primo\" & $eccFileRomNamePlain & "\" & $eccFileRomNamePlain & ".ptp"
 	$CommandLine = " /d /h " & $PrimoType
 	EmulatorControl("Ultimo", $CommandLine)

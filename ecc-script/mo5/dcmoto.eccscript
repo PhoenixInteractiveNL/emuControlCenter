@@ -44,7 +44,7 @@ Case $eccFileRomExtension = "k7" ;tape/cassette
    ;
    Send("{DOWN}")
    Send("{ENTER}")
-   Send($eccFileRomPath & $eccFileRomFile)
+   Send($RomFile)
    Send("{ENTER}")
 
    AutoItSetOption("SendKeyDownDelay", 200)
@@ -75,7 +75,7 @@ Case $eccFileRomExtension <> "rom" ;catridge
    Send("{DOWN}")
    Send("{DOWN}")
    Send("{ENTER}")
-   Send($eccFileRomPath & $eccFileRomFile)
+   Send($RomFile)
    Send("{ENTER}")
 
    AutoItSetOption("SendKeyDownDelay", 200)

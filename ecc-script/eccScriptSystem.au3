@@ -1,19 +1,16 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.0.0.7 (2009.09.20)
+; Version: 1.1.0.5 (2010.02.11)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
-
 
 ; ============================================================
 ; SET AutoIt options
 ; ============================================================
-
 Break(0)
 AutoItSetOption("TrayAutoPause",0)
 AutoItSetOption("WinTitleMatchMode",2)
-
 
 ; ============================================================
 ; ECC ScriptROM reader
@@ -24,64 +21,68 @@ AutoItSetOption("WinTitleMatchMode",2)
 ; ============================================================
 
 ;[META]
-Global $eccMetaName =			IniRead("..\eccScriptRom.dat", "META", "name", "")
-Global $eccMetaMediaType =		IniRead("..\eccScriptRom.dat", "META", "media_type", "")
-Global $eccMetaMediaCurrent =		IniRead("..\eccScriptRom.dat", "META", "media_current", "")
-Global $eccMetaMediaCount =		IniRead("..\eccScriptRom.dat", "META", "media_count", "")
-Global $eccMetaPlayer =			IniRead("..\eccScriptRom.dat", "META", "player", "")
-Global $eccMetaInfoId =			IniRead("..\eccScriptRom.dat", "META", "info_id", "")
-Global $eccMetaInfoString =		IniRead("..\eccScriptRom.dat", "META", "info_string", "")
-
+Global $eccMetaName =					IniRead("..\eccScriptRom.dat", "META", "name", "")
+Global $eccMetaMediaType =				IniRead("..\eccScriptRom.dat", "META", "media_type", "")
+Global $eccMetaMediaCurrent =			IniRead("..\eccScriptRom.dat", "META", "media_current", "")
+Global $eccMetaMediaCount =				IniRead("..\eccScriptRom.dat", "META", "media_count", "")
+Global $eccMetaPlayer =					IniRead("..\eccScriptRom.dat", "META", "player", "")
+Global $eccMetaInfoId =					IniRead("..\eccScriptRom.dat", "META", "info_id", "")
+Global $eccMetaInfoString =				IniRead("..\eccScriptRom.dat", "META", "info_string", "")
 ;[FILE]
-Global $eccFileRomCrc32 = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_crc32", "")
-Global $eccFileRomFile = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_file", "")
-Global $eccFileRomPath = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_path", "")
-Global $eccFileRomFilePacked = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_file_packed", "")
-Global $eccFileRomNamePlain = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_name_plain", "")
-Global $eccFileRomExtension = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_extension", "")
-Global $eccFileRomFileExtension =	IniRead("..\eccScriptRom.dat", "FILE", "rom_file_extension", "")
-Global $eccFileRomFilesize = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_filesize", "")
-Global $eccFileEccUnpackedFile = 	IniRead("..\eccScriptRom.dat", "FILE", "ecc_unpacked_file", "")
-Global $eccFileEccUnpackedPath = 	IniRead("..\eccScriptRom.dat", "FILE", "ecc_unpacked_path", "")
-Global $eccFileIsMultirom = 		IniRead("..\eccScriptRom.dat", "FILE", "is_multirom", "")
-
+Global $eccFileRomCrc32 = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_crc32", "")
+Global $eccFileRomFile = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_file", "")
+Global $eccFileRomPath = 				IniRead("..\eccScriptRom.dat", "FILE", "rom_path", "")
+Global $eccFileRomFilePacked = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_file_packed", "")
+Global $eccFileRomNamePlain = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_name_plain", "")
+Global $eccFileRomExtension = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_extension", "")
+Global $eccFileRomFileExtension =		IniRead("..\eccScriptRom.dat", "FILE", "rom_file_extension", "")
+Global $eccFileRomFilesize = 			IniRead("..\eccScriptRom.dat", "FILE", "rom_filesize", "")
+Global $eccFileEccUnpackedFile =		IniRead("..\eccScriptRom.dat", "FILE", "ecc_unpacked_file", "")
+Global $eccFileEccUnpackedPath =		IniRead("..\eccScriptRom.dat", "FILE", "ecc_unpacked_path", "")
+Global $eccFileIsMultirom = 			IniRead("..\eccScriptRom.dat", "FILE", "is_multirom", "")
 ;[AUDIT]
-Global $eccAuditDriver = 		IniRead("..\eccScriptRom.dat", "AUDIT", "driver", "")
-Global $eccAuditRom = 			IniRead("..\eccScriptRom.dat", "AUDIT", "rom", "")
-Global $eccAuditRomOf = 		IniRead("..\eccScriptRom.dat", "AUDIT", "rom_of", "")
-Global $eccAuditCloneOf = 		IniRead("..\eccScriptRom.dat", "AUDIT", "clone_of", "")
-Global $eccAuditSetType = 		IniRead("..\eccScriptRom.dat", "AUDIT", "set_type", "")
-Global $eccAuditSetContainsTrash = 	IniRead("..\eccScriptRom.dat", "AUDIT", "contains_trash", "")
-Global $eccAuditFilenameValid = 	IniRead("..\eccScriptRom.dat", "AUDIT", "filename_valid", "")
-
+Global $eccAuditDriver = 				IniRead("..\eccScriptRom.dat", "AUDIT", "driver", "")
+Global $eccAuditRom = 					IniRead("..\eccScriptRom.dat", "AUDIT", "rom", "")
+Global $eccAuditRomOf = 				IniRead("..\eccScriptRom.dat", "AUDIT", "rom_of", "")
+Global $eccAuditCloneOf = 				IniRead("..\eccScriptRom.dat", "AUDIT", "clone_of", "")
+Global $eccAuditSetType = 				IniRead("..\eccScriptRom.dat", "AUDIT", "set_type", "")
+Global $eccAuditSetContainsTrash =		IniRead("..\eccScriptRom.dat", "AUDIT", "contains_trash", "")
+Global $eccAuditFilenameValid = 		IniRead("..\eccScriptRom.dat", "AUDIT", "filename_valid", "")
 ;[EMU]
-Global $eccEmuEmulatorFile = 		IniRead("..\eccScriptRom.dat", "EMU", "emulator_file", "")
-Global $eccEmuEmulatorPath = 		IniRead("..\eccScriptRom.dat", "EMU", "emulator_path", "")
-Global $eccEmuEmulatorFilePlain = 	IniRead("..\eccScriptRom.dat", "EMU", "emulator_file_plain", "")
-Global $eccEmuParameter = 		IniRead("..\eccScriptRom.dat", "EMU", "parameter", "")
-Global $eccEmuEscape = 			IniRead("..\eccScriptRom.dat", "EMU", "escape", "")
-Global $eccEmuWin8char = 		IniRead("..\eccScriptRom.dat", "EMU", "win8char", "")
-Global $eccEmuFilenameOnly = 		IniRead("..\eccScriptRom.dat", "EMU", "filenameonly", "")
-Global $eccEmuNoExtension = 		IniRead("..\eccScriptRom.dat", "EMU", "noextension", "")
-Global $eccEmuExecuteInEmufolder = 	IniRead("..\eccScriptRom.dat", "EMU", "executeinemufolder", "")
+Global $eccEmuEmulatorFile = 			IniRead("..\eccScriptRom.dat", "EMU", "emulator_file", "")
+Global $eccEmuEmulatorPath = 			IniRead("..\eccScriptRom.dat", "EMU", "emulator_path", "")
+Global $eccEmuEmulatorFilePlain =		IniRead("..\eccScriptRom.dat", "EMU", "emulator_file_plain", "")
+Global $eccEmuParameter = 				IniRead("..\eccScriptRom.dat", "EMU", "parameter", "")
+Global $eccEmuEscape = 					IniRead("..\eccScriptRom.dat", "EMU", "escape", "")
+Global $eccEmuWin8char = 				IniRead("..\eccScriptRom.dat", "EMU", "win8char", "")
+Global $eccEmuFilenameOnly = 			IniRead("..\eccScriptRom.dat", "EMU", "filenameonly", "")
+Global $eccEmuNoExtension = 			IniRead("..\eccScriptRom.dat", "EMU", "noextension", "")
+Global $eccEmuExecuteInEmufolder =		IniRead("..\eccScriptRom.dat", "EMU", "executeinemufolder", "")
 Global $eccEmuEnableZipUnpackActive = 	IniRead("..\eccScriptRom.dat", "EMU", "enablezipUnpackactive", "")
 Global $eccEmuEnableZipUnpackSkip = 	IniRead("..\eccScriptRom.dat", "EMU", "enablezipUnpackskip", "")
-Global $eccEmuUseCueFile =		IniRead("..\eccScriptRom.dat", "EMU", "useCueFile", "")
-
+Global $eccEmuEnableZipUnpackAll = 		IniRead("..\eccScriptRom.dat", "EMU", "enablezipUnpackAll", "")
+Global $eccEmuUseCueFile =				IniRead("..\eccScriptRom.dat", "EMU", "useCueFile", "")
 ;[SYSTEM]
-Global $eccSystemIdent = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "ident", "")
-Global $eccSystemName = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "name", "")
-Global $eccSystemCategory = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "category", "")
-Global $eccSystemExtensions = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "extensions", "")
-Global $eccSystemLanguage = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "language", "")
-Global $eccSystemEccFolder = 		IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_folder", "")
-
+Global $eccSystemIdent =				IniRead("..\eccScriptRom.dat", "SYSTEM", "ident", "")
+Global $eccSystemName = 				IniRead("..\eccScriptRom.dat", "SYSTEM", "name", "")
+Global $eccSystemCategory = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "category", "")
+Global $eccSystemExtensions = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "extensions", "")
+Global $eccSystemLanguage = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "language", "")
+Global $eccSystemEccFolder = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_folder", "")
+$eccSystemEccFolder = 					StringMid($eccSystemEccFolder, 1, Stringlen($eccSystemEccFolder)-1) ;remove last slash
 ;[THIRDPARTY]
-Global $eccThirdParty7zip = 		Chr(34) & $eccSystemEccFolder & "ecc-core\thirdparty\7zip\7za.exe" & Chr(34)
-Global $eccThirdPartyFsum = 		Chr(34) & $eccSystemEccFolder & "ecc-core\thirdparty\fsum\fsum.exe" & Chr(34)
-Global $eccThirdPartyNotepad = 		Chr(34) & $eccSystemEccFolder & "ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
-;Optional Thirdparty tools
-Global $eccThirdPartyXpadder = 		Chr(34) & $eccSystemEccFolder & "ecc-core\thirdparty\xpadder\xpadder.exe" & Chr(34)
+Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7za.exe" & Chr(34)
+Global $eccThirdPartyFsum = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\fsum\fsum.exe" & Chr(34)
+Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
+Global $eccThirdPartyXpadder = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\xpadder\xpadder.exe" & Chr(34)
+;[ECCCONFIG]
+Global $eccConfigFile =					$eccSystemEccFolder & "\ecc-user-configs\config\ecc_general.ini"
+Global $eccUserLanguage =				IniRead($eccConfigFile, "USER_DATA", "language", "en") ;ecc language
+Global $eccUserPath =					IniRead($eccConfigFile, "USER_DATA", "base_path", $eccSystemEccFolder & "\ecc-user") ;ecc user folder
+; If userpath is default '..\ecc-user', replace '..' into ecc root folder, so we have a complete and full pathname
+$eccUserPath =							StringReplace($eccUserPath, "..", $eccSystemEccFolder)
+; Fix path with 'windows' slashes (seems the path settings in 'cIniFile.php' don't like the '\' string (makes ecc crash), so we do it here...
+$eccUserPath =							StringReplace($eccUserPath, "/", "\")
 
 ;[EXTRA]
 ; $eccScriptParamsFile (amiga gameconfig INI) (TheCyberDruid)
@@ -90,62 +91,67 @@ If StringLower($eccEmuEmulatorFilePlain) == "winuae" Then
 	$eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\amiga\winuae\eccscript_" & $eccFileRomCrc32 & ".ini"
 	$eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
 EndIf
-; ============================================================
 
-;[EXTRA]
 ; $eccScriptParamsFile (x68000 gameconfig INI) (Pacogf)
 ; ============================================================
 If StringLower($eccEmuEmulatorFilePlain) == "xm6" Then
    $eccScriptParamsFile = $eccSystemEccFolder & "ecc-script-user\x68000\XM6\eccscript_" & $eccFileRomCrc32 & ".ini"
    $eccMultiRoms = IniReadSection("..\eccScriptRom.dat", "MULTI")
 EndIf
-; ============================================================
 
-
-;[EXTRA]
 ; $eccFileRomFileIsPacked (extra flag if the romfile is packed) (Phoenix)
 ; ============================================================
-Dim $eccFileRomFileIsPacked
+Dim $eccFileRomFileIsPacked = "0"
 If StringLower($eccFileRomFileExtension) = "zip" Then $eccFileRomFileIsPacked = "1"
 If StringLower($eccFileRomFileExtension) = "7z" Then $eccFileRomFileIsPacked = "1"
 If StringLower($eccFileRomFileExtension) = "7zip" Then $eccFileRomFileIsPacked = "1"
 If StringLower($eccFileRomFileExtension) = "rar" Then $eccFileRomFileIsPacked = "1"
 
-
-; ------------------------------------------------------------
-; Check if the 'use CUE file' option is selected, when
-; selected change the file extension to 'CUE'
-; ------------------------------------------------------------
+;[IntelliX]
+; This subroutine uses the ECC config variables and applies them automaticly.
+; it leaves original parameters intact and creates 2 new variables:
+;
+; $Emulator = The emulator with path in quotes with an addition space.
+; $RomFile = The romfile with path
+; ============================================================
+; Define standards
+$Emulator = Chr(34) & $eccEmuEmulatorPath & $eccEmuEmulatorFile & Chr(34)
+$RomFile = $eccFileRomFile
+$RomPath = $eccFileRomPath
+; Is the file packed inside an archive?
+If $eccFileRomFileIsPacked = "1" Then $RomFile = $eccFileRomFilePacked
+; Filename only? (no extension)
+If $eccEmuNoExtension = "1" Then $RomFile = $eccFileRomNamePlain
+; Execute in emufolder? (set path to emulator folder)
+If $eccEmuExecuteInEmufolder = "1" Then $RomPath = $eccEmuEmulatorPath
+; Autounpack active?, then set rompath to the auto unpack folder (overrides execute in emulator folder)
+If $eccEmuEnableZipUnpackActive = "1" Then $RomPath = $eccFileEccUnpackedPath
+; Use .cue file if available (detect if the .cue file exist and use it if available) (overrides filename only)
 If $eccEmuUseCueFile = "1" Then
-	$eccFileRomFile = StringReplace($eccFileRomFile, "." & $eccFileRomExtension, ".cue")
-	$eccFileRomFilePacked = StringReplace($eccFileRomFilePacked, "." & $eccFileRomExtension, ".cue")
-	$eccFileEccUnpackedFile = StringReplace($eccFileEccUnpackedFile, "." & $eccFileRomExtension, ".cue")
-	;After changing the filenames with the extensions cue, also change the cue variable to cue.
-	$eccFileRomExtension = "cue"
+	If FileExists($RomPath & $eccFileRomNamePlain & ".cue") Then
+		$RomFile = $eccFileRomNamePlain & ".cue"
+		$eccFileRomExtension = "cue"
+	EndIf
 EndIf
+
+; Add path to the romfile?
+If $eccEmuFilenameOnly <> "1" Then $RomFile = $RomPath & $RomFile
+; Escape? (") (quotes)
+If $eccEmuEscape = "1" Then $RomFile = Chr(34) & $RomFile & Chr(34)
+; ============================================================
 
 
 ; ============================================================
 ; This part contains basic settings.
 ; ============================================================
-
-; ------------------------------------------------------------
 ; Display traytip to let user know a script is being executed.
-; ------------------------------------------------------------
 TrayTip($eccSystemName, "Executing script...please wait...", 30, 1)
 
-
-; ------------------------------------------------------------
-; Check if emulator is already running, when the emulator
-; is running, then try to close it first.
-; ------------------------------------------------------------
+; Check if emulator is already running, when the emulator is running, then try to close it first.
 If ProcessExists($eccEmuEmulatorPath & $eccEmuEmulatorFile) Then ProcessClose($eccEmuEmulatorPath & $eccEmuEmulatorFile)
 
-
-; ------------------------------------------------------------
 ; Some emulators may need to start from their root folder to read their CFG file
 ; so we change the current work folder to the emulator folder.
-; ------------------------------------------------------------
 FileChangeDir($eccEmuEmulatorPath)
 
 
@@ -153,13 +159,10 @@ FileChangeDir($eccEmuEmulatorPath)
 ; FUNCTION: EmuWindowControl(EmulatorWindowTitle) (also startup the emulator)
 ; ************************************************************
 Func EmuWindowControl($EmulatorWindowTitle)
-
 ; Start the emulator
 Run($eccEmuEmulatorPath & $eccEmuEmulatorFile)
-
 ; Wait until emulator is active (window name) (has a 10 seconds timeout) 
 WinWaitActive($EmulatorWindowTitle, "", 10) 
-
 ; Is the emulator active or not? 
 If WinExists($EmulatorWindowTitle) = 0 Then
 	MsgBox(0, $eccSystemName, "The emulator '" & $eccEmuEmulatorPath & $eccEmuEmulatorFile & "' did not respond!" & @CRLF & @CRLF & _
@@ -167,8 +170,7 @@ If WinExists($EmulatorWindowTitle) = 0 Then
 	"maybe the titlebar has changed?, please check the window title-string again!")
 	Exit
 EndIf
-
-EndFunc
+EndFunc ;EmuWindowControl
 
 ; ************************************************************
 ; FUNCTION: CDImage(CDaction)
@@ -177,7 +179,6 @@ Func CDImage($CDaction)
 Global $DaemonTools
 Global $RomExtensionInfo
 Global $DTsupport
-
 
 $DaemonTools = IniRead($eccSystemEccFolder & "\ecc-script\eccScriptDaemonTools.ini", "GENERAL", "DaemonTools", "")
 
@@ -267,22 +268,11 @@ EndIf
 
 
 Select
-	Case $CDaction = "mount"
-
-	; Mount a CD image
+	Case $CDaction = "mount" ; Mount a CD image
 	TrayTip($eccSystemName, "mounting '" & $RomExtensionInfo & "' please wait...", 1, 1)
+	ShellExecuteWait($DaemonTools, " -mount 0, " & $RomFile, "")
 
-	If $eccFileRomFileIsPacked <> "1" Then
-		; File is standard
-		ShellExecuteWait($DaemonTools, " -mount 0," & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34) , "")
-	Else
-		; File is unpacked to a temp folder
-		ShellExecuteWait($DaemonTools, " -mount 0," & chr(34) & $eccFileEccUnpackedPath & $eccFileEccUnpackedFile & chr(34) , "")
-	EndIf
-
-	Case $CDaction = "unmount"
-
-	; Unmount a CD image
+	Case $CDaction = "unmount"; Unmount a CD image
 	TrayTip($eccSystemName, "unmounting CD image...please wait...", 1, 1)
 	ShellExecuteWait($DaemonTools, " -unmount 0", "")
 

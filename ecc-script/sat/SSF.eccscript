@@ -23,7 +23,7 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 
 CDImage("mount")
-ShellExecuteWait($eccEmuEmulatorPath & $eccEmuEmulatorFile, "", "")
+ShellExecuteWait($Emulator, "", "")
 CDImage("unmount")
 
 ; ------------------------------------------------------------------------------

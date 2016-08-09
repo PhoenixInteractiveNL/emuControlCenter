@@ -30,15 +30,7 @@ Send("{ALT}+u")
 Sleep(200)
 Send("{ENTER}")
 Sleep(200)
-
-If $eccFileRomFileIsPacked = "1" Then
-   ;The ROM is packed, run ROM from the ECC temporally unpack folder.
-   Send($eccFileEccUnpackedPath & $eccFileEccUnpackedFile, 1)
-Else
-   ;The ROM is unpacked, run ROM normally.
-   Send($eccFileRomPath & $eccFileRomFile)
-EndIf
-
+Send($RomFile)
 Send("{ENTER}")
 Sleep(1000)
 Opt("SendKeyDelay", 10)

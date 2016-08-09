@@ -46,7 +46,7 @@ MouseUp("left")
 Sleep(1000)
 
 ; Load ROM file and press 'ENTER'.
-Send($eccFileRomPath & $eccFileRomFile)
+Send($RomFile)
 Send("{ENTER}")
 
 ; Ok from here some TAP roms may work instantly, and some not, that's why i have

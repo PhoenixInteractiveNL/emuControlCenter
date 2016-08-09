@@ -1,0 +1,75 @@
+; ------------------------------------------------------------------------------
+; Platform               : PC-9801
+; Script for             : Anex86
+; Script version         : v1.1.0.0
+; Last changed           : 2010.02.06
+;
+;
+; Author: te_lanus (eCC Forum Member)
+;
+; NOTES:Escape-Path must be off
+;
+;
+;
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+Opt("WinTitleMatchMode", 1)
+EmuWindowControl("Anex86")
+Sleep(1000)
+If $eccFileRomFileIsPacked = "1" Then
+	If $eccFileRomExtension = "fdi" then
+		Send("{TAB 3}")
+		Send($RomFile, 1)
+		Send("{TAB}")
+		Send("s")
+		;Start Game
+	ElseIf $eccFileRomExtension = "hdi" then
+		Send("{TAB 3}")
+		Send("{DEL}")
+			;Clearing Floppy Drive
+		Send("{TAB 4}")
+		Send("{DEL}")
+		Send("{TAB 4}")
+		Send($RomFile, 1)
+		Send("{TAB}")
+		Send("s")
+		;Start Game
+	EndIf
+Else
+	If $eccFileRomExtension = "fdi" then
+		Send("{TAB 3}")
+		Send($eccFileRomPath & $eccFileRomFile)
+		Send("{TAB}")
+		Send("s")
+			;Start Game
+	ElseIf $eccFileRomExtension = "hdi" then
+		Send("{TAB 3}")
+		Send("{DEL}")
+			;Clearing Floppy Drive
+		Send("{TAB 4}")
+		Send("{DEL}")
+		Send("{TAB 4}")
+		Send($eccFileRomPath & $eccFileRomFile)
+		Send("{TAB}")
+		Send("s")
+			;Start Game
+	Else
+		MsgBox(64,"Error","Image not supported")
+	EndIf
+EndIf
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

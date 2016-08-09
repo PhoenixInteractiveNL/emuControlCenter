@@ -26,13 +26,13 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 
 ; Check if JADMAKER exists in the script folder
-If FileExists($eccSystemEccFolder & "ecc-script\cpjava\JADMaker.exe") <> 1 Then 
-        MsgBox(0, $eccSystemName, "JAD Maker '" & $eccSystemEccFolder & "cpjava\JADMaker.exe' not found!")
+If FileExists($eccSystemEccFolder & "\ecc-script\cpjava\JADMaker.exe") <> 1 Then 
+        MsgBox(0, $eccSystemName, "JAD Maker '" & $eccSystemEccFolder & "\ecc-script\cpjava\JADMaker.exe' not found!")
         Exit 
 EndIf
 
 ;First we need to make a JAD file from the JAR file using 'JADMaker'
-Run(@ScriptDir & "\" & "JADMaker.exe" & " " & $eccFileRomPath & $eccFileRomFile) 
+Run(@ScriptDir & "\" & "JADMaker.exe" & " " & $RomFile) 
 
 ; Add a timer to give JADMaker some time to write the JAD file
 Sleep(500)
@@ -40,9 +40,9 @@ Sleep(500)
 ; Compile the EXE & RUN
 If FileExists($eccFileRomPath & $eccFileRomNamePlain & ".jad") Then
         ;Adding the '-k' parameter runs the compiled exe and then de-lete it when closed
-        Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " -jar " & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34) & " -jad " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".jad" & Chr(34) & " -k")
+        Run($Emulator & " " & "-jar " & $RomFile & " -jad " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".jad" & Chr(34) & " -k")
 Else
-        MsgBox(0, $eccSystemName, "JADMaker could not write the JAD file :(, exiting...")
+        MsgBox(0, $eccSystemName, "JADMaker could not write the JAD file :(, aborting...")
         Exit 
 EndIf
 

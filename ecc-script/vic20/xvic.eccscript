@@ -31,8 +31,8 @@ If $eccMetaInfoId = "" Then
 	; META INFO ID is not present
 
 	; Check if 'PrgInfo.exe' exists in the script folder
-	If FileExists($eccSystemEccFolder & "ecc-script\vic20\PrgInfo.exe") <> 1 Then 
-	        MsgBox(0, $eccSystemName, "PRG Info '" & $eccSystemEccFolder & "vic20\PrgInfo.exe' not found!")
+	If FileExists($eccSystemEccFolder & "\ecc-script\vic20\PrgInfo.exe") <> 1 Then 
+	        MsgBox(0, $eccSystemName, "PRG Info '" & $eccSystemEccFolder & "\vic20\PrgInfo.exe' not found!")
 	        Exit 
 	EndIf
 
@@ -118,13 +118,7 @@ Else
 EndIf
 
 ; Run the rom
-If $eccFileRomFileIsPacked = "1" Then
-	; The ROM was packed and is now extracted => run ROM from the ECC temporally unpack folder.
-	Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $VicCommandline & Chr(34) & $eccFileEccUnpackedPath & $eccFileEccUnpackedFile & Chr(34))
-Else
-	; The ROM was already unpacked => run ROM normally.
-	Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $VicCommandline & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-EndIf
+Run($Emulator & " " & $VicCommandline & $RomFile)
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

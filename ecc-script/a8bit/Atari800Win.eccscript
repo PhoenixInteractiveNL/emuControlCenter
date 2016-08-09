@@ -31,17 +31,7 @@ If $eccFileRomExtension = "rom" then $CmdParameter = " -cart "
 If $eccFileRomExtension = "bin" then $CmdParameter = " -cart "
 If $eccFileRomExtension = "atr" then $CmdParameter = " "
 
-If $eccFileRomFileIsPacked = "1" Then
-
-   ; The ROM is packed, run ROM from the ECC temporally unpack folder.
-   Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $CmdParameter & chr(34) & $eccFileEccUnpackedPath & $eccFileEccUnpackedFile & chr(34))
-
-Else
-
-   ; The ROM is unpacked, run ROM normally.
-   Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & $CmdParameter & chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
-
-EndIf
+Run($Emulator & " " & $CmdParameter & $RomFile)
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT
 ; ------------------------------------------------------------------------------

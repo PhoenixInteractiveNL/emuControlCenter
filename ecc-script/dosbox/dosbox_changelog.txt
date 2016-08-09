@@ -1,0 +1,3 @@
+v1.0.0.1
+- Added a messagebox when a START file is not configured (user canceled)
+  and the script wil end.

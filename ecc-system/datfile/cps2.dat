@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-2
-	description "CPS-2 20090915"
+	description "CPS-2 20100103"
 	category "Capcom Play System 2"
-	version 20090915
-	date 2009-09-15
+	version 20100103
+	date 2010-01-03
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -249,6 +249,43 @@ game (
 	rom ( name ssfj.05 size 524288 crc 0918d19a sha1 c23be61dd193058eb1391d39fbc22fbcf0640ee0 )
 	rom ( name ssfj.06 size 524288 crc d808a6cd sha1 214a4281abacdf6b74b7f51379a93cc64b4c1d7d )
 	rom ( name ssfj.07 size 524288 crc eb6a9b1b sha1 daedb669b0025f6efb0f3302a40d88dcde2fc76f )
+	rom ( name ssf.13m merge ssf.13m size 2097152 crc cf94d275 sha1 bf2a6d98a656d1cb5734da7836686242d3211137 )
+	rom ( name ssf.15m merge ssf.15m size 2097152 crc 5eb703af sha1 4b302dbb66e8a5c2ad92798699391e981bada427 )
+	rom ( name ssf.17m merge ssf.17m size 2097152 crc ffa60e0f sha1 b21b1c749a8241440879bf8e7cb33968ccef97e5 )
+	rom ( name ssf.19m merge ssf.19m size 2097152 crc 34e825c5 sha1 4d320fc96d1ef0b9928a8ce801734245a4c097a5 )
+	rom ( name ssf.14m merge ssf.14m size 1048576 crc b7cc32e7 sha1 0f4d26af338dab5dce5b7b34d32ad0c573434ace )
+	rom ( name ssf.16m merge ssf.16m size 1048576 crc 8376ad18 sha1 f4456833fb396e6501f4174c0fe5fd63ea40a188 )
+	rom ( name ssf.18m merge ssf.18m size 1048576 crc f5b1b336 sha1 4b060501e56b9d61294748da5387cdae5280ec4d )
+	rom ( name ssf.20m merge ssf.20m size 1048576 crc 459d5c6b sha1 32b11ba7a12004aff810d719bff7508204c7b7c0 )
+	rom ( name ssf.01 merge ssf.01 size 131072 crc eb247e8c sha1 24296c18d9b1136d69712bf1c9d9d15463041e83 )
+	rom ( name ssf.q01 merge ssf.q01 size 524288 crc a6f9da5c sha1 6d19f83a01bd25b838d5c2871f7964529d926c98 )
+	rom ( name ssf.q02 merge ssf.q02 size 524288 crc 8c66ae26 sha1 32a82aee6ed4480e5a990f9af161734c7c0a1403 )
+	rom ( name ssf.q03 merge ssf.q03 size 524288 crc 695cc2ca sha1 c2675f0233608b76de528d2a6ef19846d1348060 )
+	rom ( name ssf.q04 merge ssf.q04 size 524288 crc 9d9ebe32 sha1 9b26329370041374f1a90b479a172d2bc2801c4d )
+	rom ( name ssf.q05 merge ssf.q05 size 524288 crc 4770e7b7 sha1 0e764f0befb9227b0b36508d8ca8ec9be31bcb05 )
+	rom ( name ssf.q06 merge ssf.q06 size 524288 crc 4e79c951 sha1 1144781d7dc57ef8a6458d982f5c91548ff59e27 )
+	rom ( name ssf.q07 merge ssf.q07 size 524288 crc cdd14313 sha1 ebe767a9d4b51dba4282fa0a36a546a88620dd59 )
+	rom ( name ssf.q08 merge ssf.q08 size 524288 crc 6f5a088c sha1 6c0b4690479647a99d76335f174be8455b4ff118 )
+)
+
+game (
+	name ssf2h
+	description "Super Street Fighter II: The New Challengers (Hispanic 930911)"
+	year 1993
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof ssf2
+	romof ssf2
+	rom ( name ssfhx.03 size 524288 flags nodump )
+	rom ( name ssfhx.04 size 524288 flags nodump )
+	rom ( name ssfhx.05 size 524288 flags nodump )
+	rom ( name ssfhx.06 size 524288 flags nodump )
+	rom ( name ssfhx.07 size 524288 flags nodump )
+	rom ( name ssfh.03 size 524288 crc b086b355 sha1 c0ee70fa44081ebf09a72910ce1b733b019aaf71 )
+	rom ( name ssfh.04 size 524288 crc 1e629b29 sha1 1c1043610cae9ea6cb3139a1c14d53a6fcd91d02 )
+	rom ( name ssfh.05 size 524288 crc b5997e10 sha1 fe9502a5dfc1dfba80d0246056eae5f3b47897a7 )
+	rom ( name ssfh.06 size 524288 crc 793b8fad sha1 e0e30dbd7a95636e592fc58577179f12b7b4ea76 )
+	rom ( name ssfh.07 size 524288 crc cbb92ac3 sha1 f5dd189757b11ea39ff8ead8d7e9bd3b97934a94 )
 	rom ( name ssf.13m merge ssf.13m size 2097152 crc cf94d275 sha1 bf2a6d98a656d1cb5734da7836686242d3211137 )
 	rom ( name ssf.15m merge ssf.15m size 2097152 crc 5eb703af sha1 4b302dbb66e8a5c2ad92798699391e981bada427 )
 	rom ( name ssf.17m merge ssf.17m size 2097152 crc ffa60e0f sha1 b21b1c749a8241440879bf8e7cb33968ccef97e5 )
@@ -754,6 +791,35 @@ game (
 
 game (
 	name ddtodh
+	description "Dungeons & Dragons: Tower of Doom (Hispanic 940412)"
+	year 1993
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof ddtod
+	romof ddtod
+	rom ( name dadhx.03c size 524288 flags nodump )
+	rom ( name dadhx.04c size 524288 flags nodump )
+	rom ( name dadhx.05c size 524288 flags nodump )
+	rom ( name dadh.03c size 524288 crc 5750a861 sha1 3b94999779f1b5f7cdaf78468256e2b60ba8c076 )
+	rom ( name dadh.04c size 524288 crc cfbf1b56 sha1 d8919397f1d6dacddc6811889b69b65cd91be683 )
+	rom ( name dadh.05c size 524288 crc a6e562ba sha1 42998024a3bb4464843411ebe7283c6f5369694d )
+	rom ( name dad.06a merge dad.06a size 524288 crc 6225495a sha1 a9a02abb072e3482ac92d7aed8ce9a5bcf636bc0 )
+	rom ( name dad.07a merge dad.07a size 524288 crc b3480ec3 sha1 a66f8dba67101fd71c2af4f3c3d71e55778a9f2c )
+	rom ( name dad.13m merge dad.13m size 2097152 crc da3cb7d6 sha1 d59bb53d5f32889eb6eb7f8b1c8781948c97283d )
+	rom ( name dad.15m merge dad.15m size 2097152 crc 92b63172 sha1 9bed7dbbb17729f2ad3d318396f5335c0bd39937 )
+	rom ( name dad.17m merge dad.17m size 2097152 crc b98757f5 sha1 3eead22e097906bf0e1e151cd0a9c75abc5a32d4 )
+	rom ( name dad.19m merge dad.19m size 2097152 crc 8121ce46 sha1 40c4dc969318d38f0c6d5401c9c64371f51aa12c )
+	rom ( name dad.14m merge dad.14m size 1048576 crc 837e6f3f sha1 c060183474fba0e82d765b9f282b84838550dff6 )
+	rom ( name dad.16m merge dad.16m size 1048576 crc f0916bdb sha1 9354d258dd26cbbf12c78ecfc277c357cbdb360e )
+	rom ( name dad.18m merge dad.18m size 1048576 crc cef393ef sha1 830b33c86cc24776d17ad65fa89a3b16c40446a1 )
+	rom ( name dad.20m merge dad.20m size 1048576 crc 8953fe9e sha1 f4795beb006335d13e3934aa9760e775eb0bb950 )
+	rom ( name dad.01 merge dad.01 size 131072 crc 3f5e2424 sha1 4aa744576bc6752c43a90a27a816ebd90076b248 )
+	rom ( name dad.11m merge dad.11m size 2097152 crc 0c499b67 sha1 a8ebd8a1cd6dece8344b7cb0439d85843fb97616 )
+	rom ( name dad.12m merge dad.12m size 2097152 crc 2f0b5a4e sha1 8d1ebbb811aa469b0f0d29d719d2b9af28fb63a2 )
+)
+
+game (
+	name ddtodhr1
 	description "Dungeons & Dragons: Tower of Doom (Hispanic 940125)"
 	year 1993
 	manufacturer "Capcom"
@@ -1221,6 +1287,38 @@ game (
 	rom ( name vama.08a size 524288 crc 743f3a8e sha1 f7bde0f989582ba2cf93c9397cc38d3eec9ad92d )
 	rom ( name vama.09a size 524288 crc 67fa5573 sha1 2dab32cf0d361d2c52cce5eb41b389a0e32dd192 )
 	rom ( name vama.10a size 524288 crc 5e03d747 sha1 044ef85ca927108f5e66967819dbf7c25bb34f77 )
+	rom ( name vam.13m merge vam.13m size 4194304 crc c51baf99 sha1 2fb6642908e542e404391eb17392f8270e87bf48 )
+	rom ( name vam.15m merge vam.15m size 4194304 crc 3ce83c77 sha1 93369b23c6d7d834297434691bb047ee3dd9539c )
+	rom ( name vam.17m merge vam.17m size 4194304 crc 4f2408e0 sha1 cd49c6b3c7e6470c6058f98ccc5210b052bb13e2 )
+	rom ( name vam.19m merge vam.19m size 4194304 crc 9ff60250 sha1 d69ba4dc6bd37d003245f0cf3211d6e2623005b8 )
+	rom ( name vam.14m merge vam.14m size 1048576 crc bd87243c sha1 87b33aeb72514e1228ffc27ec6dd534f14882760 )
+	rom ( name vam.16m merge vam.16m size 1048576 crc afec855f sha1 cd117833b8d475489b90ff44b57e2c5cb1af3af5 )
+	rom ( name vam.18m merge vam.18m size 1048576 crc 3a033625 sha1 294238f30cba5cf4f8f1de951d54c2077bd95de9 )
+	rom ( name vam.20m merge vam.20m size 1048576 crc 2bff6a89 sha1 8f4e131e5ce0af48fb89f98026d9f0356c7c301f )
+	rom ( name vam.01 merge vam.01 size 131072 crc 64b685d5 sha1 6c180e7420db754eca5cad17a40f5a64f5c3bd15 )
+	rom ( name vam.02 merge vam.02 size 131072 crc cf7c97c7 sha1 109a4b56ecd59be9c3f5869de99d40619bdaef21 )
+	rom ( name vam.11m merge vam.11m size 2097152 crc 4a39deb2 sha1 7e63e615869958db66a4e52a0272afee5a10e446 )
+	rom ( name vam.12m merge vam.12m size 2097152 crc 1a3e5c03 sha1 c5a556e125d6c3d68da745b4d56cd7a851f2a23d )
+)
+
+game (
+	name dstlkh
+	description "Darkstalkers: The Night Warriors (Hispanic 940818)"
+	year 1994
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof dstlk
+	romof dstlk
+	rom ( name vamhx.03c size 524288 flags nodump )
+	rom ( name vamhx.04c size 524288 flags nodump )
+	rom ( name vamh.03c size 524288 crc 4d7b9e8f sha1 08555da1b024e6ab4dfe802352065c132ddc2abb )
+	rom ( name vamh.04c size 524288 crc 2217e9a0 sha1 b86ee89457d8a0cf828f1bed247f3b2c0c91b170 )
+	rom ( name vamh.05c size 524288 crc 3a05b13c sha1 14b58954bdff8dd699f867037a86f0bae8095e9d )
+	rom ( name vamh.06c size 524288 crc 11d70a1c sha1 e13c5afeb9cb64ec60d570b81d7fac4869c76d1d )
+	rom ( name vamh.07c size 524288 crc db5a8767 sha1 86274080e4423d09e10f2db56a4e685b32acfa18 )
+	rom ( name vamh.08c size 524288 crc 2a4fd79b sha1 ff0398db43ef849365ad88b9b57661db3a3b65c6 )
+	rom ( name vamh.09c size 524288 crc 15187632 sha1 81b7166334dc3c331673822c31581e0e7809b698 )
+	rom ( name vamh.10c size 524288 crc 192d2d81 sha1 ea99f2ea3e28edfc203e967924500dad10abb43f )
 	rom ( name vam.13m merge vam.13m size 4194304 crc c51baf99 sha1 2fb6642908e542e404391eb17392f8270e87bf48 )
 	rom ( name vam.15m merge vam.15m size 4194304 crc 3ce83c77 sha1 93369b23c6d7d834297434691bb047ee3dd9539c )
 	rom ( name vam.17m merge vam.17m size 4194304 crc 4f2408e0 sha1 cd49c6b3c7e6470c6058f98ccc5210b052bb13e2 )
@@ -3300,6 +3398,38 @@ game (
 )
 
 game (
+	name ddsomh
+	description "Dungeons & Dragons: Shadow over Mystara (Hispanic 960223)"
+	year 1996
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof ddsom
+	romof ddsom
+	rom ( name dd2hx.03a size 524288 flags nodump )
+	rom ( name dd2hx.04a size 524288 flags nodump )
+	rom ( name dd2h.03a size 524288 crc e472c9f3 sha1 43e0767cca3ce0c151f1bd12d476cc2f0013b5e5 )
+	rom ( name dd2h.04a size 524288 crc 315a7706 sha1 de6ced251a483455b0d0371c60bce0c209879b43 )
+	rom ( name dd2h.05a size 524288 crc 9b2534eb sha1 04a9f9b75f817dff1b94641aba399d487b57a9f7 )
+	rom ( name dd2h.06a size 524288 crc 3b21ba59 sha1 0b9be23253c42047ebfe3e656670ebf5e792766f )
+	rom ( name dd2h.07a size 524288 crc fce2558d sha1 67041b550bcb357f1c76e3ab703c7db3cc071515 )
+	rom ( name dd2e.08 merge dd2e.08 size 524288 crc 30970890 sha1 fd366a9323230f6997006ab4cc216f9a97865ebe )
+	rom ( name dd2e.09 merge dd2e.09 size 524288 crc 99e2194d sha1 cbcecdf5beeac3eac6c2c3fa395710e1b8347531 )
+	rom ( name dd2e.10 merge dd2e.10 size 524288 crc e198805e sha1 37ae9d88d98c59337b657cfa6feb56e4f9cae95f )
+	rom ( name dd2.13m merge dd2.13m size 4194304 crc a46b4e6e sha1 fb90f42868c581c481b4ceff9f692753fb186b30 )
+	rom ( name dd2.15m merge dd2.15m size 4194304 crc d5fc50fc sha1 bc692f17b18bb47a724cd5152377cd5ccd6e184a )
+	rom ( name dd2.17m merge dd2.17m size 4194304 crc 837c0867 sha1 3d6db290a8f76299a23543f0ccf6a7905e1088ac )
+	rom ( name dd2.19m merge dd2.19m size 4194304 crc bb0ec21c sha1 e43ccc1cf63ccd2b504cc9fd701af849a7321914 )
+	rom ( name dd2.14m merge dd2.14m size 2097152 crc 6d824ce2 sha1 0ccfe6c8a944937718e28a1a373b5822c7b7001b )
+	rom ( name dd2.16m merge dd2.16m size 2097152 crc 79682ae5 sha1 ee84f4791c29ce9e2bae06ba3ec47ff4d2cd7054 )
+	rom ( name dd2.18m merge dd2.18m size 2097152 crc acddd149 sha1 7f50de9b2d1cc733594c642be1804190519caffa )
+	rom ( name dd2.20m merge dd2.20m size 2097152 crc 117fb0c0 sha1 15c01fa1a71b6469b0e1bde0ce5835c5ff9d938c )
+	rom ( name dd2.01 merge dd2.01 size 131072 crc 99d657e5 sha1 1528dd6b07a0e79951a35c0457c8a9c9770e9c78 )
+	rom ( name dd2.02 merge dd2.02 size 131072 crc 117a3824 sha1 14f3a12170b601c5466c93af9d2f24e0b386b4e4 )
+	rom ( name dd2.11m merge dd2.11m size 2097152 crc 98d0c325 sha1 7406e8d943d77c468eb418c4113261f4ab973bbf )
+	rom ( name dd2.12m merge dd2.12m size 2097152 crc 5ea2e7fa sha1 0e6a9fd007f637adcb2226c902394f07de45e803 )
+)
+
+game (
 	name ddsomb
 	description "Dungeons & Dragons: Shadow over Mystara (Brazil 960223)"
 	year 1996
@@ -3631,6 +3761,27 @@ game (
 )
 
 game (
+	name spf2th
+	description "Super Puzzle Fighter II Turbo (Hispanic 960531)"
+	year 1996
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof spf2t
+	romof spf2t
+	rom ( name pzfhx.03 size 524288 flags nodump )
+	rom ( name pzfh.03 size 524288 crc 20510f2d sha1 dcdfc0f6b849499732b76811edb682fea758f530 )
+	rom ( name pzf.04 merge pzf.04 size 524288 crc b80649e2 sha1 5bfccd656aea7ff82e9a20bb5856f4ab99b5a007 )
+	rom ( name pzf.14m merge pzf.14m size 1048576 crc 2d4881cb sha1 fd3baa183c25bed153b19c251980e2fb761600e2 )
+	rom ( name pzf.16m merge pzf.16m size 1048576 crc 4b0fd1be sha1 377aafdcdb7a866b1c8487670e3598d8197976e4 )
+	rom ( name pzf.18m merge pzf.18m size 1048576 crc e43aac33 sha1 d041e0688c3807d3363861a7f216de43b34d846c )
+	rom ( name pzf.20m merge pzf.20m size 1048576 crc 7f536ff1 sha1 905b9d62ef7bef47297c7f4a4dd697aed6df38a5 )
+	rom ( name pzf.01 merge pzf.01 size 131072 crc 600fb2a3 sha1 1fab1c2a23bf6ad8309d29ddbbc29435a8aeea13 )
+	rom ( name pzf.02 merge pzf.02 size 131072 crc 496076e0 sha1 1ee4e135140afd0e8e03231e570cd77d140f6367 )
+	rom ( name pzf.11m merge pzf.11m size 2097152 crc 78442743 sha1 b61190bb586871de6d54af580e3e1d9cc0de0acb )
+	rom ( name pzf.12m merge pzf.12m size 2097152 crc 399d2c7b sha1 e849dea97b8d16540415c0d9bbc4f9f4eb755ec4 )
+)
+
+game (
 	name qndream
 	description "Quiz Nanairo Dreams: Nijiirochou no Kiseki (Japan 960826)"
 	year 1996
@@ -3695,7 +3846,7 @@ game (
 )
 
 game (
-	name rckman2j
+	name rockman2j
 	description "Rockman 2: The Power Fighters (Japan 960708)"
 	year 1996
 	manufacturer "Capcom"
@@ -3706,6 +3857,29 @@ game (
 	rom ( name rm2jx.04 size 524288 crc 676a116e sha1 c8b6ab70efb22fdd9b7b4b736084a0d3eb123e3c )
 	rom ( name rm2j.03 size 524288 crc dbaa1437 sha1 849572090bdbde7d9f191959f4b6ad26f46811f4 )
 	rom ( name rm2j.04 size 524288 crc cf5ba612 sha1 f0b56db8df7ad676e00325c97cf16791f409e35a )
+	rom ( name rm2.05 merge rm2.05 size 524288 crc 02ee9efc sha1 1b80c40389b51a03b930051f232630616c12e6c5 )
+	rom ( name rm2.14m merge rm2.14m size 2097152 crc 9b1f00b4 sha1 c1c5c2d9d00121425ae6598444d704f420ef4eef )
+	rom ( name rm2.16m merge rm2.16m size 2097152 crc c2bb0c24 sha1 38724c49d9db49765a4ed9bc2dc8f57cec45ec7c )
+	rom ( name rm2.18m merge rm2.18m size 2097152 crc 12257251 sha1 20cb58afda0e6200991277817485340a6a41ae2b )
+	rom ( name rm2.20m merge rm2.20m size 2097152 crc f9b6e786 sha1 aeb4acff7208e66a35198143fd2478039fdaa3a6 )
+	rom ( name rm2.01a merge rm2.01a size 131072 crc d18e7859 sha1 0939fac70042d0b4db5c2fdcef1f79b95febd45e )
+	rom ( name rm2.02 merge rm2.02 size 131072 crc c463ece0 sha1 5c3e41eb61610b3f8c431206f6672907e3a0bdb0 )
+	rom ( name rm2.11m merge rm2.11m size 2097152 crc 2106174d sha1 0a35d9ca8ebcad74904b20648d5320f839d6377e )
+	rom ( name rm2.12m merge rm2.12m size 2097152 crc 546c1636 sha1 f96b172ab899f2c6ee17a5dd1fb61af9432e3cd2 )
+)
+
+game (
+	name megaman2h
+	description "Mega Man 2: The Power Fighters (Hispanic 960712)"
+	year 1996
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	cloneof megaman2
+	romof megaman2
+	rom ( name rm2hx.03 size 524288 flags nodump )
+	rom ( name rm2hx.04 size 524288 flags nodump )
+	rom ( name rm2h.03 size 524288 crc bb180378 sha1 ecf5e9907500139073e3b1b4e384039957dca354 )
+	rom ( name rm2h.04 size 524288 crc 205ffcd6 sha1 d1e3a164f4fd4f372ad2f3b4e2026d6487395503 )
 	rom ( name rm2.05 merge rm2.05 size 524288 crc 02ee9efc sha1 1b80c40389b51a03b930051f232630616c12e6c5 )
 	rom ( name rm2.14m merge rm2.14m size 2097152 crc 9b1f00b4 sha1 c1c5c2d9d00121425ae6598444d704f420ef4eef )
 	rom ( name rm2.16m merge rm2.16m size 2097152 crc c2bb0c24 sha1 38724c49d9db49765a4ed9bc2dc8f57cec45ec7c )
@@ -6228,6 +6402,31 @@ game (
 )
 
 game (
+	name hsf2
+	description "Hyper Street Fighter 2: The Anniversary Edition (USA 040202)"
+	year 2004
+	manufacturer "Capcom"
+	sourcefile cps2.c
+	rom ( name hs2ux.03 size 524288 flags nodump )
+	rom ( name hs2ux.04 size 524288 flags nodump )
+	rom ( name hs2u.03 size 524288 crc b308151e sha1 afdfd3b049c6435e2291bc35d8c26ff5bff223d8 )
+	rom ( name hs2u.04 size 524288 crc 327aa49c sha1 6719cd6ecc2a4487fdbf5cbcd47e35fc43000607 )
+	rom ( name hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
+	rom ( name hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
+	rom ( name hs2.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
+	rom ( name hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
+	rom ( name hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
+	rom ( name hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )
+	rom ( name hs2.13m size 8388608 crc a6ecab17 sha1 6749a4c8dc81f4b10f910c31c82cf6674e2a44eb )
+	rom ( name hs2.15m size 8388608 crc 10a0ae4d sha1 701b4900fbc8bef20efa1a706891c8df4bf14641 )
+	rom ( name hs2.17m size 8388608 crc adfa7726 sha1 8d36ec125a8c91abfe5213893d794f8bc11c8acd )
+	rom ( name hs2.19m size 8388608 crc bb3ae322 sha1 ecd289d7a0fe365fdd7c5527cb17796002beb553 )
+	rom ( name hs2.01 size 131072 crc c1a13786 sha1 c7392c7efb15ea4042e75bd9007e974293d8935d )
+	rom ( name hs2.02 size 131072 crc 2d8794aa sha1 c634affdc2568020cce6af97b4fa79925d9943f3 )
+	rom ( name hs2.11m size 8388608 crc 0e15c359 sha1 176108b0d76d821a849324680aba0cd04b5016c1 )
+)
+
+game (
 	name hsf2j
 	description "Hyper Street Fighter 2: The Anniversary Edition (Japan 031222)"
 	year 2004
@@ -6241,7 +6440,7 @@ game (
 	rom ( name hs2j.04 size 524288 crc 40072c4a sha1 85b95bd3c907b4276a31777e092b8c40d3763257 )
 	rom ( name hs2.05 merge hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
 	rom ( name hs2.06 merge hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
-	rom ( name hs2j.07 size 524288 crc 09fe85b4 sha1 b15b3ae28a6a395d26580dc8f4b506507792df38 )
+	rom ( name hs2j.07 size 524288 crc 09fe85b4 sha1 b15b3ae28a6a395d26580dc8f4b506507792df38 flags baddump )
 	rom ( name hs2.08 merge hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
 	rom ( name hs2.09 merge hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
 	rom ( name hs2.10 merge hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )
@@ -6255,28 +6454,30 @@ game (
 )
 
 game (
-	name hsf2
+	name hsf2a
 	description "Hyper Street Fighter 2: The Anniversary Edition (Asia 040202)"
 	year 2004
 	manufacturer "Capcom"
 	sourcefile cps2.c
+	cloneof hsf2
+	romof hsf2
 	rom ( name hs2ax.03 size 524288 crc 5f3d7397 sha1 96f327dd998105ad5dc46bc9d3b741805a840d68 )
 	rom ( name hs2ax.04 size 524288 crc 59acf108 sha1 e68fe233681175b29a35badab249c2b892b23af3 )
 	rom ( name hs2a.03 size 524288 crc d50a17e0 sha1 5d8d6d309260cc2d862aa080d44a72886ee08c77 )
 	rom ( name hs2a.04 size 524288 crc a27f42de sha1 7a355831b57a35e327b2618fd5dca11afed2a233 )
-	rom ( name hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
-	rom ( name hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
-	rom ( name hs2a.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
-	rom ( name hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
-	rom ( name hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
-	rom ( name hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )
-	rom ( name hs2.13m size 8388608 crc a6ecab17 sha1 6749a4c8dc81f4b10f910c31c82cf6674e2a44eb )
-	rom ( name hs2.15m size 8388608 crc 10a0ae4d sha1 701b4900fbc8bef20efa1a706891c8df4bf14641 )
-	rom ( name hs2.17m size 8388608 crc adfa7726 sha1 8d36ec125a8c91abfe5213893d794f8bc11c8acd )
-	rom ( name hs2.19m size 8388608 crc bb3ae322 sha1 ecd289d7a0fe365fdd7c5527cb17796002beb553 )
-	rom ( name hs2.01 size 131072 crc c1a13786 sha1 c7392c7efb15ea4042e75bd9007e974293d8935d )
-	rom ( name hs2.02 size 131072 crc 2d8794aa sha1 c634affdc2568020cce6af97b4fa79925d9943f3 )
-	rom ( name hs2.11m size 8388608 crc 0e15c359 sha1 176108b0d76d821a849324680aba0cd04b5016c1 )
+	rom ( name hs2.05 merge hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
+	rom ( name hs2.06 merge hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
+	rom ( name hs2.07 merge hs2.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
+	rom ( name hs2.08 merge hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
+	rom ( name hs2.09 merge hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
+	rom ( name hs2.10 merge hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )
+	rom ( name hs2.13m merge hs2.13m size 8388608 crc a6ecab17 sha1 6749a4c8dc81f4b10f910c31c82cf6674e2a44eb )
+	rom ( name hs2.15m merge hs2.15m size 8388608 crc 10a0ae4d sha1 701b4900fbc8bef20efa1a706891c8df4bf14641 )
+	rom ( name hs2.17m merge hs2.17m size 8388608 crc adfa7726 sha1 8d36ec125a8c91abfe5213893d794f8bc11c8acd )
+	rom ( name hs2.19m merge hs2.19m size 8388608 crc bb3ae322 sha1 ecd289d7a0fe365fdd7c5527cb17796002beb553 )
+	rom ( name hs2.01 merge hs2.01 size 131072 crc c1a13786 sha1 c7392c7efb15ea4042e75bd9007e974293d8935d )
+	rom ( name hs2.02 merge hs2.02 size 131072 crc 2d8794aa sha1 c634affdc2568020cce6af97b4fa79925d9943f3 )
+	rom ( name hs2.11m merge hs2.11m size 8388608 crc 0e15c359 sha1 176108b0d76d821a849324680aba0cd04b5016c1 )
 )
 
 game (
@@ -6914,7 +7115,7 @@ game (
 	rom ( name hs2ad.04 size 524288 crc 0276b78a sha1 3f5502f77eb9889ca4658eb323579e05b35c9868 )
 	rom ( name hs2.05 merge hs2.05 size 524288 crc dde34a35 sha1 f5be2d2916db6e86e0886d61d55bddf138273ebc )
 	rom ( name hs2.06 merge hs2.06 size 524288 crc f4e56dda sha1 c6490707c2a416ab88612c2d73abbe5853d8cb92 )
-	rom ( name hs2a.07 merge hs2a.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
+	rom ( name hs2.07 merge hs2.07 size 524288 crc ee4420fc sha1 06cf76660b0c794d2460c52d9fe8334fff51e9de )
 	rom ( name hs2.08 merge hs2.08 size 524288 crc c9441533 sha1 bf178fac1f060fcce3ff9118333c8517dadc9429 )
 	rom ( name hs2.09 merge hs2.09 size 524288 crc 3fc638a8 sha1 2a42877b26c8abc437da46225701f0bba6e40058 )
 	rom ( name hs2.10 merge hs2.10 size 524288 crc 20d0f9e4 sha1 80a5eeef9472e327b0d4ee26434bad109a9434ea )

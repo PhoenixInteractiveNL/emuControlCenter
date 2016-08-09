@@ -29,7 +29,7 @@ Send("{ALT}")
 Send("{DOWN}")
 Send("{ENTER}")
 Sleep(1000)
-Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+Send($RomFile)
 Send("{ENTER}")
 
 ; Start emulator

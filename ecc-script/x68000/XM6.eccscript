@@ -156,7 +156,7 @@ IniWrite($sUAEFilename, 'MRU0' , 'File0' , $COMILLAS & $eccFileRomPath & $aDiskN
 
 ; Start the emulator
 
-$EMULADOR = Run($eccEmuEmulatorPath & $eccEmuEmulatorFile)
+$EMULADOR = Run($Emulator)
 Sleep (2500)
 
 Send ("{ALT}")

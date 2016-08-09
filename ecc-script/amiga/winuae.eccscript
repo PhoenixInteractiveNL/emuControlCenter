@@ -133,7 +133,7 @@ FileClose($uae_file)
 
 ; Start the emulator
 
-Run($eccEmuEmulatorPath & $eccEmuEmulatorFile & " -f " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".uae" & chr(34))
+Run($Emulator & " " & "-f " & chr(34) & $eccFileRomPath & $eccFileRomNamePlain & ".uae" & chr(34))
 
 Func CleanRomName( $sRomName )
 	While StringInStr( $sRomName, "\" )
@@ -142,7 +142,6 @@ Func CleanRomName( $sRomName )
 	Wend
 	Return StringReplace( $sRomName, '"', "" )
 EndFunc
-
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT
 ; ------------------------------------------------------------------------------

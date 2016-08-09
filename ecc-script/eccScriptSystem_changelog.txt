@@ -1,3 +1,25 @@
+v1.1.0.5
+- Fixed an issue where Windows could not find some emulators through the shell commandline due to a trailing space. (Phoenix)
+
+v1.1.0.4
+- Fixed part of mounting script that did not mount CUE file's properly with daemontools (Phoenix)
+
+v1.1.0.3
+- Fixed part of mounting script that did not load ISO's (DerMicha75)
+
+v1.1.0.2
+- Fixed part of mounting script that did not load ISO's, now adepted to 'IntelliX' section (Altheos)
+
+v1.1.0.1
+- Added new variable from the ECC general config: $eccConfigFile, $eccUserLanguage, $eccUserPath 
+
+v1.1.0.0
+- Added "IntelliX" subroutine.
+  - This subroutine uses the ECC config variables and applies them automaticly.
+  - This should make handling of packed romfile inside archives a lot easier.
+  - Autodetects if there is a .cue file present (with the same filename) and uses this
+    when available
+
 v1.0.0.7
 - Made some gramatical changes in the 'title bar not found' sentance.
 

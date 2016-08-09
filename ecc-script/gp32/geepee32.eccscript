@@ -51,7 +51,7 @@ Case $eccFileRomExtension <> "smc"
 	Send("{RIGHT}")
 	Sleep(100)
 	Send("{ENTER}")
-	Send(chr(34) & $eccFileRomPath & $eccFileRomFile & chr(34))
+	Send($RomFile)
 	Sleep(100)
 	Send("{TAB}")
 	Send("{TAB}")

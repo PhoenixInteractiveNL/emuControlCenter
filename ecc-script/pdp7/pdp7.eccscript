@@ -27,7 +27,7 @@ EmuWindowControl("pdp7")
 ;Check to see which tape to run
 ;first decsys
 if $eccFileRomFile = "decsys.dtp" then
-     Send("att –e dt2 " & $eccFileRomPath & $eccFileRomFile)
+     Send("att –e dt2 " & $RomFile)
      Send("{ENTER}")
      Sleep(10)
      Send("att dt3 "  & $eccFileRomPath & "scratch.dtp" )
@@ -44,7 +44,7 @@ if $eccFileRomFile = "sim8.rim" then
      Send("set tti fdx")
      Send("{ENTER}")
      Sleep(10)
-     Send("load "  & $eccFileRomPath & $eccFileRomFile )
+     Send("load "  & $RomFile )
      Send("{ENTER}")
      Sleep(10)
      Send("run")
@@ -54,8 +54,6 @@ Else
       Send("EXIT")
       Send("{ENTER}")
 endif
-
-
 
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT

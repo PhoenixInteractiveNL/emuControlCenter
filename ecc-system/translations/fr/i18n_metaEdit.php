@@ -89,5 +89,10 @@ $i18n['metaEdit'] = array(
 		"Template eccScript émulateur manquante",
 	'mEditScriptIniTextNoEccScript' =>
 		"Aucun eccScript trouvé !",
+
+	'mEditUserWrongCharacters' =>
+		"Invalid characters found in text. Please clean the text!",
+
+
 );
 ?>

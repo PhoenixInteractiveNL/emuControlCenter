@@ -10,6 +10,7 @@ ld	Laserdisk		Logiqx		http://www.logiqx.com/
 mame	Multi Arcade Emulator	Logiqx		http://www.logiqx.com/
 model2	SEGA Model 2		Logiqx		http://www.logiqx.com/
 ng	SNK Neo-Geo		Logiqx		http://www.logiqx.com/
+svm	ScummVM			Gruby		http://web.t-online.hu/grubycza
 zinc	Capcom Zinc 1 & Zinc 2	Logiqx		http://www.logiqx.com/
 
 Special thanks to the authors and compilers of these great Dat-Files.

@@ -5,6 +5,9 @@
 // string 'ecc userfolders created'! 
 define('ECC_CREATE_USERFOLDER_BY_TOOL', trim($argv[1]) == 'create_userfolder');
 
+echo '<pre>';
+print_r($argv[1]);
+echo '</pre>';
 
 define('LF', "\n");
 
@@ -932,10 +935,14 @@ class App extends GladeXml {
 		$this->dropdownStorage = I18n::translateArray('dropdown_meta_storage', $this->dropdownStorage);
 		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_storage').'?', $this->dropdownStorage, 'metaEditDirectUpdate', 'setStorage', true);
 		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+
+		# dump type
+		$this->dropdownDumpType = I18n::translateArray('dropdownDumpType', $this->dropdownDumpType);
+		$this->nbMediaInfoStateDumpEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_dump_type').'?', $this->dropdownDumpType, 'metaEditDirectUpdate', 'setDump_type', true);
+		$this->nbMediaInfoStateDumpEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		
 		// region
 		$this->dropdownRegion = I18n::translateArray('dropdown_meta_region', $this->dropdownRegion);
-		$this->dropdownDumpType = I18n::translateArray('dropdownDumpType', $this->dropdownDumpType);
 		
 		# icons for rating, reviews, bookmarks and notes
 		$this->nbMediaInfoStateRatingEvent->connect_simple('button-press-event', array($this, 'metaEditPopupOpen'), false, 1);
@@ -963,6 +970,10 @@ class App extends GladeXml {
 		$this->nbMediaInfoAuditStateEvent->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'nbMediaInfoAuditStateEvent'));
 		
 		$this->nbMediaInfoEditEvent->connect_simple('button-press-event', array($this, 'metaEditPopupOpen'), false, 0);
+		
+		// open asset popup
+		$this->nbMediaInfoAssetEvent->connect_simple_after('button-press-event', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'BROWSE_ASSET');
+		
 		
 		#$this->nbMediaInfoStateRatingEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
@@ -1036,8 +1047,8 @@ class App extends GladeXml {
 		// ----------------------------
 		// EVENTBOXES CONNECT
 		// ----------------------------
-		$this->img_ecc_header_ebox->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
-		$this->img_plattform_ebox->connect_simple('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
+		$this->img_ecc_header_ebox->connect_simple_after('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
+		$this->img_plattform_ebox->connect_simple_after('button-press-event', array($this, 'setNotebookPage'), $this->nb_main, 1);
 		#$this->eccImageSupportEvent->connect_simple('button-press-event', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_SUPPORT'], 'open');
 		
 		// ----------------------------
@@ -1089,11 +1100,11 @@ class App extends GladeXml {
 		// ----------------------------
 		// extended search
 		// ----------------------------
-		foreach($this->ext_search_combos as $key => $name) {
+		foreach($this->ext_search_combos as $name => $comboContentName) {
 			$obj_name = "o".$name;
 			$state =  $this->ini->getHistoryKey($name);
 			$this->ext_search_selected[$name] = $state;
-			if (!$this->$obj_name) $this->$obj_name = new IndexedCombobox($this->$name, false, $this->cbox_yesno, 1, $state);
+			if (!$this->$obj_name) $this->$obj_name = new IndexedCombobox($this->$name, false, $this->$comboContentName, 1, $state);
 			$this->$name->connect("changed", array($this, 'dispatcher_ext_search'));
 		}
 		$state = $this->get_ext_search_state();
@@ -2173,7 +2184,7 @@ class App extends GladeXml {
 			$unpackFolder = $this->ini->getUnpackFolder($systemIdent, true);
 
 			
-			// if unpack is needed, because the file isnÂ´t already unpacked, do it now!
+			// if unpack is needed, because the file isn´t already unpacked, do it now!
 			switch($romFile->getFileExtension()){
 				case 'zip':
 				
@@ -2871,7 +2882,7 @@ class App extends GladeXml {
 		
 		$guiRomAudit = FACTORY::get('manager/GuiRomAudit', $this);
 		
-		// if this isnÂ´t a multifile, show error message!
+		// if this isn´t a multifile, show error message!
 		if (!$romFile->getIsMultiFile() && !$guiRomAudit->isVisible()){
 			$title = I18N::get('popup', 'romAuditInfoNotPossibelTitle');
 			$msg = I18N::get('popup', 'romAuditInfoNotPossibelMsg');
@@ -3027,6 +3038,18 @@ class App extends GladeXml {
 				// set file informations
 				$filePath = dirname(realpath($romFile->getFilePath()));
 				$fileName = basename($romFile->getAvailableFilePath());
+				
+				
+				$assetPath = $this->ini->getUserFolder($rom->getSystemIdent(), '/assets/'.substr($rom->getCrc32(), 0, 2).'/'.$rom->getCrc32());
+				$assetState = array();
+				foreach($this->rom_path_subfolder['assets'] as $subPath){
+					$assetState[$subPath] = (!is_dir($assetPath.'/'.$subPath) || FACTORY::get('manager/FileIO')->dirIsEmpty($assetPath.'/'.$subPath)) ? '<span color="#AAAAAA">'.$subPath.'</span>' : '<span color="#00AA00">'.$subPath.'</span>';
+				}
+				$string = join(' | ', $assetState);
+				
+				$this->nbMediaInfoAssetLabel->set_markup($string);
+				
+				
 				$this->setSpanMarkup($this->media_nb_info_file_name, $fileName, '#334455', 'b');
 				$fileNamePacked = ($romFile->getFilePathPacked()) ? basename($romFile->getFilePath()) : "NO";
 				if ($romFile->getIsMultiFile()) $path_pack = 'ROMSET ZIP';
@@ -3045,6 +3068,10 @@ class App extends GladeXml {
 				// option storage
 				$storage = (!$romMeta->getStorage()) ? 0 : $romMeta->getStorage();
 				$this->setSpanMarkup($this->media_nb_info_storage, $this->dropdownStorage[$storage]);
+
+				// option storage
+				$dumpType = (!$romMeta->getDump_type()) ? 0 : $romMeta->getDump_type();
+				$this->setSpanMarkup($this->media_nb_info_dump, $this->dropdownDumpType[$dumpType]);
 				
 				// set category
 				$category = (isset($this->media_category[$romMeta->getCategory()])) ? $this->media_category[$romMeta->getCategory()] : '';
@@ -4119,6 +4146,12 @@ class App extends GladeXml {
 				$menuItem->set_sensitive($romFile->getId());
 				$menu->append($menuItem);
 				
+				// open asset folder
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lblOpenAssetFolder'), $this->getThemeFolder('icon/ecc_assets.png'));
+				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'BROWSE_ASSET');
+				$menuItem->set_sensitive($romFile->getId());
+				$menu->append($menuItem);
+				
 				$menu->append(new GtkSeparatorMenuItem());
 
 				// get image from internet
@@ -4186,7 +4219,7 @@ class App extends GladeXml {
 				$menu->append($menuItem);
 				
 				$menu->append(new GtkSeparatorMenuItem());
-
+				
 				// browse rom folder
 				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_browse_dir'), $this->getThemeFolder('icon/ecc_folder.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'BROWSE_DIR');
@@ -4525,6 +4558,22 @@ class App extends GladeXml {
 			case 'SHELLOP':
 				
 				switch ($parameter) {
+					
+					case 'BROWSE_ASSET':
+						
+						$assetPath = $this->ini->getUserFolder($rom->getSystemIdent(), '/assets/'.substr($rom->getCrc32(), 0, 2).'/'.$rom->getCrc32(), true);
+						foreach($this->rom_path_subfolder['assets'] as $subPath){
+							$assetSubPath = $assetPath.'/'.$subPath;
+							if(!is_dir($assetSubPath)) $this->ini->createDirectoryRecursive($assetSubPath);
+						}
+						
+						if (!$assetPath) {
+							$this->guiManager->openDialogInfo(I18N::get('global', 'error_title'), "No valid directoy found!".LF.$assetPath, false, $this->getThemeFolder('icon/ecc_mbox_error.png', true));
+						}
+						else {
+							FACTORY::get('manager/Os')->launch_file($assetPath);	
+						}						
+						break;
 					case 'BROWSE_DIR':
 						$filePath = realpath($romFile->getFilePath());
 						if (!$filePath) {
@@ -4854,6 +4903,7 @@ class App extends GladeXml {
 		
 		// I18N TAB USERDATA Rating/Review
 		
+		$this->setSpanMarkup($this->medit_lbl_title, i18n::get('global', 'title').'*', '#000000', 'b', 'medium');
 		$this->mediaEditReviewFrameRating->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameRating').'</b>');
 		$this->mediaEditReviewFrameReview->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameReview').'</b>');
 		$this->mediaEditReviewFrameMoreSettings->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameMoreSettings').'</b>');
@@ -5087,6 +5137,28 @@ class App extends GladeXml {
 	 */
 	public function metaEditPopupSave($hidePopupAfterSave = false) {
 		
+		$error = false;
+
+		// set labels (reset after error)
+		$this->mediaEditTabMeta->set_markup(i18n::get('metaEdit', 'mediaEditTabMeta'));
+		$this->mediaEditTabRating->set_markup(i18n::get('metaEdit', 'mediaEditTabRating'));
+		$this->mediaEditTabPersonal->set_markup(i18n::get('metaEdit', 'mediaEditTabPersonal'));
+		$this->mediaEditTabFile->set_markup(i18n::get('metaEdit', 'mediaEditTabFile'));
+		$this->labelMetaEditYear->set_markup(i18n::get('meta', 'lbl_year'));
+		$this->labelMetaEditUsk->set_markup(i18n::get('meta', 'lbl_usk'));
+		$this->labelMetaEditCategory->set_markup(i18n::get('meta', 'lbl_category'));
+		$this->labelMetaEditDeveloper->set_markup(i18n::get('meta', 'lbl_developer'));
+		$this->labelMetaEditPublisher->set_markup(i18n::get('meta', 'lbl_publisher'));
+		$this->labelMetaEditProgrammer->set_markup(i18n::get('meta', 'lbl_programmer'));
+		$this->labelMetaEditGraphicArtist->set_markup(i18n::get('meta', 'lbl_graphics'));
+		$this->labelMetaEditMusican->set_markup(i18n::get('meta', 'lbl_musican'));
+		$this->labelMetaEditInfoString->set_markup(i18n::get('meta', 'lbl_info'));
+		$this->labelMetaEditInfoId->set_markup(i18n::get('meta', 'lbl_infoid'));
+		$this->mEditUserPersonalHiscoresLabel->set_label(i18n::get('metaEdit', 'mEditUserPersonalHiscoresLabel'));
+		$this->mediaEditReviewFrameReview->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameReview').'</b>');
+		$this->mediaEditPersonalFrameNotes->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameNotes').'</b>');
+		$this->labelMetaEditMedium->set_markup(i18n::get('meta', 'lbl_medium'));
+		
 		// get RomX object
 		$rom = $this->getSelectedRom();
 		if(!$rom) return false;
@@ -5101,12 +5173,86 @@ class App extends GladeXml {
 		$romMeta->setSystemIdent($romSystemIdent);
 		$romMeta->setCrc32($romCrc32);
 		
-		// USERDATA
+		$romTitle = $this->tryToGetText($this->media_edit_title, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'medit_lbl_title', i18n::get('global', 'title'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romTitle === false) $error = true;
 		
-		$mEditUserReviewBodyBuffer = $this->mEditUserReviewBody->get_buffer();
-		$mEditUserReviewBody = $mEditUserReviewBodyBuffer->get_text($mEditUserReviewBodyBuffer->get_start_iter(), $mEditUserReviewBodyBuffer->get_end_iter());
-		$mEditUserPersonalNotesBuffer = $this->mEditUserPersonalNotes->get_buffer();
-		$mEditUserPersonalNotes = $mEditUserPersonalNotesBuffer->get_text($mEditUserPersonalNotesBuffer->get_start_iter(), $mEditUserPersonalNotesBuffer->get_end_iter());
+		$romYear = $this->tryToGetText($this->cbe_year, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditYear', i18n::get('meta', 'lbl_year'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romYear === false) $error = true;
+		
+		$romUsk = $this->tryToGetText($this->cbe_usk, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditUsk', i18n::get('meta', 'lbl_usk'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romUsk === false) $error = true;
+
+		$romCreator = $this->tryToGetText($this->cbe_creator, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditDeveloper', i18n::get('meta', 'lbl_developer'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romCreator === false) $error = true;
+		
+		$romPublisher = $this->tryToGetText($this->cbe_publisher, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditPublisher', i18n::get('meta', 'lbl_publisher'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romPublisher === false) $error = true;
+
+		$romProgrammer = $this->tryToGetText($this->cbe_programmer, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditProgrammer', i18n::get('meta', 'lbl_programmer'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romProgrammer === false) $error = true;
+		
+		$romMusican = $this->tryToGetText($this->cbe_musican, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditMusican', i18n::get('global', 'lbl_musican'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romMusican === false) $error = true;
+
+		$romGraphics = $this->tryToGetText($this->cbe_graphics, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditGraphicArtist', i18n::get('meta', 'lbl_graphics'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romGraphics === false) $error = true;
+		
+		$romInfoString = $this->tryToGetText($this->media_edit_info, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditInfoString', i18n::get('meta', 'lbl_info'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romInfoString === false) $error = true;
+		
+		$romInfoId = $this->tryToGetText($this->media_edit_info_id, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditInfoId', i18n::get('meta', 'lbl_infoid'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romInfoId === false) $error = true;
+		
+		$romReviewTitle = $this->tryToGetText($this->mEditUserReviewTitle, 'mediaEditTabRating', i18n::get('metaEdit', 'mediaEditTabRating'), 'mediaEditReviewFrameReview', i18n::get('metaEdit', 'mediaEditReviewFrameReview'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romReviewTitle === false) $error = true;
+		
+		$romHiscore = $this->tryToGetText($this->mEditUserPersonalHiscores, 'mediaEditTabPersonal', i18n::get('metaEdit', 'mediaEditTabPersonal'), 'mEditUserPersonalHiscoresLabel', i18n::get('metaEdit', 'mEditUserPersonalHiscoresLabel'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romHiscore === false) $error = true;
+		
+		$romMediaCurrent = $this->tryToGetText($this->cbe_media_current, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditMedium', i18n::get('meta', 'lbl_medium'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romMediaCurrent === false) $error = true;
+		
+		$romMediaCount = $this->tryToGetText($this->cbe_media_count, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditMedium', i18n::get('meta', 'lbl_medium'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
+		if($romMediaCount === false) $error = true;
+		
+		
+		// USERDATA
+		$mEditUserReviewBody = '';
+		try {
+			$mEditUserReviewBodyBuffer = $this->mEditUserReviewBody->get_buffer();
+			$mEditUserReviewBody = $mEditUserReviewBodyBuffer->get_text($mEditUserReviewBodyBuffer->get_start_iter(), $mEditUserReviewBodyBuffer->get_end_iter());
+		}
+		catch(PhpGtkGErrorException $e){
+			$label = i18n::get('metaEdit', 'mediaEditReviewFrameReview');
+			$error = i18n::get('global', 'error_title');
+			$this->mediaEditReviewFrameReview->set_markup("<span foreground='#aa0000'><b>".$label." (".$error.")</b></span>");
+			$errorString = i18n::get('metaEdit', 'mEditUserWrongCharacters');
+			$this->media_edit_help->set_markup("<span foreground='#aa0000'><b>$errorString</b></span>");
+			$this->mediaEditTabRating->set_markup('<b><span foreground="#aa0000">'.i18n::get('metaEdit', 'mediaEditTabRating').'</span></b>');
+			$this->media_edit_help->set_visible(true);
+			$error = true;
+		}
+		
+		$mEditUserPersonalNotes = '';
+		try {
+			$mEditUserPersonalNotesBuffer = $this->mEditUserPersonalNotes->get_buffer();
+			$mEditUserPersonalNotes = $mEditUserPersonalNotesBuffer->get_text($mEditUserPersonalNotesBuffer->get_start_iter(), $mEditUserPersonalNotesBuffer->get_end_iter());
+		}
+		catch(PhpGtkGErrorException $e) {
+			$label = i18n::get('metaEdit', 'mediaEditPersonalFrameNotes');
+			$error = i18n::get('global', 'error_title');
+			$this->mediaEditPersonalFrameNotes->set_markup("<span foreground='#aa0000'><b>".$label." (".$error.")</b></span>");
+			$errorString = i18n::get('metaEdit', 'mEditUserWrongCharacters');
+			$this->media_edit_help->set_markup("<span foreground='#aa0000'><b>$errorString</b></span>");
+			$this->mediaEditTabPersonal->set_markup('<b><span foreground="#aa0000">'.i18n::get('metaEdit', 'mediaEditTabPersonal').'</span></b>');
+			$this->media_edit_help->set_visible(true);
+			$error = true;
+		};
+		
+		if($error) {
+			return false;
+		}
+		
 		$rating_fun = $this->mEditUserRatingFunScale->get_value();
 		$rating_gameplay = $this->mEditUserRatingGameplayScale->get_value();
 		$rating_graphics = $this->mEditUserRatingGraphicsScale->get_value();
@@ -5124,11 +5270,11 @@ class App extends GladeXml {
 			'rating_music' => $rating_music,
 			'difficulty' => $this->mEditUserRatingDifficultyScale->get_value(),
 			# review
-			'review_title' => $this->mEditUserReviewTitle->get_text(),
+			'review_title' => $romReviewTitle,
 			'review_body' => $mEditUserReviewBody,
 			'review_export_allowed' => (int)$this->mEditUserReviewExportAllow->get_active(),
 			# personal tab
-			'hiscore' => $this->mEditUserPersonalHiscores->get_text(),
+			'hiscore' => $romHiscore,
 			'notes' => $mEditUserPersonalNotes,
 		);
 		FACTORY::get('manager/UserData')->updateFullUserData($userData);
@@ -5146,14 +5292,14 @@ class App extends GladeXml {
 		// METADATA
 		
 		$romMeta->setExtension($romFile->getRomExtension());
-		$romMeta->setName(trim(str_replace(';', '', $this->media_edit_title->get_text())));
-		$romMeta->setYear(trim(str_replace(';', '', $this->cbe_year->get_text())));
-		$romMeta->setUsk(trim(str_replace(';', '', $this->cbe_usk->get_text())));
-		$romMeta->setDeveloper(trim(str_replace(';', '', $this->cbe_creator->get_text())));
-		$romMeta->setPublisher(trim(str_replace(';', '', $this->cbe_publisher->get_text())));
-		$romMeta->setProgrammer(trim(str_replace(';', '', $this->cbe_programmer->get_text())));
-		$romMeta->setMusican(trim(str_replace(';', '', $this->cbe_musican->get_text())));
-		$romMeta->setGraphics(trim(str_replace(';', '', $this->cbe_graphics->get_text())));
+		$romMeta->setName(trim(str_replace(';', '', $romTitle)));
+		$romMeta->setYear(trim(str_replace(';', '', $romYear)));
+		$romMeta->setUsk(trim(str_replace(';', '', $romUsk)));
+		$romMeta->setDeveloper(trim(str_replace(';', '', $romCreator)));
+		$romMeta->setPublisher(trim(str_replace(';', '', $romPublisher)));
+		$romMeta->setProgrammer(trim(str_replace(';', '', $romProgrammer)));
+		$romMeta->setMusican(trim(str_replace(';', '', $romMusican)));
+		$romMeta->setGraphics(trim(str_replace(';', '', $romGraphics)));
 		
 		$romMeta->setRunning($this->get_dropdown_bool($this->metaEditFeatureGoodDumpDropdown->get_active()));
 		$romMeta->setBugs($this->get_dropdown_bool($this->metaEditFeatureBugsDropdown->get_active()));
@@ -5172,8 +5318,8 @@ class App extends GladeXml {
 		$romMeta->setCategory(FACTORY::get('manager/IndexedCombo')->getKey($this->cbe_category));
 
 		// Info string and id
-		$romMeta->setInfo(trim(str_replace(";", "", $this->media_edit_info->get_text())));
-		$romMeta->setInfo_id(trim(str_replace(";", "", $this->media_edit_info_id->get_text())));
+		$romMeta->setInfo(trim(str_replace(";", "", $romInfoString)));
+		$romMeta->setInfo_id(trim(str_replace(";", "", $romInfoId)));
 		
 		// selected languages
 		$this->languages_get_selected_array = array();
@@ -5181,8 +5327,12 @@ class App extends GladeXml {
 		$romMeta->setLanguages($this->languages_get_selected_array); 
 
 		$romMeta->setMedia_type($this->cb_media_type->get_active());
-		$romMeta->setMedia_current($this->cbe_media_current->get_text());
-		$romMeta->setMedia_count($this->cbe_media_count->get_text());
+		$romMeta->setMedia_current($romMediaCurrent);
+		$romMeta->setMedia_count($romMediaCount);
+		
+//		echo '<pre>';
+//		print_r($romMeta);
+//		echo '</pre>';
 		
 		// HANDLE ERRORS
 		
@@ -5210,10 +5360,8 @@ class App extends GladeXml {
 		}
 
 		// check original and new checksum!
-		$modified = !($romMeta->getChecksum() == $preChecksum);
-		
-		//print "Modified: ".(int)$modified." | ".$preChecksum." -> ".$romMeta->getChecksum()."\n";
-
+		//$modified = !($romMeta->getChecksum() == $preChecksum);
+		$modified = true;
 		if($modified){
 			// store this rom meta, if data is modified!
 			$romMapper = FACTORY::get('manager/RomMapper');
@@ -5243,6 +5391,21 @@ class App extends GladeXml {
 		return true;
 	}
 	
+	private function tryToGetText($textWidget, $fieldWidget, $fieldLabel, $tabWidget, $tabLabel, $errorLabel) {
+		
+		try{
+			return $textWidget->get_text();
+		}
+		catch(PhpGtkGErrorException $e){
+			$error = i18n::get('global', 'error_title');
+			$this->$tabWidget->set_markup("<span foreground='#aa0000'><b>".$tabLabel." (".$error.")</b></span>");
+			$this->media_edit_help->set_markup("<span foreground='#aa0000'><b>$errorLabel</b></span>");
+			$this->$fieldWidget->set_markup('<b><span foreground="#aa0000">'.$fieldLabel.'</span></b>');
+			$this->media_edit_help->set_visible(true);
+			return false;
+		}
+	}
+	
 	/**
 	 * Hide the meta edit popup
 	 * 
@@ -5270,9 +5433,9 @@ class App extends GladeXml {
 		if(!$rom) return false;
 		$romMeta = $rom->getRomMeta();
 
-		$romMeta->$method($this->get_dropdown_bool($value));
-//		if($dontUseBool) $romMeta->$method($value);
 //		$romMeta->$method($this->get_dropdown_bool($value));
+		if($dontUseBool) $romMeta->$method($value);
+		else $romMeta->$method($this->get_dropdown_bool($value));
 		
 		$romMapper = FACTORY::get('manager/RomMapper');
 		$romMapper->storeRomMeta($rom);
@@ -6839,6 +7002,7 @@ class App extends GladeXml {
 		$mngrValidator = FACTORY::get('manager/Validator');
 		$this->ecc_release = $mngrValidator->getEccCoreKey('ecc_release');
 		$this->user_path_subfolder_default = $mngrValidator->getEccCoreKey('user_path_subfolder_default');
+		$this->rom_path_subfolder = $mngrValidator->getEccCoreKey('rom_path_subfolder');
 		$this->supported_images = $mngrValidator->getEccCoreKey('supported_images');
 		$this->cbox_yesno = $mngrValidator->getEccCoreKey('cbox_yesno');
 		$this->image_type = $mngrValidator->getEccCoreKey('image_type');
@@ -6900,7 +7064,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 	 *
 	 */
 	public function onlineEccRomdbShowWebInfo(Rom $rom) {
-		$url = $this->eccdb['META_GET_URL'].'?mid='.$rom->getSystemIdent().'.'.$rom->getCrc32();
+		$url = $this->eccdb['META_GET_URL'].'?gameident='.$rom->getSystemIdent().'|'.$rom->getCrc32();
 		FACTORY::get('manager/Os')->executeProgramDirect($url, 'open');
 	}
 
@@ -6938,7 +7102,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 	/**
 	 * Opens the imageCenter
-	 * If there isnÂ´t a rom selected, click opens the ecc website! (if $openWebsite == true)
+	 * If there isn´t a rom selected, click opens the ecc website! (if $openWebsite == true)
 	 *
 	 * @param boolean $onlyShowIfOpened true, if popup should be updated on the fly
 	 * @param boolean $openWebsite true opens ecc website on click, if no rom is selected
@@ -7450,15 +7614,18 @@ current_build="'.$this->ecc_release['release_build'].'"
 		# ESEARCH
 		$this->iPaneEsearchHeadlineLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHeadlineLbl').':</b>');
 		$this->iPaneEsearchIntroTxt->set_text(I18N::get('infoPane', 'iPaneEsearchIntroTxt'));
-		$this->iPaneEsearchOptRunningLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptRunningLbl').':</b>');
-		$this->iPaneEsearchOptMultiplayLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptMultiplayLbl').':</b>');
-		$this->iPaneEsearchOptFreewareLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptFreewareLbl').':</b>');
-		$this->iPaneEsearchOptTrainerLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptTrainerLbl').':</b>');		
-		$this->iPaneEsearchOptIntroLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptIntroLbl').':</b>');
-		$this->iPaneEsearchOptBugsLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptBugsLbl').':</b>');
-		$this->iPaneEsearchOptUsermodLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptUsermodLbl').':</b>');
-		$this->iPaneEsearchOptNetplayLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptNetplayLbl').':</b>');
-		$this->iPaneEsearchOptResetBtn->set_markup(' <b>'.I18N::get('infoPane', 'iPaneEsearchOptResetBtn').'</b>');
+		
+		$this->setSpanMarkup($this->iPaneEsearchOptRunningLbl, I18N::get('infoPane', 'iPaneEsearchOptRunningLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptMultiplayLbl, I18N::get('infoPane', 'iPaneEsearchOptMultiplayLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptFreewareLbl, I18N::get('infoPane', 'iPaneEsearchOptFreewareLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptTrainerLbl, I18N::get('infoPane', 'iPaneEsearchOptTrainerLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptIntroLbl, I18N::get('infoPane', 'iPaneEsearchOptIntroLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptBugsLbl, I18N::get('infoPane', 'iPaneEsearchOptBugsLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptUsermodLbl, I18N::get('infoPane', 'iPaneEsearchOptUsermodLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptNetplayLbl, I18N::get('infoPane', 'iPaneEsearchOptNetplayLbl'), false, 'b', false);
+		$this->setSpanMarkup($this->iPaneEsearchOptDumpTypeLbl, I18N::get('infoPane', 'iPaneEsearchOptDumpTypeLbl'), false, 'b', false);
+		
+		$this->iPaneEsearchOptResetBtn->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptResetBtn').':</b>');
 		$this->iPaneEsearchHelpLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHelpLbl').':</b>');
 		
 		# DATA

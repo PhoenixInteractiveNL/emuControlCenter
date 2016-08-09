@@ -55,7 +55,7 @@ $i18n['meta'] = array(
 	'lbl_trainer' =>
 		"Trainer",
 	'lbl_intro' =>
-		"Intro",
+		"Crack/Intro",
 	'lbl_usermod' =>
 		"Modificatie",
 	'lbl_freeware' =>
@@ -125,5 +125,7 @@ $i18n['dropdownDumpType'] = array(
 		"[o] Overdump",
 	'[p]' =>
 		"[p] Piraat",
+	'[cr]' =>
+		"[cr] Cracked",
 );
 ?>

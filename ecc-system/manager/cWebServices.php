@@ -269,6 +269,7 @@ class WebServices {
 		md.region as md_region,
 		md.cdate as md_cdate,
 		md.uexport as md_uexport,
+		md.dump_type as md_dump_type,
 		fd.id as id,
 		fd.title as title,
 		fd.path as path,

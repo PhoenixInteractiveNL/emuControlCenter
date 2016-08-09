@@ -1,9 +1,9 @@
-v1.0.0.2
-- Added '$eccScriptParamsFile' to locate the config file for a amiga game. (TheCyberDruid)
+v1.0.0.6
+- Added 3rdparty variables.
+- made variables GLOBAL, so you can use these in functions inside your scripts.
 
-v1.0.0.3
-- Added '$eccEmuUseCueFile' to see if the 'use CUE file' option is selected
-- Added CUE handler, changes the file extension to CUE when CUE option is selected.
+v1.0.0.5
+- Added '$eccScriptParamsFile' to locate the config file for a x68000 game. (Pacogf)
 
 v1.0.0.4
 - Added '$eccFileRomFileExtension' to give the real extension (if the file is zipped)
@@ -14,5 +14,9 @@ v1.0.0.4
 - Added ZIP support, where mouting happens from the temporally unpack folder.
 - Added strings for fileextensions, so you can see what daemontools is mouting.
 
-v1.0.0.5
-- Added '$eccScriptParamsFile' to locate the config file for a x68000 game. (Pacogf)
+v1.0.0.3
+- Added '$eccEmuUseCueFile' to see if the 'use CUE file' option is selected
+- Added CUE handler, changes the file extension to CUE when CUE option is selected.
+
+v1.0.0.2
+- Added '$eccScriptParamsFile' to locate the config file for a amiga game. (TheCyberDruid)

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="Windows-1256" ?>
+<NotepadPlus>
+	<Native-Langue name = "Farsi" RTL = "yes">
+		<Menu>
+			<Main>
+                <!-- Main Menu Entries -->
+				<Entries>
+					<Item id = "0" name = "پرونده"/>
+					<Item id = "1" name = "ويرايش"/>
+					<Item id = "2" name = "جستجو"/>
+					<Item id = "3" name = "نمايش"/>
+					<Item id = "4" name = "فرمت"/>
+					<Item id = "5" name = "زبان"/>
+					<Item id = "6" name = "تنظيمات"/>
+				</Entries>
+             
+                <!-- Sub Menu Entries -->
+                <SubEntries>
+                    <Item posX = "3" posY = "20" name = "فروريزي سطح"/>
+                    <Item posX = "3" posY = "21" name = "فراگيري سطح"/>
+                </SubEntries>
+                
+                <!-- all menu item -->
+                <Commands>
+                    <Item id = "41001" name = "جديد	Ctrl+N"/>
+                    <Item id = "41002" name = "باز کن	Ctrl+O"/>
+                    <Item id = "41003" name = "ببند	Ctrl+F4, Ctrl+W"/>
+                    <Item id = "41004" name = "همه را ببند"/>
+                    <Item id = "41005" name = "همه را بجز سند جاري ببند"/>
+                    <Item id = "41006" name = "ذخيره کن	Ctrl+S"/>
+                    <Item id = "41007" name = "همه را ذخيره کن	Ctrl+Shift+S"/>
+                    <Item id = "41008" name = "ذخيره کن با عنوان..."/>
+                    <Item id = "41010" name = "چاپ کن...	Ctrl+P"/>
+                    <Item id = "41011" name = "خارج شو"/>
+                    
+                    <Item id = "42001" name = "ببر	Ctrl+X"/>
+                    <Item id = "42002" name = "بردار	Ctrl+C"/>
+                    <Item id = "42003" name = "برگرد	Ctrl+Z"/>
+                    <Item id = "42004" name = "درباره بکن	Ctrl+Y"/>
+                    <Item id = "42005" name = "بچسبان	Ctrl+V"/>
+                    <Item id = "42006" name = "حذف کن	Del"/>
+                    <Item id = "42007" name = "همه را انتخاب کن	Ctrl+A"/>
+                    <Item id = "42008" name = "يک Tab وارد کن (لبه بده)	TAB"/>
+                    <Item id = "42009" name = "Tab را حذف کن (لبه را بردار)	Shift+TAB"/>
+                    <Item id = "42010" name = "سطر جاري را دوچندان کن	Ctrl+D"/>
+                    <Item id = "42011" name = "سطر جاري را برگردان	Ctrl+T"/>
+                    <Item id = "42012" name = "سطرها را جدا کن	Ctrl+I"/>
+                    <Item id = "42013" name = "سطرها را به هم ملحق کن	Ctrl+J"/>
+                    <Item id = "42014" name = "سطر جاري را بالا ببر	Ctrl+Shift+Up"/>   
+                    <Item id = "42015" name = "سطر جاري را پايين ببر	Ctrl+Shift+Down"/>   
+				<Item id = "42016" name = "به حروف بزرگ تبديل کن	Ctrl+Shift+U"/>
+                    <Item id = "42017" name = "به حروف کوچک تبديل کن	Ctrl+U"/>
+                    <Item id = "42018" name = "ضبط را آغاز کن	Ctrl+Shift+R"/>
+                    <Item id = "42019" name = "ضبط را پايان بده	Ctrl+Shift+R"/>
+                    <Item id = "42021" name = "بازنما	Ctrl+Shift+P"/>
+                    
+                    <Item id = "43001" name = "بياب...	Ctrl+F"/>
+                    <Item id = "43002" name = "بعدي را بياب	F3"/>
+                    <Item id = "43003" name = "جايگزين کن...	Ctrl+H"/>
+                    <Item id = "43004" name = "برو به سطر...	Ctrl+G"/>
+                    <Item id = "43005" name = "چوب الف را تبديل کن	Ctrl+F2"/>
+                    <Item id = "43006" name = "چوب الف بعدي	F2"/>
+                    <Item id = "43007" name = "چوب الف قبلي	Shift+F2"/>
+                    <Item id = "43008" name = "همه چوب الف ها را پاک کن"/>
+                    <Item id = "43009" name = "به ابروي متناظر برو	Ctrl+B"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "44010" name = "همه را تا کن"/>
+                    <Item id = "44011" name = "جعبه محاوره دلخواه کاربر"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "44019" name = "تمامي کاراکترها را نمايش بده"/>
+                    <Item id = "44020" name = "راهنماي لبه‌گذاري را نمايش بده"/>
+                    
+                    <Item id = "44022" name = "بپيچان"/>
+                    <Item id = "44023" name = "بزرگ نما	Ctrl-Mouse Wheel Up"/>
+                    <Item id = "44024" name = "کوچک نما	Ctrl-Mouse Wheel Down"/>
+                    <Item id = "44025" name = "TAB و فاصله خالي را نمايش بده"/>
+                    <Item id = "44026" name = "پايان سطر را نمايش بده"/>
+                    
+                    
+  					<Item id = "44029" name = "همه را ناتا کن"/>
+					<Item id = "44030" name = "سطر جاري را فروبريز	Ctrl+Alt+F"/>
+					<Item id = "44031" name = "سطر جاري را فرابگير	Ctrl+Alt+Shift+F"/>
+					<Item id = "44032" name = "حالت تمام صفحه را تبديل کن	F11"/>
+					
+                    <Item id = "45001" name = "به فرمت Windows تبديل کن"/>
+                    <Item id = "45002" name = "به فرمت UNIX تبديل کن"/>
+                    <Item id = "45003" name = "به حالت MAC تبديل کن"/>
+                    <Item id = "45004" name = "به ANSI رمزگذاري کن"/>
+                    <Item id = "45005" name = "به UTF-8 رمزگزاري کن"/>
+                    <Item id = "45006" name = "به UCS-2 Big Endian رمزگذاري کن"/>
+                    <Item id = "45007" name = "به UCS-2 Little Endian رمزگذاري کن"/>
+                    <Item id = "45008" name = "با UTF-8 نمايش بده"/>
+                    
+                    <Item id = "10001" name = "به نماي ديگري برو"/>
+                    <Item id = "10002" name = "مانند نماي ديگري همانندسازي کن"/>
+                    
+                    <Item id = "46001" name = "تنظيم  فرم دهنده..."/>
+                    <Item id = "47000" name = "درباره...	F1"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "49000" name = "اجرا کن..."/>
+                </Commands>
+			</Main>
+			<Splitter>
+			</Splitter>
+            <TabBar>
+                	<Item order = "0" name = "مرا ببند"/>
+					<Item order = "1" name = "همه را جز من ببند"/>
+					<Item order = "2" name = "مرا ذخيره کن"/>
+					<Item order = "3" name = "مرا ذخيره کن به عنوان..."/>
+					<Item order = "4" name = "چاپم کن"/>
+					<Item order = "5" name = "به نماي ديگري برو"/>
+					<Item order = "6" name = "مانند نماي ديگري همانند سازي کن"/>
+			</TabBar>
+		</Menu>
+		
+		<Dialog>
+            <Find title = "بياب...">
+                <Item id = "1" name = "بعدي را بياب"/>
+                <Item id = "2" name = "ببند"/>
+                <Item id = "1620" name = "پيدا کن :"/>
+                <Item id = "1603" name = "تمام کلمه رامقايسه کن"/>
+                <Item id = "1604" name = "اندازه حروف را جدي بگير"/>
+                <Item id = "1605" name = "عبارت معمولي"/>
+                <Item id = "1606" name = "به دور و بر تا کن"/>
+                <Item id = "1612" name = "بالا"/>
+                <Item id = "1613" name = "پايين"/>
+                <Item id = "1614" name = "بشمر"/>
+                <Item id = "1615" name = "همه را بياب"/>
+                <Item id = "1616" name = "خط را علامت بزن"/>
+                <Item id = "1617" name = "علامت يابنده سبک"/>
+                <Item id = "1618" name = "براي هر جستجو، خالي شو"/>
+                <Item id = "1621" name = "جهت"/>
+                <Item id = "1611" name = "جايگزين کن با :"/>
+                <Item id = "1608" name = "جايگزين کن"/>
+                <Item id = "1609" name = "همه را جايگزين کن"/>
+			 	<Item id = "1623" name = "شفافيت"/>
+            </Find>
+            <GoToLine title = "برو به خط #">
+                <Item id = "1" name = "برو !"/>
+                <Item id = "2" name = "به هيچ جا نمي روم"/>
+                <Item id = "2004" name = "شما اينجاييد :"/>
+                <Item id = "2005" name = "مي‌خواهيد اينجا برويد :"/>
+                <Item id = "2006" name = "شما نمي‌توانيد از اينجا جلوتر برويد :"/>
+            </GoToLine>
+
+            <Run title = "اجرا کن...">
+                <Item id = "1903" name = "برنامه خود را اينجا تايپ کنيد تا اجرا شود"/>
+                <Item id = "1" name = "اجر کن!"/>
+                <Item id = "2" name = "لغو کن"/>
+            </Run>
+            
+            <StyleConfig title = "تنظيم کننده سبک">
+				<Item id = "1" name = "امتحان کن!"/>
+				<Item id = "2" name = "لغو کن"/>
+				<Item id = "2301" name = "ذخيره کن و ببند"/>
+				<Item id = "2303" name = "شفافيت"/>		
+				
+                <SubDialog>
+                	<Item id = "2204" name = "پررنگ"/>
+                    <Item id = "2205" name = "کج"/>
+                    <Item id = "2206" name = "رنگ رونما"/>
+                    <Item id = "2207" name = "رنگ زمينه"/>
+                    <Item id = "2208" name = "نام قلم :"/>
+                    <Item id = "2209" name = "اندازه قلم :"/>
+                    <Item id = "2210" name = "توجه: تعريف اين سبک، براي تمامي سبکهاي بدون تعريف پيشفرض خواهد شد"/>
+                    <Item id = "2211" name = "توضيح سبک :"/>
+                    <Item id = "2212" name = "سبک رنگ"/>
+                    <Item id = "2213" name = "سبک قلم"/>
+                    <Item id = "2214" name = "پسوند پيشفرض :"/>
+                    <Item id = "2216" name = "پسوند کاربر :"/>
+                    <Item id = "2218" name = "زيرخط‌دار"/>
+                    <Item id = "2219" name = "کلمات کليدي پيش‌فرض"/>
+                    <Item id = "2221" name = "کلمات کليدي کاربر"/>
+                </SubDialog>
+				
+            </StyleConfig>
+            
+            <UserDefine title = "تنظيمات کاربر">
+				<Item id = "20002" name = "تغيير نام بده"/>
+				<Item id = "20003" name = "جديد ايجاد کن..."/>
+				<Item id = "20004" name = "حذف کن"/>
+				<Item id = "20005" name = "ذخيره کن به عنوان..."/>
+				<Item id = "20007" name = "زبان کاربر : "/>
+				<Item id = "20009" name = "پسوند :"/>
+				<Item id = "20012" name = "به اندازه حروف توجه نکن"/>
+				<Item id = "20011" name = "شفافيت"/>
+				<Item id = "0" name = "سبک رنگ"/>
+				<Item id = "1" name = "رنگ پيش زمينه"/>
+				<Item id = "2" name = "رنگ زمينه"/>
+				<Item id = "3" name = "سبک قلم"/>
+				<Item id = "4" name = "نام قلم :"/>
+				<Item id = "5" name = "اندازه قلم :"/>
+				<Item id = "6" name = "توپر"/>
+				<Item id = "7" name = "کج"/>
+				<Item id = "8" name = "زيرخط‌دار"/>
+                <Folder title = "تاکننده و پيشفرض">
+					<Item id = "21101" name = "تنظيم سبک پيشفرض"/>
+					<Item id = "21201" name = "تنظيم بازکننده تاکن"/>
+					<Item id = "21301" name = "تنظيم پايان تاکن"/>
+                </Folder>
+                <Keywords title = "فهرستهاي کلمات کليدي">
+					<Item id = "22101" name = "گروه اول"/>
+					<Item id = "22201" name = "گروه دوم"/>
+					<Item id = "22301" name = "گروه سوم"/>
+					<Item id = "22401" name = "گروه چهارم"/>
+					<Item id = "22113" name = "حالت پيشوندي"/>
+					<Item id = "22213" name = "حالت پيشوندي"/>
+					<Item id = "22313" name = "حالت پيشوندي"/>
+					<Item id = "22413" name = "حالت پيشوندي"/>
+                </Keywords>
+                <Comment title = "توضيحات و اعداد">
+					<Item id = "23301" name = "توضيح خطي"/>
+					<Item id = "23101" name = "بلوک توضيحي"/>
+					<Item id = "23113" name = "بازکننده توضيح :"/>
+					<Item id = "23115" name = "پايان دهنده توضيح :"/>
+					<Item id = "23116" name = "با کلمه کليدي مانند سمبل رفتار کن"/>
+					<Item id = "23117" name = "با کلمات کليدي مانند سمبل رفتار کن"/>
+					<Item id = "23201" name = "عدد"/>
+                </Comment>
+                <Operator title = "عملوندها">
+					<Item id = "24107" name = "عملوند"/>
+					<Item id = "24103" name = "سمبلهاي در دسترس"/>
+					<Item id = "24101" name = "عملوندهاي فعال شده"/>
+					<Item id = "24201" name = "جداکننده 1"/>
+					<Item id = "24211" name = "بازکننده مرز :"/>
+					<Item id = "24214" name = "پايان دهنده مرز :"/>
+					<Item id = "24301" name = "جداکننده 2"/>
+					<Item id = "24311" name = "بازکننده مرز :"/>
+					<Item id = "24314" name = "پايان دهنده مرز :"/>
+                </Operator>
+            </UserDefine>
+		</Dialog>
+    </Native-Langue>
+</NotepadPlus>

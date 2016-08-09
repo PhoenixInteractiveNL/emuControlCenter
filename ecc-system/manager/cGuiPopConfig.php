@@ -132,6 +132,8 @@ class GuiPopConfig extends GladeXml {
 		$this->cfgNotepad->connect('switch-page', array($this, 'onChangeTab'));
 		
 		$this->emuAssignGlobalEditEccScript->connect_simple_after('clicked', array($this, 'openEccScriptEditor'));
+		$this->emuAssignGlobalEccScriptOptions->connect_simple_after('clicked', array($this, 'openEccScriptOptions'));
+		$this->emuAssignGlobalEccScriptRefresh->connect_simple_after('clicked', array($this, 'updateEccScriptState'));
 		$this->emuAssignGlobalDeleteEccScript->connect_simple_after('clicked', array($this, 'deleteEccScript'));
 		$this->emuAssignGlobalEnableEccScript->connect_simple_after('toggled', array($this, 'updateEccScriptState'));
 		
@@ -165,6 +167,8 @@ class GuiPopConfig extends GladeXml {
 		
 		$this->emuAssignLabelEccScript->set_markup('<b>'.I18N::get('popupConfig', 'lbl_emu_assign_use_eccscript').'</b>');
 		$this->emuAssignGlobalEditEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_create_eccscript'));
+		$this->emuAssignGlobalEccScriptOptions->set_label(I18N::get('popupConfig', 'emuAssignGlobalEccScriptOptions'));
+		$this->emuAssignGlobalEccScriptRefresh->set_label(I18N::get('popupConfig', 'lbl_emu_assign_refresh_eccscript'));
 		$this->emuAssignGlobalDeleteEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_delete_eccscript'));
 		$this->emuAssignGlobalEnableEccScript->set_label(I18N::get('popupConfig', 'emuAssignGlobalEnableEccScript'));
 		
@@ -362,15 +366,52 @@ class GuiPopConfig extends GladeXml {
 	}
 	
 	public function openEccScriptEditor(){
+		
 		$path = realpath($this->emuAssignGlobalPath->get_text());
 		if ($path){
 			$mngrValidator = FACTORY::get('manager/Validator');
 			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
 			
 			$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($path).$eccLoc['ECC_SCRIPT_EXTENSION'];
-			if(!is_dir(dirname($eccScriptFile))) mkdir(dirname($eccScriptFile));
+			if(!is_dir(dirname($eccScriptFile))) {
+				mkdir(dirname($eccScriptFile));
+			}
+			
+			if (!file_exists($eccScriptFile)) {
+				$this->emuAssignGlobalEccScriptRefresh->set_sensitive(true);
+				$this->emuAssignGlobalEditEccScript->set_sensitive(false);
+				
+				$eccScriptTemplateFile = '../ecc-script/eccScriptTemplate.eccscript';
+				if (file_exists($eccScriptTemplateFile)) {
+					$eccScriptTemplate = file_get_contents($eccScriptTemplateFile);
+					file_put_contents($eccScriptFile, $eccScriptTemplate);					
+				}
+			}
 
 			FACTORY::get('manager/Os')->executeProgramDirect(ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.$eccScriptFile.'"');
+			
+		}
+		elseif(!trim($path)) {
+			FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
+		}
+		else {
+			FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error_notfound'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
+		}
+	}
+	
+	public function openEccScriptOptions(){
+		$path = realpath($this->emuAssignGlobalPath->get_text());
+		if ($path){
+			$mngrValidator = FACTORY::get('manager/Validator');
+			$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
+			$eccScriptFile = '../ecc-script/'.$this->selectedEccident.'/'.FACTORY::get('manager/FileIO')->get_plain_filename($path).$eccLoc['ECC_SCRIPT_EXTENSION'];
+			if (!file_exists($eccScriptFile)) return false;
+			
+			print 'execute: '.ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT']."\n";
+			print 'eccScriptFile: '.$eccScriptFile."\n";
+			
+			#FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../../ecc.exe', 'open', '/fastload');
+			FACTORY::get('manager/Os')->executeProgramDirect(ECC_DIR.'/'.$eccLoc['ECC_EXE_SCRIPT'], 'open', '"'.$eccScriptFile.'" /fastload');
 
 		}
 		elseif(!trim($path)) FACTORY::get('manager/Gui')->openDialogInfo('ERROR', I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript_error'), false, FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_mbox_error.png', true));
@@ -411,16 +452,25 @@ class GuiPopConfig extends GladeXml {
 	}
 	
 	public function updateEccScriptState(){
+		
 		$state = $this->emuAssignGlobalEnableEccScript->get_active();
+		
 		$this->emuAssignLabelEccScript->set_sensitive($state);
+		
+		$this->emuAssignGlobalEditEccScript->set_visible(true);
 		$this->emuAssignGlobalEditEccScript->set_sensitive($state);
-		$this->emuAssignGlobalDeleteEccScript->set_sensitive($state);
+		
+		$this->emuAssignGlobalDeleteEccScript->set_sensitive(false);
+		$this->emuAssignGlobalEccScriptOptions->set_sensitive(false);
+		
+		$this->emuAssignGlobalEccScriptRefresh->set_sensitive(false);
 		
 		$this->emuAssignGlobalEditEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_create_eccscript'));
-		$this->emuAssignGlobalDeleteEccScript->hide();
+	
 		if ($this->eccScriptExists($this->emuAssignGlobalPath->get_text())) {
 			$this->emuAssignGlobalEditEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_edit_eccscript'));
-			$this->emuAssignGlobalDeleteEccScript->show();
+			$this->emuAssignGlobalDeleteEccScript->set_sensitive($state);
+			$this->emuAssignGlobalEccScriptOptions->set_sensitive($state);
 		}
 	}
 

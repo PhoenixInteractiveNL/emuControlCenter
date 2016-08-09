@@ -19,7 +19,7 @@ $i18n['dropdown_meta_storage'] = array(
 	'[[not_memory_card]]' =>
 		"Memory card",
 	'[[on_harddrive]]' =>
-		"Harddrive",
+		"Harddrive / Floppy",
 );
 $i18n['dropdown_search_fields'] = array(
 	'[[name]]' =>

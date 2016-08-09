@@ -1,0 +1,17 @@
+v1.0.0.4 (Phoenix)
+- Removed ZIP checking due to Arcade import of ECC
+
+v1.0.0.3 (Phoenix)
+- Added 'exit' after ZIP checking.
+- Made use of 3rdparty variables.
+- Removed 7z support due to Arcade import of ECC
+
+v1.0.0.2 (Phoenix)
+- Added 7Z support and notes for 7Z commands.
+- Added handler if 'meta-info ID' field is not filled in.
+- Changed If-Then layout (better overview).
+
+v1.0.0.1 (DerMicha75)
+- added more notes
+- changed the unpack folder to be equal to normal auto unzip behavior.
+- changed the command line to the field ID ($eccFileRomNamePlain was not correct).

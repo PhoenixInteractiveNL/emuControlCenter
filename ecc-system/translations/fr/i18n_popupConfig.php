@@ -341,5 +341,12 @@ $i18n['popupConfig'] = array(
 		"Third Party",
 	'startConfThirdPartyXpadder' =>
 		"Start 'xpadder' at startup",
+
+    /* 0.9.9. WIP 06 */
+	'emuAssignGlobalEccScriptOptions' =>
+		"Options",
+	'lbl_emu_assign_refresh_eccscript' =>
+		"Refresh",
+
 );
 ?>

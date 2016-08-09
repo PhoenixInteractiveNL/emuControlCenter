@@ -22,6 +22,8 @@ class TreeviewData {
 	# search parameter
 	private $searchMameDriver = false;
 	
+	private $dumpType;
+	
 	private $sqlFields = '
 		UPPER(CASE WHEN md.name ISNULL THEN fd.title ELSE (CASE WHEN md.media_current ISNULL THEN md.name ELSE md.name||md.media_current END) END) as orderByThis,
 		md.crc32 as md_crc32,
@@ -120,6 +122,14 @@ class TreeviewData {
 		return $this->showOnlyDisk;
 	}		
 	
+	public function setDumpType($dumpType){
+		$this->dumpType = $dumpType;
+	}
+	public function getDumpType(){
+		return $this->dumpType;
+	}		
+	
+	
 	
 	/* ------------------------------------------------------------------------
 	* VERSION TO GET ALSO META-DATA, IF THERE IS NO FOUND GAME
@@ -192,7 +202,7 @@ class TreeviewData {
 		$discCondition = $this->getShowOnlyDisk();
 		if($discCondition){
 			if($discCondition == 'one_plus'){
-				$snip_where[] = '(md.media_current = 1 OR md.media_current IS NULL)';
+				$snip_where[] = '(md.media_current = 1 OR md.media_current IS NULL OR md.media_current = \'\')';
 			}
 			else{
 				# only disk 1

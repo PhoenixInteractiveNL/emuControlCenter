@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-1
-	description "CPS-1 20081018"
+	description "CPS-1 20090105"
 	category "Capcom Play System 1"
-	version 20081018
-	date 2008-10-18
+	version 20090106
+	date 2009-01-06
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -49,9 +49,9 @@ game (
 	cloneof forgottn
 	romof forgottn
 	rom ( name lw_11.12f size 131072 crc 73e920b7 sha1 2df12fc1a66f488d06b0927db909da81466d7d07 )
-	rom ( name lw_15 size 131072 flags nodump )
-	rom ( name lw_10 size 131072 flags nodump )
-	rom ( name lw_14 size 131072 flags nodump )
+	rom ( name lw_15.12h size 131072 flags nodump )
+	rom ( name lw_10.13f size 131072 flags nodump )
+	rom ( name lw_14.13h size 131072 flags nodump )
 	rom ( name lw-07.10g size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
 	rom ( name lw_2.2b size 131072 crc 4bd75fee sha1 c27bfba951a0dc4f493937ceca335c50a1afeddf )
 	rom ( name lw_1.2a size 131072 crc 65f41485 sha1 fb05dffc87ee2f2b1b6646d54b13671f8eee0429 )
@@ -81,6 +81,8 @@ game (
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
 	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
 	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+	rom ( name lw621.1a size 279 crc 5eec6ce9 sha1 5ec8b60f1f1bdba865b1fa2387987ce99ff4093a )
+	rom ( name lwio.12b size 279 crc ad52b90c sha1 f0fd6aeea515ee449320fe15684e6b3ab7f97bf4 )
 )
 
 game (
@@ -2792,6 +2794,34 @@ game (
 )
 
 game (
+	name sf2rb3
+	description "Street Fighter II' - Champion Edition (Rainbow set 3, bootleg)"
+	year 1992
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof sf2ce
+	romof sf2ce
+	rom ( name sf2_ce_rb.23 size 524288 crc 202f9e50 sha1 8f0259ade1bc4df65abf4ad0961db24ca27e3f4b )
+	rom ( name sf2_ce_rb.22 size 524288 crc 145e5219 sha1 0b1251ad817a395f37f6c9acee393c3fce07777a )
+	rom ( name s92_21a.bin merge s92_21a.bin size 524288 crc 925a7877 sha1 1960dca35f0ca6f2b399a9fccfbc0132ac6425d1 )
+	rom ( name s92_01.bin merge s92_01.bin size 524288 crc 03b0d852 sha1 f370f25c96ad2b94f8c53d6b7139100285a25bef )
+	rom ( name s92_02.bin merge s92_02.bin size 524288 crc 840289ec sha1 2fb42a242f60ba7e74009b5a90eb26e035ba1e82 )
+	rom ( name s92_03.bin merge s92_03.bin size 524288 crc cdb5f027 sha1 4c7d944fef200fdfcaf57758b901b5511188ed2e )
+	rom ( name s92_04.bin merge s92_04.bin size 524288 crc e2799472 sha1 27d3796429338d82a8de246a0ea06dd487a87768 )
+	rom ( name s92_05.bin merge s92_05.bin size 524288 crc ba8a2761 sha1 4b696d66c51611e43522bed752654314e76d33b6 )
+	rom ( name s92_06.bin merge s92_06.bin size 524288 crc e584bfb5 sha1 ebdf1f5e2638eed3a65dda82b1ed9151a355f4c9 )
+	rom ( name s92_07.bin merge s92_07.bin size 524288 crc 21e3f87d sha1 4a4961bb68c3a1ce15f9d393d9c03ecb2466cc29 )
+	rom ( name s92_08.bin merge s92_08.bin size 524288 crc befc47df sha1 520390420da3a0271ba90b0a933e65143265e5cf )
+	rom ( name s92_10.bin merge s92_10.bin size 524288 crc 960687d5 sha1 2868c31121b1c7564e9767b9a19cdbf655c7ed1d )
+	rom ( name s92_11.bin merge s92_11.bin size 524288 crc 978ecd18 sha1 648a59706b93c84b4206a968ecbdc3e834c476f6 )
+	rom ( name s92_12.bin merge s92_12.bin size 524288 crc d6ec9a0a sha1 ed6143f8737013b6ef1684e37c05e037e7a80dae )
+	rom ( name s92_13.bin merge s92_13.bin size 524288 crc ed2c67f6 sha1 0083c0ffaf6fe7659ff0cf822be4346cd6e61329 )
+	rom ( name s92_09.bin merge s92_09.bin size 65536 crc 08f6b60e sha1 8258fcaca4ac419312531eec67079b97f471179c )
+	rom ( name s92_18.bin merge s92_18.bin size 131072 crc 7f162009 sha1 346bf42992b4c36c593e21901e22c87ae4a7d86d )
+	rom ( name s92_19.bin merge s92_19.bin size 131072 crc beade53f sha1 277c397dc12752719ec6b47d2224750bd1c07f79 )
+)
+
+game (
 	name sf2red
 	description "Street Fighter II' - Champion Edition (Red Wave, bootleg)"
 	year 1992
@@ -4333,27 +4363,6 @@ game (
 	rom ( name bprg1.11d merge bprg1.11d size 279 crc 31793da7 sha1 400fa7ac517421c978c1ee7773c30b9ed0c5d3f3 )
 	rom ( name ioc1.ic7 merge ioc1.ic7 size 279 crc 0d182081 sha1 475b3d417785da4bc512cce2b274bb00d4cc6792 )
 	rom ( name c632.ic1 merge c632.ic1 size 279 crc 0fbd9270 sha1 d7e737b20c44d41e29ca94be56114b31934dde81 )
-)
-
-game (
-	name kodb
-	description "The King of Dragons (bootleg)"
-	year 1991
-	manufacturer "Capcom"
-	cloneof kod
-	romof kod
-	rom ( name 3.ic172 size 524288 crc 036dd74c sha1 489344e56863429e86b4c362b82d89819c1d6afb )
-	rom ( name 4.ic171 size 524288 crc 3e4b7295 sha1 3245640bae7d141238051dfe5c7683d05c6d3848 )
-	rom ( name cp.ic90 size 524288 crc e3b8589e sha1 775f97e43cb995b93da40063a1f1e4d73b34437c )
-	rom ( name dp.ic89 size 524288 crc 3eec9580 sha1 3d8d0cfbeae077544e514a5eb96cc83f716e494f )
-	rom ( name ap.ic88 size 524288 crc fdf5f163 sha1 271ee96886c958accaca9a82484ab80fe32bd38e )
-	rom ( name bp.ic87 size 524288 crc 4e1c52b7 sha1 74570e7d577c999c62203c97b3d449e3b61a678a )
-	rom ( name ci.ic91 size 524288 crc 22228bc5 sha1 d48a09ee284d9e4b986f5c3c1c865930f76986e2 )
-	rom ( name di.ic92 size 524288 crc ab031763 sha1 5bcd89b1debf029b779aa1bb73b3a572d27154ec )
-	rom ( name ai.ic93 size 524288 crc cffbf4be sha1 f805bafc855d4a656c055a76eaeb26e36835541e )
-	rom ( name bi.ic94 size 524288 crc 4a1b43fe sha1 7957f45b2862825c9509043c63c7da7108bd251b )
-	rom ( name 1.ic28 size 65536 crc 01cae60c sha1 b2cdd883fd859f0b701230831aca1f1a74ad6087 )
-	rom ( name 2.ic19 size 262144 crc a2db1575 sha1 1a4a29e4b045af50700adf1665697feab12cc234 )
 )
 
 game (

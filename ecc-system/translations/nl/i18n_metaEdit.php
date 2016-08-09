@@ -89,5 +89,10 @@ $i18n['metaEdit'] = array(
 		"eccscript emulator template mist",
 	'mEditScriptIniTextNoEccScript' =>
 		"Geen eccScript gevonden!",
+
+	'mEditUserWrongCharacters' =>
+		"Invalid characters found in text. Please clean the text!",
+
+
 );
 ?>

@@ -412,6 +412,16 @@ class RomMeta extends Item {
 		
 		$this->setDump_type($dbEntry['md_dump_type']);
 		
+//		if(!isset($dbEntry['md_dump_type'])){
+//			echo '<pre>';
+//			print_r($dbEntry);
+//			echo '</pre>';	
+//			die;		
+//		}
+
+		
+		
+		
 	}
 	
 	public function getCleanInteger($field, $storeEmptyString = false, $storeNullInteger = false){

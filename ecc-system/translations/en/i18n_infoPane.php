@@ -41,7 +41,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptTrainerLbl' =>
 		"Trainer",
 	'iPaneEsearchOptIntroLbl' =>
-		"Intro",
+		"Crack/Intro",
 	'iPaneEsearchOptBugsLbl' =>
 		"Bugs",
 	'iPaneEsearchOptUsermodLbl' =>
@@ -60,6 +60,10 @@ $i18n['infoPane'] = array(
 	/* HEADER */		
 	'iPaneHeadLbl' =>
 		"Parsed Header informations",
+
+	/* 0.9.9 WIP 03 */		
+	'iPaneEsearchOptDumpTypeLbl' =>
+		"Dump type",
 
 );
 ?>

@@ -46,6 +46,8 @@ $i18n['dropdown_lang'] = array(
 		"Finlandais",
 	'[[czech]]' =>
 		"Czech",
+	'[[hungarian]]' =>
+		"Hungarian",
 );
 
 /*

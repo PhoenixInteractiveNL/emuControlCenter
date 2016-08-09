@@ -51,15 +51,23 @@ class SqlHelper{
 		if (!$eSearch) return "";
 		$out = array();
 		foreach ($eSearch as $key => $int) {
-			$field = str_replace("scb_", '', $key);
-			switch ($int) {
-				case '0': break;												// *
-				case '1': $out[] = "$field <= 0"; break;						// no
-				case '2': $out[] = "($field <= 0 OR $field is NULL)"; break;	// no?
-				case '3': $out[] = "$field > 0"; break;							// yes
-				case '4': $out[] = "($field > 0 OR $field is NULL)"; break;		//yes?
-				case '5': $out[] = "$field is NULL"; break;						// ?
+			
+			// special for dump type
+			if($key == 'scb_dump_type') {
+				if($int) $out[] = "dump_type = ".(int)$int;
 			}
+			else {
+				$field = str_replace("scb_", '', $key);
+				switch ($int) {
+					case '0': break;												// *
+					case '1': $out[] = "$field <= 0"; break;						// no
+					case '2': $out[] = "($field <= 0 OR $field is NULL)"; break;	// no?
+					case '3': $out[] = "$field > 0"; break;							// yes
+					case '4': $out[] = "($field > 0 OR $field is NULL)"; break;		//yes?
+					case '5': $out[] = "$field is NULL"; break;						// ?
+				}				
+			}
+
 		}
 		return join(' AND ', $out);
 	}

@@ -185,5 +185,10 @@ $i18n['menu'] = array(
 	'lbl_image_inject' =>
 		"Télécharger des images",
 
+	/* 0.9.9 FYEO 01 */
+	'lblOpenAssetFolder' =>
+		"Browse documents folder",
+
+
 );
 ?>

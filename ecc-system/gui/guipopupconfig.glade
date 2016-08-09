@@ -743,8 +743,22 @@
 				  </child>
 
 				  <child>
+				    <widget class="GtkButton" id="emuAssignGlobalEccScriptRefresh">
+				      <property name="can_focus">True</property>
+				      <property name="label" translatable="yes">Refresh</property>
+				      <property name="use_underline">True</property>
+				      <property name="relief">GTK_RELIEF_NORMAL</property>
+				      <property name="focus_on_click">True</property>
+				    </widget>
+				    <packing>
+				      <property name="padding">0</property>
+				      <property name="expand">False</property>
+				      <property name="fill">False</property>
+				    </packing>
+				  </child>
+
+				  <child>
 				    <widget class="GtkButton" id="emuAssignGlobalEditEccScript">
-				      <property name="visible">True</property>
 				      <property name="can_focus">True</property>
 				      <property name="label" translatable="yes">Edit/Create</property>
 				      <property name="use_underline">True</property>
@@ -759,8 +773,22 @@
 				  </child>
 
 				  <child>
+				    <widget class="GtkButton" id="emuAssignGlobalEccScriptOptions">
+				      <property name="can_focus">True</property>
+				      <property name="label" translatable="yes">Options</property>
+				      <property name="use_underline">True</property>
+				      <property name="relief">GTK_RELIEF_NORMAL</property>
+				      <property name="focus_on_click">True</property>
+				    </widget>
+				    <packing>
+				      <property name="padding">0</property>
+				      <property name="expand">False</property>
+				      <property name="fill">False</property>
+				    </packing>
+				  </child>
+
+				  <child>
 				    <widget class="GtkButton" id="emuAssignGlobalDeleteEccScript">
-				      <property name="visible">True</property>
 				      <property name="can_focus">True</property>
 				      <property name="label" translatable="yes">Delete</property>
 				      <property name="use_underline">True</property>

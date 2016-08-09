@@ -4534,7 +4534,7 @@ Visit www.camya.com for updates or use eccLive!</property>
 				  <child>
 				    <widget class="GtkTable" id="table9">
 				      <property name="visible">True</property>
-				      <property name="n_rows">8</property>
+				      <property name="n_rows">9</property>
 				      <property name="n_columns">5</property>
 				      <property name="homogeneous">False</property>
 				      <property name="row_spacing">1</property>
@@ -5236,6 +5236,20 @@ Visit www.camya.com for updates or use eccLive!</property>
 				      </child>
 
 				      <child>
+					<widget class="GtkHSeparator" id="hseparator150">
+					  <property name="visible">True</property>
+					</widget>
+					<packing>
+					  <property name="left_attach">0</property>
+					  <property name="right_attach">5</property>
+					  <property name="top_attach">8</property>
+					  <property name="bottom_attach">9</property>
+					  <property name="y_padding">3</property>
+					  <property name="x_options">fill</property>
+					</packing>
+				      </child>
+
+				      <child>
 					<widget class="GtkLabel" id="infotab_lbl_languages">
 					  <property name="width_request">75</property>
 					  <property name="height_request">20</property>
@@ -5259,8 +5273,8 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">0</property>
 					  <property name="right_attach">1</property>
-					  <property name="top_attach">6</property>
-					  <property name="bottom_attach">7</property>
+					  <property name="top_attach">7</property>
+					  <property name="bottom_attach">8</property>
 					  <property name="x_options">fill</property>
 					  <property name="y_options"></property>
 					</packing>
@@ -5290,8 +5304,8 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">1</property>
 					  <property name="right_attach">5</property>
-					  <property name="top_attach">6</property>
-					  <property name="bottom_attach">7</property>
+					  <property name="top_attach">7</property>
+					  <property name="bottom_attach">8</property>
 					  <property name="x_options">fill</property>
 					  <property name="y_options">fill</property>
 					</packing>
@@ -5304,24 +5318,87 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">0</property>
 					  <property name="right_attach">5</property>
-					  <property name="top_attach">5</property>
-					  <property name="bottom_attach">6</property>
+					  <property name="top_attach">6</property>
+					  <property name="bottom_attach">7</property>
 					  <property name="y_padding">3</property>
 					  <property name="x_options">fill</property>
 					</packing>
 				      </child>
 
 				      <child>
-					<widget class="GtkHSeparator" id="hseparator150">
+					<widget class="GtkLabel" id="infotab_lbl_dump">
+					  <property name="width_request">75</property>
+					  <property name="height_request">16</property>
 					  <property name="visible">True</property>
+					  <property name="can_focus">True</property>
+					  <property name="label" translatable="yes">&lt;b&gt;Dump type&lt;/b&gt;</property>
+					  <property name="use_underline">False</property>
+					  <property name="use_markup">True</property>
+					  <property name="justify">GTK_JUSTIFY_LEFT</property>
+					  <property name="wrap">True</property>
+					  <property name="selectable">True</property>
+					  <property name="xalign">0</property>
+					  <property name="yalign">0.5</property>
+					  <property name="xpad">0</property>
+					  <property name="ypad">0</property>
+					  <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+					  <property name="width_chars">-1</property>
+					  <property name="single_line_mode">False</property>
+					  <property name="angle">0</property>
 					</widget>
 					<packing>
 					  <property name="left_attach">0</property>
-					  <property name="right_attach">5</property>
-					  <property name="top_attach">7</property>
-					  <property name="bottom_attach">8</property>
-					  <property name="y_padding">3</property>
+					  <property name="right_attach">1</property>
+					  <property name="top_attach">5</property>
+					  <property name="bottom_attach">6</property>
 					  <property name="x_options">fill</property>
+					  <property name="y_options"></property>
+					</packing>
+				      </child>
+
+				      <child>
+					<widget class="GtkEventBox" id="nbMediaInfoStateDumpEvent">
+					  <property name="border_width">1</property>
+					  <property name="width_request">121</property>
+					  <property name="height_request">16</property>
+					  <property name="visible">True</property>
+					  <property name="tooltip" translatable="yes">click to edit</property>
+					  <property name="can_default">True</property>
+					  <property name="has_default">True</property>
+					  <property name="can_focus">True</property>
+					  <property name="has_focus">True</property>
+					  <property name="visible_window">True</property>
+					  <property name="above_child">True</property>
+
+					  <child>
+					    <widget class="GtkLabel" id="media_nb_info_dump">
+					      <property name="width_request">120</property>
+					      <property name="height_request">16</property>
+					      <property name="visible">True</property>
+					      <property name="label" translatable="yes"></property>
+					      <property name="use_underline">False</property>
+					      <property name="use_markup">False</property>
+					      <property name="justify">GTK_JUSTIFY_LEFT</property>
+					      <property name="wrap">False</property>
+					      <property name="selectable">False</property>
+					      <property name="xalign">0.5</property>
+					      <property name="yalign">0.5</property>
+					      <property name="xpad">0</property>
+					      <property name="ypad">0</property>
+					      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+					      <property name="width_chars">-1</property>
+					      <property name="single_line_mode">False</property>
+					      <property name="angle">0</property>
+					    </widget>
+					  </child>
+					</widget>
+					<packing>
+					  <property name="left_attach">1</property>
+					  <property name="right_attach">5</property>
+					  <property name="top_attach">5</property>
+					  <property name="bottom_attach">6</property>
+					  <property name="x_options">fill</property>
+					  <property name="y_options">fill</property>
 					</packing>
 				      </child>
 				    </widget>
@@ -5369,6 +5446,40 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="expand">True</property>
 					  <property name="fill">True</property>
 					</packing>
+				      </child>
+				    </widget>
+				    <packing>
+				      <property name="padding">0</property>
+				      <property name="expand">True</property>
+				      <property name="fill">True</property>
+				    </packing>
+				  </child>
+
+				  <child>
+				    <widget class="GtkEventBox" id="nbMediaInfoAssetEvent">
+				      <property name="border_width">2</property>
+				      <property name="visible">True</property>
+				      <property name="visible_window">False</property>
+				      <property name="above_child">False</property>
+
+				      <child>
+					<widget class="GtkLabel" id="nbMediaInfoAssetLabel">
+					  <property name="visible">True</property>
+					  <property name="label" translatable="yes">Manage game assets</property>
+					  <property name="use_underline">False</property>
+					  <property name="use_markup">False</property>
+					  <property name="justify">GTK_JUSTIFY_LEFT</property>
+					  <property name="wrap">False</property>
+					  <property name="selectable">False</property>
+					  <property name="xalign">0.5</property>
+					  <property name="yalign">0.5</property>
+					  <property name="xpad">0</property>
+					  <property name="ypad">0</property>
+					  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+					  <property name="width_chars">-1</property>
+					  <property name="single_line_mode">False</property>
+					  <property name="angle">0</property>
+					</widget>
 				      </child>
 				    </widget>
 				    <packing>
@@ -6470,7 +6581,7 @@ Visit www.camya.com for updates or use eccLive!</property>
 				      <property name="visible">True</property>
 				      <property name="n_rows">5</property>
 				      <property name="n_columns">4</property>
-				      <property name="homogeneous">False</property>
+				      <property name="homogeneous">True</property>
 				      <property name="row_spacing">1</property>
 				      <property name="column_spacing">1</property>
 
@@ -6536,35 +6647,6 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="bottom_attach">1</property>
 					  <property name="x_options">fill</property>
 					  <property name="y_options">fill</property>
-					</packing>
-				      </child>
-
-				      <child>
-					<widget class="GtkLabel" id="iPaneEsearchOptNetplayLbl">
-					  <property name="visible">True</property>
-					  <property name="label" translatable="yes">&lt;b&gt;Netplay&lt;/b&gt;</property>
-					  <property name="use_underline">False</property>
-					  <property name="use_markup">True</property>
-					  <property name="justify">GTK_JUSTIFY_LEFT</property>
-					  <property name="wrap">False</property>
-					  <property name="selectable">False</property>
-					  <property name="xalign">0</property>
-					  <property name="yalign">0</property>
-					  <property name="xpad">0</property>
-					  <property name="ypad">0</property>
-					  <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-					  <property name="width_chars">-1</property>
-					  <property name="single_line_mode">False</property>
-					  <property name="angle">0</property>
-					</widget>
-					<packing>
-					  <property name="left_attach">2</property>
-					  <property name="right_attach">3</property>
-					  <property name="top_attach">3</property>
-					  <property name="bottom_attach">4</property>
-					  <property name="x_padding">5</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
 					</packing>
 				      </child>
 
@@ -6657,7 +6739,8 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="right_attach">1</property>
 					  <property name="top_attach">0</property>
 					  <property name="bottom_attach">1</property>
-					  <property name="y_options"></property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
@@ -6684,8 +6767,8 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="right_attach">1</property>
 					  <property name="top_attach">1</property>
 					  <property name="bottom_attach">2</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
@@ -6712,8 +6795,8 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="right_attach">1</property>
 					  <property name="top_attach">2</property>
 					  <property name="bottom_attach">3</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
@@ -6740,15 +6823,16 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="right_attach">1</property>
 					  <property name="top_attach">3</property>
 					  <property name="bottom_attach">4</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
 				      <child>
-					<widget class="GtkLabel" id="iPaneEsearchOptUsermodLbl">
+					<widget class="GtkLabel" id="iPaneEsearchOptIntroLbl">
+					  <property name="width_request">45</property>
 					  <property name="visible">True</property>
-					  <property name="label" translatable="yes">&lt;b&gt;UserMod&lt;/b&gt;</property>
+					  <property name="label" translatable="yes">&lt;b&gt;Intro&lt;/b&gt;</property>
 					  <property name="use_underline">False</property>
 					  <property name="use_markup">True</property>
 					  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -6766,11 +6850,11 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">2</property>
 					  <property name="right_attach">3</property>
-					  <property name="top_attach">2</property>
-					  <property name="bottom_attach">3</property>
-					  <property name="x_padding">4</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
+					  <property name="top_attach">0</property>
+					  <property name="bottom_attach">1</property>
+					  <property name="x_padding">5</property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
@@ -6798,15 +6882,15 @@ Visit www.camya.com for updates or use eccLive!</property>
 					  <property name="top_attach">1</property>
 					  <property name="bottom_attach">2</property>
 					  <property name="x_padding">5</property>
-					  <property name="x_options">fill</property>
-					  <property name="y_options"></property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
 				      <child>
-					<widget class="GtkLabel" id="iPaneEsearchOptIntroLbl">
+					<widget class="GtkLabel" id="iPaneEsearchOptUsermodLbl">
 					  <property name="visible">True</property>
-					  <property name="label" translatable="yes">&lt;b&gt;Intro&lt;/b&gt;</property>
+					  <property name="label" translatable="yes">&lt;b&gt;UserMod&lt;/b&gt;</property>
 					  <property name="use_underline">False</property>
 					  <property name="use_markup">True</property>
 					  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -6824,25 +6908,40 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">2</property>
 					  <property name="right_attach">3</property>
-					  <property name="top_attach">0</property>
-					  <property name="bottom_attach">1</property>
-					  <property name="x_padding">5</property>
-					  <property name="y_options"></property>
+					  <property name="top_attach">2</property>
+					  <property name="bottom_attach">3</property>
+					  <property name="x_padding">4</property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
 				      <child>
-					<widget class="GtkComboBox" id="scb_dump_type">
+					<widget class="GtkLabel" id="iPaneEsearchOptNetplayLbl">
 					  <property name="visible">True</property>
-					  <property name="add_tearoffs">False</property>
-					  <property name="focus_on_click">True</property>
+					  <property name="label" translatable="yes">&lt;b&gt;Netplay&lt;/b&gt;</property>
+					  <property name="use_underline">False</property>
+					  <property name="use_markup">True</property>
+					  <property name="justify">GTK_JUSTIFY_LEFT</property>
+					  <property name="wrap">False</property>
+					  <property name="selectable">False</property>
+					  <property name="xalign">0</property>
+					  <property name="yalign">0</property>
+					  <property name="xpad">0</property>
+					  <property name="ypad">0</property>
+					  <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+					  <property name="width_chars">-1</property>
+					  <property name="single_line_mode">False</property>
+					  <property name="angle">0</property>
 					</widget>
 					<packing>
-					  <property name="left_attach">1</property>
-					  <property name="right_attach">4</property>
-					  <property name="top_attach">4</property>
-					  <property name="bottom_attach">5</property>
-					  <property name="x_options">fill</property>
+					  <property name="left_attach">2</property>
+					  <property name="right_attach">3</property>
+					  <property name="top_attach">3</property>
+					  <property name="bottom_attach">4</property>
+					  <property name="x_padding">5</property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
 					</packing>
 				      </child>
 
@@ -6867,6 +6966,22 @@ Visit www.camya.com for updates or use eccLive!</property>
 					<packing>
 					  <property name="left_attach">0</property>
 					  <property name="right_attach">1</property>
+					  <property name="top_attach">4</property>
+					  <property name="bottom_attach">5</property>
+					  <property name="x_options">expand|shrink|fill</property>
+					  <property name="y_options">expand|shrink</property>
+					</packing>
+				      </child>
+
+				      <child>
+					<widget class="GtkComboBox" id="scb_dump_type">
+					  <property name="visible">True</property>
+					  <property name="add_tearoffs">False</property>
+					  <property name="focus_on_click">True</property>
+					</widget>
+					<packing>
+					  <property name="left_attach">1</property>
+					  <property name="right_attach">4</property>
 					  <property name="top_attach">4</property>
 					  <property name="bottom_attach">5</property>
 					  <property name="x_options">fill</property>

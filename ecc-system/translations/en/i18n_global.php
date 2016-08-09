@@ -220,5 +220,9 @@ $i18n['global'] = array(
 		"Count",
 	'time'=>
 		"Time",
+
+	/* 0.9.9 FYEO 01 */
+	'assets' =>
+		"Documents",
 );
 ?>

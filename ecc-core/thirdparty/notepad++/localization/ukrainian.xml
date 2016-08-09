@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="Windows-1251" ?> 
+<NotepadPlus>
+	<Native-Langue name="Ukrainian">
+		<Menu>
+			<Main>
+				<!--  Main Menu Entries --> 
+				<Entries>
+					<Item id="0" name="&amp;Файл" /> 
+					<Item id="1" name="&amp;Редагування" /> 
+					<Item id="2" name="&amp;Пошук" /> 
+					<Item id="3" name="&amp;Вид" /> 
+					<Item id="4" name="Фор&amp;мат" /> 
+					<Item id="5" name="&amp;Мова" /> 
+					<Item id="6" name="&amp;Налаштування" /> 
+				</Entries>
+				
+				<!--  Sub Menu Entries --> 
+				<SubEntries>
+
+				</SubEntries>
+				
+				<!--  all menu item --> 
+				<Commands>
+					<Item id="41001" name="&amp;Новий	Ctrl+N" /> 
+					<Item id="41002" name="&amp;Відкрити	Ctrl+O" /> 
+					<Item id="41003" name="За&amp;крити	Ctrl+W" /> 
+					<Item id="41004" name="Закрити &amp;все" /> 
+					<Item id="41005" name="Закрити все крім поточного" /> 
+					<Item id="41006" name="&amp;Зберегти	Ctrl+S" /> 
+					<Item id="41007" name="Зберегти все	Ctrl+Shift+S" /> 
+					<Item id="41008" name="Зберегти &amp;як..." /> 
+					<Item id="41010" name="Друкувати...	Ctrl+P" /> 
+					<Item id="41011" name="Ви&amp;хід" /> 
+					<Item id="42001" name="Вирі&amp;зати	Ctrl+X" /> 
+					<Item id="42002" name="&amp;Копіювати	Ctrl+C" /> 
+					<Item id="42003" name="В&amp;ідмінити	Ctrl+Z" /> 
+					<Item id="42004" name="&amp;Повторити	Ctrl+Y" /> 
+					<Item id="42005" name="&amp;Вставити	Ctrl+V" /> 
+					<Item id="42006" name="&amp;Стерти	Del" /> 
+					<Item id="42007" name="Виділити &amp;все	Ctrl+A" /> 
+					<Item id="43001" name="&amp;Знайти...	Ctrl+F" /> 
+					<Item id="43002" name="Знайти &amp;далі	F3" /> 
+					<Item id="43003" name="Заміна...	Ctrl+H" /> 
+					<Item id="43004" name="Перейти до лінійки...	Ctrl+G" /> 
+					<Item id="43005" name="Закладка	Ctrl+F2" /> 
+					<Item id="43006" name="Наступна закладка	F2" /> 
+					<Item id="43007" name="Попередня закладка	Shift+F2" /> 
+					<Item id="43008" name="Очистити закладки" /> 
+
+					<Item id="44011" name="Користувацький діалог" /> 
+					<Item id="44019" name="Відображати всі символи" /> 
+					<Item id="44020" name="Відображати блоки відступів" /> 
+					<Item id="44022" name="Переноси по словах" /> 
+					<Item id="44023" name="З&amp;більш. масштаб	Ctrl-Mouse Wheel Up" /> 
+					<Item id="44024" name="З&amp;менш. масштаб	Ctrl-Mouse Wheel Down" /> 
+					<Item id="44025" name="Відображати пробіли і табулятори" /> 
+					<Item id="44026" name="Відображати кінець рядка" /> 
+					<Item id="45001" name="Ковертувати в Windows формат" /> 
+					<Item id="45002" name="Ковертувати в UNIX формат" /> 
+					<Item id="45003" name="Ковертувати в MAC формат" /> 
+					<Item id="10001" name="Перейти до копії" /> 
+					<Item id="10002" name="Зробити копію" /> 
+					<Item id="46001" name="Стилі..." /> 
+					<Item id="47000" name="Про програму...	F1" /> 
+					<Item id="49000" name="&amp;Виконати..." />
+				</Commands>
+			</Main>
+			<Splitter>
+			</Splitter>
+			<TabBar>
+				<Item order="0" name="Закрити" /> 
+				<Item order="1" name="Закрити все крім поточного" /> 
+				<Item order="2" name="Зберегти" /> 
+				<Item order="3" name="Зберегти як..." /> 
+				<Item order="4" name="Друк" /> 
+				<Item order="5" name="Перейти до копії" /> 
+				<Item order="6" name="Створити копію" /> 
+			</TabBar>
+			
+		</Menu>
+		<Dialog>
+			<Find title="Знайти...">
+				<Item id="1" name="Знайти далі" /> 
+				<Item id="2" name="Закрити" /> 
+				<Item id="1620" name="Знайти :" /> 
+				<Item id="1603" name="Слова &amp;повністю" /> 
+				<Item id="1604" name="Враховувти &amp;регістр" /> 
+				<Item id="1605" name="Регулярні &amp;вирази" /> 
+				<Item id="1606" name="Перенос навкруги" /> 
+				<Item id="1612" name="&amp;Вверх" /> 
+				<Item id="1613" name="&amp;Вниз" /> 
+				<Item id="1614" name="Порахувати" /> 
+				<Item id="1615" name="Знайти все" /> 
+				<Item id="1616" name="Закладка" /> 
+				<Item id="1617" name="Помічати знайдене" /> 
+				<Item id="1618" name="Очищувати при пошуку" /> 
+				<Item id="1621" name="Напрям" /> 
+				<Item id="1611" name="Замінити &amp;на :" /> 
+				<Item id="1608" name="&amp;Замінити" /> 
+				<Item id="1609" name="Замінити &amp;все" /> 
+			</Find>
+			<GoToLine title="Перейти до рядка">
+				<Item id="1" name="&amp;Перейти !" /> 
+				<Item id="2" name="&amp;Відмінити" /> 
+				<Item id="2004" name="Поточний рядок :" /> 
+				<Item id="2005" name="Перейти на :" /> 
+				<Item id="2006" name="Кількість рядків :" /> 
+			</GoToLine>
+			<TabSize>
+				<Item id="2401" name="Розмір табуляції :" /> 
+			</TabSize>
+			<MaxFile>
+				<Item id="2401" name="Розмір :" /> 
+			</MaxFile>
+			<Run title="Виконати...">
+				<Item id="1903" name="Програма для запуску" /> 
+				<Item id="1" name="ОК!" /> 
+				<Item id="2" name="Стоооп!" /> 
+			</Run>
+			<StyleConfig title="Параметри стилю:">
+				<Item id="1" name="Проба!" /> 
+				<Item id="2" name="Відмінити" /> 
+				<Item id="2301" name="Зберегти й закрити" /> 
+				<SubDialog>
+					<Item id="2211" name="Стиль :" /> 
+					<Item id="2210" name="Увага: Даний стиль буде використовуватись по-замовчуванню для невизначених стилів" /> 
+					<Item id="2212" name="Кольори" /> 
+					<Item id="2213" name="Шрифти" /> 
+					<Item id="2206" name="Колір шрифта" /> 
+					<Item id="2207" name="Колір фону" /> 
+					<Item id="2208" name="Шрифт :" /> 
+					<Item id="2209" name="Розмір шрифта :" /> 
+					<Item id="2204" name="Жир" /> 
+					<Item id="2205" name="Кур" /> 
+				</SubDialog>
+				
+			</StyleConfig>
+			<UserDefine title="Користувацький">
+			<Item id="20002" name="Перейменувати" /> 
+			<Item id="20003" name="Новий..." /> 
+			<Item id="20004" name="Видалити" /> 
+			<Item id="20005" name="Зберегти Як..." /> 
+			<Item id="20007" name="Мова :" /> 
+			<Item id="20009" name="Розшир. :" /> 
+			<Item id="0" name="Кольори" /> 
+			<Item id="1" name="Колір шрифта" /> 
+			<Item id="2" name="Колір фону" /> 
+			<Item id="3" name="Стиль шрифта" /> 
+			<Item id="4" name="Шрифт :" /> 
+			<Item id="5" name="Розмір шрифта :" /> 
+			<Item id="6" name="Жир" /> 
+			<Item id="7" name="Кур" /> 
+			<Folder title="Замовчування і складки">
+			<Item id="21101" name="Налаштування по-замовчуванню" /> 
+			<Item id="21201" name="Ключ. слова — початок складок" /> 
+			<Item id="21301" name="Ключ. слова — закінчення складок" /> 
+			</Folder>
+			<Keywords title="Ключові слова">
+			<Item id="22101" name="1-ша група" /> 
+			<Item id="22201" name="2-га група" /> 
+			<Item id="22301" name="3-тя група" /> 
+			<Item id="22401" name="4-та група" /> 
+			</Keywords>
+			<Comment title="Коментарі і числа">
+			<Item id="23301" name="Однострічковий коментар" /> 
+			<Item id="23101" name="Блоковий коментар" /> 
+			<Item id="23113" name="Початок коментаря :" /> 
+			<Item id="23115" name="Кінець коментаря :" /> 
+			<Item id="23201" name="Число" /> 
+			</Comment>
+			<Operator title="Оператори">
+			<Item id="24107" name="Оператор" /> 
+			<Item id="24103" name="Доступні оператори" /> 
+			<Item id="24101" name="Активні оператори" /> 
+			</Operator>
+			</UserDefine>
+			
+		</Dialog>
+	</Native-Langue>
+
+</NotepadPlus>

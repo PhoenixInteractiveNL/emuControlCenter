@@ -1,0 +1,58 @@
+; Platform		: ScummVM
+; Script for		: ScummVM 0.12.0
+; Script version	: v1.0.0.4
+; Last changed		: 2009.01.17
+;
+; Authors: S. Ebeltjes (aka Phoenix), DerMicha75
+;
+; NOTES: 
+; - This script only works for ZIPPED (ZIP) ScummVM games.
+; - The files have to be direct inside the zip, no subdirs allowed.
+; - The ScummVM GameID has to be placed in the metadata field ID.
+;
+; 7Z commands:
+; x = eXtract files with full paths.
+; -o = set Output directory.
+; -y = assume Yes on all queries.
+; -aos = skip already unpacked files.
+;
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+; Check if the 'Meta-Info ID' field is filled in.
+;
+If $eccMetaInfoId = "" Then
+	MsgBox(64, "ECC ScummVM", "This script only works if the 'Meta-Info ID' field is filled in with the gamename to start:" & @CRLF & _
+	"1. select the game in your list." & @CRLF & _
+	"2. click on 'EDIT' in the right panel." & @CRLF & _
+	"3. insert the (plain) gamename into the 'Meta-Info ID' field.")
+	Exit
+EndIf
+
+; Set some variables to make life easier ;)
+;
+$TempExtractFolder = Chr(34) & $eccSystemEccFolder & "ecc-user\#_AUTO_UNPACKED\svm\" & $eccMetaInfoId & Chr(34)
+$PackedRomFile = Chr(34) & $eccFileRomPath & $eccFileRomFile & Chr(34)
+
+; Extract the packed files to a temp folder.
+;
+TrayTip("ECC ScummVM", "Extacting files to temporally folder...please wait...", 10, 1)
+ShellExecuteWait($eccThirdParty7zip, "x -y -aos " & $PackedRomFile & " -o" & $TempExtractFolder, "", "", @SW_HIDE)
+
+; Run the emulator.
+;
+TrayTip("ECC ScummVM", "Starting ScummVM...", 5, 1)
+ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile, "-p " & $TempExtractFolder & " " & $eccMetaInfoId, "", "")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

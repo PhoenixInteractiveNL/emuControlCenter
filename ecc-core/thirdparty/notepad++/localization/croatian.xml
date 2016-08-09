@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+	<Native-Langue name = "Hrvatski(Croatian)">
+		<Menu>
+			<Main>
+                <!-- Main Menu Entries -->
+				<Entries>
+					<Item id = "0" name = "D&amp;okument"/>
+					<Item id = "1" name = "&amp;Uredi"/>
+					<Item id = "2" name = "&amp;Traži"/>
+					<Item id = "3" name = "&amp;Prikaz"/>
+					<Item id = "4" name = "For&amp;mat"/>
+					<Item id = "5" name = "&amp;Jezik"/>
+					<Item id = "6" name = "P&amp;ostavke"/>
+					<Item id = "7" name = "Makro"/>
+					<Item id = "8" name = "Pokreni"/>
+				</Entries>
+             
+                <!-- Sub Menu Entries -->
+                <SubEntries>
+                    <Item posX = "3" posY = "20" name = "Sakrij razinu"/>
+                    <Item posX = "3" posY = "21" name = "Otkrij razinu"/>
+                </SubEntries>
+                
+                <!-- all menu item -->
+                <Commands>
+                    <Item id = "41001" name = "&amp;Novi	Ctrl+N"/>
+                    <Item id = "41002" name = "&amp;Otvori	Ctrl+O"/>
+                    <Item id = "41003" name = "Zatvori	Ctrl+W"/>
+                    <Item id = "41004" name = "Z&amp;atvori sve"/>
+                    <Item id = "41005" name = "Zatvori sve osim TRENUTNOG dokumenta"/>
+                    <Item id = "41006" name = "&amp;Spremi	Ctrl+S"/>
+                    <Item id = "41007" name = "Spr&amp;emi sve	Ctrl+Shift+S"/>
+                    <Item id = "41008" name = "Spremi &amp;kao..."/>
+                    <Item id = "41010" name = "Ispiši...	Ctrl+P"/>
+                    <Item id = "41011" name = "I&amp;zlaz"/>
+                    
+                    <Item id = "42001" name = "Iz&amp;reži	Ctrl+X"/>
+                    <Item id = "42002" name = "&amp;Kopiraj	Ctrl+C"/>
+                    <Item id = "42003" name = "&amp;Poništi	Ctrl+Z"/>
+                    <Item id = "42004" name = "&amp;Ponovi	Ctrl+Y"/>
+                    <Item id = "42005" name = "&amp;Umetni	Ctrl+V"/>
+                    <Item id = "42006" name = "&amp;Obriši	Del"/>
+                    <Item id = "42007" name = "Odaberi s&amp;ve	Ctrl+A"/>
+                    <Item id = "42008" name = "Umetni TAB (Indent)	TAB"/>
+                    <Item id = "42009" name = "Zatvori TAB (Outdent)	Shift+TAB"/>
+                    <Item id = "42010" name = "Dupliciraj trenutnu liniju	Ctrl+D"/>
+                    <Item id = "42011" name = "Transpondiraj trenutnu liniju	Ctrl+T"/>
+                    <Item id = "42012" name = "Razdijeli linije	Ctrl+I"/>
+                    <Item id = "42013" name = "Spoji linije	Ctrl+J"/>
+                    <Item id = "42014" name = "Pomakni trenutnu liniju u redak iznad	Ctrl+Shift+Up"/>   
+                    <Item id = "42015" name = "Pomakni trenutnu liniju u redak ispod	Ctrl+Shift+Down"/>   
+                    <Item id = "42016" name = "Promjeni oznaèena slova u velika	Ctrl+Shift+U"/>
+                    <Item id = "42017" name = "Promjeni oznaèena slova u malena	Ctrl+U"/>
+                    <Item id = "42018" name = "&amp;Zapoèni snimanje	Ctrl+Shift+R"/>
+                    <Item id = "42019" name = "&amp;Zaustavi snimanje	Ctrl+Shift+R"/>
+                    <Item id = "42021" name = "&amp;Pusti snimljeno	Ctrl+Shift+P"/>
+                    <Item id = "42022" name = "Block comment/uncomment"/>
+                    <Item id = "42023" name = "Stream comment"/>
+                    <Item id = "42024" name = "Trim Trailing Space"/>
+                    <Item id = "42025" name = "Spremi trenutno snimljeni makro"/>
+                    <Item id = "42026" name = "Smjer teksta Desno na lijevo	Ctrl+Alt+R"/>
+                    <Item id = "42027" name = "Smjer teksta Lijevo na desno	Ctrl+Alt+L"/>
+					
+                    <Item id = "43001" name = "&amp;Pronaði...	Ctrl+F"/>
+                    <Item id = "43002" name = "Pronaði &amp;Sljedeæe	F3"/>
+                    <Item id = "43003" name = "Zamijeni...	Ctrl+H"/>
+                    <Item id = "43004" name = "Odi u redak...	Ctrl+G"/>
+                    <Item id = "43005" name = "Oznaèi liniju	Ctrl+F2"/>
+                    <Item id = "43006" name = "Sljedeæa oznaèena linija	F2"/>
+                    <Item id = "43007" name = "Predhodna oznaèena linija	Shift+F2"/>
+                    <Item id = "43008" name = "Odznaèi sve linije"/>
+                    <Item id = "43009" name = "Go to matching brace	Ctrl+B"/>
+                    <Item id = "43010" name = "Pronaði predhodno  Shift+F3"/>
+                    <Item id = "43013" name = "Pronaði u dokumentima	Ctrl+Shift+F"/>
+					
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "44010" name = "Sakrij sve razine	Alt+0"/>
+                    <Item id = "44011" name = "Formular za korisnikove definicije"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "44019" name = "Pokaži/sakrij sve znakove"/>
+                    <Item id = "44020" name = "Prikaži crte koje oznaèavaju razine"/>
+                    
+                    <Item id = "44022" name = "Prilagodi da stane u prozor"/>
+                    <Item id = "44023" name = "Približi &amp;	Ctrl-Mouse Wheel Up"/>
+                    <Item id = "44024" name = "Udalji &amp;	Ctrl-Mouse Wheel Down"/>
+                    <Item id = "44025" name = "Pokaži gdje je upotrijebljen razmak i TAB"/>
+                    <Item id = "44026" name = "Prokaži kraj reda"/>
+                    
+                    
+                    <Item id = "44029" name = "Otkrij sve razine	Alt+Shift+0"/>
+                    <Item id = "44030" name = "Sakrij trenutnu razinu	Ctrl+Alt+F"/>
+                    <Item id = "44031" name = "Otkrij trenutnu razinu	Ctrl+Alt+Shift+F"/>
+                    <Item id = "44032" name = "Cijeli zaslon	F11"/>
+                    <Item id = "44033" name = "Orginalne postavke za zoom	Ctrl+/(keypad)"/>
+                    
+                    <Item id = "45001" name = "Promjeni u Windows Format"/>
+                    <Item id = "45002" name = "Promjeni u UNIX Format"/>
+                    <Item id = "45003" name = "Promjeni u MAC Format"/>
+                    <Item id = "45004" name = "Kodiraj u ANSI"/>
+                    <Item id = "45005" name = "Kodiraj u UTF-8"/>
+                    <Item id = "45006" name = "Kodiraj u UCS-2 Big Endian"/>
+                    <Item id = "45007" name = "Kodiraj u UCS-2 Little Endian"/>
+                    <Item id = "45008" name = "Kodiraj u UTF-8 (bez BOM)"/>
+                    
+                    <Item id = "10001" name = "Prikaz u drugom dijelu"/>
+                    <Item id = "10002" name = "Dvostruki prikaz"/>
+                    
+                    <Item id = "46001" name = "Postavke stilova..."/>
+                    <Item id = "47000" name = "O programu...	F1"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <Item id = "48009" name = "Kombinacije tipaka..."/>
+                    
+                    <Item id = "49000" name = "&amp;Pokreni..."/>
+                </Commands>
+            </Main>
+            <Splitter>
+            </Splitter>
+            <TabBar>
+                    <Item order = "0" name = "Zatvori me"/>
+                    <Item order = "1" name = "Zatvori sve osim mene"/>
+                    <Item order = "2" name = "Spremi me"/>
+                    <Item order = "3" name = "Spremi me kao..."/>
+                    <Item order = "4" name = "Ispiši me"/>
+                    <Item order = "5" name = "Prikaz u drugom dijelu"/>
+                    <Item order = "6" name = "Dvostruki prikaz"/>
+            </TabBar>
+        </Menu>
+        
+        <Dialog>
+            <Find title = "Pronaði...">
+                <Item id = "1" name = "Pronaði sljedeæe"/>
+                <Item id = "2" name = "Zatvori"/>
+                <Item id = "1620" name = "Pronaði :"/>
+                <Item id = "1603" name = "Match &amp;whole word only"/>
+                <Item id = "1604" name = "Match &amp;case"/>
+                <Item id = "1605" name = "Regular &amp;expression"/>
+                <Item id = "1606" name = "Wrap aroun&amp;d"/>
+                <Item id = "1612" name = "&amp;Gore"/>
+                <Item id = "1613" name = "&amp;Dolje"/>
+                <Item id = "1614" name = "Count"/>
+                <Item id = "1615" name = "Pronaði sve"/>
+                <Item id = "1616" name = "Mark Line"/>
+                <Item id = "1617" name = "Style found token"/>
+                <Item id = "1618" name = "Purge for each search"/>
+                <Item id = "1621" name = "Direction"/>
+                <Item id = "1611" name = "Zamje &amp;ni s :"/>
+                <Item id = "1608" name = "&amp;Zamjeni"/>
+                <Item id = "1609" name = "Zamjeni &amp;sve"/>
+			 	<Item id = "1623" name = "Prozirnost"/>
+			 	<Item id = "1632" name = "In selection"/>
+			 	<Item id = "1633" name = "Oèisti"/>
+			 	<Item id = "1635" name = "Zamijeni sve u svim otvorenim dokumentima"/>
+			 	<Item id = "1636" name = "Pronaði sve u svim otvorenim dokumentima"/>
+			 	<Item id = "1637" name = "Pronaði u dokumentima"/>
+            </Find>
+            <GoToLine title = "Odi u redak #">
+                <Item id = "1" name = "&amp;Kreni !"/>
+                <Item id = "2" name = "Ne idem nikuda"/>
+                <Item id = "2004" name = "Trenutni redak :"/>
+                <Item id = "2005" name = "Željeni redak :"/>
+                <Item id = "2006" name = "Ne možeš iæi dalje od :"/>
+            </GoToLine>
+
+            <Run title = "Pokreni...">
+                <Item id = "1903" name = "Ime programa koga treba pokrenuti"/>
+                <Item id = "1" name = "Pokreni!"/>
+                <Item id = "2" name = "Odustani"/>
+                <Item id = "1904" name = "Spremi..."/>
+            </Run>
+            
+            <StyleConfig title = "Postavke stilova">
+				<Item id = "1" name = "Iskušaj!"/>
+				<Item id = "2" name = "Odustani"/>
+				<Item id = "2301" name = "Spremi &amp;&amp; Zatvori"/>
+				<Item id = "2303" name = "Prozirnost"/>		
+				
+                <SubDialog>
+                	<Item id = "2204" name = "Masno"/>
+                    <Item id = "2205" name = "Koso"/>
+                    <Item id = "2206" name = "Boja slova"/>
+                    <Item id = "2207" name = "Pozadinska boja"/>
+                    <Item id = "2208" name = "Tip slova :"/>
+                    <Item id = "2209" name = "Velièina slova :"/>
+                    <Item id = "2210" name = "Pozor : Definicije ovog stila æe biti deflautne definicije za sve nedefinirane stilove"/>
+                    <Item id = "2211" name = "Opis stila :"/>
+                    <Item id = "2212" name = "Boja stila"/>
+                    <Item id = "2213" name = "Slova stila"/>
+                    <Item id = "2214" name = "Nastavci :"/>
+                    <Item id = "2216" name = "Koris. nastavci :"/>
+                    <Item id = "2218" name = "Podcrtano"/>
+                    <Item id = "2219" name = "Deflautne kljuène rijeèi"/>
+                    <Item id = "2221" name = "Korisnikove kljuène rijeèi"/>
+                </SubDialog>
+				
+            </StyleConfig>
+            
+            <UserDefine title = "Korisnièki definirano">
+				<Item id = "20002" name = "Preimenuj"/>
+				<Item id = "20003" name = "Create New..."/>
+				<Item id = "20004" name = "Remove"/>
+				<Item id = "20005" name = "Spremi kao..."/>
+				<Item id = "20007" name = "User Language : "/>
+				<Item id = "20009" name = "Ext :"/>
+				<Item id = "20012" name = "Ignore case"/>
+				<Item id = "20011" name = "Transparency"/>
+				<Item id = "0" name = "Colour style"/>
+				<Item id = "1" name = "Boja slova"/>
+				<Item id = "2" name = "Pozadinska boja"/>
+				<Item id = "3" name = "Stil slova"/>
+				<Item id = "4" name = "Tip slova :"/>
+				<Item id = "5" name = "Velièina slova :"/>
+				<Item id = "6" name = "Masno"/>
+				<Item id = "7" name = "Koso"/>
+				<Item id = "8" name = "Podcrtano"/>
+                <Folder title = "Folder &amp;&amp; Default">
+					<Item id = "21101" name = "Default Style Setting"/>
+					<Item id = "21201" name = "Folder Open Keywords Setting"/>
+					<Item id = "21301" name = "Folder Close Keywords Setting"/>
+                </Folder>
+                <Keywords title = "Keywords Lists">
+					<Item id = "22101" name = "1st Group"/>
+					<Item id = "22201" name = "2nd Group"/>
+					<Item id = "22301" name = "3th Group"/>
+					<Item id = "22401" name = "4th Group"/>
+					<Item id = "22113" name = "Prefix mode"/>
+					<Item id = "22213" name = "Prefix mode"/>
+					<Item id = "22313" name = "Prefix mode"/>
+					<Item id = "22413" name = "Prefix mode"/>
+                </Keywords>
+                <Comment title = "Comment &amp;&amp; Number">
+					<Item id = "23301" name = "Comment Line"/>
+					<Item id = "23101" name = "Comment Block"/>
+					<Item id = "23113" name = "Comment Open :"/>
+					<Item id = "23115" name = "Comment Close :"/>
+					<Item id = "23116" name = "Treat keyword as symbol"/>
+					<Item id = "23117" name = "Treat keywords as symbols"/>
+					<Item id = "23201" name = "Number"/>
+                </Comment>
+                <Operator title = "Operators">
+					<Item id = "24107" name = "Operator"/>
+					<Item id = "24103" name = "Available Symbols"/>
+					<Item id = "24101" name = "Activated Operators"/>
+					<Item id = "24201" name = "Delimiter 1"/>
+					<Item id = "24211" name = "Boundary open :"/>
+					<Item id = "24214" name = "Boundary close :"/>
+					<Item id = "24301" name = "Delimiter 2"/>
+					<Item id = "24311" name = "Boundary open :"/>
+					<Item id = "24314" name = "Boundary close :"/>
+                </Operator>
+            </UserDefine>
+		</Dialog>
+    </Native-Langue>
+</NotepadPlus>

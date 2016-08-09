@@ -41,7 +41,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptTrainerLbl' =>
 		"Trainer ",
 	'iPaneEsearchOptIntroLbl' =>
-		"Crack/Intro ",
+		"Hack intro ",
 	'iPaneEsearchOptBugsLbl' =>
 		"Boguée ",
 	'iPaneEsearchOptUsermodLbl' =>
@@ -63,7 +63,7 @@ $i18n['infoPane'] = array(
 
 	/* 0.9.9 WIP 03 */		
 	'iPaneEsearchOptDumpTypeLbl' =>
-		"Dump type",
+		"Dump",
 
 );
 ?>

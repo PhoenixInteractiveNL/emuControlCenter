@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-1
-	description "CPS-1 20090608"
+	description "CPS-1 20090915"
 	category "Capcom Play System 1"
-	version 20090608
-	date 2009-06-08
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -55,7 +55,7 @@ game (
 )
 
 game (
-	name forgottu
+	name forgottnu
 	description "Forgotten Worlds (US)"
 	year 1988
 	manufacturer "Capcom"
@@ -97,6 +97,37 @@ game (
 	rom ( name lw_15c.14g size 131072 crc 402e2a46 sha1 cbb7017e75a425706505717bf83c2615f53309f9 )
 	rom ( name lw_10c.13f size 131072 crc c46479d7 sha1 84fd9ef33ae7d0af2110e8dc299de25c0f039cee )
 	rom ( name lw_14c.13g size 131072 crc 97670f4a sha1 f249977c814abdff85007216d7fa57db5684be0f )
+	rom ( name lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
+	rom ( name lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
+	rom ( name lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
+	rom ( name lw-05.9e size 524288 crc e4552fd7 sha1 11147afc475904848458425661473586dd6f60cc )
+	rom ( name lw-12.9g size 524288 crc 8e6a832b sha1 d63a1331fda2365f090fa31950098f321a720ea8 )
+	rom ( name lw-02.12d size 524288 crc 43e6c5c8 sha1 d3e6c971de0477ec4e178adc82508208dd8b397f )
+	rom ( name lw-09.12f size 524288 crc 899cb4ad sha1 95e61af338945e690f2a82746feba3871ea224eb )
+	rom ( name lw-06.12e size 524288 crc 5b9edffc sha1 6fd8f4a3ab070733b52365ab1945bf86acb2bf62 )
+	rom ( name lw-13.12g size 524288 crc 8e058ef5 sha1 00f2c0050fd106276ea5398511c5861ebfbc0d10 )
+	rom ( name lw_00b.14a size 65536 crc 59df2a63 sha1 dfe1fffc7a17179a80a2ae623e93b30a7d6df20d )
+	rom ( name lw-03.14c size 131072 crc ce2159e7 sha1 77d564f8b768c1cbd6e5b334f7ee86c4c3f9d62e )
+	rom ( name lw-04.13c size 131072 crc 39305536 sha1 ad24d7b6df2dc5e84a35aecb9ba9b0aaa27ab6e5 )
+	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
+	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
+	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
+	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
+	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
+	name lostwrldo
+	description "Lost Worlds (Japan Old Ver.)"
+	year 1988
+	manufacturer "Capcom"
+	sourcefile cps1.c
+	cloneof forgottn
+	romof forgottn
+	rom ( name lw_11.14f size 131072 crc 61e2cc56 sha1 bc192e37806129dd00677ca2c2e4287aa670973d )
+	rom ( name lw_15.14g size 131072 crc 8a0c18d3 sha1 7a4d80cefa0c2be427de43fbbbb906880876ed1d )
+	rom ( name lw_10.13f size 131072 crc 23bca4d5 sha1 c9d356d052d82117b6c30e40aa02a5f1f5335a73 )
+	rom ( name lw_14.13g size 131072 crc 3a023771 sha1 30de9b76e104e897ddce64615f24bba0aa270d14 )
 	rom ( name lw-07.13e size 524288 crc fd252a26 sha1 5cfb097984912a5167a8c7ec4c2e119b642f9970 )
 	rom ( name lw-01.9d size 524288 crc 0318f298 sha1 178ffd6da7bf845e30abf1bfc38a469cd319a73f )
 	rom ( name lw-08.9f size 524288 crc 25a8e43c sha1 d57cee1fc508db2677e84882fb814e4d9ad20543 )
@@ -259,24 +290,24 @@ game (
 )
 
 game (
-	name daimakr2
-	description "Dai Makai-Mura (Japan hack?)"
+	name daimakair
+	description "Dai Makai-Mura (Japan Resale Ver.)"
 	year 1988
 	manufacturer "Capcom"
 	sourcefile cps1.c
 	cloneof ghouls
 	romof ghouls
-	rom ( name damj_23.8f size 524288 crc c3b248ec sha1 5c016d2dcf882b2a9564e3c4502a0f51ee3d1803 )
-	rom ( name damj_22.7f size 524288 crc 595ff2f3 sha1 ac14b81e15f2c340526a03acbb4c28181d94d5b9 )
-	rom ( name dam_01.3a size 524288 crc 0ba9c0b0 sha1 c4945b603115f32b7346d72426571dc2d361159f )
-	rom ( name dam_02.4a size 524288 crc 5d760ab9 sha1 212176947933fcfef991bc80ad5bd91718689ffe )
-	rom ( name dam_03.5a size 524288 crc 4ba90b59 sha1 35bc9dec5ddbf064c30c951627581c16764456ac )
-	rom ( name dam_04.6a size 524288 crc 4bdee9de sha1 7d0c4736f16577afe9966447a18f039728f6fbdf )
-	rom ( name dam_05.7a size 524288 crc 7dc61b94 sha1 7796bae7555c541b3c80aacfa24788aeb2ccdfd5 )
-	rom ( name dam_06.8a size 524288 crc fde89758 sha1 9a6192f629cd1e74e225ef7426338c2816c6b977 )
-	rom ( name dam_07.9a size 524288 crc ec351d78 sha1 1005a83be4b5577612143ae7f64ca4a08aae7959 )
-	rom ( name dam_08.10a size 524288 crc ee2acc1e sha1 4628a9b2447266349d97132003992a21e2bb423a )
-	rom ( name dam_09.12a size 131072 crc 0656ff53 sha1 063a8124dbe73d014b11f72007f1b877afd1a661 )
+	rom ( name damj_23.bin size 524288 crc c3b248ec sha1 5c016d2dcf882b2a9564e3c4502a0f51ee3d1803 )
+	rom ( name damj_22.bin size 524288 crc 595ff2f3 sha1 ac14b81e15f2c340526a03acbb4c28181d94d5b9 )
+	rom ( name dam_01.bin size 524288 crc 0ba9c0b0 sha1 c4945b603115f32b7346d72426571dc2d361159f )
+	rom ( name dam_02.bin size 524288 crc 5d760ab9 sha1 212176947933fcfef991bc80ad5bd91718689ffe )
+	rom ( name dam_03.bin size 524288 crc 4ba90b59 sha1 35bc9dec5ddbf064c30c951627581c16764456ac )
+	rom ( name dam_04.bin size 524288 crc 4bdee9de sha1 7d0c4736f16577afe9966447a18f039728f6fbdf )
+	rom ( name dam_05.bin size 524288 crc 7dc61b94 sha1 7796bae7555c541b3c80aacfa24788aeb2ccdfd5 )
+	rom ( name dam_06.bin size 524288 crc fde89758 sha1 9a6192f629cd1e74e225ef7426338c2816c6b977 )
+	rom ( name dam_07.bin size 524288 crc ec351d78 sha1 1005a83be4b5577612143ae7f64ca4a08aae7959 )
+	rom ( name dam_08.bin size 524288 crc ee2acc1e sha1 4628a9b2447266349d97132003992a21e2bb423a )
+	rom ( name dam_09.bin size 131072 crc 0656ff53 sha1 063a8124dbe73d014b11f72007f1b877afd1a661 )
 	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
@@ -321,7 +352,7 @@ game (
 )
 
 game (
-	name stridrua
+	name striderua
 	description "Strider (US set 2)"
 	year 1989
 	manufacturer "Capcom"
@@ -355,35 +386,7 @@ game (
 
 game (
 	name striderj
-	description "Strider Hiryu (Japan set 1)"
-	year 1989
-	manufacturer "Capcom"
-	sourcefile cps1.c
-	cloneof strider
-	romof strider
-	rom ( name sthj23.bin size 524288 crc 046e7b12 sha1 a5761f730f6844a7e93556a6aeae76240a99540c )
-	rom ( name st-14.8h merge st-14.8h size 524288 crc 9b3cfc08 sha1 a7d7f270a097437affa845d80bed82a1fa874878 )
-	rom ( name st-2.8a merge st-2.8a size 524288 crc 4eee9aea sha1 5e619fd5f3f1181e32a8fd9dbb4661d74ff8a484 )
-	rom ( name st-11.10a merge st-11.10a size 524288 crc 2d7f21e4 sha1 593cec513de40ff802084d54313bb25a4561e25d )
-	rom ( name st-5.4a merge st-5.4a size 524288 crc 7705aa46 sha1 6cbfa30b2852fd117d117beefba434ce41d24c2f )
-	rom ( name st-9.6a merge st-9.6a size 524288 crc 5b18b722 sha1 cf71c62348ca6b404279e87a6686cb3a842eb381 )
-	rom ( name st-1.7a merge st-1.7a size 524288 crc 005f000b sha1 e6f65af7cc3295be9efaaded352e7ae6320b4133 )
-	rom ( name st-10.9a merge st-10.9a size 524288 crc b9441519 sha1 bb0926dc484dae4f64c5e5a6bce20afdc7aeba55 )
-	rom ( name st-4.3a merge st-4.3a size 524288 crc b7d04e8b sha1 5c5a079baa694927c33d0e0c23e5ff09d6c9d985 )
-	rom ( name st-8.5a merge st-8.5a size 524288 crc 6b4713b4 sha1 759b8b1fc7a5c4b00d74a27c2dd11667db44b09e )
-	rom ( name strider.09 merge strider.09 size 65536 crc 2ed403bc sha1 4ce863ea40d789db5a7cfce91d2c7c720deb9be5 )
-	rom ( name strider.18 merge strider.18 size 131072 crc 4386bc80 sha1 fb2b261995aeacfa13e7ee40b1a973dfb178f015 )
-	rom ( name strider.19 merge strider.19 size 131072 crc 444536d7 sha1 a14f5de2f6b5b29ae5161dca1f8c08c566301a91 )
-	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
-	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
-	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
-	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
-	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
-)
-
-game (
-	name stridrja
-	description "Strider Hiryu (Japan set 2)"
+	description "Strider Hiryu (Japan)"
 	year 1989
 	manufacturer "Capcom"
 	sourcefile cps1.c
@@ -432,6 +435,34 @@ game (
 	rom ( name sth23.bin size 65536 crc 2ed403bc sha1 4ce863ea40d789db5a7cfce91d2c7c720deb9be5 )
 	rom ( name sth30.bin size 131072 crc 4386bc80 sha1 fb2b261995aeacfa13e7ee40b1a973dfb178f015 )
 	rom ( name sth31.bin size 131072 crc 444536d7 sha1 a14f5de2f6b5b29ae5161dca1f8c08c566301a91 )
+	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
+	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
+	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
+	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
+	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
+	name striderjr
+	description "Strider Hiryu (Japan Resale Ver.)"
+	year 1989
+	manufacturer "Capcom"
+	sourcefile cps1.c
+	cloneof strider
+	romof strider
+	rom ( name sthj_23.bin size 524288 crc 046e7b12 sha1 a5761f730f6844a7e93556a6aeae76240a99540c )
+	rom ( name sthj_22.bin size 524288 crc 9b3cfc08 sha1 a7d7f270a097437affa845d80bed82a1fa874878 )
+	rom ( name sth_01.bin size 524288 crc 4eee9aea sha1 5e619fd5f3f1181e32a8fd9dbb4661d74ff8a484 )
+	rom ( name sth_02.bin size 524288 crc 2d7f21e4 sha1 593cec513de40ff802084d54313bb25a4561e25d )
+	rom ( name sth_03.bin size 524288 crc 7705aa46 sha1 6cbfa30b2852fd117d117beefba434ce41d24c2f )
+	rom ( name sth_04.bin size 524288 crc 5b18b722 sha1 cf71c62348ca6b404279e87a6686cb3a842eb381 )
+	rom ( name sth_05.bin size 524288 crc 005f000b sha1 e6f65af7cc3295be9efaaded352e7ae6320b4133 )
+	rom ( name sth_06.bin size 524288 crc b9441519 sha1 bb0926dc484dae4f64c5e5a6bce20afdc7aeba55 )
+	rom ( name sth_07.bin size 524288 crc b7d04e8b sha1 5c5a079baa694927c33d0e0c23e5ff09d6c9d985 )
+	rom ( name sth_08.bin size 524288 crc 6b4713b4 sha1 759b8b1fc7a5c4b00d74a27c2dd11667db44b09e )
+	rom ( name sth_09.bin size 65536 crc 08d63519 sha1 c120ecfe25c3c50bc51bc7d5a9ef1c8ca6591240 )
+	rom ( name sth_18.bin size 131072 crc 4386bc80 sha1 fb2b261995aeacfa13e7ee40b1a973dfb178f015 )
+	rom ( name sth_19.bin size 131072 crc 444536d7 sha1 a14f5de2f6b5b29ae5161dca1f8c08c566301a91 )
 	rom ( name buf1 merge buf1 size 279 crc eb122de7 sha1 b26b5bfe258e3e184f069719f9fd008d6b8f6b9b )
 	rom ( name ioa1 merge ioa1 size 279 crc 59c7ee3b sha1 fbb887c5b4f5cb8df77cec710eaac2985bc482a6 )
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
@@ -2145,7 +2176,7 @@ game (
 )
 
 game (
-	name 3wonderu
+	name 3wondersu
 	description "Three Wonders (US 910520)"
 	year 1991
 	manufacturer "Capcom"
@@ -2243,7 +2274,7 @@ game (
 )
 
 game (
-	name 3wonderh
+	name 3wondersh
 	description "Three Wonders (hack?)"
 	year 1991
 	manufacturer "bootleg"
@@ -2418,7 +2449,7 @@ game (
 )
 
 game (
-	name captcomu
+	name captcommu
 	description "Captain Commando (US 910928)"
 	year 1991
 	manufacturer "Capcom"
@@ -2453,7 +2484,7 @@ game (
 )
 
 game (
-	name captcomj
+	name captcommj
 	description "Captain Commando (Japan 911202)"
 	year 1991
 	manufacturer "Capcom"
@@ -2488,7 +2519,7 @@ game (
 )
 
 game (
-	name captcomb
+	name captcommb
 	description "Captain Commando (bootleg)"
 	year 1991
 	manufacturer "bootleg"
@@ -2600,6 +2631,29 @@ game (
 	rom ( name prg1 merge prg1 size 279 crc f1129744 sha1 a5300f301c1a08a7da768f0773fa0fe3f683b237 )
 	rom ( name rom1 merge rom1 size 279 crc 41dc73b9 sha1 7d4c9f1693c821fbf84e32dd6ef62ddf14967845 )
 	rom ( name sou1 merge sou1 size 279 crc 84f4b2fe sha1 dcc9e86cc36316fe42eace02d6df75d08bc8bb6d )
+)
+
+game (
+	name knightsb
+	description "Knights of the Round (World 911127, bootleg)"
+	year 1991
+	manufacturer "bootleg"
+	sourcefile cps1.c
+	cloneof knights
+	romof knights
+	rom ( name 3.ic173 size 262144 crc c9c6e720 sha1 e8a1cd73458b548e88fc49d8f659e0dc33a8e756 )
+	rom ( name 5.ic172 size 262144 crc 7fd91118 sha1 d2832b21309a467938891946d7af35d8095787a4 )
+	rom ( name 2.ic175 size 262144 crc 1eb91343 sha1 e02cfbbd7689346f14f2e3455ed17e7f0b51bad0 )
+	rom ( name 4.ic176 size 262144 crc af352703 sha1 7855ac65752203f45af4ef41af8c291540a1c8a8 )
+	rom ( name kr_gfx1.rom merge kr_gfx1.rom size 524288 crc 9e36c1a4 sha1 772daae74e119371dfb76fde9775bda78a8ba125 flags baddump )
+	rom ( name kr_gfx3.rom merge kr_gfx3.rom size 524288 crc c5832cae sha1 a188cf401cd3a2909b377d3059f14d22ec3b0643 flags baddump )
+	rom ( name kr_gfx2.rom merge kr_gfx2.rom size 524288 crc f095be2d sha1 0427d1574062f277a9d04440019d5638b05de561 flags baddump )
+	rom ( name kr_gfx4.rom merge kr_gfx4.rom size 524288 crc 179dfd96 sha1 b1844e69da7ab13474da569978d5b47deb8eb2be flags baddump )
+	rom ( name kr_gfx5.rom merge kr_gfx5.rom size 524288 crc 1f4298d2 sha1 4b162a7f649b0bcd676f8ca0c5eee9a1250d6452 flags baddump )
+	rom ( name kr_gfx7.rom merge kr_gfx7.rom size 524288 crc 37fa8751 sha1 b88b39d1f08621f15a5620095aef998346fa9891 flags baddump )
+	rom ( name kr_gfx6.rom merge kr_gfx6.rom size 524288 crc 0200bc3d sha1 c900b1be2b4e49b951e5c1e3fd1e19d21b82986e flags baddump )
+	rom ( name kr_gfx8.rom merge kr_gfx8.rom size 524288 crc 0bb2b4e7 sha1 983b800925d58e4aeb4e5105f93ed5faf66d009c flags baddump )
+	rom ( name 1.ic26 size 262144 crc bd6f9cc1 sha1 9f33cccef224d2204736a9eae761196866bd6e41 )
 )
 
 game (
@@ -3818,7 +3872,7 @@ game (
 )
 
 game (
-	name punishru
+	name punisheru
 	description "The Punisher (US 930422)"
 	year 1993
 	manufacturer "Capcom"
@@ -3854,7 +3908,7 @@ game (
 )
 
 game (
-	name punishrj
+	name punisherj
 	description "The Punisher (Japan 930422)"
 	year 1993
 	manufacturer "Capcom"
@@ -3983,7 +4037,7 @@ game (
 )
 
 game (
-	name slammasu
+	name slammastu
 	description "Saturday Night Slam Masters (US 930713)"
 	year 1993
 	manufacturer "Capcom"

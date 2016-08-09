@@ -1,48 +1,14 @@
 clrmamepro (
-	name model1
-	description "Model 1 20090105"
-	category "Sega Model 1"
-	version 20090106
-	date 2009-01-06
-	author Logiqx
-	homepage "Logiqx Home Page"
-	url "http://www.logiqx.com/"
-	comment "Please report any data file issues at http://forum.logiqx.com/"
-	forcenodump obsolete
-)
-
-game (
-	name vf
-	description "Virtua Fighter"
-	year 1993
-	manufacturer "Sega"
-	sourcefile model1.c
-	rom ( name epr-16082.14 size 524288 crc b23f22ee sha1 9fd5b5a5974703a60a54de3d2bce4301bfc0e533 )
-	rom ( name epr-16083.15 size 524288 crc d12c77f8 sha1 b4aeba8d5f1ab4aec024391407a2cb58ce2e94b0 )
-	rom ( name epr-16080.4 size 131072 crc 3662e1a5 sha1 6bfceb1a7c1c7912679c907f2b7516ae9c7dda67 )
-	rom ( name epr-16081.5 size 131072 crc 6dec06ce sha1 7891544456bccd2fc647bccd058945ad50466636 )
-	rom ( name mpr-16084.6 size 524288 crc 483f453b sha1 41a5527be73f5dd1c87b2a8113235bdd247ec049 )
-	rom ( name mpr-16085.7 size 524288 crc 5fa01277 sha1 dfa7ddff0a7daf29071431f26b93dd8e8e5793b6 )
-	rom ( name mpr-16086.8 size 524288 crc deac47a1 sha1 3a8016124e4dc579d4aae745d4af1905ad0e4fbd )
-	rom ( name mpr-16087.9 size 524288 crc 7a64daac sha1 da6a9cad4b0cb2af4299e664c0889f3fbdc25530 )
-	rom ( name mpr-16088.10 size 524288 crc fcda2d1e sha1 0f7d0f604d429a1da0d1c3f31694520bada49680 )
-	rom ( name mpr-16089.11 size 524288 crc 39befbe0 sha1 362c493092cd0536fadee7326ecc7f973e23fb58 )
-	rom ( name mpr-16090.12 size 524288 crc 90c76831 sha1 5a3c25f2a131cfbb2ad067bef1ab7b1c95645d41 )
-	rom ( name mpr-16091.13 size 524288 crc 53115448 sha1 af798d5b1fcb720d7288a5ac48839d9ace16a2f2 )
-	rom ( name epr-16120.7 size 131072 crc 2bff8378 sha1 854b08ab983e4e98cb666f2f44de9a6829b1eb52 )
-	rom ( name epr-16121.8 size 131072 crc ff6723f9 sha1 53498b8c103745883657dfd6efe27edfd48b356f )
-	rom ( name mpr-16122.32 size 2097152 crc 568bc64e sha1 31fd0ef8319efe258011b4621adebb790b620770 )
-	rom ( name mpr-16123.33 size 2097152 crc 15d78844 sha1 37c17e38604cf7004a951408024941cd06b1d93e )
-	rom ( name mpr-16124.4 size 2097152 crc 45520ba1 sha1 c33e3c12639961016e5fa6b5025d0a67dff28907 )
-	rom ( name mpr-16125.5 size 2097152 crc 9b4998b6 sha1 0418d9b0acf79f35d0f7575c21f1be9a0ea343da )
-	rom ( name mpr-16096.26 size 2097152 crc a92b0bf3 sha1 fd3adff5f41f0b0be98df548c848eda04fc0da48 )
-	rom ( name mpr-16097.27 size 2097152 crc 0232955a sha1 df934fb6d022032620932571ff5ed176d5dcb017 )
-	rom ( name mpr-16098.28 size 2097152 crc cf2e1b84 sha1 f3d16c72344f7f218a792ce7f1dd7cad910a8c97 )
-	rom ( name mpr-16099.29 size 2097152 crc 20e46854 sha1 423d3642bd2f14e68d29029c027b791de2c1ec53 )
-	rom ( name mpr-16100.30 size 2097152 crc e13e983d sha1 120637caa2404ad4124b676fd6fcd721f30948df )
-	rom ( name mpr-16101.31 size 2097152 crc 0dbed94d sha1 df1cddcc1d3976816bd786c2d6211a8563f6f690 )
-	rom ( name mpr-16102.32 size 2097152 crc 4cb41fb6 sha1 4a07bfad4f221508de8c931861424dcc5be3f46a )
-	rom ( name mpr-16103.33 size 2097152 crc 526d1c76 sha1 edc8dafc9261cd0e970c3b50e3c1ca51a32a4cdf )
+   name model1
+   description "Model 1 20090915"
+   category "Sega Model 1"
+   version 20090915
+   date 2009-09-15
+   author Logiqx
+   homepage "Logiqx Home Page"
+   url "http://www.logiqx.com/"
+   comment "Please report any data file issues at http://forum.logiqx.com/"
+   forcenodump ignore
 )
 
 game (
@@ -86,6 +52,40 @@ game (
 	rom ( name mpr-14900.41 size 524288 crc aa7c017d sha1 0fa2b59a8bb5f5907b2b2567e69d11c73b398dc1 )
 	rom ( name mpr-14901.42 size 524288 crc 175b7a9a sha1 c86602e771cd49bab425b4ba7926d2f44858bd39 )
 	rom ( name vr-tgp.bin size 8192 crc 3de33c7f sha1 acecc779c9d8fe39ded6c22492be5b7c25fd52db flags baddump )
+)
+
+game (
+	name vf
+	description "Virtua Fighter"
+	year 1993
+	manufacturer "Sega"
+	sourcefile model1.c
+	rom ( name epr-16082.14 size 524288 crc b23f22ee sha1 9fd5b5a5974703a60a54de3d2bce4301bfc0e533 )
+	rom ( name epr-16083.15 size 524288 crc d12c77f8 sha1 b4aeba8d5f1ab4aec024391407a2cb58ce2e94b0 )
+	rom ( name epr-16080.4 size 131072 crc 3662e1a5 sha1 6bfceb1a7c1c7912679c907f2b7516ae9c7dda67 )
+	rom ( name epr-16081.5 size 131072 crc 6dec06ce sha1 7891544456bccd2fc647bccd058945ad50466636 )
+	rom ( name mpr-16084.6 size 524288 crc 483f453b sha1 41a5527be73f5dd1c87b2a8113235bdd247ec049 )
+	rom ( name mpr-16085.7 size 524288 crc 5fa01277 sha1 dfa7ddff0a7daf29071431f26b93dd8e8e5793b6 )
+	rom ( name mpr-16086.8 size 524288 crc deac47a1 sha1 3a8016124e4dc579d4aae745d4af1905ad0e4fbd )
+	rom ( name mpr-16087.9 size 524288 crc 7a64daac sha1 da6a9cad4b0cb2af4299e664c0889f3fbdc25530 )
+	rom ( name mpr-16088.10 size 524288 crc fcda2d1e sha1 0f7d0f604d429a1da0d1c3f31694520bada49680 )
+	rom ( name mpr-16089.11 size 524288 crc 39befbe0 sha1 362c493092cd0536fadee7326ecc7f973e23fb58 )
+	rom ( name mpr-16090.12 size 524288 crc 90c76831 sha1 5a3c25f2a131cfbb2ad067bef1ab7b1c95645d41 )
+	rom ( name mpr-16091.13 size 524288 crc 53115448 sha1 af798d5b1fcb720d7288a5ac48839d9ace16a2f2 )
+	rom ( name epr-16120.7 size 131072 crc 2bff8378 sha1 854b08ab983e4e98cb666f2f44de9a6829b1eb52 )
+	rom ( name epr-16121.8 size 131072 crc ff6723f9 sha1 53498b8c103745883657dfd6efe27edfd48b356f )
+	rom ( name mpr-16122.32 size 2097152 crc 568bc64e sha1 31fd0ef8319efe258011b4621adebb790b620770 )
+	rom ( name mpr-16123.33 size 2097152 crc 15d78844 sha1 37c17e38604cf7004a951408024941cd06b1d93e )
+	rom ( name mpr-16124.4 size 2097152 crc 45520ba1 sha1 c33e3c12639961016e5fa6b5025d0a67dff28907 )
+	rom ( name mpr-16125.5 size 2097152 crc 9b4998b6 sha1 0418d9b0acf79f35d0f7575c21f1be9a0ea343da )
+	rom ( name mpr-16096.26 size 2097152 crc a92b0bf3 sha1 fd3adff5f41f0b0be98df548c848eda04fc0da48 )
+	rom ( name mpr-16097.27 size 2097152 crc 0232955a sha1 df934fb6d022032620932571ff5ed176d5dcb017 )
+	rom ( name mpr-16098.28 size 2097152 crc cf2e1b84 sha1 f3d16c72344f7f218a792ce7f1dd7cad910a8c97 )
+	rom ( name mpr-16099.29 size 2097152 crc 20e46854 sha1 423d3642bd2f14e68d29029c027b791de2c1ec53 )
+	rom ( name mpr-16100.30 size 2097152 crc e13e983d sha1 120637caa2404ad4124b676fd6fcd721f30948df )
+	rom ( name mpr-16101.31 size 2097152 crc 0dbed94d sha1 df1cddcc1d3976816bd786c2d6211a8563f6f690 )
+	rom ( name mpr-16102.32 size 2097152 crc 4cb41fb6 sha1 4a07bfad4f221508de8c931861424dcc5be3f46a )
+	rom ( name mpr-16103.33 size 2097152 crc 526d1c76 sha1 edc8dafc9261cd0e970c3b50e3c1ca51a32a4cdf )
 )
 
 game (
@@ -236,3 +236,4 @@ game (
 	rom ( name mpr-16739.41 merge mpr-16739.41 size 524288 crc 6c73e98f sha1 7b31e62922ab6d0df97c3ecc52b78e6d086c8635 )
 	rom ( name mpr-16740.42 merge mpr-16740.42 size 524288 crc 44b31007 sha1 4bb265fea25a7bbcbb8ab080fdcf09849b18f1de )
 )
+

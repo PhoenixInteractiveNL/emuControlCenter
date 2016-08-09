@@ -236,7 +236,11 @@ done by cyrille (aa@aa.fr)
 					$width = $maxWidth;
 					$aspectRatio = true;
 				}
-				if ($imageInfo[1] > $maxHeight){
+				
+				if (!$maxHeight) {
+					$height = $imageInfo[1];
+				}
+				elseif ($imageInfo[1] > $maxHeight){
 					$height = $maxHeight;
 					$aspectRatio = true;
 				}

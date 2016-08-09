@@ -61,5 +61,9 @@ $i18n['infoPane'] = array(
 	'iPaneHeadLbl' =>
 		"Parsed Header informations",
 
+	/* 0.9.9 WIP 03 */		
+	'iPaneEsearchOptDumpTypeLbl' =>
+		"Dump type",
+
 );
 ?>

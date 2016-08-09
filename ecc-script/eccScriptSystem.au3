@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.0.0.6 (2009.01.17)
+; Version: 1.0.0.7 (2009.09.20)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -28,15 +28,15 @@ Global $eccMetaName =			IniRead("..\eccScriptRom.dat", "META", "name", "")
 Global $eccMetaMediaType =		IniRead("..\eccScriptRom.dat", "META", "media_type", "")
 Global $eccMetaMediaCurrent =		IniRead("..\eccScriptRom.dat", "META", "media_current", "")
 Global $eccMetaMediaCount =		IniRead("..\eccScriptRom.dat", "META", "media_count", "")
-Global $eccMetaPlayer =		IniRead("..\eccScriptRom.dat", "META", "player", "")
-Global $eccMetaInfoId =		IniRead("..\eccScriptRom.dat", "META", "info_id", "")
+Global $eccMetaPlayer =			IniRead("..\eccScriptRom.dat", "META", "player", "")
+Global $eccMetaInfoId =			IniRead("..\eccScriptRom.dat", "META", "info_id", "")
 Global $eccMetaInfoString =		IniRead("..\eccScriptRom.dat", "META", "info_string", "")
 
 ;[FILE]
 Global $eccFileRomCrc32 = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_crc32", "")
 Global $eccFileRomFile = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_file", "")
 Global $eccFileRomPath = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_path", "")
-Global $eccFileRomFilePacked = 	IniRead("..\eccScriptRom.dat", "FILE", "rom_file_packed", "")
+Global $eccFileRomFilePacked = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_file_packed", "")
 Global $eccFileRomNamePlain = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_name_plain", "")
 Global $eccFileRomExtension = 		IniRead("..\eccScriptRom.dat", "FILE", "rom_extension", "")
 Global $eccFileRomFileExtension =	IniRead("..\eccScriptRom.dat", "FILE", "rom_file_extension", "")
@@ -59,7 +59,7 @@ Global $eccEmuEmulatorFile = 		IniRead("..\eccScriptRom.dat", "EMU", "emulator_f
 Global $eccEmuEmulatorPath = 		IniRead("..\eccScriptRom.dat", "EMU", "emulator_path", "")
 Global $eccEmuEmulatorFilePlain = 	IniRead("..\eccScriptRom.dat", "EMU", "emulator_file_plain", "")
 Global $eccEmuParameter = 		IniRead("..\eccScriptRom.dat", "EMU", "parameter", "")
-Global $eccEmuEscape = 		IniRead("..\eccScriptRom.dat", "EMU", "escape", "")
+Global $eccEmuEscape = 			IniRead("..\eccScriptRom.dat", "EMU", "escape", "")
 Global $eccEmuWin8char = 		IniRead("..\eccScriptRom.dat", "EMU", "win8char", "")
 Global $eccEmuFilenameOnly = 		IniRead("..\eccScriptRom.dat", "EMU", "filenameonly", "")
 Global $eccEmuNoExtension = 		IniRead("..\eccScriptRom.dat", "EMU", "noextension", "")
@@ -163,8 +163,8 @@ WinWaitActive($EmulatorWindowTitle, "", 10)
 ; Is the emulator active or not? 
 If WinExists($EmulatorWindowTitle) = 0 Then
 	MsgBox(0, $eccSystemName, "The emulator '" & $eccEmuEmulatorPath & $eccEmuEmulatorFile & "' did not respond!" & @CRLF & @CRLF & _
-	"eccScript searched for an window named '" & $EmulatorWindowTitle & "'but didn't find this!" & @CRLF & _
-	"Maybe the version has changed in the meantime, please check the window title-string again.")
+	"eccScript searched for an window named '" & $EmulatorWindowTitle & "' but didn't find this!" & @CRLF & _
+	"maybe the titlebar has changed?, please check the window title-string again!")
 	Exit
 EndIf
 

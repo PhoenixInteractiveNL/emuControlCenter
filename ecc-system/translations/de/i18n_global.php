@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -224,5 +224,23 @@ $i18n['global'] = array(
 	/* 0.9.9 FYEO 01 */
 	'assets' =>
 		"Dokumente",
+
+	/* 1.0.0 FYEO 02 */
+	'done' =>
+		"Fertig",
+	'ok' =>
+		"OK",
+	'move' =>
+		"Verschieben",
+	'mode' =>
+		"Modus",
+	'location' =>
+		"Ziel",
+
+	/* 1.0.0 FYEO 03 */
+	'images' =>
+		"Bilder",
+	'metadata' =>
+		"Metadaten",
 );
 ?>

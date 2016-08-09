@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
 <!--//
 
 Twilight
@@ -40,7 +41,6 @@ Credits:
     Thanks for the user for the tmTheme source.
 
 //-->
-<?xml version="1.0" encoding="Windows-1252" ?>
 <NotepadPlus>
     <LexerStyles>
         <LexerType name="c" desc="C" ext="">

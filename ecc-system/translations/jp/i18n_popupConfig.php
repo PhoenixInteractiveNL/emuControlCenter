@@ -304,5 +304,51 @@ $i18n['popupConfig'] = array(
 		"List view options",	
 			
 		
+	/* 0.9.7 WIP 04 */
+	'tab_label_themes' =>
+		"Themes",
+	'lblThemeSelect' =>
+		"Select theme",
+
+	/* 0.9.7 WIP 10 */
+	'emuAssignLabelZipUnpack' =>
+		"ZIP/7ZIP auto unpack",
+	'emuAssignGlobalCheckZipUnpackActive' =>
+		"automaticly unpack ZIP/7ZIP files",
+	'emuAssignGlobalCheckZipUnpackSkip' =>
+		"Skip allready unpacked files (faster)",
+	'emuAssignGlobalCheckZipUnpackClean' =>
+		"Cleanup ecc-unpack folder for platform",
+	'emuAssignGlobalCheckZipUnpackOpen' =>
+		"Open ecc-unpack folder",
+
+	/* 0.9.7 WIP 10 */
+	'conEccSaveGuiSettings' =>
+		"Save gui settings",
+
+	/* 0.9.8 WIP 02 */
+	'lbl_img_otp_list_imagesize_default' =>
+		"Default: 120x80",
+	'lbl_img_otp_list_aspectratio_default' =>
+		"Default: off",
+	'lbl_img_otp_list_fastrefresh_default' =>
+		"Default: off - experimental",
+
+	/* 0.9.8 WIP 04 */
+	'lbl_emu_assign_usecuefile' =>
+		"use .cue file",
+
+    /* 0.9.9. WIP 01 */
+	'startConfThirdPartyHdl' =>
+		"Third Party",
+	'startConfThirdPartyXpadder' =>
+		"Start 'xpadder' at startup",
+
+    /* 0.9.9. WIP 06 */
+	'emuAssignGlobalEccScriptOptions' =>
+		"Options",
+	'lbl_emu_assign_refresh_eccscript' =>
+		"Refresh",
+
 );
 ?>

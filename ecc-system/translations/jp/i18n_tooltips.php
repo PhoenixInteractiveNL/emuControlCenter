@@ -42,6 +42,19 @@ $i18n['tooltips'] = array(
 		"Audit state for multifile roms",
 	'nbMediaInfoMetaEvent' =>
 		"Edit the metainformations for this game",
-		
+
+	/* 0.9.7 WIP 14 */
+
+	'opt_only_disk' =>
+		"Show only the first Disk",
+
+	/* 0.9.7 WIP 16 */
+	'optionContextOnlyDiskAll' =>
+		"Show all roms",
+	'optionContextOnlyDiskOne' =>
+		"Show only first rom media",
+	'optionContextOnlyDiskOnePlus' =>
+		"Show first rom media plus unknown",
+
 );
 ?>

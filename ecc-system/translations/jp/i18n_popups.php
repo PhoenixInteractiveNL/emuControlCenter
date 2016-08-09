@@ -57,7 +57,7 @@ $i18n['popup'] = array(
 	'rom_reorg_title' =>
 		"�n�[�h�f�B�X�N���ROM��ĕҐ����܂����H",
 	'rom_reorg_msg%s%s%s' =>
-		"------------------------------------------------------------------------------------------���̃I�v�V�����̓n�[�h�f�B�X�N���ROM��ĕҐ����܂��I�I �܂�ECC-DB���畡��ROM��폜���ĉ������I�I�I\n�I�ⵂ����[�h��: #%s#\n------------------------------------------------------------------------------------------\n\n�@\n\n%s\n\n�̃J�e�S���ɂ���ROM��t�@�C���V�X�e������ĕҐ����܂����Hecc��\n\n%s/roms/organized/���ɂ��郆�[�U�[�t�H���_���ROM��Ґ����܂��B\n\n�n�[�h�f�B�X�N�̃t�@�C���e�ʂ�m�F���A�e�ʂ𖞂����ꍇ\n\n���Ȃ��̃��X�N�ɂ�Bđ����s���܂����H :-)",
+		"------------------------------------------------------------------------------------------���̃I�v�V�����̓n�[�h�f�B�X�N���ROM��ĕҐ����܂��I�I �܂�ECC-DB���畡��ROM��폜���ĉ������I�I�I\n�I�ⵂ����[�h��: #%s#\n------------------------------------------------------------------------------------------\n\n�@\n\n%s\n\n�̃J�e�S���ɂ���ROM��t�@�C���V�X�e������ĕҐ����܂����Hecc��\n\n%s/roms/organized/���ɂ��郆�[�U�[�t�H���_���ROM��Ґ����܂��B\n\n�n�[�h�f�B�X�N�̃t�@�C���e�ʂ�m�F���A�e�ʂ����������ꍇ\n\n���Ȃ��̃��X�N�ɂ�Bđ����s���܂����H :-)",
 	'rom_reorg_done_title' =>
 		"�ĕҐ������I�I",
 	'rom_reorg_done__msg%s' =>
@@ -103,7 +103,7 @@ $i18n['popup'] = array(
 	'dat_clear_title%s' =>
 		"%s��DB��폜���܂��B",
 	'dat_clear_msg%s%s' =>
-		"\n\n%s (%s)-�f�[�^�̑S�Ẵ��^����폜���܂����H\n\n�s���鎖�ɂ��J�e�S���A�X�e�[�^�X�A���ꓙ�̃��^��񂪑S�č폜����܂��Becc-�f�[�^�x�[�X���I�ⵂ��v���b�g�t�H�[����폜����܂��B���̃X�e�b�v�ł͂������̃o�b�N�A�b�v���쐬�o���܂��B (���[�U�[�t�H���_�֎����I�ɕۑ�����܂��B)\n\n�ŏI�I�ɂ̓f�[�^�x�[�X�̍œK����s���܂��I",
+		"\n\n%s (%s)-�f�[�^�̑S�Ẵ��^����폜���܂����H\n\n�s���鎖�ɂ��J�e�S���A�X�e�[�^�X�A���ꓙ�̃��^��������S�č폜����܂��Becc-�f�[�^�x�[�X���I�ⵂ��v���b�g�t�H�[����폜����܂��B���̃X�e�b�v�ł͂������̃o�b�N�A�b�v���쐬�o���܂��B (���[�U�[�t�H���_�֎����I�ɕۑ�����܂��B)\n\n�ŏI�I�ɂ̓f�[�^�x�[�X�̍œK����s���܂��I",
 	'dat_clear_backup_title%s' =>
 		"%s�̃o�b�N�A�b�v",
 	'dat_clear_backup_msg%s%s' =>
@@ -125,7 +125,7 @@ $i18n['popup'] = array(
 	'rom_miss_title' =>
 		"�G���[ - ���f�B�A�����t����܂���I",
 	'rom_miss_msg' =>
-		"�I�ⵂ��t�@�C�������t����܂���B\n\n�I�v�V������'ROMS->optimize roms in ecc'��g�p���ĉ������B\n�I�v�V������'escape'��'8.3'�𐳊m�Ƀ`�F�b�N���ĉ������B",
+		"�I�ⵂ��t�@�C�������t����܂���B\n\n�I�v�V������'ROMS->optimize roms in ecc'��g�p���ĉ������B\n�I�v�V������'escape'��'8.3'�������m�Ƀ`�F�b�N���ĉ������B",
 	'img_overwrite_title' =>
 		"�C���[�W��㏑�����܂����H",
 	'img_overwrite_msg%s%s' =>
@@ -215,9 +215,9 @@ $i18n['popup'] = array(
 
 	/* 0.9.2 WIP 11 */
 	'parse_big_file_found_title' =>
-		"�{���ɂ��̃t�@�C���𕪐͂��܂����H",
+		"�{���ɂ��̃t�@�C���������͂��܂����H",
 	'parse_big_file_found_msg%s%s' =>
-		"�傫�ȃt�@�C�������t����܂����I�I�I\n\n���t���B��Q�[��\n\n���O: %s\n�e��: %s\n\n�͔��ɑ傫�ȃt�@�C���ł��B�����emuControlCenter�Ƀt�B�[�h�o�b�N�����Ŕ��Ɏ��Ԃ��|����܂��B\n\n���̃Q�[���𕪐͂��܂����H",
+		"�傫�ȃt�@�C�������t����܂����I�I�I\n\n���t���B��Q�[��\n\n���O: %s\n�e��: %s\n\n�͔��ɑ傫�ȃt�@�C���ł��B�����emuControlCenter�Ƀt�B�[�h�o�b�N�����Ŕ��Ɏ��Ԃ��|����܂��B\n\n���̃Q�[���������͂��܂����H",
 
 	/* 0.9.5 WIP 19 */
 	'bookmark_added_title' =>
@@ -317,5 +317,60 @@ $i18n['popup'] = array(
 		"Process completed!",
 	'processDoneMsg' =>
 		"The process has been completed!",
+
+	/* 0.9.7 FYEO 11 */
+	'userdata_backuped_in%s' =>
+		"The backup XML-File with your userdata has been created into your ecc-user/#_GLOBAL/ folder\n\n%s\n\nView the exported xml now in your xml browser?",
+
+	/* 0.9.7 FYEO 17 */
+	'executePostShutdownTaskTitle' =>
+		"Really execute this background task?",
+	'executePostShutdownTaskMessage%s' =>
+		"\nTask: <b>%s</b>\n\nDo you really want to execute this long running task?",
+	'postShutdownTaskTitle' =>
+		"Execute selected task",
+	'postShutdownTaskMessage' =>
+		"You have selected a task only executable if emuControlCenter closed.\n\nAfter this task, <b>emuControlCenter will restart automaticly!</b>\n\nThis can take some seconds, some minutes and sometimes hours! This popup will be freezed! No fear! :-)\n\n<b>Please wait!</b>",
+
+	/* 0.9.8 FYEO 02 */
+	'startRomFileNotAvailableTitle' =>
+		"Romfile not found...",
+	'startRomFileNotAvailableMessage' =>
+		"It looks, like you dont have this rom!\n\nMaybe you try again after selecting view mode 'All i have' :-)",
+	'startRomWrongFilePathTitle' =>
+		"Rom in database but file not found",
+	'startRomWrongFilePathMessage' =>
+		"Maybe you have moved your roms to another position or removed them?\n\nPlease use the option 'ROMS' -> 'Optimize roms' to cleanup your database!",
+	
+	/* 0.9.8 FYEO 05 */
+	'waitForImageInjectTitle' =>
+		"Download images",
+	'waitForImageInjectMessage' =>
+		"This task could take a little bit. If images are found, this window closes automaticly and you can see the images in the list!\n\nIf no images are found, this popup closes and the mainlist is not updated! :-)",
+
+	/* 1.0.0 FYEO 02 */
+	'copy_by_search_title' =>
+		"Really copy/move files by search result?",
+	'copy_by_search_msg_waring%s%s%s' =>
+		"This option will copy/rename ALL games found in your search result (Take care: If you dont have searched, all files are selected!)\n\nYou can select the destination in the next window.\n\nThere where found <b>%s games</b> in your searchresult\n\n<b>%s packed games</b> are skipped!\n\nDo you really want to copy/move these <b>%s</b> games to another location?",
+	'copy_by_search_msg_error_noplatform' =>
+		"You have to select a platform to use this feature. It is not possible to use this function for ALL FOUND!",
+	'copy_by_search_msg_error_notfound%s' =>
+		"No valid games are found in your searchresult. <b>%s packed games</b> skipped.",
+	'searchTab' =>
+		"Searchresult",
+	'searchDescription' =>
+		"Here you can copy or move files from their source folder to a specified one.\n<b>Source is your current search result.</b>\nIf you move, also the paths in your database are updated! Clean by checksum remove files that are 100% duplicate!",
+	'searchHeadlineMain' =>
+		"Introduction",
+	'searchHeadlineOptionSameName' =>
+		"same name",
+	'searchRadioDuplicateAddNumber' =>
+		"add number",
+	'searchRadioDuplicateOverwrite' =>
+		"overwrite",
+	'searchCheckCleanup' =>
+		"cleanup by checksum",
+
 );
 ?>

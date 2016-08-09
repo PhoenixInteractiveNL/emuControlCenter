@@ -69,5 +69,30 @@ $i18n['metaEdit'] = array(
 	/* 0.9.7 WIP 20 */
 	'mediaEditMetaFrameRegion' =>
 		"Region",
+
+	/* 0.9.8 WIP 02 */
+	'mEditMediaDataInserted' =>
+		"Meta data stored!",
+	'mEditMediaDataUpdated' =>
+		"Meta data updated!",
+	'mEditMediaDataUnchanged' =>
+		"Not saved, nothing was changed!",
+	'mEditFileIsMultifileLabel' =>
+		"Is multifile",
+	'mediaEditTabFile' =>
+		"File informations",
+	'mediaEditTabScript' =>
+		"eccScript",
+	'mEditScriptIniFrameLabel' =>
+		"eccScript emulator config",
+	'mEditScriptIniTextMissingTemplate' =>
+		"missing eccscript emulator template",
+	'mEditScriptIniTextNoEccScript' =>
+		"No eccScript found!",
+
+	'mEditUserWrongCharacters' =>
+		"Invalid characters found in text. Please clean the text!",
+
+
 );
 ?>

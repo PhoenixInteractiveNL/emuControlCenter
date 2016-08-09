@@ -348,5 +348,29 @@ $i18n['popup'] = array(
 	'waitForImageInjectMessage' =>
 		"Cette tâche peut prendre un peu de temps. Si des images sont trouvées, cette fenêtre se fermera automatiquement et vous pourrez voir les images dans la liste !\n\nSi aucune image n'est trouvée, cette fenêtre se fermera et la liste ne sera pas mise à jour ! :-)",
 
+	/* 1.0.0 FYEO 02 */
+	'copy_by_search_title' =>
+		"\nCOPIER/DEPLACER LES FICHIERS RESULTATS DE LA RECHERCHE\n",
+	'copy_by_search_msg_waring%s%s%s' =>
+		"cette option va copier/déplacer TOUS les fichiers de la recherche. (Attention ! Si vous n'avez pas fait de recherche, tous les fichiers sont sélectionnés!)\n\nVous pourrez sélectionner le dossier de destination dans la fenêtre suivante.\n\nOnt été trouvés <b>%s games</b> dans votre résultat de recherche.\n\n<b>%s packed games</b> ne sont pas pris en compte !\n\nVoulez-vous vraiment copier/déplacer ces <b>%s</b> jeux dans un autre dossier ?",
+	'copy_by_search_msg_error_noplatform' =>
+		"You have to select a platform to use this feature. It is not possible to use this function for ALL FOUND!",
+	'copy_by_search_msg_error_notfound%s' =>
+		"Des jeux non valides ont été trouvés dans le résultat de la recherche. <b>%s packed games</b> n'ont pas été pris en compte.",
+	'searchTab' =>
+		"Résultat de la recherche",
+	'searchDescription' =>
+		"Ici vous pouvez copier ou déplacer des fichiers de leur dossier d'origine vers un autre spécifié.\n<b>La source est le résultat de la recherche.</b>\nSi vous les déplacer, les chemins dans votre base de données seront également modifiés ! Un nettoyage par somme de contrôle supprime les fichiers qui sont une duplication parfaite !",
+	'searchHeadlineMain' =>
+		"Introduction",
+	'searchHeadlineOptionSameName' =>
+		"Même nom",
+	'searchRadioDuplicateAddNumber' =>
+		"Ajouter un nombre",
+	'searchRadioDuplicateOverwrite' =>
+		"Remplacer",
+	'searchCheckCleanup' =>
+		"Nettoyage par somme de contrôle",
+
 );
 ?>

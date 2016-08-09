@@ -383,11 +383,20 @@ class WebServices {
 		while (gtk::events_pending()) gtk::main_iteration();
 		
 		// get zip
-		$zipFileDownload = file_get_contents($this->eccdb['IMAGE_INJECT_SERVER'].'idt='.$session.'&systemIdent='.$systemIdent.'&crc32='.$crc32);
-		if(!$zipFileDownload) return false;
+		$url = $this->eccdb['IMAGE_INJECT_SERVER'].'idt='.$session.'&systemIdent='.$systemIdent.'&crc32='.$crc32;
+		
+		echo '<pre>';
+		print_r($url);
+		echo '</pre>';
+		
+		$zipFileDownload = file_get_contents($url);
+		if(!$zipFileDownload) {
+			print "No file found\n";
+			return false;
+		}
 		
 		if(substr($zipFileDownload, 0, 5) == 'error'){
-			print $zipFileDownload."\n";
+			print "xxx".$zipFileDownload."\n";
 			return false;
 		}
 		
@@ -395,7 +404,10 @@ class WebServices {
 		
 		// store temp file
 		$tempFilename = 'temp/eccimage_temp.zip';
-		if(!file_put_contents($tempFilename, $zipFileDownload)) return false;
+		if(!file_put_contents($tempFilename, $zipFileDownload)) {
+			print "Could not move File!\n";
+			return false;
+		}
 
 		while (gtk::events_pending()) gtk::main_iteration();
 		
@@ -405,7 +417,12 @@ class WebServices {
 		$userFolder = FACTORY::get('IniFile')->getUserFolder($systemIdent);
 				
 		$zipHandle = zip_open($tempFilename);
-		if(!$zipHandle) return false;
+		if(!$zipHandle) {
+			print "Could not open ZIP\n";
+			return false;
+		}
+		
+		print "x\n";
 		
 		while (false !== $zipEntry = zip_read($zipHandle)){
 			
@@ -419,17 +436,19 @@ class WebServices {
 				$imagePath = $userFolder.''.zip_entry_name($zipEntry);
 
 				// write images and creates thumbs
-				$mngrImage->copyImageFromStream($systemIdent, $crc32, $imageStream, $imagePath);
+				print $mngrImage->copyImageFromStream($systemIdent, $crc32, $imageStream, $imagePath)."\n";
 				
 				zip_entry_close($zipEntry);
 			}
 			
 		}
 		zip_close($zipHandle);
+		
+		print "y\n";
 
 		// remove temp file
 		unlink($tempFilename);
-		
+		print "z\n";
 		return true;
 	}
 	

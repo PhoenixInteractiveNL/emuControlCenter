@@ -72,8 +72,19 @@ $i18n['meta'] = array(
 		"Musican",
 	'lbl_medium' =>
 		"Medium",
-		
-		
+
+	/* 0.9.7 WIP 20 */
+	'lbl_graphics' =>
+		"Graphics",
+
+	/* 0.9.8 WIP 03 */
+	'metaEditFeatureMuliplaySimultaneousLabel' =>
+		"Simultaneous",
+
+	/* 0.9.8 WIP 04 */
+	'lbl_dump_type' =>
+		"Dump type",
+
 );
 
 $i18n['dropdownMedium'] = array(
@@ -91,5 +102,30 @@ $i18n['dropdownMedium'] = array(
 		"Card",
 	'arcade_board' =>
 		"Arcade board",
+);
+// please dont translate this strings!
+$i18n['dropdownDumpType'] = array(
+	'unknown' =>
+		"Unknown",
+	'[!]' =>
+		"[!] Verified Good Dump",
+	'[a]' =>
+		"[a] Alternate Dump",
+	'[b]' =>
+		"[b] Bad Dump",
+	'[t]' =>
+		"[t] Trained",
+	'[f]' =>
+		"[f] Fixed",
+	'[T]' =>
+		"[T] Translation",
+	'[h]' =>
+		"[h] Hack",
+	'[o]' =>
+		"[o] Overdump",
+	'[p]' =>
+		"[p] Pirate",
+	'[cr]' =>
+		"[cr] Cracked",
 );
 ?>

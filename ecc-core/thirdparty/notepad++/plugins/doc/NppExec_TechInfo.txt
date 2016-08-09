@@ -1,6 +1,6 @@
  ****************************************************************************
- * NppExec plugin ver. 0.3 for Notepad++ 5.1 (and above)
- * by DV, December 2006 - January 2009
+ * NppExec plugin ver. 0.3.2 for Notepad++ 5.1 (and above)
+ * by DV, December 2006 - September 2009
  ****************************************************************************
 
 
@@ -11,37 +11,38 @@
  NppExec has advanced "hidden" settings which can be set manually.
  You need to edit NppExec's ini-file: "\Plugins\Config\NppExec.ini".
  
-  --------------------------------------------------------------
- |  KEY                             |  DEFAULT VALUE   |  TYPE  |
- |--------------------------------------------------------------|
- |                                  |                  |        |
- |  [Console]                       |                  |        |
- |  ChildProcess_StartupTimeout_ms  |  240             |  int   |
- |  ChildProcess_CycleTimeout_ms    |  120             |  int   |
- |  ChildProcess_ExitTimeout_ms     |  4000            |  int   |
- |  Path_AutoDblQuotes              |  0      (FALSE)  |  BOOL  |
- |  CmdHistory_MaxItems             |  256             |  int   |
- |  Exec_MaxCount                   |  100             |  int   |
- |  RichEdit_MaxTextLength          |  4194304 (4 MB)  |  int   |
- |  CommentDelimiter                |  //              | string |
- |  Visible                         |  0      (FALSE)  |  BOOL  |
- |  ShowHelp                        |  0      (FALSE)  |  BOOL  |
- |  NoEmptyVars                     |  1      (TRUE)   |  BOOL  |
- |  SaveCmdHistory                  |  1      (TRUE)   |  BOOL  |
- |  TextColorNormal                 |  00 00 00        |  HEX   |
- |  TextColorError                  |  A0 10 10        |  HEX   |
- |  TextColorMessage                |  20 80 20        |  HEX   |
- |  BackgroundColor                 |  0               |  HEX   |
- |  Alias_Cmd_NppExec               |  \               | string |
- |                                  |                  |        |
- |  [Options]                       |                  |        |
- |  HotKey                          |  F6              | string |
- |  ToolbarBtn                      |  1               |  int   |
- |  WatchScriptFile                 |  1      (TRUE)   |  BOOL  |
- |  ScriptNppStart                  |         (empty)  | string |
- |  ScriptNppExit                   |         (empty)  | string |
- |                                  |                  |        |
-  --------------------------------------------------------------
+  --------------------------------------------------------------------
+ |  KEY                             |  DEFAULT VALUE         |  TYPE  |
+ |--------------------------------------------------------------------|
+ |                                  |                        |        |
+ |  [Console]                       |                        |        |
+ |  ChildProcess_StartupTimeout_ms  |  240                   |  int   |
+ |  ChildProcess_CycleTimeout_ms    |  120                   |  int   |
+ |  ChildProcess_ExitTimeout_ms     |  4000                  |  int   |
+ |  Path_AutoDblQuotes              |  0            (FALSE)  |  BOOL  |
+ |  CmdHistory_MaxItems             |  256                   |  int   |
+ |  Exec_MaxCount                   |  100                   |  int   |
+ |  RichEdit_MaxTextLength          |  4194304      (4 MB)   |  int   |
+ |  CommentDelimiter                |  //                    | string |
+ |  Visible                         |  0            (FALSE)  |  BOOL  |
+ |  ShowHelp                        |  0            (FALSE)  |  BOOL  |
+ |  NoEmptyVars                     |  1            (TRUE)   |  BOOL  |
+ |  SaveCmdHistory                  |  1            (TRUE)   |  BOOL  |
+ |  TextColorNormal                 |  00 00 00              |  HEX   |
+ |  TextColorError                  |  A0 10 10              |  HEX   |
+ |  TextColorMessage                |  20 80 20              |  HEX   |
+ |  BackgroundColor                 |  0                     |  HEX   |
+ |  Alias_Cmd_NppExec               |  \                     | string |
+ |                                  |                        |        |
+ |  [Options]                       |                        |        |
+ |  HotKey                          |  F6                    | string |
+ |  ToolbarBtn                      |  1                     |  int   |
+ |  WatchScriptFile                 |  1            (TRUE)   |  BOOL  |
+ |  ScriptNppStart                  |               (empty)  | string |
+ |  ScriptNppExit                   |               (empty)  | string |
+ |  HelpFile                        | doc\NppExec_Manual.chm | string |
+ |                                  |                        |        |
+  --------------------------------------------------------------------
 
  The purpose of each key is described below.
  You can add specified keys to [Console] or [Options] section of 
@@ -54,6 +55,7 @@
    WatchScriptFile=1
    ScriptNppStart=
    ScriptNppExit=
+   HelpFile=doc\NppExec_Manual.chm
    
    [Console]
    Visible=0
@@ -347,3 +349,15 @@
    Note: if you specify an empty value or non-existent script name for
    this option, no script will be executed when Notepad++ exits.
    See also: ScriptNppStart.
+
+ 
+ HelpFile
+ --------
+   Relative pathname to NppExec's help file (manual). 
+   This pathname is relative to location of the "NppExec.dll" file.
+   Usually "NppExec.dll" is located somewhere in "...\Notepad++\plugins",
+   and the help file is located in "...\Notepad++\plugins\doc" so its
+   relative pathname is "doc\NppExec_Manual.chm".
+   You can specify different file name and/or extension here.
+   Also you can specify absolute pathname (e.g. C:\docs\NppExec.chm).
+

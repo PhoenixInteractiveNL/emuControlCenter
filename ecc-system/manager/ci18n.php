@@ -30,14 +30,20 @@ class i18n {
 	public static function readLangDir() {
 		if (!is_dir(self::$langDir)) return false;
 		
-		#$destEncoding = 'UTF-8';
-		$destEncoding = 'CP1250';
+		// set default values
+		$encoding_source			= 'UTF-8';
+		$encoding_destination = 'CP1250';
 		
-		# read encoding ini - this is not needed, if data is UTF-8
+		// read encoding ini - this is not needed, if data is UTF-8
 		$charsetIniFile = self::$langDir.'/charset.ini';
 		$charsetIni = (file_exists($charsetIniFile)) ? parse_ini_file($charsetIniFile, true) : false;
-		$sourceCharset = (isset($charsetIni['characterset']) && $charsetIni['characterset'] != $destEncoding) ? trim($charsetIni['characterset']) : false;
-		
+		$encoding_source				= (isset($charsetIni['encoding_source']) && $charsetIni['encoding_source'] != $encoding_source) ? trim($charsetIni['encoding_source']) : $encoding_source;
+		$encoding_destination 	= (isset($charsetIni['encoding_destination']) && $charsetIni['encoding_destination'] != $encoding_destination) ? trim($charsetIni['encoding_destination']) : $encoding_destination;
+
+		// the the codepage in the php.ini
+		ini_set('php-gtk.codepage', $encoding_destination);
+
+		// translate i18n files
 		$dirHdl = opendir(self::$langDir);
 		while($file = readdir($dirHdl)) {
 			
@@ -46,8 +52,8 @@ class i18n {
 			if (isset($i18n) && is_array($i18n)) {
 				foreach($i18n as $type => $i18nData){
 					foreach($i18nData as $key => $value){
-						if ($sourceCharset){
-							$i18n[$type][$key] = iconv($sourceCharset, $destEncoding.'//TRANSLIT', $value);
+						if ($encoding_source){
+							$i18n[$type][$key] = iconv($encoding_source, $encoding_destination.'//TRANSLIT', $value);
 						}
 						else {
 							$i18n[$type][$key] = $value;							
@@ -63,6 +69,9 @@ class i18n {
 				$i18n = false;
 			}
 		}
+		
+		#file_put_contents('testi18n.html', print_r(self::$langData, true));
+		
 	}
 	
 	public static function translateArray($category, $languageArray, $createPlaceholder=false, $valueAsIndex=false) {

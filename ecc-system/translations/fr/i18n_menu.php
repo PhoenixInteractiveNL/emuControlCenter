@@ -187,7 +187,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.9 FYEO 01 */
 	'lblOpenAssetFolder' =>
-		"Browse documents folder",
+		"Parcourir le dossier des documents",
 
 
 );

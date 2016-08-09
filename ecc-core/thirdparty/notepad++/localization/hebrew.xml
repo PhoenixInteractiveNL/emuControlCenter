@@ -21,9 +21,21 @@
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
+					<Item posX="1" posY = "9" name="העתק לזיכרון"/>
+					<Item posX="1" posY = "10" name="רווח"/>
+					<Item posX="1" posY = "11" name="המר משפט"/>
+					<Item posX="1" posY = "12" name="פעולות בשורה"/>
+					<Item posX="1" posY = "13" name="הערה/חוסר הערה"/>
+					<Item posX="1" posY = "14" name="השלמה אוטומטית"/>
+					<Item posX="2" posY = "11" name="סמן הכול"/>
+					<Item posX="2" posY = "12" name="בטל סמן הכול"/>
+					<Item posX="3" posY = "4" name="הראה סמל"/>
+					<Item posX="3" posY = "5" name="התמקד"/>
+					<Item posX="3" posY = "6" name="העבר/שכפל מסמך נוכחי"/>
                     <Item posX="3" posY = "16" name="אחד את השלב"/>
                     <Item posX="3" posY = "17" name="פצל את השלב"/>
-                </SubEntries>
+
+				</SubEntries>
 
                 <!-- all menu item -->
                 <Commands>
@@ -104,7 +116,19 @@
 					<Item id="43019" name="העתק קווי סימניה"/>
 					<Item id="43020" name="העתק בשביל להחליף קווי סימניה"/>
 					<Item id="43021" name="מחק קווי סימניה"/>
+					<Item id="43022" name="השתמש בסיגנון 1"/>
+					<Item id="43023" name="נקה סיגנון 1"/>
+					<Item id="43024" name="השתמש בסיגנון 2"/>
+					<Item id="43025" name="נקה סיגנון 2"/>
+					<Item id="43026" name="השתמש בסיגנון 3"/>
+					<Item id="43027" name="נקה סיגנון 3"/>
+					<Item id="43028" name="השתמש בסיגנון 4"/>
+					<Item id="43029" name="נקה סיגנון 4"/>
+					<Item id="43030" name="השתמש בסיגנון 5"/>
+					<Item id="43031" name="נקה סיגנון 5"/>
+					<Item id="43032" name="נקה כל הסיגנונות"/>
 
+					<Item id="44009" name="הרחב את הדף"/>
                     <Item id="44011" name="תיבת שיח הגדרת משתמש"/>
                     <Item id="44025" name="הצג מרווחים וטאבים"/>
                     <Item id="44026" name="הצג סוף שורה"/>
@@ -112,7 +136,7 @@
                     <Item id="44027" name="שורת קצה אנכית"/>
                     <Item id="44028" name="שורת קצה מצב רקע"/>
                     <Item id="44020" name="הצג קווי עימוד"/>
-                    <Item id="44022" name="כרוך עטיפה"/>
+                    <Item id="44022" name="עטיפת מילים"/>
                     <Item id="44023" name="התמקדות &amp;פנימה"/>
                     <Item id="44024" name="התמקדות &amp;החוצה"/>
 					<Item id="44032" name="הפעל\בטל מסך מלא"/>
@@ -124,6 +148,7 @@
 					<Item id="44042" name="החבא קווים"/>
 					<Item id="44070" name="הפעל חלון ראשי"/>
 					<Item id="44071" name="הפעל חלון משני"/>
+					<Item id="44072" name="התמקד בתצוגה אחרת"/>
   					<Item id="44010" name="קפל הכול"/>
 					<Item id="44030" name="אחד את השלב הנוכחי"/>
 					<Item id="44031" name="פצל את השלב הנוכחי"/>
@@ -143,6 +168,9 @@
 					<Item id="45013" name="המר לUCS-2 אינדיאני קטן"/>
 					<Item id="10001" name="עבור לתצוגה אחרת"/>
                     <Item id="10002" name="העתק לתצוגה אחרת"/>
+					<Item id="10003" name="העבר לחלון חדש"/>
+					<Item id="10004" name="פתח בחלון חדש"/>
+					
 
                     <Item id="46001" name="עיצוב סיגנונות"/>
 					<Item id="46002" name="שפת C"/>
@@ -204,12 +232,12 @@
 					<Item id="47006" name="עדכן ++Notepad"/>
 					<Item id="47007" name="ויקפדיה שאלות ותשובות"/>
 					<Item id="48009" name="קבל עוד תוספים"/>
-					<Item id="48011" name="העדפות"/>
+					<Item id="48011" name="אפשרויות"/>
                     <Item id="49000" name="הרצה..."/>
 					<Item id="50000" name="השלמת פונקציה"/>
 					<Item id="50001" name="השלמת מילה"/>
 					<Item id="50002" name="רמז פרמטרים לפונקציה"/>
-                    
+
 					
                 </Commands>
 			</Main>
@@ -219,18 +247,27 @@
                 	<Item order="0" name="סגור אותי"/>
 					<Item order="1" name="סגור את הכל חוץ ממני"/>
 					<Item order="2" name="שמור אותי"/>
-					<Item order="3" name="...שמור אותי בשם"/>
+					<Item order="3" name="שמור אותי בשם..."/>
 					<Item order="4" name="הדפס אותי"/>
 					<Item order="5" name="עבור לתצוגה אחרת"/>
 					<Item order="6" name="שכפל לתצוגה אחרת"/>
+					<Item order="7" name="מסלול קובץ מלא לזיכרון"/>
+					<Item order="8" name="שם קובץ לזיכרון"/>
+					<Item order="9" name="מסלול תיקיה נוכחית לזיכרון"/>
+					<Item order="10" name="שנה את שמי"/>
+					<Item order="11" name="מחק אותי"/>
+					<Item order="12" name="קריאה בלבד"/>
+					<Item order="13" name="נקה דגל קריאה בלבד"/>
+					<Item order="14" name="העבר לחלון חדש"/>
+					<Item order="15" name="פתח בחלון חדש"/>
 			</TabBar>
 		</Menu>
 
 		<Dialog>
-            <Find title="...חפש">
-                <Item id="1" name="חפש הבא"/>
+                <Find title="חפש">
+	   		    <Item id="1" name="חפש הבא"/>
                 <Item id="2" name="סגור"/>
-                <Item id="1620" name=":מצא את"/>
+				<Item id="1620" name="מצא את:"/>
                 <Item id="1603" name="התאם את כל המילה"/>
                 <Item id="1604" name="התאם מקרה"/>
                 <Item id="1605" name="ביטוי רגיל"/>
@@ -243,19 +280,49 @@
                 <Item id="1617" name="סגנון מצא סימן"/>
                 <Item id="1618" name="נקה בכל חיפוש"/>
                 <Item id="1621" name="כיוון חיפוש"/>
-                <Item id="1611" name=":החלף ב"/>
+				<Item id="1624" name="מצב חיפוש"/>
+				<Item id="1625" name="נורמלי"/>
+				<Item id="1626" name="מורחב"/>
+                <Item id="1611" name="החלף ב:"/>
                 <Item id="1608" name="&amp;החלף"/>
                 <Item id="1609" name="החלף ה&amp;כל"/>
-			 	<Item id="1623" name="שקיפות"/>
+			 	<Item id="1623" name="קבוצת קופסאות"/>
+				<Item id="1632" name="בבחירה"/>
+				<Item id="1633" name="נקה"/>
+				<Item id="1635" name="החלף הכול בכל המסמכים הפתוחים"/>
+				<Item id="1636" name="מצא הכול בכל המסמכים הפתוחים"/>
+				<Item id="1641" name="מצא הכול במסמך הנוכחי"/>
+				<Item id="1654" name="פילטרים"/>
+				<Item id="1655" name="תיקיה"/>
+				<Item id="1656" name="מצא הכל"/>
+				<Item id="1658" name="בכל תתי התיקיות"/>
+				<Item id="1659" name="בתיקיות חבויות"/>
+				<Item id="1660" name="החלף בקבצים"/>
+				<Item id="1661" name="עקוב מסמך נוכחי"/>
+				<Item id="1686" name="שקיפות"/>
+				<Item id="1687" name="באובדן מיקוד"/>
+				<Item id="1688" name="תמיד"/>
             </Find>
-            <GoToLine title="# דלג לשורה">
-                <Item id="1" name="! &amp;דלג"/>
+			<ColumnEditor title="עורך עמודות">
+		        <Item id="1" name="אישור"/>
+			    <Item id="2" name="ביטול"/>
+			    <Item id="2023" name="טקסט להכניס"/>
+				<Item id="2033" name="מספר להכניס"/>
+				<Item id="2030" name="מספר התחלתי:"/>
+				<Item id="2032" name="פורמט"/>
+				<Item id="2031" name="הגדל ב:"/>
+				<Item id="2035" name="אפסים עוקבים"/>
+			</ColumnEditor>
+            <GoToLine title="דלג אל שורה...">
+                <Item id="1" name="&amp;דלג !"/>
                 <Item id="2" name="לא הולך לשומקום"/>
                 <Item id="2004" name="אתה כאן :"/>
                 <Item id="2005" name="אתה מדלג אל :"/>
                 <Item id="2006" name="אתה לא יכול לעבור :"/>
-            </GoToLine>
-            <TabSize>
+				<Item id="2007" name="שורה"/>
+				<Item id="2008" name="אופסט"/>
+			</GoToLine>
+			<TabSize>
                 <Item id="2401" name="גודל טאב :"/>
             </TabSize>
             <MaxFile>
@@ -266,8 +333,7 @@
                 <Item id="1" name="! הרץ"/>
                 <Item id="2" name="ביטול"/>
             </Run>
-            <StyleConfig title="מעצב סיגנונות">
-				<Item id="1" name="תנסו את זה!"/>
+		        <StyleConfig title="מעצב סיגנונות">
 				<Item id="2" name="בטל"/>
 				<Item id="2301" name="שמור &amp;&amp; סגור"/>
 				<Item id="2303" name="שקיפות"/>
@@ -283,11 +349,22 @@
                     <Item id="2209" name="גודל פונט :"/>
                     <Item id="2204" name="מודגש"/>
                     <Item id="2205" name="נטוי"/>
-                    <Item id="2214" name="סיומת ברירת מחדל :"/>
+					<Item id="2206" name="רקע קדמי"/>
+					<Item id="2207" name="רקע אחורי"/>
+					<Item id="2214" name="סיומת ברירת מחדל :"/>
                     <Item id="2216" name="סיומת משתמש :"/>
                     <Item id="2218" name="קו תחתי"/>
                     <Item id="2219" name="מילות מפתח ברירת מחדל"/>
                     <Item id="2221" name="מילות מפתח הגדרת משתמש"/>
+					<Item id="2225" name="שפה"/>
+					<Item id="2226" name="אפשר רקע קדמי גלובלית"/>
+					<Item id="2227" name="אפשר רקע אחורי גלובלית"/>
+					<Item id="2228" name="אפשר פונט גלובלי"/>
+					<Item id="2229" name="אפשר גודל פונט גלובלי"/>
+					<Item id="2230" name="אפשר פונט בולט גלובלי"/>
+					<Item id="2231" name="אפשר פונט נטוי גלובלי"/>
+					<Item id="2232" name="אפשר פונט קו תחתי גלובלי"/>
+					<Item id="2306" name="בחר ערכת נושא :"/>
                 </SubDialog>
 
             </StyleConfig>

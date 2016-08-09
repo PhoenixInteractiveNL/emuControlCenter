@@ -89,31 +89,43 @@ class FileIO {
 		}
 	}
 	
-   public function fopen_zip($zipFileName, $zipEntryFileName) {   
-      
-      $zip = new ZipArchive;
-      $res = $zip->open($zipFileName);
-      if($res !== true) return null;
+	public function fopen_zip($zipFileName, $zipEntryFileName) {	
+		
+		$zip = new ZipArchive;
+		$res = $zip->open($zipFileName);
+		if($res !== true) return null;
 
-      $tempFolder = getcwd().'/temp/';
-      if (!is_dir($tempFolder)) mkdir($tempFolder);
-      
-      $zip->extractTo($tempFolder, array($zipEntryFileName));
-      
-      $tempFile = $tempFolder.$zipEntryFileName;
-      $fhdl = fopen($tempFile, 'r+b');
-      
-      # quick hack
-      # fsum cannot parse an file with open filehandle
-      # dont return an valid filehandle here, because the
-      # zips dont need an filehandle!
-      if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
-         fclose($fhdl);
-         return null;
-      }
-      
-      return $fhdl;
-   }
+		$tempFolder = getcwd().'/temp/';
+		if (!is_dir($tempFolder)) mkdir($tempFolder);
+		
+		$zip->extractTo($tempFolder, array($zipEntryFileName));
+		
+		$tempFile = $tempFolder.$zipEntryFileName;
+		$fhdl = fopen($tempFile, 'r+b');
+		
+//		$zip = new ZipArchive();
+//		$zip->open($zipFileName);
+//		$buf = $zip->getFromName($zipEntryFileName);
+//		$zip->close();
+//		
+//		$tempFolder = getcwd().'/temp/';
+//		if (!is_dir($tempFolder)) mkdir($tempFolder);
+//		$tempFile = $tempFolder.basename($zipEntryFileName);
+//		
+//		$fhdl = fopen($tempFile, 'w+b');
+//		fwrite($fhdl, $buf);
+		
+		# quick hack
+		# fsum cannot parse an file with open filehandle
+		# dont return an valid filehandle here, because the
+		# zips dont need an filehandle!
+		if(filesize($tempFile) >= SLOW_CRC32_PARSING_FROM){
+			fclose($fhdl);
+			return null;
+		}
+		
+		return $fhdl;
+	}
 	
 	public function extractZip($zipFile, $zipEntry, $destinationFolder = false){
 		
@@ -139,8 +151,8 @@ class FileIO {
 	}
 	
 	public function fclose_zip($fhdl, $path) {
-		fclose($fhdl);
-		unlink($path);
+		if($fhdl) fclose($fhdl);
+		if($path) unlink($path);
 	}
 	
 	public function ecc_reset($fhdl) {
@@ -438,8 +450,10 @@ class FileIO {
 		$file = basename($file);
 		if (false !== strpos($file, ".")) {
 			$split = explode(".", $file);
+			array_pop($split);
+			$plainName = join('.', $split);
+			return FileIO::covertStringToUtf8($plainName);
 			#return FileIO::covertStringToUtf8(array_shift($split));
-			return FileIO::covertStringToUtf8(array_shift($split));
 		}
 		return "";
 	}
@@ -575,7 +589,23 @@ class FileIO {
 		}
 		return self::$fileList;	
 	}
-		
+	
+	
+	/**
+	 * Gather info, if this device is read only
+	 *
+	 * @param string $path
+	 * @return boolean
+	 */
+	public function deviceIsReadOnly($path) {
+		$chkFile = $path.'/eccWrite.chk';
+		$isReadOnly = true;
+		if(@file_put_contents($chkFile, 'can be removed!')) {
+			$isReadOnly = false;
+			unlink($chkFile);
+		}
+		return $isReadOnly;
+	}
 }
 
 ?>

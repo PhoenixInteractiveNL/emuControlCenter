@@ -1,24 +1,596 @@
 clrmamepro (
 	name S16
-	description "System 16 20090105"
+	description "System 16 20090915"
 	category "Sega System 16"
-	version 20090106
-	date 2009-01-06
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
 	comment "Please report any data file issues at http://forum.logiqx.com/"
-	forcenodump obsolete
+	forcenodump ignore
 )
 
 game (
-	name aliensy1
+	name bayrouteb1
+	description "Bay Route (encrypted, protected bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name b4.bin size 65536 crc eb6646ae sha1 073bc0a3868e70785f44e497a949cd9e3b591a33 )
+	rom ( name b2.bin size 65536 crc ecd9cd0e sha1 177c38ca02c4e87d6adcae77ce4e9237938d23a9 )
+	rom ( name br.5a size 65536 crc 9d6fd183 sha1 5ae78d33c0e929886d84a25c0fbd62ab45dcbff4 )
+	rom ( name br.2a size 65536 crc 5ca1e3d2 sha1 51ce67ed0a0054f9c9c4ac56c5775716c44d74b1 )
+	rom ( name b8.bin size 65536 crc e7ca0331 sha1 b255939576a84f4d266f31a7fde818e04ff35b24 )
+	rom ( name b6.bin size 65536 crc 2bc748a6 sha1 9ab760377fde24cecb703726ee3e59ee23d60a3a )
+	rom ( name protdata size 4096 crc 5474fd95 sha1 1cbd47aa8f8b9641ba81942bcaae0bc768fd33fd flags baddump )
+	rom ( name unknown.mcu size 4096 flags nodump )
+	rom ( name bs16.bin size 65536 crc a8a5b310 sha1 8883e1ed48a3e0f7b4c36d83579f93e84e28568c )
+	rom ( name bs14.bin size 65536 crc 6bc4d0a8 sha1 90b9a61c7a140291d72554857ce26d54ebf03fc2 )
+	rom ( name bs12.bin size 65536 crc c1f967a6 sha1 8eb6bbd9e17dc531830bc798b8485c8ea999e56e )
+	rom ( name br_obj0o.1b size 65536 crc 098a5e82 sha1 c5922f418773bc3629071e584457839d67a370e9 )
+	rom ( name br_obj0e.5b size 65536 crc 85238af9 sha1 39989a8d9b60c6d55272b5e2c213341a563dd993 )
+	rom ( name br_obj1o.2b size 65536 crc cc641da1 sha1 28f8a6502702cb9e2cc7f3e98f6c5d201f462fa3 )
+	rom ( name br_obj1e.6b size 65536 crc d3123315 sha1 16a87caed1cabb080d4f35935910b38797344ca5 )
+	rom ( name br_obj2o.3b size 65536 crc 84efac1f sha1 41c43d70dc7ae7e361d6fa12c5790ea7ebf13ca8 )
+	rom ( name br_obj2e.7b size 65536 crc b73b12cb sha1 e8265ae90aabf1ee0522dbc6541a0f82fec97c7a )
+	rom ( name br_obj3o.4b size 65536 crc a2e238ac sha1 c854774c0ffd1ccf6e46591a8fa3c80a4630e007 )
+	rom ( name bs7.bin size 65536 crc 0c91abcc sha1 d25608f3cbacd1bd169f1a2247f007ac8bc8dda0 )
+	rom ( name epr12459.a10 size 32768 crc 3e1d29d0 sha1 fe3d985983e5132e8a26a02a3f2d8d420cbf1a49 )
+	rom ( name mpr12460.a11 size 131072 crc 0bae570d sha1 05fa4a3405666342ab66e696a7344cca97569f19 )
+	rom ( name mpr12461.a12 size 131072 crc b03b8b46 sha1 b0283ac377d464f3d9374a992192ec6c515a3c2f )
+	rom ( name 12.12 size 32768 crc 81ce4576 sha1 84eea0ab8d8ea8869c12f0b603b91b1188d0e288 )
+)
+
+game (
+	name bayrouteb2
+	description "Bay Route (Datsu bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name br_04 size 65536 crc 2e33ebfc sha1 f6b5a4bd28d302abd6b1e5a9ec6f2a8b57ff213e )
+	rom ( name br_06 size 65536 crc 3db42313 sha1 e1c874ebf83e1a458cefaa038fbe89a9804ca30d )
+	rom ( name br_03 size 131072 crc 285d256b sha1 73eac0131d14f0d7fe2a06cb2e0e57dcf4779cf9 )
+	rom ( name br_05 size 131072 crc 552e6384 sha1 2770b0c9d961671576e09ada2ebd7bb486f24547 )
+	rom ( name bs16.bin size 65536 crc a8a5b310 sha1 8883e1ed48a3e0f7b4c36d83579f93e84e28568c )
+	rom ( name bs14.bin size 65536 crc 6bc4d0a8 sha1 90b9a61c7a140291d72554857ce26d54ebf03fc2 )
+	rom ( name bs12.bin size 65536 crc c1f967a6 sha1 8eb6bbd9e17dc531830bc798b8485c8ea999e56e )
+	rom ( name br_obj0o.1b size 65536 crc 098a5e82 sha1 c5922f418773bc3629071e584457839d67a370e9 )
+	rom ( name br_obj0e.5b size 65536 crc 85238af9 sha1 39989a8d9b60c6d55272b5e2c213341a563dd993 )
+	rom ( name br_obj1o.2b size 65536 crc cc641da1 sha1 28f8a6502702cb9e2cc7f3e98f6c5d201f462fa3 )
+	rom ( name br_obj1e.6b size 65536 crc d3123315 sha1 16a87caed1cabb080d4f35935910b38797344ca5 )
+	rom ( name br_obj2o.3b size 65536 crc 84efac1f sha1 41c43d70dc7ae7e361d6fa12c5790ea7ebf13ca8 )
+	rom ( name br_obj2e.7b size 65536 crc b73b12cb sha1 e8265ae90aabf1ee0522dbc6541a0f82fec97c7a )
+	rom ( name br_obj3o.4b size 65536 crc a2e238ac sha1 c854774c0ffd1ccf6e46591a8fa3c80a4630e007 )
+	rom ( name bs7.bin size 65536 crc 0c91abcc sha1 d25608f3cbacd1bd169f1a2247f007ac8bc8dda0 )
+	rom ( name br_01 size 65536 crc b87156ec sha1 bdfef2ab5a4d3cac4077c92ce1ef4604b4c11cf8 )
+	rom ( name br_02 size 65536 crc ef63991b sha1 4221741780f88c80b3213ddca949bee7d4c1469a )
+)
+
+game (
+	name dduxbl
+	description "Dynamite Dux (bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name dduxb03.bin size 131072 crc e7526012 sha1 a1798008bfa1ce9b87dc330f3817b1978052fcfd )
+	rom ( name dduxb05.bin size 131072 crc 459d1237 sha1 55e9c0dc341c919d58cc789203642c397d7ac65e )
+	rom ( name dduxb02.bin size 131072 crc d8ed3132 sha1 a9d5ad8f79fb635cc234a99fad398688a5f15926 )
+	rom ( name dduxb04.bin size 131072 crc 30c6cb92 sha1 2e17c74eeb37c9731fc2e365cc0114f7383c0106 )
+	rom ( name dduxb14.bin size 65536 crc 664bd135 sha1 674b06e01c2c8f5b8057dd24d470330c3f140473 )
+	rom ( name dduxb15.bin size 65536 crc ce0d2b30 sha1 e60521c46f1650c9bdc76f2ceb91a6d61aaa0a09 )
+	rom ( name dduxb16.bin size 65536 crc 6de95434 sha1 7bed2a0261cf6c2fbb3756633f05f0bb2173977c )
+	rom ( name dduxb06.bin size 65536 crc b0079e99 sha1 9bb4d3fa804a3d05a6e06b45a1280d7064e96ac6 )
+	rom ( name dduxb10.bin size 65536 crc 0be3aee5 sha1 48fc779b7398abbb82cd0d0d28705ece75b3c4e3 )
+	rom ( name dduxb07.bin size 65536 crc 0217369c sha1 b6ec2fa1279a27a602d79e1073c54193745ea816 )
+	rom ( name dduxb11.bin size 65536 crc cfb2af18 sha1 1ad18f933a7b797f0364d1f4a6c8549351b4c9a6 )
+	rom ( name dduxb08.bin size 65536 crc 8844f336 sha1 18c1baaad3bcc658d4a6d03de8c97378b5284e88 )
+	rom ( name dduxb12.bin size 65536 crc 28ce9b15 sha1 1640df9c8f21893c0647ad2f4210c714a06e6f37 )
+	rom ( name dduxb09.bin size 65536 crc 6b64f665 sha1 df07fcf2bbec6fa78f89b95272762aebd6f3ec0e )
+	rom ( name dduxb13.bin size 65536 crc efe57759 sha1 69b8969b20ab9480df2735bd2bcd527069196bd7 )
+	rom ( name dduxb01.bin size 32768 crc 0dbef0d7 sha1 8b9afb2fcb946cec467b1e691c267194b503f841 )
+)
+
+game (
+	name eswatbl
+	description "E-Swat - Cyber Police (bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name eswat_c.rom size 65536 crc 1028cc81 sha1 24b4cd182419a44f3d6afa1c4273353024eb278f )
+	rom ( name eswat_f.rom size 65536 crc f7b2d388 sha1 8131ba8f4fa01751b9993c3c6c218c9bd3adb328 )
+	rom ( name eswat_b.rom size 65536 crc 87c6b1b5 sha1 a9f29e29a9c0e3daf272dce263a5fd7866642c77 )
+	rom ( name eswat_e.rom size 65536 crc 937ddf9a sha1 9fc73f93e9c4221a4dc778593edc02cb405b2f78 )
+	rom ( name eswat_a.rom size 32768 crc 2af4fc62 sha1 f7b1539a5ab9560bd49dfecf44699abccfb649be )
+	rom ( name eswat_d.rom size 32768 crc b4751e19 sha1 57c9687dc864c163d13dbb89057cd42684a199cd )
+	rom ( name mpr12624.b11 size 262144 crc 375a5ec4 sha1 42b9116bdc0e0a5b1dd667ac1856b4c2252829ba )
+	rom ( name mpr12625.b12 size 262144 crc 3b8c757e sha1 0b66e8446d059a12e47e2a6fe8f0a333245bb95c )
+	rom ( name mpr12626.b13 size 262144 crc 3efca25c sha1 0d866bf53a16b52719f73081e933f4db27d72ece )
+	rom ( name ic9 size 262144 crc 0d1530bf sha1 bb8626cd98761c1c20cee117d00315c85621ba6a )
+	rom ( name ic12 size 262144 crc 18ff0799 sha1 5417223378aef16ee2b4f438d1f8f11a23fe7265 )
+	rom ( name ic10 size 262144 crc 32069246 sha1 4913009bc72bf4f8b171b14fe06457f5784cab15 )
+	rom ( name ic13 size 262144 crc a3dfe436 sha1 640ccc552114d403f35d441574d2f3e4f1d4a8f9 )
+	rom ( name ic11 size 262144 crc f6b096e0 sha1 695ad1adbdc29f4d614645867e16de038cf92709 )
+	rom ( name ic14 size 262144 crc 6773fef6 sha1 91e646ea447be02254d060daf255d26afe0cc79e )
+	rom ( name epr12617.a13 size 32768 crc 7efecf23 sha1 2b87af7cfaab5942a3f7b38c987fcba01d3475ab )
+	rom ( name mpr12616.a11 size 262144 crc 254347c2 sha1 bf2d83a69a5be375c7e42e9f7d6e65c1095a354c )
+)
+
+game (
+	name fpointbl
+	description "Flash Point (World, bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name flpoint.003 size 65536 crc 4d6df514 sha1 168aa1629ab7152ba1984605155406b236954a2c )
+	rom ( name flpoint.002 size 65536 crc 4dff2ee8 sha1 bd157d8c168d45e7490a05d5e1e901d9bdda9599 )
+	rom ( name flpoint.006 size 65536 crc c539727d sha1 56674effe1d273128dddd2ff9e02974ec10f3fff )
+	rom ( name flpoint.005 size 65536 crc 82c0b8b0 sha1 e1e2e721cb8ad53df33065582dc90edeba9c3cab )
+	rom ( name flpoint.004 size 65536 crc 522426ae sha1 90fd0a19b30a8a61dc4cfa66a64115596333dcc6 )
+	rom ( name 12596.bin size 65536 crc 4a4041f3 sha1 4c52b30223d8aa80ccdbb196098cb17e64ad6583 )
+	rom ( name 12597.bin size 65536 crc 6961e676 sha1 7639d2da086b57a9a8d6100fdacf40d97d7c4772 )
+	rom ( name flpoint.001 size 32768 crc c5b8e0fe sha1 6cf8c67151d8604326fc6dbf976c0635b452a844 )
+)
+
+game (
+	name fpointbj
+	description "Flash Point (Japan, bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name boot2.003 size 65536 crc 6c00d1b0 sha1 fd0c47b8ca010a64d3ef91980f93854ebc98fbda )
+	rom ( name boot2.002 size 65536 crc c1fcd704 sha1 697bef464e53fb9891ed15ee2d6210107b693b20 )
+	rom ( name flpoint.006 size 65536 crc c539727d sha1 56674effe1d273128dddd2ff9e02974ec10f3fff )
+	rom ( name flpoint.005 size 65536 crc 82c0b8b0 sha1 e1e2e721cb8ad53df33065582dc90edeba9c3cab )
+	rom ( name flpoint.004 size 65536 crc 522426ae sha1 90fd0a19b30a8a61dc4cfa66a64115596333dcc6 )
+	rom ( name 12596.bin size 65536 crc 4a4041f3 sha1 4c52b30223d8aa80ccdbb196098cb17e64ad6583 )
+	rom ( name 12597.bin size 65536 crc 6961e676 sha1 7639d2da086b57a9a8d6100fdacf40d97d7c4772 )
+	rom ( name flpoint.001 size 32768 crc c5b8e0fe sha1 6cf8c67151d8604326fc6dbf976c0635b452a844 )
+	rom ( name 82s129.1 size 256 crc a7c22d96 sha1 160deae8053b09c09328325246598b3518c7e20b )
+	rom ( name 82s123.2 size 32 crc 58bcf8bd sha1 e4d3d179b08c0f3424a6bec0f15058fb1b56f8d8 )
+	rom ( name fpointbj_gal16v8_1.bin size 279 crc ba7f292c sha1 c383700d05663c9c5f29d5d04d16b05cd6adceb8 )
+	rom ( name fpointbj_gal16v8_3.bin size 279 crc ce1ab1e1 sha1 dcfc0015d8595ee6cb6bb02c95655161a7f3b017 )
+	rom ( name fpointbj_gal20v8.bin size 413 flags nodump )
+)
+
+game (
+	name goldnaxeb1
+	description "Golden Axe (encrypted bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name 6.6 size 65536 crc f95b459f sha1 dadf66d63454ed62fefa521d4fed249d28c63778 )
+	rom ( name 4.4 size 65536 crc 83eabdf5 sha1 1effef966f513fbdec2026d535658e17ef7dea51 )
+	rom ( name 11.11 size 65536 crc f4ef9349 sha1 3ffa335e74ffbc10f80387268da659643c566897 )
+	rom ( name 8.8 size 65536 crc 37a65839 sha1 6e8055d91b840afd8526041d3752c0a55eaebe0c )
+	rom ( name 7.7 size 65536 crc 056879fd sha1 fc0a910c1dc4cf535ad589f482f57379798b5524 )
+	rom ( name 5.5 size 65536 crc 8c77d958 sha1 f7c5abfec2a9d1724c83b1de2cd994bb4c42857c )
+	rom ( name 10.10 size 65536 crc b69ab892 sha1 9b426058a80abb8dd3d6c0c55574fdc841889a72 )
+	rom ( name 9.9 size 65536 crc 3cf2f725 sha1 1f620fcebe8533cba50736ae1d97c095abf1bc25 )
+	rom ( name 32.16 size 65536 crc 84587263 sha1 3a88c8578a477a487a0a214a367042b9739f39eb )
+	rom ( name 31.15 size 65536 crc 63d72388 sha1 ba0a582b1daf3a1e316237efbad17fcc0381643f )
+	rom ( name 30.14 size 65536 crc f8b6ae4f sha1 55132c98955107e4b247992f7917a6ce588460a7 )
+	rom ( name 29.13 size 65536 crc e29baf4f sha1 3761cb2217599fe3f2f860f9395930b96ec52f47 )
+	rom ( name 28.12 size 65536 crc 22f0667e sha1 2d11b2ce105a3db9c914942cace85aff17deded9 )
+	rom ( name 27.11 size 65536 crc afb1a7e4 sha1 726fded9db72a881128b43f449d2baf450131f63 )
+	rom ( name 33.17 size 65536 crc 28ba70c8 sha1 a6f33e1404928b6d1006943494646d6cfbd60a4b )
+	rom ( name 34.18 size 65536 crc 2ed96a26 sha1 edcf915243e6f92d31cdfc53965438f6b6bff51d )
+	rom ( name 37.bin size 65536 crc 84dccc5b sha1 10263d98d663f1170c3203066f391075a1d64ff5 )
+	rom ( name 13.bin size 65536 crc 3d41b995 sha1 913d2a0c9a2ac6d36589966d7eb5537120ea6ff0 )
+	rom ( name 21.7 size 65536 crc ede51fe0 sha1 c05a2b51095a322bac5a67ee8886aecc186cbdfe )
+	rom ( name 22.8 size 65536 crc 30989141 sha1 f6e7ae258deedec11b1f80c19575c884aac26c56 )
+	rom ( name 38.bin size 65536 crc 38e4c92a sha1 8b8a596da0726bc02c412a68e5163770fe3e62e4 )
+	rom ( name 14.bin size 65536 crc 9fb1f9b6 sha1 a193ff48f2bfbb4afbc322ae33cdf360afcb681e )
+	rom ( name 35.19 size 65536 crc 101d2fff sha1 1de1390c5f55f192491053c8aac31be3389aab2b )
+	rom ( name 36.20 size 65536 crc 677e64a6 sha1 e3d0d31097017c6cb1a7f41292783f18ce13b41c )
+	rom ( name 15.bin size 65536 crc 11794d05 sha1 eef52d7a644dbcc5f983222f163445a725286a32 )
+	rom ( name 17.bin size 65536 crc ad1c1c90 sha1 155f17593cfab1a117bb755b1edd0c473d455f91 )
+	rom ( name 23.9 size 65536 crc 5853000d sha1 db7adf1de74c66f667ea7ccc41702576de081ff5 )
+	rom ( name 24.10 size 65536 crc 697b3276 sha1 a8aeb2cfaca9368d5bfa14a67de36dbadd4a0585 )
+	rom ( name 16.bin size 65536 crc 753b01e8 sha1 0180cf893d63e60e14e2fb0f5836b302f08f0228 )
+	rom ( name 18.bin size 65536 crc 5dd6d8db sha1 270886aebf4549c5cf456b1e90927b759a53e2e1 )
+	rom ( name 40.23 size 65536 crc a9519afe sha1 0550f596ef080db25241d88242d57edb3c7fb685 )
+	rom ( name 39.22 size 65536 crc 74df9232 sha1 61286c83eb6f31983c0ed24ca2151c58a95238f1 )
+	rom ( name 19.bin size 65536 crc a8c8c784 sha1 8e998019b4dbf509179d41eb2b446647db3d00a6 )
+	rom ( name 25.bin size 65536 crc cc3a922c sha1 3c96459d95961d463909b6b0e8c77916c3a018e3 )
+	rom ( name 42.26 size 65536 crc ac6ad195 sha1 3c3fe38047698e28cae9193438fe0b85941476c5 )
+	rom ( name 41.25 size 65536 crc 03a905c4 sha1 c526a744021a392c860ded37afd54a78e9f47778 )
+	rom ( name 20.bin size 65536 crc cba013c7 sha1 a0658aaf7893bc9fb8f0435cab9f77ceb1fb4e1d )
+	rom ( name 26.bin size 65536 crc bea4d237 sha1 46e51e89b4ee1e2701da1004758d7da547a2e4c2 )
+	rom ( name 2.3 size 32768 crc 399fc5f5 sha1 6f290b36dc71ff4759598e2a9c185a8945a3c9e7 )
+	rom ( name 3.1 size 65536 crc 50eb5a56 sha1 d59ba04254000de5577e8a58d0b51c73112a4c80 )
+	rom ( name 1.2 size 65536 crc b372eb94 sha1 8f82530633589de003a5462b227335526a6a61a6 )
+	rom ( name 12.12 size 32768 crc 81ce4576 sha1 84eea0ab8d8ea8869c12f0b603b91b1188d0e288 )
+	rom ( name 82s129.bin size 256 crc 88962e80 sha1 ebf3d57d53fcba727cf20e4bb26f12934f7d1bc7 )
+)
+
+game (
+	name goldnaxeb2
+	description "Golden Axe (bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name ic39.1 size 65536 crc 71489c9a sha1 ec25463a2c63027d2635f0e27f5a971d68938fe3 )
+	rom ( name ic53.5 size 65536 crc 7a98512d sha1 f022a047d23051211e2de761b6c2289438b8f3cc )
+	rom ( name ic38.2 size 65536 crc 8c8c95b1 sha1 2b3897b8af587e6397dca0f3409a803432be07aa )
+	rom ( name ic52.6 size 65536 crc 4f58f15b sha1 4dcd7e8cfd8fe5fe9f9259abf53fd0d4c64b5abd )
+	rom ( name ic37.3 size 65536 crc 056879fd sha1 fc0a910c1dc4cf535ad589f482f57379798b5524 )
+	rom ( name ic51.7 size 65536 crc 8c77d958 sha1 f7c5abfec2a9d1724c83b1de2cd994bb4c42857c )
+	rom ( name ic36.4 size 65536 crc b69ab892 sha1 9b426058a80abb8dd3d6c0c55574fdc841889a72 )
+	rom ( name ic50.8 size 65536 crc 3cf2f725 sha1 1f620fcebe8533cba50736ae1d97c095abf1bc25 )
+	rom ( name ic4.35 size 65536 crc 84587263 sha1 3a88c8578a477a487a0a214a367042b9739f39eb )
+	rom ( name ic18.38 size 65536 crc 63d72388 sha1 ba0a582b1daf3a1e316237efbad17fcc0381643f )
+	rom ( name ic3.36 size 65536 crc f8b6ae4f sha1 55132c98955107e4b247992f7917a6ce588460a7 )
+	rom ( name ic17.39 size 65536 crc e29baf4f sha1 3761cb2217599fe3f2f860f9395930b96ec52f47 )
+	rom ( name ic2.37 size 65536 crc 22f0667e sha1 2d11b2ce105a3db9c914942cace85aff17deded9 )
+	rom ( name ic16.40 size 65536 crc afb1a7e4 sha1 726fded9db72a881128b43f449d2baf450131f63 )
+	rom ( name ic73.34 size 65536 crc 28ba70c8 sha1 a6f33e1404928b6d1006943494646d6cfbd60a4b )
+	rom ( name ic74.33 size 65536 crc 2ed96a26 sha1 edcf915243e6f92d31cdfc53965438f6b6bff51d )
+	rom ( name ic79.28 size 65536 crc 84dccc5b sha1 10263d98d663f1170c3203066f391075a1d64ff5 )
+	rom ( name ic80.27 size 65536 crc 3d41b995 sha1 913d2a0c9a2ac6d36589966d7eb5537120ea6ff0 )
+	rom ( name ic58.22 size 65536 crc ede51fe0 sha1 c05a2b51095a322bac5a67ee8886aecc186cbdfe )
+	rom ( name ic59.21 size 65536 crc 30989141 sha1 f6e7ae258deedec11b1f80c19575c884aac26c56 )
+	rom ( name ic64.16 size 65536 crc 38e4c92a sha1 8b8a596da0726bc02c412a68e5163770fe3e62e4 )
+	rom ( name ic65.15 size 65536 crc 9fb1f9b6 sha1 a193ff48f2bfbb4afbc322ae33cdf360afcb681e )
+	rom ( name ic75.32 size 65536 crc 101d2fff sha1 1de1390c5f55f192491053c8aac31be3389aab2b )
+	rom ( name ic76.31 size 65536 crc 677e64a6 sha1 e3d0d31097017c6cb1a7f41292783f18ce13b41c )
+	rom ( name ic81.26 size 65536 crc a34e84d1 sha1 5aa8836ef1bdf97e399899c911967840e9873bfb )
+	rom ( name ic82.25 size 65536 crc ad1c1c90 sha1 155f17593cfab1a117bb755b1edd0c473d455f91 )
+	rom ( name ic60.20 size 65536 crc 5853000d sha1 db7adf1de74c66f667ea7ccc41702576de081ff5 )
+	rom ( name ic61.19 size 65536 crc 697b3276 sha1 a8aeb2cfaca9368d5bfa14a67de36dbadd4a0585 )
+	rom ( name ic66.14 size 65536 crc 753b01e8 sha1 0180cf893d63e60e14e2fb0f5836b302f08f0228 )
+	rom ( name ic67.13 size 65536 crc 5dd6d8db sha1 270886aebf4549c5cf456b1e90927b759a53e2e1 )
+	rom ( name ic77.30 size 65536 crc a9519afe sha1 0550f596ef080db25241d88242d57edb3c7fb685 )
+	rom ( name ic78.29 size 65536 crc 74df9232 sha1 61286c83eb6f31983c0ed24ca2151c58a95238f1 )
+	rom ( name ic83.24 size 65536 crc a8c8c784 sha1 8e998019b4dbf509179d41eb2b446647db3d00a6 )
+	rom ( name ic84.23 size 65536 crc cc3a922c sha1 3c96459d95961d463909b6b0e8c77916c3a018e3 )
+	rom ( name ic62.18 size 65536 crc ac6ad195 sha1 3c3fe38047698e28cae9193438fe0b85941476c5 )
+	rom ( name ic63.17 size 65536 crc 03a905c4 sha1 c526a744021a392c860ded37afd54a78e9f47778 )
+	rom ( name ic68.12 size 65536 crc cba013c7 sha1 a0658aaf7893bc9fb8f0435cab9f77ceb1fb4e1d )
+	rom ( name ic69.11 size 65536 crc bea4d237 sha1 46e51e89b4ee1e2701da1004758d7da547a2e4c2 )
+	rom ( name ic45.10 size 65536 crc 804dfba8 sha1 650ca61f78eb4d0aa256b554fb1570330166cc24 )
+	rom ( name ic46.9 size 65536 crc 634dd54e sha1 ac4ab0ad9c1ac634ff4dfb83232b0fa5cfb26fdd )
+)
+
+game (
+	name passht4b
+	description "Passing Shot (4 Players) (bootleg)"
+	year 1988
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name pas4p.3 size 65536 crc 2d8bc946 sha1 35d3e529d4815543d9876fd0545c3d686467abaa )
+	rom ( name pas4p.4 size 65536 crc e759e831 sha1 dd5727dc28010cb988e4951723171171eb645ce8 )
+	rom ( name pas4p.11 size 65536 crc da20fbc9 sha1 21dc8143f4d1cebae4f86e83495fa84e5293ba48 )
+	rom ( name pas4p.12 size 65536 crc bebb9211 sha1 4f56048f6f70b63f74a4c0d64456213d36ce5b26 )
+	rom ( name pas4p.13 size 65536 crc e37506c3 sha1 e6fbf15d58f321a3d052fefbe5a1901e4a1734ae )
+	rom ( name opr11862.b1 size 65536 crc b6e94727 sha1 0838e034f1f10d9cd1312c8c94b5c57387c0c271 )
+	rom ( name opr11865.b5 size 65536 crc 17e8d5d5 sha1 ac1074b0a705be13c6e3391441e6cfec1d2b3f8a )
+	rom ( name opr11863.b2 size 65536 crc 3e670098 sha1 2cfc83f4294be30cd868738886ac546bd8489962 )
+	rom ( name opr11866.b6 size 65536 crc 50eb71cc sha1 463b4917ca19c7f4ad2c2845caa104d5e4a2dda3 )
+	rom ( name opr11864.b3 size 65536 crc 05733ca8 sha1 1dbc7c99450ebe6a9fd8c0244fd3cb38b74984ef )
+	rom ( name opr11867.b7 size 65536 crc 81e49697 sha1 a70fa409e3555ad6c8f28930a7026fdf2deb8c65 )
+	rom ( name pas4p.1 size 32768 crc e60fb017 sha1 21298036eab55c74427f1c2e3a9623d41bca4849 )
+	rom ( name pas4p.2 size 65536 crc 092e016e sha1 713638749efa9dce19c547b84308236110bc85fe )
+)
+
+game (
+	name passshtb
+	description "Passing Shot (2 Players) (bootleg)"
+	year 1988
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name pass3_2p.bin size 65536 crc 26bb9299 sha1 11bacf86dfdd8bcfbfb61f0ebc59890325c48adc )
+	rom ( name pass4_2p.bin size 65536 crc 06ac6d5d sha1 2dd71a8a956404326797de8beed7bca016c9919e )
+	rom ( name opr11854.b9 size 65536 crc d31c0b6c sha1 610d04988da70c30300cc5614817eda9d2204f39 )
+	rom ( name opr11855.b10 size 65536 crc b78762b4 sha1 d594ef846bd7fed8da91a89906b39c1a2867a1fe )
+	rom ( name opr11856.b11 size 65536 crc ea49f666 sha1 36ccd32cdcbb7fcc300628bb59c220ec3c324d82 )
+	rom ( name opr11862.b1 size 65536 crc b6e94727 sha1 0838e034f1f10d9cd1312c8c94b5c57387c0c271 )
+	rom ( name opr11865.b5 size 65536 crc 17e8d5d5 sha1 ac1074b0a705be13c6e3391441e6cfec1d2b3f8a )
+	rom ( name opr11863.b2 size 65536 crc 3e670098 sha1 2cfc83f4294be30cd868738886ac546bd8489962 )
+	rom ( name opr11866.b6 size 65536 crc 50eb71cc sha1 463b4917ca19c7f4ad2c2845caa104d5e4a2dda3 )
+	rom ( name opr11864.b3 size 65536 crc 05733ca8 sha1 1dbc7c99450ebe6a9fd8c0244fd3cb38b74984ef )
+	rom ( name opr11867.b7 size 65536 crc 81e49697 sha1 a70fa409e3555ad6c8f28930a7026fdf2deb8c65 )
+	rom ( name epr11857.a7 size 32768 crc 789edc06 sha1 8c89c94e503513c287807d187de78a7fbd75a7cf )
+	rom ( name epr11858.a8 size 32768 crc 08ab0018 sha1 0685f80a7d403208c9cfffea3f2035324f3924fe )
+	rom ( name epr11859.a9 size 32768 crc 8673e01b sha1 e79183ab30e683fdf61ced2e9dbe010567c324cb )
+	rom ( name epr11860.a10 size 32768 crc 10263746 sha1 1f981fb185c6a9795208ecdcfba36cf892a99ed5 )
+	rom ( name epr11861.a11 size 32768 crc 38b54a71 sha1 68ec4ef5b115844214ff2213be1ce6678904fbd2 )
+)
+
+game (
+	name shinobld
+	description "Shinobi (Datsu bootleg)"
+	year 1987
+	manufacturer "[Sega] (Datsu bootleg)"
+	sourcefile system16.c
+	rom ( name 12.bin size 65536 crc 757a0c71 sha1 8f476b0fd5f5dd480489af09b99585c58a4801fc )
+	rom ( name 14.bin size 65536 crc a65870b2 sha1 3e9b4aa694bf86ef9db4756ebaa3d8d87d7f269a )
+	rom ( name 13.bin size 65536 crc c4334bcd sha1 ea1dd23ca6fbf632d8e10bbb9ced6515a69bd14a )
+	rom ( name 15.bin size 65536 crc b70a6ec1 sha1 79db41c36d6a053bcdc355b46b19ae938a7755a9 )
+	rom ( name 9.bin size 65536 crc 565e11c6 sha1 e063400b3d0470b932d75da0be9cd4b446189dea )
+	rom ( name 10.bin size 65536 crc 7cc40b6c sha1 ffad7eef7ab2ff9a2e49a8d71b5785a61fa3c675 )
+	rom ( name 11.bin size 65536 crc 0f6c7b1c sha1 defc76592c285b3396e89a3cff7a73f3a948117f )
+	rom ( name 5.bin size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
+	rom ( name 3.bin size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
+	rom ( name 8.bin size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
+	rom ( name 2.bin size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
+	rom ( name 6.bin size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
+	rom ( name 4.bin size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
+	rom ( name 7.bin size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
+	rom ( name 1.bin size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
+	rom ( name 16.bin size 65536 crc 52c8364e sha1 01d30b82f92498d155d2e31d43d58dff0285cce3 )
+)
+
+game (
+	name tetrisbl
+	description "Tetris (bootleg)"
+	year 1988
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name rom2.bin size 65536 crc 4d165c38 sha1 04706b1977ae18bd09bafaf8ea65f8e5f32e04b8 )
+	rom ( name rom1.bin size 65536 crc 1e912131 sha1 8f53504ac08942ee340489d84eab825e654d0a2c )
+	rom ( name epr12165.b9 size 65536 crc 62640221 sha1 c311d3847a981d0e1609f9b3d80481565d32d78c )
+	rom ( name epr12166.b10 size 65536 crc 9abd183b sha1 621b017cb34973f9227be383e26b5cd41aea9422 )
+	rom ( name epr12167.b11 size 65536 crc 2495fd4e sha1 2db94ead9223a67238a97e724668076fc43e5534 )
+	rom ( name obj0-o.rom size 65536 crc 2fb38880 sha1 0e1b601bbda78d1887951c1f7e752531c281bc83 )
+	rom ( name obj0-e.rom size 65536 crc d6a02cba sha1 d80000f92e754e89c6ca7b7273feab448fc9a061 )
+	rom ( name epr12168.a7 size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
+)
+
+game (
+	name beautyb
+	description "Beauty Block"
+	year 1991
+	manufacturer "AMT"
+	sourcefile system16.c
+	rom ( name b13.u3 size 32768 crc 90c4489b sha1 240275ad6dfd02feab636ceb620264d339e79b6a )
+	rom ( name b23.u2 size 32768 crc 79b8f9ed sha1 5926852ea00b60d91684dbea4687b67894a397a1 )
+	rom ( name b43.bin size 65536 crc 67fe3f0c sha1 c9479512dd7a80895740c7fbd2133ab4d4c679d6 )
+	rom ( name b53.bin size 65536 crc aca8e330 sha1 912e636e3c1e238682ea29620e8e2c6089c77209 )
+	rom ( name b63.bin size 65536 crc f2af2fd5 sha1 0a95ebb5eae7cdc6535533d73d06419c23d01ac3 )
+	rom ( name 1.bin size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
+	rom ( name 82s123.2 size 32 crc 58bcf8bd sha1 e4d3d179b08c0f3424a6bec0f15058fb1b56f8d8 )
+	rom ( name pal16r4acn.1 size 260 crc 826be9e7 sha1 893fc49c38aa8e7d6e98f6320157ba627a5d1748 )
+	rom ( name pal16r4acn.2 size 260 crc b3084ffe sha1 086ad2f89bdd8524ae358fd49b0803f9bb4aff33 )
+	rom ( name pal16r4acn.3 size 260 crc 741cd872 sha1 d53bdcadcd25d44b6423e0740e88209f85c709bd )
+	rom ( name pal20l8acn size 324 crc 36e30d71 sha1 e38f0257f9beedccc9421eec78701a86465d16ad )
+	rom ( name pal16l8ajc.u4 size 260 flags nodump )
+)
+
+game (
+	name iqpipe
+	description "IQ Pipe"
+	year 1991
+	manufacturer "AMT"
+	sourcefile system16.c
+	rom ( name iqpipe.u3 size 32768 crc 4ef1a0ba sha1 b11412b6b9e1a5d2f44ed5b7ceaa011418e5eab5 )
+	rom ( name iqpipe.u2 size 32768 crc 1dacee68 sha1 7a37362a679a2c4cbeadca63c2ef9a112c946c97 )
+	rom ( name iqpipe.4 size 65536 crc 938b9a04 sha1 98c61b0526e76d5de134d9e22be0af0d576a6749 )
+	rom ( name iqpipe.5 size 65536 crc dfaedd39 sha1 498f1c34fecd8de497fdce41bb683d00047a868a )
+	rom ( name iqpipe.6 size 65536 crc 8e554f8d sha1 4b3b0e47c36f37947422f1c31063f11975108cd0 )
+	rom ( name iqpipe.1 size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
+	rom ( name 82s123.2 size 32 flags nodump )
+	rom ( name iqpipe.a size 260 crc e9cd78fb sha1 557d3e7ef3b25c1338b24722cac91bca788c02b8 )
+	rom ( name iqpipe.b size 260 crc e9cd78fb sha1 557d3e7ef3b25c1338b24722cac91bca788c02b8 )
+	rom ( name iqpipe.c size 260 crc e9cd78fb sha1 557d3e7ef3b25c1338b24722cac91bca788c02b8 )
+	rom ( name iqpipe.d size 324 crc 36e30d71 sha1 e38f0257f9beedccc9421eec78701a86465d16ad )
+	rom ( name iqpipe.u4 size 260 crc e9cd78fb sha1 557d3e7ef3b25c1338b24722cac91bca788c02b8 )
+)
+
+game (
+	name tturfbl
+	description "Tough Turf (bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name tt042197.rom size 65536 crc deee5af1 sha1 0caba775021dc7e28ac6b7af8eac4f49d3102c83 )
+	rom ( name tt06c794.rom size 65536 crc 90e6a95a sha1 014a0ae5cebcba9cc99e6ccde4ad5d938fab915c )
+	rom ( name tt030be3.rom size 65536 crc 100264a2 sha1 d1ea4bf93f5472901ce95200f546ce9b58936aea )
+	rom ( name tt05ef8a.rom size 65536 crc f787a948 sha1 512b8cb2f5e9795171951e02c07cae957db41334 )
+	rom ( name tt1574b3.rom size 65536 crc e9e630da sha1 e8471dedbb25475e4814d78b56f579fe9110461e )
+	rom ( name tt16cf44.rom size 65536 crc 4c467735 sha1 8338b6605cbe2e076da0b3e3a47630409a79f002 )
+	rom ( name tt17d59e.rom size 65536 crc 60c0f2fe sha1 3fea4ed757d47628f59ff940e40cb86b3b5b443b )
+	rom ( name 12279.1b size 65536 crc 7a169fb1 sha1 1ec6da0d2cfcf727e61f61c847fd8b975b64f944 )
+	rom ( name 12283.5b size 65536 crc ae0fa085 sha1 ae9af92d4dd0c8a0f064d24e647522b588fbd7f7 )
+	rom ( name 12278.2b size 65536 crc 961d06b7 sha1 b1a9dea63785bfa2c0e7b931387b91dfcd27d79b )
+	rom ( name 12282.6b size 65536 crc e8671ee1 sha1 a3732938c370f1936d867aae9c3d1e9bbfb57ede )
+	rom ( name 12277.3b size 65536 crc f16b6ba2 sha1 00cc04c7b5aad82d51d2d252e1e57bcdc5e2c9e3 )
+	rom ( name 12281.7b size 65536 crc 1ef1077f sha1 8ce6fd7d32a20b93b3f91aaa43fe22720da7236f )
+	rom ( name 12276.4b size 65536 crc 838bd71f sha1 82d9d127438f5e1906b1cf40bf3b4727f2ee5685 )
+	rom ( name 12280.8b size 65536 crc 639a57cb sha1 84fd8b96758d38f9e1ba1a3c2cf8099ec0452784 )
+	rom ( name tt014d68.rom size 65536 crc d4aab1d9 sha1 94885896d59da1ecabe2377a194fcf61eaae3765 )
+	rom ( name tt0246ff.rom size 65536 crc bb4bba8f sha1 b182a7e1d0425e93c2c1b93472aafd30a6af6907 )
+)
+
+game (
+	name wb3bbl
+	description "Wonder Boy III - Monster Lair (bootleg)"
+	year 1988
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name wb3_03 size 65536 crc 0019ab3b sha1 89d49a437690fa6e0c35bb9f1450042f89504714 )
+	rom ( name wb3_05 size 65536 crc 196e17ee sha1 71e4345b2c3d1612a3d424c9310fad1e23c8a9f7 )
+	rom ( name wb3_02 size 65536 crc c87350cb sha1 55a8cb68d70b6060dd9a55e281e216ce3917ea5b )
+	rom ( name wb3_04 size 65536 crc 565d5035 sha1 e28a132f1a4ce9466945e231c54502178748af98 )
+	rom ( name wb3_14 size 65536 crc d3f20bca sha1 0a87f709f8e2a913473512ede408e2cbc535443f )
+	rom ( name wb3_15 size 65536 crc 96ff9d52 sha1 791a9da4860e0d42fba98f80a3c6725ad8c73e33 )
+	rom ( name wb3_16 size 65536 crc afaf0d31 sha1 d4309329a0a543250788146b63b27ff058c02fc3 )
+	rom ( name epr12090.b1 size 65536 crc aeeecfca sha1 496124b170a725ad863c741d4e021ab947511e4c )
+	rom ( name epr12094.b5 size 65536 crc 615e4927 sha1 d23f164973afa770714e284a77ddf10f18cc596b )
+	rom ( name epr12091.b2 size 65536 crc 8409a243 sha1 bcbb9510a6499d8147543d6befa5a49f4ac055d9 )
+	rom ( name epr12095.b6 size 65536 crc e774ec2c sha1 a4aa15ec7be5539a740ad02ff720458018dbc536 )
+	rom ( name epr12092.b3 size 65536 crc 5c2f0d90 sha1 e0fbc0f841e4607ad232931368b16e81440a75c4 )
+	rom ( name epr12096.b7 size 65536 crc 0cd59d6e sha1 caf754a461feffafcfe7bfc6e89da76c4db257c5 )
+	rom ( name epr12093.b4 size 65536 crc 4891e7bb sha1 1be04fcabe9bfa8cf746263a5bcca67902a021a0 )
+	rom ( name epr12097.b8 size 65536 crc e645902c sha1 497cfcf6c25cc2e042e16dbcb1963d2223def15a )
+	rom ( name epr12127.a10 size 32768 crc 0bb901bb sha1 c81b198df8e3b0ec568032c76addf0d1a1711194 )
+)
+
+game (
+	name astormbl
+	description "Alien Storm (bootleg, set 1)"
+	year 1990
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name astorm.a6 size 262144 crc 7682ed3e sha1 b857352ad9c66488e91f60989472638c483e4ae8 )
+	rom ( name astorm.a5 size 262144 crc efe9711e sha1 496fd9e30941fde1658fab7292a669ef7964cecb )
+	rom ( name epr13073.bin size 262144 crc df5d0a61 sha1 79ad71de348f280bad847566c507b7a31f022292 )
+	rom ( name epr13074.bin size 262144 crc 787afab8 sha1 a119042bb2dad54e9733bfba4eaab0ac5fc0f9e7 )
+	rom ( name epr13075.bin size 262144 crc 4e01b477 sha1 4178ce4a87ea427c3b0195e64acef6cddfb3485f )
+	rom ( name mpr13082.bin size 262144 crc a782b704 sha1 ba15bdfbc267b8d86f03e5310ce60846ff846de3 )
+	rom ( name astorm.a11 size 262144 crc 7829c4f3 sha1 3adb7aa7f70163d3848c98316e18b9783c41d663 )
+	rom ( name mpr13081.bin size 262144 crc eb510228 sha1 4cd387b160ec7050e1300ebe708853742169e643 )
+	rom ( name mpr13088.bin size 262144 crc 3b6b4c55 sha1 970495c54b3e1893ee8060f6ca1338c2cbbd1074 )
+	rom ( name mpr13080.bin size 262144 crc e668eefb sha1 d4a087a238b4d3ac2d23fe148d6a73018e348a89 )
+	rom ( name mpr13087.bin size 262144 crc 2293427d sha1 4fd07763ff060afd594e3f64fa4750577f56c80e )
+	rom ( name epr13079.bin size 262144 crc de9221ed sha1 5e2e434d1aa547be1e5652fc906d2e18c5122023 )
+	rom ( name epr13086.bin size 262144 crc 8c9a71c4 sha1 40b774765ac888792aad46b6351a24b7ef40d2dc )
+	rom ( name epr13083.bin size 131072 crc 5df3af20 sha1 e49105fcfd5bf37d14bd760f6adca5ce2412883d )
+	rom ( name epr13076.bin size 262144 crc 94e6c76e sha1 f99e58a9bf372c41af211bd9b9ea3ac5b924c6ed )
+	rom ( name epr13077.bin size 262144 crc e2ec0d8d sha1 225b0d223b7282cba7710300a877fb4a2c6dbabb )
+	rom ( name epr13078.bin size 262144 crc 15684dc5 sha1 595051006de24f791dae937584e502ff2fa31d9c )
+)
+
+game (
+	name astormb2
+	description "Alien Storm (bootleg, set 2)"
+	year 1990
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name 1.a4 size 65536 crc cca0d0af sha1 26fdbbeb8444d05f0ca2056a7c7fb81b0f1f2b5a )
+	rom ( name 2.a3 size 65536 crc f95eb883 sha1 b25d9c0fd46a534e7612f4a3ffa708b73654ae2b )
+	rom ( name 3.a2 size 65536 crc 4206ecd4 sha1 45c65d7727cfaf215a7081159f6931185e92b39a )
+	rom ( name 4.a1 size 65536 crc 23247c95 sha1 e4d78c453d2cb77946dd1b5266de823968eade77 )
+	rom ( name 5.a9 size 65536 crc 6143039e sha1 8a5143c1e2c637149e988c423fa30b31e29a1193 )
+	rom ( name 6.a8 size 65536 crc 0fd17bec sha1 e9a5dd93394fdf1561a925e4111dfce51b717b14 )
+	rom ( name 7.a7 size 65536 crc c901e228 sha1 f459ba819a4e5f5174ff1b3957fb648c93beed53 )
+	rom ( name 8.a6 size 65536 crc bfb9d607 sha1 8c3e10c1397fa0807d8df4715c9eb1945c774924 )
+	rom ( name 32.01 size 131072 crc d2aeb4ab sha1 9338ec5dc48f5d2b20511628a281236fe4646ef4 )
+	rom ( name 33.011 size 131072 crc 2193f0ae sha1 84070f74693699c1ffc1a47517a97b5d058d08ec )
+	rom ( name 34.02 size 131072 crc 849aa725 sha1 0f949dfe8a6c5796edc86a05339da80a158a95ae )
+	rom ( name 35.021 size 131072 crc 3f190347 sha1 131953ccefb95eeef1ea90499ce521c3749f95c1 )
+	rom ( name 36.03 size 131072 crc c0f9628d sha1 aeacf5e409adfa0b9c28c90d4e89eb1f56cd5f4d )
+	rom ( name 37.031 size 131072 crc 95af904e sha1 6574fa874c355c368109b417aab7d0b05c9d215d )
+	rom ( name 17.042 size 131072 crc db08beb5 sha1 c154d22c69b77637d6a9d0f2bffcfb47e6901ec8 )
+	rom ( name 16.043 size 131072 crc 41f78977 sha1 9cf9fcf96722d148c4b2cf7aa33425b6efcd0379 )
+	rom ( name 29.012 size 131072 crc 22acf675 sha1 80fd0d96017bf36d964a79f7e13e73fee7ed370a )
+	rom ( name 28.013 size 131072 crc 32b37a3a sha1 70f268aa99a17739fd9d832b5f1d9e37247747e6 )
+	rom ( name 19.040 size 131072 crc 10c359ac sha1 9087cb824242ce5fc8eba45b61cca8b329c576e5 )
+	rom ( name 18.041 size 131072 crc 47146c1d sha1 cd5d92136f86128a9f304c4f8850f1efd652dd5c )
+	rom ( name 31.010 size 131072 crc e88fc39c sha1 f19c55c49771625a76e65b639a3b23969db8031d )
+	rom ( name 30.011 size 131072 crc 6fe7e2a2 sha1 94e5852377f72fd00daae302db4a5f93301213e4 )
+	rom ( name 21.032 size 131072 crc c9e5a258 sha1 809a3a3f88efe9c7a9dd9f6439ccb48fffb84df0 )
+	rom ( name 20.033 size 131072 crc ddf8d00e sha1 0a9031063921bb03e7fd57eea369a1ddcfa85431 )
+	rom ( name 25.022 size 131072 crc af8f3700 sha1 3787f732eee5c6c9b6550bd4ce5387aff2c4072e )
+	rom ( name 24.023 size 131072 crc a092ecb6 sha1 d7cc85eaea70c7947c497bc1d9743ab12a6fb43e )
+	rom ( name 23.030 size 131072 crc adc1b625 sha1 496a1e92a833dbde37a0426165ff4250848b6ef4 )
+	rom ( name 22.031 size 131072 crc 27c27f38 sha1 439502250da4e376d2aa4bd9122455c6991e334d )
+	rom ( name 27.020 size 131072 crc 6c5312aa sha1 94b74c78f318fcc1881a2926cebc98033a7e535d )
+	rom ( name 26.021 size 131072 crc c67fc986 sha1 5fac826f9dde45201e3b93582dbe29c584a10229 )
+	rom ( name 9.a5 size 32768 crc 0a4638e9 sha1 0470e03a194464ff53c7583637193b585f5fd79f )
+	rom ( name 11.a10 size 131072 crc 7e0f752c sha1 a4070c3fa4848b5be223f9b927de4b6926dbb4e6 )
+	rom ( name 10.a11 size 65536 crc 722e5969 sha1 9cf891c6533b2e2a5c4741aa4e405038a7bf4e97 )
+	rom ( name 12.a15 size 131072 crc cb4517db sha1 4c93376c2b3e70001bbc283d4485bb55514f6ef9 )
+	rom ( name 13.a14 size 131072 crc c60d6f18 sha1 c9610729f19ae8414efd785948a1e6fb079bfe8d )
+	rom ( name 14.a13 size 131072 crc 07e6b3a5 sha1 32da2a9aeb840b76e6f0117ac342ff5d612762b4 )
+	rom ( name 15.a12 size 131072 crc dffde929 sha1 037b32470747d155385e532ee574b1234b3c2b26 )
+	rom ( name n82s129n.129 size 256 crc a7c22d96 sha1 160deae8053b09c09328325246598b3518c7e20b )
+	rom ( name n82s123n.123 size 32 crc 58bcf8bd sha1 e4d3d179b08c0f3424a6bec0f15058fb1b56f8d8 )
+)
+
+game (
+	name shdancbl
+	description "Shadow Dancer (bootleg)"
+	year 1989
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name ic39 size 65536 crc adc1781c sha1 b2ca2831a48779df7533e6b2a406ee539e1f650c )
+	rom ( name ic53 size 65536 crc 1c1ac463 sha1 21075f7afae372daef197f04f5f12d14479a8140 )
+	rom ( name ic38 size 65536 crc cd6e155b sha1 e37b53cc431533091d26b37be9b8e30494de5faf )
+	rom ( name ic52 size 65536 crc bb3c49a4 sha1 ab01a6de1a6d338d30f9cfea7b3bf80dda67f215 )
+	rom ( name ic37 size 65536 crc 1bd8d5c3 sha1 4d663362c059e112ac6c742d80200be98d50d175 )
+	rom ( name ic51 size 65536 crc ce2e71b4 sha1 3e251319cd4c8c63c66e6b92b2eef514d79dba8e )
+	rom ( name ic36 size 65536 crc bb861290 sha1 62ea8eec74c6b1f5530ee86f97ad821daeac26ad )
+	rom ( name ic50 size 65536 crc 7f7b82b1 sha1 675020b57ce689b2767ff83773e2b828cda5aeed )
+	rom ( name ic4 size 131072 crc f0a016fe sha1 1426f3fbf50a04a8c5e998e071ca0e78d15f37a8 )
+	rom ( name ic18 size 131072 crc f6bee053 sha1 39ee5edfcc67bb4855217c7428254f3e8c862ba0 )
+	rom ( name ic3 size 131072 crc e07e6b5d sha1 bdeb1193415049d0c9261ca261073bdd9e251b88 )
+	rom ( name ic17 size 131072 crc f59deba1 sha1 21188d22fe607281bb7da1e1f418a33d4a315695 )
+	rom ( name ic2 size 131072 crc 60095070 sha1 913c2ee51fb6f838f3c6cbd27032bdf754fbadf1 )
+	rom ( name ic16 size 131072 crc 0f0d5dd3 sha1 76812e2f831256a8b6598257dd84a7f07443642e )
+	rom ( name ic73 size 65536 crc 59e77c96 sha1 08da058529ac83352a4528d3792a21edda348f7a )
+	rom ( name ic74 size 65536 crc 90ea5407 sha1 4bdd93c86cb35822517433d491aa8be6857dd36c )
+	rom ( name ic75 size 65536 crc 27d2fa61 sha1 0ba3cd9448e54ce9fc9433f3edd28de9a4e451e9 )
+	rom ( name ic76 size 65536 crc f36db688 sha1 a527298ce9ca1d9f5aa7b9eac93985f34ca8119f )
+	rom ( name ic58 size 65536 crc 9cd5c8c7 sha1 54c2d0a683bda37eb9a75f90f4ca5e620c09c4cf )
+	rom ( name ic59 size 65536 crc ff40e872 sha1 bd2c4aac427d106a46318f4cb2eb05c34d3c70b6 )
+	rom ( name ic60 size 65536 crc 826d7245 sha1 bb3394de058bd63b9939cd05f22c925e0cdc840a )
+	rom ( name ic61 size 65536 crc dcf8068b sha1 9c78de224df76fc90fb90f1bbd9b22dad0874f69 )
+	rom ( name ic77 size 65536 crc f93470b7 sha1 1041afa43aa8d0589d6def9743721cdbda617f78 )
+	rom ( name sdbl.78 size 65536 crc e533be5d sha1 926d6ba3f7a3ac289b0ae40d7633c70b2819df4d )
+	rom ( name ic95 size 65536 crc 828b8294 sha1 f2cdb882fb0709a909e6ef98f0315aceeb8bf283 )
+	rom ( name sdbl.94 size 65536 crc e2fa2b41 sha1 7186107734dac5763dee43addcea7c14fb0d9d74 )
+	rom ( name ic62 size 65536 crc 50ca8065 sha1 8c0d6ae34b9da6c376df387e8fc8b1068bcb4dcb )
+	rom ( name ic63 size 65536 crc d1866aa9 sha1 524c82a12a1c484a246b8d49d9f05a774d008108 )
+	rom ( name ic90 size 65536 crc 3602b758 sha1 d25b6c8420e07d0f2ac3e1d8717f14738466df16 )
+	rom ( name ic89 size 65536 crc 1ba4be93 sha1 6f4fe2016e375be3df477436f5cde7508a24ecd1 )
+	rom ( name ic79 size 65536 crc f22548ee sha1 723cb7604784c6715817daa8c86c18c6bcd1388d )
+	rom ( name ic80 size 65536 crc 6209f7f9 sha1 09b33c99d972a62af8ef56dacfa6262f002aba0c )
+	rom ( name ic81 size 65536 crc 34692f23 sha1 56126a81ac279662e3e3423da5205f65a62c4600 )
+	rom ( name ic82 size 65536 crc 7ae40237 sha1 fae97cfcfd3cd557da3330158831e4727c438745 )
+	rom ( name ic64 size 65536 crc 7a8b7bcc sha1 00cbbbc4b3db48ca3ac65ff56b02c7d63a1b898a )
+	rom ( name ic65 size 65536 crc 90ffca14 sha1 00962e5309a79ce34c6f420036054bc607595dfe )
+	rom ( name ic66 size 65536 crc 5d655517 sha1 2a1c197dde62bd7946ca7b5f1c2833bdbc2e2e32 )
+	rom ( name ic67 size 65536 crc 0e5d0855 sha1 3c15088f7fdda5c2bba9c89d244bbcff022f05fd )
+	rom ( name ic83 size 65536 crc a9040a32 sha1 7b0b375285f528b2833c50892b55b0d4c550506d )
+	rom ( name ic84 size 65536 crc d6810031 sha1 a82857a9ac442fbe076cdafcf7390765391ed136 )
+	rom ( name ic92 size 65536 crc b57d5cb5 sha1 636f1a07a84d37cecbe388a2f585893c4611436c )
+	rom ( name ic91 size 65536 crc 49def6c8 sha1 d8b2cc1993f0808553f87bf56fdbe47374576c5a )
+	rom ( name ic68 size 65536 crc 8d684e53 sha1 00e82ddaf875a7452ff978b7b7eb87a1a5a8fb64 )
+	rom ( name ic69 size 65536 crc c47d32e2 sha1 92b21f51abdd7950fb09d965b1d71b7bffac31ec )
+	rom ( name ic88 size 65536 crc 9de140e1 sha1 f1125e056a898a4fa519b49ae866c5c742e36bf7 )
+	rom ( name ic87 size 65536 crc 8172a991 sha1 6d12b1533a19cb02613b473cc8ba73ece1f2a2fc )
+	rom ( name ic45 size 65536 crc 576b3a81 sha1 b65356a3837ed3875634ab0cbcd61acce44f2bb9 )
+	rom ( name ic46 size 65536 crc c84e8c84 sha1 f57895bedb6152c30733e91e6f4795702a62ac3a )
+)
+
+game (
+	name mwalkbl
+	description "Michael Jackson's Moonwalker (bootleg)"
+	year 1990
+	manufacturer "bootleg"
+	sourcefile system16.c
+	rom ( name mwalkbl.01 size 65536 crc f49cdb16 sha1 34b7e98d31c3b9db2f0f055d7b249b0e5e5cb746 )
+	rom ( name mwalkbl.05 size 65536 crc c483f29f sha1 8fdfa764d8e49754844a9dc001400d439f9af9f0 )
+	rom ( name mwalkbl.02 size 65536 crc 0bde1896 sha1 42731ae90d56918dc50c0dcb53d092dcfb957159 )
+	rom ( name mwalkbl.06 size 65536 crc 5b9fc688 sha1 53d8143c3876548f63b392f0ea16c0e7c30a7917 )
+	rom ( name mwalkbl.03 size 65536 crc 0c5fe15c sha1 626e3f37f019448c3c96bf73b2d2b5fe4b3716c0 )
+	rom ( name mwalkbl.07 size 65536 crc 9e600704 sha1 efd3d450b26f81dc2b74f44b4aaf906fa017e437 )
+	rom ( name mwalkbl.04 size 65536 crc 64692f79 sha1 ad7f32997b78863e3aa3214018cdd24e3ec9c5cb )
+	rom ( name mwalkbl.08 size 65536 crc 546ca530 sha1 51f74878fdc221fee026e2e6a7ca96f290c8947f )
+	rom ( name mpr13216.b1 size 262144 crc 862d2c03 sha1 3c5446d702a639b62a602c6d687f9875d8450218 )
+	rom ( name mpr13217.b2 size 262144 crc 7d1ac3ec sha1 8495357304f1df135bba77ef3b96e79a883b8ff0 )
+	rom ( name mpr13218.b3 size 262144 crc 56d3393c sha1 50a2d065060692c9ecaa56046a781cb21d93e554 )
+	rom ( name mpr13224.b11 size 262144 crc c59f107b sha1 10fa60fca6e34eda277c483bb1c0e81bb88c8a47 )
+	rom ( name mpr13231.a11 size 262144 crc a5e96346 sha1 a854f4dd5dc16975373255110fdb8ab3d121b1af )
+	rom ( name mpr13223.b10 size 262144 crc 364f60ff sha1 9ac887ec0b2e32b504b7c6a5f3bb1ce3fe41a15a )
+	rom ( name mpr13230.a10 size 262144 crc 9550091f sha1 bb6e898f7b540e130fd338c10f74609a7604cef4 )
+	rom ( name mpr13222.b9 size 262144 crc 523df3ed sha1 2e496125e75decd674c3a08404fbdb53791a965d )
+	rom ( name mpr13229.a9 size 262144 crc f40dc45d sha1 e9468cef428f52ecdf6837c6d9a9fea934e7676c )
+	rom ( name epr13221.b8 size 262144 crc 9ae7546a sha1 5413b0131881b0b32bac8de51da9a299835014bb )
+	rom ( name epr13228.a8 size 262144 crc de3786be sha1 2279bb390aa3efab9aeee0a643e5cb6a4f5933b6 )
+	rom ( name epr13225.a4 size 131072 crc 56c2e82b sha1 d5755a1bb6e889d274dc60e883d4d65f12fdc877 )
+	rom ( name mpr13219.b4 size 262144 crc 19e2061f sha1 2dcf1718a43dab4da53b4f67722664e70ddd2169 )
+	rom ( name mpr13220.b5 size 262144 crc 58d4d9ce sha1 725e73a656845b02702ef131b4c0aa2a73cdd02e )
+	rom ( name mpr13249.b6 size 262144 crc 623edc5d sha1 c32d9f818d40f311877fbe6532d9e95b6045c3c4 )
+)
+
+game (
+	name aliensyn1
 	description "Alien Syndrome (set 1, System 16A, FD1089A 317-0033)"
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof aliensyn
-	romof aliensyn
 	rom ( name epr10699.43 size 32768 crc 3fd38d17 sha1 538c1246121051a1af9ba2a4259eb1fe7e4952e1 )
 	rom ( name epr10696.26 size 32768 crc d734f19f sha1 4a08c35084f7a9364ba0f058b9a9ffc30c8b5a78 )
 	rom ( name epr10700.42 size 32768 crc 3b04b252 sha1 0e40e89e8feb7c98ee1da1c3fb3fe1d317c66842 )
@@ -45,13 +617,11 @@ game (
 )
 
 game (
-	name aliensy2
+	name aliensyn2
 	description "Alien Syndrome (set 2, System 16A, FD1089A 317-0033)"
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof aliensyn
-	romof aliensyn
 	rom ( name 10808 size 32768 crc e669929f sha1 b5ab41d6f31f0369f8c5f5eb6fc08e8c23312b96 )
 	rom ( name 10806 size 32768 crc 9f7f8fdd sha1 819e9c491b7d23deaef646d37319c38e75827d68 )
 	rom ( name 10809 size 32768 crc 9a424919 sha1 a7be5d9bed329099df10ff5a0104cb832485bd0a )
@@ -78,13 +648,11 @@ game (
 )
 
 game (
-	name aliensy5
+	name aliensyn5
 	description "Alien Syndrome (set 5, System 16A, FD1089B 317-0037)"
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof aliensyn
-	romof aliensyn
 	rom ( name epr10804.43 size 32768 crc 23f78b83 sha1 76538663e8f7ffffeea4928e3ebe091dac954dc7 )
 	rom ( name epr10802.26 size 32768 crc 996768bd sha1 8c972f0f4120600ecd10ceb3456243d9614924b7 )
 	rom ( name epr10805.42 size 32768 crc 53d7fe50 sha1 9a4e18f4d11c77ec04a817dca7b618297658113e )
@@ -139,7 +707,7 @@ game (
 	rom ( name epr-10030.c2 size 32768 crc dcc1df0b sha1 a82a557fa48f4b3e1ab38f61b84d749cd417e80f )
 	rom ( name epr-10031.c3 size 32768 crc ea3c4472 sha1 ad8eac2d3d14fd6aba713f4d624861c17aabf757 )
 	rom ( name epr-10032.c4 size 32768 crc 0aabebce sha1 fab12df8f4eab270be491c6c025d832c338e1e83 )
-	rom ( name 317-0015.mcu size 4096 flags nodump )
+	rom ( name 317-0015.bin size 4096 crc 833869e2 sha1 2675fda669351e958be28ca28de276abb2bbc99a )
 )
 
 game (
@@ -243,7 +811,7 @@ game (
 )
 
 game (
-	name quartet1
+	name quarteta
 	description "Quartet (8751 315-5194)"
 	year 1986
 	manufacturer "Sega"
@@ -280,7 +848,7 @@ game (
 )
 
 game (
-	name quart21
+	name quartet2
 	description "Quartet 2 (8751 317-0010)"
 	year 1986
 	manufacturer "Sega"
@@ -310,11 +878,11 @@ game (
 	rom ( name epr-7475.2c merge epr-7475.2c size 32768 crc 7abd1206 sha1 54d52dc0b9c245cd2df647e714310a71b803cbcf )
 	rom ( name epr-7474.3c merge epr-7474.3c size 32768 crc dbf853b8 sha1 e82f497e1144f23f3233b5c45ef182bfc7923715 )
 	rom ( name epr-7476.4c merge epr-7476.4c size 32768 crc 5eba655a sha1 6713ef12037cba3139d0f469c82bd90b44bae8ce )
-	rom ( name 317-0010.mcu size 4096 flags nodump )
+	rom ( name 317-0010.bin size 4096 crc 8c2033ea sha1 4a60d141517a5d5d065f40f71be4d2ee3be18384 )
 )
 
 game (
-	name quart2
+	name quartet2a
 	description "Quartet 2 (unprotected)"
 	year 1986
 	manufacturer "Sega"
@@ -347,13 +915,11 @@ game (
 )
 
 game (
-	name aceattaa
+	name aceattaca
 	description "Ace Attacker (Japan, System 16A, FD1094 317-0060)"
 	year 1988
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof aceattac
-	romof aceattac
 	rom ( name epr-11573.43 size 65536 crc ca116367 sha1 ca09b01568dafec48354072267accb73a97a670f )
 	rom ( name epr-11571.26 size 65536 crc 5631d1d6 sha1 08a2d375e3e4caf392cf2da2dc5497fd1142ab15 )
 	rom ( name epr-11574.42 size 65536 crc 8d3ed7bd sha1 0cb947a796071b0b787638a85fce39135ad8d3cb )
@@ -433,7 +999,7 @@ game (
 )
 
 game (
-	name alexkid1
+	name alexkidd1
 	description "Alex Kidd: The Lost Stars (set 1, FD1089A 317-0021)"
 	year 1986
 	manufacturer "Sega"
@@ -487,7 +1053,7 @@ game (
 )
 
 game (
-	name fantzon1
+	name fantzone1
 	description "Fantasy Zone (set 1, unprotected)"
 	year 1986
 	manufacturer "Sega"
@@ -626,30 +1192,28 @@ game (
 	year 1987
 	manufacturer "White Board"
 	sourcefile segas16a.c
-	cloneof sjryuko
-	romof sjryuko
 	rom ( name epr12251.43 size 32768 crc 1af3cd0b sha1 a14907bf8da8010bacaf35893037310f1bb8d375 )
 	rom ( name epr12249.26 size 32768 crc 743d467d sha1 0eaccd3fd5c64513a86d23928a1469557c972f57 )
 	rom ( name epr12252.42 size 32768 crc 7ae309d6 sha1 399c2a4d8b64df03e02b95cc635ee041254b7683 )
 	rom ( name epr12250.25 size 32768 crc 52c40f19 sha1 0606943248b2433b70a7e4ad3408d4d3957756c9 )
-	rom ( name 12224-95.b9 merge 12224-95.b9 size 32768 crc eac17ba1 sha1 6dfea3383b7c9c47bc0943a8d86fc89efcb85ae2 )
-	rom ( name 12225-94.b10 merge 12225-94.b10 size 32768 crc 2310fc98 sha1 c40ca62edbe5cfa2f84811426233412cd5bd398c )
-	rom ( name 12226-93.b11 merge 12226-93.b11 size 32768 crc 210e6999 sha1 5707cc613060b0070a822850b9afab8293f64dd7 )
-	rom ( name 12232-10.b1 merge 12232-10.b1 size 65536 crc 0adec62b sha1 cd798a7994cea73bffe78feac4e692d755074b1d )
-	rom ( name 12236-11.b5 merge 12236-11.b5 size 65536 crc 286b9af8 sha1 085251b8ce8b7fadf15b8ebd5872f0337adf142b )
-	rom ( name 12233-17.b2 merge 12233-17.b2 size 65536 crc 3e45969c sha1 804f3714c97877c6f0caf458f8af38e8d8179d73 )
-	rom ( name 12237-18.b6 merge 12237-18.b6 size 65536 crc e5058e96 sha1 4a1f663c7c87fe7177a52017da3f2f55568bd863 )
-	rom ( name 12234-23.b3 merge 12234-23.b3 size 65536 crc 8c8d54ef sha1 a8adee4f6ad8079af88cf471af42ace8ac8d093e )
-	rom ( name 12238-24.b7 merge 12238-24.b7 size 65536 crc 7ada3304 sha1 e402442e73d93a1b174e3fcab6a97fb2d450994c )
-	rom ( name 12235-29.b4 merge 12235-29.b4 size 65536 crc fa45d511 sha1 41e343b039e8633b2469a5eaf5e4196b682f0d01 )
-	rom ( name 12239-30.b8 merge 12239-30.b8 size 65536 crc 91f70c8b sha1 c3ac9cf248540d948f7845eb17ec95e1be8d00bb )
+	rom ( name 12224-95.b9 size 32768 crc eac17ba1 sha1 6dfea3383b7c9c47bc0943a8d86fc89efcb85ae2 )
+	rom ( name 12225-94.b10 size 32768 crc 2310fc98 sha1 c40ca62edbe5cfa2f84811426233412cd5bd398c )
+	rom ( name 12226-93.b11 size 32768 crc 210e6999 sha1 5707cc613060b0070a822850b9afab8293f64dd7 )
+	rom ( name 12232-10.b1 size 65536 crc 0adec62b sha1 cd798a7994cea73bffe78feac4e692d755074b1d )
+	rom ( name 12236-11.b5 size 65536 crc 286b9af8 sha1 085251b8ce8b7fadf15b8ebd5872f0337adf142b )
+	rom ( name 12233-17.b2 size 65536 crc 3e45969c sha1 804f3714c97877c6f0caf458f8af38e8d8179d73 )
+	rom ( name 12237-18.b6 size 65536 crc e5058e96 sha1 4a1f663c7c87fe7177a52017da3f2f55568bd863 )
+	rom ( name 12234-23.b3 size 65536 crc 8c8d54ef sha1 a8adee4f6ad8079af88cf471af42ace8ac8d093e )
+	rom ( name 12238-24.b7 size 65536 crc 7ada3304 sha1 e402442e73d93a1b174e3fcab6a97fb2d450994c )
+	rom ( name 12235-29.b4 size 65536 crc fa45d511 sha1 41e343b039e8633b2469a5eaf5e4196b682f0d01 )
+	rom ( name 12239-30.b8 size 65536 crc 91f70c8b sha1 c3ac9cf248540d948f7845eb17ec95e1be8d00bb )
 	rom ( name epr12227.12 size 32768 crc 5b12409d sha1 b25d6fa004461426f6358ab70fd071239c78e949 )
 	rom ( name 7751.bin size 1024 crc 6a9534fc sha1 67ad94674db5c2aab75785668f610f6f4eccd158 )
 	rom ( name epr12228.1 size 32768 crc 6b2e6aef sha1 64ae6ec327c32cdb877a493ebfe11af15e2388ac )
 	rom ( name epr12229.2 size 32768 crc b7aa015c sha1 0ef023f73722e27180c271b207a5097220f40b5e )
 	rom ( name epr12230.4 size 32768 crc d0f61fd4 sha1 e6f29459d7395122f26957f56e38926aebd9004c )
 	rom ( name epr12231.5 size 32768 crc 780bdc57 sha1 8c859043bba389292604385b88c743728180f9a9 )
-	rom ( name 317-5021.key merge 317-5021.key size 8192 crc 4a3422e4 sha1 69a32a6987ff2481f6d6cbbe399269a2461b8bad flags baddump )
+	rom ( name 317-5021.key size 8192 crc 4a3422e4 sha1 69a32a6987ff2481f6d6cbbe399269a2461b8bad flags baddump )
 )
 
 game (
@@ -689,13 +1253,11 @@ game (
 )
 
 game (
-	name timesca1
+	name timescan1
 	description "Time Scanner (set 1, System 16A, FD1089B 317-0024)"
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof timescan
-	romof timescan
 	rom ( name epr10540a.43 size 32768 crc 76848b0b sha1 a7755898c2b3212d80034c47760440db6dcde83c )
 	rom ( name epr10537a.26 size 32768 crc 4ddc434a sha1 54908654f1445f2d3a3b1496015f3347ad603225 )
 	rom ( name epr10541.42 size 32768 crc cc6d945e sha1 0ace2a8fddc27da4c8c3efb16f245f6325f02ed5 )
@@ -725,8 +1287,6 @@ game (
 	year 1988
 	manufacturer "Sega / Westone"
 	sourcefile segas16a.c
-	cloneof wb3
-	romof wb3
 	rom ( name epr12084.bin size 65536 crc b6deb654 sha1 37066cc63902233bb8b56d3171c42bf8a8f82e58 )
 	rom ( name epr12082.bin size 65536 crc 38dc5b15 sha1 b25bf60d269a87f9d8dbc1a3787c8ff9a6e7482c )
 	rom ( name epr12085.bin size 65536 crc 0962098b sha1 150fc439dd5e773bef706f058abdb4d2ec44e355 )
@@ -735,14 +1295,14 @@ game (
 	rom ( name epr12086.bin size 65536 crc 45b949df sha1 84390d16da00b775988e5f6c20950cb2304b1a74 )
 	rom ( name epr12087.bin size 65536 crc 6f0396b7 sha1 0a340f2b58e5ecfe504197a8fd2111181e868a3e )
 	rom ( name epr12088.bin size 65536 crc ba8c0749 sha1 7d996c7a1ad249c06ef7ec9c87a83710c98005d3 )
-	rom ( name epr12090.b1 merge epr12090.b1 size 65536 crc aeeecfca sha1 496124b170a725ad863c741d4e021ab947511e4c )
-	rom ( name epr12094.b5 merge epr12094.b5 size 65536 crc 615e4927 sha1 d23f164973afa770714e284a77ddf10f18cc596b )
-	rom ( name epr12091.b2 merge epr12091.b2 size 65536 crc 8409a243 sha1 bcbb9510a6499d8147543d6befa5a49f4ac055d9 )
-	rom ( name epr12095.b6 merge epr12095.b6 size 65536 crc e774ec2c sha1 a4aa15ec7be5539a740ad02ff720458018dbc536 )
-	rom ( name epr12092.b3 merge epr12092.b3 size 65536 crc 5c2f0d90 sha1 e0fbc0f841e4607ad232931368b16e81440a75c4 )
-	rom ( name epr12096.b7 merge epr12096.b7 size 65536 crc 0cd59d6e sha1 caf754a461feffafcfe7bfc6e89da76c4db257c5 )
-	rom ( name epr12093.b4 merge epr12093.b4 size 65536 crc 4891e7bb sha1 1be04fcabe9bfa8cf746263a5bcca67902a021a0 )
-	rom ( name epr12097.b8 merge epr12097.b8 size 65536 crc e645902c sha1 497cfcf6c25cc2e042e16dbcb1963d2223def15a )
+	rom ( name epr12090.b1 size 65536 crc aeeecfca sha1 496124b170a725ad863c741d4e021ab947511e4c )
+	rom ( name epr12094.b5 size 65536 crc 615e4927 sha1 d23f164973afa770714e284a77ddf10f18cc596b )
+	rom ( name epr12091.b2 size 65536 crc 8409a243 sha1 bcbb9510a6499d8147543d6befa5a49f4ac055d9 )
+	rom ( name epr12095.b6 size 65536 crc e774ec2c sha1 a4aa15ec7be5539a740ad02ff720458018dbc536 )
+	rom ( name epr12092.b3 size 65536 crc 5c2f0d90 sha1 e0fbc0f841e4607ad232931368b16e81440a75c4 )
+	rom ( name epr12096.b7 size 65536 crc 0cd59d6e sha1 caf754a461feffafcfe7bfc6e89da76c4db257c5 )
+	rom ( name epr12093.b4 size 65536 crc 4891e7bb sha1 1be04fcabe9bfa8cf746263a5bcca67902a021a0 )
+	rom ( name epr12097.b8 size 65536 crc e645902c sha1 497cfcf6c25cc2e042e16dbcb1963d2223def15a )
 	rom ( name epr12089.bin size 32768 crc 8321eb0b sha1 61cf95833c0aa38e35fc18db39d4ec74e4aaf01e )
 )
 
@@ -752,8 +1312,6 @@ game (
 	year 1988
 	manufacturer "Sega / Westone"
 	sourcefile segas16a.c
-	cloneof wb3
-	romof wb3
 	rom ( name epr12120.43 size 65536 crc cf41adf1 sha1 aab2146d990d6698d73edf8d8699e98a1f01d534 )
 	rom ( name epr12118.26 size 65536 crc 050ad6d0 sha1 4d5e5b9a6b9b33ec767a18c30a8252063341eefb )
 	rom ( name epr12121.42 size 65536 crc 5e44c0a9 sha1 4d4c9575a6cd571a7cf635164e92afd92d4b63fe )
@@ -774,13 +1332,11 @@ game (
 )
 
 game (
-	name pshot16a
+	name passsht16a
 	description "Passing Shot (Japan, 4 Players, System 16A, FD1094 317-0071)"
 	year 1988
 	manufacturer "Sega"
 	sourcefile segas16a.c
-	cloneof passsht
-	romof passsht
 	rom ( name epr11833.43 size 65536 crc 5eb1405c sha1 0a68d3fcc074475d38f999c93082d4a9dff0f19a )
 	rom ( name epr11832.26 size 65536 crc 718a3fe4 sha1 bd6844c53ce3b64b113795360175df92d095b467 )
 	rom ( name 317-0071.key size 8192 crc c69949ec sha1 1c63f42404ee1d8333e734e892b1c4cac0cb440e )
@@ -799,6 +1355,35 @@ game (
 	rom ( name epr11839.2 size 32768 crc 99de6197 sha1 f7de6a34fa185754c12276a94b1513234d352f3f )
 	rom ( name epr11840.4 size 32768 crc 9854e8b3 sha1 bc9d8a17ff96cf03f9a955223c11d9f1fb0309c5 )
 	rom ( name epr11841.5 size 32768 crc 1e89877e sha1 bbceb4f3cafae40d1e256f4336d3ee0bcdf8d077 )
+)
+
+game (
+	name shinoblb
+	description "Shinobi (Beta bootleg)"
+	year 1987
+	manufacturer "[Sega] (Beta bootleg)"
+	sourcefile segas16a.c
+	cloneof shinobi
+	romof shinobi
+	rom ( name 4.3k size 65536 crc c178a39c sha1 05ff1679cdfc3618df8b3fabdeab64b1f2299aa3 )
+	rom ( name 2.3n size 65536 crc 5ad8ebf2 sha1 b22e0c8d4b27c553abface17c625e207d19417ab )
+	rom ( name 5.2k size 65536 crc a2a620bd sha1 f8b135ce14d6c5eac5e40ddfd5ad2f1e6f2bc7a6 )
+	rom ( name 3.2n size 65536 crc a3ceda52 sha1 97a1c52a162fb1d43b3f8f16613b70ce582a8d26 )
+	rom ( name 8.3b size 65536 crc 46627e7d sha1 66bb5b22a2100e7b9df303007a837bc2d52cf7ba )
+	rom ( name 7.4b size 65536 crc 87d0f321 sha1 885b38eaff2dcaeab4eeaa20cc8a2885d520abd6 )
+	rom ( name 6.5b size 65536 crc efb4af87 sha1 0b8a905023e1bc808fd2b1c3cfa3778cde79e659 )
+	rom ( name 9.6r size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
+	rom ( name 13.8r size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
+	rom ( name 10.6q size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
+	rom ( name 14.8q size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
+	rom ( name 11.6p size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
+	rom ( name 15.8p size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
+	rom ( name 12.6n size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
+	rom ( name 16.8n size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
+	rom ( name 1.5s size 32768 crc dd50b745 sha1 52e1977569d3713ad864d607170c9a61cd059a65 )
+	rom ( name 7751.bin merge 7751.bin size 1024 crc 6a9534fc sha1 67ad94674db5c2aab75785668f610f6f4eccd158 )
+	rom ( name b9 size 32768 crc 6d7966da sha1 90f55a99f784c21d7c135e630f4e8b1d4d043d66 )
+	rom ( name 17.6u size 32768 crc b7a6890c sha1 6431df82c7dbe454cabc6084c1a677ebb42ae4b3 flags baddump )
 )
 
 game (
@@ -860,7 +1445,7 @@ game (
 )
 
 game (
-	name aliensy3
+	name aliensyn3
 	description "Alien Syndrome (set 3, System 16B, FD1089A 317-0033)"
 	year 1987
 	manufacturer "Sega"
@@ -917,7 +1502,7 @@ game (
 )
 
 game (
-	name altbeasj
+	name altbeastj
 	description "Juuouki (set 6, Japan, 8751 317-0077)"
 	year 1988
 	manufacturer "Sega"
@@ -953,7 +1538,7 @@ game (
 )
 
 game (
-	name altbeas5
+	name altbeast5
 	description "Altered Beast (set 5, 8751 317-0076)"
 	year 1988
 	manufacturer "Sega"
@@ -989,7 +1574,7 @@ game (
 )
 
 game (
-	name altbeas4
+	name altbeast4
 	description "Altered Beast (set 4, MC-8123B 317-0066)"
 	year 1988
 	manufacturer "Sega"
@@ -1025,7 +1610,7 @@ game (
 )
 
 game (
-	name altbeaj3
+	name altbeastj3
 	description "Juuouki (set 3, Japan, FD1094 317-0068)"
 	year 1988
 	manufacturer "Sega"
@@ -1061,7 +1646,7 @@ game (
 )
 
 game (
-	name altbeas2
+	name altbeast2
 	description "Altered Beast (set 2, MC-8123B 317-0066)"
 	year 1988
 	manufacturer "Sega"
@@ -1088,7 +1673,7 @@ game (
 )
 
 game (
-	name altbeaj1
+	name altbeastj1
 	description "Juuouki (set 1, Japan, FD1094 317-0065)"
 	year 1988
 	manufacturer "Sega"
@@ -1252,7 +1837,7 @@ game (
 )
 
 game (
-	name bayroutj
+	name bayroutej
 	description "Bay Route (set 2, Japan, FD1094 317-0115)"
 	year 1989
 	manufacturer "Sunsoft / Sega"
@@ -1277,7 +1862,7 @@ game (
 )
 
 game (
-	name bayrout1
+	name bayroute1
 	description "Bay Route (set 1, US, unprotected)"
 	year 1989
 	manufacturer "Sunsoft / Sega"
@@ -1454,7 +2039,7 @@ game (
 game (
 	name ddux
 	description "Dynamite Dux (set 2, FD1094 317-0096)"
-	year 1989
+	year 1988
 	manufacturer "Sega"
 	sourcefile segas16b.c
 	rom ( name epr11191.a7 size 131072 crc 500e400a sha1 c4d23cd09baf3049a8014190d82598d1e3f8ce89 )
@@ -1475,7 +2060,7 @@ game (
 game (
 	name ddux1
 	description "Dynamite Dux (set 1, 8751 317-0095)"
-	year 1989
+	year 1988
 	manufacturer "Sega"
 	sourcefile segas16b.c
 	cloneof ddux
@@ -1598,7 +2183,7 @@ game (
 game (
 	name exctleag
 	description "Excite League (FD1094 317-0079)"
-	year 1989
+	year 1988
 	manufacturer "Sega"
 	sourcefile segas16b.c
 	rom ( name epr11939.a04 size 65536 crc 117dd98f sha1 0234c2cf3421849854bec3711ab64f50f12cc5dd )
@@ -1685,7 +2270,7 @@ game (
 )
 
 game (
-	name goldnaxu
+	name goldnaxeu
 	description "Golden Axe (set 5, US, FD1094 317-0122)"
 	year 1989
 	manufacturer "Sega"
@@ -1709,7 +2294,7 @@ game (
 )
 
 game (
-	name goldnaxj
+	name goldnaxej
 	description "Golden Axe (set 4, Japan, FD1094 317-0121)"
 	year 1989
 	manufacturer "Sega"
@@ -1735,7 +2320,7 @@ game (
 )
 
 game (
-	name goldnax3
+	name goldnaxe3
 	description "Golden Axe (set 3, World, FD1094 317-0120)"
 	year 1989
 	manufacturer "Sega"
@@ -1761,7 +2346,7 @@ game (
 )
 
 game (
-	name goldnax2
+	name goldnaxe2
 	description "Golden Axe (set 2, US, 8751 317-0112)"
 	year 1989
 	manufacturer "Sega"
@@ -1787,7 +2372,7 @@ game (
 )
 
 game (
-	name goldnax1
+	name goldnaxe1
 	description "Golden Axe (set 1, World, FD1094 317-0110)"
 	year 1989
 	manufacturer "Sega"
@@ -2028,8 +2613,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof sdi
-	romof sdi
 	rom ( name epr10986a.a4 size 32768 crc 3e136215 sha1 e90b55d03c515752cc2c647cb30f6f23a0a91b01 )
 	rom ( name epr10984a.a1 size 32768 crc 44bf3cf5 sha1 fd7bcb25fbbfb01da49892c8b39c1f98e5acf9e6 )
 	rom ( name epr10987a.a5 size 32768 crc cfd79404 sha1 5dec1d31cb0fe14a0dbe00df13322f8e2676774b )
@@ -2055,8 +2638,6 @@ game (
 	year 1987
 	manufacturer "bootleg"
 	sourcefile segas16b.c
-	cloneof sdi
-	romof sdi
 	rom ( name a4.rom size 32768 crc f2c41dd6 sha1 7fdbf819e42c7af0efe3976ffd919ee142efe1bc )
 	rom ( name a1.rom size 32768 crc a9f816ef sha1 5ccab14b088d2249f83ff5e80591eccb4afb6e20 )
 	rom ( name a5.rom size 32768 crc 7952e27e sha1 caead75724a6744fc6fc7fbbc9894932a7a22eed )
@@ -2066,11 +2647,11 @@ game (
 	rom ( name epr10772.b9 size 65536 crc 182b6301 sha1 bb6f1174f82611c801d2b4b7d3596bf71619e8a1 )
 	rom ( name epr10773.b10 size 65536 crc 8f7129a2 sha1 094a4065597d8d51fb2232546df1de9043fea731 )
 	rom ( name epr10774.b11 size 65536 crc 4409411f sha1 84fd7128e8440d96b0384ae3c391a59bd37ecf9d )
-	rom ( name b1.rom merge b1.rom size 65536 crc 30e2c50a sha1 1fb9e69d4cb97fdcb0f98c2a7ede246aaa4ac382 )
-	rom ( name b5.rom merge b5.rom size 65536 crc 794e3e8b sha1 91ca1cb9aabf99adc8426feed4494a992afb8c4a )
-	rom ( name b2.rom merge b2.rom size 65536 crc 6a8b3fd0 sha1 a122d3cb0b3263714f026e57d85b0dbf6cb110d7 )
+	rom ( name b1.rom size 65536 crc 30e2c50a sha1 1fb9e69d4cb97fdcb0f98c2a7ede246aaa4ac382 )
+	rom ( name b5.rom size 65536 crc 794e3e8b sha1 91ca1cb9aabf99adc8426feed4494a992afb8c4a )
+	rom ( name b2.rom size 65536 crc 6a8b3fd0 sha1 a122d3cb0b3263714f026e57d85b0dbf6cb110d7 )
 	rom ( name 10764.b6 size 65536 crc 602da5d5 sha1 d32cdde7d86c4561e7bfa547d7d7995ce9a43c24 )
-	rom ( name b3.rom merge b3.rom size 65536 crc b9de3aeb sha1 2f7a55a8377e831338a884f8962d6ab2757e8c9b )
+	rom ( name b3.rom size 65536 crc b9de3aeb sha1 2f7a55a8377e831338a884f8962d6ab2757e8c9b )
 	rom ( name 10765.b7 size 65536 crc 0a73a057 sha1 7f31124c67541a245e069e5b6aac59935d99a9a9 )
 	rom ( name a7.rom size 32768 crc 793f9f7f sha1 9e4fde376db9e99a83eb2fc734c6721c122ba9af )
 )
@@ -2081,8 +2662,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof sdi
-	romof sdi
 	rom ( name epr10917a.a4 size 32768 crc d91ac47c sha1 298e4a9c1b00bd6090e7c4f42efd4c6e20b69d62 )
 	rom ( name epr10915.a1 size 32768 crc 7344c510 sha1 4bee5485204e8ec858726e403c55bb1592a991cc )
 	rom ( name epr10918a.a5 size 32768 crc e41befcd sha1 bbac5f501d215b18d34e3d366fd39cf7fa38a25c )
@@ -2108,8 +2687,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof shinobi
-	romof shinobi
 	rom ( name epr11360.a7 size 131072 crc b1f67ab9 sha1 83eddd1ef3fbe58f1f8e8d57229fabf1907fc371 )
 	rom ( name epr11359.a5 size 131072 crc 0f0306e1 sha1 eebe7c88e5f665d1d0920fb9b545e20b05be9b52 )
 	rom ( name epr11363.a14 size 131072 crc 40914168 sha1 cf0508e8c852c24ec3d2fc4a4013aec631d2271f )
@@ -2129,8 +2706,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof shinobi
-	romof shinobi
 	rom ( name epr11360.a7 size 131072 crc b1f67ab9 sha1 83eddd1ef3fbe58f1f8e8d57229fabf1907fc371 )
 	rom ( name epr11359.a5 size 131072 crc 0f0306e1 sha1 eebe7c88e5f665d1d0920fb9b545e20b05be9b52 )
 	rom ( name epr11363.a14 size 131072 crc 40914168 sha1 cf0508e8c852c24ec3d2fc4a4013aec631d2271f )
@@ -2151,8 +2726,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof shinobi
-	romof shinobi
 	rom ( name epr11299.a4 size 65536 crc b930399d sha1 955ff2948e1990463631b0bc5c7f5275384236cc )
 	rom ( name epr11298.a1 size 65536 crc 343f4c46 sha1 2cf5d00462ad85ae9a2e16d59171c8ab85e10f49 )
 	rom ( name epr11283.a5 size 65536 crc 9d46e707 sha1 37ab25b3b37365c9f45837bfb6ec80652691dd4c )
@@ -2160,14 +2733,14 @@ game (
 	rom ( name epr11284.b9 size 65536 crc 5f62e163 sha1 03f008745a1af84142ada647acf3601049f43ad5 )
 	rom ( name epr11285.b10 size 65536 crc 75f8fbc9 sha1 29072edcd583af60ec66b4c8bb82b179a3751edf )
 	rom ( name epr11286.b11 size 65536 crc 06508bb9 sha1 57c9036123ec8e35d0275ab6eaff25a16aa203d4 )
-	rom ( name epr11290.10 merge epr11290.10 size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
-	rom ( name epr11294.11 merge epr11294.11 size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
-	rom ( name epr11291.17 merge epr11291.17 size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
-	rom ( name epr11295.18 merge epr11295.18 size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
-	rom ( name epr11292.23 merge epr11292.23 size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
-	rom ( name epr11296.24 merge epr11296.24 size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
-	rom ( name epr11293.29 merge epr11293.29 size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
-	rom ( name epr11297.30 merge epr11297.30 size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
+	rom ( name epr11290.10 size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
+	rom ( name epr11294.11 size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
+	rom ( name epr11291.17 size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
+	rom ( name epr11295.18 size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
+	rom ( name epr11292.23 size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
+	rom ( name epr11296.24 size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
+	rom ( name epr11293.29 size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
+	rom ( name epr11297.30 size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
 	rom ( name epr11372.a7 size 32768 crc 0824269a sha1 501ab1b80c6e8a4b0ccda148c13fa96c71c7300d )
 	rom ( name epr11288.a8 size 32768 crc c8df8460 sha1 0aeb41a493df155edb5f600f53ec43b798927dff )
 	rom ( name epr11289.a9 size 32768 crc e5a4cf30 sha1 d1982da7a550c11ab2253f5d64ac6ab847da0a04 )
@@ -2180,8 +2753,6 @@ game (
 	year 1987
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof shinobi
-	romof shinobi
 	rom ( name epr11282.a4 size 65536 crc 5f2e5524 sha1 9e5fcabb95abbe6c8178e82f4971abdbc92bff73 )
 	rom ( name epr11280.a1 size 65536 crc bdfe5c38 sha1 65f537e38b74c66576d57c770d182dc13302cca6 )
 	rom ( name epr11283.a5 size 65536 crc 9d46e707 sha1 37ab25b3b37365c9f45837bfb6ec80652691dd4c )
@@ -2190,14 +2761,14 @@ game (
 	rom ( name epr11284.b9 size 65536 crc 5f62e163 sha1 03f008745a1af84142ada647acf3601049f43ad5 )
 	rom ( name epr11285.b10 size 65536 crc 75f8fbc9 sha1 29072edcd583af60ec66b4c8bb82b179a3751edf )
 	rom ( name epr11286.b11 size 65536 crc 06508bb9 sha1 57c9036123ec8e35d0275ab6eaff25a16aa203d4 )
-	rom ( name epr11290.10 merge epr11290.10 size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
-	rom ( name epr11294.11 merge epr11294.11 size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
-	rom ( name epr11291.17 merge epr11291.17 size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
-	rom ( name epr11295.18 merge epr11295.18 size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
-	rom ( name epr11292.23 merge epr11292.23 size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
-	rom ( name epr11296.24 merge epr11296.24 size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
-	rom ( name epr11293.29 merge epr11293.29 size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
-	rom ( name epr11297.30 merge epr11297.30 size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
+	rom ( name epr11290.10 size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
+	rom ( name epr11294.11 size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
+	rom ( name epr11291.17 size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
+	rom ( name epr11295.18 size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
+	rom ( name epr11292.23 size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
+	rom ( name epr11296.24 size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
+	rom ( name epr11293.29 size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
+	rom ( name epr11297.30 size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
 	rom ( name epr11287.a7 size 32768 crc e8cccd42 sha1 39cbf9298540b9d5a26f47fcf6c9b89b6cead6c9 )
 	rom ( name epr11288.a8 size 32768 crc c8df8460 sha1 0aeb41a493df155edb5f600f53ec43b798927dff )
 	rom ( name epr11289.a9 size 32768 crc e5a4cf30 sha1 d1982da7a550c11ab2253f5d64ac6ab847da0a04 )
@@ -2233,7 +2804,7 @@ game (
 game (
 	name sjryuko
 	description "Sukeban Jansi Ryuko (set 2, System 16B, FD1089B 317-5021)"
-	year 1987
+	year 1988
 	manufacturer "White Board"
 	sourcefile segas16b.c
 	rom ( name epr12256.a4 size 32768 crc 5987ee1b sha1 70a4e8603491d60a687c10980db02e60f4239779 )
@@ -2296,8 +2867,6 @@ game (
 	year 1988
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof tetris
-	romof tetris
 	rom ( name epr12193.a7 size 131072 crc 44466ed4 sha1 ddb4f0310987e54ce4cd9ffa2813e2d1309aeaaa )
 	rom ( name epr12192.a5 size 131072 crc a1c8af00 sha1 a8e4b289eb3939d6798bb78df1b4ae51c8ccc2d6 )
 	rom ( name 317-0092.key size 8192 crc d10e1ad9 sha1 26e81b5f62d96ea50bf203f66dc3643f29dd1596 )
@@ -2315,16 +2884,14 @@ game (
 	year 1988
 	manufacturer "Sega"
 	sourcefile segas16b.c
-	cloneof tetris
-	romof tetris
 	rom ( name epr12163.a1 size 32768 crc d372d3f3 sha1 e88fa5e66cc2d3cb9eb6d0f60d81c537e4642500 )
 	rom ( name epr12164.a4 size 32768 crc b329cd6f sha1 409322f32ee676dc72a3b007e3f8d691ca991e60 )
 	rom ( name 317-0091.key size 8192 crc a7937661 sha1 a1f74749641fe5a25696dc328530377c7707adaf )
 	rom ( name epr12165.b9 size 65536 crc 62640221 sha1 c311d3847a981d0e1609f9b3d80481565d32d78c )
 	rom ( name epr12166.b10 size 65536 crc 9abd183b sha1 621b017cb34973f9227be383e26b5cd41aea9422 )
 	rom ( name epr12167.b11 size 65536 crc 2495fd4e sha1 2db94ead9223a67238a97e724668076fc43e5534 )
-	rom ( name epr12169.b1 merge epr12169.b1 size 32768 crc dacc6165 sha1 87b1a7643e3630ff73b2b117752496e1ea5da23d )
-	rom ( name epr12170.b5 merge epr12170.b5 size 32768 crc 87354e42 sha1 e7fd55aee59b51d82cb9b619fbb815ad6839560c )
+	rom ( name epr12169.b1 size 32768 crc dacc6165 sha1 87b1a7643e3630ff73b2b117752496e1ea5da23d )
+	rom ( name epr12170.b5 size 32768 crc 87354e42 sha1 e7fd55aee59b51d82cb9b619fbb815ad6839560c )
 	rom ( name epr12168.a7 size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
 )
 
@@ -2566,7 +3133,7 @@ game (
 )
 
 game (
-	name wrestwa2
+	name wrestwar2
 	description "Wrestle War (set 2, World, FD1094 317-0102)"
 	year 1989
 	manufacturer "Sega"
@@ -2599,7 +3166,7 @@ game (
 )
 
 game (
-	name wrestwa1
+	name wrestwar1
 	description "Wrestle War (set 1, Japan, FD1094 317-0090)"
 	year 1989
 	manufacturer "Sega"
@@ -2657,432 +3224,3 @@ game (
 	rom ( name snap5.r05 size 32768 crc 378e08eb sha1 f2c10bd9e885c185ac2d0d51d907ceca1f21dd7a )
 )
 
-game (
-	name bayrtbl1
-	description "Bay Route (bootleg set 1)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof bayroute
-	romof bayroute
-	rom ( name b4.bin size 65536 crc eb6646ae sha1 073bc0a3868e70785f44e497a949cd9e3b591a33 )
-	rom ( name b2.bin size 65536 crc ecd9cd0e sha1 177c38ca02c4e87d6adcae77ce4e9237938d23a9 )
-	rom ( name br.5a size 65536 crc 9d6fd183 sha1 5ae78d33c0e929886d84a25c0fbd62ab45dcbff4 )
-	rom ( name br.2a size 65536 crc 5ca1e3d2 sha1 51ce67ed0a0054f9c9c4ac56c5775716c44d74b1 )
-	rom ( name b8.bin size 65536 crc e7ca0331 sha1 b255939576a84f4d266f31a7fde818e04ff35b24 )
-	rom ( name b6.bin size 65536 crc 2bc748a6 sha1 9ab760377fde24cecb703726ee3e59ee23d60a3a )
-	rom ( name bs16.bin size 65536 crc a8a5b310 sha1 8883e1ed48a3e0f7b4c36d83579f93e84e28568c )
-	rom ( name bs14.bin size 65536 crc 6bc4d0a8 sha1 90b9a61c7a140291d72554857ce26d54ebf03fc2 )
-	rom ( name bs12.bin size 65536 crc c1f967a6 sha1 8eb6bbd9e17dc531830bc798b8485c8ea999e56e )
-	rom ( name br_obj0o.1b size 65536 crc 098a5e82 sha1 c5922f418773bc3629071e584457839d67a370e9 )
-	rom ( name br_obj0e.5b size 65536 crc 85238af9 sha1 39989a8d9b60c6d55272b5e2c213341a563dd993 )
-	rom ( name br_obj1o.2b size 65536 crc cc641da1 sha1 28f8a6502702cb9e2cc7f3e98f6c5d201f462fa3 )
-	rom ( name br_obj1e.6b size 65536 crc d3123315 sha1 16a87caed1cabb080d4f35935910b38797344ca5 )
-	rom ( name br_obj2o.3b size 65536 crc 84efac1f sha1 41c43d70dc7ae7e361d6fa12c5790ea7ebf13ca8 )
-	rom ( name br_obj2e.7b size 65536 crc b73b12cb sha1 e8265ae90aabf1ee0522dbc6541a0f82fec97c7a )
-	rom ( name br_obj3o.4b size 65536 crc a2e238ac sha1 c854774c0ffd1ccf6e46591a8fa3c80a4630e007 )
-	rom ( name bs7.bin size 65536 crc 0c91abcc sha1 d25608f3cbacd1bd169f1a2247f007ac8bc8dda0 )
-	rom ( name epr12459.a10 merge epr12459.a10 size 32768 crc 3e1d29d0 sha1 fe3d985983e5132e8a26a02a3f2d8d420cbf1a49 )
-	rom ( name mpr12460.a11 merge mpr12460.a11 size 131072 crc 0bae570d sha1 05fa4a3405666342ab66e696a7344cca97569f19 )
-	rom ( name mpr12461.a12 merge mpr12461.a12 size 131072 crc b03b8b46 sha1 b0283ac377d464f3d9374a992192ec6c515a3c2f )
-)
-
-game (
-	name bayrtbl2
-	description "Bay Route (bootleg set 2)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof bayroute
-	romof bayroute
-	rom ( name br_04 size 65536 crc 2e33ebfc sha1 f6b5a4bd28d302abd6b1e5a9ec6f2a8b57ff213e )
-	rom ( name br_06 size 65536 crc 3db42313 sha1 e1c874ebf83e1a458cefaa038fbe89a9804ca30d )
-	rom ( name br_03 size 131072 crc 285d256b sha1 73eac0131d14f0d7fe2a06cb2e0e57dcf4779cf9 )
-	rom ( name br_05 size 131072 crc 552e6384 sha1 2770b0c9d961671576e09ada2ebd7bb486f24547 )
-	rom ( name br_15 size 65536 crc 050079a9 sha1 4b356eddec2f500fb0dcc20af6b7aed2f9ef0c02 )
-	rom ( name br_16 size 65536 crc fc371928 sha1 b36866c95bdc440aae999a90ecf3bbaed11d4351 )
-	rom ( name bs12.bin size 65536 crc c1f967a6 sha1 8eb6bbd9e17dc531830bc798b8485c8ea999e56e )
-	rom ( name br_11 size 65536 crc 65232905 sha1 cb195a0ce8bff9d1d3e31678060b3aaccfefcd2d )
-	rom ( name br_obj0e.5b size 65536 crc 85238af9 sha1 39989a8d9b60c6d55272b5e2c213341a563dd993 )
-	rom ( name br_obj1o.2b size 65536 crc cc641da1 sha1 28f8a6502702cb9e2cc7f3e98f6c5d201f462fa3 )
-	rom ( name br_obj1e.6b size 65536 crc d3123315 sha1 16a87caed1cabb080d4f35935910b38797344ca5 )
-	rom ( name br_obj2o.3b size 65536 crc 84efac1f sha1 41c43d70dc7ae7e361d6fa12c5790ea7ebf13ca8 )
-	rom ( name br_09 size 65536 crc 05e9b840 sha1 7cc1c9ac7b85f1e1bdb68215b5e83eae3ee5ba2a )
-	rom ( name br_14 size 65536 crc 4c4a177b sha1 a9dfd7e56b0a21a0f7750d8ec4631901ad182609 )
-	rom ( name bs7.bin size 65536 crc 0c91abcc sha1 d25608f3cbacd1bd169f1a2247f007ac8bc8dda0 )
-	rom ( name br_01 size 65536 crc b87156ec sha1 bdfef2ab5a4d3cac4077c92ce1ef4604b4c11cf8 )
-	rom ( name br_02 size 65536 crc ef63991b sha1 4221741780f88c80b3213ddca949bee7d4c1469a )
-)
-
-game (
-	name dduxbl
-	description "Dynamite Dux (bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof ddux
-	romof ddux
-	rom ( name dduxb03.bin size 131072 crc e7526012 sha1 a1798008bfa1ce9b87dc330f3817b1978052fcfd )
-	rom ( name dduxb05.bin size 131072 crc 459d1237 sha1 55e9c0dc341c919d58cc789203642c397d7ac65e )
-	rom ( name dduxb02.bin size 131072 crc d8ed3132 sha1 a9d5ad8f79fb635cc234a99fad398688a5f15926 )
-	rom ( name dduxb04.bin size 131072 crc 30c6cb92 sha1 2e17c74eeb37c9731fc2e365cc0114f7383c0106 )
-	rom ( name dduxb14.bin size 65536 crc 664bd135 sha1 674b06e01c2c8f5b8057dd24d470330c3f140473 )
-	rom ( name dduxb15.bin size 65536 crc ce0d2b30 sha1 e60521c46f1650c9bdc76f2ceb91a6d61aaa0a09 )
-	rom ( name dduxb16.bin size 65536 crc 6de95434 sha1 7bed2a0261cf6c2fbb3756633f05f0bb2173977c )
-	rom ( name dduxb10.bin size 65536 crc 0be3aee5 sha1 48fc779b7398abbb82cd0d0d28705ece75b3c4e3 )
-	rom ( name dduxb06.bin size 65536 crc b0079e99 sha1 9bb4d3fa804a3d05a6e06b45a1280d7064e96ac6 )
-	rom ( name dduxb11.bin size 65536 crc cfb2af18 sha1 1ad18f933a7b797f0364d1f4a6c8549351b4c9a6 )
-	rom ( name dduxb07.bin size 65536 crc 0217369c sha1 b6ec2fa1279a27a602d79e1073c54193745ea816 )
-	rom ( name dduxb12.bin size 65536 crc 28ce9b15 sha1 1640df9c8f21893c0647ad2f4210c714a06e6f37 )
-	rom ( name dduxb08.bin size 65536 crc 8844f336 sha1 18c1baaad3bcc658d4a6d03de8c97378b5284e88 )
-	rom ( name dduxb13.bin size 65536 crc efe57759 sha1 69b8969b20ab9480df2735bd2bcd527069196bd7 )
-	rom ( name dduxb09.bin size 65536 crc 6b64f665 sha1 df07fcf2bbec6fa78f89b95272762aebd6f3ec0e )
-	rom ( name dduxb01.bin size 32768 crc 0dbef0d7 sha1 8b9afb2fcb946cec467b1e691c267194b503f841 )
-)
-
-game (
-	name eswatbl
-	description "E-Swat - Cyber Police (bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof eswat
-	romof eswat
-	rom ( name eswat_c.rom size 65536 crc 1028cc81 sha1 24b4cd182419a44f3d6afa1c4273353024eb278f )
-	rom ( name eswat_f.rom size 65536 crc f7b2d388 sha1 8131ba8f4fa01751b9993c3c6c218c9bd3adb328 )
-	rom ( name eswat_b.rom size 65536 crc 87c6b1b5 sha1 a9f29e29a9c0e3daf272dce263a5fd7866642c77 )
-	rom ( name eswat_e.rom size 65536 crc 937ddf9a sha1 9fc73f93e9c4221a4dc778593edc02cb405b2f78 )
-	rom ( name eswat_a.rom size 32768 crc 2af4fc62 sha1 f7b1539a5ab9560bd49dfecf44699abccfb649be )
-	rom ( name eswat_d.rom size 32768 crc b4751e19 sha1 57c9687dc864c163d13dbb89057cd42684a199cd )
-	rom ( name mpr12624.b11 merge mpr12624.b11 size 262144 crc 375a5ec4 sha1 42b9116bdc0e0a5b1dd667ac1856b4c2252829ba )
-	rom ( name mpr12625.b12 merge mpr12625.b12 size 262144 crc 3b8c757e sha1 0b66e8446d059a12e47e2a6fe8f0a333245bb95c )
-	rom ( name mpr12626.b13 merge mpr12626.b13 size 262144 crc 3efca25c sha1 0d866bf53a16b52719f73081e933f4db27d72ece )
-	rom ( name mpr12618.b1 merge mpr12618.b1 size 262144 crc 0d1530bf sha1 bb8626cd98761c1c20cee117d00315c85621ba6a )
-	rom ( name mpr12621.b4 merge mpr12621.b4 size 262144 crc 18ff0799 sha1 5417223378aef16ee2b4f438d1f8f11a23fe7265 )
-	rom ( name mpr12619.b2 merge mpr12619.b2 size 262144 crc 32069246 sha1 4913009bc72bf4f8b171b14fe06457f5784cab15 )
-	rom ( name mpr12622.b5 merge mpr12622.b5 size 262144 crc a3dfe436 sha1 640ccc552114d403f35d441574d2f3e4f1d4a8f9 )
-	rom ( name mpr12620.b3 merge mpr12620.b3 size 262144 crc f6b096e0 sha1 695ad1adbdc29f4d614645867e16de038cf92709 )
-	rom ( name mpr12623.b6 merge mpr12623.b6 size 262144 crc 6773fef6 sha1 91e646ea447be02254d060daf255d26afe0cc79e )
-	rom ( name epr12617.a13 merge epr12617.a13 size 32768 crc 7efecf23 sha1 2b87af7cfaab5942a3f7b38c987fcba01d3475ab )
-	rom ( name mpr12616.a11 merge mpr12616.a11 size 262144 crc 254347c2 sha1 bf2d83a69a5be375c7e42e9f7d6e65c1095a354c )
-)
-
-game (
-	name fpointbl
-	description "Flash Point (World, bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof fpoint
-	romof fpoint
-	rom ( name flpoint.003 size 65536 crc 4d6df514 sha1 168aa1629ab7152ba1984605155406b236954a2c )
-	rom ( name flpoint.002 size 65536 crc 4dff2ee8 sha1 bd157d8c168d45e7490a05d5e1e901d9bdda9599 )
-	rom ( name flpoint.006 size 65536 crc c539727d sha1 56674effe1d273128dddd2ff9e02974ec10f3fff )
-	rom ( name flpoint.005 size 65536 crc 82c0b8b0 sha1 e1e2e721cb8ad53df33065582dc90edeba9c3cab )
-	rom ( name flpoint.004 size 65536 crc 522426ae sha1 90fd0a19b30a8a61dc4cfa66a64115596333dcc6 )
-	rom ( name 12596.bin size 65536 crc 4a4041f3 sha1 4c52b30223d8aa80ccdbb196098cb17e64ad6583 )
-	rom ( name 12597.bin size 65536 crc 6961e676 sha1 7639d2da086b57a9a8d6100fdacf40d97d7c4772 )
-	rom ( name flpoint.001 size 32768 crc c5b8e0fe sha1 6cf8c67151d8604326fc6dbf976c0635b452a844 )
-)
-
-game (
-	name fpointbj
-	description "Flash Point (Japan, bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof fpoint
-	romof fpoint
-	rom ( name boot2.003 size 65536 crc 6c00d1b0 sha1 fd0c47b8ca010a64d3ef91980f93854ebc98fbda )
-	rom ( name boot2.002 size 65536 crc c1fcd704 sha1 697bef464e53fb9891ed15ee2d6210107b693b20 )
-	rom ( name flpoint.006 size 65536 crc c539727d sha1 56674effe1d273128dddd2ff9e02974ec10f3fff )
-	rom ( name flpoint.005 size 65536 crc 82c0b8b0 sha1 e1e2e721cb8ad53df33065582dc90edeba9c3cab )
-	rom ( name flpoint.004 size 65536 crc 522426ae sha1 90fd0a19b30a8a61dc4cfa66a64115596333dcc6 )
-	rom ( name 12596.bin size 65536 crc 4a4041f3 sha1 4c52b30223d8aa80ccdbb196098cb17e64ad6583 )
-	rom ( name 12597.bin size 65536 crc 6961e676 sha1 7639d2da086b57a9a8d6100fdacf40d97d7c4772 )
-	rom ( name flpoint.001 size 32768 crc c5b8e0fe sha1 6cf8c67151d8604326fc6dbf976c0635b452a844 )
-	rom ( name 82s129.1 size 256 crc a7c22d96 sha1 160deae8053b09c09328325246598b3518c7e20b )
-	rom ( name 82s123.2 size 32 crc 58bcf8bd sha1 e4d3d179b08c0f3424a6bec0f15058fb1b56f8d8 )
-	rom ( name fpointbj_gal16v8_1.bin size 279 crc ba7f292c sha1 c383700d05663c9c5f29d5d04d16b05cd6adceb8 )
-	rom ( name fpointbj_gal16v8_3.bin size 279 crc ce1ab1e1 sha1 dcfc0015d8595ee6cb6bb02c95655161a7f3b017 )
-	rom ( name fpointbj_gal20v8.bin size 413 flags nodump )
-)
-
-game (
-	name goldnabl
-	description "Golden Axe (bootleg, encrypted)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof goldnaxe
-	romof goldnaxe
-	rom ( name ga6.a22 size 65536 crc f95b459f sha1 dadf66d63454ed62fefa521d4fed249d28c63778 )
-	rom ( name ga4.a20 size 65536 crc 83eabdf5 sha1 1effef966f513fbdec2026d535658e17ef7dea51 )
-	rom ( name ga11.a27 size 65536 crc f4ef9349 sha1 3ffa335e74ffbc10f80387268da659643c566897 )
-	rom ( name ga8.a24 size 65536 crc 37a65839 sha1 6e8055d91b840afd8526041d3752c0a55eaebe0c )
-	rom ( name epr12521.a8 size 131072 crc 5001d713 sha1 68cf3f48d6e440e5b800503a211adda02107d956 )
-	rom ( name epr12519.a6 size 131072 crc 4438ca8e sha1 0af53d64f06abf41f4c46540d28d5f008a4835a3 )
-	rom ( name ga33.b16 size 65536 crc 84587263 sha1 3a88c8578a477a487a0a214a367042b9739f39eb )
-	rom ( name ga32.b15 size 65536 crc 63d72388 sha1 ba0a582b1daf3a1e316237efbad17fcc0381643f )
-	rom ( name ga31.b14 size 65536 crc f8b6ae4f sha1 55132c98955107e4b247992f7917a6ce588460a7 )
-	rom ( name ga30.b13 size 65536 crc e29baf4f sha1 3761cb2217599fe3f2f860f9395930b96ec52f47 )
-	rom ( name ga29.b12 size 65536 crc 22f0667e sha1 2d11b2ce105a3db9c914942cace85aff17deded9 )
-	rom ( name ga28.b11 size 65536 crc afb1a7e4 sha1 726fded9db72a881128b43f449d2baf450131f63 )
-	rom ( name ga34.b17 size 65536 crc 28ba70c8 sha1 a6f33e1404928b6d1006943494646d6cfbd60a4b )
-	rom ( name ga35.b18 size 65536 crc 2ed96a26 sha1 edcf915243e6f92d31cdfc53965438f6b6bff51d )
-	rom ( name ga23.a14 size 65536 crc 84dccc5b sha1 10263d98d663f1170c3203066f391075a1d64ff5 )
-	rom ( name ga18.a9 size 65536 crc de346006 sha1 65aa489373b6d2cccbb024f13fc190a7cae86274 )
-	rom ( name mpr12379.b4 merge mpr12379.b4 size 262144 crc 1a0e8c57 sha1 674f1ae7db632876fff346e76786801ae19d9799 )
-	rom ( name ga36.b19 size 65536 crc 101d2fff sha1 1de1390c5f55f192491053c8aac31be3389aab2b )
-	rom ( name ga37.b20 size 65536 crc 677e64a6 sha1 e3d0d31097017c6cb1a7f41292783f18ce13b41c )
-	rom ( name ga19.a10 size 65536 crc 11794d05 sha1 eef52d7a644dbcc5f983222f163445a725286a32 )
-	rom ( name ga20.a11 size 65536 crc ad1c1c90 sha1 155f17593cfab1a117bb755b1edd0c473d455f91 )
-	rom ( name mpr12381.b5 merge mpr12381.b5 size 262144 crc 81ba6ecc sha1 7f59e4d86a192b97e92729371b78c3f1c784a0b5 )
-	rom ( name mpr12382.b3 merge mpr12382.b3 size 262144 crc 81601c6f sha1 604bc5613c6c734a06860303ba36d61bb54508a0 )
-	rom ( name mpr12383.b6 merge mpr12383.b6 size 262144 crc 5dbacf7a sha1 236866fb94672b13cbb2cb479324e61de87eeb34 )
-	rom ( name epr12390 merge epr12390 size 32768 crc 399fc5f5 sha1 6f290b36dc71ff4759598e2a9c185a8945a3c9e7 )
-	rom ( name mpr12384.a11 merge mpr12384.a11 size 131072 crc 6218d8e7 sha1 5a745c750efb4a61716f99befb7ed14cc84e9973 )
-)
-
-game (
-	name goldnab2
-	description "Golden Axe (bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof goldnaxe
-	romof goldnaxe
-	rom ( name ic39.1 size 65536 crc 71489c9a sha1 ec25463a2c63027d2635f0e27f5a971d68938fe3 )
-	rom ( name ic53.5 size 65536 crc 7a98512d sha1 f022a047d23051211e2de761b6c2289438b8f3cc )
-	rom ( name ic38.2 size 65536 crc 8c8c95b1 sha1 2b3897b8af587e6397dca0f3409a803432be07aa )
-	rom ( name ic52.6 size 65536 crc 4f58f15b sha1 4dcd7e8cfd8fe5fe9f9259abf53fd0d4c64b5abd )
-	rom ( name ic37.3 size 65536 crc 056879fd sha1 fc0a910c1dc4cf535ad589f482f57379798b5524 )
-	rom ( name ic51.7 size 65536 crc 8c77d958 sha1 f7c5abfec2a9d1724c83b1de2cd994bb4c42857c )
-	rom ( name ic36.4 size 65536 crc b69ab892 sha1 9b426058a80abb8dd3d6c0c55574fdc841889a72 )
-	rom ( name ic50.8 size 65536 crc 3cf2f725 sha1 1f620fcebe8533cba50736ae1d97c095abf1bc25 )
-	rom ( name ic4.35 size 65536 crc 84587263 sha1 3a88c8578a477a487a0a214a367042b9739f39eb )
-	rom ( name ic18.38 size 65536 crc 63d72388 sha1 ba0a582b1daf3a1e316237efbad17fcc0381643f )
-	rom ( name ic3.36 size 65536 crc f8b6ae4f sha1 55132c98955107e4b247992f7917a6ce588460a7 )
-	rom ( name ic17.39 size 65536 crc e29baf4f sha1 3761cb2217599fe3f2f860f9395930b96ec52f47 )
-	rom ( name ic2.37 size 65536 crc 22f0667e sha1 2d11b2ce105a3db9c914942cace85aff17deded9 )
-	rom ( name ic16.40 size 65536 crc afb1a7e4 sha1 726fded9db72a881128b43f449d2baf450131f63 )
-	rom ( name ic73.34 size 65536 crc 28ba70c8 sha1 a6f33e1404928b6d1006943494646d6cfbd60a4b )
-	rom ( name ic74.33 size 65536 crc 2ed96a26 sha1 edcf915243e6f92d31cdfc53965438f6b6bff51d )
-	rom ( name ic79.28 size 65536 crc 84dccc5b sha1 10263d98d663f1170c3203066f391075a1d64ff5 )
-	rom ( name ic80.27 size 65536 crc 3d41b995 sha1 913d2a0c9a2ac6d36589966d7eb5537120ea6ff0 )
-	rom ( name ic58.22 size 65536 crc ede51fe0 sha1 c05a2b51095a322bac5a67ee8886aecc186cbdfe )
-	rom ( name ic59.21 size 65536 crc 30989141 sha1 f6e7ae258deedec11b1f80c19575c884aac26c56 )
-	rom ( name ic64.16 size 65536 crc 38e4c92a sha1 8b8a596da0726bc02c412a68e5163770fe3e62e4 )
-	rom ( name ic65.15 size 65536 crc 9fb1f9b6 sha1 a193ff48f2bfbb4afbc322ae33cdf360afcb681e )
-	rom ( name ic75.32 size 65536 crc 101d2fff sha1 1de1390c5f55f192491053c8aac31be3389aab2b )
-	rom ( name ic76.31 size 65536 crc 677e64a6 sha1 e3d0d31097017c6cb1a7f41292783f18ce13b41c )
-	rom ( name ic81.26 size 65536 crc a34e84d1 sha1 5aa8836ef1bdf97e399899c911967840e9873bfb )
-	rom ( name ic82.25 size 65536 crc ad1c1c90 sha1 155f17593cfab1a117bb755b1edd0c473d455f91 )
-	rom ( name ic60.20 size 65536 crc 5853000d sha1 db7adf1de74c66f667ea7ccc41702576de081ff5 )
-	rom ( name ic61.19 size 65536 crc 697b3276 sha1 a8aeb2cfaca9368d5bfa14a67de36dbadd4a0585 )
-	rom ( name ic66.14 size 65536 crc 753b01e8 sha1 0180cf893d63e60e14e2fb0f5836b302f08f0228 )
-	rom ( name ic67.13 size 65536 crc 5dd6d8db sha1 270886aebf4549c5cf456b1e90927b759a53e2e1 )
-	rom ( name ic77.30 size 65536 crc a9519afe sha1 0550f596ef080db25241d88242d57edb3c7fb685 )
-	rom ( name ic78.29 size 65536 crc 74df9232 sha1 61286c83eb6f31983c0ed24ca2151c58a95238f1 )
-	rom ( name ic83.24 size 65536 crc a8c8c784 sha1 8e998019b4dbf509179d41eb2b446647db3d00a6 )
-	rom ( name ic84.23 size 65536 crc cc3a922c sha1 3c96459d95961d463909b6b0e8c77916c3a018e3 )
-	rom ( name ic62.18 size 65536 crc ac6ad195 sha1 3c3fe38047698e28cae9193438fe0b85941476c5 )
-	rom ( name ic63.17 size 65536 crc 03a905c4 sha1 c526a744021a392c860ded37afd54a78e9f47778 )
-	rom ( name ic68.12 size 65536 crc cba013c7 sha1 a0658aaf7893bc9fb8f0435cab9f77ceb1fb4e1d )
-	rom ( name ic69.11 size 65536 crc bea4d237 sha1 46e51e89b4ee1e2701da1004758d7da547a2e4c2 )
-	rom ( name ic45.10 size 65536 crc 804dfba8 sha1 650ca61f78eb4d0aa256b554fb1570330166cc24 )
-	rom ( name ic46.9 size 65536 crc 634dd54e sha1 ac4ab0ad9c1ac634ff4dfb83232b0fa5cfb26fdd )
-)
-
-game (
-	name passht4b
-	description "Passing Shot (4 Players) (bootleg)"
-	year 1988
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof passsht
-	romof passsht
-	rom ( name pas4p.3 size 65536 crc 2d8bc946 sha1 35d3e529d4815543d9876fd0545c3d686467abaa )
-	rom ( name pas4p.4 size 65536 crc e759e831 sha1 dd5727dc28010cb988e4951723171171eb645ce8 )
-	rom ( name pas4p.11 size 65536 crc da20fbc9 sha1 21dc8143f4d1cebae4f86e83495fa84e5293ba48 )
-	rom ( name pas4p.12 size 65536 crc bebb9211 sha1 4f56048f6f70b63f74a4c0d64456213d36ce5b26 )
-	rom ( name pas4p.13 size 65536 crc e37506c3 sha1 e6fbf15d58f321a3d052fefbe5a1901e4a1734ae )
-	rom ( name opr11862.b1 merge opr11862.b1 size 65536 crc b6e94727 sha1 0838e034f1f10d9cd1312c8c94b5c57387c0c271 )
-	rom ( name opr11865.b5 merge opr11865.b5 size 65536 crc 17e8d5d5 sha1 ac1074b0a705be13c6e3391441e6cfec1d2b3f8a )
-	rom ( name opr11863.b2 merge opr11863.b2 size 65536 crc 3e670098 sha1 2cfc83f4294be30cd868738886ac546bd8489962 )
-	rom ( name opr11866.b6 merge opr11866.b6 size 65536 crc 50eb71cc sha1 463b4917ca19c7f4ad2c2845caa104d5e4a2dda3 )
-	rom ( name opr11864.b3 merge opr11864.b3 size 65536 crc 05733ca8 sha1 1dbc7c99450ebe6a9fd8c0244fd3cb38b74984ef )
-	rom ( name opr11867.b7 merge opr11867.b7 size 65536 crc 81e49697 sha1 a70fa409e3555ad6c8f28930a7026fdf2deb8c65 )
-	rom ( name pas4p.1 size 32768 crc e60fb017 sha1 21298036eab55c74427f1c2e3a9623d41bca4849 )
-	rom ( name pas4p.2 size 65536 crc 092e016e sha1 713638749efa9dce19c547b84308236110bc85fe )
-)
-
-game (
-	name passshtb
-	description "Passing Shot (2 Players) (bootleg)"
-	year 1988
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof passsht
-	romof passsht
-	rom ( name pass3_2p.bin size 65536 crc 26bb9299 sha1 11bacf86dfdd8bcfbfb61f0ebc59890325c48adc )
-	rom ( name pass4_2p.bin size 65536 crc 06ac6d5d sha1 2dd71a8a956404326797de8beed7bca016c9919e )
-	rom ( name opr11854.b9 merge opr11854.b9 size 65536 crc d31c0b6c sha1 610d04988da70c30300cc5614817eda9d2204f39 )
-	rom ( name opr11855.b10 merge opr11855.b10 size 65536 crc b78762b4 sha1 d594ef846bd7fed8da91a89906b39c1a2867a1fe )
-	rom ( name opr11856.b11 merge opr11856.b11 size 65536 crc ea49f666 sha1 36ccd32cdcbb7fcc300628bb59c220ec3c324d82 )
-	rom ( name opr11862.b1 merge opr11862.b1 size 65536 crc b6e94727 sha1 0838e034f1f10d9cd1312c8c94b5c57387c0c271 )
-	rom ( name opr11865.b5 merge opr11865.b5 size 65536 crc 17e8d5d5 sha1 ac1074b0a705be13c6e3391441e6cfec1d2b3f8a )
-	rom ( name opr11863.b2 merge opr11863.b2 size 65536 crc 3e670098 sha1 2cfc83f4294be30cd868738886ac546bd8489962 )
-	rom ( name opr11866.b6 merge opr11866.b6 size 65536 crc 50eb71cc sha1 463b4917ca19c7f4ad2c2845caa104d5e4a2dda3 )
-	rom ( name opr11864.b3 merge opr11864.b3 size 65536 crc 05733ca8 sha1 1dbc7c99450ebe6a9fd8c0244fd3cb38b74984ef )
-	rom ( name opr11867.b7 merge opr11867.b7 size 65536 crc 81e49697 sha1 a70fa409e3555ad6c8f28930a7026fdf2deb8c65 )
-	rom ( name epr11857.a7 merge epr11857.a7 size 32768 crc 789edc06 sha1 8c89c94e503513c287807d187de78a7fbd75a7cf )
-	rom ( name epr11858.a8 merge epr11858.a8 size 32768 crc 08ab0018 sha1 0685f80a7d403208c9cfffea3f2035324f3924fe )
-	rom ( name epr11859.a9 merge epr11859.a9 size 32768 crc 8673e01b sha1 e79183ab30e683fdf61ced2e9dbe010567c324cb )
-	rom ( name epr11860.a10 merge epr11860.a10 size 32768 crc 10263746 sha1 1f981fb185c6a9795208ecdcfba36cf892a99ed5 )
-	rom ( name epr11861.a11 merge epr11861.a11 size 32768 crc 38b54a71 sha1 68ec4ef5b115844214ff2213be1ce6678904fbd2 )
-)
-
-game (
-	name shinoblb
-	description "Shinobi (Beta bootleg)"
-	year 1987
-	manufacturer "[Sega] (Beta bootleg)"
-	sourcefile system16.c
-	cloneof shinobi
-	romof shinobi
-	rom ( name 4.3k size 65536 crc c178a39c sha1 05ff1679cdfc3618df8b3fabdeab64b1f2299aa3 )
-	rom ( name 2.3n size 65536 crc 5ad8ebf2 sha1 b22e0c8d4b27c553abface17c625e207d19417ab )
-	rom ( name 5.2k size 65536 crc a2a620bd sha1 f8b135ce14d6c5eac5e40ddfd5ad2f1e6f2bc7a6 )
-	rom ( name 3.2n size 65536 crc a3ceda52 sha1 97a1c52a162fb1d43b3f8f16613b70ce582a8d26 )
-	rom ( name 8.3b size 65536 crc 46627e7d sha1 66bb5b22a2100e7b9df303007a837bc2d52cf7ba )
-	rom ( name 7.4b size 65536 crc 87d0f321 sha1 885b38eaff2dcaeab4eeaa20cc8a2885d520abd6 )
-	rom ( name 6.5b size 65536 crc efb4af87 sha1 0b8a905023e1bc808fd2b1c3cfa3778cde79e659 )
-	rom ( name 9.6r size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
-	rom ( name 13.8r size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
-	rom ( name 10.6q size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
-	rom ( name 14.8q size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
-	rom ( name 11.6p size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
-	rom ( name 15.8p size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
-	rom ( name 12.6n size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
-	rom ( name 16.8n size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
-	rom ( name 1.5s size 32768 crc dd50b745 sha1 52e1977569d3713ad864d607170c9a61cd059a65 )
-	rom ( name 17.6u size 32768 crc b7a6890c sha1 6431df82c7dbe454cabc6084c1a677ebb42ae4b3 )
-)
-
-game (
-	name shinobld
-	description "Shinobi (Datsu bootleg)"
-	year 1987
-	manufacturer "[Sega] (Datsu bootleg)"
-	sourcefile system16.c
-	cloneof shinobi
-	romof shinobi
-	rom ( name 12.bin size 65536 crc 757a0c71 sha1 8f476b0fd5f5dd480489af09b99585c58a4801fc )
-	rom ( name 14.bin size 65536 crc a65870b2 sha1 3e9b4aa694bf86ef9db4756ebaa3d8d87d7f269a )
-	rom ( name 13.bin size 65536 crc c4334bcd sha1 ea1dd23ca6fbf632d8e10bbb9ced6515a69bd14a )
-	rom ( name 15.bin size 65536 crc b70a6ec1 sha1 79db41c36d6a053bcdc355b46b19ae938a7755a9 )
-	rom ( name 9.bin size 65536 crc 565e11c6 sha1 e063400b3d0470b932d75da0be9cd4b446189dea )
-	rom ( name 10.bin size 65536 crc 7cc40b6c sha1 ffad7eef7ab2ff9a2e49a8d71b5785a61fa3c675 )
-	rom ( name 11.bin size 65536 crc 0f6c7b1c sha1 defc76592c285b3396e89a3cff7a73f3a948117f )
-	rom ( name 5.bin size 65536 crc 611f413a sha1 180f83216e2dfbfd77b0fb3be83c3042954d12df )
-	rom ( name 3.bin size 65536 crc 5eb00fc1 sha1 97e02eee74f61fabcad2a9e24f1868cafaac1d51 )
-	rom ( name 8.bin size 65536 crc 3c0797c0 sha1 df18c7987281bd9379026c6cf7f96f6ae49fd7f9 )
-	rom ( name 2.bin size 65536 crc 25307ef8 sha1 91ffbe436f80d583524ee113a8b7c0cf5d8ab286 )
-	rom ( name 6.bin size 65536 crc c29ac34e sha1 b5e9b8c3233a7d6797f91531a0d9123febcf1660 )
-	rom ( name 4.bin size 65536 crc 04a437f8 sha1 ea5fed64443236e3404fab243761e60e2e48c84c )
-	rom ( name 7.bin size 65536 crc 41f41063 sha1 5cc461e9738dddf9eea06831fce3702d94674163 )
-	rom ( name 1.bin size 65536 crc b6e1fd72 sha1 eb86e4bf880bd1a1d9bcab3f2f2e917bcaa06172 )
-	rom ( name 16.bin size 65536 crc 52c8364e sha1 01d30b82f92498d155d2e31d43d58dff0285cce3 )
-)
-
-game (
-	name tetrisbl
-	description "Tetris (bootleg)"
-	year 1988
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof tetris
-	romof tetris
-	rom ( name rom2.bin size 65536 crc 4d165c38 sha1 04706b1977ae18bd09bafaf8ea65f8e5f32e04b8 )
-	rom ( name rom1.bin size 65536 crc 1e912131 sha1 8f53504ac08942ee340489d84eab825e654d0a2c )
-	rom ( name epr12165.b9 size 65536 crc 62640221 sha1 c311d3847a981d0e1609f9b3d80481565d32d78c )
-	rom ( name epr12166.b10 size 65536 crc 9abd183b sha1 621b017cb34973f9227be383e26b5cd41aea9422 )
-	rom ( name epr12167.b11 size 65536 crc 2495fd4e sha1 2db94ead9223a67238a97e724668076fc43e5534 )
-	rom ( name obj0-o.rom size 65536 crc 2fb38880 sha1 0e1b601bbda78d1887951c1f7e752531c281bc83 )
-	rom ( name obj0-e.rom size 65536 crc d6a02cba sha1 d80000f92e754e89c6ca7b7273feab448fc9a061 )
-	rom ( name epr12168.a7 size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
-)
-
-game (
-	name beautyb
-	description "Beauty Block"
-	year 1991
-	manufacturer "AMT"
-	sourcefile system16.c
-	rom ( name b13.u3 size 32768 crc 90c4489b sha1 240275ad6dfd02feab636ceb620264d339e79b6a )
-	rom ( name b23.u2 size 32768 crc 79b8f9ed sha1 5926852ea00b60d91684dbea4687b67894a397a1 )
-	rom ( name b43.bin size 65536 crc 67fe3f0c sha1 c9479512dd7a80895740c7fbd2133ab4d4c679d6 )
-	rom ( name b53.bin size 65536 crc aca8e330 sha1 912e636e3c1e238682ea29620e8e2c6089c77209 )
-	rom ( name b63.bin size 65536 crc f2af2fd5 sha1 0a95ebb5eae7cdc6535533d73d06419c23d01ac3 )
-	rom ( name 1.bin size 32768 crc bd9ba01b sha1 fafa7dc36cc057a50ae4cdf7a35f3594292336f4 )
-	rom ( name 82s123.2 size 32 crc 58bcf8bd sha1 e4d3d179b08c0f3424a6bec0f15058fb1b56f8d8 )
-	rom ( name pal16r4acn.1 size 260 crc 826be9e7 sha1 893fc49c38aa8e7d6e98f6320157ba627a5d1748 )
-	rom ( name pal16r4acn.2 size 260 crc b3084ffe sha1 086ad2f89bdd8524ae358fd49b0803f9bb4aff33 )
-	rom ( name pal16r4acn.3 size 260 crc 741cd872 sha1 d53bdcadcd25d44b6423e0740e88209f85c709bd )
-	rom ( name pal20l8acn size 324 crc 36e30d71 sha1 e38f0257f9beedccc9421eec78701a86465d16ad )
-	rom ( name pal16l8ajc.u4 size 260 flags nodump )
-)
-
-game (
-	name tturfbl
-	description "Tough Turf (bootleg)"
-	year 1989
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof tturf
-	romof tturf
-	rom ( name tt042197.rom size 65536 crc deee5af1 sha1 0caba775021dc7e28ac6b7af8eac4f49d3102c83 )
-	rom ( name tt06c794.rom size 65536 crc 90e6a95a sha1 014a0ae5cebcba9cc99e6ccde4ad5d938fab915c )
-	rom ( name tt030be3.rom size 65536 crc 100264a2 sha1 d1ea4bf93f5472901ce95200f546ce9b58936aea )
-	rom ( name tt05ef8a.rom size 65536 crc f787a948 sha1 512b8cb2f5e9795171951e02c07cae957db41334 )
-	rom ( name tt1574b3.rom size 65536 crc e9e630da sha1 e8471dedbb25475e4814d78b56f579fe9110461e )
-	rom ( name tt16cf44.rom size 65536 crc 4c467735 sha1 8338b6605cbe2e076da0b3e3a47630409a79f002 )
-	rom ( name tt17d59e.rom size 65536 crc 60c0f2fe sha1 3fea4ed757d47628f59ff940e40cb86b3b5b443b )
-	rom ( name 12279.1b size 65536 crc 7a169fb1 sha1 1ec6da0d2cfcf727e61f61c847fd8b975b64f944 )
-	rom ( name 12283.5b size 65536 crc ae0fa085 sha1 ae9af92d4dd0c8a0f064d24e647522b588fbd7f7 )
-	rom ( name 12278.2b size 65536 crc 961d06b7 sha1 b1a9dea63785bfa2c0e7b931387b91dfcd27d79b )
-	rom ( name 12282.6b size 65536 crc e8671ee1 sha1 a3732938c370f1936d867aae9c3d1e9bbfb57ede )
-	rom ( name 12277.3b size 65536 crc f16b6ba2 sha1 00cc04c7b5aad82d51d2d252e1e57bcdc5e2c9e3 )
-	rom ( name 12281.7b size 65536 crc 1ef1077f sha1 8ce6fd7d32a20b93b3f91aaa43fe22720da7236f )
-	rom ( name 12276.4b size 65536 crc 838bd71f sha1 82d9d127438f5e1906b1cf40bf3b4727f2ee5685 )
-	rom ( name 12280.8b size 65536 crc 639a57cb sha1 84fd8b96758d38f9e1ba1a3c2cf8099ec0452784 )
-	rom ( name tt014d68.rom size 65536 crc d4aab1d9 sha1 94885896d59da1ecabe2377a194fcf61eaae3765 )
-	rom ( name tt0246ff.rom size 65536 crc bb4bba8f sha1 b182a7e1d0425e93c2c1b93472aafd30a6af6907 )
-)
-
-game (
-	name wb3bbl
-	description "Wonder Boy III - Monster Lair (bootleg)"
-	year 1988
-	manufacturer "bootleg"
-	sourcefile system16.c
-	cloneof wb3
-	romof wb3
-	rom ( name wb3_03 size 65536 crc 0019ab3b sha1 89d49a437690fa6e0c35bb9f1450042f89504714 )
-	rom ( name wb3_05 size 65536 crc 196e17ee sha1 71e4345b2c3d1612a3d424c9310fad1e23c8a9f7 )
-	rom ( name wb3_02 size 65536 crc c87350cb sha1 55a8cb68d70b6060dd9a55e281e216ce3917ea5b )
-	rom ( name wb3_04 size 65536 crc 565d5035 sha1 e28a132f1a4ce9466945e231c54502178748af98 )
-	rom ( name wb3_14 size 65536 crc d3f20bca sha1 0a87f709f8e2a913473512ede408e2cbc535443f )
-	rom ( name wb3_15 size 65536 crc 96ff9d52 sha1 791a9da4860e0d42fba98f80a3c6725ad8c73e33 )
-	rom ( name wb3_16 size 65536 crc afaf0d31 sha1 d4309329a0a543250788146b63b27ff058c02fc3 )
-	rom ( name epr12093.b4 merge epr12093.b4 size 65536 crc 4891e7bb sha1 1be04fcabe9bfa8cf746263a5bcca67902a021a0 )
-	rom ( name epr12097.b8 merge epr12097.b8 size 65536 crc e645902c sha1 497cfcf6c25cc2e042e16dbcb1963d2223def15a )
-	rom ( name epr12091.b2 merge epr12091.b2 size 65536 crc 8409a243 sha1 bcbb9510a6499d8147543d6befa5a49f4ac055d9 )
-	rom ( name epr12095.b6 merge epr12095.b6 size 65536 crc e774ec2c sha1 a4aa15ec7be5539a740ad02ff720458018dbc536 )
-	rom ( name epr12090.b1 merge epr12090.b1 size 65536 crc aeeecfca sha1 496124b170a725ad863c741d4e021ab947511e4c )
-	rom ( name epr12094.b5 merge epr12094.b5 size 65536 crc 615e4927 sha1 d23f164973afa770714e284a77ddf10f18cc596b )
-	rom ( name epr12092.b3 merge epr12092.b3 size 65536 crc 5c2f0d90 sha1 e0fbc0f841e4607ad232931368b16e81440a75c4 )
-	rom ( name epr12096.b7 merge epr12096.b7 size 65536 crc 0cd59d6e sha1 caf754a461feffafcfe7bfc6e89da76c4db257c5 )
-	rom ( name epr12127.a10 merge epr12127.a10 size 32768 crc 0bb901bb sha1 c81b198df8e3b0ec568032c76addf0d1a1711194 )
-)

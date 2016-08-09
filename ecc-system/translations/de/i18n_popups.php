@@ -347,5 +347,29 @@ $i18n['popup'] = array(
 	'waitForImageInjectMessage' =>
 		"Diese Aufgabe dauert einen kurzen Augenblick. Wenn Bilder gefunden wurden, so wird dieses Fenster automatisch geschlossen und du siehst sie in der Liste.\n\nWurden keine gefunden, so wird das Fenster auch geschlossen.... und du siehst keine neuen Bilder :-)",
 
+	/* 1.0.0 FYEO 02 */
+	'copy_by_search_title' =>
+		"Möchtest du wirklich die gefundenen Dateien kopieren/verschieben?",
+	'copy_by_search_msg_waring%s%s%s' =>
+		"Mit dieser Option können alle Spiele, die zur Zeit ausgewählt sind kopiert oder verschoben werden. (Achtung: Wenn du keine Suche durchgeführt hast sind dies alle Spiele.)\n\nDu kannst das Ziel sowie alle Optionen im nächsten Fenster wählen.\n\nEs wurden <b>%s Spiele</b> in deiner Suche gefunden.\n\n<b>%s gepackte Spiele</b> werden übersprungen!\n\nMöchtest du diese <b>%s</b> Spiele kopieren/umbewegen?",
+	'copy_by_search_msg_error_noplatform' =>
+		"Du musst eine Platform auswählen, um diese Funktion zu nutzen. Es ist nicht möglich, diese Funktion auf ALL FOUND anzuwenden!",
+	'copy_by_search_msg_error_notfound%s' =>
+		"Es wurden keine für diese Funktion zulässigen Spiele gefunden. <b>%s gepackte Spiele</b> werden übersprungen.",
+	'searchTab' =>
+		"Sucheergebnis",
+	'searchDescription' =>
+		"Mit dieser Funktion kannst du Spiele aus derem Ursprungsverzeichnis in ein anderes kopieren/verschieben.\n<b>Grundlage ist dein aktuelles Suchergebnis.</b>\nWenn du verschieben auswählst werden die Pfade in der Datenbank automatisch angepasst! Doppelte bereinigen (Checksumme) löscht 100% gleiche Spiele anhand der Checksumme!",
+	'searchHeadlineMain' =>
+		"Beschreibung",
+	'searchHeadlineOptionSameName' =>
+		"Gleicher name",
+	'searchRadioDuplicateAddNumber' =>
+		"nummerieren",
+	'searchRadioDuplicateOverwrite' =>
+		"überschreiben",
+	'searchCheckCleanup' =>
+		"Doppelte bereinigen (Checksumme)",
+
 );
 ?>

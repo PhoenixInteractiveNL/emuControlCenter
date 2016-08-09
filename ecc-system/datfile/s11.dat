@@ -1,14 +1,14 @@
 clrmamepro (
 	name S11
-	description "System 11 20090105"
+	description "System 11 20090915"
 	category "Namco Sytem 11"
-	version 20090106
-	date 2009-01-06
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
 	comment "Please report any data file issues at http://forum.logiqx.com/"
-	forcenodump obsolete
+	forcenodump ignore
 )
 
 game (
@@ -80,7 +80,7 @@ game (
 
 game (
 	name tekkenc
-	description "Tekken (TE1/VER.B)"
+	description "Tekken (Japan, TE1/VER.B)"
 	year 1994
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -175,55 +175,7 @@ game (
 )
 
 game (
-	name souledge
-	description "Soul Edge Ver. II (SO4/VER.C)"
-	year 1996
-	manufacturer "Namco"
-	sourcefile namcos11.c
-	rom ( name so4verc.2l size 1048576 crc 12b8ae0d sha1 31571023d5b77ebcd4103b8cac5ba710a3d570a0 )
-	rom ( name so4verc.2j size 1048576 crc 938262b0 sha1 e806883e32c473a3c2bb07849126631f6d66fa66 )
-	rom ( name so1verc.2k size 1048576 crc 1789e399 sha1 2e11869124cdfa7a66107b0e642bdc72ee0c306a )
-	rom ( name so1verc.2f size 1048576 crc 8cffe1c3 sha1 d54a0b1d55f33db2890bfa70c411cca3e446fccf )
-	rom ( name so1rom0u.ic5 size 2097152 crc e364d673 sha1 70fd58fb912939c57e3a5fadd01c1467df08d4ac )
-	rom ( name so1rom0l.ic6 size 2097152 crc 9c5b0858 sha1 f3ac726f1167551beea7edc46e43b826b7baaf62 )
-	rom ( name so1rom1u.ic3 size 2097152 crc 8f9d8c5b sha1 ac1da70854eee344a645749f564366ceac571767 )
-	rom ( name so1rom1l.ic8 size 2097152 crc 4406ef16 sha1 c86f199fdb1db23e5944ca51e6518b9cd0dafb71 )
-	rom ( name so1rom2u.ic4 size 2097152 crc b4baa886 sha1 0432692a4d71a3f1b47707efb6858927744940e4 )
-	rom ( name so1rom2l.ic7 size 2097152 crc 37c1f66e sha1 13a8a73fce142ea5ebe3f0c1050e44a027ab42a6 )
-	rom ( name so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
-	rom ( name so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
-	rom ( name so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
-	rom ( name so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
-)
-
-game (
-	name souledga
-	description "Soul Edge Ver. II (SO3/VER.C)"
-	year 1995
-	manufacturer "Namco"
-	sourcefile namcos11.c
-	cloneof souledge
-	romof souledge
-	rom ( name so3verc.2l size 1048576 crc c90e343b sha1 83bd2fc67493c34b408b13148f6a2feba9a44ed0 )
-	rom ( name so3verc.2j size 1048576 crc b7466db5 sha1 c7a4c66e61812fb6de582fe555755293d78771c7 )
-	rom ( name so1verc.2k merge so1verc.2k size 1048576 crc 1789e399 sha1 2e11869124cdfa7a66107b0e642bdc72ee0c306a )
-	rom ( name so1verc.2f merge so1verc.2f size 1048576 crc 8cffe1c3 sha1 d54a0b1d55f33db2890bfa70c411cca3e446fccf )
-	rom ( name so1rom0u.ic5 merge so1rom0u.ic5 size 2097152 crc e364d673 sha1 70fd58fb912939c57e3a5fadd01c1467df08d4ac )
-	rom ( name so1rom0l.ic6 merge so1rom0l.ic6 size 2097152 crc 9c5b0858 sha1 f3ac726f1167551beea7edc46e43b826b7baaf62 )
-	rom ( name so1rom1u.ic3 merge so1rom1u.ic3 size 2097152 crc 8f9d8c5b sha1 ac1da70854eee344a645749f564366ceac571767 )
-	rom ( name so1rom1l.ic8 merge so1rom1l.ic8 size 2097152 crc 4406ef16 sha1 c86f199fdb1db23e5944ca51e6518b9cd0dafb71 )
-	rom ( name so1rom2u.ic4 merge so1rom2u.ic4 size 2097152 crc b4baa886 sha1 0432692a4d71a3f1b47707efb6858927744940e4 )
-	rom ( name so1rom2l.ic7 merge so1rom2l.ic7 size 2097152 crc 37c1f66e sha1 13a8a73fce142ea5ebe3f0c1050e44a027ab42a6 )
-	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
-	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
-	rom ( name so1sprogc.6d merge so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
-	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
-	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
-)
-
-game (
-	name souledgb
+	name souledge1
 	description "Soul Edge (SO3/VER.A)"
 	year 1995
 	manufacturer "Namco"
@@ -248,8 +200,8 @@ game (
 )
 
 game (
-	name souledgc
-	description "Soul Edge (SO1/VER.A)"
+	name souledge1j
+	description "Soul Edge (Japan, SO1/VER.A)"
 	year 1995
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -268,6 +220,92 @@ game (
 	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
 	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
 	rom ( name so1sprog.6d size 262144 crc f6f682b7 sha1 a64e19be3f6e630b8c34f34b46b95aadfabd3f63 )
+	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
+)
+
+game (
+	name primglex
+	description "Prime Goal EX (Japan, PG1/VER.A)"
+	year 1996
+	manufacturer "Namco"
+	sourcefile namcos11.c
+	rom ( name pg1vera.2l size 1048576 crc fc15fd1a sha1 6ca5ebdc096cab3296dc7c1f675d78dfc7c69a05 )
+	rom ( name pg1vera.2j size 1048576 crc 79955553 sha1 ad2dca38b06a835f8241fae0a5fa18d5874cebe4 )
+	rom ( name pg1rom0u.ic5 size 4194304 crc 2a503f2f sha1 206b9c9204be22241d2a3e017b96c3a103f5a976 )
+	rom ( name pg1rom0l.ic6 size 4194304 crc 54cef992 sha1 5ba81353b1dddc1c6640fc4c15df81535e7a6ae8 )
+	rom ( name pg1rom1u.ic3 size 4194304 crc 1ee41152 sha1 d240e6ba820aa2aa4f12380c255f624f91aed564 )
+	rom ( name pg1rom1l.ic8 size 4194304 crc 59b5a71c sha1 ddc1f0a5488466166c21fd0c84ab2b4cf04316bf )
+	rom ( name pg1sprog.6d size 262144 crc e7c3396d sha1 12bbb8ebcaab1b40462a12917dd9b58bd9ab8663 )
+	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name pg1wave.8k size 4194304 crc fc9ad9eb sha1 ce5bb2288ed8cf1348825c39423cbb99d9324b9c )
+)
+
+game (
+	name xevi3dg
+	description "Xevious 3D/G (Japan, XV31/VER.A)"
+	year 1995
+	manufacturer "Namco"
+	sourcefile namcos11.c
+	rom ( name xv31vera.2l size 1048576 crc 419e0f13 sha1 876ae81c9fde18cdec792f3dfee682761ac99730 )
+	rom ( name xv31vera.2j size 1048576 crc df95373a sha1 65cf85ad4dcbc8f0376ac46ee0c1037d79099843 )
+	rom ( name xv31vera.2k size 1048576 crc 3d58138e sha1 9203d6bdc2d968de818d5f465523cc030217dcf8 )
+	rom ( name xv31vera.2f size 1048576 crc 9e8780a2 sha1 83148d55456b2b92969f7ac2bdb2d492bf969895 )
+	rom ( name xv31rom0l.ic5 size 2097152 crc 24e1e262 sha1 84df49b22a8a36284da771944a8390672a0c32bf )
+	rom ( name xv31rom0u.ic6 size 2097152 crc cae38ef3 sha1 2dfe0b31969091975e8d8c8188ce7dd007e4a0f3 )
+	rom ( name xv31rom1l.ic3 size 2097152 crc 46b4cb72 sha1 c3360c4fdb71ffcbccec3f4ad8d7963b08822e26 )
+	rom ( name xv31rom1u.ic8 size 2097152 crc be0eb5d1 sha1 f1a0adcb7c65bbba723fe09b07280b0b924d6b19 )
+	rom ( name xv31rom2l.ic4 size 2097152 crc 8403a277 sha1 35193211351494a086d8422e3b0b71a8d3a262a6 )
+	rom ( name xv31rom2u.ic7 size 2097152 crc ecf70432 sha1 bec128a215e0aef66e9a8707bb0d1eb7b098a356 )
+	rom ( name xv31sprog.6d size 262144 crc e50b856a sha1 631da4f60c9ce08387fca26a70481a2fdacf9765 )
+	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name xv31wave.8k size 4194304 crc 14f25ddd sha1 4981cf1017432ff85b768ec88c36f535df30b783 )
+)
+
+game (
+	name souledge
+	description "Soul Edge Ver. II (SO4/VER.C)"
+	year 1996
+	manufacturer "Namco"
+	sourcefile namcos11.c
+	rom ( name so4verc.2l size 1048576 crc 12b8ae0d sha1 31571023d5b77ebcd4103b8cac5ba710a3d570a0 )
+	rom ( name so4verc.2j size 1048576 crc 938262b0 sha1 e806883e32c473a3c2bb07849126631f6d66fa66 )
+	rom ( name so1verc.2k size 1048576 crc 1789e399 sha1 2e11869124cdfa7a66107b0e642bdc72ee0c306a )
+	rom ( name so1verc.2f size 1048576 crc 8cffe1c3 sha1 d54a0b1d55f33db2890bfa70c411cca3e446fccf )
+	rom ( name so1rom0u.ic5 size 2097152 crc e364d673 sha1 70fd58fb912939c57e3a5fadd01c1467df08d4ac )
+	rom ( name so1rom0l.ic6 size 2097152 crc 9c5b0858 sha1 f3ac726f1167551beea7edc46e43b826b7baaf62 )
+	rom ( name so1rom1u.ic3 size 2097152 crc 8f9d8c5b sha1 ac1da70854eee344a645749f564366ceac571767 )
+	rom ( name so1rom1l.ic8 size 2097152 crc 4406ef16 sha1 c86f199fdb1db23e5944ca51e6518b9cd0dafb71 )
+	rom ( name so1rom2u.ic4 size 2097152 crc b4baa886 sha1 0432692a4d71a3f1b47707efb6858927744940e4 )
+	rom ( name so1rom2l.ic7 size 2097152 crc 37c1f66e sha1 13a8a73fce142ea5ebe3f0c1050e44a027ab42a6 )
+	rom ( name so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
+	rom ( name so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
+	rom ( name so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
+	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
+	rom ( name so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
+)
+
+game (
+	name souledgea
+	description "Soul Edge Ver. II (SO3/VER.C)"
+	year 1995
+	manufacturer "Namco"
+	sourcefile namcos11.c
+	cloneof souledge
+	romof souledge
+	rom ( name so3verc.2l size 1048576 crc c90e343b sha1 83bd2fc67493c34b408b13148f6a2feba9a44ed0 )
+	rom ( name so3verc.2j size 1048576 crc b7466db5 sha1 c7a4c66e61812fb6de582fe555755293d78771c7 )
+	rom ( name so1verc.2k merge so1verc.2k size 1048576 crc 1789e399 sha1 2e11869124cdfa7a66107b0e642bdc72ee0c306a )
+	rom ( name so1verc.2f merge so1verc.2f size 1048576 crc 8cffe1c3 sha1 d54a0b1d55f33db2890bfa70c411cca3e446fccf )
+	rom ( name so1rom0u.ic5 merge so1rom0u.ic5 size 2097152 crc e364d673 sha1 70fd58fb912939c57e3a5fadd01c1467df08d4ac )
+	rom ( name so1rom0l.ic6 merge so1rom0l.ic6 size 2097152 crc 9c5b0858 sha1 f3ac726f1167551beea7edc46e43b826b7baaf62 )
+	rom ( name so1rom1u.ic3 merge so1rom1u.ic3 size 2097152 crc 8f9d8c5b sha1 ac1da70854eee344a645749f564366ceac571767 )
+	rom ( name so1rom1l.ic8 merge so1rom1l.ic8 size 2097152 crc 4406ef16 sha1 c86f199fdb1db23e5944ca51e6518b9cd0dafb71 )
+	rom ( name so1rom2u.ic4 merge so1rom2u.ic4 size 2097152 crc b4baa886 sha1 0432692a4d71a3f1b47707efb6858927744940e4 )
+	rom ( name so1rom2l.ic7 merge so1rom2l.ic7 size 2097152 crc 37c1f66e sha1 13a8a73fce142ea5ebe3f0c1050e44a027ab42a6 )
+	rom ( name so1rom3u.ic1 merge so1rom3u.ic1 size 2097152 crc f11bd521 sha1 baf936dec58cebfeef1c74f95e455b2fe74eb982 )
+	rom ( name so1rom3l.ic9 merge so1rom3l.ic9 size 2097152 crc 84465bcc sha1 d8be888d41cfe194c3a1853d9146d3a74ef7bab1 )
+	rom ( name so1sprogc.6d merge so1sprogc.6d size 262144 crc 2bbc118c sha1 4168a9aa525f1f0ce6cf6e14cfe4c118c4c0d773 )
 	rom ( name pr1data.8k merge pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
 	rom ( name so1wave.8k merge so1wave.8k size 4194304 crc 0e68836b sha1 c392b370a807803c7ab060105861253e1b407f49 )
 )
@@ -292,8 +330,8 @@ game (
 )
 
 game (
-	name dunkmnic
-	description "Dunk Mania (DM1/VER.C)"
+	name dunkmniaj
+	description "Dunk Mania (Japan, DM1/VER.C)"
 	year 1995
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -313,46 +351,8 @@ game (
 )
 
 game (
-	name xevi3dg
-	description "Xevious 3D/G (XV31/VER.A)"
-	year 1995
-	manufacturer "Namco"
-	sourcefile namcos11.c
-	rom ( name xv31vera.2l size 1048576 crc 419e0f13 sha1 876ae81c9fde18cdec792f3dfee682761ac99730 )
-	rom ( name xv31vera.2j size 1048576 crc df95373a sha1 65cf85ad4dcbc8f0376ac46ee0c1037d79099843 )
-	rom ( name xv31vera.2k size 1048576 crc 3d58138e sha1 9203d6bdc2d968de818d5f465523cc030217dcf8 )
-	rom ( name xv31vera.2f size 1048576 crc 9e8780a2 sha1 83148d55456b2b92969f7ac2bdb2d492bf969895 )
-	rom ( name xv31rom0l.ic5 size 2097152 crc 24e1e262 sha1 84df49b22a8a36284da771944a8390672a0c32bf )
-	rom ( name xv31rom0u.ic6 size 2097152 crc cae38ef3 sha1 2dfe0b31969091975e8d8c8188ce7dd007e4a0f3 )
-	rom ( name xv31rom1l.ic3 size 2097152 crc 46b4cb72 sha1 c3360c4fdb71ffcbccec3f4ad8d7963b08822e26 )
-	rom ( name xv31rom1u.ic8 size 2097152 crc be0eb5d1 sha1 f1a0adcb7c65bbba723fe09b07280b0b924d6b19 )
-	rom ( name xv31rom2l.ic4 size 2097152 crc 8403a277 sha1 35193211351494a086d8422e3b0b71a8d3a262a6 )
-	rom ( name xv31rom2u.ic7 size 2097152 crc ecf70432 sha1 bec128a215e0aef66e9a8707bb0d1eb7b098a356 )
-	rom ( name xv31sprog.6d size 262144 crc e50b856a sha1 631da4f60c9ce08387fca26a70481a2fdacf9765 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
-	rom ( name xv31wave.8k size 4194304 crc 14f25ddd sha1 4981cf1017432ff85b768ec88c36f535df30b783 )
-)
-
-game (
-	name primglex
-	description "Prime Goal EX (PG1/VER.A)"
-	year 1996
-	manufacturer "Namco"
-	sourcefile namcos11.c
-	rom ( name pg1vera.2l size 1048576 crc fc15fd1a sha1 6ca5ebdc096cab3296dc7c1f675d78dfc7c69a05 )
-	rom ( name pg1vera.2j size 1048576 crc 79955553 sha1 ad2dca38b06a835f8241fae0a5fa18d5874cebe4 )
-	rom ( name pg1rom0u.ic5 size 4194304 crc 2a503f2f sha1 206b9c9204be22241d2a3e017b96c3a103f5a976 )
-	rom ( name pg1rom0l.ic6 size 4194304 crc 54cef992 sha1 5ba81353b1dddc1c6640fc4c15df81535e7a6ae8 )
-	rom ( name pg1rom1u.ic3 size 4194304 crc 1ee41152 sha1 d240e6ba820aa2aa4f12380c255f624f91aed564 )
-	rom ( name pg1rom1l.ic8 size 4194304 crc 59b5a71c sha1 ddc1f0a5488466166c21fd0c84ab2b4cf04316bf )
-	rom ( name pg1sprog.6d size 262144 crc e7c3396d sha1 12bbb8ebcaab1b40462a12917dd9b58bd9ab8663 )
-	rom ( name pr1data.8k size 524288 crc 2e5767a4 sha1 390bf05c90044d841fe2dd4a427177fa1570b9a6 flags baddump )
-	rom ( name pg1wave.8k size 4194304 crc fc9ad9eb sha1 ce5bb2288ed8cf1348825c39423cbb99d9324b9c )
-)
-
-game (
 	name danceyes
-	description "Dancing Eyes (DC1/VER.A)"
+	description "Dancing Eyes (Japan, DC1/VER.A)"
 	year 1996
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -375,7 +375,7 @@ game (
 
 game (
 	name pocketrc
-	description "Pocket Racer (PKR1/VER.B)"
+	description "Pocket Racer (Japan, PKR1/VER.B)"
 	year 1996
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -390,7 +390,7 @@ game (
 
 game (
 	name starswep
-	description "Star Sweep (STP1/VER.A)"
+	description "Star Sweep (Japan, STP1/VER.A)"
 	year 1997
 	manufacturer "Axela/Namco"
 	sourcefile namcos11.c
@@ -403,7 +403,7 @@ game (
 
 game (
 	name myangel3
-	description "Kosodate Quiz My Angel 3 (KQT1/VER.A)"
+	description "Kosodate Quiz My Angel 3 (Japan, KQT1/VER.A)"
 	year 1998
 	manufacturer "Namco"
 	sourcefile namcos11.c
@@ -424,8 +424,6 @@ game (
 	year 1999
 	manufacturer "Namco"
 	sourcefile namcos11.c
-	cloneof ptblank2
-	romof ptblank2
 	rom ( name gnb3vera.2l size 1048576 crc 57ad719a sha1 f22a02d33c7c23cccffb8ce2e3aca26b07ecac0a )
 	rom ( name gnb3vera.2j size 1048576 crc 0378af98 sha1 601444b5a0935a4b69b5ada618aaf1bc6bb12a3b )
 	rom ( name gnb3vera.2k size 1048576 crc e6335e4e sha1 9067f05d848c1c8a88967a3c6552d2d24e80672b )
@@ -439,7 +437,7 @@ game (
 
 game (
 	name tekken3
-	description "Tekken 3 (TET1/VER.E1)"
+	description "Tekken 3 (Japan, TET1/VER.E1)"
 	year 1996
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -545,7 +543,7 @@ game (
 
 game (
 	name toukon3
-	description "Shin Nihon Pro Wrestling Toukon Retsuden 3 Arcade Edition (TR1/VER.A)"
+	description "Shin Nihon Pro Wrestling Toukon Retsuden 3 Arcade Edition (Japan, TR1/VER.A)"
 	year 1997
 	manufacturer "Tomy/Namco"
 	sourcefile namcos12.c
@@ -556,99 +554,6 @@ game (
 	rom ( name tr1vera.11s size 524288 crc f9ecbd19 sha1 ad64f95ef85ee5c45dcf15217ea5adff61fddba6 )
 	rom ( name tr1wave0.5 size 4194304 crc 07d10e55 sha1 3af8f7019a221981984741181b6be98e2315d441 )
 	rom ( name tr1wave1.4 size 4194304 crc 34539cdd sha1 afb7079c0f447fbda285a5b97a37c04baf26db75 )
-)
-
-game (
-	name soulclbr
-	description "Soul Calibur (SOC14/VER.C)"
-	year 1998
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	rom ( name soc14verc.2e size 2097152 crc c40e9614 sha1 dc20469f0d657423e472fdf5897852ab9fb8bb73 )
-	rom ( name soc14verc.2j size 2097152 crc 80c41446 sha1 e5620a4f0ffba913169a779df73384b7ca8780b9 )
-	rom ( name soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
-	rom ( name soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
-	rom ( name soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
-	rom ( name soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
-	rom ( name soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
-	rom ( name soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
-	rom ( name soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
-)
-
-game (
-	name soulclba
-	description "Soul Calibur (SOC11/VER.C)"
-	year 1998
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	cloneof soulclbr
-	romof soulclbr
-	rom ( name soc11verc.2l size 2097152 crc f5e3679c sha1 b426cfc7707a6772e6aabbaf4a19b7f008324d55 )
-	rom ( name soc11verc.2p size 2097152 crc 7537719c sha1 d83d4c762fa7fcfd5d84de550568e92999e5bdfb )
-	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
-	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
-	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
-	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
-	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
-	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
-	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
-)
-
-game (
-	name soulclbb
-	description "Soul Calibur (SOC13/VER.B)"
-	year 1998
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	cloneof soulclbr
-	romof soulclbr
-	rom ( name soc13verb.2e size 2097152 crc ad7cfb1e sha1 7d1e7fd0024e31780335690906846e91ba063003 )
-	rom ( name soc13verb.2j size 2097152 crc 7449c045 sha1 1c7a8b659d0f12dded2a00bc83baeb392fd7a719 )
-	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
-	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
-	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
-	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
-	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
-	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
-	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
-)
-
-game (
-	name soulclbc
-	description "Soul Calibur (SOC11/VER.B)"
-	year 1998
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	cloneof soulclbr
-	romof soulclbr
-	rom ( name soc11verb.2e size 2097152 crc 9660d996 sha1 6361abfd8b0d29848aabad6a5c517ba0d336359a )
-	rom ( name soc11verb.2j size 2097152 crc 49939880 sha1 a53fb8ecd71c8d59b0e08d6233ea658ae083bc6d )
-	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
-	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
-	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
-	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
-	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
-	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
-	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
-)
-
-game (
-	name soulclbd
-	description "Soul Calibur (SOC11/VER.A2)"
-	year 1998
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	cloneof soulclbr
-	romof soulclbr
-	rom ( name soc1vera.2l size 2097152 crc 37e0a203 sha1 3915b5e530c8e70a07aa8ccedeb66633ae5f670e )
-	rom ( name soc1vera.2p size 2097152 crc 7cd87a35 sha1 5a4837b6f6a49c88126a0ddbb8059a4da77127bc )
-	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
-	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
-	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
-	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
-	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
-	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
-	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
 )
 
 game (
@@ -694,44 +599,30 @@ game (
 )
 
 game (
-	name kaiunqz
-	description "Kaiun Quiz (KW1/VER.A)"
-	year 1999
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	rom ( name kw1vera.2l size 2097152 crc fd1d2324 sha1 eedb4627dfa17e9aac2c99592628f1fa7060edb5 )
-	rom ( name kw1vera.2p size 2097152 crc d8bdea6b sha1 d32118846a1f43eecff7f56dcda03adf04975784 )
-	rom ( name kw1rom0l.12 size 8388608 crc e0768f0b sha1 3ffec7c789a95fcff7f06432723f155b99a20c42 )
-	rom ( name kw1rom0u.11 size 8388608 crc 04101a16 sha1 c2d79333ee382e2fea229bba23918fb5f88a25d4 )
-	rom ( name kw1rom1l.10 size 8388608 crc 6a4edfa6 sha1 a59fa28446b28db28b38368c794af71e673f69a2 )
-	rom ( name kw1rom1u.9 size 8388608 crc e6150b0d sha1 7dd1ba524246aea007e7bd6d3e7d457033b23a09 )
-	rom ( name kw1rom2l.7 size 8388608 crc 21c376e4 sha1 4b82494c1e13ebcea3c4e97803c0667be73bf6ae )
-	rom ( name kw1rom2u.8 size 8388608 crc d850c222 sha1 802c1782b323802eae871e2b9ccc5eae34277861 )
-	rom ( name kw1vera.11s size 524288 crc d863fafa sha1 3c2bb38c24165e3a1a4d1d257fcfc019b63d5199 )
-	rom ( name kw1wave0.2 size 8388608 crc 060e52ae sha1 7ea95cae9d3c648163b225d0c7d365644be90241 )
-)
-
-game (
-	name mdhorse
-	description "Derby Quiz My Dream Horse (MDH1/VER.A2)"
+	name ehrgeizj
+	description "Ehrgeiz (Japan, EG1/VER.A)"
 	year 1998
-	manufacturer "Namco"
+	manufacturer "Square/Namco"
 	sourcefile namcos12.c
-	rom ( name mdh1vera.2l size 2097152 crc fbb567b2 sha1 899dccdfbc8dcbcdaf9b5df93e249a36f8cbf999 )
-	rom ( name mdh1vera.2p size 2097152 crc a0f182ab sha1 70c789ea88248c1f810f9fdb3feaf808acbaa8cd )
-	rom ( name mdh1rom0l size 8388608 crc ca5bf806 sha1 8c88b1f29c96a0696ac9428c411cde10faacce35 )
-	rom ( name mdh1rom0u size 8388608 crc 315e9539 sha1 340fcd196f53f64b3f56ef73101eddc9e142d907 )
-	rom ( name mdh1rom1l size 8388608 crc 9f610211 sha1 8459733c52d1c62033a4aeb9985b4a6e863a62d0 )
-	rom ( name mdh1rom1u size 8388608 crc a2e43560 sha1 b0657a22701c6f2098f210d59e4c9bc88593a750 )
-	rom ( name mdh1rom2l size 8388608 crc 84840fa9 sha1 0f051db55b30f7dd473f4df9bb5e7d38c39dc785 )
-	rom ( name mdh1rom2u size 8388608 crc 9490dafe sha1 c1bd9343535876eac5369a86105013b4a7d731b3 )
-	rom ( name mdh1vera.11s size 524288 crc 20d7ba29 sha1 95a056d1f1ac70dda8ced832b506076485348a33 )
-	rom ( name mdh1wave0 size 8388608 crc 7b031123 sha1 7cbc1f71d259405f9f1ef26026d51abcb255b057 )
+	cloneof ehrgeiz
+	romof ehrgeiz
+	rom ( name eg1vera.2l size 2097152 crc 302d62cf sha1 e2de280ae4475829398a6770aed8eab0ed35b1ce )
+	rom ( name eg1vera.2p size 2097152 crc 1d7fb3a1 sha1 dc038a639f89d7c8daaf987b728fde175fe4dbec )
+	rom ( name eg1rom0l.12 merge eg1rom0l.12 size 8388608 crc fe11a48e sha1 bdb2af5949bb4a324dab01489e9488aa5b9bd129 )
+	rom ( name eg1rom0u.11 merge eg1rom0u.11 size 8388608 crc 7cb90c25 sha1 0ff6f7bf8b7eb2e0706bd235fcb9a95ea639fae6 )
+	rom ( name eg1fl1l.9 merge eg1fl1l.9 size 2097152 crc dd4cac2b sha1 f49d0055303b3d8639e94f93bce6bf160cc99913 )
+	rom ( name eg1fl1u.10 merge eg1fl1u.10 size 2097152 crc e3348407 sha1 829bf1be0f74fd385e325d774f1449e28aba1e4d )
+	rom ( name eg1fl2l.7 merge eg1fl2l.7 size 2097152 crc 34493262 sha1 9dd5b1b25e7232460bf5ee5b339d9f536ec26979 )
+	rom ( name eg1fl2u.8 merge eg1fl2u.8 size 2097152 crc 4fb84f1d sha1 714e0ef56871d7b4568bc6dda08bbb1c01dbba37 )
+	rom ( name eg1fl3l.5 merge eg1fl3l.5 size 2097152 crc f9441f87 sha1 70944160620ba2fc80b4fc3a7b61c33622298a8b )
+	rom ( name eg1fl3u.6 merge eg1fl3u.6 size 2097152 crc cea397de sha1 3791dbadb5699c805c27930e59c61af4d62f77f7 )
+	rom ( name eg1vera.11s merge eg1vera.11s size 524288 crc 9e44645e sha1 374eb4a4c09d6b5b7af5ff0efec16b4d2aacbe2b )
+	rom ( name eg1wave0.2 merge eg1wave0.2 size 8388608 crc 961fe69f sha1 0189a061959a8d94b9d2db627911264faf9f28fd )
 )
 
 game (
 	name sws98
-	description "Super World Stadium '98 (SS81/VER.A)"
+	description "Super World Stadium '98 (Japan, SS81/VER.A)"
 	year 1998
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -746,6 +637,117 @@ game (
 	rom ( name ss81vera.11s size 524288 crc c6bc5c31 sha1 c6ef46c3fa8a7749618126d360e614ea6c8d9c54 )
 	rom ( name ss81wave0.2 size 8388608 crc 1c5e2ff1 sha1 4f29dfd49f6b5c3ca3b758823d368051354bd673 )
 	rom ( name ss81wave1.1 size 8388608 crc 5f4c8861 sha1 baee7182c32bc064d805de5a16948faf78941ac4 )
+)
+
+game (
+	name soulclbr
+	description "Soul Calibur (SOC14/VER.C)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name soc14verc.2e size 2097152 crc c40e9614 sha1 dc20469f0d657423e472fdf5897852ab9fb8bb73 )
+	rom ( name soc14verc.2j size 2097152 crc 80c41446 sha1 e5620a4f0ffba913169a779df73384b7ca8780b9 )
+	rom ( name soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
+	name soulclbrj
+	description "Soul Calibur (Japan, SOC11/VER.C)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	cloneof soulclbr
+	romof soulclbr
+	rom ( name soc11verc.2l size 2097152 crc f5e3679c sha1 b426cfc7707a6772e6aabbaf4a19b7f008324d55 )
+	rom ( name soc11verc.2p size 2097152 crc 7537719c sha1 d83d4c762fa7fcfd5d84de550568e92999e5bdfb )
+	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
+	name soulclbrb
+	description "Soul Calibur (SOC13/VER.B)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	cloneof soulclbr
+	romof soulclbr
+	rom ( name soc13verb.2e size 2097152 crc ad7cfb1e sha1 7d1e7fd0024e31780335690906846e91ba063003 )
+	rom ( name soc13verb.2j size 2097152 crc 7449c045 sha1 1c7a8b659d0f12dded2a00bc83baeb392fd7a719 )
+	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
+	name soulclbrjb
+	description "Soul Calibur (Japan, SOC11/VER.B)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	cloneof soulclbr
+	romof soulclbr
+	rom ( name soc11verb.2e size 2097152 crc 9660d996 sha1 6361abfd8b0d29848aabad6a5c517ba0d336359a )
+	rom ( name soc11verb.2j size 2097152 crc 49939880 sha1 a53fb8ecd71c8d59b0e08d6233ea658ae083bc6d )
+	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
+	name soulclbrja
+	description "Soul Calibur (Japan, SOC11/VER.A2)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	cloneof soulclbr
+	romof soulclbr
+	rom ( name soc1vera.2l size 2097152 crc 37e0a203 sha1 3915b5e530c8e70a07aa8ccedeb66633ae5f670e )
+	rom ( name soc1vera.2p size 2097152 crc 7cd87a35 sha1 5a4837b6f6a49c88126a0ddbb8059a4da77127bc )
+	rom ( name soc1rom0.7 merge soc1rom0.7 size 8388608 crc cdc47b55 sha1 315ea6b819de5c4883aa400f1b9f4172637757bf )
+	rom ( name soc1rom1.8 merge soc1rom1.8 size 8388608 crc 30d2dd5a sha1 1c0c467ba339e0241efb8d5c3b025a046b2ca676 )
+	rom ( name soc1rom2.9 merge soc1rom2.9 size 8388608 crc dbb93955 sha1 624cd8ad94e8ae53206f798bff81784afe95e5f1 )
+	rom ( name soc1fl3.6 merge soc1fl3.6 size 4194304 crc 24d94c38 sha1 0f9b9ab11dd4e02086d7b9104ce2f5d4e93cd696 )
+	rom ( name soc1fl4.5 merge soc1fl4.5 size 4194304 crc 6212090e sha1 ed5e50771180935a0c2e760e7369673098722201 )
+	rom ( name soc1vera.11s merge soc1vera.11s size 524288 crc 52aa206a sha1 5abe9d6f800fa1b9623aa08b16e9b959b840e50b )
+	rom ( name soc1wave0.2 merge soc1wave0.2 size 8388608 crc c100618d sha1 b87f88ee42ad9c5affa674e5f816d902143fed99 )
+)
+
+game (
+	name mdhorse
+	description "Derby Quiz My Dream Horse (Japan, MDH1/VER.A2)"
+	year 1998
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name mdh1vera.2l size 2097152 crc fbb567b2 sha1 899dccdfbc8dcbcdaf9b5df93e249a36f8cbf999 )
+	rom ( name mdh1vera.2p size 2097152 crc a0f182ab sha1 70c789ea88248c1f810f9fdb3feaf808acbaa8cd )
+	rom ( name mdh1rom0l size 8388608 crc ca5bf806 sha1 8c88b1f29c96a0696ac9428c411cde10faacce35 )
+	rom ( name mdh1rom0u size 8388608 crc 315e9539 sha1 340fcd196f53f64b3f56ef73101eddc9e142d907 )
+	rom ( name mdh1rom1l size 8388608 crc 9f610211 sha1 8459733c52d1c62033a4aeb9985b4a6e863a62d0 )
+	rom ( name mdh1rom1u size 8388608 crc a2e43560 sha1 b0657a22701c6f2098f210d59e4c9bc88593a750 )
+	rom ( name mdh1rom2l size 8388608 crc 84840fa9 sha1 0f051db55b30f7dd473f4df9bb5e7d38c39dc785 )
+	rom ( name mdh1rom2u size 8388608 crc 9490dafe sha1 c1bd9343535876eac5369a86105013b4a7d731b3 )
+	rom ( name mdh1vera.11s size 524288 crc 20d7ba29 sha1 95a056d1f1ac70dda8ced832b506076485348a33 )
+	rom ( name mdh1wave0 size 8388608 crc 7b031123 sha1 7cbc1f71d259405f9f1ef26026d51abcb255b057 )
 )
 
 game (
@@ -770,8 +772,8 @@ game (
 )
 
 game (
-	name tenkomoj
-	description "Tenkomori Shooting (TKM1/VER.A1)"
+	name tenkomorj
+	description "Tenkomori Shooting (Japan, TKM1/VER.A1)"
 	year 1998
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -793,8 +795,27 @@ game (
 )
 
 game (
+	name pacapp
+	description "Paca Paca Passion (Japan, PPP1/VER.A2)"
+	year 1999
+	manufacturer "Produce/Namco"
+	sourcefile namcos12.c
+	rom ( name ppp1vera.2l size 2097152 crc 6e74bd05 sha1 41a2e06538cea3bced2992f5858a3f0cd1c0b4aa )
+	rom ( name ppp1vera.2p size 2097152 crc b7a2f724 sha1 820ae04ec416b8394a1d919279748bde3460cb96 )
+	rom ( name ppp1rom0l.6 size 4194304 crc b152fdd8 sha1 23c5c07680a62e941a7b1a28897f986dd9399801 )
+	rom ( name ppp1rom0u.9 size 4194304 crc c615c26e sha1 db1aae37ebee2a74636415e4b1b0b17790a6a67e )
+	rom ( name ppp1rom1l.7 size 4194304 crc 46eaedbd sha1 afe3c966fcf083d89b45d44d871bed1b8caa3014 )
+	rom ( name ppp1rom1u.10 size 4194304 crc 32f27dce sha1 06de870b83c972403d96b8b9a8ee5a192a99451d )
+	rom ( name ppp1rom2l.8 size 4194304 crc dca7e5ed sha1 b43b6e086912009295ceae11d2d540733353d7b6 )
+	rom ( name ppp1rom2u.11 size 4194304 crc cada7a0d sha1 e8d927a4680911b77de1d906b5e0140697e9c67b )
+	rom ( name ppp1vera.11s size 524288 crc 22242317 sha1 e46bf3c594136168faedebbd59f53ff9a6ecf3c1 )
+	rom ( name ppp1wave0.5 size 8388608 crc 184ccc7d sha1 b74638cebef209638c625aac7e8c5b924f56a8bb )
+	rom ( name ppp1wave1.4 size 8388608 crc cbcf74c5 sha1 a089277c9befc87b5bbe0d4e5b8187a4ad5ef143 )
+)
+
+game (
 	name fgtlayer
-	description "Fighting Layer (FTL0/VER.A)"
+	description "Fighting Layer (Japan, FTL1/VER.A)"
 	year 1998
 	manufacturer "Arika/Namco"
 	sourcefile namcos12.c
@@ -813,25 +834,6 @@ game (
 )
 
 game (
-	name pacapp
-	description "Paca Paca Passion (PPP1/VER.A2)"
-	year 1999
-	manufacturer "Produce/Namco"
-	sourcefile namcos12.c
-	rom ( name ppp1vera.2l size 2097152 crc 6e74bd05 sha1 41a2e06538cea3bced2992f5858a3f0cd1c0b4aa )
-	rom ( name ppp1vera.2p size 2097152 crc b7a2f724 sha1 820ae04ec416b8394a1d919279748bde3460cb96 )
-	rom ( name ppp1rom0l.6 size 4194304 crc b152fdd8 sha1 23c5c07680a62e941a7b1a28897f986dd9399801 )
-	rom ( name ppp1rom0u.9 size 4194304 crc c615c26e sha1 db1aae37ebee2a74636415e4b1b0b17790a6a67e )
-	rom ( name ppp1rom1l.7 size 4194304 crc 46eaedbd sha1 afe3c966fcf083d89b45d44d871bed1b8caa3014 )
-	rom ( name ppp1rom1u.10 size 4194304 crc 32f27dce sha1 06de870b83c972403d96b8b9a8ee5a192a99451d )
-	rom ( name ppp1rom2l.8 size 4194304 crc dca7e5ed sha1 b43b6e086912009295ceae11d2d540733353d7b6 )
-	rom ( name ppp1rom2u.11 size 4194304 crc cada7a0d sha1 e8d927a4680911b77de1d906b5e0140697e9c67b )
-	rom ( name ppp1vera.11s size 524288 crc 22242317 sha1 e46bf3c594136168faedebbd59f53ff9a6ecf3c1 )
-	rom ( name ppp1wave0.5 size 8388608 crc 184ccc7d sha1 b74638cebef209638c625aac7e8c5b924f56a8bb )
-	rom ( name ppp1wave1.4 size 8388608 crc cbcf74c5 sha1 a089277c9befc87b5bbe0d4e5b8187a4ad5ef143 )
-)
-
-game (
 	name ptblank2
 	description "Point Blank 2 (GNB5/VER.A)"
 	year 1999
@@ -847,7 +849,7 @@ game (
 
 game (
 	name sws99
-	description "Super World Stadium '99 (SS91/VER.A3)"
+	description "Super World Stadium '99 (Japan, SS91/VER.A3)"
 	year 1999
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -862,6 +864,36 @@ game (
 	rom ( name ss91vera.11s size 524288 crc c6bc5c31 sha1 c6ef46c3fa8a7749618126d360e614ea6c8d9c54 )
 	rom ( name ss91wave0.2 size 8388608 crc 1c5e2ff1 sha1 4f29dfd49f6b5c3ca3b758823d368051354bd673 )
 	rom ( name ss91wave1.1 size 8388608 crc 5f4c8861 sha1 baee7182c32bc064d805de5a16948faf78941ac4 )
+)
+
+game (
+	name ghlpanic
+	description "Ghoul Panic (OB2/VER.A)"
+	year 1999
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name ob2vera.2e size 2097152 crc 77162ae0 sha1 cdc0833756037562b49bb2ae02931b3b24d27329 )
+	rom ( name ob2vera.2j size 2097152 crc 628f0830 sha1 a547880674d95b84acc9c05413cba4fd3a81e0cf )
+	rom ( name ob1rom0l.ic12 size 4194304 crc f8b6a599 sha1 2af3186242a8cbf14ab7532496a91041300527e9 )
+	rom ( name ob1rom0u.ic11 size 4194304 crc 0625db92 sha1 b63be6e41b2c6e2194f02f0c31da1f30c4e08232 )
+	rom ( name ob2vera.11s size 524288 crc f8c459f2 sha1 681520c891f5c8a0f321652d8834910310c88d1a )
+	rom ( name ob1wave.ic2 size 8388608 crc e7bc7202 sha1 f0f598304866ebe62642eaac6b7d8709baa14fe1 )
+)
+
+game (
+	name pacapp2
+	description "Paca Paca Passion 2 (Japan, PKS1/VER.A)"
+	year 1999
+	manufacturer "Produce/Namco"
+	sourcefile namcos12.c
+	rom ( name pks1vera.2l size 2097152 crc aec428d3 sha1 c13aecc6a367d6da501dce66fecbab5458ecac53 )
+	rom ( name pks1vera.2p size 2097152 crc 289e6e8a sha1 b8197355bee5660e8ff78a1c427c6d2b94a12b9d )
+	rom ( name pks1rom0.ic7 size 8388608 crc 91f151fc sha1 84b4c9b2a9ae5687e1cba5f0a0db96495956cbfe )
+	rom ( name pks1rom1.ic8 size 8388608 crc 8195f981 sha1 1b9c2289e0975606ff52b9974778f82c9c29e955 )
+	rom ( name pks1rom2.ic9 size 8388608 crc fea93ddc sha1 5f9c3f899a11797746d9c1077960f918aaca95f4 )
+	rom ( name pks1vera.11s size 524288 crc 4942b588 sha1 b28eb64a7347259619e32fdd396770983e25a707 )
+	rom ( name pks1wave0.ic2 size 8388608 crc 3ebd27c3 sha1 af874c3fb4cf1651075f307daefe7e3434769ecb )
+	rom ( name pks1wave1.ic1 size 8388608 crc 07e426b7 sha1 6dd038d4f2c95470f1ca09cfead83802e9480d02 )
 )
 
 game (
@@ -914,7 +946,7 @@ game (
 
 game (
 	name tektagtb
-	description "Tekken Tag Tournament (TEG1/VER.B)"
+	description "Tekken Tag Tournament (Japan, TEG1/VER.B)"
 	year 1999
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -928,10 +960,10 @@ game (
 	rom ( name teg3rom1o.14 merge teg3rom1o.14 size 8388608 crc 2434ceb6 sha1 f19f1599acbd6fd48793a2ee5a500ca817d9df56 )
 	rom ( name teg3rom2e.11 merge teg3rom2e.11 size 8388608 crc 6e5c3428 sha1 e3cdb60a4445406877b2e273385f34bfb0974220 )
 	rom ( name teg3rom2o.15 merge teg3rom2o.15 size 8388608 crc 21ce9dfa sha1 f27e8210ee236c327aa3e1ce4dd408abc6580a1b )
-	rom ( name teg3flel.4 merge teg3flel.4 size 2097152 crc 88b3823c sha1 6f31acb642c57daccbfdb87b790037e261c8c73c )
-	rom ( name teg3fleu.5 merge teg3fleu.5 size 2097152 crc 36df0867 sha1 6bec8560ad4c122dc909daa83aa9089ba5b281f7 )
-	rom ( name teg3flol.6 merge teg3flol.6 size 2097152 crc 03a76765 sha1 ae35ae28375f2a3e52d72b77ec09750c326cc269 )
-	rom ( name teg3flou.7 merge teg3flou.7 size 2097152 crc 6d6947d1 sha1 2f307bc4070fadb510c0473bc91d917b2d845ca5 )
+	rom ( name teg1flel.4 size 2097152 flags nodump )
+	rom ( name teg1fleu.5 size 2097152 flags nodump )
+	rom ( name teg1flol.6 size 2097152 flags nodump )
+	rom ( name teg1flou.7 size 2097152 flags nodump )
 	rom ( name teg3verb.11s merge teg3verb.11s size 524288 crc 67d0c469 sha1 da164702fc21b9f46a9e32c89e7b1d36070ddf79 )
 	rom ( name teg3wave0.1 merge teg3wave0.1 size 8388608 crc 4bd99104 sha1 f76b0576cc28fe49d3c1c402988b933933e52e15 )
 	rom ( name teg3wave1.12 merge teg3wave1.12 size 8388608 crc dbc74fff sha1 601b7e7361ea744b34e3fa1fc39d88641de7f4c6 )
@@ -939,7 +971,7 @@ game (
 
 game (
 	name tektagtc
-	description "Tekken Tag Tournament (TEG1/VER.A3)"
+	description "Tekken Tag Tournament (Japan, TEG1/VER.A3)"
 	year 1999
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -953,48 +985,18 @@ game (
 	rom ( name teg3rom1o.14 merge teg3rom1o.14 size 8388608 crc 2434ceb6 sha1 f19f1599acbd6fd48793a2ee5a500ca817d9df56 )
 	rom ( name teg3rom2e.11 merge teg3rom2e.11 size 8388608 crc 6e5c3428 sha1 e3cdb60a4445406877b2e273385f34bfb0974220 )
 	rom ( name teg3rom2o.15 merge teg3rom2o.15 size 8388608 crc 21ce9dfa sha1 f27e8210ee236c327aa3e1ce4dd408abc6580a1b )
-	rom ( name teg3flel.4 merge teg3flel.4 size 2097152 crc 88b3823c sha1 6f31acb642c57daccbfdb87b790037e261c8c73c )
-	rom ( name teg3fleu.5 merge teg3fleu.5 size 2097152 crc 36df0867 sha1 6bec8560ad4c122dc909daa83aa9089ba5b281f7 )
-	rom ( name teg3flol.6 merge teg3flol.6 size 2097152 crc 03a76765 sha1 ae35ae28375f2a3e52d72b77ec09750c326cc269 )
-	rom ( name teg3flou.7 merge teg3flou.7 size 2097152 crc 6d6947d1 sha1 2f307bc4070fadb510c0473bc91d917b2d845ca5 )
+	rom ( name teg1flel.4 size 2097152 flags nodump )
+	rom ( name teg1fleu.5 size 2097152 flags nodump )
+	rom ( name teg1flol.6 size 2097152 flags nodump )
+	rom ( name teg1flou.7 size 2097152 flags nodump )
 	rom ( name teg3verb.11s merge teg3verb.11s size 524288 crc 67d0c469 sha1 da164702fc21b9f46a9e32c89e7b1d36070ddf79 )
 	rom ( name teg3wave0.1 merge teg3wave0.1 size 8388608 crc 4bd99104 sha1 f76b0576cc28fe49d3c1c402988b933933e52e15 )
 	rom ( name teg3wave1.12 merge teg3wave1.12 size 8388608 crc dbc74fff sha1 601b7e7361ea744b34e3fa1fc39d88641de7f4c6 )
 )
 
 game (
-	name ghlpanic
-	description "Ghoul Panic (OB2/VER.A)"
-	year 1999
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	rom ( name ob2vera.2e size 2097152 crc 77162ae0 sha1 cdc0833756037562b49bb2ae02931b3b24d27329 )
-	rom ( name ob2vera.2j size 2097152 crc 628f0830 sha1 a547880674d95b84acc9c05413cba4fd3a81e0cf )
-	rom ( name ob1rom0l.ic12 size 4194304 crc f8b6a599 sha1 2af3186242a8cbf14ab7532496a91041300527e9 )
-	rom ( name ob1rom0u.ic11 size 4194304 crc 0625db92 sha1 b63be6e41b2c6e2194f02f0c31da1f30c4e08232 )
-	rom ( name ob2vera.11s size 524288 crc f8c459f2 sha1 681520c891f5c8a0f321652d8834910310c88d1a )
-	rom ( name ob1wave.ic2 size 8388608 crc e7bc7202 sha1 f0f598304866ebe62642eaac6b7d8709baa14fe1 )
-)
-
-game (
-	name pacapp2
-	description "Paca Paca Passion 2 (PKS1/VER.A)"
-	year 1999
-	manufacturer "Produce/Namco"
-	sourcefile namcos12.c
-	rom ( name pks1vera.2l size 2097152 crc aec428d3 sha1 c13aecc6a367d6da501dce66fecbab5458ecac53 )
-	rom ( name pks1vera.2p size 2097152 crc 289e6e8a sha1 b8197355bee5660e8ff78a1c427c6d2b94a12b9d )
-	rom ( name pks1rom0.ic7 size 8388608 crc 91f151fc sha1 84b4c9b2a9ae5687e1cba5f0a0db96495956cbfe )
-	rom ( name pks1rom1.ic8 size 8388608 crc 8195f981 sha1 1b9c2289e0975606ff52b9974778f82c9c29e955 )
-	rom ( name pks1rom2.ic9 size 8388608 crc fea93ddc sha1 5f9c3f899a11797746d9c1077960f918aaca95f4 )
-	rom ( name pks1vera.11s size 524288 crc 4942b588 sha1 b28eb64a7347259619e32fdd396770983e25a707 )
-	rom ( name pks1wave0.ic2 size 8388608 crc 3ebd27c3 sha1 af874c3fb4cf1651075f307daefe7e3434769ecb )
-	rom ( name pks1wave1.ic1 size 8388608 crc 07e426b7 sha1 6dd038d4f2c95470f1ca09cfead83802e9480d02 )
-)
-
-game (
 	name mrdrillr
-	description "Mr Driller (DRI1/VER.A2)"
+	description "Mr. Driller (Japan, DRI1/VER.A2)"
 	year 1999
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -1007,22 +1009,8 @@ game (
 )
 
 game (
-	name aquarush
-	description "Aqua Rush (AQ1/VER.A1)"
-	year 1999
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	rom ( name aq1vera.2l size 2097152 crc 91eb9258 sha1 30e225eb551bfe1bed6b342dd6d597345d64b677 )
-	rom ( name aq1vera.2p size 2097152 crc a92f21aa sha1 bde33f1f66aaa55031c6b2972b042eef87047cce )
-	rom ( name aq1rom0.7 size 8388608 crc 3e64dd33 sha1 dce3bb84c3069bc202d04f24d7702158dd3194d4 )
-	rom ( name aq1rom1.8 size 8388608 crc e4d415cf sha1 bbd244adaf704d7daf7341ff3b0a92162927a59b )
-	rom ( name aq1vera.11s size 524288 crc 78277e02 sha1 577ebb6d7ab5e304fb1dc1e7fd5649762e0d1786 )
-	rom ( name aq1wave0.2 size 8388608 crc 0cf7278d sha1 aee31e4d9b3522f42325071768803c542aa6de09 )
-)
-
-game (
 	name pacappsp
-	description "Paca Paca Passion Special (PSP1/VER.A)"
+	description "Paca Paca Passion Special (Japan, PSP1/VER.A)"
 	year 1999
 	manufacturer "Produce/Namco"
 	sourcefile namcos12.c
@@ -1037,8 +1025,40 @@ game (
 )
 
 game (
+	name kaiunqz
+	description "Kaiun Quiz (Japan, KW1/VER.A)"
+	year 1999
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name kw1vera.2l size 2097152 crc fd1d2324 sha1 eedb4627dfa17e9aac2c99592628f1fa7060edb5 )
+	rom ( name kw1vera.2p size 2097152 crc d8bdea6b sha1 d32118846a1f43eecff7f56dcda03adf04975784 )
+	rom ( name kw1rom0l.12 size 8388608 crc e0768f0b sha1 3ffec7c789a95fcff7f06432723f155b99a20c42 )
+	rom ( name kw1rom0u.11 size 8388608 crc 04101a16 sha1 c2d79333ee382e2fea229bba23918fb5f88a25d4 )
+	rom ( name kw1rom1l.10 size 8388608 crc 6a4edfa6 sha1 a59fa28446b28db28b38368c794af71e673f69a2 )
+	rom ( name kw1rom1u.9 size 8388608 crc e6150b0d sha1 7dd1ba524246aea007e7bd6d3e7d457033b23a09 )
+	rom ( name kw1rom2l.7 size 8388608 crc 21c376e4 sha1 4b82494c1e13ebcea3c4e97803c0667be73bf6ae )
+	rom ( name kw1rom2u.8 size 8388608 crc d850c222 sha1 802c1782b323802eae871e2b9ccc5eae34277861 )
+	rom ( name kw1vera.11s size 524288 crc d863fafa sha1 3c2bb38c24165e3a1a4d1d257fcfc019b63d5199 )
+	rom ( name kw1wave0.2 size 8388608 crc 060e52ae sha1 7ea95cae9d3c648163b225d0c7d365644be90241 )
+)
+
+game (
+	name aquarush
+	description "Aqua Rush (Japan, AQ1/VER.A1)"
+	year 1999
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name aq1vera.2l size 2097152 crc 91eb9258 sha1 30e225eb551bfe1bed6b342dd6d597345d64b677 )
+	rom ( name aq1vera.2p size 2097152 crc a92f21aa sha1 bde33f1f66aaa55031c6b2972b042eef87047cce )
+	rom ( name aq1rom0.7 size 8388608 crc 3e64dd33 sha1 dce3bb84c3069bc202d04f24d7702158dd3194d4 )
+	rom ( name aq1rom1.8 size 8388608 crc e4d415cf sha1 bbd244adaf704d7daf7341ff3b0a92162927a59b )
+	rom ( name aq1vera.11s size 524288 crc 78277e02 sha1 577ebb6d7ab5e304fb1dc1e7fd5649762e0d1786 )
+	rom ( name aq1wave0.2 size 8388608 crc 0cf7278d sha1 aee31e4d9b3522f42325071768803c542aa6de09 )
+)
+
+game (
 	name golgo13
-	description "Golgo 13 (GLG1/VER.A)"
+	description "Golgo 13 (Japan, GLG1/VER.A)"
 	year 1999
 	manufacturer "Raizing/Namco"
 	sourcefile namcos12.c
@@ -1062,8 +1082,26 @@ game (
 )
 
 game (
+	name sws2000
+	description "Super World Stadium 2000 (Japan, SS01/VER.A)"
+	year 2000
+	manufacturer "Namco"
+	sourcefile namcos12.c
+	rom ( name ss01vera.2l size 2097152 crc 6ddbdcaa sha1 cff31d75e7780851b2c2c025ee34fd8990e2f502 )
+	rom ( name ss01vera.2p size 2097152 crc 6ade7d28 sha1 3e8d7bc9a284324c4de0ac265872b613d108cb57 )
+	rom ( name ss01rom0.9 size 8388608 crc c08cc59c sha1 f2d8064491c98acbb40260d7f13d0f9b394c1383 )
+	rom ( name ss01rom1.10 size 8388608 crc d4aa1dc6 sha1 68fcb60aadf35668d7d746da1e29d5d985e40aec )
+	rom ( name ss01rom2.11 size 8388608 crc 3371904a sha1 58bbf98a44560bc021bac4bc513fe89deea85b50 )
+	rom ( name ss01fl3l.7 size 2097152 crc 35bad813 sha1 19ceffb78695c8c22b30659aad56ac237ffb56ac )
+	rom ( name ss01fl3h.8 size 2097152 crc a14828fc sha1 fd8a052451f74f420f4a4a2b902e0c2e83e3239b )
+	rom ( name ss01vera.11s size 524288 crc 641e6584 sha1 dfc0ac21bea5b19dbce5d50fb681854889d756dc )
+	rom ( name ss01wave0.2 size 8388608 crc 1c5e2ff1 sha1 4f29dfd49f6b5c3ca3b758823d368051354bd673 )
+	rom ( name ss01wave1.1 size 8388608 crc 5f4c8861 sha1 baee7182c32bc064d805de5a16948faf78941ac4 )
+)
+
+game (
 	name g13knd
-	description "Golgo 13 Kiseki no Dandou (GLS1/VER.A)"
+	description "Golgo 13 Kiseki no Dandou (Japan, GLS1/VER.A)"
 	year 1999
 	manufacturer "Raizing/Namco"
 	sourcefile namcos12.c
@@ -1087,26 +1125,8 @@ game (
 )
 
 game (
-	name sws2000
-	description "Super World Stadium 2000 (SS01/VER.A)"
-	year 2000
-	manufacturer "Namco"
-	sourcefile namcos12.c
-	rom ( name ss01vera.2l size 2097152 crc 6ddbdcaa sha1 cff31d75e7780851b2c2c025ee34fd8990e2f502 )
-	rom ( name ss01vera.2p size 2097152 crc 6ade7d28 sha1 3e8d7bc9a284324c4de0ac265872b613d108cb57 )
-	rom ( name ss01rom0.9 size 8388608 crc c08cc59c sha1 f2d8064491c98acbb40260d7f13d0f9b394c1383 )
-	rom ( name ss01rom1.10 size 8388608 crc d4aa1dc6 sha1 68fcb60aadf35668d7d746da1e29d5d985e40aec )
-	rom ( name ss01rom2.11 size 8388608 crc 3371904a sha1 58bbf98a44560bc021bac4bc513fe89deea85b50 )
-	rom ( name ss01fl3l.7 size 2097152 crc 35bad813 sha1 19ceffb78695c8c22b30659aad56ac237ffb56ac )
-	rom ( name ss01fl3h.8 size 2097152 crc a14828fc sha1 fd8a052451f74f420f4a4a2b902e0c2e83e3239b )
-	rom ( name ss01vera.11s size 524288 crc 641e6584 sha1 dfc0ac21bea5b19dbce5d50fb681854889d756dc )
-	rom ( name ss01wave0.2 size 8388608 crc 1c5e2ff1 sha1 4f29dfd49f6b5c3ca3b758823d368051354bd673 )
-	rom ( name ss01wave1.1 size 8388608 crc 5f4c8861 sha1 baee7182c32bc064d805de5a16948faf78941ac4 )
-)
-
-game (
 	name sws2001
-	description "Super World Stadium 2001 (SS11/VER.A)"
+	description "Super World Stadium 2001 (Japan, SS11/VER.A)"
 	year 2001
 	manufacturer "Namco"
 	sourcefile namcos12.c
@@ -1123,3 +1143,4 @@ game (
 	rom ( name ss01wave0.2 merge ss01wave0.2 size 8388608 crc 1c5e2ff1 sha1 4f29dfd49f6b5c3ca3b758823d368051354bd673 )
 	rom ( name ss01wave1.1 merge ss01wave1.1 size 8388608 crc 5f4c8861 sha1 baee7182c32bc064d805de5a16948faf78941ac4 )
 )
+

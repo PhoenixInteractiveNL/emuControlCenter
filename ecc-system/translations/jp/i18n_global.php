@@ -192,5 +192,55 @@ $i18n['global'] = array(
 	/* 0.9.7 WIP 02 */
 	'of' =>
 		"of",
+		
+	/* 0.9.7 WIP 04 */
+	'informations' =>
+		"Informations",
+	'contact'=>
+		"Contact",
+	'author'=>
+		"Author",
+	'date'=>
+		"Date",
+	'description'=>
+		"Description",
+	'website'=>
+		"Website",
+		
+	/* 0.9.7 WIP 07 */
+	'reset'=>
+		"Reset",
+
+	/* 0.9.8 WIP 02 */
+	'yes'=>
+		"Yes",
+	'no'=>
+		"No",
+	'count'=>
+		"Count",
+	'time'=>
+		"Time",
+
+	/* 0.9.9 FYEO 01 */
+	'assets' =>
+		"Documents",
+
+	/* 1.0.0 FYEO 02 */
+	'done' =>
+		"Done",
+	'ok' =>
+		"OK",
+	'move' =>
+		"Move",
+	'mode' =>
+		"Mode",
+	'location' =>
+		"Destination location",
+
+	/* 1.0.0 FYEO 03 */
+	'images' =>
+		"Images",
+	'metadata' =>
+		"Metadata",
 );
 ?>

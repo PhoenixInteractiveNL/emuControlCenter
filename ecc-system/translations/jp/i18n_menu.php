@@ -156,6 +156,39 @@ $i18n['menu'] = array(
 	/* 0.9.6 FYEO 11 */
 	'menuItemRomOptions' =>
 		"Rom options",
-		
+
+	/* 0.9.7 FYEO 17 */
+	'imagepackTopMenu' =>
+		"imagepack helpers",
+	'imagepackRemoveImagesWithoutRomFile' =>
+		"Remove images for roms that i dont have in database",
+	'imagepackRemoveEmptyFolder' =>
+		"Remove empty folder",
+	'imagepackCreateAllThumbnails' =>
+		"Create thumbnails for faster access",
+	'imagepackRemoveAllThumbnails' =>
+		"Remove thumbnails for imagepack exchange",
+	'imagepackConvertEccV1Images' =>
+		"Convert flat images to new imagepack structure! (V1->V2)",
+
+	/* 0.9.7 FYEO 17 */
+	'onlineSearchForRom' =>
+		"Search for rom in web",
+	'onlineEccRomdbShowWebInfo' =>
+		"Search for rom in romdb",
+
+	/* 0.9.8 FYEO 04 */
+	'lbl_meta_edit_top' =>
+		"Edit meta",
+
+	/* 0.9.8 FYEO 05 */
+	'lbl_image_inject' =>
+		"Download images",
+
+	/* 0.9.9 FYEO 01 */
+	'lblOpenAssetFolder' =>
+		"Browse documents folder",
+
+
 );
 ?>

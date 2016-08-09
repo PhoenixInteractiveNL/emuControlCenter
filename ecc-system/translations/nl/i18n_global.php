@@ -223,6 +223,24 @@ $i18n['global'] = array(
 
 	/* 0.9.9 FYEO 01 */
 	'assets' =>
-		"Documents",
+		"Documenten",
+
+	/* 1.0.0 FYEO 02 */
+	'done' =>
+		"Klaar",
+	'ok' =>
+		"OK",
+	'move' =>
+		"Verplaatsen",
+	'mode' =>
+		"Modus",
+	'location' =>
+		"Eindlocatie",
+
+	/* 1.0.0 FYEO 03 */
+	'images' =>
+		"Plaatjes",
+	'metadata' =>
+		"META informatie",
 );
 ?>

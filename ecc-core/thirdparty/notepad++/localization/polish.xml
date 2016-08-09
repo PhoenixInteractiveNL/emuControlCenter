@@ -13,13 +13,25 @@
                     <Item id = "5" name = "&amp;Jêzyk"/>
                     <Item id = "6" name = "&amp;Ustawienia"/>
                     <Item id = "7" name = "&amp;Makra"/>
-                    <Item id = "8" name = "&amp;Uruchom"/>
+                    <Item id = "8" name = "U&amp;ruchom"/>
                     <Item idName = "Plugins" name = "Plu&amp;giny"/>
                     <Item idName = "Window" name = "&amp;Okno"/>
                 </Entries>
 
                 <!-- Sub Menu Entries -->
                 <SubEntries>
+                    <Item posX = "1" posY = "9" name = "Kopiuj do schowka"/>
+                    <Item posX = "1" posY = "10" name = "Wciêcia"/>
+                    <Item posX = "1" posY = "11" name = "Du¿e / ma³e litery"/>
+                    <Item posX = "1" posY = "12" name = "Operacje na liniach"/>
+                    <Item posX = "1" posY = "13" name = "Komentarze"/>
+                    <Item posX = "1" posY = "14" name = "Auto-uzupe³nianie"/>
+                    <Item posX = "2" posY = "11" name = "Wyró¿nij"/>
+                    <Item posX = "2" posY = "12" name = "Usuñ wyró¿nienie"/>
+                    <Item posX = "3" posY = "4" name = "Poka¿ niewidoczne znaki"/>
+                    <Item posX = "3" posY = "5" name = "Powiêkszenie"/>
+                    <Item posX = "3" posY = "6" name = "Przenieœ / sklonuj bie¿¹cy dokument"/>
+					
                     <Item posX = "3" posY = "16" name = "Zwiñ poziom"/>
                     <Item posX = "3" posY = "17" name = "Rozwiñ poziom"/>
                 </SubEntries>
@@ -98,7 +110,18 @@
                     <Item id = "43019" name = "Skopiuj linie z zak³adkami"/>
                     <Item id = "43020" name = "Wklej do linii z zak³adkami (zast¹p)"/>
                     <Item id = "43021" name = "Usuñ linie z zak³adkami"/>
-
+                    <Item id = "43022" name = "Wyró¿nienie 1"/>
+                    <Item id = "43023" name = "Usuñ wyró¿nienie 1"/>
+                    <Item id = "43024" name = "Wyró¿nienie 2"/>
+                    <Item id = "43025" name = "Usuñ wyró¿nienie 2"/>
+                    <Item id = "43026" name = "Wyró¿nienie 3"/>
+                    <Item id = "43027" name = "Usuñ wyró¿nienie 3"/>
+                    <Item id = "43028" name = "Wyró¿nienie 4"/>
+                    <Item id = "43029" name = "Usuñ wyró¿nienie 4"/>
+                    <Item id = "43030" name = "Wyró¿nienie 5"/>
+                    <Item id = "43031" name = "Usuñ wyró¿nienie 5"/>
+                    <Item id = "43032" name = "Usuñ wszystkie wyró¿nienia"/>
+					<Item id = "44009" name = "Pe³ny ekran 2"/>
                     <Item id = "44010" name = "Zwiñ wszystko"/>
                     <Item id = "44011" name = "Definiowanie w³asnego stylu"/>
                     <Item id = "44019" name = "Poka¿ wszystkie znaki"/>
@@ -111,14 +134,13 @@
                     <Item id = "44029" name = "Rozwiñ wszystko"/>
                     <Item id = "44030" name = "Zwiñ bie¿¹cy poziom"/>
                     <Item id = "44031" name = "Rozwiñ bie¿¹cy poziom"/>
-                    <Item id = "44032" name = "Prze³¹cz w tryb pe³noekranowy"/>
+                    <Item id = "44032" name = "Pe³ny ekran"/>
                     <Item id = "44033" name = "Przywróæ domyœlne powiêkszenie"/>
                     <Item id = "44034" name = "Zawsze na wierzchu"/>
                     <Item id = "44035" name = "Synchronizuj przewijanie pionowe"/>
                     <Item id = "44036" name = "Synchronizuj przewijanie poziome"/>
                     <Item id = "44041" name = "Poka¿ symbol zawijania"/>
-                    <Item id = "44070" name = "Aktywuj g³ówny widok"/>
-                    <Item id = "44071" name = "Aktywuj drugi widok"/>
+                    <Item id = "44072" name = "PrzejdŸ do drugiego widoku"/>
 
                     <Item id = "45001" name = "Konwertuj na format Windows"/>
                     <Item id = "45002" name = "Konwertuj na format UNIX"/>
@@ -134,10 +156,11 @@
                     <Item id = "45012" name = "Konwertuj na format UCS-2 Big Endian"/>
                     <Item id = "45013" name = "Konwertuj na format UCS-2 Little Endian"/>
 
-                    <Item id = "10001" name = "Poka¿ drugi widok"/>
+                    <Item id = "10001" name = "Przenieœ do drugiego widoku"/>
                     <Item id = "10002" name = "Sklonuj do drugiego widoku"/>
-                    <Item id = "10003" name = "PrzejdŸ do nowej instancji"/>
+                    <Item id = "10003" name = "Przenieœ do nowej instancji"/>
                     <Item id = "10004" name = "Otwórz w nowej instancji"/>
+
 
                     <Item id = "46001" name = "Konfigurator stylów..."/>
                     <Item id = "47000" name = "O programie..."/>
@@ -147,7 +170,7 @@
                     <Item id = "47004" name = "Forum"/>
                     <Item id = "47005" name = "Pobierz pluginy"/>
 
-                    <Item id = "48009" name = "Przypisanie skrótów klawiaturowych..."/>
+                    <Item id = "48009" name = "Skróty klawiaturowe..."/>
                     <Item id = "48011" name = "Preferencje..."/>
                     <Item id = "49000" name = "U&amp;ruchom..."/>
 
@@ -169,7 +192,7 @@
                     <Item order = "2" name = "Zapisz mnie"/>
                     <Item order = "3" name = "Zapisz mnie jako..."/>
                     <Item order = "4" name = "Wydrukuj mnie"/>
-                    <Item order = "5" name = "Poka¿ drugi widok"/>
+                    <Item order = "5" name = "Poka¿ / ukryj drugi widok"/>
                     <Item order = "6" name = "Sklonuj do drugiego widoku"/>
                     <Item order = "7" name = "Œcie¿ka pliku do schowka"/>
                     <Item order = "8" name = "Nazwa pliku do schowka"/>
@@ -220,6 +243,9 @@
                 <Item id = "1624" name = "Tryb szukania"/>
                 <Item id = "1625" name = "Normalny"/>
                 <Item id = "1626" name = "Rozszerzony (\n, \r, \t, \0, \x...)"/>
+			 	<Item id = "1660" name = "Zamieñ w plikach"/>
+			 	<Item id = "1641" name = "ZnajdŸ wszystkie w bie¿¹cym dokumencie"/>
+			 	<Item id = "1686" name = "PrzeŸroczystoœæ"/>
             </Find>
             <GoToLine title = "IdŸ do linii #">
                 <Item id = "2007" name = "Linia"/>
@@ -243,7 +269,7 @@
                 <Item id = "2" name = "Anuluj"/>
                 <Item id = "2301" name = "Zapisz i zamknij"/>
                 <Item id = "2303" name = "PrzeŸroczystoœæ"/>
-
+				<Item id = "2306" name = "Dostêpne style : "/>
                 <SubDialog>
                     <Item id = "2204" name = "Pogrubione"/>
                     <Item id = "2205" name = "Pochy³e"/>
@@ -352,6 +378,7 @@
 
                     <Item id = "6121" name = "Menu g³ówne"/>
                     <Item id = "6122" name = "Ukryj (klawisz Alt lub F10 prze³¹cza widocznoœæ)"/>
+					<Item id = "6123" name = "Jêzyk"/>
                 </Global>
                 <Scintillas title = "Edycja">
                     <Item id = "6216" name = "Kursor"/>
@@ -381,6 +408,7 @@
                     <Item id = "6214" name = "Podœwietlanie bie¿¹cego wiersza"/>
                 </Scintillas>
                 <NewDoc title = "Nowy dokument">
+					<Item id = "6419" name = "Nowy dokument"/>
                     <Item id = "6401" name = "Format"/>
                     <Item id = "6402" name = "Windows"/>
                     <Item id = "6403" name = "Unix"/>
@@ -395,7 +423,6 @@
                     <Item id = "6413" name = "Katalog otwarcia / zapisu pliku"/>
                     <Item id = "6414" name = "Z bie¿¹cego dokumentu"/>
                     <Item id = "6415" name = "Ostatnio u¿ywany"/>
-                    <Item id = "6418" name = "..."/>
                 </NewDoc>
                 <FileAssoc title = "Powi¹zania plików">
                     <Item id = "4009" name = "Obs³ugiwane typy :"/>
@@ -403,9 +430,10 @@
                 </FileAssoc>
                 <LangMenu title = "Menu jêzyków">
                     <Item id = "6505" name = "Dostêpne"/>
-                    <Item id = "6506" name = "Wy³aczone"/>
+                    <Item id = "6506" name = "Wy³¹czone"/>
+					<Item id = "6507" name = "Kompaktowe menu jêzyków"/>
                 </LangMenu>
-                <Print1 title = "Druk - kolor i marginesy">
+                <Print title = "Druk">
                     <Item id = "6601" name = "Drukuj numery wierszy"/>
                     <Item id = "6602" name = "Opcje koloru"/>
                     <Item id = "6603" name = "WYSIWYG"/>
@@ -417,8 +445,6 @@
                     <Item id = "6613" name = "Górny"/>
                     <Item id = "6614" name = "Prawy"/>
                     <Item id = "6615" name = "Dolny"/>
-                </Print1>
-                <Print2 title = "Druk - nag³ówek i stopka">
                     <Item id = "6706" name = "Pogrubiony"/>
                     <Item id = "6707" name = "Kursywa"/>
                     <Item id = "6708" name = "Nag³ówek"/>
@@ -433,7 +459,7 @@
                     <Item id = "6722" name = "Prawa sekcja"/>
                     <Item id = "6723" name = "Dodaj"/>
                     <Item id = "6725" name = "Parametr :"/>
-                </Print2>
+                </Print>
                 <MISC title = "Inne">
                     <Item id = "6304" name = "Historia plików"/>
                     <Item id = "6305" name = "Nie sprawdzaj przy uruchamianiu"/>
@@ -447,21 +473,19 @@
                     <Item id = "6325" name = "Przewiñ na koniec po uaktualnieniu"/>
                     <Item id = "6319" name = "W³¹cz"/>
                     <Item id = "6320" name = "Nie podkreœlaj"/>
+                    <Item id = "6322" name = "Rozszerz. pliku sesji :"/>
                     <Item id = "6323" name = "W³¹cz autoaktualizacjê Notepad++"/>
                     <Item id = "6324" name = "Prze³¹czanie miêdzy dokum. (Ctrl+TAB)"/>
-
                     <Item id = "6326" name = "Inteligentne podœwietlanie"/>
-                    <Item id = "6114" name = "W³¹cz"/>
-                    <Item id = "6115" name = "Automatyczne wciêcia"/>
-                    <Item id = "6117" name = "Kolejnoœæ ostatniego u¿ycia (MRU)"/>
-                    <Item id = "6322" name = "Rozszerz. pliku sesji :"/>
-
                     <Item id = "6329" name = "Podœwietlanie pasuj¹cych tag'ów"/>
                     <Item id = "6327" name = "W³¹cz"/>
                     <Item id = "6328" name = "Podœwietlaj atrybuty"/>
                     <Item id = "6330" name = "Podœwietlaj strefy php/asp"/>
 
-                    <Item id = "6331" name = "Poka¿ tylko nazwê pliku w pasku tytu³u"/>
+					<Item id = "6331" name = "Tylko nazwa pliku w pasku tytu³u"/>
+                    <Item id = "6114" name = "W³¹cz"/>
+                    <Item id = "6115" name = "Automatyczne wciêcia"/>
+                    <Item id = "6117" name = "Kolejnoœæ ostatniego u¿ycia (MRU)"/>
 
                 </MISC>
                 <Backup title = "Kopia / Auto-uzupe³nianie">

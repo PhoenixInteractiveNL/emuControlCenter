@@ -194,5 +194,16 @@ $i18n['menuTop'] = array(
 	'mTopOptionBackupUserdata' =>
 		'Sauvegarde des données utilisateur (XML)',
 
+	/* 1.0.0 WIP 01 */
+	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
+		'  possède des données (editées ou transférées)',
+	'mTopViewModeRomPersonalMetaEdited' =>
+		'  possède des données (editées seulement)',
+	'mTopViewModeRomPersonalMetaTransfered' =>
+		'  possède des données (transférées seulement)',
+
+	/* 1.0.0 WIP 02 */
+	'mTopFileSearch' =>
+		'Transférer par résultats de la recherche',
 );
 ?>

@@ -1,19 +1,19 @@
 clrmamepro (
 	name S22
-	description "System 22 20090105"
+	description "System 22 20090915"
 	category "Namco Sytem 22"
-	version 20090106
-	date 2009-01-06
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
 	comment "Please report any data file issues at http://forum.logiqx.com/"
-	forcenodump obsolete
+	forcenodump ignore
 )
 
 game (
 	name winrun
-	description "Winning Run Suzuka Grand Prix"
+	description "Winning Run Suzuka Grand Prix (Japan)"
 	year 1989
 	manufacturer "Namco"
 	sourcefile namcos21.c
@@ -46,7 +46,7 @@ game (
 
 game (
 	name winrun91
-	description "Winning Run 91"
+	description "Winning Run 91 (Japan)"
 	year 1991
 	manufacturer "Namco"
 	sourcefile namcos21.c
@@ -112,7 +112,7 @@ game (
 
 game (
 	name starblad
-	description "Starblade"
+	description "Starblade (Japan)"
 	year 1991
 	manufacturer "Namco"
 	sourcefile namcos21.c
@@ -144,8 +144,8 @@ game (
 
 game (
 	name driveyes
-	description "Driver's Eyes"
-	year 1987
+	description "Driver's Eyes (US)"
+	year 1991
 	manufacturer "Namco"
 	sourcefile namcos21.c
 	rom ( name de2-mp-ub.3j size 131072 crc f9c86fb5 sha1 b48d16e8f26e7a2cfecb30285b517c42e5585ac7 )
@@ -332,44 +332,6 @@ game (
 )
 
 game (
-	name gal3
-	description "Galaxian 3 - Theater 6 : Project Dragoon"
-	manufacturer "Namco"
-	sourcefile gal3.c
-	rom ( name glc1-mst-prg0e.6b size 524288 crc 5deccd72 sha1 8d50779221538cc171469a691fabb17b62a8e664 )
-	rom ( name glc1-mst-prg1e.10b size 524288 crc b6144e3b sha1 33f63d881e7012db7f971b074bc5f876a66198b7 )
-	rom ( name glc1-mst-prg2e.14b size 524288 crc 13381084 sha1 486c1e136e6594ba68858e40246c5fb9bef1c0d2 )
-	rom ( name glc1-mst-prg3e.18b size 524288 crc 7917584a sha1 ec22de8a3751099d37e14cd05c736c33baa1ee1d )
-	rom ( name glc-slv-prg0.6b size 131072 crc 75b2341a sha1 73616f5633f583b9ebfba2380fde3e7b08743e9f )
-	rom ( name glc-slv-prg1.10b size 131072 crc f37ba6c0 sha1 f8ee29ee4d341bfd6595e92c090865b8e5d9578c )
-	rom ( name glc-slv-prg2.14b size 131072 crc c38a933e sha1 96c85db607d8527e927ef23fc53324172ddb861a )
-	rom ( name glc-slv-prg3.18b size 131072 crc deae86d2 sha1 1898955423b8da585b6319406566aad02db20d64 )
-	rom ( name glc1-dsp-ptoh.2f size 524288 crc b4213c83 sha1 9d036b73149656fdc13eed38946a70f532bff3f1 )
-	rom ( name glc1-dsp-ptou.2k size 524288 crc 14877cef sha1 5ebdccd6db837ceb9473bd219eb211431944cbf0 )
-	rom ( name glc1-dsp-ptol.2n size 524288 crc b318534a sha1 6fcf2ead6dd0d5a6f22438520588ba4e33ca39a8 )
-	rom ( name glc1-obj-obj0.9t size 524288 crc 0fe98d33 sha1 5cfefa342fe2fa278d010927d761cb51105a4a60 )
-	rom ( name glc1-obj-obj1.9w size 524288 crc 660a4f6d sha1 c3c3525f51280e71f2d607649a6b5434cbd862c8 )
-	rom ( name glc1-obj-obj2.9y size 524288 crc 90bcc5a3 sha1 76cb23e295bb15279e046e83f8e4ab9f85f68243 )
-	rom ( name glc1-obj-obj3.9z size 524288 crc 65244f07 sha1 fd876ca5f198914f15864397b358e56fcaa41e90 )
-	rom ( name glc-psn-prg0b.ic22 size 131072 crc da8a74f8 sha1 2826a55a4a0acec07ff760c7857da10c4ffaf7d0 )
-	rom ( name glc-psn-prg1b.ic23 size 131072 crc 978431c9 sha1 7d631444f5844c55bea820507e34a17199f5da2e )
-	rom ( name glc-psn-vol.ic100 size 131072 crc 9d49576c sha1 25c02d2cc171468711c71d8f2da0ea7d9b5f0c23 )
-	rom ( name glc-rs-prglb.18b size 131072 crc 9d0c8d03 sha1 8fffef622cd4440ea9f17882cd54a8a49fbbc148 )
-	rom ( name glc-rs-prgub.19b size 131072 crc 125ad94c sha1 4e2e316b639e9a3a78ecd5c827f3309efa3bc78c )
-	rom ( name glc1-snd-prg0.1h size 131072 crc 4845481c sha1 3cf90b8b2351b2bc015bf273552e19e09f84ee70 )
-	rom ( name glc1-snd-prg1.2h size 131072 crc 3b98c175 sha1 26e59700347bab7fa10f029e781f993f3a97d257 )
-	rom ( name glc1-snd-data1.4h size 131072 crc 8c7135f5 sha1 b8c3866c70ac1c431140d6cfe50d9273db7d9b68 )
-	rom ( name glc1-snd-voi0.13a size 524288 crc ef3bda56 sha1 2cdfec1860a6d2bd645d83b42cc232643818a699 )
-	rom ( name glc1-snd-voi2.13c size 524288 crc ef3bda56 sha1 2cdfec1860a6d2bd645d83b42cc232643818a699 )
-	rom ( name glc1-snd-voi8.10g size 524288 crc bba0c15b sha1 b0abc22fd1ae8a9970ad45d9ebdb38e6b06033a7 )
-	rom ( name glc1-snd-voi9.11g size 524288 crc dd1b1ee4 sha1 b69af15acaa9c3d79d7758adc8722ff5c1129b76 )
-	rom ( name glc1-snd-voi10.13g size 524288 crc 1c1dedf4 sha1 b6b9dac68103ff2206d731d409a557a71afd98f7 )
-	rom ( name glc1-snd-voi11.14g size 524288 crc 559e2a8a sha1 9a2f28305c6073a0b9b80a5d9617cc25a921e9d0 )
-	disk ( name gal3_ld1 flags nodump )
-	disk ( name gal3_ld2 flags nodump )
-)
-
-game (
 	name ridgerac
 	description "Ridge Racer (Rev. RR3, World)"
 	year 1993
@@ -404,7 +366,7 @@ game (
 )
 
 game (
-	name ridgerab
+	name ridgeracb
 	description "Ridge Racer (Rev. RR2, World)"
 	year 1993
 	manufacturer "Namco"
@@ -440,7 +402,7 @@ game (
 )
 
 game (
-	name ridgeraj
+	name ridgeracj
 	description "Ridge Racer (Rev. RR1, Japan)"
 	year 1993
 	manufacturer "Namco"
@@ -451,6 +413,42 @@ game (
 	rom ( name rr1prlm.2d size 524288 crc 68e13830 sha1 ddc447c7afbb5c4238969d7e78bfe9cf8fac6061 )
 	rom ( name rr1prum.8d size 524288 crc 705ef78a sha1 881903413e66d6fd83d46eb18c4e1230531832ae )
 	rom ( name rr1pruu.6d size 524288 crc c1371f96 sha1 a78e0bf6c147c034487a85efa0a8470f4e8f4bf0 )
+	rom ( name c71.bin merge c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name c74.bin merge c74.bin size 16384 crc a3dce360 sha1 8f3248b1890abb2e649927240ae46f73bb171e3b )
+	rom ( name rr1data.6r merge rr1data.6r size 524288 crc 18f5f748 sha1 e0d149a66de36156edd9b55f604c9a9801aaefa8 )
+	rom ( name rr1cg0.bin merge rr1cg0.bin size 2097152 crc b557a795 sha1 f345486ffbe797246ad80a55d3c4a332ed6e2888 )
+	rom ( name rr1cg1.bin merge rr1cg1.bin size 2097152 crc 0fa212d9 sha1 a1311de0a504e2d399044fa8ac32ec6c56ec965f )
+	rom ( name rr1cg2.bin merge rr1cg2.bin size 2097152 crc 18e2d2bd sha1 69c2ea62eeb255f27d3c69373f6716b0a34683cc )
+	rom ( name rr1cg3.bin merge rr1cg3.bin size 2097152 crc 9564488b sha1 6b27d1aea75d6be747c62e165cfa49ecc5d9e767 )
+	rom ( name rr1ccrl.bin merge rr1ccrl.bin size 2097152 crc 6092d181 sha1 52c0e3ac20aa23059a87d1a985d24ae641577310 )
+	rom ( name rr1ccrh.bin merge rr1ccrh.bin size 524288 crc dd332fd5 sha1 a7d9c1d6b5a8e3a937b525c1363880e404dcd147 )
+	rom ( name rr1potl0.5b merge rr1potl0.5b size 524288 crc 3ac193e3 sha1 ff213766f15e34dc1b25187b57d94e17930090a3 )
+	rom ( name rr1potl1.4b merge rr1potl1.4b size 524288 crc ac3ffba5 sha1 4eb4dda5faeff237e0d35725b56d309948fba900 )
+	rom ( name rr1potm0.5c merge rr1potm0.5c size 524288 crc 42a3fa08 sha1 15db0ae7ccf7f5a77b9dd9a9d82a488b67f8aaff )
+	rom ( name rr1potm1.4c merge rr1potm1.4c size 524288 crc 1bc1ea7b sha1 52c21eef4989c45acc5fa4deda2d0b63214731c8 )
+	rom ( name rr1potu0.5d merge rr1potu0.5d size 524288 crc 5e367f72 sha1 5887f011379dce865fef238b402678a3d2033de9 )
+	rom ( name rr1potu1.4d merge rr1potu1.4d size 524288 crc 31d92475 sha1 51d3c0baa223e1bc16ea2950f2e085597528f870 )
+	rom ( name rr1wav0.10r merge rr1wav0.10r size 1048576 crc a8e85bde sha1 b56677e9f6c98f7b600043f5dcfef3a482ca7455 )
+	rom ( name rr1wav1.10p merge rr1wav1.10p size 1048576 crc 35f47c8e sha1 7c3f9e942f532af8008fbead2a96fee6084bcde6 )
+	rom ( name rr1wav2.10n merge rr1wav2.10n size 1048576 crc 3244cb59 sha1 b3283b30cfafbfdcbc6d482ecc4ed6a47a527ca4 )
+	rom ( name rr1wav3.10l merge rr1wav3.10l size 1048576 crc c4cda1a7 sha1 60bc96880ec79efdff3cc70c09e848692a40bea4 )
+	rom ( name rr1gam.2d merge rr1gam.2d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
+	rom ( name rr1gam.3d merge rr1gam.3d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
+	rom ( name rr1gam.4d merge rr1gam.4d size 256 crc b2161bce sha1 d2681cc0cf8e68df0d942d392b4eb4458c4bb356 )
+)
+
+game (
+	name ridgerac3
+	description "Ridge Racer (3 Screen? Rev. RR2, World)"
+	year 1993
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	cloneof ridgerac
+	romof ridgerac
+	rom ( name rr3prgll-3s.4d size 524288 crc 2c3d8cb7 sha1 46a7b62938fe3edde5c52ce3fdfe447000cd6af0 )
+	rom ( name rr3prglm-3s.2d size 524288 crc b15343f2 sha1 3056eb5a3036a74b2ac641a4c3221986c0be1e27 )
+	rom ( name rr3prgum-3s.8d size 524288 crc 8fda06ac sha1 7e9adba198eb0941100cda64ecedac504f6ac696 )
+	rom ( name rr3prguu-3s.6d size 524288 crc 868398df sha1 422e0f9884904b0df93fcacd1468b8da0458eb8e )
 	rom ( name c71.bin merge c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
 	rom ( name c74.bin merge c74.bin size 16384 crc a3dce360 sha1 8f3248b1890abb2e649927240ae46f73bb171e3b )
 	rom ( name rr1data.6r merge rr1data.6r size 524288 crc 18f5f748 sha1 e0d149a66de36156edd9b55f604c9a9801aaefa8 )
@@ -625,7 +623,7 @@ game (
 )
 
 game (
-	name ridger2a
+	name ridgera2j
 	description "Ridge Racer 2 (Rev. RRS1, Ver.B, Japan)"
 	year 1994
 	manufacturer "Namco"
@@ -661,7 +659,7 @@ game (
 )
 
 game (
-	name ridger2b
+	name ridgera2ja
 	description "Ridge Racer 2 (Rev. RRS1, Japan)"
 	year 1994
 	manufacturer "Namco"
@@ -789,7 +787,7 @@ game (
 )
 
 game (
-	name raveraja
+	name raveracja
 	description "Rave Racer (Rev. RV1, Japan)"
 	year 1995
 	manufacturer "Namco"
@@ -837,7 +835,7 @@ game (
 
 game (
 	name airco22b
-	description "Air Combat 22 (Rev. ACS1 Ver.B)"
+	description "Air Combat 22 (Rev. ACS1 Ver.B, Japan)"
 	year 1995
 	manufacturer "Namco"
 	sourcefile namcos22.c
@@ -910,6 +908,45 @@ game (
 	rom ( name ars1ptru3.14f size 524288 crc 73ce6958 sha1 918b0fb0fca33dbe3be3ac679b8b28f58213f75b )
 	rom ( name ars1wavea.2l size 4194304 crc f8d107e9 sha1 5c418691f0b35403553f21f5570eda8bbb66890f )
 	rom ( name ars2waveb.1l size 4194304 crc deab4ad1 sha1 580ad88d516280baaf6cc92b2e07cdc0cfc486f3 )
+)
+
+game (
+	name alpinr2a
+	description "Alpine Racer 2 (Rev. ARS2 Ver.A)"
+	year 1996
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	cloneof alpinr2b
+	romof alpinr2b
+	rom ( name ars2ver-a.2 size 2097152 crc b07b15a4 sha1 ea3b2d7b4ef4ccf3aafeef7e7eac92e8d446f4e7 )
+	rom ( name ars2ver-a.3 size 2097152 crc 90a92e40 sha1 bf8083256e56e7e33e61b4cdaf9fd03dabfb36ba )
+	rom ( name ars2ver-a.4 size 2097152 crc 9e9d771d sha1 6fb983e3f4f8233544667b1bbf87864e4fb8698c )
+	rom ( name ars2ver-a.5 size 2097152 crc e93c7771 sha1 305f35488a55be1b845702df972bba8334c0726c )
+	rom ( name c71.bin merge c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name ars2data.8k merge ars2data.8k size 524288 crc 29b36dcb sha1 70fde130c11789c822829493a70ecefb077c0c15 )
+	rom ( name ars1scg0.12f merge ars1scg0.12f size 2097152 crc bc49ed86 sha1 289b39f2cb21c723dbe4ddd64ee4b2c5fa65c368 )
+	rom ( name ars1cg0.8d merge ars1cg0.8d size 2097152 crc 74f4515c sha1 1e3a96281d543213d10c962b4d387c414d76e0c3 )
+	rom ( name ars1cg1.10d merge ars1cg1.10d size 2097152 crc 329a95c1 sha1 2cad7fd9e5ca7c64729ca2548ef4f873a0b8de64 )
+	rom ( name ars1cg2.12d merge ars1cg2.12d size 2097152 crc 5648345a sha1 0dc7aedba65b7d97687a9e38a63597f16cee6179 )
+	rom ( name ars1cg3.13d merge ars1cg3.13d size 2097152 crc a752f205 sha1 373b5a69e4488bc30763568ceae512ab7039f5f8 )
+	rom ( name ars1cg4.14d merge ars1cg4.14d size 2097152 crc 54bf35b6 sha1 aec43b66e7597ad7d113ae785417bf26164c1bca )
+	rom ( name ars1cg5.16d merge ars1cg5.16d size 2097152 crc e24a19a2 sha1 34c1b51eea954ae3000602e550eb1cef0a10e651 )
+	rom ( name ars1ccrl.3d merge ars1ccrl.3d size 2097152 crc fc8c9161 sha1 ad0fcfae27e02d68a6f8d1d03c514dc2f12d9ee8 )
+	rom ( name ars1ccrh.1d merge ars1ccrh.1d size 524288 crc a17660bb sha1 bae2c3f20772c6cea99f271ee3f39b1f999038c6 )
+	rom ( name ars1ptrl0.18k merge ars1ptrl0.18k size 524288 crc f04e0e61 sha1 d58a1d3ca1d0922e134db21a04feaee7dc97b020 )
+	rom ( name ars1ptrl1.16k merge ars1ptrl1.16k size 524288 crc 8bdb4970 sha1 a504cd4beca4bedd1a7a228c83dd6b844ca3a1e0 )
+	rom ( name ars1ptrl2.15k merge ars1ptrl2.15k size 524288 crc ec993a4f sha1 883f64e3e8d951415e9cef589c354eba9406c0aa )
+	rom ( name ars1ptrl3.14k merge ars1ptrl3.14k size 524288 crc 4d453f3c sha1 7a82e5d8f974d9e56d0031b35e73647fe6aeec2e )
+	rom ( name ars1ptrm0.18j merge ars1ptrm0.18j size 524288 crc d1bdc524 sha1 b898bb38de397551ada4da4677dd733bf8fa5010 )
+	rom ( name ars1ptrm1.16j merge ars1ptrm1.16j size 524288 crc 86b81c81 sha1 45096abf46794f06a4b647f5e4222798d8467632 )
+	rom ( name ars1ptrm2.15j merge ars1ptrm2.15j size 524288 crc 24116b83 sha1 41c6a880abce7b543c409fda767682b2537b0d99 )
+	rom ( name ars1ptrm3.14j merge ars1ptrm3.14j size 524288 crc 772bede3 sha1 f9565b7a40f0bbf11081d619fe5a46feafce2e56 )
+	rom ( name ars1ptru0.18f merge ars1ptru0.18f size 524288 crc a4cf197a sha1 ee78cc259e87395df75179bbe5b6e521e762b582 )
+	rom ( name ars1ptru1.16f merge ars1ptru1.16f size 524288 crc 1deb1fc0 sha1 bfd1dfcaccf5a0f851b6757995fa7195452a3965 )
+	rom ( name ars1ptru2.15f merge ars1ptru2.15f size 524288 crc bcfad0ba sha1 bee7f2f9ecd2b289c6706e19fa86863913b286b5 )
+	rom ( name ars1ptru3.14f merge ars1ptru3.14f size 524288 crc 73ce6958 sha1 918b0fb0fca33dbe3be3ac679b8b28f58213f75b )
+	rom ( name ars1wavea.2l merge ars1wavea.2l size 4194304 crc f8d107e9 sha1 5c418691f0b35403553f21f5570eda8bbb66890f )
+	rom ( name ars2waveb.1l merge ars2waveb.1l size 4194304 crc deab4ad1 sha1 580ad88d516280baaf6cc92b2e07cdc0cfc486f3 )
 )
 
 game (
@@ -1029,7 +1066,7 @@ game (
 )
 
 game (
-	name timecrsa
+	name timecrisa
 	description "Time Crisis (Rev. TS2 Ver.A)"
 	year 1995
 	manufacturer "Namco"
@@ -1066,6 +1103,41 @@ game (
 	rom ( name ts1ptru2.15f merge ts1ptru2.15f size 524288 crc 7cb25c73 sha1 616eab3ac238864a584394f7ec8736ece227974a )
 	rom ( name ts1wavea.2l merge ts1wavea.2l size 4194304 crc d1123301 sha1 4bf1fd746fef4e6befa63c61a761971d729e1573 )
 	rom ( name ts1waveb.1l merge ts1waveb.1l size 2097152 crc bf4d7272 sha1 c7c7b3620e7b3176644b6784ee36e679c9e31cc1 )
+)
+
+game (
+	name dirtdash
+	description "Dirt Dash (Rev. DT2)"
+	year 1995
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	rom ( name dt2vera.1 size 2097152 crc 402a3d73 sha1 009b57ed0ea228ccedb139d945b9eaf2a36e2502 )
+	rom ( name dt2vera.2 size 2097152 crc 66ed140d sha1 a472fdc7b6aaeb4b3643ecdafd32fa665e7c7aa2 )
+	rom ( name c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name dt1dataa.8k size 524288 crc 9bcdea21 sha1 26ae025cf746d3a703a82495eb2bb515b828a650 )
+	rom ( name dt1scg0.12f size 2097152 crc a09b5760 sha1 3dd54ebebf9da1de76874a1adf491ed15849e1b1 )
+	rom ( name dt1scg1.10f size 2097152 crc f9ac8111 sha1 814074ae8cc81c6c1201d764a84dd95fe914f19c )
+	rom ( name dt1cg0.8d size 2097152 crc 10ab95e0 sha1 ffde1f00ac3e82a36fbcfa060c6b97c92dfcfc8b )
+	rom ( name dt1cg1.10d size 2097152 crc d9f1ba53 sha1 5a1095b726c55001cc1d4c695adc38097e6a0201 )
+	rom ( name dt1cg2.12d size 2097152 crc bd8b1e0b sha1 fcd94e33a0cbd17c9308cb8952e3c618ab56f9fc )
+	rom ( name dt1cg3.13d size 2097152 crc ba960663 sha1 e98149bc4652ea7933ac47d760a6f7e6489f15e2 )
+	rom ( name dt1cg4.14d size 2097152 crc 424b9652 sha1 fa8865110db03559740c4e633e123d1a009782c4 )
+	rom ( name dt1cg5.16d size 2097152 crc 29516626 sha1 1f12c5dc3975b88dc60d87d0409bf311837e9fa4 )
+	rom ( name dt1cg6.18d size 2097152 crc e6fa7180 sha1 85316cde282cff1f913cf9f155cfa36adcc1108e )
+	rom ( name dt1cg7.19d size 2097152 crc 2ca19153 sha1 c82403c8b40bf85daedf610b1bc7bfea9dfc6206 )
+	rom ( name dt1ccrl.3d size 2097152 crc e536b313 sha1 7357da993d2bb3fcc8c1c2feb53689ad368cd80a )
+	rom ( name dt1ccrh.1d size 524288 crc af257064 sha1 0da561d9f8824618c00209ccef6146e9f3ad72bb )
+	rom ( name dt1ptrl0.18k size 524288 crc 4e0cac3a sha1 c2778e9e93be2de729c6f118caf62ac9f48efbb0 )
+	rom ( name dt1ptrl1.16k size 524288 crc 59ba9dba sha1 a2e9488cf0ff255284c06a1ef653ae86c0d98adc )
+	rom ( name dt1ptrl2.15k size 524288 crc cfe80c67 sha1 ba3bc48aa39712e63c915070a76974fbd560dee6 )
+	rom ( name dt1ptrm0.18j size 524288 crc 41f34337 sha1 7e624e7b6fdefe156168b1c9cc5e919db3b2fbaa )
+	rom ( name dt1ptrm1.16j size 524288 crc d68541fc sha1 6b00079bd8f2db26e71968de289cea93458aebe9 )
+	rom ( name dt1ptrm2.15j size 524288 crc 71e6714d sha1 6aad6db3be5020213d7add61c7d927ae9c4fea4e )
+	rom ( name dt1ptru0.18f size 524288 crc 4909bd7d sha1 0e4ef3987c43ef0438331b82b50dcc97363a45d0 )
+	rom ( name dt1ptru1.16f size 524288 crc 4a5097df sha1 a9c814b0ed4bd92accd0e57be8e3d887114b06a5 )
+	rom ( name dt1ptru2.15f size 524288 crc 1171eaf5 sha1 168365ea619386f218585c49025cdd7fd1224082 )
+	rom ( name dt1wavea.2l size 4194304 crc cbd52e40 sha1 dc995dd919548c96a90efb0375e5b5f1055e05cb )
+	rom ( name dt1waveb.1l size 4194304 crc 6b736f94 sha1 ac3715480aa9a9c2dec099607f89859bb3b73a6a )
 )
 
 game (
@@ -1141,7 +1213,7 @@ game (
 
 game (
 	name propcycl
-	description "Prop Cycle (Rev PR2 Ver.A)"
+	description "Prop Cycle (Rev. PR2 Ver.A)"
 	year 1996
 	manufacturer "Namco"
 	sourcefile namcos22.c
@@ -1175,3 +1247,86 @@ game (
 	rom ( name pr1wavea.2l size 4194304 crc 320f3913 sha1 3887b7334ca7762794c14198dd24bab47fcd9505 )
 	rom ( name pr1waveb.1l size 4194304 crc d91acb26 sha1 c2161e2d70e08aed15cbc875ffee685190611daf )
 )
+
+game (
+	name tokyowar
+	description "Tokyo Wars (Rev. TW2 Ver.A)"
+	year 1996
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	rom ( name tw2ver-a.1 size 1048576 crc 2b17ca92 sha1 7bcb1658059c59fb1a0131a41ede7157855130a8 )
+	rom ( name tw2ver-a.2 size 1048576 crc 12da84e3 sha1 a9406d0b77f60ba930c30e60bf4b3656c8905585 )
+	rom ( name tw2ver-a.3 size 1048576 crc 7d42c516 sha1 28c1596dd55c15207bbb41a8b9a5abc97abc2bc8 )
+	rom ( name tw2ver-a.4 size 1048576 crc b904ed16 sha1 773e11536e1b3fe4971608a63a8e6eca702f8667 )
+	rom ( name c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name tw1data.8k size 524288 crc bd046e4b sha1 162bc4ab69959ccab49fd69de291d34d472fb1c8 )
+	rom ( name tw1scg0.12f size 2097152 crc e3ec4daa sha1 f3a71ae9820d62075b814ffa2fecf3343ae09ffe )
+	rom ( name tw1scg1.10f size 2097152 crc b18a06e9 sha1 ecf6a1e11603b8ea5119a036a57595dea021d778 )
+	rom ( name tw1scg2.8f size 2097152 crc 36f8c3d8 sha1 d5c965d5cdd258c77b9db3137ce33404a5a3641c )
+	rom ( name tw1scg3.7f size 2097152 crc 8e14d013 sha1 ca63105a5c07bb9653499eef7a757db52612b59b )
+	rom ( name tw1cg0.8d size 2097152 crc 98b9b070 sha1 cb920a34700dab330c967cc634717134c04b7e1d )
+	rom ( name tw1cg1.10d size 2097152 crc f96a723a sha1 5ba14963a4c51c875ac8d3b42049bc334de90038 )
+	rom ( name tw1cg2.12d size 2097152 crc 573e9ded sha1 815bda1ac000532c915c2d65ffdb04fee6fa8201 )
+	rom ( name tw1cg3.13d size 2097152 crc 302d5c74 sha1 5a823f6842cf0f79eb93da47d5bf8c5f51e420db )
+	rom ( name tw1cg4.14d size 2097152 crc ab8aa1df sha1 355192d999f493e0761fbc822fa9b30c33d8e1c4 )
+	rom ( name tw1cg5.16d size 2097152 crc 5063f3d0 sha1 ad8dd2f4184373a3a3ca748b411a5eec1835dc97 )
+	rom ( name tw1cg6.18d size 2097152 crc d764027c sha1 5cbf93392683885c220628936ba50c09cb40fcfb )
+	rom ( name tw1cg7.19d size 2097152 crc 8d89877e sha1 7d76d48d64d7ac5411d714a4bb83f37e3e5b8df6 )
+	rom ( name tw1ccrl.3d size 2097152 crc d08f5794 sha1 336a97a2b060505e259e3bcedb9eb8aa4ea8815e )
+	rom ( name tw1ccrh.1d size 524288 crc ad17e693 sha1 4f06dc82c03159894fb8e10383862920f94563b1 )
+	rom ( name tw1ptrl0.18k size 524288 crc 44ac5e86 sha1 5e42db58f2e352c0fe5e49588a9283817dd15ab1 )
+	rom ( name tw1ptrl1.16k size 524288 crc 3c769860 sha1 19b32c3d262f2a9d07354fbd6ac6be97b05f176e )
+	rom ( name tw1ptrl2.15k size 524288 crc 6e94103c sha1 ee90b77939a9f5780ce271882133cdf977eb643e )
+	rom ( name tw1ptrl3.14k size 524288 crc e3ce5eb2 sha1 4e15a6f630be15eb017cd51c5e7901db3138a061 )
+	rom ( name tw1ptrm0.18j size 524288 crc e170cea2 sha1 ca259508d76fdab97a9d0502f871f0e560e6c308 )
+	rom ( name tw1ptrm1.16j size 524288 crc 36a32237 sha1 f46851dc5c094810ddc42d56310a9f85908bf715 )
+	rom ( name tw1ptrm2.15j size 524288 crc c426c278 sha1 64232ac3c1649e0d0adb4b03e58b8b5ea4013f83 )
+	rom ( name tw1ptrm3.14j size 524288 crc d9b9a651 sha1 0c49a051526081149d894d629f19cb0f2b66a698 )
+	rom ( name tw1ptru0.18f size 524288 crc 62a9e9fb sha1 24739adba029b0acf2d7078962c9d01098a29a6c )
+	rom ( name tw1ptru1.16f size 524288 crc 2fd36177 sha1 368b915261d914be01ae9daeb52571bead52d14d )
+	rom ( name tw1ptru2.15f size 524288 crc ceacb1c9 sha1 b86cf576e16bbe26ad0d6d6df8bf28d0071c25e2 )
+	rom ( name tw1ptru3.14f size 524288 crc 939044c2 sha1 f4c1c0a1c2f07ca7f784d59ef4162a2a6a8bbc43 )
+	rom ( name tw1wavea.2l size 4194304 crc ebce6366 sha1 44ebe90ff3c7af5bebbf1baba3b7a2b1863daebb )
+)
+
+game (
+	name aquajet
+	description "Aqua Jet (Rev. AJ2 Ver.B)"
+	year 1996
+	manufacturer "Namco"
+	sourcefile namcos22.c
+	rom ( name aj2ver-b.1 size 1048576 crc 3a67b9f4 sha1 8cd51f319e082297fdb99634486fe297a0ace654 )
+	rom ( name aj2ver-b.2 size 1048576 crc f5e8fc96 sha1 e23fcf6f84724d1de15870ff578ff8a6b26e8f31 )
+	rom ( name aj2ver-b.3 size 1048576 crc ef6ebcf7 sha1 358973b678b9a3065e945fb589af16e8102d437b )
+	rom ( name aj2ver-b.4 size 1048576 crc 7799b909 sha1 e40005f96f51742b2778605926b8184c9b2c1ad2 )
+	rom ( name c71.bin size 8192 crc 47c623ab sha1 e363ac50f5556f83308d4cc191b455e9b62bcfc8 )
+	rom ( name aj1data.8k size 524288 crc 52bcc6d5 sha1 25319ea6db35cc9bdcb39cc83d597a2a9f1690f3 )
+	rom ( name aj1scg0.12f size 2097152 crc 13ea766c sha1 a1a259bd8f468b90cbc891f1c2875fe03bba9802 )
+	rom ( name aj1scg1.10f size 2097152 crc cb3638de sha1 0af99aaf00782036d7f479b00b0c3d9d7ad4fc37 )
+	rom ( name aj1scg2.8f size 2097152 crc 1048a09b sha1 6859533e24db5ac54e28d480aaac7b411a648dfe )
+	rom ( name aj1cg0.8d size 2097152 crc b814e1eb sha1 1af29897dcfd0a58743b4fcdd5049d9e6e3d4cbd )
+	rom ( name aj1cg1.10d size 2097152 crc dc63d496 sha1 d3c3eea6b134850004062dd513c0f26096101227 )
+	rom ( name aj1cg2.12d size 2097152 crc 71fbb571 sha1 40f84ab5a4a7bb4438fb53751762609671d17800 )
+	rom ( name aj1cg3.13d size 2097152 crc e28052e2 sha1 3dbc446d7a13312ed4c1d20c2e1209947853f2c4 )
+	rom ( name aj1cg4.14d size 2097152 crc c77ae1a0 sha1 e15f2ccbadb8634f6e5cfd2cf48f428d68bd92e1 )
+	rom ( name aj1cg5.16d size 2097152 crc 15be0080 sha1 ca14dfd2a66996f0b32fa1155c04f21d300e8f30 )
+	rom ( name aj1cg6.18d size 2097152 crc 1a4f733a sha1 60a991f06e73667fa2c9016189999c4301cba24f )
+	rom ( name aj1cg7.19d size 2097152 crc ea118130 sha1 24ef22e5c8c6f6e8a01c72466be1e7acbfba63bc )
+	rom ( name aj1ccrl.3d size 2097152 crc 3cc7a247 sha1 336e4dd506d932987e20a5890dd3b0db75c02ccf )
+	rom ( name aj1ccrh.1d size 524288 crc 9d936030 sha1 a383bcca494a9f8d9a08fbe9940c8071d4525d65 )
+	rom ( name aj1ptrl0.18k size 524288 crc 16205d45 sha1 7e9681af852e2e875f80cbbe350e4982eaf80884 )
+	rom ( name aj1ptrl1.16k size 524288 crc 6f114da7 sha1 a1e7349ef8eb0ef043fce06f88bfbb76c2967393 )
+	rom ( name aj1ptrl2.15k size 524288 crc 719b73f0 sha1 bf8530a706097ae663769090177f1f259c540aa6 )
+	rom ( name aj1ptrl3.14k size 524288 crc 9555fe31 sha1 03bdd0784817191b3600d643b775191181a21706 )
+	rom ( name aj1ptrm0.18j size 524288 crc 89bee2e0 sha1 d84b06ef1318814fcf4782fef09a85ae1a87beb8 )
+	rom ( name aj1ptrm1.16j size 524288 crc 0ecf88c7 sha1 20b7cb09a6a13599cac024ef19c73612ce2952f6 )
+	rom ( name aj1ptrm2.15j size 524288 crc 829bc7ba sha1 7104d66a027911e38ecf521f01ff098ccb76d5fb )
+	rom ( name aj1ptrm3.14j size 524288 crc 7d0a222a sha1 e78c405d00429580015c6c7d1bcd35393317a769 )
+	rom ( name aj1ptru0.18f size 524288 crc 90d4e36a sha1 bdc44aac6aef5266d289f03c816aa2abdb263e9b )
+	rom ( name aj1ptru1.16f size 524288 crc bf0cf4bf sha1 bbf06c7605c083d2fb8c72528c5c9d3b8b067073 )
+	rom ( name aj1ptru2.15f size 524288 crc 91ffbb77 sha1 fbfe7d32ef22037f7190d1b8263b5e8c55f2d892 )
+	rom ( name aj1ptru3.14f size 524288 crc d83d8d42 sha1 e1561ce4538b01db92b7e645ad008cd1a2ddaf8a )
+	rom ( name aj1wavea.2l size 4194304 crc 8c72ea59 sha1 3ae8dbd8baae08f1daab2b218932ba9d9451231d )
+	rom ( name aj1waveb.1l size 4194304 crc ab5a457f sha1 c34531fd574eb0c3e78fc31a9af8658df3446adc )
+)
+

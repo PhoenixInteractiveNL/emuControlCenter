@@ -129,7 +129,12 @@ class TreeviewData {
 		return $this->dumpType;
 	}		
 	
-	
+	public function setShowOnlyPersonalMeta($showOnlyPersonalMeta) {
+		$this->showOnlyPersonalMeta = $showOnlyPersonalMeta;
+	}
+	public function getShowOnlyPersonalMeta() {
+		return $this->showOnlyPersonalMeta;
+	}	
 	
 	/* ------------------------------------------------------------------------
 	* VERSION TO GET ALSO META-DATA, IF THERE IS NO FOUND GAME
@@ -237,6 +242,20 @@ class TreeviewData {
 			else $snip_join[] = "mdata AS md left join fdata AS fd on (md.eccident=fd.eccident and md.crc32=fd.crc32)";
 			$sqlOrderBy[] = "orderByThis ".$orderBy;	
 		}
+
+		if (($type = $this->getShowOnlyPersonalMeta()) != false) {
+			switch ($type) {
+				case 'META_EDITED':
+					$snip_where[] = "md.cdate IS NOT NULL";
+				break;
+				case 'META_TRANSFERED':
+					$snip_where[] = "md.uexport IS NOT NULL";
+				break;
+				case 'META_EDITED_OR_TRANSFERED':
+					$snip_where[] = "md.cdate IS NOT NULL OR md.uexport IS NOT NULL";
+				break;
+			}
+		}
 	
 		if ($language) $snip_join[] = "left join mdata_language AS mdl on md.id=mdl.mdata_id";
 		
@@ -323,7 +342,9 @@ class TreeviewData {
 			$eccidentSql = ($extension) ? 'md.eccident="'.sqlite_escape_string($extension).'"' : '1';
 			//$q = "SELECT md.category, count(*) AS cnt FROM ".$snipSqlJoin." WHERE ".$eccidentSql." GROUP BY md.category ORDER BY cnt DESC";
 			$q = 'SELECT md.category, count(*) AS cnt FROM mdata md WHERE '.$eccidentSql.' GROUP BY md.category ORDER BY cnt DESC';
+			#$q = 'SELECT md.category, count(*) AS cnt FROM mdata md inner join fdata fd on (fd.crc32 = md.crc32 and fd.eccident = md.eccident) WHERE '.$eccidentSql.' GROUP BY md.category ORDER BY cnt DESC';
 			#$q = "SELECT md.category, count(*) AS cnt FROM ".$snipSqlJoin." WHERE ".$snipSqlWhere." GROUP BY md.category ORDER BY cnt DESC";
+			
 			$hdl = $this->dbms->query($q);
 			$ret['cat'] = array();
 			while($res = $hdl->fetch(SQLITE_ASSOC)) {
@@ -816,6 +837,19 @@ class TreeviewData {
 			$personalJoin = 'fdata AS fd';
 		}
 		
+		if (($type = $this->getShowOnlyPersonalMeta()) != false) {
+			switch ($type) {
+				case 'META_EDITED':
+					$snip_where[] = "md.cdate IS NOT NULL";
+				break;
+				case 'META_TRANSFERED':
+					$snip_where[] = "md.uexport IS NOT NULL";
+				break;
+				case 'META_EDITED_OR_TRANSFERED':
+					$snip_where[] = "md.cdate IS NOT NULL OR md.uexport IS NOT NULL";
+				break;
+			}
+		}
 		
 		$sqlNamespace = 'fd';
 		$snipSqlJoin = $personalJoin.' '.$joinType.' join mdata AS md on fd.crc32=md.crc32 and fd.eccident=md.eccident '.$sql_join;
@@ -977,6 +1011,8 @@ class TreeviewData {
 			'programmer',
 			'musican',
 			'graphics',
+			'info',
+			'info_id',
 			'year'
 		);
 		

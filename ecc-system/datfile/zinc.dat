@@ -2,13 +2,22 @@ clrmamepro (
 	name ZiNc
 	description "ZiNc v1.1"
 	category "Sony Playstation based arcade games"
-	version 20090106
-	date 2009-01-06
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
 	comment "Please report any data file issues at http://forum.logiqx.com/"
-	forcenodump obsolete
+	forcenodump ignore
+)
+
+resource (
+	name cpzn1
+	description "ZN1"
+	year 1995
+	manufacturer "Sony/Capcom"
+	sourcefile zn.c
+	rom ( name coh-1000c.353 size 524288 crc 50033af6 sha1 486d92ff6c7f1e54f8e0ef41cd9116eca0e10e1a )
 )
 
 game (
@@ -225,6 +234,15 @@ game (
 	rom ( name sfe-01m merge sfe-01m size 4194304 crc f5afff0d sha1 7f9ac32ba0a3d9c6fef367e36a92d47c9ac1feb3 )
 )
 
+resource (
+	name cpzn2
+	description "ZN2"
+	year 1997
+	manufacturer "Sony/Capcom"
+	sourcefile zn.c
+	rom ( name coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
+)
+
 game (
 	name rvschool
 	description "Rival Schools (USA 971117)"
@@ -249,7 +267,7 @@ game (
 )
 
 game (
-	name rvschola
+	name rvschoola
 	description "Rival Schools (ASIA 971117)"
 	year 1997
 	manufacturer "Capcom"
@@ -392,7 +410,7 @@ game (
 )
 
 game (
-	name plsmswda
+	name plsmaswda
 	description "Plasma Sword (ASIA 980316)"
 	year 1998
 	manufacturer "Capcom"
@@ -447,7 +465,7 @@ game (
 )
 
 game (
-	name techromu
+	name techromnu
 	description "Tech Romancer (USA 980914)"
 	year 1998
 	manufacturer "Capcom"
@@ -570,7 +588,7 @@ game (
 )
 
 game (
-	name stridr2a
+	name strider2a
 	description "Strider 2 (ASIA 991213)"
 	year 1999
 	manufacturer "Capcom"
@@ -609,6 +627,14 @@ game (
 	rom ( name hr2-01m.bin merge hr2-01m.bin size 2097152 crc 510a16d1 sha1 05f10c2921a4d3b1fab4d0a4ea06351809bdbb07 )
 )
 
+resource (
+	name tps
+	description "TPS"
+	year 1997
+	manufacturer "Sony/Tecmo"
+	sourcefile zn.c
+	rom ( name coh-1002m.353 size 524288 crc 69ffbcb4 sha1 03eb2febfab3fcde716defff291babd9392de965 )
+)
 
 game (
 	name glpracr2
@@ -631,7 +657,7 @@ game (
 )
 
 game (
-	name glprac2j
+	name glpracr2j
 	description "Gallop Racer 2 (JAPAN)"
 	year 1997
 	manufacturer "Tecmo"
@@ -652,7 +678,7 @@ game (
 )
 
 game (
-	name glprac2l
+	name glpracr2l
 	description "Gallop Racer 2 Link HW (JAPAN)"
 	year 1997
 	manufacturer "Tecmo"
@@ -793,7 +819,7 @@ game (
 )
 
 game (
-	name flameguj
+	name flamegunj
 	description "Flame Gunner (Japan)"
 	year 1999
 	manufacturer "GAPS Inc."
@@ -881,6 +907,15 @@ game (
 	rom ( name mfj.216 size 4194304 crc 0d518dba sha1 100cd4d0a1e678e660336027f067a9a1f5cbad3e )
 )
 
+resource (
+	name atluspsx
+	description "Atlus PSX"
+	year 1996
+	manufacturer "Sony/Atlus"
+	sourcefile zn.c
+	rom ( name coh-1001l.353 size 524288 crc 6721146b sha1 9511d24bfe25eb180fb2db0835b131cb4a12730e )
+)
+
 game (
 	name hvnsgate
 	description "Heaven's Gate"
@@ -902,6 +937,15 @@ game (
 	rom ( name athg-06.4134 size 2097152 crc 443ade73 sha1 6ef6aa68c525b9749833125dcab929d1d65d3b90 )
 )
 
+resource (
+	name psarc95
+	description "PS Arcade 95"
+	year 1997
+	manufacturer "Sony/Eighting/Raizing"
+	sourcefile zn.c
+	rom ( name coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
+)
+
 game (
 	name beastrzr
 	description "Beastorizer (USA)"
@@ -910,22 +954,42 @@ game (
 	sourcefile zn.c
 	romof psarc95
 	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
-	rom ( name broar.213 size 524288 crc 2c586534 sha1 a38dfc3a45446d24a1caac89b0f560989d46ded5 )
-	rom ( name broar.212 size 524288 crc 1c85d7fb sha1 aa406a42c424cc16a9e5330c68dda9acf8760088 )
-	rom ( name broar.215 size 524288 crc 31c8e055 sha1 2811789ab6221b972d1e3ffe98916587990f7564 )
-	rom ( name broar.214 size 524288 crc 1cdc450a sha1 9215e5fec52f7c5c0070feb621eb9c77f98e2362 )
-	rom ( name rabroar1.217 size 4194304 crc 11f1ba36 sha1 d41ae686c2c607640cbadf906215c89134758050 )
-	rom ( name rabroar2.216 size 4194304 crc d46d46b7 sha1 1c42cb5dcda4b26c08c4ecf95efeadaf3a1d1dd2 )
-	rom ( name broar.046 size 262144 crc d4bb261a sha1 9a295b1354ef15f37ea09bb209cf0cb98437c462 )
-	rom ( name broar.042 size 262144 crc 4d537f88 sha1 1760367d70a81606e29885ea315185d2c2a9409b )
-	rom ( name rabroar3.snd size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+	rom ( name b.roar_u0213 size 524288 crc 2c586534 sha1 a38dfc3a45446d24a1caac89b0f560989d46ded5 )
+	rom ( name b.roar_u0212 size 524288 crc 1c85d7fb sha1 aa406a42c424cc16a9e5330c68dda9acf8760088 )
+	rom ( name b.roar-u0215 size 524288 crc 31c8e055 sha1 2811789ab6221b972d1e3ffe98916587990f7564 )
+	rom ( name b.roar-u0214 size 524288 crc 1cdc450a sha1 9215e5fec52f7c5c0070feb621eb9c77f98e2362 )
+	rom ( name ra-b-roar_rom-1.u0217 size 4194304 crc 11f1ba36 sha1 d41ae686c2c607640cbadf906215c89134758050 )
+	rom ( name ra-b.roar_rom-2.u0216 size 4194304 crc d46d46b7 sha1 1c42cb5dcda4b26c08c4ecf95efeadaf3a1d1dd2 )
+	rom ( name b.roar-u046 size 262144 crc d4bb261a sha1 9a295b1354ef15f37ea09bb209cf0cb98437c462 )
+	rom ( name b.roar-u042 size 262144 crc 4d537f88 sha1 1760367d70a81606e29885ea315185d2c2a9409b )
+	rom ( name ra-b.roar3_rom-3.u0326 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+)
+
+game (
+	name bldyroar
+	description "Bloody Roar (JAPAN)"
+	year 1997
+	manufacturer "Eighting/Raizing"
+	sourcefile zn.c
+	cloneof beastrzr
+	romof beastrzr
+	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
+	rom ( name b.roar-u0213 size 524288 crc 63769342 sha1 7231188073b997b039467db85ce7c85383daf591 )
+	rom ( name b.roar-u0212 size 524288 crc 966b7169 sha1 63e025cacb84e89d30b40ed6cfa5c63d84c298c4 )
+	rom ( name b.roar-u0215 merge b.roar-u0215 size 524288 crc 31c8e055 sha1 2811789ab6221b972d1e3ffe98916587990f7564 )
+	rom ( name b.roar-u0214 merge b.roar-u0214 size 524288 crc 1cdc450a sha1 9215e5fec52f7c5c0070feb621eb9c77f98e2362 )
+	rom ( name ra-b-roar_rom-1.u0217 merge ra-b-roar_rom-1.u0217 size 4194304 crc 11f1ba36 sha1 d41ae686c2c607640cbadf906215c89134758050 )
+	rom ( name ra-b.roar_rom-2.u0216 merge ra-b.roar_rom-2.u0216 size 4194304 crc d46d46b7 sha1 1c42cb5dcda4b26c08c4ecf95efeadaf3a1d1dd2 )
+	rom ( name b.roar-u046 merge b.roar-u046 size 262144 crc d4bb261a sha1 9a295b1354ef15f37ea09bb209cf0cb98437c462 )
+	rom ( name b.roar-u042 merge b.roar-u042 size 262144 crc 4d537f88 sha1 1760367d70a81606e29885ea315185d2c2a9409b )
+	rom ( name ra-b.roar3_rom-3.u0326 merge ra-b.roar3_rom-3.u0326 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
 )
 
 game (
 	name beastrzb
-	description "Beastorizer (USA Bootleg)"
+	description "Beastorizer (USA bootleg)"
 	year 1997
-	manufacturer "Eighting/Raizing"
+	manufacturer "bootleg"
 	sourcefile zn.c
 	romof psarc95
 	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
@@ -942,14 +1006,14 @@ game (
 
 game (
 	name bldyror2
-	description "Bloody Roar 2 (JAPAN)"
+	description "Bloody Roar 2 (WORLD)"
 	year 1998
 	manufacturer "Eighting/Raizing"
 	sourcefile zn.c
 	romof psarc95
 	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
 	rom ( name flash0.021 size 2097152 crc fa7602e1 sha1 6fb6af09656fbb86d2abda35804b2ed4a4cd7461 )
-	rom ( name flash1.024 size 2097152 crc 59a2e367 sha1 484fd5a4515a8391f1d2fa95ac681d9bcf52406d )
+	rom ( name flash1.024 size 2097152 crc 03465a69 sha1 7c29aff2bf19c379873d3927c260892c78281882 )
 	rom ( name rom-1a.028 size 4194304 crc 0e711461 sha1 1d0bd80e6885432ef0623babde28e5760b714bfa )
 	rom ( name rom-1b.29 size 4194304 crc 0cf153f9 sha1 53bb9f8642079f56d8e925792b069362df666819 )
 	rom ( name rom-2a.026 size 4194304 crc b71d955d sha1 49fce452c70ceafc8a149fa9ff073589b7261882 )
@@ -957,6 +1021,70 @@ game (
 	rom ( name br2_u0412.412 size 524288 crc e254dd8a sha1 5b8fcafcf2176e0b55efcf37799d7c0d97e01bdc )
 	rom ( name br2_u049.049 size 524288 crc 10dc855b sha1 4e6e3a71911c8976ae07c2b6cac5a36f98193def )
 	rom ( name rom-3.336 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+	rom ( name at28c16_world size 2048 crc 01b42397 sha1 853553a38e81e64a17c040173b29c7bfd6f79f31 flags baddump )
+)
+
+game (
+	name bldyror2u
+	description "Bloody Roar 2 (USA)"
+	year 1998
+	manufacturer "Eighting/Raizing"
+	sourcefile zn.c
+	cloneof bldyror2
+	romof bldyror2
+	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
+	rom ( name flash0.021 merge flash0.021 size 2097152 crc fa7602e1 sha1 6fb6af09656fbb86d2abda35804b2ed4a4cd7461 )
+	rom ( name flash1.024 merge flash1.024 size 2097152 crc 03465a69 sha1 7c29aff2bf19c379873d3927c260892c78281882 )
+	rom ( name rom-1a.028 merge rom-1a.028 size 4194304 crc 0e711461 sha1 1d0bd80e6885432ef0623babde28e5760b714bfa )
+	rom ( name rom-1b.29 merge rom-1b.29 size 4194304 crc 0cf153f9 sha1 53bb9f8642079f56d8e925792b069362df666819 )
+	rom ( name rom-2a.026 merge rom-2a.026 size 4194304 crc b71d955d sha1 49fce452c70ceafc8a149fa9ff073589b7261882 )
+	rom ( name rom-2b.210 merge rom-2b.210 size 4194304 crc 89959dde sha1 99d54b9876f38f5e625334bbd1439618cdf01d56 )
+	rom ( name br2_u0412.412 merge br2_u0412.412 size 524288 crc e254dd8a sha1 5b8fcafcf2176e0b55efcf37799d7c0d97e01bdc )
+	rom ( name br2_u049.049 merge br2_u049.049 size 524288 crc 10dc855b sha1 4e6e3a71911c8976ae07c2b6cac5a36f98193def )
+	rom ( name rom-3.336 merge rom-3.336 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+	rom ( name at28c16_usa size 2048 crc b78d6fc3 sha1 49d8b6f44c31d74f36cba981af7f4c7e23dd9007 flags baddump )
+)
+
+game (
+	name bldyror2a
+	description "Bloody Roar 2 (ASIA)"
+	year 1998
+	manufacturer "Eighting/Raizing"
+	sourcefile zn.c
+	cloneof bldyror2
+	romof bldyror2
+	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
+	rom ( name flash0.021 merge flash0.021 size 2097152 crc fa7602e1 sha1 6fb6af09656fbb86d2abda35804b2ed4a4cd7461 )
+	rom ( name flash1.024 merge flash1.024 size 2097152 crc 03465a69 sha1 7c29aff2bf19c379873d3927c260892c78281882 )
+	rom ( name rom-1a.028 merge rom-1a.028 size 4194304 crc 0e711461 sha1 1d0bd80e6885432ef0623babde28e5760b714bfa )
+	rom ( name rom-1b.29 merge rom-1b.29 size 4194304 crc 0cf153f9 sha1 53bb9f8642079f56d8e925792b069362df666819 )
+	rom ( name rom-2a.026 merge rom-2a.026 size 4194304 crc b71d955d sha1 49fce452c70ceafc8a149fa9ff073589b7261882 )
+	rom ( name rom-2b.210 merge rom-2b.210 size 4194304 crc 89959dde sha1 99d54b9876f38f5e625334bbd1439618cdf01d56 )
+	rom ( name br2_u0412.412 merge br2_u0412.412 size 524288 crc e254dd8a sha1 5b8fcafcf2176e0b55efcf37799d7c0d97e01bdc )
+	rom ( name br2_u049.049 merge br2_u049.049 size 524288 crc 10dc855b sha1 4e6e3a71911c8976ae07c2b6cac5a36f98193def )
+	rom ( name rom-3.336 merge rom-3.336 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+	rom ( name at28c16_asia size 2048 crc da8c1a64 sha1 14cbb751f498c96d9d8fce3eea3781ebc45f6291 flags baddump )
+)
+
+game (
+	name bldyror2j
+	description "Bloody Roar 2 (JAPAN)"
+	year 1998
+	manufacturer "Eighting/Raizing"
+	sourcefile zn.c
+	cloneof bldyror2
+	romof bldyror2
+	rom ( name coh-1002e.353 merge coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
+	rom ( name flash0.021 merge flash0.021 size 2097152 crc fa7602e1 sha1 6fb6af09656fbb86d2abda35804b2ed4a4cd7461 )
+	rom ( name flash1.024 merge flash1.024 size 2097152 crc 03465a69 sha1 7c29aff2bf19c379873d3927c260892c78281882 )
+	rom ( name rom-1a.028 merge rom-1a.028 size 4194304 crc 0e711461 sha1 1d0bd80e6885432ef0623babde28e5760b714bfa )
+	rom ( name rom-1b.29 merge rom-1b.29 size 4194304 crc 0cf153f9 sha1 53bb9f8642079f56d8e925792b069362df666819 )
+	rom ( name rom-2a.026 merge rom-2a.026 size 4194304 crc b71d955d sha1 49fce452c70ceafc8a149fa9ff073589b7261882 )
+	rom ( name rom-2b.210 merge rom-2b.210 size 4194304 crc 89959dde sha1 99d54b9876f38f5e625334bbd1439618cdf01d56 )
+	rom ( name br2_u0412.412 merge br2_u0412.412 size 524288 crc e254dd8a sha1 5b8fcafcf2176e0b55efcf37799d7c0d97e01bdc )
+	rom ( name br2_u049.049 merge br2_u049.049 size 524288 crc 10dc855b sha1 4e6e3a71911c8976ae07c2b6cac5a36f98193def )
+	rom ( name rom-3.336 merge rom-3.336 size 4194304 crc b74cc4d1 sha1 eb5485582a12959ae06927a2f1d8a7e63e0f956f )
+	rom ( name at28c16_japan size 2048 crc 6cb55630 sha1 b840bc0339485dd82f7c9aa669faf90ae371218f flags baddump )
 )
 
 game (
@@ -995,7 +1123,16 @@ game (
 	rom ( name mtr-bam-a08.u30 size 4194304 crc 6e691ff1 sha1 3fdcf3403e9ffd99b98e789930fc805dc2bc7692 )
 	rom ( name mtr-bam-a09.u31 size 4194304 crc e4bd7cec sha1 794d10b15a22aeed89082f4db2f3cb94aa7d807d )
 	rom ( name mtr-bam-a10.u32 size 4194304 crc 37fd1fa0 sha1 afe846a817e499c405a5fd4ad83094270640faf3 )
-	disk ( name bam2 sha1 cc4662f0eb988807b74a71d6c95eb54c81d672ed )
+	disk ( name bam2 sha1 634d9a745a82c567fc4d7ce48e3570d88326c5f9 )
+)
+
+resource (
+	name atpsx
+	description "Atari PSX"
+	year 1996
+	manufacturer "Atari"
+	sourcefile zn.c
+	rom ( name coh-1000w.353 size 524288 crc 45e8a4b4 sha1 815488d8563c85f97fbc3384ff21f08e4c88b7b7 )
 )
 
 game (
@@ -1010,7 +1147,16 @@ game (
 	rom ( name pr2_036.u14 size 524288 crc c86450cd sha1 19c3c50d839a9efb6ffa9ada8a072f56697c1abb )
 	rom ( name pr2_036.u17 size 524288 crc 3681516c sha1 714f73ea4ac190c36a6eb2308616a4aecabc4e69 )
 	rom ( name pr2_036.u15 size 524288 crc 4b24bd54 sha1 7f27cd524d10e5869aab6d4dc6a4217d049c475d )
-	disk ( name primrag2 sha1 d79b2dad16fbdb174bcd34eb70025a53ebdb0e51 )
+	disk ( name primrag2 sha1 bc615068ddf4fd967f770ee01c02f285c052c4c5 )
+)
+
+resource (
+	name acpsx
+	description "Acclaim PSX"
+	year 1995
+	manufacturer "Acclaim"
+	sourcefile zn.c
+	rom ( name coh-1000a.353 size 524288 crc 8d8d0764 sha1 7ee83d317190bb1cef2f8f01c81eaaae47150ebb )
 )
 
 game (
@@ -1052,7 +1198,7 @@ game (
 	rom ( name coh-1000a.353 merge coh-1000a.353 size 524288 crc 8d8d0764 sha1 7ee83d317190bb1cef2f8f01c81eaaae47150ebb )
 	rom ( name j-dread.u36 size 131072 crc 37addbf9 sha1 a4061a1ba9e230f080f0bfea69bf77efe9264a92 )
 	rom ( name j-dread.u35 size 131072 crc c1e17191 sha1 82901439b1a51b9aadb4df4b9d944f26697a1460 )
-	disk ( name jdreddc sha1 83ed8df25d100b1c060f4dde2f162ba31803db7d )
+	disk ( name jdreddc sha1 eee205f83e5f590f8baf36452c873d7063156bd0 )
 )
 
 game (
@@ -1066,7 +1212,16 @@ game (
 	rom ( name coh-1000a.353 merge coh-1000a.353 size 524288 crc 8d8d0764 sha1 7ee83d317190bb1cef2f8f01c81eaaae47150ebb )
 	rom ( name j-dread.u36 merge j-dread.u36 size 131072 crc 37addbf9 sha1 a4061a1ba9e230f080f0bfea69bf77efe9264a92 )
 	rom ( name j-dread.u35 merge j-dread.u35 size 131072 crc c1e17191 sha1 82901439b1a51b9aadb4df4b9d944f26697a1460 )
-	disk ( name jdreddb sha1 9b810e3a16de62cabfc8271b6606574c7034cf41 )
+	disk ( name jdreddb sha1 20f696fa6e1fbf97793bac2a794631c5dd4fb39a )
+)
+
+resource (
+	name vspsx
+	description "Video System PSX"
+	year 1996
+	manufacturer "Video System"
+	sourcefile zn.c
+	rom ( name coh-1002v.353 size 524288 crc 5ff165f3 sha1 8f59314c1093446b9bcb06d232244da6df78e206 )
 )
 
 game (
@@ -1110,6 +1265,15 @@ game (
 	rom ( name ic14.bin merge ic14.bin size 4194304 crc c4ef1424 sha1 1734a6ee6d0be94d24afefcf2a125b74747f53d0 )
 	rom ( name ic15.bin merge ic15.bin size 4194304 crc 2551d816 sha1 e1500d4bfa8cc55220c366a5852263ac2070da82 )
 	rom ( name ic16.bin merge ic16.bin size 4194304 crc 21b401bc sha1 89374b80453c474aa1dd3a219422f557f95a262c )
+)
+
+resource (
+	name taitofx1
+	description "Taito FX1"
+	year 1995
+	manufacturer "Sony/Taito"
+	sourcefile zn.c
+	rom ( name coh-1000t.353 size 524288 crc e3f23b6e sha1 e18907cf8c6ba54d96edba0a9a00487a90219e0d )
 )
 
 game (
@@ -1167,7 +1331,7 @@ game (
 )
 
 game (
-	name psyforcj
+	name psyforcej
 	description "Psychic Force (Ver 2.4J)"
 	year 1995
 	manufacturer "Taito"
@@ -1185,7 +1349,7 @@ game (
 )
 
 game (
-	name psyfrcex
+	name psyforcex
 	description "Psychic Force EX (Ver 2.0J)"
 	year 1995
 	manufacturer "Taito"
@@ -1216,7 +1380,7 @@ game (
 	rom ( name e32-01.1 merge e32-01.1 size 4194304 crc cf5f1d01 sha1 5417f8aef5c8d0e9e63ba8c68efb5b3ef37b4693 )
 	rom ( name e32-02.6 merge e32-02.6 size 4194304 crc 61c8438c sha1 bdbe6079cc634c0cd6580f76619eb2944c9a31d9 )
 	rom ( name e32-03.12 merge e32-03.12 size 2097152 crc 190d1618 sha1 838a651d32752015baa7e8caea62fd739631b8be )
-	rom ( name e32-10.22 merge e32-10.22 size 131072 crc adf3feb5 sha1 bae5bc3fad99a92a3492be1b775dab861007eb3b )
+	rom ( name e32-07.22 size 131072 crc adf3feb5 sha1 bae5bc3fad99a92a3492be1b775dab861007eb3b )
 	rom ( name e32-04.15 merge e32-04.15 size 4194304 crc c72f9eea sha1 7ab8b412a8ed00a42016acb7d13d3b074155780a )
 )
 
@@ -1254,7 +1418,7 @@ game (
 )
 
 game (
-	name raystorj
+	name raystormj
 	description "Ray Storm (Ver 2.05J)"
 	year 1996
 	manufacturer "Taito"
@@ -1280,6 +1444,25 @@ game (
 	romof ftimpcta
 	rom ( name coh-1000t.353 merge coh-1000t.353 size 524288 crc e3f23b6e sha1 e18907cf8c6ba54d96edba0a9a00487a90219e0d )
 	rom ( name e25-09.4 size 524288 crc d457bfc7 sha1 e974a9c3e7b0748ef89d78e76a7dbb763c42b6f7 )
+	rom ( name e25-07.3 size 524288 crc 829be1cc sha1 64b139d7c3696ab2f0b9a4842c19a38fe6a8cede )
+	rom ( name e25-01.1 merge e25-01.1 size 4194304 crc 8cc4be0c sha1 9ca15558a83b7e332e50accf1f7852444a7ce730 )
+	rom ( name e25-02.2 merge e25-02.2 size 4194304 crc 8e8b4c82 sha1 55c9d4d3a08fc3226a75ab3a674be433af83e289 )
+	rom ( name e25-03.12 merge e25-03.12 size 4194304 crc 43b1c085 sha1 6e53550e9be0d2f415fc6b4f3b8a71185c5370b2 )
+	rom ( name e25-10.14 merge e25-10.14 size 524288 crc 2b2ad1b1 sha1 6d064d0b6805d43ce42929ac8f5645b56384f53c )
+	rom ( name e25-04.27 merge e25-04.27 size 4194304 crc 09a66d35 sha1 f0df24bc9bfc9eb0f5150dc035c19fc5b8a39bf9 )
+	rom ( name e25-05.28 merge e25-05.28 size 2097152 crc 3fb57636 sha1 aa38bfac11ecf10fd55143cf4525a2a529be8bb6 )
+)
+
+game (
+	name ftimpactj
+	description "Fighters' Impact (Ver 2.02J)"
+	year 1996
+	manufacturer "Taito"
+	sourcefile zn.c
+	cloneof ftimpcta
+	romof ftimpcta
+	rom ( name coh-1000t.353 merge coh-1000t.353 size 524288 crc e3f23b6e sha1 e18907cf8c6ba54d96edba0a9a00487a90219e0d )
+	rom ( name e25-06.4 size 524288 crc 3a59deeb sha1 4377c5829fb5b6f5d0120caf992b1ee714897641 )
 	rom ( name e25-07.3 size 524288 crc 829be1cc sha1 64b139d7c3696ab2f0b9a4842c19a38fe6a8cede )
 	rom ( name e25-01.1 merge e25-01.1 size 4194304 crc 8cc4be0c sha1 9ca15558a83b7e332e50accf1f7852444a7ce730 )
 	rom ( name e25-02.2 merge e25-02.2 size 4194304 crc 8e8b4c82 sha1 55c9d4d3a08fc3226a75ab3a674be433af83e289 )
@@ -1360,96 +1543,3 @@ game (
 	rom ( name e39-04.27 size 4194304 crc 6ee35e68 sha1 fdfe63203d8cecf84cb869039fb893d5b63cdd67 )
 )
 
-resource (
-	name acpsx
-	description "Acclaim PSX"
-	year 1995
-	manufacturer "Acclaim"
-	sourcefile zn.c
-	rom ( name coh-1000a.353 size 524288 crc 8d8d0764 sha1 7ee83d317190bb1cef2f8f01c81eaaae47150ebb )
-)
-
-resource (
-	name atluspsx
-	description "Atlus PSX"
-	year 1996
-	manufacturer "Sony/Atlus"
-	rom ( name coh-1001l.353 size 524288 crc 6721146b sha1 9511d24bfe25eb180fb2db0835b131cb4a12730e )
-)
-
-resource (
-	name atpsx
-	description "Atari PSX"
-	year 1996
-	manufacturer "Atari"
-	sourcefile zn.c
-	rom ( name coh-1000w.353 size 524288 crc 45e8a4b4 sha1 815488d8563c85f97fbc3384ff21f08e4c88b7b7 )
-)
-
-resource (
-	name cpzn1
-	description "ZN1"
-	year 1995
-	manufacturer "Sony/Capcom"
-	rom ( name coh-1000c.353 size 524288 crc 50033af6 sha1 486d92ff6c7f1e54f8e0ef41cd9116eca0e10e1a )
-)
-
-resource (
-	name cpzn2
-	description "ZN2"
-	year 1997
-	manufacturer "Sony/Capcom"
-	rom ( name coh-3002c.353 size 524288 crc e860ea8b sha1 66e7e1d4e426466b8f48a2ba055a91b475569504 )
-)
-
-resource (
-	name konamigv
-	description "Baby Phoenix/GV System"
-	year 1995
-	manufacturer "Konami"
-	rom ( name 999a01.7e size 524288 crc ad498d2d sha1 02a82a2fe1fba0404517c3602324bfa64e23e478 )
-)
-
-resource (
-	name psarc95
-	description "PS Arcade 95"
-	year 1997
-	manufacturer "Sony/Eighting/Raizing"
-	rom ( name coh-1002e.353 size 524288 crc 910f3a8b sha1 cd68532967a25f476a6d73473ec6b6f4df2e1689 )
-)
-
-resource (
-	name taitofx1
-	description "Taito FX1"
-	year 1995
-	manufacturer "Sony/Taito"
-	rom ( name coh-1000t.353 size 524288 crc e3f23b6e sha1 e18907cf8c6ba54d96edba0a9a00487a90219e0d )
-)
-
-resource (
-	name taitogn
-	description "Taito GNET"
-	year 1997
-	manufacturer "Sony/Taito"
-	sourcefile zn.c
-	rom ( name coh-3002t.353 size 524288 crc 03967fa7 sha1 0e17fec2286e4e25deb23d40e41ce0986f373d49 )
-	rom ( name flash.u30 size 2097152 crc 2d6740fc sha1 9a17411c1bd07b714227e84de23976ec900bdeed )
-	rom ( name flash.u27 size 524288 crc 75bd9c51 sha1 e1eeab509faedb1ed815551fcc63a5a41e1cfdf0 )
-)
-
-resource (
-	name tps
-	description "TPS"
-	year 1997
-	manufacturer "Sony/Tecmo"
-	rom ( name coh-1002m.353 size 524288 crc 69ffbcb4 sha1 03eb2febfab3fcde716defff291babd9392de965 )
-)
-
-resource (
-	name vspsx
-	description "Video System PSX"
-	year 1996
-	manufacturer "Video System"
-	sourcefile zn.c
-	rom ( name coh-1002v.353 size 524288 crc 5ff165f3 sha1 8f59314c1093446b9bcb06d232244da6df78e206 )
-)

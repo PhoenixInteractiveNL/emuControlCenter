@@ -194,5 +194,16 @@ $i18n['menuTop'] = array(
 	'mTopOptionBackupUserdata' =>
 		'Herstelpunt gebruikersdata maken (XML)',
 
+	/* 1.0.0 WIP 01 */
+	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
+		'  eigen metagegevens (bewerkt of verstuurd)',
+	'mTopViewModeRomPersonalMetaEdited' =>
+		'  eigen metagegevens (alleen bewerkt)',
+	'mTopViewModeRomPersonalMetaTransfered' =>
+		'  eigen metagegevens (alleen verstuurd)',
+
+	/* 1.0.0 WIP 02 */
+	'mTopFileSearch' =>
+		'Versturen met huidige zoekgegevens',
 );
 ?>

@@ -43,7 +43,11 @@ $i18n['dropdown_lang'] = array(
 	'[[swedish]]' =>
 		"スイス語",
 	'[[finnish]]' =>
-		"フィンランド語",
+		"Finnish",
+	'[[czech]]' =>
+		"Czech",
+	'[[hungarian]]' =>
+		"Hungarian",
 );
 
 /*
@@ -70,5 +74,13 @@ $i18n['languages'] = array(
 	'[[nl]]' =>
 		"Nederlands",
 
+	/* 1.0.0 WIP 01 */
+	'[[pt]]' =>
+		"Portuguese",
+	'[[gr]]' =>
+		"Greek",
+	/* 1.0.0 WIP 04 */
+	'[[hu]]' =>
+		"Hungarian",
 );
 ?>

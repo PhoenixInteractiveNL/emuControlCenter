@@ -46,6 +46,8 @@ $i18n['dropdown_search_fields'] = array(
 		"Musiker",
 	'[[graphics]]' =>
 		"Grafiker",
+	'[[info_id]]' =>
+		"Info ID",
 );
 
 /* 0.9.7 FYEO 20 */

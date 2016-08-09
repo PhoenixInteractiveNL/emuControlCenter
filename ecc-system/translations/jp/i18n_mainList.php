@@ -24,5 +24,9 @@ $i18n['mainList'] = array(
 		"Y-m-d H:i",
 	'detailPlayInfos%s%s' =>
 		"Played %s times %s",
+		
+	/*0.9.7 WIP 04*/
+	'simpeDateFormat' =>
+		"Y-m-d",
 );
 ?>

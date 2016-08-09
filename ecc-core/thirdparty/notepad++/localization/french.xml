@@ -155,10 +155,10 @@
                     <Item id = "45012" name = "Convertir en UCS-2 Big Endian"/>
                     <Item id = "45013" name = "Convertir en UCS-2 Little Endian"/>
 					                        
-					<Item id = "10001" name = "Aller à l'autre vue"/>
-                    <Item id = "10002" name = "Cloner dans l'autre vue"/>
-                    <Item id = "10003" name = "Aller à l'autre instance"/>
-                    <Item id = "10004" name = "Ouvrir dans l'autre instance"/>
+					<Item id = "10001" name = "Déplacer dans une autre vue"/>
+                    <Item id = "10002" name = "Cloner dans une autre vue"/>
+                    <Item id = "10003" name = "Déplacer dans une nouvelle fenêtre"/>
+                    <Item id = "10004" name = "Ouvrir dans une nouvelle fenêtre"/>
 
                     <Item id = "46001" name = "Configurateur de coloration syntaxique..."/>
                     <Item id = "47000" name = "A propos de Notepad++"/>
@@ -189,17 +189,17 @@
 					<Item order = "2" name = "Sauvegarder"/>
 					<Item order = "3" name = "Sauvegarder sous..."/>
 					<Item order = "4" name = "Imprimer"/>
-					<Item order = "5" name = "Aller à l'autre Vue"/>
-					<Item order = "6" name = "Cloner dans l'autre Vue"/>
-					<Item order = "7" name = "Copier le chemin complèt du fichier courant"/>
+					<Item order = "5" name = "Déplacer dans une autre vue"/>
+					<Item order = "6" name = "Cloner dans une autre vue"/>
+					<Item order = "7" name = "Copier le chemin complet du fichier courant"/>
                     <Item order = "8" name = "Copier le nom du fichier courant"/>
                     <Item order = "9" name = "Copier le répertoire du fichier courant"/>
 					<Item order = "10" name = "Renommer le fichier courant"/>
-					<Item order = "11" name = "Supprimmer le fichier courant"/>
+					<Item order = "11" name = "Supprimer le fichier courant"/>
 					<Item order = "12" name = "Lecture seule pour le document courant"/>
 					<Item order = "13" name = "Enlever l'attribut de lecture seule du fichier"/>
-					<Item order = "14" name = "Aller à l'autre instance"/>
-                    <Item order = "15" name = "Ouvrir dans l'autre instance"/>
+					<Item order = "14" name = "Déplacer dans une nouvelle fenêtre"/>
+                    <Item order = "15" name = "Ouvrir dans une nouvelle fenêtre"/>
 			</TabBar>
 		</Menu>
 
@@ -231,7 +231,6 @@
 			 	<Item id = "1635" name = "Remplacer tout dans les documents ouverts"/>
 			 	<Item id = "1636" name = "Rechercher dans les documents ouverts"/>
 			 	<Item id = "1637" name = "Rechercher dans..."/>
-				<Item id = "1640" name = "Rechercher&lt;-&gt;Remplacer"/>
 			 	<Item id = "1654" name = "Filtres :"/>
 			 	<Item id = "1655" name = "Répertoire :"/>
 			 	<Item id = "1656" name = "Trouvez-les"/>
@@ -242,7 +241,7 @@
 			 	<Item id = "1626" name = "Mode étendu (\n, \r, \t, \0, \x...)"/>
 			 	<Item id = "1660" name = "Remplacer-les"/>
 			 	<Item id = "1641" name = "Rechercher dans le document courant"/>
-			 	<Item id = "1686" name = "Transparenc"/>
+			 	<Item id = "1686" name = "Transparence"/>
             </Find>
             <GoToLine title = "Allez à la Ligne #">
                 <Item id = "1" name = "&amp;Zyva !"/>
@@ -262,7 +261,6 @@
             </Run>
 
             <StyleConfig title = "Configurateur de coloration syntaxique">
-				<Item id = "1" name="Appliquer"/>
 				<Item id = "2" name = "Annuler"/>
 				<Item id = "2301" name = "Enregistrer&amp;&amp;Fermer"/>
 				<Item id = "2303" name = "Transparence"/>
@@ -379,11 +377,6 @@
 					<Item id = "6219" name = "Clignotement :"/>
 					<Item id = "6221" name = "R"/>
 					<Item id = "6222" name = "L"/>
-					
-					<Item id = "6301" name = "Tabulations"/>
-					<Item id = "6302" name = "Replacer des espaces"/>
-					<Item id = "6303" name = "Taille : "/>
-
 					<Item id = "6201" name = "Contrôle de relief syntaxique"/>
 					<Item id = "6202" name = "Simple"/>
 					<Item id = "6203" name = "Flèche"/>
@@ -419,12 +412,15 @@
 					<Item id = "4009" name = "Extensions :"/>
 					<Item id = "4010" name = "Extensions associées :"/>
                 </FileAssoc>
-				<LangMenu title = "Menu langage">
+				<LangMenu title = "Menu langage/Option de TAB">
 					<Item id = "6505" name = "Langages disponibles"/>
 					<Item id = "6506" name = "Langages cachés"/>
 					<Item id = "6507" name = "Compacter le menu langage"/>
+					<Item id = "6301" name = "Tabulations"/>
+					<Item id = "6302" name = "Remplacer des espaces"/>
+					<Item id = "6303" name = "Taille : "/>
                 </LangMenu>
-				<Print1 title = "Impression - couleur et marge">
+				<Print title = "Impression">
 					<Item id = "6601" name = "Imprimer la numérotation de ligne"/>
 					<Item id = "6602" name = "Couleur"/>
 					<Item id = "6603" name = "Impression tel qu'à l'écran"/>
@@ -436,8 +432,6 @@
 					<Item id = "6613" name = "Haut"/>
 					<Item id = "6614" name = "Droit"/>
 					<Item id = "6615" name = "Bas"/>
-                </Print1>
-				<Print2 title = "Impression - entête et pied de page">
 					<Item id = "6706" name = "Gras"/>
 					<Item id = "6707" name = "Italique"/>
 					<Item id = "6708" name = "Entête"/>
@@ -452,7 +446,8 @@
 					<Item id = "6722" name = "Partie droite"/>
 	                <Item id = "6723" name = "Ajouter"/>
 					<Item id = "6725" name = "Variable :"/>
-                </Print2>
+                    <Item id = "6728" name = "Entête et pied de page"/>
+                </Print>
 				<MISC title = "Divers">
 					<Item id = "6304" name = "Historique"/>
 	                <Item id = "6305" name = "Ne pas vérifier au lancement"/>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
 <!-- 
 Notepad++ Custom stylers
 Style name: 		Port Ruby Blue
@@ -34,7 +35,6 @@ http://sourceforge.net/donate/index.php?group_id=95717
 
 2006.03.27.
 -->
-<?xml version="1.0" encoding="Windows-1252" ?>
 <NotepadPlus>
     <LexerStyles>
         <LexerType name="c" desc="C" ext="">

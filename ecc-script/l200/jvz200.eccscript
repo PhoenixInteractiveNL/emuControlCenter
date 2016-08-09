@@ -1,0 +1,52 @@
+; Platform       	: Vtech Laser 200
+; Script for     	: JVZ200
+; Script version 	: v1.0.0.0
+; Last changed   	: 2009.07.26
+;
+;
+; Author :  te_lanus (ECC forum member) & S.Ebeltjes (aka Phoenix)
+;
+; NOTES:
+; - Make sure you have enabled the 'auto unpack' option if you want to use ZIPPED files.
+; - Does not work with DSK & CVZ files yet...
+;
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+
+;Load jvz200
+EmuWindowControl("JVZ200")
+Sleep(1000)
+Send("{ALT}+u")
+;Added sleep for slower machines
+Sleep(200)
+Send("{ENTER}")
+Sleep(200)
+
+If $eccFileRomFileIsPacked = "1" Then
+   ;The ROM is packed, run ROM from the ECC temporally unpack folder.
+   Send($eccFileEccUnpackedPath & $eccFileEccUnpackedFile, 1)
+Else
+   ;The ROM is unpacked, run ROM normally.
+   Send($eccFileRomPath & $eccFileRomFile)
+EndIf
+
+Send("{ENTER}")
+Sleep(1000)
+Opt("SendKeyDelay", 10)
+Opt("SendKeyDownDelay", 100)
+Send("run")
+Send("{ENTER}")
+
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

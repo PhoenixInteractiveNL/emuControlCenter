@@ -55,7 +55,7 @@ $i18n['meta'] = array(
 	'lbl_trainer' =>
 		"Trainer",
 	'lbl_intro' =>
-		"Crack/Intro",
+		"Hack intro",
 	'lbl_usermod' =>
 		"Traduit",
 	'lbl_freeware' =>
@@ -106,19 +106,19 @@ $i18n['dropdownMedium'] = array(
 // please dont translate this strings!
 $i18n['dropdownDumpType'] = array(
 	'unknown' =>
-		"Unknown",
+		"Inconnu",
 	'[!]' =>
-		"[!] Verified Good Dump",
+		"[!] Bon dump vérifié",
 	'[a]' =>
-		"[a] Alternate Dump",
+		"[a] Dump alternatif",
 	'[b]' =>
-		"[b] Bad Dump",
+		"[b] Mauvais dump",
 	'[t]' =>
-		"[t] Trained",
+		"[t] Trainer",
 	'[f]' =>
-		"[f] Fixed",
+		"[f] Fixé",
 	'[T]' =>
-		"[T] Translation",
+		"[T] Traduit",
 	'[h]' =>
 		"[h] Hack",
 	'[o]' =>
@@ -126,6 +126,6 @@ $i18n['dropdownDumpType'] = array(
 	'[p]' =>
 		"[p] Pirate",
 	'[cr]' =>
-		"[cr] Cracked",
+		"[cr] Craqué",
 );
 ?>

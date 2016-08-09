@@ -1,9 +1,9 @@
 clrmamepro (
 	name CPS-2
-	description "CPS-2 20090426"
+	description "CPS-2 20090915"
 	category "Capcom Play System 2"
-	version 20090426
-	date 2009-04-26
+	version 20090915
+	date 2009-09-15
 	author Logiqx
 	homepage "Logiqx Home Page"
 	url "http://www.logiqx.com/"
@@ -407,7 +407,7 @@ game (
 )
 
 game (
-	name ecofghtu
+	name ecofghtru
 	description "Eco Fighters (USA 940215)"
 	year 1993
 	manufacturer "Capcom"
@@ -436,7 +436,7 @@ game (
 )
 
 game (
-	name ecofgtu1
+	name ecofghtru1
 	description "Eco Fighters (USA 931203)"
 	year 1993
 	manufacturer "Capcom"
@@ -465,7 +465,7 @@ game (
 )
 
 game (
-	name ecofghta
+	name ecofghtra
 	description "Eco Fighters (Asia 931203)"
 	year 1993
 	manufacturer "Capcom"
@@ -3672,7 +3672,7 @@ game (
 )
 
 game (
-	name megamn2a
+	name megaman2a
 	description "Mega Man 2: The Power Fighters (Asia 960708)"
 	year 1996
 	manufacturer "Capcom"
@@ -5723,7 +5723,7 @@ game (
 )
 
 game (
-	name gwingj
+	name gigawingj
 	description "Giga Wing (Japan 990223)"
 	year 1999
 	manufacturer "Capcom, supported by Takumi"
@@ -5745,7 +5745,7 @@ game (
 )
 
 game (
-	name gwinga
+	name gigawinga
 	description "Giga Wing (Asia 990222)"
 	year 1999
 	manufacturer "Capcom, supported by Takumi"
@@ -5767,7 +5767,7 @@ game (
 )
 
 game (
-	name gwingb
+	name gigawingb
 	description "Giga Wing (Brazil 990222)"
 	year 1999
 	manufacturer "Capcom, supported by Takumi"

@@ -1,3 +1,6 @@
+v1.0.0.7
+- Made some gramatical changes in the 'title bar not found' sentance.
+
 v1.0.0.6
 - Added 3rdparty variables.
 - made variables GLOBAL, so you can use these in functions inside your scripts.

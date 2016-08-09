@@ -1,7 +1,7 @@
  
  ****************************************************************************
- * NppExec plugin ver. 0.3 RC1 for Notepad++ 5.1 (and above)
- * by DV, December 2006 - January 2009
+ * NppExec plugin ver. 0.3.2 for Notepad++ 5.1 (and above)
+ * by DV, December 2006 - September 2009
  * Co-developers: Nicolas Babled & Geert Vancompernolle (since July 2007)
  ****************************************************************************
  *
@@ -31,13 +31,17 @@
  *        con_load <file> - see "con_loadfrom"
  *        con_saveto <file> - saves the Console's content to a file
  *        con_save - see "con_saveto"
+ *        sel_loadfrom <file> - replace current selection with a file's content
+ *        sel_load <file> - see "sel_loadfrom"
  *        sel_saveto <file> - save the selected text to a file
  *        sel_saveto <file> : <encoding> - save the selected text to a file
  *        sel_save <file> : <encoding> - see "sel_saveto"
+ *        sel_settext <text> - replace current selection with the text specified
+ *        sel_settext+ <text> - replace current selection with the text specified
  *        npp_exec <script> - execute commands from specified script
- *        npp_exec <file> - execute commands from specified file         (*)
+ *        npp_exec <file> - execute commands from specified file           (*)
  *        npp_close - close current file in Notepad++
- *        npp_close <file> - close specified file opened in Notepad++    (*)
+ *        npp_close <file> - close specified file opened in Notepad++      (*)
  *        npp_console <on/off/keep> - show/hide the Console window
  *        npp_console <1/0/?> - show/hide the Console window
  *        npp_open <file> - open a file in Notepad++
@@ -45,9 +49,15 @@
  *        npp_open <path\mask> - open files matched the mask
  *        npp_run <command> - run external process/command
  *        npp_save - save current file in Notepad++
- *        npp_save <file> - save a file in Notepad++ (if it's opened)    (*)
+ *        npp_save <file> - save a file in Notepad++ (if it's opened)      (*)
  *        npp_saveall - save all modified files
- *        npp_switch <file> - switch to specified opened file            (*)
+ *        npp_switch <file> - switch to specified opened file              (*)
+ *        npe_cmdalias - show all command aliases
+ *        npe_cmdalias <alias> - shows the value of command alias
+ *        npe_cmdalias <alias> = - removes the command alias
+ *        npe_cmdalias <alias> = <command> - sets the command alias
+ *        npe_console <options> - set/modify Console options/mode
+ *        npe_debuglog <on/off> - enable/disable Debug Log
  *        (*) these commands work with a partial file path/name also
  *            i.e.  npp_save c:\dir\f.txt  is the same as  npp_save f.txt
  *   5) Additional console commands (Console Dlg only):
@@ -80,6 +90,9 @@
  *        $(RARGV[N])           : Nth argument in reverse order (N=1,2,3...)
  *        $(INPUT)              : this value is set by the 'inputbox' command
  *        $(INPUT[N])           : Nth field of the $(INPUT) value (N=1,2,3...)
+ *        $(OUTPUT)             : this value can be set by the child process, see npe_console v+
+ *        $(OUTPUT1)            : first line in $(OUTPUT)
+ *        $(OUTPUTL)            : last line in $(OUTPUT)
  *        $(SYS.<var>)          : system's environment variable, e.g. $(SYS.PATH)
  *
  ****************************************************************************
@@ -88,6 +101,33 @@
  *************
  *  HISTORY  *
  *************
+ 
+ 
+ v0.3.2 - September 2009
+ -----------------------
+ + new feature: TAB autocompletes file paths (in the Console)
+   (* thanks to ILme for initial implementation)
+ + new feature: Shift+Tab (in the Console, the same as TAB but backwards)
+ - fixed: 'cd \path', 'dir \path' did not jump to the root of current drive
+ - fixed: on-exit script was not executed
+ + new command: NPE_CMDALIAS
+ + new menu item: Disable command aliases
+ + new option in NPE_CONSOLE: q+/q-
+ 
+ 
+ v0.3.1 - June 2009
+ ------------------
+ + new command: SEL_LOADFROM
+ + new command: SEL_SETTEXT, SEL_SETTEXT+
+ + new variable: $(OUTPUT), $(OUTPUTL), $(OUTPUT1), see NPE_CONSOLE V+
+ + several small improvements
+ 
+ 
+ v0.3 final - April 2009
+ -----------------------
+ * thanks to Greg Webb for the .chm help file (manual)
+ + several small fixes
+ + new command: NPE_CONSOLE 
 
 
  v0.3 RC1 - January 2009
@@ -128,7 +168,7 @@
  
  
  v0.2.5 - August 2008
- ------------------
+ --------------------
  + added: word wrap in the Console dialog (Ctrl+W)
  * changed: Advanced Options dialog - SaveCmdHistory added, 
    RichEdit_MaxTextLength removed

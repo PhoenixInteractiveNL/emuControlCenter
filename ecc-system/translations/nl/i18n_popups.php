@@ -347,5 +347,29 @@ $i18n['popup'] = array(
 	'waitForImageInjectMessage' =>
 		"Dit kan even duren... Als er plaatjes zijn gevonden, zal dit venster sluiten en kun je de plaatjes zien in de lijst!\n\nAls er geen plaatjes zijn gevonden, zal dit venster sluiten en de lijst zal niet bijgewerkt worden! :-)",
 
+	/* 1.0.0 FYEO 02 */
+	'copy_by_search_title' =>
+		"Werkelijk bestanden kopieren/verplaatsen met huidige zoekresultaten?",
+	'copy_by_search_msg_waring%s%s%s' =>
+		"Deze optie zal alle spellen kopieren/verplaatsen met de huidige zoekresultaten (Let wel: Als je niet hebt gezocht, dat zijn alle bestanden geselecteerd!)\n\nJe kan de bestamming opgeven in het volgende schermw.\n\nEr zijn <b>%s spellen gevonden</b> in je zoekresultaten\n\n<b>%s ingepakte spellen</b> zijn overgeslagen!\n\nWil je deze <b>%s</b> spellen echt kopieren/verplaatsen naar een andere locatie?",
+	'copy_by_search_msg_error_noplatform' =>
+		"Je moet een platform selecteren om deze funtie te gebruiken. Het is niet mogelijk deze functie te gebruiken voor ALL FOUND!",
+	'copy_by_search_msg_error_notfound%s' =>
+		"Er zijn geen geldige spellen gevonden in je zoekresultaten. <b>%s ingepakte spellen</b> zijn overgeslagen.",
+	'searchTab' =>
+		"Zoekresultaat",
+	'searchDescription' =>
+		"Hier kun je spellen kopieren of verplaatsen vanuit hun huidige locatie naar een andere locatie\n<b>De bron zijn je huidige zoekresultaten</b>\nAls je verplaatst, dan zijn ook de paden aangepast in de database! Opruimen doormiddel van checksum verwijderdt bestanden die 100% hetzelfde zijn!",
+	'searchHeadlineMain' =>
+		"Introductie",
+	'searchHeadlineOptionSameName' =>
+		"Dezelfde naam",
+	'searchRadioDuplicateAddNumber' =>
+		"nummer toevoegen",
+	'searchRadioDuplicateOverwrite' =>
+		"overschrijven",
+	'searchCheckCleanup' =>
+		"Opruimen doormiddel van checksum",
+
 );
 ?>

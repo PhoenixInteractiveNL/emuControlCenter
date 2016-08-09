@@ -20,6 +20,18 @@
              
                 <!-- Sub Menu Entries -->
                 <SubEntries>
+                    <Item posX = "1" posY = "9" name = "Copiazã în Cliplanºetã"/>
+                    <Item posX = "1" posY = "10" name = "Indenteazã"/>
+                    <Item posX = "1" posY = "11" name = "Converteºte Caseta Textului"/>
+                    <Item posX = "1" posY = "12" name = "Modificã Liniile"/>
+                    <Item posX = "1" posY = "13" name = "Comenteazã/Decomenteazã"/>
+                    <Item posX = "1" posY = "14" name = "Completeazã Automat"/>
+                    <Item posX = "2" posY = "11" name = "Marcheazã Tot"/>
+                    <Item posX = "2" posY = "12" name = "Demarcheazã Tot"/>
+                    <Item posX = "3" posY = "4" name = "Aratã Simbolul"/>
+                    <Item posX = "3" posY = "5" name = "Panorameazã"/>
+                    <Item posX = "3" posY = "6" name = "Mutã/Cloneazã Documentul Curent"/>
+					
                     <Item posX = "3" posY = "16" name = "Pliazã Nivelul"/>
                     <Item posX = "3" posY = "17" name = "Depliazã Nivelul"/>
                 </SubEntries>
@@ -51,19 +63,19 @@
                     <Item id = "42005" name = "&amp;Lipeºte"/>
                     <Item id = "42006" name = "ªter&amp;ge"/>
                     <Item id = "42007" name = "Selecteazã T&amp;ot"/>
-                    <Item id = "42008" name = "Insereazã Tabulator (Indenteazã)"/>
-                    <Item id = "42009" name = "Înlãturã Tabulator (Autdenteazã)"/>
+                    <Item id = "42008" name = "Creºte Indentarea Liniei"/>
+                    <Item id = "42009" name = "Scade Indentarea Liniei"/>
                     <Item id = "42010" name = "Duplicheazã Linia Curentã"/>
                     <Item id = "42012" name = "Desparte Liniile"/>
                     <Item id = "42013" name = "Uneºte Liniile"/>
                     <Item id = "42014" name = "Mutã în Sus Linia Curentã"/>   
                     <Item id = "42015" name = "Mutã în Jos Linia Curentã"/>   
-                    <Item id = "42016" name = "Converteºte în Majuscule"/>
+                    <Item id = "42016" name = "Converteºte în MAJUSCULE"/>
                     <Item id = "42017" name = "Converteºte în minuscule"/>
                     <Item id = "42018" name = "&amp;Porneºte Înregistrarea"/>
                     <Item id = "42019" name = "&amp;Opreºte Înregistrarea"/>
                     <Item id = "42021" name = "&amp;Redã"/>
-                    <Item id = "42022" name = "Comenteazã/Decomenteazã Blocul Selectat"/>
+                    <Item id = "42022" name = "Comutã Comentarea Blocului Selectat"/>
                     <Item id = "42023" name = "Comenteazã Secvenþa"/>
                     <Item id = "42024" name = "Tunde Spaþiile Goale Finale"/>
                     <Item id = "42025" name = "Salveazã Macrocomanda Înregistratã Curent"/>
@@ -98,6 +110,17 @@
                     <Item id = "43019" name = "Copiazã Liniile cu Semne de Carte"/>
                     <Item id = "43020" name = "Lipeºte peste Liniile cu Semne de Carte"/>
                     <Item id = "43021" name = "ªterge Liniile cu Semne de Carte"/>
+                    <Item id = "43022" name = "Foloseºte 1-ul Stil"/>
+                    <Item id = "43023" name = "Curãþã 1-ul Stil"/>
+                    <Item id = "43024" name = "Foloseºte al 2-lea Stil"/>
+                    <Item id = "43025" name = "Curãþã al 2-lea Stil"/>
+                    <Item id = "43026" name = "Foloseºte al 3-lea Stil"/>
+                    <Item id = "43027" name = "Curãþã al 3-lea Stil"/>
+                    <Item id = "43028" name = "Foloseºte al 4-lea Stil"/>
+                    <Item id = "43029" name = "Curãþã al 4-lea Stil"/>
+                    <Item id = "43030" name = "Foloseºte al 5-lea Stil"/>
+                    <Item id = "43031" name = "Curãþã al 5-lea Stil"/>
+                    <Item id = "43032" name = "Curãþã Toate Stilurile"/>
                     <Item id = "44009" name = "Doar Conþinutul"/>
                     <Item id = "44010" name = "Pliazã Tot	Alt+0"/>
                     <Item id = "44011" name = "Panoul cu Preferinþele Utilizatorului"/>
@@ -117,10 +140,8 @@
                     <Item id = "44035" name = "Sincronizeazã Derularea Verticalã"/>
                     <Item id = "44036" name = "Sincronizeazã Derularea Orizontalã"/>
                     <Item id = "44041" name = "Aratã Marcajele de Încadrare"/>
-                    <Item id = "44070" name = "Activeazã Vederea Principalã"/>
-                    <Item id = "44071" name = "Activeazã Vederea Secundarã"/>
-                    <Item id = "44072" name = "Activeazã Vederea Principalã"/>
-                    
+                    <Item id = "44072" name = "Focalizeazã Panoul Celãlalt"/>
+                                        
                     <Item id = "45001" name = "Converteºte în format Windows"/>
                     <Item id = "45002" name = "Converteºte în format Unix"/>
                     <Item id = "45003" name = "Converteºte în format Mac"/>
@@ -225,8 +246,8 @@
 		    <Item id = "1656" name = "Gãseºte Tot"/>
 		    <Item id = "1658" name = "Include subdosarele"/>
                     <Item id = "1659" name = "Incl. dos. ascunse"/>
-                    <Item id = "1660" name = "Opreºte cãutarea"/>
-                    <Item id = "1686" name = "Trans&amp;parenþã"/>
+                    <Item id = "1660" name = "Înlocuieºte în fiºiere"/>
+                    <Item id = "1686" name = "Transparenþã"/>
 		    <Item id = "1687" name = "La nefocalizare"/>
 		    <Item id = "1688" name = "Mereu"/>
             </Find>
@@ -251,7 +272,8 @@
 				<Item id = "1" name = "Testeazã!"/>
 				<Item id = "2" name = "Anuleazã"/>
 				<Item id = "2301" name = "Salveazã ºi Închide"/>
-				<Item id = "2303" name = "Transparenþã"/>		
+				<Item id = "2303" name = "Transparenþã"/>
+                                <Item id = "2306" name = "Selecteazã Tema : "/>		
 				
                 <SubDialog>
                 	<Item id = "2204" name = "Gros"/>
@@ -386,8 +408,8 @@
 					<Item id = "6302" name = "Înlocuieºte cu spaþiu gol"/>
 					<Item id = "6303" name = "Mãrime : "/>
 
-                                        <Item id = "6221" name = "R"/> 
-                                        <Item id = "6222" name = "L"/>	
+                                        <Item id = "6221" name = "R"/>
+                                        <Item id = "6222" name = "L"/>
                                         <Item id = "6223" name = "Marcheazã pe margine liniile modificate"/>			
 					
                 </Scintillas>
@@ -417,8 +439,9 @@
 				<LangMenu title = "Meniu de Limbaje">
 					<Item id = "6505" name = "Itemuri Disponibile"/>
 					<Item id = "6506" name = "Itemuri Dezactivate"/>
+                                        <Item id = "6507" name = "Meniu de limbaje compact"/>
                 </LangMenu>
-				<Print1 title = "Tipãrire - Culori ºi Margini">
+				<Print title = "Tipãrire">
 					<Item id = "6601" name = "Tipãreºte numerotarea liniilor"/>
 					<Item id = "6602" name = "Culori"/>
 					<Item id = "6603" name = "Aºa cum sînt afiºate"/>
@@ -430,8 +453,6 @@
 					<Item id = "6613" name = "Sus"/>
 					<Item id = "6614" name = "Dreapta"/>
 					<Item id = "6615" name = "Jos"/>
-                </Print1>
-				<Print2 title = "Tipãrire - Antet ºi Subsol">
 					<Item id = "6706" name = "Gros"/>
 					<Item id = "6707" name = "Înclinat"/>
 					<Item id = "6708" name = "Antet"/>
@@ -447,7 +468,7 @@
 	                		<Item id = "6723" name = "Adaugã"/>
 					<Item id = "6725" name = "Variabilã :"/>
                                         <Item id = "6727" name = "Care parte :"/>
-                </Print2>
+                </Print>
 				<MISC title = "Diverse">
 					<Item id = "6304" name = "Istoricul Fiºierelor"/>
 	                		<Item id = "6305" name = "Nu verifica la pornirea softului"/>
@@ -468,7 +489,7 @@
                                         <Item id = "6327" name = "Taguri potrivite cu evidenþierea"/> 
                                         <Item id = "6328" name = "Evidenþiazã atributele"/>
                                         <Item id = "6329" name = "Evidenþiazã tagurile corespondente"/>
-                                        <Item id = "6330" name = "Evidenþiazã zona php/asp"/>
+                                        <Item id = "6330" name = "Evidenþiazã zona coment./php/asp"/>
                                         <Item id = "6331" name = "Aratã doar numele fiºierului în bara de titlu"/>
 					<Item id = "6114" name = "Activeazã"/>
 					<Item id = "6115" name = "Auto-Indenteazã"/>

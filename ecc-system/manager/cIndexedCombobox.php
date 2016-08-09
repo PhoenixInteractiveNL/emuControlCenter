@@ -101,7 +101,9 @@ class IndexedCombobox {
 				$this->liststore->append(array($id, $value));
 			}
 		}
-		$this->combobox->set_active($index);
+		#if ($index) {
+			$this->combobox->set_active($index);
+		#}
 	}
 	
 	public function get_active_text() {

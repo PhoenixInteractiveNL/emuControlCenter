@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
 <!-- 
 Style Name: Port VibrantInk
 Description: Based on the Textmate theme VibrantInk (http://alternateidea.com/blog/articles/2006/01/03/textmate-vibrant-ink-theme-and-prototype-bundle) by Justin Palmer
@@ -16,7 +17,6 @@ http://sourceforge.net/donate/index.php?group_id=95717
 
 2007.11.16
 -->
-<?xml version="1.0" encoding="Windows-1252" ?>
 <NotepadPlus>
     <LexerStyles>
         <LexerType name="c" desc="C" ext="">

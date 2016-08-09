@@ -3,6 +3,7 @@ class LOGGER {
 	
 	public static $active;
 	private static $fHdl = array();
+	private static $fName = array();
 	
 	private static $types = array(
 		'def' => 'status',
@@ -14,6 +15,7 @@ class LOGGER {
 		'dateecc' => 'dat_export_ecc',
 		'romdbadd' => 'romdb_add',
 		'datimportcm' => 'dat_import_cm',
+		'transferbysearchresult' => 'transfer_by_searchresult',
 	);
 	
 	public static function setActiveState($state = false){
@@ -62,6 +64,13 @@ class LOGGER {
 		return $out;
 	}
 
+	public static function getLogfileName($type) {
+		if (self::$fName[$type]) {
+			return self::$fName[$type];
+		}
+		return false;
+	}
+	
 	private static function setLogfile($type= false, $typePrefix = false, $mode = 'a+'){
 		
 		if(!isset(self::$types[$type])) $type = 'def';
@@ -75,6 +84,8 @@ class LOGGER {
 		if (!is_dir($dir)) mkdir($dir);
 		$typePrefix = ($typePrefix) ? '_'.$typePrefix : '';
 		$logfile = self::$types[$type].$typePrefix.'.txt';
+		
+		self::$fName[$type] = $dir.DIRECTORY_SEPARATOR.$logfile;
 		
 		self::$fHdl[$type] = fopen($dir.DIRECTORY_SEPARATOR.$logfile, 'a+');
 		

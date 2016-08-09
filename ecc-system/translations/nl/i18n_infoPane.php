@@ -41,7 +41,7 @@ $i18n['infoPane'] = array(
 	'iPaneEsearchOptTrainerLbl' =>
 		"Trainer",
 	'iPaneEsearchOptIntroLbl' =>
-		"Crack/Intro",
+		"Intro",
 	'iPaneEsearchOptBugsLbl' =>
 		"Heeft fouten",
 	'iPaneEsearchOptUsermodLbl' =>

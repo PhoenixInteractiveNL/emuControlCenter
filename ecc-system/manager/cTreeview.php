@@ -9,16 +9,23 @@ class Treeview {
 	
 	private $treeView;
 	
-	public function init(&$parent){
+	public function init(&$parent, $isIconView = false){
 		
 		# parent available?
 		if (!$parent  || !is_object($parent)) throw new Exception('ERROR!');
 		
-		# reset, if allready initialized
-		if ($this->treeView && $this->treeView instanceof GtkTreeView) $this->treeView = NULL;
-		
-		# create new treeview and add to parent
-		$this->treeView = new GtkTreeView();
+		if (!$isIconView) {
+			# reset, if allready initialized
+			if ($this->treeView && $this->treeView instanceof GtkTreeView) $this->treeView = NULL;
+			# create new treeview and add to parent
+			$this->treeView = new GtkTreeView();
+		}
+		else {
+			# reset, if allready initialized
+			if ($this->treeView && $this->treeView instanceof GtkIconView) $this->treeView = NULL;
+			# create new treeview and add to parent
+			$this->treeView = new GtkIconView();			
+		}
 				
 		if ($parent->child) $parent->remove($parent->child);
 		$parent->add($this->treeView);

@@ -186,5 +186,24 @@ $i18n['menuTop'] = array(
 		'most played',
 	'mTopViewModeRomPersonalReviews' =>
 		'with personal review',
+
+	'mTopViewToggleSearch' =>
+		'Show search panel',
+
+	/* 0.9.7 WIP 11*/
+	'mTopOptionBackupUserdata' =>
+		'Backup userdata (XML)',
+
+	/* 1.0.0 WIP 01 */
+	'mTopViewModeRomPersonalMetaEditedOrTransfered' =>
+		'  own metadata (edited or transfered)',
+	'mTopViewModeRomPersonalMetaEdited' =>
+		'  own metadata (edited only)',
+	'mTopViewModeRomPersonalMetaTransfered' =>
+		'  own metadata (transfered only)',
+
+	/* 1.0.0 WIP 02 */
+	'mTopFileSearch' =>
+		'Transfer by searchresult',
 );
 ?>

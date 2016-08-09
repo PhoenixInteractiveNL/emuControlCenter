@@ -1072,7 +1072,7 @@ class GuiPopConfig extends GladeXml {
 			'1000',
 		);
 		$selected =  $iniManager->getKey('USER_SWITCHES', 'show_media_pp');
-		if ($selected > 100) $selected = 100;
+		#if ($selected > 100) $selected = 100;
 		$index =  array_search($selected, $this->perPageDetail);
 		$void = new IndexedCombobox($this->cfgEccDetailPerPage, false, $this->perPageDetail, false, $index);
 		

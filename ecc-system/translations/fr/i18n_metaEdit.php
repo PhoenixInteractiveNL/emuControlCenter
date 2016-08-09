@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -91,7 +91,7 @@ $i18n['metaEdit'] = array(
 		"Aucun eccScript trouvé !",
 
 	'mEditUserWrongCharacters' =>
-		"Invalid characters found in text. Please clean the text!",
+		"Caractères invalides trouvés dans le texte. SVP nettoyez le !",
 
 
 );

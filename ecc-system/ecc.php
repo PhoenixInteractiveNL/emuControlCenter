@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 define('LF', "\n");
 
@@ -591,6 +591,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);	
 
 		$oEvent = new GtkEventBox();
+		$oEvent->set_visible_window(false);
 		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'optvis_mainlistmode'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 		$oEvent->add($oImage);
@@ -616,6 +617,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);
 		
 		$oEvent = new GtkEventBox();
+		$oEvent->set_visible_window(false);
 		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_nav_null'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'nav_inactive_hidden', 'dispatch_menu_context_platform', 'PLATFORM_TOGGLE_INACTIVE');
 		$oEvent->add($oImage);
@@ -632,6 +634,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);
 
 		$oEvent = new GtkEventBox();
+		$oEvent->set_visible_window(false);
 		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_dup'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'toggle_show_doublettes', 'dispatch_menu_context_platform', 'TOGGLE_MAINVIEV_DOUBLETTES');
 		$oEvent->add($oImage);
@@ -648,6 +651,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);	
 
 		$oEvent = new GtkEventBox();
+		$oEvent->set_visible_window(false);
 		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_only_disk'));
 
 		#$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'toggle_only_disk', 'dispatch_menu_context_platform', 'ONLY_DISK');
@@ -674,6 +678,7 @@ class App extends GladeXml {
 		$oImage->set_from_pixbuf($pixbuf);	
 
 		$oEvent = new GtkEventBox();
+		$oEvent->set_visible_window(false);
 		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_hide_img'));
 		$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'images_inactiv', 'dispatch_menu_context_platform', 'IMG_TOGGLE');
 		$oEvent->add($oImage);

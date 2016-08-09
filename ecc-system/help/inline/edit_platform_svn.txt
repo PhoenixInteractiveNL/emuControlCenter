@@ -1,0 +1,7 @@
+###############################################################################
+WATARA SUPERVISION - Emulator notes
+###############################################################################
+
+POTATOR
+This emulator only support filenames in 8.3-Format (DOS). So you have to check this box in "CONFIG/EMULATOR"
+-------------------------------------------------------------------------------

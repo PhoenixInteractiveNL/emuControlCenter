@@ -1,0 +1,7 @@
+###############################################################################
+Atari Jaguar - Emulator notes
+###############################################################################
+
+Project Tempest & phoenix´s RomRunner-PT
+To use PT within emuControlCenter, you have to use the RomRunner-Tool for Tempest, because Project Tempest doesn´t support commandline-parameters.
+-------------------------------------------------------------------------------

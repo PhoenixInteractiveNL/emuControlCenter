@@ -1,0 +1,7 @@
+###############################################################################
+NINTENDO N64 - Emulator notes
+###############################################################################
+
+PROJECT64
+If you use "project64", you have to deselect the checkbox "escape" in Tab "CONFIG / EMULATOR", because "project64" could not hadle escaped filenames.
+-------------------------------------------------------------------------------

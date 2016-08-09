@@ -7,79 +7,223 @@ A. CHANGELOG
 ###############################################################################
 
 -------------------------------------------------------------------------------
-* Version 0.5.01
+* Version 0.5.885
 -------------------------------------------------------------------------------
-** initial release
+* Menu options -> show only roms with metadata
+** better overview of missing metadata
+* Added show_media_pp to ecc_general.ini to change the "media per page" value
+* refactoring release
+** Added new Singleton FACTORY and refactor manager-names
+** cleanup manager-folder
+* I18N
+** Language dropdowns translatable
+* Removed save to history.ini for "show only avalable roms"
+* Listviews Roms/Platform
+** add background color
+** add hilight color
+* Added experimental and buggy "fast_list_refresh" to ecc_general.ini
+* Added experimental webservice for meta/get meta/send (not really working :-))
 
 -------------------------------------------------------------------------------
-* Version 0.5.02
+* Version 0.5.884
 -------------------------------------------------------------------------------
-** MediaMaintenance
-*** add function optimize db
-*** add function clear db
-** MediaEdit
-*** add usk (altersfreigabe)
-*** add multiplayer
-*** add netplay
-** ContextMenu
-*** item remove from eccdb
+* Added color-swap tho the navigation and main list
+* escape & under dos (^&)
+* Added window title status "emuControlCenter vX.X build XXX (state)"
+* new startup bat
+** ecc.bat
+** ecc-dev.bat (shows debug output)
+* fixed translation in context menu
+* Remove save to history for hide images
 
 -------------------------------------------------------------------------------
-* Version 0.5.03
+* Version 0.5.883
 -------------------------------------------------------------------------------
-** eccini: refactored
-*** [NAVIGATION] now creates the main-navigation of ecc
-*** comments add for all sections
-*** add new extensions to [FILE_PARSER] section
-*** add "all found" to navigation.
-** DatfileImport:
-*** ecc-datFile import implemented
-*** datFileImporter.php for romCenter imports. (DEVEL)
-**** refreshed all mdata_ext_game fileinformations
-** MediaMaintenance:
-*** "all found" clear/optimize now have impact for all records.
-*** function optimize db also optimize bookmarks
-*** function clear db also optimize bookmarks
-** internal refactoring manager
+* Platform category could be configured in frontend!
+* New Platforms added (by phoenix)
+** Coleco Vision
+** GCE Vectrex
+** Mattel Intellivision
+* Added new version of platform/media images (by phoenix)
 
 -------------------------------------------------------------------------------
-* Version 0.5.04
+* Version 0.5.882
 -------------------------------------------------------------------------------
-** ini-manager
-*** complete refactored
-*** save user-selections for the next ecc-session to history.ini
-**** navigation: save last selected plattform
-**** parser: save last parsed folder
-**** importer: save last selected eccDatFile
-** Import / Export
-*** optimize import. Now direct export from query without data-array
-** sql
-*** optimize queries
-*** type-hinting and escaping.
-** media-edit win
-*** ; in user-input not allowed. Reason Import/Export and File-Rename-Option
-** parser popup
-*** file_lister shows found (unpacked and packed) by extension
-*** parser shows new and changed media
-** Internal windows
-*** media-edit popup changed to splash-screen mode
-*** parser popup changed to splash-screen mode
-** temp. removed md5 support. ecc dont need md5 by now :-)
+* Add Platform category dropdown.
+** Categories could be assigned free in ecc_platform_xxx.ini
+** e.g. category = Console
+** Shows only Platforms for the selected Category
+* Imagepopup
+** remove images in contex-menu
 
 -------------------------------------------------------------------------------
-* Version 0.5.05
+* Version 0.5.881
 -------------------------------------------------------------------------------
-** new user-folder structure
-*** now relative and absolut path could be set in ecc.ini
-*** now every media have his own folder with subfolders eg. images and export
-**** better structure for sharing the media-data with other ecc user
-**** first step for a planned user-folder to zip backup.
-*** refactoring image function
-**** save images now use new user-folder structure
-**** fixed little bug in save image that overwrites "image 001" sometimes. :-)
-** DatfileExport
-*** insert credits from ecc.ini (author, web, email, comment)
-*** save export now use new user-folder structure
+* imagepopup
+** added imageselect by preview image in scrollable area! :) Cool! :-)
+
+-------------------------------------------------------------------------------
+* Version 0.5.88
+-------------------------------------------------------------------------------
+* fixed bug in saved image handling. (<0.5.88 could not find saved images)
+* Preview image clickable. Opens Imagepopup.
+* Mediaedit-popup
+** Mot longer modal... you can get the next rom to edit from the romlist.
+** Added Filename/Packed Filename to popup!
+* Imagepopup
+** Popup now has autofocus. A click to the romlist updates the images in popup!
+** Added Imageposition label
+** Buttons a now only sensitive if needed
+** Imagepopup now direct show selected image (position)!
+* "Show all images" added to contextmenu ROMS
+* Platform navigation scrollbars added
+* i18n internationalization
+** ecc-config dropdown for changing languages
+** i18n parser statusarea
+* Platform images / emuControlCenter-Logo clickable
+
+-------------------------------------------------------------------------------
+* Version 0.5.879
+-------------------------------------------------------------------------------
+* Added gif support
+* saving title screens as ecc_crc32_ingame_title.ext
+* first version of image-popup for full images.
+
+-------------------------------------------------------------------------------
+* Version 0.5.878
+-------------------------------------------------------------------------------
+* fixed bugs:
+** problem with escaped string in getEightDotThreePath()
+** writing NULL into db if a ecc-datfile is imported!
+
+-------------------------------------------------------------------------------
+* Version 0.5.865/0.5.866/0.5.877
+-------------------------------------------------------------------------------
+* ecc-configuration added
+** Set your user folder
+*** create, if not exists
+*** create all ecc-system-subfolders in user-folder
+** Activate/Deactivate Platforms from gui
+** Set your datfile-author informations (header for your exports!)
+* i18n Internationalization/Translation
+** ecc_general.ini flag language = de
+** Location ecc-system/i18n/language/i18n_popups.php (lang=language 2chars eg. de,en,nl)
+** I step one, all dialogs and context-menues are translatable.
+*** Done: Context menu Platformnavigation
+*** Done: Context menu Romlist
+*** Done: All Confirm/Info/File-Pathchooser-Dialogs!
+** In step to, all Strings (also glade strings) are translatable via gettext!
+* Start Media: add error-popup if emu is missing or wrong!
+* navigation now is automaticlly sorted
+* Added more image-slots for coverart and booklets
+* Added support for Atari Jaguar. [by phoenix]
+* Fix a bug in media-edit.
+* set eccident for jaguar=jag, supervision=svn
+* Added shortcuts for options and rom-actions (see main menu)
+* Optimized platform navigation contextMenu
+* media-info
+** added archive - If rom is packed, the path of the packed file is shown.
+** added location - path to the rom-/packed-file
+* Added 8.3 Filename-Support for Watara-Supervision emulator
+* Emus without commandline-support could be used using the RomRunner-PT [phoenix]
+
+-------------------------------------------------------------------------------
+* Version 0.5.08
+-------------------------------------------------------------------------------
+* Save last selected platform to history
+* Reorganize Roms by categories implemented
+* MenuBar
+** All options organized in top menubar
+* Maintenance
+** Remove duplicate roms from db implemented
+** DB Vacuum -> Vacuum sqlite database
+** ecc-userfolder and subfolder
+*** ecc creates folders automaticly on demand
+*** ecc also create missing user-folder
+*** subfolder could be configured in ecc_general.ini
+* Absolute/Relative path convertion
+** ecc create relative paths, if data is within the root dir of ecc
+*** emulators
+*** roms/media
+** reorganize also creates relative paths, if possible
+* ImageProcessing
+** jpeg-compression could be configuredin ecc_general.ini
+* File-Filter (File-Dialogs)
+** Filefilter for Romcenter Datfiles (*.dat)
+** Filefilter for emuControlCenter Datfiles (*.ecc)
+* Spellcheck ;-)
+* Tooltips wordings fixed :-)
+* Images
+** More ingame screenshots possible
+*** ingame_start = startscreen of a game
+*** ingame_play_1 = first ingame playing screenshot
+*** ingame_play_2 = second ingame playing screenshot
+*** ingame_play_3 = third ingame playing screenshot
+* Added platform "Watara Supervision" [by phoenix]
+
+-------------------------------------------------------------------------------
+* Version 0.5.08
+-------------------------------------------------------------------------------
+** implemented  Import of emuControlCenter- and Romcenter-Datfiles
+*** support for importing Romcenter-Datfiles
+**** Support 2.00/2.50 Dats with assigned fileextensions.
+**** Dats without fileextensions couldn´t supported by ecc :-(
+**** Dat-Stripper for Romcenter-Dats implemented
+***** Clean up names from data like (PD) and [T-*]
+***** Auto-Fill ecc´s extended meta-informations from stripped data
+****** Languages
+****** Freeware/PD
+****** Year
+****** Running (gooddump)
+***** All stripped data is collected to field info in database!
+***** Regular expressions could be configured in conf/ecc_dat_stripper.php
+***** Dat-Stripper could be deactivated in conf/ecc_general.ini
+** datfile-export
+*** eSearch-Export
+*** now you can use the eSearch-options to limit your export-data!
+*** meta-informations like languages, status could be removed from database
+*** data could be automaticlly backuped by ecc
+** implemented edit platform.ini
+*** Edit title for navigation now possible in gui
+*** Edit paths and assign emulator now possible in gui
+** implemented new tab platform informations in main-view
+*** Show some facts about the platform like name, manufacurer, history, links
+*** own ini-file (infos/ecc_platform_a2600_info.ini)
+*** maybe used for categories like in MESS (show only platforms by atari)
+** implemented Active [AUTOUPDATE|NORMAL] Navigation
+*** navigation will only show the real result-counts of a search
+*** combination with "Active [HIDE|SHOW] platforms w/o media" possible!
+** implemented Active [HIDE|SHOW] platforms w/o media.
+** clear dat database added
+** optimized "optimize languages", now using multi-deletes
+** added platforms
+** Optimize null-data ordering, if there are no meta-infos for a file!
+** Changed database
+*** filedata = fdata 
+*** metadata = mdata
+*** metadata_languages = mdata_languages
+*** Atari 2600
+*** Atari 5200
+*** Atari 7800
+
+-------------------------------------------------------------------------------
+* Version 0.5.07
+-------------------------------------------------------------------------------
+** Status area
+*** progressbar
+*** show status of export, import and parsing
+*** could be hidden
+*** processes could be cancled
+** Extended Search
+*** result could be set to option = *|no|no+?|yes|yes+?|?
+*** is saved to ecc_histroy.ini
+*** could be hidden
+** Image-Processing
+*** New image-system improves the speed of ecc
+*** select start/running ingame-shots in main-view from dropdown
+*** show only saved or only unsaved images
+** Add Platform-Nav context menu
+** Inline-Help system restructured!
 
 -------------------------------------------------------------------------------
 * Version 0.5.06
@@ -132,68 +276,79 @@ A. CHANGELOG
 *** only shown first time, you open ecc (saved to history.ini)
 
 -------------------------------------------------------------------------------
-* Version 0.5.07
+* Version 0.5.05
 -------------------------------------------------------------------------------
-** Status area
-*** progressbar
-*** show status of export, import and parsing
-*** could be hidden
-*** processes could be cancled
-** Extended Search
-*** result could be set to option = *|no|no+?|yes|yes+?|?
-*** is saved to ecc_histroy.ini
-*** could be hidden
-** Image-Processing
-*** New image-system improves the speed of ecc
-*** select start/running ingame-shots in main-view from dropdown
-*** show only saved or only unsaved images
-** Add Platform-Nav context menu
-** Inline-Help system restructured!
+** new user-folder structure
+*** now relative and absolut path could be set in ecc.ini
+*** now every media have his own folder with subfolders eg. images and export
+**** better structure for sharing the media-data with other ecc user
+**** first step for a planned user-folder to zip backup.
+*** refactoring image function
+**** save images now use new user-folder structure
+**** fixed little bug in save image that overwrites "image 001" sometimes. :-)
+** DatfileExport
+*** insert credits from ecc.ini (author, web, email, comment)
+*** save export now use new user-folder structure
 
 -------------------------------------------------------------------------------
-* Version 0.5.08
+* Version 0.5.04
 -------------------------------------------------------------------------------
-** implemented  Import of emuControlCenter- and Romcenter-Datfiles
-*** support for importing Romcenter-Datfiles
-**** Support 2.00/2.50 Dats with assigned fileextensions.
-**** Dats without fileextensions couldn´t supported by ecc :-(
-**** Dat-Stripper for Romcenter-Dats implemented
-***** Clean up names from data like (PD) and [T-*]
-***** Auto-Fill ecc´s extended meta-informations from stripped data
-****** Languages
-****** Freeware/PD
-****** Year
-****** Running (gooddump)
-***** All stripped data is collected to field info in database!
-***** Regular expressions could be configured in conf/ecc_dat_stripper.php
-***** Dat-Stripper could be deactivated in conf/ecc_general.ini
-** datfile-export
-*** eSearch-Export
-*** now you can use the eSearch-options to limit your export-data!
-*** meta-informations like languages, status could be removed from database
-*** data could be automaticlly backuped by ecc
-** implemented edit platform.ini
-*** Edit title for navigation now possible in gui
-*** Edit paths and assign emulator now possible in gui
-** implemented new tab platform informations in main-view
-*** Show some facts about the platform like name, manufacurer, history, links
-*** own ini-file (infos/ecc_platform_a2600_info.ini)
-*** maybe used for categories like in MESS (show only platforms by atari)
-** implemented Active [AUTOUPDATE|NORMAL] Navigation
-*** navigation will only show the real result-counts of a search
-*** combination with "Active [HIDE|SHOW] platforms w/o media" possible!
-** implemented Active [HIDE|SHOW] platforms w/o media.
-** clear dat database added
-** optimized "optimize languages", now using multi-deletes
-** added platforms
-** Optimize null-data ordering, if there are no meta-infos for a file!
-** Changed database
-*** filedata = fdata 
-*** metadata = mdata
-*** metadata_languages = mdata_languages
-*** Atari 2600
-*** Atari 5200
-*** Atari 7800
+** ini-manager
+*** complete refactored
+*** save user-selections for the next ecc-session to history.ini
+**** navigation: save last selected plattform
+**** parser: save last parsed folder
+**** importer: save last selected eccDatFile
+** Import / Export
+*** optimize import. Now direct export from query without data-array
+** sql
+*** optimize queries
+*** type-hinting and escaping.
+** media-edit win
+*** ; in user-input not allowed. Reason Import/Export and File-Rename-Option
+** parser popup
+*** file_lister shows found (unpacked and packed) by extension
+*** parser shows new and changed media
+** Internal windows
+*** media-edit popup changed to splash-screen mode
+*** parser popup changed to splash-screen mode
+** temp. removed md5 support. ecc dont need md5 by now :-)
+
+-------------------------------------------------------------------------------
+* Version 0.5.03
+-------------------------------------------------------------------------------
+** eccini: refactored
+*** [NAVIGATION] now creates the main-navigation of ecc
+*** comments add for all sections
+*** add new extensions to [FILE_PARSER] section
+*** add "all found" to navigation.
+** DatfileImport:
+*** ecc-datFile import implemented
+*** datFileImporter.php for romCenter imports. (DEVEL)
+**** refreshed all mdata_ext_game fileinformations
+** MediaMaintenance:
+*** "all found" clear/optimize now have impact for all records.
+*** function optimize db also optimize bookmarks
+*** function clear db also optimize bookmarks
+** internal refactoring manager
+
+-------------------------------------------------------------------------------
+* Version 0.5.02
+-------------------------------------------------------------------------------
+** MediaMaintenance
+*** add function optimize db
+*** add function clear db
+** MediaEdit
+*** add usk (altersfreigabe)
+*** add multiplayer
+*** add netplay
+** ContextMenu
+*** item remove from eccdb
+
+-------------------------------------------------------------------------------
+* Version 0.5.01
+-------------------------------------------------------------------------------
+** initial release
 
 ###############################################################################
 B. KNOWN BUGS AND GLITCHES
@@ -217,9 +372,6 @@ C. TODOS / NICE TO HAVE
 ** quicksearch
 *** optimize with timeouts (20ms ?)
 
-** bookmarks
-*** paging
-
 ** DatFile
 *** eccDatFile from zip
 
@@ -232,6 +384,6 @@ C. TODOS / NICE TO HAVE
 *** Possibility to automaticly pack unpacked files.
 
 ** export
-*** compleded
-*** uncompleted
+*** compleded metadata
+*** uncompleted metadata
 

@@ -22,7 +22,7 @@ class EccUpdate {
 		switch (true) {
 			case $eccDbVersion < '0.5.901':
 				print "".LF;
-				print "UPDATE FROM VERSION < '0.5.901'".LF;
+				#print "UPDATE FROM VERSION < '0.5.901'".LF;
 				if ($this->updateEccFromConfig('0.5.901')) {
 					$this->updateEccDbVersion('0.5.901');
 				}
@@ -32,7 +32,7 @@ class EccUpdate {
 				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
-		print "VERSION NOW ".$eccVersion."".LF.LF;
+		#print "VERSION NOW ".$eccVersion."".LF.LF;
 	}
 	
 	private function updateEccFromConfig($version) {

@@ -1035,10 +1035,20 @@ class App extends GladeXml {
 		$this->img_media_btn_save->set_sensitive(false);
 		$this->img_media_btn_show_unsaved->connect('clicked', array($this, 'on_image_toggle_unsaved'));
 		// change image order
-		$this->image_type_selected = key($this->image_type);
-		if (!$this->obj_image_type) $this->obj_image_type = new IndexedCombobox($this->cb_image_type, false, $this->image_type, 2);
-		$this->cb_image_type->connect("changed", array($this, 'image_type_order'));
-
+		$userSelectedImageType = $this->ini->read_ecc_histroy_ini('imageTypeSelected');
+		$imageIndex = 0;
+		if ($userSelectedImageType) {
+			foreach ($this->image_type as $name => $void) {
+				if ($userSelectedImageType == $name) break;
+				$imageIndex++;
+			}
+		}
+		$this->image_type_selected = ($userSelectedImageType) ? $userSelectedImageType : key($this->image_type);
+		if (!$this->obj_image_type) $this->obj_image_type = new IndexedCombobox($this->cb_image_type, false, $this->image_type, 2, $imageIndex);
+		$this->cb_image_type->connect_after("changed", array($this, 'image_type_order'));
+		// set current selected imageindex
+		$this->image_type_order(false, $this->image_type_selected);
+		
 		// ----------------------------		
 		// INLINE HELP PARSER BUTTON
 		// ----------------------------
@@ -2019,6 +2029,46 @@ class App extends GladeXml {
 		// implement later--- needs new database table!!!!
 		//print "$eccIdent, $crc32".LF;
 		//$personalData = $this->_fileView->getRomPersonalData($eccIdent, $crc32);
+		
+		$mngrUserData = FACTORY::get('manager/UserData');
+		$userData = $mngrUserData->getUserdata($eccIdent, $crc32);
+		
+		$this->userDataId = ($userData['id']) ? $userData['id'] : false;
+		
+		if ($this->userDataId) {
+			$this->infoPersonalLbl->set_markup('<span color="#008800">PERSONAL</span>');
+		}
+		else {
+			$this->infoPersonalLbl->set_markup('PERSONAL');
+		}
+		
+		$this->userDataEccident = $eccIdent;
+		$this->userDataCrc32 = $crc32;
+		
+		$textBuffer = new GtkTextBuffer();
+		$textBuffer->set_text(trim($userData['notes']));
+		$this->media_nb_pers_note->set_buffer($textBuffer);
+		
+		if (!$this->media_nb_pers_save_connected) {
+			$this->media_nb_pers_save->connect_simple('clicked', array($this, 'saveUserData'));
+			$this->media_nb_pers_save_connected = true;
+		}
+	}
+	
+	public function saveUserData() {
+		
+		$mngrUserData = FACTORY::get('manager/UserData');
+		
+		$textBuffer = $this->media_nb_pers_note->get_buffer();
+		$notes = $textBuffer->get_text($textBuffer->get_start_iter(), $textBuffer->get_end_iter());
+		
+		if ($this->userDataId) {
+			$mngrUserData->updateNotesById($this->userDataId, $notes);
+		}
+		else {
+			$this->userDataId = $mngrUserData->insertNotesByRomident($this->userDataEccident, $this->userDataCrc32, $notes);
+		}
+		
 	}
 	
 	/*
@@ -2249,9 +2299,12 @@ class App extends GladeXml {
 		}
 	}
 	
-	public function image_type_order($obj) {
-		$needle = $obj->get_active_text();
+	public function image_type_order($obj=false, $needle=false) {
+		if (!$needle) $needle = $obj->get_active_text();
 		$this->image_type_selected = $needle;
+		
+		$this->ini->write_ecc_histroy_ini('imageTypeSelected', $this->image_type_selected);
+		
 		$temp[$needle] = $this->image_type[$needle];
 		unset($this->image_type[$needle]);
 		$this->image_type = array_merge($temp, $this->image_type);
@@ -4043,6 +4096,7 @@ class App extends GladeXml {
 		if (isset($this->cell_ident_pixbuf[$eccident])) return $this->cell_ident_pixbuf[$eccident];
 		
 		// Get path
+//		$path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_nav.png';
 		$path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_'.$eccident.'_cell.png';
 		if (!file_exists($path)) $path = dirname(__FILE__)."/".'images/eccsys/platform/ecc__cell.png';
 		
@@ -4092,16 +4146,23 @@ class App extends GladeXml {
 				
 				$obj_pixbuff = $this->get_pixbuf($data['path'], $media, false, false, false, strtolower($eccident));
 				
+				//$obj_pixbuff = null;
+				
 				// get pixbuf
 				$pixbuf_eccident = $this->get_pixbuf_eccident($eccident);
 				
+				//$pixbuf_eccident = null;
+				
 				$rating = (isset($data['md_rating'])) ? $data['md_rating'] : 0;
 				$ratingPixbuff = $this->getPixbufForRatingImage($rating);
+				
+				//$ratingPixbuff = null;
 				
 				// info
 				$info_strg = "";
 				$info_strg .= ($data['md_info']) ? "\t\t\t\t\t|*[INFOS: ".$data['md_info']."]*|" : '';;
 				
+//				$media_name = "FILE: ".basename($data['path']);
 				$media_name = "";
 				
 				if ($data['md_name']) {

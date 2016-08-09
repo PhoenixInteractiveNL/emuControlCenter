@@ -26,6 +26,11 @@ class GuiImagePopup {
 		
 		$this->connect_signals();
 		$this->twImageInit();
+		
+		
+		
+		$this->imageFit = !$this->gui->ini->read_ecc_histroy_ini('imageCenterDefaultSize');
+		
 	}
 	
 	public function show($imageTank, $mediaInfo, $pos=0) {
@@ -72,6 +77,7 @@ class GuiImagePopup {
 	
 	public function setImageSizeMode($obj) {
 		$this->imageFit = $obj->get_active();
+		$this->gui->ini->write_ecc_histroy_ini('imageCenterDefaultSize', !$this->imageFit);
 		$this->updateImage();
 	}
 	

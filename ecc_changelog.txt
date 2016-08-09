@@ -35,15 +35,20 @@
 ###############################################################################
 
 -------------------------------------------------------------------------------
-- Version 0.5.901
+- Version 0.5.95
 -------------------------------------------------------------------------------
+* Implemented "user table"
+** adding/updating rom notes implemented
 * Implemented "best fit" in imageCenter
+** option will be written to history.ini
+* Implemented "image selection" saving
+** The last imagetype-selection is saved into the history.ini
 * Shortcuts implemented
+** F11 Hide navigation area
+** F12 Hide mediainfo area
 ** F6 Show media
 ** F7 Show bookmarks
 ** F8 Show history
-** F11 Hide navigation area
-** F12 Hide mediainfo area
 * implemented internal database updator for eccLive updates!
 * fixed "Number of pages error"
 * deactivated support-banner (support banner bug)

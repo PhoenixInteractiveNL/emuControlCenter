@@ -5,6 +5,8 @@ class EccParserDataProzessor{
 	private $dataParserObj = false;
 	private $fileListObj = false;
 	
+	private $gui;
+	
 	// data
 	private $_file_list = array();
 	private $_base_directory = false;
@@ -14,10 +16,13 @@ class EccParserDataProzessor{
 	private $_parser_stats_cnt_notchanged = array();
 	private $_parser_stats_cnt_add = array();
 	
-	public function __construct($dataParserObj, $fileListObj)
+	public function __construct($dataParserObj, $fileListObj, $dispatchExtensions, $gui)
 	{
+		$this->gui = $gui;
 		$this->dataParserObj = $dataParserObj;
 		$this->fileListObj = $fileListObj;
+		
+		$this->dispatchExtensions = $dispatchExtensions;
 		
 		$this->_file_list = $this->fileListObj->get_file_list();
 		
@@ -49,22 +54,6 @@ class EccParserDataProzessor{
 					$file_name_direct = $file_name_info['DIRECT_FILE'];
 					$file_name_packed = isset($file_name_info['PACKED_FILE']) ? $file_name_info['PACKED_FILE'] : false;
 					
-					// Parser für extensions suchen
-					#$parser = Singleton::get_instance($this->_known_extensions[$file_extension], "parser/");
-					
-					$className = $this->_known_extensions[$file_extension][0];
-					$parameter = false;
-					if (FALSE !== $position = strpos($this->_known_extensions[$file_extension][0], "#")) {
-						$className = substr($this->_known_extensions[$file_extension][0], 0, $position);
-						$parameter = substr($this->_known_extensions[$file_extension][0], $position+1);
-					}
-					
-//					print "-> ".get_class($parser)." -> ".$className." -- ".$parameter."\n";					
-					
-					$parser = FACTORY::getStrict('parser/'.$className, $parameter);
-					
-
-					
 					// Preparse, damit nur neu geparst wird,
 					// wenn eine �nderung der Filesize (bytes) aufgetreten
 					// ist. Soll verhindern, das zu oft unn�tig geparst wird.
@@ -79,22 +68,60 @@ class EccParserDataProzessor{
 						$this->_parser_stats_cnt_notchanged[$file_extension]++;
 					}
 					else {
+						
+						$out = false;
+						
+//						$parserClassNamePlain = $this->_known_extensions[$file_extension][0];
+//						if (in_array($file_extension, $this->dispatchExtensions)) {
+//							$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
+//							$dispatcher = FACTORY::get($dispatcherClassName);
+//							$dispatchedParser = $dispatcher->getValidParser();
+//							if ($dispatchedParser) $parserClassNamePlain = $dispatchedParser;
+//						}
+//						
+//						$parameter = false;
+//						if (FALSE !== $position = strpos($parserClassNamePlain, "#")) {
+//							$className = substr($parserClassNamePlain, 0, $position);
+//							$parameter = substr($parserClassNamePlain, $position+1);
+//						}
+//						$parser = FACTORY::getStrict('parser/'.$className, $parameter);
+						
 						// Hier beginnt das eigentliche parsen
 						// File operations
 						if ($file_name_packed) {
 							$fhdl = FileIO::fopen_zip($file_name_direct, $file_name_packed);
 							$file_temp = realpath(getcwd().'/temp/'.basename($file_name_packed));
-							$out = $parser->parse($fhdl, $file_temp, $file_name_direct, $file_name_packed);
+							
+							$parser = $this->getParser($file_extension, $fhdl);
+							if ($parser) {
+								$out = $parser->parse($fhdl, $file_temp, $file_name_direct, $file_name_packed);
+							}
+							else {
+								print "DISPATCH_".strtoupper($file_extension)." INVALID: ".basename($file_name_direct)." / ".basename($file_name_packed)."\n";
+							}
 							FileIO::fclose_zip($fhdl, $file_temp);
 						}
 						else {
 							$fhdl = fopen($file_name_direct, 'rb');
-							$out = $parser->parse($fhdl, $file_name_direct, $file_name_direct, false);
+							
+							$parser = $this->getParser($file_extension, $fhdl);
+							if ($parser) {
+								$out = $parser->parse($fhdl, $file_name_direct, $file_name_direct, false);
+							}
+							else {
+								print "DISPATCH_".strtoupper($file_extension)." INVALID: ".basename($file_name_direct)." / ".basename($file_name_packed)."\n";
+							}
 							fclose($fhdl);
 						}
 						
-						// Db operations
-						$this->dataParserObj->add_file($out);
+						if ($out && $out['FILE_VALID']) {
+							// Db operations
+							$this->dataParserObj->add_file($out);
+						}
+						else {
+							print "invalid: ".$out['FILE_PATH']."\n";
+
+						}
 						
 						if (!isset($this->_parser_stats_cnt_add[$file_extension])) {
 							$this->_parser_stats_cnt_add[$file_extension] = 0;
@@ -114,10 +141,47 @@ class EccParserDataProzessor{
 					$this->fileListObj->status_obj->update_message($detail_header);
 					if ($this->fileListObj->status_obj->is_canceled()) return false;
 				}
+				$this->gui->update_treeview_nav();
 			}
 		}
 		else {
 		}
+	}
+	
+	private function getParser($file_extension, $fileHandle) {
+		
+		$parserClassNamePlain = $this->_known_extensions[$file_extension][0];
+		
+		if (in_array($file_extension, $this->dispatchExtensions)) {
+			#$dispatcherClassName = 'parser/dispatch/Dispatch'.ucfirst($file_extension);
+			#$dispatcher = FACTORY::get($dispatcherClassName, $fileHandle);
+			
+			$dispatcherClassName = 'parser/dispatch/cDispatch'.ucfirst($file_extension).".php";
+			$dispatcherClass = 'Dispatch'.ucfirst($file_extension);
+			
+			require_once($dispatcherClassName);
+			$dispatcher = new $dispatcherClass($fileHandle);
+
+			$dispatchedParser = $dispatcher->getValidParser();
+			if ($dispatchedParser) {
+				$parserClassNamePlain = $dispatchedParser;
+			}
+			else {
+				// unknown file
+				return false;
+			}
+		}
+		
+		$parameter = false;
+		if (FALSE !== $position = strpos($parserClassNamePlain, "#")) {
+			$className = substr($parserClassNamePlain, 0, $position);
+			$parameter = substr($parserClassNamePlain, $position+1);
+		}
+		else {
+			$className = $parserClassNamePlain;
+		}
+
+		return FACTORY::getStrict('parser/'.$className, $parameter);
 	}
 	
 	public function format_results()

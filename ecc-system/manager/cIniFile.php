@@ -1,29 +1,41 @@
 <?
 class IniFile {
 	
-	private $ini_path = false;
-	
 	private $ini = array();
 	private $ini_platform = array();
-	#private $ini_base_path = "ecc-system/conf/";
+
+	# ecc uses this folder as default!
+	private $eccDefaultUserFolder = '../ecc-user/';
 	
-	private $ini_path_global = false;
+	private $eccDefaultConfigPath = 'conf/';
+	private $eccUserConfigPath = '../ecc-user-configs/';
+	
+	# general ini file - ecc configuration
+	private $eccIniGeneralName = 'ecc_general.ini';
+	private $eccIniGeneralFile = false;
+	
+	# history ini file - ecc runtime config
+	private $eccIniHistoryName = 'ecc_history.ini';
+	private $eccIniHistoryFile = false;
+	
+	# holds cached data for platform inis!
+	private $cachePlatformIniData = array();
 	
 	/*
 	*
 	*/	
-	public function __construct($ecc_ini_path)	{
-		$this->ini_path = realpath($ecc_ini_path);
-		if (!$this->ini_path) return false;
-		
-		// THIS IS THE INI!!!!
-		$this->ini_path_global = $this->ini_path."/ecc_general.ini";
+	public function __construct()	{
+
+		# create userconfig-path, if needed
+		if (!is_dir($this->eccUserConfigPath)) mkdir($this->eccUserConfigPath);
+
+		# get the current history ini file
+		$this->eccIniHistoryFile = $this->eccUserConfigPath.$this->eccIniHistoryName;
+		if (!file_exists($this->eccIniHistoryFile)) {
+			file_put_contents($this->eccIniHistoryFile, '');
+		}
 		
 		$this->get_ecc_ini();
-	}
-	
-	public function get_ini_path_global() {
-		return realpath($this->ini_path_global);
 	}
 	
 	public function reload() {
@@ -35,12 +47,10 @@ class IniFile {
 	* get ini-file from filesystem and writes the data to ini var.
 	*/
 	public function get_ecc_ini() {
-		if (!$this->ini_path) return false;
-		if (!count($this->ini)) {
-			$ini = @parse_ini_file($this->ini_path_global, true);
-			#$ini = $this->parse_ini_file_quotes_safe($this->ini_path_global);
+		if (!$this->eccDefaultConfigPath) return false;
+		if (!$this->ini) {
+			$ini = @parse_ini_file($this->getGeneralIniPath(), true);
 			$this->ini = (count($ini)) ? $ini : false;
-			
 			$this->ini['ECC_PLATFORM'] = $this->get_ecc_platform_data();
 		}
 		return $this->ini;
@@ -52,17 +62,22 @@ class IniFile {
 		return $ini;
 	}
 	
-	public function get_ecc_platform_ini($eccident) {
-		$ini = array();
-		$file = realpath($this->ini_path."/ecc_platform_".$eccident.".ini");
+	public function get_ecc_platform_ini($eccident, $cached=true) {
+		if ($eccident == 'null') return false;
+		
+		if ($cached && isset($this->cachePlatformIniData[$eccident])) {
+			return $this->cachePlatformIniData[$eccident];
+		}
+		$file = $this->getPlatformIniPathByFolderDispatcher('ecc_platform_'.$eccident.'.ini');
 		if (!$file) return false;
-		$ini = @parse_ini_file($file, true);
-		#$ini = $this->parse_ini_file_quotes_safe($file);
-		return $ini;
+		$iniData = $this->parse_ini_file_quotes_safe($file);
+		$this->cachePlatformIniData[$eccident] = $iniData;
+		return $iniData;
 	}
 	
 	public function write_ecc_platform_ini($platform_ini) {
-		$file = $this->ini_path."/ecc_platform_".$platform_ini['GENERAL']['eccident'].".ini";
+		$eccident = $platform_ini['GENERAL']['eccident'];
+		$file = $this->getPlatformIniPathByFolderDispatcher('ecc_platform_'.$eccident.'.ini', true);
 		if (!$this->backup_ini_platform($platform_ini['GENERAL']['eccident'])) return false;
 		return $this->write_ini_file($file, $platform_ini);
 	}
@@ -74,26 +89,25 @@ class IniFile {
 			if (is_array($item)) {
 				$content .= "[$key]\n";
 				foreach ($item as $key2 => $item2) {
+					if (0 !== strpos($item2, '"')) $item2 = '"'.$item2.'"';
 					$content .= "$key2 = $item2\n";
 				} 
 			} else {
+				if (0 === strpos($item, '"')) $item = '"'.$item.'"';
 				$content .= "$key = $item\n";
 			}
 		}
-			
-		if (!$handle = fopen($path, 'w')) {
-			return false;
-		}
-		if (!fwrite($handle, $content)) {
-			return false;
-		}
+		
+		if (!$handle = fopen($path, 'w'))return false;
+		if (!fwrite($handle, $content)) return false;
+		
 		fclose($handle);
 		return true;
 	}
 	
 	public function write_ini_global($assoc_array) {
 		if (!is_array($assoc_array) || !count($assoc_array)) return false;
-		return $this->write_ini_file($this->ini_path_global, $assoc_array);
+		return $this->write_ini_file($this->getGeneralIniPath(true), $assoc_array);
 	}
 	
 	public function get_ecc_platform_data($show_all=false) {
@@ -105,7 +119,7 @@ class IniFile {
 		foreach ($nav_skeleton as $eccident => $active) {
 			if ($show_all || $active) {
 				if ($data = $this->get_ecc_platform_ini($eccident)) {
-					$this->ini_platform[$eccident] = $this->get_ecc_platform_ini($eccident);
+					$this->ini_platform[$eccident] = $data;
 				}
 				else {
 					print "### ERROR! Missing ecc_platform_".$eccident.".ini - Nav for ".$eccident." is hidden! ###\n";
@@ -120,20 +134,22 @@ class IniFile {
 		if ($eccident=='null' || !$eccident) $eccident = 'ecc';
 		
 		$ini = array();
-		$file = realpath($this->ini_path."/../infos/ecc_platform_".$eccident."_info.ini");
+		$file = realpath($this->eccDefaultConfigPath."/../infos/ecc_platform_".$eccident."_info.ini");
 		if (!$file) return false;
 		$ini = @parse_ini_file($file, true);
-		#$ini = $this->parse_ini_file_quotes_safe($file);
+
 		return $ini;
 	}
 	
 	
 	public function get_ecc_platform_navigation($eccident=false, $category=false, $show_all=false) {
+		
 		if (!$this->ini) $this->get_ecc_ini();
 		if ($show_all || !$this->ini_platform) $this->get_ecc_platform_data($show_all);
 		
 		if ($eccident && isset($this->ini_platform[$eccident])) return $this->ini_platform[$eccident]['GENERAL']['navigation'];
 		$out = array();
+		
 		foreach ($this->ini_platform as $eccident => $platform_data) {
 			if ($show_all || $eccident=='null' || (isset($this->ini['NAVIGATION'][$eccident]) && $this->ini['NAVIGATION'][$eccident])) {
 				if ($category && @$platform_data['GENERAL']['category'] != $category) continue;
@@ -145,8 +161,18 @@ class IniFile {
 		return $out;
 	}
 	
-	public function get_ecc_platform_categories($reload=false) {
-		if ($reload) {
+	public function getPlatformCategoryByEccIdent($eccident=false) {
+		if (!$this->ini) $this->get_ecc_ini();
+		if (!$this->ini_platform) $this->get_ecc_platform_data();
+		if (isset($this->ini_platform[$eccident])) {
+			return $this->ini_platform[$eccident]['GENERAL']['category'];
+		}
+		return false;
+	}
+	
+	public function get_ecc_platform_categories($eccIdents=false) {
+		
+		if ($eccIdents) {
 			$this->ini = array();
 			$this->ini_platform = array();
 		}
@@ -157,18 +183,39 @@ class IniFile {
 		$countTotal = 0;
 		foreach ($this->ini_platform as $eccident => $platform_data) {
 			$currentCat = (@$platform_data['GENERAL']['category']) ? $platform_data['GENERAL']['category'] : "???";
-			if (!isset($count[$currentCat])) {
-				$count[$currentCat] = 1;
+			
+			if ($eccIdents) {
+				if (in_array($eccident, $eccIdents)) {
+					if (!isset($count[$currentCat])) {
+						$count[$currentCat] = 1;
+					}
+					else {
+						$count[$currentCat]++;				
+					}
+					$countTotal++;
+				}
 			}
 			else {
-				$count[$currentCat]++;				
+				if (!isset($count[$currentCat])) {
+					$count[$currentCat] = 1;
+				}
+				else {
+					$count[$currentCat]++;				
+				}
+				$countTotal++;
 			}
-			$countTotal++;
 		}
 		$out[''] = "All Categories (".$countTotal.")";
 		foreach ($this->ini_platform as $eccident => $platform_data) {
-			if (isset($platform_data['GENERAL']['category'])) {
-				$out[$platform_data['GENERAL']['category']] = $platform_data['GENERAL']['category']." (".$count[$platform_data['GENERAL']['category']].")";
+			if ($eccIdents) {
+				if (@in_array($eccident, $eccIdents)) {
+					$out[$platform_data['GENERAL']['category']] = $platform_data['GENERAL']['category']." (".$count[$platform_data['GENERAL']['category']].")";;
+				}
+			}
+			else {	
+				if (isset($platform_data['GENERAL']['category'])) {
+					$out[$platform_data['GENERAL']['category']] = $platform_data['GENERAL']['category']." (".$count[$platform_data['GENERAL']['category']].")";
+				}
 			}
 		}
 		## SORT ##
@@ -238,13 +285,25 @@ class IniFile {
 	/*
 	*
 	*/
-	public function read_ecc_histroy_ini($key)	{
-		$filename = $this->ini_path."/ecc_history.ini";
-		if (!file_exists($filename)) return false;
+	public function read_ecc_histroy_ini($key=false)	{
+		if (!file_exists($this->eccIniHistoryFile)) return false;
 		// search for key
-		$data = @parse_ini_file($filename);
-		#$data = $this->parse_ini_file_quotes_safe($filename);
-		return (isset($data[$key]) && $data[$key]) ? $data[$key] : false;
+		$data = @parse_ini_file($this->eccIniHistoryFile);
+		
+		if ($key===false) {
+			return $data;
+		}
+		else {
+			return (isset($data[$key]) && $data[$key]) ? $data[$key] : false;	
+		}
+		
+		
+	}
+	
+	public function emptyEccHistory() {
+		if (!file_exists($this->eccIniHistoryFile)) return false;
+		file_put_contents($this->eccIniHistoryFile, "");
+		return true;
 	}
 	
 	/*
@@ -254,12 +313,10 @@ class IniFile {
 		// check for real path... valid?
 		if ($check_path) $new_path = realpath($new_path);
 		
-		$ini_path = $this->ini_path."/ecc_history.ini";
-		if (!file_exists($ini_path)) return false;
+		if (!file_exists($this->eccIniHistoryFile)) return false;
 		
 		// search for key and replace value
-		$data = @parse_ini_file($ini_path);
-		#$data = $this->parse_ini_file_quotes_safe($ini_path);
+		$data = @parse_ini_file($this->eccIniHistoryFile);
 		if (!isset($data[$search_key])) {
 			$data[$search_key] = $new_path;
 		}
@@ -273,7 +330,7 @@ class IniFile {
 				$new_ini .= $key."=\"".$path."\"\n";
 			}
 		}
-		if (!file_put_contents($ini_path, $new_ini)) return false;
+		if (!file_put_contents($this->eccIniHistoryFile, $new_ini)) return false;
 		return true;
 	}
 	
@@ -282,21 +339,21 @@ class IniFile {
 	* @return mixed (new) userpath | false
 	*/
 	public function get_ecc_ini_user_folder($user_subfolder=false, $create_folder_recursive=false) {
+		
 		// get user-folder from ecc.ini
 		$user_folder = $this->get_ecc_ini_key('USER_DATA', 'base_path');
-		#print $user_folder."\n";
 		if (!($user_folder && realpath($user_folder))) return false;
 		
 		// only if user folder is selected, create subfolder if needed
 		if ($user_subfolder) {
 			// build path name
 			$user_folder = $user_folder.DIRECTORY_SEPARATOR.$user_subfolder.DIRECTORY_SEPARATOR;
+			
 			if ($create_folder_recursive===true) {
 				// create recursive directory, if dir doesnt exists
-				$this->create_dirs_recursive($user_folder);
-				#if (!is_dir($user_folder)) {
-				#	if (!mkdir($user_folder, 0777, true)) return false;
-				#}
+				if (!$this->create_dirs_recursive($user_folder)) {
+					return false;
+				}
 			}
 			else {
 				$user_folder = realpath($user_folder);
@@ -310,7 +367,27 @@ class IniFile {
 	}
 	
 	private function create_dirs_recursive($strPath, $mode = 0777) {
+		#if (!$this->parentIsWritable($strPath)) return false;
 		return is_dir($strPath) or ($this->create_dirs_recursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );
+	}
+	
+	public function parentIsWritable($path) {
+		$parentPath = (substr($path, -1) == DIRECTORY_SEPARATOR) ? substr($path, 0, -1) : $path;
+		$split = explode(DIRECTORY_SEPARATOR, $parentPath);
+		array_pop($split);
+		$parentPath = implode(DIRECTORY_SEPARATOR, $split);
+		$parentPath = realpath($parentPath);
+		if (!is_writable($parentPath)) {
+			$this->setDefaultEccBasePath();
+			#throw new Exception('parent folder not writable');
+		}
+		return true;
+	}
+	
+	public function setDefaultEccBasePath() {
+		$ini = $this->get_ecc_global_ini();
+		$ini['USER_DATA']['base_path'] = $this->eccDefaultUserFolder;
+		$this->write_ini_global($ini);
 	}
 	
 	/*
@@ -339,13 +416,12 @@ class IniFile {
 	}
 	
 	public function backup_ini_global() {
-		if (FALSE == copy($this->ini_path_global, $this->ini_path_global.".bak")) return FALSE;
+		if (FALSE == copy($this->getGeneralIniPath(), $this->getGeneralIniPath().".bak")) return FALSE;
 		return true;
 	}
 	public function backup_ini_platform($eccident) {
-		$file = realpath($this->ini_path."/ecc_platform_".$eccident.".ini");
-		if (FALSE == copy($file, $file.".bak")) return FALSE;
-		return true;
+		$file = $this->getPlatformIniPathByFolderDispatcher('ecc_platform_'.$eccident.'.ini');
+		return copy($file, $file.".bak");
 	}
 	
 	public function strip_danger_chars($string="") {
@@ -377,33 +453,20 @@ class IniFile {
 		$comment_chars="/*<;#?>";
 		$num_comments = "0";
 		$header_section = "";
-		
-		//Read to end of file with the newlines still attached into $f
 		$f=file($f);
-		
 		$row_count = ($row_count_limit) ? $row_count_limit : count($f);
-		
-		// Process all lines from 0 to count($f) 
 		for ($i=0;$i<@$row_count;$i++) {
-			
 			while (gtk::events_pending()) gtk::main_iteration();
-			
 			$newsec=0;
 			$w=@trim($f[$i]);
 			$first_char = @substr($w,0,1);
 			if ($w) {
 				if ((!$r) or ($sec)) {
-					// Look for [] chars round section headings
 					if ((@substr($w,0,1)=="[") and (@substr($w,-1,1))=="]") {$sec=@substr($w,1,@strlen($w)-2);$newsec=1;}
-					// Look for comments and number into array
 					if ((stristr($comment_chars, $first_char) === FALSE)) {} else {$sec=$w;$k="Comment".$num_comments;$num_comments = $num_comments +1;$v=$w;$newsec=1;$r[$k]=$v;/*echo "comment".$w.$newline;*/}
-					//
 				}
 				if (!$newsec) {
-					//
-					// Look for the = char to allow us to split the section into key and value 
 					$w=@explode("=",$w);$k=@trim($w[0]);unset($w[0]); $v=@trim(@implode("=",$w));
-					// look for the new lines 
 					if ((@substr($v,0,1)=="\"") and (@substr($v,-1,1)=="\"")) {$v=@substr($v,1,@strlen($v)-2);}
 					if ($sec) {$r[$sec][$k]=$v;} else {$r[$k]=$v;}
 				}
@@ -425,7 +488,33 @@ class IniFile {
 			}
 		}
 		return $platform;
-
 	}
+
+	function getGeneralIniPath($transferToUserFolder=false) {
+		# return path to user-folder, if ini should be transfered
+		if ($transferToUserFolder) {
+			return $this->eccUserConfigPath.$this->eccIniGeneralName;
+		}
+		else {
+			if (file_exists($this->eccUserConfigPath.$this->eccIniGeneralName)) {
+				return $this->eccUserConfigPath.$this->eccIniGeneralName;
+			}
+			return $this->eccDefaultConfigPath.$this->eccIniGeneralName;
+		}
+	}
+	
+	function getPlatformIniPathByFolderDispatcher($platformIniFilename, $transferToUserFolder=false) {
+		# return path to user-folder, if ini should be transfered
+		if ($transferToUserFolder) {
+			return $this->eccUserConfigPath.$platformIniFilename;
+		}
+		else {
+			if (file_exists($this->eccUserConfigPath.$platformIniFilename)) {
+				return $this->eccUserConfigPath.$platformIniFilename;
+			}
+			return $this->eccDefaultConfigPath.$platformIniFilename;
+		}
+	}
+	
 }
 ?>

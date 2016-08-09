@@ -15,20 +15,28 @@ class GuiHelper {
 	}
 	
 	public function getEccVersionString() {
-		return "emuControlCenter ".$this->gui->ecc_release['release_version']." ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
+		return $this->gui->ecc_release['title']." ".$this->gui->ecc_release['release_version']." ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
 	}
 	
 	public function createUserfolderIfNeeded() {
+
 		$user_folder = $this->gui->ini->get_ecc_ini_key('USER_DATA', 'base_path');
-		if (!is_dir($user_folder)) {
-			$title = I18N::get('popup', 'conf_userfolder_notset_title');
-			$msg = sprintf(I18N::get('popup', 'conf_userfolder_notset_msg%s'), $user_folder);
-			$choice = $this->gui->open_window_confirm($title, $msg);
-			if (!$choice) {
-				#print ("\n\n!!! MISSING USER-FOLDER: EDIT conf/ecc_general.ini\n\n");
-			} else {
+		
+		// is writeable directory?
+		if (!$user_folder && !$this->gui->ini->parentIsWritable($user_folder)) {
+			print "not writeable!!!!\n\n";
+			return false;
+		}
+		
+		// if directory not found - create default!
+		if (!is_dir($user_folder) || !is_dir($user_folder.'null/')) {
+			$this->gui->ini->setDefaultEccBasePath();
+			try {
 				$this->gui->ini->create_folder($user_folder);
-				$this->gui->rebuildEccUserFolder();
+				$this->rebuildEccUserFolder(false);
+			}
+			catch (Exception $e) {
+				print "could not create user subfolder!!!!\n\n";
 			}
 		}
 	}
@@ -45,6 +53,35 @@ class GuiHelper {
 			foreach ($user_path_subfolder_merged as $subpath => $void) {
 				$this->gui->ini->get_ecc_ini_user_folder($platform_eccident.DIRECTORY_SEPARATOR.trim($subpath), true);
 			}
+
+			
+$eccInfoSubfolder = implode("/\n", array_flip($user_path_subfolder_merged))."/";
+$eccInfoText = "
+".str_repeat('-', 80)."
+- This is an emuControlCenter userfolder!
+- (".$this->getEccVersionString().")
+- You can get the latest version of ecc at http://www.camya.com/
+- With ecc, you can manage your roms in an easier way!
+".str_repeat('-', 80)."
+
+This folder contains data for
+Platform: $platform_name ($platform_eccident)
+
+Included subfolder:
+".$eccInfoSubfolder."
+
+".str_repeat('-', 80)."
+This folder is initial created with
+[ECC_VERSION]
+".$this->gui->ecc_release['local_release_version']."
+[INITIAL_FOLDER_CREATE]
+".date('Y-m-d H:i:s', time())."
+".str_repeat('-', 80)."
+";
+			
+			$eccInfoFile = $this->gui->ini->get_ecc_ini_user_folder($platform_eccident).DIRECTORY_SEPARATOR.'emuControlCenter.txt';
+			file_put_contents($eccInfoFile, trim($eccInfoText));
+
 		}
 		if ($show_info_popup) {
 			$user_folder = $this->gui->ini->get_ecc_ini_key('USER_DATA', 'base_path');
@@ -58,6 +95,12 @@ class GuiHelper {
 		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_header_small.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
 		$this->gui->img_ecc_header->set_from_pixbuf(GdkPixbuf::new_from_file($img_path));
+	}
+	
+		public function setEccSupportImage() {
+		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_logo_support.png';
+		if (!file_exists($img_path)) die ("missing ecc_header");
+		$this->gui->eccImageSupport->set_from_pixbuf(GdkPixbuf::new_from_file($img_path));
 	}
 	
 	public function open_splash_screen() {
@@ -75,17 +118,14 @@ class GuiHelper {
 		$dlg->set_icon(GdkPixbuf::new_from_file(ECC_BASEDIR.'/ecc-system/images/eccsys/ecc_icon_camya.png'));
 		$dlg->set_logo(GdkPixbuf::new_from_file(ECC_BASEDIR.'/ecc-system/images/eccsys/platform/ecc_ecc_teaser.png'));
 		
-		// ecc-informations from ini
-		//$version = "".$this->gui->ecc_release['release_version']." ".$this->gui->ecc_release['release_build']." ".$this->gui->ecc_release['release_state']."";
 		
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];
 		$email = $this->gui->ecc_release['email'];
 		
-//		$dlg->set_name("emuControlCenter");
 		$dlg->set_name("");
 		$dlg->set_version($version);
-		$dlg->set_copyright("Copyright (c) 2006 Andreas Scheibel");
+		$dlg->set_copyright($this->gui->ecc_release['info_copyright']);
 		$dlg->set_website($website);
 		$dlg->set_comments("This is a early beta-version of ecc.\nPlease look for updates at camya.com or email ".$email."\n\nSpecial thanks goes out to PHOENIX for his support!");
 		$dlg->set_license(file_get_contents("license.txt"));
@@ -110,7 +150,6 @@ class GuiHelper {
 		$style->bg_pixmap[Gtk::STATE_NORMAL] = $pixmap;
 		$window->set_style($style);
 	}
-	
 }
 
 ?>

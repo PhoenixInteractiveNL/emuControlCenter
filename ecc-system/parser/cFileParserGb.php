@@ -68,7 +68,7 @@ class FileParserGb implements FileParser {
 		$ret['SGB_FEATURES'] = FileIO::ecc_read($fhdl, 323, 1, 'HEX');
 		
 		// Checksummen ermitteln.
-		// Aus performancegründen zuerst in string einlesen
+		// Aus performancegrÃ¼nden zuerst in string einlesen
 		while (gtk::events_pending()) gtk::main_iteration();
 		$file_content = FileIO::ecc_read_file($fhdl, false, false, $file_name);
 		

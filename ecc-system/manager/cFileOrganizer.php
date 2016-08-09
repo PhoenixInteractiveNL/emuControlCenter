@@ -10,7 +10,11 @@ class FileOrganizer extends App{
 	
 	private $statistics = false;
 	
+	private $oTreeviewDB;
+	
 	public $message = "";
+	
+	private $progress_count = 1;
 	
 	public function __construct($eccident=false, $ini, $status_obj) {
 		#$this->db = $db;
@@ -18,6 +22,9 @@ class FileOrganizer extends App{
 		$this->ini = $ini;
 		$this->set_destination_path();
 		$this->status_obj = $status_obj;
+		
+		$this->oTreeviewDB = FACTORY::get('manager/TreeviewData');
+		
 	}
 	
 	// called by FACTORY
@@ -121,7 +128,7 @@ class FileOrganizer extends App{
 	private function reorganize_files($cat_cnt) {
 		$out = array();
 		foreach ($cat_cnt as $cat_id => $value) {
-			$opt_cat_name = $this->optimize_category_path($value['cat_name']);
+			$opt_cat_name = $this->cleanFileName($value['cat_name']);
 			$files = $this->get_files_by_category($cat_id);
 			if (count($files)) {
 				$this->write_organized_files_by_category($opt_cat_name, $files['VALID']);
@@ -148,9 +155,9 @@ class FileOrganizer extends App{
 	* @author ascheibel
 	* @return boolean
 	*/
-	private function optimize_category_path($category) {
+	private function cleanFileName($category) {
 		$optimized_cat = str_replace("  ", " ", $category);
-		$optimized_cat = ereg_replace("[^0-9A-Za-z\-]", " ", $category);
+		$optimized_cat = ereg_replace("[^0-9A-Za-z\-\ ]", "", $category);
 		return $optimized_cat;
 	}
 	
@@ -165,18 +172,17 @@ class FileOrganizer extends App{
 		$cnt_current = 0;
 		$cnt_total = count($files);
 		$this->message .= "Category: $opt_cat_name:\n";
+		
+		$catFileColisionTest = array();
+		
 		foreach($files as $id => $data) {
-			
+
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$path_source = $data['path'];
-			$path_destination =  $this->create_new_file_path($opt_cat_name, basename($data['path']));
-			
-			#print "1 path_source#### ".$path_source."\n";
+			$path_destination =  $this->create_new_file_path($opt_cat_name, basename($data['newFileName']));
 			
 			if (file_exists($path_source)) {
-				
-				#print "2 path_source#### ".$path_source."\n";
 				
 				// create directories, if needed
 				if (!is_dir(dirname($path_destination))) {
@@ -184,9 +190,7 @@ class FileOrganizer extends App{
 						$this->create_dirs_recursive(dirname($path_destination), 0777, true);
 					}
 				}
-				if (!file_exists($path_destination)) {
-					
-					#print "3 path_destination#### ".$path_destination."\n";
+				if (!file_exists($path_destination) && !isset($catFileColisionTest[$path_destination])) {
 					
 					// copy, move or print out commands!
 					if ($this->reorganize_mode == 'copy') {
@@ -194,7 +198,7 @@ class FileOrganizer extends App{
 						
 						// ABS-PATH TO REL-PATH...
 						#print "1 copy ".$path_destination."\n";
-						$this->update_fdata_by_path($path_source, $path_destination);
+						$this->oTreeviewDB->update_fdata_by_path($path_source, $path_destination);
 					}
 					elseif ($this->reorganize_mode == 'move') {
 						rename($path_source, $path_destination);
@@ -202,22 +206,20 @@ class FileOrganizer extends App{
 						// ABS-PATH TO REL-PATH...
 						$path_destination = realpath($path_destination);
 						#print "rename ".$path_destination."\n";
-						$this->update_fdata_by_path($path_source, $path_destination);
+						$this->oTreeviewDB->update_fdata_by_path($path_source, $path_destination);
 					}
-					
-					
-					
 					$this->statistics['DONE'][$opt_cat_name][] = basename($path_destination);
+					$catFileColisionTest[$path_destination] = true;
+					$this->message .= "\t".basename($path_destination)."\n";
 				}
 				else {
-					$this->update_fdata_by_path($path_source, $path_destination);
+					#$this->oTreeviewDB->update_fdata_by_path($path_source, $path_destination);
 					$this->statistics['ISSET'][$opt_cat_name][] = basename($path_destination);
 				}
 			}
 			else {
-				$this->statistics['MISSING'][$opt_cat_name][] = basename($path_destination);
+				$this->statistics['MISSING'][$opt_cat_name][] = basename($path_source);
 			}
-			
 			$cnt_current++;
 			
 			// ---------------------------------
@@ -229,7 +231,6 @@ class FileOrganizer extends App{
 			$this->status_obj->update_progressbar($percent, $msg);
 			// STATUS BAR MESSAGE
 			// ---------------------------------
-			$this->message .= "\t".basename($path_destination)."\n";
 			$this->status_obj->update_message($this->message);
 			// STATUS BAR OBSERVER CANCEL
 			// ---------------------------------
@@ -285,12 +286,39 @@ class FileOrganizer extends App{
 			if ($this->is_single_file($res['fd.path'])) {
 				$out['VALID'][$res['fd.id']]['crc32'] = $res['fd.crc32'];
 				$out['VALID'][$res['fd.id']]['path'] = $res['fd.path'];
+				
+				$fileExtension = strtolower(array_pop(explode('.', $res['fd.path'])));
+				if (trim($res['m.name'])) {
+					$fileName = $this->cleanFileName(trim($res['m.name'])).".".$fileExtension;
+				}
+				else {
+					$fileName = $this->cleanFileName(basename($res['fd.path'])).".".$fileExtension;
+				}
+				$out['VALID'][$res['fd.id']]['newFileName'] = $fileName;
 			}
 			else {
 				$out['INVALID'][$res['fd.id']]['crc32'] = $res['fd.crc32'];
 				$out['INVALID'][$res['fd.id']]['path'] = $res['fd.path'];
 			}
+			
+			// ---------------------------------
+			// STATUS BAR PROGRESS
+			// ---------------------------------
+			if ($this->progress_count < 1000) {
+				$this->progress_count++;
+			}
+			else {
+				$this->progress_count = 1;
+			}
+			$progressbar_string = sprintf(I18N::get('status', 'reorg_prepare_data%s'), $this->progress_count);
+			$this->status_obj->update_progressbar($this->progress_count/1000, $progressbar_string);
+			// STATUS BAR OBSERVER CANCEL
+			// ---------------------------------
+			if ($this->status_obj->is_canceled()) return false;
+			// ---------------------------------
+			while (gtk::events_pending()) gtk::main_iteration();
 		}
+
 		return $out;
 	}
 	
@@ -344,7 +372,8 @@ class FileOrganizer extends App{
 		while ($res = $hdl->fetch(1)) {
 			$out[$res['cat_id']] = $res;
 			if ($res['cat_id'] != '') {
-				$idx = (int) $res['cat_id'] +1;
+				//$idx = (int) $res['cat_id'] +1;
+				$idx = (int) $res['cat_id'];
 				$out[$res['cat_id']]['cat_name'] = $this->categories[$idx];
 			}
 			else {
@@ -384,28 +413,7 @@ class FileOrganizer extends App{
 		return false;
 	}
 	
-	private function update_fdata_by_path($path_source, $path_destination) {
-		
-		// ABS-PATH TO REL-PATH...
-		$path_destination = realpath($path_destination);
-		#print "1update_fdata_by_path ".$path_destination."\n";
-		if (strpos($path_destination, ECC_BASEDIR) == 0) {
-			$path_destination = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_destination);
-			$path_destination = str_replace("\\", "/", $path_destination);
-			#print "2update_fdata_by_path ".$path_destination."\n";
-		};
-		
-		$q = '
-			UPDATE
-			fdata
-			SET
-			path = "'.($path_destination).'"
-			WHERE
-			path = "'.$path_source.'"
-		';
-		#print $q."\n";
-		$hdl = $this->dbms->query($q);
-	}
+
 	
 	private function create_dirs_recursive($strPath, $mode = 0777) {
 		return is_dir($strPath) or ($this->create_dirs_recursive(dirname($strPath), $mode) and mkdir($strPath, $mode) );

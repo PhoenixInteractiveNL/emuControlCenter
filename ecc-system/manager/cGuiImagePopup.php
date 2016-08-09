@@ -158,7 +158,7 @@ class GuiImagePopup {
 	 * 
 	 */
 	private function updateImage() {
-		if (isset($this->imageTank[$this->imagePosition])) {
+		if (isset($this->imageTank[$this->imagePosition]) && file_exists($this->imageTank[$this->imagePosition])) {
 			$obj_pixbuff = GdkPixbuf::new_from_file($this->imageTank[$this->imagePosition]);
 			$this->gui->imgPopup_image->set_from_pixbuf($obj_pixbuff);			
 		}

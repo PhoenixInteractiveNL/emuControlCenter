@@ -13,7 +13,7 @@ class FileIO {
 	* Sucht informationen zu file
 	* ext extension
 	* name filename ohne extension
-	* size grˆﬂe in byte
+	* size gr√∂√üe in byte
 	*/	
 	public function ecc_file_get_info($path) {
 		
@@ -34,7 +34,7 @@ class FileIO {
 	}
 	
 	/*
-	* ermittelt die grˆﬂe der datei
+	* ermittelt die gr√∂√üe der datei
 	*/
 	public function get_file_size($file_direct, $file_packed=false, $size='KB')
 	{
@@ -109,6 +109,10 @@ class FileIO {
 		unlink($path);
 	}
 	
+	public function ecc_reset($fhdl) {
+		fseek($fhdl, 0);
+	}
+	
 	/*
 	* ecc_read(fHdl, 160, 12, False)
 	* - liest 12 bytes der Datei ab Position 160
@@ -145,7 +149,7 @@ class FileIO {
 		switch($type_result) {
 			
 			// 'DEZ'
-			// gibt den ascii-wert (integer) des strings zur¸ck
+			// gibt den ascii-wert (integer) des strings zur√ºck
 			case 'DEZ':
 				$out = 0;
 				$data = fread($fhdl, $read_bytes);
@@ -171,21 +175,21 @@ class FileIO {
 	}
 	
 	/*
-	* List die Datei unter ber¸cksichtigung eines
+	* List die Datei unter ber√ºcksichtigung eines
 	* start und end offsets ein
 	*/	
 	public function ecc_read_file($fhdl, $start_offset=false, $end_offset=false, $file_name=false) {
 		
 		// Beispiel MP3
 		// id3v1 (die letzten 128 bytes im mp3) darf nicht in die
-		// kalkulation der checksumme einflieﬂen
+		// kalkulation der checksumme einflie√üen
 		// $file_content = FileIO::ecc_read_file($fhdl, 0, -128, $file_name);
 		// liest file von byte 0 bis filesize-128
 		//
 		// Beispiel SNES
-		// Hat manchmal einen 512 kb groﬂen Rom-Header, der von
-		// kopierstationen in das rom geschrieben wird. Er ist f¸r die chcksumme nicht
-		// relevant und muﬂ ausgelassen werden.
+		// Hat manchmal einen 512 kb gro√üen Rom-Header, der von
+		// kopierstationen in das rom geschrieben wird. Er ist f√ºr die chcksumme nicht
+		// relevant und mu√ü ausgelassen werden.
 		// $file_content = FileIO::ecc_read_file($fhdl, 512, false, $file_name);
 		// liest datei ab byte 512 bis zum ende der datei.
 		//
@@ -194,7 +198,7 @@ class FileIO {
 		// $file_content = FileIO::ecc_read_file($fhdl, 100, 50, $file_name);
 		
 		// Wenn der file_name gesetzt ist sowie der offset nicht
-		// benˆtigt wird, kann auch direkt eingeladen werden.
+		// ben√∂tigt wird, kann auch direkt eingeladen werden.
 		// Das ist performanter
 		if (
 			$file_name !== false &&
@@ -245,6 +249,54 @@ class FileIO {
 	*/	
 	public function ecc_get_crc32_from_string($string) {
 		return str_pad (strtoupper(dechex(crc32($string))), 8, '0', STR_PAD_LEFT);
+	}
+	
+	/*
+	*
+	*/	
+	public function eccGetCrc32FromFile($fileName) {
+		return str_pad (strtoupper(dechex(crc32(file_get_contents($fileName)))), 8, '0', STR_PAD_LEFT);
+	}
+	
+	public function copyFile($fileNameSource, $fileNameDestination) {
+		if (!is_file($fileNameSource)) return false;
+		if ($fileNameSource == $fileNameDestination) return true;
+		copy($fileNameSource, $fileNameDestination);
+		return true;
+	}
+	
+	public function renameFile($fileNameSource, $fileNameDestination) {
+		if (!realpath($fileNameSource)) return false;
+		//if (!VALID::fileName(basename($fileNameDestination))) return false;
+		if ($fileNameSource == $fileNameDestination) return true;
+		return rename($fileNameSource, $fileNameDestination);
+	}
+	
+	public function deleteFileByFilename($fileName) {
+		return (@unlink($fileName));
+	}
+	
+	/*
+	*
+	*/
+	public function get_ext_form_file($file) {
+		if (false !== strpos($file, ".")) {
+			$split = explode(".", $file);
+			return array_pop($split);
+		}
+		return "";
+	}
+	
+	/*
+	*
+	*/
+	public function get_plain_filename($file) {
+		$file = basename($file);
+		if (false !== strpos($file, ".")) {
+			$split = explode(".", $file);
+			return array_shift($split);
+		}
+		return "";
 	}
 }
 

@@ -170,22 +170,29 @@ class GuiEccConfig {
 	 * 
 	 */
 	public function get_path() {
-
+		
+		$oOs = FACTORY::get('manager/Os');
+		
 		// get path from textarea
 		$path = realpath($this->gui->gconf_ud_folder->get_text());
 		$title = I18N::get('popup', 'conf_ecc_userfolder_filechooser_title');
 		
 		#$path_new = $this->gui->openFileChooserDialog($title, $path, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
-		$path_new = FACTORY::get('manager/Os')->openChooseFolderDialog($path, $title);
+		$path_new = $oOs->openChooseFolderDialog($path, $title);
+
+//		// ABS-PATH TO REL-PATH...		
+//		if ($path_new) {
+//			$path_new = realpath($path_new);
+//			if ($path_new!="" && strpos($path_new, ECC_BASEDIR) == 0) {
+//				$path_new = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_new);
+//			};
+//		}
+//		if ($path_new && strpos($path_new, -1) !== DIRECTORY_SEPARATOR) $path_new = $path_new.DIRECTORY_SEPARATOR;
+
+		// ABS-PATH TO REL-PATH...
+		// 20061116 as
+		$path_new = $oOs->eccSetRelativeDir($path_new);
 		
-		// ABS-PATH TO REL-PATH...		
-		if ($path_new) {
-			$path_new = realpath($path_new);
-			if ($path_new!="" && strpos($path_new, ECC_BASEDIR) == 0) {
-				$path_new = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path_new);
-			};
-		}
-		if ($path_new && strpos($path_new, -1) !== DIRECTORY_SEPARATOR) $path_new = $path_new.DIRECTORY_SEPARATOR;
 		// set new text
 		if ($path_new) $this->gui->gconf_ud_folder->set_text($path_new);
 	}
@@ -240,7 +247,9 @@ class GuiEccConfig {
 		// pf_state
 		$renderer_text_3 = new GtkCellRendererText();
 		$column_pf_extensions = new GtkTreeViewColumn('ID', $renderer_text_3, 'text',3);
+		//$column_pf_extensions->set_sizing(Gtk::TREE_VIEW_COLUMN_FIXED);
 		$view->append_column($column_pf_extensions);
+
 		
 		$this->model_platform = $model;
 	}

@@ -61,10 +61,14 @@ class EccParserFileListDir implements FileList {
 					}
 					else {
 						// ABS-PATH TO REL-PATH...
-						$full_file_path = realpath($full_file_path);
-						if (strpos($full_file_path, ECC_BASEDIR) == 0) {
-							$full_file_path = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $full_file_path);
-						};
+//						$full_file_path = realpath($full_file_path);
+//						if (strpos($full_file_path, ECC_BASEDIR) == 0) {
+//							$full_file_path = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $full_file_path);
+//						};
+
+						// ABS-PATH TO REL-PATH...
+						// 20061116 as
+						$full_file_path = FACTORY::get('manager/Os')->eccSetRelativeFile($full_file_path);
 						
 						if ($this->is_packed_file($full_file_path)) {
 						}

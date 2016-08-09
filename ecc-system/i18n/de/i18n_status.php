@@ -9,22 +9,24 @@
  */
 $i18n['status'] = array(
 	'parse_rom_pbar_file%s%s%s' =>
-		" Datei %s von %s %s",
+		"- FILE %s of %s %s",
 	'parse_rom_pbar_file_packed' =>
-		"(GEPACKT)",		
+		"(PACKED)",		
 	'parse_rom_detail_header%s' =>
-		"Alle gefundenen ROMS werden nun geparst:\n%s",
+		"New media added to ecc\n%s",
 	'parse_rom_detail_added_header' =>
-		"Hinzugefügte ROMS:\n",
+		"Added ROMS:\n",
 	'parse_rom_detail_unchanged_header' =>
-		"Keine Änderung seit dem letzen Parsen:\n",
+		"No changes since last parsing:\n",
 	'parse_rom_pbar_scan_count%s' =>
-		"Durchsucht: %s",
+		"Scanned: %s",
 	'parse_rom_detail_scan_head' =>
-		"Gefundene ROMS:\n",
+		"Found media by type and extension\n",
 	'parse_rom_detail_scan_found_direct_head' =>
-		"Direkt (ungepackt)\n",
+		"Found direct (not packed)\n",
 	'parse_rom_detail_scan_found_direct_head' =>
-		"Gepackt (ZIP)\n",
+		"Found packed (eg. zip)\n",
+	'reorg_prepare_data%s' =>
+		"Prepare data! %s",
 );
 ?>

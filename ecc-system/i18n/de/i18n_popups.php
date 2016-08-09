@@ -2,175 +2,189 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	en (english)
  * author:	andreas scheibel
- * date:	2006/09/09 
+ * date:	2006/09/09
  * ------------------------------------------
  */
 $i18n['popup'] = array(
 	'rom_add_filechooser_title%s' =>
-		"ROM-Verzeichnis auswählen für: %s",
+		"%s: Locate your media folder!",
 	'rom_add_parse_title%s' =>
-		"%s ROMS hinzufügen?",
+		"Add new Roms for %s",
 	'rom_add_parse_msg%s%s' =>
-		"Sollen alle ROMS für\n\n%s\n\naus dem Verzeichnis\n\n%s\n\nhinzugefügt werden?",
+		"Add new Roms for\n\n%s\n\nfrom directory\n\n%s?",
 	'rom_add_parse_done_title' =>
-		"Fertig!",
+		"Parsing done",
 	'rom_add_parse_done_msg%s' =>
-		"Alle gefundenen ROMS für\n\n%s\n\nwurden in die ecc-Datenbank eingetragen!",
+		"Parsing new \n\n%s\n\nROMS is done!",
 	'rom_remove_title%s' =>
-		"ROMS für %s entfernen",
+		"CLEAR DB FOR %s",
 	'rom_remove_msg%s' =>
-		"Sollen wirklich alle ROMS für \n\n\"%s\"\n\n aus der Datenbank entfernt werden?\n\nEs werden nur Daten aus der Datenbank entfernt! Die ROMS bleiben weiterhin auf der Festplatte! :-)",
+		"DO YOU WANT CLEAR THE DATABASE FOR \n\"%s\"-MEDIA?\n\nThis action wil remove all filedata of the selected media from the ecc database. This will NOT remove your datfile-informations or your media from your harddisc.",
 	'rom_remove_done_title' =>
-		"Fertig!",
+		"DB Clear done",
 	'rom_remove_done_msg%s' =>
-		"Alle %s ROMS wurden aus der Datenbank entfernt!",
+		"All data for %s is removed from ecc-database",
 	'rom_remove_single_title' =>
-		"ROM entfernen?",
+		"Remove ROM from database?",
 	'rom_remove_single_msg%s' =>
-		"Soll das ROM\n\n%s\n\nwirklich aus der Datenbank entfernt werden?",
+		"Should i remove\n\n%s\n\nfrom the ecc database?",
 	'rom_remove_single_dupfound_title' =>
-		"Doppelte ROMS gefunden!!!",
+		"Duplicate ROMS found!!!",
 	'rom_remove_single_dupfound_msg%d%s' =>
-		"ecc hat %d ROM(S) mit der gleichen Checksumme gefunden. Soll\n\n%s\n\nauch aus der Datenbank entfernt werden?",
+		"%d DUPLICATE ROMS FOUND\n\nShould i also remove all duplicates of\n\n%s\n\n from the ecc database?\n\nSee HELP for more informations!",
 	'rom_optimize_title' =>
-		"ROMS optimieren?",
+		"Optimize database",
 	'rom_optimize_msg' =>
-		"Soll ecc die ROMS in der Datenbank optimieren?\n\nDu solltest die Datenbank zum Beispiel dann optimieren, wenn du ROMS auf deiner Festplatte gelöscht oder umbewegt hast.\necc schaut auf der Festplatte nach, ob die ROMS noch an der indizierten stelle vorhanden sind und entfernt sie gegebenenfalls aus seiner Datenbank\nDas optimieren löscht nur Daten aus der Datenbank!",
+		"Do you want to optimize your ROMS in ecc-database?\n\nYou should optimize the database, if you have moved or removed files from your harddrive\necc will automaticly search for this database-entries and bookmarks and will remove them from the database!\nThis options only edit the database.",
 	'rom_optimize_done_title' =>
-		"Optimierung durchgeführt!",
+		"Optimization done!",
 	'rom_optimize_done_msg%s' =>
-		"Die Datenbank für\n\n%s\n\nwurde optimiert!",
+		"The database for platform\n\n%s\n\nis now optimized!",
 	'rom_dup_remove_title' =>
-		"Doppelte ROMS aus der Datenbank löschen?",
+		"Remove duplicate ROMS from ecc-database?",
 	'rom_dup_remove_msg%s' =>
-		"Sollen alle doppelten\n\n%s\n\nROMS aus der ecc-Datenbank entfernt werden?\n\nDiese Operation löscht nur Daten aus der Datenbank! Die ROMS auf der Festplatte bleiben unberührt!",
+		"Do you want to remove all duplicate ROMS for\n\n%s\n\nfrom the ecc-database?\n\nThis operation only works within the emuControlCenter Database....\n\nThis will NOT remove Files from your harddisk!!!",
 	'rom_dup_remove_done_title' =>
-		"Vorgang abgeschlossen!",
+		"Removing done",
 	'rom_dup_remove_done_msg%s' =>
-		"Alle doppelten ROMS für\n\n%s\n\nwurden aus der ecc-Datenbank entfernt!",
+		"All duplicate ROMS for\n\n%s\n\nare removed from ecc-database",
 	'rom_reorg_nocat_title' =>
-		"Keine Kategorien!",
+		"There are no categories!",
 	'rom_reorg_nocat_msg%s' =>
-		"Es wurden keine Kategorien in den Metainformationen deiner \n\n%s\n\nROMS gefunden! Du kannst deine ROMS über die EDIT-Funktion kategoriesieren oder ein gutes ecc-Datfile importieren!",
+		"You havenÂ´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
 	'rom_reorg_title' =>
-		"ROMS organisieren?",
+		"Reorganize your ROMS on Harddisk?",
 	'rom_reorg_msg%s%s%s' =>
-		"------------------------------------------------------------------------------------------BITTE FÜHRE ALS ERSTES DAS PREVIEW DURCH!!!!!\n\nDIESE OPTION ORGANISIERT DEINE ROMS AUF DER FESTPLATTE !!! BITTE ENTFERNE ZUERST ALLE DOPPELTEN ROMS AUS DER DATENBANK !!!\nDER AUSGEWÄHLTE MODUS IST: #%s#\n------------------------------------------------------------------------------------------\n\nWillst du wirklich, das ecc deine ROMS für die Platform\n\n%s\n\nnach den zugwiesenen Kategorien auf deiner Festplatte organisiert? ecc wird hierzu ein Verzeichnis in deinem User-Verzeichnis anlegen in dem die Kategorien abgelegt werden!\n\n%s/roms/organized/\n\nBitte vergewissere dich vorher, das du genügend Platz auf der Festplatte zur Verfügung hast!\n\nMÖCHTEST DU DIES AUF DEINE EIGENE VERANTWORTUNG TUN? :-)",
+		"------------------------------------------------------------------------------------------THIS OPTION WILL REORGANIZE YOUR ROMS AT YOUR HARDDRIVE !!! PLEASE FIRST REMOVE DUPLICATES FROM ECC-DB !!!\nYOUR SELECTED MODE IS: #%s#\n------------------------------------------------------------------------------------------\n\nDo you want to reorganize your roms by categories for\n\n%s\n\nat your filesystem? ecc will organize your roms in the ecc-userfolder under\n\n%s/roms/organized/\n\nPlease check the discspace of this harddrive, if there is space available\n\nDO YOU WANT THIS AT YOUR RISK? :-)",
 	'rom_reorg_done_title' =>
-		"Vorgang beendet!",
+		"Reorganization done",
 	'rom_reorg_done__msg%s' =>
-		"Alle kategorisierten ROMS wurden unter\n\n%s\n\norganisiert. Die Datenbank-Einträge wurden geändert!",
+		"Take a look at your filesystem into folder\n\n%s\n\nto validate the copy",
 	'db_optimize_title' =>
-		"Datenbank optimieren?",
+		"Optimize database",
 	'db_optimize_msg' =>
-		"Soll die Datenbank wirklich optimiert werden\nDieser Vorgang kann die größe der emuControlCenter-Datenbank dramatisch verkleinern!\n\nDiese Operation wird einige Sekunden in Anspruch nehmen! :-)",
+		"Do you want to optimize the database?\nThis will decrease the physical size of the emuControlCenter-DatabaseYou should use Vacuum, if you often Parsed and remove Media in emuControlCenter!\n\nThis operation will freeze the application for some seconds - please wait! :-)",
 	'db_optimize_done_title' =>
-		"Vorgang abgeschlossen!",
+		"Database optimized!",
 	'db_optimize_done_msg' =>
-		"Die Datenbank ist nun optimiert!",
+		"Your ecc-database is now optimized!",
 	'export_esearch_error_title' =>
-		"Keine Optionen ausgewählt!",
+		"No eSearch options selected",
 	'export_esearch_error_msg' =>
-		"Um diese Art von Export durchzuführen muß eine Erweiterte Suche (eSearch) durchgeführt werden\nDadurch werden nur die gefundenen Suchergebnisse exportiert die im Hauptbereich zu sehen sind!",
+		"You have to use the eSearch (extended search) to use this export-function. This will only export the search-result, you see in the mainview!",
 	'dat_export_filechooser_title%s' =>
-		"Speicherort füf %s datfile auswählen!",	
+		"Select directory to save %s dat-file!",	
 	'dat_export_title%s' =>
-		"%s datfile exportieren",
+		"Export %s datfile",
 	'dat_export_msg%s%s%s' =>
-		"Soll wirklich ein %s datfile für die Platform\n\n%s\n\nin dieses Verzeichnis generiert werden?\n\n%s",
+		"Do you want to export a %s datfile for platform\n\n%s\n\ninto this directory?\n\n%s",
 	'dat_export_esearch_msg_add' =>
-		"\n\necc berücksichtigt deine eSearch Einstellungen für den export!",
+		"\n\necc will use your eSearch selection to export!",
 	'dat_export_done_title' =>
-		"Export durchgeführt",
+		"Export done",
 	'dat_export_done_msg%s%s%s' =>
-		"Das %s datfile für die Platform\n\n%s\n\nwurde in die Datei\n\n%s\n\ngespeichert!",
+		"Export %s datfile for\n\n%s\n\ninto path\n\n%s\n\ndone!",
 	'dat_import_filechooser_title%s' =>
-		"Import: Wähle ein %s datfile!",
+		"Import: Select a %s datfile!",
 	'rom_import_backup_title' =>
-		"Backup anlegen?",
+		"Create backup?",
 	'rom_import_backup_msg%s%s' =>
-		"Soll vor dem Datfile-Import für\n\n%s (%s)\n\nein Backup der aktuellen Metadaten im Userfolder abgelegt werden?",
+		"Should i create a BACKUP into your user-folder for\n\n%s (%s)\n\nbefore you import new meta-data?",
 	'rom_import_title' =>
-		"Datfile importieren?",
+		"Import datfile?",
 	'rom_import_msg%s%s%s' =>
-		"Sollen die Daten für die Plattform\n\n%s (%s)\n\nwirklich aus dem Datfile\n\n%s\n\nimportiert werden?",
+		"Do you really want to import data for platform\n\n%s (%s)\n\nfrom datfile\n\n%s?",
 	'rom_import_done_title' =>
-		"Import durchgeführt!",
+		"Import done!",
 	'rom_import_done_msg%s' =>
-		"Import des Datfiles für \n\n%s\n\nabgeschlossen!",
+		"Import datfile for\n\n%s\n\ndone!",
 	'dat_clear_title%s' =>
-		"Metadaten für %s entfernen",
+		"CLEAR DB FOR %s",
 	'dat_clear_msg%s%s' =>
-		"Sollen wirklich alle Metainformationenen für\n\n%s (%s)\n\naus der Datenbank entfernt werden?\n\nIm nächsten Schritt kann ecc automatisch ein Backup der vorhandenen Metainformationen erstellen!",
+		"DO YOU WANT CLEAR ALL META-INFORMATIONS FOR\n\n%s (%s)-DAT?\n\nThis will remove all meta-informations like category, status, languages aso. for the selected platform from the ecc-database!. In the next step, YOU CAN CREATE A BACKUP FOR THIS INFORMATIONS. (Will be automaticly saved to your user-folder!)\n\nThe last step is a optimization of the database!",
 	'dat_clear_backup_title%s' =>
-		"Sicherheitskopie für %s anlegen?",
+		"Backup %s",
 	'dat_clear_backup_msg%s%s' =>
-		"Soll eine Sicherheitskopie der Metadaten für \n\n%s (%s)\n\n angelegt werden??",
+		"Should i create a backup for platform\n\n%s (%s)?",
 	'dat_clear_done_title%s' =>
-		"Vorgang abegschlossen!",
+		"DB Clear done",
 	'dat_clear_done_msg%s%s' =>
-		"Alle Metadaten für die Platform\n\n%s (%s)\n\nwurden aus der Datenbank entfernt!",
+		"All meta-informations for\n\n%s (%s)\n\nare removed from ecc-database!",
 	'dat_clear_done_ifbackup_msg%s' =>
-		"\n\nDas Backup wurde in das Userverzeichnis für %s abgelegt!",
+		"\n\n ecc have backuped your data to the %s-User-Folder",
 	'emu_miss_title' =>
-		"Fehler - Emulator nicht gefunden!",
+		"Error - Emulator not found!",
 	'emu_miss_notfound_msg%s' =>
-		"Der eingetragene Emulator\n\n%s\n\nkonnte nicht gefunden werden!\nBitte überprüfe, ob der Pfad richtig gesetzt wurde!",
+		"The assigned emulator\n\n%s\n\nwas not found!\nPlease check the path in CONFIG/EMULATOR",
 	'emu_miss_notset_msg' =>
-		"Es wurde noch kein Emulator für diese Platform/Fileextension zugewiesen!",
+		"Missing emulator!\n\nPlease add an emulator for this platform/extension! Please check the path in CONFIG/EMULATOR",
 	'rom_miss_title' =>
-		"Fehler - ROM nicht gefunden!",
+		"Error - Media not found!",
 	'rom_miss_msg' =>
-		"Das ausgewählte ROM kann nicht gestartet werden, da der Pfad nicht richtig ist!\n\nEin Grund kann das Löschen oder Umbewegen von ROMS auf der Festplatte sein.\nBitte führe die Option 'ROMS->optimize roms in ecc' aus!",		
+		"The selected File was not found\n\nPlease use the option 'ROMS->optimize roms in ecc'\nPlease check also if you use options like 'escape' or '8.3' correct",
 	'img_overwrite_title' =>
-		"Bild überschreiben?",
+		"Overwrite image?",
 	'img_overwrite_msg%s%s' =>
-		"Das Bild\n\n%s\n\nexistiert bereits\n\nSoll dieses wirklich durch das Bild\n\n%s\n\nüberschrieben werden?",	
+		"The Image\n\n%s\n\nalready exists\n\nDo you really overwrite this image with\n\n%s?",	
 	'img_remove_title' =>
-		"Bild löschen?",
+		"Remove image?",
 	'img_remove_msg%s' =>
-		"Soll das Bild %s wirklich gelöscht werden?",
+		"Do you really want to remove the image %s",
 	'img_remove_error_title' =>
-		"Fehler - Bild konnte nicht gelöscht werden!",
+		"Error - Could not remove image!",
 	'img_remove_error_msg%s' =>
-		"Das Bild %s konnte nicht gelöscht werden!",
+		"Image %s could not be deleted!",
 	'conf_platform_update_title' =>
-		"Konfiguration speichern?",
+		"Update platform ini?",
 	'conf_platform_update_msg%s' =>
-		"Soll die neue Konfiguration für %s wirklich gespeichert werden?",
+		"Do you really want to update the platform-ini for %s?",
 	'conf_platform_emu_filechooser_title%s' =>
-		"Wähle den Emulator für die Fileextension '%s'",
+		"Select emulator for extension '%s'",
 	'conf_userfolder_notset_title' =>
-		"Fehler: User-Verzeichnis nicht gefunden!!!",
+		"ERROR: Could not find userfolder!!!",
 	'conf_userfolder_notset_msg%s' =>
-		"Der Pfad zu deinem User-Verzeichnis wurde geändert! Dieser Pfad ist noch nicht vorhanden!\n\nSoll das Verzeichnis\n\n%s\n\nangelegt werden?",
+		"You have altered the base_path in your ecc_general.ini. This folder isnÂ´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
+	'conf_userfolder_error_readonly_title' =>
+		"ERROR: Could not create folder!!!",
+	'conf_userfolder_error_readonly_msg%s' =>
+		"The folder %s could not be created because you have selected an readonly medium (CD?)\n\nIf you want choose an other folder, click OK and choose \n'options'->'configuration'\nto set your user-folder!",
 	'conf_userfolder_created_title' =>
-		"Verzeichnisse angelegt!",
+		"User-folder created!",
 	'conf_userfolder_created_msg%s%s' =>
-		"Die Unterverzeichnisse\n\n%s\n\nwurden in deinem Userfolder\n\n%s\n\nangelegt!",
+		"The subfolders\n\n%s\n\nare created in your selected user-folder\n\n%s",
 	'conf_ecc_save_title' =>
-		"emuControlCenter GLOBAL-INI speichern?",
+		"Update emuControlCenter GLOBAL-INI?",
 	'conf_ecc_save_msg' =>
-		"Sollen diese Einstellungen in gepeichert werden?\n\nEs werden automatisch alle Unterverzeichnisse für das gewählte Userverzeichnis erstellt!\n\nWillst du wirklich speichern?",
+		"This will write your changes settings to the ecc_global.ini\n\nThis will also create the selected user-folder and all needed subfolders\n\nDo you really want to do this?",
 	'conf_ecc_userfolder_filechooser_title' =>
 		"Select the Folder for your User-Data",
 	'fav_remove_all_title' =>
-		"Bookmarks löschen?",
+		"Remove all bookmarks?",
 	'fav_remove_all_msg' =>
-		"Sollen wirklich alle Bookmarks gelöscht werden?",
+		"Do you really want to remove ALL BOOKMARKS?",
+	'maint_empty_history_title' =>
+		'Reset ecc history.ini?',
+	'maint_empty_history_msg' =>
+		'This will empty the ecc history.ini file. This files stores your selections in ecc frontend like options (eg. Hide duplicate roms) and selected paths! Should i reset this file?',
 	'sys_dialog_info_miss_title' =>
-		"?? TITLE FEHLT ??",
+		"?? TITLE MISSING ??",
 	'sys_dialog_info_miss_msg' =>
-		"?? MESSAGE FEHLT ??",
+		"?? MESSAGE MISSING ??",
 	'sys_filechooser_miss_title' =>
-		"?? TITEL FEHLT ??",
+		"?? TITLE MISSING ??",
 	'status_dialog_close' =>
-		"\n\nSollen die Processdetails ausgeblendet werden?",
+		"\n\nShould i close the status detail area?",
 	'status_process_running_title' =>
 		"Process running",
 	'status_process_running_msg' =>
-		"Ein anderer Prozess läuft.\nEs kann nur ein Prozess zur Zeit abgearbeitet werden. Bitte warte, bis der laufende Prozess abgeschlossen ist, oder breche diesen ab!",
+		"Another process is running\nYou can only start one process like parsing/import/export! Please wait until the current running process is done!",
+	'meta_rating_add_error_msg' =>
+		"You can only rate a rom with metadata.\n\nPlease use EDIT and create theses metainformations!",
+	'maint_unset_ratings_title' =>
+		"Unset ratings for platform?",
+	'maint_unset_ratings_msg' =>
+		"This will reset all ratings in the database... should i do it?",
 );
 ?>

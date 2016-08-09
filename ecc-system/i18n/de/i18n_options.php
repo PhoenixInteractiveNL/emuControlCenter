@@ -2,7 +2,7 @@
 /**
  * emuControlCenter language system file
  * ------------------------------------------
- * language:	de (german)
+ * language:	en (english)
  * author:	andreas scheibel
  * date:	2006/09/30 
  * ------------------------------------------
@@ -15,34 +15,34 @@ $i18n['dropdown_lang'] = array(
 	// context menu navigation
 	// -------------------------------------------------------------
 	'[[japanese]]' =>
-		"Japanisch",
+		"Japanese",
 	'[[english]]' =>
-		"Englisch",
+		"English",
 	'[[german]]' =>
-		"Deutsch",
+		"German",
 	'[[french]]' =>
-		"Französisch",
+		"French",
 	'[[italian]]' =>
-		"Italienisch",
+		"Italiano",
 	'[[spanish]]' =>
-		"Spanisch",
+		"Spanish",
 	'[[chinese]]' =>
-		"Chinesisch",
+		"Chinese",
 	'[[korean]]' =>
-		"Koreanisch",
+		"Korean",
 	'[[portugese]]' =>
-		"Portugisisch",
+		"Portuguise",
 	'[[polish]]' =>
-		"Polnisch",
+		"Polish",
 	'[[danish]]' =>
-		"Dänisch",
+		"Danish",
 	'[[dutch]]' =>
-		"Niederländisch",
+		"Dutch",
 	'[[norway]]' =>
-		"Norwegisch",
+		"Norway",
 	'[[swedish]]' =>
-		"Schwedisch",
+		"Swedish",
 	'[[finnish]]' =>
-		"Finnisch",
+		"Finnish",
 );
 ?>

@@ -12,15 +12,17 @@ $i18n['menu'] = array(
 	// context menu navigation
 	// -------------------------------------------------------------
 	'lbl_platform%s' =>
-		"Platform %s!!!",
-	'lbl_roms_add' =>
+		"%s options",
+	'lbl_roms_add%s' =>
 		"Add new ROMS",
-	'lbl_roms_optimize' =>
+	'lbl_roms_optimize%s' =>
 		"Optimize ROMS",
-	'lbl_roms_remove' =>
+	'lbl_roms_remove%s' =>
 		"Remove ROMS",
 	'lbl_emu_config' =>
 		"Edit/Assign emulator",
+	'lbl_ecc_config' =>
+		"Configuration",
 	'lbl_dat_import_ecc' =>
 		"Import emuControlCenter Datfile",
 	'lbl_dat_import_rc' =>
@@ -60,5 +62,32 @@ $i18n['menu'] = array(
 		"Get data from eccdb (Internet)",
 	'lbl_meta_webservice_meta_set' =>
 		"Add your data to eccdb (Internet)",
+	// File operations
+	'lbl_shellop_submenu' =>
+		"Shell operations",
+	'lbl_shellop_browse_dir' =>
+		"Browse ROM directory",
+	'lbl_shellop_file_rename' =>
+		"Rename file on harddisk",
+	'lbl_shellop_file_copy' =>
+		"Copy file on harddisk",
+	'lbl_shellop_file_unpack' =>
+		"Unpack this file",
+	'lbl_shellop_file_remove' =>
+		"Remove file from harddisk",
+	// Rating
+	'lbl_rating_submenu' =>
+		"Rate ROM",
+	'lbl_import_submenu' =>
+		"Import Datfile",
+	'lbl_export_submenu' =>
+		"Export Datfile",
+	'lbl_rom_rescan_folder' =>
+		"(Re)parse ROM-Directory",
+	'lbl_meta_remove' =>
+		"Remove META from DB",
+	'lbl_rating_unset' =>
+		"Unset ratings",
+		
 );
 ?>

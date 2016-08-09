@@ -26,5 +26,7 @@ $i18n['status'] = array(
 		"Found direct (not packed)\n",
 	'parse_rom_detail_scan_found_direct_head' =>
 		"Found packed (eg. zip)\n",
+	'reorg_prepare_data%s' =>
+		"Prepare data! %s",
 );
 ?>

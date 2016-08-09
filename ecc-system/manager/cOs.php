@@ -70,18 +70,20 @@
 		
 		// Compile start command
 		$command = 'start '.$start_ident.' '.escapeshellcmd($exeFileName).' '.($filePathFile);
-//		print $command."\n";
-		
+
 		// create an backup of the curren cwd
 		$cwdBackup = getcwd();
 		// change dir to the programs directory
 		chdir(dirname($exePathFull));
-		
 		// STANDARD WORKING ECC WAY!
 		// execute command
 		pclose(popen($command, "r"));
 		// change dir back to cwdBacup!
 		chdir($cwdBackup);
+		
+		// working faster, but not full tested!!!!
+		// FACTORY::get('manager/Os')->executeProgramDirect($filePathCommand, 'open', $filePathFile);
+		
 		
 		return true;		
 	}
@@ -163,6 +165,7 @@
 				Gtk::RESPONSE_OK
 			)
 		);
+		$dialog->set_position(Gtk::WIN_POS_CENTER);
 		
 		if (!realpath($path)) {
 			$path = (dirname($path)) ? dirname($path) : false;
@@ -195,16 +198,13 @@
 	*
 	*/
 	public function launch_file($filename) {
-		$filename = realpath($filename);
-		if (!$filename) return false;
-		
-		// win98 needs "player". Otherwise, the file isnt started
-		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
-		
-		$command = 'start '.$start_ident.' '.$filename;
-
-		pclose(popen($command, "r"));
+		win_shell_execute($filename);
 		return true;
+	}
+	
+	public function executeProgramDirect($applicationPath, $action=false, $arguments=false, $directory=false) {
+		win_shell_execute($applicationPath, $action, $arguments, $directory);
+		return true;		
 	}
 	
 	/**
@@ -217,6 +217,41 @@
 		$filePath = $exFile->ShortPath;
 		unset($exFSO);
 		return $filePath;
+	}
+	
+	
+	/**
+	 * Functions create relative paths from ecc-basepath, if possible
+	 * Used by eccSetRelativeDir & eccSetRelativeFile
+	 *
+	 * @param unknown_type $path
+	 * @return unknown
+	 */
+	private function eccSetPathRelative($path) {
+		if ($path && realpath($path)) {
+			//$path = realpath($path);
+			if ($path!="" && strpos($path, ECC_BASEDIR) == 0) {
+				$path = str_replace(ECC_BASEDIR, ECC_BASEDIR_OFFSET, $path);
+				$path = str_replace("\\", "/", $path);
+			};
+		}
+		return $path;
+	}
+	
+	/**
+	 * Enter description here...
+	 *
+	 * @param unknown_type $dir
+	 * @return unknown
+	 */
+	public function eccSetRelativeDir($dir) {
+		$dir = $this->eccSetPathRelative($dir);
+		if ($dir && strpos($dir, -1) !== DIRECTORY_SEPARATOR) $dir = $dir.DIRECTORY_SEPARATOR;
+		return $dir;
+	}
+	
+	public function eccSetRelativeFile($file) {
+		return $this->eccSetPathRelative($file);
 	}
  	
  }

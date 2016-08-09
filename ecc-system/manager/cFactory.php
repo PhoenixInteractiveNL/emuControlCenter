@@ -23,6 +23,19 @@ class FACTORY {
 		}
 	}
 	
+	public function create($classNameIdent, $parameter=false) {
+		
+		$className = $classNameIdent;
+		$classPath = "";
+
+		$splitBy = "/";
+		if (FALSE !== $postition = strrpos($classNameIdent, $splitBy)) {
+			$className = substr($classNameIdent, $postition+1);
+			$classPath = substr($classNameIdent, 0, $postition+1);
+		}
+		return FACTORY::register_instance($className, $classPath, $parameter, "");
+	}
+	
 	/*
 	 * This function ads a checksum from parameters to the
 	 * keys in $_instances ($strictHash) to get a unique object for a
@@ -40,20 +53,20 @@ class FACTORY {
 	private static function register_instance($className, $classPath, $parameter=false, $strictHash="") {
 		$classFileName = $classPath."c".$className.".php";
 		require_once($classFileName);
-
+		
 		if ($parameter != false) {
 			FACTORY::$_instances[$className.$strictHash] = new $className($parameter);
 		}
 		else {
 			FACTORY::$_instances[$className.$strictHash] = new $className();
 		}
-
+		
 		// if a manager has a class setDbms,
 		// factory also sets the dbms!
 		if (FACTORY::$dbms && method_exists(FACTORY::$_instances[$className.$strictHash], 'setDbms')) {
 			FACTORY::$_instances[$className.$strictHash]->setDbms(FACTORY::$dbms);
 		}
-
+		
 		return FACTORY::$_instances[$className.$strictHash];
 	}
 	

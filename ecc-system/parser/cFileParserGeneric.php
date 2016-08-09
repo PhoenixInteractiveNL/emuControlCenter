@@ -31,19 +31,26 @@ class FileParserGeneric implements FileParser {
 		$fstat = fstat($fhdl);
 		$ret['FILE_SIZE'] = $fstat['size'];
 		
-		// Checksummen ermitteln.
-		// Aus performancegründen zuerst in string einlesen
 		while (gtk::events_pending()) gtk::main_iteration();
+		
+		// Checksummen ermitteln.
+		// Aus performancegrÃ¼nden zuerst in string einlesen
 		$file_content = FileIO::ecc_read_file($fhdl, false, false, $file_name);
 		
-		#while (gtk::events_pending()) gtk::main_iteration();
+		while (gtk::events_pending()) gtk::main_iteration();		
+		
+
 		#$ret['FILE_MD5'] = FileIO::ecc_get_md5_from_string($file_content);
 		$ret['FILE_MD5'] = NULL;
 		
-		while (gtk::events_pending()) gtk::main_iteration();
+		// mutch faster as reading text! :-)
+		// reading text in only needed, if offsets a needed!
+		//$ret['FILE_CRC32'] = FileIO::eccGetCrc32FromFile($file_name);
 		$ret['FILE_CRC32'] = FileIO::ecc_get_crc32_from_string($file_content);
 		
 		$ret['FILE_VALID'] = true;
+		
+		while (gtk::events_pending()) gtk::main_iteration();
 		
 		return $ret;
 	}

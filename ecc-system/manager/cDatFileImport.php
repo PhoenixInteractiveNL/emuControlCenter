@@ -30,6 +30,13 @@ class DatFileImport extends App {
 	{
 		$dat_header = $this->parse_ini_file_quotes_safe($this->dat_filename, 20);
 		
+		if (!$dat_header) {
+			$this->status_obj->update_progressbar(0, "ERROR!");
+			$message = "This is not a compatible Romcenter-Dat!\n";
+			$message .= '"'.$this->dat_filename.'"'."";
+			$this->status_obj->update_message($message);
+		}
+		
 		$dat_header_lowercase = array();
 		foreach ($dat_header as $key_dim_1 => $void) {
 			if (is_array($void)) {
@@ -70,7 +77,7 @@ class DatFileImport extends App {
 				$this->status_obj->update_progressbar(0, "ERROR!");
 				$message = "This is not a compatible Romcenter-Dat!\n";
 				$message .= '"'.$this->dat_filename.'"'."\n\n";
-				$message .= "emuControlCenter doesn´t find any fileextension in this dat-file!\n";
+				$message .= "emuControlCenter doesnï¿½t find any fileextension in this dat-file!\n";
 				$message .= "ecc needs to match fileextension from dat-file and assigned extensions in ecc!\n";
 				$this->status_obj->update_message($message);
 			}
@@ -111,7 +118,7 @@ class DatFileImport extends App {
 	
 	public function validate_romcenter_format($rc_dat_version=false, $first_game = array()) {
 		
-		$split_row = explode("¬", $first_game);
+		$split_row = explode("ï¿½", $first_game);
 		
 		switch ($rc_dat_version) {
 			case '2.00':
@@ -184,7 +191,7 @@ class DatFileImport extends App {
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			// get data for a row
-			$split = explode('¬', $key);
+			$split = explode('ï¿½', $key);
 			
 			// corrupt data... jump to next entry and log!
 			if (!isset($split[$name_from_field]) || !isset($split[$extension_from_field])) {
@@ -367,7 +374,7 @@ class DatFileImport extends App {
 			$message = "No matches in Dat-File\n(".basename($this->dat_filename).")\n";
 			$message .= "found for ".$platform_name." (".$this->eccident.")\n\n";
 			$message .= "Search for this extensions: *.".implode("; *.", array_keys($possible_extensions))." - and found nothing :-(\n";
-			$message .= "Maybe this wasn´t the right dat-file? :-)\n";
+			$message .= "Maybe this wasnï¿½t the right dat-file? :-)\n";
 			$message .= "Please use a Dat-File for $platform_name\n";
 			$this->status_obj->update_message($message);
 			
@@ -551,7 +558,7 @@ class DatFileImport extends App {
 	}
 	
 	/*
-	* FÜR DAT-VERSION 0.5.0
+	* Fï¿½R DAT-VERSION 0.5.0
 	* $res[20] == '*'
 	* wenn *, dann valid.
 	*/
@@ -559,7 +566,6 @@ class DatFileImport extends App {
 	{
 		
 		$this->dat = $this->parse_ini_file_quotes_safe($this->dat_filename);
-		
 		$ret = array();
 		
 		// if eccident is set, 100 percent is the count of ecc-ident-roms
@@ -741,7 +747,8 @@ class DatFileImport extends App {
 			year = '".sqlite_escape_string($data['year'])."',
 			usk = ".sqlite_escape_string($data['usk']).",
 			category = ".sqlite_escape_string($data['category']).",
-			creator = '".sqlite_escape_string($data['creator'])."'
+			creator = '".sqlite_escape_string($data['creator'])."',
+			uexport = NULL
 			WHERE
 			id = ".$id."
 		";

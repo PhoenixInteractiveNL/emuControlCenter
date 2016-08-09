@@ -53,7 +53,7 @@ $i18n['popup'] = array(
 	'rom_reorg_nocat_title' =>
 		"There are no categories!",
 	'rom_reorg_nocat_msg%s' =>
-		"You haven´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
+		"You havenÂ´t assigned any category to your\n\n%s\n\nROMS! Please use the edit-function to add some categories or import a good ecc-datfile!",
 	'rom_reorg_title' =>
 		"Reorganize your ROMS on Harddisk?",
 	'rom_reorg_msg%s%s%s' =>
@@ -120,6 +120,8 @@ $i18n['popup'] = array(
 		"The assigned emulator\n\n%s\n\nwas not found!\nPlease check the path in CONFIG/EMULATOR",
 	'emu_miss_notset_msg' =>
 		"Missing emulator!\n\nPlease add an emulator for this platform/extension! Please check the path in CONFIG/EMULATOR",
+	'emu_miss_dir_msg%s' =>
+		"No emulator! (Only directory given!)\n\nPlease add an emulator for this platform/extension!\n\nPlease locate the emulators executeable (exe, bat, jar aso.). Only a directory will not work!",
 	'rom_miss_title' =>
 		"Error - Media not found!",
 	'rom_miss_msg' =>
@@ -145,7 +147,11 @@ $i18n['popup'] = array(
 	'conf_userfolder_notset_title' =>
 		"ERROR: Could not find userfolder!!!",
 	'conf_userfolder_notset_msg%s' =>
-		"You have altered the base_path in your ecc_general.ini. This folder isn´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?",
+		"You have altered the base_path in your ecc_general.ini. This folder isnÂ´t created by now.\n\nShould i create the directory\n\n%s\n\nfor you?\n\nIf you want choose an other folder, click NO and use \n'options'->'configuration'\nto set your user-folder!",
+	'conf_userfolder_error_readonly_title' =>
+		"ERROR: Could not create folder!!!",
+	'conf_userfolder_error_readonly_msg%s' =>
+		"The folder %s could not be created because you have selected an readonly medium (CD?)\n\nIf you want choose an other folder, click OK and choose \n'options'->'configuration'\nto set your user-folder!",
 	'conf_userfolder_created_title' =>
 		"User-folder created!",
 	'conf_userfolder_created_msg%s%s' =>
@@ -160,6 +166,10 @@ $i18n['popup'] = array(
 		"Remove all bookmarks?",
 	'fav_remove_all_msg' =>
 		"Do you really want to remove ALL BOOKMARKS?",
+	'maint_empty_history_title' =>
+		'Reset ecc history.ini?',
+	'maint_empty_history_msg' =>
+		'This will empty the ecc history.ini file. This files stores your selections in ecc frontend like options (eg. Hide duplicate roms) and selected paths! Should i reset this file?',
 	'sys_dialog_info_miss_title' =>
 		"?? TITLE MISSING ??",
 	'sys_dialog_info_miss_msg' =>
@@ -172,5 +182,21 @@ $i18n['popup'] = array(
 		"Process running",
 	'status_process_running_msg' =>
 		"Another process is running\nYou can only start one process like parsing/import/export! Please wait until the current running process is done!",
+	'meta_rating_add_error_msg' =>
+		"You can only rate a rom with metadata.\n\nPlease use EDIT and create theses metainformations!",
+	'maint_unset_ratings_title' =>
+		"Unset ratings for platform?",
+	'maint_unset_ratings_msg' =>
+		"This will reset all ratings in the database... should i do it?",
+	'eccdb_title' =>
+		"eccdb/romdb",
+	'eccdb_statistics_msg%s%s%s%s%s' =>
+		"eccdb - Statistics:\n\n%s added\n%s allready inplace\n%s errors\n\n%s Datasets processed!%s",
+	'eccdb_webservice_post_msg' =>
+		"eccdb/romdb - Metadatabase:\n\nTo support the emuControlCenter community, you can add your modified metadata (title, category, languages aso.) into the ECCDB (Internet Database).\n\nThis works like the well known CDDB for CD-Tracks.\n\nIf you confirm this, ecc will automaticly transfer you data into the eccdb!\n\nYou have to be connected to the internet to add your content!!!\n\nAfter 10 processed Metadatasets, you have to confirm to add more!",
+	'eccdb_error' =>
+		"eccdb - Errors:\n\nMaybe you are not connected to the internet... only with an active internet connection, you can add data into the eccdb!",
+	'eccdb_no_data' =>
+		"eccdb - No data to add found:\n\nYou have to edit some of your metadata to add this into the eccdb. Use the edit button and try again!",
 );
 ?>

@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -316,5 +316,21 @@ $i18n['popup'] = array(
 		"Vorgang abgeschlossen!",
 	'processDoneMsg' =>
 		"Der Vorgang wurde abgeschlossen!",
+
+	/* 0.9.7 FYEO 11 */
+	'userdata_backuped_in%s' =>
+		"Die XML-Datei mit deinem Benutzerdaten wurden in das Verzeichnis ecc-user/#_GLOBAL/ gesichert.\n\n%s\n\nSoll die Datei nun in deinem XML-Browser angezeigt werden?",
+
+	/* 0.9.7 FYEO 17 */
+	'executePostShutdownTaskTitle' =>
+		"Soll diese Aufgabe durchgeführt werden?",
+	'executePostShutdownTaskMessage%s' =>
+		"\nAufgabe: <b>%s</b>\n\nSoll diese lange laufende Aufgabe nun durchgeführt werden?",
+	'postShutdownTaskTitle' =>
+		"Führe gewählte Aufgabe aus.",
+	'postShutdownTaskMessage' =>
+		"Du hast eine Aufgabe gewählt, die nur durchführbar ist, wenn das emuControlCenter geschlossen ist..\n\nNach der abarbeitung wird das <b>emuControlCenter automatisch neugestartet!</b>\n\nBis dahin können einige Sekunden, Minuten und manchmal auch Stunden vergehen! Diese Popup ist dabei oft eingefroren. Keine Angst! :-)\n\n<b>Bitte warten!</b>",
+
+
 );
 ?>

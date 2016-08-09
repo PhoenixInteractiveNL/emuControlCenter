@@ -8,7 +8,7 @@
  * ------------------------------------------
  **/
 $i18n['infoPane'] = array(
-
+	
 	/* PERSONAL */
 	'iPanePersHeadlineLbl' =>
 		"Statistik",
@@ -26,7 +26,7 @@ $i18n['infoPane'] = array(
 		"ROMDB Export",
 	'iPanePersMetaNotesLbl' =>
 		"Eigene Notizen",
-
+	
 	/* ESEARCH */
 	'iPaneEsearchHeadlineLbl' =>
 		"Erweiterte Suche (eSearch)",
@@ -57,7 +57,7 @@ $i18n['infoPane'] = array(
 	'iPaneDataLbl' =>
 		"Datei- und Meta-Informationen",
 
-	/* HEADER */
+	/* HEADER */		
 	'iPaneHeadLbl' =>
 		"Extrahierte Header-Informationen",
 

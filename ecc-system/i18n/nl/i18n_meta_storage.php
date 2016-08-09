@@ -30,14 +30,39 @@ $i18n['dropdown_search_fields'] = array(
 		"Jaar",
 	'[[info]]' =>
 		"Info",
-	'[[fileextension]]' =>
+	'[[extension]]' =>
 		"Bestandsextensie",
-	'[[filepath]]' =>
+	'[[path]]' =>
 		"Bestandspad",
 	'[[eccident]]' =>
 		"ECCident",
 	'[[crc32]]' =>
 		"CRC32",
+	'[[programmer]]' =>
+		"Programmeur",
+	'[[musican]]' =>
+		"Musicus",
+	'[[graphics]]' =>
+		"Grafisch",
 );
-?>
+
+/* 0.9.7 FYEO 20 */
+$i18n['dropdown_meta_region'] = array(
+	'[[empty]]' =>
+		"",
+	'[[Asia]]' =>
+		"Asia",
+	'[[Brazil]]' =>
+		"Brazil",
+	'[[Europe]]' =>
+		"Europe",
+	'[[Hispanic]]' =>
+		"Hispanic",
+	'[[Japan]]' =>
+		"Japan",
+	'[[USA]]' =>
+		"USA",
+	'[[World]]' =>
+		"World",
+);
 ?>

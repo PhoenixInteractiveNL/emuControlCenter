@@ -190,7 +190,6 @@ $i18n['popupConfig'] = array(
 	'title_startup_select_sound' =>
 		"Sélectionner un son pour le démarrage",
 
-
 	/* 0.9.2 FYEO 14 */
 	'title_emu_assign_found_eccscript' =>
 		"eccScript trouvé",
@@ -282,5 +281,48 @@ $i18n['popupConfig'] = array(
 	'tab_label_language' =>
 		"Langue",
 		
+	/* 0.9.7 WIP 01 */
+	'confEccSilentParsing' =>
+		"Scan silencieux de ROMs (sans popup de requête)",
+		
+	'emuAssignGlobalEnableEccScript' =>
+		"Activer eccScript",
+	'emuAssignFileextLabel' =>
+		"Emulateur pour cette extension",
+	'emuAssignPreviewLabel' =>
+		"Aperçu des lignes de commande",
+	'emuAssignGlobalActive%s' =>
+		"Démarrer les ROMs d'extension '%s' avec cet émulateur",
+	'emuAssignGlobalActiveGlobal%s' =>
+		"Activer tous les émulateurs '%s'",
+	'lbl_emu_tips_ecc' =>
+		"Liens ecc",	
+	'emuPlatformActiveState' =>
+		"Activer la plateforme",
+	'tabGeneralHlListOptions' =>
+		"Options d'affichage des listes",	
+		
+	/* 0.9.7 WIP 04 */
+	'tab_label_themes' =>
+		"Thèmes",
+	'lblThemeSelect' =>
+		"Selectionner un thème",
+
+	/* 0.9.7 WIP 10 */
+	'emuAssignLabelZipUnpack' =>
+		"Auto-extraction des ZIPs",
+	'emuAssignGlobalCheckZipUnpackActive' =>
+		"Extraction automatique des fichiers zippés",
+	'emuAssignGlobalCheckZipUnpackSkip' =>
+		"Sauter les fichiers déjà extraits (plus rapide)",
+	'emuAssignGlobalCheckZipUnpackClean' =>
+		"Nettoyer le dossier d'extraction d'eCC",
+	'emuAssignGlobalCheckZipUnpackOpen' =>
+		"Ouvrir le dossier d'extraction d'eCC",
+
+	/* 0.9.7 WIP 10 */
+	'conEccSaveGuiSettings' =>
+		"Sauvegarder les options de l'interface graphique",
+
 );
 ?>

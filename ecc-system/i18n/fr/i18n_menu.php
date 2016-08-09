@@ -146,6 +146,31 @@ $i18n['menu'] = array(
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Ouvrir l'eccUser-Folder (dossier utilisateur) (%s)",
+	'lbl_rom_remove_toplevel' =>
+		"Supprimer la (les) ROM(s)",
+	'menuItemPersonalEditNote' =>
+		"Editer les notes",
+	'menuItemPersonalEditReview' =>
+		"Editer les infos",
+		
+	/* 0.9.6 FYEO 11 */
+	'menuItemRomOptions' =>
+		"Options de la ROM",
+
+	/* 0.9.7 FYEO 17 */
+	'imagepackTopMenu' =>
+		"imagepack helpers",
+	'imagepackRemoveImagesWithoutRomFile' =>
+		"Supprimer les images des ROMS que vous n'avez pas",
+	'imagepackRemoveEmptyFolder' =>
+		"Supprimer les dossiers vides",
+	'imagepackCreateAllThumbnails' =>
+		"Créer des miniatures pour un accès plus rapide",
+	'imagepackRemoveAllThumbnails' =>
+		"Supprimer les minitaures Remove thumbnails pour les échanges de pack d'images",
+	'imagepackConvertEccV1Images' =>
+		"Convertir les images en pack ! (V1->V2)",
+
 		
 );
 ?>

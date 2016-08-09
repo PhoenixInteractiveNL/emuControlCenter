@@ -1,4 +1,4 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -85,19 +85,19 @@ $i18n['menu'] = array(
 	'lbl_export_submenu' =>
 		"Datfile exportieren",
 	'lbl_rom_rescan_folder' =>
-		"Dateiordner auf Ver&auml;nderungen &uuml;berpr&uuml;fen",
+		"Dateiordner auf Veränderungen überprüfen",
 	'lbl_meta_remove' =>
 		"Metainformation aus der DB löschen",
 	'lbl_rating_unset' =>
 		"Bewertung entfernen",
-
+	
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
 		"Suche und ZEIGE doppelte Spiele",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
 		"Doppelte Spiele finden",
-
+	
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
 		"Lösche ALLE Bilder des Spiels",
@@ -116,7 +116,7 @@ $i18n['menu'] = array(
 		"quickFilter",
 	'lbl_quickfilter_reset' =>
 		"quickFilter entfernen",
-
+	
 	/* 0.9.6 FYEO 1 */
 	'lbl_dat_import_ecc_romdb' =>
 		"Online Datfile importieren",
@@ -146,6 +146,31 @@ $i18n['menu'] = array(
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Öffne eccUser-Folder (%s)",
+	'lbl_rom_remove_toplevel' =>
+		"Entferne Rom(s)",
+	'menuItemPersonalEditNote' =>
+		"Bearbeite Notizen",
+	'menuItemPersonalEditReview' =>
+		"Bearbeite Review",
+		
+	/* 0.9.6 FYEO 11 */
+	'menuItemRomOptions' =>
+		"Rom optionen",
 
+	/* 0.9.7 FYEO 17 */
+	'imagepackTopMenu' =>
+		"imagepack Helfer",
+	'imagepackRemoveImagesWithoutRomFile' =>
+		"Entferne Bilder der Spiele, die ich nicht in der Datenbank habe",
+	'imagepackRemoveEmptyFolder' =>
+		"Entferne alle leeren Verzeichnisse",
+	'imagepackCreateAllThumbnails' =>
+		"Erstelle Thumbnails für schnelleren Zugriff",
+	'imagepackRemoveAllThumbnails' =>
+		"Entferne alle Thumnails für die Weitergabe des imagepacks",
+	'imagepackConvertEccV1Images' =>
+		"Konvertiere flaches imagepack in imagepack Struktur! (V1->V2)",
+
+		
 );
 ?>

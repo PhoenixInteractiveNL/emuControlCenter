@@ -13,7 +13,7 @@ class GuiPopFileOperations extends GladeXml {
 	}
 	
 	private function prepareGui() {
-		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiPopFileOperations.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiPopFileOperations.glade');
 		$this->signal_autoconnect_instance($this);
 		$this->guiFileOperations->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->guiFileOperations->set_modal(true);

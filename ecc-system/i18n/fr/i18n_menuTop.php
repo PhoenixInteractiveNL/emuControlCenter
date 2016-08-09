@@ -175,5 +175,24 @@ $i18n['menuTop'] = array(
 	'mTopDatExport' =>
 		"Exporter des données",
 
+	/* 0.9.7 WIP 01*/
+	'mTopViewModeRomPlayed' =>
+		"Dernière jouée",
+	'mTopViewModeRomNotPlayed' =>
+		"Jamais jouée",
+	'mTopViewModeRomBookmarks' =>
+		"Favoris de ROMs",		
+	'mTopViewModeRomMostPlayed' =>
+		'La plus jouée',
+	'mTopViewModeRomPersonalReviews' =>
+		'ROMS avec des notes personnelles',
+
+	'mTopViewToggleSearch' =>
+		'Montrer le panneau de recherche',
+
+	/* 0.9.7 WIP 11*/
+	'mTopOptionBackupUserdata' =>
+		'Sauvegarde des données utilisateur (XML)',
+
 );
 ?>

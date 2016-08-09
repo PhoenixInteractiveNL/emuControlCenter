@@ -212,7 +212,7 @@ $i18n['popup'] = array(
 	/* 0.9.1 FYEO 6 */
 	'sys_dialog_miss_title' =>
 		"\nCONFIRMATION\n",
-
+		
 	/* 0.9.2 WIP 11 */
 	'parse_big_file_found_title' =>
 		"\nFICHIER ENORME TROUVE !!!\n",
@@ -317,5 +317,20 @@ $i18n['popup'] = array(
 		"\nPROCESSUS TERMINE\n",
 	'processDoneMsg' =>
 		"Le processus est terminé !\n",
+
+	/* 0.9.7 FYEO 11 */
+	'userdata_backuped_in%s' =>
+		"Le fichier backup XML de vos données utilisateur a été créé dans le dossier ecc-user/#_GLOBAL/ folder\n\n%s\n\nVoulez-vous visualiser maintenant le fichier XML exporté ?",
+
+	/* 0.9.7 FYEO 17 */
+	'executePostShutdownTaskTitle' =>
+		"\nEXECUTION D'UNE TACHE DE FOND\n",
+	'executePostShutdownTaskMessage%s' =>
+		"\nTâche: <b>%s</b>\n\nVoulez-vous vraiment exécuter cette tâche de fond ?",
+	'postShutdownTaskTitle' =>
+		"\nEXECUTER LES TACHES SELECTIONNEES\n",
+	'postShutdownTaskMessage' =>
+		"Vous avez sélectionné une tâche exécutable seulement si emuControlCenter est fermé.\n\nA la fin de cette tâche, <b>emuControlCenter va redémarrer automatiquement !</b>\n\nCeci peut prendre quelques secondes, quelques minutes ou parfois des heures ! Ce popup sera bloqué, donc aucune crainte ! :-)\n\n<b>SVP attendez !</b>",
+
 );
 ?>

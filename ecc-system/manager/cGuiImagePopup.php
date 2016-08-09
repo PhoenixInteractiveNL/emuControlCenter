@@ -7,7 +7,7 @@ class GuiImagePopup {
 	private $gui = false;
 	private $oImage;
 	private $imagePosition = 0;
-	private $imageTypes; // contains the given imagetypes as array
+	private $imageTypes = array(); // contains the given imagetypes as array
 	
 	private $selectedImageType = false;
 	
@@ -214,7 +214,9 @@ class GuiImagePopup {
 	private function createImageDataArray() {
 		foreach ($this->gui->image_type as $key => $value) {
 			$split = explode('_', $key);
-			if (isset($split[2])) $this->imageTypes[$split[0]][$split[1]][(int)$split[2]]['pos'] = (int)$split[2];
+			if (isset($split[2])){
+				$this->imageTypes[$split[0]][$split[1]][(int)$split[2]]['pos'] = $split[2];
+			}
 			$this->imageTypes[$split[0]][$split[1]][(int)@$split[2]]['label'] = $value;
 			$this->imageTypes[$split[0]][$split[1]][(int)@$split[2]]['key'] = $key;
 		}
@@ -247,7 +249,10 @@ class GuiImagePopup {
 					
 					// get current label
 					$label = ucfirst($key2);
-					if (isset($value3['pos'])) $label .= ' '.sprintf("%02d", $value3['pos']);
+					
+					if (isset($value3['pos'])){
+						$label .= (!is_numeric($value3['pos'])) ? ' '.ucfirst($value3['pos']) : ' '.sprintf("%02d", $value3['pos']);
+					}
 					
 					$widged = new GtkLabel();
 					$widged->set_markup('<span color="'.$this->dropZoneBgColorText.'">'.$label.'</span>');
@@ -429,7 +434,8 @@ class GuiImagePopup {
 	}
 	
 	private function twImageInit() {
-		$this->imgPopup_model = new GtkListStore(Gtk::TYPE_STRING, GdkPixbuf::gtype, Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+		
+		$this->imgPopup_model = new GtkListStore(GObject::TYPE_STRING, GdkPixbuf::gtype, GObject::TYPE_STRING, GObject::TYPE_STRING);		
 		
 		// set index
 		$rendererText = new GtkCellRendererText();		// set index
@@ -506,8 +512,7 @@ class GuiImagePopup {
 		return false;
 	}
 	
-	public function hidePopup() {
-		
+	public function storeSettings(){
 		$transferModeState = $this->gui->mediaCenterOptRadioCopy->get_active();
 		$transferMode = ($transferModeState) ? 'COPY' : 'MOVE';
 		$this->iniManager->storeHistoryKey('imageCenterConfirmPopupState', $transferMode);
@@ -517,9 +522,15 @@ class GuiImagePopup {
 		# write position and size settings
 		$this->writePopupPosition();
 		$this->writePopupSize();
+	}
+	
+	public function hidePopup() {
+		
+		$this->storeSettings();
 		
 		$this->gui->hide($this->gui->win_imagePopup);
 		$this->opened_state = false;
+		return true;
 	}
 	
 	public function updateImagePosition($obj=false) {
@@ -799,8 +810,10 @@ class GuiImagePopup {
 	
 	public function onStorePosition() {
 		# write position and size settings
-		$this->writePopupPosition();
-		$this->writePopupSize();
+//		$this->writePopupPosition();
+//		$this->writePopupSize();
+		
+		$this->storeSettings();
 	}
 }
 ?>

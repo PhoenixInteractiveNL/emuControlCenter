@@ -242,8 +242,6 @@ $i18n['popupConfig'] = array(
 
 	'colOptOptionsBg1' =>
 		"Hintergrund 1",
-	'colOptOptionsBg1' =>
-		"Hintergrund 1",
 	'colOptOptionsBgHilight' =>
 		"Hintergrund gewählt",
 	'colOptOptionsText' =>
@@ -270,7 +268,7 @@ $i18n['popupConfig'] = array(
 		"Platform Einstellungen",
 	'tab_label_platforms' =>
 		"Platform / Emulator",
-
+	
 	/* 0.9.6 WIP 18 */
 	'confEccSaveViewSettings' =>
 		"Speichere Ansicht-Einstellungen (fur für Experten)",
@@ -278,7 +276,7 @@ $i18n['popupConfig'] = array(
 	/* 0.9.6 WIP 19 */
 	'tabEmuInfos' =>
 		"Links & Infos",
-
+		
 	/* 0.9.6 WIP 20 */
 	'startConfBugreportSend' =>
 		"Fehlerbricht automatisch versenden",
@@ -286,6 +284,49 @@ $i18n['popupConfig'] = array(
 		"Spracheinstellungen",
 	'tab_label_language' =>
 		"Sprache",
+	
+	/* 0.9.7 WIP 01 */
+	'confEccSilentParsing' =>
+		"Stilles ROM parsing (keine Popups)",
+		
+	'emuAssignGlobalEnableEccScript' =>
+		"aktiviere eccScript",
+	'emuAssignFileextLabel' =>
+		"Emulator für Dateiendung",
+	'emuAssignPreviewLabel' =>
+		"Kommandozeilen Vorschau",
+	'emuAssignGlobalActive%s' =>
+		"Starte roms mit der Dateiendung '%s' mit diesem Emulator",
+	'emuAssignGlobalActiveGlobal%s' =>
+		"Aktiviere catch all Emulator '%s'",
+	'lbl_emu_tips_ecc' =>
+		"ecc links",	
+	'emuPlatformActiveState' =>
+		"Aktiviere Platform",
+	'tabGeneralHlListOptions' =>
+		"Listen Optionen",	
+		
+	/* 0.9.7 WIP 04 */
+	'tab_label_themes' =>
+		"Themes",
+	'lblThemeSelect' =>
+		"Theme wählen",
+
+	/* 0.9.7 WIP 10 */
+	'emuAssignLabelZipUnpack' =>
+		"ZIP extrahieren",
+	'emuAssignGlobalCheckZipUnpackActive' =>
+		"Entpacke ZIP Dateien automatisch",
+	'emuAssignGlobalCheckZipUnpackSkip' =>
+		"Überspringe schon entpackte Dateien (schneller)",
+	'emuAssignGlobalCheckZipUnpackClean' =>
+		"Bereinige das ecc-unpack Verzeichnis für diese Platform",
+	'emuAssignGlobalCheckZipUnpackOpen' =>
+		"Öffne das ecc-unpack Verzeichnis",
+
+	/* 0.9.7 WIP 10 */
+	'conEccSaveGuiSettings' =>
+		"Speicher GUI-Einstellungen",
 
 );
 ?>

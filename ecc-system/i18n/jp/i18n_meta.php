@@ -11,58 +11,85 @@ $i18n['meta'] = array(
 	
 	/* FILES */
 	'lbl_filename' =>
-		"ƒtƒ@ƒCƒ‹–¼",
+		"ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½",
 	'lbl_filename_short' =>
-		"ƒtƒ@ƒCƒ‹",
+		"ï¿½tï¿½@ï¿½Cï¿½ï¿½",
 	'lbl_directory' =>
-		"ƒfƒBƒŒƒNƒgƒŠ",
+		"ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½",
 	'lbl_directory_short' =>
-		"ŠK‘w",
+		"ï¿½Kï¿½w",
 	'lbl_filesize' =>
-		"ƒtƒ@ƒCƒ‹ƒTƒCƒY",
+		"ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Tï¿½Cï¿½Y",
 	'lbl_filesize_short' =>
-		"ƒTƒCƒY",
+		"ï¿½Tï¿½Cï¿½Y",
 	
 	/* META FIELDS */
 	'lbl_title' =>
-		"ƒ^ƒCƒgƒ‹",
+		"ï¿½^ï¿½Cï¿½gï¿½ï¿½",
 	'lbl_category' =>
-		"ƒJƒeƒSƒŠ",
+		"ï¿½Jï¿½eï¿½Sï¿½ï¿½",
 	'lbl_developer' =>
-		"ŠJ”­ŽÒ",
+		"ï¿½Jï¿½ï¿½ï¿½ï¿½",
 	'lbl_publisher' =>
-		"”­•\Œ³",
+		"ï¿½ï¿½ï¿½\ï¿½ï¿½",
 	'lbl_year' =>
-		"”N",
+		"ï¿½N",
 	'lbl_usk' =>
 		"USK",
 	'lbl_storage' =>
-		"•Û‘¶ƒ^ƒCƒv",
+		"ï¿½Û‘ï¿½ï¿½^ï¿½Cï¿½v",
 	'lbl_info' =>
-		"î•ñ",
+		"ï¿½ï¿½ï¿½",
 	'lbl_infoid' =>
 		"ID",
 	'lbl_languages' =>
-		"Œ¾Œê",
+		"ï¿½ï¿½ï¿½ï¿½",
 	'lbl_rating' =>
-		"•]‰¿",
+		"ï¿½]ï¿½ï¿½",
 		
 	/* META OPTIONS */
 	'lbl_running' =>
-		"‹N“®‰Â",
+		"ï¿½Nï¿½ï¿½ï¿½ï¿½",
 	'lbl_buggy' =>
-		"ƒoƒO—L‚è",
+		"ï¿½oï¿½Oï¿½Lï¿½ï¿½",
 	'lbl_trainer' =>
-		"ƒgƒŒ[ƒi[",
+		"ï¿½gï¿½ï¿½ï¿½[ï¿½iï¿½[",
 	'lbl_intro' =>
-		"ƒCƒ“ƒgƒ",
+		"ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½",
 	'lbl_usermod' =>
-		"ŒÂl‚Ì‰ü‘¢",
+		"ï¿½Âlï¿½Ì‰ï¿½",
 	'lbl_freeware' =>
-		"ƒtƒŠ[ƒEƒFƒA",
+		"ï¿½tï¿½ï¿½ï¿½[ï¿½Eï¿½Fï¿½A",
 	'lbl_multiplay' =>
-		"•¡”ƒvƒŒƒC",
+		"ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½C",
 	'lbl_netplay' =>
-		"ƒlƒbƒg’ÊM",
+		"Netplay",
+
+	/* 0.9.7 WIP 01 */
+	'lbl_programmer' =>
+		"Programmer",
+	'lbl_musican' =>
+		"Musican",
+	'lbl_medium' =>
+		"Medium",
+		
+		
+);
+
+$i18n['dropdownMedium'] = array(
+	'unknown' =>
+		"Unknown",
+	'cd' =>
+		"CD/DVD-Rom",
+	'tape' =>
+		"Tape",
+	'floppydics' =>
+		"Floppydisk",
+	'cartridge' =>
+		"Cartridge",
+	'card' =>
+		"Card",
+	'arcade_board' =>
+		"Arcade board",
 );
 ?>

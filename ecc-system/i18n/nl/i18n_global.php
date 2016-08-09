@@ -111,7 +111,6 @@ $i18n['global'] = array(
 	'cancel' =>
 		"Annuleren",
 
-
 	/* 0.9.6 WIP 15 */
 	'first' =>
 		"Eerste",
@@ -175,6 +174,41 @@ $i18n['global'] = array(
 	/* 0.9.6 WIP 16 */
 	'rateRom' =>
 		"Beoordeel deze ROM",
-
+		
+	/* 0.9.7 WIP 01 */
+	'total' =>
+		"totaal",
+	'startRom' =>
+		"Start ROM",
+	'zip' =>
+		"Zip",
+	'fileInfo' =>
+		"Bestands informatie",
+	'edit' =>
+		"Bewerken",
+	'hiscore' =>
+		"Hoogste score",
+		
+	/* 0.9.7 WIP 02 */
+	'of' =>
+		"van",
+		
+	/* 0.9.7 WIP 04 */
+	'informations' =>
+		"Informatie",
+	'contact'=>
+		"Contact",
+	'author'=>
+		"Eigenaar",
+	'date'=>
+		"Datum",
+	'description'=>
+		"Beschrijving",
+	'website'=>
+		"Website",
+		
+	/* 0.9.7 WIP 07 */
+	'reset'=>
+		"Herstel",
 );
 ?>

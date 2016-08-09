@@ -92,10 +92,10 @@ class FileIO {
 	public function fopen_zip($zipFileName, $zipEntryFileName) {	
 		
 		// ABS-PATH TO REL-PATH...
-		$file_name_direct = realpath($zipFileName);
+		#$file_name_direct = realpath($zipFileName);
 		
 		$zip = new ZipArchive();
-		$res = $zip->open($zipFileName);
+		$zip->open($zipFileName);
 		$buf = $zip->getFromName($zipEntryFileName);
 		$zip->close();
 		
@@ -116,6 +116,18 @@ class FileIO {
 		}
 		
 		return $fhdl;
+	}
+	
+	public function extractZip($zipFile, $zipEntry, $destinationFolder = false){
+		
+		# if destination not set, extract to zip file folder
+		if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
+		else $destinationFolder = realpath($destinationFolder);
+		
+		$zip = new ZipArchive();
+		$zip->open($zipFile);
+		$zip->extractTo($destinationFolder, $zipEntry);
+		$zip->close();
 	}
 	
 	public function fclose_zip($fhdl, $path) {
@@ -365,29 +377,30 @@ class FileIO {
 	}
 	
 	public function deleteFileByFilename($fileName) {
-		return (@unlink($fileName));
+		return @unlink($fileName);
 	}
-	
 	
 	public function rmDirComplete($dirName){
 		if(empty($dirName) || !file_exists($dirName)) return false;
 		$command = "RMDIR /S /Q ".escapeshellarg($dirName.'/')."";
-		exec ($command);		
+		return exec($command);
 	}
 	
 	public function rmdirr($dirName) {
-		if(empty($dirName) || !file_exists($dirName)) return false;
+		if(!$dirName || !file_exists($dirName)) return false;
 		$dir = dir($dirName);
 		while($file = $dir->read()) {
 			if($file != '.' && $file != '..') {
-				if(is_dir($dirName.'/'.$file)) $this->rmdirr($dirName.'/'.$file);
-				else{
-					@unlink($dirName.'/'.$file);
+				$currentPath = $dirName.'/'.$file;
+				if(is_dir($currentPath)){
+					$this->rmdirr($currentPath);
+					@rmdir($currentPath);
 				}
+				else unlink($currentPath);
 			}
 		}
-		$path = realpath($dirName.'/'.$file);
-		if ($path) @rmdir($path);
+		$dir->close();
+		rmdir($dirName);
 	}
 	
 	public function dirIsEmpty($dirName){
@@ -438,11 +451,14 @@ class FileIO {
 		
 		# configuration
 		$crcGeneratorFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/fsum.exe');
+		if(!$crcGeneratorFile) return false;
+		
 		$crcGeneratorParams = '-crc32';
 		$logFile = realpath('../ecc-core-'.strtolower(PHP_OS).'/thirdparty/fsum/').'eccCrc32.chk';
 		
 		# create command for execution
-		$execCommand = $crcGeneratorFile.' '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);
+		#$execCommand = '"'.$crcGeneratorFile.'" '.$crcGeneratorParams.' '.escapeshellarg(basename($filename)).' > '.escapeshellarg($logFile);
+		$execCommand = '"'.$crcGeneratorFile.'" '.$crcGeneratorParams.' "'.basename($filename).'" > "'.$logFile.'"';
 		
 		# get manager os
 		$mngrOs = FACTORY::getManager('Os');
@@ -459,7 +475,7 @@ class FileIO {
 			if(!$commandIsExecuted){
 				
 				# first remove old logfile!
-				unlink($logFile); # now remove chk logfile
+				@unlink($logFile); # now remove chk logfile
 				
 				$commandCwdPath = $mngrOs->executeCommand($execCommand, dirname($filename), $returnCwdPath = true);
 				$commandIsExecuted = true;
@@ -509,6 +525,49 @@ class FileIO {
 		}
 		return false;
 	}	
+
+	public static $fileList;
+	public static $basePath;
+	public static function readDirRecursive($currentDir, $callback = false) {
+		
+		# store basedir
+		if(!self::$basePath) self::$basePath = $currentDir;
+		
+		$d = opendir($currentDir);
+		while(($currentFilename = readdir($d)) !== false) {
+			if ($currentFilename == '.' || $currentFilename == '..') continue;
+			$currentPath = realpath($currentDir.'/'.$currentFilename);
+			if(!$currentPath) continue;
+			
+			// if is directory, read dir
+			if (is_dir($currentPath)) self::readDirRecursive($currentPath, $callback);
+			
+			# if callback is set, and return false -> skip entry
+			if(isset($callback) && is_array($callback)){
+				$callbackObject = $callback[0];
+				$callbackMethod = $callback[1];
+				$callbackParams = @$callback[2];
+				$data = $callbackObject->$callbackMethod($currentPath, self::$basePath, $callbackParams);
+				if($data !== false) {
+					
+					if(is_array($data) && count($data) == 2){
+						if(is_array($data[1])){
+							if(!isset(self::$fileList[$data[0]])) self::$fileList[$data[0]] = array();
+							array_push(self::$fileList[$data[0]], $data[1][0]);
+						}
+						else{
+							self::$fileList[$data[0]] = $data[1];	
+						}
+					}
+					else self::$fileList[] = $data;	
+				}
+				else continue;
+			}
+			else self::$fileList[] = $currentPath;
+		}
+		return self::$fileList;	
+	}
+		
 }
 
 ?>

@@ -27,5 +27,21 @@ $i18n['tooltips'] = array(
 		"ROMがEQUALまたはそれ以下の選択を表示する",
 	'optvis_mainlistmode' =>
 		"詳細とリスト表示を切換える",
+		
+	/* 0.9.7 WIP 01 */
+
+	'nbMediaInfoStateRatingEvent' =>
+		"Click to add your own rating for this rom",
+	'nbMediaInfoNoteEvent' =>
+		"Show notes for this rom",
+	'nbMediaInfoReviewEvent' =>
+		"Show review for this game",
+	'nbMediaInfoBookmarkEvent' =>
+		"Add / Remove bookmark",
+	'nbMediaInfoAuditStateEvent' =>
+		"Audit state for multifile roms",
+	'nbMediaInfoMetaEvent' =>
+		"Edit the metainformations for this game",
+		
 );
 ?>

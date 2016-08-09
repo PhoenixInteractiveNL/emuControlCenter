@@ -29,7 +29,9 @@ class EccParser {
 		
 		$useExtDispatcher = $ini->getKey('USER_SWITCHES', 'useExtensionDispatcher');
 		
-		$dataParser = FACTORY::get('manager/EccParserMedia', dirname($path[0]));
+		# TODO [0]
+		$dataParser = FACTORY::get('manager/EccParserMedia', dirname(reset($path)));
+		#$dataParser = FACTORY::get('manager/EccParserMedia', dirname($path[0]));
 		
 		// parse only eccident, if set. else parse everything found
 		$wanted_extensions = $ini->getPlatformExtensionParser($eccident);
@@ -46,29 +48,35 @@ class EccParser {
 		# store paths for global reparse feature like in mame (F5)
 		$dataParser->storeSelectedBasePaths($eccident, $path);
 		
+		# unset extension by dialog
+		$silentReparse = $ini->getKey('USER_SWITCHES', 'confEccSilentParsing');
+		
 		$directUnseted = array();
 		foreach ($wanted_extensions as $fileExtension => $void) {
 			
 			if (count($all_extensions[$fileExtension])>1) {
-
-				$platformNames = join(" | ", $this->gui->ini->getPlatformsByFileExtension($fileExtension))."\n";
 				
-				if ($eccident) {
-					$fileExtensionOutput = '*.'.$fileExtension;
-					$title = sprintf(I18N::get('popup', 'romparser_fileext_problem_title%s'), '"<b>'.$fileExtensionOutput.'</b>"');
-					$message = sprintf(I18N::get('popup', 'romparser_fileext_problem_msg%s%s%s%s%s%s'), '"<b>'.$fileExtensionOutput.'</b>"', '<span color="#6C6C6C">'.$platformNames.'</span>', '"<b>'.$this->gui->ecc_platform_name.'</b>"', '"'.join("\n", $path).'"', $fileExtensionOutput, $fileExtensionOutput);
+				if(!$silentReparse){
 					
-					if (!$guiManager->openDialogConfirm($title, $message)) {
+					if ($eccident) {
+						$platformNames = join(" | ", $this->gui->ini->getPlatformsByFileExtension($fileExtension))."\n";
+						$fileExtensionOutput = '*.'.$fileExtension;
+						$title = sprintf(I18N::get('popup', 'romparser_fileext_problem_title%s'), '"<b>'.$fileExtensionOutput.'</b>"');
+						$message = sprintf(I18N::get('popup', 'romparser_fileext_problem_msg%s%s%s%s%s%s'), '"<b>'.$fileExtensionOutput.'</b>"', '<span color="#6C6C6C">'.$platformNames.'</span>', '"<b>'.$this->gui->ecc_platform_name.'</b>"', '"'.join("\n", $path).'"', $fileExtensionOutput, $fileExtensionOutput);
+						
+						if (!$guiManager->openDialogConfirm($title, $message)) {
+							unset($wanted_extensions[$fileExtension]);
+						}
+					}
+					else {
 						unset($wanted_extensions[$fileExtension]);
 					}
+					$directUnseted[] = $fileExtension;
 				}
-				else {
-					unset($wanted_extensions[$fileExtension]);
-				}
-				$directUnseted[] = $fileExtension;
 			}
 		}
 
+		# for all found rescan
 		if (!$eccident && count($directUnseted)) {
 			$directUnseted[] = 'zip';
 			$removedExtensions = "*.".implode(", *.", $directUnseted)."";

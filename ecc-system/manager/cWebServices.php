@@ -89,6 +89,8 @@ class WebServices {
 			$urlData['url'] .= "&csid=".urlencode($this->eccDbSessionKey);	
 			
 			$ret = file_get_contents($urlData['url'], false, NULL, 0, 30); // only read the first 30 chars
+			#$ret = file_get_contents($urlData['url'], false, NULL, 0, 130); // only read the first 30 chars
+			
 			while (gtk::events_pending()) gtk::main_iteration();
 			
 			$split = explode(':', $ret);
@@ -119,7 +121,7 @@ class WebServices {
 			
 			if (!$error) $this->setExportedSession($mid, $sessionKey);
 			
-			usleep(200000);
+			usleep(100000);
 			
 			// ---------------------------------
 			// STATUS BAR PROGRESS
@@ -149,16 +151,18 @@ class WebServices {
 	
 	private function getEccdbUpdateUrls($perRun, $eccversion, $sessionKey) {
 
-		$userData = $this->getModifiedUserData($perRun);
+		$debug = true;
 		
+		$userData = $this->getModifiedUserData($perRun);
 		$urlData = array();
 		foreach ($userData as $key => $modData) {
 
 			$eccident = trim($modData['md.eccident']);
 			$crc32 = trim($modData['md.crc32']);
 			$filename = trim($modData['fd.title']);
-			$filesize = trim($modData['fd.size']);
-			$filesize = ($filesize) ? round($filesize/1024, 1) : 0;
+			$filesize = $modData['fd.size'];
+			$fileext = trim($modData['md.extension']);
+			//$filesize = ($filesize) ? round($filesize/1024, 1) : 0;
 			
 			$title = (trim($modData['md.name']));
 			$rating = $modData['md.rating'];
@@ -176,8 +180,42 @@ class WebServices {
 			$date = ($modData['fd.launchtime']) ? date('Ymd-His', $modData['fd.launchtime']) : 0;
 			$stats = (int)$modData['fd.launchcnt'].'.'.$date;
 			
+			$data = array(
+				'eccident' => urlencode($eccident),
+				'crc32' => urlencode($crc32),
+				'title' => urlencode($title),
+				'fname' => urlencode($filename),
+				'fsize' => urlencode((int)$filesize),
+				'fext' => urlencode($fileext),
+				'rating' => urlencode($rating),
+				'eccvers' => urlencode($eccversion),
+				'data' => urlencode($data),
+				'lang' => urlencode($lang),
+				'year' => urlencode($year),
+				'cat' => urlencode($cat),
+				'dev' => urlencode($dev),
+				'usk' => urlencode($usk),
+				'sk' => urlencode($sessionKey),
+				'pub' => urlencode($publisher),
+				'sto' => urlencode($storage),
+				'stat' => urlencode($stats),
+				'debug' => urlencode($debug),
+				'pro' => urlencode(trim($modData['md.programmer'])),
+				'mus' => urlencode(trim($modData['md.musican'])),
+				'gra' => urlencode(trim($modData['md.graphics'])),
+				'mtype' => urlencode($modData['md.media_type']),
+				'mcur' => urlencode($modData['md.media_current']),
+				'mcou' => urlencode($modData['md.media_count']),
+				'reg' => urlencode($modData['md.region']),
+				'catb' => urlencode($modData['md.category_base']),
+			);
+			$params = array();
+			foreach($data as $key => $value) $params[] = $key.'='.$value;
+			$paramString = join('&', $params);
+			
 			$urlData[$modData['md.id']]['title'] = $eccident."|".$crc32."|".$title;
-			$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."&pub=".urlencode($publisher)."&sto=".urlencode($storage)."&stat=".urlencode($stats)."";
+			$urlData[$modData['md.id']]['url'] = $this->serviceUrl.'?'.$paramString;
+			#$urlData[$modData['md.id']]['url'] = $this->serviceUrl."?eccident=".urlencode($eccident)."&crc32=".urlencode($crc32)."&title=".urlencode($title)."&fname=".urlencode($filename)."&fsize=".urlencode((int)$filesize)."&rating=".urlencode($rating)."&eccvers=".urlencode($eccversion)."&data=".urlencode($data)."&lang=".urlencode($lang)."&year=".urlencode($year)."&cat=".urlencode($cat)."&dev=".urlencode($dev)."&usk=".urlencode($usk)."&sk=".urlencode($sessionKey)."&pub=".urlencode($publisher)."&sto=".urlencode($storage)."&stat=".urlencode($stats)."&debug=".$debug;
 		}
 		
 		return $urlData;
@@ -235,18 +273,38 @@ class WebServices {
 	
 	private function setRomdbSessionKey() {
 		if (!$this->eccDbSessionKey) {
-			$romdbSessionKey = @file_get_contents(ECC_BASEDIR.$this->cs['cscheckdat']);
+			$romdbSessionKey = @file_get_contents(ECC_DIR.'/'.$this->cs['cscheckdat']);
 			$this->eccDbSessionKey = ($romdbSessionKey) ? $romdbSessionKey : '........';
 		}
 	}
 	
 	private function addRomdbSessionKey($romdbSessionKey) {
-		file_put_contents(ECC_BASEDIR.$this->cs['cscheckdat'], $romdbSessionKey);
+		file_put_contents(ECC_DIR.'/'.$this->cs['cscheckdat'], $romdbSessionKey);
 		$this->eccDbSessionKey = $romdbSessionKey;
 	}
 	
 	public function getRomdbDatfile(){
-		return @file_get_contents($this->serviceUrl.'/eccdat_all_complete.'.date('Ymd', time()).'.eccDat');
+
+		$userFolder = FACTORY::get('manager/IniFile')->getUserFolder(false, '#_GLOBAL', true);
+//		$userFolder = FACTORY::get('manager/IniFile')->getUserFolder().'/#_GLOBAL/';
+
+		$filename = 'eccdat_all_complete.'.date('Ymd', time()).'.eccDat';
+		
+		# direct get datfile... no more caching!
+		$data = file_get_contents($this->serviceUrl.'/'.$filename);
+		
+//		$cachedFile = $userFolder.$filename;
+//		if(file_exists($cachedFile)){
+//			$data = file_get_contents($cachedFile);
+//		}
+//		else{
+//			$data = file_get_contents($this->serviceUrl.'/'.$filename);
+//			if(trim($data)) file_put_contents($cachedFile, $data);
+//		}
+		
+		return $data;
+		
+		#return @file_get_contents($this->serviceUrl.'/eccdat_all_complete.'.date('Ymd', time()).'.eccDat');
 	}
 	
 }

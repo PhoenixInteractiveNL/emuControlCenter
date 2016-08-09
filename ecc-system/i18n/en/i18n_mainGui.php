@@ -62,5 +62,24 @@ $i18n['mainGui'] = array(
 		"Header",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
+	
+	/* 0.9.7 WIP 01*/
+	'btnMainShowAllRomsLabel' => 
+		"Roms",
+	'btnMainShowBookmarkedRomsLabel' => 
+		"Bookmarks",
+	'btnMainShowLaunchedRomsLabel' => 
+		"History",
+		
+	'contextViewModeSelectHeader' => 
+		"Select a mode",
+
+	'paneInfoEccDbGetDatfileTitle' =>
+		"Import online datfile",
+	'paneInfoEccDbGetDatfileText%s' =>
+		"You can import the latest online datfile for %s from internet romDB here.",
+	'paneInfoEccDbGetDatfileButton' =>
+		"Import datfile",
+		
 );
 ?>

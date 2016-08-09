@@ -18,7 +18,7 @@ class DbmsSqlite2 extends Dbms {
 	}
 
 	public function query($q) {
-		#print $q."\n";
+		#if(stripos($q, 'update')) print $q."\n";
 		return $this->dbms->query(trim($q));
 	}
 

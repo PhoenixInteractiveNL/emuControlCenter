@@ -20,36 +20,18 @@ class EccUpdate {
 		// handle all update from begining to now
 		$errorVersion = false;
 		switch (true) {
-			case $eccDbVersion < '0.5.901':
-				if ($this->updateEccFromConfig('0.5.901')) $this->updateEccDbVersion('0.5.901');
+			case $eccDbVersion < '0.9.701':
+				if ($this->updateEccFromConfig('0.9.701')) $this->updateEccDbVersion('0.9.701');
 				else {
-					$errorVersion = '0.5.901';
+					$errorVersion = '0.9.701';
 					break;
 				}
-			case $eccDbVersion < '0.7.0':
-				if ($this->updateEccFromConfig('0.7.0')) $this->updateEccDbVersion('0.7.0');
+			case $eccDbVersion < '0.9.706':
+				if ($this->updateEccFromConfig('0.9.706')) $this->updateEccDbVersion('0.9.706');
 				else {
-					$errorVersion = '0.7.0';
+					$errorVersion = '0.9.706';
 					break;
 				}
-			case $eccDbVersion < '0.7.1':
-				if ($this->updateEccFromConfig('0.7.1')) $this->updateEccDbVersion('0.7.1');
-				else {
-					$errorVersion = '0.7.1';
-					break;
-				}
-			case $eccDbVersion < '0.8.6':
-				if ($this->updateEccFromConfig('0.8.6')) $this->updateEccDbVersion('0.8.6');
-				else {
-					$errorVersion = '0.8.6';
-					break;
-				}
-//			case $eccDbVersion < '0.9.613':
-//				if ($this->updateEccFromConfig('0.9.613')) $this->updateEccDbVersion('0.9.613');
-//				else {
-//					$errorVersion = '0.9.613';
-//					break;
-//				}
 		}
 		if (!$errorVersion) $this->updateEccDbVersion($eccVersion);
 		#print "VERSION NOW ".$eccVersion." #$errorVersion#".LF.LF;
@@ -62,6 +44,7 @@ class EccUpdate {
 			@$this->dbms->query($query);
 			#if (!$hdl) $success = false;
 		}
+		print "DATABASE UPDATED TO VERSION $version\n";
 		return $success;
 	}
 	

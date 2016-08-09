@@ -240,8 +240,6 @@ $i18n['popupConfig'] = array(
 
 	'colOptOptionsBg1' =>
 		"Background 1",
-	'colOptOptionsBg1' =>
-		"Background 1",
 	'colOptOptionsBgHilight' =>
 		"Background selected",
 	'colOptOptionsText' =>
@@ -284,5 +282,49 @@ $i18n['popupConfig'] = array(
 		"Language settings",
 	'tab_label_language' =>
 		"Language",
+	
+	/* 0.9.7 WIP 01 */
+	'confEccSilentParsing' =>
+		"Silent ROM parsing (no popup requests)",
+		
+	'emuAssignGlobalEnableEccScript' =>
+		"activate eccScript",
+	'emuAssignFileextLabel' =>
+		"Emulator for fileextension",
+	'emuAssignPreviewLabel' =>
+		"Commandline preview",
+	'emuAssignGlobalActive%s' =>
+		"Start roms with fileextension '%s' with this emulator",
+	'emuAssignGlobalActiveGlobal%s' =>
+		"Activate catch all emulator '%s'",
+	'lbl_emu_tips_ecc' =>
+		"ecc links",	
+	'emuPlatformActiveState' =>
+		"activate platform",
+	'tabGeneralHlListOptions' =>
+		"List view options",	
+		
+	/* 0.9.7 WIP 04 */
+	'tab_label_themes' =>
+		"Themes",
+	'lblThemeSelect' =>
+		"Select theme",
+
+	/* 0.9.7 WIP 10 */
+	'emuAssignLabelZipUnpack' =>
+		"ZIP auto unpack",
+	'emuAssignGlobalCheckZipUnpackActive' =>
+		"automaticly unpack ZIP files",
+	'emuAssignGlobalCheckZipUnpackSkip' =>
+		"Skip allready unpacked files (faster)",
+	'emuAssignGlobalCheckZipUnpackClean' =>
+		"Cleanup ecc-unpack folder for platform",
+	'emuAssignGlobalCheckZipUnpackOpen' =>
+		"Open ecc-unpack folder",
+
+	/* 0.9.7 WIP 10 */
+	'conEccSaveGuiSettings' =>
+		"Save gui settings",
+
 );
 ?>

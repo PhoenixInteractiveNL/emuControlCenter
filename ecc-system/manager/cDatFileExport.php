@@ -126,8 +126,8 @@ class DatFileExport {
 			$export_file = $user_folder_export."/eccdat_".$this->exportHeader['export_ident']."_".$this->exportHeader['export_type'].".".$this->exportHeader['export_date'].$exportTypeFileExtension;			
 			
 			if (false !== $fhdl = fopen($export_file, 'w+')) {
-				
-				$line = $header;
+
+				fwrite($fhdl, $header);
 				
 				#$cnt_total = count($data);
 				$cnt_current = 0;
@@ -137,7 +137,7 @@ class DatFileExport {
 					$this->status_obj->update_message("Error: No data for export found!");
 					return false;
 				}
-				#foreach($data as $key => $v) {
+				$header = false;
 				while ($v = $dbhdl->fetch(1)) {
 					
 					#print_r($v);
@@ -148,8 +148,32 @@ class DatFileExport {
 					$languages = implode("|", $languages);
 					
 					$fileSize = $this->getFileSize($v['eccident'], $v['crc32']);
+
+//# TEST
+//					$hideFields = array(
+//						'id',
+//						'uexport',
+//						'cdate',
+//					);
+//					foreach($hideFields as $hideKey) unset($v[$hideKey]);
+//
+//$v['info'] = str_replace(" ","", $v['info']);
+//$v['languages'] = $languages;
+//$v['filesize'] = $fileSize;
+//					
+//					if(!$header){
+//						print join(';', array_keys($v))."\n";
+//						$header = true;
+//					}
+//					print join(';', $v)."\n";
+//					
+//					$this->createExportString($v, $hideFields, $addFields);
+
+					# remove "invalid ;" in strings
+					foreach($v as $key => $value) if(strpos($value, ';') !== false) $v[$key] = str_replace(';', ',', $value);
 					
-					$line .= $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";#\r\n";
+					$line = $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";".$v['programmer'].";".$v['musican'].";".$v['graphics'].";".$v['media_type'].";".$v['media_current'].";".$v['media_count'].";".$v['region'].";".$v['category_base'].";#\r\n";
+					
 					#print $line."\r\n";
 					fwrite($fhdl, $line);
 					$line = "";
@@ -201,6 +225,9 @@ class DatFileExport {
 		return $ret;
 	}
 	
+//	public function createExportString($v, $hideFields, $addFields){
+//	}
+	
 	private function createEccDatHeader(){
 
 		$this->exportHeader['title'] = $this->ecc_release['title'];
@@ -227,7 +254,7 @@ class DatFileExport {
 		$line .= "COMMENT=\t".$this->exportHeader['comment']."\r\n";
 		$line .= "\r\n";
 		$line .= "[ECC_MEDIA]\r\n";
-		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;#\r\n";
+		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;programmer;musican;graphics;media_type;media_current;media_count;region;category_base;#\r\n";
 		return $line;
 	}
 	

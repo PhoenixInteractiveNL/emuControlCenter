@@ -6,7 +6,7 @@ class AutoCompletion {
 	}
 	
 	public function createListStore($listStore = false) {
-		$listStore = ($listStore) ? $listStore : new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+		$listStore = ($listStore) ? $listStore : new GtkListStore(GObject::TYPE_STRING, GObject::TYPE_STRING);
 		return $listStore;
 	}
 	

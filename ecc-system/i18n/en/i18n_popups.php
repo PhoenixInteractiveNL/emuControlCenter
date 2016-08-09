@@ -316,5 +316,21 @@ $i18n['popup'] = array(
 		"Process completed!",
 	'processDoneMsg' =>
 		"The process has been completed!",
+
+	/* 0.9.7 FYEO 11 */
+	'userdata_backuped_in%s' =>
+		"The backup XML-File with your userdata has been created into your ecc-user/#_GLOBAL/ folder\n\n%s\n\nView the exported xml now in your xml browser?",
+
+	/* 0.9.7 FYEO 17 */
+	'executePostShutdownTaskTitle' =>
+		"Really execute this background task?",
+	'executePostShutdownTaskMessage%s' =>
+		"\nTask: <b>%s</b>\n\nDo you really want to execute this long running task?",
+	'postShutdownTaskTitle' =>
+		"Execute selected task",
+	'postShutdownTaskMessage' =>
+		"You have selected a task only executable if emuControlCenter closed.\n\nAfter this task, <b>emuControlCenter will restart automaticly!</b>\n\nThis can take some seconds, some minutes and sometimes hours! This popup will be freezed! No fear! :-)\n\n<b>Please wait!</b>",
+
+
 );
 ?>

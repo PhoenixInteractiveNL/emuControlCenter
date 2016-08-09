@@ -174,6 +174,23 @@ $i18n['global'] = array(
 	/* 0.9.6 WIP 16 */
 	'rateRom' =>
 		"Rate the rom",
-
+		
+	/* 0.9.7 WIP 01 */
+	'total' =>
+		"total",
+	'startRom' =>
+		"Start rom",
+	'zip' =>
+		"Zip",
+	'fileInfo' =>
+		"File info",
+	'edit' =>
+		"Edit",
+	'hiscore' =>
+		"Hiscore",
+		
+	/* 0.9.7 WIP 02 */
+	'of' =>
+		"of",
 );
 ?>

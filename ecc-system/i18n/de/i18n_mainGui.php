@@ -1,4 +1,4 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -62,5 +62,24 @@ $i18n['mainGui'] = array(
 		"Header",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
+
+	/* 0.9.7 WIP 01*/
+	'btnMainShowAllRomsLabel' => 
+		"Roms",
+	'btnMainShowBookmarkedRomsLabel' => 
+		"Bookmarks",
+	'btnMainShowLaunchedRomsLabel' => 
+		"History",
+		
+	'contextViewModeSelectHeader' => 
+		"Wähle einen Modus",
+
+	'paneInfoEccDbGetDatfileTitle' =>
+		"Importiere online datfile",
+	'paneInfoEccDbGetDatfileText%s' =>
+		"Du kannst das aktuelle datfile für %s aus dem online romDB importieren.",
+	'paneInfoEccDbGetDatfileButton' =>
+		"Datfile importieren",
+		
 );
 ?>

@@ -115,7 +115,6 @@ $i18n['menu'] = array(
 	'lbl_quickfilter' =>
 		"quickFilter",
 	'lbl_quickfilter_reset' =>
-
 		"quickFilter entfernen",
 
 	/* 0.9.6 FYEO 1 */
@@ -147,6 +146,31 @@ $i18n['menu'] = array(
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Open eccUser-Folder (%s)",
+	'lbl_rom_remove_toplevel' =>
+		"Remove rom(s)",
+	'menuItemPersonalEditNote' =>
+		"Edit notes",
+	'menuItemPersonalEditReview' =>
+		"Edit review",
+		
+	/* 0.9.6 FYEO 11 */
+	'menuItemRomOptions' =>
+		"Rom options",
+
+	/* 0.9.7 FYEO 17 */
+	'imagepackTopMenu' =>
+		"imagepack helpers",
+	'imagepackRemoveImagesWithoutRomFile' =>
+		"Remove images for roms that i dont have in database",
+	'imagepackRemoveEmptyFolder' =>
+		"Remove empty folder",
+	'imagepackCreateAllThumbnails' =>
+		"Create thumbnails for faster access",
+	'imagepackRemoveAllThumbnails' =>
+		"Remove thumbnails for imagepack exchange",
+	'imagepackConvertEccV1Images' =>
+		"Convert flat images to new imagepack structure! (V1->V2)",
+
 		
 );
 ?>

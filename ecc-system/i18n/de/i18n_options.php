@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------

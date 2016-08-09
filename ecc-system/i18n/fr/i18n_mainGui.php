@@ -62,5 +62,24 @@ $i18n['mainGui'] = array(
 		"En-tête",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
+
+	/* 0.9.7 WIP 01*/
+	'btnMainShowAllRomsLabel' => 
+		"ROMS",
+	'btnMainShowBookmarkedRomsLabel' => 
+		"Favoris",
+	'btnMainShowLaunchedRomsLabel' => 
+		"Historique",
+		
+	'contextViewModeSelectHeader' => 
+		"Choisir un mode",
+
+	'paneInfoEccDbGetDatfileTitle' =>
+		"Importer un fichier de données en ligne",
+	'paneInfoEccDbGetDatfileText%s' =>
+		"Vous pouvez importer le fichier de données pour %s le plus récent à partir de la romDB ici.",
+	'paneInfoEccDbGetDatfileButton' =>
+		"Importer le fichier de données",
+		
 );
 ?>

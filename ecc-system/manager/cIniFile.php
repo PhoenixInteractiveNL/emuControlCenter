@@ -30,6 +30,17 @@ class IniFile {
 		$this->getCompleteEccIni();
 	}
 	
+	public function setThemColors($path){
+		
+		if(!$path) return false;
+		
+		$ini = @parse_ini_file($path, true);
+		if(isset($ini['GUI_COLOR'])){
+			# overwrite colors with the theme colors!
+			$this->ini['GUI_COLOR'] = $ini['GUI_COLOR'];
+		}
+	}
+	
 	public function flushIni() {
 		$this->ini = array();
 		$this->cachedPlatformIni = array();
@@ -572,7 +583,7 @@ class IniFile {
 	
 	public function getLanguageFromI18Folders() {
 		$languages = array();
-		$dirHdl = opendir(ECC_BASEDIR.DIRECTORY_SEPARATOR."ecc-system/i18n/");
+		$dirHdl = opendir(ECC_DIR_SYSTEM."/i18n/");
 		if (!$dirHdl) return $languages;
 		while ($file = readdir($dirHdl)) {
 			if ($file == '.' || $file == '..') continue;
@@ -688,6 +699,12 @@ class IniFile {
 		return $out;
 	}
 	
+	public function getUnpackFolder($eccident = false, $create = false){
+		$folder = $this->getUserFolder().'/#_AUTO_UNPACKED/';
+		if($eccident) $folder .= $eccident.'/';
+		if($create && !is_dir($folder)) $this->createDirectoryRecursive($folder);
+		return realpath($folder);
+	}
 	
 ### ADD TO MANAGER FOR FILES ###
 ### ADD TO MANAGER FOR FILES ###

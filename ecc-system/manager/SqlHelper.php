@@ -7,7 +7,7 @@ class SqlHelper{
 	 * @param array $where
 	 * @return unknown
 	 */
-	public function createSqlWhere($where=array()){
+	public static function createSqlWhere($where=array()){
 		$sqlWhere = join(' AND ', $where);
 		return (!$sqlWhere) ? ' 1 ' : $sqlWhere;
 	}
@@ -19,12 +19,12 @@ class SqlHelper{
 	 * @param unknown_type $orderByString
 	 * @return unknown
 	 */
-	public function createSqlJoin($join=array()){
+	public static function createSqlJoin($join=array()){
 		return join(' ', $join);
 	}
 	
 	
-	public function createSqlOrder($order=array(), $prependString='ORDER BY'){
+	public static function createSqlOrder($order=array(), $prependString='ORDER BY'){
 		return $prependString.' '.join(', ', $order);
 	}
 	
@@ -34,7 +34,7 @@ class SqlHelper{
 	 * @param unknown_type $limit
 	 * @return unknown
 	 */
-	public function createSqlLimit($limit=array()){
+	public static function createSqlLimit($limit=array()){
 		if ( count($limit) == 2 && isset($limit[0]) && isset($limit[1])) {
 			return ' LIMIT '.(int)$limit[0].', '.(int)$limit[1].'';
 		}
@@ -47,7 +47,7 @@ class SqlHelper{
 	 * @param array $eSearch
 	 * @return unknown
 	 */
-	public function createSqlExtSearch($eSearch=array()){
+	public static function createSqlExtSearch($eSearch=array()){
 		if (!$eSearch) return "";
 		$out = array();
 		foreach ($eSearch as $key => $int) {

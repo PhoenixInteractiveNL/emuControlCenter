@@ -153,7 +153,7 @@ class Image {
 	public function removeUserImage($imageFile)
 	{
 		$imageFullFile = $imageFile;
-		$imageThumbFile = $this->getImageThumbFile($imageFile, false);
+		$imageThumbFile = $this->getImageThumbFile($imageFile);
 		
 		if (file_exists($imageFullFile)) unlink($imageFullFile);
 		if (file_exists($imageThumbFile)) unlink($imageThumbFile);
@@ -215,21 +215,20 @@ class Image {
 	}
 	
 	public function moveImage($sourceImagePath, $destImagePath, $createThumb = false) {
-		if ($createThumb) $this->createThumbnail($sourceImagePath, $this->getImageThumbFile($destImagePath, true), true, 240, false);
+		if ($createThumb) $this->createThumbnail($sourceImagePath, $this->getImageThumbFile($destImagePath), true, 240, false);
 		@unlink($destImagePath);
 		@rename($sourceImagePath, $destImagePath);
 		return true;
 	}
 	
 	public function copyImage($sourceImagePath, $destImagePath, $createThumb = false) {
-		if ($createThumb) $this->createThumbnail($sourceImagePath, $this->getImageThumbFile($destImagePath, true), true, 240, false);
+		if ($createThumb) $this->createThumbnail($sourceImagePath, $this->getImageThumbFile($destImagePath), true, 240, false);
 		@copy($sourceImagePath, $destImagePath);
 		return true;
 	}
 	
-	public function getImageThumbFile($destImagePath, $createDir = false){
+	public function getImageThumbFile($destImagePath){
 		$destThumbPath = dirname($destImagePath).'/'.$this->imageThumbSubfolder;
-		if ($createDir && !is_dir($destThumbPath)) mkdir($destThumbPath);
 		return $this->fileIoManager->replaceFileExtension($destThumbPath.basename($destImagePath), $this->imageThumbType);
 	}
 	
@@ -267,6 +266,9 @@ class Image {
 		imagecopyresampled($imageThumb, $image, 0, 0, 0, 0, $destImageWidth, $destImageHeight, $sourceImageWidth, $sourceImageHeight);
 		imageinterlace($imageThumb);
 		
+		// now create dir for thumb
+		if(!is_dir($thumbFile)) @mkdir(dirname($thumbFile));
+		
 		// write the thumbnail to harddrive
 		switch($this->imageThumbType) {
 			case 'jpg': imagejpeg($imageThumb, $thumbFile, $this->imageThumbQuality); break;
@@ -275,6 +277,9 @@ class Image {
 			case 'gif': imagegif($imageThumb, $thumbFile); break;
 		}
 		imagedestroy($imageThumb);
+		
+//		print "created: Size: ".$this->imageThumbSourceMinSizeKb." -> ".$this->imageThumbQuality."\n";
+		
 		return true;
 	}
 	
@@ -311,9 +316,11 @@ class Image {
 			$imageDestFolder = $imageDestFolder.'/'.$this->imageThumbSubfolder;
 			$cacheImages = false;
 		}
-		if (!is_dir($imageDestFolder)) return false;
+		if (!is_dir($imageDestFolder)) return array();
 		
-		$dHdl = opendir($imageDestFolder);
+		$dHdl = @opendir($imageDestFolder);
+		if(!$dHdl) return array();
+		
 		while(false !== $file = readdir($dHdl)) {
 			if ($file == '.' || $file == '..') continue;
 			$fileExtension = $this->fileIoManager->get_ext_form_file(basename($file));
@@ -491,6 +498,18 @@ class Image {
 	
 	public function resetErrors(){
 		$this->errors = NULL;
+	}
+	
+	public function setWidgetBackground($widget, $imageName, $themePreview = false){
+		$imagePath = FACTORY::get('manager/GuiTheme')->getThemeFolder($imageName, $important = false, $themePreview);
+		$pixbuf = FACTORY::get('manager/GuiHelper')->getPixbuf($imagePath);
+		if($pixbuf){
+			list($pixmap,$mask) = $pixbuf->render_pixmap_and_mask(255);
+			$style = $widget->get_style();
+			$style=$style->copy();
+			$style->bg_pixmap[Gtk::STATE_NORMAL]=$pixmap;
+			$widget->set_style($style);
+		}
 	}
 }
 ?>

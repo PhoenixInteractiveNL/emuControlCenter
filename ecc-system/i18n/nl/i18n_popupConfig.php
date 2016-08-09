@@ -184,7 +184,7 @@ $i18n['popupConfig'] = array(
 	'emu_info_nodata' =>
 		"Nog geen informatie aanwezig...",
 	'emu_info_footer%s' =>
-		"Misschien weet jij een goede emulator voor dit platform!\nJe kan je bevindingen plaatsen op ons Forum/Board at\n%s",
+		"Misschien weet jij een goede emulator voor dit platform!\nJe kan je bevindingen plaatsen op ons forum op\n%s",
 	
 	/* 0.9.2 FYEO 11 */
 	'title_startup_select_sound' =>
@@ -213,6 +213,8 @@ $i18n['popupConfig'] = array(
 		"Je hebt geen emulator geselecteerd! gebruik de 'selecteer emulator' knop hierboven!",
 
 	/* 0.9.6 FYEO 13 */
+
+
 	'winTitleConfiguration' =>
 		"Configuration",
 
@@ -280,5 +282,49 @@ $i18n['popupConfig'] = array(
 		"Taal instellingen",
 	'tab_label_language' =>
 		"Taal",
+	
+	/* 0.9.7 WIP 01 */
+	'confEccSilentParsing' =>
+		"ROM toevoegen in achtergrons (geen meldingen)",
+		
+	'emuAssignGlobalEnableEccScript' =>
+		"activeer eccScript",
+	'emuAssignFileextLabel' =>
+		"Emulator voor fileextension",
+	'emuAssignPreviewLabel' =>
+		"Commandolijn voorbeeld",
+	'emuAssignGlobalActive%s' =>
+		"Start ROMS met bestandextensie '%s' met deze emulator",
+	'emuAssignGlobalActiveGlobal%s' =>
+		"Activeer 'grijp' alle emulator '%s'",
+	'lbl_emu_tips_ecc' =>
+		"ecc links",	
+	'emuPlatformActiveState' =>
+		"activeer platform",
+	'tabGeneralHlListOptions' =>
+		"Lijst-modus opties",	
+		
+	/* 0.9.7 WIP 04 */
+	'tab_label_themes' =>
+		"Themas",
+	'lblThemeSelect' =>
+		"Selecteer thema",
+
+	/* 0.9.7 WIP 10 */
+	'emuAssignLabelZipUnpack' =>
+		"ZIP automatisch uitpakken",
+	'emuAssignGlobalCheckZipUnpackActive' =>
+		"Pakt automatisch ZIP bestanden uit",
+	'emuAssignGlobalCheckZipUnpackSkip' =>
+		"Sla al eerder uitgepakte bestanden over (sneller)",
+	'emuAssignGlobalCheckZipUnpackClean' =>
+		"Maak ecc-unpack folder schoon voor platform",
+	'emuAssignGlobalCheckZipUnpackOpen' =>
+		"Open ecc-unpack folder",
+
+	/* 0.9.7 WIP 10 */
+	'conEccSaveGuiSettings' =>
+		"Sla GUI instellingen op",
+
 );
 ?>

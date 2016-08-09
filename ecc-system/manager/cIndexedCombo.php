@@ -1,5 +1,5 @@
 <?php
-require_once ECC_BASEDIR.'/ecc-system/manager/thirdParty/IndexedComboBox/Model.php';
+require_once ECC_DIR_SYSTEM.'/manager/thirdParty/IndexedComboBox/Model.php';
 
 class IndexedCombo {
 	

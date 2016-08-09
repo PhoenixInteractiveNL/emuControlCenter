@@ -146,6 +146,31 @@ $i18n['menu'] = array(
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Open ECC gebruikers folder (%s)",
+	'lbl_rom_remove_toplevel' =>
+		"Verwijder ROM(S)",
+	'menuItemPersonalEditNote' =>
+		"Bewerk notities",
+	'menuItemPersonalEditReview' =>
+		"Bewerk samenvatting",
+		
+	/* 0.9.6 FYEO 11 */
+	'menuItemRomOptions' =>
+		"ROM opties",
+
+	/* 0.9.7 FYEO 17 */
+	'imagepackTopMenu' =>
+		"Instrumenten plaatjespakketten",
+	'imagepackRemoveImagesWithoutRomFile' =>
+		"Verwijder plaatjes van ROMS die ik niet in mijn database heb",
+	'imagepackRemoveEmptyFolder' =>
+		"Verwijder lege folder(s)",
+	'imagepackCreateAllThumbnails' =>
+		"Maak kleine plaatjes aan voor snellere toegangstijden",
+	'imagepackRemoveAllThumbnails' =>
+		"Verwijder alle kleine plaatjes om plaatjepakketten uit te wisselen",
+	'imagepackConvertEccV1Images' =>
+		"Converteer oude plaatjes van ECC <0.9.1 naar de nieuwe structuur! (V1->V2)",
+
 		
 );
 ?>

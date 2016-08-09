@@ -1,8 +1,20 @@
 <?php
+
+define('LF', "\n");
+
+error_reporting(E_ALL);
+
 chdir(dirname(__FILE__));
 define("MY_MASK", Gdk::BUTTON_PRESS_MASK);
-define('LF', "\n");
-define('DEBUG', true);
+if(!defined('DEBUG')) define('DEBUG', true);
+
+if(!defined('ECC_DIR_OFFSET')) define('ECC_DIR_OFFSET', "..".DIRECTORY_SEPARATOR); # needed for relative paths
+if(!defined('ECC_DIR')) define('ECC_DIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_DIR_OFFSET)); # contains basepath of ecc
+if(!defined('ECC_DIR_SYSTEM')) define('ECC_DIR_SYSTEM', ECC_DIR.'/ecc-system/'); # contains ecc-system dir
+
+# write ini for external ecc tools
+include(ECC_DIR_SYSTEM.'/manager/fStartupHelper.php');
+EccExtHelper::writeLocalHostInfo(ECC_DIR_SYSTEM.'/infos/ecc_local_host_info.ini');
 
 # static class for generating comboboxes
 require_once('manager/cIndexedCombobox.php');
@@ -92,6 +104,7 @@ class App extends GladeXml {
 	public $toggle_show_files_only = false;
 	public $toggle_show_metaless_roms_only = false;
 	public $toggle_show_doublettes = false;
+	public $toggle_only_disk = false;
 
 	// Colors
 	public $background_color='#ffffff';
@@ -109,6 +122,7 @@ class App extends GladeXml {
 	
 	private $visibleNavigation = true;
 	private $visibleMedia = true;
+	private $visibleSearch = true;
 	
 	# if set, dont update data
 	private $breakSearchReset = false;
@@ -119,7 +133,7 @@ class App extends GladeXml {
 	// manager
 	private $oHelper = false;
 	
-	public function create_combo_lanugages()
+	public function create_combo_lanugages($widget)
 	{
 		$combobox = new IndexedCombobox();
 		
@@ -137,7 +151,7 @@ class App extends GladeXml {
 				'visible' => true,
 			),
 		);
-		$combobox->init_combobox($this->cb_search_language, $data);
+		$combobox->init_combobox($widget, $data);
 
 		$lang = array();
 		$lang[] = array(
@@ -156,7 +170,7 @@ class App extends GladeXml {
 		} 
 		
 		$combobox->fill($lang);
-		$this->cb_search_language->connect("changed", array($this, 'set_search_language_from_combobox'));
+		$widget->connect("changed", array($this, 'set_search_language_from_combobox'));
 	}
 	
 	public function set_search_language_from_combobox($combobox) {
@@ -175,6 +189,12 @@ class App extends GladeXml {
 	
 	public function set_search_state($ident, $state) {
 		$this->_search_active[$ident] = $state;
+		
+		$image = ($state) ? 'box_hilight' : 'box';
+
+		$imageObject = FACTORY::get('manager/Image');
+		$imageObject->setWidgetBackground($this->eventbox1, 'background/'.$image.'.png');
+		
 		$this->search_input_reset->set_sensitive($this->get_search_state());
 	}
 	
@@ -299,7 +319,8 @@ class App extends GladeXml {
 	}
 	public function setSearchFfType($type, $reload=true) {
 
-		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$type[0].$type[1].'</b></span>');
+		#$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$type[0].$type[1].'</b></span>');
+		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.i18n::get('dropdown_search_fields', '[['.strtolower($type).']]').'</b></span>');
 		
 		switch($type) {
 			case 'YEAR':
@@ -310,6 +331,15 @@ class App extends GladeXml {
 				break;
 			case 'PUBLISHER':
 				$field = 'publisher';
+				break;
+			case 'PROGRAMMER':
+				$field = 'programmer';
+				break;
+			case 'MUSICAN':
+				$field = 'musican';
+				break;
+			case 'GRAPHICS':
+				$field = 'graphics';
 				break;
 			default:
 				$field = false;
@@ -404,27 +434,27 @@ class App extends GladeXml {
 		if (!$this->breakSearchReset && $reload) $this->onInitialRecord();
 	}
 	
-	public function directRating($object, $event) {
-		if ($event) {
-			$menuRating = new GtkMenu();
-			$menuItemRating = new GtkMenuItem(I18N::get('menu', 'lbl_rating_submenu'));
-			
-			$miRating = new GtkMenuItem(I18N::get('global', 'rateRom'));
-			$miRating->set_sensitive(false);
-			$menuRating->append($miRating);
-			
-			$menuRating->append(new GtkSeparatorMenuItem());
-			
-			for ($i=6; $i>=0; $i--) {
-				$ratingString = str_repeat($this->ratingChar, $i);
-				$miRating = new GtkMenuItem($ratingString);
-				$miRating->connect_simple('activate', array($this, 'dispatch_menu_context'), 'RATING', $i);
-				$menuRating->append($miRating);
-			}
-		}
-		$menuRating->show_all();
-		$menuRating->popup();
-	}
+//	public function directRating($object, $event) {
+//		if ($event) {
+//			$menuRating = new GtkMenu();
+//			$menuItemRating = new GtkMenuItem(I18N::get('menu', 'lbl_rating_submenu'));
+//			
+//			$miRating = new GtkMenuItem(I18N::get('global', 'rateRom'));
+//			$miRating->set_sensitive(false);
+//			$menuRating->append($miRating);
+//			
+//			$menuRating->append(new GtkSeparatorMenuItem());
+//			
+//			for ($i=6; $i>=0; $i--) {
+//				$ratingString = str_repeat($this->ratingChar, $i);
+//				$miRating = new GtkMenuItem($ratingString);
+//				$miRating->connect_simple('activate', array($this, 'dispatch_menu_context'), 'RATING', $i);
+//				$menuRating->append($miRating);
+//			}
+//		}
+//		$menuRating->show_all();
+//		$menuRating->popup();
+//	}
 	
 	public function simpleContextMenu($title=false, $dataArray=array(), $callback, $field, $param=false) {
 			if (!$title) $title = I18N::get('global', 'change');
@@ -440,6 +470,25 @@ class App extends GladeXml {
 				$menuItem->connect_simple_after('activate', array($this, $callback), $dataArray, $key, $field, $param);
 				$menu->append($menuItem);
 			}
+		$menu->show_all();
+		$menu->popup();
+	}
+	
+	public function contextViewMode($i18nKeyAndCallbackParam=array(), $i18nCategory = 'menuTop'){
+		
+		$menu = new GtkMenu();
+		$menuItem = new GtkMenuItem(I18N::get('mainGui', 'contextViewModeSelectHeader'));
+		$menuItem->set_sensitive(false);
+		$menu->append($menuItem);
+
+		$menu->append(new GtkSeparatorMenuItem());
+		
+		foreach($i18nKeyAndCallbackParam as $i18nKey => $callbackParam) {
+			$menuItem = new GtkMenuItem(I18N::get($i18nCategory, $i18nKey));
+			$menuItem->connect_simple_after('activate', array($this, 'dispatch_menu_context_platform'), $callbackParam);
+			$menu->append($menuItem);
+		}
+		
 		$menu->show_all();
 		$menu->popup();
 	}
@@ -471,7 +520,7 @@ class App extends GladeXml {
 		$frameChild = $this->frameMediaInfoEvent->child;
 		if ($frameChild) $this->frameMediaInfoEvent->remove($frameChild);
 		
-		$this->frameMediaInfoEvent->connect_simple_after('button-press-event', array($this, 'edit_media'));
+		$this->frameMediaInfoEvent->connect_simple_after('button-press-event', array($this, 'edit_media'), false, 0);
 		$this->frameMediaInfoEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse('#ffffff'));
 
 		$table = new GtkTable();
@@ -592,6 +641,32 @@ class App extends GladeXml {
 		$col++;
 		//$row++;
 		
+		$state = (!$this->toggle_only_disk || !in_array($this->toggle_only_disk, array('all', 'one', 'one_plus'))) ? 'all' : $this->toggle_only_disk; 
+		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_hide_disk_'.$state.'.png';
+		$pixbuf = $this->oHelper->getPixbuf($imageFile);
+		$oImage = new GtkImage();
+		$oImage->set_from_pixbuf($pixbuf);	
+
+		$oEvent = new GtkEventBox();
+		$this->objTooltips->set_tip($oEvent, I18N::get('tooltips', 'opt_only_disk'));
+
+		#$oEvent->connect_simple_after('button-press-event', array($this, 'updateEccOptBtnBar'), 'toggle_only_disk', 'dispatch_menu_context_platform', 'ONLY_DISK');
+		
+		# context menu for main navigation button ROMS
+		$contextRoms = array(
+			'optionContextOnlyDiskAll' => 'TOGGLE_VIEWMODE_DISK_ALL',
+			'optionContextOnlyDiskOne' => 'TOGGLE_VIEWMODE_DISK_ONE',
+			'optionContextOnlyDiskOnePlus' => 'TOGGLE_VIEWMODE_DISK_ONE_PLUS',
+		);
+		$oEvent->connect_simple_after('button-press-event', array($this, 'contextViewMode'), $contextRoms, 'tooltips');
+		
+		$oEvent->add($oImage);
+		
+		$table->attach($oEvent, $col, $col+1, $row, $row+1, Gtk::SHRINK, Gtk::SHRINK, 0, 0);	
+		
+		$col++;
+		//$row++;
+				
 		$state = ($this->images_inactiv) ? 'a' : 'i'; 
 		$imageFile = dirname(__FILE__).'/images/eccsys/options/ecc_opt_hide_img_'.$state.'.png';
 		$pixbuf = $this->oHelper->getPixbuf($imageFile);
@@ -625,11 +700,7 @@ class App extends GladeXml {
 		else $this->mTopViewListDetail->set_active(true);
 		
 		$this->initGameList();
-		
 		$this->onReloadRecord();
-		
-		#FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open', '/fastload');
-		#Gtk::main_quit();
 	}
 	
 	
@@ -638,14 +709,14 @@ class App extends GladeXml {
 	*/
 	public function __construct()
 	{
+		
 		// ----------------------------------------------------------------
-		// ABS-PATH TO REL-PATH...
+		// Get current operating system
 		// ----------------------------------------------------------------
-		define('ECC_BASEDIR_OFFSET', "..".DIRECTORY_SEPARATOR);
-		#define('ECC_BASEDIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_BASEDIR_OFFSET).DIRECTORY_SEPARATOR);
-		define('ECC_BASEDIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.ECC_BASEDIR_OFFSET));
+		$this->os_env = FACTORY::get('manager/Os')->getOperatingSystemInfos();
 		
 		$this->writeLocalReleaseInfo();
+		$this->writeEnviromentInfo();
 		
 		// ----------------------------------------------------------------
 		// Sort media category array!
@@ -662,6 +733,8 @@ class App extends GladeXml {
 		// ----------------------------------------------------------------
 		$this->ini = FACTORY::get('manager/IniFile');
 		if ($this->ini === false) die('miss ini');
+		
+		FACTORY::get('manager/IniFile')->setThemColors(FACTORY::get('manager/GuiTheme')->getColorIniPath());
 		
 		# initialize logger to get status reports		
 		LOGGER::setActiveState($this->ini->getKey('USER_SWITCHES', 'log_details'));
@@ -748,12 +821,15 @@ class App extends GladeXml {
 		// ----------------------------------------------------------------
 		// GUI/GLADE get gui from glade-file
 		// ----------------------------------------------------------------
-		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/gui.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui2/gui.glade');
+		
+		# !!!!!!
+		# the window is default invisible! $wdo_main->show() is called add end of constructor!
+		# !!!!!!
+		
 		$this->wdo_main->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->background_color));
 		
 		$this->wdo_main->connect('key-press-event', array($this, 'handleShortcuts'));
-		
-		$this->translateGui();
 		
 //// TEST
 //print "1";
@@ -790,6 +866,10 @@ class App extends GladeXml {
 
 		$this->oHelper->createUserfolderIfNeeded();
 		
+		FACTORY::get('manager/GuiTheme');
+		$this->translateGui();
+		$this->guiInit();
+		
 		// ----------------------------
 		// is this an initialized history ini?
 		// use defaults if init-ini!
@@ -807,6 +887,9 @@ class App extends GladeXml {
 		
 		$this->toggle_show_doublettes = $this->ini->getHistoryKey('toggle_show_doublettes');
 		
+		$this->toggle_only_disk = $this->ini->getHistoryKey('toggle_only_disk');
+		
+		
 		// show images in aspect ratio?
 		$aspectRatio = $this->ini->getKey('USER_SWITCHES', 'image_aspect_ratio');
 		$this->imagesAspectRatio = ($aspectRatio == 1) ? true : false;
@@ -820,6 +903,25 @@ class App extends GladeXml {
 			$pp = $this->ini->getKey('USER_SWITCHES', 'media_perpage_list');
 			$this->_results_per_page = ($pp) ? $pp : 100;
 		}
+		
+		# context menu for main navigation button ROMS
+		$contextRoms = array(
+			'mTopViewModeRomHave' => 'TOGGLE_MAINVIEV_ALL',
+			'mTopViewModeRomDontHave' => 'TOGGLE_VIEWMODE_DONTHAVE',
+			'mTopViewModeRomAll' => 'TOGGLE_MAINVIEV_DISPLAY',
+			'mTopViewModeRomNoMeta' => 'TOGGLE_MAINVIEV_DISPLAY_METALESS',
+			'mTopViewModeRomPersonal' => 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL',
+			'mTopViewModeRomPersonalReviews' => 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL_REVIEW',
+		);
+		$this->btnMainShowAllRomsButton->connect_simple_after('pressed', array($this, 'contextViewMode'), $contextRoms);
+		
+		# context menu for main navigation button HISTORY
+		$contextHistory = array(
+			'mTopViewModeRomPlayed' => 'TOGGLE_MAINVIEV_DISPLAY_PLAYED',
+			'mTopViewModeRomMostPlayed' => 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED',
+			'mTopViewModeRomNotPlayed' => 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED',
+		);
+		$this->btnMainShowLaunchedRomsButton->connect_simple_after('pressed', array($this, 'contextViewMode'), $contextHistory);		
 		
 		$this->createEccOptBtnBar();
 
@@ -855,9 +957,29 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_storage').'?', $this->dropdownStorage, 'simpleMetaUpdate', 'md_storage', true);
 		$this->nbMediaInfoStateStorageEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		
-		$this->nbMediaInfoStateRatingEvent->connect('button-press-event', array($this, 'directRating'));
+		// region
+		$this->dropdownRegion = I18n::translateArray('dropdown_meta_region', $this->dropdownRegion);
 		
+		# icons for rating, reviews, bookmarks and notes
+		$this->nbMediaInfoStateRatingEvent->connect_simple('button-press-event', array($this, 'edit_media'), false, 1);
+		$this->objTooltips->set_tip($this->nbMediaInfoStateRatingEvent, I18N::get('tooltips', 'nbMediaInfoStateRatingEvent'));
+		
+		$this->nbMediaInfoMetaEvent->connect_simple('button-press-event', array($this, 'edit_media'), false, 0);
+		$this->objTooltips->set_tip($this->nbMediaInfoMetaEvent, I18N::get('tooltips', 'nbMediaInfoMetaEvent'));
+		
+		$this->nbMediaInfoNoteEvent->connect_simple('button-press-event', array($this, 'edit_media'), false, 2);
+		$this->objTooltips->set_tip($this->nbMediaInfoNoteEvent, I18N::get('tooltips', 'nbMediaInfoNoteEvent'));
+		
+		$this->nbMediaInfoReviewEvent->connect_simple('button-press-event', array($this, 'edit_media'), false, 1);
+		$this->objTooltips->set_tip($this->nbMediaInfoReviewEvent, I18N::get('tooltips', 'nbMediaInfoReviewEvent'));
+		
+		$this->nbMediaInfoBookmarkEvent->connect('button-press-event', array($this, 'add_bookmark_by_id'));
+		$this->objTooltips->set_tip($this->nbMediaInfoBookmarkEvent, I18N::get('tooltips', 'nbMediaInfoBookmarkEvent'));
+
 		$this->nbMediaInfoAuditStateEvent->connect_simple('button-press-event', array($this, 'openRomAuditPopup'));
+		$this->objTooltips->set_tip($this->nbMediaInfoAuditStateEvent, I18N::get('tooltips', 'nbMediaInfoAuditStateEvent'));
+		
+		$this->nbMediaInfoEditEvent->connect_simple('button-press-event', array($this, 'edit_media'), false, 0);
 		
 		#$this->nbMediaInfoStateRatingEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
@@ -876,7 +998,8 @@ class App extends GladeXml {
 
 		$first = key($this->freeformSearchFields);
 		$this->freeformSearchFields = I18n::translateArray('dropdown_search_fields', $this->freeformSearchFields);
-		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
+		#$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
+		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first.'</b></span>');
 		$this->objTooltips->set_tip($this->searchSelectorFfType, I18N::get('tooltips', 'search_field_select'));
 
 		$this->searchSelectorRating->connect('button-press-event', array($this, 'dispatchSearchSelectory'));
@@ -888,11 +1011,6 @@ class App extends GladeXml {
 		$this->searchSelectorOperator->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		$this->searchSelectorOperatorLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>+</b></span>');
 		$this->objTooltips->set_tip($this->searchSelectorOperator, I18N::get('tooltips', 'search_operator'));
-		
-		// ----------------------------------------------------------------
-		// Get current operating system
-		// ----------------------------------------------------------------
-		$this->os_env = FACTORY::get('manager/Os')->getOperatingSystemInfos();
 		
 		// set title of the main window!
 		$this->wdo_main->set_title('.oO('.$this->ecc_release['title'].')Oo.');
@@ -925,6 +1043,10 @@ class App extends GladeXml {
 		// ----------------------------
 		$this->connectSignalsForTopMenu();
 
+		# init popup menus
+		$this->initPopupMetaEdit();
+		$this->initPopupImageCenter();
+		
 		// ----------------------------
 		// EVENTBOXES CONNECT
 		// ----------------------------
@@ -970,7 +1092,7 @@ class App extends GladeXml {
 		// init main bombo for languages
 		// ----------------------------
 		$this->media_language = I18n::translateArray('dropdown_lang', $this->media_language);
-		$this->create_combo_lanugages();
+		$this->create_combo_lanugages($this->cb_search_language);
 		
 		// ----------------------------
 		// INIT search options
@@ -1065,10 +1187,13 @@ class App extends GladeXml {
 		// Special navigation beyond
 		// normal platform navigation
 		// ----------------------------			
+
+		
+		$this->btnMainShowAllRomsButton->connect_simple('clicked', array($this, 'selectViewModeAllAvailable'));
 		// bookmarks
-		$this->btn_bookmarks->connect_simple('clicked', array($this, 'selectViewModeBookmarks'));
+		$this->btnMainShowBookmarkedRomsButton->connect_simple('clicked', array($this, 'selectViewModeBookmarks'));
 		// last launched
-		$this->btn_last_launched->connect_simple('clicked', array($this, 'selectViewModePlayedHistory'));
+		$this->btnMainShowLaunchedRomsButton->connect_simple('clicked', array($this, 'selectViewModePlayedHistory'));
 		
 		// ----------------------------
 		// MEDIA-EDIT POPUP - signals
@@ -1083,14 +1208,15 @@ class App extends GladeXml {
 		$this->media_edit_btn_cancel->connect_simple('clicked', array($this, 'media_edit_hide'));
 		$this->media_edit_btn_cancel->set_label(i18n::get('global', 'close'));
 		
-		$this->media_nb_info_edit->connect_simple('clicked', array($this, 'edit_media'), false);
+		$this->media_nb_info_edit->connect_simple('clicked', array($this, 'edit_media'), false, 0);
 		$this->media_edit_btn_start->connect("clicked", array($this, 'startRom'));
-		$this->infotab_button_area->hide();
+		$this->infotab_button_area->set_sensitive(false);
 		
 		
 		// Webservices eccdb
 		$this->paneInfoEccDbAddButton->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
-		$this->paneInfoEccDbGetButton->connect_simple('clicked', array($this, 'openRomdbGetUrl'));
+		#$this->paneInfoEccDbGetButton->connect_simple('clicked', array($this, 'openRomdbGetUrl'));
+		$this->paneInfoEccDbGetDatfileButton->connect_simple('clicked', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'GET_ROMDB_DATFILE');
 		
 		$this->media_nb_info_eccdb_info->connect_simple('button-press-event', array($this, 'setNotebookPage'), $this->media_nb, 3);
 		
@@ -1153,14 +1279,16 @@ class App extends GladeXml {
 		// ----------------------------
 		// standard windows close connect
 		// ----------------------------
-		$this->wdo_main->connect_simple('destroy', array($this, 'quit'));
+		#$this->wdo_main->connect_simple('destroy', array($this, 'eccShutdown'));
+		$this->wdo_main->connect_simple('delete-event', array($this, 'eccShutdown'));
+		$this->wdo_main->connect('window-state-event', array($this, 'onStateChange'));
 		
 		// ----------------------------
 		// PRINT OUT DEBUG INFORMATIONS
 		// ABOUT ALL CLASSES BUILD BY
 		// FACTORY IN THIS CONSTRUCTOR!
 		// ----------------------------	
-		//FACTORY::status();
+		#FACTORY::status();
 		
 		// ----------------------------
 		// INITIAL GET ALL DATA FOR
@@ -1170,32 +1298,114 @@ class App extends GladeXml {
 
 		$confEccSaveViewSettings = $this->ini->getKey('USER_SWITCHES', 'confEccSaveViewSettings');
 		if ($confEccSaveViewSettings && false !== $showListDataMode = $this->ini->getHistoryKey('showListDataMode')){
+			$this->showListDataMode = $showListDataMode;
+			$this->view_mode = $this->ini->getHistoryKey('showListDataType');
 			$this->dispatch_menu_context_platform($showListDataMode);
 		}
-		else $this->onInitialRecord(true);
+		else{
+			$this->view_mode = 'MEDIA';
+			$this->showListDataMode = 'TOGGLE_MAINVIEV_ALL';
+			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_ALL');
+			#$this->onInitialRecord(true);
+		}
 		
-		if ($confEccSaveViewSettings){
+		# now saved by default!
+		$leftPanelState = $this->ini->getHistoryKey('vis_hide_panel_nav');
+		$this->visibleNavigation = $leftPanelState;
+		$this->toogleNavPanel();
+		
+		$rightPanelState = $this->ini->getHistoryKey('vis_hide_panel_info');
+		$this->visibleMedia = $rightPanelState;
+		$this->toogleInfoPanel();
+		
+		$searchPanelState = $this->ini->getHistoryKey('vis_hide_panel_search');
+		$this->visibleSearch = $searchPanelState;
+		$this->toogleSearchPanel();
+		
+		$navigationWidth = $this->ini->getHistoryKey('vis_navigation_width');
+		if($navigationWidth) $this->hpaned1->set_position($navigationWidth);
+		
+		# get the ids of the last selected game!
+		$lastSelectedGame = $this->ini->getHistoryKey('last_selected_game');
+		if($lastSelectedGame) $this->show_media_info(false, $lastSelectedGame);
 
-			$leftPanelState = $this->ini->getHistoryKey('vis_hide_panel_nav');
-			$this->visibleNavigation = $leftPanelState;
-			$this->toogleNavPanel();
+		# get last state of the window before it closes!
+		$guiState = $this->ini->getHistoryKey('gui_main_state');
+		if($guiState == 4){
+			$this->wdo_main->maximize();
+		}
+//		elseif($guiState == 16){
+//			$this->wdo_main->fullscreen();
+//		}
+		else{
+			# get the ids of the last selected game!
+			$guiSize = $this->ini->getHistoryKey('gui_main_size');
+			if($guiSize){
+				list ($width, $height) = explode('x', $guiSize);
+				if($width && $height) $this->wdo_main->resize((int)$width, (int)$height);
+				#$this->navPanelMainSize = array((int)$width, (int)$height);		
+			}
 			
-			$rightPanelState = $this->ini->getHistoryKey('vis_hide_panel_info');
-			$this->visibleMedia = $rightPanelState;
-			$this->toogleInfoPanel();
-			
-			$navigationWidth = $this->ini->getHistoryKey('vis_navigation_width');
-			if($navigationWidth) $this->hpaned1->set_position($navigationWidth);
+			# move the gui to the last stored coordinates
+			$guiPosition = $this->ini->getHistoryKey('gui_main_position');
+			if ($guiPosition) {
+				list($width, $height) = explode('x', $guiPosition);
+				if ($width && $height) $this->wdo_main->move($width, $height);
+			}
 		}
 		
 		
-		// ----------------------------		
-		// START GTK!
-		// ----------------------------		
+//		$this->wdo_main->connect('expose_event', array($this, 'onRedrawRequest'));
+		
+		$this->wdo_main->show();
+		
+		
 		Gtk::Main();
 	}
 	
-	public function mailListDragAndDropInit($treeView){
+
+//	public function onRedrawRequest($widget, $event){
+//		list($widgetWidth, $widgetHeight) = $this->wdo_main->get_size();
+//		
+//		print "$widgetWidth<pre>".LF;
+//		print_r($widgetHeight).LF;
+//		print "</pre>".LF;
+//		
+//	}
+	
+	public function onExposeEvent($widget, $event, $pixbuf){
+		if($pixbuf){
+			
+    		if(get_class($widget) == 'GtkEventBox'){
+    			$widgetWidth = $widget->allocation->width;
+				$widgetHeight = $widget->allocation->heigth; 
+    		}
+    		elseif(get_class($widget) == 'GtkWindow'){
+    			list($widgetWidth, $widgetHeight) = $widget->get_size(); 
+    		}
+
+			$pixbufWidth = $pixbuf->get_width();
+    		$pixbufHeight = $pixbuf->get_height();
+    		
+    		$widthRepeat = ceil($widgetWidth/$pixbufWidth);
+    		$heightRepeat = ceil($widgetHeight/$pixbufHeight);
+    		
+    		$gObjectNormaState = Gtk::STATE_NORMAL;
+    		
+    		for($i=0; $i<$widthRepeat; $i++){
+    			for($j=0; $j<$heightRepeat; $j++){
+    				$widget->window->draw_pixbuf($widget->style->bg_gc[$gObjectNormaState], $pixbuf, 0, 0, $pixbufWidth*$i, $pixbufHeight*$j, $pixbufWidth, $pixbufHeight);	
+    			}
+    		}
+    		
+	    	if($widget->get_child() != null) $widget->propagate_expose($widget->get_child(), $event);
+	    	return true;
+    		
+		}
+		return false;
+	}
+	
+	public function mainListDragAndDropInit($treeView){
 		$treeView->drag_source_set(Gdk::BUTTON1_MASK, array( array( 'text/plain', 0, 0)), Gdk::ACTION_COPY|Gdk::ACTION_MOVE);
 		$treeView->drag_dest_set(Gtk::DEST_DEFAULT_ALL, array( array( 'text/plain', 0, 0)), Gdk::ACTION_COPY|Gdk::ACTION_MOVE);
 		$treeView->connect('drag-data-get', array($this, 'mailListDragAndDropOnDrag')); // note 2
@@ -1224,12 +1434,16 @@ class App extends GladeXml {
 		# the next entry is selected! path -1 selects the
 		#  right one in list mode
 		if($this->optVisMainListMode){
-			$path = reset($pathData[0])-1;
+//			$path = reset($pathData[0])-1;
+//			if($path < 1) $path = 0;
+			$path = $pathData[0][0]-1;
 			if($path < 1) $path = 0;
 		}
 		else{
 			$path = reset($pathData[0]);
 		}
+		
+		#$path = reset($pathData[0]);
 		
 		$selection->select_path($path);
 		list($model, $iter) = $selection->get_selected();
@@ -1286,7 +1500,7 @@ class App extends GladeXml {
 		// ----------------------------
 		
 		$this->mTopDatImportOnlineRomdb->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_ECC_ROMDB');
-		$this->mTopDatImportOnlineRomdb->set_sensitive(false);
+		#$this->mTopDatImportOnlineRomdb->set_sensitive(false);
 		
 		$this->mTopDatExportOnlineRomdb->connect_simple('activate', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
 		
@@ -1332,6 +1546,8 @@ class App extends GladeXml {
 		$this->mTopOptionDbVacuum->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_VACUUM');
 		// clear ecc history
 		$this->mTopOptionCleanHistory->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_CLEAN_HISTORY');
+		// backup userdata to xml file!
+		$this->mTopOptionBackupUserdata->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_BACKUP_USERDATA');
 		
 		// ----------------------------
 		// OPTIONS
@@ -1343,6 +1559,10 @@ class App extends GladeXml {
 		$this->mTopViewModeRomAll->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY');
 		$this->mTopViewModeRomNoMeta->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_METALESS');
 		$this->mTopViewModeRomPersonal->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL');
+		$this->mTopViewModeRomPlayed->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_PLAYED');
+		$this->mTopViewModeRomMostPlayed->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED');
+		$this->mTopViewModeRomNotPlayed->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED');
+		$this->mTopViewModeRomBookmarks->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');		
 		
 		# List Detail / Simple
 		# First init selected state
@@ -1358,11 +1578,10 @@ class App extends GladeXml {
 		// ----------------------------
 		// Startup
 		// ----------------------------		
-		$this->mTopUpdateEccLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_LIVE']));
+		$this->mTopUpdateEccLive->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_LIVE']));
 		
-		#$this->mTopToolEccRomId->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_EXE_ROMID']));
-		$this->mTopToolEccTheme->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_THEME']));
-		$this->mTopToolEccBugreport->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_BASEDIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_BUGREPORT']));
+		$this->mTopToolEccTheme->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_THEME']));
+		$this->mTopToolEccBugreport->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeFileWithProgramm'), realpath(ECC_DIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_EXE_BUGREPORT']));
 		$this->mTopImageConvert->connect_simple('activate', array($this, 'convertEccV1Images'));
 		
 		// View
@@ -1372,12 +1591,13 @@ class App extends GladeXml {
 		
 		$this->mTopViewToggleLeft->connect_simple('activate', array($this, 'toogleNavPanel'));
 		$this->mTopViewToggleRight->connect_simple('activate', array($this, 'toogleInfoPanel'));
+		$this->mTopViewToggleSearch->connect_simple('activate', array($this, 'toogleSearchPanel'));
 		
-		$this->mTopViewOnlyRoms->connect_simple("button-press-event", array($this, 'selectViewModeRoms'));
+		$this->mTopViewOnlyRoms->connect_simple("button-press-event", array($this, 'selectViewModeAllAvailable'));
 		$this->mTopViewOnlyBookmarks->connect_simple("button-press-event", array($this, 'selectViewModeBookmarks'));
 		$this->mTopViewOnlyPlayed->connect_simple("button-press-event", array($this, 'selectViewModePlayedHistory'));
 		
-		$this->mTopHelpDocOffline->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), 'file:///'.realpath(ECC_BASEDIR.$this->eccHelpLocations['ECC_DOC_OFFLINE']));
+		$this->mTopHelpDocOffline->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), 'file:///'.realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DOC_OFFLINE']));
 		$this->mTopHelpDocOnline->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_DOC_ONLINE'], 'open');
 		$this->mTopHelpWebsite->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
 		$this->mTopHelpForum->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_FORUM'], 'open');
@@ -1462,7 +1682,7 @@ class App extends GladeXml {
 				$path = false;
 			}
 
-			$this->status_obj->set_label(sprintf(i18n::get('popup', 'stateLabelDatExport%s%s')), $user_only_strg, $platfom);
+			$this->status_obj->set_label(sprintf(i18n::get('popup', 'stateLabelDatExport%s%s'), $user_only_strg, $platfom));
 			$this->status_obj->set_popup_cancel_msg();
 			$this->status_obj->show_main();
 			$this->status_obj->show_output();
@@ -1623,7 +1843,7 @@ class App extends GladeXml {
 			# rem
 			$platfom = $this->ini->getPlatformName($eccident);
 			$lastSelected = $this->ini->getHistoryKey('ImportDatCmLast_'.$eccident);
-			if (!$lastSelected) $lastSelected = realpath(ECC_BASEDIR.'/ecc-system/datfile/'.strtolower($eccident).'.dat');
+			if (!$lastSelected) $lastSelected = realpath(ECC_DIR_SYSTEM.'/datfile/'.strtolower($eccident).'.dat');
 			
 			$shorcutFolder = $this->ini->getShortcutPaths($eccident);
 			$title = sprintf(I18N::get('popup', 'importDatCMFilechooseTitle%s'), $platfom);
@@ -1871,8 +2091,10 @@ class App extends GladeXml {
 		return false;
 	}
 	
-	public function on_toggle_state(&$observed_var, $write_histroy=false) {
-		$observed_var = ($observed_var) ? false : true ;
+	public function on_toggle_state(&$observed_var, $write_histroy=false, $typeCast = true) {
+		if($typeCast) {
+			$observed_var = ($observed_var) ? false : true ;
+		}
 		if ($write_histroy) {
 			$this->ini->storeHistoryKey($write_histroy, $observed_var, false);
 			//print "write: $observed_var -- $write_histroy";
@@ -1926,9 +2148,9 @@ class App extends GladeXml {
 		
 		$romName = ($this->current_media_info['path_pack']) ? $this->current_media_info['path_pack'] : $this->current_media_info['path'];
 		$romFileExtension = strtolower($this->get_ext_form_file($romName));
-		
+
 		$emuConfig = $this->ini->getKey('ECC_PLATFORM', $eccident);
-		
+	
 		# global emulator used as overall fallback!
 		$emuGlobal = $emuConfig['EMU.GLOBAL'];
 		
@@ -1949,6 +2171,26 @@ class App extends GladeXml {
 			if (!trim($emuAlternate['path'])) $emuAlternate['path'] = $usedEmu['path'];
 			$usedEmu = $emuAlternate;
 		}
+		
+		# if packed, get configuration and unpack, if needed!
+		if(@$usedEmu['enableZipUnpackActive'] && $this->current_media_info['path_pack']){
+
+			# get folder to unpack
+			$unpackDestination = $this->ini->getUnpackFolder($eccident, true);
+			
+			# if upack skip is activated, this file is only create the first time!
+			$unpackFileNeeded = true;
+			if(@$usedEmu['enableZipUnpackSkip']){
+				if(file_exists($unpackDestination.'/'.$romName)) $unpackFileNeeded = false;
+				$romPath = $unpackDestination.'/'.$romName; 
+			}
+			if($unpackFileNeeded){
+				FileIO::extractZip($this->current_media_info['path'], $this->current_media_info['path_pack'], $unpackDestination);
+				$romPath = $unpackDestination.'/'.$romName;
+			}
+		}
+		
+
 		
 		$emuPath = $usedEmu['path'];
 		$emuParameter = $usedEmu['param'];
@@ -1975,8 +2217,6 @@ class App extends GladeXml {
 			return false;
 		}
 
-
-		
 		// execute the file with the assigned emulator		
 		$osManager = FACTORY::get('manager/Os');
 		if ($osManager->executeFileWithProgramm($emuPath, $emuParameter, $romPath, $emuEscape, $emuWin8char, $filenameOnly, $noExtension, $enableEccScript, $executeInEmuFolder)){
@@ -2033,9 +2273,51 @@ if (i18n::getLanguageIdent() != 'jp') {
 	}
 	
 	public function handleShortcuts($widged, $event) {
+
+		# only for debug output
+//		print "$event->keyval && $event->state".LF;
+//		return true;
 		
-		#print "$event->keyval && $event->state".LF;
-		#return true;
+		switch ($event->keyval){
+			
+			case '65535': # DEL
+				
+				# only delete, if main treeview is focused and data is selected!
+				$searchFocusState = $this->newTreeView->is_focus();
+				if(!$searchFocusState || !$this->current_media_info) return false;
+				 
+				switch ($event->state){
+					case '0': # DIRECT
+						# remove rom from database
+						#$this->remove_media_from_fdata();
+						$this->dispatch_menu_context('REMOVE_MEDIA');
+						return true;
+						break;
+					case '1': # SHIFT
+						# remove from disk
+						$this->dispatch_menu_context('SHELLOP', 'FILE_REMOVE');
+						return true;
+						break;
+					case '4': # STRG
+						# remove metadata for selected rom
+						$this->dispatch_menu_context('REMOVE_META_SINGLE');
+						return true;
+						break;
+					case '8': # ALT
+						# remove all images from this rom
+						$this->dispatch_menu_context('IMG_REMOVE_ALL');
+						return true;
+						break;
+				}
+				break;
+		}
+		
+		# STRG+F - fullscreen
+		if ($event->keyval == '102' && $event->state == '4') {
+			if($this->wdo_main->window->get_state() != 16) $this->wdo_main->fullscreen();
+			else $this->wdo_main->unfullscreen();
+			return true;
+		}
 		
 		// DETAIL LIST
 		// F1
@@ -2064,10 +2346,6 @@ if (i18n::getLanguageIdent() != 'jp') {
 			$this->onReloadRecord();
 			return true;
 		}
-//		if ($event->keyval == '114' && $event->state == '8') {
-//			$this->onReloadRecord();
-//			return true;
-//		}
 		
 		# F4 select random games
 		if ($event->keyval == '65473' && $event->state == '0') {
@@ -2094,26 +2372,6 @@ if (i18n::getLanguageIdent() != 'jp') {
 			return true;
 		}
 		
-		// remove rom
-		// strg X
-		if ($event->keyval == '120' && $event->state == '8') {
-			$this->remove_media_from_fdata();
-			return true;
-		}
-		// remove rom
-		// ALT-Entf
-		if ($event->keyval == '65535' && $event->state == '8') {
-			$this->remove_media_from_fdata();
-			return true;
-		}
-		
-		// remove rom META 
-		// STRG-Entf
-		if ($event->keyval == '65535' && $event->state == '4') {
-			$this->dispatch_menu_context('REMOVE_META_SINGLE');
-			return true;
-		}
-		
 		// bookmark
 		// strg B
 		if ($event->keyval == '98' && $event->state == '8') {
@@ -2124,7 +2382,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 		//edit meta
 		// strg E
 		if ($event->keyval == '101' && $event->state == '8') {
-			$this->edit_media();
+			$this->edit_media(false, 0);
 			return true;
 		}
 
@@ -2142,7 +2400,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 		
 		// F6 show media
 		if ($event->keyval == '65475' && $event->state == '0') {
-			return $this->selectViewModeRoms();
+			return $this->selectViewModeAllAvailable();
 		}
 		
 		// F7 show bookmark
@@ -2153,6 +2411,11 @@ if (i18n::getLanguageIdent() != 'jp') {
 		// F8 show history
 		if ($event->keyval == '65477' && $event->state == '0') {
 			return $this->selectViewModePlayedHistory();
+		}
+		
+		// F9 hide search panel
+		if ($event->keyval == '65478' && $event->state == '0') {
+			return $this->toogleSearchPanel();
 		}
 		
 		// F11 hide navigation
@@ -2169,60 +2432,155 @@ if (i18n::getLanguageIdent() != 'jp') {
 		if ($event->keyval == '65470' && $event->state == '4') {
 			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_ALL');
 		}
-			// STRG+F1
+		// STRG+F2
 		if ($event->keyval == '65471' && $event->state == '4') {
 			$this->dispatch_menu_context_platform('TOGGLE_VIEWMODE_DONTHAVE');
 		}
-			// STRG+F1
+		// STRG+F3
 		if ($event->keyval == '65472' && $event->state == '4') {
 			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY');
 		}
-			// STRG+F1
+		// STRG+F4
 		if ($event->keyval == '65473' && $event->state == '4') {
 			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_METALESS');
 		}
-			// STRG+F1
+		// STRG+F5
 		if ($event->keyval == '65474' && $event->state == '4') {
 			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_PERSONAL');
 		}
-
+		// STRG+F6
+		if ($event->keyval == '65475' && $event->state == '4') {
+			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_PLAYED');
+		}
+		// STRG+F7
+		if ($event->keyval == '65476' && $event->state == '4') {
+			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED');
+		}
+		
+		// STRG+F8
+		if ($event->keyval == '65477' && $event->state == '4') {
+			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED');
+		}
+		// STRG+F9
+		if ($event->keyval == '65478' && $event->state == '4') {
+			$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');
+		}
 	}
 	
-	public function selectViewModeRoms(){
-		$this->mTopViewOnlyRoms->set_active(true);
+	public function selectViewModeAllAvailable(){
 		$this->view_mode = 'MEDIA';
-		
-		# rem
-		$platformName = $this->ini->getPlatformName($this->_eccident);
-		$txt = '<b>'.htmlspecialchars($platformName).'</b>';
-		$this->nb_main_lbl_media->set_markup($txt);
-		$this->onInitialRecord();
+		$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_ALL');
 		return true;
 	}
 	
+	##TEst
 	public function selectViewModeBookmarks(){
-		$this->mTopViewOnlyBookmarks->set_active(true);
-		$this->get_media_bookmarks();
+		$this->view_mode = 'BOOKMARK';
+		$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');
 		return true;
 	}
 	
 	public function selectViewModePlayedHistory(){
-		$this->mTopViewOnlyPlayed->set_active(true);
-		$this->get_media_last_launched();
+		$this->view_mode = 'HISTORY';
+		$this->dispatch_menu_context_platform('TOGGLE_MAINVIEV_DISPLAY_PLAYED');
 		return true;
 	}
-#****	
+	
+	public function updateMainButtonHilights($selectedType, $selectedMode){
+		
+		if(!$selectedType) $selectedType = 'MEDIA';
+		
+		switch($selectedMode){
+			case 'TOGGLE_MAINVIEV_ALL':
+			case 'TOGGLE_MAINVIEV_DISPLAY_PLAYED':
+			case 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS':
+				$hilightColor = '#000000';
+				$hilightMarkupStart = '<b>';
+				$hilightMarkupEnd = '</b>';
+				break;
+			case 'TOGGLE_VIEWMODE_DONTHAVE':
+			case 'TOGGLE_MAINVIEV_DISPLAY':
+			case 'TOGGLE_MAINVIEV_DISPLAY_METALESS':
+			case 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL':
+			case 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL_REVIEW':
+			case 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED':
+			case 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED':
+				$hilightColor = '#333333';
+				$hilightMarkupStart = '<b><i>';
+				$hilightMarkupEnd = ' *</i></b>';
+				break;
+			default:
+				$hilightColor = '#000000';
+				$hilightMarkupStart = '<b>';
+				$hilightMarkupEnd = '</b>';
+		}
+		
+		$buttons = array(
+			'MEDIA' => 'btnMainShowAllRomsLabel',
+			'BOOKMARK' => 'btnMainShowBookmarkedRomsLabel',
+			'HISTORY' => 'btnMainShowLaunchedRomsLabel',
+		);
+
+		foreach($buttons as $type => $widgetAndI18nKey){
+			if($type == $selectedType) $this->$widgetAndI18nKey->set_markup($hilightMarkupStart.'<span color="'.$hilightColor.'">'.I18N::get('mainGui', $widgetAndI18nKey).'</span>'.$hilightMarkupEnd);
+			else $this->$widgetAndI18nKey->set_label(I18N::get('mainGui', $widgetAndI18nKey));
+		}
+	}
+
 	public function toogleNavPanel() {
 		
 		if ($this->visibleNavigation) {
+			
+//			#$navPanelMainSizeBeforeToggle = $this->wdo_main->get_size();
+//			if($this->navPanelMainSize && $this->wdo_main->window->get_state() != 16 && $this->wdo_main->window->get_state() != 4){
+//				list ($width, $height) = $this->navPanelMainSize;
+//				$this->wdo_main->resize($width, $height);
+//				$this->navPanelMainSize = false;
+//			}
+			
+			#$modeBefore = $this->wdo_main->window->get_state();
+			
+//			print __FUNCTION__.'<pre>';
+//			print_r($modeBefore);
+//			print '</pre>'."\n";
+			
 			$this->vbox_nav->hide();
 			$this->mTopViewToggleLeft->set_active(false);
 			$this->visibleNavigation = false;
+			
+//			switch($modeBefore){
+//				case 16:
+//					$this->wdo_main->hide();
+//					$this->wdo_main->fullscreen();
+//					$this->wdo_main->show();
+//					break;
+//				case 4:
+//					$this->wdo_main->maximize();
+//					break;
+//			}
+			
 		}
 		else {
+			
+//			$this->navPanelMainSize = $this->wdo_main->get_size();
+			
+			#$modeBefore = $this->wdo_main->window->get_state();
+			
 			$this->vbox_nav->show();
 			$this->mTopViewToggleLeft->set_active(true);
 			$this->visibleNavigation = true;
+			
+//			switch($modeBefore){
+//				case 16:
+//					$this->wdo_main->hide();
+//					$this->wdo_main->fullscreen();
+//					$this->wdo_main->show();
+//					break;
+//				case 4:
+//					$this->wdo_main->maximize();
+//					break;
+//			}
+			
 		}
 		
 		# store this information to history ini
@@ -2233,18 +2591,40 @@ if (i18n::getLanguageIdent() != 'jp') {
 	
 	public function toogleInfoPanel() {
 		if ($this->visibleMedia) {
-			$this->vbox_media->hide();
+			
+			#$this->vbox_media->hide();
+			$this->scrolledwindow41->hide();
 			$this->mTopViewToggleRight->set_active(false);
 			$this->visibleMedia = false;
 		}
 		else {
-			$this->vbox_media->show();
+
+			#$this->vbox_media->show();
+			$this->scrolledwindow41->show();
 			$this->mTopViewToggleRight->set_active(true);
 			$this->visibleMedia = true;
 		}
 		
 		# store this information to history ini
 		$this->ini->storeHistoryKey('vis_hide_panel_info', !$this->visibleMedia, false);
+		
+		return true;
+	}
+	
+	public function toogleSearchPanel() {
+		if ($this->visibleSearch) {
+			$this->frame26->hide();
+			$this->mTopViewToggleSearch->set_active(false);
+			$this->visibleSearch = false;
+		}
+		else {
+			$this->frame26->show();
+			$this->mTopViewToggleSearch->set_active(true);
+			$this->visibleSearch = true;
+		}
+		
+		# store this information to history ini
+		$this->ini->storeHistoryKey('vis_hide_panel_seach', !$this->visibleSearch, false);
 		
 		return true;
 	}
@@ -2330,6 +2710,11 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->guiManager->openDialogInfo($title, $msg);
 	}
 	
+	public function setRatingImage($widget, $rating = 0){
+		$pixbuf = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/eccsys/rating/ecc_rating_stars_'.(int)$rating.'.png');
+		$widget->set_from_pixbuf($pixbuf);
+	}
+	
 	/*
 	*
 	*/
@@ -2364,7 +2749,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 			}
 			
 			// edit-button anzeigen
-			$this->infotab_button_area->show();
+			$this->infotab_button_area->set_sensitive(true);
 			$this->btn_start_media->set_sensitive(true);
 			$this->btn_add_bookmark->set_sensitive(true);
 			
@@ -2416,9 +2801,8 @@ if (i18n::getLanguageIdent() != 'jp') {
 				
 				if (!trim($platformName)) $platformName = "emuControlCenter";
 
-				$this->set_style($this->media_nb_info_plattform, 8000);
-
-				$this->media_nb_info_plattform->set_markup('<b>'.htmlspecialchars($platformName).'</b>');
+				#$this->set_style($this->media_nb_info_plattform, 8000);
+				$this->media_nb_info_plattform->set_markup('<b><span size="small">'.htmlspecialchars($platformName).'</span></b>');
 				
 				$packed = ($info['path_pack']) ? 'YES' : 'NO';
 
@@ -2443,10 +2827,10 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$filesize_mbit_strg = ($filesize_mbit > 0) ? "$filesize_mbit Mbit /" : '';
 				
 				$size = ($info['size']) ? "$filesize_mbit_strg $filesize_mb_strg $filesize_kb KB" : '';
-				$this->media_nb_info_file_size->set_markup('<span color="#334455">'.htmlspecialchars($size).'</span>');
+				$this->media_nb_info_file_size->set_markup('<span size="small" color="#334455">'.htmlspecialchars($size).'</span>');
 				
 				$crc32 = ($info['crc32']) ? $info['crc32'] : $info['md_crc32'];
-				$this->media_nb_info_file_crc32->set_markup('<span color="#334455">'.htmlspecialchars($crc32).'</span>');
+				$this->media_nb_info_file_crc32->set_markup('<span size="small" color="#334455">'.htmlspecialchars($crc32).'</span>');
 
 				# get icon, if available
 				if ($iconPath = $this->imageManager->getImageByType($eccident, $info['crc32'], 'media_icon', false)){
@@ -2460,29 +2844,24 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$path = ($info['path_pack']) ? $info['path_pack'] : $info['path'];
 				$path = MultiByte::convertToUtf8($path);
 				
-				$this->media_nb_info_file_name->set_markup('<span color="#334455">'.htmlspecialchars(basename($path)).'</span>');
+				$this->media_nb_info_file_name->set_markup('<span size="small" color="#334455">'.htmlspecialchars(basename($path)).'</span>');
 				
 				$path_pack = ($info['path_pack']) ? basename($info['path']) : "NO";
 				$path_pack = MultiByte::convertToUtf8($path_pack);
 				
-//print "\n<pre>";
-//print_r($info);
-//print "<pre>\n";
-				
 				if ($info['fd_isMultiFile']) $path_pack = 'ROMSET ZIP';
 				
-				$this->media_nb_info_file_name_pack->set_markup('<span color="#334455">'.htmlspecialchars($path_pack).'</span>');
-				
-				$this->media_nb_info_file_path->set_markup('<span color="#334455">'.htmlspecialchars(MultiByte::convertToUtf8(dirname(realpath($info['path'])))).'</span>');
+				$this->media_nb_info_file_name_pack->set_markup('<span size="small" color="#334455">'.htmlspecialchars($path_pack).'</span>');
+				$this->media_nb_info_file_path->set_markup('<span size="small" color="#334455">'.htmlspecialchars(MultiByte::convertToUtf8(dirname(realpath($info['path'])))).'</span>');
 
-				$this->media_nb_info_running->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_running']).'</span>');
-				$this->media_nb_info_bugs->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_bugs']).'</span>');
-				$this->media_nb_info_trainer->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_trainer']).'</span>');
-				$this->media_nb_info_intro->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_intro']).'</span>');
-				$this->media_nb_info_usermod->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_usermod']).'</span>');
-				$this->media_nb_info_freeware->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_freeware']).'</span>');
-				$this->media_nb_info_multiplayer->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_multiplayer']).'</span>');
-				$this->media_nb_info_netplay->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_netplay']).'</span>');
+				$this->media_nb_info_running->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_running']).'</span></b>');
+				$this->media_nb_info_bugs->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_bugs']).'</span></b>');
+				$this->media_nb_info_trainer->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_trainer']).'</span></b>');
+				$this->media_nb_info_intro->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_intro']).'</span></b>');
+				$this->media_nb_info_usermod->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_usermod']).'</span></b>');
+				$this->media_nb_info_freeware->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_freeware']).'</span></b>');
+				$this->media_nb_info_multiplayer->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_multiplayer']).'</span></b>');
+				$this->media_nb_info_netplay->set_markup('<b><span size="small" color="'.$this->colEventOptionText.'">'.$this->get_dropdown_string($info['md_netplay']).'</span></b>');
 				
 				$md_storage = (!$info['md_storage'] || $info['md_storage'] === 'NULL') ? 0 : $info['md_storage'];
 				$this->media_nb_info_storage->set_markup('<span color="'.$this->colEventOptionText.'">'.$this->dropdownStorage[$md_storage].'</span>');
@@ -2499,9 +2878,15 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$publisher = (isset($info['md_publisher'])) ? $info['md_publisher'] : '';
 				$this->media_nb_info_publisher->set_text($publisher);
 				
+//				$programmer = (isset($info['md_programmer'])) ? $info['md_programmer'] : '';
+//				$this->media_nb_info_programmer->set_text($programmer);
+//				$musican = (isset($info['md_musican'])) ? $info['md_musican'] : '';
+//				$this->media_nb_info_musican->set_text($musican);
+//				$graphics = (isset($info['md_graphics'])) ? $info['md_graphics'] : '';
+//				$this->media_nb_info_graphics->set_text($graphics);
+				
 				$rating = (isset($info['md_rating'])) ? $info['md_rating'] : 0;
-				$pixbuf = $this->oHelper->getPixbuf(dirname(__FILE__)."/".'images/eccsys/rating/ecc_rating_stars_'.$rating.'.png');
-				$this->mInfoRatingImage->set_from_pixbuf($pixbuf);
+				$this->setRatingImage($this->mInfoRatingImage, $rating);
 				
 				$imageAuditStateImagePath = FACTORY::get('manager/GuiRomAudit', $this)->getAuditStateIconFilename(
 					$info['fa_fDataId'],
@@ -2522,7 +2907,11 @@ if (i18n::getLanguageIdent() != 'jp') {
 
 				$this->updateTabPersonal($info, $info['fd_eccident'], $info['crc32']);
 				$this->updatePaneInfoHeader($info);
-				$this->updatePaneInfoData($info, $platformName, $crc32, $size);
+				
+				# romDb tab
+				$this->paneInfoEccDbGetDatfileText->set_markup(sprintf(i18n::get('mainGui', 'paneInfoEccDbGetDatfileText%s'), '<b>'.$platformName.'</b>'));
+				
+//				$this->updatePaneInfoData($info, $platformName, $crc32, $size);
 					
 			}
 		}
@@ -2541,29 +2930,30 @@ if (i18n::getLanguageIdent() != 'jp') {
 	private function updateTabPersonal($info, $eccIdent, $crc32) {
 		
 		// PLAY COUNT
-		$count = ($info['fd_launchcnt']) ? '<span foreground="#000000"><b>'.$info['fd_launchcnt'].'</b></span>' : '<span foreground="#aaaaaa"><b>0</b></span>';
+		$count = ($info['fd_launchcnt']) ? '<span foreground="#000000">'.$info['fd_launchcnt'].'</span>' : '<span foreground="#aaaaaa">0</span>';
 		$this->media_nb_pers_played_count->set_markup($count);
 		
 		// PLAY TIME
-		$date = ($info['fd_launchtime']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['fd_launchtime']).'</b></span>' : '<span foreground="#aaaaaa"><b>never</b></span>';
+		$date = ($info['fd_launchtime']) ? '<span foreground="#000000">'.date('Y-m-d H:i', $info['fd_launchtime']).'</span>' : '<span foreground="#aaaaaa">never</span>';
 		$this->media_nb_pers_played_time->set_markup($date);
-
-		// RATING
-		$rating = ($info['md_rating']) ? '<span foreground="#000000"><b>'.str_repeat($this->ratingChar, $info['md_rating']).'</b></span>' : '<span foreground="#aaaaaa"><b>not rated</b></span>';
-		$this->media_nb_pers_rating->set_markup($rating);
 
 		// BOOKMARKED
 		$hasBookmark = $this->_fileView->hasBookmark($info['id']);
-		$bookmarked = ($hasBookmark) ? '<span foreground="#000000"><b>YES</b></span>' : '<span foreground="#aaaaaa"><b>NO</b></span>';
+		$bookmarked = ($hasBookmark) ? '<span foreground="#000000">YES</span>' : '<span foreground="#aaaaaa">NO</span>';
 		$this->media_nb_pers_bookmarked->set_markup($bookmarked);
 		
 		// META CHANGED
-		$metaChangeDate = ($info['md_cdate']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['md_cdate']).'</b></span>' : '<span foreground="#aaaaaa"><b>not changed</b></span>';
+		$metaChangeDate = ($info['md_cdate']) ? '<span foreground="#000000">'.date('Y-m-d H:i', $info['md_cdate']).'</span>' : '<span foreground="#aaaaaa">not changed</span>';
 		$this->media_nb_pers_metachange->set_markup($metaChangeDate);
 
 		// ROMDB EXPORT
-		$romdbExport = ($info['md_uexport']) ? '<span foreground="#000000"><b>'.date('Y-m-d H:i', $info['md_uexport']).'</b></span>' : '<span foreground="#aaaaaa"><b>possible</b></span>';
-		$this->media_nb_pers_romdb->set_markup($romdbExport);
+		if($info['md_cdate']){
+			$romdbExport = ($info['md_uexport']) ? '<span foreground="#000000">'.date('Y-m-d H:i', $info['md_uexport']).'</span>' : 'possible';
+			$this->media_nb_pers_romdb->set_markup($romdbExport);
+		}
+		else{
+			$this->media_nb_pers_romdb->set_markup('');
+		}
 		
 		// implement later--- needs new database table!!!!
 		//print "$eccIdent, $crc32".LF;
@@ -2583,13 +2973,32 @@ if (i18n::getLanguageIdent() != 'jp') {
 		
 		$this->userDataEccident = $eccIdent;
 		$this->userDataCrc32 = $crc32;
-		
+
 		$textBuffer = new GtkTextBuffer();
 		$textBuffer->set_text(trim($userData['notes']));
 		$this->media_nb_pers_note->set_buffer($textBuffer);
 		
+		$this->media_nb_pers_hiscore->set_text(trim($userData['hiscore']));
+		
+		$state = ($info['md_id']) ? '_active' : '';
+		$this->nbMediaInfoMetaImage->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_edit_yellow'.$state.'.png', true)));
+		
+		$state = (trim($userData['review_title']) || trim($userData['review_body'])) ? '_active' : '';
+		$this->nbMediaInfoReviewImage->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_edit_green'.$state.'.png', true)));
+
+		$state = (trim($userData['hiscore']) || trim($userData['notes'])) ? '_active' : '';
+		$this->nbMediaInfoNoteImage->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_edit_blue'.$state.'.png', true)));
+
+		$state = ($info['id'] && $this->_fileView->hasBookmark($info['id'])) ? '' : '_add' ;
+		$this->nbMediaInfoBookmarkImage->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/heart'.$state.'.png', true)));
+		$this->nbMediaInfoBookmarkImage->set_sensitive(!$state);
+		
 		if (!$this->media_nb_pers_save_connected) {
-			$this->media_nb_pers_save->connect_simple('clicked', array($this, 'saveUserData'));
+			
+			#$this->iPanePersonalEvent->connect_simple('clicked', array($this, 'edit_media'), false, 2);
+			
+			$this->media_nb_pers_save->connect_simple('clicked', array($this, 'edit_media'), false, 2);
+			$this->media_nb_pers_save_label->set_label(I18N::get('global', 'edit'));
 			$this->media_nb_pers_save_connected = true;
 		}
 	}
@@ -2652,82 +3061,86 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->media_nb_header_lbl->set_text(strtoupper($tabLabel));
 	}
 	
-	private function updatePaneInfoData($info, $platformName, $crc32, $size){
-		
-		$packed = ($info['path_pack']) ? 'YES' : 'NO';
-		
-		$text = "";
-		
-		$text .= "<b><u>".i18n::get('global', 'fileInfos').":</u></b>\n\n";
-		
-		$text .= "<b>".i18n::get('global', 'name').":</b> ".htmlspecialchars(basename(MultiByte::convertToUtf8($info['path'])))."\n";
-		$text .= "<b>".i18n::get('global', 'platform').":</b> ".htmlspecialchars($platformName)."\n\n";
-		
-		$text .= "<b>".i18n::get('global', 'fileNameShort').":</b> ".htmlspecialchars(basename(MultiByte::convertToUtf8($info['path_pack'])))."\n";
-		$text .= "<b>".i18n::get('global', 'filePathShort').":</b> ".htmlspecialchars(MultiByte::convertToUtf8($info['path']))."\n";
-		$text .= "<b>".i18n::get('global', 'packed').":</b> ".$packed."\n";
-
-		$text .= "<b>".i18n::get('global', 'size').":</b> ".$size."\n";
-		$text .= "<b>".i18n::get('global', 'crc32').":</b> ".$crc32."\n";
-		
-			
-		$text .= "\n";
-		$text .= "<b><u>".i18n::get('global', 'metaInfos').":</u></b>\n\n";
-
-		$dataText = '';
-		if ($info['md_id']) {
-			foreach($info as $key => $value) {
-				if (false !== strpos($key, "md_")) {
-					if ($key == 'md_category') {
-						$category = (isset($this->media_category[$value])) ? $this->media_category[$value] : '';
-						$dataText .= "<b>".i18n::get('global', 'category').":</b> ".htmlspecialchars($category)." ";
-						$dataText .= ($value) ? " (".htmlspecialchars($value).")" : "";
-						$dataText .= "\n";
-					}
-					else {
-						$dataText .= "<b>".htmlspecialchars(strtoupper(str_replace("md_", "", $key)))."</b>: ".htmlspecialchars($value)."\n";
-					}
-				}
-			}
-		}
-		if (!$dataText) $dataText = "<b>".i18n::get('global', 'noInformationsAvailable')."</b>\n";
-		$text .= $dataText;
-		
-		$version = $this->ecc_release['local_release_version']." ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state'];
-		$text .= "\n".i18n::get('global', 'generatedBy')." ".$this->ecc_release['title']." ".$version."\n";
-
-		try{
-			@$this->paneInfoDataText->set_markup($text);
-		}
-		catch(PhpGtkGErrorException $e){
-			$this->paneInfoDataText->set_markup(i18n::get('global', 'invalidDataEncodingError'));			
-		}
-	}
+//	private function updatePaneInfoData($info, $platformName, $crc32, $size){
+//		
+//		$packed = ($info['path_pack']) ? 'YES' : 'NO';
+//		
+//		$text = "";
+//		
+//		$text .= "<b><u>".i18n::get('global', 'fileInfos').":</u></b>\n\n";
+//		
+//		$text .= "<b>".i18n::get('global', 'name').":</b> ".htmlspecialchars(basename(MultiByte::convertToUtf8($info['path'])))."\n";
+//		$text .= "<b>".i18n::get('global', 'platform').":</b> ".htmlspecialchars($platformName)."\n\n";
+//		
+//		$text .= "<b>".i18n::get('global', 'fileNameShort').":</b> ".htmlspecialchars(basename(MultiByte::convertToUtf8($info['path_pack'])))."\n";
+//		$text .= "<b>".i18n::get('global', 'filePathShort').":</b> ".htmlspecialchars(MultiByte::convertToUtf8($info['path']))."\n";
+//		$text .= "<b>".i18n::get('global', 'packed').":</b> ".$packed."\n";
+//
+//		$text .= "<b>".i18n::get('global', 'size').":</b> ".$size."\n";
+//		$text .= "<b>".i18n::get('global', 'crc32').":</b> ".$crc32."\n";
+//		
+//			
+////		$text .= "\n";
+////		$text .= "<b><u>".i18n::get('global', 'metaInfos').":</u></b>\n\n";
+////
+////		$dataText = '';
+////		if ($info['md_id']) {
+////			foreach($info as $key => $value) {
+////				if (false !== strpos($key, "md_")) {
+////					if ($key == 'md_category') {
+////						$category = (isset($this->media_category[$value])) ? $this->media_category[$value] : '';
+////						$dataText .= "<b>".i18n::get('global', 'category').":</b> ".htmlspecialchars($category)." ";
+////						$dataText .= ($value) ? " (".htmlspecialchars($value).")" : "";
+////						$dataText .= "\n";
+////					}
+////					else {
+////						$dataText .= "<b>".htmlspecialchars(strtoupper(str_replace("md_", "", $key)))."</b>: ".htmlspecialchars($value)."\n";
+////					}
+////				}
+////			}
+////		}
+////		if (!$dataText) $dataText = "<b>".i18n::get('global', 'noInformationsAvailable')."</b>\n";
+////		$text .= $dataText;
+//		
+////		$version = $this->ecc_release['local_release_version']." ".$this->ecc_release['release_build']." ".$this->ecc_release['release_state'];
+////		$text .= "\n".i18n::get('global', 'generatedBy')." ".$this->ecc_release['title']." ".$version."\n";
+////
+////		try{
+////			@$this->paneInfoDataText->set_markup($text);
+////		}
+////		catch(PhpGtkGErrorException $e){
+////			$this->paneInfoDataText->set_markup(i18n::get('global', 'invalidDataEncodingError'));			
+////		}
+//	}
 	
-	public function saveUserData() {
-		
-		$mngrUserData = FACTORY::get('manager/UserData');
-		
-		$textBuffer = $this->media_nb_pers_note->get_buffer();
-		$notes = $textBuffer->get_text($textBuffer->get_start_iter(), $textBuffer->get_end_iter());
-		
-		if (!trim($notes)) {
-			$mngrUserData->deleteNotesByRomident($this->userDataEccident, $this->userDataCrc32);
-			$msg = i18n::get('global', 'dataRemoved');
-		}
-		elseif ($this->userDataId) {
-			$mngrUserData->updateNotesById($this->userDataId, $notes);
-			$msg = i18n::get('global', 'dataUpdated');
-		}
-		else {
-			$this->userDataId = $mngrUserData->insertNotesByRomident($this->userDataEccident, $this->userDataCrc32, $notes);
-			$msg = i18n::get('global', 'dataAdded');
-		}
-		$this->guiManager->openDialogInfo(i18n::get('global', 'dataSaved'), $msg);
-	}
+//	public function saveUserData() {
+//		
+//		$mngrUserData = FACTORY::get('manager/UserData');
+//		
+//		$textBuffer = $this->media_nb_pers_note->get_buffer();
+//		$notes = $textBuffer->get_text($textBuffer->get_start_iter(), $textBuffer->get_end_iter());
+//		
+//		if (!trim($notes)) {
+//			$mngrUserData->deleteNotesByRomident($this->userDataEccident, $this->userDataCrc32);
+//			$msg = i18n::get('global', 'dataRemoved');
+//		}
+//		elseif ($this->userDataId) {
+//			$mngrUserData->updateNotesById($this->userDataId, $notes);
+//			$msg = i18n::get('global', 'dataUpdated');
+//		}
+//		else {
+//			$this->userDataId = $mngrUserData->insertNotesByRomident($this->userDataEccident, $this->userDataCrc32, $notes);
+//			$msg = i18n::get('global', 'dataAdded');
+//		}
+//		$this->guiManager->openDialogInfo(i18n::get('global', 'dataSaved'), $msg);
+//	}
 
 	
 	public function show_popup_menu_platform_doubleclick($obj, $event){
+		
+		# not possible for all found!
+		if (!$this->_eccident) return false;
+
 		if ($event->button == 1 && $event->type == 5) {
 			$this->dispatch_menu_context_platform('ADD_NEW');
 		}
@@ -2744,30 +3157,36 @@ if (i18n::getLanguageIdent() != 'jp') {
 			
 			$platform_name = $this->ecc_platform_name;
 			
-			$itm_header = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_platform%s'), $platform_name));
-			$itm_header->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_INFO');
-			$menu->append($itm_header);
-			$itm_header->set_sensitive(false);
+			$menuItem = $this->createImageMenuItem('<b>'.sprintf(I18N::get('menu', 'lbl_platform%s'), $platform_name).'</b>', false);
+			#$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_INFO');
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
+			$menu->append($menuItem);
+			#$menuItem->set_sensitive(false);
 			
 			$menu->append(new GtkSeparatorMenuItem());
 			
-			$itm_add_new = new GtkMenuItem(I18N::get('menu', 'lbl_roms_add'));
-			$itm_add_new->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ADD_NEW');
-			$itm_add_new->set_sensitive($this->_eccident);
-			$menu->append($itm_add_new);
-			
-			$itm_add_new = new GtkMenuItem(I18N::get('menu', 'lbl_roms_rescan_all'));
-			$itm_add_new->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ROM_RESCAN_ALL');
-			$menu->append($itm_add_new);
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_add'), $this->getThemeFolder('icon/ecc_add.png'));
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ADD_NEW');
+			$menuItem->set_sensitive($this->_eccident);
+			$menu->append($menuItem);
 
-			$menu->append(new GtkSeparatorMenuItem());
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/ecc_settings.png'));
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
+			$menu->append($menuItem);
+			$menuItem->set_sensitive($this->_eccident);
 			
-			$itm_maint_db_optimize = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_optimize%s'), $platform_name));
+			$menu->append(new GtkSeparatorMenuItem());
+
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_rescan_all'), $this->getThemeFolder('icon/ecc_reload.png'));
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ROM_RESCAN_ALL');
+			$menu->append($menuItem);
+			
+			$itm_maint_db_optimize = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_optimize%s'), $platform_name), $this->getThemeFolder('icon/ecc_optimize.png'));
 			$itm_maint_db_optimize->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_OPTIMIZE');
 			$menu->append($itm_maint_db_optimize);
 
 			$menuRomDup = new GtkMenu();
-			$menuItemRomDup = new GtkMenuItem(I18N::get('menu', 'lbl_roms_dup'));
+			$menuItemRomDup = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_dup'), $this->getThemeFolder('icon/ecc_duplicate.png'));
 			$menuItemRomDup->set_submenu($menuRomDup);
 			$menu->append($menuItemRomDup);
 
@@ -2781,27 +3200,51 @@ if (i18n::getLanguageIdent() != 'jp') {
 			#$menu->append($itm_maint_db_clear_media);
 			$menuRomDup->append($itm_maint_db_clear_media);
 			
-			$itm_maint_db_clear_media = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove%s'), $platform_name));
-			$itm_maint_db_clear_media->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
-			$menu->append($itm_maint_db_clear_media);
+			$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove%s'), $platform_name), $this->getThemeFolder('icon/ecc_remove.png'));
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
+			$menu->append($menuItem);
+			
+			$menu->append(new GtkSeparatorMenuItem());
+
+			// ----------------------------------------------------------------
+			// images
+			// ----------------------------------------------------------------
+			
+			$menuTop = new GtkMenu();
+			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackTopMenu'), $this->getThemeFolder('icon/ecc_image.png'));
+			$menuTopItem->set_submenu($menuTop);
+			$menu->append($menuTopItem);
+			
+			$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackCreateAllThumbnails'));
+			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackCreateAllThumbnails', $this->_eccident));
+			$menuTop->append($menuSubItem);
+			
+			$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackRemoveImagesWithoutRomFile'));
+			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveImagesWithoutRomFile', $this->_eccident));
+			$menuTop->append($menuSubItem);
+
+			$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackRemoveEmptyFolder'));
+			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveEmptyFolder', $this->_eccident));
+			$menuTop->append($menuSubItem);	
+
+			$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackRemoveAllThumbnails'));
+			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveAllThumbnails', $this->_eccident));
+			$menuTop->append($menuSubItem);	
+
+			$menuSubItem = new GtkMenuItem(I18N::get('menu', 'imagepackConvertEccV1Images'));
+			$menuSubItem->connect_simple('activate', array($this, 'convertEccV1Images'));
+			$menuTop->append($menuSubItem);				
 			
 			$menu->append(new GtkSeparatorMenuItem());
 			
-			$itm_platform_edit = new GtkMenuItem(I18N::get('menu', 'lbl_emu_config'));
-			$itm_platform_edit->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
-			$menu->append($itm_platform_edit);
-			$itm_platform_edit->set_sensitive($this->_eccident);
-			#$itm_platform_editState = ($this->_eccident) ? true : false;
-			#$itm_platform_edit->set_sensitive($itm_platform_editState);
-			
-			$menu->append(new GtkSeparatorMenuItem());
+//			convertEccV1Images
 			
 			// ----------------------------------------------------------------
 			// Import
 			// ----------------------------------------------------------------
 			
 			$menuImport = new GtkMenu();
-			$menuItemImport = new GtkMenuItem(I18N::get('menu', 'lbl_import_submenu'));
+			$menuItemImport = $this->createImageMenuItem(I18N::get('menu', 'lbl_import_submenu'), $this->getThemeFolder('icon/ecc_import.png'));
 			$menuItemImport->set_submenu($menuImport);
 			$menu->append($menuItemImport);
 			
@@ -2831,7 +3274,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 			// ----------------------------------------------------------------
 			
 			$menuExport = new GtkMenu();
-			$menuItemExport = new GtkMenuItem(I18N::get('menu', 'lbl_export_submenu'));
+			$menuItemExport = $this->createImageMenuItem(I18N::get('menu', 'lbl_export_submenu'), $this->getThemeFolder('icon/ecc_export.png'));
 			$menuItemExport->set_submenu($menuExport);
 			$menu->append($menuItemExport);
 			
@@ -2847,7 +3290,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 			$itm_export_esearch->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT_ESEARCH');
 			$menuExport->append($itm_export_esearch);
 
-			$itm_maint_db_clear_dat = new GtkMenuItem(I18N::get('menu', 'lbl_dat_empty'));
+			$itm_maint_db_clear_dat = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_empty'), $this->getThemeFolder('icon/ecc_clear.png'));
 			$itm_maint_db_clear_dat->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_DAT');
 			$menu->append($itm_maint_db_clear_dat);
 			
@@ -2857,13 +3300,12 @@ if (i18n::getLanguageIdent() != 'jp') {
 			// Other
 			// ----------------------------------------------------------------
 			
-			$itm_maint_db_clear_dat = new GtkMenuItem(I18N::get('menu', 'lbl_rating_unset'));
-			$itm_maint_db_clear_dat->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_UNSET_RATINGS');
-			$menu->append($itm_maint_db_clear_dat);
+//			$itm_maint_db_clear_dat = new GtkMenuItem(I18N::get('menu', 'lbl_rating_unset'));
+//			$itm_maint_db_clear_dat->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_UNSET_RATINGS');
+//			$menu->append($itm_maint_db_clear_dat);
+//			$menu->append(new GtkSeparatorMenuItem());
 			
-			$menu->append(new GtkSeparatorMenuItem());
-			
-			$mItemUserFolder = new GtkMenuItem(sprintf(I18N::get('menu', 'lbl_open_eccuser_folder%s'), $this->_eccident));
+			$mItemUserFolder = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_open_eccuser_folder%s'), $this->_eccident), $this->getThemeFolder('icon/ecc_folder.png'));
 			$mItemUserFolder->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'OPEN_ECCUSER_FOLDER', $this->_eccident);
 			$mItemUserFolder->set_sensitive($this->_eccident);
 			$menu->append($mItemUserFolder);
@@ -2897,9 +3339,17 @@ if (i18n::getLanguageIdent() != 'jp') {
 				if (!$this->guiManager->openDialogConfirm($title, $msg)) return false; 
 				if ($this->ini->clearHistoryIni()) {
 					FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open', '/fastload');
-					Gtk::main_quit();
+					#Gtk::main_quit();
+					$this->eccShutdown();
 				}
 				break;
+			case 'MAINT_BACKUP_USERDATA':
+				if($filename = FACTORY::get('manager/UserData')->exportXml()){
+					if($this->guiManager->openDialogConfirm(I18N::get('global', 'done_title'), sprintf(I18N::get('popup', 'userdata_backuped_in%s'), basename($filename)))){
+						FACTORY::get('manager/Os')->executeProgramDirect($filename, 'open');
+					}
+				}
+				break;				
 			case 'MAINT_UNSET_RATINGS':
 				$title = I18N::get('popup', 'maint_unset_ratings_title');
 				$msg = I18N::get('popup', 'maint_unset_ratings_msg');
@@ -2998,59 +3448,281 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$this->on_toggle_state($this->toggle_show_doublettes, "toggle_show_doublettes");
 				$this->createEccOptBtnBar();
 				break;			
-			
 			// radio buttons in top navigation
 			case 'TOGGLE_MAINVIEV_ALL':
+				
+				$this->view_mode = 'MEDIA';
+				
 				$this->mTopViewModeRomHave->set_active(true);
 				$this->toggle_show_files_only = false;
 				$this->toggle_show_metaless_roms_only = false;
 				$this->_fileView->showOnlyPersonal(false);
 				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
 				$this->onInitialRecord();
 				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_ALL';
 				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_ALL', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+
+				$this->mTopViewOnlyRoms->set_active(true);
+				
 				break;
 			// radio buttons in top navigation
 			case 'TOGGLE_VIEWMODE_DONTHAVE':
+				
+				$this->view_mode = 'MEDIA';
+				
 				$this->mTopViewModeRomDontHave->set_active(true);
 				$this->toggle_show_files_only = false;
 				$this->toggle_show_metaless_roms_only = false;
 				$this->_fileView->showOnlyPersonal(false);
 				$this->_fileView->showOnlyDontHave(true);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
 				$this->onInitialRecord();
 				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_VIEWMODE_DONTHAVE';
 				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_VIEWMODE_DONTHAVE', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyRoms->set_active(true);
+				
 				break;
 			case 'TOGGLE_MAINVIEV_DISPLAY':
+				
+				$this->view_mode = 'MEDIA';
+				
 				$this->mTopViewModeRomAll->set_active(true);
 				$this->toggle_show_files_only = true;
 				$this->toggle_show_metaless_roms_only = false;
 				$this->_fileView->showOnlyPersonal(false);
 				$this->_fileView->showOnlyDontHave(false);
+
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
 				$this->onInitialRecord();
 				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY';
 				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyRoms->set_active(true);
+				
 				break;
 			case 'TOGGLE_MAINVIEV_DISPLAY_METALESS':
+				
+				$this->view_mode = 'MEDIA';
+				
 				$this->mTopViewModeRomNoMeta->set_active(true);
 				$this->toggle_show_files_only = false;
 				$this->toggle_show_metaless_roms_only = true;
 				$this->_fileView->showOnlyPersonal(false);
 				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
 				$this->onInitialRecord();
 				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_METALESS';
 				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_METALESS', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyRoms->set_active(true);
+				
 				break;
 			case 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL':
+				
+				$this->view_mode = 'MEDIA';
+
+				$this->_fileView->setPersonalMode('notes');
+				
 				$this->mTopViewModeRomPersonal->set_active(true);
 				$this->toggle_show_files_only = false;
 				$this->toggle_show_metaless_roms_only = false;
 				$this->_fileView->showOnlyPersonal(true);
 				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
 				$this->onInitialRecord();
 				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL';
 				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyRoms->set_active(true);
+				
 				break;
+			case 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL_REVIEW':
+				
+				$this->view_mode = 'MEDIA';
+
+				$this->_fileView->setPersonalMode('review');
+				
+				$this->mTopViewModeRomPersonal->set_active(true);
+				$this->toggle_show_files_only = false;
+				$this->toggle_show_metaless_roms_only = false;
+				$this->_fileView->showOnlyPersonal(true);
+				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
+				$this->onInitialRecord();
+				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL_REVIEW';
+				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_PERSONAL_REVIEW', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyRoms->set_active(true);
+				
+				break;
+			case 'TOGGLE_MAINVIEV_DISPLAY_PLAYED':
+				
+				$this->view_mode = 'HISTORY';
+				
+				$this->mTopViewModeRomPlayed->set_active(true);
+				$this->toggle_show_files_only = false;
+				$this->toggle_show_metaless_roms_only = false;
+				$this->_fileView->showOnlyPersonal(false);
+				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(true);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
+				$this->onInitialRecord();
+				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_PLAYED';
+				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_PLAYED', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyPlayed->set_active(true);
+				
+				break;
+			case 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED':
+				
+				$this->view_mode = 'HISTORY';
+				
+				$this->mTopViewModeRomMostPlayed->set_active(true);
+				$this->toggle_show_files_only = false;
+				$this->toggle_show_metaless_roms_only = false;
+				$this->_fileView->showOnlyPersonal(false);
+				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(true);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(false);
+				
+				$this->onInitialRecord();
+				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED';
+				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_MOSTPLAYED', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyPlayed->set_active(true);
+				
+				break;
+			case 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED':
+				
+				$this->view_mode = 'HISTORY';
+				
+				$this->mTopViewModeRomNotPlayed->set_active(true);
+				$this->toggle_show_files_only = false;
+				$this->toggle_show_metaless_roms_only = false;
+				$this->_fileView->showOnlyPersonal(false);
+				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(true);
+				$this->_fileView->showOnlyBookmarks(false);
+				
+				$this->onInitialRecord();
+				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED';
+				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyPlayed->set_active(true);
+				
+				break;
+			case 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS':
+				
+				$this->view_mode = 'BOOKMARK';
+				
+				$this->mTopViewModeRomBookmarks->set_active(true);
+				$this->toggle_show_files_only = false;
+				$this->toggle_show_metaless_roms_only = false;
+				$this->_fileView->showOnlyPersonal(false);
+				$this->_fileView->showOnlyDontHave(false);
+				
+				$this->_fileView->showOnlyPlayed(false);
+				$this->_fileView->showOnlyMostPlayed(false);
+				$this->_fileView->showOnlyNotPlayed(false);
+				$this->_fileView->showOnlyBookmarks(true);
+				
+				$this->onInitialRecord();
+				$this->update_treeview_nav();
+				
+				$this->showListDataMode = 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS';
+				$this->ini->storeHistoryKey('showListDataMode', 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS', false);
+				$this->ini->storeHistoryKey('showListDataType', $this->view_mode, false);
+				
+				$this->mTopViewOnlyBookmarks->set_active(true);
+				
+				break;
+				
+			case 'TOGGLE_VIEWMODE_DISK_ALL':
+				$this->toggle_only_disk = false;
+				$this->on_toggle_state($this->toggle_only_disk, "toggle_only_disk", false);
+				$this->createEccOptBtnBar(true);
+				break;
+				
+			case 'TOGGLE_VIEWMODE_DISK_ONE':
+				$this->toggle_only_disk = 'one';
+				$this->on_toggle_state($this->toggle_only_disk, "toggle_only_disk", false);
+				$this->createEccOptBtnBar(true);
+				break;
+				
+			case 'TOGGLE_VIEWMODE_DISK_ONE_PLUS':
+				$this->toggle_only_disk = 'one_plus';
+				$this->on_toggle_state($this->toggle_only_disk, "toggle_only_disk", false);
+				$this->createEccOptBtnBar(true);
+				break;
+				
 			case 'MAINT_DUPLICATE_REMOVE_ALL_PREVIEW':
 				$this->duplicate_remove_all(false);
 				break;
@@ -3079,26 +3751,30 @@ if (i18n::getLanguageIdent() != 'jp') {
 						$msg = sprintf(I18N::get('popup', 'romReparseAllMsg%s'), $this->ini->getPlatformName($eccident))."\n";
 						if (!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) return false;
 						
-						$this->MediaMaintDb('OPTIMIZE', $eccident, false);
 						$this->parseMedia($eccident, $reparsePaths);
+						$this->MediaMaintDb('OPTIMIZE', $eccident, false);
 					}
 				}
 				else {
+					
+					$silentReparse = $this->ini->getKey('USER_SWITCHES', 'confEccSilentParsing');
+					
 					$allReparsePaths = $this->_fileView->getReparsePathsAll();
 					if (count($allReparsePaths)) {
 						
 						$platformNames = array();
 						# rem
 						foreach($allReparsePaths as $key => $void) $platformNames[] = $this->ini->getPlatformName($key);
-
-						$title = I18N::get('popup', 'romReparseAllTitle');
-						$msg = sprintf(I18N::get('popup', 'romReparseAllMsg%s'), join("\n", $platformNames))."\n";
-						if (!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) return false;
 						
-						$this->MediaMaintDb('OPTIMIZE', false, false);
-						foreach($allReparsePaths as $aEccident => $reparsePaths) {
-							$this->parseMedia($aEccident, $reparsePaths);
+						if (!$silentReparse){
+							$title = I18N::get('popup', 'romReparseAllTitle');
+							$msg = sprintf(I18N::get('popup', 'romReparseAllMsg%s'), join("\n", $platformNames))."\n";
+							if (!FACTORY::get('manager/Gui')->openDialogConfirm($title, $msg)) return false;
 						}
+						foreach($allReparsePaths as $aEccident => $paths) {
+							$this->parseMedia($aEccident, $paths);
+						}
+						$this->MediaMaintDb('OPTIMIZE', false, false);
 					}
 				}
 			break;
@@ -3106,6 +3782,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 			default:
 				// do nothing
 		}
+		$this->updateMainButtonHilights($this->view_mode, $name);
 	}
 	
 	
@@ -3179,62 +3856,24 @@ if (i18n::getLanguageIdent() != 'jp') {
 				//popup the menu
 				$menu = new GtkMenu();
 				
-				/**
-				 * Simple filter
-				 */
-				$menuItemLabel = I18N::get('menu', 'lbl_quickfilter');
-				$menuItem = new GtkMenuItem($menuItemLabel);
-				$menuItemActive = ($this->current_media_info) ? true : false;
-				$menuItem->set_sensitive($menuItemActive);
-				
-				if ($menuItemActive) {
-				
-					$menuSub = new GtkMenu();
-					$menuItem->set_submenu($menuSub);
-					
-					$menuSubItem = new GtkMenuItem(I18N::get('menu', 'lbl_quickfilter_reset'));
-					$menuSubItem->connect_simple('activate', array($this, 'onResetSearch'));
-					$menuSub->append($menuSubItem);
-					$menuSub->append(new GtkSeparatorMenuItem());
-					
-	    			$searchFields = array(
-	    				'NAME' => 'md_name',
-	    				'YEAR' => 'md_year',
-	    				'DEVELOPER' => 'md_creator',
-	    				'PUBLISHER' => 'md_publisher',
-	    				'INFO' => 'md_info',
-	    				'ECCIDENT' => 'fd_eccident',
-	    				'CRC32' => 'crc32',
-	    			);
-
-					foreach ($this->freeformSearchFields as $key => $label) {
-						$value = false;
-						$searchField = (isset($searchFields[$key])) ? $searchFields[$key] : false;
-						if (!$searchField) continue;
-						$value = $this->current_media_info[$searchField];
-						if (!$value) continue;
-						$labelValue = '"'.$value.'"';
-						$itemLabel = $label.' = '.$labelValue;
-						$menuSubItem = new GtkMenuItem($itemLabel);
-						$menuSubItem->connect_simple('activate', array($this, 'directMatchSearch'), $key, $value);
-						$menuSub->append($menuSubItem);
-					}
-				}
+				$menuItem = $this->createImageMenuItem('<b>'.I18N::get('menu', 'menuItemRomOptions').'</b>', false);
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'EDIT');
 				$menu->append($menuItem);
 				
 				$menu->append(new GtkSeparatorMenuItem());
 				
 				# start with default emulator!
-				$menuItemLabel = I18N::get('menu', 'lbl_start');
-				$menuItem = new GtkMenuItem($menuItemLabel);
+				#$menuItemLabel = I18N::get('menu', 'lbl_start');
+				#$menuItem = new GtkMenuItem($menuItemLabel);
+				
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_start'), $this->getThemeFolder('icon/ecc_run.png'));
 				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'START_ROM',  false);
 				$menuItemActive = ($platformValid && $this->current_media_info['id']) ? true : false;
 				$menuItem->set_sensitive($menuItemActive);
 				$menu->append($menuItem);
 				
 				# start with alternate emulator!
-				$menuItemLabel = I18N::get('menu', 'lbl_start_with');
-				$menuItem = new GtkMenuItem($menuItemLabel);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_start_with'), $this->getThemeFolder('icon/ecc_run_opt.png'));
 				$menuItemActive = ($platformValid && $this->current_media_info['id']) ? true : false;
 				$menuItem->set_sensitive($menuItemActive);
 				
@@ -3269,65 +3908,49 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$menu->append($menuItem);
 				
 				# start with default emulator!
-				$menuItemLabel = I18N::get('menu', 'lbl_emu_config');
-				$menuItem = new GtkMenuItem($menuItemLabel);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/ecc_settings.png'));
 				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'OPEN_CONFIG',  'EMU', strtolower($this->current_media_info['fd_eccident']));
 				#$menuItemActive = ($platformValid) ? true : false;
 				#$menuItem->set_sensitive($menuItemActive);
 				$menu->append($menuItem);
 				
 				$menu->append(new GtkSeparatorMenuItem());
-				
-				// ----------------------------------------------------------------
-				// Edit
-				// ----------------------------------------------------------------
-				
-				$label = (!$this->compareLeftId) ? I18N::get('menu', 'lbl_meta_compare_left') : sprintf(I18N::get('menu', 'lbl_meta_compare_right%s'), $this->compareLeftName);
-				$echo4 = new GtkMenuItem($label);
-				$echo4->connect_simple('activate', array($this, 'setupCompare'));
-				$menu->append($echo4);
-				
-				$menu->append(new GtkSeparatorMenuItem());
-				
+
 				// ----------------------------------------------------------------
 				// Rating submenu
 				// ----------------------------------------------------------------
 				
-				$menuRating = new GtkMenu();
-				$menuItemRating = new GtkMenuItem(I18N::get('menu', 'lbl_rating_submenu'));
-				$menuItemRating->set_submenu($menuRating);
-				$menu->append($menuItemRating);
-				
-				for ($i=6; $i>=0; $i--) {
-					$ratingString = str_repeat($this->ratingChar, $i);
-					$miRating = new GtkMenuItem($ratingString);
-					$miRating->connect_simple('activate', array($this, 'dispatch_menu_context'), 'RATING', $i);
-					$menuRating->append($miRating);
-				}
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rating_submenu'), $this->getThemeFolder('icon/ecc_rating.png'));
+				$menuItem->connect_simple('activate', array($this, 'edit_media'), false, 1);
+				$menu->append($menuItem);	
 
-				// ----------------------------------------------------------------
-				// Bookmarks
-				// ----------------------------------------------------------------
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_meta_edit'), $this->getThemeFolder('icon/ecc_edit_yellow.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'EDIT');
+				$menu->append($menuItem);
 				
-				if ($this->view_mode == 'BOOKMARK') {
-					$itm_bookmark_rem_single = new GtkMenuItem(I18N::get('menu', 'lbl_fav_remove'));
-					$itm_bookmark_rem_single->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_BOOKMARK_SINGLE');
-					$menu->append($itm_bookmark_rem_single);
-					
-					$menu->append(new GtkSeparatorMenuItem());
-					
-					$itm_bookmark_rem_all = new GtkMenuItem(I18N::get('menu', 'lbl_fav_all_remove'));
-					$itm_bookmark_rem_all->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_BOOKMARK_ALL');
-					$menu->append($itm_bookmark_rem_all);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'menuItemPersonalEditNote'), $this->getThemeFolder('icon/ecc_edit_blue.png'));
+				$menuItem->connect_simple('activate', array($this, 'edit_media'), false, 2);
+				$menu->append($menuItem);	
+
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'menuItemPersonalEditReview'), $this->getThemeFolder('icon/ecc_edit_green.png'));
+				$menuItem->connect_simple('activate', array($this, 'edit_media'), false, 1);
+				$menu->append($menuItem);
+
+				# lbl_fav_add
+				if($this->current_media_info['id'] && $this->_fileView->hasBookmark($this->current_media_info['id'])){
+					$label = 'lbl_fav_remove';
+					$file = 'heart_delete';
+					$action = 'REMOVE_BOOKMARK_SINGLE';
 				}
-				else {
-					$echo2 = new GtkMenuItem(I18N::get('menu', 'lbl_fav_add'));
-					$echo2->connect_simple('activate', array($this, 'dispatch_menu_context'), 'ADD_BOOKMARK');
-					$menu->append($echo2);
-					
-					$echo2State = ($this->current_media_info['id']) ? true : false;
-					$echo2->set_sensitive($echo2State);
+				else{
+					$label = 'lbl_fav_add';
+					$file = 'heart_add';
+					$action = 'ADD_BOOKMARK';
 				}
+				
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', $label), $this->getThemeFolder('icon/'.$file.'.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), $action);
+				$menu->append($menuItem);
 				
 				$menu->append(new GtkSeparatorMenuItem());
 
@@ -3336,91 +3959,125 @@ if (i18n::getLanguageIdent() != 'jp') {
 //				$menu->append($echo4);
 //				$echo4->set_sensitive(false);
 				
-				$imagePopup = new GtkMenuItem(I18N::get('menu', 'lbl_image_popup'));
-				$imagePopup->connect_simple('activate', array($this, 'openImagePopup'), false);
-				$menu->append($imagePopup);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_popup'), $this->getThemeFolder('icon/ecc_image.png'));
+				$menuItem->connect_simple('activate', array($this, 'openImagePopup'), false);
+				$menu->append($menuItem);
 				$imagePopupState = ($this->current_media_info) ? true : false;
-				$imagePopup->set_sensitive($imagePopupState);
+				$menuItem->set_sensitive($imagePopupState);
 				
-				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_img_reload'));
-				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'RELOAD');
-				$menu->append($echo4);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_reload'), $this->getThemeFolder('icon/ecc_reload.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'RELOAD');
+				$menu->append($menuItem);
 				
 				$menu->append(new GtkSeparatorMenuItem());
+				
+				/**
+				 * Simple filter
+				 */
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_quickfilter'), $this->getThemeFolder('icon/ecc_filter.png'));
+				$menuItemActive = ($this->current_media_info) ? true : false;
+				$menuItem->set_sensitive($menuItemActive);
+				
+				if ($menuItemActive) {
+				
+					$menuSub = new GtkMenu();
+					$menuItem->set_submenu($menuSub);
+					
+					$menuSubItem = new GtkMenuItem(I18N::get('menu', 'lbl_quickfilter_reset'));
+					$menuSubItem->connect_simple('activate', array($this, 'onResetSearch'));
+					$menuSub->append($menuSubItem);
+					$menuSub->append(new GtkSeparatorMenuItem());
+					
+	    			$searchFields = array(
+	    				'NAME' => 'md_name',
+	    				'YEAR' => 'md_year',
+	    				'DEVELOPER' => 'md_creator',
+	    				'PUBLISHER' => 'md_publisher',
+	    				'PROGRAMMER' => 'md_programmer',
+	    				'MUSICAN' => 'md_musican',
+	    				'GRAPHICS' => 'md_graphics',
+	    				'INFO' => 'md_info',
+	    				'ECCIDENT' => 'fd_eccident',
+	    				'CRC32' => 'crc32',
+	    			);
 
-				$echo4State = ($this->current_media_info['id']) ? true : false;
+					foreach ($this->freeformSearchFields as $key => $label) {
+						$value = false;
+						$searchField = (isset($searchFields[$key])) ? $searchFields[$key] : false;
+						if (!$searchField) continue;
+						$value = $this->current_media_info[$searchField];
+						if (!$value) continue;
+						$labelValue = '"'.$value.'"';
+						$itemLabel = $label.' = '.$labelValue;
+						$menuSubItem = new GtkMenuItem($itemLabel);
+						$menuSubItem->connect_simple('activate', array($this, 'directMatchSearch'), $key, $value);
+						$menuSub->append($menuSubItem);
+					}
+				}
+				$menu->append($menuItem);
 				
-				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_rom_remove'));
-				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_MEDIA');
-				$menu->append($echo4);
-				$echo4->set_sensitive($echo4State);
-				
-				$echo4 = new GtkMenuItem(I18N::get('menu', 'lContextMetaRemove'));
-				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_META_SINGLE');
-				$menu->append($echo4);
-				
-				$metaIdAvailable = ($this->current_media_info['md_id']) ? true : false;
-				$echo4->set_sensitive($metaIdAvailable);
-
-				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_img_remove_all'));
-				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'IMG_REMOVE_ALL');
-				$menu->append($echo4);
-				
-//				$menu->append(new GtkSeparatorMenuItem());
-//				
-//				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_meta_webservice_meta_get'));
-//				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'GET');
-//				$menu->append($echo4);
-//				#$echo4->set_sensitive(false);
-//				
-//				
-//				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_meta_webservice_meta_set'));
-//				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'WEBSERVICE', 'SET');
-//				$menu->append($echo4);
-
 				$menu->append(new GtkSeparatorMenuItem());
 				
 				// ----------------------------------------------------------------
 				// File operations submenu
 				// ----------------------------------------------------------------
 
-				$miBrowseDir = new GtkMenuItem(I18N::get('menu', 'lbl_shellop_browse_dir'));
-				$miBrowseDir->connect_simple('activate', array($this, 'dispatch_menu_context'), 'SHELLOP', 'BROWSE_DIR');
-				$menu->append($miBrowseDir);
-				#$miBrowseDir->set_sensitive(file_exists($this->current_media_info['path']));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_browse_dir'), $this->getThemeFolder('icon/ecc_folder.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'SHELLOP', 'BROWSE_DIR');
+				$menu->append($menuItem);
 				
-				$miBrowseDir = new GtkMenuItem(I18N::get('menu', 'lbl_rom_rescan_folder'));
-				$miBrowseDir->connect_simple('activate', array($this, 'dispatch_menu_context'), 'ROM_RESCAN_FOLDER');
-				$menu->append($miBrowseDir);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_rescan_folder'), $this->getThemeFolder('icon/ecc_reload.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'ROM_RESCAN_FOLDER');
+				$menu->append($menuItem);
 				
 				$eccAndFileState = $this->current_media_info['fd_eccident'] &&	file_exists($this->current_media_info['path']);
-				#$miBrowseDir->set_sensitive($eccAndFileState);
 
 				$menu->append(new GtkSeparatorMenuItem());
 				
 				# rem
-				$miBrowseDir = new GtkMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionAddNewRoms%s'), $this->ini->getPlatformName($this->current_media_info['fd_eccident'])));
-				$miBrowseDir->connect_simple('activate', array($this, 'dispatch_menu_context'), 'ROM_SELECTION_ADD_NEW');
-				$menu->append($miBrowseDir);
+				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionAddNewRoms%s'), $this->ini->getPlatformName($this->current_media_info['fd_eccident'])), $this->getThemeFolder('icon/ecc_add.png'));
+				$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context'), 'ROM_SELECTION_ADD_NEW');
+				$menu->append($menuItem);
 				
-				# rem
-				$miBrowseDir = new GtkMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($this->current_media_info['fd_eccident'])));
-				$miBrowseDir->connect_simple('activate', array($this, 'MediaMaintDb'), 'CLEAR_MEDIA', $this->current_media_info['fd_eccident']);
-				$menu->append($miBrowseDir);
-				$miBrowseDir->set_sensitive($this->current_media_info['fd_eccident']);
+				$subMenu = new GtkMenu();
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove_toplevel'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem->set_submenu($subMenu);
+				$menu->append($menuItem);
+
+				$menuItemRemRom = new GtkMenuItem(I18N::get('menu', 'lbl_rom_remove'));
+				$menuItemRemRom->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_MEDIA');
+				$menuItemRemRom->set_sensitive($this->current_media_info['id']);
+				$subMenu->append($menuItemRemRom);
+				
+				$menuItemRemMeta = new GtkMenuItem(I18N::get('menu', 'lContextMetaRemove'));
+				$menuItemRemMeta->connect_simple('activate', array($this, 'dispatch_menu_context'), 'REMOVE_META_SINGLE');
+				$menuItemRemMeta->set_sensitive($this->current_media_info['md_id']);
+				$subMenu->append($menuItemRemMeta);
+
+				$menuItemRemImages = new GtkMenuItem(I18N::get('menu', 'lbl_img_remove_all'));
+				$menuItemRemImages->connect_simple('activate', array($this, 'dispatch_menu_context'), 'IMG_REMOVE_ALL');
+				$subMenu->append($menuItemRemImages);
+				
+				$subMenu->append(new GtkSeparatorMenuItem());
+				
+				$menuItemRemRomsForPlatform = new GtkMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($this->current_media_info['fd_eccident'])));
+				$menuItemRemRomsForPlatform->connect_simple('activate', array($this, 'MediaMaintDb'), 'CLEAR_MEDIA', $this->current_media_info['fd_eccident']);
+				$menuItemRemRomsForPlatform->set_sensitive($this->current_media_info['fd_eccident']);
+				$subMenu->append($menuItemRemRomsForPlatform);
 				
 				$menu->append(new GtkSeparatorMenuItem());
 				
+				
 				$menuShellOperations = new GtkMenu();
-				$menuItemShellOperations = new GtkMenuItem(I18N::get('menu', 'lbl_shellop_submenu'));
-				$menuItemShellOperations->set_submenu($menuShellOperations);
-				$menu->append($menuItemShellOperations);
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_submenu'), $this->getThemeFolder('icon/ecc_save.png'));
+				$menuItem->set_submenu($menuShellOperations);
+				$menu->append($menuItem);
 				
 				if (!$this->current_media_info['id'] || !file_exists($this->current_media_info['path'])) {
-					$menuItemShellOperations->set_sensitive(false);
+					$menuItem->set_sensitive(false);
 				}
 				else {
-					$menuItemShellOperations->set_sensitive(true);
+					$menuItem->set_sensitive(true);
 					
 					$miFileRename = new GtkMenuItem(I18N::get('menu', 'lbl_shellop_file_rename'));
 					$miFileRename->connect_simple('activate', array($this, 'dispatch_menu_context'), 'SHELLOP', 'FILE_RENAME');
@@ -3464,9 +4121,11 @@ if (i18n::getLanguageIdent() != 'jp') {
 					$menu->append(new GtkSeparatorMenuItem());
 				}
 				
-				$echo4 = new GtkMenuItem(I18N::get('menu', 'lbl_meta_edit'));
-				$echo4->connect_simple('activate', array($this, 'dispatch_menu_context'), 'EDIT');
-				$menu->append($echo4);
+				$label = (!$this->compareLeftId) ? I18N::get('menu', 'lbl_meta_compare_left') : sprintf(I18N::get('menu', 'lbl_meta_compare_right%s'), $this->compareLeftName);
+				$menuItem = $this->createImageMenuItem($label, $this->getThemeFolder('icon/ecc_equal.png'));
+				$menuItem->connect_simple('activate', array($this, 'setupCompare'));
+				$menu->append($menuItem);
+				
 				
 				$menu->show_all();
 				$menu->popup();
@@ -3486,6 +4145,32 @@ if (i18n::getLanguageIdent() != 'jp') {
 				$menu->popup();
 			}
 		}
+	}
+	
+	public function createImageMenuItem($label, $imagePath, $width = false, $height = false, $aspectRatio = false){
+		
+		$menuItem = new GtkMenuItem($label);
+		$labelWidget = $menuItem->child;
+		$menuItem->remove($labelWidget);
+
+		$hBox = new GtkHBox();
+		#$image = GtkImage::new_from_file($imagePath);
+		
+		$gtkLabel = new GtkLabel();
+		$gtkLabel->set_markup($label);
+		$gtkLabel->set_alignment(0, 0.5);
+
+		if($imagePath){
+			$image = new GtkImage();
+			$image->set_from_pixbuf($this->oHelper->getPixbuf($imagePath, $width, $height, $aspectRatio));
+			$hBox->pack_start($image, 0);	
+		}
+		
+		$menuItem->add($hBox);
+		
+		$hBox->pack_start($gtkLabel);
+
+		return $menuItem;
 	}
 	
 
@@ -3510,9 +4195,9 @@ if (i18n::getLanguageIdent() != 'jp') {
 			case 'REMOVE_BOOKMARK_SINGLE':
 				$this->remove_bookmark_by_id();
 				break;
-			case 'REMOVE_BOOKMARK_ALL':
-				$this->remove_bookmark_all();
-				break;
+//			case 'REMOVE_BOOKMARK_ALL':
+//				$this->remove_bookmark_all();
+//				break;
 			case 'OPEN_CONFIG':
 				$this->openGuiConfig($parameter, $parameter2);
 				break;				
@@ -3559,12 +4244,12 @@ if (i18n::getLanguageIdent() != 'jp') {
 					
 					$title = I18N::get('popup', 'eccdb_webservice_get_datfile_title');
 					# rem
-					$msg = sprintf(I18N::get('popup', 'eccdb_webservice_get_datfile_msg%s'), $this->ini->getPlatformName($this->_eccident));
+					$msg = sprintf(I18N::get('popup', 'eccdb_webservice_get_datfile_msg%s'), '<b>'.$this->ini->getPlatformName($this->_eccident).'</b>');
 					if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
 					
 					$oWebServices->setServiceUrl($this->eccdb['META_DATFILE_URL']);
 					$data = $oWebServices->getRomdbDatfile();
-					
+
 					if (!$data || !count($data)){
 						$title = I18N::get('popup', 'eccdb_webservice_get_datfile_error_title');
 						$msg = I18N::get('popup', 'eccdb_webservice_get_datfile_error_msg');
@@ -3636,19 +4321,19 @@ if (i18n::getLanguageIdent() != 'jp') {
 				
 				break;
 			case 'EDIT':
-				$this->edit_media(false);
+				$this->edit_media(false, 0);
 				break;
 			case 'RATING':
-				if (!$this->current_media_info['md_id']) {
-					$this->guiManager->openDialogInfo(I18N::get('global', 'error_title'), I18N::get('popup', 'meta_rating_add_error_msg'));
-					$this->edit_media(false);
-				}
-				if ($this->_fileView->addRatingByMdataId($this->current_media_info['md_id'], $parameter)) {
-					$this->directMediaEdit = true;
-					$this->show_media_info();
-					$this->onReloadRecord(false);
-					$this->directMediaEdit = false;					
-				}
+				#if (!$this->current_media_info['md_id']) {
+				#	$this->guiManager->openDialogInfo(I18N::get('global', 'error_title'), I18N::get('popup', 'meta_rating_add_error_msg'));
+					$this->edit_media(false, 1);
+				#}
+//				if ($this->_fileView->addRatingByMdataId($this->current_media_info['md_id'], $parameter)) {
+//					$this->directMediaEdit = true;
+//					$this->show_media_info();
+//					$this->onReloadRecord(false);
+//					$this->directMediaEdit = false;					
+//				}
 				break;
 			case 'ROM_SELECTION_ADD_NEW':
 				$this->parseMedia($this->current_media_info['fd_eccident'], dirname($this->current_media_info['path']), true);
@@ -3722,7 +4407,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 		
 		$title = I18N::get('popup', 'img_remove_all_title');
 		$msg = sprintf(I18N::get('popup', 'img_remove_all_msg%s'), $romTitle);
-		if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
+		if (!$this->guiManager->openDialogConfirm($title, $msg, array('dhide_remove_rom_images'))) return false;
 
 		$this->imageManager->removeUserImageFolder($eccident, $crc32);
 
@@ -3730,23 +4415,71 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->onReloadRecord();
 	}
 
+	public function openTabMediaEditRating(){
+		$this->mEditUserNotebook->set_current_page(1);
+	}
+	
+	public function initPopupImageCenter(){
+		$this->win_imagePopup->connect('delete-event', array($this->oGuiImagePopup, 'hidePopup'));
+	}
+	
+	public function initPopupMetaEdit(){
+		
+		# windows
+		$this->win_media_edit->connect('delete-event', array($this, 'media_edit_hide'));
+		
+		# rating
+		$this->mEditUserRatingFunScale->connect('value-changed', array($this, 'processChangedUserRating'));
+		$this->mEditUserRatingGameplayScale->connect('value-changed', array($this, 'processChangedUserRating'));
+		$this->mEditUserRatingGraphicsScale->connect('value-changed', array($this, 'processChangedUserRating'));
+		$this->mEditUserRatingMusicScale->connect('value-changed', array($this, 'processChangedUserRating'));
+	}
+	
+	public $lastRating;
+	public function processChangedUserRating(){
+		$rating_fun = $this->mEditUserRatingFunScale->get_value();
+		$rating_gameplay = $this->mEditUserRatingGameplayScale->get_value();
+		$rating_graphics = $this->mEditUserRatingGraphicsScale->get_value();
+		$rating_music = $this->mEditUserRatingMusicScale->get_value();
+		$rating = $this->getRating($rating_fun, $rating_gameplay, $rating_graphics, $rating_music);
+		$eccRating = $this->getEccRatingIntegerByPercent($rating);
+		if($this->lastRating != $eccRating){
+			$this->setRatingImage($this->mEditUserRatingSumImage, $eccRating);
+			$this->setRatingImage($this->mediaEditMetaRatingLink, $eccRating);
+			$this->lastRating = $eccRating;
+		}
+		$this->mEditUserRatingSum->set_markup('<b>'.i18n::get('global', 'total').': <span color="#00CC00">'.(int)$rating.'</span> %</b>');
+	}
+	
+	public function getRating($rating_fun, $rating_gameplay, $rating_graphics, $rating_music){
+		return round(($rating_fun*4 + $rating_gameplay*2 + $rating_graphics + $rating_music) / 8);
+	}
+	
+	public function getEccRatingIntegerByPercent($rating){
+		return round((int)$rating*6/100);
+	}
 	
 	/*
 	*
 	*/
 	#public $lastMetaEditChecksum = array();
-	public function edit_media($onlyShowIfOpened=false)
+	public function edit_media($onlyShowIfOpened=false, $openTab = false)
 	{
+		
+		# open tab
+		if($openTab !== false) $this->mEditUserNotebook->set_current_page($openTab);
+		
 		if ($onlyShowIfOpened && !$this->media_edit_is_opened) return false;
 		
 		$composite_id = $this->current_media_info['composite_id'];
 		$coposite_id_array = $this->extract_composite_ids($composite_id);
 		
 		if ($coposite_id_array['fdata_id']) {
-			$mdata_array = $this->_fileView->get_file_data_TEST_META(false, "fd.id='".(int)$coposite_id_array['fdata_id']."'", array(0, 1), false, "", $this->_search_language, $this->_search_category, false, $this->toggle_show_files_only);
+			$mdata_array = $this->_fileView->getRecordByFileId($coposite_id_array['fdata_id']);
 		}
 		else {
-			$mdata_array = $this->_fileView->get_file_data_TEST_META(false, "md.id='".(int)$coposite_id_array['mdata_id']."'", array(0, 1), false, "", $this->_search_language, $this->_search_category, false, $this->toggle_show_files_only);
+			
+			$mdata_array = $this->_fileView->getRecordByMetaId($coposite_id_array['mdata_id']);
 		}
 		$mdata = @$mdata_array['data'][$composite_id];
 		
@@ -3771,13 +4504,19 @@ if (i18n::getLanguageIdent() != 'jp') {
 			'md_usk' => $mdata['md_usk'],
 			'md_creator' => $mdata['md_creator'],
 			'md_publisher' => $mdata['md_publisher'],
+			'md_programmer' => $mdata['md_programmer'],
+			'md_musican' => $mdata['md_musican'],
+			'md_graphics' => $mdata['md_graphics'],
+			'md_media_type' => $mdata['md_media_type'],
+			'md_media_current' => $mdata['md_media_current'],
+			'md_media_count' => $mdata['md_media_count'],
 			'md_storage' => $mdata['md_storage'],
 		);
+		
 		$mdata['edit_checksum'] = $this->create_mdata_checksum($check_data);
 		
-		$fileNamePlain = $this->get_plain_filename($mdata['path']);
+		$fileNamePlain = ($mdata['path_pack']) ? $this->get_plain_filename($mdata['path_pack']) : $this->get_plain_filename($mdata['path']);
 		$this->media_edit_filename->set_text($fileNamePlain);
-		$this->media_edit_filename_packed->set_text($this->get_plain_filename($mdata['path_pack']));
 		
 		//$name = ($mdata['md_name']) ? $mdata['md_name'] : $fileNamePlain;
 		$name = $mdata['md_name'];
@@ -3786,58 +4525,117 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$label = i18n::get('global', 'title').'*';
 		$this->medit_lbl_title->set_markup("<span foreground='#000000'><b>".$label."</b></span>");
 		
-		$this->labelMetaEditYear->set_markup("<b>".i18n::get('meta', 'lbl_year')."</b>");
-		$this->labelMetaEditUsk->set_markup("<b>".i18n::get('meta', 'lbl_usk')."</b>");
-		$this->labelMetaEditCategory->set_markup("<b>".i18n::get('meta', 'lbl_category')."</b>");
-		$this->labelMetaEditDeveloper->set_markup("<b>".i18n::get('meta', 'lbl_developer')."</b>");
-		$this->labelMetaEditPublisher->set_markup("<b>".i18n::get('meta', 'lbl_publisher')."</b>");
-		$this->labelMetaEditLanguages->set_markup("<b>".i18n::get('meta', 'lbl_languages')."</b>");
-		$this->labelMetaEditOptRunning->set_markup("<b>".i18n::get('meta', 'lbl_languages')."</b>");
-		$this->labelMetaEditOptMultiplay->set_markup("<b>".i18n::get('meta', 'lbl_multiplay')."</b>");
-		$this->labelMetaEditOptNetplay->set_markup("<b>".i18n::get('meta', 'lbl_netplay')."</b>");
-		$this->labelMetaEditOptTrainer->set_markup("<b>".i18n::get('meta', 'lbl_trainer')."</b>");
-		$this->labelMetaEditOptBuggy->set_markup("<b>".i18n::get('meta', 'lbl_buggy')."</b>");
-		$this->labelMetaEditOptUsermod->set_markup("<b>".i18n::get('meta', 'lbl_usermod')."</b>");
-		$this->labelMetaEditOptFreeware->set_markup("<b>".i18n::get('meta', 'lbl_freeware')."</b>");
-		$this->labelMetaEditOptIntro->set_markup("<b>".i18n::get('meta', 'lbl_intro')."</b>");
-		$this->labelMetaEditOptRunning->set_markup("<b>".i18n::get('meta', 'lbl_running')."</b>");
-		$this->labelMetaEditStorage->set_markup("<b>".i18n::get('meta', 'lbl_storage')."</b>");
-		$this->labelMetaEditInfoString->set_markup("<b>".i18n::get('meta', 'lbl_info')."</b>");
-		$this->labelMetaEditInfoId->set_markup("<b>".i18n::get('meta', 'lbl_infoid')."</b>");
-		$this->labelMetaEditFilename->set_markup("<b>".i18n::get('global', 'fileNameShort')."</b>");
+		# reset text
+		$this->media_edit_help->set_text('');
+		$this->media_edit_help->set_visible(false);
+		
+		$this->mediaEditTabMeta->set_markup(i18n::get('metaEdit', 'mediaEditTabMeta'));
+		$this->mediaEditTabRating->set_markup(i18n::get('metaEdit', 'mediaEditTabRating'));
+		$this->mediaEditTabPersonal->set_markup(i18n::get('metaEdit', 'mediaEditTabPersonal'));
+		$this->mediaEditTabFile->set_markup(i18n::get('metaEdit', 'mediaEditTabFile'));
+		
+		$this->mediaEditMetaButtonStartRom->set_markup(i18n::get('global', 'startRom'));
+		
+		
+		# rating preview image
+		$this->setRatingImage($this->mediaEditMetaRatingLink, $mdata['md_rating']);
+		$this->mediaEditMetaRatingLinkEvent->connect('button-press-event', array($this, 'openTabMediaEditRating'));
+		
+		$this->labelMetaEditYear->set_markup(i18n::get('meta', 'lbl_year'));
+		$this->labelMetaEditUsk->set_markup(i18n::get('meta', 'lbl_usk'));
+		$this->labelMetaEditCategory->set_markup(i18n::get('meta', 'lbl_category'));
+		$this->labelMetaEditDeveloper->set_markup(i18n::get('meta', 'lbl_developer'));
+		$this->labelMetaEditPublisher->set_markup(i18n::get('meta', 'lbl_publisher'));
+		
+		$this->labelMetaEditProgrammer->set_markup(i18n::get('meta', 'lbl_programmer'));
+		$this->labelMetaEditGraphicArtist->set_markup(i18n::get('meta', 'lbl_graphics'));
+		$this->labelMetaEditMusican->set_markup(i18n::get('meta', 'lbl_musican'));
+		$this->labelMetaEditMedium->set_markup(i18n::get('meta', 'lbl_medium'));
+		$this->labelMetaEditMediumOf->set_markup(i18n::get('global', 'of'));
+		
+		# meta
+		$this->mediaEditMetaFrameLanguages->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameLanguages').'</b>');
+		$this->mediaEditMetaFrameRegion->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameRegion').'</b>');
+		
+		$this->mediaEditMetaFrameBaseData->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameBaseData').'</b>');
+		$this->mediaEditMetaFrameFeatures->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameFeatures').'</b>');
+		$this->mediaEditMetaFrameFileInfos->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameFileInfos').'</b>');
+		$this->mediaEditMetaFrameAdditionalInfos->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameAdditionalInfos').'</b>');
+		$this->mediaEditMetaFrameLinks->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameLinks').'</b>');
+		# rating
+		$this->mediaEditReviewFrameRating->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameRating').'</b>');
+		$this->mediaEditReviewFrameReview->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameReview').'</b>');
+		$this->mediaEditReviewFrameMoreSettings->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameMoreSettings').'</b>');
+		$this->mEditUserRatingFunScaleLabel->set_label(i18n::get('metaEdit', 'mEditUserRatingFunScaleLabel'));
+		$this->mEditUserRatingGameplayScaleLabel->set_label(i18n::get('metaEdit', 'mEditUserRatingGameplayScaleLabel'));
+		$this->mEditUserRatingGraphicsScaleLabel->set_label(i18n::get('metaEdit', 'mEditUserRatingGraphicsScaleLabel'));
+		$this->mEditUserRatingMusicScaleLabel->set_label(i18n::get('metaEdit', 'mEditUserRatingMusicScaleLabel'));
+		$this->mEditUserRatingDifficultyScaleLabel->set_label(i18n::get('metaEdit', 'mEditUserRatingDifficultyScaleLabel'));
+		$this->mEditUserReviewExportAllow->set_label(i18n::get('metaEdit', 'mEditUserReviewExportAllow'));
+		# personal
+		$this->mediaEditPersonalFrameNotes->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameNotes').'</b>');
+		$this->mediaEditPersonalFrameMoreSettings->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameMoreSettings').'</b>');
+		$this->mEditUserPersonalHiscoresLabel->set_label(i18n::get('metaEdit', 'mEditUserPersonalHiscoresLabel'));
+		
+		
+		$this->labelMetaEditStorage->set_markup(i18n::get('meta', 'lbl_storage'));
+		$this->labelMetaEditInfoString->set_markup(i18n::get('meta', 'lbl_info'));
+		$this->labelMetaEditInfoId->set_markup(i18n::get('meta', 'lbl_infoid'));
 		
 		$this->media_edit_info->set_text($mdata['md_info']);
 		$this->media_edit_info_id->set_text($mdata['md_info_id']);
+
+		$this->metaEditFeatureGoodDumpLabel->set_text(i18n::get('meta', 'lbl_running'));
+		if (!$this->obj_running) $this->obj_running = new IndexedCombobox($this->metaEditFeatureGoodDumpDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureGoodDumpDropdown->set_active($this->set_dropdown_bool($mdata['md_running']));
+
+		$this->metaEditFeatureBugsLabel->set_text(i18n::get('meta', 'lbl_buggy'));
+		if (!$this->obj_bugs) $this->obj_bugs = new IndexedCombobox($this->metaEditFeatureBugsDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureBugsDropdown->set_active($this->set_dropdown_bool($mdata['md_bugs']));
+
+		$this->metaEditFeatureMultiplayLabel->set_text(i18n::get('meta', 'lbl_multiplay'));
+		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownStateCount);
+		$this->metaEditFeatureMultiplayDropdown->set_active($this->set_dropdown_bool($mdata['md_multiplayer']));
 		
-		if (!$this->obj_running) $this->obj_running = new IndexedCombobox($this->cb_running_new, false, $this->dropdownStateYesNo);
-		$this->cb_running_new->set_active($this->set_dropdown_bool($mdata['md_running']));
-		
-		if (!$this->obj_bugs) $this->obj_bugs = new IndexedCombobox($this->cb_bugs_new, false, $this->dropdownStateYesNo);
-		$this->cb_bugs_new->set_active($this->set_dropdown_bool($mdata['md_bugs']));
-		
-		if (!$this->obj_trainer) $this->obj_trainer = new IndexedCombobox($this->cb_trainer_new, false, $this->dropdownStateCount);
-		$this->cb_trainer_new->set_active($this->set_dropdown_bool($mdata['md_trainer']));
-		
-		if (!$this->obj_intro) $this->obj_intro = new IndexedCombobox($this->cb_intro, false, $this->dropdownStateYesNo);
-		$this->cb_intro->set_active($this->set_dropdown_bool($mdata['md_intro']));
-		
-		if (!$this->obj_usermod) $this->obj_usermod = new IndexedCombobox($this->cb_usermod, false, $this->dropdownStateYesNo);
-		$this->cb_usermod->set_active($this->set_dropdown_bool($mdata['md_usermod']));
-		
-		if (!$this->obj_freeware) $this->obj_freeware = new IndexedCombobox($this->cb_freeware, false, $this->dropdownStateYesNo);
-		$this->cb_freeware->set_active($this->set_dropdown_bool($mdata['md_freeware']));
-		
-		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->cb_multiplayer, false, $this->dropdownStateCount);
-		$this->cb_multiplayer->set_active($this->set_dropdown_bool($mdata['md_multiplayer']));
-		
-		if (!$this->obj_netplay) $this->obj_netplay = new IndexedCombobox($this->cb_netplay, false, $this->dropdownStateYesNo);
-		$this->cb_netplay->set_active($this->set_dropdown_bool($mdata['md_netplay']));
+		$this->metaEditFeatureTrainerLabel->set_text(i18n::get('meta', 'lbl_trainer'));
+		if (!$this->obj_trainer) $this->obj_trainer = new IndexedCombobox($this->metaEditFeatureTrainerDropdown, false, $this->dropdownStateCount);
+		$this->metaEditFeatureTrainerDropdown->set_active($this->set_dropdown_bool($mdata['md_trainer']));
+
+		$this->metaEditFeatureModifiedLabel->set_text(i18n::get('meta', 'lbl_usermod'));
+		if (!$this->obj_usermod) $this->obj_usermod = new IndexedCombobox($this->metaEditFeatureModifiedDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureModifiedDropdown->set_active($this->set_dropdown_bool($mdata['md_usermod']));
+
+		$this->metaEditFeatureNetplayLabel->set_text(i18n::get('meta', 'lbl_netplay'));
+		if (!$this->obj_netplay) $this->obj_netplay = new IndexedCombobox($this->metaEditFeatureNetplayDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureNetplayDropdown->set_active($this->set_dropdown_bool($mdata['md_netplay']));
+
+		$this->metaEditFeatureFreewareLabel->set_text(i18n::get('meta', 'lbl_freeware'));
+		if (!$this->obj_freeware) $this->obj_freeware = new IndexedCombobox($this->metaEditFeatureFreewareDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureFreewareDropdown->set_active($this->set_dropdown_bool($mdata['md_freeware']));
+
+		$this->metaEditFeatureIntroLabel->set_text(i18n::get('meta', 'lbl_intro'));
+		if (!$this->obj_intro) $this->obj_intro = new IndexedCombobox($this->metaEditFeatureIntroDropdown, false, $this->dropdownStateYesNo);
+		$this->metaEditFeatureIntroDropdown->set_active($this->set_dropdown_bool($mdata['md_intro']));
 		
 		if (!$this->obj_storage) $this->obj_storage = new IndexedCombobox($this->cb_storage, false, $this->dropdownStorage);
-		//$this->cb_storage->set_active($this->set_dropdown_bool($mdata['md_storage']));
 		if ($mdata['md_storage'] === null) $mdata['md_storage'] = 0;
 		$this->cb_storage->set_active($mdata['md_storage']);
 
+		if (!$this->obj_region) $this->obj_region = new IndexedCombobox($this->cb_region, false, $this->dropdownRegion);
+		if ($mdata['md_region'] === null) $mdata['md_region'] = 0;
+		$this->cb_region->set_active($mdata['md_region']);
+		
+		# media type / current / count
+		if (!$this->obj_media_type){
+			$this->dropdownMediaType = I18n::translateArray('dropdownMedium', $this->dropdownMediaType);
+			$this->obj_media_type = new IndexedCombobox($this->cb_media_type, false, $this->dropdownMediaType);
+		}
+		if ($mdata['md_media_type'] === null) $mdata['md_media_type'] = 0;
+		
+		$this->cb_media_type->set_active($mdata['md_media_type']);
+		$this->cbe_media_current->set_text($mdata['md_media_current']);
+		$this->cbe_media_count->set_text($mdata['md_media_count']);
+		
 		if (!$this->obj_category) $this->obj_category = FACTORY::get('manager/IndexedCombo')->set($this->cbe_category, $this->media_category, 4);
 		FACTORY::get('manager/IndexedCombo')->set_active_key($this->cbe_category, $mdata['md_category']);
 		
@@ -3846,6 +4644,10 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->cbe_usk->set_text($mdata['md_usk']);
 		$this->cbe_creator->set_text($mdata['md_creator']);
 		$this->cbe_publisher->set_text($mdata['md_publisher']);
+		
+		$this->cbe_programmer->set_text($mdata['md_programmer']);
+		$this->cbe_musican->set_text($mdata['md_musican']);
+		$this->cbe_graphics->set_text($mdata['md_graphics']);
 
 		# set autocompletion
 		$autoCompletion = FACTORY::get('manager/AutoCompletion');
@@ -3861,6 +4663,25 @@ if (i18n::getLanguageIdent() != 'jp') {
 			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
 			$autoCompletion->connect($this->cbe_publisher, $this->comletionData[$field]);
 		}
+		# programmer
+		$field = 'programmer';
+		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
+			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
+			$autoCompletion->connect($this->cbe_programmer, $this->comletionData[$field]);
+		}
+		# musican
+		$field = 'musican';
+		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
+			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
+			$autoCompletion->connect($this->cbe_musican, $this->comletionData[$field]);
+		}
+		# graphics
+		$field = 'graphics';
+		if (!isset($this->comletionData[$field]) || !$this->comletionData[$field]) {
+			$this->comletionData[$field] = FACTORY::get('manager/TreeviewData')->getAutoCompleteData($field, false);
+			$autoCompletion->connect($this->cbe_graphics, $this->comletionData[$field]);
+		}
+		
 		
 		$this->model_languages->foreach(array($this, 'languages_set_selected'), $mdata['md_id']);
 		
@@ -3872,16 +4693,77 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->metaEditFileinfo->set_markup($infoString);
 		
 		$this->edit_mdata = $mdata;
-		unset($mdata);
+		
+		# now handle user data
+		$eccident = ($this->current_media_info['fd_eccident']) ? $this->current_media_info['fd_eccident'] : $this->current_media_info['md_eccident'];
+		$crc32 = ($this->current_media_info['crc32']) ? $this->current_media_info['crc32'] : $this->current_media_info['md_crc32'];
+		$userData = FACTORY::get('manager/UserData')->getUserdata($eccident, $crc32);
+		
+		if($userData){
+			
+			# fill widgets with data
+			
+			$eccRating = $this->getEccRatingIntegerByPercent((int)$userData['rating']);
+			$this->setRatingImage($this->mEditUserRatingSumImage, $eccRating);
+			
+			$this->mEditUserRatingSum->set_markup('<b>'.i18n::get('global', 'total').': <span color="#00CC00">'.(int)$userData['rating'].'</span> %</b>');
+			
+			$this->mEditUserRatingFunScale->set_value((int)$userData['rating_fun']);
+			$this->mEditUserRatingGameplayScale->set_value((int)$userData['rating_gameplay']);
+			$this->mEditUserRatingGraphicsScale->set_value((int)$userData['rating_graphics']);
+			$this->mEditUserRatingMusicScale->set_value((int)$userData['rating_music']);
+			$this->mEditUserRatingDifficultyScale->set_value((int)$userData['difficulty']);
+			$this->mEditUserReviewTitle->set_text($userData['review_title']);
+
+			$textBuffer = new GtkTextBuffer();
+			$textBuffer->set_text(trim($userData['review_body']));
+			$this->mEditUserReviewBody->set_buffer($textBuffer);
+			$this->mEditUserReviewExportAllow->set_active($userData['review_export_allowed']);
+			
+			$textBuffer = new GtkTextBuffer();
+			$textBuffer->set_text(trim($userData['notes']));
+			$this->mEditUserPersonalNotes->set_buffer($textBuffer);
+			
+			$this->mEditUserPersonalHiscores->set_text($userData['hiscore']);
+		}
+		else{
+			
+			# clear all entries
+
+			$this->setRatingImage($this->mEditUserRatingSumImage, 0);
+			
+			$this->mEditUserRatingSum->set_text('');
+			$this->mEditUserRatingFunScale->set_value(0);
+			$this->mEditUserRatingGameplayScale->set_value(0);
+			$this->mEditUserRatingGraphicsScale->set_value(0);
+			$this->mEditUserRatingMusicScale->set_value(0);
+			$this->mEditUserRatingDifficultyScale->set_value(0);
+			
+			$this->mEditUserReviewTitle->set_text('');
+			$textBuffer = new GtkTextBuffer();
+			$textBuffer->set_text('');
+			$this->mEditUserReviewBody->set_buffer($textBuffer);
+			
+			$textBuffer = new GtkTextBuffer();
+			$textBuffer->set_text(trim($userData['notes']));
+			$this->mEditUserPersonalNotes->set_buffer($textBuffer);
+			
+			$this->mEditUserPersonalHiscores->set_text('');
+		}
 
 		$this->win_media_edit->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
-		$this->viewport1->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));		
+		
+		$imageObject = FACTORY::get('manager/Image');
+		$imageObject->setWidgetBackground($this->win_media_edit, 'background/main.png');
+		
 		$this->win_media_edit->show();
 		
 		$this->media_edit_is_opened = true;
 		$this->win_media_edit->set_keep_above(true);
 		#$this->win_media_edit->present();
 		$this->win_media_edit->set_position(Gtk::WIN_POS_CENTER);
+		
+		unset($mdata);
 	}
 	
 	public function create_mdata_checksum($data=false) {
@@ -3962,9 +4844,45 @@ if (i18n::getLanguageIdent() != 'jp') {
 	*/
 	public function edit_media_save($validate_title=false, $hideWindow = false)
 	{
+		
 		$data['id'] = $this->current_media_info['md_id'];
-		$data['crc32'] = $this->edit_mdata['crc32'];
-		$data['eccident'] = strtolower($this->edit_mdata['fd_eccident']);
+		$data['crc32'] = ($this->edit_mdata['md_crc32']) ? $this->edit_mdata['md_crc32'] : $this->edit_mdata['crc32'];
+		$data['eccident'] = ($this->edit_mdata['md_eccident']) ? strtolower($this->edit_mdata['md_eccident']) : strtolower($this->edit_mdata['fd_eccident']);
+		
+		# get rating and review data!
+		
+		$mEditUserReviewBodyBuffer = $this->mEditUserReviewBody->get_buffer();
+		$mEditUserReviewBody = $mEditUserReviewBodyBuffer->get_text($mEditUserReviewBodyBuffer->get_start_iter(), $mEditUserReviewBodyBuffer->get_end_iter());
+
+		$mEditUserPersonalNotesBuffer = $this->mEditUserPersonalNotes->get_buffer();
+		$mEditUserPersonalNotes = $mEditUserPersonalNotesBuffer->get_text($mEditUserPersonalNotesBuffer->get_start_iter(), $mEditUserPersonalNotesBuffer->get_end_iter());
+		
+		$rating_fun = $this->mEditUserRatingFunScale->get_value();
+		$rating_gameplay = $this->mEditUserRatingGameplayScale->get_value();
+		$rating_graphics = $this->mEditUserRatingGraphicsScale->get_value();
+		$rating_music = $this->mEditUserRatingMusicScale->get_value();
+		$rating = $this->getRating($rating_fun, $rating_gameplay, $rating_graphics, $rating_music);
+		$userData = array(
+			# general data
+			'eccident' => $data['eccident'],
+			'crc32' => $data['crc32'],
+			# rating
+			'rating' => $rating, 
+			'rating_fun' => $rating_fun, 
+			'rating_gameplay' => $rating_gameplay,
+			'rating_graphics' => $rating_graphics,
+			'rating_music' => $rating_music,
+			'difficulty' => $this->mEditUserRatingDifficultyScale->get_value(),
+			# review
+			'review_title' => $this->mEditUserReviewTitle->get_text(),
+			'review_body' => $mEditUserReviewBody,
+			'review_export_allowed' => (int)$this->mEditUserReviewExportAllow->get_active(),
+			# personal tab
+			'hiscore' => $this->mEditUserPersonalHiscores->get_text(),
+			'notes' => $mEditUserPersonalNotes,
+		);
+		
+		FACTORY::get('manager/UserData')->updateFullUserData($userData);
 		
 		$path = ($this->edit_mdata['path_pack']) ? $this->edit_mdata['path_pack'] : $this->edit_mdata['path'];
 		$data['extension'] = ".".$this->get_ext_form_file($path);
@@ -3973,32 +4891,69 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$data['name'] = trim(str_replace(";", "", $this->media_edit_title->get_text()));
 		
 		
-		if (!trim($data['name']) && !$hideWindow) {
+		if (!trim($data['name'])) {
 			$label = i18n::get('global', 'title').'*';
 			$error = i18n::get('global', 'error_title');
 			$this->medit_lbl_title->set_markup("<span foreground='#aa0000'><b>".$label." (".$error.")</b></span>");
+			
+			$errorString = i18n::get('metaEdit', 'mEditUserMissingTitle');
+			$this->media_edit_help->set_markup("<span foreground='#aa0000'><b>$errorString</b></span>");
+			$this->mediaEditTabMeta->set_markup('<b><span foreground="#aa0000">'.i18n::get('metaEdit', 'mediaEditTabMeta').'</span></b>');
+			$this->media_edit_help->set_visible(true);
 			return false;
 		}
 		
 		$data['info'] = trim(str_replace(";", "", $this->media_edit_info->get_text()));
 		$data['info_id'] = trim(str_replace(";", "", $this->media_edit_info_id->get_text()));
+
+		$data['media_type'] = $this->cb_media_type->get_active();
+		$data['media_current'] = $this->cbe_media_current->get_text();
+		$data['media_count'] = $this->cbe_media_count->get_text();
+		
+		
+//		if(!$data['media_current'] && !$data['media_count']){
+//			$data['media_current'] = 1;
+//			$data['media_count'] = 1;
+//		}
+		
+		if (
+			($data['media_count'] && $data['media_current'] > $data['media_count'])
+			|| ($data['media_current'] && !$data['media_count'])
+			|| (!$data['media_current'] && $data['media_count'])
+		) {
+			$label = i18n::get('meta', 'lbl_medium').'*';
+			$error = i18n::get('global', 'error_title');
+			$this->labelMetaEditMedium->set_markup("<span foreground='#aa0000'><b>".$label." (".$error.")</b></span>");
+			$errorString = i18n::get('metaEdit', 'mEditMediaCountsWrong');
+			$this->media_edit_help->set_markup("<span foreground='#aa0000'><b>$errorString</b></span>");
+			$this->mediaEditTabMeta->set_markup('<b><span foreground="#aa0000">'.i18n::get('metaEdit', 'mediaEditTabMeta').'</span></b>');
+			$this->media_edit_help->set_visible(true);
+			return false;
+		}
+
+		if($data['media_type'] == 0) $data['media_type'] = "NULL";
+		if($data['media_current'] == '') $data['media_current'] = "NULL";
+		if($data['media_count'] == '') $data['media_count'] = "NULL";
+		
 		$data['year'] = trim(str_replace(";", "", $this->cbe_year->get_text()));
 		$data['usk'] = trim(str_replace(";", "", $this->cbe_usk->get_text()));
 		$data['creator'] = trim(str_replace(";", "", $this->cbe_creator->get_text()));
 		$data['publisher'] = trim(str_replace(";", "", $this->cbe_publisher->get_text()));
+		$data['programmer'] = trim(str_replace(";", "", $this->cbe_programmer->get_text()));
+		$data['musican'] = trim(str_replace(";", "", $this->cbe_musican->get_text()));
+		$data['graphics'] = trim(str_replace(";", "", $this->cbe_graphics->get_text()));
 		
-		// new
-		$data['running'] = $this->get_dropdown_bool($this->cb_running_new->get_active());
-		$data['bugs'] = $this->get_dropdown_bool($this->cb_bugs_new->get_active());
-		$data['trainer'] = $this->get_dropdown_bool($this->cb_trainer_new->get_active());
-		$data['intro'] = $this->get_dropdown_bool($this->cb_intro->get_active());
-		$data['usermod'] = $this->get_dropdown_bool($this->cb_usermod->get_active());
-		$data['freeware'] = $this->get_dropdown_bool($this->cb_freeware->get_active());
-		$data['multiplayer'] = $this->get_dropdown_bool($this->cb_multiplayer->get_active());
-		$data['netplay'] = $this->get_dropdown_bool($this->cb_netplay->get_active());
-		
+		$data['running'] = $this->get_dropdown_bool($this->metaEditFeatureGoodDumpDropdown->get_active());
+		$data['bugs'] = $this->get_dropdown_bool($this->metaEditFeatureBugsDropdown->get_active());
+		$data['multiplayer'] = $this->get_dropdown_bool($this->metaEditFeatureMultiplayDropdown->get_active());
+		$data['netplay'] = $this->get_dropdown_bool($this->metaEditFeatureNetplayDropdown->get_active());		
+		$data['trainer'] = $this->get_dropdown_bool($this->metaEditFeatureTrainerDropdown->get_active());
+		$data['freeware'] = $this->get_dropdown_bool($this->metaEditFeatureFreewareDropdown->get_active());
+		$data['usermod'] = $this->get_dropdown_bool($this->metaEditFeatureModifiedDropdown->get_active());
+		$data['intro'] = $this->get_dropdown_bool($this->metaEditFeatureIntroDropdown->get_active());
+
 		$data['storage'] = $this->cb_storage->get_active();
-		#$data['storage'] = ($data['storage'] === null) ? null : $data['storage']+1;
+		$data['region'] = $this->cb_region->get_active();
 		
 		$data['category'] = FACTORY::get('manager/IndexedCombo')->getKey($this->cbe_category);
 		
@@ -4010,51 +4965,66 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$data['name'] = MultiByte::convertToUtf8($data['name']);
 		$data['creator'] = MultiByte::convertToUtf8($data['creator']);
 		$data['publisher'] = MultiByte::convertToUtf8($data['publisher']);
+		$data['programmer'] = MultiByte::convertToUtf8($data['programmer']);
+		$data['musican'] = MultiByte::convertToUtf8($data['musican']);
+		$data['graphics'] = MultiByte::convertToUtf8($data['graphics']);
 		$data['year'] = MultiByte::convertToUtf8($data['year']);
 		$data['usk'] = MultiByte::convertToUtf8($data['usk']);
 		
-		if ($data['name']) {
+		#if ($data['name']) {
 			
-			$check_data = array(
-				'md_name' => $data['name'],
-				'md_info' => $data['info'],
-				'md_info_id' => $data['info_id'],
-				'md_running' => $data['running'],
-				'md_bugs' => $data['bugs'],
-				'md_trainer' => $data['trainer'],
-				'md_intro' => $data['intro'],
-				'md_usermod' => $data['usermod'],
-				'md_freeware' => $data['freeware'],
-				'md_multiplayer' => $data['multiplayer'],
-				'md_netplay' => $data['netplay'],
-				'md_category' => $data['category'],
-				'md_year' => $data['year'],
-				'md_usk' => $data['usk'],
-				'md_creator' => $data['creator'],
-				'md_publisher' => $data['publisher'],
-				'md_storage' => $data['storage'],
-			);
-			$check = $this->create_mdata_checksum($check_data);
-			
-			$modified = !($check == $this->edit_mdata['edit_checksum']);
-			
-			if ($data['id']) {
-				$this->_fileView->update_file_info($data, $modified);
-				$status = "Metadata updated!";
-			}
-			else {
-				$this->current_media_info['md_id'] = $this->_fileView->insert_file_info($data);
-				$data['id'] = $this->current_media_info['md_id'];
-				$status = "Metadata inserted!";
-			}
-			$this->_fileView->save_language($data);
-			
-			$this->media_edit_help->set_markup("<span foreground='#00aa00'><b>$status</b></span>");
+		$check_data = array(
+			'md_name' => $data['name'],
+			'md_info' => $data['info'],
+			'md_info_id' => $data['info_id'],
+			'md_running' => $data['running'],
+			'md_bugs' => $data['bugs'],
+			'md_trainer' => $data['trainer'],
+			'md_intro' => $data['intro'],
+			'md_usermod' => $data['usermod'],
+			'md_freeware' => $data['freeware'],
+			'md_multiplayer' => $data['multiplayer'],
+			'md_netplay' => $data['netplay'],
+			'md_category' => $data['category'],
+			'md_year' => $data['year'],
+			'md_usk' => $data['usk'],
+			'md_creator' => $data['creator'],
+			'md_publisher' => $data['publisher'],
+			'md_programmer' => $data['programmer'],
+			'md_musican' => $data['musican'],
+			'md_graphics' => $data['graphics'],
+			'md_media_type' => $data['media_type'],
+			'md_media_current' => $data['media_current'],
+			'md_media_count' => $data['media_count'],
+			'md_storage' => $data['storage'],
+		);
+		$check = $this->create_mdata_checksum($check_data);
+		
+		$modified = !($check == $this->edit_mdata['edit_checksum']);
+		
+		if ($data['id']) {
+			$this->_fileView->update_file_info($data, $modified);
+			$status = "Metadata updated!";
 		}
+		else {
+			$this->current_media_info['md_id'] = $this->_fileView->insert_file_info($data);
+			$data['id'] = $this->current_media_info['md_id'];
+			$status = "Metadata inserted!";
+		}
+		$this->_fileView->save_language($data);
+		
+		$this->media_edit_help->set_markup("<span foreground='#00aa00'><b>$status</b></span>");
+		$this->media_edit_help->set_visible(true);
+					
+		#}
 		// Set new composite id
 		// for updated media_edit data		
 		$this->current_media_info['composite_id'] = $this->current_media_info['id']."|".$this->current_media_info['md_id'];
 		//$this->onReloadRecord();
+
+		# save rating from selection
+		$eccRating = $this->getEccRatingIntegerByPercent((int)$userData['rating']);
+		$this->_fileView->addRatingByMdataId($this->current_media_info['md_id'], $eccRating);
 		
 		$this->directMediaEdit = true;
 		$this->show_media_info();
@@ -4070,9 +5040,13 @@ if (i18n::getLanguageIdent() != 'jp') {
 	public function media_edit_hide() {
 		$this->win_media_edit->hide();
 		$this->media_edit_is_opened = false;
+		return true;
 	}
 	
-
+	public function hideWindow($widget){
+		$widget->hide();
+		return true;
+	}
 	
 	/*
 	*
@@ -4096,7 +5070,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 		if ($pp) $this->_results_per_page = $pp;
 		
 		// main model
-		$this->model = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT);
+		$this->model = new GtkListStore(GObject::TYPE_OBJECT, GObject::TYPE_OBJECT, GObject::TYPE_STRING, GObject::TYPE_STRING, GObject::TYPE_STRING, GObject::TYPE_STRING, GObject::TYPE_OBJECT);
 		
 		// INIT $pixbufRenderer
 		$pixbufRenderer = new GtkCellRendererPixbuf();
@@ -4144,6 +5118,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$col_composite_id->set_visible(false);
 		
 		$treeView = FACTORY::get('manager/Treeview');
+		
 		$test = $treeView->setModel($this->model);
 		
 		$test->set_headers_visible(false);
@@ -4156,6 +5131,22 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$test->append_column($col_file_id);
 		$test->append_column($col_mdata_id);
 		$test->append_column($col_composite_id);
+			
+	}
+	
+	public function on_tooltip($widget, $x, $y, $keyboard_mode, $tooltip) {
+		$path = $widget->get_path_at_pos($x, $y); // note 2
+		if ($path==null) return false;
+	
+		$col_title = $path[1]->get_title(); // note 3
+		$path2 = $path[0][0]-1;
+		if ($path2<0) return false; // note 4
+
+		$widget->set_tooltip_cell($tooltip, $path2, $path[1], null); // note 5
+		$text = "this is <i>treeview tooltip!</i> <b>path=$path2</b> col=$col_title";
+	    
+	    $tooltip->set_markup($text); // note 6
+		return true;
 	}
 	
 	public function formatCellDetail($column, $cell, $model, $iter, $colNum){
@@ -4182,17 +5173,19 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$this->_results_per_page = ($pp) ? $pp : 100;
 		
 		// main model
+
+		# repository fix
 		$this->model = new GtkListStore(
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_OBJECT,
-			Gtk::TYPE_OBJECT,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING,
-			Gtk::TYPE_STRING
+			GObject::TYPE_STRING,
+			GObject::TYPE_OBJECT,
+			GObject::TYPE_OBJECT,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING,
+			GObject::TYPE_STRING
 		);
 		
 		$rendererText = new GtkCellRendererText();
@@ -4277,6 +5270,10 @@ if (i18n::getLanguageIdent() != 'jp') {
 		$test->append_column($col6);
 		$test->append_column($col7);
 		$test->append_column($col8);
+		
+//		$test->set_property('has-tooltip', true); // note 1
+//	    $test->connect('query-tooltip', array($this, 'on_tooltip')); // note 1
+		
 	}
 	
 	// 20060108 hack for simle mediaview
@@ -4299,6 +5296,14 @@ if (i18n::getLanguageIdent() != 'jp') {
 				
 				$media_name = basename($path);
 				$media_name = ($data['md_name']) ? $data['md_name'] : $media_name;
+				
+				if($data['md_media_current'] && $data['md_media_count']){
+					$media_name .= ' (';
+					//if($data['md_media_type']) $media_name .= $this->dropdownMediaType[(int)$data['md_media_type']].' ';
+					$media_name .= (int)$data['md_media_current'].'/'.(int)$data['md_media_count'];
+					$media_name .= ')';
+				}
+				
 				
 				$year = ($data['md_year']) ? $data['md_year'] : '';
 				$category = @$this->media_category[$data['md_category']];
@@ -4395,7 +5400,7 @@ if (i18n::getLanguageIdent() != 'jp') {
 	
 	public function init_treeview_languages($treeview)
 	{
-		$this->model_languages = new GtkListStore(Gtk::TYPE_BOOLEAN, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_OBJECT, Gtk::TYPE_OBJECT);
+		$this->model_languages = new GtkListStore(GObject::TYPE_BOOLEAN, GObject::TYPE_STRING, GObject::TYPE_OBJECT, GObject::TYPE_STRING, GObject::TYPE_OBJECT, GObject::TYPE_OBJECT);
 		
 		$pixbufRenderer = new GtkCellRendererPixbuf();
 		
@@ -4464,8 +5469,9 @@ if (i18n::getLanguageIdent() != 'jp') $textRenderer->set_property('font',  $this
 	*
 	*/
 	public function init_treeview_nav() {
-		$this->model_navigation = new GtkListStore(Gtk::TYPE_OBJECT, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING, Gtk::TYPE_STRING);
-
+		
+		$this->model_navigation = new GtkListStore(GObject::TYPE_OBJECT, GObject::TYPE_STRING, GObject::TYPE_STRING, GObject::TYPE_STRING, GObject::TYPE_STRING);
+		
 		$pixbufRenderer = new GtkCellRendererPixbuf();
 		
 		$textRenderer = new GtkCellRendererText();
@@ -4644,7 +5650,7 @@ if (i18n::getLanguageIdent() != 'jp') $textRenderer->set_property('font',  $this
 			$this->ini->storeHistoryKey('navigation_last_index', current($path), false);
 			
 			// for twmain_data_dispatcher
-			$this->view_mode = 'MEDIA';
+			#$this->view_mode = 'MEDIA';
 			
 			$eccident = $model->get_value($iter, 3);
 			
@@ -4762,7 +5768,7 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		$this->mTopEmuConfig->set_sensitive($state);
 		$this->mTopDatImportRc->set_sensitive($state);
 		$this->mTopDatImportCtrlMAME->set_sensitive($state);
-		$this->mTopDatImportOnlineRomdb->set_sensitive($state);
+		#$this->mTopDatImportOnlineRomdb->set_sensitive($state);
 
 		$isMultiRomPlatform = $this->ini->isMultiRomPlatform($this->_eccident);
 		$this->mTopRomAuditShow->set_sensitive($isMultiRomPlatform);
@@ -4924,6 +5930,15 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 			
 			foreach ($file_list['data'] as $id => $data) {
 				
+//				$validKeys = array(
+//					'%NAME_NAME%' => 'md_name',
+//					'%META_INFO_STRING%' => 'md_info',
+//					'%META_INFO_ID%' => 'md_info_id',
+//					'%META_MEDIA_TYPE%' => 'md_media_type',
+//					'%META_MEDIA_COUNT_CURRENT%' => 'md_media_current',
+//					'%META_MEDIA_COUNT_TOTAL%' => 'md_media_count',
+//				);
+				
 				// fast refresh activated?
 				if ($this->fastListRefresh) while (gtk::events_pending()) gtk::main_iteration();
 				
@@ -4953,9 +5968,18 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 				$info_strg .= ($data['md_info']) ? "\t\t\t\t\t|*[INFOS: ".$data['md_info']."]*|" : '';;
 
 				$name = ($data['md_name']) ? $data['md_name'] : basename(MultiByte::convertToUtf8($data['path']));
+
+				# create main detail input for cell
+				$media_name = $name;
 				
-				$media_name = '';
-				$media_name .= "$name\n\n";
+				if($data['md_media_current'] && $data['md_media_count']){
+					$media_name .= ' (';
+					//if($data['md_media_type']) $media_name .= $this->dropdownMediaType[(int)$data['md_media_type']].' ';
+					$media_name .= (int)$data['md_media_current'].'/'.(int)$data['md_media_count'];
+					$media_name .= ')';
+				}
+				
+				$media_name .= "\n\n";
 				
 				if ($data['md_name']) {
 					$year = ($data['md_year']) ? $data['md_year'] : '';
@@ -5010,57 +6034,23 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 	/*
 	*
 	*/
-	public function get_media_last_launched()
-	{
-		$this->view_mode = 'HISTORY';
-		$this->setPlatformName('HISTORY');
-		
-		$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
-		$this->set_notebook_page_visiblility($this->nb_main, 1, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
-		
-		$placeholder_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_history_teaser.png';
-		$obj_pixbuff = $this->oHelper->getPixbuf($placeholder_path, 240, 160);
-		$this->img_plattform->set_from_pixbuf($obj_pixbuff);
-		
-		$txt = '<b>'.htmlspecialchars($this->ecc_platform_name).'</b>';
-		$this->nb_main_lbl_media->set_markup($txt);
-		
-		$this->onInitialRecord();
-	}
-	
-	/*
-	*
-	*/
-	public function get_media_bookmarks()
-	{
-		$this->view_mode = 'BOOKMARK';
-		$this->setPlatformName('BOOKMARK');
-		
-		$this->set_notebook_page_visiblility($this->nb_main, 0, true); // media
-		$this->set_notebook_page_visiblility($this->nb_main, 1, false);
-		$this->set_notebook_page_visiblility($this->nb_main, 2, false);
-		
-		$txt = '<b>'.htmlspecialchars($this->ecc_platform_name).'</b>';
-		$this->nb_main_lbl_media->set_markup($txt);
-
-		$placeholder_path = dirname(__FILE__)."/".'images/eccsys/platform/ecc_bookmark_teaser.png';
-		$obj_pixbuff = $this->oHelper->getPixbuf($placeholder_path, 240, 160);
-		$this->img_plattform->set_from_pixbuf($obj_pixbuff);
-		
-		$this->onInitialRecord();
-	}
-	
-	/*
-	*
-	*/
 	public function add_bookmark_by_id() {
-		if (!$this->current_media_info['id']) return false;
-		$this->_fileView->add_bookmark_by_id($this->current_media_info['id']);
 		
-		$title = I18N::get('popup', 'bookmark_added_title');
-		$msg = I18N::get('popup', 'bookmark_added_msg');
-		$this->guiManager->openDialogInfo($title, $msg, array('dhide_finish_bookmark_add'));
+		if (!$this->current_media_info['id']) return false;
+		
+		if($this->_fileView->hasBookmark($this->current_media_info['id'])){
+			$this->remove_bookmark_by_id();
+		}
+		else{
+			$this->_fileView->add_bookmark_by_id($this->current_media_info['id']);
+			$title = I18N::get('popup', 'bookmark_added_title');
+			$msg = I18N::get('popup', 'bookmark_added_msg');
+			$this->guiManager->openDialogInfo($title, $msg, array('dhide_finish_bookmark_add'));
+		}
+		$this->directMediaEdit = true;
+		$this->show_media_info();
+		$this->onReloadRecord(false);
+		$this->directMediaEdit = false;
 	}
 	
 	/*
@@ -5077,7 +6067,7 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		
 		$title = I18N::get('popup', 'rom_remove_single_title');
 		$msg = sprintf(I18N::get('popup', 'rom_remove_single_msg%s'), $rom_title);
-		if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;		
+		if (!$this->guiManager->openDialogConfirm($title, $msg, array('dhide_remove_rom_from_db'))) return false;		
 		$status = $this->_fileView->remove_media_from_fdata($id, $eccident, $crc32);
 		
 		$duplicates = $this->_fileView->get_duplicates($eccident, $crc32);
@@ -5100,49 +6090,44 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 	public function remove_bookmark_by_id() {
 		if (!$this->current_media_info['id']) return false;
 		$this->_fileView->remove_bookmark_by_id($this->current_media_info['id']);
-		$this->get_media_bookmarks();
+		
+		#$this->selectViewModeBookmarks();
 		
 		$title = I18N::get('popup', 'bookmark_removed_single_title');
 		$msg = I18N::get('popup', 'bookmark_removed_single_msg');
 		$this->guiManager->openDialogInfo($title, $msg, array('dhide_finish_bookmark_removed_single'));
+		
+		$this->directMediaEdit = true;
+		$this->show_media_info();
+		$this->onReloadRecord(false);
+		$this->directMediaEdit = false;
 	}
 	
-	/*
-	*
-	*/
-	public function remove_bookmark_all() {
-		$title = I18N::get('popup', 'fav_remove_all_title');
-		$msg = I18N::get('popup', 'fav_remove_all_msg');
-		if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
-		$this->_fileView->remove_bookmark_all();
-		$this->get_media_bookmarks();
-		
-		$title = I18N::get('popup', 'bookmark_removed_all_title');
-		$msg = I18N::get('popup', 'bookmark_removed_all_msg');
-		$this->guiManager->openDialogInfo($title, $msg, array('dhide_finish_bookmark_removed_all'));
-		
-	}
+//	/*
+//	*
+//	*/
+//	public function remove_bookmark_all() {
+//		$title = I18N::get('popup', 'fav_remove_all_title');
+//		$msg = I18N::get('popup', 'fav_remove_all_msg');
+//		if (!$this->guiManager->openDialogConfirm($title, $msg)) return false;
+//		$this->_fileView->remove_bookmark_all();
+//
+//		$this->selectViewModeBookmarks();
+//		
+//		$title = I18N::get('popup', 'bookmark_removed_all_title');
+//		$msg = I18N::get('popup', 'bookmark_removed_all_msg');
+//		$this->guiManager->openDialogInfo($title, $msg, array('dhide_finish_bookmark_removed_all'));
+//		
+//	}
 	
 	/*
 	* dispatcher
 	*/
 	public function filelist_data_dispatcher($eccident, $search_like, $limit, $test, $order_by, $search_lang_strg, $search_cat_id, $search_ext=false, $updateCategories=true) {
-		$view_mode = $this->view_mode;
 		
-		switch($view_mode) {
-			case 'MEDIA':
-				return $this->_fileView->get_file_data_TEST_META($eccident, $search_like, $limit, $test, $order_by, $search_lang_strg, $search_cat_id, $search_ext, $this->toggle_show_files_only, $this->toggle_show_doublettes, $this->toggle_show_metaless_roms_only, $this->searchRating, $this->randomGame, $updateCategories);
-				# radom game only on click!
-				$this->randomGame = false;
-				break;
-			case 'BOOKMARK':
-				return $this->_fileView->get_bookmarks(false, $search_like, $limit, $test, $order_by, $search_lang_strg, $search_cat_id, $search_ext, $this->toggle_show_files_only, $this->toggle_show_doublettes, $this->toggle_show_metaless_roms_only, $this->searchRating);
-				break;
-			case 'HISTORY':
-				return $this->_fileView->get_last_launched(false, $search_like, $limit, $test, $order_by, $search_lang_strg, $search_cat_id, $search_ext, $this->toggle_show_files_only, $this->toggle_show_doublettes, $this->toggle_show_metaless_roms_only, $this->searchRating);
-				break;
-		}
-		return false;
+		$this->_fileView->setShowOnlyDisk($this->toggle_only_disk);
+		
+		return $this->_fileView->get_file_data_TEST_META($eccident, $search_like, $limit, $test, $order_by, $search_lang_strg, $search_cat_id, $search_ext, $this->toggle_show_files_only, $this->toggle_show_doublettes, $this->toggle_show_metaless_roms_only, $this->searchRating, $this->randomGame, $updateCategories);
 	}
 	
 	/*
@@ -5209,6 +6194,15 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 			case 'PUBLISHER':
 				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.publisher like '%s'", $this->searchFreeformOperator);
 				break;
+			case 'PROGRAMMER':
+				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.programmer like '%s'", $this->searchFreeformOperator);
+				break;
+			case 'MUSICAN':
+				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.musican like '%s'", $this->searchFreeformOperator);
+				break;
+			case 'GRAPHICS':
+				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.graphics like '%s'", $this->searchFreeformOperator);
+				break;
 			case 'INFO':
 				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "md.info like '%s'", $this->searchFreeformOperator);
 				break;
@@ -5222,7 +6216,7 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "fd.crc32 like '%s'", $this->searchFreeformOperator);
 				break;	
 			case 'PATH':
-				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "fd.path like '%s'", $this->searchFreeformOperator);
+				$searchString = $this->createPseudoFuzzySearch($this->_search_word, $like_pre, $like_post, "(fd.path like '%1\$s' OR fd.path_pack like '%1\$s')", $this->searchFreeformOperator);
 				break;
 		}
 		return $searchString;
@@ -5256,7 +6250,8 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 			$search[] = sprintf($sqlString, $searchWordAtom);
 		}
 		
-		return "(".implode(' '.$type.' ', $search).")";
+		$query = "(".implode(' '.$type.' ', $search).")";
+		return $query;
 	}
 	
 	/*
@@ -5264,6 +6259,15 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 	*/
 	public function onInitialRecord($updateCategories=false)
 	{
+		
+		# get last selected page from history!
+		$page = 0;
+		$lastSelectedPage = $this->ini->getHistoryKey('last_selected_page');
+		# if there was an last selected page, reset this page now!
+		if($lastSelectedPage){
+			$page = $lastSelectedPage-1;
+			$this->ini->storeHistoryKey('last_selected_page', false, false);
+		}
 		
 		$this->model->clear();
 		
@@ -5278,7 +6282,8 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 			$limit = false;
 		}
 		else {
-			$limit = array(0, $this->_results_per_page);
+			$limit = array($page*$this->_results_per_page, $this->_results_per_page);
+			#$limit = array(0, $this->_results_per_page);
 		}
 		
 		$file_list = $this->filelist_data_dispatcher($this->_eccident, $search_like, $limit, true, $order_by, $this->_search_language, $this->_search_category, $this->ext_search_selected, $updateCategories);
@@ -5292,7 +6297,9 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		
 		// 20060108 hack for simle mediaview
 		if ($this->_results_per_page) {
-			$pager_data = $this->media_treeview_pager->init($file_list['count'], 0, $this->_results_per_page);
+			
+			# init pager
+			$pager_data = $this->media_treeview_pager->init($file_list['count'], $page, $this->_results_per_page);
 			
 			if ($pager_data->_pt > 0) {
 				$this->set_pager_position_label($this->media_pager_label, $pager_data->_p, $pager_data->_pt, $pager_data->_res_total);
@@ -5447,10 +6454,9 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 	*/
 	public function parseMedia($directEccIdent = false, $directParseDirectory = false, $openFileChooser = false) {
 		
+		$eccIdent = $this->_eccident;
+		
 		if ($this->status_obj->init()) {
-			
-			$selectedPlatformName = $this->ecc_platform_name;
-			$eccIdent = $this->_eccident;
 			
 			if ($directEccIdent && $directParseDirectory) {
 				$eccIdent = $directEccIdent;
@@ -5469,20 +6475,32 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 				}
 			}
 			else {
-				$platfom = strtoupper($selectedPlatformName);
+				$platfom = $this->ini->getPlatformName($eccIdent);
 				if (!$this->setPathForEccParser($platfom, false, $eccIdent)) {
 					$this->status_obj->reset1();
 					return false;
 				}
 				$parseDirectory = $this->fs_path_for_parser;
 			}
-			
-			$title = sprintf(I18N::get('popup', 'rom_add_parse_title%s'), $platfom);
-			$msg = sprintf(I18N::get('popup', 'rom_add_parse_msg%s%s'), $platfom, join("\n", $parseDirectory));
-			if (!$this->guiManager->openDialogConfirm($title, $msg, array('dhide_parser_platform_info'.$eccIdent))) {
-				$this->status_obj->reset1();
-				return false;
+
+			$managerOs = FACTORY::get('manager/Os');
+			$parseDirectoryFixed = array();
+			foreach($parseDirectory as $index => $path){
+				$fixedPath = $managerOs->eccSetRelativeDir($path);
+				if($fixedPath) $parseDirectoryFixed[$fixedPath] = $fixedPath;
 			}
+			
+			$silentReparse = $this->ini->getKey('USER_SWITCHES', 'confEccSilentParsing');
+			
+			if(!$silentReparse){
+				$title = sprintf(I18N::get('popup', 'rom_add_parse_title%s'), $platfom);
+				$msg = sprintf(I18N::get('popup', 'rom_add_parse_msg%s%s'), $platfom, join("\n", $parseDirectoryFixed));
+				if (!$this->guiManager->openDialogConfirm($title, $msg, array('dhide_parser_platform_info'.$eccIdent))) {
+					$this->status_obj->reset1();
+					return false;
+				}
+			}
+			
 			$this->status_obj->set_label(sprintf(i18n::get('popup', 'stateLabelParseRomsFor%s'), $platfom));
 			$this->status_obj->set_popup_cancel_msg();
 			$this->status_obj->show_main();
@@ -5490,19 +6508,27 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 			
 			require_once('manager/cEccParser.php');
 			$connectedMetaFilesizeCheck = false;
-			$eccparser = new EccParser($eccIdent, $this->ini, $parseDirectory, $this->pbar_parser, $this->statusbar_lbl_bottom, $this->status_obj, $this, $connectedMetaFilesizeCheck);
 			
-			if ($this->ini->isMultiRomPlatform($eccIdent)){
-				FACTORY::get('manager/ImportDatControlMame')->updateCloneState($eccIdent);
-			}
+			$eccparser = new EccParser($eccIdent, $this->ini, $parseDirectoryFixed, $this->pbar_parser, $this->statusbar_lbl_bottom, $this->status_obj, $this, $connectedMetaFilesizeCheck);
+			
+			# only for multirom platforms!
+			if ($this->ini->isMultiRomPlatform($eccIdent) && !$this->status_obj->is_canceled()) FACTORY::get('manager/ImportDatControlMame')->updateCloneState($eccIdent);
+			
 			if ($eccIdent) $this->status_obj->update_message($eccparser->getLog());
 			
 			$this->update_treeview_nav();
 			$this->onInitialRecord();
 			
-			$title = I18N::get('popup', 'rom_add_parse_done_title');
-			$msg = sprintf(I18N::get('popup', 'rom_add_parse_done_msg%s'), strtoupper($selectedPlatformName));
-			$this->status_obj->open_popup_complete($title, $msg, array('dhide_parser_status_close'));
+			if(!$silentReparse){
+				$title = I18N::get('popup', 'rom_add_parse_done_title');
+				$msg = sprintf(I18N::get('popup', 'rom_add_parse_done_msg%s'), strtoupper($platfom));
+				$this->status_obj->open_popup_complete($title, $msg, array('dhide_parser_status_close'));
+			}
+			else{
+				$this->status_obj->reset1();
+				$this->status_obj->hide_main();
+				return false;
+			}
 		}
 	}
 	
@@ -5514,7 +6540,10 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		// get path from history
 		$historyKey = 'eccparser_'.$eccident;
 	
-		if (!$path) $path = $this->ini->getHistoryKey($historyKey);
+		if (!$path || !realpath($path)) $path = $this->ini->getHistoryKey($historyKey);
+		
+		# if no path is given, try to get the last selected path
+		if(!$path || !realpath($path)) $path = FACTORY::get('manager/IniFile')->getUserFolder($eccident, 'roms');
 		
 		$title = sprintf(I18N::get('popup', 'rom_add_filechooser_title%s'), $platfom);
 		
@@ -5539,12 +6568,6 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		$obj->delete();
 	}
 	
-	public function quit() {
-		$this->ini->storeHistoryKey('vis_navigation_width', $this->hpaned1->get_position(), false);
-		$this->ini->storeHistoryKey('navigation_last', $this->_eccident, false);
-		gtk::main_quit();
-	}
-	
 	/*
 	* internal function for glade
 	*/
@@ -5554,7 +6577,6 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 	
 	private function loadEccConfig() {
 		$mngrValidator = FACTORY::get('manager/Validator');
-		
 		$this->ecc_release = $mngrValidator->getEccCoreKey('ecc_release');
 		$this->user_path_subfolder_default = $mngrValidator->getEccCoreKey('user_path_subfolder_default');
 		$this->supported_images = $mngrValidator->getEccCoreKey('supported_images');
@@ -5568,6 +6590,8 @@ if (i18n::getLanguageIdent() != 'jp') $this->pf_info_resources->modify_font(new 
 		$this->dropdownStateYesNo = $mngrValidator->getEccCoreKey('dropdownStateYesNo');
 		$this->dropdownStateCount = $mngrValidator->getEccCoreKey('dropdownStateCount');
 		$this->dropdownStorage = $mngrValidator->getEccCoreKey('dropdownStorage');
+		$this->dropdownRegion = $mngrValidator->getEccCoreKey('dropdownRegion');
+		$this->dropdownMediaType = $mngrValidator->getEccCoreKey('dropdownMediaType'); # meta -> dropdownMedium
 		$this->eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
 		$this->eccdb = $mngrValidator->getEccCoreKey('eccdb');
 		$this->cs = $mngrValidator->getEccCoreKey('cs');
@@ -5584,18 +6608,22 @@ current_version="'.$this->ecc_release["local_release_version"].'"
 date_build="'.$this->ecc_release['local_release_date'].'"
 current_build="'.$this->ecc_release['release_build'].'"
 ';
-		file_put_contents(ECC_BASEDIR.'/ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
+		file_put_contents(ECC_DIR_SYSTEM.'/infos/ecc_local_version_info.ini', trim($versionInfos));
+	}
+	
+	private function writeEnviromentInfo(){
+		#file_put_contents(ECC_DIR_SYSTEM.'/infos/ecc_local_envment_info.ini', 'NOT IMPLEMENTED');
 	}
 	
 	private function cleanupConfigsIfCopied() {
 		$ciString = @$_SERVER['USERDOMAIN']."|".@$_SERVER['TEMP']."|".@$_SERVER['TMP']."|".@$_SERVER['APPDATA']."|".@$_SERVER['COMPUTERNAME']."|".@$_SERVER['HOMEPATH'];
 		$ciCheck = sprintf('%08X', crc32($ciString));
-		$ciDatPath = ECC_BASEDIR.$this->cs['cicheckdat'];
+		$ciDatPath = ECC_DIR.'/'.$this->cs['cicheckdat'];
 		if (file_exists($ciDatPath)) {
 			$ciCheckFound = @file_get_contents($ciDatPath);
 			if ($ciCheckFound != $ciCheck) {
 				@unlink($ciDatPath);
-				@unlink(ECC_BASEDIR.$this->cs['cscheckdat']);
+				@unlink(ECC_DIR.'/'.$this->cs['cscheckdat']);
 			}
 		}
 		@file_put_contents($ciDatPath, $ciCheck);
@@ -5826,7 +6854,9 @@ current_build="'.$this->ecc_release['release_build'].'"
 				if (is_file($thumbName)) $file_path = $thumbName;
 				
 				$obj_pixbuff = $this->oHelper->getPixbuf($file_path, $width, $height, $this->imagesAspectRatio);
-				return $obj_pixbuff;
+				
+				# if pixbuf not found, return the default pixbuf for platform
+				if($obj_pixbuff !== null) return $obj_pixbuff;
 			}
 		}
 		
@@ -5882,7 +6912,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$eccident = ($this->current_media_info['fd_eccident']) ? $this->current_media_info['fd_eccident'] : $this->current_media_info['md_eccident'];
 		$crc32 = $this->current_media_info['crc32'];
 		$parameter = '/images /'.$this->ini->getPlatformFolderName($eccident).' /'.$crc32.'';
-		$exe = ECC_BASEDIR.$this->eccHelpLocations['ECC_INJECT_START'];
+		$exe = ECC_DIR.'/ecc-tools/'.$this->eccHelpLocations['ECC_INJECT_START'];
 		//print $exe.$parameter.LF;
 		FACTORY::get('manager/Os')->executeProgramDirect($exe, false, $parameter);
 	}
@@ -5949,7 +6979,11 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopViewModeRomAll->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomAll'));
 		$this->mTopViewModeRomNoMeta->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomNoMeta'));
 		$this->mTopViewModeRomPersonal->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomPersonal'));
-
+		$this->mTopViewModeRomPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomPlayed'));
+		$this->mTopViewModeRomMostPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomMostPlayed'));
+		$this->mTopViewModeRomNotPlayed->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomNotPlayed'));
+		$this->mTopViewModeRomBookmarks->get_child()->set_text(I18N::get('menuTop', 'mTopViewModeRomBookmarks'));
+		
 		$this->mTopViewListDetail->get_child()->set_text(I18N::get('menuTop', 'mTopViewListDetail'));
 		$this->mTopViewListSimple->get_child()->set_text(I18N::get('menuTop', 'mTopViewListSimple'));
 		
@@ -5962,6 +6996,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		
 		$this->mTopViewToggleLeft->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleLeft'));
 		$this->mTopViewToggleRight->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleRight'));
+		$this->mTopViewToggleSearch->get_child()->set_text(I18N::get('menuTop', 'mTopViewToggleSearch'));
 		
 		# TOP-OPT
 		$this->mTopOption->get_child()->set_text(I18N::get('menuTop', 'mTopOption'));
@@ -5969,6 +7004,8 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopOptionCreateUserFolder->get_child()->set_text(I18N::get('menuTop', 'mTopOptionCreateUserFolder'));
 		$this->mTopOptionCleanHistory->get_child()->set_text(I18N::get('menuTop', 'mTopOptionCleanHistory'));
 		$this->mTopOptionConfig->get_child()->set_text(I18N::get('menuTop', 'mTopOptionConfig'));
+		
+		$this->mTopOptionBackupUserdata->get_child()->set_text(I18N::get('menuTop', 'mTopOptionBackupUserdata'));
 		
 		# TOP-TOOL
 		$this->mTopTool->get_child()->set_text(I18N::get('menuTop', 'mTopTool'));
@@ -5990,6 +7027,40 @@ current_build="'.$this->ecc_release['release_build'].'"
 		
 	}
 	
+	private function guiInit(){
+		
+		$imageObject = FACTORY::get('manager/Image');
+		$imageObject->setWidgetBackground($this->wdo_main, 'background/main.png');
+		$imageObject->setWidgetBackground($this->eventbox1, 'background/box.png');
+		$imageObject->setWidgetBackground($this->eventbox2, 'background/box.png');
+		$imageObject->setWidgetBackground($this->statusAreaBackground, 'background/box_hilight.png');
+		$imageObject->setWidgetBackground($this->scrolledwindow1, 'background/box.png');
+		
+		#setup icons for rom/bookmark/history buttons
+		$this->btnMainShowAllRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/controller.png', true)));
+		$this->btnMainShowBookmarkedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/heart.png', true)));
+		$this->btnMainShowLaunchedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/clock.png', true)));
+		$this->statusAreaIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_working.png', true)));
+	}
+	
+	public function getThemeFolder($subfolder = '', $important = false){
+		
+		$defaultTheme = 'default';
+		$theme = $this->ini->getKey('ECC_THEME', 'ecc-theme');
+		
+		if($theme == 'none' && !$important) return false;
+		
+		$basePath = ECC_DIR.'/ecc-themes/';
+
+		$fullPath = $basePath.$theme.'/'.$subfolder;
+		
+		if($theme != $defaultTheme){
+			if(!file_exists($fullPath)) $fullPath = $basePath.$defaultTheme.'/'.$subfolder;;
+		}
+		
+		return $fullPath;
+	}
+	
 	private function translateGui(){
 		
 		$this->translateGuiTopMenu();
@@ -6000,14 +7071,16 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->infoPersonalLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabPersonal')));
 		$this->infoEsearchLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabESearch')));
 		$this->infoRomDBLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomDB')));
-		$this->media_nb_mdata_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomData')));
+//		$this->media_nb_mdata_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomData')));
 		$this->media_nb_header_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabRomHeader')));
 		
 		# main gui buttons
 		$this->gui_main_btn_rom_start->set_text(I18N::get('mainGui', 'gui_main_btn_rom_start'));
 		$this->gui_main_btn_rom_bookmark->set_text(I18N::get('mainGui', 'gui_main_btn_rom_bookmark'));
-		$this->gui_main_btn_list_bookmark->set_text(I18N::get('mainGui', 'gui_main_btn_list_bookmark'));
-		$this->gui_main_btn_list_history->set_text(I18N::get('mainGui', 'gui_main_btn_list_history'));
+
+		$this->btnMainShowAllRomsLabel->set_label(I18N::get('mainGui', 'btnMainShowAllRomsLabel'));
+		$this->btnMainShowBookmarkedRomsLabel->set_label(I18N::get('mainGui', 'btnMainShowBookmarkedRomsLabel'));
+		$this->btnMainShowLaunchedRomsLabel->set_label(I18N::get('mainGui', 'btnMainShowLaunchedRomsLabel'));
 		
 		$this->media_nb_info_edit->set_label(I18N::get('mainGui', 'media_nb_info_edit'));
 		
@@ -6023,9 +7096,12 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->paneInfoEccDbAddTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbAddTitle').'</b>');
 		$this->paneInfoEccDbAddText->set_text(i18n::get('mainGui', 'paneInfoEccDbAddText'));
 		$this->paneInfoEccDbAddButton->set_label(i18n::get('mainGui', 'paneInfoEccDbAddButton'));
-		$this->paneInfoEccDbGetTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetTitle').'</b>');
-		$this->paneInfoEccDbGetText->set_text(i18n::get('mainGui', 'paneInfoEccDbGetText'));
-		$this->paneInfoEccDbGetButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetButton'));	
+//		$this->paneInfoEccDbGetTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetTitle').'</b>');
+//		$this->paneInfoEccDbGetText->set_text(i18n::get('mainGui', 'paneInfoEccDbGetText'));
+//		$this->paneInfoEccDbGetButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetButton'));	
+
+		$this->paneInfoEccDbGetDatfileTitle->set_markup('<b>'.i18n::get('mainGui', 'paneInfoEccDbGetDatfileTitle').'</b>');
+		$this->paneInfoEccDbGetDatfileButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetDatfileButton'));
 		
 		# metaoptions
 		$this->infotab_lbl_category->set_markup('<b>'.I18N::get('meta', 'lbl_category').'</b>');
@@ -6036,7 +7112,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->infotab_lbl_info->set_markup('<b>'.I18N::get('meta', 'lbl_info').'</b>');
 		
 		$this->infotab_lbl_languages->set_markup('<b>'.I18N::get('meta', 'lbl_languages').'</b>');
-		$this->infotab_lbl_rating->set_markup('<b>'.I18N::get('meta', 'lbl_rating').'</b>');
 		
 		$this->infotab_lbl_storage->set_markup('<b>'.I18N::get('meta', 'lbl_storage').'</b>');
 		$this->infotab_lbl_running->set_markup('<b>'.I18N::get('meta', 'lbl_running').'</b>');
@@ -6049,18 +7124,22 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->infotab_lbl_netplay->set_markup('<b>'.I18N::get('meta', 'lbl_netplay').'</b>');
 		
 		# Fileinfos
-		$this->infotab_lbl_filename->set_markup('<b>'.I18N::get('meta', 'lbl_filename_short').':</b>');
-		$this->infotab_lbl_directory->set_markup('<b>'.I18N::get('meta', 'lbl_directory_short').':</b>');
-		$this->infotab_lbl_filesize->set_markup('<b>'.I18N::get('meta', 'lbl_filesize_short').':</b>');
-		
+		$this->infotab_frame_fileinfo->set_markup('<b>'.I18N::get('global', 'fileInfo').'</b>');
+		$this->infotab_lbl_filename->set_markup('<b><span size="small">'.I18N::get('meta', 'lbl_filename_short').':</span></b>');
+		$this->infotab_lbl_directory->set_markup('<b><span size="small">'.I18N::get('meta', 'lbl_directory_short').':</span></b>');
+		$this->infotab_lbl_filesize->set_markup('<b><span size="small">'.I18N::get('meta', 'lbl_filesize_short').':</span></b>');
+		$this->infotab_lbl_zip->set_markup('<b><span size="small">'.I18N::get('global', 'zip').':</span></b>');
+		$this->infotab_lbl_crc32->set_markup('<b><span size="small">'.I18N::get('global', 'crc32').':</span></b>');
+
 		# PERSONAL
 		$this->iPanePersHeadlineLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersHeadlineLbl').':</b>');
 		$this->iPanePersTimesPlayedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersTimesPlayedLbl').':</b>');
 		$this->iPanePersLastPlayedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersLastPlayedLbl').':</b>');
-		$this->iPanePersRatingLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersRatingLbl').':</b>');
 		$this->iPanePersBookmarkedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersBookmarkedLbl').':</b>');
 		$this->iPanePersMetaEditedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaEditedLbl').':</b>');
 		$this->iPanePersMetaExportLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaExportLbl').':</b>');
+		$this->iPanePersMetaHiscoreLbl->set_markup('<b>'.I18N::get('global', 'hiscore').':</b>');
+		
 		$this->iPanePersMetaNotesLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaNotesLbl').':</b>');
 
 		# ESEARCH
@@ -6078,10 +7157,13 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->iPaneEsearchHelpLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHelpLbl').':</b>');
 		
 		# DATA
-		$this->iPaneDataLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneDataLbl').':</b>');
+//		$this->iPaneDataLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneDataLbl').':</b>');
 		
 		# HEADER
 		$this->iPaneHeadLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneHeadLbl').':</b>');
+		
+		# SEARCH AREA
+		$this->search_input_reset_label->set_label(i18n::get('global', 'reset'));
 		
 	}
 
@@ -6114,12 +7196,218 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$treeView->connect('button-release-event', array($this, 'show_popup_menu'));
 
 		# init drag-n-drop
-		$this->mailListDragAndDropInit($this->newTreeView);
+		$this->mainListDragAndDropInit($this->newTreeView);
 		
 		# init the model and assign it to the treeview!
 		$this->init_treeview_main();
 		
 		if ($reload) $this->onInitialRecord();
+	}
+	
+	private function onEccStartup(){
+		
+	}
+
+	public function eccShutdown($restart = false) {
+		
+		$title = I18N::get('popup', 'executePostShutdownTaskTitle');
+		$task = $this->getShutdownTask();
+		if($task){
+			$typeTranslated = I18N::get('menu', $task[0]);
+			$message = sprintf(I18N::get('popup', 'executePostShutdownTaskMessage%s'), $typeTranslated);
+			if (!$this->guiManager->openDialogConfirm($title, $message)){
+				$this->unsetShutdownTask();
+				return false;
+			}			
+		}
+
+		
+		
+		# store state
+		
+		//GdkWindowState
+		//
+		//Specifies the state of a toplevel window.
+		//Value
+		//	
+		//Symbolic name
+		//	
+		//Description
+		//  1	Gdk::STATE_WITHDRAWN	The window is not shown.
+		//  2	Gdk::STATE_ICONIFIED	The window is minimized.
+		//  4	Gdk::STATE_MAXIMIZED	The window is maximized.
+		//  8	Gdk::WINDOW_STATE_STICKY	The window is sticky.
+		//  16	Gdk::WINDOW_STATE_FULLSCREEN	The window is maximized without decorations
+		//  32	Gdk::WINDOW_STATE_ABOVE	The window is kept above other windows.
+		//  64	Gdk::WINDOW_STATE_BELOW	The window is kept below other windows.
+		
+		$guiState = $this->wdo_main->window->get_state();
+		if(!in_array($guiState, array(4))) $guiState = 0; # only save maximied
+		$this->ini->storeHistoryKey('gui_main_state', $guiState, false);
+		
+//		print __FUNCTION__.'<pre>';
+//		print_r($this->wdo_main->window->get_state());
+//		print '</pre>'."\n";
+		
+		# store the last gui size setup
+		$guiSize = $this->wdo_main->get_size();
+		$this->ini->storeHistoryKey('gui_main_size', $guiSize[0].'x'.$guiSize[1], false);
+		
+		# store the last gui position setup
+		$guiPosition = $this->wdo_main->get_position();
+		list($width, $height) = $guiPosition;
+		$this->ini->storeHistoryKey('gui_main_position', $width.'x'.$height);
+
+		# hide main gui first
+		# hide here, because otherwise the wrong widow position is returned!
+		$this->wdo_main->hide();
+		
+		# store the with of the navigation area
+		$this->ini->storeHistoryKey('vis_navigation_width', $this->hpaned1->get_position(), false);
+		
+		# store the last selected platform
+		$this->ini->storeHistoryKey('navigation_last', $this->_eccident, false);
+		
+		# store the last selected game!
+		if($this->current_media_info['id'] || $this->current_media_info['md_id']){
+			$key = $this->current_media_info['id'].'|'.$this->current_media_info['md_id'];
+			$this->ini->storeHistoryKey('last_selected_game', $key, false);			
+		}
+		
+		# store the last selected page
+		if($this->media_treeview_pager->_p && !$this->get_search_state()){
+			$this->ini->storeHistoryKey('last_selected_page', $this->media_treeview_pager->_p, false);	
+		}
+		
+		# now stop the gtk2 application
+		gtk::main_quit();
+		
+		# execute task after exiting the gtk2 app.
+		$this->executePostShutdownTasks();
+		
+		if ($restart) FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open', '/fastload');
+		
+		return true;
+		
+	}
+	
+	public $postShutdownTask;
+	public function executePostShutdownTasks(){
+		if(!$this->postShutdownTask) return false;
+		$type = $this->postShutdownTask[0];
+		$params = array_slice($this->postShutdownTask, 1);
+		$this->dispatchPostShutdownTasks($type, $params);
+		return true;
+	}
+	
+	public function setShutdownTask($task){
+		$this->postShutdownTask = $task;
+		$this->eccShutdown($restart = true);
+	}
+	
+	public function getShutdownTask(){
+		return $this->postShutdownTask;
+	}
+	public function unsetShutdownTask(){
+		$this->postShutdownTask = false;
+	}
+	
+	public function dispatchPostShutdownTasks($type, $param = false){
+		
+		switch ($type){
+			case 'imagepackCreateAllThumbnails':
+				$dialog = $this->openWaitSplashscreen();
+				$systems = $this->getSystemsWithImagepacks(@$param[0]);
+				foreach ($systems as $systemIdent => $systemName) {
+					$this->updateWaitSplashscreen($dialog, $systemName);
+					FACTORY::get('ImagePack')->createAllThumbnails($systemIdent);
+				}
+			break;
+			case 'imagepackRemoveAllThumbnails':
+				$dialog = $this->openWaitSplashscreen();
+				$systems = $this->getSystemsWithImagepacks(@$param[0]);
+				foreach ($systems as $systemIdent => $systemName) {
+					$this->updateWaitSplashscreen($dialog, $systemName);
+					FACTORY::get('ImagePack')->removeAllThumbnails($systemIdent);
+				}
+			break;
+			case 'imagepackRemoveImagesWithoutRomFile':
+				$dialog = $this->openWaitSplashscreen();
+				$systems = $this->getSystemsWithImagepacks(@$param[0]);
+				foreach ($systems as $systemIdent => $systemName) {
+					$availableCrc32 = FACTORY::get('TreeviewData')->getAllCrc32ForSystem($systemIdent);
+					if(!$availableCrc32) continue;
+					$this->updateWaitSplashscreen($dialog, $systemName);
+					FACTORY::get('ImagePack')->removeImagesWithoutRomFile($systemIdent, $availableCrc32);
+				}
+			break;
+			case 'imagepackRemoveEmptyFolder':
+				$dialog = $this->openWaitSplashscreen();
+				$systems = $this->getSystemsWithImagepacks(@$param[0]);
+				foreach ($systems as $systemIdent => $systemName) {
+					$this->updateWaitSplashscreen($dialog, $systemName);
+					FACTORY::get('ImagePack')->removeEmptyFolder($systemIdent);
+				}
+			break;
+		}
+	}
+	
+	public function getSystemsWithImagepacks($systemIdent = false){
+		
+		$imagePackManager = FACTORY::get('ImagePack');
+		$iniManager = FACTORY::get('manager/IniFile');
+		
+		$systems = array();
+		if($systemIdent) $systems[$systemIdent] = $iniManager->getPlatformName($systemIdent);
+		else $systems = $iniManager->getPlatformNavigation(false, false, true);
+		
+		$out = array();
+		foreach ($systems as $systemIdent => $systemName) {
+			if(stripos($systemIdent, 'null') === 0 || !$imagePackManager->hasImagePack($systemIdent)) continue;
+			while (gtk::events_pending()) gtk::main_iteration();
+			$out[$systemIdent] = $systemName;
+		}
+		return $out;
+	}
+	
+	public function openWaitSplashscreen(){
+		$title = I18N::get('popup', 'postShutdownTaskTitle');
+		$message = I18N::get('popup', 'postShutdownTaskMessage');
+		return $this->guiManager->openDialogWait($title, $message);
+	}
+	public function updateWaitSplashscreen($dialog, $platformName){
+		$title = I18N::get('popup', 'postShutdownTaskTitle');
+		$dialog->title->set_markup('<b>'.$title.' ('.$platformName.')</b>');
+		while (gtk::events_pending()) gtk::main_iteration();
+	}
+	
+	public static $fileList;
+	public static $level = 0;
+	public static function readDirRecursive($currentDir) {
+		$d = opendir($currentDir);
+		while(($currentFilename = readdir($d)) !== false) {
+			if ($currentFilename == '.' || $currentFilename == '..') continue;
+			$currentPath = realpath($currentDir.DIRECTORY_SEPARATOR.$currentFilename);
+			
+			if(!$currentPath) continue;
+			if (is_dir($currentPath)){
+				self::$level++;
+				
+				self::readDirRecursive($currentPath);
+				self::$level--;
+			}
+			else self::$fileList[] = $currentPath;
+			
+			if(self::$level == 3) print self::$level." - ".$currentPath."\n";
+			
+		}
+		return self::$fileList;
+	}
+	
+	public function onStateChange($widget, $stateObject){
+//		print __FUNCTION__.'<pre>';
+//		print_r($stateObject);
+//		print '</pre>'."\n";
 	}
 	
 }

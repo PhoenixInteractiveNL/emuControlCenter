@@ -212,7 +212,6 @@ $i18n['popup'] = array(
 	/* 0.9.1 FYEO 6 */
 	'sys_dialog_miss_title' =>
 		"bevestig",
-
 	/* 0.9.2 WIP 11 */
 	'parse_big_file_found_title' =>
 		"Dit bestand echt verwerken?",
@@ -317,5 +316,20 @@ $i18n['popup'] = array(
 		"Proces voltooid!",
 	'processDoneMsg' =>
 		"Het proces is voltooid!",
+
+	/* 0.9.7 FYEO 11 */
+	'userdata_backuped_in%s' =>
+		"Het herstel bestand (XML) met je gebruikers-gegevens is aangemaakt in je ecc-user/#_GLOBAL/ folder\n\n%s\n\nWil je de ge-exporteerde gegevens (XML) nu bekijken met je internet browser?",
+
+	/* 0.9.7 FYEO 17 */
+	'executePostShutdownTaskTitle' =>
+		"Wil je werkelijk deze uitvoering starten in de achtergrond?",
+	'executePostShutdownTaskMessage%s' =>
+		"\nTaak: <b>%s</b>\n\nWil je echt deze langdurige taak uitvoeren in de achtergrond?",
+	'postShutdownTaskTitle' =>
+		"Uitvoeren geselecteede taak",
+	'postShutdownTaskMessage' =>
+		"Je hebt een taak geselecteerd waarbij ECC gesloten moet worden.\n\nNa deze taak, <b>Zal emuControlCenter zichzelf weer automatisch starten!</b>\n\nDit kan enkele seconden, minuten en soms uren duren! Dit venster kan dan 'bevriezen'! Dus geen paniek! :-)\n\n<b>wachten AUB!</b>",
+
 );
 ?>

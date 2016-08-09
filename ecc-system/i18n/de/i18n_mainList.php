@@ -1,4 +1,4 @@
-<?
+﻿<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -24,5 +24,9 @@ $i18n['mainList'] = array(
 		"d.m.Y H:i",
 	'detailPlayInfos%s%s' =>
 		"%sx gespielt %s",
+		
+	/*0.9.7 WIP 04*/
+	'simpeDateFormat' =>
+		"d.m.Y",
 );
 ?>

@@ -27,5 +27,34 @@ $i18n['tooltips'] = array(
 		"Only show roms RATED equal or lower selection",
 	'optvis_mainlistmode' =>
 		"Toggle beween detail and listview",
+		
+	/* 0.9.7 WIP 01 */
+
+	'nbMediaInfoStateRatingEvent' =>
+		"Click to add your own rating for this rom",
+	'nbMediaInfoNoteEvent' =>
+		"Show notes for this rom",
+	'nbMediaInfoReviewEvent' =>
+		"Show review for this game",
+	'nbMediaInfoBookmarkEvent' =>
+		"Add / Remove bookmark",
+	'nbMediaInfoAuditStateEvent' =>
+		"Audit state for multifile roms",
+	'nbMediaInfoMetaEvent' =>
+		"Edit the metainformations for this game",
+
+	/* 0.9.7 WIP 14 */
+
+	'opt_only_disk' =>
+		"Show only the first Disk",
+
+	/* 0.9.7 WIP 16 */
+	'optionContextOnlyDiskAll' =>
+		"Show all roms",
+	'optionContextOnlyDiskOne' =>
+		"Show only first rom media",
+	'optionContextOnlyDiskOnePlus' =>
+		"Show first rom media plus unknown",
+
 );
 ?>

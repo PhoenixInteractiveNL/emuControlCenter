@@ -16,8 +16,8 @@ class TreeviewPager {
 	{
 		if ($total > 0) {
 			$this->_p = $p+$pp/$pp;
-			$this->_plast = false;
-			$this->_pfirst = true;
+			$this->_plast = ($this->_p < ($total / $pp)) ? false : true;
+			$this->_pfirst = ($p) ? false : true;
 		}
 		else {
 			$this->_p = 0;
@@ -65,8 +65,6 @@ class TreeviewPager {
 	{
 		$this->_plast = false;
 		$this->_pfirst = false;
-		
-		
 		
 		if ($this->_res_total > 0) {
 			$this->_p--;

@@ -11,13 +11,13 @@ $i18n['dropdown_meta_storage'] = array(
 	'[[empty]]' =>
 		"",
 	'[[not_possible]]' =>
-		"•s‰Â”\‚Å‚·",
+		"ï¿½sï¿½Â”\ï¿½Å‚ï¿½",
 	'[[not_battery]]' =>
-		"ƒoƒbƒeƒŠ[",
+		"ï¿½oï¿½bï¿½eï¿½ï¿½ï¿½[",
 	'[[not_password_code]]' =>
-		"ƒpƒXƒ[ƒh/ƒR[ƒh",
+		"ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½h/ï¿½Rï¿½[ï¿½h",
 	'[[not_memory_card]]' =>
-		"ƒƒ‚ƒŠ[ƒJ[ƒh",
+		"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Jï¿½[ï¿½h",
 );
 $i18n['dropdown_search_fields'] = array(
 	'[[name]]' =>
@@ -30,13 +30,19 @@ $i18n['dropdown_search_fields'] = array(
 		"Year",
 	'[[info]]' =>
 		"Info",
-	'[[fileextension]]' =>
+	'[[extension]]' =>
 		"Fileextension",
-	'[[filepath]]' =>
+	'[[path]]' =>
 		"Filepath",
 	'[[eccident]]' =>
 		"eccident",
 	'[[crc32]]' =>
 		"CRC32",
+	'[[programmer]]' =>
+		"Programmer",
+	'[[musican]]' =>
+		"Musican",
+	'[[graphics]]' =>
+		"Graphics",
 );
 ?>

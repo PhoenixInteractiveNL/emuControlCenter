@@ -49,5 +49,7 @@ $i18n['imageCenter'] = array(
 		"Verplaatsen",
 
 
+
+
 );
 ?>

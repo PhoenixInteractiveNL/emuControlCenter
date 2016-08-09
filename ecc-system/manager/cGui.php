@@ -1,21 +1,25 @@
 <?
+/*
+ * 
+ * -11	Gtk::RESPONSE_HELP	 Returned by Help buttons in GTK+ dialogs.
+ * -10	Gtk::RESPONSE_APPLY	Returned by Apply buttons in GTK+ dialogs.
+ * -9	Gtk::RESPONSE_NO	Returned by No buttons in GTK+ dialogs.
+ * -8	Gtk::RESPONSE_YES	Returned by Yes buttons in GTK+ dialogs.
+ * -7	Gtk::RESPONSE_CLOSE	Returned by Close buttons in GTK+ dialogs.
+ * -6	Gtk::RESPONSE_CANCEL	Returned by Cancel buttons in GTK+ dialogs.
+ * -5	Gtk::RESPONSE_OK	Returned by OK buttons in GTK+ dialogs.
+ * -4	Gtk::RESPONSE_DELETE_EVENT	Returned if the dialog is deleted.
+ * -3	Gtk::RESPONSE_ACCEPT	Generic response id, not used by GTK+ dialogs.
+ * -2	Gtk::RESPONSE_REJECT	Generic response id, not used by GTK+ dialogs.
+ * -1	Gtk::RESPONSE_NONE	Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
+ * 
+ */
+
 class Gui extends GladeXml{
 	
 	private $dialogIsset = false;
 	private $response = NULL;
-	
-// -11	Gtk::RESPONSE_HELP	 Returned by Help buttons in GTK+ dialogs.
-// -10	Gtk::RESPONSE_APPLY	Returned by Apply buttons in GTK+ dialogs.
-// -9	Gtk::RESPONSE_NO	Returned by No buttons in GTK+ dialogs.
-// -8	Gtk::RESPONSE_YES	Returned by Yes buttons in GTK+ dialogs.
-// -7	Gtk::RESPONSE_CLOSE	Returned by Close buttons in GTK+ dialogs.
-// -6	Gtk::RESPONSE_CANCEL	Returned by Cancel buttons in GTK+ dialogs.
-// -5	Gtk::RESPONSE_OK	Returned by OK buttons in GTK+ dialogs.
-// -4	Gtk::RESPONSE_DELETE_EVENT	Returned if the dialog is deleted.
-// -3	Gtk::RESPONSE_ACCEPT	Generic response id, not used by GTK+ dialogs.
-// -2	Gtk::RESPONSE_REJECT	Generic response id, not used by GTK+ dialogs.
-// -1	Gtk::RESPONSE_NONE	Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
-	
+
 	/**
 	 * This constructor is only needed to avoid an GladeXml warning!
 	 *
@@ -74,6 +78,14 @@ class Gui extends GladeXml{
 		$this->buttonOk->grab_focus();
 		
 		return $this->getResponse($historyKey);
+	}
+	
+	public function openDialogWait($title=false, $message=false){
+		$this->init(Gdk::WINDOW_TYPE_HINT_SPLASHSCREEN);
+		$this->checkboxHideDialog->set_visible(false);
+		$this->hbox32->set_visible(false);
+		$this->setDialogContent($title, $message, $image = false);
+		return $this;
 	}
 	
 	/**
@@ -145,7 +157,16 @@ class Gui extends GladeXml{
 		while(1){
 			while (gtk::events_pending()) gtk::main_iteration();
 			if (!isset($this->response)) continue;
-			$state = ($this->response === Gtk::RESPONSE_OK) ? true : false;
+			
+			switch($this->response){
+				case Gtk::RESPONSE_OK:
+					$state = true;
+					break;
+				default:
+					$state = false;
+			}
+			
+			#$state = ($this->response === Gtk::RESPONSE_OK) ? true : false;
 			if ($state && $historyKey) $this->writeHistoryKey($historyKey);
 			$this->guiDialog->hide();
 			return $state;
@@ -158,28 +179,32 @@ class Gui extends GladeXml{
 	 * If the dialog is allready created, only init
 	 * the dialog with the given parameters
 	 */
-	private function init(){
-		if(!$this->dialogIsset) $this->initGlade();
-		else $this->initDialog();
+	private function init($windowType = false){
+		if(!$this->dialogIsset) $this->initGlade($show = true, $windowType);
+		else $this->initDialog(true, $windowType);
 	}
 	
 	/**
 	 * Initializes the Dialog and reset variables
 	 */
-	private function initDialog($show = true){
+	private function initDialog($show = true, $windowType = false){
 		
 		# glade needs to execute an constructor
 		# so, the first time, the popup isnts opened via $show
+		
+		if($windowType) $this->guiDialog->set_type_hint($windowType);
+		
 		if ($show) $this->guiDialog->show();
 		
 		$this->guiDialog->set_keep_above(true);
+		
 		unset($this->response);
 	}
 	
 	/**
 	 * Load Glade file and initialize the Dialog
 	 */
-	private function initGlade($show = true){
+	private function initGlade($show = true, $windowType = false){
 		
 		# glade needs to execute an constructor
 		# so, the first time, the popup isnts opened via $show
@@ -188,10 +213,21 @@ class Gui extends GladeXml{
 		$path = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR).'/gui2/guiDialog.glade';
 		parent::__construct($path);
 		
-		$this->guiDialog->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
+		if($windowType) $this->guiDialog->set_type_hint($windowType);
+		
 		$this->guiDialog->set_position(Gtk::WIN_POS_CENTER_ALWAYS);
 
-		$this->guiDialog->connect('destroy', array($this, 'destroyed'));
+		$theme = FACTORY::get('manager/IniFile')->getKey('ECC_THEME', 'ecc-theme');
+		if($theme == 'none'){
+			$this->guiDialog->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));			
+		}
+		else{
+			$imageObject = FACTORY::get('manager/Image');
+			$imageObject->setWidgetBackground($this->guiDialog, '/background/dialog.png');
+			$imageObject->setWidgetBackground($this->eventbox1, '/background/dialog_bottom.png');			
+		}
+		
+		$this->guiDialog->connect('delete-event', array($this, 'destroyed'));
 		
 		$this->guiDialog->connect('key-press-event', array($this, 'handleKeyboardShortcuts'));
 		
@@ -201,12 +237,20 @@ class Gui extends GladeXml{
 
 		$this->dialogIsset = true;
 		
+		#$this->guiDialog->show();
+		
 		# initialize the dialog
 		$this->initDialog($show);
 	}
 	
 	public function destroyed(){
-		
+		$this->response = false;
+		$this->guiDialog->hide();
+		return true;
+	}
+	
+	public function close(){
+		$this->guiDialog->destroy();
 	}
 	
 	/**

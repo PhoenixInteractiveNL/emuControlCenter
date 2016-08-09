@@ -42,7 +42,7 @@ class DatFileImport extends App {
 		$dat_header = $this->parse_ini_file_quotes_safe($this->dat_filename, 20);
 		
 		if (!$dat_header) {
-			$this->status_obj->update_progressbar(0, "ERROR!");
+			$this->status_obj->update_progressbar(0, "ERROR 1!");
 			$message = "This is not a compatible Romcenter-Dat!\n";
 			$message .= '"'.$this->dat_filename.'"'."";
 			$this->status_obj->update_message($message);
@@ -86,7 +86,7 @@ class DatFileImport extends App {
 			$first_game = key($dat_header['GAMES']);
 
 			if (!$this->eccident) {
-				$this->status_obj->update_progressbar(0, "ERROR!");
+				$this->status_obj->update_progressbar(0, "ERROR 2!");
 				$message = "Romcenter: You have to choose a Platform!\n\n";
 				$message .= "You cannot import a Romcenter-Datfile without selecting the Platform!\n";
 				$message .= "Please choose the correct Platform in the navigation and try again!\n";
@@ -106,7 +106,7 @@ class DatFileImport extends App {
 				$this->parse_dat_romcenter($this->dat_filename);
 			}
 			else {
-				$this->status_obj->update_progressbar(0, "ERROR!");
+				$this->status_obj->update_progressbar(0, "ERROR 3!");
 				$message = "Sorry... missing extension in Romcenter-Dat!\n";
 				$message .= '"'.basename($this->dat_filename).'"'."\n\n";
 				
@@ -129,7 +129,7 @@ class DatFileImport extends App {
 		}
 		*/
 		else {
-			$this->status_obj->update_progressbar(0, "ERROR!");
+			$this->status_obj->update_progressbar(0, "ERROR 4!");
 			$message = "Unknown Dat-Format in file\n";
 			$message .= '"'.$this->dat_filename.'"'."\n";
 			$this->status_obj->update_message($message);
@@ -138,7 +138,9 @@ class DatFileImport extends App {
 	
 	public function validate_romcenter_format($rc_dat_version=false, $first_game = array()) {
 		
-		$split_row = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
+		# chr(172) is the seperator "¬"
+		$split_row = explode(chr(172), $first_game);
+		#$split_row = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $first_game));
 		
 		switch ($rc_dat_version) {
 			case '2.00':
@@ -151,7 +153,7 @@ class DatFileImport extends App {
 				return true;
 				break;
 			default:
-				$this->status_obj->update_progressbar(0, "ERROR!");
+				$this->status_obj->update_progressbar(0, "ERROR 5!");
 				$message = "Romcenter-Dat-Version '".$rc_dat_version."' is not supported\n";
 				$message .= '"'.$this->dat_filename.'"'."\n";
 				$this->status_obj->update_message($message);
@@ -209,8 +211,10 @@ class DatFileImport extends App {
 			
 			while (gtk::events_pending()) gtk::main_iteration();
 			
-			// get data for a row
-			$split = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $key));
+			# get data for a row
+			# chr(172) is the seperator "¬"
+			$split = explode(chr(172), $key);
+			#$split = explode("Â¬", iconv('ISO-8859-1', 'UTF-8', $key));
 			
 			// corrupt data... jump to next entry and log!
 			if (!isset($split[$name_from_field]) || !isset($split[$extension_from_field])) {
@@ -289,7 +293,7 @@ class DatFileImport extends App {
 									$save_type = $regex_tmp['save_type'];
 									$save_string = $regex_tmp['save_string'];
 									$save_match = (isset($regex_tmp['save_match'])) ?  $regex_tmp['save_match'] : 0;
-									
+									$remove_match = (isset($regex_tmp['remove_match'])) ?  $regex_tmp['remove_match'] : 0;
 									
 									if ($regex!==false) {
 										preg_match('/'.$regex.'/i', $file_name, $matches);
@@ -345,8 +349,6 @@ class DatFileImport extends App {
 				
 				$count_total++;
 				
-				
-				
 				if ($count_total >= 100) $count_total = 0;
 				
 				// status-area update
@@ -385,7 +387,7 @@ class DatFileImport extends App {
 		
 		if (!isset($ret['GAMES'])) {
 			$platform_name = $this->ini->getPlatformName($this->eccident);
-			$this->status_obj->update_progressbar(0, "ERROR!");
+			$this->status_obj->update_progressbar(0, "ERROR 6!");
 			$message = "No matches in Dat-File\n(".basename($this->dat_filename).")\n";
 			$message .= "found for ".$platform_name." (".$this->eccident.")\n\n";
 			$message .= "Search for this extensions: *.".implode("; *.", array_keys($possible_extensions))." - and found nothing :-(\n";
@@ -664,10 +666,14 @@ class DatFileImport extends App {
 					# filesize added (isnt added to database)
 					$terminator = 24;
 					break;
+				case '0.98':
+					# filesize added (isnt added to database)
+					$terminator = 32;
+					break;
 			}
-			
+
 			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
-			
+		
 			// if eccident is set, dont import not matching items.
 			if ($this->eccident && $this->eccident!=$res[0]) continue;
 			
@@ -687,7 +693,7 @@ class DatFileImport extends App {
 				$data['multiplayer'] = 	(($res[10] != "")) ? $res[10] : "NULL" ;
 				$data['netplay'] = 		(($res[11] != "")) ? $res[11] : "NULL" ;
 				$data['year'] = 		(($res[12] != "")) ? $res[12] : "" ;
-				$data['usk'] = 			(($res[13] != "")) ? $res[13] : "NULL" ;
+				$data['usk'] = 			(is_numeric($res[13])) ? (int)$res[13] : "NULL" ;
 				$data['category'] = 	(($res[14] != "")) ? $res[14] : "NULL" ;
 				$data['languages'] = 	(($res[15] != "")) ? $res[15] : false ;
 				$data['creator'] = 		(($res[16] != "")) ? $res[16] : "" ;
@@ -703,6 +709,28 @@ class DatFileImport extends App {
 				if ($version >= '0.96') {
 					$data['publisher'] = (($res[21] != "")) ? $res[21] : "" ;
 					$data['storage'] = (($res[22] != "")) ? $res[22] : "NULL" ;				
+				}
+				
+				# dont import $res[23]!!!! filesize!
+				
+				// v0.98
+				$data['programmer'] = "";
+				$data['musican'] = "";
+				$data['graphics'] = "";
+				$data['media_type'] = "NULL";
+				$data['media_current'] = "NULL";
+				$data['media_count'] = "NULL";
+				$data['region'] = "NULL";
+				$data['category_base'] = "NULL";
+				if ($version >= '0.98') {
+					$data['programmer'] = (($res[24] != "")) ? $res[24] : "";
+					$data['musican'] = (($res[25] != "")) ? $res[25] : "";
+					$data['graphics'] = (($res[26] != "")) ? $res[26] : "";
+					$data['media_type'] = (($res[27] != "")) ? $res[27] : "NULL";
+					$data['media_current'] = (($res[28] != "")) ? $res[28] : "NULL";
+					$data['media_count'] = (($res[29] != "")) ? $res[29] : "NULL";
+					$data['region'] = (($res[30] != "")) ? $res[30] : "NULL";
+					$data['category_base'] = (($res[31] != "")) ? $res[31] : "NULL";
 				}
 				
 				$q = "
@@ -776,15 +804,14 @@ class DatFileImport extends App {
 		$this->log .= LOGGER::add('datiecc', $msg, 2);
 	}
 	
-	
 	public function fileAvailable($eccident, $crc32) {
 		$q = "SELECT id FROM fdata WHERE eccident = '".sqlite_escape_string($eccident)."' AND crc32 = '".sqlite_escape_string($crc32)."' LIMIT 1";
 		$hdl = $this->dbms->query($q);
 		return ($res = $hdl->fetch(SQLITE_ASSOC)) ? true : false; 
 	}
 	
-	public function insert_mdata($data)
-	{
+	public function insert_mdata($data){
+		
 		$q = "
 			INSERT INTO
 			mdata
@@ -808,7 +835,15 @@ class DatFileImport extends App {
 				category,
 				creator,
 				publisher,
-				storage
+				storage,
+				programmer,
+				musican,
+				graphics,
+				media_type,
+				media_current,
+				media_count,
+				region,
+				category_base
 			)
 			VALUES
 			(
@@ -831,7 +866,15 @@ class DatFileImport extends App {
 				".sqlite_escape_string($data['category']).",
 				'".sqlite_escape_string($data['creator'])."',
 				'".sqlite_escape_string($data['publisher'])."',
-				".sqlite_escape_string($data['storage'])."
+				".sqlite_escape_string($data['storage']).",
+				'".sqlite_escape_string($data['programmer'])."',
+				'".sqlite_escape_string($data['musican'])."',
+				'".sqlite_escape_string($data['graphics'])."',
+				".sqlite_escape_string($data['media_type']).",
+				".sqlite_escape_string($data['media_current']).",
+				".sqlite_escape_string($data['media_count']).",
+				".sqlite_escape_string($data['region']).",
+				".sqlite_escape_string($data['category_base'])."
 			)
 		";
 		$this->dbms->query($q);
@@ -864,11 +907,31 @@ class DatFileImport extends App {
 			creator = '".sqlite_escape_string($data['creator'])."',
 			publisher = '".sqlite_escape_string($data['publisher'])."',
 			storage = ".sqlite_escape_string($data['storage']).",
+			
+			programmer = '".sqlite_escape_string($data['programmer'])."',
+			musican = '".sqlite_escape_string($data['musican'])."',
+			graphics = '".sqlite_escape_string($data['graphics'])."',
+			media_type = ".sqlite_escape_string($data['media_type']).",
+			media_current = ".sqlite_escape_string($data['media_current']).",
+			media_count = ".sqlite_escape_string($data['media_count']).",
+			region = ".sqlite_escape_string($data['region']).",
+			category_base = ".sqlite_escape_string($data['category_base']).",
+			
 			uexport = NULL,
 			cdate = NULL
 			WHERE
 			id = ".$id."
 		";
+		
+//				$data['programmer'] = "";
+//				$data['musican'] = "";
+//				$data['graphics'] = "";
+//				$data['media_type'] = "NULL";
+//				$data['media_current'] = "NULL";
+//				$data['media_count'] = "NULL";
+//				$data['region'] = "NULL";
+//				$data['category_base'] = "NULL";
+		
 		#print $q."\n";
 		$this->dbms->query($q);
 	}

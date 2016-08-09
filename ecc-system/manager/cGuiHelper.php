@@ -152,12 +152,11 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 <i>This folder contains user content, not generated or collected and not distributed by the emuControlCenter team!</i>
 </body>
 ";
-				
 				$platfomNameCleaned = preg_replace('/[^a-zA-Z0-9 ]/', ' ', trim($platform_name));
 				$platfomNameCleaned = trim($platform_eccident).' - '.trim($platfomNameCleaned);
 				$platfomNameCleaned = preg_replace('/\s\s+/', ' ', $platfomNameCleaned);
 				$platfomNameCleaned = str_replace(' ', '_', $platfomNameCleaned);
-				
+			
 				$platfomFile = $this->gui->ini->getUserFolder($platform_eccident).DIRECTORY_SEPARATOR.$platfomNameCleaned.'.html';
 				file_put_contents($platfomFile, trim($platformText));
 			}
@@ -172,14 +171,14 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 	}
 	
 	public function set_eccheader_image() {
-		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_header_small.png';
+		$img_path = ECC_DIR_SYSTEM.'/images/eccsys/internal/ecc_header_small.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
 		$obj_pixbuff = $this->getPixbuf($img_path);
 		$this->gui->img_ecc_header->set_from_pixbuf($obj_pixbuff);
 	}
 	
 	public function setEccSupportImage() {
-		$img_path = ECC_BASEDIR.'/ecc-system/images/eccsys/internal/ecc_logo_support.png';
+		$img_path = ECC_DIR_SYSTEM.'/images/eccsys/internal/ecc_logo_support.png';
 		if (!file_exists($img_path)) die ("missing ecc_header");
 		
 		$obj_pixbuff = $this->getPixbuf($img_path);
@@ -200,8 +199,8 @@ forum/board: <a href=\"http://ecc.phoenixinteractive.mine.nu/\">http://ecc.phoen
 		$win_style_temp->bg[Gtk::STATE_NORMAL] = GdkColor::parse($this->gui->background_color);
 		$dlg->set_style($win_style_temp);
 		
-		$dlg->set_icon($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/ecc_icon_small.ico'));
-		$dlg->set_logo($this->getPixbuf(ECC_BASEDIR.'/ecc-system/images/eccsys/platform/ecc_ecc_teaser.png'));
+		$dlg->set_icon($this->getPixbuf(ECC_DIR_SYSTEM.'/images/ecc_icon_small.ico'));
+		$dlg->set_logo($this->getPixbuf(ECC_DIR_SYSTEM.'/images/eccsys/platform/ecc_ecc_teaser.png'));
 		
 		$version = $this->getEccVersionString();
 		$website = $this->gui->ecc_release['website'];

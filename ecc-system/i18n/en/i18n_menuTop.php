@@ -16,15 +16,15 @@ $i18n['menuTop'] = array(
 	/* 0.9.2 FYEO 07 */	
 
 	'mTopViewModeRomHave' =>
-		"Show all ROMS (HAVE)",
+		"all (HAVE)",
 	'mTopViewModeRomDontHave' =>
-		"Show missing ROMS (DONTHAVE)",
+		"missing (DONTHAVE)",
 	'mTopViewModeRomAll' =>
-		"Show all available metadata",
+		"with metadata",
 	'mTopViewModeRomNoMeta' =>
-		"Show only ROMS without metadata",
+		"without metadata",
 	'mTopViewModeRomPersonal' =>
-		"Show all ROMS with Personal notes",
+		"with personal notes",
 	
 	'mTopViewRandomGame' =>
 		"Feel lucky! (Random Rom)",
@@ -174,6 +174,25 @@ $i18n['menuTop'] = array(
 		"Import datfile",
 	'mTopDatExport' =>
 		"Export datfile",
+
+	/* 0.9.7 WIP 01*/
+	'mTopViewModeRomPlayed' =>
+		"last played",
+	'mTopViewModeRomNotPlayed' =>
+		"never played",
+	'mTopViewModeRomBookmarks' =>
+		"bookmarked",		
+	'mTopViewModeRomMostPlayed' =>
+		'most played',
+	'mTopViewModeRomPersonalReviews' =>
+		'with personal review',
+
+	'mTopViewToggleSearch' =>
+		'Show search panel',
+
+	/* 0.9.7 WIP 11*/
+	'mTopOptionBackupUserdata' =>
+		'Backup userdata (XML)',
 
 );
 ?>

@@ -64,5 +64,32 @@ $i18n['meta'] = array(
 		"Meerspelers",
 	'lbl_netplay' =>
 		"Netplay",
+
+	/* 0.9.7 WIP 01 */
+	'lbl_programmer' =>
+		"Programmeur",
+	'lbl_musican' =>
+		"Musicus",
+	'lbl_medium' =>
+		"Opslag medium",
+		
+	/* 0.9.7 WIP 20 */
+	'lbl_graphics' =>
+		"Graphics",
+);
+
+$i18n['dropdownMedium'] = array(
+	'unknown' =>
+		"Unknown",
+	'cd' =>
+		"CD/DVD-Rom",
+	'tape' =>
+		"Tape",
+	'floppydics' =>
+		"Floppydisk",
+	'cartridge' =>
+		"Cartridge",
+	'card' =>
+		"Card",
 );
 ?>

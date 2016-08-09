@@ -47,7 +47,7 @@ $i18n['global'] = array(
 		"Alle",
 	'dialog_button_none' =>
 		"Keinen",
-
+	
 	/* 0.9.2 WIP 19 */
 	'dialog_dont_show_again' =>
 		"Diesen Dialog nicht mehr anzeigen!",
@@ -137,7 +137,7 @@ $i18n['global'] = array(
 		"Suchoperator",
 	'searchRatings' =>
 		"Suche nach Bewertung",
-
+	
 	'change' =>
 		"Ändern",
 	'options' =>
@@ -174,6 +174,41 @@ $i18n['global'] = array(
 	/* 0.9.6 WIP 16 */
 	'rateRom' =>
 		"Dieses Spiel bewerten",
-
+		
+	/* 0.9.7 WIP 01 */
+	'total' =>
+		"Gesamt",
+	'startRom' =>
+		"Starte rom",
+	'zip' =>
+		"Zip",
+	'fileInfo' =>
+		"File info",
+	'edit' =>
+		"Bearbeiten",
+	'hiscore' =>
+		"Hiscore",
+		
+	/* 0.9.7 WIP 02 */
+	'of' =>
+		"von",
+		
+	/* 0.9.7 WIP 04 */
+	'informations' =>
+		"Informationen",
+	'contact'=>
+		"Kontakt",
+	'author'=>
+		"Autor",
+	'date'=>
+		"Datum",
+	'description'=>
+		"Beschreibung",
+	'website'=>
+		"Webseite",
+		
+	/* 0.9.7 WIP 07 */
+	'reset'=>
+		"Reset",
 );
 ?>

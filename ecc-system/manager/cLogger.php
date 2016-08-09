@@ -13,16 +13,17 @@ class LOGGER {
 		'datirc' => 'dat_import_rc',
 		'dateecc' => 'dat_export_ecc',
 		'romdbadd' => 'romdb_add',
+		'datimportcm' => 'dat_import_cm',
 	);
 	
 	public static function setActiveState($state = false){
 		self::$active = $state;
 	}
 	
-	public static function add($type= false, $text, $headerType = false){
+	public static function add($type= false, $text, $headerType = false, $typePrefix = false, $mode = false){
 		
 		# if not active -- return!
-		if (self::$active) self::setLogfile($type);
+		if (self::$active) self::setLogfile($type, $typePrefix, $mode);
 
 		$out = '';
 		if (substr($text, -4) !== "\r\n") $text .= "\r\n";
@@ -61,17 +62,19 @@ class LOGGER {
 		return $out;
 	}
 
-	private static function setLogfile($type= false){
+	private static function setLogfile($type= false, $typePrefix = false, $mode = 'a+'){
 		
-		if (!isset(self::$types[$type])) $type = 'def';
-		if (isset(self::$fHdl[$type])) return true;
-
+		if(!isset(self::$types[$type])) $type = 'def';
+		if(isset(self::$fHdl[$type])) return true;
+		if(!$mode) $mode = 'a+';
+		
 		# create logfile path 
 		$validator = FACTORY::get('manager/Validator');
 		$coreKey = $validator->getEccCoreKey('eccHelpLocations');
-		$dir = ECC_BASEDIR.$coreKey['LOG_DIR'];
+		$dir = ECC_DIR.'/'.$coreKey['LOG_DIR'];
 		if (!is_dir($dir)) mkdir($dir);
-		$logfile = self::$types[$type].'.txt';
+		$typePrefix = ($typePrefix) ? '_'.$typePrefix : '';
+		$logfile = self::$types[$type].$typePrefix.'.txt';
 		
 		self::$fHdl[$type] = fopen($dir.DIRECTORY_SEPARATOR.$logfile, 'a+');
 		
@@ -79,6 +82,11 @@ class LOGGER {
 		self::add($type, "NEW SESSION", 3);
 		
 		return true;
+	}
+	
+	public function close($type){
+		fclose(self::$fHdl[$type]);
+		unset(self::$fHdl[$type]);
 	}
 }
 ?>

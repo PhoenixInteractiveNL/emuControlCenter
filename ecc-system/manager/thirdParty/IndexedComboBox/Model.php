@@ -19,15 +19,12 @@ class Gtk2_IndexedComboBox_Model extends GtkListStore
     *
     *   @param array    $arData     If wished, you can set the initial data here.
     */
-    public function __construct($arData = null)
-    {
-        parent::__construct(Gtk::TYPE_STRING, Gtk::TYPE_STRING);
+    public function __construct($arData = null) {
+    	parent::__construct(GObject::TYPE_STRING, GObject::TYPE_STRING);
         if ($arData !== null) {
             $this->set_array($arData);
         }
-    }//public function __construct($arData = null)
-
-
+    }
 
     /**
     *   Appends a single key/value pair to the list.

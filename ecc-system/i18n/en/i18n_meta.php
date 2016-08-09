@@ -64,5 +64,36 @@ $i18n['meta'] = array(
 		"Multiplayer",
 	'lbl_netplay' =>
 		"Netplay",
+
+	/* 0.9.7 WIP 01 */
+	'lbl_programmer' =>
+		"Programmer",
+	'lbl_musican' =>
+		"Musican",
+	'lbl_medium' =>
+		"Medium",
+
+	/* 0.9.7 WIP 20 */
+	'lbl_graphics' =>
+		"Graphics",
+		
+		
+);
+
+$i18n['dropdownMedium'] = array(
+	'unknown' =>
+		"Unknown",
+	'cd' =>
+		"CD/DVD-Rom",
+	'tape' =>
+		"Tape",
+	'floppydics' =>
+		"Floppydisk",
+	'cartridge' =>
+		"Cartridge",
+	'card' =>
+		"Card",
+	'arcade_board' =>
+		"Arcade board",
 );
 ?>

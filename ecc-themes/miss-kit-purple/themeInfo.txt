@@ -1,0 +1,5 @@
+name="Miss Kit I - Purple"
+author="ecc"
+date="20080501"
+contact="ecc@camya.com"
+website="http://www.camya.com/"

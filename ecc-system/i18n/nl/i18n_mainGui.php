@@ -48,7 +48,6 @@ $i18n['mainGui'] = array(
 	'paneInfoEccDbGetButton' =>
 		"Geef geselecteerde META-data weer! (online)",
 
-	/* 0.9.6 FYEO 15 */
 	'romDetailTabInfo' =>
 		"Info",
 	'romDetailTabPersonal' =>
@@ -63,6 +62,24 @@ $i18n['mainGui'] = array(
 		"Kop",
 	'romDetailTabRomHeaderJad' =>
 		"Jad",
+	
+	/* 0.9.7 WIP 01*/
+	'btnMainShowAllRomsLabel' => 
+		"Roms",
+	'btnMainShowBookmarkedRomsLabel' => 
+		"Favorieten",
+	'btnMainShowLaunchedRomsLabel' => 
+		"Geschiedenis",
+		
+	'contextViewModeSelectHeader' => 
+		"Selecteer een mode",
 
+	'paneInfoEccDbGetDatfileTitle' =>
+		"Importeer online dat-bestand",
+	'paneInfoEccDbGetDatfileText%s' =>
+		"Je kan het laatste online DAT-bestand voor %s hier van internet downloaden.",
+	'paneInfoEccDbGetDatfileButton' =>
+		"Importeer dat-bestand",
+		
 );
 ?>

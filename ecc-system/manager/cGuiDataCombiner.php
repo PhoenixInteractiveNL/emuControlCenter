@@ -16,10 +16,11 @@ class GuiDataCombiner extends GladeXml {
 	}
 	
 	private function prepareGui() {
-		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiDataCombiner.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiDataCombiner.glade');
 		$this->signal_autoconnect_instance($this);
 		
 		$this->dataCombiner->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
+		
 		$this->dataCombiner->set_modal(true);
 		$this->dataCombiner->set_keep_above(true);
 		

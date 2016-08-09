@@ -87,7 +87,7 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"ï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½",
 	'lbl_dat_opt_namestrip' =>
-		"RomCenterï¿½fï¿½[ï¿½^ï¿½ð®—ï¿½",
+		"RomCenterï¿½fï¿½[ï¿½^ï¿½í ‚í¾—ï¿½",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
@@ -182,7 +182,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_create_eccscript' =>
 		"eccï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Ìì¬",
 	'emu_info_nodata' =>
-		"ï¿½Ü‚ï¿½ï¿½ï¿½ñ‚ª‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½...",
+		"ï¿½Ü‚ï¿½ï¿½ï¿½í£Šíº‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½...",
 	'emu_info_footer%s' =>
 		"ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½bï¿½gï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½É“Kï¿½Ø‚ÈƒGï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½â²‘ï¿½ï¿½mï¿½Å‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½È‚ï¿½ï¿½Ìï¿½ï¿½â±‚ï¿½ï¿½ï¿½ï¿½\n%s\nï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ö’Ç‰Bï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I",
 	
@@ -239,8 +239,6 @@ $i18n['popupConfig'] = array(
 
 	'colOptOptionsBg1' =>
 		"Background 1",
-	'colOptOptionsBg1' =>
-		"Background 1",
 	'colOptOptionsBgHilight' =>
 		"Background selected",
 	'colOptOptionsText' =>
@@ -283,6 +281,28 @@ $i18n['popupConfig'] = array(
 		"Language settings",
 	'tab_label_language' =>
 		"Language",
+	
+	/* 0.9.7 WIP 01 */
+	'confEccSilentParsing' =>
+		"Silent ROM parsing (no popup requests)",
+		
+	'emuAssignGlobalEnableEccScript' =>
+		"activate eccScript",
+	'emuAssignFileextLabel' =>
+		"Emulator for fileextension",
+	'emuAssignPreviewLabel' =>
+		"Commandline preview",
+	'emuAssignGlobalActive%s' =>
+		"Start roms with fileextension '%s' with this emulator",
+	'emuAssignGlobalActiveGlobal%s' =>
+		"Activate catch all emulator '%s'",
+	'lbl_emu_tips_ecc' =>
+		"ecc links",	
+	'emuPlatformActiveState' =>
+		"activate platform",
+	'tabGeneralHlListOptions' =>
+		"List view options",	
+			
 		
 );
 ?>

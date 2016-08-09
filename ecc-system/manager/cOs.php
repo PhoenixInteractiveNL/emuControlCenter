@@ -21,7 +21,7 @@
 	public function getOperatingSystemInfos() {
 		
 		$this->os_env['OS'] = PHP_OS;
-		$this->os_env['TMP'] = ($_SERVER['TMP']) ? $_SERVER['TMP'] : $_SERVER['TEMP'];
+		$this->os_env['TMP'] = (isset($_SERVER['TMP']) && $_SERVER['TMP']) ? $_SERVER['TMP'] : '';
 		
 		if ('WIN' == strtoupper(substr($this->os_env['OS'],0,3))) {
 			$this->os_env['PLATFORM'] = 'WIN';
@@ -44,28 +44,13 @@
 			$chdirDestination = $theEmuCommand['chdir'];
 		}
 		else return false;
-
-//		// win98 needs "player". Otherwise, the file isnt started
-//		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
-//		
-//		// Compile start command
-//		$command = 'start '.$start_ident.' '.$emuCommand;
-//		
-//		// create an backup of the curren cwd
-//		$cwdBackup = getcwd();
-//		// change dir to the programs directory
-//		chdir($chdirDestination);
-//		// execute command
-//		pclose(popen($command, "r"));
-//		// change dir back to cwdBacup!
-//		chdir($cwdBackup);
 		
 		$this->executeCommand($emuCommand, $chdirDestination);
-
+		
 		return true;		
 	}
 	
-	public function executeCommand($command, $cwdPath = false, $returnCwdPath = false){
+	public function executeCommand($command, $cwdPath = false, $returnCwdPath = false, $useExec = false){
 		
 		# widows start tool
 		$commandWinStart  = 'start /B';
@@ -82,7 +67,12 @@
 		if($cwdPath) chdir($cwdPath); # change dir to the programs directory
 
 		# execute this command
-		pclose(popen($executeCommand, "r")); # execute command
+		if($useExec) exec($executeCommand);
+		else pclose(popen($executeCommand, "r")); # execute command
+		
+//		print "<pre>".LF;
+//		print_r($executeCommand).LF;
+//		print "</pre>".LF;
 		
 		# return path
 		if($returnCwdPath) return $cwdBackup;
@@ -100,7 +90,8 @@
 		else {
 			$chdirDestination = dirname(realpath($exeFileSource));
 			$romFile = ($romFileSource) ? realpath($romFileSource) : ''; 
-			$exeFile = escapeshellcmd(basename($exeFileSource));
+			#$exeFile = escapeshellcmd(basename($exeFileSource));
+			$exeFile = basename($exeFileSource);
 		}
 		
 		if (!$chdirDestination) return false;
@@ -109,11 +100,12 @@
 		
 		$eccScriptExeFile = '';
 		if ($enableEccScript) {
+			$fileNameEscape = true; # if ecc script is enabled, path has to be escaped
 			$eccLoc = FACTORY::get('manager/Validator')->getEccCoreKey('eccHelpLocations');
 			$scriptExtension = $eccLoc['ECC_SCRIPT_EXTENSION'];
 			if ($eccScriptFile = realpath($exeFileSource.$scriptExtension)){
 				$exeFile = $eccScriptFile;
-				if ($eccScriptExeFile = realpath(ECC_BASEDIR.'/ecc-tools/'.$eccLoc['ECC_EXE_SCRIPT'])){
+				if ($eccScriptExeFile = realpath(ECC_DIR.'/ecc-tools/'.$eccLoc['ECC_EXE_SCRIPT'])){
 					$eccScriptExeFile = '"'.$eccScriptExeFile.'"';
 				}
 			}
@@ -134,24 +126,27 @@
 		if (!$fileNameEscape) {
 			if ($this->os_env['PLATFORM']=='WIN') $romFile = str_replace("&", "^&", $romFile);
 		}
-		else $romFile = escapeshellarg($romFile);
+		else{
+			$romFile = '"'.$romFile.'"';
+			#$romFile = escapeshellarg($romFile);
+		}
 		
 		# eccScript dont support commandline-params at the beginning!
 		if($enableEccScript){
-			$param = '';
-			$param2 = '';
+			$paramPre = '';
+			$paramPost = '';
 		}
 		else{
-			if (!$param) $param = '';
-			$param2 = '';
+			$paramPre = '';
+			$paramPost = '';
 			if (FALSE !== $startPos = strpos($param, '%ROM%')){
-				$param2 = trim(substr($param, $startPos+5));
-				$param = trim(substr($param, 0, $startPos));
+				$paramPre = ltrim(substr($param, 0, $startPos));
+				$paramPost = rtrim(substr($param, $startPos+5));
 			}
 		}
 		
-		if ($param) $param = ' '.$param;
-		if ($param2) $param2 = ' '.$param2;
+//		if ($paramPre) $paramPre = ' '.$paramPre;
+//		if ($paramPost) $paramPost = ' '.$paramPost;
 		
 		# This is used eg for WinKawaks!
 		# change to emu dir -> execute basename of emu with an given
@@ -164,30 +159,21 @@
 		// win98 needs "player". Otherwise, the file isnt started
 		$start_ident = ($this->os_env['OS'] == 'WINNT') ? '"player"' : "";
 		
-		$emuCommand = trim($eccScriptExeFile.' "'.$exeFile.'"'.$param.' '.$romFile.$param2);
+		$emuCommand = trim($eccScriptExeFile.' "'.$exeFile.'" '.$paramPre.$romFile.$paramPost);
 		
 		$ret = array('command' => $emuCommand, 'chdir' => $chdirDestination);
+		
+//		print __FUNCTION__.'<pre>';
+//		print_r($ret);
+//		print '</pre>';
+		
 		return $ret;
 		
 	}
 	
 	public function openChooseFolderDialog($path=false, $title=false, $multiSelection = false, $shorcutFolder = false) {
-		switch($this->os_env['PLATFORM']) {
-			case 'WIN':
-			case 'WINNT':
-				if (FACTORY::get('manager/IniFile')->getKey('EXPERIMENTAL', 'win32Dialogs')) {
-					// win32std standard windows32 style
-					return $this->openWin32ChooseFolderDialog($path, $title);
-				}
-				else {
-					// gtk2 standard style
-					return $this->openGtk2ChooseFsDialog($path, $title, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER, $multiSelection, $shorcutFolder);
-				}
-				break;				
-			default:
-				print "openChooseFolderDialog for OS not implemented\n";
-				break;
-		}
+		
+		return $this->openGtk2ChooseFsDialog($path, $title, false, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER, $multiSelection, $shorcutFolder);
 	}
 	
 	/**
@@ -203,22 +189,7 @@
 	}
 
 	public function openChooseFileDialog($path=false, $title=false, $filter=array(), $defaultFilename=false, $multiSelection = false, $shorcutFolder = false) {
-		switch($this->os_env['PLATFORM']) {
-			case 'WIN':
-			case 'WINNT':
-				if (FACTORY::get('manager/IniFile')->getKey('EXPERIMENTAL', 'win32Dialogs')) {
-					// win32std standard windows32 style
-					return $this->openWin32ChooseFileDialog($path, $filter, $defaultFilename);
-				}
-				else {
-					// gtk2 standard style
-					return $this->openGtk2ChooseFsDialog($path, $title, $filter, Gtk::FILE_CHOOSER_ACTION_OPEN, $multiSelection, $shorcutFolder);
-				}
-				break;				
-			default:
-				print "openChooseFolderDialog for OS not implemented\n";
-				break;
-		}
+		return $this->openGtk2ChooseFsDialog($path, $title, $filter, Gtk::FILE_CHOOSER_ACTION_OPEN, $multiSelection, $shorcutFolder);
 	}
 	
 	/**
@@ -236,6 +207,7 @@
 	*
 	*/
 	public function openGtk2ChooseFsDialog($path=false, $title=false, $extension_limit=false, $type=Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER, $multiSelection = false, $shorcutFolder = false) {
+		
 		$title = ($title) ? $title : I18N::get('popup', 'sys_filechooser_miss_title');
 		$dialog = new GtkFileChooserDialog(
 			$title,
@@ -258,11 +230,20 @@
 		$label->set_markup('<b>'.$title.'</b>');
 		$dialog->set_extra_widget($label);
 		
-		if (!realpath($path)) {
-			$path = (dirname($path)) ? dirname($path) : false;
-		}
+		# if no path is given, try to get the last selected path
+		if(!trim($path)) $path = FACTORY::get('manager/IniFile')->getHistoryKey('path_selected_last');
 		
+		# if the given path isnt available, try to get the dir before this path
+		if (!realpath($path)) $path = (dirname($path)) ? dirname($path) : false;
+		
+		# if after all no path is selected, select the root path of ecc installation
+		if(!trim($path)) $path = realpath('/');
+	
 		if ($path) $dialog->set_filename($path);
+		
+//		$dialog->set_preview_widget(new GtkEntry());
+//		$dialog->connect_simple('update-preview', array($this, 'test'), $dialog);
+//		$dialog->set_preview_widget_active();
 		
 		if ($shorcutFolder && count($shorcutFolder)){
 			foreach ($shorcutFolder as $shorcutFolderDirname){
@@ -278,7 +259,7 @@
 				$filter->add_pattern($filter_value);
 				$dialog->add_filter($filter);
 			}
-			$filter2 = new GtkFileFilter();
+			#$filter2 = new GtkFileFilter();
 		}
 		
 		$response = $dialog->run();
@@ -288,9 +269,14 @@
 			else $path = $dialog->get_filename();
 			
 			$dialog->destroy();
+			
+			# store the last selected path
+			if(isset($path[0])) FACTORY::get('manager/IniFile')->storeHistoryKey('path_selected_last', realpath($path[0]));
+			
 			return $path;
 		}
 		$dialog->destroy();
+		
 		return false;
 	}
 	
@@ -330,14 +316,16 @@
 	 */
 	public function eccSetPathRelative($path, $fromBasepath = true) {
 		
-		if ($path && realpath($path)) {
-			if ($path!="" && strpos($path, ECC_BASEDIR) === 0) {
-				$offset = ($fromBasepath) ? ECC_BASEDIR_OFFSET : '';
-				$path = str_replace(ECC_BASEDIR, $offset, $path);
-				#$path = str_replace("\\", "/", $path);
-				$path = str_replace("\\", DIRECTORY_SEPARATOR, $path);
-			};
-		}
+		$path = preg_replace('/\/+/', DIRECTORY_SEPARATOR, $path);
+		$path = preg_replace('/\\\+/', DIRECTORY_SEPARATOR, $path);
+		
+		if(!file_exists($path)) return false;
+		
+		if (strpos($path, ECC_DIR) === 0) {
+			$offset = ($fromBasepath) ? ECC_DIR_OFFSET : '';
+			$path = str_replace(ECC_DIR, $offset, $path);
+		};
+
 		return $path;
 	}
 	
@@ -349,7 +337,13 @@
 	 */
 	public function eccSetRelativeDir($dir) {
 		$dir = $this->eccSetPathRelative($dir);
-		if ($dir && substr($dir, -1) !== DIRECTORY_SEPARATOR) $dir = $dir.DIRECTORY_SEPARATOR;
+		#if ($dir && substr($dir, -1) !== DIRECTORY_SEPARATOR) $dir = $dir.DIRECTORY_SEPARATOR;
+		
+		if($dir){
+			$lastChar = substr($dir, -1);
+			if($lastChar != '/' && $lastChar != '\\') $dir .= DIRECTORY_SEPARATOR;
+		}
+		
 		return $dir;
 	}
 	

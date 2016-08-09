@@ -34,7 +34,34 @@ class ImportDatControlMame extends ImportDat {
 		$statusCurrent = 0;
 		$statusCount = count($this->datContentSets);
 		
+		# for flat output of the multirom datfile!
+		$multiFileDatFields = array(
+			'mergedEccCrc32',
+			'name',
+			'sourcefile',
+			'cloneof',
+			'romof',
+			'description',
+			'manufacturer',
+			'year',
+			'filesize',
+			'type',
+		);
+		
+		
+		$multiFileDatOut = "Platform: ".$eccident.LF;
+		$multiFileDatOut .= "CM-Datfile: ".$this->datFileName.LF.LF;
+		$multiFileDatOut .= implode(';', $multiFileDatFields).LF;
+		
 		foreach($this->datContentSets as $index => $game){
+			
+			if(!$game['info']['mergedEccCrc32']) continue;
+			
+			# for flat output of the multirom datfile!
+			foreach($multiFileDatFields as $key){
+				$multiFileDatOut .= @$game['info'][$key].';';
+			}
+			$multiFileDatOut .= LF;
 			
 			$data['eccident'] = $eccident;
 
@@ -77,6 +104,9 @@ class ImportDatControlMame extends ImportDat {
 			if ('FAIL' === $this->updateStatusProgress('Import', $statusCount, $statusCurrent++, true, 10)) return false;
 		}
 		$this->dbms->query('COMMIT TRANSACTION;');
+		
+		LOGGER::add('datimportcm', trim($multiFileDatOut), 1, $eccident, 'w');
+		LOGGER::close('datimportcm');
 	}
 	
 	public function getBestMatch($hits, $fileId = false){
@@ -278,10 +308,6 @@ class ImportDatControlMame extends ImportDat {
 		# now correct also the image crc32
 		# do this after the transaction is done!!!!
 		if (count($imageRename)) FACTORY::get('manager/Image')->correctImageCrc32($eccident, $imageRename);
-		
-//		$mngrValidator = FACTORY::get('manager/Validator');
-//		$eccLoc = $mngrValidator->getEccCoreKey('eccHelpLocations');
-//		FACTORY::get('manager/Os')->executeProgramDirect(ECC_BASEDIR.$eccLoc['ECC_EXE_SCRIPT_EDITOR'], false, '"'.realpath($logFile).'"');
 	}
 	
 	public function updateFileAudit($fileId, $match, $allData = false){
@@ -712,6 +738,8 @@ class ImportDatControlMame extends ImportDat {
 
 				# create diff for the merged roms
 				if (isset($out[$cloneId]['rom_merge']) && is_array($out[$cloneId]['rom_merge'])) {
+					if(!is_array($out[$originalId]['rom_unique'])) $out[$originalId]['rom_unique'] = array();
+					if(!is_array($out[$originalId]['rom_unique_simple'])) $out[$originalId]['rom_unique_simple'] = array();
 					$out[$cloneId]['rom_merge'] = array_diff_assoc($out[$cloneId]['rom_merge'], $out[$originalId]['rom_unique']);
 					$out[$cloneId]['rom_merge_simple'] = array_diff_assoc($out[$cloneId]['rom_merge_simple'], $out[$originalId]['rom_unique_simple']);	
 				}
@@ -730,7 +758,7 @@ class ImportDatControlMame extends ImportDat {
 		$outPos = 0;
 		foreach($out as $pos => $game){
 			
-			$out[$pos]['info']['mergedEccCrc32'] = (isset($out[$pos]['rom_unique_simple'])) ?  FileIO::createMergedEccCrc32(array_flip($out[$pos]['rom_unique_simple'])) : array();
+			$out[$pos]['info']['mergedEccCrc32'] = (isset($out[$pos]['rom_unique_simple'])) ?  FileIO::createMergedEccCrc32(array_flip($out[$pos]['rom_unique_simple'])) : false;
 			
 			$out[$pos]['info']['size'] = 0;
 			if (isset($out[$pos]['rom_unique']) && is_array($out[$pos]['rom_unique'])) foreach($out[$pos]['rom_unique'] as $data) $out[$pos]['info']['size'] += $data['size'];

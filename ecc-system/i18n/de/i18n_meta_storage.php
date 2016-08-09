@@ -30,13 +30,39 @@ $i18n['dropdown_search_fields'] = array(
 		"Jahr",
 	'[[info]]' =>
 		"Info",
-	'[[fileextension]]' =>
+	'[[extension]]' =>
 		"Dateierweiterung",
-	'[[filepath]]' =>
+	'[[path]]' =>
 		"Verzeichnis/Dateiname",
 	'[[eccident]]' =>
 		"eccident",
 	'[[crc32]]' =>
 		"CRC32",
+	'[[programmer]]' =>
+		"Programmierer",
+	'[[musican]]' =>
+		"Musiker",
+	'[[graphics]]' =>
+		"Grafiker",
+);
+
+/* 0.9.7 FYEO 20 */
+$i18n['dropdown_meta_region'] = array(
+	'[[empty]]' =>
+		"",
+	'[[Asien]]' =>
+		"Asia",
+	'[[Brasilien]]' =>
+		"Brazil",
+	'[[Europa]]' =>
+		"Europe",
+	'[[Hispanic]]' =>
+		"Hispanic",
+	'[[Japan]]' =>
+		"Japan",
+	'[[USA]]' =>
+		"USA",
+	'[[Weltweit]]' =>
+		"World",
 );
 ?>

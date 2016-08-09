@@ -1,4 +1,4 @@
-﻿<?
+<?
 /**
  * emuControlCenter language system file
  * ------------------------------------------
@@ -27,5 +27,34 @@ $i18n['tooltips'] = array(
 		"Alle ROMs nach Bewertung sortieren",
 	'optvis_mainlistmode' =>
 		"Zwischen Detail- und Listenansicht wechseln",
+		
+	/* 0.9.7 WIP 01 */
+
+	'nbMediaInfoStateRatingEvent' =>
+		"Klicke hier um deine Bewertung abzugeben.",
+	'nbMediaInfoNoteEvent' =>
+		"Zeige Notizen für dieses Spiel",
+	'nbMediaInfoReviewEvent' =>
+		"Zeige das Review für dieses Spiel",
+	'nbMediaInfoBookmarkEvent' =>
+		"Bookmark hinzufügen / entfernen",
+	'nbMediaInfoAuditStateEvent' =>
+		"Audit status für Mehrdatei-Spiele",
+	'nbMediaInfoMetaEvent' =>
+		"Bearbeite die Metainformationen für dieses Rom",
+
+	/* 0.9.7 WIP 14 */
+
+	'opt_only_disk' =>
+		"Zeige nur die erste Diskette",
+
+	/* 0.9.7 WIP 16 */
+	'optionContextOnlyDiskAll' =>
+		"Zeige alle roms",
+	'optionContextOnlyDiskOne' =>
+		"Zeige nur das erste Medium",
+	'optionContextOnlyDiskOnePlus' =>
+		"Zeige das erste Medium + unbekannte",
+
 );
 ?>

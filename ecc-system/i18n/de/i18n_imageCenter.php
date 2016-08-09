@@ -8,7 +8,7 @@
  * ------------------------------------------
  **/
 $i18n['imageCenter'] = array(
-
+	
 	'imagePositionInfo%s%s%s' =>
 		"Bild %s von %s (%s)",
 	'imageSlotLabel' =>

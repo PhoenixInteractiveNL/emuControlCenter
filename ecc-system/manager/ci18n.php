@@ -12,7 +12,7 @@ class i18n {
 	private static $langDir;
 	private static $langData = array();
 	
-	public function set($langIdent=FALSE) {
+	public static function set($langIdent=FALSE) {
 		self::$langIdent = ($langIdent) ? $langIdent : self::$langIdentDefault;
 		self::$langDir = 'i18n/'.self::$langIdent.'/';
 		self::readLangDir();

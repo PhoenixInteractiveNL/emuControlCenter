@@ -52,7 +52,7 @@ class IndexedCombobox {
 			
 			switch($attr['renderer']) {
 				case 'text':
-					$create['liststore_type'][$col_cnt] = "Gtk::TYPE_STRING";
+					$create['liststore_type'][$col_cnt] = "GObject::TYPE_STRING";
 					$create['attribute_type'][$col_cnt] = "text";
 					$create['renderer'][$col_cnt] = new GtkCellRendererText();
 					break;

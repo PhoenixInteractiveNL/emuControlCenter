@@ -64,7 +64,7 @@ class FACTORY {
 		$classFileName = $classPath."c".$className.".php";
 		
 		$cwdBackup = getcwd();
-		chdir(ECC_BASEDIR.'/ecc-system/');
+		chdir(ECC_DIR_SYSTEM);
 		require_once($classFileName);
 		chdir($cwdBackup);
 		
@@ -91,10 +91,10 @@ class FACTORY {
 		
 	}
 	
-	public function setDbms($dbmsObject) {
+	public static function setDbms($dbmsObject) {
 		FACTORY::$dbms = $dbmsObject;
 	}
-	public function getDbms() {
+	public static function getDbms() {
 		return FACTORY::$dbms;
 	}
 }

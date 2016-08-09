@@ -64,5 +64,35 @@ $i18n['meta'] = array(
 		"Multijoueur",
 	'lbl_netplay' =>
 		"En réseau",
+
+	/* 0.9.7 WIP 01 */
+	'lbl_programmer' =>
+		"Programmeur",
+	'lbl_musican' =>
+		"Musicien",
+	'lbl_medium' =>
+		"Support",
+		
+	/* 0.9.7 WIP 20 */
+	'lbl_graphics' =>
+		"Graphics",
+		
+);
+
+$i18n['dropdownMedium'] = array(
+	'unknown' =>
+		"Inconnu",
+	'cd' =>
+		"CD/DVD-Rom",
+	'tape' =>
+		"K7",
+	'floppydics' =>
+		"Disquette",
+	'cartridge' =>
+		"Cartouche",
+	'card' =>
+		"Carte",
+	'arcade_board' =>
+		"Arcade board",
 );
 ?>

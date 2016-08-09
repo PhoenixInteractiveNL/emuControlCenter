@@ -175,5 +175,16 @@ $i18n['menuTop'] = array(
 	'mTopDatExport' =>
 		"Export datfile",
 
+	/* 0.9.7 WIP 01*/
+	'mTopViewModeRomPlayed' =>
+		"last played",
+	'mTopViewModeRomNotPlayed' =>
+		"never played",
+	'mTopViewModeRomBookmarks' =>
+		"bookmarked",		
+	'mTopViewModeRomMostPlayed' =>
+		'most played',
+	'mTopViewModeRomPersonalReviews' =>
+		'with personal review',
 );
 ?>

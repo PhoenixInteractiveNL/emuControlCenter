@@ -11,6 +11,7 @@ $i18n['file'] = array(
 
 	'winTitle' =>
 		"Datei Operationen",
+
 	'tabRenameHl' =>
 		"Datei umbenennen",
 	'tabRenameDesc' =>

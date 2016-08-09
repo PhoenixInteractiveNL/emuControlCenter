@@ -27,7 +27,7 @@ class GuiRomAudit extends GladeXml {
 		
 		$this->eccGui = $eccGui;
 		
-		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guiRomAudit.glade');
+		parent::__construct(ECC_DIR_SYSTEM.'/gui2/guiRomAudit.glade');
 		$this->signal_autoconnect_instance($this);
 		$this->romAudit->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));
 		$this->romAudit->set_modal(false);
@@ -253,7 +253,7 @@ class GuiRomAudit extends GladeXml {
 
 		if (!$fileId) $setType = '_donthave';
 		
-		return ECC_BASEDIR.'/ecc-system/images/eccsys/audit/ecc'.$setType.$setClone.'_ok.gif';
+		return ECC_DIR_SYSTEM.'/images/eccsys/audit/ecc'.$setType.$setClone.'_ok.gif';
 	}
 
 	public function getAuditStateDescription(

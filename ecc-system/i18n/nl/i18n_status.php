@@ -40,5 +40,6 @@ $i18n['status'] = array(
 		"Zoek en verwerk nieuwe ROM bestanden",
 	'addingRomsFor%s' =>
 		"Toevoegen ROMS voor %s",
+
 );
 ?>

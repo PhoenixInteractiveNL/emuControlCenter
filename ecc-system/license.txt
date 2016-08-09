@@ -1,6 +1,6 @@
 *********************************************************************
 
-emuControlCenter is Copyright(c) 2005-2007 by Andreas Scheibel
+emuControlCenter is Copyright(c) 2005-2008 by Andreas Scheibel
 
 This licence grants you the following:
 

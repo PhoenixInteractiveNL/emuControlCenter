@@ -110,7 +110,7 @@ class GuiPopConfig extends GladeXml {
 	
 	private function prepareGui() {
 		# get gui!
-		parent::__construct(ECC_BASEDIR.'ecc-system/gui2/guipopupconfig.glade');
+		parent::__construct(ECC_BASEDIR.'/ecc-system/gui2/guipopupconfig.glade');
 		$this->signal_autoconnect_instance($this);
 		
 		$this->guiPopConfig->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse("#FFFFFF"));

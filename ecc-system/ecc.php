@@ -5584,7 +5584,7 @@ current_version="'.$this->ecc_release["local_release_version"].'"
 date_build="'.$this->ecc_release['local_release_date'].'"
 current_build="'.$this->ecc_release['release_build'].'"
 ';
-		file_put_contents(ECC_BASEDIR.'ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
+		file_put_contents(ECC_BASEDIR.'/ecc-system/infos/ecc_local_version_info.ini', trim($versionInfos));
 	}
 	
 	private function cleanupConfigsIfCopied() {

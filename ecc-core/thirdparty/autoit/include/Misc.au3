@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Misc
-; AutoIt Version : 3.3.7.20++
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Functions that assist with Common Dialogs.
 ; Author(s) .....: Gary Frost, Florian Fida (Piccaso), Dale (Klaatu) Thompson, Valik, ezzetabi, Jon, Paul Campbell (PaulIA)
@@ -17,12 +17,6 @@
 Global Const $__MISCCONSTANT_CC_ANYCOLOR = 0x0100
 Global Const $__MISCCONSTANT_CC_FULLOPEN = 0x0002
 Global Const $__MISCCONSTANT_CC_RGBINIT = 0x0001
-; ===============================================================================================================================
-
-; #NO_DOC_FUNCTION# =============================================================================================================
-; Not documented - function(s) no longer needed, will be worked out of the file at a later date
-;
-; _Iif
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -145,7 +139,7 @@ Global Const $tagCHOOSECOLOR = "dword Size;hwnd hWndOwnder;handle hInstance;dwor
 ;                  FontType - Specifies the type of the selected font when ChooseFont returns. This member can be one or more of the following values.
 ;                  |$BOLD_FONTTYPE - The font weight is bold. This information is duplicated in the lfWeight member of the LOGFONT
 ;                  +structure and is equivalent to FW_BOLD.
-;                  |$ITALIC_FONTTYPE - The italic font attribute is set. This information is duplicated in the lfItalic member of the LOGFONT structure.
+;                  |$iItalic_FONTTYPE - The italic font attribute is set. This information is duplicated in the lfItalic member of the LOGFONT structure.
 ;                  |$PRINTER_FONTTYPE - The font is a printer font.
 ;                  |$REGULAR_FONTTYPE - The font weight is normal. This information is duplicated in the lfWeight member of the LOGFONT structure and is
 ;                  +equivalent to FW_REGULAR.
@@ -164,10 +158,10 @@ Global Const $tagCHOOSEFONT = "dword Size;hwnd hWndOwner;handle hDC;ptr LogFont;
 ; Modified.......:
 ; ===============================================================================================================================
 Func _ChooseColor($iReturnType = 0, $iColorRef = 0, $iRefType = 0, $hWndOwnder = 0)
-	Local $custcolors = "dword[16]"
+	Local $tagCustcolors = "dword[16]"
 
 	Local $tChoose = DllStructCreate($tagCHOOSECOLOR)
-	Local $tcc = DllStructCreate($custcolors)
+	Local $tCc = DllStructCreate($tagCustcolors)
 
 	If $iRefType = 1 Then ; BGR hex color to colorref
 		$iColorRef = Int($iColorRef)
@@ -179,22 +173,22 @@ Func _ChooseColor($iReturnType = 0, $iColorRef = 0, $iRefType = 0, $hWndOwnder =
 	DllStructSetData($tChoose, "Size", DllStructGetSize($tChoose))
 	DllStructSetData($tChoose, "hWndOwnder", $hWndOwnder)
 	DllStructSetData($tChoose, "rgbResult", $iColorRef)
-	DllStructSetData($tChoose, "CustColors", DllStructGetPtr($tcc))
+	DllStructSetData($tChoose, "CustColors", DllStructGetPtr($tCc))
 	DllStructSetData($tChoose, "Flags", BitOR($__MISCCONSTANT_CC_ANYCOLOR, $__MISCCONSTANT_CC_FULLOPEN, $__MISCCONSTANT_CC_RGBINIT))
 
 	Local $aResult = DllCall("comdlg32.dll", "bool", "ChooseColor", "struct*", $tChoose)
 	If @error Then Return SetError(@error, @extended, -1)
 	If $aResult[0] = 0 Then Return SetError(-3, -3, -1) ; user selected cancel or struct settings incorrect
 
-	Local $color_picked = DllStructGetData($tChoose, "rgbResult")
+	Local $sColor_picked = DllStructGetData($tChoose, "rgbResult")
 
 	If $iReturnType = 1 Then ; return Hex BGR Color
-		Return '0x' & Hex(String($color_picked), 6)
+		Return '0x' & Hex(String($sColor_picked), 6)
 	ElseIf $iReturnType = 2 Then ; return Hex RGB Color
-		$color_picked = Hex(String($color_picked), 6)
-		Return '0x' & StringMid($color_picked, 5, 2) & StringMid($color_picked, 3, 2) & StringMid($color_picked, 1, 2)
+		$sColor_picked = Hex(String($sColor_picked), 6)
+		Return '0x' & StringMid($sColor_picked, 5, 2) & StringMid($sColor_picked, 3, 2) & StringMid($sColor_picked, 1, 2)
 	ElseIf $iReturnType = 0 Then ; return RGB COLORREF
-		Return $color_picked
+		Return $sColor_picked
 	Else
 		Return SetError(-4, -4, -1)
 	EndIf
@@ -204,12 +198,12 @@ EndFunc   ;==>_ChooseColor
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ChooseFont($sFontName = "Courier New", $iPointSize = 10, $iColorRef = 0, $iFontWeight = 0, $iItalic = False, $iUnderline = False, $iStrikethru = False, $hWndOwner = 0)
-	Local $italic = 0, $underline = 0, $strikeout = 0
+Func _ChooseFont($sFontName = "Courier New", $iPointSize = 10, $iFontColorRef = 0, $iFontWeight = 0, $bItalic = False, $bUnderline = False, $bStrikethru = False, $hWndOwner = 0)
+	Local $iItalic = 0, $iUnderline = 0, $iStrikeout = 0
 
-	Local $lngDC = __MISC_GetDC(0)
-	Local $lfHeight = Round(($iPointSize * __MISC_GetDeviceCaps($lngDC, $LOGPIXELSX)) / 72, 0)
-	__MISC_ReleaseDC(0, $lngDC)
+	Local $hDC = __MISC_GetDC(0)
+	Local $iHeight = Round(($iPointSize * __MISC_GetDeviceCaps($hDC, $LOGPIXELSX)) / 72, 0)
+	__MISC_ReleaseDC(0, $hDC)
 
 	Local $tChooseFont = DllStructCreate($tagCHOOSEFONT)
 	Local $tLogFont = DllStructCreate($tagLOGFONT)
@@ -219,35 +213,35 @@ Func _ChooseFont($sFontName = "Courier New", $iPointSize = 10, $iColorRef = 0, $
 	DllStructSetData($tChooseFont, "LogFont", DllStructGetPtr($tLogFont))
 	DllStructSetData($tChooseFont, "PointSize", $iPointSize)
 	DllStructSetData($tChooseFont, "Flags", BitOR($CF_SCREENFONTS, $CF_PRINTERFONTS, $CF_EFFECTS, $CF_INITTOLOGFONTSTRUCT, $CF_NOSCRIPTSEL))
-	DllStructSetData($tChooseFont, "rgbColors", $iColorRef)
+	DllStructSetData($tChooseFont, "rgbColors", $iFontColorRef)
 	DllStructSetData($tChooseFont, "FontType", 0)
 
-	DllStructSetData($tLogFont, "Height", $lfHeight)
+	DllStructSetData($tLogFont, "Height", $iHeight)
 	DllStructSetData($tLogFont, "Weight", $iFontWeight)
-	DllStructSetData($tLogFont, "Italic", $iItalic)
-	DllStructSetData($tLogFont, "Underline", $iUnderline)
-	DllStructSetData($tLogFont, "Strikeout", $iStrikethru)
+	DllStructSetData($tLogFont, "Italic", $bItalic)
+	DllStructSetData($tLogFont, "Underline", $bUnderline)
+	DllStructSetData($tLogFont, "Strikeout", $bStrikethru)
 	DllStructSetData($tLogFont, "FaceName", $sFontName)
 
 	Local $aResult = DllCall("comdlg32.dll", "bool", "ChooseFontW", "struct*", $tChooseFont)
 	If @error Then Return SetError(@error, @extended, -1)
 	If $aResult[0] = 0 Then Return SetError(-3, -3, -1) ; user selected cancel or struct settings incorrect
 
-	Local $fontname = DllStructGetData($tLogFont, "FaceName")
-	If StringLen($fontname) = 0 And StringLen($sFontName) > 0 Then $fontname = $sFontName
+	Local $sFaceName = DllStructGetData($tLogFont, "FaceName")
+	If StringLen($sFaceName) = 0 And StringLen($sFontName) > 0 Then $sFaceName = $sFontName
 
-	If DllStructGetData($tLogFont, "Italic") Then $italic = 2
-	If DllStructGetData($tLogFont, "Underline") Then $underline = 4
-	If DllStructGetData($tLogFont, "Strikeout") Then $strikeout = 8
+	If DllStructGetData($tLogFont, "Italic") Then $iItalic = 2
+	If DllStructGetData($tLogFont, "Underline") Then $iUnderline = 4
+	If DllStructGetData($tLogFont, "Strikeout") Then $iStrikeout = 8
 
-	Local $attributes = BitOR($italic, $underline, $strikeout)
-	Local $size = DllStructGetData($tChooseFont, "PointSize") / 10
-	Local $colorref = DllStructGetData($tChooseFont, "rgbColors")
-	Local $weight = DllStructGetData($tLogFont, "Weight")
+	Local $iAttributes = BitOR($iItalic, $iUnderline, $iStrikeout)
+	Local $iSize = DllStructGetData($tChooseFont, "PointSize") / 10
+	Local $iColorRef = DllStructGetData($tChooseFont, "rgbColors")
+	Local $iWeight = DllStructGetData($tLogFont, "Weight")
 
-	Local $color_picked = Hex(String($colorref), 6)
+	Local $sColor_picked = Hex(String($iColorRef), 6)
 
-	Return StringSplit($attributes & "," & $fontname & "," & $size & "," & $weight & "," & $colorref & "," & '0x' & $color_picked & "," & '0x' & StringMid($color_picked, 5, 2) & StringMid($color_picked, 3, 2) & StringMid($color_picked, 1, 2), ",")
+	Return StringSplit($iAttributes & "," & $sFaceName & "," & $iSize & "," & $iWeight & "," & $iColorRef & "," & '0x' & $sColor_picked & "," & '0x' & StringMid($sColor_picked, 5, 2) & StringMid($sColor_picked, 3, 2) & StringMid($sColor_picked, 1, 2), ",")
 EndFunc   ;==>_ChooseFont
 
 ; #FUNCTION# ====================================================================================================================
@@ -280,19 +274,19 @@ Func _ClipPutFile($sFile, $sSeparator = "|")
 				$iLastError = _WinAPI_GetLastError()
 			Else
 				Local $hLock = $aResult[0]
-				Local $DROPFILES = DllStructCreate("dword pFiles;" & $tagPOINT & ";bool fNC;bool fWide;wchar[" & StringLen($sFile) + 1 & "]", $hLock)
+				Local $tDROPFILES = DllStructCreate("dword pFiles;" & $tagPOINT & ";bool fNC;bool fWide;wchar[" & StringLen($sFile) + 1 & "]", $hLock)
 				If @error Then Return SetError(5, 6, False)
 
-				Local $tempStruct = DllStructCreate("dword;long;long;bool;bool")
+				Local $tStruct = DllStructCreate("dword;long;long;bool;bool")
 
-				DllStructSetData($DROPFILES, "pFiles", DllStructGetSize($tempStruct))
-				DllStructSetData($DROPFILES, "X", 0)
-				DllStructSetData($DROPFILES, "Y", 0)
-				DllStructSetData($DROPFILES, "fNC", 0)
-				DllStructSetData($DROPFILES, "fWide", 1)
-				DllStructSetData($DROPFILES, 6, $sFile)
+				DllStructSetData($tDROPFILES, "pFiles", DllStructGetSize($tStruct))
+				DllStructSetData($tDROPFILES, "X", 0)
+				DllStructSetData($tDROPFILES, "Y", 0)
+				DllStructSetData($tDROPFILES, "fNC", 0)
+				DllStructSetData($tDROPFILES, "fWide", 1)
+				DllStructSetData($tDROPFILES, 6, $sFile)
 				For $i = 1 To StringLen($sFile)
-					If DllStructGetData($DROPFILES, 6, $i) = $sSeparator Then DllStructSetData($DROPFILES, 6, Chr(0), $i)
+					If DllStructGetData($tDROPFILES, 6, $i) = $sSeparator Then DllStructSetData($tDROPFILES, 6, Chr(0), $i)
 				Next
 
 				$aResult = DllCall("user32.dll", "handle", "SetClipboardData", "uint", $CF_HDROP, "handle", $hGlobal)
@@ -319,26 +313,6 @@ Func _ClipPutFile($sFile, $sSeparator = "|")
 	If $iError Then Return SetError($iError, $iLastError, False)
 	Return True
 EndFunc   ;==>_ClipPutFile
-
-; #NO_DOC_FUNCTION# ====================================================================================================================
-; Name...........: _Iif
-; Description ...: Perform a boolean test within an expression.
-; Syntax.........: _Iif ($fTest, $vTrueVal, $vFalseVal )
-; Parameters ....: $fTest     - Boolean test.
-;                  $vTrueVal  - Value to return if $fTest is true.
-;                  $vFalseVal - Value to return if $fTest is false.
-; Return values .: True         - $vTrueVal
-;                  False        - $vFalseVal
-; Author ........: Dale (Klaatu) Thompson
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _Iif($fTest, $vTrueVal, $vFalseVal)
-	Return $fTest ? $vTrueVal : $vFalseVal
-EndFunc   ;==>_Iif
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Gary Frost (gafrost)
@@ -404,20 +378,20 @@ Func _Singleton($sOccurenceName, $iFlag = 0)
 		EndIf
 	EndIf
 
-	Local $handle = DllCall("kernel32.dll", "handle", "CreateMutexW", "struct*", $tSecurityAttributes, "bool", 1, "wstr", $sOccurenceName)
+	Local $aHandle = DllCall("kernel32.dll", "handle", "CreateMutexW", "struct*", $tSecurityAttributes, "bool", 1, "wstr", $sOccurenceName)
 	If @error Then Return SetError(@error, @extended, 0)
-	Local $lastError = DllCall("kernel32.dll", "dword", "GetLastError")
+	Local $aLastError = DllCall("kernel32.dll", "dword", "GetLastError")
 	If @error Then Return SetError(@error, @extended, 0)
-	If $lastError[0] = $ERROR_ALREADY_EXISTS Then
+	If $aLastError[0] = $ERROR_ALREADY_EXISTS Then
 		If BitAND($iFlag, 1) Then
-			DllCall("kernel32.dll", "bool", "CloseHandle", "handle", $handle[0])
+			DllCall("kernel32.dll", "bool", "CloseHandle", "handle", $aHandle[0])
 			If @error Then Return SetError(@error, @extended, 0)
-			Return SetError($lastError[0], $lastError[0], 0)
+			Return SetError($aLastError[0], $aLastError[0], 0)
 		Else
 			Exit -1
 		EndIf
 	EndIf
-	Return $handle[0]
+	Return $aHandle[0]
 EndFunc   ;==>_Singleton
 
 ; #FUNCTION# ====================================================================================================================

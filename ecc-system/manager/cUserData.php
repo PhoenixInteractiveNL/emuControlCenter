@@ -49,6 +49,14 @@ class UserData {
 		while($res = $hdl->fetch(SQLITE_ASSOC)) $out[] = $res;
 		return $out;
 	}
+
+	public function clearRomLaunchData($eccident){ // Added 2014.04.23 to clear last played data
+		if (!$eccident) return false;	
+		$q = "UPDATE fdata SET launchcnt = '0' WHERE eccident = '".$eccident."'";
+		$hdl = $this->dbms->query($q);	
+		$q = "UPDATE fdata SET launchtime = '' WHERE eccident = '".$eccident."'";
+		$hdl = $this->dbms->query($q);
+	}
 	
 	public function updateNotesById($userDataId, $notes) {
 		if (!$userDataId) return false;

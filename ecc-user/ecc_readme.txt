@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 - This is the emuControlCenter userfolder!
-- You can get the latest version of ecc at http://www.camya.com/
+- You can get the latest version of ECC at http://ecc.phoenixinteractive.nl/
 - With ecc, you can manage your roms in an easier way!
 --------------------------------------------------------------------------------
 

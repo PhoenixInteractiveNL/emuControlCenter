@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Timers
-; AutoIt Version : 3.3.7.20++
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Functions that assist with Timers management.
 ;                  An application uses a timer to schedule an event for a window after a specified time has elapsed.
@@ -14,7 +14,7 @@
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
-Global $_Timers_aTimerIDs[1][3]
+Global $__g_aTimers_aTimerIDs[1][3]
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -67,9 +67,9 @@ EndFunc   ;==>_Timer_GetIdleTime
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Timer_GetTimerID($iwParam)
-	Local $_iTimerID = Dec(Hex($iwParam, 8)), $iMax = UBound($_Timers_aTimerIDs) - 1
+	Local $_iTimerID = Dec(Hex($iwParam, 8)), $iMax = UBound($__g_aTimers_aTimerIDs) - 1
 	For $x = 1 To $iMax
-		If $_iTimerID = $_Timers_aTimerIDs[$x][1] Then Return $_Timers_aTimerIDs[$x][0]
+		If $_iTimerID = $__g_aTimers_aTimerIDs[$x][1] Then Return $__g_aTimers_aTimerIDs[$x][0]
 	Next
 	Return 0
 EndFunc   ;==>_Timer_GetTimerID
@@ -87,21 +87,21 @@ EndFunc   ;==>_Timer_Init
 ; Modified.......: Squirrely1
 ; ===============================================================================================================================
 Func _Timer_KillAllTimers($hWnd)
-	Local $iNumTimers = $_Timers_aTimerIDs[0][0]
+	Local $iNumTimers = $__g_aTimers_aTimerIDs[0][0]
 	If $iNumTimers = 0 Then Return False
 	Local $aResult, $hCallBack = 0
 	For $x = $iNumTimers To 1 Step -1
 		If IsHWnd($hWnd) Then
-			$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $_Timers_aTimerIDs[$x][1])
+			$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $__g_aTimers_aTimerIDs[$x][1])
 		Else
-			$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $_Timers_aTimerIDs[$x][0])
+			$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $__g_aTimers_aTimerIDs[$x][0])
 		EndIf
 		If @error Or $aResult[0] = 0 Then Return SetError(@error, @extended, False)
-		$hCallBack = $_Timers_aTimerIDs[$x][2]
+		$hCallBack = $__g_aTimers_aTimerIDs[$x][2]
 		If $hCallBack <> 0 Then DllCallbackFree($hCallBack)
-		$_Timers_aTimerIDs[0][0] -= 1
+		$__g_aTimers_aTimerIDs[0][0] -= 1
 	Next
-	ReDim $_Timers_aTimerIDs[1][3]
+	ReDim $__g_aTimers_aTimerIDs[1][3]
 	Return True
 EndFunc   ;==>_Timer_KillAllTimers
 
@@ -110,24 +110,24 @@ EndFunc   ;==>_Timer_KillAllTimers
 ; Modified.......: Squirrely1
 ; ===============================================================================================================================
 Func _Timer_KillTimer($hWnd, $iTimerID)
-	Local $aResult[1] = [0], $hCallBack = 0, $iUBound = UBound($_Timers_aTimerIDs) - 1
+	Local $aResult[1] = [0], $hCallBack = 0, $iUBound = UBound($__g_aTimers_aTimerIDs) - 1
 	For $x = 1 To $iUBound
-		If $_Timers_aTimerIDs[$x][0] = $iTimerID Then
+		If $__g_aTimers_aTimerIDs[$x][0] = $iTimerID Then
 			If IsHWnd($hWnd) Then
-				$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $_Timers_aTimerIDs[$x][1])
+				$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $__g_aTimers_aTimerIDs[$x][1])
 			Else
-				$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $_Timers_aTimerIDs[$x][0])
+				$aResult = DllCall("user32.dll", "bool", "KillTimer", "hwnd", $hWnd, "uint_ptr", $__g_aTimers_aTimerIDs[$x][0])
 			EndIf
 			If @error Or $aResult[0] = 0 Then Return SetError(@error, @extended, False)
-			$hCallBack = $_Timers_aTimerIDs[$x][2]
+			$hCallBack = $__g_aTimers_aTimerIDs[$x][2]
 			If $hCallBack <> 0 Then DllCallbackFree($hCallBack)
 			For $i = $x To $iUBound - 1
-				$_Timers_aTimerIDs[$i][0] = $_Timers_aTimerIDs[$i + 1][0]
-				$_Timers_aTimerIDs[$i][1] = $_Timers_aTimerIDs[$i + 1][1]
-				$_Timers_aTimerIDs[$i][2] = $_Timers_aTimerIDs[$i + 1][2]
+				$__g_aTimers_aTimerIDs[$i][0] = $__g_aTimers_aTimerIDs[$i + 1][0]
+				$__g_aTimers_aTimerIDs[$i][1] = $__g_aTimers_aTimerIDs[$i + 1][1]
+				$__g_aTimers_aTimerIDs[$i][2] = $__g_aTimers_aTimerIDs[$i + 1][2]
 			Next
-			ReDim $_Timers_aTimerIDs[UBound($_Timers_aTimerIDs - 1)][3]
-			$_Timers_aTimerIDs[0][0] -= 1
+			ReDim $__g_aTimers_aTimerIDs[UBound($__g_aTimers_aTimerIDs - 1)][3]
+			$__g_aTimers_aTimerIDs[0][0] -= 1
 			ExitLoop
 		EndIf
 	Next
@@ -179,13 +179,13 @@ EndFunc   ;==>__Timer_QueryPerformanceFrequency
 ; Modified.......: Squirrely1
 ; ===============================================================================================================================
 Func _Timer_SetTimer($hWnd, $iElapse = 250, $sTimerFunc = "", $iTimerID = -1)
-	Local $aResult[1] = [0], $pTimerFunc = 0, $hCallBack = 0, $iIndex = $_Timers_aTimerIDs[0][0] + 1
+	Local $aResult[1] = [0], $pTimerFunc = 0, $hCallBack = 0, $iIndex = $__g_aTimers_aTimerIDs[0][0] + 1
 	If $iTimerID = -1 Then ; create a new timer
-		ReDim $_Timers_aTimerIDs[$iIndex + 1][3]
-		$_Timers_aTimerIDs[0][0] = $iIndex
+		ReDim $__g_aTimers_aTimerIDs[$iIndex + 1][3]
+		$__g_aTimers_aTimerIDs[0][0] = $iIndex
 		$iTimerID = $iIndex + 1000
 		For $x = 1 To $iIndex
-			If $_Timers_aTimerIDs[$x][0] = $iTimerID Then
+			If $__g_aTimers_aTimerIDs[$x][0] = $iTimerID Then
 				$iTimerID = $iTimerID + 1
 				$x = 0
 			EndIf
@@ -198,14 +198,14 @@ Func _Timer_SetTimer($hWnd, $iElapse = 250, $sTimerFunc = "", $iTimerID = -1)
 		EndIf
 		$aResult = DllCall("user32.dll", "uint_ptr", "SetTimer", "hwnd", $hWnd, "uint_ptr", $iTimerID, "uint", $iElapse, "ptr", $pTimerFunc)
 		If @error Or $aResult[0] = 0 Then Return SetError(@error, @extended, 0)
-		$_Timers_aTimerIDs[$iIndex][0] = $aResult[0] ; integer identifier
-		$_Timers_aTimerIDs[$iIndex][1] = $iTimerID ; timer id
-		$_Timers_aTimerIDs[$iIndex][2] = $hCallBack ; callback identifier, need this for the Kill Timer
+		$__g_aTimers_aTimerIDs[$iIndex][0] = $aResult[0] ; integer identifier
+		$__g_aTimers_aTimerIDs[$iIndex][1] = $iTimerID ; timer id
+		$__g_aTimers_aTimerIDs[$iIndex][2] = $hCallBack ; callback identifier, need this for the Kill Timer
 	Else ; reuse timer
 		For $x = 1 To $iIndex - 1
-			If $_Timers_aTimerIDs[$x][0] = $iTimerID Then
-				If IsHWnd($hWnd) Then $iTimerID = $_Timers_aTimerIDs[$x][1]
-				$hCallBack = $_Timers_aTimerIDs[$x][2]
+			If $__g_aTimers_aTimerIDs[$x][0] = $iTimerID Then
+				If IsHWnd($hWnd) Then $iTimerID = $__g_aTimers_aTimerIDs[$x][1]
+				$hCallBack = $__g_aTimers_aTimerIDs[$x][2]
 				If $hCallBack <> 0 Then ; call back was used to create the timer
 					$pTimerFunc = DllCallbackGetPtr($hCallBack)
 					If $pTimerFunc = 0 Then Return SetError(-1, -1, 0)

@@ -27,7 +27,6 @@ FileChangeDir(@ScriptDir)
 EmuWindowControl("Classic99")
 Sleep(1000)
 ; Load ROM
-msgbox(64, "test", $RomFile)
 $WinPos = WinGetPos("Classic99")
 MouseClick("left", $WinPos[0]+150, $WinPos[1]+40 , 1, 10)
 Send("{DOWN}")

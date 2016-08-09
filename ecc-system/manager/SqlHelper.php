@@ -56,6 +56,9 @@ class SqlHelper{
 			if($key == 'scb_dump_type') {
 				if($int) $out[] = "dump_type = ".(int)$int;
 			}
+			else if($key == 'scb_multiplayer') {
+				if($int) $out[] = "multiplayer = ".(int)$int;
+			}
 			else {
 				$field = str_replace("scb_", '', $key);
 				switch ($int) {
@@ -63,7 +66,7 @@ class SqlHelper{
 					case '1': $out[] = "$field <= 0"; break;						// no
 					case '2': $out[] = "($field <= 0 OR $field is NULL)"; break;	// no?
 					case '3': $out[] = "$field > 0"; break;							// yes
-					case '4': $out[] = "($field > 0 OR $field is NULL)"; break;		//yes?
+					case '4': $out[] = "($field > 0 OR $field is NULL)"; break;		// yes?
 					case '5': $out[] = "$field is NULL"; break;						// ?
 				}				
 			}

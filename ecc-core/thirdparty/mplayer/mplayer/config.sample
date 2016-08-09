@@ -1,0 +1,19 @@
+## Windows MPlayer Configuration
+## Rev 2013-0416
+
+## Video output driver
+## Recommend DirectX for Windows 2000/XP, Direct3D for Vista and later
+#vo=directx
+#vo=direct3d
+#vo=gl
+#vo=gl_tiled
+#vo=sdl
+
+## Color console
+msgcolor=yes
+
+## Multithread decoding on supported codecs
+#lavdopts=threads=2
+
+## Drive letter of your DVD
+#dvd-device=d:

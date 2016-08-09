@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter ImagePackCenter (IPC)
 ;
-; Script version         : v2.2.1.0
-; Last changed           : 2014.03.29
+; Script version         : v2.2.1.1
+; Last changed           : 2014.04.22
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -545,7 +545,7 @@ While 1
 	Global $ImageFolder = StringReplace($RFSstartDir & $RFSnext, $ImageFileName, "")
 	Global $ImageFileVariables = StringSplit($ImageFileName, ".")
 
-	If Ubound($ImageFileVariables) < 1 Then ExitLoop ; Do not process file without any extension
+	If Ubound($ImageFileVariables) < 3 Then ContinueLoop ; Do not process file without any extension
 
 	Global $ImageFileNameOnly = $ImageFileVariables[1]
 	Global $ImageFileExtension = $ImageFileVariables[2]

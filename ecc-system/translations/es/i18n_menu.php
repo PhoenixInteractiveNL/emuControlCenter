@@ -228,5 +228,9 @@ $i18n['menu'] = array(
 	'lbl_rom_moby_import_fullauto' =>
 		"Importar información de la ROM desde MobyGames.com (automático)",
 
+	/* 1.152 BUILD 3 */
+	'lbl_roms_clear_launchdata' =>
+		"Clear ROM launch data",
+
 	);
 ?>

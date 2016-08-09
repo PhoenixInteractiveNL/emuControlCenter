@@ -1,0 +1,5 @@
+<closeButton>
+	<over value="assets/skins/closeButtons/close3Over.png"/>
+	<out value="assets/skins/closeButtons/close3.png"/>
+	<down value="assets/skins/closeButtons/close3.png"/>
+</closeButton>

@@ -1,0 +1,141 @@
+<settings>
+  <General_Properties>
+    <componentWidth value="1920"/>
+    <componentHeight value="1100"/>
+    <assets value="images.xml"/>
+    <preloader value="assets/preloaders/redsquares.swf"/>
+    <positionItems value="random"/>
+    <controlSkin value="assets/skins/controlsSkin1.xml"/>
+    <cameraZoom value="60"/>
+    <panEase value="0.05"/>
+    <transitions value="assets/transitions/slides.xml"/>
+    <showAbout value="true"/>
+    <useColorbox value="false"/>
+  </General_Properties>
+  <Colorbox_Properties>
+    <transition value="elastic"/>
+    <innerWidth value="900"/>
+    <innerHeight value="500"/>
+    <slideshow value="false"/>
+    <slideshowSpeed value="2500"/>
+  </Colorbox_Properties>
+  <Item_Properties>
+    <thumbWidth value="640"/>
+    <thumbHeight value="380"/>
+    <thumbDist value="15"/>
+    <colNum value="9"/>
+    <func value="Cubic"/>
+    <method value="easeInOut"/>
+    <duration value="0.5"/>
+    <expandZoom value="103.636363636364"/>
+    <distanceBlur value="250"/>
+    <blurStrength value="6"/>
+  </Item_Properties>
+  <Border_Properties>
+    <useBorder value="true"/>
+    <width value="3"/>
+    <color value="0xffffff"/>
+    <alpha value="1"/>
+    <cornerRadius value="0"/>
+  </Border_Properties>
+  <Filter_Properties>
+    <useFilter value="true"/>
+    <filter value="DropShadow"/>
+    <distance value="0"/>
+    <angle value="40"/>
+    <alpha value="0.5"/>
+    <blurX value="6"/>
+    <blurY value="6"/>
+    <strength value="3"/>
+    <quality value="9"/>
+    <color value="0x000000"/>
+  </Filter_Properties>
+  <Text_Properties>
+    <style value="assets/css/style.css"/>
+    <position value="CC"/>
+    <offsetX value="0"/>
+    <offsetY value="0"/>
+    <textSpacing value="0"/>
+    <embedFonts value="true"/>
+    <headWidth value="1920"/>
+    <headBackColor value="0xffffff"/>
+    <headBackAlpha value="1"/>
+    <headBorderColor value="0x303030"/>
+    <headBorderAlpha value="0"/>
+    <headBorderSize value="2"/>
+    <headCornerRadius value="0"/>
+    <headTopPadding value="7"/>
+    <headBottomPadding value="5"/>
+    <headLeftPadding value="5"/>
+    <headRightPadding value="5"/>
+    <headOffsetX value="0"/>
+    <headOffsetY value="0"/>
+    <headUseDouble value="true"/>
+    <headOffsetDirection value="TC"/>
+    <bodyWidth value="1920"/>
+    <bodyBackColor value="0xf0f0f"/>
+    <bodyBackAlpha value="1"/>
+    <bodyBorderColor value="0xffffff"/>
+    <bodyBorderAlpha value="0"/>
+    <bodyBorderSize value="0"/>
+    <bodyCornerRadius value="0"/>
+    <bodyTopPadding value="5"/>
+    <bodyBottomPadding value="5"/>
+    <bodyLeftPadding value="5"/>
+    <bodyRightPadding value="5"/>
+    <bodyDelay value="0"/>
+    <bodyOffsetX value="0"/>
+    <bodyOffsetY value="780"/>
+    <bodyUseDouble value="false"/>
+    <bodyOffsetDirection value=""/>
+  </Text_Properties>
+  <Tooltip_Properties>
+    <position value="followMouse"/>
+    <delay value="0.3"/>
+    <distance value="3"/>
+    <padding value="0"/>
+    <cornerRadius value="2"/>
+    <appearance value="center"/>
+    <easingFunction value="Back"/>
+    <easingDuration value="0.3"/>
+    <fontFace value="verdana"/>
+    <fontSize value="10"/>
+    <fontColor value="0xffffff"/>
+    <backColor value="0x000000"/>
+    <backColor2 value="0x000000"/>
+    <backAlpha value="16777215"/>
+    <borderColor value="11184810"/>
+    <borderThickness value="0"/>
+    <useArrow value="true"/>
+    <arrowPos value="center"/>
+    <arrowSize value="5"/>
+    <embedFonts value="false"/>
+  </Tooltip_Properties>
+  <Background_Properties>
+    <fillType value="image"/>
+    <backgroundImage value="assets/backgroundImages/nebula_emulator_3d_blue.jpg"/>
+    <backgroundFitting value="repeat"/>
+    <backgroundColor1 value=""/>
+    <backgroundColor2 value=""/>
+    <backgroundAlpha value="1"/>
+    <bgCornerRadius value="0"/>
+    <gradientRotation value="0"/>
+    <gradientRatio value="0"/>
+    <gradientPosX value="0"/>
+    <gradientPosY value="0"/>
+    <useShade value="false"/>
+    <shadeColor value="0x000000"/>
+    <shadeAlpha value="1"/>
+    <shadeRatio value="100"/>
+    <shadeWidth value="600"/>
+    <shadeHeight value="300"/>
+  </Background_Properties>
+  <Shade_Properties>
+    <useShade value="false"/>
+    <shadeColor value="0x000000"/>
+    <shadeAlpha value="0.4"/>
+    <shadeRatio value="161"/>
+    <shadeWidth value="-94"/>
+    <shadeHeight value="207"/>
+  </Shade_Properties>
+</settings>

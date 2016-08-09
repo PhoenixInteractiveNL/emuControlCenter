@@ -1,16 +1,31 @@
 ; ------------------------------------------------------------------------------
-; Platform               : Sony Playstation 
-; Script for             : EPSXe
-; Script version         : v1.0.0.0
-; Last changed           : 2009.10.12
+; Platform               : Sony PlayStation
+; Script for             : ePSXe
+; Script version         : v2.0.0.0
+; Last changed           : 2014.05.18
 ;
 ;
-; Author:  Bigby
+; Author:  Sebastiaan Ebeltjes (aka Phoenix)
 ;
 ; NOTES:
-; This script mounts the game
-; 
-; 
+;
+; ECC settings:
+;
+; *** Start ePSXe without mounting a CD. (menu scripting):
+; %ROM% (DEFAULT)
+; ESCAPE = ON
+;
+; *** Mount CD and start ePSXe:
+; %ROM% /mount
+; ESCAPE = ON
+; USE CUE FILE = ON
+; (cd will not be unmounted)
+;
+; *** Mount CD and start ePSXe with NO GUI (-nogui):
+; %ROM% /mount /nogui
+; ESCAPE = ON
+; USE CUE FILE = ON
+;
 ; ------------------------------------------------------------------------------
 
 ; ==============================================================================
@@ -23,12 +38,49 @@ FileChangeDir(@ScriptDir)
 ; ------------------------------------------------------------------------------
 ; BEGIN OF SCRIPT
 ; ------------------------------------------------------------------------------
+If $eccEmuCmdparameter1 = "/mount" Then
+    If $eccEmuCmdparameter2 = "/nogui" Then
+        ExecuteScriptMountNogui()
+        Exit
+    Else
+        ExecuteScriptMount()
+        Exit
+    EndIf
+EndIf
 
-;MOUNTING THE CD (by Bigby)
+; Start mount (default)
+ExecuteScriptNoMount()
+Exit
+
+Func ExecuteScriptNomount()
+EmuWindowControl("ePSXe")
+Sleep(1000)
+; Load ROM
+Send("{ALT}")
+Send("{ENTER}")
+Send("{Down}")
+Send("{ENTER}")
+Sleep(1000)
+Send($RomFile, 1)
+Send("{ENTER}")
+Endfunc
+
+Func ExecuteScriptMount()
 CDImage("mount")
-ShellExecuteWait( "ePSXe.exe" , "-nogui" )
-CDImage("unmount")
+ShellExecute($eccEmuEmulatorPath & $eccEmuEmulatorFile)
+Sleep(1000)
+; Load ROM
+Send("{ALT}")
+Send("{ENTER}")
+Send("{ENTER}")
+;CDImage("unmount")
+Endfunc
 
+Func ExecuteScriptMountNogui()
+CDImage("mount")
+ShellExecuteWait($eccEmuEmulatorPath & $eccEmuEmulatorFile, "-nogui")
+CDImage("unmount")
+Endfunc
 ; ------------------------------------------------------------------------------
 ; END OF SCRIPT
 ; ------------------------------------------------------------------------------

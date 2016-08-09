@@ -1,0 +1,51 @@
+<transitions>
+
+	<transition name = 'aplhaSine2.5' > 
+		<x value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<y value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleY value = '0' time = '1' easing = 'easeout' motion = 'none' />
+		<rotation value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<alpha value = '0' time = '2.5' easing = 'easeInOut' motion = 'Sine' />
+		<blurX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<blurY value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<registrationPoint value = 'br' />
+	</transition>
+
+	<transition name = 'alphaExpoIn1.5' > 
+		<x value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<y value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleY value = '0' time = '1' easing = 'easeout' motion = 'none' />
+		<rotation value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<alpha value = '0' time = '1.5' easing = 'easeIn' motion = 'Exponential' />
+		<blurX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<blurY value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<registrationPoint value = 'tl' />
+	</transition>
+
+	<transition name = 'alphaLinearOut2' > 
+		<x value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<y value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<scaleY value = '0' time = '1' easing = 'easeout' motion = 'none' />
+		<rotation value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<alpha value = '0' time = '2' easing = 'easeOut' motion = 'Linear' />
+		<blurX value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<blurY value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<registrationPoint value = 'tl' />
+	</transition>
+
+	<transition name = 'alphaLinearIn1' > 
+		<x value = '0' time = '1' easing = 'easeOut' motion = 'None' />
+		<y value = '0' time = '1' easing = 'easeOut' motion = 'None' />
+		<scaleX value = '0' time = '1' easing = 'easeOut' motion = 'None' />
+		<scaleY value = '0' time = '1' easing = 'easeout' motion = 'None' />
+		<rotation value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<alpha value = '0' time = '1' easing = 'easeIn' motion = 'Linear' />
+		<blurX value = '0' time = '1' easing = 'easeOut' motion = 'None' />
+		<blurY value = '0' time = '1' easing = 'easeOut' motion = 'none' />
+		<registrationPoint value = 'tl' />
+	</transition>
+
+</transitions>

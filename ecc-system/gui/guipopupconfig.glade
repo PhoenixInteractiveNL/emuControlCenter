@@ -1291,15 +1291,81 @@
                                 </child>
                               </widget>
                             </child>
+                            <child>
+                              <widget class="GtkHBox" id="hbox27">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkImage" id="tabGeneralUnpackGUITriggerImage">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-execute</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="tabGeneralUnpackGUITriggerLabel">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Unpack GUI (progressbar) trigger size (MB)</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkEntry" id="tabGeneralUnpackGUITriggerValue">
+                                    <property name="width_request">45</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="max_length">5</property>
+                                    <property name="text" translatable="yes">50</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="label8">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">(default: 50)</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">5</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="tabGeneralUnpackGUITriggerNoteLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">(depends on computer speed / wait time)</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </widget>
                         </child>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="tabGeneralParsingOptions">
+                      <widget class="GtkLabel" id="tabGeneralParsingUnpackingOptions">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Parsing options&lt;/b&gt;</property>
+                        <property name="label" translatable="yes">&lt;b&gt;Parsing / Unpacking options&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
                       <packing>
@@ -1551,7 +1617,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                   </packing>
                 </child>
                 <child>
@@ -1565,23 +1631,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_ecc_videoplayer">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">The ECC Video Player needs to have VLC player installed!, download @ http://www.videolan.org/vlc</property>
-                              </widget>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="lbl_ecc_videoplayer_note">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!</property>
-                              </widget>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
                             <child>
                               <widget class="GtkCheckButton" id="eccVideoPlayer_enable">
                                 <property name="visible">True</property>
@@ -1631,7 +1680,6 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1735,7 +1783,7 @@
                                 </child>
                               </widget>
                               <packing>
-                                <property name="position">3</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
@@ -1786,7 +1834,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">4</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1875,7 +1923,7 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="position">5</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                             <child>
@@ -1963,7 +2011,7 @@
                                 </child>
                               </widget>
                               <packing>
-                                <property name="position">6</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -1985,7 +2033,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                   </packing>
                 </child>
               </widget>
@@ -2688,6 +2736,58 @@
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
                                 <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="cfgUseThemeColors">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="response_id">0</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                                <child>
+                                  <widget class="GtkAlignment" id="alignment40">
+                                    <property name="visible">True</property>
+                                    <property name="xscale">0</property>
+                                    <property name="yscale">0</property>
+                                    <child>
+                                      <widget class="GtkHBox" id="hbox35">
+                                        <property name="visible">True</property>
+                                        <property name="spacing">2</property>
+                                        <child>
+                                          <widget class="GtkImage" id="imgUseThemeColors">
+                                            <property name="visible">True</property>
+                                            <property name="stock">gtk-jump-to</property>
+                                            <property name="icon_size">1</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="padding">2</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="lblUseThemeColors">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Use theme colors</property>
+                                            <property name="use_underline">True</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="padding">2</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </widget>
+                                    </child>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                           </widget>

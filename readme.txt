@@ -11,6 +11,7 @@
   3.3 Administrator rights
   3.4 More instances of ECC running
   3.5 Minimal width resolution of 1000 pixels
+  3.6 7-Zip (GUI) extraction problem (warnings)
 4. ECC Video Player
 5. Links
 
@@ -126,6 +127,11 @@ Your useable WIDTH resolution to display ECC, should be more then
 does not work at all !
 (this may occur when you have set the taskbar on the side @ 1024x768)
 
+3.6 7-Zip (GUI) extraction problem (warnings)
+--------------------------------------------------------------------------------
+When you found problems where ECC extract 7-zip files due to warnings, you can always
+Downgrade 7-zip (like to v9.20) and overwirte every file in: ecc-core\thirdparty\7zip
+Website: http://www.7-zip.org/
 
 4. ECC Video Player
 ********************************************************************************

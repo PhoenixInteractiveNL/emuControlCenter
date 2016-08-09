@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.1
-; Last changed           : 2014.03.29
+; Script version         : v1.0.0.5
+; Last changed           : 2014.06.24
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -17,6 +17,7 @@ FileChangeDir(@ScriptDir)
 #include "..\thirdparty\autoit\include\GuiRichEdit.au3"
 #include "..\thirdparty\autoit\include\ScrollBarConstants.au3"
 #include "..\thirdparty\autoit\include\ButtonConstants.au3"
+#include "..\thirdparty\autoit\include\Constants.au3"
 #include "..\thirdparty\autoit\include\EditConstants.au3"
 #include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
 #include "..\thirdparty\autoit\include\GUIListBox.au3"
@@ -29,7 +30,6 @@ FileChangeDir(@ScriptDir)
 #include "..\thirdparty\autoit\include\String.au3"
 #include "..\thirdparty\autoit\include\URLStrings.au3"
 #include "..\thirdparty\autoit\include\XMLDomWrapper.au3"
-#include "..\thirdparty\autoit\include\VLCPlayer.au3"
 #include "..\thirdparty\autoit\include\IE.au3"
 #include "..\thirdparty\autoit\include\GetCRC32.au3"
 
@@ -44,6 +44,7 @@ Global $XpadderExe			= $eccInstallPath & "\ecc-core\thirdparty\xpadder\xpadder.e
 Global $KodaExe				= $eccInstallPath & "\ecc-core\thirdparty\koda\fd.exe"
 Global $StripperExe 		= $eccInstallPath & "\ecc-core\thirdparty\stripper\stripper.exe"
 Global $SQliteExe 			= $eccInstallPath & "\ecc-core\thirdparty\sqlite\sqlite.exe"
+Global $VideoPlayerExe		= $eccInstallPath & "\ecc-core\thirdparty\mplayer\mplayer.exe"
 Global $eccDataBaseFile 	= $eccInstallPath & "\ecc-system\database\eccdb"
 Global $SQLInstructionFile 	= @Scriptdir & "\sqlcommands.inst"
 Global $SQLcommandFile 		= @Scriptdir & "\sqlcommands.cmd"
@@ -52,12 +53,12 @@ Global $PlatformDataFile 	= "platformdata.txt"
 ; Global INFO variables
 ; version info
 Global $eccLocalVersionIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
-Global $eccCurrentVersion 	= Iniread($eccLocalVersionIni, "GENERAL", "current_version", "")
-Global $eccCurrentDateBuild = Iniread($eccLocalVersionIni, "GENERAL", "date_build", "")
-Global $eccCurrentBuild 	= Iniread($eccLocalVersionIni, "GENERAL", "current_build", "")
+Global $eccCurrentVersion 	= Iniread($eccLocalVersionIni, "GENERAL", "current_version", "x.x")
+Global $eccCurrentDateBuild = Iniread($eccLocalVersionIni, "GENERAL", "date_build", "xxxx.xx.xx")
+Global $eccCurrentBuild 	= Iniread($eccLocalVersionIni, "GENERAL", "current_build", "xxx")
 ; update info
 Global $eccLocalUpdateIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_update_info.ini"
-Global $eccLocalLastUpdate 	= Iniread($eccLocalUpdateIni, "UPDATE", "last_update", "")
+Global $eccLocalLastUpdate 	= Iniread($eccLocalUpdateIni, "UPDATE", "last_update", "xxxxx")
 Global $eccDatfileInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
 Global $eccVersionInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
 Global $eccHostInfoIni 		= $eccInstallPath & "\ecc-system\system\info\ecc_local_host_info.ini"
@@ -69,15 +70,18 @@ Global $eccLanguageSaved 	= IniRead($ThirdPartyConfigIni, "ECC", "language", "")
 ;Determine USER folder (set in ECC config)
 Global $EccUserPathTemp 	= StringReplace(Iniread($eccConfigFileGeneralUser, "USER_DATA", "base_path", ""), "/", "\")
 Global $EccUserPath 		= StringReplace($EccUserPathTemp, "..\", $eccInstallPath & "\") ;Add full path to variable if it's an directory within the ECC structure
-; userdata
+; Userdata
 Global $eccUserCidFile 		= $eccInstallPath & "\ecc-system\idt\cicheck.idt"
 Global $eccUserPathTemp 	= StringReplace(IniRead($eccConfigFileGeneralUser, "USER_DATA", "base_path", ""), "/", "\")
 Global $eccUserPath 		= StringReplace($eccUserPathTemp, "..\", $eccInstallPath & "\") ; Add full path to variable if it's an directory within the ECC structure
+; ECC window title
+Global $eccGeneratedTitle 	=	"emuControlCenter" & " v" & $eccCurrentVersion & " build:" & $eccCurrentBuild & " (" & $eccCurrentDateBuild & ")" & " upd:" & $eccLocalLastUpdate
 
 
 ; ECC SELECTED ROM variables
 Global $eccRomDataFile 		= $eccInstallPath & "\ecc-system\selectedrom.ini"
 Global $RomName 			= IniRead($eccRomDataFile, "ROMDATA", "rom_name", "")
+Global $RomFileNamePlain	= IniRead($eccRomDataFile, "ROMDATA", "rom_filename_plain", "")
 Global $RomCrc32 			= IniRead($eccRomDataFile, "ROMDATA", "rom_crc32", "")
 Global $RomCrc32short 		= StringLeft($RomCrc32, 2)
 Global $RomEccId 			= IniRead($eccRomDataFile, "ROMDATA", "rom_platformid", "")
@@ -99,9 +103,19 @@ Global $FullPathToImageFolder = $eccInstallPath & "\ecc-user\" & $RomEccId & "\i
 
 ; ECC EMD variables
 Global $eccSig 				= "3AC741E3A76D7BD5B31256A1B67A7D6A238D" ;Please do NOT alter!
-Global $EmuMoviesServer 	= "http://api.gamesdbase.com/"
+Global $EmuMoviesServer 	= "https://api.gamesdbase.com/"
 Global $EmuMoviesWebsite 	= "http://emumovies.com/"
 Global $EmuMoviesList 		= @ScriptDir & "\emuMoviesDownloader.list"
+
+; ECC MobyGames Importer (MGI)
+Global $MGIConfigFile		= @Scriptdir & "\MobyGamesImporter.ini"
+Global $FileNameFlag 		= IniRead($MGIConfigFile, "SETTINGS", "FileNameFlag", "1")
+Global $NameFlag 			= IniRead($MGIConfigFile, "SETTINGS", "NameFlag", "1")
+Global $YearFlag 			= IniRead($MGIConfigFile, "SETTINGS", "YearFlag", "1")
+Global $DeveloperFlag 		= IniRead($MGIConfigFile, "SETTINGS", "DeveloperFlag", "1")
+Global $PublisherFlag 		= IniRead($MGIConfigFile, "SETTINGS", "PublisherFlag", "1")
+Global $ReviewFlag 			= IniRead($MGIConfigFile, "SETTINGS", "ReviewFlag", "1")
+Global $MGFooterTag			= "[--- Info from MobyGames.com ---]"
 
 ; ECC GET CRC32 variables
 Global $CRCfile 			= @ScriptDir & "\getCRC32.dat"
@@ -129,6 +143,8 @@ Global $PlatformDataFileRomMeta = "platformdata_meta.txt"
 Global $PlatformDataFileRomUser = "platformdata_user.txt"
 
 ; IMAGEPACK CREATOR variables
-
 Global $IpcPresetFolder 	= @ScriptDir & "\eccImagePackCenter_presets"
 Global $AutoSavedIpcFile 	= @ScriptDir & "\eccImagePackCenter.ipc"
+
+; VIDEOPLAYER (MPLAYER) variables
+Global $VideoWindowTitle	= "The Movie Player"

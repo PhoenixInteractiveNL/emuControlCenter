@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.1.6 (2014.03.29)
+; Version: 1.3.0.0 (2014.05.18)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -87,6 +87,14 @@ Global $DaemonTools =					IniRead($eccConfigFile, "DAEMONTOOLS", "daemontools_ex
 
 Global $eccMultiRoms = 					"" ;Declare variable
 Global $eccScriptParamsFile = 			"" ;Declare variable
+Global $eccEmuCmdparameter1 =			"" ;Declare variable
+Global $eccEmuCmdparameter2 =			"" ;Declare variable
+Global $eccEmuCmdparameter3 =			"" ;Declare variable
+Global $eccEmuCmdparameter4 =			"" ;Declare variable
+Global $eccEmuCmdparameter5 =			"" ;Declare variable
+Global $eccEmuCmdparameter6 =			"" ;Declare variable
+Global $eccEmuCmdparameter7 =			"" ;Declare variable
+Global $eccEmuCmdparameter8 =			"" ;Declare variable
 
 ;[EXTRA]
 ; $eccScriptParamsFile (amiga gameconfig INI) (TheCyberDruid)
@@ -153,13 +161,22 @@ If $eccFileRomFileIsPacked = "1" And $eccEmuWin8char = "1" Then
 	$RomFile = $RomFileDivided[$RomFileArray]
 EndIf
 
-; Use .cue/.m3u (track-info) file if available (detect if the file exist and use it if available) (overrides filename only)
+; Use "index" (track-info) file if available (detect if the file exist and use it if available) (overrides filename only)
 If $eccEmuUseCueFile = "1" Then
     Select
         Case FileExists($RomPath & $eccFileRomNamePlain & ".cue")
 			$RomFile = $eccFileRomNamePlain & ".cue"
 			$eccFileRomExtension = "cue"
-        Case FileExists($RomPath & $eccFileRomNamePlain & ".m3u")
+		Case FileExists($RomPath & $eccFileRomNamePlain & ".ccd")
+			$RomFile = $eccFileRomNamePlain & ".ccd"
+			$eccFileRomExtension = "ccd"
+		Case FileExists($RomPath & $eccFileRomNamePlain & ".mds")
+			$RomFile = $eccFileRomNamePlain & ".mds"
+			$eccFileRomExtension = "mds"
+		Case FileExists($RomPath & $eccFileRomNamePlain & ".toc")
+			$RomFile = $eccFileRomNamePlain & ".toc"
+			$eccFileRomExtension = "toc"
+		Case FileExists($RomPath & $eccFileRomNamePlain & ".m3u")
 			$RomFile = $eccFileRomNamePlain & ".m3u"
 			$eccFileRomExtension = "m3u"
     EndSelect
@@ -169,6 +186,20 @@ EndIf
 If $eccEmuFilenameOnly <> "1" Then $RomFile = $RomPath & $RomFile
 ; Escape? (") (quotes)
 If $eccEmuEscape = "1" Then $RomFile = Chr(34) & $RomFile & Chr(34)
+; Commandline parameters? after ECC config %ROM%
+If $eccEmuParameter <> "" Then
+	$eccEmuParameter = StringReplace($eccEmuParameter, "%ROM% ", "")
+	$CommandLineParameters = StringSplit($eccEmuParameter, " ")
+EndIf
+If UBound($CommandLineParameters) > 1 Then $eccEmuCmdparameter1 = $CommandLineParameters[1]
+If UBound($CommandLineParameters) > 2 Then $eccEmuCmdparameter2 = $CommandLineParameters[2]
+If UBound($CommandLineParameters) > 3 Then $eccEmuCmdparameter3 = $CommandLineParameters[3]
+If UBound($CommandLineParameters) > 4 Then $eccEmuCmdparameter4 = $CommandLineParameters[4]
+If UBound($CommandLineParameters) > 5 Then $eccEmuCmdparameter5 = $CommandLineParameters[5]
+If UBound($CommandLineParameters) > 6 Then $eccEmuCmdparameter6 = $CommandLineParameters[6]
+If UBound($CommandLineParameters) > 7 Then $eccEmuCmdparameter7 = $CommandLineParameters[7]
+If UBound($CommandLineParameters) > 8 Then $eccEmuCmdparameter8 = $CommandLineParameters[8]
+
 ; ============================================================
 
 ; ============================================================
@@ -236,9 +267,6 @@ Func CDImage($CDaction)
 	$DTsupport = 0
 
 	Select
-		Case $eccFileRomExtension = "cue"
-			$RomExtensionInfo = "CUE sheet"
-			$DTsupport = 1
 		Case $eccFileRomExtension = "img"
 			$RomExtensionInfo = "Binary image file"
 			$DTsupport = 2
@@ -248,8 +276,8 @@ Func CDImage($CDaction)
 		Case $eccFileRomExtension = "iso"
 			$RomExtensionInfo = "ISO image"
 			$DTsupport = 1
-		Case $eccFileRomExtension = "mds"
-			$RomExtensionInfo = "Media Discriptor file"
+		Case $eccFileRomExtension = "mdf"
+			$RomExtensionInfo = "Media Discriptor file" ;Alcohol 120%
 			$DTsupport = 1
 		Case $eccFileRomExtension = "b5t"
 			$RomExtensionInfo = "BlindWrite image"
@@ -260,13 +288,10 @@ Func CDImage($CDaction)
 		Case $eccFileRomExtension = "bwt"
 			$RomExtensionInfo = "Blindread image"
 			$DTsupport = 1
-		Case $eccFileRomExtension = "ccd"
-			$RomExtensionInfo = "Clone CD image"
-			$DTsupport = 1
 		Case $eccFileRomExtension = "isz"
 			$RomExtensionInfo = "Compressed ISO image"
 			$DTsupport = 1
-		Case $eccFileRomExtension = "nrg"
+		Case $eccFileRomExtension = "nrg" ;Nero
 			$RomExtensionInfo = "Nero image"
 			$DTsupport = 1
 		Case $eccFileRomExtension = "pdi"
@@ -274,6 +299,22 @@ Func CDImage($CDaction)
 			$DTsupport = 1
 		Case $eccFileRomExtension = "cdi"
 			$RomExtensionInfo = "DiscJuggler image"
+			$DTsupport = 1
+		; INDEX FILES
+		Case $eccFileRomExtension = "cue"
+			$RomExtensionInfo = "CUE sheet"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "ccd"
+			$RomExtensionInfo = "Clone CD image" ;Clone CD
+			$DTsupport = 1
+		Case $eccFileRomExtension = "mds"
+			$RomExtensionInfo = "Media Discriptor file" ;Alcohol 120%
+			$DTsupport = 1
+		Case $eccFileRomExtension = "toc"
+			$RomExtensionInfo = "Table of Contents file"
+			$DTsupport = 1
+		Case $eccFileRomExtension = "m3u"
+			$RomExtensionInfo = "Multimedia Playlist"
 			$DTsupport = 1
 	EndSelect
 
@@ -297,12 +338,12 @@ Func CDImage($CDaction)
 
 	Select
 		Case $CDaction = "mount" ; Mount a CD image
-			ToolTip($eccSystemName, "mounting '" & $RomExtensionInfo & "' please wait...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
-			ShellExecuteWait($DaemonTools, " -mount 0, " & $RomFile, "")
+			ToolTip("Mounting '" & $RomExtensionInfo & "' please wait...", @DesktopWidth/2, @DesktopHeight/2, $eccSystemName, 1, 6)
+			ShellExecuteWait($DaemonTools, " -mount scsi, 0," & $RomFile, "")
 			ToolTip("")
 		Case $CDaction = "unmount"; Unmount a CD image
-			ToolTip($eccSystemName, "unmounting CD image...please wait...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
-			ShellExecuteWait($DaemonTools, " -unmount 0", "")
+			ToolTip("Unmounting CD image...please wait...", @DesktopWidth/2, @DesktopHeight/2, $eccSystemName, 1, 6)
+			ShellExecuteWait($DaemonTools, " -unmount scsi, 0", "")
 			ToolTip("")
 	EndSelect
 

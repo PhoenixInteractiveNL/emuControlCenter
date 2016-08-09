@@ -20,6 +20,7 @@ if(!defined('ECC_DIR')) define('ECC_DIR', $eccBaseDirectory); // contains basepa
 if(!defined('ECC_DIR_SYSTEM')) define('ECC_DIR_SYSTEM', ECC_DIR.'/ecc-system/'); // contains ecc-system dir
 
 define('SZIP_UNPACK_EXE', '../ecc-core/thirdparty/7Zip/7z.exe');
+define('SZIPG_UNPACK_EXE', '../ecc-core/thirdparty/7Zip/7zG.exe');
 
 // write ini for external ecc tools
 include(ECC_DIR_SYSTEM.'/manager/fStartupHelper.php');
@@ -41,12 +42,9 @@ require_once('manager/cLogger.php'); // logs to the logs folder!
 
 /**
  * emuControlCenter Main class.
- *
  * @autor Andreas Scheibel <ecc@camya.com>
- *
  */
 class App extends GladeXml {
-
 	/**
 	 * contains object of the current selected rom
 	 * @var Rom contains RomFile, RomMeta, RomAudit
@@ -327,7 +325,6 @@ class App extends GladeXml {
 	}
 	
 	public function setSearchFfType($type, $reload=true) {
-		#$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$type[0].$type[1].'</b></span>');
 		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.i18n::get('dropdown_search_fields', '[['.strtolower($type).']]').'</b></span>');
 
 		switch($type) {
@@ -406,8 +403,6 @@ class App extends GladeXml {
 		if ($reload) $this->onInitialRecord();
 		if ($reload) $this->update_treeview_nav();
 	}
-
-
 
 	public function dispatchSearchSelectory($object, $event) {
 		if ($event) {
@@ -697,17 +692,13 @@ class App extends GladeXml {
 
 	public function __construct()
 	{
-		// ----------------------------------------------------------------
 		// Get current operating system
-		// ----------------------------------------------------------------
 		$this->os_env = FACTORY::get('manager/Os')->getOperatingSystemInfos();
 
 		// read and write needed settings
 		$this->writeLocalReleaseInfo();
 
-		// ----------------------------------------------------------------
 		// DBMS connect to database and fill FACTORY with dbms
-		// ----------------------------------------------------------------
 		$databaseFile = 'database/eccdb';
 		if (!file_exists($databaseFile)) copy($databaseFile.'.empty', $databaseFile);
 		$dbms = FACTORY::get('manager/DbmsSqlite2');
@@ -725,23 +716,22 @@ class App extends GladeXml {
 		$mngrEccUpdate->updateSystem($release);
 		#die;
 
-		// ----------------------------------------------------------------
 		// Sort media category array!
-		// ----------------------------------------------------------------
 		asort($this->media_category);
 
-		// ----------------------------------------------------------------
 		// image-manager
-		// ----------------------------------------------------------------
 		$this->imageManager = FACTORY::get('manager/Image');
 
-		// ----------------------------------------------------------------
 		// INI get ecc main ini-file
-		// ----------------------------------------------------------------
 		$this->ini = FACTORY::get('manager/IniFile');
 		if ($this->ini === false) die('miss ini');
 
-		FACTORY::get('manager/IniFile')->setThemColors(FACTORY::get('manager/GuiTheme')->getColorIniPath());
+		// TRIGGER - THEME COLORS LOADING? | config setting: use_theme_colors | added 2014-05-09
+		$use_theme_colors = $this->ini->getKey('ECC_THEME', 'use_theme_colors');
+		if ($use_theme_colors == "1"){
+		// Load and overwrite ECC theme 'user setting' (GENERAL.INI) with the theme settings in 'ecc-themes\[THEME]\themeColors.ini'
+			FACTORY::get('manager/IniFile')->setThemColors(FACTORY::get('manager/GuiTheme')->getColorIniPath());
+		}
 
 		// initialize logger to get status reports
 		LOGGER::setActiveState($this->ini->getKey('USER_SWITCHES', 'log_details'));
@@ -798,15 +788,11 @@ class App extends GladeXml {
 		if (!$this->treeviewFontType) $this->treeviewFontType = "arial 10";
 
 
-		// ----------------------------------------------------------------
 		// I18N Initialize
-		// ----------------------------------------------------------------
 		$language = $this->ini->getKey('USER_DATA', 'language');
 		I18N::set($language);
 
-		// ----------------------------------------------------------------
 		// GUI/GLADE get gui from glade-file
-		// ----------------------------------------------------------------
 		parent::__construct(ECC_DIR_SYSTEM.'/gui/gui.glade');
 
 		// !!!!!!
@@ -817,9 +803,7 @@ class App extends GladeXml {
 
 		$this->wdo_main->connect('key-press-event', array($this, 'handleShortcuts'));
 
-		// ----------------------------------------------------------------
 		// get helper object
-		// ----------------------------------------------------------------
 		$this->oHelper = FACTORY::get('manager/GuiHelper', $this);
 		$this->guiManager = FACTORY::get('manager/Gui');
 
@@ -842,7 +826,6 @@ class App extends GladeXml {
 		// is this an initialized history ini?
 		// use defaults if init-ini!
 		// ----------------------------
-
 		$initialHistroyIni = (count($this->ini->getHistoryKey()) <= 1);
 
 		// ----------------------------
@@ -854,7 +837,6 @@ class App extends GladeXml {
 		$this->toggle_show_doublettes = $this->ini->getHistoryKey('toggle_show_doublettes');
 
 		$this->toggle_only_disk = $this->ini->getHistoryKey('toggle_only_disk');
-
 
 		// show images in aspect ratio?
 		$aspectRatio = $this->ini->getKey('USER_SWITCHES', 'image_aspect_ratio');
@@ -895,7 +877,6 @@ class App extends GladeXml {
 		$this->createEccOptBtnBar();
 
 		$this->dropdownStateYesNo = I18n::translateArray('dropdown_meta_state_yes_no', $this->dropdownStateYesNo);
-		$this->dropdownStateCount = I18n::translateArray('dropdown_meta_state_count', $this->dropdownStateCount);
 
 		// left
 		$this->nbMediaInfoStateRunningEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_running').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setRunning');
@@ -908,8 +889,6 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateBuggyEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
 		// right
-		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_multiplay').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setMultiplayer');
-		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
 		$this->nbMediaInfoStateTrainerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_trainer').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setTrainer');
 		$this->nbMediaInfoStateTrainerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 		$this->nbMediaInfoStateNetplayEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_netplay').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setNetplay');
@@ -917,6 +896,11 @@ class App extends GladeXml {
 		$this->nbMediaInfoStateIntroEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_intro').'?', $this->dropdownStateYesNo, 'metaEditDirectUpdate', 'setIntro');
 		$this->nbMediaInfoStateIntroEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
+		// multiplayer
+		$this->dropdownMultiplayer = I18n::translateArray('dropdown_meta_multiplayer', $this->dropdownMultiplayer);
+		$this->nbMediaInfoStateMultiplayerEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_multiplay').'?', $this->dropdownMultiplayer, 'metaEditDirectUpdate', 'setMultiplayer', true);
+		$this->nbMediaInfoStateMultiplayerEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		
 		// storage
 		$this->dropdownStorage = I18n::translateArray('dropdown_meta_storage', $this->dropdownStorage);
 		$this->nbMediaInfoStateStorageEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_storage').'?', $this->dropdownStorage, 'metaEditDirectUpdate', 'setStorage', true);
@@ -972,7 +956,6 @@ class App extends GladeXml {
 
 		$first = key($this->freeformSearchFields);
 		$this->freeformSearchFields = I18n::translateArray('dropdown_search_fields', $this->freeformSearchFields);
-		//$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first[0].$first[1].'</b></span>');
 		$this->searchSelectorFfTypeLbl->set_markup('<span color="'.$this->colEventOptionText.'"><b>'.$first.'</b></span>');
 		$this->searchSelectorFfType->set_property('has-tooltip', true);
 		$this->searchSelectorFfType->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'search_field_select'));
@@ -999,25 +982,17 @@ class App extends GladeXml {
 		$this->fastListRefresh = $this->ini->getKey('USER_SWITCHES', 'image_fast_refresh');
 		// get size from the inifile!
 
-		// ----------------------------
 		// GuiImagePopup init
-		// ----------------------------
 		$this->oGuiImagePopup = FACTORY::get('manager/GuiImagePopup', $this);
 		$this->image_preview_ebox->connect_simple('button-press-event', array($this, 'openImageCenter'), false, true);
 
-		// ----------------------------
 		// GuiStatus init
-		// ----------------------------
 		$this->status_obj = FACTORY::get('manager/GuiStatus', $this);
 
-		// ----------------------------
 		// HELP init
-		// ----------------------------
 		$this->updateRomlistTabHelp($this->textview3, array('../readme.txt'));
 
-		// ----------------------------
 		// CONNECT TOP MENU SIGNALS
-		// ----------------------------
 		$this->connectSignalsForTopMenu();
 
 		// init popup menus
@@ -1067,21 +1042,18 @@ class App extends GladeXml {
 		$this->infoImageBtnMatchImageType->set_sensitive(false);
 		$this->infoImageEditBtn->set_sensitive(false);
 
-		// ----------------------------
 		// init main combo for languages
-		// ----------------------------
 		$this->media_language = I18n::translateArray('dropdown_lang', $this->media_language);
 		$this->create_combo_lanugages($this->cb_search_language);
 
 		// ----------------------------
 		// INIT search options
 		// ----------------------------
+		
 		// language  dropdown
 		$this->init_treeview_languages($this->test_language);
 
-		// ----------------------------
 		// extended search
-		// ----------------------------
 		foreach($this->ext_search_combos as $name => $comboContentName) {
 			$obj_name = "o".$name;
 			$state =  $this->ini->getHistoryKey($name);
@@ -1094,9 +1066,7 @@ class App extends GladeXml {
 		$this->ext_search_reset->connect_simple("clicked", array($this, 'reset_ext_search_state'));
 		//$this->ext_search_expander->set_expanded(false);
 
-		// ----------------------------
 		// TreeviewData init
-		// ----------------------------
 		$this->_fileView = FACTORY::get('manager/TreeviewData');
 		$this->init_treeview_nav();
 		$treeview_nav_selection = $this->treeview1->get_selection();
@@ -1104,6 +1074,7 @@ class App extends GladeXml {
 		// ----------------------------
 		// navigation_last / index
 		// ----------------------------
+		
 		// navigation_last_index for treeview
 		$selected_platform = $this->ini->getHistoryKey('navigation_last_index');
 		if (isset($selected_platform)) {
@@ -1134,9 +1105,7 @@ class App extends GladeXml {
 		// ----------------------------
 		//$this->init_treeview_main();
 
-		// ----------------------------
 		// TreeviewPager Init
-		// ----------------------------
 		$this->media_treeview_pager = FACTORY::get('manager/TreeviewPager');
 
 		// ----------------------------
@@ -1489,7 +1458,6 @@ class App extends GladeXml {
 		// ----------------------------
 		// DATFILE
 		// ----------------------------
-
 		// 2012-07-03 Disabled, this is not needed anymore, ROMdb is no more
 		//$this->mTopDatImportOnlineRomdb->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_ECC_ROMDB');
 		//$this->mTopDatImportOnlineRomdb->set_sensitive(false);
@@ -1522,7 +1490,7 @@ class App extends GladeXml {
 		$this->mTopFileSearch->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
 		$this->mTopFileSearch->set_sensitive(false);
 
-		// 20070628 deactivated
+		// 2007.06.28 deactivated
 		// $this->menubar_filesys_organize_roms_preview->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE_PREVIEW');
 		// $this->menubar_filesys_organize_roms->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE');
 
@@ -1573,9 +1541,8 @@ class App extends GladeXml {
 		$this->mTopViewListDetail->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 		$this->mTopViewListSimple->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 
-		// configuration
+		// Configuration
 		$this->mTopOptionConfig->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT', 'ECC');
-
 
 		// TOP-MENU - TOOLS
 		$this->mTopToolEccGtkts->connect_simple('activate', array($this, 'executeCommands'), 'START_GTKTHEMESELECT');	
@@ -3063,14 +3030,22 @@ class App extends GladeXml {
 				$this->setSpanMarkupForMetaOption($this->media_nb_info_intro, $romMeta->getIntro());
 				$this->setSpanMarkupForMetaOption($this->media_nb_info_usermod, $romMeta->getUsermod());
 				$this->setSpanMarkupForMetaOption($this->media_nb_info_freeware, $romMeta->getFreeware());
-				$this->setSpanMarkupForMetaOption($this->media_nb_info_multiplayer, $romMeta->getMultiplayer());
+
+				// Multiplayer
+				// OLD $this->setSpanMarkupForMetaOption($this->media_nb_info_multiplayer, $romMeta->getMultiplayer());`
+				
+				//added 2014.04.12
+				$multiplayer = (!$romMeta->getMultiplayer()) ? 0 : $romMeta->getMultiplayer();
+				$this->setSpanMarkup($this->media_nb_info_multiplayer, $this->dropdownMultiplayer[$multiplayer]);
+				
+				//netplay
 				$this->setSpanMarkupForMetaOption($this->media_nb_info_netplay, $romMeta->getNetplay());
 
 				// option storage
 				$storage = (!$romMeta->getStorage()) ? 0 : $romMeta->getStorage();
 				$this->setSpanMarkup($this->media_nb_info_storage, $this->dropdownStorage[$storage]);
 
-				// option storage
+				// option dump type
 				$dumpType = (!$romMeta->getDump_type()) ? 0 : $romMeta->getDump_type();
 				$this->setSpanMarkup($this->media_nb_info_dump, $this->dropdownDumpType[$dumpType]);
 
@@ -3143,6 +3118,7 @@ class App extends GladeXml {
 						'rom_platformid' => $rom->getSystemIdent(),
 						'rom_platformname' => $this->ini->getPlatformName($this->_eccident),
 						'rom_name' => $rom->getName(),
+						'rom_filename_plain' => $romFile->getRomFilenamePlain(),
 						'rom_crc32' => $rom->getCrc32(),
 						'rom_meta_data' => $romMetadata,
 						'rom_user_data' => $romUserdata,
@@ -3444,8 +3420,16 @@ class App extends GladeXml {
 			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
 			$menu->append($menuItem);
 
-			$menu->append(new GtkSeparatorMenuItem());
+			// ----------------------------------------------------------------
+			// Clear ROM LAUNCH data's (time last played / ...time played
+			// ----------------------------------------------------------------	
+			
+			$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_clear_launchdata'), $platform_name), $this->getThemeFolder('icon/ecc_clear.png'));
+			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'DB_CLEAR_LAUNCHDATA');
+			$menu->append($menuItem);
 
+			$menu->append(new GtkSeparatorMenuItem());
+			
 			// ----------------------------------------------------------------
 			// Platform Emulators
 			// ----------------------------------------------------------------			
@@ -3691,6 +3675,11 @@ class App extends GladeXml {
 			case 'MAINT_DB_CLEAR_MEDIA':
 				$this->MediaMaintDb('CLEAR_MEDIA');
 				break;
+			//Added 2014.04.23 to remove times played (launchdata) etc. from ROM
+			//db: fdata, see manager\cUserData.php for the SQL query
+			case 'DB_CLEAR_LAUNCHDATA':
+				FACTORY::get('manager/UserData')->clearRomLaunchData($this->_eccident);
+				break;
 			case 'PLATFORM_INFO':
 				$this->nb_main->set_current_page(1);
 				break;
@@ -3748,7 +3737,6 @@ class App extends GladeXml {
 				break;
 			// radio buttons in top navigation
 			case 'TOGGLE_MAINVIEV_ALL':
-
 				$this->view_mode = 'MEDIA';
 
 				$this->mTopViewModeRomHave->set_active(true);
@@ -5452,7 +5440,7 @@ class App extends GladeXml {
 		// setup languages
 		$this->model_languages->foreach(array($this, 'languages_set_selected'), $romMeta->getId());
 
-		// bunning
+		// running
 		$this->metaEditFeatureGoodDumpLabel->set_text(i18n::get('meta', 'lbl_running'));
 		if (!$this->obj_running) $this->obj_running = new IndexedCombobox($this->metaEditFeatureGoodDumpDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureGoodDumpDropdown->set_active($this->set_dropdown_bool($romMeta->getRunning()));
@@ -5461,11 +5449,6 @@ class App extends GladeXml {
 		$this->metaEditFeatureBugsLabel->set_text(i18n::get('meta', 'lbl_buggy'));
 		if (!$this->obj_bugs) $this->obj_bugs = new IndexedCombobox($this->metaEditFeatureBugsDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureBugsDropdown->set_active($this->set_dropdown_bool($romMeta->getBugs()));
-
-		// multiplayer
-		$this->metaEditFeatureMultiplayLabel->set_text(i18n::get('meta', 'lbl_multiplay'));
-		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownStateYesNo);
-		$this->metaEditFeatureMultiplayDropdown->set_active($this->set_dropdown_bool($romMeta->getMultiplayer()));
 
 		// trainer
 		$this->metaEditFeatureTrainerLabel->set_text(i18n::get('meta', 'lbl_trainer'));
@@ -5482,7 +5465,6 @@ class App extends GladeXml {
 		if (!$this->obj_netplay) $this->obj_netplay = new IndexedCombobox($this->metaEditFeatureNetplayDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureNetplayDropdown->set_active($this->set_dropdown_bool($romMeta->getNetplay()));
 
-
 		// freeware
 		$this->metaEditFeatureFreewareLabel->set_text(i18n::get('meta', 'lbl_freeware'));
 		if (!$this->obj_freeware) $this->obj_freeware = new IndexedCombobox($this->metaEditFeatureFreewareDropdown, false, $this->dropdownStateYesNo);
@@ -5493,6 +5475,19 @@ class App extends GladeXml {
 		if (!$this->obj_intro) $this->obj_intro = new IndexedCombobox($this->metaEditFeatureIntroDropdown, false, $this->dropdownStateYesNo);
 		$this->metaEditFeatureIntroDropdown->set_active($this->set_dropdown_bool($romMeta->getIntro()));
 
+		// multiplayer
+		
+		//old
+		//$this->metaEditFeatureMultiplayLabel->set_text(i18n::get('meta', 'lbl_multiplay'));
+		//if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownMultiplayer);
+		//$this->metaEditFeatureMultiplayDropdown->set_active($this->set_dropdown_bool($romMeta->getMultiplayer()));
+		
+		// This part was added @ 2014.04.13 for ?, NO, 1P, 2P, 3P, 4P options FOR ROM METAEDIT WINDOW
+		$Mmultiplayer = $romMeta->getMultiplayer();
+		if (!$this->obj_multiplayer) $this->obj_multiplayer = new IndexedCombobox($this->metaEditFeatureMultiplayDropdown, false, $this->dropdownMultiplayer);
+		if ($Mmultiplayer === null) $Mmultiplayer = 0;
+		$this->metaEditFeatureMultiplayDropdown->set_active($Mmultiplayer);
+		
 		// storage type (before $mdata['md_storage'] = 0)
 		$storage = $romMeta->getStorage();
 		if (!$this->obj_storage) $this->obj_storage = new IndexedCombobox($this->cb_storage, false, $this->dropdownStorage);
@@ -5591,7 +5586,6 @@ class App extends GladeXml {
 		$this->media_edit_filename->set_text($romFile->getRomFilenamePlain());
 
 		// I18N TAB USERDATA Rating/Review
-
 		$this->setSpanMarkup($this->medit_lbl_title, i18n::get('global', 'title').'*', '#000000', 'b', 'medium');
 		$this->mediaEditReviewFrameRating->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameRating').'</b>');
 		$this->mediaEditReviewFrameReview->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditReviewFrameReview').'</b>');
@@ -5604,7 +5598,6 @@ class App extends GladeXml {
 		$this->mEditUserReviewExportAllow->set_label(i18n::get('metaEdit', 'mEditUserReviewExportAllow'));
 
 		// I18N TAB USERDATA Personal
-
 		$this->mediaEditPersonalFrameNotes->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameNotes').'</b>');
 		$this->mediaEditPersonalFrameMoreSettings->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditPersonalFrameMoreSettings').'</b>');
 		$this->mEditUserPersonalHiscoresLabel->set_label(i18n::get('metaEdit', 'mEditUserPersonalHiscoresLabel'));
@@ -5658,7 +5651,6 @@ class App extends GladeXml {
 		}
 
 		// I18N TAB FILEDATA
-
 		$this->mediaEditTabFile->set_markup(i18n::get('metaEdit', 'mediaEditTabFile'));
 
 		$this->mEditFileNameLabel->set_markup('<b>'.i18n::get('global', 'fileName').'</b>');
@@ -5685,7 +5677,6 @@ class App extends GladeXml {
 		$this->mEditFileCrc32->set_text($rom->getCrc32());
 
 		// I18N TAB ECCSCRIPT
-
 		$this->mediaEditTabScript->set_markup(i18n::get('metaEdit', 'mediaEditTabScript'));
 
 		$eccScript = FACTORY::get('manager/EccScript');
@@ -5968,7 +5959,6 @@ class App extends GladeXml {
 		);
 		FACTORY::get('manager/UserData')->updateFullUserData($userData);
 
-
 		// ECCSCRIPT
 		$eccScriptIniTextBuffer = $this->mEditScriptIniText->get_buffer();
 		$eccScriptIniText = $eccScriptIniTextBuffer->get_text($eccScriptIniTextBuffer->get_start_iter(), $eccScriptIniTextBuffer->get_end_iter());
@@ -5979,7 +5969,6 @@ class App extends GladeXml {
 		}
 
 		// METADATA
-
 		$romMeta->setExtension($romFile->getRomExtension());
 		$romMeta->setName(trim(str_replace(';', '', $romTitle)));
 		$romMeta->setYear(trim(str_replace(';', '', $romYear)));
@@ -5992,13 +5981,15 @@ class App extends GladeXml {
 
 		$romMeta->setRunning($this->get_dropdown_bool($this->metaEditFeatureGoodDumpDropdown->get_active()));
 		$romMeta->setBugs($this->get_dropdown_bool($this->metaEditFeatureBugsDropdown->get_active()));
-		$romMeta->setMultiplayer($this->get_dropdown_bool($this->metaEditFeatureMultiplayDropdown->get_active()));
 		$romMeta->setNetplay($this->get_dropdown_bool($this->metaEditFeatureNetplayDropdown->get_active()));
 		$romMeta->setTrainer($this->get_dropdown_bool($this->metaEditFeatureTrainerDropdown->get_active()));
 		$romMeta->setFreeware($this->get_dropdown_bool($this->metaEditFeatureFreewareDropdown->get_active()));
 		$romMeta->setUsermod($this->get_dropdown_bool($this->metaEditFeatureModifiedDropdown->get_active()));
 		$romMeta->setIntro($this->get_dropdown_bool($this->metaEditFeatureIntroDropdown->get_active()));
 
+		// This part was added @ 2014.04.13 for ?, NO, 1P, 2P, 3P, 4P options FOR ROM METAEDIT WINDOW
+		$romMeta->setMultiplayer($this->metaEditFeatureMultiplayDropdown->get_active());
+		
 		$romMeta->setStorage($this->cb_storage->get_active());
 		$romMeta->setRegion($this->cb_region->get_active());
 		$romMeta->setDump_type($this->cb_dump_type->get_active());
@@ -7806,6 +7797,7 @@ class App extends GladeXml {
 		$this->freeformSearchOperators = $mngrValidator->getEccCoreKey('freeformSearchOperators');
 		$this->dropdownStateYesNo = $mngrValidator->getEccCoreKey('dropdownStateYesNo');
 		$this->dropdownStateCount = $mngrValidator->getEccCoreKey('dropdownStateCount');
+		$this->dropdownMultiplayer = $mngrValidator->getEccCoreKey('dropdownMultiplayer');
 		$this->dropdownStorage = $mngrValidator->getEccCoreKey('dropdownStorage');
 		$this->dropdownRegion = $mngrValidator->getEccCoreKey('dropdownRegion');
 		$this->dropdownDumpType = $mngrValidator->getEccCoreKey('dropdownDumpType');
@@ -8624,7 +8616,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 		if ($restart) FACTORY::get('manager/Os')->executeProgramDirect(dirname(__FILE__).'/../ecc.exe', 'open', '/fastload');
 
 		return true;
-
 	}
 
 	/**
@@ -8655,7 +8646,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 	}
 
 	public function dispatchPostShutdownTasks($type, $param = false){
-
 		switch ($type){
 			case 'imagepackCreateAllThumbnails':
 				$dialog = $this->openWaitSplashscreen();

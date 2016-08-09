@@ -1,0 +1,34 @@
+head {
+font-family:Berthold Akzidenz Grotesk BE Co;
+font-size:24px;
+color:#d82838;
+text-align:center;
+}
+
+headBack {
+font-family:Berthold Akzidenz Grotesk BE Co;
+font-size:24px;
+color:#7e0712;
+text-align:center;
+}
+
+body {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#ffffff; 
+text-align:center;
+}
+
+bodyBack {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#ff0000; 
+text-align:center;
+}
+
+a {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#000000;
+text-decoration:underline;
+}

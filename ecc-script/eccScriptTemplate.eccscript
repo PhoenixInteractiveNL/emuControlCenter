@@ -4,7 +4,6 @@
 ; Script version         : v1.0.0.0
 ; Last changed           : YYYY.MM.DD
 ;
-;
 ; Author:
 ;
 ; NOTES:
@@ -14,7 +13,7 @@
 ; ------------------------------------------------------------------------------
 
 ; ==============================================================================
-; You need to implent this block in every script, this changes the workfolder to
+; You need to implement this block in every script, this changes the workfolder to
 ; the folder where this script is executed, and loads the 'eccScriptSystem' script.
 FileChangeDir(@ScriptDir)
 #include "..\eccScriptSystem.au3"

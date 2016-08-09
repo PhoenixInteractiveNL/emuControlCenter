@@ -1,0 +1,89 @@
+<settings>
+  <General_Properties>
+    <componentWidth value="1920"/>
+    <componentHeight value="1140"/>
+    <assets value="images.xml"/>
+    <preloader value="assets/preloaders/redsquares.swf"/>
+    <closeButton value="assets/closeButtons/close.png"/>
+    <limitMovement value="false"/>
+    <showAbout value="true"/>
+  </General_Properties>
+  <Item_Properties>
+    <positioning value="random"/>
+    <spacing value="0"/>
+    <maximize value="true"/>
+    <expandScale value="2.9"/>
+    <bgColor1 value="0xffffff"/>
+    <bgAlpha1 value="1"/>
+    <bgCornerRadius1 value="3"/>
+    <bg1PaddingH value="3"/>
+    <bg1PaddingTop value="3"/>
+    <bg1PaddingBottom value="18"/>
+    <bgColor2 value="0x000000"/>
+    <bgAlpha2 value="1"/>
+    <bgCornerRadius2 value="2"/>
+    <bg2PaddingH value="0"/>
+    <bg2PaddingV value="1"/>
+    <textDistance value="0"/>
+    <rotationOffset value="38"/>
+    <friction value="1"/>
+  </Item_Properties>
+  <Image_Properties>
+    <width value="480"/>
+    <height value="285"/>
+    <cornerRadius value="50"/>
+  </Image_Properties>
+  <Text_Properties>
+    <styleSheet value="assets/css/styleSheet3.css"/>
+    <bodyDistance value="0"/>
+    <width value="0"/>
+    <headBgColor value="26265"/>
+    <bodyBgColor value="0"/>
+    <bgAlpha value="0"/>
+    <borderColor value="0xffffff"/>
+    <borderAlpha value="0"/>
+    <borderWidth value="0.3"/>
+    <cornerRadius value="0"/>
+    <paddingLeft value="0"/>
+    <paddingRight value="0"/>
+    <paddingTop value="0"/>
+    <paddingBottom value="0"/>
+  </Text_Properties>
+  <Filter_Properties>
+    <useDropShadow value="true"/>
+    <distance value="10"/>
+    <angle value="0"/>
+    <color value="0x000000"/>
+    <alpha value="1"/>
+    <blurAmount value="20"/>
+    <quality value="2"/>
+    <strength value="1"/>
+  </Filter_Properties>
+  <Background_Properties>
+    <fillType value="solid"/>
+    <backgroundImage value=""/>
+    <backgroundFitting value="repeat"/>
+    <backgroundColor1 value="0x006699"/>
+    <backgroundColor2 value="0xff0000"/>
+    <backgroundAlpha value="1"/>
+    <bgCornerRadius value="5"/>
+    <gradientRotation value="30"/>
+    <gradientRatio value="40"/>
+    <gradientPosX value="0"/>
+    <gradientPosY value="0"/>
+    <useShade value="false"/>
+    <shadeColor value="0x000000"/>
+    <shadeAlpha value="1"/>
+    <shadeRatio value="100"/>
+    <shadeWidth value="600"/>
+    <shadeHeight value="300"/>
+  </Background_Properties>
+  <Shade_Properties>
+    <useShade value="true"/>
+    <shadeColor value="0x000000"/>
+    <shadeAlpha value="0.7"/>
+    <shadeRatio value="35"/>
+    <shadeWidth value="40"/>
+    <shadeHeight value="28"/>
+  </Shade_Properties>
+</settings>

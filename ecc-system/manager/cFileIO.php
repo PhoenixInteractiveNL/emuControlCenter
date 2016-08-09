@@ -1,7 +1,14 @@
 <?php
+$iniManager = FACTORY::get('manager/IniFile');
+// Variable for trigger size, added 2014-05-04 (ECC v1.15 build 05)
+$UnpackGuiTriggerSizeMB = $iniManager->getKey('USER_SWITCHES', 'unpack_gui_trigger_size');
+if ($UnpackGuiTriggerSizeMB < 1 or $UnpackGuiTriggerSizeMB > 99999 or $UnpackGuiTriggerSizeMB == "" or !is_numeric($UnpackGuiTriggerSizeMB)) $UnpackGuiTriggerSizeMB = 50; //default value
+$UnpackGuiTriggerSize = $UnpackGuiTriggerSizeMB * 1024 * 1024; // convert MB to bytes
+define('UnpackGuiTriggerSize', $UnpackGuiTriggerSize);
+// --->
+
 class FileIO {
 	public function __construct() {}
-	
 	/**
 	 * replace the fileextension of a given file with the replacement!
 	 */
@@ -66,7 +73,6 @@ class FileIO {
 	}
 	
 	public function get_zip_size($file_direct, $file_packed) {
-		
 		// ABS-PATH TO REL-PATH...
 		$file_direct = realpath($file_direct);
 		$zip = zip_open($file_direct);
@@ -83,7 +89,6 @@ class FileIO {
 	}
 	
 	public function fopen_zip($zipFileName, $zipEntryFileName) {	
-		
 		$zip = new ZipArchive;
 		$res = $zip->open($zipFileName);
 		if($res !== true) return null;
@@ -119,50 +124,92 @@ class FileIO {
 		
 		return $fhdl;
 	}
+	// Disabled 2014.05.18 - OLD internal PHP extraction and add 7zip extraction to also use the 7z extract GUI for ZIP files!!
 	
-	public function extractZip($zipFile, $zipEntry, $destinationFolder = false){
+	// public function extractZip($zipFile, $zipEntry, $destinationFolder = false){
+		// # if destination not set, extract to zip file folder
+		// if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
+		// else $destinationFolder = realpath($destinationFolder);
 		
-		# if destination not set, extract to zip file folder
-		if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
-		else $destinationFolder = realpath($destinationFolder);
-		
-		$zip = new ZipArchive();
-		$zip->open($zipFile);
-		$zip->extractTo($destinationFolder, $zipEntry);
-		$zip->close();
-	}
+		// $zip = new ZipArchive();
+		// $zip->open($zipFile);
+		// $zip->extractTo($destinationFolder, $zipEntry);
+		// $zip->close();
+	// }
 
-	public function extractZipAll($zipFile, $zipEntry, $destinationFolder = false){
-		
-		# if destination not set, extract to zip file folder
-		if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
-		else $destinationFolder = realpath($destinationFolder);
-		
-		$zip = new ZipArchive();
-		$zip->open($zipFile);
-		$zip->extractTo($destinationFolder);
-		$zip->close();
-	}
-	
-	public function extractSzip($zipFile, $zipEntry, $outputFolder = false){
-		
+		public function extractZip($zipFile, $zipEntry, $outputFolder = false){
 		# if destination not set, extract to zip file folder
 		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
 		else $outputFolder = realpath($outputFolder);
 		
 		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
-		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		
+		// Added 2014.05.04 > UnpackGuiTriggerSize to show GUI (progressbar) when unpacking big files!
+		if (filesize($zipFile) >= UnpackGuiTriggerSize) {
+			$manager7zip->setExecutable(SZIPG_UNPACK_EXE);
+		} else {
+			$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		}
+		$manager7zip->extract($zipFile, $zipEntry, $outputFolder);
+	}
+	
+	
+	// Disabled 2014.05.18 - OLD internal PHP extraction and add 7zip extraction to also use the 7z extract GUI for ZIP files!!
+	
+	// public function extractZipAll($zipFile, $zipEntry, $destinationFolder = false){
+		// # if destination not set, extract to zip file folder
+		// if($destinationFolder === false) $destinationFolder = realpath(dirname($zipFile));
+		// else $destinationFolder = realpath($destinationFolder);
+		
+		// $zip = new ZipArchive();
+		// $zip->open($zipFile);
+		// $zip->extractTo($destinationFolder);
+		// $zip->close();
+	// }
+
+	public function extractZipAll($zipFile, $zipEntry, $outputFolder = false){
+		# if destination not set, extract to zip file folder
+		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
+		else $outputFolder = realpath($outputFolder);
+		
+		// Added 2014.05.04 > UnpackGuiTriggerSize to show GUI (progressbar) when unpacking big files!
+		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+		if (filesize($zipFile) >= UnpackGuiTriggerSize) {
+			$manager7zip->setExecutable(SZIPG_UNPACK_EXE);
+		} else {
+			$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		}
+		$manager7zip->extractAll($zipFile, $zipEntry, $outputFolder);
+	}
+	
+	public function extractSzip($zipFile, $zipEntry, $outputFolder = false){
+		# if destination not set, extract to zip file folder
+		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
+		else $outputFolder = realpath($outputFolder);
+		
+		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
+		
+		// Added 2014.05.04 > UnpackGuiTriggerSize to show GUI (progressbar) when unpacking big files!
+		if (filesize($zipFile) >= UnpackGuiTriggerSize) {
+			$manager7zip->setExecutable(SZIPG_UNPACK_EXE);
+		} else {
+			$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		}
 		$manager7zip->extract($zipFile, $zipEntry, $outputFolder);
 	}
 
 	public function extractSzipAll($zipFile, $zipEntry, $outputFolder = false){
-		
 		# if destination not set, extract to zip file folder
 		if($outputFolder === false) $outputFolder = realpath(dirname($zipFile));
 		else $outputFolder = realpath($outputFolder);
 		
+		// Added 2014.05.04 > UnpackGuiTriggerSize to show GUI (progressbar) when unpacking big files!
 		$manager7zip = FACTORY::get('manager/cmd/php7zip/sZip');
-		$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		if (filesize($zipFile) >= UnpackGuiTriggerSize) {
+			$manager7zip->setExecutable(SZIPG_UNPACK_EXE);
+		} else {
+			$manager7zip->setExecutable(SZIP_UNPACK_EXE);
+		}
 		$manager7zip->extractAll($zipFile, $zipEntry, $outputFolder);
 	}
 	
@@ -438,9 +485,6 @@ class FileIO {
 		return true;
 	}
 	
-	/*
-	*
-	*/
 	public function get_ext_form_file($file) {
 		if (false !== strpos($file, ".")) {
 			$split = explode(".", $file);
@@ -449,9 +493,6 @@ class FileIO {
 		return "";
 	}
 	
-	/*
-	*
-	*/
 	public function get_plain_filename($file) {
 		$file = basename($file);
 		if (false !== strpos($file, ".")) {
@@ -472,7 +513,7 @@ class FileIO {
 	public function getExternalCrc32($filename){
 	// Removed FSUM support because the COM object cannot
 	// handle parameters like 'fsum.exe file.rom >crc32.txt'
-	// so i made this AutoIt3 CRC32 wrapper, somewhat slower
+	// so i've made this AutoIt3 CRC32 wrapper, somewhat slower
 	// but working perfect!, tested with 10GB file, all OK!
 		
 		if(is_dir($filename)) return false;

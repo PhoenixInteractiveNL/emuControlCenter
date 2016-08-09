@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: API Constants UDF Library for AutoIt3
-; AutoIt Version : 3.8 / 3.3.8.0
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Constants that can be used with UDF library
 ; Author(s) .....: Yashied, Jpm
@@ -159,6 +159,7 @@ Global Const $GW_HWNDNEXT = 2
 Global Const $GW_HWNDPREV = 3
 Global Const $GW_OWNER = 4
 Global Const $GW_CHILD = 5
+Global Const $GW_ENABLEDPOPUP = 6
 
 ; GetWindowLong Constants
 Global Const $GWL_WNDPROC = 0xFFFFFFFC

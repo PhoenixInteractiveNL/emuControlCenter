@@ -2,19 +2,19 @@
 
 #include "ButtonConstants.au3"
 #include "SendMessage.au3"
-#include "WinAPI.au3"
 #include "UDFGlobalID.au3"
+#include "WinAPI.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Button
-; AutoIt Version : 3.3.7.20++
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Functions that assist with Button control management.
 ;                  A button is a control the user can click to provide input to an application.
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
-Global $_ghButtonLastWnd
+Global $__g_hButtonLastWnd
 
 ; ===============================================================================================================================
 
@@ -138,12 +138,12 @@ EndFunc   ;==>_GUICtrlButton_Create
 Func _GUICtrlButton_Destroy(ByRef $hWnd)
 	If Not _WinAPI_IsClassName($hWnd, $__BUTTONCONSTANT_ClassName) Then Return SetError(2, 2, False)
 
-	Local $Destroyed = 0
+	Local $iDestroyed = 0
 	If IsHWnd($hWnd) Then
-		If _WinAPI_InProcess($hWnd, $_ghButtonLastWnd) Then
+		If _WinAPI_InProcess($hWnd, $__g_hButtonLastWnd) Then
 			Local $nCtrlID = _WinAPI_GetDlgCtrlID($hWnd)
 			Local $hParent = _WinAPI_GetParent($hWnd)
-			$Destroyed = _WinAPI_DestroyWindow($hWnd)
+			$iDestroyed = _WinAPI_DestroyWindow($hWnd)
 			Local $iRet = __UDF_FreeGlobalID($hParent, $nCtrlID)
 			If Not $iRet Then
 				; can check for errors here if needed, for debug
@@ -153,19 +153,19 @@ Func _GUICtrlButton_Destroy(ByRef $hWnd)
 			Return SetError(1, 1, False)
 		EndIf
 	Else
-		$Destroyed = GUICtrlDelete($hWnd)
+		$iDestroyed = GUICtrlDelete($hWnd)
 	EndIf
-	If $Destroyed Then $hWnd = 0
-	Return $Destroyed <> 0
+	If $iDestroyed Then $hWnd = 0
+	Return $iDestroyed <> 0
 EndFunc   ;==>_GUICtrlButton_Destroy
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_Enable($hWnd, $fEnable = True)
+Func _GUICtrlButton_Enable($hWnd, $bEnable = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	If _WinAPI_IsClassName($hWnd, $__BUTTONCONSTANT_ClassName) Then Return _WinAPI_EnableWindow($hWnd, $fEnable) = $fEnable
+	If _WinAPI_IsClassName($hWnd, $__BUTTONCONSTANT_ClassName) Then Return _WinAPI_EnableWindow($hWnd, $bEnable) = $bEnable
 EndFunc   ;==>_GUICtrlButton_Enable
 
 ; #FUNCTION# ====================================================================================================================
@@ -319,15 +319,15 @@ EndFunc   ;==>_GUICtrlButton_SetCheck
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetDontClick($hWnd, $fState = True)
+Func _GUICtrlButton_SetDontClick($hWnd, $bState = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	_SendMessage($hWnd, $BM_SETDONTCLICK, $fState)
+	_SendMessage($hWnd, $BM_SETDONTCLICK, $bState)
 EndFunc   ;==>_GUICtrlButton_SetDontClick
 
 ; #NO_DOC_FUNCTION# =============================================================================================================
 ; Name...........: _GUICtrlButton_SetDropDownState
 ; Description ...: Sets the drop down state for a button with style $TBSTYLE_DROPDOWN
-; Syntax.........: _GUICtrlButton_SetDropDownState ( $hWnd [, $fState = True] )
+; Syntax.........: _GUICtrlButton_SetDropDownState ( $hWnd [, $bState = True] )
 ; Parameters ....: $hWnd        - Handle to the control
 ;                  $iState      - Drop down state
 ;                  |  True  - For state of $BST_DROPDOWNPUSHED
@@ -341,19 +341,19 @@ EndFunc   ;==>_GUICtrlButton_SetDontClick
 ; Link ..........: @@MsdnLink@@ BCM_SETDROPDOWNSTATE
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetDropDownState($hWnd, $fState = True)
+Func _GUICtrlButton_SetDropDownState($hWnd, $bState = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	Return _SendMessage($hWnd, $BCM_SETDROPDOWNSTATE, $fState) <> 0
+	Return _SendMessage($hWnd, $BCM_SETDROPDOWNSTATE, $bState) <> 0
 EndFunc   ;==>_GUICtrlButton_SetDropDownState
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetFocus($hWnd, $fFocus = True)
+Func _GUICtrlButton_SetFocus($hWnd, $bFocus = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 	If _WinAPI_IsClassName($hWnd, $__BUTTONCONSTANT_ClassName) Then
-		If $fFocus Then
+		If $bFocus Then
 			Return _WinAPI_SetFocus($hWnd) <> 0
 		Else
 			Return _WinAPI_SetFocus(_WinAPI_GetParent($hWnd)) <> 0
@@ -365,7 +365,7 @@ EndFunc   ;==>_GUICtrlButton_SetFocus
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $fLarge = False)
+Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $bLarge = False)
 	Local $hImage, $hPrevImage
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
@@ -393,7 +393,7 @@ Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $fLarge = False)
 		Else
 			Local $tIcon = DllStructCreate("handle Handle")
 			Local $iRet
-			If $fLarge Then
+			If $bLarge Then
 				$iRet = _WinAPI_ExtractIconEx($sImageFile, $nIconId, $tIcon, 0, 1)
 			Else
 				$iRet = _WinAPI_ExtractIconEx($sImageFile, $nIconId, 0, $tIcon, 1)
@@ -427,10 +427,10 @@ Func _GUICtrlButton_SetImageList($hWnd, $hImage, $nAlign = 0, $iLeft = 1, $iTop 
 	DllStructSetData($tBUTTON_IMAGELIST, "Bottom", $iBottom)
 	DllStructSetData($tBUTTON_IMAGELIST, "Align", $nAlign)
 
-	Local $fEnabled = _GUICtrlButton_Enable($hWnd, False)
+	Local $bEnabled = _GUICtrlButton_Enable($hWnd, False)
 	Local $iRet = _SendMessage($hWnd, $BCM_SETIMAGELIST, 0, $tBUTTON_IMAGELIST, 0, "wparam", "struct*") <> 0
 	_GUICtrlButton_Enable($hWnd)
-	If Not $fEnabled Then _GUICtrlButton_Enable($hWnd, False)
+	If Not $bEnabled Then _GUICtrlButton_Enable($hWnd, False)
 	Return $iRet
 EndFunc   ;==>_GUICtrlButton_SetImageList
 
@@ -448,9 +448,9 @@ EndFunc   ;==>_GUICtrlButton_SetNote
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetShield($hWnd, $fRequired = True)
+Func _GUICtrlButton_SetShield($hWnd, $bRequired = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	Return _SendMessage($hWnd, $BCM_SETSHIELD, 0, $fRequired) = 1
+	Return _SendMessage($hWnd, $BCM_SETSHIELD, 0, $bRequired) = 1
 EndFunc   ;==>_GUICtrlButton_SetShield
 
 ; #FUNCTION# ====================================================================================================================
@@ -477,13 +477,13 @@ EndFunc   ;==>_GUICtrlButton_SetSize
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetSplitInfo($hWnd, $himlGlyph = -1, $iSplitStyle = $BCSS_ALIGNLEFT, $iWidth = 0, $iHeight = 0)
+Func _GUICtrlButton_SetSplitInfo($hWnd, $hImlGlyph = -1, $iSplitStyle = $BCSS_ALIGNLEFT, $iWidth = 0, $iHeight = 0)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 	Local $tSplitInfo = DllStructCreate($tagBUTTON_SPLITINFO), $iMask = 0
 
-	If $himlGlyph <> -1 Then
+	If $hImlGlyph <> -1 Then
 		$iMask = BitOR($iMask, $BCSIF_GLYPH)
-		DllStructSetData($tSplitInfo, "himlGlyph", $himlGlyph)
+		DllStructSetData($tSplitInfo, "himlGlyph", $hImlGlyph)
 	EndIf
 
 	$iMask = BitOR($iMask, $BCSIF_STYLE)
@@ -505,9 +505,9 @@ EndFunc   ;==>_GUICtrlButton_SetSplitInfo
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetState($hWnd, $fHighlighted = True)
+Func _GUICtrlButton_SetState($hWnd, $bHighlighted = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	_SendMessage($hWnd, $BM_SETSTATE, $fHighlighted)
+	_SendMessage($hWnd, $BM_SETSTATE, $bHighlighted)
 EndFunc   ;==>_GUICtrlButton_SetState
 
 ; #FUNCTION# ====================================================================================================================
@@ -547,10 +547,10 @@ EndFunc   ;==>_GUICtrlButton_SetTextMargin
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_Show($hWnd, $fShow = True)
+Func _GUICtrlButton_Show($hWnd, $bShow = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 	If _WinAPI_IsClassName($hWnd, $__BUTTONCONSTANT_ClassName) Then
-		If $fShow Then
+		If $bShow Then
 			Return _WinAPI_ShowWindow($hWnd, @SW_SHOW)
 		Else
 			Return _WinAPI_ShowWindow($hWnd, @SW_HIDE)

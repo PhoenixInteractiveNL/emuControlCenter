@@ -1,0 +1,42 @@
+head{
+	font-family:Sansation;
+	font-size:24pt;
+	color:#0066ff;
+}
+
+headBack{
+	font-family:Sansation;
+	font-size:24pt;
+	color:#349FC4;
+}
+
+body{
+	font-family:Myriad Pro;
+	font-size:14pt;
+	color:#2b2b2b;
+}
+
+bodyBack{
+	font-family:Myriad Pro;
+	font-size:14pt;
+	color:#3b3b3b;
+}
+
+counter{
+	font-family:Sansation;
+	font-size:20pt;
+	color:#0066ff;
+}
+
+counterBack{
+	font-family:Sansation;
+	font-size:20pt;
+	color:#dddddd;
+}
+
+circleText{
+	font-family:Arial;
+	font-size:20pt;
+	color:#FFFFFF;
+	text-align:center;
+}

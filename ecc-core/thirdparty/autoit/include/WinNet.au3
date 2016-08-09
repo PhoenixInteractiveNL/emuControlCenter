@@ -1,11 +1,11 @@
 #include-once
 
-#include "WinAPI.au3"
 #include "StructureConstants.au3"
+#include "WinAPI.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WindowsNetworking
-; AutoIt Version : 3.3.7.20++
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Functions that assist with Windows Networking management.
 ;                  The Windows Networking (WNet) functions allow you to implement networking  capabilities  in  your  application
@@ -362,8 +362,8 @@ EndFunc   ;==>_WinNet_AddConnection3
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _WinNet_CancelConnection($sName, $fForce = True)
-	Local $aResult = DllCall("mpr.dll", "dword", "WNetCancelConnectionW", "wstr", $sName, "bool", $fForce)
+Func _WinNet_CancelConnection($sName, $bForce = True)
+	Local $aResult = DllCall("mpr.dll", "dword", "WNetCancelConnectionW", "wstr", $sName, "bool", $bForce)
 	If @error Then Return SetError(@error, @extended, False)
 	Return SetError($aResult[0], 0, $aResult[0] = 0)
 EndFunc   ;==>_WinNet_CancelConnection
@@ -372,8 +372,8 @@ EndFunc   ;==>_WinNet_CancelConnection
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _WinNet_CancelConnection2($sName, $fUpdate = True, $fForce = True)
-	Local $aResult = DllCall("mpr.dll", "dword", "WNetCancelConnection2W", "wstr", $sName, "dword", $fUpdate, "bool", $fForce)
+Func _WinNet_CancelConnection2($sName, $bUpdate = True, $bForce = True)
+	Local $aResult = DllCall("mpr.dll", "dword", "WNetCancelConnection2W", "wstr", $sName, "dword", $bUpdate, "bool", $bForce)
 	If @error Then Return SetError(@error, @extended, False)
 	Return SetError($aResult[0], 0, $aResult[0] = 0)
 EndFunc   ;==>_WinNet_CancelConnection2
@@ -794,13 +794,13 @@ EndFunc   ;==>_WinNet_OpenEnum
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _WinNet_RestoreConnection($sDevice = "", $hWnd = 0, $fUseUI = True)
+Func _WinNet_RestoreConnection($sDevice = "", $hWnd = 0, $bUseUI = True)
 	Local $tDevice = 0
 	If $sDevice <> "" Then
 		$tDevice = _WinAPI_MultiByteToWideChar($sDevice)
 	EndIf
 
-	Local $aResult = DllCall("mpr.dll", "dword", "WNetRestoreConnectionW", "hwnd", $hWnd, "struct*", $tDevice, "bool", $fUseUI)
+	Local $aResult = DllCall("mpr.dll", "dword", "WNetRestoreConnectionW", "hwnd", $hWnd, "struct*", $tDevice, "bool", $bUseUI)
 	If @error Then Return SetError(@error, @extended, False)
 	Return SetError($aResult[0], 0, $aResult[0] = 0)
 EndFunc   ;==>_WinNet_RestoreConnection

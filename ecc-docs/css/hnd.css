@@ -102,29 +102,35 @@ span.rvts18
 span.rvts19
 {
  font-family: 'Courier New', 'Courier', monospace;
+ font-weight: bold;
+ color: #0000ff;
 }
 span.rvts20
 {
  font-family: 'Courier New', 'Courier', monospace;
  font-weight: bold;
- color: #0000ff;
+ color: #3333ff;
 }
 span.rvts21
 {
  font-family: 'Courier New', 'Courier', monospace;
  font-weight: bold;
- color: #3333ff;
+ color: #0000ff;
 }
 span.rvts22
 {
  font-family: 'Courier New', 'Courier', monospace;
  font-weight: bold;
- color: #0000ff;
+ color: #000000;
 }
 span.rvts23
 {
  font-family: 'Courier New', 'Courier', monospace;
  color: #000000;
+}
+span.rvts24
+{
+ font-family: 'Courier New', 'Courier', monospace;
 }
 /* ========== Para Styles ========== */
 p,ul,ol /* Paragraph Style */

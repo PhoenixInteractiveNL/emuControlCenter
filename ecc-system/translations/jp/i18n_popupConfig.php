@@ -87,7 +87,7 @@ $i18n['popupConfig'] = array(
 	'lbl_dat_opt_hdl' =>
 		"ï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½",
 	'lbl_dat_opt_namestrip' =>
-		"RomCenterï¿½fï¿½[ï¿½^ï¿½í ‚í¾—ï¿½",
+		"RomCenterï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 		
 	/* 0.9 FYEO 3 */
 	'lbl_img_otp_list_hdl' =>
@@ -182,7 +182,7 @@ $i18n['popupConfig'] = array(
 	'lbl_emu_assign_create_eccscript' =>
 		"eccï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Ìì¬",
 	'emu_info_nodata' =>
-		"ï¿½Ü‚ï¿½ï¿½ï¿½í£Šíº‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½...",
+		"ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½...",
 	'emu_info_footer%s' =>
 		"ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½bï¿½gï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½É“Kï¿½Ø‚ÈƒGï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½â²‘ï¿½ï¿½mï¿½Å‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½È‚ï¿½ï¿½Ìï¿½ï¿½â±‚ï¿½ï¿½ï¿½ï¿½\n%s\nï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ö’Ç‰Bï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I",
 	
@@ -336,7 +336,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"use .cue file",
+		"use CD-index (cue,ccd,toc,m3u) file if available",
 
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
@@ -359,10 +359,6 @@ $i18n['popupConfig'] = array(
 		"Empty ECC unpack folder on exit",
 
 	/* 1.13 BUILD 4-8 */
-	'lbl_ecc_videoplayer' =>	
-	"ECC Video Player need to have VLC player installed!, download @ http://www.videolan.org/vlc",
-	'lbl_ecc_videoplayer_note' =>	
-	"NOTES: 1) Use VideoLAN VLC v2.0.4+  2) Install the ActiveX component!",
 	'eccVideoPlayer_enable' =>
 		"Enable Video Player",
 	'eccVideoPlayer_sound' =>
@@ -383,13 +379,23 @@ $i18n['popupConfig'] = array(
 		"IMAGE TAB in main view options",
 	'tabGeneralImageTabTcuttLabel' =>	
 		"Text cuttoff length (characters):",
-	'tabGeneralParsingOptions' =>	
-		"Parsing options:",
+	'tabGeneralParsingUnpackingOptions' =>	
+		"Parsing / Unpacking options",
 	'tabGeneralParsingTriggerLabel' =>	
 		"Big file parser trigger size (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
 		"(experimental, PHP could crash if set to high)",
 	'ThemeSelectLabel' =>
 		"Theme:",
+		
+	/* 1.152 BUILD 04 */		
+	'tabGeneralUnpackGUITriggerLabel' =>	
+		"Unpack GUI (progressbar) trigger size (MB)",
+	'tabGeneralUnpackGUITriggerNoteLabel' =>	
+		"(depends on computer speed / wait time)",
+
+	/* 1.152 BUILD 06 */		
+	'lblUseThemeColors' =>	
+		"Use theme colors",
 );
 ?>

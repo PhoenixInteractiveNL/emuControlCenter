@@ -334,7 +334,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"gebruik .cue bestand wanneer aanwezig",
+		"gebruik CD-index (cue,ccd,toc,m3u) bestand wanneer aanwezig",
 
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
@@ -357,10 +357,6 @@ $i18n['popupConfig'] = array(
 		"Maak folder met tijdelijke bestanden leeg bij afsluiten.",
 
 	/* 1.13 BUILD 4-8 */
-	'lbl_ecc_videoplayer' =>	
-	"ECC Video Player gebruikt VLC player deze moet je installeren!, download @ http://www.videolan.org/vlc",
-	'lbl_ecc_videoplayer_note' =>	
-	"LET OP: 1) Gebruik VideoLAN VLC v2.0.4+  2) Installeer het ActiveX component!",
 	'eccVideoPlayer_enable' =>
 		"Video Player aanzetten",
 	'eccVideoPlayer_sound' =>
@@ -376,18 +372,28 @@ $i18n['popupConfig'] = array(
 
 	/* 1.13 BUILD 12 */		
 	'lbl_ecc_opt_hdl' =>
-		"Other options",
+		"Overige opties",
 	'tabGeneralImageTabOptions' =>
-		"IMAGE TAB in main view options",
+		"PLAATJES TAB in hoofd scherm opties",
 	'tabGeneralImageTabTcuttLabel' =>	
-		"Text cuttoff length (characters):",
-	'tabGeneralParsingOptions' =>	
-		"Parsing options:",
+		"Tekst afbreken bij x karakters:",
+	'tabGeneralParsingUnpackingOptions' =>	
+		"Verwerking / Uitpakken opties:",
 	'tabGeneralParsingTriggerLabel' =>	
-		"Big file parser trigger size (MB)",
+		"Grote bestanden verwerkings module trigger grootte (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
-		"(experimental, PHP could crash if set to high)",
+		"(experimenteel, PHP kan crashen als deze te hoog gezet wordt)",
 	'ThemeSelectLabel' =>
-		"Theme:",
+		"Thema:",
+		
+	/* 1.152 BUILD 04 */		
+	'tabGeneralUnpackGUITriggerLabel' =>	
+		"GUI voor uitpakken (progressbar) trigger grootte (MB)",
+	'tabGeneralUnpackGUITriggerNoteLabel' =>	
+		"(hangt af van computer snelheid / wachttijd)",
+
+	/* 1.152 BUILD 06 */		
+	'lblUseThemeColors' =>	
+		"Gebruik thema kleuren",
 );
 ?>

@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: File
-; AutoIt Version : 3.2
+; AutoIt Version : 3.3.12.0
 ; Language ......: English
 ; Description ...: Functions that assist with files and directories.
 ; Author(s) .....: Brian Keene, Michael Michta, erifash, Jon, JdeB, Jeremy Landes, MrCreatoR, cdkid, Valik, Erik Pilsits, Kurt, Dale, guinness, DXRW4E, Melba23
@@ -47,7 +47,7 @@ Func _FileCountLines($sFilePath)
 
 	Local $sFileRead = StringStripWS(FileRead($hFileOpen), $STR_STRIPTRAILING)
 	FileClose($hFileOpen)
-	Return UBound(StringRegExp($sFileRead, "(*BSR_ANYCRLF)\R", 3)) + 1 - Int($sFileRead = "")
+	Return UBound(StringRegExp($sFileRead, "\R", $STR_REGEXPARRAYGLOBALMATCH)) + 1 - Int($sFileRead = "")
 EndFunc   ;==>_FileCountLines
 
 ; #FUNCTION# ====================================================================================================================
@@ -55,7 +55,7 @@ EndFunc   ;==>_FileCountLines
 ; Modified.......:
 ; ===============================================================================================================================
 Func _FileCreate($sFilePath)
-	Local $hFileOpen = FileOpen($sFilePath, $FO_OVERWRITE)
+	Local $hFileOpen = FileOpen($sFilePath, BitOR($FO_OVERWRITE, $FO_CREATEPATH))
 	If $hFileOpen = -1 Then Return SetError(1, 0, 0)
 
 	Local $iFileWrite = FileWrite($hFileOpen, "")
@@ -68,13 +68,13 @@ EndFunc   ;==>_FileCreate
 ; Author ........: Michael Michta
 ; Modified.......: guinness - Added optional parameter to return the full path.
 ; ===============================================================================================================================
-Func _FileListToArray($sFilePath, $sFilter = "*", $iFlag = 0, $fReturnPath = False)
+Func _FileListToArray($sFilePath, $sFilter = "*", $iFlag = 0, $bReturnPath = False)
 	Local $sDelimiter = "|", $sFileList = "", $sFileName = "", $sFullPath = ""
 
 	; Check parameters for the Default keyword or they meet a certain criteria
 	$sFilePath = StringRegExpReplace($sFilePath, "[\\/]+$", "") & "\" ; Ensure a single trailing backslash
 	If $iFlag = Default Then $iFlag = 0
-	If $fReturnPath Then $sFullPath = $sFilePath
+	If $bReturnPath Then $sFullPath = $sFilePath
 	If $sFilter = Default Then $sFilter = "*"
 
 	; Check if the directory exists
@@ -101,12 +101,12 @@ EndFunc   ;==>_FileListToArray
 Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0, $iSort = 0, $iReturnPath = 1)
 	Local $asReturnList[100] = [0], $asFileMatchList[100] = [0], $asRootFileMatchList[100] = [0], $asFolderMatchList[100] = [0], $asFolderSearchList[100] = [1]
 	Local $sInclude_List = "*", $sExclude_List, $sExclude_List_Folder, $sInclude_File_Mask = ".+", $sExclude_File_Mask = ":", $sInclude_Folder_Mask = ".+", $sExclude_Folder_Mask = ":"
-	Local $sFolderSlash = "", $iMaxLevel, $hSearch, $fFolder, $sRetPath = "", $sCurrentPath, $sName, $iAttribs, $iHide_HS = 0, $iHide_Link = 0, $fLongPath = False
+	Local $sFolderSlash = "", $iMaxLevel, $hSearch, $bFolder, $sRetPath = "", $sCurrentPath, $sName, $iAttribs, $iHide_HS = 0, $iHide_Link = 0, $bLongPath = False
 	Local $asFolderFileSectionList[100][2] = [[0, 0]], $sFolderToFind, $iFileSectionStartIndex, $iFileSectionEndIndex
 
 	; Check for valid path
 	If StringLeft($sInitialPath, 4) == "\\?\" Then
-		$fLongPath = True
+		$bLongPath = True
 	EndIf
 	If Not FileExists($sInitialPath) Then Return SetError(1, 1, "")
 
@@ -228,7 +228,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 			Case 1 ;Relative to initial path
 				$sRetPath = StringReplace($sCurrentPath, $sInitialPath, "")
 			Case 2 ; Full path
-				If $fLongPath Then
+				If $bLongPath Then
 					$sRetPath = StringTrimLeft($sCurrentPath, 4)
 				Else
 					$sRetPath = $sCurrentPath
@@ -283,9 +283,9 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					ContinueLoop
 				EndIf
 				; Set subfolder flag
-				$fFolder = 0
+				$bFolder = False
 				If BitAND($iAttribs, 16) Then
-					$fFolder = 1
+					$bFolder = True
 				EndIf
 			Else
 				; Use native code
@@ -295,11 +295,11 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					ExitLoop
 				EndIf
 				; Set subfolder flag - @extended set in 3.3.1.1 +
-				$fFolder = @extended
+				$bFolder = @extended
 			EndIf
 
 			; If folder then check whether to add to search list
-			If $fFolder Then
+			If $bFolder Then
 				Select
 					Case $iRecur < 0 ; Check recur depth
 						StringReplace($sCurrentPath, "\", "", 0, $STR_NOCASESENSEBASIC)
@@ -316,7 +316,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 			EndIf
 
 			If $iSort Then ; Save in relevant folders for later sorting
-				If $fFolder Then
+				If $bFolder Then
 					If StringRegExp($sName, $sInclude_Folder_Mask) And Not StringRegExp($sName, $sExclude_Folder_Mask) Then
 						__FLTAR_AddToList($asFolderMatchList, $sRetPath & $sName & $sFolderSlash)
 					EndIf
@@ -331,7 +331,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					EndIf
 				EndIf
 			Else ; Save directly in return list
-				If $fFolder Then
+				If $bFolder Then
 					If $iReturn <> 1 And StringRegExp($sName, $sInclude_Folder_Mask) And Not StringRegExp($sName, $sExclude_Folder_Mask) Then
 						__FLTAR_AddToList($asReturnList, $sRetPath & $sName & $sFolderSlash)
 					EndIf
@@ -388,7 +388,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					$asReturnList[0] += $asFolderMatchList[0]
 					; Resize and add file match array
 					ReDim $asFolderMatchList[$asFolderMatchList[0] + 1]
-					_ArrayConcatenate($asReturnList, $asFolderMatchList)
+					_ArrayConcatenate($asReturnList, $asFolderMatchList, 1)
 					; Simple sort final list
 					__ArrayDualPivotSort($asReturnList, 1, $asReturnList[0])
 				Else
@@ -481,7 +481,7 @@ Func __FLTAR_AddFileLists(ByRef $asTarget, $asSource_1, $asSource_2, $iSort = 0)
 	; Simple sort file match array if required
 	If $iSort = 1 Then __ArrayDualPivotSort($asSource_2, 1, $asSource_2[0])
 	; Add file match array
-	_ArrayConcatenate($asTarget, $asSource_2)
+	_ArrayConcatenate($asTarget, $asSource_2, 1)
 EndFunc   ;==>__FLTAR_AddFileLists
 
 ; #INTERNAL_USE_ONLY#============================================================================================================
@@ -526,7 +526,7 @@ Func __FLTAR_ListToMask(ByRef $sMask, $sList)
 	; Check for invalid characters within list
 	If StringRegExp($sList, "\\|/|:|\<|\>|\|") Then Return 0
 	; Strip WS and insert | for ;
-	$sList = StringReplace(StringStripWS(StringRegExpReplace($sList, "\s*;\s*", ";"), 3), ";", "|")
+	$sList = StringReplace(StringStripWS(StringRegExpReplace($sList, "\s*;\s*", ";"), $STR_STRIPLEADING + $STR_STRIPTRAILING), ";", "|")
 	; Convert to SRE pattern
 	$sList = StringReplace(StringReplace(StringRegExpReplace($sList, "[][$^.{}()+\-]", "\\$0"), "?", "."), "*", ".*?")
 	; Add prefix and suffix
@@ -546,26 +546,110 @@ EndFunc   ;==>_FilePrint
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Jonathan Bennett <jon at autoitscript dot com>, Valik - Support Windows Unix and Mac line separator
 ; Modified ......: Jpm - fixed empty line at the end, Gary Fixed file contains only 1 line, guinness - Optional flag to return the array count.
+;                : Melba23 - Read to 1D/2D arrays, guinness & jchd - Removed looping through 1D array with $FRTA_COUNT flag.
 ; ===============================================================================================================================
-Func _FileReadToArray($sFilePath, ByRef $aArray, $iFlag = 1)
-	If $iFlag Or $iFlag = Default Then
-		Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
-		If $hFileOpen = -1 Then Return SetError(1, 0, 0)
-		Local $sFileRead = FileRead($hFileOpen)
-		FileClose($hFileOpen)
+Func _FileReadToArray($sFilePath, ByRef $aArray, $iFlags = $FRTA_COUNT, $sDelimiter = "")
+	; Clear the previous contents
+	$aArray = 0
 
-		If StringLen($sFileRead) Then
-			$aArray = StringRegExp(@CRLF & $sFileRead, "([^\r\n]*)(?:\r\n|\n|\r|$)", 3)
-			$aArray[0] = UBound($aArray) - 2
-			ReDim $aArray[UBound($aArray) - 1]
-		Else
-			Return SetError(2, 0, 0)
-		EndIf
-	Else
-		$aArray = FileReadToArray($sFilePath)
-		If @error Then Return SetError(@error, 0, 0)
+	If $iFlags = Default Then $iFlags = $FRTA_COUNT
+	If $sDelimiter = Default Then $sDelimiter = ""
+
+	; Set "array of arrays" flag
+	Local $bExpand = True
+	If BitAND($iFlags, $FRTA_INTARRAYS) Then
+		$bExpand = False
+		$iFlags -= $FRTA_INTARRAYS
+	EndIf
+	; Set delimiter flag
+	Local $iEntire = $STR_CHRSPLIT
+	If BitAND($iFlags, $FRTA_ENTIRESPLIT) Then
+		$iEntire = $STR_ENTIRESPLIT
+		$iFlags -= $FRTA_ENTIRESPLIT
+	EndIf
+	; Set row count and split count flags
+	Local $iNoCount = 0
+	If $iFlags <> $FRTA_COUNT Then
+		$iFlags = $FRTA_NOCOUNT
+		$iNoCount = $STR_NOCOUNT
 	EndIf
 
+	; Check delimiter
+	If $sDelimiter Then
+		; Read file into an array
+		Local $aLines = FileReadToArray($sFilePath)
+		If @error Then Return SetError(@error, 0, 0)
+
+		; Get first dimension and add count if required
+		Local $iDim_1 = UBound($aLines) + $iFlags
+		; Check type of return array
+		If $bExpand Then ; All lines have same number of fields
+			; Count fields in first line
+			Local $iDim_2 = UBound(StringSplit($aLines[0], $sDelimiter, $iEntire + $STR_NOCOUNT))
+			; Size array
+			Local $aTemp_Array[$iDim_1][$iDim_2]
+			; Declare the variables
+			Local $iFields, _
+					$aSplit
+			; Loop through the lines
+			For $i = 0 To $iDim_1 - $iFlags - 1
+				; Split each line as required
+				$aSplit = StringSplit($aLines[$i], $sDelimiter, $iEntire + $STR_NOCOUNT)
+				; Count the items
+				$iFields = UBound($aSplit)
+				If $iFields <> $iDim_2 Then
+					; Return error
+					Return SetError(3, 0, 0)
+				EndIf
+				; Fill this line of the array
+				For $j = 0 To $iFields - 1
+					$aTemp_Array[$i + $iFlags][$j] = $aSplit[$j]
+				Next
+			Next
+			; Check at least 2 columns
+			If $iDim_2 < 2 Then Return SetError(4, 0, 0)
+			; Set dimension count
+			If $iFlags Then
+				$aTemp_Array[0][0] = $iDim_1 - $iFlags
+				$aTemp_Array[0][1] = $iDim_2
+			EndIf
+		Else ; Create "array of arrays"
+			; Size array
+			Local $aTemp_Array[$iDim_1]
+			; Loop through the lines
+			For $i = 0 To $iDim_1 - $iFlags - 1
+				; Split each line as required
+				$aTemp_Array[$i + $iFlags] = StringSplit($aLines[$i], $sDelimiter, $iEntire + $iNoCount)
+			Next
+			; Set dimension count
+			If $iFlags Then
+				$aTemp_Array[0] = $iDim_1 - $iFlags
+			EndIf
+		EndIf
+		; Return the array
+		$aArray = $aTemp_Array
+	Else ; 1D
+		If $iFlags Then
+			Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
+			If $hFileOpen = -1 Then Return SetError(1, 0, 0)
+			Local $sFileRead = FileRead($hFileOpen)
+			FileClose($hFileOpen)
+
+			If StringLen($sFileRead) Then
+				$aArray = StringRegExp(@LF & $sFileRead, "(?|(\N+)\z|(\N*)(?:\R))", 3)
+				$aArray[0] = UBound($aArray) - 1
+			Else
+				Return SetError(2, 0, 0)
+			EndIf
+		Else
+			$aArray = FileReadToArray($sFilePath)
+			If @error Then
+				$aArray = 0
+				Return SetError(@error, 0, 0)
+			EndIf
+		EndIf
+
+	EndIf
 	Return 1
 EndFunc   ;==>_FileReadToArray
 
@@ -578,7 +662,7 @@ Func _FileWriteFromArray($sFilePath, Const ByRef $aArray, $iBase = Default, $iUB
 	If Not IsArray($aArray) Then Return SetError(2, 0, 0)
 
 	; Check the number of dimensions
-	Local $iDims = UBound($aArray, 0)
+	Local $iDims = UBound($aArray, $UBOUND_DIMENSIONS)
 	If $iDims > 2 Then Return SetError(4, 0, 0)
 
 	; Determine last entry of the array
@@ -606,8 +690,8 @@ Func _FileWriteFromArray($sFilePath, Const ByRef $aArray, $iBase = Default, $iUB
 				EndIf
 			Next
 		Case 2
-			Local $sTemp
-			Local $iCols = UBound($aArray, 2)
+			Local $sTemp = ""
+			Local $iCols = UBound($aArray, $UBOUND_COLUMNS)
 			For $i = $iBase To $iUBound
 				$sTemp = $aArray[$i][0]
 				For $j = 1 To $iCols - 1
@@ -673,30 +757,30 @@ Func _FileWriteToLine($sFilePath, $iLine, $sText, $iOverWrite = 0)
 	If $iOverWrite <> 0 And $iOverWrite <> 1 Then Return SetError(5, 0, 0)
 	If FileExists($sFilePath) = 0 Then Return SetError(2, 0, 0)
 
-	Local $sFileRead = FileRead($sFilePath)
-	Local $aArray = StringRegExp(@CRLF & $sFileRead & @CRLF, "([^\r\n]*)(?:\r\n|\n|\r)(?:[\r\n]$)?", 3)
-	$aArray[0] = UBound($aArray) - 1
-	If ($aArray[0] + 1) < $iLine Then Return SetError(1, 0, 0)
+	Local $aArray = FileReadToArray($sFilePath)
+	Local $iUBound = UBound($aArray) - 1
+	If ($iUBound + 1) < $iLine Then Return SetError(1, 0, 0)
 
 	Local $hFileOpen = FileOpen($sFilePath, FileGetEncoding($sFilePath) + $FO_OVERWRITE)
 	If $hFileOpen = -1 Then Return SetError(3, 0, 0)
 
-	$sFileRead = ""
-	For $i = 1 To $aArray[0]
+	Local $sData = ""
+	$iLine -= 1 ; Now the array is 0-based, so reduce the line number by 1.
+	For $i = 0 To $iUBound
 		If $i = $iLine Then
 			If $iOverWrite Then
-				If $sText <> '' Then $sFileRead &= $sText & @CRLF
+				If $sText Then $sData &= $sText & @CRLF
 			Else
-				$sFileRead &= $sText & @CRLF & $aArray[$i] & @CRLF
+				$sData &= $sText & @CRLF & $aArray[$i] & @CRLF
 			EndIf
-		ElseIf $i < $aArray[0] Then
-			$sFileRead &= $aArray[$i] & @CRLF
-		ElseIf $i = $aArray[0] Then
-			$sFileRead &= $aArray[$i]
+		ElseIf $i < $iUBound Then
+			$sData &= $aArray[$i] & @CRLF
+		ElseIf $i = $iUBound Then
+			$sData &= $aArray[$i]
 		EndIf
 	Next
 
-	FileWrite($hFileOpen, $sFileRead)
+	FileWrite($hFileOpen, $sData)
 	FileClose($hFileOpen)
 	Return 1
 EndFunc   ;==>_FileWriteToLine
@@ -860,7 +944,7 @@ EndFunc   ;==>_PathMake
 ; Modified.......: DXRW4E - Re-wrote to use a regular expression; guinness - Update syntax and structure.
 ; ===============================================================================================================================
 Func _PathSplit($sFilePath, ByRef $sDrive, ByRef $sDir, ByRef $sFileName, ByRef $sExtension)
-	Local $aArray = StringRegExp($sFilePath, "^\h*((?:\\\\\?\\)*(\\\\[^\?\/\\]+|[A-Za-z]:)?(.*[\/\\]\h*)?((?:[^\.\/\\]|(?(?=\.[^\/\\]*\.)\.))*)?([^\/\\]*))$", 1)
+	Local $aArray = StringRegExp($sFilePath, "^\h*((?:\\\\\?\\)*(\\\\[^\?\/\\]+|[A-Za-z]:)?(.*[\/\\]\h*)?((?:[^\.\/\\]|(?(?=\.[^\/\\]*\.)\.))*)?([^\/\\]*))$", $STR_REGEXPARRAYMATCH)
 	If @error Then ; This error should never happen.
 		ReDim $aArray[5]
 		$aArray[0] = $sFilePath

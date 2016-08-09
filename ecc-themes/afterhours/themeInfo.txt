@@ -1,5 +1,5 @@
 name="Afterhours"
 author="Cyrille"
 date="20080706"
-contact="http://ecc.phoenixinteractive.mine.nu/memberlist.php"
+contact="http://eccforum.phoenixinteractive.nl/memberlist.php"
 website=""

@@ -1,0 +1,35 @@
+head {
+font-family:Myriad Pro;
+font-size:24px;
+color:#000000;
+text-align:center;
+}
+
+headBack {
+font-family:Myriad Pro;
+font-size:24px;
+color:#373636;
+text-align:center;
+}
+
+body {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#505050; 
+text-align:center;
+}
+
+bodyBack {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#000000; 
+text-align:center;
+}
+
+a {
+font-family:Myriad Pro;	
+font-size:14px;
+color:#505050;
+text-decoration:underline;
+}
+

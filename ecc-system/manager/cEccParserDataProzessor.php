@@ -1,14 +1,11 @@
 <?php
 $iniManager = FACTORY::get('manager/IniFile');
-
 // Variable for trigger size, added 2012-12-07 (ECC v1.13 build 12)
 $ExtParserTriggerSizeMB = $iniManager->getKey('USER_SWITCHES', 'ext_parser_trigger_size');
 if ($ExtParserTriggerSizeMB < 1 or $ExtParserTriggerSizeMB > 99999 or $ExtParserTriggerSizeMB == "" or !is_numeric($ExtParserTriggerSizeMB)) $ExtParserTriggerSizeMB = 100; //default value
 $ExtParserTriggerSize = $ExtParserTriggerSizeMB * 1024 * 1024; // convert MB to bytes
-// --->
-
-
 define('ExtParserTriggerSize', $ExtParserTriggerSize);
+// --->
 
 class EccParserDataProzessor{
 	
@@ -119,7 +116,7 @@ class EccParserDataProzessor{
 					}
 					else {
 
-						if ($size_fs >= $ExtParserTriggerSize){
+						if ($size_fs >= ExtParserTriggerSize){
 							$fileSizeMB = round($size_fs/1024/1024, 1)." MB";
 							$fileName = ($file_name_packed) ? basename($file_name_packed) : basename($file_name_direct);
 							$title = I18N::get('popup', 'parse_big_file_found_title');
@@ -225,14 +222,18 @@ class EccParserDataProzessor{
 									
 									break;
 
-								// seven zip file (7z)
+								// 7z/rar file
 								case ParserFile::SZIP:
 									
 									$parser = $this->getParser($parserFile->getExtension());
 									if(!$parser->hasRipHeader()){
 										
 										$out = array();
-										$out['FILE_NAME'] = basename($parserFile->getNamePacked());
+										//OLD
+										//$out['FILE_NAME'] = basename($parserFile->getNamePacked());
+										//
+										//2014.05.25 Adjusted for ROM files in archives 7z/rar to have no extension in the TITLE column in fdata
+										$out['FILE_NAME'] = FileIO::get_plain_filename(basename($parserFile->getNamePacked()));							
 										$out['FILE_PATH'] = $parserFile->getName();
 										$out['FILE_PATH_PACK'] = $parserFile->getNamePacked();
 										$out['FILE_EXT'] = strtoupper($eccident);
@@ -254,7 +255,7 @@ class EccParserDataProzessor{
 										$tempFileHandle = fopen($tempFile, 'rb');
 										
 										$out = $parser->parse($tempFileHandle, $tempFile, $parserFile->getName(), $parserFile->getNamePacked());
-
+										
 										fclose($tempFileHandle);
 										unlink($tempFile);
 										
@@ -278,7 +279,7 @@ class EccParserDataProzessor{
 						if ($out && $out['FILE_VALID']) {
 							
 							/*
-							 * HYPERFAST MODE!!!!!!!!!!!!!!!!!
+							 * HYPERFAST MODE!!
 							 * THIS ONLY WORKS, IF THERE ARE FILESIZES AVAILABLE IN THE METADATA
 							 */
 							if ($this->connectedMetaOnlyEccident){

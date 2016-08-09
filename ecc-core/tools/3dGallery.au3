@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : 3D Gallery for viewing images!
-; Script version         : v1.1.0.8
-; Last changed           : 2014-03.28
+; Script version         : v1.2.0.0
+; Last changed           : 2014.04.23
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -16,6 +16,10 @@
 ; 3dcurvegallery		http://www.flashmo.com
 ; polaroidgallery		http://www.no3dfx.com/polaroid
 ; flshowcarouselblack	http://www.flshow.net
+; circulargallery		http://www.flashxml.net/circular-gallery.html
+; 3dphotorotator		http://www.flashxml.net/3d-photo-rotator.html
+; 3dphotozoom			http://www.flashxml.net/3d-photo-zoom.html
+; polaroidgalleryfx		http://www.flashxml.net/polaroid-gallery.html
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
@@ -49,6 +53,8 @@ Else
 		$GalleryResolutionY = $GalleryResolution[2]
 	EndIf
 EndIf
+
+Global $GalleryFolder = @ScriptDir & "\3dgallery_scripts\" & $GalleryToUse
 Global $GalleryDataFile = IniRead($GalleryConfigFile, $GalleryToUse, "datafile", "")
 Global $GalleryDataFileFull = @ScriptDir & "\3dgallery_scripts\" & $GalleryToUse & "\" & $GalleryDataFile
 Global $GalleryStartFile = IniRead($GalleryConfigFile, $GalleryToUse, "startfile", "")
@@ -124,11 +130,11 @@ Func GalleryConfig()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $ecc3DGALCONF = GUICreate("ECC 3D Gallery configuration", 342, 246, -1, -1)
+Global $ECC3DGALCONF = GUICreate("ECC 3D Gallery configuration", 342, 246, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Group1 = GUICtrlCreateGroup(" Select a 3D gallery ", 8, 0, 329, 169)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
-Global $GalleryList = GUICtrlCreateList("", 16, 16, 153, 123, BitOR($LBS_NOTIFY,$LBS_SORT,$WS_BORDER))
+Global $GalleryList = GUICtrlCreateList("", 16, 16, 153, 123, $GUI_SS_DEFAULT_LIST)
 GUICtrlSetBkColor(-1, 0xA6CAF0)
 Global $Label1 = GUICtrlCreateLabel("preview image:", 208, 8, 93, 17, 0)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
@@ -235,6 +241,8 @@ EndFunc ;UpdateGalleryData
 
 
 Func BuildDataFile($Gallery)
+ToolTip("Creating '" & $GalleryToUse & "' data files, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC 3D Gallery", 1, 6)
+
 ;=========================================================================================
 ;=========================================================================================
 ;
@@ -485,13 +493,13 @@ EndIf
 ;		<thumbnail>image.jpg</thumbnail>
 ;		<filename>image.jpg</filename>
 ;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
+;		<description>[DESCRIPTION]</description>
 ;	</photo>
 ;	<photo>
 ;		<thumbnail>image.jpg</thumbnail>
 ;		<filename>image.jpg</filename>
 ;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
+;		<description>[DESCRIPTION]</description>
 ;	</photo>
 ;</photos>
 
@@ -557,7 +565,7 @@ EndIf
 ;<?xml version="1.0"?>
 ;
 ;<photos>
-;	<config
+;	<config>
 ;		folder="photos/"
 ;		enable_fullscreen="true"
 ;		galaxy_background="true"
@@ -586,13 +594,13 @@ EndIf
 ;		<thumbnail>image.jpg</thumbnail>
 ;		<filename>image.jpg</filename>
 ;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
+;		<description>[DESCRIPTION]</description>
 ;	</photo>
 ;	<photo>
 ;		<thumbnail>image.jpg</thumbnail>
 ;		<filename>image.jpg</filename>
 ;		<tooltip>{TOOLTIP]</tooltip>
-;		<description>[DISCRIPTION]</description>
+;		<description>[DESCRIPTION]</description>
 ;	</photo>
 ;</photos>
 
@@ -661,8 +669,8 @@ EndIf
 ;
 ;<?xml version="1.0"?>
 ;<photos>
-;	<photo desc="DISCRIPTION" url="image.jpg" />
-;	<photo desc="DISCRIPTION" url="image.jpg" />
+;	<photo desc="DESCRIPTION" url="image.jpg" />
+;	<photo desc="DESCRIPTION" url="image.jpg" />
 ;</photos>
 
 If $Gallery = "polaroidgallery" Then
@@ -736,10 +744,408 @@ If $Gallery = "flshowcarouselblack" Then
 	WEnd
 FileClose($search)
 EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[circulargallery]
+;datafile="default.xml"
+;startfile="fullpage.html"
+;engine="Java / Flash"
+;website="http://www.flashxml.net/circular-gallery.html"
+;
+;Default datafile structure:
+;
+; <images>
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; </images>
+If $Gallery = "circulargallery" Then
 
+	;Write index.html to adjust JAVA dimensions
+	$FileHandle = FileOpen($GalleryStartFileFull, 10)
+	FileWriteLine($FileHandle, '<!DOCTYPE html>')
+	FileWriteLine($FileHandle, '<html lang="en">')
+	FileWriteLine($FileHandle, '<head>')
+	FileWriteLine($FileHandle, '	<meta http-equiv="content-type" content="text/html; charset=utf-8" />')
+	FileWriteLine($FileHandle, '	<title>CircularGalleryFX</title>')
+	FileWriteLine($FileHandle, '</head>')
+	FileWriteLine($FileHandle, '<body>')
+	FileWriteLine($FileHandle, '	<div id="DivCircularGalleryFX"></div>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript" src="swfobject.js"></script>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript">')
+	FileWriteLine($FileHandle, '		var flashvars = {};')
+	FileWriteLine($FileHandle, '		var params = {};')
+	FileWriteLine($FileHandle, '		params.base = "";')
+	FileWriteLine($FileHandle, '		params.scale = "noscale";')
+	FileWriteLine($FileHandle, '		params.salign = "tl";')
+	FileWriteLine($FileHandle, '		params.wmode = "transparent";')
+	FileWriteLine($FileHandle, '		params.allowFullScreen = "true";')
+	FileWriteLine($FileHandle, '		params.allowScriptAccess = "always";')
+	FileWriteLine($FileHandle, '		swfobject.embedSWF("CircularGalleryFX.swf", "DivCircularGalleryFX", ' & $GalleryResolutionX & ', ' & $GalleryResolutionY & ', "9.0.0", false, flashvars, params);')
+	FileWriteLine($FileHandle, '	</script>')
+	FileWriteLine($FileHandle, '</body>')
+	FileWriteLine($FileHandle, '</html>')
+	FileClose($FileHandle)
+
+	; Adjust settings.xml
+	_XMLFileOpen($GalleryFolder & "\settings.xml")
+	;Set Resolution
+	_XMLSetAttrib("settings/General_Properties/componentWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/General_Properties/componentHeight", "value", $GalleryResolutionY)
+
+	;Thumbnail size...set at 1/5 of the total resolution
+	_XMLSetAttrib("settings/Image_Properties/width", "value", $GalleryResolutionX / 5)
+	_XMLSetAttrib("settings/Image_Properties/height", "value", $GalleryResolutionY / 5)
+
+	; How far apart from eachother....in px?
+	_XMLSetAttrib("settings/Image_Properties/distance", "value", $GalleryResolutionY / 20)
+
+	;When clicked what resolution to show the image?, let's take about 80% of the resolution
+	_XMLSetAttrib("settings/Maximize_Properties/width", "value", $GalleryResolutionY / 1.2)
+	_XMLSetAttrib("settings/Maximize_Properties/height", "value", $GalleryResolutionY / 1.2)
+
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "images")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		FileClose($search)
+		ToolTip("No images found for this Rom!", @DesktopWidth/2, @DesktopHeight/2, "3D Gallery", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("images", "photo")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "image", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxImage", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxInfo", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxClass", "image")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", $GalleryImageUrl)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "target", "_blank")
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "head", GetRomTypeContents($file))
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "body", $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+	FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[3dphotorotator]
+;datafile="images.xml"
+;startfile="index.html"
+;engine="Java / Flash"
+;website="http://www.flashxml.net/3d-photo-rotator.html"
+;
+;Default datafile structure:
+;
+; <images>
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; </images>
+If $Gallery = "3dphotorotator" Then
+
+	;Write index.html to adjust JAVA dimensions
+	$FileHandle = FileOpen($GalleryStartFileFull, 10)
+	FileWriteLine($FileHandle, '<!DOCTYPE html>')
+	FileWriteLine($FileHandle, '<html lang="en">')
+	FileWriteLine($FileHandle, '<head>')
+	FileWriteLine($FileHandle, '	<meta http-equiv="content-type" content="text/html; charset=utf-8" />')
+	FileWriteLine($FileHandle, '	<title>3DPhotoRotatorFX</title>')
+	FileWriteLine($FileHandle, '</head>')
+	FileWriteLine($FileHandle, '<body>')
+	FileWriteLine($FileHandle, '	<div id="Div3DPhotoRotatorFX"></div>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript" src="swfobject.js"></script>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript">')
+	FileWriteLine($FileHandle, '		var flashvars = {};')
+	FileWriteLine($FileHandle, '		var params = {};')
+	FileWriteLine($FileHandle, '		params.base = "";')
+	FileWriteLine($FileHandle, '		params.scale = "noscale";')
+	FileWriteLine($FileHandle, '		params.salign = "tl";')
+	FileWriteLine($FileHandle, '		params.wmode = "transparent";')
+	FileWriteLine($FileHandle, '		params.allowFullScreen = "true";')
+	FileWriteLine($FileHandle, '		params.allowScriptAccess = "always";')
+	FileWriteLine($FileHandle, '		swfobject.embedSWF("3DPhotoRotatorFX.swf", "Div3DPhotoRotatorFX", ' & $GalleryResolutionX & ', ' & $GalleryResolutionY - 40 & ', "9.0.0", false, flashvars, params);')
+	FileWriteLine($FileHandle, '	</script>')
+	FileWriteLine($FileHandle, '</body>')
+	FileWriteLine($FileHandle, '</html>')
+	FileClose($FileHandle)
+
+	; Adjust settings.xml
+	_XMLFileOpen($GalleryFolder & "\settings.xml")
+	;Set Resolution
+	_XMLSetAttrib("settings/General_Properties/componentWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/General_Properties/componentHeight", "value", $GalleryResolutionY - 40)
+
+	;Thumbnail size...set at 1/5 of the total resolution
+	_XMLSetAttrib("settings/Item_Properties/thumbWidth", "value", $GalleryResolutionX / 3)
+	_XMLSetAttrib("settings/Item_Properties/thumbHeight", "value", $GalleryResolutionY / 3)
+
+	;When clicked what resolution to show the image?, let's take about 70% of the resolution
+	_XMLSetAttrib("settings/Item_Properties/expandWidth", "value", $GalleryResolutionY / 1.3)
+	_XMLSetAttrib("settings/Item_Properties/expandHeight", "value", $GalleryResolutionY / 1.3)
+
+	; Text offsets
+	_XMLSetAttrib("settings/Text_Properties/offsetX", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/offsetY", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/headOffsetY", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/headWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/Text_Properties/bodyWidth", "value",  $GalleryResolutionX)
+	_XMLSetAttrib("settings/Text_Properties/bodyOffsetY", "value",  $GalleryResolutionY - 360)
+
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "images")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		FileClose($search)
+		ToolTip("No images found for this Rom!", @DesktopWidth/2, @DesktopHeight/2, "3D Gallery", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("images", "photo")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "image", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxImage", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxInfo", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxClass", "image")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", "")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "target", "")
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "head", GetRomTypeContents($file))
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "body", $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+	FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[3dphotozoom]
+;datafile="images.xml"
+;startfile="index.html"
+;engine="Java / Flash"
+;website="http://www.flashxml.net/3d-photo-zoom.html"
+;
+;Default datafile structure:
+;
+; <images>
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; </images>
+If $Gallery = "3dphotozoom" Then
+
+	;Write index.html to adjust JAVA dimensions
+	$FileHandle = FileOpen($GalleryStartFileFull, 10)
+	FileWriteLine($FileHandle, '<!DOCTYPE html>')
+	FileWriteLine($FileHandle, '<html lang="en">')
+	FileWriteLine($FileHandle, '<head>')
+	FileWriteLine($FileHandle, '	<meta http-equiv="content-type" content="text/html; charset=utf-8" />')
+	FileWriteLine($FileHandle, '	<title>3DPhotoZoomFX</title>')
+	FileWriteLine($FileHandle, '</head>')
+	FileWriteLine($FileHandle, '<body>')
+	FileWriteLine($FileHandle, '	<div id="Div3DPhotoZoomFX"></div>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript" src="swfobject.js"></script>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript">')
+	FileWriteLine($FileHandle, '		var flashvars = {};')
+	FileWriteLine($FileHandle, '		var params = {};')
+	FileWriteLine($FileHandle, '		params.base = "";')
+	FileWriteLine($FileHandle, '		params.scale = "noscale";')
+	FileWriteLine($FileHandle, '		params.salign = "tl";')
+	FileWriteLine($FileHandle, '		params.wmode = "transparent";')
+	FileWriteLine($FileHandle, '		params.allowFullScreen = "true";')
+	FileWriteLine($FileHandle, '		params.allowScriptAccess = "always";')
+	FileWriteLine($FileHandle, '		swfobject.embedSWF("3DPhotoZoomFX.swf", "Div3DPhotoZoomFX", ' & $GalleryResolutionX & ', ' & $GalleryResolutionY & ', "9.0.0", false, flashvars, params);')
+	FileWriteLine($FileHandle, '	</script>')
+	FileWriteLine($FileHandle, '</body>')
+	FileWriteLine($FileHandle, '</html>')
+	FileClose($FileHandle)
+
+	; Adjust settings.xml
+	_XMLFileOpen($GalleryFolder & "\settings.xml")
+	;Set Resolution
+	_XMLSetAttrib("settings/General_Properties/componentWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/General_Properties/componentHeight", "value", $GalleryResolutionY - 40)
+
+	;Thumbnail size...set at 1/5 of the total resolution
+	_XMLSetAttrib("settings/Item_Properties/thumbWidth", "value", $GalleryResolutionX / 3)
+	_XMLSetAttrib("settings/Item_Properties/thumbHeight", "value", $GalleryResolutionY / 3)
+
+	;When clicked what resolution to show the image?
+	_XMLSetAttrib("settings/Item_Properties/expandZoom", "value", $GalleryResolutionY / 11)
+
+	; Text offsets
+	_XMLSetAttrib("settings/Text_Properties/offsetX", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/offsetY", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/headOffsetY", "value", 0)
+	_XMLSetAttrib("settings/Text_Properties/headWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/Text_Properties/bodyWidth", "value",  $GalleryResolutionX)
+	_XMLSetAttrib("settings/Text_Properties/bodyOffsetY", "value",  $GalleryResolutionY - 360)
+
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "images")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		FileClose($search)
+		ToolTip("No images found for this Rom!", @DesktopWidth/2, @DesktopHeight/2, "3D Gallery", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("images", "photo")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "image", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxImage", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxInfo", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxClass", "image")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", "")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "target", "")
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "head", GetRomTypeContents($file))
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "body", $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+	FileClose($search)
+EndIf
+;=========================================================================================
+;=========================================================================================
+;
+;[polaroidgalleryfx]
+;datafile="images.xml"
+;startfile="index.html"
+;engine="Java / Flash"
+;website="http://www.flashxml.net/polaroid-gallery.html"
+;
+;Default datafile structure:
+;
+; <images>
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; 	<photo image="image.jpg" colorboxImage="image.jpg" colorboxInfo="Item" colorboxClass="image" url = "http://website.com" target="_blank">
+; 	<head>TOOLTIP</head><body>DESCRIPTION</body></photo>
+;
+; </images>
+If $Gallery = "polaroidgalleryfx" Then
+
+	;Write index.html to adjust JAVA dimensions
+	$FileHandle = FileOpen($GalleryStartFileFull, 10)
+	FileWriteLine($FileHandle, '<!DOCTYPE html>')
+	FileWriteLine($FileHandle, '<html lang="en">')
+	FileWriteLine($FileHandle, '<head>')
+	FileWriteLine($FileHandle, '	<meta http-equiv="content-type" content="text/html; charset=utf-8" />')
+	FileWriteLine($FileHandle, '	<title>PolaroidGalleryFX</title>')
+	FileWriteLine($FileHandle, '</head>')
+	FileWriteLine($FileHandle, '<body>')
+	FileWriteLine($FileHandle, '	<div id="DivPolaroidGalleryFX"></div>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript" src="swfobject.js"></script>')
+	FileWriteLine($FileHandle, '	<script type="text/javascript">')
+	FileWriteLine($FileHandle, '		var flashvars = {};')
+	FileWriteLine($FileHandle, '		var params = {};')
+	FileWriteLine($FileHandle, '		params.base = "";')
+	FileWriteLine($FileHandle, '		params.scale = "noscale";')
+	FileWriteLine($FileHandle, '		params.salign = "tl";')
+	FileWriteLine($FileHandle, '		params.wmode = "transparent";')
+	FileWriteLine($FileHandle, '		params.allowFullScreen = "true";')
+	FileWriteLine($FileHandle, '		params.allowScriptAccess = "always";')
+	FileWriteLine($FileHandle, '		swfobject.embedSWF("PolaroidGalleryFX.swf", "DivPolaroidGalleryFX", ' & $GalleryResolutionX & ', ' & $GalleryResolutionY & ', "9.0.0", false, flashvars, params);')
+	FileWriteLine($FileHandle, '	</script>')
+	FileWriteLine($FileHandle, '</body>')
+	FileWriteLine($FileHandle, '</html>')
+	FileClose($FileHandle)
+
+	; Adjust settings.xml
+	_XMLFileOpen($GalleryFolder & "\settings.xml")
+	;Set Resolution
+	_XMLSetAttrib("settings/General_Properties/componentWidth", "value", $GalleryResolutionX)
+	_XMLSetAttrib("settings/General_Properties/componentHeight", "value", $GalleryResolutionY)
+
+	;Thumbnail size...set at 1/4 of the total resolution
+	_XMLSetAttrib("settings/Image_Properties/width", "value", $GalleryResolutionX / 4)
+	_XMLSetAttrib("settings/Image_Properties/height", "value", $GalleryResolutionY / 4)
+
+	FileDelete($GalleryDataFileFull)
+	_XMLCreateFile($GalleryDataFileFull, "images")
+	_XMLFileOpen($GalleryDataFileFull)
+
+	$search = FileFindFirstFile($FullPathToImageFolder & "\*.*")
+	If $search = -1 Then
+		FileClose($search)
+		ToolTip("No images found for this Rom!", @DesktopWidth/2, @DesktopHeight/2, "3D Gallery", 1, 6)
+		Sleep(1500)
+		Exit
+	EndIf
+
+	While 1
+		$file = FileFindNextFile($search)
+		If @error Then ExitLoop
+
+		If IsFileOk($file) = 1 Then
+			$Teller = $Teller + 1
+			_XMLCreateChildNode("images", "photo")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "image", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxImage", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxInfo", $FullPathToImageFolder & $file)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxClass", "image")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", "")
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "target", "")
+			_XMLCreateChildNode("photos", "photo")
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "head", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
+			_XMLCreateChildNode("images/photo[" & $Teller & "]", "body", $RomName & " [" & $RomEccId & "]")
+		EndIf
+	WEnd
+	FileClose($search)
+EndIf
+
+
+ToolTip("")
 EndFunc ;BuildDataFile
-;=========================================================================================
-;=========================================================================================
 
 Func Terminate()
 	Exit

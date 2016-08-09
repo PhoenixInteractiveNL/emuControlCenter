@@ -334,7 +334,7 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.8 WIP 04 */
 	'lbl_emu_assign_usecuefile' =>
-		"usar archivos .cue",
+		"usar archivos CD-index (cue,ccd,toc,m3u)",
 
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
@@ -357,10 +357,6 @@ $i18n['popupConfig'] = array(
 		"Vaciar carpeta de archivos descomprimidos al salir",
 
 	/* 1.13 BUILD 4-8 */
-	'lbl_ecc_videoplayer' =>	
-	"ECC necesita tener VLC player instalado!, descargar en @ http://www.videolan.org/vlc",
-	'lbl_ecc_videoplayer_note' =>	
-	"NOTAS: 1) Usa VideoLAN VLC v2.0.4+  2) Instala los controladores de ActiveX!",
 	'eccVideoPlayer_enable' =>
 		"Activar reproductor de vídeo",
 	'eccVideoPlayer_sound' =>
@@ -381,13 +377,23 @@ $i18n['popupConfig'] = array(
 		"Opciones de visualización de la pestaña IMÁGENES",
 	'tabGeneralImageTabTcuttLabel' =>	
 		"Longitud del texto (caracteres):",
-	'tabGeneralParsingOptions' =>	
-		"Opciones de análisis:",
+	'tabGeneralParsingUnpackingOptions' =>	
+		"Parsing / Unpacking options",
 	'tabGeneralParsingTriggerLabel' =>	
 		"Análizar archivos grandes (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
 		"(experimental, PHP puede fallar si lo pones muy alto)",
 	'ThemeSelectLabel' =>
 		"Tema:",
+		
+	/* 1.152 BUILD 04 */		
+	'tabGeneralUnpackGUITriggerLabel' =>	
+		"Unpack GUI (progressbar) trigger size (MB)",
+	'tabGeneralUnpackGUITriggerNoteLabel' =>	
+		"(depends on computer speed / wait time)",
+
+	/* 1.152 BUILD 06 */		
+	'lblUseThemeColors' =>	
+		"Use theme colors",
 );
 ?>

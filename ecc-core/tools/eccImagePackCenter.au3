@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter ImagePackCenter (IPC)
 ;
-; Script version         : v2.2.0.9
-; Last changed           : 2013.02.19
+; Script version         : v2.2.1.0
+; Last changed           : 2014.03.29
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -11,44 +11,13 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
+#include "eccToolVariables.au3"
 
-#include "..\thirdparty\autoit\include\ButtonConstants.au3"
-#include "..\thirdparty\autoit\include\EditConstants.au3"
-#include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
-#include "..\thirdparty\autoit\include\ProgressConstants.au3"
-#include "..\thirdparty\autoit\include\StaticConstants.au3"
-#include "..\thirdparty\autoit\include\WindowsConstants.au3"
-#include "..\thirdparty\autoit\include\ComboConstants.au3"
-
-; Define variables
-Global $EccInstallFolder = StringReplace(@Scriptdir, "\ecc-core\tools", "")
-Global $7zexe = $EccInstallFolder & "\ecc-core\thirdparty\7zip\7z.exe"
-Global $IpcPresetFolder = @ScriptDir & "\eccImagePackCenter_presets"
-Global $AutoSavedIpcFile = @ScriptDir & "\" & "eccImagePackCenter.ipc"
-
-; Define variables for ECC database access
-Global $StripperExe = $EccInstallFolder & "\ecc-core\thirdparty\stripper\stripper.exe"
-Global $EccDataBaseFile = $EccInstallFolder & "\ecc-system\database\eccdb"
-Global $SQliteExe = $EccInstallFolder & "\ecc-core\thirdparty\sqlite\sqlite.exe"
-Global $SQLInstructionFile = @Scriptdir & "\sqlcommands.inst"
-Global $SQLCommandFile = @Scriptdir & "\sqlcommands.cmd"
-Global $PlatFormImagesFile = "platformdata.txt"
-
-;Determine USER folder (set in ECC config)
-Global $EccGeneralIni = $EccInstallFolder & "\ecc-user-configs\config\ecc_general.ini"
-Global $EccUserPathTemp = StringReplace(IniRead($EccGeneralIni, "USER_DATA", "base_path", ""), "/", "\")
-Global $EccUserPath = StringReplace($EccUserPathTemp, "..\", $EccInstallFolder & "\") ; Add full path to variable if it's an directory within the ECC structure
-
-; Read in ECC dumped values of the platform
-Global $EccPlatformIni	= $EccInstallFolder & "\ecc-system\selectedrom.ini"
-Global $PlatformId		= IniRead($EccPlatformIni, "ROMDATA", "rom_platformid", "") ; %PLATFORMID% variable
-Global $PlatformName	= IniRead($EccPlatformIni, "ROMDATA", "rom_platformname", "") ; %PLATFORMNAME% variable
-Global $EccImageFolder	= $EccUserPath & $PlatformId & "\images"
 Global $ProcessResult, $IpcSettingsFile, $AutoSave, $AutoLoad, $RomListRetrieved, $TrueFileName, $AbortProcess, $ImagesProcessed = 0
 Global $SelectedFolder, $SelectedRCFile
 
-; Exit if user wants to create an imagepack from the ECC menu "ALL PLATFORMS", this is not possible, $PlatformId = ""
-If $PlatformId = "" Then
+; Exit if user wants to create an imagepack from the ECC menu "ALL PLATFORMS", this is not possible, $RomEccId = ""
+If $RomEccId = "" Then
 	ToolTip("You cannot use this function for ALL platforms, please select a single platform!", @DesktopWidth/2, @DesktopHeight/2, "eccImagePackCenter", 1, 6)
 	Sleep(1500)
 	Exit
@@ -74,7 +43,7 @@ Func StartExport()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $ECCIPCEXPORT = GUICreate("ECC ImagePackCenter [EXPORT]", 1070, 808, -1, -1)
+Global $eccIPCEXPORT = GUICreate("ECC ImagePackCenter [EXPORT]", 1070, 808, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Label1 = GUICtrlCreateLabel("Processing:", 8, 488, 84, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
@@ -362,10 +331,10 @@ GUICtrlSetTip(-1, "Clear all GUI settings.")
 ;==============================================================================
 ;END *** GUI
 ;==============================================================================
-GUISetIcon(@ScriptDir & "\eccImagePackCenter_export.ico", "", $ECCIPCEXPORT) ;Set proper icon for the window.
-GUISetState(@SW_SHOW, $ECCIPCEXPORT)
-GUICtrlSetData($PlatformLabel, $PlatformName)
-GUICtrlSetData($eccidLabel, $PlatformId)
+GUISetIcon(@ScriptDir & "\eccImagePackCenter_export.ico", "", $eccIPCEXPORT) ;Set proper icon for the window.
+GUISetState(@SW_SHOW, $eccIPCEXPORT)
+GUICtrlSetData($PlatformLabel, $RomPlatformName)
+GUICtrlSetData($eccidLabel, $RomEccId)
 If FileExists($AutoSavedIpcFile) Then
 	$AutoLoad = 1
 	ReadFromFile($AutoSavedIpcFile)
@@ -381,10 +350,10 @@ While 1
 			$AutoSave = 1
 			FileDelete($AutoSavedIpcFile)
 			WriteToFile($AutoSavedIpcFile)
-			Global $ImageExportFolder = $EccInstallFolder & "\ecc-user-imagepacks\" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & @SEC & "_" & GUICtrlRead($ExportName) & "_export_of_" & $PlatformId
+			Global $ImageExportFolder = $eccInstallPath & "\ecc-user-imagepacks\" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & @SEC & "_" & GUICtrlRead($ExportName) & "_export_of_" & $RomEccId
 			$ImagesProcessed = 0
 			$AbortProcess = 0
-			StartFileExport($EccImageFolder) ; Search for images
+			StartFileExport($eccImageFolder) ; Search for images
 
 			If GUICtrlRead($CheckBoxZip) = $GUI_CHECKED Then
 				ToolTip("Compressing images with 7ZIP, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
@@ -447,7 +416,7 @@ Func StartImport()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $ECCIPCIMPORT = GUICreate("ECC ImagePackCenter [IMPORT]", 361, 511, -1, -1)
+Global $eccIPCIMPORT = GUICreate("ECC ImagePackCenter [IMPORT]", 361, 511, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Label1 = GUICtrlCreateLabel("Processing:", 8, 288, 84, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
@@ -505,10 +474,10 @@ GUICtrlSetFont(-1, 7, 400, 0, "Verdana")
 ;==============================================================================
 ;END *** GUI
 ;==============================================================================
-GUISetIcon(@ScriptDir & "\eccImagePackCenter_import.ico", "", $ECCIPCIMPORT) ;Set proper icon for the window.
-GUISetState(@SW_SHOW, $ECCIPCIMPORT)
-GUICtrlSetData($PlatformLabel, $PlatformName)
-GUICtrlSetData($eccidLabel, $PlatformId)
+GUISetIcon(@ScriptDir & "\eccImagePackCenter_import.ico", "", $eccIPCIMPORT) ;Set proper icon for the window.
+GUISetState(@SW_SHOW, $eccIPCIMPORT)
+GUICtrlSetData($PlatformLabel, $RomPlatformName)
+GUICtrlSetData($eccidLabel, $RomEccId)
 $SelectedFolder = ""
 
 While 1
@@ -588,7 +557,7 @@ While 1
 		Global $ImageFileCrc32Short = StringMid($ImageFileCrc32, 1, 2)
 
 		GUICtrlSetData($ImportProcessingLabel, $ImageFileName)
-		FileCopy_IPC($RFSstartDir & $RFSnext, $EccUserPath & $PlatformId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $PlatformId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
+		FileCopy_IPC($RFSstartDir & $RFSnext, $eccUserPath & $RomEccId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $RomEccId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
 	EndIf
 
 	If GUICtrlRead($ImportDumpType) = "NAME Based (like EmuMovies)" Then
@@ -605,7 +574,7 @@ While 1
 				If $ImageFileCrc32 <> "" Then ;Is the ROMNAME found in the RomCenter DATfile?
 					Global $ImageFileCrc32Short = StringMid($ImageFileCrc32, 1, 2)
 					GUICtrlSetData($ImportProcessingLabel, $ImageFileName)
-					FileCopy_IPC($RFSstartDir & $RFSnext, $EccUserPath & $PlatformId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $PlatformId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
+					FileCopy_IPC($RFSstartDir & $RFSnext, $eccUserPath & $RomEccId & "\images\" & $ImageFileCrc32Short & "\" & $ImageFileCrc32 & "\ecc_" & $RomEccId & "_" & $ImageFileCrc32 & "_" & GUICtrlRead($ImportImageType) & "." & $ImageFileExtension)
 				EndIf
 			Else
 				ToolTip("This RomCenter DAT version is not supported!", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
@@ -634,9 +603,9 @@ EndFunc ;==>StartFileImport
 
 Func RetrieveCRCFromFilename($nametofind)
 $TrueCRC = ""
-$PlatFormImagesFileHandle = Fileopen($SelectedRCFile)
+$PlatFormDataFileHandle = Fileopen($SelectedRCFile)
 While 1
-	$PlatFormImagesData = FileReadLine($PlatFormImagesFileHandle)
+	$PlatFormImagesData = FileReadLine($PlatFormDataFileHandle)
 	If @error = -1 Then ExitLoop
 	$DBFilenameData = StringSplit($PlatFormImagesData, Chr(172))
 		If Ubound($DBFilenameData) > 10 Then ;We have found a DATA line (this way header lines are not processed)
@@ -647,7 +616,7 @@ While 1
 		EndIf
 	EndIf
 WEnd
-FileClose($PlatFormImagesFileHandle)
+FileClose($PlatFormDataFileHandle)
 Return($TrueCRC)
 EndFunc ;==>RetrieveFilenameFromCRC
 
@@ -897,8 +866,8 @@ $ImagesProcessed = $ImagesProcessed + 1
 EndFunc ;==>FileCopy_IPC
 
 Func ProcessVariables($Input)
-$Input = StringReplace($Input, "%PLATFORMID%", $PlatformId)
-$Input = StringReplace($Input, "%PLATFORMNAME%", $PlatformName)
+$Input = StringReplace($Input, "%PLATFORMID%", $RomEccId)
+$Input = StringReplace($Input, "%PLATFORMNAME%", $RomPlatformName)
 $Input = StringReplace($Input, "%CRC32%", $ImageFileCrc32)
 $Input = StringReplace($Input, "%CRC32SHORT%", $ImageFileCrc32Short)
 $Input = StringReplace($Input, "%IMAGEEXT%", $ImageFileExtension)
@@ -921,15 +890,15 @@ If $RomListRetrieved <> 1 Then
 
 	$INSTFile = Fileopen($SQLInstructionFile, 10)
 	FileWriteLine($INSTFile, ".separator ;")
-	FileWriteLine($INSTFile, ".output " & $PlatFormImagesFile)
-	FileWriteLine($INSTFile, "SELECT crc32, path FROM fdata WHERE eccident='" & $PlatformId & "';")
+	FileWriteLine($INSTFile, ".output " & $PlatFormDataFile)
+	FileWriteLine($INSTFile, "SELECT crc32, path FROM fdata WHERE eccident='" & $RomEccId & "';")
 	FileClose($INSTFile)
 
 	; It's not possible to execute the sqlite.exe with these command's, so we have to create a .BAT or .CMD file and then run that file.
-	; ShellExecuteWait($SQliteExe, Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
-	; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+	; ShellExecuteWait($SQliteExe, Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
+	; RunWait(Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir)
 	$CMDFile = Fileopen($SQLCommandFile, 10)
-	FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $EccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
+	FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 	FileClose($CMDFile)
 
 	RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
@@ -941,7 +910,7 @@ If $RomListRetrieved <> 1 Then
 	ToolTip("")
 
 	; Warning if user has no roms imported for the platform
-	If FileGetSize(@ScriptDir & "\" & $PlatFormImagesFile) < 8 Then
+	If FileGetSize(@ScriptDir & "\" & $PlatFormDataFile) < 8 Then
 		ToolTip("WARNING: Could not retrive any imported ROMS for this platform!", @DesktopWidth/2, @DesktopHeight/2, "ECC-IPC", 1, 6)
 		Sleep(1500)
 	EndIf
@@ -951,22 +920,22 @@ EndFunc ;==>GetDataFromEccDB
 
 
 Func RetrieveFilenameFromCRC($crc32tofind)
-$PlatFormImagesFileHandle = Fileopen(@ScriptDir & "\" & $PlatFormImagesFile)
+$PlatFormDataFileHandle = Fileopen(@ScriptDir & "\" & $PlatFormDataFile)
 While 1
-	$PlatFormImagesData = FileReadLine($PlatFormImagesFileHandle)
+	$PlatFormImagesData = FileReadLine($PlatFormDataFileHandle)
 	If @error = -1 Then ExitLoop
 	$DBFilenameData = StringSplit($PlatFormImagesData, ";")
 	If $crc32tofind = $DBFilenameData[1] Then
-		$PlatFormImagesFileName = $DBFilenameData[2]
-		$PlatFormImagesFileName = StringReplace($PlatFormImagesFileName, "/", "\") ; make sure all slashes are \
-		$PlatFormImagesFileNameData = StringSplit($PlatFormImagesFileName, "\")
-		$PlatFormImagesFileNameData = $PlatFormImagesFileNameData[Ubound($PlatFormImagesFileNameData)-1]
-		$TrueFileNameTemp = StringSplit($PlatFormImagesFileNameData, ".")
-		$TrueFileName = StringLeft($PlatFormImagesFileNameData, StringLen($PlatFormImagesFileNameData) - StringLen($TrueFileNameTemp[UBound($TrueFileNameTemp)-1]) - 1)
+		$PlatFormDataFileName = $DBFilenameData[2]
+		$PlatFormDataFileName = StringReplace($PlatFormDataFileName, "/", "\") ; make sure all slashes are \
+		$PlatFormDataFileNameData = StringSplit($PlatFormDataFileName, "\")
+		$PlatFormDataFileNameData = $PlatFormDataFileNameData[Ubound($PlatFormDataFileNameData)-1]
+		$TrueFileNameTemp = StringSplit($PlatFormDataFileNameData, ".")
+		$TrueFileName = StringLeft($PlatFormDataFileNameData, StringLen($PlatFormDataFileNameData) - StringLen($TrueFileNameTemp[UBound($TrueFileNameTemp)-1]) - 1)
 		ExitLoop
 	EndIf
 WEnd
-FileClose($PlatFormImagesFileHandle)
+FileClose($PlatFormDataFileHandle)
 Return($TrueFileName)
 EndFunc ;==>RetrieveFilenameFromCRC
 

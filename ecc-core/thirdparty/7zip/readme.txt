@@ -1,16 +1,16 @@
-7-Zip 9.30
+7-Zip 9.32
 ----------
 
-7-Zip is a file archiver for Windows 95/98/ME/NT/2000/2003/2008/XP/Vista/7. 
+7-Zip is a file archiver for Windows NT / 2000 / 2003 / 2008 / XP / Vista / 7 / 8. 
 
-7-Zip Copyright (C) 1999-2012 Igor Pavlov.
+7-Zip Copyright (C) 1999-2013 Igor Pavlov.
 
 The main features of 7-Zip: 
 
   - High compression ratio in the new 7z format
   - Supported formats:
      - Packing / unpacking: 7z, XZ, BZIP2, GZIP, TAR, ZIP and WIM.
-     - Unpacking only: ARJ, CAB, CHM, CPIO, CramFS, DEB, DMG, FAT, HFS, ISO, LZH, LZMA, 
+     - Unpacking only: AR, ARJ, CAB, CHM, CPIO, CramFS, DMG, FAT, HFS, ISO, LZH, LZMA, 
                        MBR, MSI, NSIS, NTFS, RAR, RPM, SquashFS, UDF, UEFI, VHD, WIM, XAR and Z.
   - Fast compression and decompression
   - Self-extracting capability for 7z format
@@ -18,14 +18,14 @@ The main features of 7-Zip:
   - Integration with Windows Shell
   - Powerful File Manager
   - Powerful command line version
-  - Localizations for 83 languages
+  - Localizations for 85 languages
 
 
 7-Zip is free software distributed under the GNU LGPL (except for unRar code).
 Read License.txt for more infomation about license.
 
 
-  This distribution contains the following files:
+  This distribution package contains the following files:
 
   7zFM.exe      - 7-Zip File Manager
   7-zip.dll     - Plugin for Windows Shell

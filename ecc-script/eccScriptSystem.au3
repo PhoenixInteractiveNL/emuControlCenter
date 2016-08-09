@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.2.1.5 (2013.12.29)
+; Version: 1.2.1.6 (2014.03.29)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -228,13 +228,13 @@ Func CDImage($CDaction)
 	EndIf
 
 	; Check if the extension is supported by Daemon Tools, and set extensions info tag.
-	
+
 	; $DTsupport = 0 (not supported)
 	; $DTsupport = 1 (supported)
 	; $DTsupport = 2 (can be supported, but possibly needs .cue (track-info) file to assist) --> ONE-TIME MESSAGE
-	
+
 	$DTsupport = 0
-		
+
 	Select
 		Case $eccFileRomExtension = "cue"
 			$RomExtensionInfo = "CUE sheet"
@@ -293,7 +293,7 @@ Func CDImage($CDaction)
 				IniWrite($eccConfigFile, "DAEMONTOOLS", "daemontools_warning", "1")
 			EndIf
 		Exit
-	EndIf
+	EndSelect
 
 	Select
 		Case $CDaction = "mount" ; Mount a CD image

@@ -5,7 +5,7 @@
 ; AutoIt Version : 3.2
 ; Language ......: English
 ; Description ...: Constants for GDI+
-; Author(s) .....: Valik, Gary Frost
+; Author(s) .....: Valik, Gary Frost, UEZ
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -161,4 +161,216 @@ Global Const $GDIP_IMAGEFLAGS_HASREALPIXELSIZE = 0x2000 ; pixel size is stored i
 Global Const $GDIP_IMAGEFLAGS_READONLY = 0x00010000 ; pixel data is read-only.
 Global Const $GDIP_IMAGEFLAGS_CACHING = 0x00020000 ; pixel data can be cached for faster access.
 
-; ===============================================================================================================================
+; Graphic SmoothingMode constants
+Global Const $GDIP_SMOOTHINGMODE_INVALID = -1 ; Reserved.
+Global Const $GDIP_SMOOTHINGMODE_DEFAULT = 0 ; Specifies that smoothing is not applied.
+Global Const $GDIP_SMOOTHINGMODE_HIGHSPEED = 1 ; Specifies that smoothing is not applied.
+Global Const $GDIP_SMOOTHINGMODE_HIGHQUALITY = 2 ; Specifies that smoothing is applied using an 8 X 4 box filter.
+Global Const $GDIP_SMOOTHINGMODE_NONE = 3 ; Specifies that smoothing is not applied.
+Global Const $GDIP_SMOOTHINGMODE_ANTIALIAS8X4 = 4 ; Specifies that smoothing is applied using an 8 X 4 box filter.
+Global Const $GDIP_SMOOTHINGMODE_ANTIALIAS = $GDIP_SMOOTHINGMODE_ANTIALIAS8X4 ; Specifies that smoothing is applied using an 8 X 4 box filter.
+Global Const $GDIP_SMOOTHINGMODE_ANTIALIAS8X8 = 5 ; Specifies that smoothing is applied using an 8 X 8 box filter.
+
+; Colors luminance
+Global Const $GDIP_RLUM = 0.3086
+Global Const $GDIP_GLUM = 0.6094
+Global Const $GDIP_BLUM = 0.0820
+
+; Interpolation Mode constants
+Global Const $GDIP_INTERPOLATIONMODE_INVALID = -1 ; Reserved (used internally)
+Global Const $GDIP_INTERPOLATIONMODE_DEFAULT = 0 ; Specifies the default interpolation mode
+Global Const $GDIP_INTERPOLATIONMODE_LOWQUALITY = 1 ; Specifies a low-quality mode
+Global Const $GDIP_INTERPOLATIONMODE_HIGHQUALITY = 2 ; Specifies a high-quality mode
+Global Const $GDIP_INTERPOLATIONMODE_BILINEAR = 3 ; Specifies bilinear interpolation. No prefiltering is done. This mode is not suitable for shrinking an image below 50 percent of its original size.
+Global Const $GDIP_INTERPOLATIONMODE_BICUBIC = 4 ; Specifies bicubic interpolation. No prefiltering is done. This mode is not suitable for shrinking an image below 25 percent of its original size
+Global Const $GDIP_INTERPOLATIONMODE_NEARESTNEIGHBOR = 5 ; Specifies nearest-neighbor interpolation
+Global Const $GDIP_INTERPOLATIONMODE_HIGHQUALITYBILINEAR = 6 ; Specifies high-quality, bilinear interpolation. Prefiltering is performed to ensure high-quality shrinking.
+Global Const $GDIP_INTERPOLATIONMODE_HIGHQUALITYBICUBIC = 7 ; Specifies high-quality, bicubic interpolation. Prefiltering is performed to ensure high-quality shrinking. This mode produces the highest quality transformed images.
+
+; TextRenderingHint constants
+Global Const $GDIP_TEXTRENDERINGHINT_SYSTEMDEFAULT = 0 ; Specifies that a character is drawn using the currently selected system font smoothing mode (also called a rendering hint).
+Global Const $GDIP_TEXTRENDERINGHINT_SINGLEBITPERPIXELGRIDFIT = 1 ; Specifies that a character is drawn using its glyph bitmap and hinting to improve character appearance on stems and curvature.
+Global Const $GDIP_TEXTRENDERINGHINT_SINGLEBITPERPIXEL = 2 ; Specifies that a character is drawn using its glyph bitmap and no hinting. This results in better performance at the expense of quality.
+Global Const $GDIP_TEXTRENDERINGHINT_ANTIALIASGRIDFIT = 3 ; Specifies that a character is drawn using its antialiased glyph bitmap and hinting. This results in much better quality due to antialiasing at a higher performance cost.
+Global Const $GDIP_TEXTRENDERINGHINT_ANTIALIAS = 4 ; Specifies that a character is drawn using its antialiased glyph bitmap and no hinting. Stem width differences may be noticeable because hinting is turned off.
+Global Const $GDIP_TEXTRENDERINGHINT_CLEARTYPEGRIDFIT = 5 ; Specifies that a character is drawn using its glyph ClearType bitmap and hinting. This type of text rendering cannot be used along with CompositingModeSourceCopy.
+
+; PixelOffsetMode constants
+Global Const $GDIP_PIXELOFFSETMODE_INVALID = -1 ; Used internally.
+Global Const $GDIP_PIXELOFFSETMODE_DEFAULT = 0 ; Equivalent to $GDIP_PIXELOFFSETMODE_NONE
+Global Const $GDIP_PIXELOFFSETMODE_HIGHSPEED = 1 ; Equivalent to $GDIP_PIXELOFFSETMODE_NONE
+Global Const $GDIP_PIXELOFFSETMODE_HIGHQUALITY = 2 ; Equivalent to $GDIP_PIXELOFFSETMODE_HALF
+Global Const $GDIP_PIXELOFFSETMODE_NONE = 3 ; Indicates that pixel centers have integer coordinates.
+Global Const $GDIP_PIXELOFFSETMODE_HALF = 4 ; Indicates that pixel centers have coordinates that are half way between integer values.
+
+; LineJoin constants
+Global Const $GDIP_PENSETLINEJOIN_MITER = 0 ; Specifies a mitered join. This produces a sharp corner or a clipped corner, depending on whether the length of the miter exceeds the miter limit.
+Global Const $GDIP_PENSETLINEJOIN_BEVEL = 1 ; Specifies a beveled join. This produces a diagonal corner.
+Global Const $GDIP_PENSETLINEJOIN_ROUND = 2 ; Specifies a circular join. This produces a smooth, circular arc between the lines.
+Global Const $GDIP_PENSETLINEJOIN_MITERCLIPPED = 3 ; Specifies a mitered join. This produces a sharp corner or a beveled corner, depending on whether the length of the miter exceeds the miter limit.
+
+; Fill mode constants
+Global Const $GDIP_FillModeAlternate = 0 ;Specifies that areas are filled according to the even-odd parity rule. According to this rule, you can determine
+;whether a test point is inside or outside a closed curve as follows: Draw a line from the test point to a point
+;that is distant from the curve. If that line crosses the curve an odd number of times, the test point is inside
+;the curve; otherwise, the test point is outside the curve.
+
+Global Const $GDIP_FillModeWinding = 1 ;Specifies that areas are filled according to the nonzero winding rule. According to this rule, you can determine
+;whether a test point is inside or outside a closed curve as follows: Draw a line from a test point to a point that
+;is distant from the curve. Count the number of times the curve crosses the test line from left to right, and count
+;the number of times the curve crosses the test line from right to left. If those two numbers are the same, the test
+;point is outside the curve; otherwise, the test point is inside the curve.
+
+; Quality constants
+Global Const $GDIP_QUALITYMODEINVALID = -1
+Global Const $GDIP_QUALITYMODEDEFAULT = 0
+Global Const $GDIP_QUALITYMODELOW = 1
+Global Const $GDIP_QUALITYMODEHIGH = 2
+
+; Alpha Compositing mode constants
+Global Const $GDIP_COMPOSITINGMODESOURCEOVER = 0 ; Specifies that when a color is rendered, it is blended with the background color. The blend is determined by the alpha component of the color being rendered
+Global Const $GDIP_COMPOSITINGMODESOURCECOPY = 1 ; Specifies that when a color is rendered, it overwrites the background color. This mode cannot be used along with $TextRenderingHintClearTypeGridFit
+
+; Alpha Compositing quality constants
+Global Const $GDIP_COMPOSITINGQUALITYINVALID = $GDIP_QUALITYMODEINVALID ; Invalid quality
+Global Const $GDIP_COMPOSITINGQUALITYDEFAULT = $GDIP_QUALITYMODEDEFAULT ; Gamma correction is not applied
+Global Const $GDIP_COMPOSITINGQUALITYHIGHSPEED = $GDIP_QUALITYMODELOW ; Gamma correction is not applied. High speed, low quality
+Global Const $GDIP_COMPOSITINGQUALITYHIGHQUALITY = $GDIP_QUALITYMODEHIGH ; Gamma correction is applied. Composition of high quality and speed.
+Global Const $GDIP_COMPOSITINGQUALITYGAMMACORRECTED = 3 ; Gamma correction is applied
+Global Const $GDIP_COMPOSITINGQUALITYASSUMELINEAR = 4 ; Gamma correction is not applied. Linear values are used
+
+; Various hatch styles
+Global Const $GDIP_HATCHSTYLE_HORIZONTAL = 0
+Global Const $GDIP_HATCHSTYLE_VERTICAL = 1
+Global Const $GDIP_HATCHSTYLE_FORWARDDIAGONAL = 2
+Global Const $GDIP_HATCHSTYLE_BACKWARDDIAGONAL = 3
+Global Const $GDIP_HATCHSTYLE_CROSS = 4
+Global Const $GDIP_HATCHSTYLE_DIAGONALCROSS = 5
+Global Const $GDIP_HATCHSTYLE_05PERCENT = 6
+Global Const $GDIP_HATCHSTYLE_10PERCENT = 7
+Global Const $GDIP_HATCHSTYLE_20PERCENT = 8
+Global Const $GDIP_HATCHSTYLE_25PERCENT = 9
+Global Const $GDIP_HATCHSTYLE_30PERCENT = 10
+Global Const $GDIP_HATCHSTYLE_40PERCENT = 11
+Global Const $GDIP_HATCHSTYLE_50PERCENT = 12
+Global Const $GDIP_HATCHSTYLE_60PERCENT = 13
+Global Const $GDIP_HATCHSTYLE_70PERCENT = 14
+Global Const $GDIP_HATCHSTYLE_75PERCENT = 15
+Global Const $GDIP_HATCHSTYLE_80PERCENT = 16
+Global Const $GDIP_HATCHSTYLE_90PERCENT = 17
+Global Const $GDIP_HATCHSTYLE_LIGHTDOWNWARDDIAGONAL = 18
+Global Const $GDIP_HATCHSTYLE_LIGHTUPWARDDIAGONAL = 19
+Global Const $GDIP_HATCHSTYLE_DARKDOWNWARDDIAGONAL = 20
+Global Const $GDIP_HATCHSTYLE_DARKUPWARDDIAGONAL = 21
+Global Const $GDIP_HATCHSTYLE_WIDEDOWNWARDDIAGONAL = 22
+Global Const $GDIP_HATCHSTYLE_WIDEUPWARDDIAGONAL = 23
+Global Const $GDIP_HATCHSTYLE_LIGHTVERTICAL = 24
+Global Const $GDIP_HATCHSTYLE_LIGHTHORIZONTAL = 25
+Global Const $GDIP_HATCHSTYLE_NARROWVERTICAL = 26
+Global Const $GDIP_HATCHSTYLE_NARROWHORIZONTAL = 27
+Global Const $GDIP_HATCHSTYLE_DARKVERTICAL = 28
+Global Const $GDIP_HATCHSTYLE_DARKHORIZONTAL = 29
+Global Const $GDIP_HATCHSTYLE_DASHEDDOWNWARDDIAGONAL = 30
+Global Const $GDIP_HATCHSTYLE_DASHEDUPWARDDIAGONAL = 31
+Global Const $GDIP_HATCHSTYLE_DASHEDHORIZONTAL = 32
+Global Const $GDIP_HATCHSTYLE_DASHEDVERTICAL = 33
+Global Const $GDIP_HATCHSTYLE_SMALLCONFETTI = 34
+Global Const $GDIP_HATCHSTYLE_LARGECONFETTI = 35
+Global Const $GDIP_HATCHSTYLE_ZIGZAG = 36
+Global Const $GDIP_HATCHSTYLE_WAVE = 37
+Global Const $GDIP_HATCHSTYLE_DIAGONALBRICK = 38
+Global Const $GDIP_HATCHSTYLE_HORIZONTALBRICK = 39
+Global Const $GDIP_HATCHSTYLE_WEAVE = 40
+Global Const $GDIP_HATCHSTYLE_PLAID = 41
+Global Const $GDIP_HATCHSTYLE_DIVOT = 42
+Global Const $GDIP_HATCHSTYLE_DOTTEDGRID = 43
+Global Const $GDIP_HATCHSTYLE_DOTTEDDIAMOND = 44
+Global Const $GDIP_HATCHSTYLE_SHINGLE = 45
+Global Const $GDIP_HATCHSTYLE_TRELLIS = 46
+Global Const $GDIP_HATCHSTYLE_SPHERE = 47
+Global Const $GDIP_HATCHSTYLE_SMALLGRID = 48
+Global Const $GDIP_HATCHSTYLE_SMALLCHECKERBOARD = 49
+Global Const $GDIP_HATCHSTYLE_LARGECHECKERBOARD = 50
+Global Const $GDIP_HATCHSTYLE_OUTLINEDDIAMOND = 51
+Global Const $GDIP_HATCHSTYLE_SOLIDDIAMOND = 52
+Global Const $GDIP_HATCHSTYLE_TOTAL = 53
+Global Const $GDIP_HATCHSTYLE_LARGEGRID = $GDIP_HATCHSTYLE_CROSS
+Global Const $GDIP_HATCHSTYLE_MIN = $GDIP_HATCHSTYLE_HORIZONTAL
+Global Const $GDIP_HATCHSTYLE_MAX = $GDIP_HATCHSTYLE_TOTAL - 1
+
+; GDIPlus V1.1 constants
+;GDI+ effect GUIDs
+Global Const $GDIP_BlurEffectGuid = '{633C80A4-1843-482b-9EF2-BE2834C5FDD4}'
+Global Const $GDIP_SharpenEffectGuid = '{63CBF3EE-C526-402c-8F71-62C540BF5142}'
+Global Const $GDIP_ColorMatrixEffectGuid = '{718F2615-7933-40e3-A511-5F68FE14DD74}'
+Global Const $GDIP_ColorLUTEffectGuid = '{A7CE72A9-0F7F-40d7-B3CC-D0C02D5C3212}'
+Global Const $GDIP_BrightnessContrastEffectGuid = '{D3A1DBE1-8EC4-4c17-9F4C-EA97AD1C343D}'
+Global Const $GDIP_HueSaturationLightnessEffectGuid = '{8B2DD6C3-EB07-4d87-A5F0-7108E26A9C5F}'
+Global Const $GDIP_LevelsEffectGuid = '{99C354EC-2A31-4f3a-8C34-17A803B33A25}'
+Global Const $GDIP_TintEffectGuid = '{1077AF00-2848-4441-9489-44AD4C2D7A2C}'
+Global Const $GDIP_ColorBalanceEffectGuid = '{537E597D-251E-48da-9664-29CA496B70F8}'
+Global Const $GDIP_RedEyeCorrectionEffectGuid = '{74D29D05-69A4-4266-9549-3CC52836B632}'
+Global Const $GDIP_ColorCurveEffectGuid = '{DD6A0022-58E4-4a67-9D9B-D48EB881A53D}'
+
+Global Const $GDIP_AdjustExposure = 0 ;[-255..255]
+Global Const $GDIP_AdjustDensity = 1 ;[-255..255]
+Global Const $GDIP_AdjustContrast = 2 ;[-100..100]
+Global Const $GDIP_AdjustHighlight = 3;[-100..100]
+Global Const $GDIP_AdjustShadow = 4;[-100..100]
+Global Const $GDIP_AdjustMidtone = 5;[-100..100]
+Global Const $GDIP_AdjustWhiteSaturation = 6;[0..255]
+Global Const $GDIP_AdjustBlackSaturation = 7;[0..255]
+
+Global Const $GDIP_CurveChannelAll = 0
+Global Const $GDIP_CurveChannelRed = 1
+Global Const $GDIP_CurveChannelGreen = 2
+Global Const $GDIP_CurveChannelBlue = 3
+
+;Color format conversion parameters
+Global Const $GDIP_PaletteTypeCustom = 0 ;Arbitrary custom palette provided by caller.
+Global Const $GDIP_PaletteTypeOptimal = 1 ;Optimal palette generated using a median-cut algorithm.
+Global Const $GDIP_PaletteTypeFixedBW = 2 ;Black and white palette.
+
+;Symmetric halftone palettes. Each of these halftone palettes will be a superset of the system palette. E.g. Halftone8 will have it's 8-color on-off primaries and the 16 system colors added. With duplicates removed, that leaves 16 colors.
+Global Const $GDIP_PaletteTypeFixedHalftone8 = 3 ;8-color, on-off primaries
+Global Const $GDIP_PaletteTypeFixedHalftone27 = 4 ;3 intensity levels of each color
+Global Const $GDIP_PaletteTypeFixedHalftone64 = 5 ;4 intensity levels of each color
+Global Const $GDIP_PaletteTypeFixedHalftone125 = 6 ;5 intensity levels of each color
+Global Const $GDIP_PaletteTypeFixedHalftone216 = 7 ;6 intensity levels of each color
+
+;Assymetric halftone palettes. These are somewhat less useful than the symmetric ones, but are included for completeness. These do not include all of the system colors.
+Global Const $GDIP_PaletteTypeFixedHalftone252 = 8 ;6-red, 7-green, 6-blue intensities
+Global Const $GDIP_PaletteTypeFixedHalftone256 = 9 ;8-red, 8-green, 4-blue intensities
+
+;PaletteFlags enumeration
+Global Const $GDIP_PaletteFlagsHasAlpha = 0x0001
+Global Const $GDIP_PaletteFlagsGrayScale = 0x0002
+Global Const $GDIP_PaletteFlagsHalftone = 0x0004
+
+;DitherType
+Global Const $GDIP_DitherTypeNone = 0
+Global Const $GDIP_DitherTypeSolid = 1 ;Solid color - picks the nearest matching color with no attempt to halftone or dither. May be used on an arbitrary palette.
+
+;Ordered dithers and spiral dithers must be used with a fixed palette. NOTE: DitherOrdered4x4 is unique in that it may apply to 16bpp conversions also.
+Global Const $GDIP_DitherTypeOrdered4x4 = 2
+Global Const $GDIP_DitherTypeOrdered8x8 = 3
+Global Const $GDIP_DitherTypeOrdered16x16 = 4
+Global Const $GDIP_DitherTypeSpiral4x4 = 5
+Global Const $GDIP_DitherTypeSpiral8x8 = 6
+Global Const $GDIP_DitherTypeDualSpiral4x4 = 7
+Global Const $GDIP_DitherTypeDualSpiral8x8 = 8
+
+;Error diffusion. May be used with any palette.
+Global Const $GDIP_DitherTypeErrorDiffusion = 9
+Global Const $GDIP_DitherTypeMax = 10
+
+;HistogramFormat
+Global Const $GDIP_HistogramFormatARGB = 0
+Global Const $GDIP_HistogramFormatPARGB = 1
+Global Const $GDIP_HistogramFormatRGB = 2
+Global Const $GDIP_HistogramFormatGray = 3
+Global Const $GDIP_HistogramFormatB = 4
+Global Const $GDIP_HistogramFormatG = 5
+Global Const $GDIP_HistogramFormatR = 6
+Global Const $GDIP_HistogramFormatA = 7
+;===============================================================================================================================

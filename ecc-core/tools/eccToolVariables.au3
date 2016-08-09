@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.0
-; Last changed           : 2014.03.28
+; Script version         : v1.0.0.1
+; Last changed           : 2014.03.29
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -23,6 +23,8 @@ FileChangeDir(@ScriptDir)
 #include "..\thirdparty\autoit\include\GuiListView.au3"
 #include "..\thirdparty\autoit\include\StaticConstants.au3"
 #include "..\thirdparty\autoit\include\WindowsConstants.au3"
+#include "..\thirdparty\autoit\include\ProgressConstants.au3"
+#include "..\thirdparty\autoit\include\ComboConstants.au3"
 #include "..\thirdparty\autoit\include\File.au3"
 #include "..\thirdparty\autoit\include\String.au3"
 #include "..\thirdparty\autoit\include\URLStrings.au3"
@@ -40,10 +42,12 @@ Global $NotepadExe 			= $eccInstallPath & "\ecc-core\thirdparty\notepad++\notepa
 Global $DATUtilExe 			= $eccInstallPath & "\ecc-core\thirdparty\datutil\datutil.exe"
 Global $XpadderExe			= $eccInstallPath & "\ecc-core\thirdparty\xpadder\xpadder.exe"
 Global $KodaExe				= $eccInstallPath & "\ecc-core\thirdparty\koda\fd.exe"
-Global $eccDataBaseFile 	= $eccInstallPath & "\ecc-system\database\eccdb"
+Global $StripperExe 		= $eccInstallPath & "\ecc-core\thirdparty\stripper\stripper.exe"
 Global $SQliteExe 			= $eccInstallPath & "\ecc-core\thirdparty\sqlite\sqlite.exe"
+Global $eccDataBaseFile 	= $eccInstallPath & "\ecc-system\database\eccdb"
 Global $SQLInstructionFile 	= @Scriptdir & "\sqlcommands.inst"
 Global $SQLcommandFile 		= @Scriptdir & "\sqlcommands.cmd"
+Global $PlatformDataFile 	= "platformdata.txt"
 
 ; Global INFO variables
 ; version info
@@ -67,6 +71,9 @@ Global $EccUserPathTemp 	= StringReplace(Iniread($eccConfigFileGeneralUser, "USE
 Global $EccUserPath 		= StringReplace($EccUserPathTemp, "..\", $eccInstallPath & "\") ;Add full path to variable if it's an directory within the ECC structure
 ; userdata
 Global $eccUserCidFile 		= $eccInstallPath & "\ecc-system\idt\cicheck.idt"
+Global $eccUserPathTemp 	= StringReplace(IniRead($eccConfigFileGeneralUser, "USER_DATA", "base_path", ""), "/", "\")
+Global $eccUserPath 		= StringReplace($eccUserPathTemp, "..\", $eccInstallPath & "\") ; Add full path to variable if it's an directory within the ECC structure
+
 
 ; ECC SELECTED ROM variables
 Global $eccRomDataFile 		= $eccInstallPath & "\ecc-system\selectedrom.ini"
@@ -77,6 +84,7 @@ Global $RomEccId 			= IniRead($eccRomDataFile, "ROMDATA", "rom_platformid", "")
 Global $RomPlatformName 	= IniRead($EccRomDataFile, "ROMDATA", "rom_platformname", "")
 Global $RomMetaData 		= IniRead($EccRomDataFile, "ROMDATA", "rom_meta_data", "")
 Global $RomUserData 		= IniRead($EccRomDataFile, "ROMDATA", "rom_user_data", "")
+Global $eccImageFolder		= $eccUserPath & $RomEccId & "\images"
 
 ; ECC CREATE SHORTCUT variables
 Global $StartFolderName 	= "emuControlCenter"
@@ -94,7 +102,6 @@ Global $eccSig 				= "3AC741E3A76D7BD5B31256A1B67A7D6A238D" ;Please do NOT alter
 Global $EmuMoviesServer 	= "http://api.gamesdbase.com/"
 Global $EmuMoviesWebsite 	= "http://emumovies.com/"
 Global $EmuMoviesList 		= @ScriptDir & "\emuMoviesDownloader.list"
-Global $PlatformDataFile 	= "platformdata.txt"
 
 ; ECC GET CRC32 variables
 Global $CRCfile 			= @ScriptDir & "\getCRC32.dat"
@@ -120,3 +127,8 @@ Global $MobyGamesList 		= @ScriptDir & "\MobyGamesImporter.list"
 Global $PlatformDataFileRomList = "platformdata_romlist.txt"
 Global $PlatformDataFileRomMeta = "platformdata_meta.txt"
 Global $PlatformDataFileRomUser = "platformdata_user.txt"
+
+; IMAGEPACK CREATOR variables
+
+Global $IpcPresetFolder 	= @ScriptDir & "\eccImagePackCenter_presets"
+Global $AutoSavedIpcFile 	= @ScriptDir & "\eccImagePackCenter.ipc"

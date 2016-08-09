@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.0.0.6
-Global $ScriptVersion = "v1.0.0.4"
-; Last changed           : 2014.03.28
+; Script version         : v1.0.0.8
+Global $ScriptVersion = "v1.0.0.8"
+; Last changed           : 2014.04.10
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -144,7 +144,7 @@ AddNote("check: updates available?...")
 $eccLastUpdate = BinaryToString(InetRead($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $eccLocalLastUpdate & "&command=lastupdate", 1))
 If $eccLastUpdate > $eccLocalLastUpdate Then
 	If $eccLastUpdate - $eccLocalLastUpdate > 30 Then
-	    Addnote("yes,#")
+		Addnote("yes,#")
 		Addnote("there are more then 30 updates available!#")
 		Addnote("please download the most recent version of ECC!#")
 		Addnote("visit 'http://ecc.phoenixinteractive.nl' for more information.#")
@@ -184,22 +184,22 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
    ;Download update instructions, INI (part 1)
    AddNote("action: downloading update " & $UpdateToDownload & " info & instructions...") ;do NOT use 1024 otherwise the values of ROUND do not match!
    $FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=instructions", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", 1, 1)
-   Do
-	  If GUIGetMsg($eccUPDATE) = $GUI_EVENT_CLOSE Then
-		 ; Catch close button.
-	  EndIf
-   Until InetGetInfo($FileDownloadHandle, 2) ;Check if the download is complete.
-   Sleep(100)
-   AddNote("succes!#")
+	Do
+		If GUIGetMsg($eccUPDATE) = $GUI_EVENT_CLOSE Then
+			; Catch close button.
+		EndIf
+	Until InetGetInfo($FileDownloadHandle, 2) ;Check if the download is complete.
+	Sleep(100)
+	AddNote("succes!#")
 
-   Global $ShortInfo = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "ShortInfo", "-")
-   Global $Credits = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Credits", "-")
-   Global $Message = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Message", "")
+	Global $ShortInfo = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "ShortInfo", "-")
+	Global $Credits = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Credits", "-")
+	Global $Message = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Message", "")
 
-   If $Message <> "" Then
+	If $Message <> "" Then
 	  AddNote("message: " & $Message & "#")
 	  MsgBox(64, "eccUpdate important message for update " & $UpdateToDownload, $Message)
-   EndIf
+	EndIf
 
    AddNote("info: " & $ShortInfo & "#")
    AddNote("date: " & $FileDate & "#")
@@ -213,13 +213,11 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 	;Execute update instructions (part 1) ;Skip update?
 	$SkipUpdate = 0
 	For $i = 1 To $UpdateInstructions[0][0]
-
 		If $UpdateInstructions[$i][0] = "SkipUpdate" And $UpdateInstructions[$i][1] = 1 Then
 			AddNote("action: skipping update!, reason: a more recent update awaits...#")
 			$SkipUpdate = "1"
 		EndIf
 	Next
-
 
 
 	If $SkipUpdate <> "1" Then ;Skip update?
@@ -240,69 +238,77 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 	For $i = 1 To $UpdateInstructions[0][0]
 
 	  If $UpdateInstructions[$i][0] = "ExtractFiles" And $UpdateInstructions[$i][1] = 1 Then
-		 AddNote("action: extracting update files...")
-		 ShellExecuteWait($7zexe, "x " & Chr(34) & @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z" & Chr(34) & " -o" & Chr(34) & $eccInstallPath & Chr(34) & " -r -y", "", "", @SW_HIDE)
-		 Sleep(500) ; Just to be sure 7z is closed!
-		 AddNote("done!#")
+		AddNote("action: extracting update files...")
+		ShellExecuteWait($7zexe, "x " & Chr(34) & @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z" & Chr(34) & " -o" & Chr(34) & $eccInstallPath & Chr(34) & " -r -y", "", "", @SW_HIDE)
+		Sleep(500) ; Just to be sure 7z is closed!
+		AddNote("done!#")
 	  EndIf
 
 	  If $UpdateInstructions[$i][0] = "FileDelete" And $UpdateInstructions[$i][1] <> "" Then
-		 AddNote("action: deleting file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
-		 FileDelete($eccInstallPath & "\" & $UpdateInstructions[$i][1])
-		 If FileExists($eccInstallPath & "\" & $UpdateInstructions[$i][1]) = 1 Then
+		AddNote("action: deleting file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
+		FileSetAttrib($eccInstallPath & "\" & $UpdateInstructions[$i][1], "-R+A")
+		FileDelete($eccInstallPath & "\" & $UpdateInstructions[$i][1])
+		If FileExists($eccInstallPath & "\" & $UpdateInstructions[$i][1]) = 1 Then
 			AddNote("failed!#")
-		 Else
+		Else
 			AddNote("succes!#")
-		 EndIf
+		EndIf
 	  EndIf
 
 	  If $UpdateInstructions[$i][0] = "FolderDelete" And $UpdateInstructions[$i][1] <> "" Then
-		 AddNote("action: deleting folder (incl. files) [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
-		 DirRemove($eccInstallPath & "\" & $UpdateInstructions[$i][1], 1)
-		 If FileExists($eccInstallPath & "\" & $UpdateInstructions[$i][1]) = 1 Then
+		AddNote("action: deleting folder (incl. files) [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
+		FileSetAttrib($eccInstallPath & "\" & $UpdateInstructions[$i][1], "-R+A", 1)
+		DirRemove($eccInstallPath & "\" & $UpdateInstructions[$i][1], 1)
+		If FileExists($eccInstallPath & "\" & $UpdateInstructions[$i][1]) = 1 Then
 			AddNote("failed!#")
-		 Else
+		Else
 			AddNote("succes!#")
-		 EndIf
+		EndIf
 	  EndIf
 
 	  If $UpdateInstructions[$i][0] = "ExecuteFile" And $UpdateInstructions[$i][1] <> "" Then
-		 AddNote("action: executing file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
-		 ShellExecute($eccInstallPath & "\" & $UpdateInstructions[$i][1])
-		 AddNote("done!#")
+		AddNote("action: executing file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
+		FileChangeDir($eccInstallPath)
+		ShellExecute($eccInstallPath & "\" & $UpdateInstructions[$i][1])
+		AddNote("done!#")
 	  EndIf
 
 	  If $UpdateInstructions[$i][0] = "ExecuteFileWait" And $UpdateInstructions[$i][1] <> "" Then
-		 AddNote("action: executing file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
-		 ShellExecuteWait($eccInstallPath & "\" & $UpdateInstructions[$i][1])
-		 AddNote("done!#")
+		AddNote("action: executing file [ecc-path]\" & $UpdateInstructions[$i][1] & "...")
+		FileChangeDir($eccInstallPath)
+		ShellExecuteWait($eccInstallPath & "\" & $UpdateInstructions[$i][1])
+		AddNote("done!#")
 	  EndIf
 
 	  If $UpdateInstructions[$i][0] = "ForceReload" And $UpdateInstructions[$i][1] <> "" Then
-		 AddNote("action: force reloading eccUpdate...#")
-		 If $StartEccAfterUpdate = 1 Then
-			FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z")
-			FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini")
-			IniWrite($eccLocalUpdateIni, "UPDATE", "last_update", $UpdateToDownload) ;Write lastupdate value in local INI
-			Run($Autoit3Exe & " " & Chr(34) & @ScriptDir & "\eccUpdate.au3 /StartEccAfterUpdate" & Chr(34))
+		AddNote("action: force reloading eccUpdate...#")
+		FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z")
+		FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini")
+		IniWrite($eccLocalUpdateIni, "UPDATE", "last_update", $UpdateToDownload) ;Write lastupdate value in local INI
+
+		If $StartEccAfterUpdate = 1 Then
+			Run($Autoit3Exe & " " & Chr(34) & @ScriptDir & "\eccUpdate.au3" & Chr(34) & " /StartEccAfterUpdate")
 			Exit
 		Else
-			FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z")
-			FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini")
-			IniWrite($eccLocalUpdateIni, "UPDATE", "last_update", $UpdateToDownload) ;Write lastupdate value in local INI
 			Run($Autoit3Exe & " " & Chr(34) & @ScriptDir & "\eccUpdate.au3" & Chr(34))
 			Exit
 		EndIf
 	  EndIf
 
-   Next
+	  If $UpdateInstructions[$i][0] = "ForceExit" And $UpdateInstructions[$i][1] <> "" Then
+		AddNote("action: force exit eccUpdate...#")
+		IniWrite($eccLocalUpdateIni, "UPDATE", "last_update", $UpdateToDownload) ;Write lastupdate value in local INI
+		Exit
+	  EndIf
 
-   EndIf
+   Next
 
    AddNote("action: removing temporally update files...")
    FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z")
    FileDelete(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini")
    AddNote("done!#")
+
+   EndIf
 
    IniWrite($eccLocalUpdateIni, "UPDATE", "last_update", $UpdateToDownload) ;Write lastupdate value in local INI
 

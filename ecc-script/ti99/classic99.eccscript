@@ -1,0 +1,46 @@
+; ------------------------------------------------------------------------------
+; Platform               : Ti99/4
+; Script for             : Classic99 v3.x.x
+; Script version         : v1.0.0.0
+; Last changed           : 2014.03.28
+;
+;
+; Author: S. Ebeltjes (aka Phoenix)
+;
+; NOTES: 
+; 
+; - Loads a file trough the menu
+; - DISABLE "ESCAPE PATH" function in ECC emulator config!
+;
+; ------------------------------------------------------------------------------
+
+; ==============================================================================
+; You need to implent this block in every script, this changes the workfolder to
+; the folder where this script is executed, and loads the 'eccScriptSystem' script.
+FileChangeDir(@ScriptDir)
+#include "..\eccScriptSystem.au3"
+; ==============================================================================
+
+; ------------------------------------------------------------------------------
+; BEGIN OF SCRIPT
+; ------------------------------------------------------------------------------
+EmuWindowControl("Classic99")
+Sleep(1000)
+; Load ROM
+msgbox(64, "test", $RomFile)
+$WinPos = WinGetPos("Classic99")
+MouseClick("left", $WinPos[0]+150, $WinPos[1]+40 , 1, 10)
+Send("{DOWN}")
+Send("{DOWN}")
+Send("{DOWN}")
+Send("{ENTER}")
+Send("{ENTER}")
+Sleep(1000)
+Send($RomFile, 1) ;Send RAW otherwise the # does not work, therefore you cannot use the "romname" (escaped name)
+Send("{ENTER}")
+Sleep(2000)
+Send("{ENTER}")
+; ------------------------------------------------------------------------------
+; END OF SCRIPT
+; ------------------------------------------------------------------------------
+Exit

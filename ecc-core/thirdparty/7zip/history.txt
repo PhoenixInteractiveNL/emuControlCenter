@@ -1,18 +1,37 @@
 HISTORY of the 7-Zip
 --------------------
 
-9.30 alpha     2012-10-26
+9.32 alpha     2013-12-01
 -------------------------
-- The BUG in 7-Zip 9.26 alpha - 9.29 alpha versions was fixed.
-  These alpha versions could not open non-solid 7z archive, if 
-  some files were skipped during creation of that archive.
-  That problem is also related to 7z archives created in solid mode,
-  if each solid block contains no more than one file.
-  Note: 7-Zip skips files that were open for writing by another 
-  application and shows warning in that case.
+- 7-Zip now can create multivolume SFX archives in 7z format.
+- ZIP, NSIS, HFS, AR support was improved.
+- 7-Zip now supports files larger than 4 GiB in ISO archives
+- Improved compression ratio in 7z format with maximum or ultra level for
+  executable files (EXE and DLL) that are larger than 16 MB (improved BCJ2 filter).
+- Improved support for file pathnames longer than 260 characters.
+- CRC and SHA checksum calculation for files can be called via Explorer's context menu.
+- 7-Zip File Manager now also takes into account the numbers in filenames for sorting order.
+- 7-Zip File Manager now can use RAM buffers instead of temp files to open 
+  nested archives, if temp file is smaller than 1/4 of RAM size.
+- 7-Zip File Manager can open files in "Parser" mode via "Open Archive > #" context 
+  menu command. It shows the list of archives inside file.
+- Command line version:
+    - new -t# switch to open file in "Parser" mode and show the list of archives inside file.
+    - new -stx{Type} switch to exclude archive type from using.
+    - -scs switch now supports UTF-16 encoding.
+    - now it shows time and memory usage statistics at the end of execution.
+- The BUGs were fixed:
+    - 7-Zip 9.30 and early versions created ZIP archives with minor errors
+      in extra field of headers for directory items, if AES (WinZip-AES) encryption was used.
+    - 7-Zip could work incorrectly in decompression of more than one 
+      multi-volume archive in one command.
+    - 7-Zip 9.24 alpha - 9.30 alpha versions could not extract ZIP archives 
+      encrypted with PKWARE-AES method.
+- Minimum supported system now is Windows 2000. 7-Zip doesn't work on Windows 95/98/ME.
+- New localization: Irish.
 
 
-9.29 alpha     2012-09-07
+9.30 alpha     2012-10-26
 -------------------------
 - LZMA2 now is default compression method for .7z format.
 - 7-Zip now can update WIM archives.
@@ -25,8 +44,18 @@ HISTORY of the 7-Zip
     - new -sni switch to store NT security information for files (for WIM format only).
     - new -stl switch to set archive timestamp from the most recently modified file.
 - Speed optimizations for opening big archives and big disk folders.
+- 7-Zip now writes special padding blocks to headers of 7z archives for 
+  faster archive opening. Note that 7-Zip 4.50 - 4.58 contain BUG, 
+  so these old versions can't correctly work with such new 7z archives.
 - DMG support was improved
 - Some bugs were fixed.
+- The BUG in 7-Zip 9.26 alpha - 9.29 alpha versions was fixed.
+  These alpha versions could not open non-solid 7z archive, if 
+  some files were skipped during creation of that archive.
+  That problem is also related to 7z archives created in solid mode,
+  if each solid block contains no more than one file.
+  Note: 7-Zip skips files that were open for writing by another 
+  application and shows warning in that case.
 - New localization: Aragonese.
 
 

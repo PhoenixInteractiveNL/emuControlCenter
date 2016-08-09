@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.2.5.8
+; Script version         : v1.2.5.9
 ; Last changed           : 2014.03.28
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
@@ -11,7 +11,7 @@
 ;
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
-#include "eccVariables.au3"
+#include "eccToolVariables.au3"
 
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
@@ -97,7 +97,7 @@ If FileExists($DATfileMameFile) <> 1 Then
 			If $BackupBox = 6 Then ;YES selected
 				ToolTip("Creating a backup of your existing DATfiles, please wait...", @DesktopWidth/2, @DesktopHeight/2, "ECC DatFileUpdater", 1, 6)
 				$7zfile = $DATfileBackupPath & "eccDATbackup_" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & @SEC & ".7z"
-				ShellExecuteWait($7zexe, "a " & $7zfile & " " & Chr(34) & Chr(34) & $DATfilePath &  "\*.dat" & Chr(34), "", "", @SW_HIDE)
+				ShellExecuteWait($7zexe, "a " & Chr(34) & $7zfile & Chr(34) & " " & Chr(34) & $DATfilePath & "\*.dat" & Chr(34), "", "", @SW_HIDE)
 				ToolTip("")
 				Msgbox(64, "ECC DatFileUpdater", "DATfile backup '" & $7zfile & "' created!")
 			EndIf

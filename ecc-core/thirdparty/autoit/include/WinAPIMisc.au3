@@ -6,11 +6,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIMisc.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: winmm.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -94,7 +92,7 @@ Func _WinAPI_CopyStruct($tStruct, $sStruct = '')
 	EndIf
 	If DllStructGetSize($tResult) < $iSize Then Return SetError(2, 0, 0)
 
-	_WinAPI_MoveMemory(DllStructGetPtr($tResult), DllStructGetPtr($tStruct), $iSize)
+	_WinAPI_MoveMemory($tResult, $tStruct, $iSize)
 	; Return SetError(3, 0, 0) ; cannot really occur
 	; EndIf
 	Return $tResult
@@ -152,7 +150,7 @@ Func _WinAPI_HashData($pMemory, $iSize, $iLength = 32)
 
 	Local $tData = DllStructCreate('byte[' & $iLength & ']')
 
-	Local $aRet = DllCall('shlwapi.dll', 'uint', 'HashData', 'ptr', $pMemory, 'dword', $iSize, 'struct*', $tData, 'dword', $iLength)
+	Local $aRet = DllCall('shlwapi.dll', 'uint', 'HashData', 'struct*', $pMemory, 'dword', $iSize, 'struct*', $tData, 'dword', $iLength)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -172,7 +170,7 @@ Func _WinAPI_HashString($sString, $bCaseSensitive = True, $iLength = 32)
 		$sString = StringLower($sString)
 	EndIf
 	DllStructSetData($tString, 1, $sString)
-	Local $sHash = _WinAPI_HashData(DllStructGetPtr($tString), 2 * $iLengthS, $iLength)
+	Local $sHash = _WinAPI_HashData($tString, 2 * $iLengthS, $iLength)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Return $sHash
@@ -265,7 +263,7 @@ EndFunc   ;==>_WinAPI_OemToChar
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_PlaySound($sSound, $iFlags = 0x00020010, $hInstance = 0)
+Func _WinAPI_PlaySound($sSound, $iFlags = $SND_SYSTEM_NOSTOP, $hInstance = 0)
 	Local $sTypeOfSound = 'ptr'
 	If $sSound Then
 		If IsString($sSound) Then
@@ -341,51 +339,6 @@ EndFunc   ;==>_WinAPI_StrFromTimeInterval
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
-; Modified.......:
-; ===============================================================================================================================
-Func _WinAPI_SwapDWord($iValue)
-	Local $tStruct1 = DllStructCreate('dword;dword')
-	Local $tStruct2 = DllStructCreate('byte[4];byte[4]', DllStructGetPtr($tStruct1))
-	DllStructSetData($tStruct1, 1, $iValue)
-	For $i = 1 To 4
-		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 5 - $i), $i)
-	Next
-
-	Return DllStructGetData($tStruct1, 2)
-EndFunc   ;==>_WinAPI_SwapDWord
-
-; #FUNCTION# ====================================================================================================================
-; Author.........: Yashied
-; Modified.......:
-; ===============================================================================================================================
-Func _WinAPI_SwapQWord($iValue)
-	Local $tStruct1 = DllStructCreate('int64;int64')
-	Local $tStruct2 = DllStructCreate('byte[8];byte[8]', DllStructGetPtr($tStruct1))
-	DllStructSetData($tStruct1, 1, $iValue)
-	For $i = 1 To 8
-		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 9 - $i), $i)
-	Next
-
-	Return DllStructGetData($tStruct1, 2)
-EndFunc   ;==>_WinAPI_SwapQWord
-
-; #FUNCTION# ====================================================================================================================
-; Author.........: Yashied
-; Modified.......: jpm
-; ===============================================================================================================================
-Func _WinAPI_SwapWord($iValue)
-	Local $tStruct1 = DllStructCreate('word;word')
-	Local $tStruct2 = DllStructCreate('byte[2];byte[2]', DllStructGetPtr($tStruct1))
-	DllStructSetData($tStruct1, 1, $iValue)
-	For $i = 1 To 2
-		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 3 - $i), $i)
-	Next
-
-	Return DllStructGetData($tStruct1, 2)
-EndFunc   ;==>_WinAPI_SwapWord
-
-; #FUNCTION# ====================================================================================================================
-; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
 Func _WinAPI_UnionStruct($tStruct1, $tStruct2, $sStruct = '')
@@ -401,10 +354,9 @@ Func _WinAPI_UnionStruct($tStruct1, $tStruct2, $sStruct = '')
 	EndIf
 	If DllStructGetSize($tResult) < ($aSize[0] + $aSize[1]) Then Return SetError(2, 0, 0)
 
-	Local $pResult = DllStructGetPtr($tResult)
-	_WinAPI_MoveMemory($pResult, DllStructGetPtr($tStruct1), $aSize[0])
-	_WinAPI_MoveMemory($pResult + $aSize[0], DllStructGetPtr($tStruct2), $aSize[1])
-	; If (Not _WinAPI_MoveMemory($pResult, DllStructGetPtr($tStruct1), $aSize[0])) Or (Not _WinAPI_MoveMemory($pResult + $aSize[0], DllStructGetPtr($tStruct2), $aSize[1])) Then
+	_WinAPI_MoveMemory($tResult, $tStruct1, $aSize[0])
+	_WinAPI_MoveMemory(DllStructGetPtr($tResult) + $aSize[0], $tStruct2, $aSize[1])
+	; If (Not _WinAPI_MoveMemory($tResult, $tStruct1, $aSize[0])) Or (Not _WinAPI_MoveMemory($pResult + $aSize[0], $tStruct2, $aSize[1])) Then
 	; Return SetError(3, 0, 0) ; cannot really occur
 	; EndIf
 

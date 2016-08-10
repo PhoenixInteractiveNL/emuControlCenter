@@ -8,7 +8,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Slider
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Slider Control "Trackbar" management.
 ; Author(s) .....: Gary Frost (gafrost)
@@ -91,7 +91,7 @@ EndFunc   ;==>_GUICtrlSlider_ClearTics
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlSlider_Create($hWnd, $iX, $iY, $iWidth = 100, $iHeight = 20, $iStyle = 0x0001, $iExStyle = 0x00000000)
+Func _GUICtrlSlider_Create($hWnd, $iX, $iY, $iWidth = 100, $iHeight = 20, $iStyle = $TBS_AUTOTICKS, $iExStyle = 0x00000000)
 	If Not IsHWnd($hWnd) Then Return SetError(1, 0, 0) ; Invalid Window handle for _GUICtrlSlider_Create 1st parameter
 
 	If $iWidth = -1 Then $iWidth = 100
@@ -153,12 +153,12 @@ EndFunc   ;==>_GUICtrlSlider_GetBuddy
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlSlider_GetChannelRect($hWnd)
-	Local $tRect = _GUICtrlSlider_GetChannelRectEx($hWnd)
+	Local $tRECT = _GUICtrlSlider_GetChannelRectEx($hWnd)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlSlider_GetChannelRect
 
@@ -169,9 +169,9 @@ EndFunc   ;==>_GUICtrlSlider_GetChannelRect
 Func _GUICtrlSlider_GetChannelRectEx($hWnd)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
-	Local $tRect = DllStructCreate($tagRECT)
-	_SendMessage($hWnd, $TBM_GETCHANNELRECT, 0, $tRect, 0, "wparam", "struct*")
-	Return $tRect
+	Local $tRECT = DllStructCreate($tagRECT)
+	_SendMessage($hWnd, $TBM_GETCHANNELRECT, 0, $tRECT, 0, "wparam", "struct*")
+	Return $tRECT
 EndFunc   ;==>_GUICtrlSlider_GetChannelRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -311,12 +311,12 @@ EndFunc   ;==>_GUICtrlSlider_GetThumbLength
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlSlider_GetThumbRect($hWnd)
-	Local $tRect = _GUICtrlSlider_GetThumbRectEx($hWnd)
+	Local $tRECT = _GUICtrlSlider_GetThumbRectEx($hWnd)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlSlider_GetThumbRect
 
@@ -327,9 +327,9 @@ EndFunc   ;==>_GUICtrlSlider_GetThumbRect
 Func _GUICtrlSlider_GetThumbRectEx($hWnd)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
-	Local $tRect = DllStructCreate($tagRECT)
-	_SendMessage($hWnd, $TBM_GETTHUMBRECT, 0, $tRect, 0, "wparam", "struct*")
-	Return $tRect
+	Local $tRECT = DllStructCreate($tagRECT)
+	_SendMessage($hWnd, $TBM_GETTHUMBRECT, 0, $tRECT, 0, "wparam", "struct*")
+	Return $tRECT
 EndFunc   ;==>_GUICtrlSlider_GetThumbRectEx
 
 ; #FUNCTION# ====================================================================================================================

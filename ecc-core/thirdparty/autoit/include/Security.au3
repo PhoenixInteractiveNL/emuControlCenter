@@ -5,10 +5,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Security
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Functions that assist with Security management.
 ; Author(s) .....: Paul Campbell (PaulIA), trancexx
-; Dll(s) ........: advapi32.dll
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -37,8 +36,8 @@
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: trancexx
 ; ===============================================================================================================================
-Func _Security__AdjustTokenPrivileges($hToken, $bDisableAll, $pNewState, $iBufferLen, $pPrevState = 0, $pRequired = 0)
-	Local $aCall = DllCall("advapi32.dll", "bool", "AdjustTokenPrivileges", "handle", $hToken, "bool", $bDisableAll, "struct*", $pNewState, "dword", $iBufferLen, "struct*", $pPrevState, "struct*", $pRequired)
+Func _Security__AdjustTokenPrivileges($hToken, $bDisableAll, $tNewState, $iBufferLen, $tPrevState = 0, $pRequired = 0)
+	Local $aCall = DllCall("advapi32.dll", "bool", "AdjustTokenPrivileges", "handle", $hToken, "bool", $bDisableAll, "struct*", $tNewState, "dword", $iBufferLen, "struct*", $tPrevState, "struct*", $pRequired)
 	If @error Then Return SetError(@error, @extended, False)
 
 	Return Not ($aCall[0] = 0)

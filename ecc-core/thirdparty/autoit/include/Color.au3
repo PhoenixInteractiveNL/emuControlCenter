@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Color
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ..... : English
 ; Description ...: Functions that assist with color management.
 ; Author(s) .....: Ultima, Jon, Jpm
@@ -35,13 +35,13 @@ Global Const $__COLORCONSTANTS_RGBMAX = 255
 ; Author ........: Ultima
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorConvertHSLtoRGB($avArray)
-	If UBound($avArray) <> 3 Or UBound($avArray, $UBOUND_DIMENSIONS) <> 1 Then Return SetError(1, 0, 0)
+Func _ColorConvertHSLtoRGB($aArray)
+	If UBound($aArray) <> 3 Or UBound($aArray, $UBOUND_DIMENSIONS) <> 1 Then Return SetError(1, 0, 0)
 
 	Local $nR, $nG, $nB
-	Local $nH = Number($avArray[0]) / $__COLORCONSTANTS_HSLMAX
-	Local $nS = Number($avArray[1]) / $__COLORCONSTANTS_HSLMAX
-	Local $nL = Number($avArray[2]) / $__COLORCONSTANTS_HSLMAX
+	Local $nH = Number($aArray[0]) / $__COLORCONSTANTS_HSLMAX
+	Local $nS = Number($aArray[1]) / $__COLORCONSTANTS_HSLMAX
+	Local $nL = Number($aArray[2]) / $__COLORCONSTANTS_HSLMAX
 
 	If $nS = 0 Then
 		; Grayscale
@@ -64,11 +64,11 @@ Func _ColorConvertHSLtoRGB($avArray)
 		$nB = __ColorConvertHueToRGB($nValA, $nValB, $nH - 1 / 3)
 	EndIf
 
-	$avArray[0] = $nR * $__COLORCONSTANTS_RGBMAX
-	$avArray[1] = $nG * $__COLORCONSTANTS_RGBMAX
-	$avArray[2] = $nB * $__COLORCONSTANTS_RGBMAX
+	$aArray[0] = $nR * $__COLORCONSTANTS_RGBMAX
+	$aArray[1] = $nG * $__COLORCONSTANTS_RGBMAX
+	$aArray[2] = $nB * $__COLORCONSTANTS_RGBMAX
 
-	Return $avArray
+	Return $aArray
 EndFunc   ;==>_ColorConvertHSLtoRGB
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -100,13 +100,13 @@ EndFunc   ;==>__ColorConvertHueToRGB
 ; Author ........: Ultima
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorConvertRGBtoHSL($avArray)
-	If UBound($avArray) <> 3 Or UBound($avArray, $UBOUND_DIMENSIONS) <> 1 Then Return SetError(1, 0, 0)
+Func _ColorConvertRGBtoHSL($aArray)
+	If UBound($aArray) <> 3 Or UBound($aArray, $UBOUND_DIMENSIONS) <> 1 Then Return SetError(1, 0, 0)
 
 	Local $nH, $nS, $nL
-	Local $nR = Number($avArray[0]) / $__COLORCONSTANTS_RGBMAX
-	Local $nG = Number($avArray[1]) / $__COLORCONSTANTS_RGBMAX
-	Local $nB = Number($avArray[2]) / $__COLORCONSTANTS_RGBMAX
+	Local $nR = Number($aArray[0]) / $__COLORCONSTANTS_RGBMAX
+	Local $nG = Number($aArray[1]) / $__COLORCONSTANTS_RGBMAX
+	Local $nB = Number($aArray[2]) / $__COLORCONSTANTS_RGBMAX
 
 	Local $nMax = $nR
 	If $nMax < $nG Then $nMax = $nG
@@ -147,91 +147,91 @@ Func _ColorConvertRGBtoHSL($avArray)
 		If $nH > 1 Then $nH -= 1
 	EndIf
 
-	$avArray[0] = $nH * $__COLORCONSTANTS_HSLMAX
-	$avArray[1] = $nS * $__COLORCONSTANTS_HSLMAX
-	$avArray[2] = $nL * $__COLORCONSTANTS_HSLMAX
+	$aArray[0] = $nH * $__COLORCONSTANTS_HSLMAX
+	$aArray[1] = $nS * $__COLORCONSTANTS_HSLMAX
+	$aArray[2] = $nL * $__COLORCONSTANTS_HSLMAX
 
-	Return $avArray
+	Return $aArray
 EndFunc   ;==>_ColorConvertRGBtoHSL
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Jonathan Bennett <jon at autoitscript dot com>
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorGetBlue($nColor)
-	Return BitAND($nColor, 0xFF)
+Func _ColorGetBlue($iColor)
+	Return BitAND($iColor, 0xFF)
 EndFunc   ;==>_ColorGetBlue
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Jonathan Bennett <jon at autoitscript dot com>
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorGetGreen($nColor)
-	Return BitAND(BitShift($nColor, 8), 0xFF)
+Func _ColorGetGreen($iColor)
+	Return BitAND(BitShift($iColor, 8), 0xFF)
 EndFunc   ;==>_ColorGetGreen
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Jonathan Bennett <jon at autoitscript dot com>
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorGetRed($nColor)
-	Return BitAND(BitShift($nColor, 16), 0xFF)
+Func _ColorGetRed($iColor)
+	Return BitAND(BitShift($iColor, 16), 0xFF)
 EndFunc   ;==>_ColorGetRed
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: jpm
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorGetCOLORREF($nColor, $iCurExt = @extended)
-	If BitAND($nColor, 0xFF000000) Then Return SetError(1, 0, 0) ; invalid color value
+Func _ColorGetCOLORREF($iColor, Const $_iCurrentExtended = @extended)
+	If BitAND($iColor, 0xFF000000) Then Return SetError(1, 0, 0) ; invalid color value
 	Local $aColor[3]
-	$aColor[2] = BitAND(BitShift($nColor, 16), 0xFF)
-	$aColor[1] = BitAND(BitShift($nColor, 8), 0xFF)
-	$aColor[0] = BitAND($nColor, 0xFF)
-	Return SetExtended($iCurExt, $aColor)
+	$aColor[2] = BitAND(BitShift($iColor, 16), 0xFF)
+	$aColor[1] = BitAND(BitShift($iColor, 8), 0xFF)
+	$aColor[0] = BitAND($iColor, 0xFF)
+	Return SetExtended($_iCurrentExtended, $aColor)
 EndFunc   ;==>_ColorGetCOLORREF
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: jpm
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorGetRGB($nColor, $iCurExt = @extended)
-	If BitAND($nColor, 0xFF000000) Then Return SetError(1, 0, 0) ; invalid color value
+Func _ColorGetRGB($iColor, Const $_iCurrentExtended = @extended)
+	If BitAND($iColor, 0xFF000000) Then Return SetError(1, 0, 0) ; invalid color value
 	Local $aColor[3]
-	$aColor[0] = BitAND(BitShift($nColor, 16), 0xFF)
-	$aColor[1] = BitAND(BitShift($nColor, 8), 0xFF)
-	$aColor[2] = BitAND($nColor, 0xFF)
-	Return SetExtended($iCurExt, $aColor)
+	$aColor[0] = BitAND(BitShift($iColor, 16), 0xFF)
+	$aColor[1] = BitAND(BitShift($iColor, 8), 0xFF)
+	$aColor[2] = BitAND($iColor, 0xFF)
+	Return SetExtended($_iCurrentExtended, $aColor)
 EndFunc   ;==>_ColorGetRGB
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: jpm
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorSetCOLORREF($aColor, $iCurExt = @extended)
+Func _ColorSetCOLORREF($aColor, Const $_iCurrentExtended = @extended)
 	If UBound($aColor) <> 3 Then Return SetError(1, 0, -1) ; invalid array
-	Local $nColor = 0, $iColor
+	Local $iColor = 0, $iColorI
 	For $i = 2 To 0 Step -1
-		$nColor = BitShift($nColor, -8)
-		$iColor = $aColor[$i]
-		If $iColor < 0 Or $iColor > 255 Then Return SetError(2, $i, -1) ; invalid color value
-		$nColor += $iColor
+		$iColor = BitShift($iColor, -8)
+		$iColorI = $aColor[$i]
+		If $iColorI < 0 Or $iColorI > 255 Then Return SetError(2, $i, -1) ; invalid color value
+		$iColor += $iColorI
 	Next
-	Return SetExtended($iCurExt, $nColor)
+	Return SetExtended($_iCurrentExtended, $iColor)
 EndFunc   ;==>_ColorSetCOLORREF
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: jpm
 ; Modified.......:
 ; ===============================================================================================================================
-Func _ColorSetRGB($aColor, $iCurExt = @extended)
+Func _ColorSetRGB($aColor, Const $_iCurrentExtended = @extended)
 	If UBound($aColor) <> 3 Then Return SetError(1, 0, -1) ; invalid array
-	Local $nColor = 0, $iColor
+	Local $iColor = 0, $iColorI
 	For $i = 0 To 2
-		$nColor = BitShift($nColor, -8)
-		$iColor = $aColor[$i]
-		If $iColor < 0 Or $iColor > 255 Then Return SetError(2, 0, -1) ; invalid color value
-		$nColor += $iColor
+		$iColor = BitShift($iColor, -8)
+		$iColorI = $aColor[$i]
+		If $iColorI < 0 Or $iColorI > 255 Then Return SetError(2, 0, -1) ; invalid color value
+		$iColor += $iColorI
 	Next
-	Return SetExtended($iCurExt, $nColor)
+	Return SetExtended($_iCurrentExtended, $iColor)
 EndFunc   ;==>_ColorSetRGB

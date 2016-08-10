@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.2.5.9
-; Last changed           : 2014.03.28
+; Script version         : v1.3.0.0
+; Last changed           : 2016.09.08
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -16,11 +16,6 @@ FileChangeDir(@ScriptDir)
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-If FileExists($eccInstallPath & "\ecc.exe") <> 1 or FileExists($eccInstallPath & "\ecc-system\ecc.php") <> 1 Then
-	MsgBox(64,"ECC DatFileUpdater", "No ECC software found!, aborting...")
-	Exit
-EndIf
-
 If FileExists($7zExe) <> 1 Then
 	MsgBox(64,"ECC DatFileUpdater", "7zip could not be found!, aborting...")
 	Exit
@@ -31,8 +26,8 @@ If FileExists($eccDatfileInfoIni) <> 1 or FileExists($DATUtilExe) <> 1 Then
 	Exit
 EndIf
 
-If DriveSpaceFree(@Scriptdir) < 100 Then
-	MsgBox(64,"ECC DatFileUpdater", "There is not enough drivespace to perform DATfile updates!" & @CRLF & "You need at least 100 MB for the temporally files." & @CRLF & "You have " & Round(DriveSpaceFree(@Scriptdir), -1) & " MB free, aborting...")
+If DriveSpaceFree(@Scriptdir) < 150 Then
+	MsgBox(64,"ECC DatFileUpdater", "There is not enough drivespace to perform DATfile updates!" & @CRLF & "You need at least 150 MB for the temporally files." & @CRLF & "You have " & Round(DriveSpaceFree(@Scriptdir), -1) & " MB free, aborting...")
 	Exit
 EndIf
 ;==============================================================================
@@ -111,6 +106,7 @@ If FileExists($DATfileMameFile) <> 1 Then
 		EndIf
 	EndIf
 Else
+	; OBSOLETE, BUT STILL HANDY TO CREATE THE DAT FILES FOR GITHUB!!!
 	;Check if the MAME version in the ECC update is newer then the user has installed.
 	$CheckMameUpdateFile = FileOpen($DATfileMameFile,0)
 	For $checkline = 50 to 200
@@ -180,60 +176,60 @@ Func UpdatePlatforms()
 	ToolTip("")
 
 	WriteDatFileWithHeader("cps1.dat", "CPS-1", "Capcom Play System 1")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps1.c -a " & Chr(34) & $DATfilePath & "cps1.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps1.cpp -a " & Chr(34) & $DATfilePath & "cps1.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("cps2.dat", "CPS-2", "Capcom Play System 2")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps2.c -a " & Chr(34) & $DATfilePath & "cps2.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps2.cpp -a " & Chr(34) & $DATfilePath & "cps2.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("cps3.dat", "CPS-3", "Capcom Play System 3")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps3.c -a " & Chr(34) & $DATfilePath & "cps3.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G cps3.cpp -a " & Chr(34) & $DATfilePath & "cps3.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("zinc.dat", "ZINC", "ZiNc")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G zn.c -a " & Chr(34) & $DATfilePath & "zinc.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G zn.cpp -a " & Chr(34) & $DATfilePath & "zinc.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("model1.dat", "MODEL-1", "Sega Model 1")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G model1.c -a " & Chr(34) & $DATfilePath & "model1.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G model1.cpp -a " & Chr(34) & $DATfilePath & "model1.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("model2.dat", "MODEL-2", "Sega Model 2")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G model2.c -a " & Chr(34) & $DATfilePath & "model2.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G model2.cpp -a " & Chr(34) & $DATfilePath & "model2.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("pgm.dat", "PGM", "PGM")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G pgm.c -a " & Chr(34) & $DATfilePath & "pgm.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G pgm.cpp -a " & Chr(34) & $DATfilePath & "pgm.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("naomi.dat", "NAOMI", "Sega Naomi")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G naomi.c -a " & Chr(34) & $DATfilePath & "naomi.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G naomi.cpp -a " & Chr(34) & $DATfilePath & "naomi.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("ng.dat", "NEOGEO", "SNK NeoGeo")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neodrvr.c -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neodrvr.cpp -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s11.dat", "SYSTEM-11", "Namco System 11")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos11.c -a " & Chr(34) & $DATfilePath & "s11.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos12.c -a " & Chr(34) & $DATfilePath & "s11.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos11.cpp -a " & Chr(34) & $DATfilePath & "s11.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos12.cpp -a " & Chr(34) & $DATfilePath & "s11.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s16.dat", "SYSTEM-16", "Sega System 16")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G system16.c -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas16a.c -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas16b.c -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G system16.cpp -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas16a.cpp -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas16b.cpp -a " & Chr(34) & $DATfilePath & "s16.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s18.dat", "SYSTEM-18", "Sega System 18")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G system18.c -a " & Chr(34) & $DATfilePath & "s18.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas18.c -a " & Chr(34) & $DATfilePath & "s18.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G system18.cpp -a " & Chr(34) & $DATfilePath & "s18.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G segas18.cpp -a " & Chr(34) & $DATfilePath & "s18.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s22.dat", "SYSTEM-22", "Namco System 22")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos21.c -a " & Chr(34) & $DATfilePath & "s22.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos22.c -a " & Chr(34) & $DATfilePath & "s22.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos21.cpp -a " & Chr(34) & $DATfilePath & "s22.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G namcos22.cpp -a " & Chr(34) & $DATfilePath & "s22.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	FileDelete($DATfileInfoFile)

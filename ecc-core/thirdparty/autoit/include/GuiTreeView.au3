@@ -10,7 +10,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: TreeView
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with TreeView control management.
 ;                  A TreeView control is a window that displays a hierarchical list of items, such as the headings in a document,
@@ -18,7 +18,6 @@
 ;                  bitmapped image, and each item can have a list of subitems associated with it.  By clicking an item, the  user
 ;                  can expand or collapse the associated list of subitems.
 ; Author(s) .....: Paul Campbell (PaulIA), Gary Frost (gafrost), Holger Kotsch
-; Dll(s) ........: user32.dll, comctl32.dll, shell32.dll
 ; ===============================================================================================================================
 
 ; Default treeview item extended structure
@@ -366,12 +365,12 @@ EndFunc   ;==>_GUICtrlTreeView_BeginUpdate
 Func _GUICtrlTreeView_ClickItem($hWnd, $hItem, $sButton = "left", $bMove = False, $iClicks = 1, $iSpeed = 0)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
-	Local $tRect = _GUICtrlTreeView_DisplayRectEx($hWnd, $hItem, True)
+	Local $tRECT = _GUICtrlTreeView_DisplayRectEx($hWnd, $hItem, True)
 	If @error Then Return SetError(@error, @error, 0)
 	; Always click on the left-most portion of the control, not the center.  A
 	; very wide control may be off-screen which means clicking on it's center
 	; will click outside the window.
-	Local $tPoint = _WinAPI_PointFromRect($tRect, False)
+	Local $tPoint = _WinAPI_PointFromRect($tRECT, False)
 	_WinAPI_ClientToScreen($hWnd, $tPoint)
 	Local $iX, $iY
 	_WinAPI_GetXYFromPoint($tPoint, $iX, $iY)
@@ -528,13 +527,13 @@ EndFunc   ;==>_GUICtrlTreeView_Destroy
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlTreeView_DisplayRect($hWnd, $hItem, $bTextOnly = False)
-	Local $tRect = _GUICtrlTreeView_DisplayRectEx($hWnd, $hItem, $bTextOnly)
+	Local $tRECT = _GUICtrlTreeView_DisplayRectEx($hWnd, $hItem, $bTextOnly)
 	If @error Then Return SetError(@error, @error, 0)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlTreeView_DisplayRect
 
@@ -543,32 +542,32 @@ EndFunc   ;==>_GUICtrlTreeView_DisplayRect
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _GUICtrlTreeView_DisplayRectEx($hWnd, $hItem, $bTextOnly = False)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	Local $iRet
 	If IsHWnd($hWnd) Then
 		; RECT is expected to point to the item in its first member.
-		DllStructSetData($tRect, "Left", $hItem)
+		DllStructSetData($tRECT, "Left", $hItem)
 		If _WinAPI_InProcess($hWnd, $__g_hTVLastWnd) Then
-			$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, $bTextOnly, $tRect, 0, "wparam", "struct*")
+			$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, $bTextOnly, $tRECT, 0, "wparam", "struct*")
 		Else
-			Local $iRect = DllStructGetSize($tRect)
+			Local $iRect = DllStructGetSize($tRECT)
 			Local $tMemMap
 			Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
-			_MemWrite($tMemMap, $tRect)
+			_MemWrite($tMemMap, $tRECT)
 			$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, $bTextOnly, $pMemory, 0, "wparam", "ptr")
-			_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+			_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 			_MemFree($tMemMap)
 		EndIf
 	Else
 		If Not IsHWnd($hItem) Then $hItem = _GUICtrlTreeView_GetItemHandle($hWnd, $hItem)
 		; RECT is expected to point to the item in its first member.
-		DllStructSetData($tRect, "Left", $hItem)
-		$iRet = GUICtrlSendMsg($hWnd, $TVM_GETITEMRECT, $bTextOnly, DllStructGetPtr($tRect))
+		DllStructSetData($tRECT, "Left", $hItem)
+		$iRet = GUICtrlSendMsg($hWnd, $TVM_GETITEMRECT, $bTextOnly, DllStructGetPtr($tRECT))
 	EndIf
 
 	; On failure ensure Left is set to 0 and not the item handle.
-	If Not $iRet Then DllStructSetData($tRect, "Left", 0)
-	Return SetError($iRet = 0, $iRet, $tRect)
+	If Not $iRet Then DllStructSetData($tRECT, "Left", 0)
+	Return SetError($iRet = 0, $iRet, $tRECT)
 EndFunc   ;==>_GUICtrlTreeView_DisplayRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -714,11 +713,11 @@ EndFunc   ;==>_GUICtrlTreeView_FindItem
 ; Author ........: Miguel Pilar (luckyb), Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlTreeView_FindItemEx($hWnd, $sPath, $hStart = 0)
+Func _GUICtrlTreeView_FindItemEx($hWnd, $sTreePath, $hStart = 0)
 	Local $sDelimiter = Opt("GUIDataSeparatorChar")
 
 	Local $iIndex = 1
-	Local $aParts = StringSplit($sPath, $sDelimiter)
+	Local $aParts = StringSplit($sTreePath, $sDelimiter)
 	If $hStart = 0 Then $hStart = _GUICtrlTreeView_GetFirstItem($hWnd)
 	While ($iIndex <= $aParts[0]) And ($hStart <> 0x00000000)
 		If StringStripWS(_GUICtrlTreeView_GetText($hWnd, $hStart), $STR_STRIPLEADING + $STR_STRIPTRAILING) = StringStripWS($aParts[$iIndex], $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
@@ -1587,18 +1586,18 @@ Func _GUICtrlTreeView_GetVisible($hWnd, $hItem)
 	If Not IsHWnd($hItem) Then $hItem = _GUICtrlTreeView_GetItemHandle($hWnd, $hItem)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
-	Local $tRect = DllStructCreate($tagRECT)
-	DllStructSetData($tRect, "Left", $hItem)
+	Local $tRECT = DllStructCreate($tagRECT)
+	DllStructSetData($tRECT, "Left", $hItem)
 	Local $iRet
 	If _WinAPI_InProcess($hWnd, $__g_hTVLastWnd) Then
-		$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, True, $tRect, 0, "wparam", "struct*")
+		$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, True, $tRECT, 0, "wparam", "struct*")
 	Else
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
-		_MemWrite($tMemMap, $tRect)
+		_MemWrite($tMemMap, $tRECT)
 		$iRet = _SendMessage($hWnd, $TVM_GETITEMRECT, True, $pMemory, 0, "wparam", "ptr")
-		_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+		_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 		_MemFree($tMemMap)
 	EndIf
 	If $iRet = 0 Then Return False ; item is child item, collapsed and not visible
@@ -1606,8 +1605,8 @@ Func _GUICtrlTreeView_GetVisible($hWnd, $hItem)
 	; item may not be collapsed or may be at the root level the above will give a rect even it isn't in the view
 	; check to see if it is visible to the eye
 	Local $iControlHeight = _WinAPI_GetWindowHeight($hWnd)
-	If DllStructGetData($tRect, "Top") >= $iControlHeight Or _
-			DllStructGetData($tRect, "Bottom") <= 0 Then
+	If DllStructGetData($tRECT, "Top") >= $iControlHeight Or _
+			DllStructGetData($tRECT, "Bottom") <= 0 Then
 		Return False
 	Else
 		Return True

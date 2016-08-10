@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ScrollBar_Constants
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Kept for compatibility with old naming.
 ; Author(s) .....: jpm

@@ -6,11 +6,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIShellEx.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: user32.dll, comctl32.dll, userenv.dll, shlwapi.dll, shell32.dll, ole32.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -98,11 +96,11 @@ EndFunc   ;==>_WinAPI_DefSubclassProc
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_DllGetVersion($sPath)
+Func _WinAPI_DllGetVersion($sFilePath)
 	Local $tVersion = DllStructCreate('dword[5]')
 	DllStructSetData($tVersion, 1, DllStructGetSize($tVersion), 1)
 
-	Local $aRet = DllCall($sPath, 'uint', 'DllGetVersion', 'struct*', $tVersion)
+	Local $aRet = DllCall($sFilePath, 'uint', 'DllGetVersion', 'struct*', $tVersion)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -190,19 +188,19 @@ EndFunc   ;==>_WinAPI_SetWindowSubclass
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellAddToRecentDocs($sFile)
+Func _WinAPI_ShellAddToRecentDocs($sFilePath)
 	Local $sTypeOfFile = 'wstr'
-	If StringStripWS($sFile, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
-		$sFile = _WinAPI_PathSearchAndQualify($sFile, 1)
-		If Not $sFile Then
+	If StringStripWS($sFilePath, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
+		$sFilePath = _WinAPI_PathSearchAndQualify($sFilePath, 1)
+		If Not $sFilePath Then
 			Return SetError(1, 0, 0)
 		EndIf
 	Else
 		$sTypeOfFile = 'ptr'
-		$sFile = 0
+		$sFilePath = 0
 	EndIf
 
-	DllCall('shell32.dll', 'none', 'SHAddToRecentDocs', 'uint', 3, $sTypeOfFile, $sFile)
+	DllCall('shell32.dll', 'none', 'SHAddToRecentDocs', 'uint', 3, $sTypeOfFile, $sFilePath)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Return 1
@@ -280,8 +278,8 @@ EndFunc   ;==>_WinAPI_ShellChangeNotifyRegister
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellCreateDirectory($sPath, $hParent = 0, $tSecurity = 0)
-	Local $aRet = DllCall('shell32.dll', 'int', 'SHCreateDirectoryExW', 'hwnd', $hParent, 'wstr', $sPath, 'struct*', $tSecurity)
+Func _WinAPI_ShellCreateDirectory($sFilePath, $hParent = 0, $tSecurity = 0)
+	Local $aRet = DllCall('shell32.dll', 'int', 'SHCreateDirectoryExW', 'hwnd', $hParent, 'wstr', $sFilePath, 'struct*', $tSecurity)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -304,7 +302,7 @@ EndFunc   ;==>_WinAPI_ShellEmptyRecycleBin
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellExecute($sFile, $sArgs = '', $sDir = '', $sVerb = '', $iShow = 1, $hParent = 0)
+Func _WinAPI_ShellExecute($sFilePath, $sArgs = '', $sDir = '', $sVerb = '', $iShow = 1, $hParent = 0)
 	Local $sTypeOfArgs = 'wstr', $sTypeOfDir = 'wstr', $sTypeOfVerb = 'wstr'
 	If Not StringStripWS($sArgs, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
 		$sTypeOfArgs = 'ptr'
@@ -319,7 +317,7 @@ Func _WinAPI_ShellExecute($sFile, $sArgs = '', $sDir = '', $sVerb = '', $iShow =
 		$sVerb = 0
 	EndIf
 
-	Local $aRet = DllCall('shell32.dll', 'ULONG_PTR', 'ShellExecuteW', 'hwnd', $hParent, $sTypeOfVerb, $sVerb, 'wstr', $sFile, _
+	Local $aRet = DllCall('shell32.dll', 'ULONG_PTR', 'ShellExecuteW', 'hwnd', $hParent, $sTypeOfVerb, $sVerb, 'wstr', $sFilePath, _
 			$sTypeOfArgs, $sArgs, $sTypeOfDir, $sDir, 'int', $iShow)
 	If @error Then Return SetError(@error, @extended, False)
 	If $aRet[0] <= 32 Then Return SetError(10, $aRet[0], 0)
@@ -343,9 +341,9 @@ EndFunc   ;==>_WinAPI_ShellExecuteEx
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellExtractAssociatedIcon($sFile, $bSmall = False)
+Func _WinAPI_ShellExtractAssociatedIcon($sFilePath, $bSmall = False)
 	Local $iFlags = 0x00000100
-	If Not _WinAPI_PathIsDirectory($sFile) Then
+	If Not _WinAPI_PathIsDirectory($sFilePath) Then
 		$iFlags = BitOR($iFlags, 0x00000010)
 	EndIf
 	If $bSmall Then
@@ -353,7 +351,7 @@ Func _WinAPI_ShellExtractAssociatedIcon($sFile, $bSmall = False)
 	EndIf
 
 	Local $tSHFILEINFO = DllStructCreate($tagSHFILEINFO)
-	If Not _WinAPI_ShellGetFileInfo($sFile, $iFlags, 0, $tSHFILEINFO) Then Return SetError(@error + 10, @extended, 0)
+	If Not _WinAPI_ShellGetFileInfo($sFilePath, $iFlags, 0, $tSHFILEINFO) Then Return SetError(@error + 10, @extended, 0)
 
 	Return DllStructGetData($tSHFILEINFO, 'hIcon')
 EndFunc   ;==>_WinAPI_ShellExtractAssociatedIcon
@@ -421,8 +419,8 @@ EndFunc   ;==>_WinAPI_ShellFlushSFCache
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellGetFileInfo($sPath, $iFlags, $iAttributes, ByRef $tSHFILEINFO)
-	Local $aRet = DllCall('shell32.dll', 'dword_ptr', 'SHGetFileInfoW', 'wstr', $sPath, 'dword', $iAttributes, _
+Func _WinAPI_ShellGetFileInfo($sFilePath, $iFlags, $iAttributes, ByRef $tSHFILEINFO)
+	Local $aRet = DllCall('shell32.dll', 'dword_ptr', 'SHGetFileInfoW', 'wstr', $sFilePath, 'dword', $iAttributes, _
 			'struct*', $tSHFILEINFO, 'uint', DllStructGetSize($tSHFILEINFO), 'uint', $iFlags)
 	If @error Then Return SetError(@error, @extended, 0)
 
@@ -453,10 +451,10 @@ EndFunc   ;==>_WinAPI_ShellGetIconOverlayIndex
 ; ===============================================================================================================================
 Func _WinAPI_ShellGetKnownFolderIDList($sGUID, $iFlags = 0, $hToken = 0)
 	Local $tGUID = DllStructCreate($tagGUID)
-	Local $aRet = DllCall('ole32.dll', 'uint', 'CLSIDFromString', 'wstr', $sGUID, 'ptr', DllStructGetPtr($tGUID))
+	Local $aRet = DllCall('ole32.dll', 'uint', 'CLSIDFromString', 'wstr', $sGUID, 'struct*', $tGUID)
 	If @error Or $aRet[0] Then Return SetError(@error + 20, @extended, 0)
 
-	$aRet = DllCall('shell32.dll', 'uint', 'SHGetKnownFolderIDList', 'ptr', DllStructGetPtr($tGUID), 'dword', $iFlags, 'ptr', $hToken, 'ptr*', 0)
+	$aRet = DllCall('shell32.dll', 'uint', 'SHGetKnownFolderIDList', 'struct*', $tGUID, 'dword', $iFlags, 'handle', $hToken, 'ptr*', 0)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -485,8 +483,8 @@ EndFunc   ;==>_WinAPI_ShellGetKnownFolderPath
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellGetLocalizedName($sPath)
-	Local $aRet = DllCall('shell32.dll', 'long', 'SHGetLocalizedName', 'wstr', $sPath, 'wstr', '', 'uint*', 0, 'int*', 0)
+Func _WinAPI_ShellGetLocalizedName($sFilePath)
+	Local $aRet = DllCall('shell32.dll', 'long', 'SHGetLocalizedName', 'wstr', $sFilePath, 'wstr', '', 'uint*', 0, 'int*', 0)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -504,7 +502,7 @@ EndFunc   ;==>_WinAPI_ShellGetLocalizedName
 ; Modified.......: Jpm
 ; ===============================================================================================================================
 Func _WinAPI_ShellGetPathFromIDList($pPIDL)
-	Local $aRet = DllCall('shell32.dll', 'bool', 'SHGetPathFromIDListW', 'ptr', $pPIDL, 'wstr', '')
+	Local $aRet = DllCall('shell32.dll', 'bool', 'SHGetPathFromIDListW', 'struct*', $pPIDL, 'wstr', '')
 	If @error Or Not $aRet[0] Then Return SetError(@error, @extended, '')
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -515,11 +513,11 @@ EndFunc   ;==>_WinAPI_ShellGetPathFromIDList
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellGetSetFolderCustomSettings($sPath, $iFlag, ByRef $tSHFCS)
+Func _WinAPI_ShellGetSetFolderCustomSettings($sFilePath, $iFlag, ByRef $tSHFCS)
 	Local $sProc = 'SHGetSetFolderCustomSettings'
 	If $__WINVER < 0x0600 Then $sProc &= 'W'
 
-	Local $aRet = DllCall('shell32.dll', 'long', $sProc, 'struct*', $tSHFCS, 'wstr', $sPath, 'dword', $iFlag)
+	Local $aRet = DllCall('shell32.dll', 'long', $sProc, 'struct*', $tSHFCS, 'wstr', $sFilePath, 'dword', $iFlag)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -615,8 +613,8 @@ EndFunc   ;==>_WinAPI_ShellGetStockIconInfo
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellILCreateFromPath($sPath)
-	Local $aRet = DllCall('shell32.dll', 'long', 'SHILCreateFromPath', 'wstr', $sPath, 'ptr*', 0, 'dword*', 0)
+Func _WinAPI_ShellILCreateFromPath($sFilePath)
+	Local $aRet = DllCall('shell32.dll', 'long', 'SHILCreateFromPath', 'wstr', $sFilePath, 'ptr*', 0, 'dword*', 0)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -646,11 +644,11 @@ Func _WinAPI_ShellNotifyIconGetRect($hWnd, $iID, $tGUID = 0)
 	DllStructSetData($tNII, 3, $iID)
 
 	If IsDllStruct($tGUID) Then
-		If Not _WinAPI_MoveMemory(DllStructGetPtr($tNII, 4), DllStructGetPtr($tGUID), 16) Then Return SetError(@error + 10, @extended, 0)
+		If Not _WinAPI_MoveMemory(DllStructGetPtr($tNII, 4), $tGUID, 16) Then Return SetError(@error + 10, @extended, 0)
 	EndIf
 
 	Local $tRECT = DllStructCreate($tagRECT)
-	Local $aRet = DllCall('shell32.dll ', 'long', 'Shell_NotifyIconGetRect', 'struct*', $tNII, 'struct*', $tRECT)
+	Local $aRet = DllCall('shell32.dll', 'long', 'Shell_NotifyIconGetRect', 'struct*', $tNII, 'struct*', $tRECT)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -661,14 +659,14 @@ EndFunc   ;==>_WinAPI_ShellNotifyIconGetRect
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellObjectProperties($sPath, $iType = 2, $sProperty = '', $hParent = 0)
+Func _WinAPI_ShellObjectProperties($sFilePath, $iType = 2, $sProperty = '', $hParent = 0)
 	Local $sTypeOfProperty = 'wstr'
 	If Not StringStripWS($sProperty, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
 		$sTypeOfProperty = 'ptr'
 		$sProperty = 0
 	EndIf
 
-	Local $aRet = DllCall('shell32.dll', 'bool', 'SHObjectProperties', 'hwnd', $hParent, 'dword', $iType, 'wstr', $sPath, _
+	Local $aRet = DllCall('shell32.dll', 'bool', 'SHObjectProperties', 'hwnd', $hParent, 'dword', $iType, 'wstr', $sFilePath, _
 			$sTypeOfProperty, $sProperty)
 	If @error Then Return SetError(@error, @extended, False)
 	; If Not $aRet[0] Then Return SetError(@error, @extended, 0)
@@ -680,21 +678,21 @@ EndFunc   ;==>_WinAPI_ShellObjectProperties
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellOpenFolderAndSelectItems($sPath, $aNames = 0, $iStart = 0, $iEnd = -1, $iFlags = 0)
+Func _WinAPI_ShellOpenFolderAndSelectItems($sFilePath, $aNames = 0, $iStart = 0, $iEnd = -1, $iFlags = 0)
 	Local $pPIDL, $aRet, $tPtr = 0, $iCount = 0, $iObj = 0, $iError = 0
 
-	$sPath = _WinAPI_PathRemoveBackslash(_WinAPI_PathSearchAndQualify($sPath))
+	$sFilePath = _WinAPI_PathRemoveBackslash(_WinAPI_PathSearchAndQualify($sFilePath))
 	If IsArray($aNames) Then
-		If $sPath And Not _WinAPI_PathIsDirectory($sPath) Then Return SetError(@error + 20, @extended, 0)
+		If $sFilePath And Not _WinAPI_PathIsDirectory($sFilePath) Then Return SetError(@error + 20, @extended, 0)
 	EndIf
-	$pPIDL = _WinAPI_ShellILCreateFromPath($sPath)
+	$pPIDL = _WinAPI_ShellILCreateFromPath($sFilePath)
 	If @error Then Return SetError(@error + 30, @extended, 0)
 	If Not __CheckErrorArrayBounds($aNames, $iStart, $iEnd) Then
 		$tPtr = DllStructCreate('ptr[' & ($iEnd - $iStart + 1) & ']')
 		For $i = $iStart To $iEnd
 			$iCount += 1
 			If $aNames[$i] Then
-				DllStructSetData($tPtr, 1, _WinAPI_ShellILCreateFromPath($sPath & '\' & $aNames[$i]), $iCount)
+				DllStructSetData($tPtr, 1, _WinAPI_ShellILCreateFromPath($sFilePath & '\' & $aNames[$i]), $iCount)
 			Else
 				DllStructSetData($tPtr, 1, 0, $iCount)
 			EndIf
@@ -756,8 +754,8 @@ EndFunc   ;==>_WinAPI_ShellQueryUserNotificationState
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellRemoveLocalizedName($sPath)
-	Local $aRet = DllCall('shell32.dll', 'long', 'SHRemoveLocalizedName', 'wstr', $sPath)
+Func _WinAPI_ShellRemoveLocalizedName($sFilePath)
+	Local $aRet = DllCall('shell32.dll', 'long', 'SHRemoveLocalizedName', 'wstr', $sFilePath)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -779,12 +777,12 @@ EndFunc   ;==>_WinAPI_ShellRestricted
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellSetKnownFolderPath($sGUID, $sPath, $iFlags = 0, $hToken = 0)
+Func _WinAPI_ShellSetKnownFolderPath($sGUID, $sFilePath, $iFlags = 0, $hToken = 0)
 	Local $tGUID = DllStructCreate($tagGUID)
 	Local $aRet = DllCall('ole32.dll', 'long', 'CLSIDFromString', 'wstr', $sGUID, 'struct*', $tGUID)
 	If @error Or $aRet[0] Then Return SetError(@error + 20, @extended, 0)
 
-	$aRet = DllCall('shell32.dll', 'long', 'SHSetKnownFolderPath', 'struct*', $tGUID, 'dword', $iFlags, 'handle', $hToken, 'wstr', $sPath)
+	$aRet = DllCall('shell32.dll', 'long', 'SHSetKnownFolderPath', 'struct*', $tGUID, 'dword', $iFlags, 'handle', $hToken, 'wstr', $sFilePath)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 
@@ -795,8 +793,8 @@ EndFunc   ;==>_WinAPI_ShellSetKnownFolderPath
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellSetLocalizedName($sPath, $sModule, $iResID)
-	Local $aRet = DllCall('shell32.dll', 'long', 'SHSetLocalizedName', 'wstr', $sPath, 'wstr', $sModule, 'int', $iResID)
+Func _WinAPI_ShellSetLocalizedName($sFilePath, $sModule, $iResID)
+	Local $aRet = DllCall('shell32.dll', 'long', 'SHSetLocalizedName', 'wstr', $sFilePath, 'wstr', $sModule, 'int', $iResID)
 	If @error Then Return SetError(@error, @extended, 0)
 	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
 

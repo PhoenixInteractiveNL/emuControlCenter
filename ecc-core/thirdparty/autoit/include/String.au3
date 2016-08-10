@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: String
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Functions that assist with String management.
 ; Author(s) .....: Jarvis Stubblefield, SmOke_N, Valik, Wes Wolfe-Wolvereness, WeaponX, Louis Horvath, JdeB, Jeremy Landes, Jon, jchd, BrewManNH, guinness
 ; ===============================================================================================================================
@@ -12,7 +12,6 @@
 ; #CURRENT# =====================================================================================================================
 ; _HexToString
 ; _StringBetween
-; _StringEncrypt
 ; _StringExplode
 ; _StringInsert
 ; _StringProper
@@ -27,7 +26,7 @@
 ; ===============================================================================================================================
 Func _HexToString($sHex)
 	If Not (StringLeft($sHex, 2) == "0x") Then $sHex = "0x" & $sHex
-	Return BinaryToString($sHex)
+	Return BinaryToString($sHex, $SB_UTF8)
 EndFunc   ;==>_HexToString
 
 ; #FUNCTION# ====================================================================================================================
@@ -35,17 +34,11 @@ EndFunc   ;==>_HexToString
 ; Modified.......: SmOke_N - (Re-write for speed and accuracy), jchd, Melba23 (added mode)
 ; ===============================================================================================================================
 Func _StringBetween($sString, $sStart, $sEnd, $iMode = $STR_ENDISSTART, $bCase = False)
-	; Set mode
-	If $iMode <> $STR_ENDNOTSTART Then $iMode = $STR_ENDISSTART
-
-	; Set correct case sensitivity
-	If $bCase = Default Then
-		$bCase = False
-	EndIf
-	Local $sCase = $bCase ? "(?s)" : "(?is)"
-
 	; If starting from beginning of string
 	$sStart = $sStart ? "\Q" & $sStart & "\E" : "\A"
+
+	; Set mode
+	If $iMode <> $STR_ENDNOTSTART Then $iMode = $STR_ENDISSTART
 
 	; If ending at end of string
 	If $iMode = $STR_ENDISSTART Then
@@ -56,7 +49,12 @@ Func _StringBetween($sString, $sStart, $sEnd, $iMode = $STR_ENDISSTART, $bCase =
 		$sEnd = $sEnd ? "\Q" & $sEnd & "\E" : "\z"
 	EndIf
 
-	Local $aReturn = StringRegExp($sString, $sCase & $sStart & "(.*?)" & $sEnd, $STR_REGEXPARRAYGLOBALMATCH)
+	; Set correct case sensitivity
+	If $bCase = Default Then
+		$bCase = False
+	EndIf
+
+	Local $aReturn = StringRegExp($sString, "(?s" & (Not $bCase ? "i" : "") & ")" & $sStart & "(.*?)" & $sEnd, $STR_REGEXPARRAYGLOBALMATCH)
 	If @error Then Return SetError(1, 0, 0)
 	Return $aReturn
 EndFunc   ;==>_StringBetween
@@ -66,9 +64,10 @@ EndFunc   ;==>_StringBetween
 ; Modified.......:
 ; ===============================================================================================================================
 Func _StringExplode($sString, $sDelimiter, $iLimit = 0)
-	Local Const $NULL = Chr(0) ; Different from the Null keyword.
 	If $iLimit = Default Then $iLimit = 0
 	If $iLimit > 0 Then
+		Local Const $NULL = Chr(0) ; Different from the Null keyword.
+
 		; Replace delimiter with NULL character using given limit
 		$sString = StringReplace($sString, $sDelimiter, $NULL, $iLimit)
 
@@ -83,36 +82,24 @@ Func _StringExplode($sString, $sDelimiter, $iLimit = 0)
 		EndIf
 	EndIf
 
-	Return StringSplit($sString, $sDelimiter, $STR_NOCOUNT)
+	Return StringSplit($sString, $sDelimiter, $STR_ENTIRESPLIT + $STR_NOCOUNT)
 EndFunc   ;==>_StringExplode
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Louis Horvath <celeri at videotron dot ca>
-; Modified.......: jchd - Removed explicitly checking if the source and insert strings were strings and forcing an @error return value
+; Modified.......: jchd - Removed explicitly checking if the source and insert strings were strings and forcing an @error return value, czardas - re-write for optimization
 ; ===============================================================================================================================
 Func _StringInsert($sString, $sInsertString, $iPosition)
-	; Casting Int() takes care of String/Int, Numbers
-	$iPosition = Int($iPosition)
-
 	; Retrieve the length of the source string
 	Local $iLength = StringLen($sString)
-
-	; Check the insert position isn't greater than the string length
-	If Abs($iPosition) > $iLength Then
-		Return SetError(1, 0, $sString) ; Invalid position as it's greater than the string length
-	EndIf
-
-	; Check if the source and insert strings are strings and convert accordingly if not
-	If Not IsString($sInsertString) Then $sInsertString = String($sInsertString)
-	If Not IsString($sString) Then $sString = String($sString)
-	; Escape all "\" characters in the string to insert - otherwise they do not appear
-	$sInsertString = StringReplace($sInsertString, "\", "\\")
+	; Casting Int() takes care of String/Int, Numbers
+	$iPosition = Int($iPosition)
+	; Adjust the position to accomodate negative values (insertion from the right)
+	If $iPosition < 0 Then $iPosition = $iLength + $iPosition
+	; Check the insert position is within bounds
+	If $iLength < $iPosition Or $iPosition < 0 Then Return SetError(1, 0, $sString)
 	; Insert the string
-	If $iPosition >= 0 Then
-		Return StringRegExpReplace($sString, "(?s)\A(.{" & $iPosition & "})(.*)\z", "${1}" & $sInsertString & "$2") ; Insert to the left hand side
-	Else
-		Return StringRegExpReplace($sString, "(?s)\A(.*)(.{" & - $iPosition & "})\z", "${1}" & $sInsertString & "$2") ; Insert to the right hand side
-	EndIf
+	Return StringLeft($sString, $iPosition) & $sInsertString & StringRight($sString, $iLength - $iPosition)
 EndFunc   ;==>_StringInsert
 
 ; #FUNCTION# ====================================================================================================================
@@ -125,11 +112,11 @@ Func _StringProper($sString)
 		$sChr = StringMid($sString, $i, 1)
 		Select
 			Case $bCapNext = True
-				If StringRegExp($sChr, '[a-zA-ZÀ-ÿšœžŸ]') Then
+				If StringRegExp($sChr, '[a-zA-ZÃ€-Ã¿Å¡Å“Å¾Å¸]') Then
 					$sChr = StringUpper($sChr)
 					$bCapNext = False
 				EndIf
-			Case Not StringRegExp($sChr, '[a-zA-ZÀ-ÿšœžŸ]')
+			Case Not StringRegExp($sChr, '[a-zA-ZÃ€-Ã¿Å¡Å“Å¾Å¸]')
 				$bCapNext = True
 			Case Else
 				$sChr = StringLower($sChr)
@@ -146,6 +133,7 @@ EndFunc   ;==>_StringProper
 Func _StringRepeat($sString, $iRepeatCount)
 	; Casting Int() takes care of String/Int, Numbers.
 	$iRepeatCount = Int($iRepeatCount)
+	If $iRepeatCount = 0 Then Return "" ; Return a blank string if the repeat count is zero.
 	; Zero is a valid repeat integer.
 	If StringLen($sString) < 1 Or $iRepeatCount < 0 Then Return SetError(1, 0, "")
 	Local $sResult = ""
@@ -186,5 +174,5 @@ EndFunc   ;==>_StringTitleCase
 ; Modified.......: SmOke_N - (Re-write using StringToBinary for speed)
 ; ===============================================================================================================================
 Func _StringToHex($sString)
-	Return Hex(StringToBinary($sString))
+	Return Hex(StringToBinary($sString, $SB_UTF8))
 EndFunc   ;==>_StringToHex

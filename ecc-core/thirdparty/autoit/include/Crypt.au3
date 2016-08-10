@@ -4,10 +4,10 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Crypt
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions for encrypting and hashing data.
-; Author(s) .....: Andreas Karlsson (monoceres)
+; Author(s) .....: Andreas Karlsson (monoceres), jchd
 ; Dll(s) ........: Advapi32.dll
 ; ===============================================================================================================================
 
@@ -32,6 +32,7 @@
 ; __Crypt_DllHandleSet
 ; __Crypt_Context
 ; __Crypt_ContextSet
+; __Crypt_GetCalgFromCryptKey
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -58,6 +59,7 @@ Global Const $CALG_DES = 0x00006601
 Global Const $CALG_RC2 = 0x00006602
 Global Const $CALG_RC4 = 0x00006801
 Global Const $CALG_USERKEY = 0
+Global Const $KP_ALGID = 0x00000007
 
 ; #VARIABLES# ===================================================================================================================
 Global $__g_aCryptInternalData[3]
@@ -102,7 +104,7 @@ EndFunc   ;==>_Crypt_Shutdown
 ; Author ........: Andreas Karlsson (monoceres)
 ; Modified ......:
 ; ===============================================================================================================================
-Func _Crypt_DeriveKey($vPassword, $iALG_ID, $iHash_ALG_ID = $CALG_MD5)
+Func _Crypt_DeriveKey($vPassword, $iAlgID, $iHashAlgID = $CALG_MD5)
 	Local $aRet = 0, _
 			$hBuff = 0, $hCryptHash = 0, _
 			$iError = 0, $iExtended = 0, _
@@ -111,7 +113,7 @@ Func _Crypt_DeriveKey($vPassword, $iALG_ID, $iHash_ALG_ID = $CALG_MD5)
 	_Crypt_Startup()
 	Do
 		; Create Hash object
-		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptCreateHash", "handle", __Crypt_Context(), "uint", $iHash_ALG_ID, "ptr", 0, "dword", 0, "handle*", 0)
+		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptCreateHash", "handle", __Crypt_Context(), "uint", $iHashAlgID, "ptr", 0, "dword", 0, "handle*", 0)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 10
 			$iExtended = @extended
@@ -131,7 +133,7 @@ Func _Crypt_DeriveKey($vPassword, $iALG_ID, $iHash_ALG_ID = $CALG_MD5)
 		EndIf
 
 		; Create key
-		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptDeriveKey", "handle", __Crypt_Context(), "uint", $iALG_ID, "handle", $hCryptHash, "dword", $CRYPT_EXPORTABLE, "handle*", 0)
+		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptDeriveKey", "handle", __Crypt_Context(), "uint", $iAlgID, "handle", $hCryptHash, "dword", $CRYPT_EXPORTABLE, "handle*", 0)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 30
 			$iExtended = @extended
@@ -163,9 +165,19 @@ EndFunc   ;==>_Crypt_DestroyKey
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Andreas Karlsson (monoceres)
-; Modified ......:
+; Modified ......: jchd
 ; ===============================================================================================================================
-Func _Crypt_EncryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
+Func _Crypt_EncryptData($vData, $vCryptKey, $iAlgID, $bFinal = True)
+
+	Switch $iAlgID
+		Case $CALG_USERKEY
+			Local $iCalgUsed = __Crypt_GetCalgFromCryptKey($vCryptKey)
+			If @error Then Return SetError(@error, -1, @extended)
+			If $iCalgUsed = $CALG_RC4 Then ContinueCase
+		Case $CALG_RC4
+			If BinaryLen($vData) = 0 Then Return SetError(0, 0, Binary(''))
+	EndSwitch
+
 	Local $iReqBuffSize = 0, _
 			$aRet = 0, _
 			$hBuff = 0, _
@@ -175,8 +187,8 @@ Func _Crypt_EncryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
 	_Crypt_Startup()
 
 	Do
-		If $iALG_ID <> $CALG_USERKEY Then
-			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iALG_ID)
+		If $iAlgID <> $CALG_USERKEY Then
+			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iAlgID)
 			If @error Then
 				$iError = @error + 100
 				$iExtended = @extended
@@ -195,20 +207,20 @@ Func _Crypt_EncryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
 		EndIf
 
 		$iReqBuffSize = $aRet[6]
-		$hBuff = DllStructCreate("byte[" & $iReqBuffSize & "]")
+		$hBuff = DllStructCreate("byte[" & $iReqBuffSize + 1 & "]")
 		DllStructSetData($hBuff, 1, $vData)
 		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptEncrypt", "handle", $vCryptKey, "handle", 0, "bool", $bFinal, "dword", 0, "struct*", $hBuff, _
-				"dword*", BinaryLen($vData), "dword", DllStructGetSize($hBuff))
+				"dword*", BinaryLen($vData), "dword", DllStructGetSize($hBuff) - 1)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 30
 			$iExtended = @extended
 			$vReturn = -1
 			ExitLoop
 		EndIf
-		$vReturn = DllStructGetData($hBuff, 1)
+		$vReturn = BinaryMid(DllStructGetData($hBuff, 1), 1, $iReqBuffSize)
 	Until True
 
-	If $iALG_ID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
+	If $iAlgID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
 	_Crypt_Shutdown()
 
 	Return SetError($iError, $iExtended, $vReturn)
@@ -216,9 +228,19 @@ EndFunc   ;==>_Crypt_EncryptData
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Andreas Karlsson (monoceres)
-; Modified ......:
+; Modified ......: jchd
 ; ===============================================================================================================================
-Func _Crypt_DecryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
+Func _Crypt_DecryptData($vData, $vCryptKey, $iAlgID, $bFinal = True)
+
+	Switch $iAlgID
+		Case $CALG_USERKEY
+			Local $iCalgUsed = __Crypt_GetCalgFromCryptKey($vCryptKey)
+			If @error Then Return SetError(@error, -1, @extended)
+			If $iCalgUsed = $CALG_RC4 Then ContinueCase
+		Case $CALG_RC4
+			If BinaryLen($vData) = 0 Then Return SetError(0, 0, Binary(''))
+	EndSwitch
+
 	Local $aRet = 0, _
 			$hBuff = 0, $hTempStruct = 0, _
 			$iError = 0, $iExtended = 0, $iPlainTextSize = 0, _
@@ -227,8 +249,8 @@ Func _Crypt_DecryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
 	_Crypt_Startup()
 
 	Do
-		If $iALG_ID <> $CALG_USERKEY Then
-			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iALG_ID)
+		If $iAlgID <> $CALG_USERKEY Then
+			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iAlgID)
 			If @error Then
 				$iError = @error + 100
 				$iExtended = @extended
@@ -238,7 +260,7 @@ Func _Crypt_DecryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
 		EndIf
 
 		$hBuff = DllStructCreate("byte[" & BinaryLen($vData) + 1000 & "]")
-		DllStructSetData($hBuff, 1, $vData)
+		If BinaryLen($vData) > 0 Then DllStructSetData($hBuff, 1, $vData)
 		$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptDecrypt", "handle", $vCryptKey, "handle", 0, "bool", $bFinal, "dword", 0, "struct*", $hBuff, "dword*", BinaryLen($vData))
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 20
@@ -248,11 +270,11 @@ Func _Crypt_DecryptData($vData, $vCryptKey, $iALG_ID, $bFinal = True)
 		EndIf
 
 		$iPlainTextSize = $aRet[6]
-		$hTempStruct = DllStructCreate("byte[" & $iPlainTextSize & "]", DllStructGetPtr($hBuff))
-		$vReturn = DllStructGetData($hTempStruct, 1)
+		$hTempStruct = DllStructCreate("byte[" & $iPlainTextSize + 1 & "]", DllStructGetPtr($hBuff))
+		$vReturn = BinaryMid(DllStructGetData($hTempStruct, 1), 1, $iPlainTextSize)
 	Until True
 
-	If $iALG_ID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
+	If $iAlgID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
 	_Crypt_Shutdown()
 
 	Return SetError($iError, $iExtended, $vReturn)
@@ -262,7 +284,7 @@ EndFunc   ;==>_Crypt_DecryptData
 ; Author ........: Andreas Karlsson (monoceres)
 ; Modified ......:
 ; ===============================================================================================================================
-Func _Crypt_HashData($vData, $iALG_ID, $bFinal = True, $hCryptHash = 0)
+Func _Crypt_HashData($vData, $iAlgID, $bFinal = True, $hCryptHash = 0)
 	Local $aRet = 0, _
 			$hBuff = 0, _
 			$iError = 0, $iExtended = 0, $iHashSize = 0, _
@@ -272,7 +294,7 @@ Func _Crypt_HashData($vData, $iALG_ID, $bFinal = True, $hCryptHash = 0)
 	Do
 		If $hCryptHash = 0 Then
 			; Create Hash object
-			$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptCreateHash", "handle", __Crypt_Context(), "uint", $iALG_ID, "ptr", 0, "dword", 0, "handle*", 0)
+			$aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptCreateHash", "handle", __Crypt_Context(), "uint", $iAlgID, "ptr", 0, "dword", 0, "handle*", 0)
 			If @error Or Not $aRet[0] Then
 				$iError = @error + 10
 				$iExtended = @extended
@@ -330,7 +352,7 @@ EndFunc   ;==>_Crypt_HashData
 ; Author ........: Andreas Karlsson (monoceres)
 ; Modified ......:
 ; ===============================================================================================================================
-Func _Crypt_HashFile($sFile, $iALG_ID)
+Func _Crypt_HashFile($sFilePath, $iAlgID)
 	Local $bTempData = 0, _
 			$hFile = 0, $hHashObject = 0, _
 			$iError = 0, $iExtended = 0, _
@@ -339,7 +361,7 @@ Func _Crypt_HashFile($sFile, $iALG_ID)
 	_Crypt_Startup()
 
 	Do
-		$hFile = FileOpen($sFile, $FO_BINARY)
+		$hFile = FileOpen($sFilePath, $FO_BINARY)
 		If $hFile = -1 Then
 			$iError = 1
 			$vReturn = -1
@@ -349,7 +371,7 @@ Func _Crypt_HashFile($sFile, $iALG_ID)
 		Do
 			$bTempData = FileRead($hFile, 512 * 1024)
 			If @error Then
-				$vReturn = _Crypt_HashData($bTempData, $iALG_ID, True, $hHashObject)
+				$vReturn = _Crypt_HashData($bTempData, $iAlgID, True, $hHashObject)
 				If @error Then
 					$iError = @error
 					$iExtended = @extended
@@ -358,7 +380,7 @@ Func _Crypt_HashFile($sFile, $iALG_ID)
 				EndIf
 				ExitLoop 2
 			Else
-				$hHashObject = _Crypt_HashData($bTempData, $iALG_ID, False, $hHashObject)
+				$hHashObject = _Crypt_HashData($bTempData, $iAlgID, False, $hHashObject)
 				If @error Then
 					$iError = @error + 100
 					$iExtended = @extended
@@ -379,7 +401,7 @@ EndFunc   ;==>_Crypt_HashFile
 ; Author ........: Andreas Karlsson (monoceres)
 ; Modified ......:
 ; ===============================================================================================================================
-Func _Crypt_EncryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
+Func _Crypt_EncryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iAlgID)
 	Local $bTempData = 0, _
 			$hInFile = 0, $hOutFile = 0, _
 			$iError = 0, $iExtended = 0, $iFileSize = FileGetSize($sSourceFile), $iRead = 0, _
@@ -388,8 +410,8 @@ Func _Crypt_EncryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
 	_Crypt_Startup()
 
 	Do
-		If $iALG_ID <> $CALG_USERKEY Then
-			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iALG_ID)
+		If $iAlgID <> $CALG_USERKEY Then
+			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iAlgID)
 			If @error Then
 				$iError = @error
 				$iExtended = @extended
@@ -436,7 +458,7 @@ Func _Crypt_EncryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
 		Until False
 	Until True
 
-	If $iALG_ID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
+	If $iAlgID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
 	_Crypt_Shutdown()
 	If $hInFile <> -1 Then FileClose($hInFile)
 	If $hOutFile <> -1 Then FileClose($hOutFile)
@@ -448,7 +470,7 @@ EndFunc   ;==>_Crypt_EncryptFile
 ; Author ........: Andreas Karlsson (monoceres)
 ; Modified ......:
 ; ===============================================================================================================================
-Func _Crypt_DecryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
+Func _Crypt_DecryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iAlgID)
 	Local $bTempData = 0, _
 			$hInFile = 0, $hOutFile = 0, _
 			$iError = 0, $iExtended = 0, $iFileSize = FileGetSize($sSourceFile), $iRead = 0, _
@@ -457,8 +479,8 @@ Func _Crypt_DecryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
 	_Crypt_Startup()
 
 	Do
-		If $iALG_ID <> $CALG_USERKEY Then
-			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iALG_ID)
+		If $iAlgID <> $CALG_USERKEY Then
+			$vCryptKey = _Crypt_DeriveKey($vCryptKey, $iAlgID)
 			If @error Then
 				$iError = @error
 				$iExtended = @extended
@@ -505,7 +527,7 @@ Func _Crypt_DecryptFile($sSourceFile, $sDestinationFile, $vCryptKey, $iALG_ID)
 		Until False
 	Until True
 
-	If $iALG_ID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
+	If $iAlgID <> $CALG_USERKEY Then _Crypt_DestroyKey($vCryptKey)
 	_Crypt_Shutdown()
 	If $hInFile <> -1 Then FileClose($hInFile)
 	If $hOutFile <> -1 Then FileClose($hOutFile)
@@ -520,10 +542,10 @@ EndFunc   ;==>_Crypt_DecryptFile
 Func _Crypt_GenRandom($pBuffer, $iSize)
 	_Crypt_Startup()
 	Local $aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptGenRandom", "handle", __Crypt_Context(), "dword", $iSize, "struct*", $pBuffer)
-	Local $iError = @error + 10, $iExtended = @extended
+	Local $iError = @error, $iExtended = @extended
 	_Crypt_Shutdown()
 	If $iError Or (Not $aRet[0]) Then
-		Return SetError($iError, $iExtended, False)
+		Return SetError($iError + 10, $iExtended, False)
 	Else
 		Return True
 	EndIf
@@ -647,3 +669,27 @@ EndFunc   ;==>__Crypt_Context
 Func __Crypt_ContextSet($hCryptContext)
 	$__g_aCryptInternalData[2] = $hCryptContext
 EndFunc   ;==>__Crypt_ContextSet
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name...........: __Crypt_GetCalgFromCryptKey
+; Description ...: Retrieves the crypto-algorithm use by a USERKEY.
+; Syntax.........: __Crypt_GetCalgFromCryptKey($vCryptKey)
+; Parameters ....: $vCryptKey - The USERKEY handle.
+; Return values .:
+; Author ........: jchd
+; Modified.......:
+; Remarks .......: For Internal Use Only
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+Func __Crypt_GetCalgFromCryptKey($vCryptKey)
+	Local $tAlgId = DllStructCreate("uint;dword")
+	DllStructSetData($tAlgId, 2, 4)
+	Local $aRet = DllCall(__Crypt_DllHandle(), "bool", "CryptGetKeyParam", "handle", $vCryptKey, "dword", $KP_ALGID, "ptr", DllStructGetPtr($tAlgId, 1), "dword*", DllStructGetPtr($tAlgId, 2), "dword", 0)
+	If @error Or Not $aRet[0] Then
+		Return SetError(@error, @extended, $CRYPT_USERDATA)
+	Else
+		Return DllStructGetData($tAlgId, 1)
+	EndIf
+EndFunc   ;==>__Crypt_GetCalgFromCryptKey

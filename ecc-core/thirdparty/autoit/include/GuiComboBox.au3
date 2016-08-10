@@ -9,11 +9,10 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ComboBox
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with ComboBox control management.
 ; Author(s) .....: gafrost, PaulIA, Valik
-; Dll(s) ........: User32.dll
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
@@ -128,14 +127,14 @@ Global Const $tagCOMBOBOXINFO = "dword Size;struct;long EditLeft;long EditTop;lo
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlComboBox_AddDir($hWnd, $sFile, $iAttributes = 0, $bBrackets = True)
+Func _GUICtrlComboBox_AddDir($hWnd, $sFilePath, $iAttributes = 0, $bBrackets = True)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
 	If BitAND($iAttributes, $DDL_DRIVES) = $DDL_DRIVES And Not $bBrackets Then
 		Local $sText
 		Local $hGui_no_brackets = GUICreate("no brackets")
 		Local $idCombo_no_brackets = GUICtrlCreateCombo("", 240, 40, 120, 120)
-		Local $iRet = GUICtrlSendMsg($idCombo_no_brackets, $CB_DIR, $iAttributes, $sFile)
+		Local $iRet = GUICtrlSendMsg($idCombo_no_brackets, $CB_DIR, $iAttributes, $sFilePath)
 		For $i = 0 To _GUICtrlComboBox_GetCount($idCombo_no_brackets) - 1
 			_GUICtrlComboBox_GetLBText($idCombo_no_brackets, $i, $sText)
 			$sText = StringReplace(StringReplace(StringReplace($sText, "[", ""), "]", ":"), "-", "")
@@ -144,7 +143,7 @@ Func _GUICtrlComboBox_AddDir($hWnd, $sFile, $iAttributes = 0, $bBrackets = True)
 		GUIDelete($hGui_no_brackets)
 		Return $iRet
 	Else
-		Return _SendMessage($hWnd, $CB_DIR, $iAttributes, $sFile, 0, "wparam", "wstr")
+		Return _SendMessage($hWnd, $CB_DIR, $iAttributes, $sFilePath, 0, "wparam", "wstr")
 	EndIf
 EndFunc   ;==>_GUICtrlComboBox_AddDir
 
@@ -365,7 +364,7 @@ Func _GUICtrlComboBox_GetDroppedControlRectEx($hWnd)
 EndFunc   ;==>_GUICtrlComboBox_GetDroppedControlRectEx
 
 ; #FUNCTION# ====================================================================================================================
-; Author ........: Gary Frost (gafro_GUICtrlComboBox_GetDroppedState
+; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlComboBox_GetDroppedState($hWnd)

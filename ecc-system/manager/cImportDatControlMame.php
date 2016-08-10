@@ -605,7 +605,7 @@ class ImportDatControlMame extends ImportDat {
 			}
 			else {
 				# if headerDone, try to get games / resources
-				if (0 === strpos($line, 'game (')){
+				if (0 === strpos($line, 'machine (')){
 					$entryType = 'game';
 					$gamePos++; 
 				}

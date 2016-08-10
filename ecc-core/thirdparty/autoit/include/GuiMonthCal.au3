@@ -9,7 +9,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: MonthCalendar
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with MonthCalendar control management.
 ;                  A month calendar control implements a calendar-like user  interface.  This  provides  the  user  with  a  very
@@ -276,8 +276,8 @@ EndFunc   ;==>_GUICtrlMonthCal_GetMaxTodayWidth
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlMonthCal_GetMinReqHeight($hWnd)
-	Local $tRect = _GUICtrlMonthCal_GetMinReqRect($hWnd)
-	Return DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlMonthCal_GetMinReqRect($hWnd)
+	Return DllStructGetData($tRECT, "Bottom")
 EndFunc   ;==>_GUICtrlMonthCal_GetMinReqHeight
 
 ; #FUNCTION# ====================================================================================================================
@@ -285,22 +285,22 @@ EndFunc   ;==>_GUICtrlMonthCal_GetMinReqHeight
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _GUICtrlMonthCal_GetMinReqRect($hWnd)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If IsHWnd($hWnd) Then
 		If _WinAPI_InProcess($hWnd, $__g_hMCLastWnd) Then
-			_SendMessage($hWnd, $MCM_GETMINREQRECT, 0, $tRect, 0, "wparam", "struct*")
+			_SendMessage($hWnd, $MCM_GETMINREQRECT, 0, $tRECT, 0, "wparam", "struct*")
 		Else
-			Local $iRect = DllStructGetSize($tRect)
+			Local $iRect = DllStructGetSize($tRECT)
 			Local $tMemMap
 			Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
 			_SendMessage($hWnd, $MCM_GETMINREQRECT, 0, $pMemory, 0, "wparam", "ptr")
-			_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+			_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 			_MemFree($tMemMap)
 		EndIf
 	Else
-		GUICtrlSendMsg($hWnd, $MCM_GETMINREQRECT, 0, DllStructGetPtr($tRect))
+		GUICtrlSendMsg($hWnd, $MCM_GETMINREQRECT, 0, DllStructGetPtr($tRECT))
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>_GUICtrlMonthCal_GetMinReqRect
 
 ; #FUNCTION# ====================================================================================================================
@@ -325,8 +325,8 @@ EndFunc   ;==>_GUICtrlMonthCal_GetMinReqRectArray
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlMonthCal_GetMinReqWidth($hWnd)
-	Local $tRect = _GUICtrlMonthCal_GetMinReqRect($hWnd)
-	Return DllStructGetData($tRect, "Right")
+	Local $tRECT = _GUICtrlMonthCal_GetMinReqRect($hWnd)
+	Return DllStructGetData($tRECT, "Right")
 EndFunc   ;==>_GUICtrlMonthCal_GetMinReqWidth
 
 ; #FUNCTION# ====================================================================================================================
@@ -656,9 +656,9 @@ Func __GUICtrlMonthCal_Resize($hWnd, $iX = -1, $iY = -1)
 	Local $iW = _GUICtrlMonthCal_GetMinReqWidth($hWnd)
 	If $iN > $iW Then $iW = $iN
 	If ($iX = -1) Or ($iY = -1) Then
-		Local $tRect = _WinAPI_GetWindowRect($hWnd)
-		If $iX = -1 Then $iX = DllStructGetData($tRect, "Left")
-		If $iY = -1 Then $iY = DllStructGetData($tRect, "Top")
+		Local $tRECT = _WinAPI_GetWindowRect($hWnd)
+		If $iX = -1 Then $iX = DllStructGetData($tRECT, "Left")
+		If $iY = -1 Then $iY = DllStructGetData($tRECT, "Top")
 	EndIf
 	;_WinAPI_SetWindowPos($hWnd, 0, $iX, $iY, $iX + $iW, $iY + $iH, $__MONTHCALCONSTANT_SWP_NOZORDER)
 	_WinAPI_SetWindowPos($hWnd, 0, $iX, $iY, $iW, $iH, $__MONTHCALCONSTANT_SWP_NOZORDER)

@@ -1,15 +1,13 @@
 #include-once
-
 #include <Array.au3>
 #include <ExcelConstants.au3>
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Microsoft Excel Function Library
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: A collection of functions for accessing and manipulating Microsoft Excel files
 ; Author(s) .....: SEO (Locodarwin), DaLiMan, Stanley Lim, MikeOsdx, MRDev, big_daddy, PsaltyDS, litlmike, water, spiff59, golfinhu, bowmore, GMX, Andreu, danwilli
-; Dll(s) ........:
 ; Resources .....:
 ; ===============================================================================================================================
 
@@ -50,6 +48,7 @@
 
 ; #INTERNAL_USE_ONLY#============================================================================================================
 ; __Excel_CloseOnQuit
+; __Excel_COMErrFunc
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -82,6 +81,9 @@ EndFunc   ;==>_Excel_Open
 ; Modified ......:
 ; ===============================================================================================================================
 Func _Excel_Close(ByRef $oExcel, $bSaveChanges = Default, $bForceClose = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If $bSaveChanges = Default Then $bSaveChanges = True
 	If $bForceClose = Default Then $bForceClose = False
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, 0)
@@ -107,6 +109,9 @@ EndFunc   ;==>_Excel_Close
 ; Modified.......: water
 ; ===============================================================================================================================
 Func _Excel_BookAttach($sString, $sMode = Default, $oInstance = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $oWorkbook, $iCount = 0, $sCLSID_Workbook = "{00020819-0000-0000-C000-000000000046}" ; Microsoft.Office.Interop.Excel.WorkbookClass
 	If $sMode = Default Then $sMode = "FilePath"
 	While True
@@ -132,6 +137,9 @@ EndFunc   ;==>_Excel_BookAttach
 ; Modified.......: big_daddy, litlmike, water
 ; ===============================================================================================================================
 Func _Excel_BookClose(ByRef $oWorkbook, $bSave = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If $bSave = Default Then $bSave = True
 	If $bSave And Not $oWorkbook.Saved Then
@@ -180,10 +188,13 @@ EndFunc   ;==>_Excel_BookList
 ; Modified.......: litlmike, water
 ; ===============================================================================================================================
 Func _Excel_BookNew($oExcel, $iSheets = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, 0)
 	With $oExcel
 		If $iSheets <> Default Then
-			If $iSheets > 255 Then Return SetError(4, 0, 0)
+			If $iSheets < 1 Or $iSheets > 255 Then Return SetError(4, 0, 0)
 			Local $iSheetsBackup = .SheetsInNewWorkbook
 			.SheetsInNewWorkbook = $iSheets
 			If @error Then Return SetError(2, @error, 0)
@@ -201,18 +212,21 @@ EndFunc   ;==>_Excel_BookNew
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: SEO <locodarwin at yahoo dot com>
-; Modified.......: litlmike, water, GMK
+; Modified.......: litlmike, water, GMK, willichan
 ; ===============================================================================================================================
-Func _Excel_BookOpen($oExcel, $sFilePath, $bReadOnly = Default, $bVisible = Default, $sPassword = Default, $sWritePassword = Default)
+Func _Excel_BookOpen($oExcel, $sFilePath, $bReadOnly = Default, $bVisible = Default, $sPassword = Default, $sWritePassword = Default, $bUpdateLinks = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, @error, 0)
 	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
 	If $bReadOnly = Default Then $bReadOnly = False
 	If $bVisible = Default Then $bVisible = True
-	Local $oWorkbook = $oExcel.Workbooks.Open($sFilePath, Default, $bReadOnly, Default, $sPassword, $sWritePassword)
+	Local $oWorkbook = $oExcel.Workbooks.Open($sFilePath, $bUpdateLinks, $bReadOnly, Default, $sPassword, $sWritePassword)
 	If @error Then Return SetError(3, @error, 0)
 	$oExcel.Windows($oWorkbook.Name).Visible = $bVisible
-	; If a read-write workbook was opened read-only then return an error
-	If $bReadOnly = False And $oWorkbook.Readonly = True Then Return SetError(4, 0, $oWorkbook)
+	; If a read-write workbook was opened read-only then set @extended = 1
+	If $bReadOnly = False And $oWorkbook.Readonly = True Then Return SetError(0, 1, $oWorkbook)
 	Return $oWorkbook
 EndFunc   ;==>_Excel_BookOpen
 
@@ -221,6 +235,9 @@ EndFunc   ;==>_Excel_BookOpen
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_BookOpenText($oExcel, $sFilePath, $iStartRow = Default, $iDataType = Default, $sTextQualifier = Default, $bConsecutiveDelimiter = Default, $sDelimiter = Default, $aFieldInfo = Default, $sDecimalSeparator = Default, $sThousandsSeparator = Default, $bTrailingMinusNumbers = Default, $iOrigin = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $bTab = False, $bSemicolon = False, $bComma = False, $bSpace = False, $aDelimiter[1], $bOther = False, $sOtherChar
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, @error, 0)
 	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
@@ -250,6 +267,9 @@ EndFunc   ;==>_Excel_BookOpenText
 ; Modified.......: litlmike, water
 ; ===============================================================================================================================
 Func _Excel_BookSave($oWorkbook)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not $oWorkbook.Saved Then
 		$oWorkbook.Save()
@@ -264,6 +284,9 @@ EndFunc   ;==>_Excel_BookSave
 ; Modified.......: litlmike, water
 ; ===============================================================================================================================
 Func _Excel_BookSaveAs($oWorkbook, $sFilePath, $iFormat = Default, $bOverWrite = Default, $sPassword = Default, $sWritePassword = Default, $bReadOnlyRecommended = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If $iFormat = Default Then
 		$iFormat = $xlWorkbookDefault
@@ -325,6 +348,9 @@ EndFunc   ;==>_Excel_ColumnToNumber
 ; Modified ......:
 ; ===============================================================================================================================
 Func _Excel_ConvertFormula($oExcel, $sFormula, $iFromStyle, $iToStyle = Default, $iToAbsolute = Default, $vRelativeTo = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, "")
 	If $vRelativeTo <> Default Then
 		If Not IsObj($vRelativeTo) Then $vRelativeTo = $oExcel.Range($vRelativeTo)
@@ -338,16 +364,19 @@ EndFunc   ;==>_Excel_ConvertFormula
 ; Author ........: water
 ; Modified ......:
 ; ===============================================================================================================
-Func _Excel_Export($oExcel, $vObject, $sFilename, $iType = Default, $iQuality = Default, $bIncludeProperties = Default, $iFrom = Default, $iTo = Default, $bOpenAfterPublish = Default)
+Func _Excel_Export($oExcel, $vObject, $sFileName, $iType = Default, $iQuality = Default, $bIncludeProperties = Default, $iFrom = Default, $iTo = Default, $bOpenAfterPublish = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, 0)
 	If Not IsObj($vObject) Then $vObject = $oExcel.Range($vObject)
 	If @error Or Not IsObj($vObject) Then Return SetError(2, @error, 0)
-	If $sFilename = "" Then Return SetError(3, 0, 0)
+	If $sFileName = "" Then Return SetError(3, 0, 0)
 	If $iType = Default Then $iType = $xlTypePDF
 	If $iQuality = Default Then $iQuality = $xlQualityStandard
 	If $bIncludeProperties = Default Then $bIncludeProperties = True
 	If $bOpenAfterPublish = Default Then $bOpenAfterPublish = False
-	$vObject.ExportAsFixedFormat($iType, $sFilename, $iQuality, $bIncludeProperties, Default, $iFrom, $iTo, $bOpenAfterPublish)
+	$vObject.ExportAsFixedFormat($iType, $sFileName, $iQuality, $bIncludeProperties, Default, $iFrom, $iTo, $bOpenAfterPublish)
 	If @error Then Return SetError(4, @error, 0)
 	Return $vObject
 EndFunc   ;==>_Excel_Export
@@ -357,6 +386,9 @@ EndFunc   ;==>_Excel_Export
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_FilterGet($oWorkbook, $vWorksheet = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -398,6 +430,9 @@ EndFunc   ;==>_Excel_FilterGet
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_FilterSet($oWorkbook, $vWorksheet, $vRange, $iField, $sCriteria1 = Default, $iOperator = Default, $sCriteria2 = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -431,6 +466,9 @@ EndFunc   ;==>_Excel_FilterSet
 ; Modified.......: water
 ; ===============================================================================================================================
 Func _Excel_PictureAdd($oWorkbook, $vWorksheet, $sFile, $vRangeOrLeft, $iTop = Default, $iWidth = Default, $iHeight = Default, $bKeepRatio = True)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $oReturn, $iPosLeft, $iPosTop
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not FileExists($sFile) Then Return SetError(5, 0, 0)
@@ -513,6 +551,9 @@ EndFunc   ;==>_Excel_PictureAdd
 ; Modified ......:
 ; ===============================================================================================================
 Func _Excel_Print($oExcel, $vObject, $iCopies = Default, $sPrinter = Default, $bPreview = Default, $iFrom = Default, $iTo = Default, $bPrintToFile = Default, $bCollate = Default, $sPrToFileName = "")
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, 0)
 	If IsString($vObject) Then $vObject = $oExcel.Range($vObject)
 	If @error Or Not IsObj($vObject) Then Return SetError(2, @error, 0)
@@ -526,6 +567,9 @@ EndFunc   ;==>_Excel_Print
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeCopyPaste($oWorksheet, $vSourceRange, $vTargetRange = Default, $bCut = Default, $iPaste = Default, $iOperation = Default, $bSkipBlanks = Default, $bTranspose = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorksheet) Or ObjName($oWorksheet, 1) <> "_Worksheet" Then Return SetError(1, 0, 0)
 	If $bCut = Default Then $bCut = False
 	If $vSourceRange = Default And $vTargetRange = Default Then Return SetError(7, 0, 0)
@@ -563,6 +607,9 @@ EndFunc   ;==>_Excel_RangeCopyPaste
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeDelete($oWorksheet, $vRange, $iShift = Default, $iEntireRowCol = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorksheet) Or ObjName($oWorksheet, 1) <> "_Worksheet" Then Return SetError(1, 0, 0)
 	If Not IsObj($vRange) Then
 		$vRange = $oWorksheet.Range($vRange)
@@ -595,7 +642,7 @@ Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Defaul
 		$oSheet = $oWorkbook.Sheets(1)
 		$vRange = $oSheet.UsedRange
 	ElseIf IsString($vRange) Then
-		$vRange = $oWorkbook.Parent.Range($vRange)
+		$vRange = $oWorkbook.Activesheet.Range($vRange)
 		If @error Then Return SetError(3, @error, 0)
 	EndIf
 	Local $aResult[100][6], $iIndex = 0, $iIndexSheets = 1
@@ -611,10 +658,10 @@ Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Defaul
 				$aResult[$iIndex][3] = $oMatch.Value
 				$aResult[$iIndex][4] = $oMatch.Formula
 				$aResult[$iIndex][5] = $oMatch.Comment.Text
-				$oMatch = $vRange.Findnext($oMatch)
-				If Not IsObj($oMatch) Or $sFirst = $oMatch.Address Then ExitLoop
 				$iIndex = $iIndex + 1
 				If Mod($iIndex, 100) = 0 Then ReDim $aResult[UBound($aResult, 1) + 100][6]
+				$oMatch = $vRange.Findnext($oMatch)
+				If Not IsObj($oMatch) Or $sFirst = $oMatch.Address Then ExitLoop
 			WEnd
 		EndIf
 		If Not $bSearchWorkbook Then ExitLoop
@@ -624,7 +671,7 @@ Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Defaul
 		If @error Then ExitLoop
 		$vRange = $oSheet.UsedRange
 	WEnd
-	ReDim $aResult[$iIndex + 1][6]
+	ReDim $aResult[$iIndex][6]
 	Return $aResult
 EndFunc   ;==>_Excel_RangeFind
 
@@ -633,6 +680,9 @@ EndFunc   ;==>_Excel_RangeFind
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeInsert($oWorksheet, $vRange, $iShift = Default, $iCopyOrigin = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorksheet) Or ObjName($oWorksheet, 1) <> "_Worksheet" Then Return SetError(1, 0, 0)
 	If Not IsObj($vRange) Then
 		$vRange = $oWorksheet.Range($vRange)
@@ -645,9 +695,12 @@ EndFunc   ;==>_Excel_RangeInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: water
-; Modified ......:
+; Modified ......: Added parameter $sTextToDisplay
 ; ===============================================================================================================================
-Func _Excel_RangeLinkAddRemove($oWorkbook, $vWorksheet, $vRange, $sAddress, $sSubAddress = Default, $sScreenTip = Default)
+Func _Excel_RangeLinkAddRemove($oWorkbook, $vWorksheet, $vRange, $sAddress, $sSubAddress = Default, $sScreenTip = Default, $sTextToDisplay = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $oLink
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
@@ -669,7 +722,7 @@ Func _Excel_RangeLinkAddRemove($oWorkbook, $vWorksheet, $vRange, $sAddress, $sSu
 		If @error Then Return SetError(4, @error, 0)
 		Return 1
 	Else
-		$oLink = $vWorksheet.Hyperlinks.Add($vRange, $sAddress, $sSubAddress, $sScreenTip)
+		$oLink = $vWorksheet.Hyperlinks.Add($vRange, $sAddress, $sSubAddress, $sScreenTip, $sTextToDisplay)
 		If @error Then Return SetError(4, @error, 0)
 		Return $oLink
 	EndIf
@@ -681,6 +734,9 @@ EndFunc   ;==>_Excel_RangeLinkAddRemove
 ; Modified.......: litlmike, water, GMK
 ; ===============================================================================================================================
 Func _Excel_RangeRead($oWorkbook, $vWorksheet = Default, $vRange = Default, $iReturn = Default, $bForceFunc = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -700,11 +756,12 @@ Func _Excel_RangeRead($oWorkbook, $vWorksheet = Default, $vRange = Default, $iRe
 	EndIf
 	If $iReturn = Default Then
 		$iReturn = 1
-	ElseIf $iReturn < 1 Or $iReturn > 3 Then
+	ElseIf $iReturn < 1 Or $iReturn > 4 Then
 		Return SetError(4, 0, 0)
 	EndIf
 	If $bForceFunc = Default Then $bForceFunc = False
 	Local $vResult, $iCellCount = $vRange.Columns.Count * $vRange.Rows.Count
+	If $iReturn = 3 And $iCellCount > 1 Then Return SetError(8, @error, 0)
 	; The max number of elements in an AutoIt array is limited to 2^24 = 16,777,216
 	If $iCellCount > 16777216 Then Return SetError(6, 0, 0)
 	; Transpose has an undocumented limit on the number of cells or rows it can transpose. This limit increases with the Excel version
@@ -717,24 +774,30 @@ Func _Excel_RangeRead($oWorkbook, $vWorksheet = Default, $vRange = Default, $iRe
 	;   Excel 2013 - ?
 	If $iCellCount > 65535 Then $bForceFunc = True
 	If $bForceFunc Then
-		If $iReturn = 1 Then
-			$vResult = $vRange.Value
-		ElseIf $iReturn = 2 Then
-			$vResult = $vRange.Formula
-		Else
-			$vResult = $vRange.Text
-		EndIf
+		Switch $iReturn
+			Case 1
+				$vResult = $vRange.Value
+			Case 2
+				$vResult = $vRange.Formula
+			Case 3
+				$vResult = $vRange.Text
+			Case Else
+				$vResult = $vRange.Value2
+		EndSwitch
 		If @error Then Return SetError(7, @error, 0)
 		If $iCellCount > 1 Then _ArrayTranspose($vResult)
 	Else
 		Local $oExcel = $oWorkbook.Parent
-		If $iReturn = 1 Then
-			$vResult = $oExcel.Transpose($vRange.Value)
-		ElseIf $iReturn = 2 Then
-			$vResult = $oExcel.Transpose($vRange.Formula)
-		Else
-			$vResult = $oExcel.Transpose($vRange.Text)
-		EndIf
+		Switch $iReturn
+			Case 1
+				$vResult = $oExcel.Transpose($vRange.Value)
+			Case 2
+				$vResult = $oExcel.Transpose($vRange.Formula)
+			Case 3
+				$vResult = $oExcel.Transpose($vRange.Text)
+			Case Else
+				$vResult = $oExcel.Transpose($vRange.Value2)
+		EndSwitch
 		If @error Then Return SetError(5, @error, 0)
 	EndIf
 	Return $vResult
@@ -745,6 +808,9 @@ EndFunc   ;==>_Excel_RangeRead
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeReplace($oWorkbook, $vWorksheet, $vRange, $sSearch, $sReplace, $iLookAt = Default, $bMatchcase = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -777,6 +843,9 @@ EndFunc   ;==>_Excel_RangeReplace
 ; ===============================================================================================================================
 Func _Excel_RangeSort($oWorkbook, $vWorksheet, $vRange, $vKey1, $iOrder1 = Default, $iSortText = Default, $iHeader = Default, _
 		$bMatchcase = Default, $iOrientation = Default, $vKey2 = Default, $iOrder2 = Default, $vKey3 = Default, $iOrder3 = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -835,6 +904,9 @@ EndFunc   ;==>_Excel_RangeSort
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeValidate($oWorkbook, $vWorksheet, $vRange, $iType, $sFormula1, $iOperator = Default, $sFormula2 = Default, $bIgnoreBlank = Default, $iAlertStyle = Default, $sErrorMessage = Default, $sInputMessage = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -874,6 +946,9 @@ EndFunc   ;==>_Excel_RangeValidate
 ; Modified.......: litlmike, PsaltyDS, Golfinhu, water
 ; ===============================================================================================================================
 Func _Excel_RangeWrite($oWorkbook, $vWorksheet, $vValue, $vRange = Default, $bValue = Default, $bForceFunc = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If Not IsObj($vWorksheet) Then
 		If $vWorksheet = Default Then
@@ -917,21 +992,13 @@ Func _Excel_RangeWrite($oWorkbook, $vWorksheet, $vValue, $vRange = Default, $bVa
 		;   Excel 2010 - ?
 		; Example: If $oExcel.Version = 14 And $vRange.Columns.Count * $vRange.Rows.Count > 1000000 Then $bForceFunc = True
 		If $bForceFunc Then
-			If UBound($vValue, 0) = 1 Then ; _ArrayTranspose only works for 2D arrays so we do it ourselfs for 1D arrays
-				Local $aTemp[1][UBound($vValue, 1)]
-				For $z = 0 To UBound($vValue, 1) - 1
-					$aTemp[0][$z] = $vValue[$z]
-				Next
-				$vValue = $aTemp
-			Else
-				_ArrayTranspose($vValue)
-			EndIf
+			_ArrayTranspose($vValue)
 			If $bValue Then
 				$vRange.Value = $vValue
 			Else
 				$vRange.Formula = $vValue
 			EndIf
-			If @error Then Return SetError(4, @error, 0)
+			If @error Then Return SetError(5, @error, 0)
 		Else
 			Local $oExcel = $oWorkbook.Parent
 			If $bValue Then
@@ -939,7 +1006,7 @@ Func _Excel_RangeWrite($oWorkbook, $vWorksheet, $vValue, $vRange = Default, $bVa
 			Else
 				$vRange.Formula = $oExcel.Transpose($vValue)
 			EndIf
-			If @error Then Return SetError(4, @error, 0)
+			If @error Then Return SetError(6, @error, 0)
 		EndIf
 	EndIf
 	Return $vRange
@@ -950,6 +1017,9 @@ EndFunc   ;==>_Excel_RangeWrite
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_SheetAdd($oWorkbook, $vSheet = Default, $bBefore = Default, $iCount = Default, $sName = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	Local $bInsertAtEnd = False, $iStartSheet, $oBefore = Default, $oAfter = Default
 	If $iCount = Default Then $iCount = 1
@@ -1009,6 +1079,9 @@ EndFunc   ;==>_Excel_SheetAdd
 ; Modified.......: litlmike, water
 ; ===============================================================================================================================
 Func _Excel_SheetCopyMove($oSourceBook, $vSourceSheet = Default, $oTargetBook = Default, $vTargetSheet = Default, $bBefore = Default, $bCopy = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $vBefore = Default, $vAfter = Default
 	If Not IsObj($oSourceBook) Or ObjName($oSourceBook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	If $vSourceSheet = Default Then $vSourceSheet = $oSourceBook.ActiveSheet
@@ -1048,6 +1121,9 @@ EndFunc   ;==>_Excel_SheetCopyMove
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_SheetDelete($oWorkbook, $vSheet = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	Local $oSheet
 	If $vSheet = Default Then
@@ -1108,3 +1184,21 @@ Func __Excel_CloseOnQuit($oExcel, $bNewState = Default)
 	EndIf
 	Return False ; Excel instance not found. Will not be closed by _Excel_Close
 EndFunc   ;==>__Excel_CloseOnQuit
+
+; #INTERNAL_USE_ONLY#============================================================================================================
+; Name...........: __Excel_COMErrFunc
+; Description ...: Dummy function for silently handling COM errors.
+; Syntax.........:
+; Parameters ....:
+; Return values .:
+;
+; Author ........:
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+Func __Excel_COMErrFunc()
+	; Do nothing special, just check @error after suspect functions.
+EndFunc   ;==>__Excel_COMErrFunc

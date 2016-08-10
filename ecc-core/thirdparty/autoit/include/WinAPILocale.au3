@@ -6,11 +6,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPILocale.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: kernel32.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -367,7 +365,7 @@ EndFunc   ;==>_WinAPI_GetUserGeoID
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_IsValidLocale($iLCID, $iFlag)
+Func _WinAPI_IsValidLocale($iLCID, $iFlag = 0)
 	Local $aRet = DllCall('kernel32.dll', 'bool', 'IsValidLocale', 'dword', $iLCID, 'dword', $iFlag)
 	If @error Then Return SetError(@error, @extended, False)
 

@@ -7,7 +7,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Edit Constants
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Internet.
 ; Author(s) .....: Larry, Ezzetabi, Jarvis Stubblefield, Wes Wolfe-Wolvereness, Wouter, Walkabout, Florian Fida, guinness
@@ -63,7 +63,7 @@ Func _GetIP()
 		$sReturn = InetRead($aGetIPURL[$i])
 		If @error Or $sReturn == "" Then ContinueLoop
 		$aReturn = StringRegExp(BinaryToString($sReturn), "((?:\d{1,3}\.){3}\d{1,3})", $STR_REGEXPARRAYGLOBALMATCH) ; [\d\.]{7,15}
-		If @error = 0 Then
+		If Not @error Then
 			$sReturn = $aReturn[0]
 			ExitLoop
 		EndIf
@@ -79,12 +79,12 @@ EndFunc   ;==>_GetIP
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Wes Wolfe-Wolvereness <Weswolf at aol dot com>
 ; ===============================================================================================================================
-Func _INetExplorerCapable($s_IEString)
-	If StringLen($s_IEString) <= 0 Then Return SetError(1, 0, '')
+Func _INetExplorerCapable($sIEString)
+	If StringLen($sIEString) <= 0 Then Return SetError(1, 0, '')
 	Local $s_IEReturn
 	Local $n_IEChar
-	For $i_IECount = 1 To StringLen($s_IEString)
-		$n_IEChar = '0x' & Hex(Asc(StringMid($s_IEString, $i_IECount, 1)), 2)
+	For $i_IECount = 1 To StringLen($sIEString)
+		$n_IEChar = '0x' & Hex(Asc(StringMid($sIEString, $i_IECount, 1)), 2)
 		If $n_IEChar < 0x21 Or $n_IEChar = 0x25 Or $n_IEChar = 0x2f Or $n_IEChar > 0x7f Then
 			$s_IEReturn = $s_IEReturn & '%' & StringRight($n_IEChar, 2)
 		Else
@@ -125,17 +125,17 @@ EndFunc   ;==>_INetMail
 ; Author ........: Asimzameer, Walkabout
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _INetSmtpMail($sSmtpServer, $sFromName, $sFromAddress, $sToAddress, $s_Subject = "", $as_Body = "", $sHelo = "", $sFirst = " ", $bTrace = 0)
-	If $sSmtpServer = "" Or $sFromAddress = "" Or $sToAddress = "" Or $sFromName = "" Or StringLen($sFromName) > 256 Then Return SetError(1, 0, 0)
-	If $sHelo = "" Then $sHelo = @ComputerName
+Func _INetSmtpMail($sSMTPServer, $sFromName, $sFromAddress, $sToAddress, $sSubject = "", $aBody = "", $sEHLO = "", $sFirst = "", $bTrace = 0)
+	If $sSMTPServer = "" Or $sFromAddress = "" Or $sToAddress = "" Or $sFromName = "" Or StringLen($sFromName) > 256 Then Return SetError(1, 0, 0)
+	If $sEHLO = "" Then $sEHLO = @ComputerName
 
 	If TCPStartup() = 0 Then Return SetError(2, 0, 0)
 
 	Local $s_IPAddress, $i_Count
-	If StringRegExp($sSmtpServer, "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$") Then
-		$s_IPAddress = $sSmtpServer
+	If StringRegExp($sSMTPServer, "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$") Then
+		$s_IPAddress = $sSMTPServer
 	Else
-		$s_IPAddress = TCPNameToIP($sSmtpServer)
+		$s_IPAddress = TCPNameToIP($sSMTPServer)
 	EndIf
 	If $s_IPAddress = "" Then
 		TCPShutdown()
@@ -148,8 +148,8 @@ Func _INetSmtpMail($sSmtpServer, $sFromName, $sFromAddress, $sToAddress, $s_Subj
 	EndIf
 
 	Local $aSend[6], $aReplyCode[6] ; Return code from SMTP server indicating success
-	$aSend[0] = "HELO " & $sHelo & @CRLF
-	If StringLeft($sHelo, 5) = "EHLO " Then $aSend[0] = $sHelo & @CRLF
+	$aSend[0] = "HELO " & $sEHLO & @CRLF
+	If StringLeft($sEHLO, 5) = "EHLO " Then $aSend[0] = $sEHLO & @CRLF
 	$aReplyCode[0] = "250"
 
 	$aSend[1] = "MAIL FROM: <" & $sFromAddress & ">" & @CRLF
@@ -168,7 +168,7 @@ Func _INetSmtpMail($sSmtpServer, $sFromName, $sFromAddress, $sToAddress, $s_Subj
 
 	$aSend[4] = "From:" & $sFromName & "<" & $sFromAddress & ">" & @CRLF & _
 			"To:" & "<" & $sToAddress & ">" & @CRLF & _
-			"Subject:" & $s_Subject & @CRLF & _
+			"Subject:" & $sSubject & @CRLF & _
 			"Mime-Version: 1.0" & @CRLF & _
 			"Date: " & _DateDayOfWeek(@WDAY, 1) & ", " & @MDAY & " " & _DateToMonth(@MON, 1) & " " & @YEAR & " " & @HOUR & ":" & @MIN & ":" & @SEC & $iBias & @CRLF & _
 			"Content-Type: text/plain; charset=US-ASCII" & @CRLF & _
@@ -187,11 +187,11 @@ Func _INetSmtpMail($sSmtpServer, $sFromName, $sFromAddress, $sToAddress, $s_Subj
 	Next
 
 	; send body records (a record can be multiline : take care of a subline beginning with a dot should be ..)
-	For $i_Count = 0 To UBound($as_Body) - 1
+	For $i_Count = 0 To UBound($aBody) - 1
 		; correct line beginning with a dot
-		If StringLeft($as_Body[$i_Count], 1) = "." Then $as_Body[$i_Count] = "." & $as_Body[$i_Count]
+		If StringLeft($aBody[$i_Count], 1) = "." Then $aBody[$i_Count] = "." & $aBody[$i_Count]
 
-		If __SmtpSend($vSocket, $as_Body[$i_Count] & @CRLF, "", $bTrace) Then Return SetError(500 + $i_Count, 0, 0)
+		If __SmtpSend($vSocket, $aBody[$i_Count] & @CRLF, "", $bTrace) Then Return SetError(500 + $i_Count, 0, 0)
 	Next
 
 	; close the smtp session
@@ -288,19 +288,19 @@ EndFunc   ;==>__SmtpSend
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Florian Fida
 ; ===============================================================================================================================
-Func _TCPIpToName($sIp, $iOption = Default, $hDll_Ws2_32 = Default)
+Func _TCPIpToName($sIp, $iOption = Default, $hDll = Default)
 	Local $iINADDR_NONE = 0xffffffff, $iAF_INET = 2, $sSeparator = @CR
 	If $iOption = Default Then $iOption = 0
-	If $hDll_Ws2_32 = Default Then $hDll_Ws2_32 = "ws2_32.dll"
-	Local $avDllCall = DllCall($hDll_Ws2_32, "ulong", "inet_addr", "STR", $sIp)
+	If $hDll = Default Then $hDll = "ws2_32.dll"
+	Local $avDllCall = DllCall($hDll, "ulong", "inet_addr", "STR", $sIp)
 	If @error Then Return SetError(1, 0, "") ; inet_addr DllCall Failed
 	Local $vBinIP = $avDllCall[0]
 	If $vBinIP = $iINADDR_NONE Then Return SetError(2, 0, "") ; inet_addr Failed
-	$avDllCall = DllCall($hDll_Ws2_32, "ptr", "gethostbyaddr", "ptr*", $vBinIP, "int", 4, "int", $iAF_INET)
+	$avDllCall = DllCall($hDll, "ptr", "gethostbyaddr", "ptr*", $vBinIP, "int", 4, "int", $iAF_INET)
 	If @error Then Return SetError(3, 0, "") ; gethostbyaddr DllCall Failed
 	Local $pvHostent = $avDllCall[0]
 	If $pvHostent = 0 Then
-		$avDllCall = DllCall($hDll_Ws2_32, "int", "WSAGetLastError")
+		$avDllCall = DllCall($hDll, "int", "WSAGetLastError")
 		If @error Then Return SetError(5, 0, "") ; gethostbyaddr Failed, WSAGetLastError Failed
 		Return SetError(4, $avDllCall[0], "") ; gethostbyaddr Failed, WSAGetLastError = @extended
 	EndIf

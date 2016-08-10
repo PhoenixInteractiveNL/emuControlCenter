@@ -9,7 +9,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Toolbar
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Toolbar control management.
 ;                  A toolbar is a control window that contains one or more buttons.  Each button, when clicked by a user, sends a
@@ -366,8 +366,8 @@ EndFunc   ;==>_GUICtrlToolbar_ClickAccel
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
 Func _GUICtrlToolbar_ClickButton($hWnd, $iCommandID, $sButton = "left", $bMove = False, $iClicks = 1, $iSpeed = 1)
-	Local $tRect = _GUICtrlToolbar_GetButtonRectEx($hWnd, $iCommandID)
-	Local $tPoint = _WinAPI_PointFromRect($tRect)
+	Local $tRECT = _GUICtrlToolbar_GetButtonRectEx($hWnd, $iCommandID)
+	Local $tPoint = _WinAPI_PointFromRect($tRECT)
 	$tPoint = _WinAPI_ClientToScreen($hWnd, $tPoint)
 	Local $iX, $iY
 	_WinAPI_GetXYFromPoint($tPoint, $iX, $iY)
@@ -576,11 +576,11 @@ EndFunc   ;==>_GUICtrlToolbar_GetButtonParam
 Func _GUICtrlToolbar_GetButtonRect($hWnd, $iCommandID)
 	Local $aRect[4]
 
-	Local $tRect = _GUICtrlToolbar_GetButtonRectEx($hWnd, $iCommandID)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlToolbar_GetButtonRectEx($hWnd, $iCommandID)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlToolbar_GetButtonRect
 
@@ -589,18 +589,18 @@ EndFunc   ;==>_GUICtrlToolbar_GetButtonRect
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
 Func _GUICtrlToolbar_GetButtonRectEx($hWnd, $iCommandID)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If _WinAPI_InProcess($hWnd, $__g_hTBLastWnd) Then
-		_SendMessage($hWnd, $TB_GETRECT, $iCommandID, $tRect, 0, "wparam", "struct*")
+		_SendMessage($hWnd, $TB_GETRECT, $iCommandID, $tRECT, 0, "wparam", "struct*")
 	Else
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
 		_SendMessage($hWnd, $TB_GETRECT, $iCommandID, $pMemory, 0, "wparam", "ptr")
-		_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+		_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 		_MemFree($tMemMap)
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>_GUICtrlToolbar_GetButtonRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -1533,22 +1533,22 @@ EndFunc   ;==>_GUICtrlToolbar_SetParent
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
 Func _GUICtrlToolbar_SetRows($hWnd, $iRows, $bLarger = True)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If _WinAPI_InProcess($hWnd, $__g_hTBLastWnd) Then
-		_SendMessage($hWnd, $TB_SETROWS, _WinAPI_MakeLong($iRows, $bLarger), $tRect, 0, "long", "struct*")
+		_SendMessage($hWnd, $TB_SETROWS, _WinAPI_MakeLong($iRows, $bLarger), $tRECT, 0, "long", "struct*")
 	Else
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
 		_SendMessage($hWnd, $TB_SETROWS, _WinAPI_MakeLong($iRows, $bLarger), $pMemory, 0, "long", "ptr")
-		_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+		_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 		_MemFree($tMemMap)
 	EndIf
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlToolbar_SetRows
 

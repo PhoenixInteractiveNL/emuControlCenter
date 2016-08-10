@@ -8,14 +8,13 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: StatusBar
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with StatusBar control management.
 ;                  A status bar is a horizontal window at the bottom of a parent window in which an application can display
 ;                  various kinds of status information.  The status bar can be divided into parts to display more than one type
 ;                  of information
 ; Author(s) .....: Paul Campbell (PaulIA)
-; Dll(s) ........: user32.dll, comctl32.dll, shell32.dll
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
@@ -82,7 +81,7 @@ Global Const $tagBORDERS = "int BX;int BY;int RX"
 ; Author ........: Gary Frost, Steve Podhajecki <gehossafats at netmdc dot com>
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
-Func _GUICtrlStatusBar_Create($hWnd, $vPartEdge = -1, $vPartText = "", $iStyles = -1, $iExStyles = -1)
+Func _GUICtrlStatusBar_Create($hWnd, $vPartEdge = -1, $vPartText = "", $iStyles = -1, $iExStyles = 0x00000000)
 	If Not IsHWnd($hWnd) Then Return SetError(1, 0, 0) ; Invalid Window handle for _GUICtrlStatusBar_Create 1st parameter
 
 	Local $iStyle = BitOR($__UDFGUICONSTANT_WS_CHILD, $__UDFGUICONSTANT_WS_VISIBLE)
@@ -112,9 +111,6 @@ Func _GUICtrlStatusBar_Create($hWnd, $vPartEdge = -1, $vPartText = "", $iStyles 
 				If UBound($aPartWidth) > UBound($aPartText) Then ; width array is larger
 					$iLast = UBound($aPartText)
 					ReDim $aPartText[UBound($aPartWidth)]
-					For $x = $iLast To UBound($aPartText) - 1
-						$aPartWidth[$x] = ""
-					Next
 				Else ; text array is larger
 					$iLast = UBound($aPartWidth)
 					ReDim $aPartWidth[UBound($aPartText)]
@@ -274,8 +270,8 @@ EndFunc   ;==>_GUICtrlStatusBar_GetCount
 ; Modified.......: Gary Frost (gafrost) Removed dot notation
 ; ===============================================================================================================================
 Func _GUICtrlStatusBar_GetHeight($hWnd)
-	Local $tRect = _GUICtrlStatusBar_GetRectEx($hWnd, 0)
-	Return DllStructGetData($tRect, "Bottom") - DllStructGetData($tRect, "Top") - (_GUICtrlStatusBar_GetBordersVert($hWnd) * 2)
+	Local $tRECT = _GUICtrlStatusBar_GetRectEx($hWnd, 0)
+	Return DllStructGetData($tRECT, "Bottom") - DllStructGetData($tRECT, "Top") - (_GUICtrlStatusBar_GetBordersVert($hWnd) * 2)
 EndFunc   ;==>_GUICtrlStatusBar_GetHeight
 
 ; #FUNCTION# ====================================================================================================================
@@ -315,13 +311,13 @@ EndFunc   ;==>_GUICtrlStatusBar_GetParts
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlStatusBar_GetRect($hWnd, $iPart)
-	Local $tRect = _GUICtrlStatusBar_GetRectEx($hWnd, $iPart)
+	Local $tRECT = _GUICtrlStatusBar_GetRectEx($hWnd, $iPart)
 	If @error Then Return SetError(@error, 0, 0)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlStatusBar_GetRect
 
@@ -330,19 +326,19 @@ EndFunc   ;==>_GUICtrlStatusBar_GetRect
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlStatusBar_GetRectEx($hWnd, $iPart)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	Local $iRet
 	If _WinAPI_InProcess($hWnd, $__g_hSBLastWnd) Then
-		$iRet = _SendMessage($hWnd, $SB_GETRECT, $iPart, $tRect, 0, "wparam", "struct*")
+		$iRet = _SendMessage($hWnd, $SB_GETRECT, $iPart, $tRECT, 0, "wparam", "struct*")
 	Else
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
 		$iRet = _SendMessage($hWnd, $SB_GETRECT, $iPart, $pMemory, 0, "wparam", "ptr")
-		_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+		_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 		_MemFree($tMemMap)
 	EndIf
-	Return SetError($iRet = 0, 0, $tRect)
+	Return SetError($iRet = 0, 0, $tRECT)
 EndFunc   ;==>_GUICtrlStatusBar_GetRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -448,8 +444,8 @@ EndFunc   ;==>_GUICtrlStatusBar_GetUnicodeFormat
 ; Modified.......: Gary Frost (gafrost) Removed dot notation
 ; ===============================================================================================================================
 Func _GUICtrlStatusBar_GetWidth($hWnd, $iPart)
-	Local $tRect = _GUICtrlStatusBar_GetRectEx($hWnd, $iPart)
-	Return DllStructGetData($tRect, "Right") - DllStructGetData($tRect, "Left") - (_GUICtrlStatusBar_GetBordersHorz($hWnd) * 2)
+	Local $tRECT = _GUICtrlStatusBar_GetRectEx($hWnd, $iPart)
+	Return DllStructGetData($tRECT, "Right") - DllStructGetData($tRECT, "Left") - (_GUICtrlStatusBar_GetBordersHorz($hWnd) * 2)
 EndFunc   ;==>_GUICtrlStatusBar_GetWidth
 
 ; #FUNCTION# ====================================================================================================================

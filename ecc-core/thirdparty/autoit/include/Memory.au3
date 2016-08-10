@@ -7,12 +7,11 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Memory
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Functions that assist with Memory management.
 ;                  The memory manager implements virtual memory, provides a core set of services such  as  memory  mapped  files,
 ;                  copy-on-write memory, large memory support, and underlying support for the cache manager.
 ; Author(s) .....: Paul Campbell (PaulIA)
-; Dll(s) ........: kernel32.dll
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -85,8 +84,8 @@ EndFunc   ;==>_MemGlobalAlloc
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _MemGlobalFree($hMem)
-	Local $aResult = DllCall("kernel32.dll", "ptr", "GlobalFree", "handle", $hMem)
+Func _MemGlobalFree($hMemory)
+	Local $aResult = DllCall("kernel32.dll", "ptr", "GlobalFree", "handle", $hMemory)
 	If @error Then Return SetError(@error, @extended, False)
 	Return $aResult[0]
 EndFunc   ;==>_MemGlobalFree
@@ -95,8 +94,8 @@ EndFunc   ;==>_MemGlobalFree
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _MemGlobalLock($hMem)
-	Local $aResult = DllCall("kernel32.dll", "ptr", "GlobalLock", "handle", $hMem)
+Func _MemGlobalLock($hMemory)
+	Local $aResult = DllCall("kernel32.dll", "ptr", "GlobalLock", "handle", $hMemory)
 	If @error Then Return SetError(@error, @extended, 0)
 	Return $aResult[0]
 EndFunc   ;==>_MemGlobalLock
@@ -105,8 +104,8 @@ EndFunc   ;==>_MemGlobalLock
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _MemGlobalSize($hMem)
-	Local $aResult = DllCall("kernel32.dll", "ulong_ptr", "GlobalSize", "handle", $hMem)
+Func _MemGlobalSize($hMemory)
+	Local $aResult = DllCall("kernel32.dll", "ulong_ptr", "GlobalSize", "handle", $hMemory)
 	If @error Then Return SetError(@error, @extended, 0)
 	Return $aResult[0]
 EndFunc   ;==>_MemGlobalSize
@@ -115,8 +114,8 @@ EndFunc   ;==>_MemGlobalSize
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _MemGlobalUnlock($hMem)
-	Local $aResult = DllCall("kernel32.dll", "bool", "GlobalUnlock", "handle", $hMem)
+Func _MemGlobalUnlock($hMemory)
+	Local $aResult = DllCall("kernel32.dll", "bool", "GlobalUnlock", "handle", $hMemory)
 	If @error Then Return SetError(@error, @extended, 0)
 	Return $aResult[0]
 EndFunc   ;==>_MemGlobalUnlock
@@ -138,7 +137,7 @@ EndFunc   ;==>_MemGlobalUnlock
 ; Example .......:
 ; ===============================================================================================================================
 Func _MemInit($hWnd, $iSize, ByRef $tMemMap)
-	Local $aResult = DllCall("User32.dll", "dword", "GetWindowThreadProcessId", "hwnd", $hWnd, "dword*", 0)
+	Local $aResult = DllCall("user32.dll", "dword", "GetWindowThreadProcessId", "hwnd", $hWnd, "dword*", 0)
 	If @error Then Return SetError(@error + 10, @extended, 0)
 	Local $iProcessID = $aResult[2]
 	If $iProcessID = 0 Then Return SetError(1, 0, 0) ; Invalid window handle

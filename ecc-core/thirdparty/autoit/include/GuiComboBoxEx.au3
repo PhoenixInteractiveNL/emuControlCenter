@@ -7,7 +7,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ComboBoxEx
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with ComboBoxEx control management.
 ;                  ComboBoxEx Controls are an extension of the combo box control that provides native support for item images.
@@ -108,10 +108,10 @@ Global Const $__COMBOBOXEXCONSTANT_WM_SIZE = 0x05
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlComboBoxEx_AddDir($hWnd, $sFile, $iAttributes = 0, $bBrackets = True)
+Func _GUICtrlComboBoxEx_AddDir($hWnd, $sFilePath, $iAttributes = 0, $bBrackets = True)
 	Local $hGui = GUICreate("combo gui")
 	Local $idCombo = GUICtrlCreateCombo("", 240, 40, 120, 120)
-	Local $iRet = GUICtrlSendMsg($idCombo, $CB_DIR, $iAttributes, $sFile)
+	Local $iRet = GUICtrlSendMsg($idCombo, $CB_DIR, $iAttributes, $sFilePath)
 	If $iRet = -1 Then
 		GUIDelete($hGui)
 		Return SetError(-1, -1, -1)
@@ -131,8 +131,8 @@ EndFunc   ;==>_GUICtrlComboBoxEx_AddDir
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlComboBoxEx_AddString($hWnd, $sText, $iImage = -1, $iSelecteImage = -1, $iOverlayImage = -1, $iIndent = -1, $iParam = -1)
-	Return _GUICtrlComboBoxEx_InsertString($hWnd, $sText, -1, $iImage, $iSelecteImage, $iOverlayImage, $iIndent, $iParam)
+Func _GUICtrlComboBoxEx_AddString($hWnd, $sText, $iImage = -1, $iSelectedImage = -1, $iOverlayImage = -1, $iIndent = -1, $iParam = -1)
+	Return _GUICtrlComboBoxEx_InsertString($hWnd, $sText, -1, $iImage, $iSelectedImage, $iOverlayImage, $iIndent, $iParam)
 EndFunc   ;==>_GUICtrlComboBoxEx_AddString
 
 ; #FUNCTION# ====================================================================================================================
@@ -611,7 +611,7 @@ EndFunc   ;==>_GUICtrlComboBoxEx_InitStorage
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlComboBoxEx_InsertString($hWnd, $sText, $iIndex = -1, $iImage = -1, $iSelecteImage = -1, $iOverlayImage = -1, $iIndent = -1, $iParam = -1)
+Func _GUICtrlComboBoxEx_InsertString($hWnd, $sText, $iIndex = -1, $iImage = -1, $iSelectedImage = -1, $iOverlayImage = -1, $iIndent = -1, $iParam = -1)
 	Local $iBuffer = 0, $iMask, $iRet
 	Local $bUnicode = _GUICtrlComboBoxEx_GetUnicode($hWnd)
 
@@ -633,14 +633,14 @@ Func _GUICtrlComboBoxEx_InsertString($hWnd, $sText, $iIndex = -1, $iImage = -1, 
 		$iMask = BitOR($CBEIF_DI_SETITEM, $CBEIF_LPARAM)
 	EndIf
 	If $iImage >= 0 Then $iMask = BitOR($iMask, $CBEIF_IMAGE)
-	If $iSelecteImage >= 0 Then $iMask = BitOR($iMask, $CBEIF_SELECTEDIMAGE)
+	If $iSelectedImage >= 0 Then $iMask = BitOR($iMask, $CBEIF_SELECTEDIMAGE)
 	If $iOverlayImage >= 0 Then $iMask = BitOR($iMask, $CBEIF_OVERLAY)
 	If $iIndent >= 1 Then $iMask = BitOR($iMask, $CBEIF_INDENT)
 	If $iParam = -1 Then $iParam = _GUICtrlComboBoxEx_GetCount($hWnd)
 	DllStructSetData($tItem, "Mask", $iMask)
 	DllStructSetData($tItem, "Item", $iIndex)
 	DllStructSetData($tItem, "Image", $iImage)
-	DllStructSetData($tItem, "SelectedImage", $iSelecteImage)
+	DllStructSetData($tItem, "SelectedImage", $iSelectedImage)
 	DllStructSetData($tItem, "OverlayImage", $iOverlayImage)
 	DllStructSetData($tItem, "Indent", $iIndent)
 	DllStructSetData($tItem, "Param", $iParam)

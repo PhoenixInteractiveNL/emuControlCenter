@@ -8,7 +8,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ListBox
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with ListBox control management.
 ; Author(s) .....: Paul Campbell (PaulIA)
@@ -89,13 +89,13 @@ Global Const $__LISTBOXCONSTANT_WM_GETFONT = 0x0031
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
-Func _GUICtrlListBox_AddFile($hWnd, $sFile)
-	If Not IsString($sFile) Then $sFile = String($sFile)
+Func _GUICtrlListBox_AddFile($hWnd, $sFilePath)
+	If Not IsString($sFilePath) Then $sFilePath = String($sFilePath)
 
 	If IsHWnd($hWnd) Then
-		Return _SendMessage($hWnd, $LB_ADDFILE, 0, $sFile, 0, "wparam", "wstr")
+		Return _SendMessage($hWnd, $LB_ADDFILE, 0, $sFilePath, 0, "wparam", "wstr")
 	Else
-		Return GUICtrlSendMsg($hWnd, $LB_ADDFILE, 0, $sFile)
+		Return GUICtrlSendMsg($hWnd, $LB_ADDFILE, 0, $sFilePath)
 	EndIf
 EndFunc   ;==>_GUICtrlListBox_AddFile
 
@@ -130,8 +130,8 @@ EndFunc   ;==>_GUICtrlListBox_BeginUpdate
 Func _GUICtrlListBox_ClickItem($hWnd, $iIndex, $sButton = "left", $bMove = False, $iClicks = 1, $iSpeed = 0)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
-	Local $tRect = _GUICtrlListBox_GetItemRectEx($hWnd, $iIndex)
-	Local $tPoint = _WinAPI_PointFromRect($tRect)
+	Local $tRECT = _GUICtrlListBox_GetItemRectEx($hWnd, $iIndex)
+	Local $tPoint = _WinAPI_PointFromRect($tRECT)
 	$tPoint = _WinAPI_ClientToScreen($hWnd, $tPoint)
 	Local $iX, $iY
 	_WinAPI_GetXYFromPoint($tPoint, $iX, $iY)
@@ -223,14 +223,14 @@ EndFunc   ;==>_GUICtrlListBox_Destroy
 ; Author ........: Gary Frost (gafrost), CyberSlug
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlListBox_Dir($hWnd, $sFile, $iAttributes = 0, $bBrackets = True)
-	If Not IsString($sFile) Then $sFile = String($sFile)
+Func _GUICtrlListBox_Dir($hWnd, $sFilePath, $iAttributes = 0, $bBrackets = True)
+	If Not IsString($sFilePath) Then $sFilePath = String($sFilePath)
 
 	If BitAND($iAttributes, $DDL_DRIVES) = $DDL_DRIVES And Not $bBrackets Then
 		Local $sText
 		Local $hGui_no_brackets = GUICreate("no brackets")
 		Local $idList_no_brackets = GUICtrlCreateList("", 240, 40, 120, 120)
-		Local $iRet = GUICtrlSendMsg($idList_no_brackets, $LB_DIR, $iAttributes, $sFile)
+		Local $iRet = GUICtrlSendMsg($idList_no_brackets, $LB_DIR, $iAttributes, $sFilePath)
 		For $i = 0 To _GUICtrlListBox_GetCount($idList_no_brackets) - 1
 			$sText = _GUICtrlListBox_GetText($idList_no_brackets, $i)
 			$sText = StringReplace(StringReplace(StringReplace($sText, "[", ""), "]", ":"), "-", "")
@@ -240,9 +240,9 @@ Func _GUICtrlListBox_Dir($hWnd, $sFile, $iAttributes = 0, $bBrackets = True)
 		Return $iRet
 	Else
 		If IsHWnd($hWnd) Then
-			Return _SendMessage($hWnd, $LB_DIR, $iAttributes, $sFile, 0, "wparam", "wstr")
+			Return _SendMessage($hWnd, $LB_DIR, $iAttributes, $sFilePath, 0, "wparam", "wstr")
 		Else
-			Return GUICtrlSendMsg($hWnd, $LB_DIR, $iAttributes, $sFile)
+			Return GUICtrlSendMsg($hWnd, $LB_DIR, $iAttributes, $sFilePath)
 		EndIf
 	EndIf
 EndFunc   ;==>_GUICtrlListBox_Dir
@@ -392,11 +392,11 @@ EndFunc   ;==>_GUICtrlListBox_GetItemHeight
 Func _GUICtrlListBox_GetItemRect($hWnd, $iIndex)
 	Local $aRect[4]
 
-	Local $tRect = _GUICtrlListBox_GetItemRectEx($hWnd, $iIndex)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlListBox_GetItemRectEx($hWnd, $iIndex)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlListBox_GetItemRect
 
@@ -405,13 +405,13 @@ EndFunc   ;==>_GUICtrlListBox_GetItemRect
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _GUICtrlListBox_GetItemRectEx($hWnd, $iIndex)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If IsHWnd($hWnd) Then
-		_SendMessage($hWnd, $LB_GETITEMRECT, $iIndex, $tRect, 0, "wparam", "struct*")
+		_SendMessage($hWnd, $LB_GETITEMRECT, $iIndex, $tRECT, 0, "wparam", "struct*")
 	Else
-		GUICtrlSendMsg($hWnd, $LB_GETITEMRECT, $iIndex, DllStructGetPtr($tRect))
+		GUICtrlSendMsg($hWnd, $LB_GETITEMRECT, $iIndex, DllStructGetPtr($tRECT))
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>_GUICtrlListBox_GetItemRectEx
 
 ; #FUNCTION# ====================================================================================================================

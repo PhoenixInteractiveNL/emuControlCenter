@@ -6,11 +6,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIDlg.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: shell32.dll, comdlg32.dll, credui.dll, shlwapi.dll, user32.dll, kernel32.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -271,8 +269,8 @@ EndFunc   ;==>_WinAPI_MessageBoxIndirect
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_OpenFileDlg($sTitle = '', $sInitDir = '', $sFilters = '', $iDefFilter = 0, $sDefFile = '', $sDefExt = '', $iFlags = 0, $iFlagsEx = 0, $pOFNProc = 0, $pData = 0, $hParent = 0)
-	Local $sResult = __OFNDlg(0, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDefExt, $iFlags, $iFlagsEx, $pOFNProc, $pData, $hParent)
+Func _WinAPI_OpenFileDlg($sTitle = '', $sInitDir = '', $sFilters = '', $iDefaultFilter = 0, $sDefaultFilePath = '', $sDefaultExt = '', $iFlags = 0, $iFlagsEx = 0, $pOFNProc = 0, $pData = 0, $hParent = 0)
+	Local $sResult = __OFNDlg(0, $sTitle, $sInitDir, $sFilters, $iDefaultFilter, $sDefaultFilePath, $sDefaultExt, $iFlags, $iFlagsEx, $pOFNProc, $pData, $hParent)
 	If @error Then Return SetError(@error, @extended, '')
 
 	Return $sResult
@@ -385,9 +383,9 @@ EndFunc   ;==>_WinAPI_RestartDlg
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_SaveFileDlg($sTitle = '', $sInitDir = '', $sFilters = '', $iDefFilter = 0, $sDefFile = '', $sDefExt = '', $iFlags = 0, $iFlagsEx = 0, $pOFNProc = 0, $pData = 0, $hParent = 0)
-	Local $sResult = __OFNDlg(1, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDefExt, $iFlags, $iFlagsEx, $pOFNProc, $pData, $hParent)
-	If @error Then Return SetError(@error, @extended, '')
+Func _WinAPI_SaveFileDlg($sTitle = "", $sInitDir = "", $sFilters = "", $iDefaultFilter = 0, $sDefaultFilePath = "", $sDefaultExt = "", $iFlags = 0, $iFlagsEx = 0, $pOFNProc = 0, $pData = 0, $hParent = 0)
+	Local $sResult = __OFNDlg(1, $sTitle, $sInitDir, $sFilters, $iDefaultFilter, $sDefaultFilePath, $sDefaultExt, $iFlags, $iFlagsEx, $pOFNProc, $pData, $hParent)
+	If @error Then Return SetError(@error, @extended, "")
 
 	Return $sResult
 EndFunc   ;==>_WinAPI_SaveFileDlg
@@ -422,12 +420,12 @@ EndFunc   ;==>_WinAPI_ShellAboutDlg
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShellOpenWithDlg($sFile, $iFlags = 0, $hParent = 0)
-	Local $tOPENASINFO = DllStructCreate('ptr;ptr;dword;wchar[' & (StringLen($sFile) + 1) & ']')
+Func _WinAPI_ShellOpenWithDlg($sFilePath, $iFlags = 0, $hParent = 0)
+	Local $tOPENASINFO = DllStructCreate('ptr;ptr;dword;wchar[' & (StringLen($sFilePath) + 1) & ']')
 	DllStructSetData($tOPENASINFO, 1, DllStructGetPtr($tOPENASINFO, 4))
 	DllStructSetData($tOPENASINFO, 2, 0)
 	DllStructSetData($tOPENASINFO, 3, $iFlags)
-	DllStructSetData($tOPENASINFO, 4, $sFile)
+	DllStructSetData($tOPENASINFO, 4, $sFilePath)
 
 	Local $aRet = DllCall('shell32.dll', 'long', 'SHOpenWithDialog', 'hwnd', $hParent, 'struct*', $tOPENASINFO)
 	If @error Then Return SetError(@error, @extended, 0)

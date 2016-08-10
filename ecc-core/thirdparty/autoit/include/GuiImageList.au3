@@ -7,14 +7,13 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ImageList
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Functions that assist with ImageList control management.
 ;                  An image list is a collection of images of the same size, each of which can be referred to by its index. Image
 ;                  lists are used to efficiently manage large sets of icons or bitmaps. All images in an image list are contained
 ;                  in a single, wide bitmap in screen device format.  An image list can also include  a  monochrome  bitmap  that
 ;                  contains masks used to draw images transparently (icon style).
 ; Author(s)......: Paul Campbell (PaulIA)
-; Dll(s) ........: comctl32.dll
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -108,12 +107,12 @@ EndFunc   ;==>_GUIImageList_AddBitmap
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUIImageList_AddIcon($hWnd, $sFile, $iIndex = 0, $bLarge = False)
+Func _GUIImageList_AddIcon($hWnd, $sFilePath, $iIndex = 0, $bLarge = False)
 	Local $iRet, $tIcon = DllStructCreate("handle Handle")
 	If $bLarge Then
-		$iRet = _WinAPI_ExtractIconEx($sFile, $iIndex, $tIcon, 0, 1)
+		$iRet = _WinAPI_ExtractIconEx($sFilePath, $iIndex, $tIcon, 0, 1)
 	Else
-		$iRet = _WinAPI_ExtractIconEx($sFile, $iIndex, 0, $tIcon, 1)
+		$iRet = _WinAPI_ExtractIconEx($sFilePath, $iIndex, 0, $tIcon, 1)
 	EndIf
 	If $iRet <= 0 Then Return SetError(-1, $iRet, -1)
 
@@ -204,7 +203,7 @@ EndFunc   ;==>_GUIImageList_DragLeave
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUIImageList_DragMove($iX, $iY)
-	Local $aResult = DllCall("comCtl32.dll", "bool", "ImageList_DragMove", "int", $iX, "int", $iY)
+	Local $aResult = DllCall("comctl32.dll", "bool", "ImageList_DragMove", "int", $iX, "int", $iY)
 	If @error Then Return SetError(@error, @extended, False)
 	Return $aResult[0] <> 0
 EndFunc   ;==>_GUIImageList_DragMove

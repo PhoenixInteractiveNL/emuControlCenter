@@ -5,14 +5,13 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Network_Share
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Network Share.
 ;                  The network share functions control shared resources.  A shared resource is a local resource on a server  (for
 ;                  example, a disk directory, print device, or named pipe) that can be accessed by users and applications on  the
 ;                  network.
 ; Author(s) .....: Paul Campbell (PaulIA)
-; Dll(s) ........: netapi32.dll
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -506,7 +505,7 @@ EndFunc   ;==>_Net_Share_SessionGetInfo
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _Net_Share_ShareAdd($sServer, $sShare, $iType, $sPath, $sComment = "", $iMaxUses = -1)
+Func _Net_Share_ShareAdd($sServer, $sShare, $iType, $sResourcePath, $sComment = "", $iMaxUses = -1)
 	Local $tData = DllStructCreate("char Share[512];char Path[512];char Comment[512]")
 	Local $pShare = DllStructGetPtr($tData, "Share")
 	Local $pPath = DllStructGetPtr($tData, "Path")
@@ -514,7 +513,7 @@ Func _Net_Share_ShareAdd($sServer, $sShare, $iType, $sPath, $sComment = "", $iMa
 	If $sServer = "" Then $sServer = "127.0.0.1"
 	If StringLeft($sServer, 2) <> "\\" Then $sServer = "\\" & $sServer
 	_WinAPI_MultiByteToWideCharEx($sShare, DllStructGetPtr($tData, "Share"))
-	_WinAPI_MultiByteToWideCharEx($sPath, DllStructGetPtr($tData, "Path"))
+	_WinAPI_MultiByteToWideCharEx($sResourcePath, DllStructGetPtr($tData, "Path"))
 	Local $pComment = 0
 	If $sComment <> "" Then
 		_WinAPI_MultiByteToWideCharEx($sComment, DllStructGetPtr($tData, "Comment"))

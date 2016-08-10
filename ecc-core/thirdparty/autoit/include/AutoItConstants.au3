@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Constants
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Constants to be included in an AutoIt v3 script.
 ; Author(s) .....: JLandes, Nutster, CyberSlug, Holger, ...
@@ -47,6 +47,11 @@ Global Const $DT_DRIVETYPE = 1 ; Drive type e.g. CD-ROM, Fixed.
 Global Const $DT_SSDSTATUS = 2 ; Status of whether the drive is SSD.
 Global Const $DT_BUSTYPE = 3 ; Bus type e.g. SATA, SD.
 
+; FtpSetProxy and HttpSetProxy Constants
+Global Const $PROXY_IE = 0
+Global Const $PROXY_NONE = 1
+Global Const $PROXY_SPECIFIED = 2
+
 ; Reserved IDs for System Objects
 ; in MenuConstants.au3
 ; in ScrollBarsConstants.au3
@@ -60,6 +65,7 @@ Global Const $OBJID_SOUND = 0xFFFFFFF5
 
 ; Progress and Splash Constants
 ; Indicates properties of the displayed progress or splash dialog
+Global Const $DLG_CENTERONTOP = 0 ; Center justified/always on top/with title
 Global Const $DLG_NOTITLE = 1 ; Titleless window
 Global Const $DLG_NOTONTOP = 2 ; Without "always on top" attribute
 Global Const $DLG_TEXTLEFT = 4 ; Left justified text
@@ -174,7 +180,159 @@ Global Const $SWP_NOSENDCHANGING = 0x0400
 Global Const $SWP_DEFERERASE = 0x2000
 Global Const $SWP_ASYNCWINDOWPOS = 0x4000
 
-; Keywords (returned from the IsKeyword() function
+; Keywords (returned from the IsKeyword() function)
 Global Const $KEYWORD_DEFAULT = 1
 Global Const $KEYWORD_NULL = 2
+
+; IsDeclared Constants
+Global Const $DECLARED_LOCAL = -1
+Global Const $DECLARED_UNKNOWN = 0
+Global Const $DECLARED_GLOBAL = 1
+
+; Assign Constants
+Global Const $ASSIGN_CREATE = 0
+Global Const $ASSIGN_FORCELOCAL = 1
+Global Const $ASSIGN_FORCEGLOBAL = 2
+Global Const $ASSIGN_EXISTFAIL = 4
+
+; BlockInput Constants
+Global Const $BI_ENABLE = 0
+Global Const $BI_DISABLE = 1
+
+; Break Constants
+Global Const $BREAK_ENABLE = 1
+Global Const $BREAK_DISABLE = 0
+
+; CDTray Constants
+Global Const $CDTRAY_OPEN = "open"
+Global Const $CDTRAY_CLOSED = "closed"
+
+; ControlSend and Send Constants
+Global Const $SEND_DEFAULT = 0
+Global Const $SEND_RAW = 1
+
+; DirGetSize Constants
+Global Const $DIR_DEFAULT = 0
+Global Const $DIR_EXTENDED= 1
+Global Const $DIR_NORECURSE = 2
+
+; DirRemove Constants
+;~ Global Const $DIR_DEFAULT = 0
+Global Const $DIR_REMOVE= 1
+
+; DriveGetDrive Constants
+Global Const $DT_ALL = "ALL"
+Global Const $DT_CDROM = "CDROM"
+Global Const $DT_REMOVABLE = "REMOVABLE"
+Global Const $DT_FIXED = "FIXED"
+Global Const $DT_NETWORK = "NETWORK"
+Global Const $DT_RAMDISK = "RAMDISK"
+Global Const $DT_UNKNOWN = "UNKNOWN"
+
+; DriveGetFileSystem Constants
+Global Const $DT_UNDEFINED = 1
+Global Const $DT_FAT = "FAT"
+Global Const $DT_FAT32 = "FAT32"
+Global Const $DT_EXFAT = "exFAT"
+Global Const $DT_NTFS = "NTFS"
+Global Const $DT_NWFS = "NWFS"
+Global Const $DT_CDFS = "CDFS"
+Global Const $DT_UDF = "UDF"
+
+; DriveMapAdd Constants
+Global Const $DMA_DEFAULT = 0
+Global Const $DMA_PERSISTENT = 1
+Global Const $DMA_AUTHENTICATION = 8
+
+; DriveStatus Constants
+Global Const $DS_UNKNOWN = "UNKNOWN"
+Global Const $DS_READY = "READY"
+Global Const $DS_NOTREADY = "NOTREADY"
+Global Const $DS_INVALID = "INVALID"
+
+; Mouse related Constants
+Global Const $MOUSE_CLICK_LEFT = "left"
+Global Const $MOUSE_CLICK_RIGHT = "right"
+Global Const $MOUSE_CLICK_MIDDLE = "middle"
+Global Const $MOUSE_CLICK_MAIN = "main"
+Global Const $MOUSE_CLICK_MENU = "menu"
+Global Const $MOUSE_CLICK_PRIMARY = "primary"
+Global Const $MOUSE_CLICK_SECONDARY = "secondary"
+Global Const $MOUSE_WHEEL_UP = "up"
+Global Const $MOUSE_WHEEL_DOWN = "down"
+
+; Dec, Int, Number Constants
+Global Const $NUMBER_AUTO = 0
+Global Const $NUMBER_32BIT = 1
+Global Const $NUMBER_64BIT = 2
+Global Const $NUMBER_DOUBLE = 3
+
+; ObjName Constants
+Global Const $OBJ_NAME = 1
+Global Const $OBJ_STRING = 2
+Global Const $OBJ_PROGID = 3
+Global Const $OBJ_FILE = 4
+Global Const $OBJ_MODULE = 5
+Global Const $OBJ_CLSID = 6
+Global Const $OBJ_IID = 7
+
+; OnAutoItExitRegister Constants
+Global Const $EXITCLOSE_NORMAL = 0 ; Natural closing.
+Global Const $EXITCLOSE_BYEXIT = 1 ; close by Exit function.
+Global Const $EXITCLOSE_BYCLICK = 2 ; close by clicking on exit of the systray.
+Global Const $EXITCLOSE_BYLOGOFF = 3 ; close by user logoff.
+Global Const $EXITCLOSE_BYSUTDOWN = 4 ; close by Windows shutdown.
+
+; ProcessGetStats Constants
+Global Const $PROCESS_STATS_MEMORY = 0
+Global Const $PROCESS_STATS_IO = 1
+
+; ProcessSetPriority Constants
+Global Const $PROCESS_LOW = 0
+Global Const $PROCESS_BELOWNORMAL = 1
+Global Const $PROCESS_NORMAL = 2
+Global Const $PROCESS_ABOVENORMAL = 3
+Global Const $PROCESS_HIGH = 4
+Global Const $PROCESS_REALTIME = 5
+
+; RunAs and RunAsWait Constants
+Global Const $RUN_LOGON_NOPROFILE = 0
+Global Const $RUN_LOGON_PROFILE = 1
+Global Const $RUN_LOGON_NETWORK = 2
+Global Const $RUN_LOGON_INHERIT = 4
+
+; SoundPlay Constants
+Global Const $SOUND_NOWAIT = 0 ; continue script while sound is playing (default)
+Global Const $SOUND_WAIT = 1 ; wait until sound has finished
+
+; ShellExecute and ShellExecuteWait Constants
+Global Const $SHEX_OPEN = "open"
+Global Const $SHEX_EDIT = "edit"
+Global Const $SHEX_PRINT = "print"
+Global Const $SHEX_PROPERTIES = "properties"
+
+; TCPRecv Constants
+Global Const $TCP_DATA_DEFAULT = 0
+Global Const $TCP_DATA_BINARY = 1
+
+; UDPOpen, UDPRecv Constants
+Global Const $UDP_OPEN_DEFAULT = 0
+Global Const $UDP_OPEN_BROADCAST = 1
+Global Const $UDP_DATA_DEFAULT = 0
+Global Const $UDP_DATA_BINARY = 1
+Global Const $UDP_DATA_ARRAY = 2
+
+; ToolTip, GUICtrlSetTip Constants
+Global Const $TIP_NOICON = 0 ; No icon
+Global Const $TIP_INFOICON = 1 ; Info icon
+Global Const $TIP_WARNINGICON = 2 ; Warning icon
+Global Const $TIP_ERRORICON = 3 ; Error Icon
+
+Global Const $TIP_BALLOON = 1
+Global Const $TIP_CENTER = 2
+Global Const $TIP_FORCEVISIBLE = 4
+
+; WindowsSetOnTop Constants
+Global Const $WINDOWS_NOONTOP = 0
+Global Const $WINDOWS_ONTOP = 1
 ; ===============================================================================================================================

@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Process
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Process management.
 ; Author(s) .....: Erifash, Wouter, Matthew Tucker, Jeremy Landes, Valik
@@ -21,17 +21,15 @@
 ; Author ........: Erifash <erifash [at] gmail [dot] com>, Wouter van Kesteren. guinness - Removed ProcessExists for speed.
 ; ===============================================================================================================================
 Func _ProcessGetName($iPID)
-	Local $aProcessList = ProcessList(), _
-			$iError = 1, _
-			$sProcessName = ""
-	For $i = 1 To $aProcessList[0][0]
-		If $aProcessList[$i][1] = $iPID Then
-			$iError = 0
-			$sProcessName = $aProcessList[$i][0]
-			ExitLoop
-		EndIf
-	Next
-	Return SetError($iError, 0, $sProcessName)
+	Local $aProcessList = ProcessList()
+	If Not @error Then
+		For $i = 1 To $aProcessList[0][0]
+			If $aProcessList[$i][1] = $iPID Then
+				Return $aProcessList[$i][0]
+			EndIf
+		Next
+	EndIf
+	Return SetError(1, 0, "")
 EndFunc   ;==>_ProcessGetName
 
 ; #FUNCTION# ====================================================================================================================

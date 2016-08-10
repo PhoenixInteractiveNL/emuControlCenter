@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Timers
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Timers management.
 ;                  An application uses a timer to schedule an event for a window after a specified time has elapsed.
@@ -10,7 +10,6 @@
 ;                  associated with the timer. Because a timer's accuracy depends on the system clock rate and how often the
 ;                  application retrieves messages from the message queue, the time-out value is only approximate.
 ; Author(s) .....: Gary Frost
-; Dll(s) ........: user32.dll, kernel32.dll
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
@@ -52,7 +51,7 @@ Func _Timer_GetIdleTime()
 	If @error Or $aResult[0] = 0 Then Return SetError(@error, @extended, 0)
 
 	; Get current ticks since last restart
-	Local $avTicks = DllCall("Kernel32.dll", "dword", "GetTickCount")
+	Local $avTicks = DllCall("kernel32.dll", "dword", "GetTickCount")
 	If @error Or Not $aResult[0] Then Return SetError(@error, @extended, 0)
 
 	; Return time since last activity, in ticks (approx milliseconds)
@@ -66,8 +65,8 @@ EndFunc   ;==>_Timer_GetIdleTime
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _Timer_GetTimerID($iwParam)
-	Local $_iTimerID = Dec(Hex($iwParam, 8)), $iMax = UBound($__g_aTimers_aTimerIDs) - 1
+Func _Timer_GetTimerID($wParam)
+	Local $_iTimerID = Dec(Hex($wParam, 8)), $iMax = UBound($__g_aTimers_aTimerIDs) - 1
 	For $x = 1 To $iMax
 		If $_iTimerID = $__g_aTimers_aTimerIDs[$x][1] Then Return $__g_aTimers_aTimerIDs[$x][0]
 	Next
@@ -191,7 +190,7 @@ Func _Timer_SetTimer($hWnd, $iElapse = 250, $sTimerFunc = "", $iTimerID = -1)
 			EndIf
 		Next
 		If $sTimerFunc <> "" Then ; using callbacks, if $sTimerFunc = "" then using WM_TIMER events
-			$hCallBack = DllCallbackRegister($sTimerFunc, "none", "hwnd;int;uint_ptr;dword")
+			$hCallBack = DllCallbackRegister($sTimerFunc, "none", "hwnd;uint;uint_ptr;dword")
 			If $hCallBack = 0 Then Return SetError(-1, -1, 0)
 			$pTimerFunc = DllCallbackGetPtr($hCallBack)
 			If $pTimerFunc = 0 Then Return SetError(-1, -1, 0)
@@ -210,7 +209,7 @@ Func _Timer_SetTimer($hWnd, $iElapse = 250, $sTimerFunc = "", $iTimerID = -1)
 					$pTimerFunc = DllCallbackGetPtr($hCallBack)
 					If $pTimerFunc = 0 Then Return SetError(-1, -1, 0)
 				EndIf
-				$aResult = DllCall("user32.dll", "uint_ptr", "SetTimer", "hwnd", $hWnd, "uint_ptr", $iTimerID, "int", $iElapse, "ptr", $pTimerFunc)
+				$aResult = DllCall("user32.dll", "uint_ptr", "SetTimer", "hwnd", $hWnd, "uint_ptr", $iTimerID, "uint", $iElapse, "ptr", $pTimerFunc)
 				If @error Or $aResult[0] = 0 Then Return SetError(@error, @extended, 0)
 				ExitLoop
 			EndIf

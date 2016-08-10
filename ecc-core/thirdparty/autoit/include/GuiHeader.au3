@@ -9,7 +9,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Header
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Functions that assist with Header control management.
 ;                  A header control is a window that is usually positioned above columns of text or numbers.  It contains a title
 ;                  for each column, and it can be divided into parts.
@@ -150,8 +150,8 @@ Func _GUICtrlHeader_Create($hWnd, $iStyle = 0x00000046)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Local $hHeader = _WinAPI_CreateWindowEx(0, $__HEADERCONSTANT_ClassName, "", $iStyle, 0, 0, 0, 0, $hWnd, $nCtrlID)
-	Local $tRect = _WinAPI_GetClientRect($hWnd)
-	Local $tWindowPos = _GUICtrlHeader_Layout($hHeader, $tRect)
+	Local $tRECT = _WinAPI_GetClientRect($hWnd)
+	Local $tWindowPos = _GUICtrlHeader_Layout($hHeader, $tRECT)
 	Local $iFlags = BitOR(DllStructGetData($tWindowPos, "Flags"), $__HEADERCONSTANT_SWP_SHOWWINDOW)
 	_WinAPI_SetWindowPos($hHeader, DllStructGetData($tWindowPos, "InsertAfter"), _
 			DllStructGetData($tWindowPos, "X"), DllStructGetData($tWindowPos, "Y"), _
@@ -371,11 +371,11 @@ EndFunc   ;==>_GUICtrlHeader_GetItemParam
 Func _GUICtrlHeader_GetItemRect($hWnd, $iIndex)
 	Local $aRect[4]
 
-	Local $tRect = _GUICtrlHeader_GetItemRectEx($hWnd, $iIndex)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlHeader_GetItemRectEx($hWnd, $iIndex)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlHeader_GetItemRect
 
@@ -384,19 +384,19 @@ EndFunc   ;==>_GUICtrlHeader_GetItemRect
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _GUICtrlHeader_GetItemRectEx($hWnd, $iIndex)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If _WinAPI_InProcess($hWnd, $__g_hHDRLastWnd) Then
-		_SendMessage($hWnd, $HDM_GETITEMRECT, $iIndex, $tRect, 0, "wparam", "struct*")
+		_SendMessage($hWnd, $HDM_GETITEMRECT, $iIndex, $tRECT, 0, "wparam", "struct*")
 	Else
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
-		_MemWrite($tMemMap, $tRect)
+		_MemWrite($tMemMap, $tRECT)
 		_SendMessage($hWnd, $HDM_GETITEMRECT, $iIndex, $pMemory, 0, "wparam", "ptr")
-		_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+		_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 		_MemFree($tMemMap)
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>_GUICtrlHeader_GetItemRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -585,23 +585,23 @@ EndFunc   ;==>_GUICtrlHeader_InsertItem
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
-Func _GUICtrlHeader_Layout($hWnd, ByRef $tRect)
+Func _GUICtrlHeader_Layout($hWnd, ByRef $tRECT)
 	Local $tLayout = DllStructCreate($tagHDLAYOUT)
 	Local $tWindowPos = DllStructCreate($tagWINDOWPOS)
 	If _WinAPI_InProcess($hWnd, $__g_hHDRLastWnd) Then
-		DllStructSetData($tLayout, "Rect", DllStructGetPtr($tRect))
+		DllStructSetData($tLayout, "Rect", DllStructGetPtr($tRECT))
 		DllStructSetData($tLayout, "WindowPos", DllStructGetPtr($tWindowPos))
 		_SendMessage($hWnd, $HDM_LAYOUT, 0, $tLayout, 0, "wparam", "struct*")
 	Else
 		Local $iLayout = DllStructGetSize($tLayout)
-		Local $iRect = DllStructGetSize($tRect)
+		Local $iRect = DllStructGetSize($tRECT)
 		Local $iWindowPos = DllStructGetSize($tWindowPos)
 		Local $tMemMap
 		Local $pMemory = _MemInit($hWnd, $iLayout + $iRect + $iWindowPos, $tMemMap)
 		DllStructSetData($tLayout, "Rect", $pMemory + $iLayout)
 		DllStructSetData($tLayout, "WindowPos", $pMemory + $iLayout + $iRect)
 		_MemWrite($tMemMap, $tLayout, $pMemory, $iLayout)
-		_MemWrite($tMemMap, $tRect, $pMemory + $iLayout, $iRect)
+		_MemWrite($tMemMap, $tRECT, $pMemory + $iLayout, $iRect)
 		_SendMessage($hWnd, $HDM_LAYOUT, 0, $pMemory, 0, "wparam", "ptr")
 		_MemRead($tMemMap, $pMemory + $iLayout + $iRect, $tWindowPos, $iWindowPos)
 		_MemFree($tMemMap)
@@ -691,11 +691,11 @@ EndFunc   ;==>_GUICtrlHeader_SetItemAlign
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
-Func _GUICtrlHeader_SetItemBitmap($hWnd, $iIndex, $hBmp)
+Func _GUICtrlHeader_SetItemBitmap($hWnd, $iIndex, $hBitmap)
 	Local $tItem = DllStructCreate($tagHDITEM)
 	DllStructSetData($tItem, "Mask", BitOR($HDI_FORMAT, $HDI_BITMAP))
 	DllStructSetData($tItem, "Fmt", $HDF_BITMAP)
-	DllStructSetData($tItem, "hBMP", $hBmp)
+	DllStructSetData($tItem, "hBMP", $hBitmap)
 	Return _GUICtrlHeader_SetItem($hWnd, $iIndex, $tItem)
 EndFunc   ;==>_GUICtrlHeader_SetItemBitmap
 

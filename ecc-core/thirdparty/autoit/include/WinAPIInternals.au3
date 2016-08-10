@@ -7,11 +7,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIxxx.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: kernel32.dll, ntdll.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -59,6 +57,11 @@ Global Const $__WINVER = __WINVER()
 ; Doc in WinAPIProc
 ; _WinAPI_IsWow64Process
 ; _WinAPI_PathIsDirectory
+
+; Doc in WinAPIMisc
+; _WinAPI_SwapDWord
+; _WinAPI_SwapQWord
+; _WinAPI_SwapWord
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -213,7 +216,7 @@ EndFunc   ;==>_WinAPI_GetString
 ; Modified.......: jpm
 ; ===============================================================================================================================
 Func _WinAPI_IsBadReadPtr($pAddress, $iLength)
-	Local $aRet = DllCall('kernel32.dll', 'bool', 'IsBadReadPtr', 'ptr', $pAddress, 'uint_ptr', $iLength)
+	Local $aRet = DllCall('kernel32.dll', 'bool', 'IsBadReadPtr', 'struct*', $pAddress, 'uint_ptr', $iLength)
 	If @error Then Return SetError(@error, @extended, False)
 
 	Return $aRet[0]
@@ -224,7 +227,7 @@ EndFunc   ;==>_WinAPI_IsBadReadPtr
 ; Modified.......: jpm
 ; ===============================================================================================================================
 Func _WinAPI_IsBadWritePtr($pAddress, $iLength)
-	Local $aRet = DllCall('kernel32.dll', 'bool', 'IsBadWritePtr', 'ptr', $pAddress, 'uint_ptr', $iLength)
+	Local $aRet = DllCall('kernel32.dll', 'bool', 'IsBadWritePtr', 'struct*', $pAddress, 'uint_ptr', $iLength)
 	If @error Then Return SetError(@error, @extended, False)
 
 	Return $aRet[0]
@@ -255,7 +258,7 @@ Func _WinAPI_MoveMemory($pDestination, $pSource, $iLength)
 	If _WinAPI_IsBadReadPtr($pSource, $iLength) Then Return SetError(10, @extended, 0)
 	If _WinAPI_IsBadWritePtr($pDestination, $iLength) Then Return SetError(11, @extended, 0)
 
-	DllCall('ntdll.dll', 'none', 'RtlMoveMemory', 'ptr', $pDestination, 'ptr', $pSource, 'ulong_ptr', $iLength)
+	DllCall('ntdll.dll', 'none', 'RtlMoveMemory', 'struct*', $pDestination, 'struct*', $pSource, 'ulong_ptr', $iLength)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Return 1
@@ -265,8 +268,8 @@ EndFunc   ;==>_WinAPI_MoveMemory
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_PathIsDirectory($sPath)
-	Local $aRet = DllCall('shlwapi.dll', 'bool', 'PathIsDirectoryW', 'wstr', $sPath)
+Func _WinAPI_PathIsDirectory($sFilePath)
+	Local $aRet = DllCall('shlwapi.dll', 'bool', 'PathIsDirectoryW', 'wstr', $sFilePath)
 	If @error Then Return SetError(@error, @extended, False)
 
 	Return $aRet[0]
@@ -280,7 +283,7 @@ Func _WinAPI_StrLen($pString, $bUnicode = True)
 	Local $W = ''
 	If $bUnicode Then $W = 'W'
 
-	Local $aRet = DllCall('kernel32.dll', 'int', 'lstrlen' & $W, 'ptr', $pString)
+	Local $aRet = DllCall('kernel32.dll', 'int', 'lstrlen' & $W, 'struct*', $pString)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Return $aRet[0]
@@ -323,6 +326,51 @@ EndFunc   ;==>_WinAPI_StructToArray
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
+; Modified.......:
+; ===============================================================================================================================
+Func _WinAPI_SwapDWord($iValue)
+	Local $tStruct1 = DllStructCreate('dword;dword')
+	Local $tStruct2 = DllStructCreate('byte[4];byte[4]', DllStructGetPtr($tStruct1))
+	DllStructSetData($tStruct1, 1, $iValue)
+	For $i = 1 To 4
+		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 5 - $i), $i)
+	Next
+
+	Return DllStructGetData($tStruct1, 2)
+EndFunc   ;==>_WinAPI_SwapDWord
+
+; #FUNCTION# ====================================================================================================================
+; Author.........: Yashied
+; Modified.......:
+; ===============================================================================================================================
+Func _WinAPI_SwapQWord($iValue)
+	Local $tStruct1 = DllStructCreate('int64;int64')
+	Local $tStruct2 = DllStructCreate('byte[8];byte[8]', DllStructGetPtr($tStruct1))
+	DllStructSetData($tStruct1, 1, $iValue)
+	For $i = 1 To 8
+		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 9 - $i), $i)
+	Next
+
+	Return DllStructGetData($tStruct1, 2)
+EndFunc   ;==>_WinAPI_SwapQWord
+
+; #FUNCTION# ====================================================================================================================
+; Author.........: Yashied
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _WinAPI_SwapWord($iValue)
+	Local $tStruct1 = DllStructCreate('word;word')
+	Local $tStruct2 = DllStructCreate('byte[2];byte[2]', DllStructGetPtr($tStruct1))
+	DllStructSetData($tStruct1, 1, $iValue)
+	For $i = 1 To 2
+		DllStructSetData($tStruct2, 2, DllStructGetData($tStruct2, 1, 3 - $i), $i)
+	Next
+
+	Return DllStructGetData($tStruct1, 2)
+EndFunc   ;==>_WinAPI_SwapWord
+
+; #FUNCTION# ====================================================================================================================
+; Author.........: Yashied
 ; Modified.......: JPM
 ; ===============================================================================================================================
 Func _WinAPI_SwitchColor($iColor)
@@ -337,7 +385,7 @@ EndFunc   ;==>_WinAPI_SwitchColor
 Func _WinAPI_ZeroMemory($pMemory, $iLength)
 	If _WinAPI_IsBadWritePtr($pMemory, $iLength) Then Return SetError(11, @extended, 0)
 
-	DllCall('ntdll.dll', 'none', 'RtlZeroMemory', 'ptr', $pMemory, 'ulong_ptr', $iLength)
+	DllCall('ntdll.dll', 'none', 'RtlZeroMemory', 'struct*', $pMemory, 'ulong_ptr', $iLength)
 	If @error Then Return SetError(@error, @extended, 0)
 
 	Return 1
@@ -449,7 +497,7 @@ EndFunc   ;==>__HeapAlloc
 Func __HeapFree(ByRef $pMemory, $bCheck = False, $iCurErr = @error, $iCurExt = @extended)
 	If $bCheck And (Not __HeapValidate($pMemory)) Then Return SetError(@error, @extended, 0)
 
-	Local $aRet = DllCall('kernel32.dll', 'int', 'HeapFree', 'ptr', $__g_hHeap, 'dword', 0, 'ptr', $pMemory)
+	Local $aRet = DllCall('kernel32.dll', 'int', 'HeapFree', 'handle', $__g_hHeap, 'dword', 0, 'ptr', $pMemory)
 	If @error Or Not $aRet[0] Then Return SetError(@error + 40, @extended, 0)
 
 	$pMemory = 0

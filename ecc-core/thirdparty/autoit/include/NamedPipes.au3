@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Pipes
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Named Pipes.
 ;                  A named pipe is a named, one-way or duplex pipe for communication between the pipe server and one or more pipe
@@ -18,7 +18,6 @@
 ;                  processes on the same computer or between processes on different computers across a  network.  If  the  server
 ;                  service is running, all named pipes are accessible remotely.
 ; Author(s) .....: Paul Campbell (PaulIA)
-; Dll(s) ........: kernel32.dll
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -70,7 +69,7 @@ Global Const $__ACCESS_SYSTEM_SECURITY = 0x01000000
 ; Modified.......:
 ; ===============================================================================================================================
 Func _NamedPipes_CallNamedPipe($sPipeName, $pInpBuf, $iInpSize, $pOutBuf, $iOutSize, ByRef $iRead, $iTimeOut = 0)
-	Local $aResult = DllCall("kernel32.dll", "bool", "CallNamedPipeW", "wstr", $sPipeName, "ptr", $pInpBuf, "dword", $iInpSize, "ptr", $pOutBuf, _
+	Local $aResult = DllCall("kernel32.dll", "bool", "CallNamedPipeW", "wstr", $sPipeName, "struct*", $pInpBuf, "dword", $iInpSize, "struct*", $pOutBuf, _
 			"dword", $iOutSize, "dword*", 0, "dword", $iTimeOut)
 	If @error Then Return SetError(@error, @extended, False)
 	$iRead = $aResult[6]
@@ -79,20 +78,20 @@ EndFunc   ;==>_NamedPipes_CallNamedPipe
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
-; Modified.......:
+; Modified.......: jpm
 ; ===============================================================================================================================
-Func _NamedPipes_ConnectNamedPipe($hNamedPipe, $pOverlapped = 0)
-	Local $aResult = DllCall("kernel32.dll", "bool", "ConnectNamedPipe", "handle", $hNamedPipe, "ptr", $pOverlapped)
+Func _NamedPipes_ConnectNamedPipe($hNamedPipe, $tOverlapped = 0)
+	Local $aResult = DllCall("kernel32.dll", "bool", "ConnectNamedPipe", "handle", $hNamedPipe, "struct*", $tOverlapped)
 	If @error Then Return SetError(@error, @extended, False)
 	Return $aResult[0]
 EndFunc   ;==>_NamedPipes_ConnectNamedPipe
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
-; Modified.......:
+; Modified.......: jpm
 ; ===============================================================================================================================
 Func _NamedPipes_CreateNamedPipe($sName, $iAccess = 2, $iFlags = 2, $iACL = 0, $iType = 1, $iRead = 1, $iWait = 0, $iMaxInst = 25, _
-		$iOutBufSize = 4096, $iInpBufSize = 4096, $iDefTimeout = 5000, $pSecurity = 0)
+		$iOutBufSize = 4096, $iInpBufSize = 4096, $iDefaultTimeout = 5000, $tSecurity = 0)
 	Local $iOpenMode, $iPipeMode
 
 	Switch $iAccess
@@ -133,7 +132,7 @@ Func _NamedPipes_CreateNamedPipe($sName, $iAccess = 2, $iFlags = 2, $iACL = 0, $
 	EndSwitch
 
 	Local $aResult = DllCall("kernel32.dll", "handle", "CreateNamedPipeW", "wstr", $sName, "dword", $iOpenMode, "dword", $iPipeMode, "dword", $iMaxInst, _
-			"dword", $iOutBufSize, "dword", $iInpBufSize, "dword", $iDefTimeout, "ptr", $pSecurity)
+			"dword", $iOutBufSize, "dword", $iInpBufSize, "dword", $iDefaultTimeout, "struct*", $tSecurity)
 	If @error Then Return SetError(@error, @extended, -1)
 	Return $aResult[0]
 EndFunc   ;==>_NamedPipes_CreateNamedPipe
@@ -241,11 +240,11 @@ EndFunc   ;==>_NamedPipes_SetNamedPipeHandleState
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
-; Modified.......:
+; Modified.......: jpm
 ; ===============================================================================================================================
-Func _NamedPipes_TransactNamedPipe($hNamedPipe, $pInpBuf, $iInpSize, $pOutBuf, $iOutSize, $pOverlapped = 0)
-	Local $aResult = DllCall("kernel32.dll", "bool", "TransactNamedPipe", "handle", $hNamedPipe, "ptr", $pInpBuf, "dword", $iInpSize, _
-			"ptr", $pOutBuf, "dword", $iOutSize, "dword*", 0, "ptr", $pOverlapped)
+Func _NamedPipes_TransactNamedPipe($hNamedPipe, $pInpBuf, $iInpSize, $pOutBuf, $iOutSize, $tOverlapped = 0)
+	Local $aResult = DllCall("kernel32.dll", "bool", "TransactNamedPipe", "handle", $hNamedPipe, "struct*", $pInpBuf, "dword", $iInpSize, _
+			"struct*", $pOutBuf, "dword", $iOutSize, "dword*", 0, "struct*", $tOverlapped)
 	If @error Then Return SetError(@error, @extended, 0)
 	Return SetError(0, $aResult[0], $aResult[6])
 EndFunc   ;==>_NamedPipes_TransactNamedPipe

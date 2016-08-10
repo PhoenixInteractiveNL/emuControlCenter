@@ -9,7 +9,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Rebar
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Rebar control management.
 ;                  Rebar controls act as containers for child windows. An application assigns child windows,
@@ -17,7 +17,6 @@
 ;                  and each band can have any combination of a gripper bar, a bitmap, a text label, and a child window.
 ;                  However, bands cannot contain more than one child window.
 ; Author(s) .....: Gary Frost
-; Dll(s) ........: user32.dll, comctl32.dll
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
@@ -185,9 +184,9 @@ Func _GUICtrlRebar_AddBand($hWndRebar, $hWndChild, $iMinWidth = 100, $iDefaultWi
 	DllStructSetData($tINFO, "fStyle", $iStyle)
 
 	;// Set values unique to the band with the control
-	Local $tRect = _WinAPI_GetWindowRect($hWndChild)
-	Local $iBottom = DllStructGetData($tRect, "Bottom")
-	Local $iTop = DllStructGetData($tRect, "Top")
+	Local $tRECT = _WinAPI_GetWindowRect($hWndChild)
+	Local $iBottom = DllStructGetData($tRECT, "Bottom")
+	Local $iTop = DllStructGetData($tRECT, "Top")
 	Local $iBuffer = StringLen($sText) + 1
 	Local $tBuffer
 	If $bUnicode Then
@@ -390,12 +389,12 @@ EndFunc   ;==>_GUICtrlRebar_GetBandBackColor
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlRebar_GetBandBorders($hWnd, $iIndex)
-	Local $tRect = _GUICtrlRebar_GetBandBordersEx($hWnd, $iIndex)
+	Local $tRECT = _GUICtrlRebar_GetBandBordersEx($hWnd, $iIndex)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlRebar_GetBandBorders
 
@@ -404,9 +403,9 @@ EndFunc   ;==>_GUICtrlRebar_GetBandBorders
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlRebar_GetBandBordersEx($hWnd, $iIndex)
-	Local $tRect = DllStructCreate($tagRECT)
-	_SendMessage($hWnd, $RB_GETBANDBORDERS, $iIndex, $tRect, 0, "uint", "struct*")
-	Return $tRect
+	Local $tRECT = DllStructCreate($tagRECT)
+	_SendMessage($hWnd, $RB_GETBANDBORDERS, $iIndex, $tRECT, 0, "uint", "struct*")
+	Return $tRECT
 EndFunc   ;==>_GUICtrlRebar_GetBandBordersEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -677,12 +676,12 @@ EndFunc   ;==>_GUICtrlRebar_GetBandStyleVariableHeight
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlRebar_GetBandRect($hWnd, $iIndex)
-	Local $tRect = _GUICtrlRebar_GetBandRectEx($hWnd, $iIndex)
+	Local $tRECT = _GUICtrlRebar_GetBandRectEx($hWnd, $iIndex)
 	Local $aRect[4]
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlRebar_GetBandRect
 
@@ -691,9 +690,9 @@ EndFunc   ;==>_GUICtrlRebar_GetBandRect
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlRebar_GetBandRectEx($hWnd, $iIndex)
-	Local $tRect = DllStructCreate($tagRECT)
-	_SendMessage($hWnd, $RB_GETRECT, $iIndex, $tRect, 0, "uint", "struct*")
-	Return $tRect
+	Local $tRECT = DllStructCreate($tagRECT)
+	_SendMessage($hWnd, $RB_GETRECT, $iIndex, $tRECT, 0, "uint", "struct*")
+	Return $tRECT
 EndFunc   ;==>_GUICtrlRebar_GetBandRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -1023,16 +1022,16 @@ EndFunc   ;==>__GUICtrlRebar_SetBandInfo
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlRebar_SetBandLength($hWnd, $iIndex, $iCx)
-	Return __GUICtrlRebar_SetBandInfo($hWnd, $iIndex, $RBBIM_SIZE, "cx", $iCx)
+Func _GUICtrlRebar_SetBandLength($hWnd, $iIndex, $iLength)
+	Return __GUICtrlRebar_SetBandInfo($hWnd, $iIndex, $RBBIM_SIZE, "cx", $iLength)
 EndFunc   ;==>_GUICtrlRebar_SetBandLength
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlRebar_SetBandLParam($hWnd, $iIndex, $ilParam)
-	Return __GUICtrlRebar_SetBandInfo($hWnd, $iIndex, $RBBIM_LPARAM, "lParam", $ilParam)
+Func _GUICtrlRebar_SetBandLParam($hWnd, $iIndex, $lParam)
+	Return __GUICtrlRebar_SetBandInfo($hWnd, $iIndex, $RBBIM_LPARAM, "lParam", $lParam)
 EndFunc   ;==>_GUICtrlRebar_SetBandLParam
 
 ; #FUNCTION# ====================================================================================================================

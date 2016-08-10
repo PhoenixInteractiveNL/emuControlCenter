@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Constants
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Constants to be included in an AutoIt v3 script.
 ; Author(s) .....: JLandes, Nutster, CyberSlug, Holger, ...
@@ -24,6 +24,7 @@ Global Const $TRAY_FOCUS = 256
 Global Const $TRAY_DEFAULT = 512
 
 ; Tray event values
+Global Const $TRAY_EVENT_NONE = 0
 Global Const $TRAY_EVENT_SHOWICON = -3
 Global Const $TRAY_EVENT_HIDEICON = -4
 Global Const $TRAY_EVENT_FLASHICON = -5
@@ -43,6 +44,20 @@ Global Const $TIP_ICONASTERISK = 1 ; Info icon
 Global Const $TIP_ICONEXCLAMATION = 2 ; Warning icon
 Global Const $TIP_ICONHAND = 3 ; Error icon
 Global Const $TIP_NOSOUND = 16 ; No sound
+
+; TrayCreateItem values
+Global Const $TRAY_ITEM_NORMAL = 0
+Global Const $TRAY_ITEM_RADIO = 1
+
+; TraySetClick values
+Global Const $TRAY_CLICK_SHOW = 0
+Global Const $TRAY_CLICK_PRIMARYDOWN = 1
+Global Const $TRAY_CLICK_PRIMARYUP = 2
+Global Const $TRAY_DBLCLICK_PRIMARY= 4
+Global Const $TRAY_CLICK_SECONDARYDOWN = 8
+Global Const $TRAY_CLICK_SECONDARYUP = 16
+Global Const $TRAY_DBLCLICK_SECONDARY= 32
+Global Const $TRAY_CLICK_HOVERING= 64
 
 ; TraySetState values
 Global Const $TRAY_ICONSTATE_SHOW = 1

@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ScrollBar_Constants
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Constants for ScrollBar functions.
 ; Author(s) .....: Valik, Gary Frost, ...

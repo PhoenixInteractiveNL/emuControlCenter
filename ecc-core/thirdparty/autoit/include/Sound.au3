@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Sound
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Sound management.
 ; Author(s) .....: RazerM, Melba23, Simucal, PsaltyDS
@@ -43,9 +43,9 @@ Global Const $__SOUNDCONSTANT_SNDID_MARKER = 0x49442d2d
 ; Author ........: RazerM, Melba23, some code by Simucal, PsaltyDS
 ; Modified.......:
 ; ===============================================================================================================================
-Func _SoundOpen($sFile)
+Func _SoundOpen($sFilePath)
 	;check for file
-	If Not FileExists($sFile) Then Return SetError(2, 0, 0)
+	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
 	;create random string for file ID
 	Local $aSndID[4]
 	For $i = 1 To 10
@@ -53,7 +53,7 @@ Func _SoundOpen($sFile)
 	Next
 
 	Local $sDrive, $sDir, $sFName, $sExt
-	_PathSplit($sFile, $sDrive, $sDir, $sFName, $sExt)
+	_PathSplit($sFilePath, $sDrive, $sDir, $sFName, $sExt)
 
 	Local $sSndDirName
 	If $sDrive = "" Then
@@ -66,7 +66,7 @@ Func _SoundOpen($sFile)
 	Local $sSndDirShortName = FileGetShortName($sSndDirName, 1)
 
 	;open file
-	__SoundMciSendString("open """ & $sFile & """ alias " & $aSndID[0])
+	__SoundMciSendString("open """ & $sFilePath & """ alias " & $aSndID[0])
 	If @error Then Return SetError(1, @error, 0) ; open failed
 
 	Local $sTrackLength, $bTryNextMethod = False
@@ -120,7 +120,7 @@ Func _SoundOpen($sFile)
 	If $bTryNextMethod Then
 		$bTryNextMethod = False
 		;tell mci to use time in milliseconds
-		__SoundMciSendString("set " & $aSndID[0] & " time format miliseconds")
+		__SoundMciSendString("set " & $aSndID[0] & " time format milliseconds")
 		;receive length of sound
 		Local $iSndLenMs = __SoundMciSendString("status " & $aSndID[0] & " length", 255)
 
@@ -137,7 +137,7 @@ Func _SoundOpen($sFile)
 	Local $iActualTicks = __SoundTimeToTicks($aiTime[1], $aiTime[2], $aiTime[3])
 
 	;tell mci to use time in milliseconds
-	__SoundMciSendString("set " & $aSndID[0] & " time format miliseconds")
+	__SoundMciSendString("set " & $aSndID[0] & " time format milliseconds")
 
 	;;Get estimated length
 	Local $iSoundTicks = __SoundMciSendString("status " & $aSndID[0] & " length", 255)
@@ -258,7 +258,7 @@ Func _SoundLength($aSndID, $iMode = 1)
 	EndIf
 
 	;tell mci to use time in milliseconds
-	__SoundMciSendString("set " & $aSndID[0] & " time format miliseconds")
+	__SoundMciSendString("set " & $aSndID[0] & " time format milliseconds")
 	;receive length of sound
 	Local $iSndLenMs = Number(__SoundMciSendString("status " & $aSndID[0] & " length", 255))
 	If $aSndID[1] <> 0 Then $iSndLenMs = Round($iSndLenMs / $aSndID[1])
@@ -288,7 +288,7 @@ Func _SoundSeek(ByRef $aSndID, $iHour, $iMin, $iSec)
 	If Not IsArray($aSndID) Or Not __SoundChkSndID($aSndID) Then Return SetError(3, 0, 0) ; invalid Sound ID
 
 	;prepare mci to receive time in milliseconds
-	__SoundMciSendString("set " & $aSndID[0] & " time format miliseconds")
+	__SoundMciSendString("set " & $aSndID[0] & " time format milliseconds")
 	;modify the $iHour, $iMin and $iSec parameters to be in milliseconds
 	;and add to $iMs
 	Local $iMs = $iSec * 1000
@@ -328,7 +328,7 @@ Func _SoundPos($aSndID, $iMode = 1)
 	If Not __SoundChkSndID($aSndID) Then Return SetError(3, 0, 0) ; invalid Sound ID or file name
 
 	;tell mci to use time in milliseconds
-	__SoundMciSendString("set " & $aSndID[0] & " time format miliseconds")
+	__SoundMciSendString("set " & $aSndID[0] & " time format milliseconds")
 	;receive position of sound
 	Local $iSndPosMs = Number(__SoundMciSendString("status " & $aSndID[0] & " position", 255))
 	If $aSndID[1] <> 0 Then

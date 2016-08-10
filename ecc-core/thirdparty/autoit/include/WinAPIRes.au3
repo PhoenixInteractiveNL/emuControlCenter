@@ -1,5 +1,6 @@
 #include-once
 
+#include "APILocaleConstants.au3"
 #include "APIResConstants.au3"
 #include "WinAPI.au3"
 #include "WinAPIGdi.au3"
@@ -7,11 +8,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIRes.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: kernel32.dll, user32.dll, shell32.dll, version.dll, shlwapi.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -98,7 +97,7 @@ Func _WinAPI_AddIconTransparency($hIcon, $iPercent = 50, $bDelete = False)
 			ExitLoop
 		EndIf
 		$tBITMAP = DllStructCreate($tagBITMAP)
-		If (Not _WinAPI_GetObject($hDib, DllStructGetSize($tBITMAP), DllStructGetPtr($tBITMAP))) Or (DllStructGetData($tBITMAP, 'bmBitsPixel') <> 32) Then
+		If (Not _WinAPI_GetObject($hDib, DllStructGetSize($tBITMAP), $tBITMAP)) Or (DllStructGetData($tBITMAP, 'bmBitsPixel') <> 32) Then
 			$iError = 21
 			ExitLoop
 		EndIf
@@ -136,8 +135,8 @@ EndFunc   ;==>_WinAPI_AddIconTransparency
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_BeginUpdateResource($sFile, $bDelete = False)
-	Local $aRet = DllCall('kernel32.dll', 'handle', 'BeginUpdateResourceW', 'wstr', $sFile, 'bool', $bDelete)
+Func _WinAPI_BeginUpdateResource($sFilePath, $bDelete = False)
+	Local $aRet = DllCall('kernel32.dll', 'handle', 'BeginUpdateResourceW', 'wstr', $sFilePath, 'bool', $bDelete)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -182,7 +181,7 @@ EndFunc   ;==>_WinAPI_CreateCaret
 ; ===============================================================================================================================
 Func _WinAPI_CreateIcon($hInstance, $iWidth, $iHeight, $iPlanes, $iBitsPixel, $pANDBits, $pXORBits)
 	Local $aRet = DllCall('user32.dll', 'handle', 'CreateIcon', 'handle', $hInstance, 'int', $iWidth, 'int', $iHeight, _
-			'byte', $iPlanes, 'byte', $iBitsPixel, 'ptr', $pANDBits, 'ptr', $pXORBits)
+			'byte', $iPlanes, 'byte', $iBitsPixel, 'struct*', $pANDBits, 'struct*', $pXORBits)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -193,9 +192,9 @@ EndFunc   ;==>_WinAPI_CreateIcon
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_CreateIconFromResourceEx($pData, $iSize, $bIcon = True, $iDesiredX = 0, $iDesiredY = 0, $iFlags = 0)
+Func _WinAPI_CreateIconFromResourceEx($pData, $iSize, $bIcon = True, $iXDesiredPixels = 0, $iYDesiredPixels = 0, $iFlags = 0)
 	Local $aRet = DllCall('user32.dll', 'handle', 'CreateIconFromResourceEx', 'ptr', $pData, 'dword', $iSize, 'bool', $bIcon, _
-			'dword', 0x00030000, 'int', $iDesiredX, 'int', $iDesiredY, 'uint', $iFlags)
+			'dword', 0x00030000, 'int', $iXDesiredPixels, 'int', $iYDesiredPixels, 'uint', $iFlags)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -487,13 +486,13 @@ EndFunc   ;==>_WinAPI_GetCursor
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_GetFileVersionInfo($sFile, ByRef $pBuffer, $iFlags = 0)
+Func _WinAPI_GetFileVersionInfo($sFilePath, ByRef $pBuffer, $iFlags = 0)
 	Local $aRet
 	If $__WINVER >= 0x0600 Then
-		$aRet = DllCall('version.dll', 'dword', 'GetFileVersionInfoSizeExW', 'dword', BitAND($iFlags, 0x03), 'wstr', $sFile, _
+		$aRet = DllCall('version.dll', 'dword', 'GetFileVersionInfoSizeExW', 'dword', BitAND($iFlags, 0x03), 'wstr', $sFilePath, _
 				'ptr', 0)
 	Else
-		$aRet = DllCall('version.dll', 'dword', 'GetFileVersionInfoSizeW', 'wstr', $sFile, 'ptr', 0)
+		$aRet = DllCall('version.dll', 'dword', 'GetFileVersionInfoSizeW', 'wstr', $sFilePath, 'ptr', 0)
 	EndIf
 	If @error Or Not $aRet[0] Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
@@ -501,10 +500,10 @@ Func _WinAPI_GetFileVersionInfo($sFile, ByRef $pBuffer, $iFlags = 0)
 	If @error Then Return SetError(@error + 100, @extended, 0)
 	Local $iNbByte = $aRet[0]
 	If $__WINVER >= 0x0600 Then
-		$aRet = DllCall('version.dll', 'bool', 'GetFileVersionInfoExW', 'dword', BitAND($iFlags, 0x07), 'wstr', $sFile, _
+		$aRet = DllCall('version.dll', 'bool', 'GetFileVersionInfoExW', 'dword', BitAND($iFlags, 0x07), 'wstr', $sFilePath, _
 				'dword', 0, 'dword', $iNbByte, 'ptr', $pBuffer)
 	Else
-		$aRet = DllCall('version.dll', 'bool', 'GetFileVersionInfoW', 'wstr', $sFile, _
+		$aRet = DllCall('version.dll', 'bool', 'GetFileVersionInfoW', 'wstr', $sFilePath, _
 				'dword', 0, 'dword', $iNbByte, 'ptr', $pBuffer)
 	EndIf
 	If @error Or Not $aRet[0] Then Return SetError(@error + 10, @extended, 0)
@@ -564,8 +563,8 @@ EndFunc   ;==>_WinAPI_LoadCursor
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_LoadCursorFromFile($sFile)
-	Local $aRet = DllCall('user32.dll', 'handle', 'LoadCursorFromFileW', 'wstr', $sFile)
+Func _WinAPI_LoadCursorFromFile($sFilePath)
+	Local $aRet = DllCall('user32.dll', 'handle', 'LoadCursorFromFileW', 'wstr', $sFilePath)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -582,7 +581,7 @@ Func _WinAPI_LoadIcon($hInstance, $sName)
 		$sTypeOfName = 'wstr'
 	EndIf
 
-	Local $aRet = DllCall('user32.dll ', 'handle', 'LoadIconW', 'handle', $hInstance, $sTypeOfName, $sName)
+	Local $aRet = DllCall('user32.dll', 'handle', 'LoadIconW', 'handle', $hInstance, $sTypeOfName, $sName)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -617,7 +616,7 @@ EndFunc   ;==>_WinAPI_LoadResource
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_LoadStringEx($hModule, $iID, $iLanguage = 0x0400)
+Func _WinAPI_LoadStringEx($hModule, $iID, $iLanguage = $LOCALE_USER_DEFAULT)
 	Local $iLibrary = 0
 	If IsString($hModule) Then
 		If StringStripWS($hModule, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
@@ -663,9 +662,9 @@ EndFunc   ;==>_WinAPI_LockResource
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
-Func _WinAPI_LookupIconIdFromDirectoryEx($pData, $bIcon = True, $iXDesired = 0, $iYDesired = 0, $iFlags = 0)
+Func _WinAPI_LookupIconIdFromDirectoryEx($pData, $bIcon = True, $iXDesiredPixels = 0, $iYDesiredPixels = 0, $iFlags = 0)
 	Local $aRet = DllCall('user32.dll', 'int', 'LookupIconIdFromDirectoryEx', 'ptr', $pData, 'bool', $bIcon, _
-			'int', $iXDesired, 'int', $iYDesired, 'uint', $iFlags)
+			'int', $iXDesiredPixels, 'int', $iYDesiredPixels, 'uint', $iFlags)
 	If @error Then Return SetError(@error, @extended, 0)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
 
@@ -751,7 +750,7 @@ Func _WinAPI_UpdateResource($hUpdate, $sType, $sName, $iLanguage, $pData, $iSize
 		$sTypeOfName = 'wstr'
 	EndIf
 
-	Local $aRet = DllCall('kernel32.dll', 'bool', 'UpdateResourceW', 'ptr', $hUpdate, $sTypeOfType, $sType, $sTypeOfName, $sName, _
+	Local $aRet = DllCall('kernel32.dll', 'bool', 'UpdateResourceW', 'handle', $hUpdate, $sTypeOfType, $sType, $sTypeOfName, $sName, _
 			'word', $iLanguage, 'ptr', $pData, 'dword', $iSize)
 	If @error Then Return SetError(@error, @extended, False)
 	; If Not $aRet[0] Then Return SetError(1000, 0, 0)
@@ -768,7 +767,7 @@ Func _WinAPI_VerQueryRoot($pData)
 	If @error Or Not $aRet[0] Or Not $aRet[4] Then Return SetError(@error + 10, @extended, 0)
 
 	Local $tVFFI = DllStructCreate($tagVS_FIXEDFILEINFO)
-	If Not _WinAPI_MoveMemory(DllStructGetPtr($tVFFI), $aRet[3], $aRet[4]) Then Return SetError(@error + 20, @extended, 0)
+	If Not _WinAPI_MoveMemory($tVFFI, $aRet[3], $aRet[4]) Then Return SetError(@error + 20, @extended, 0)
 
 	Return $tVFFI
 EndFunc   ;==>_WinAPI_VerQueryRoot

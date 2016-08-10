@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------
+- This is an emuControlCenter GLOBAL userfolder!
+- You can get the latest version of ECC at http://ecc.phoenixinteractive.nl
+- With ecc, you can manage your roms in an easier way!
+--------------------------------------------------------------------------------
+
+This folder could be used as global folder for emulators used by more than one platform!
+Please dont store your images, roms or datfiles in this folder!
+
+Included subfolder: emus/
+
+--------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Tab_Control
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Tab control management.
 ;                  A tab control is analogous to the dividers in a notebook or the labels in a  file  cabinet.  By  using  a  tab
@@ -124,11 +124,11 @@ Global Const $tagTCHITTESTINFO = $tagPOINT & ";uint Flags"
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name...........: __GUICtrlTab_AdjustRect
 ; Description ...: Calculates a tab control's display area given a window rectangle
-; Syntax.........: __GUICtrlTab_AdjustRect ( $hWnd, ByRef $tRect [, $bLarger = False] )
+; Syntax.........: __GUICtrlTab_AdjustRect ( $hWnd, ByRef $tRECT [, $bLarger = False] )
 ; Parameters ....: $hWnd        - Handle to the control
-;                  $tRect       - $tagRECT structure that holds a window or text display rectangle
-;                  $bLarger     - Value that specifies which operation to perform.  If True, $tRect is used to specify a text
-;                  +display rectangle and it receives the corresponding window rectangle.  If False, $tRect is used to specify a
+;                  $tRECT       - $tagRECT structure that holds a window or text display rectangle
+;                  $bLarger     - Value that specifies which operation to perform.  If True, $tRECT is used to specify a text
+;                  +display rectangle and it receives the corresponding window rectangle.  If False, $tRECT is used to specify a
 ;                  +window rectangle and it receives the corresponding text display rectangle.
 ; Return values .: Success      - $tagRECT structure with requested coordinates
 ; Author ........: Paul Campbell (PaulIA)
@@ -139,21 +139,21 @@ Global Const $tagTCHITTESTINFO = $tagPOINT & ";uint Flags"
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Func __GUICtrlTab_AdjustRect($hWnd, ByRef $tRect, $bLarger = False)
+Func __GUICtrlTab_AdjustRect($hWnd, ByRef $tRECT, $bLarger = False)
 	If IsHWnd($hWnd) Then
 		If _WinAPI_InProcess($hWnd, $__g_hTabLastWnd) Then
-			_SendMessage($hWnd, $TCM_ADJUSTRECT, $bLarger, $tRect, 0, "wparam", "struct*")
+			_SendMessage($hWnd, $TCM_ADJUSTRECT, $bLarger, $tRECT, 0, "wparam", "struct*")
 		Else
-			Local $iRect = DllStructGetSize($tRect)
+			Local $iRect = DllStructGetSize($tRECT)
 			Local $tMemMap
 			Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
-			_MemWrite($tMemMap, $tRect)
+			_MemWrite($tMemMap, $tRECT)
 			_SendMessage($hWnd, $TCM_ADJUSTRECT, $bLarger, $pMemory, 0, "wparam", "ptr")
-			_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+			_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 			_MemFree($tMemMap)
 		EndIf
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>__GUICtrlTab_AdjustRect
 
 ; #FUNCTION# ====================================================================================================================
@@ -205,8 +205,8 @@ Func _GUICtrlTab_ClickTab($hWnd, $iIndex, $sButton = "left", $bMove = False, $iC
 		ControlClick($hWinParent, "", $hWnd, $sButton, $iClicks, $iX, $iY)
 	Else
 		; Original code to move mouse and click (requires active window)
-		Local $tRect = _GUICtrlTab_GetItemRectEx($hWnd, $iIndex)
-		Local $tPoint = _WinAPI_PointFromRect($tRect, True)
+		Local $tRECT = _GUICtrlTab_GetItemRectEx($hWnd, $iIndex)
+		Local $tPoint = _WinAPI_PointFromRect($tRECT, True)
 		$tPoint = _WinAPI_ClientToScreen($hWnd, $tPoint)
 		_WinAPI_GetXYFromPoint($tPoint, $iX, $iY)
 		Local $iMode = Opt("MouseCoordMode", 1)
@@ -354,11 +354,11 @@ EndFunc   ;==>_GUICtrlTab_GetCurSel
 Func _GUICtrlTab_GetDisplayRect($hWnd)
 	Local $aRect[4]
 
-	Local $tRect = _GUICtrlTab_GetDisplayRectEx($hWnd)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlTab_GetDisplayRectEx($hWnd)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlTab_GetDisplayRect
 
@@ -367,8 +367,8 @@ EndFunc   ;==>_GUICtrlTab_GetDisplayRect
 ; Modified.......:
 ; ===============================================================================================================================
 Func _GUICtrlTab_GetDisplayRectEx($hWnd)
-	Local $tRect = _WinAPI_GetClientRect($hWnd)
-	Return __GUICtrlTab_AdjustRect($hWnd, $tRect)
+	Local $tRECT = _WinAPI_GetClientRect($hWnd)
+	Return __GUICtrlTab_AdjustRect($hWnd, $tRECT)
 EndFunc   ;==>_GUICtrlTab_GetDisplayRectEx
 
 ; #FUNCTION# ====================================================================================================================
@@ -476,11 +476,11 @@ EndFunc   ;==>_GUICtrlTab_GetItemParam
 Func _GUICtrlTab_GetItemRect($hWnd, $iIndex)
 	Local $aRect[4]
 
-	Local $tRect = _GUICtrlTab_GetItemRectEx($hWnd, $iIndex)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = _GUICtrlTab_GetItemRectEx($hWnd, $iIndex)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlTab_GetItemRect
 
@@ -489,22 +489,22 @@ EndFunc   ;==>_GUICtrlTab_GetItemRect
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _GUICtrlTab_GetItemRectEx($hWnd, $iIndex)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	If IsHWnd($hWnd) Then
 		If _WinAPI_InProcess($hWnd, $__g_hTabLastWnd) Then
-			_SendMessage($hWnd, $TCM_GETITEMRECT, $iIndex, $tRect, 0, "wparam", "struct*")
+			_SendMessage($hWnd, $TCM_GETITEMRECT, $iIndex, $tRECT, 0, "wparam", "struct*")
 		Else
-			Local $iRect = DllStructGetSize($tRect)
+			Local $iRect = DllStructGetSize($tRECT)
 			Local $tMemMap
 			Local $pMemory = _MemInit($hWnd, $iRect, $tMemMap)
 			_SendMessage($hWnd, $TCM_GETITEMRECT, $iIndex, $pMemory, 0, "wparam", "ptr")
-			_MemRead($tMemMap, $pMemory, $tRect, $iRect)
+			_MemRead($tMemMap, $pMemory, $tRECT, $iRect)
 			_MemFree($tMemMap)
 		EndIf
 	Else
-		GUICtrlSendMsg($hWnd, $TCM_GETITEMRECT, $iIndex, DllStructGetPtr($tRect))
+		GUICtrlSendMsg($hWnd, $TCM_GETITEMRECT, $iIndex, DllStructGetPtr($tRECT))
 	EndIf
-	Return $tRect
+	Return $tRECT
 EndFunc   ;==>_GUICtrlTab_GetItemRectEx
 
 ; #FUNCTION# ====================================================================================================================

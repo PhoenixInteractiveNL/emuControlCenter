@@ -33,12 +33,10 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: API Constants UDF WinAPI Libraries for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Constants that can be used with UDF WinAPI libraries
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........:
-; Requirements...: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================

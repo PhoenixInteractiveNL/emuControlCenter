@@ -7,12 +7,11 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: FTP
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with FTP.
 ; Author(s) .....: Wouter, Prog@ndy, jpm, Beege
 ; Notes .........: based on FTP_Ex.au3 16/02/2009 http://www.autoit.de/index.php?page=Thread&postID=48393
-; Dll(s) ........: wininet.dll
 ; ===============================================================================================================================
 
 ; #VARIABLES# ===================================================================================================================
@@ -111,9 +110,9 @@ Global Const $INTERNET_STATUS_NAME_RESOLVED = 11
 ; Author ........: Wouter van Kesteren
 ; Modified.......: Beege
 ; ===============================================================================================================================
-Func _FTP_Close($l_InternetSession)
+Func _FTP_Close($hSession)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $l_InternetSession)
+	Local $aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $hSession)
 	If @error Or $aDone[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	If $__g_bCallback_FTP = True Then DllCallbackFree($__g_hCallback_FTP)
@@ -125,9 +124,9 @@ EndFunc   ;==>_FTP_Close
 ; Author ........: Bill Mezian
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_Command($l_FTPSession, $s_FTPCommand, $l_Flags = $FTP_TRANSFER_TYPE_ASCII, $l_ExpectResponse = 0, $iContext = 0)
+Func _FTP_Command($hFTPSession, $sFTPCommand, $iFlags = $FTP_TRANSFER_TYPE_ASCII, $iExpectResponse = 0, $iContext = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPCommand = DllCall($__g_hWinInet_FTP, 'bool', 'FtpCommandW', 'handle', $l_FTPSession, 'bool', $l_ExpectResponse, 'dword', $l_Flags, 'wstr', $s_FTPCommand, 'dword_ptr', $iContext, 'ptr*', 0)
+	Local $ai_FTPCommand = DllCall($__g_hWinInet_FTP, 'bool', 'FtpCommandW', 'handle', $hFTPSession, 'bool', $iExpectResponse, 'dword', $iFlags, 'wstr', $sFTPCommand, 'dword_ptr', $iContext, 'ptr*', 0)
 	If @error Or $ai_FTPCommand[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return SetError(0, $ai_FTPCommand[6], $ai_FTPCommand[0])
@@ -137,10 +136,10 @@ EndFunc   ;==>_FTP_Command
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_Connect($l_InternetSession, $s_ServerName, $s_Username, $s_Password, $i_Passive = 0, $i_ServerPort = 0, $l_Service = $INTERNET_SERVICE_FTP, $l_Flags = 0, $iContext = 0)
+Func _FTP_Connect($hInternetSession, $sServerName, $sUsername, $sPassword, $iPassive = 0, $iServerPort = 0, $iService = $INTERNET_SERVICE_FTP, $iFlags = 0, $fuContext = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	If $i_Passive == 1 Then $l_Flags = BitOR($l_Flags, $INTERNET_FLAG_PASSIVE)
-	Local $ai_InternetConnect = DllCall($__g_hWinInet_FTP, 'hwnd', 'InternetConnectW', 'handle', $l_InternetSession, 'wstr', $s_ServerName, 'ushort', $i_ServerPort, 'wstr', $s_Username, 'wstr', $s_Password, 'dword', $l_Service, 'dword', $l_Flags, 'dword_ptr', $iContext)
+	If $iPassive == 1 Then $iFlags = BitOR($iFlags, $INTERNET_FLAG_PASSIVE)
+	Local $ai_InternetConnect = DllCall($__g_hWinInet_FTP, 'hwnd', 'InternetConnectW', 'handle', $hInternetSession, 'wstr', $sServerName, 'ushort', $iServerPort, 'wstr', $sUsername, 'wstr', $sPassword, 'dword', $iService, 'dword', $iFlags, 'dword_ptr', $fuContext)
 	If @error Or $ai_InternetConnect[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_InternetConnect[0]
@@ -214,9 +213,9 @@ EndFunc   ;==>_FTP_DecodeInternetStatus
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_DirCreate($l_FTPSession, $s_Remote)
+Func _FTP_DirCreate($hFTPSession, $sRemote)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPMakeDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpCreateDirectoryW', 'handle', $l_FTPSession, 'wstr', $s_Remote)
+	Local $ai_FTPMakeDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpCreateDirectoryW', 'handle', $hFTPSession, 'wstr', $sRemote)
 	If @error Or $ai_FTPMakeDir[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPMakeDir[0]
@@ -226,9 +225,9 @@ EndFunc   ;==>_FTP_DirCreate
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_DirDelete($l_FTPSession, $s_Remote)
+Func _FTP_DirDelete($hFTPSession, $sRemote)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPDelDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpRemoveDirectoryW', 'handle', $l_FTPSession, 'wstr', $s_Remote)
+	Local $ai_FTPDelDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpRemoveDirectoryW', 'handle', $hFTPSession, 'wstr', $sRemote)
 	If @error Or $ai_FTPDelDir[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPDelDir[0]
@@ -238,9 +237,9 @@ EndFunc   ;==>_FTP_DirDelete
 ; Author ........: Beast
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_DirGetCurrent($l_FTPSession)
+Func _FTP_DirGetCurrent($hFTPSession)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPGetCurrentDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpGetCurrentDirectoryW', 'handle', $l_FTPSession, 'wstr', "", 'dword*', 260)
+	Local $ai_FTPGetCurrentDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpGetCurrentDirectoryW', 'handle', $hFTPSession, 'wstr', "", 'dword*', 260)
 	If @error Or $ai_FTPGetCurrentDir[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPGetCurrentDir[2]
@@ -250,10 +249,10 @@ EndFunc   ;==>_FTP_DirGetCurrent
 ; Author ........: Stumpii
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_DirPutContents($l_InternetSession, $s_LocalFolder, $s_RemoteFolder, $b_RecursivePut, $iContext = 0)
-	If StringRight($s_LocalFolder, 1) == "\" Then $s_LocalFolder = StringTrimRight($s_LocalFolder, 1)
+Func _FTP_DirPutContents($hFTPSession, $sLocalFolder, $sRemoteFolder, $bRecursivePut, $iContext = 0)
+	If StringRight($sLocalFolder, 1) == "\" Then $sLocalFolder = StringTrimRight($sLocalFolder, 1)
 	; Shows the filenames of all files in the current directory.
-	Local $hSearch = FileFindFirstFile($s_LocalFolder & "\*.*")
+	Local $hSearch = FileFindFirstFile($sLocalFolder & "\*.*")
 
 	; Check if the search was successful
 	If $hSearch = -1 Then Return SetError(1, 0, 0)
@@ -262,13 +261,13 @@ Func _FTP_DirPutContents($l_InternetSession, $s_LocalFolder, $s_RemoteFolder, $b
 	While 1
 		$sFile = FileFindNextFile($hSearch)
 		If @error Then ExitLoop
-		If StringInStr(FileGetAttrib($s_LocalFolder & "\" & $sFile), "D") Then
-			_FTP_DirCreate($l_InternetSession, $s_RemoteFolder & "/" & $sFile)
-			If $b_RecursivePut Then
-				_FTP_DirPutContents($l_InternetSession, $s_LocalFolder & "\" & $sFile, $s_RemoteFolder & "/" & $sFile, $b_RecursivePut, $iContext)
+		If StringInStr(FileGetAttrib($sLocalFolder & "\" & $sFile), "D") Then
+			_FTP_DirCreate($hFTPSession, $sRemoteFolder & "/" & $sFile)
+			If $bRecursivePut Then
+				_FTP_DirPutContents($hFTPSession, $sLocalFolder & "\" & $sFile, $sRemoteFolder & "/" & $sFile, $bRecursivePut, $iContext)
 			EndIf
 		Else
-			_FTP_FilePut($l_InternetSession, $s_LocalFolder & "\" & $sFile, $s_RemoteFolder & "/" & $sFile, 0, $iContext)
+			_FTP_FilePut($hFTPSession, $sLocalFolder & "\" & $sFile, $sRemoteFolder & "/" & $sFile, 0, $iContext)
 		EndIf
 	WEnd
 
@@ -281,9 +280,9 @@ EndFunc   ;==>_FTP_DirPutContents
 ; Author ........: Beast
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_DirSetCurrent($l_FTPSession, $s_Remote)
+Func _FTP_DirSetCurrent($hFTPSession, $sRemote)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPSetCurrentDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpSetCurrentDirectoryW', 'handle', $l_FTPSession, 'wstr', $s_Remote)
+	Local $ai_FTPSetCurrentDir = DllCall($__g_hWinInet_FTP, 'bool', 'FtpSetCurrentDirectoryW', 'handle', $hFTPSession, 'wstr', $sRemote)
 	If @error Or $ai_FTPSetCurrentDir[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPSetCurrentDir[0]
@@ -293,9 +292,9 @@ EndFunc   ;==>_FTP_DirSetCurrent
 ; Author ........: joeyb1275
 ; Modified.......: Prog@ndy
 ; ===============================================================================================================================
-Func _FTP_FileClose($l_InternetSession)
+Func _FTP_FileClose($hFTPFile)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $l_InternetSession)
+	Local $aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $hFTPFile)
 	If @error Or $aDone[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $aDone[0]
@@ -305,9 +304,9 @@ EndFunc   ;==>_FTP_FileClose
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_FileDelete($l_FTPSession, $s_RemoteFile)
+Func _FTP_FileDelete($hFTPSession, $sRemoteFile)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpDeleteFileW', 'handle', $l_FTPSession, 'wstr', $s_RemoteFile)
+	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpDeleteFileW', 'handle', $hFTPSession, 'wstr', $sRemoteFile)
 	If @error Or $ai_FTPPutFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPPutFile[0]
@@ -317,9 +316,9 @@ EndFunc   ;==>_FTP_FileDelete
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_FileGet($l_FTPSession, $s_RemoteFile, $s_LocalFile, $bFailIfExists = False, $iFlagsAndAttributes = 0, $l_Flags = $FTP_TRANSFER_TYPE_UNKNOWN, $iContext = 0)
+Func _FTP_FileGet($hFTPSession, $sRemoteFile, $sLocalFile, $bFailIfExists = False, $iFlagsAndAttributes = 0, $iFlags = $FTP_TRANSFER_TYPE_UNKNOWN, $iContext = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPGetFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpGetFileW', 'handle', $l_FTPSession, 'wstr', $s_RemoteFile, 'wstr', $s_LocalFile, 'bool', $bFailIfExists, 'dword', $iFlagsAndAttributes, 'dword', $l_Flags, 'dword_ptr', $iContext)
+	Local $ai_FTPGetFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpGetFileW', 'handle', $hFTPSession, 'wstr', $sRemoteFile, 'wstr', $sLocalFile, 'bool', $bFailIfExists, 'dword', $iFlagsAndAttributes, 'dword', $iFlags, 'dword_ptr', $iContext)
 	If @error Or $ai_FTPGetFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPGetFile[0]
@@ -329,9 +328,9 @@ EndFunc   ;==>_FTP_FileGet
 ; Author ........: Joachim de Koning
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _FTP_FileGetSize($l_FTPSession, $s_FileName)
+Func _FTP_FileGetSize($hFTPSession, $sFileName)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPGetSizeHandle = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $l_FTPSession, 'wstr', $s_FileName, 'dword', $GENERIC_READ, 'dword', $INTERNET_FLAG_NO_CACHE_WRITE + $INTERNET_FLAG_TRANSFER_BINARY, 'dword_ptr', 0)
+	Local $ai_FTPGetSizeHandle = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $hFTPSession, 'wstr', $sFileName, 'dword', $GENERIC_READ, 'dword', $INTERNET_FLAG_NO_CACHE_WRITE + $INTERNET_FLAG_TRANSFER_BINARY, 'dword_ptr', 0)
 	If @error Or $ai_FTPGetSizeHandle[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Local $ai_FTPGetFileSize = DllCall($__g_hWinInet_FTP, 'dword', 'FtpGetFileSize', 'handle', $ai_FTPGetSizeHandle[0], 'dword*', 0)
@@ -365,9 +364,9 @@ EndFunc   ;==>_FTP_FileOpen
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_FilePut($l_FTPSession, $s_LocalFile, $s_RemoteFile, $l_Flags = 0, $iContext = 0)
+Func _FTP_FilePut($hFTPSession, $sLocalFile, $sRemoteFile, $iFlags = 0, $iContext = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpPutFileW', 'handle', $l_FTPSession, 'wstr', $s_LocalFile, 'wstr', $s_RemoteFile, 'dword', $l_Flags, 'dword_ptr', $iContext)
+	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpPutFileW', 'handle', $hFTPSession, 'wstr', $sLocalFile, 'wstr', $sRemoteFile, 'dword', $iFlags, 'dword_ptr', $iContext)
 	If @error Or $ai_FTPPutFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPPutFile[0]
@@ -377,11 +376,11 @@ EndFunc   ;==>_FTP_FilePut
 ; Author ........: joeyb1275
 ; Modified.......: Prog@ndy
 ; ===============================================================================================================================
-Func _FTP_FileRead($h_File, $iNumberOfBytesToRead)
+Func _FTP_FileRead($hFTPFile, $iNumberOfBytesToRead)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 	Local $tBuffer = DllStructCreate("byte[" & $iNumberOfBytesToRead & "]")
 
-	Local $ai_FTPReadFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetReadFile', 'handle', $h_File, 'struct*', $tBuffer, 'dword', $iNumberOfBytesToRead, 'dword*', 0) ;LPDWORD lpdwNumberOfBytesRead
+	Local $ai_FTPReadFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetReadFile', 'handle', $hFTPFile, 'struct*', $tBuffer, 'dword', $iNumberOfBytesToRead, 'dword*', 0) ;LPDWORD lpdwNumberOfBytesRead
 	If @error Then Return SetError(1, _WinAPI_GetLastError(), 0)
 
 	Local $iNumberOfBytesRead = $ai_FTPReadFile[4]
@@ -405,9 +404,9 @@ EndFunc   ;==>_FTP_FileRead
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_FileRename($l_FTPSession, $s_Existing, $s_New)
+Func _FTP_FileRename($hFTPSession, $sExisting, $sNew)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPRenameFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpRenameFileW', 'handle', $l_FTPSession, 'wstr', $s_Existing, 'wstr', $s_New)
+	Local $ai_FTPRenameFile = DllCall($__g_hWinInet_FTP, 'bool', 'FtpRenameFileW', 'handle', $hFTPSession, 'wstr', $sExisting, 'wstr', $sNew)
 	If @error Or $ai_FTPRenameFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_FTPRenameFile[0]
@@ -430,9 +429,9 @@ EndFunc   ;==>_FTP_FileTimeLoHiToStr
 ; Author ........: Dick Bronsdijk
 ; Modified.......: Prog@ndy, jpm
 ; ===============================================================================================================================
-Func _FTP_FindFileClose($h_Handle)
+Func _FTP_FindFileClose($hFTPFind)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
-	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $h_Handle)
+	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $hFTPFind)
 	If @error Or $ai_FTPPutFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), "")
 
 	Return $ai_FTPPutFile[0]
@@ -442,7 +441,7 @@ EndFunc   ;==>_FTP_FindFileClose
 ; Author ........: Dick Bronsdijk
 ; Modified.......: Prog@ndy, jpm
 ; ===============================================================================================================================
-Func _FTP_FindFileFirst($l_FTPSession, $s_RemotePath, ByRef $h_Handle, $l_Flags = 0, $iContext = 0)
+Func _FTP_FindFileFirst($hFTPSession, $sRemotePath, ByRef $hFTPFind, $iFlags = 0, $iContext = 0)
 	;flags = 0 changed to $INTERNET_FLAG_TRANSFER_BINARY to see if stops hanging
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 	Local $t_DllStruct = DllStructCreate($tagWIN32_FIND_DATA)
@@ -451,10 +450,10 @@ Func _FTP_FindFileFirst($l_FTPSession, $s_RemotePath, ByRef $h_Handle, $l_Flags 
 	Local $a_FTPFileList[1]
 	$a_FTPFileList[0] = 0
 
-	Local $ai_FTPFirstFile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpFindFirstFileW', 'handle', $l_FTPSession, 'wstr', $s_RemotePath, 'struct*', $t_DllStruct, 'dword', $l_Flags, 'dword_ptr', $iContext)
+	Local $ai_FTPFirstFile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpFindFirstFileW', 'handle', $hFTPSession, 'wstr', $sRemotePath, 'struct*', $t_DllStruct, 'dword', $iFlags, 'dword_ptr', $iContext)
 	If @error Or $ai_FTPFirstFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), $ai_FTPFirstFile)
 
-	$h_Handle = $ai_FTPFirstFile[0]
+	$hFTPFind = $ai_FTPFirstFile[0]
 
 	Local $a_FTPFileList[12]
 	$a_FTPFileList[0] = 11
@@ -477,13 +476,13 @@ EndFunc   ;==>_FTP_FindFileFirst
 ; Author ........: Dick Bronsdijk
 ; Modified.......: Prog@ndy, jpm
 ; ===============================================================================================================================
-Func _FTP_FindFileNext($h_Handle)
+Func _FTP_FindFileNext($hFTPFind)
 	Local $t_DllStruct = DllStructCreate($tagWIN32_FIND_DATA)
 
 	Local $a_FTPFileList[1]
 	$a_FTPFileList[0] = 0
 
-	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetFindNextFileW', 'handle', $h_Handle, 'struct*', $t_DllStruct)
+	Local $ai_FTPPutFile = DllCall($__g_hWinInet_FTP, 'bool', 'InternetFindNextFileW', 'handle', $hFTPFind, 'struct*', $t_DllStruct)
 	If @error Or $ai_FTPPutFile[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), $a_FTPFileList)
 
 	Local $a_FTPFileList[12]
@@ -519,11 +518,11 @@ EndFunc   ;==>_FTP_GetLastResponseInfo
 ; Author ........: Beast, Prog@ndy
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_ListToArray($l_FTPSession, $iReturn_Type = 0, $l_Flags = $INTERNET_FLAG_NO_CACHE_WRITE, $iContext = 0)
+Func _FTP_ListToArray($hFTPSession, $iReturnType = 0, $iFlags = $INTERNET_FLAG_NO_CACHE_WRITE, $iContext = 0)
 	Local $aArray[1]
 	$aArray[0] = 0
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, $aArray)
-	$aArray = __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, 0, 1, $iContext)
+	$aArray = __FTP_ListToArray($hFTPSession, $iReturnType, $iFlags, 0, 1, $iContext)
 	Return SetError(@error, @extended, $aArray)
 EndFunc   ;==>_FTP_ListToArray
 
@@ -531,11 +530,11 @@ EndFunc   ;==>_FTP_ListToArray
 ; Author ........: Prog@ndy
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _FTP_ListToArray2D($l_FTPSession, $iReturn_Type = 0, $l_Flags = $INTERNET_FLAG_NO_CACHE_WRITE, $iContext = 0)
+Func _FTP_ListToArray2D($hFTPSession, $iReturnType = 0, $iFlags = $INTERNET_FLAG_NO_CACHE_WRITE, $iContext = 0)
 	Local $aArray[1][1]
 	$aArray[0][0] = 0
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, $aArray)
-	$aArray = __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, 0, 2, $iContext)
+	$aArray = __FTP_ListToArray($hFTPSession, $iReturnType, $iFlags, 0, 2, $iContext)
 	Return SetError(@error, @extended, $aArray)
 EndFunc   ;==>_FTP_ListToArray2D
 
@@ -543,11 +542,11 @@ EndFunc   ;==>_FTP_ListToArray2D
 ; Author ........: Beast, Prog@ndy
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _FTP_ListToArrayEx($l_FTPSession, $iReturn_Type = 0, $l_Flags = $INTERNET_FLAG_NO_CACHE_WRITE, $b_Fmt = 1, $iContext = 0)
+Func _FTP_ListToArrayEx($hFTPSession, $iReturnType = 0, $iFlags = $INTERNET_FLAG_NO_CACHE_WRITE, $iFmt = 1, $iContext = 0)
 	Local $aArray[1][1]
 	$aArray[0][0] = 0
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, $aArray)
-	$aArray = __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $b_Fmt, 6, $iContext)
+	$aArray = __FTP_ListToArray($hFTPSession, $iReturnType, $iFlags, $iFmt, 6, $iContext)
 	Return SetError(@error, @extended, $aArray)
 EndFunc   ;==>_FTP_ListToArrayEx
 
@@ -555,10 +554,10 @@ EndFunc   ;==>_FTP_ListToArrayEx
 ; Author ........: Wouter van Kesteren
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_Open($s_Agent, $l_AccessType = $INTERNET_OPEN_TYPE_DIRECT, $s_ProxyName = '', $s_ProxyBypass = '', $l_Flags = 0)
+Func _FTP_Open($sAgent, $iAccessType = $INTERNET_OPEN_TYPE_DIRECT, $sProxyName = '', $sProxyBypass = '', $iFlags = 0)
 	If $__g_hWinInet_FTP = -1 Then __FTP_Init()
-	Local $ai_InternetOpen = DllCall($__g_hWinInet_FTP, 'handle', 'InternetOpenW', 'wstr', $s_Agent, 'dword', $l_AccessType, _
-			'wstr', $s_ProxyName, 'wstr', $s_ProxyBypass, 'dword', $l_Flags)
+	Local $ai_InternetOpen = DllCall($__g_hWinInet_FTP, 'handle', 'InternetOpenW', 'wstr', $sAgent, 'dword', $iAccessType, _
+			'wstr', $sProxyName, 'wstr', $sProxyBypass, 'dword', $iFlags)
 	If @error Or $ai_InternetOpen[0] = 0 Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
 	Return $ai_InternetOpen[0]
@@ -568,21 +567,21 @@ EndFunc   ;==>_FTP_Open
 ; Author ........: limette, Prog@ndy
 ; Modified.......: jchd
 ; ===============================================================================================================================
-Func _FTP_ProgressDownload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctionCall = 0)
+Func _FTP_ProgressDownload($hFTPSession, $sLocalFile, $sRemoteFile, $hFunctionToCall = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 
-	Local $hFile = FileOpen($s_LocalFile, $FO_OVERWRITE + $FO_BINARY)
+	Local $hFile = FileOpen($sLocalFile, $FO_OVERWRITE + $FO_BINARY)
 	If $hFile < 0 Then Return SetError(-1, 0, 0)
 
-	Local $ai_FtpOpenfile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $l_FTPSession, 'wstr', $s_RemoteFile, 'dword', $GENERIC_READ, 'dword', $FTP_TRANSFER_TYPE_BINARY, 'dword_ptr', 0)
+	Local $ai_FtpOpenfile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $hFTPSession, 'wstr', $sRemoteFile, 'dword', $GENERIC_READ, 'dword', $FTP_TRANSFER_TYPE_BINARY, 'dword_ptr', 0)
 	If @error Or $ai_FtpOpenfile[0] = 0 Then Return SetError(-3, _WinAPI_GetLastError(), 0)
 
 	Local $ai_FTPGetFileSize = DllCall($__g_hWinInet_FTP, 'dword', 'FtpGetFileSize', 'handle', $ai_FtpOpenfile[0], 'dword*', 0)
 	If @error Then Return SetError(-2, _WinAPI_GetLastError(), 0)
 
-	If Not IsFunc($hFunctionCall) Then ProgressOn("FTP Download", "Downloading " & $s_LocalFile)
+	If Not IsFunc($hFunctionToCall) Then ProgressOn("FTP Download", "Downloading " & $sLocalFile)
 
-	Local $iLen = _WinAPI_MakeQWord($ai_FTPGetFileSize[0], $ai_FTPGetFileSize[2]) ;FileGetSize($s_RemoteFile)
+	Local $iLen = _WinAPI_MakeQWord($ai_FTPGetFileSize[0], $ai_FTPGetFileSize[2]) ;FileGetSize($sRemoteFile)
 	Local Const $iChunkSize = 256 * 1024
 	Local $iLast = Mod($iLen, $iChunkSize)
 
@@ -603,7 +602,7 @@ Func _FTP_ProgressDownload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctio
 			$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 			; No need to test @error.
 			FileClose($hFile)
-			If Not IsFunc($hFunctionCall) Then ProgressOff()
+			If Not IsFunc($hFunctionToCall) Then ProgressOff()
 			Return SetError(-4, $iLasterror, 0)
 		EndIf
 		$iRet = FileWrite($hFile, BinaryMid(DllStructGetData($tBuffer, 1), 1, $ai_FTPread[4]))
@@ -612,23 +611,23 @@ Func _FTP_ProgressDownload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctio
 			$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 			; No need to test @error.
 			FileClose($hFile)
-			FileDelete($s_LocalFile)
-			If Not IsFunc($hFunctionCall) Then ProgressOff()
+			FileDelete($sLocalFile)
+			If Not IsFunc($hFunctionToCall) Then ProgressOff()
 			Return SetError(-7, $iLasterror, 0)
 		EndIf
 		$iDone += $ai_FTPread[4]
 
-		If Not IsFunc($hFunctionCall) Then
+		If Not IsFunc($hFunctionToCall) Then
 			ProgressSet(($iDone / $iLen) * 100)
 		Else
-			$iRet = $hFunctionCall(($iDone / $iLen) * 100)
+			$iRet = $hFunctionToCall(($iDone / $iLen) * 100)
 			If $iRet <= 0 Then
 				$iLasterror = @error
 				$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 				; No need to test @error.
 				FileClose($hFile)
-				FileDelete($s_LocalFile)
-				If Not IsFunc($hFunctionCall) Then ProgressOff()
+				FileDelete($sLocalFile)
+				If Not IsFunc($hFunctionToCall) Then ProgressOff()
 				Return SetError(-6, $iLasterror, $iRet)
 			EndIf
 		EndIf
@@ -637,7 +636,7 @@ Func _FTP_ProgressDownload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctio
 
 	FileClose($hFile)
 
-	If Not IsFunc($hFunctionCall) Then ProgressOff()
+	If Not IsFunc($hFunctionToCall) Then ProgressOff()
 
 	$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 	If @error Or $aDone[0] = 0 Then
@@ -651,18 +650,18 @@ EndFunc   ;==>_FTP_ProgressDownload
 ; Author ........: limette, Prog@ndy
 ; Modified.......: jchd
 ; ===============================================================================================================================
-Func _FTP_ProgressUpload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctionCall = 0)
+Func _FTP_ProgressUpload($hFTPSession, $sLocalFile, $sRemoteFile, $hFunctionToCall = 0)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 
-	Local $hFile = FileOpen($s_LocalFile, $FO_BINARY)
+	Local $hFile = FileOpen($sLocalFile, $FO_BINARY)
 	If @error Then Return SetError(-1, _WinAPI_GetLastError(), 0)
 
-	Local $ai_FtpOpenfile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $l_FTPSession, 'wstr', $s_RemoteFile, 'dword', $GENERIC_WRITE, 'dword', $FTP_TRANSFER_TYPE_BINARY, 'dword_ptr', 0)
+	Local $ai_FtpOpenfile = DllCall($__g_hWinInet_FTP, 'handle', 'FtpOpenFileW', 'handle', $hFTPSession, 'wstr', $sRemoteFile, 'dword', $GENERIC_WRITE, 'dword', $FTP_TRANSFER_TYPE_BINARY, 'dword_ptr', 0)
 	If @error Or $ai_FtpOpenfile[0] = 0 Then Return SetError(-3, _WinAPI_GetLastError(), 0)
 
-	If Not IsFunc($hFunctionCall) Then ProgressOn("FTP Upload", "Uploading " & $s_LocalFile)
+	If Not IsFunc($hFunctionToCall) Then ProgressOn("FTP Upload", "Uploading " & $sLocalFile)
 
-	Local $iLen = FileGetSize($s_LocalFile)
+	Local $iLen = FileGetSize($sLocalFile)
 	Local Const $iChunkSize = 256 * 1024
 	Local $iLast = Mod($iLen, $iChunkSize)
 
@@ -685,23 +684,23 @@ Func _FTP_ProgressUpload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctionC
 			; No need to test @error.
 			FileClose($hFile)
 
-			If Not IsFunc($hFunctionCall) Then ProgressOff()
+			If Not IsFunc($hFunctionToCall) Then ProgressOff()
 			Return SetError(-4, $iLasterror, 0)
 		EndIf
 		$iDone += $x
 
-		If Not IsFunc($hFunctionCall) Then
+		If Not IsFunc($hFunctionToCall) Then
 			ProgressSet(($iDone / $iLen) * 100)
 		Else
-			$iRet = $hFunctionCall(($iDone / $iLen) * 100)
+			$iRet = $hFunctionToCall(($iDone / $iLen) * 100)
 			If $iRet <= 0 Then
 				$iLasterror = @error
 				$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 				; No need to test @error.
-				DllCall($__g_hWinInet_FTP, 'bool', 'FtpDeleteFileW', 'handle', $l_FTPSession, 'wstr', $s_RemoteFile)
+				DllCall($__g_hWinInet_FTP, 'bool', 'FtpDeleteFileW', 'handle', $hFTPSession, 'wstr', $sRemoteFile)
 				; No need to test @error.
 				FileClose($hFile)
-				If Not IsFunc($hFunctionCall) Then ProgressOff()
+				If Not IsFunc($hFunctionToCall) Then ProgressOff()
 				Return SetError(-6, $iLasterror, $iRet)
 			EndIf
 		EndIf
@@ -710,7 +709,7 @@ Func _FTP_ProgressUpload($l_FTPSession, $s_LocalFile, $s_RemoteFile, $hFunctionC
 
 	FileClose($hFile)
 
-	If Not IsFunc($hFunctionCall) Then ProgressOff()
+	If Not IsFunc($hFunctionToCall) Then ProgressOff()
 
 	$aDone = DllCall($__g_hWinInet_FTP, 'bool', 'InternetCloseHandle', 'handle', $ai_FtpOpenfile[0])
 	; No need to test @error.
@@ -722,8 +721,8 @@ EndFunc   ;==>_FTP_ProgressUpload
 ; FUNCTION# ====================================================================================================================
 ; Name...........: _FTP_SetStatusCallback
 ; Description ...: Registers callback function that WinINet functions can call as progress is made during an operation.
-; Syntax.........: _InternetSetStatusCallback ($l_InternetSession, $sFunctionName )
-; Parameters ....: $l_InternetSession   - as returned by _FTP_Open().
+; Syntax.........: _InternetSetStatusCallback ($hInternetSession, $sFunctionName )
+; Parameters ....: $hInternetSession   - as returned by _FTP_Open().
 ;                  $sFunctionName       - The name of the User Defined Function to call
 ; Return values .: Success      - Pointer to callback function
 ;                  Failure      - 0 and Set @error
@@ -734,13 +733,13 @@ EndFunc   ;==>_FTP_ProgressUpload
 ; Link ..........: @@MsdnLink@@ InternetSetStatusCallback
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _FTP_SetStatusCallback($l_InternetSession, $sFunctionName)
+Func _FTP_SetStatusCallback($hInternetSession, $sFunctionName)
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 
 	Local $hCallBack_Register = DllCallbackRegister($sFunctionName, "none", "ptr;ptr;dword;ptr;dword")
 	If Not $hCallBack_Register Then Return SetError(-1, 0, 0)
 
-	Local $ah_CallBackFunction = DllCall('wininet.dll', "ptr", "InternetSetStatusCallback", "ptr", $l_InternetSession, "ulong_ptr", DllCallbackGetPtr($hCallBack_Register))
+	Local $ah_CallBackFunction = DllCall('wininet.dll', "ptr", "InternetSetStatusCallback", "ptr", $hInternetSession, "ulong_ptr", DllCallbackGetPtr($hCallBack_Register))
 	If @error Then Return SetError(-3, 0, 0)
 	If $ah_CallBackFunction[0] = Ptr(-1) Then Return SetError(-4, 0, 0) ; INTERNET_INVALID_STATUS_CALLBACK
 
@@ -752,7 +751,7 @@ EndFunc   ;==>_FTP_SetStatusCallback
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name...........: __FTP_ListToArray
 ; Description ...:
-; Syntax.........: __FTP_ListToArray ( $l_FTPSession [, $iReturn_Type = 0 [, $l_Flags = 0 [, $bFmt = 1 [, $iArrayCount = 6 [, $iContext = 0 ]]]]] )
+; Syntax.........: __FTP_ListToArray ( $hFTPSession [, $iReturnType = 0 [, $iFlags = 0 [, $iFmt = 1 [, $iArrayCount = 6 [, $iContext = 0 ]]]]] )
 ; Parameters ....:
 ; Return values .: an 2D array with the requested info defined by $iArrayCount
 ;                  [0] Filename
@@ -768,7 +767,7 @@ EndFunc   ;==>_FTP_SetStatusCallback
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCount, $iContext)
+Func __FTP_ListToArray($hFTPSession, $iReturnType, $iFlags, $iFmt, $iArrayCount, $iContext)
 	If $iArrayCount = 1 Then
 		Local $asFileArray[1], $aDirectoryArray[1]
 		$asFileArray[0] = 0
@@ -777,12 +776,12 @@ Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCou
 		$asFileArray[0][0] = 0
 	EndIf
 
-	If $iReturn_Type < 0 Or $iReturn_Type > 2 Then Return SetError(3, 0, $asFileArray)
+	If $iReturnType < 0 Or $iReturnType > 2 Then Return SetError(3, 0, $asFileArray)
 
 	; Global Const $tagWIN32_FIND_DATA = "DWORD dwFileAttributes; dword ftCreationTime[2]; dword ftLastAccessTime[2]; dword ftLastWriteTime[2]; DWORD nFileSizeHigh; DWORD nFileSizeLow; dword dwReserved0; dword dwReserved1; WCHAR cFileName[260]; WCHAR cAlternateFileName[14];"
 	Local $tWIN32_FIND_DATA = DllStructCreate($tagWIN32_FIND_DATA)
 	Local $iLasterror
-	Local $aCallFindFirst = DllCall($__g_hWinInet_FTP, 'handle', 'FtpFindFirstFileW', 'handle', $l_FTPSession, 'wstr', "", 'struct*', $tWIN32_FIND_DATA, 'dword', $l_Flags, 'dword_ptr', $iContext)
+	Local $aCallFindFirst = DllCall($__g_hWinInet_FTP, 'handle', 'FtpFindFirstFileW', 'handle', $hFTPSession, 'wstr', "", 'struct*', $tWIN32_FIND_DATA, 'dword', $iFlags, 'dword_ptr', $iContext)
 	If @error Or Not $aCallFindFirst[0] Then
 		$iLasterror = _WinAPI_GetLastError()
 		If $iLasterror = 12003 Then ; ERROR_INTERNET_EXTENDED_ERROR
@@ -797,7 +796,7 @@ Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCou
 	Local $tFileTime, $bIsDir, $aCallFindNext
 	Do
 		$bIsDir = BitAND(DllStructGetData($tWIN32_FIND_DATA, "dwFileAttributes"), $FILE_ATTRIBUTE_DIRECTORY) = $FILE_ATTRIBUTE_DIRECTORY
-		If $bIsDir And ($iReturn_Type <> 2) Then
+		If $bIsDir And ($iReturnType <> 2) Then
 			$iDirectoryIndex += 1
 			If $iArrayCount = 1 Then
 				If UBound($aDirectoryArray) < $iDirectoryIndex + 1 Then ReDim $aDirectoryArray[$iDirectoryIndex * 2]
@@ -811,14 +810,14 @@ Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCou
 					$aDirectoryArray[$iDirectoryIndex][2] = DllStructGetData($tWIN32_FIND_DATA, "dwFileAttributes")
 
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftLastWriteTime"))
-					$aDirectoryArray[$iDirectoryIndex][3] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$aDirectoryArray[$iDirectoryIndex][3] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftCreationTime"))
-					$aDirectoryArray[$iDirectoryIndex][4] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$aDirectoryArray[$iDirectoryIndex][4] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftLastAccessTime"))
-					$aDirectoryArray[$iDirectoryIndex][5] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$aDirectoryArray[$iDirectoryIndex][5] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 				EndIf
 			EndIf
-		ElseIf Not $bIsDir And $iReturn_Type <> 1 Then
+		ElseIf Not $bIsDir And $iReturnType <> 1 Then
 			$sFileIndex += 1
 			If $iArrayCount = 1 Then
 				If UBound($asFileArray) < $sFileIndex + 1 Then ReDim $asFileArray[$sFileIndex * 2]
@@ -832,11 +831,11 @@ Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCou
 					$asFileArray[$sFileIndex][2] = DllStructGetData($tWIN32_FIND_DATA, "dwFileAttributes")
 
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftLastWriteTime"))
-					$asFileArray[$sFileIndex][3] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$asFileArray[$sFileIndex][3] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftCreationTime"))
-					$asFileArray[$sFileIndex][4] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$asFileArray[$sFileIndex][4] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 					$tFileTime = DllStructCreate($tagFILETIME, DllStructGetPtr($tWIN32_FIND_DATA, "ftLastAccessTime"))
-					$asFileArray[$sFileIndex][5] = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+					$asFileArray[$sFileIndex][5] = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 				EndIf
 			EndIf
 		EndIf
@@ -860,7 +859,7 @@ Func __FTP_ListToArray($l_FTPSession, $iReturn_Type, $l_Flags, $bFmt, $iArrayCou
 		$asFileArray[0][0] = $sFileIndex
 	EndIf
 
-	Switch $iReturn_Type
+	Switch $iReturnType
 		Case 0
 			If $iArrayCount = 1 Then
 				ReDim $aDirectoryArray[$aDirectoryArray[0] + $asFileArray[0] + 1]

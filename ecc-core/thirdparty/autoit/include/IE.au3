@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Internet Explorer Automation UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: A collection of functions for creating, attaching to, reading from and manipulating Internet Explorer.
 ; Author(s) .....: DaleHohm, big_daddy, jpm
@@ -19,13 +19,18 @@
 	Filename:  IE.au3
 	Description: A collection of functions for creating, attaching to, reading from and manipulating Internet Explorer
 	Author:   DaleHohm
-	Modified: jpm
+	Modified: jpm, Jon
 	Version:  T3.0-1
 	Last Update: 13/06/02
 	Requirements: AutoIt3 3.3.9 or higher
 
 	Update History:
 	===================================================
+	T3.0-2 14/8/19
+
+	Enhancements
+	- Updated  __IEErrorHandlerRegister to work with or without COM errors being fatal
+
 	T3.0-1 13/6/2
 
 	Enhancements
@@ -69,25 +74,13 @@
 Global $__g_iIELoadWaitTimeout = 300000 ; 5 Minutes
 Global $__g_bIEAU3Debug = False
 Global $__g_bIEErrorNotify = True
-;~ Global $o__IEErrorHandler, $s__IEUserErrorHandler
-;~ Global _; Com Error Handler Status Strings
-;~ 		$IEComErrorNumber, _
-;~ 		$IEComErrorNumberHex, _
-;~ 		$IEComErrorDescription, _
-;~ 		$IEComErrorScriptline, _
-;~ 		$IEComErrorWinDescription, _
-;~ 		$IEComErrorSource, _
-;~ 		$IEComErrorHelpFile, _
-;~ 		$IEComErrorHelpContext, _
-;~ 		$IEComErrorLastDllError, _
-;~ 		$IEComErrorComObj, _
-;~ 		$IEComErrorOutput
+Global $__g_oIEErrorHandler, $__g_sIEUserErrorHandler
 #EndRegion Global Variables
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
 #Region Global Constants
-Global Const $__gaIEAU3VersionInfo[6] = ["T", 3, 0, 1, "20130601", "T3.0-1"]
+Global Const $__gaIEAU3VersionInfo[6] = ["T", 3, 0, 2, "20140819", "T3.0-2"]
 Global Const $LSFW_LOCK = 1, $LSFW_UNLOCK = 2
 ;
 ; Enums
@@ -114,6 +107,11 @@ Global Enum _; Error Status Types
 ;~ 		$_IENotifyMethod_ToolTip, _
 ;~ 		$_IENotifyMethod_MsgBox
 #EndRegion Global Constants
+; ===============================================================================================================================
+
+; #NO_DOC_FUNCTION# =============================================================================================================
+; _IEErrorHandlerRegister
+; _IEErrorHandlerDeRegister
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -185,11 +183,14 @@ Global Enum _; Error Status Types
 ; __IEConsoleWriteError
 ; __IEComErrorUnrecoverable
 ;
+; __IEInternalErrorHandler
+; __IEInternalErrorHandlerRegister
 ; __IENavigate
-; __IEStringToBstr
-; __IEBstrToString
 ; __IECreateNewIE
 ; __IETempFile
+;
+; __IEStringToBstr
+; __IEBstrToString
 ; ===============================================================================================================================
 
 #Region Core functions
@@ -284,7 +285,7 @@ EndFunc   ;==>_IENavigate
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEAttach($sString, $sMode = "Title", $iInstance = 1)
+Func _IEAttach($sString, $sMode = "title", $iInstance = 1)
 	$sMode = StringLower($sMode)
 
 	$iInstance = Int($iInstance)
@@ -326,6 +327,7 @@ Func _IEAttach($sString, $sMode = "Title", $iInstance = 1)
 	Local $oShellWindows = $oShell.Windows(); collection of all ShellWindows (IE and File Explorer)
 	Local $iTmp = 1
 	Local $iNotifyStatus, $bIsBrowser, $sTmp
+	Local $bStatus
 	For $oWindow In $oShellWindows
 		;------------------------------------------------------------------------------------------
 		; Check to verify that the window object is a valid browser, if not, skip it
@@ -334,7 +336,11 @@ Func _IEAttach($sString, $sMode = "Title", $iInstance = 1)
 		;     check object property validity, set a flag and reset error handler and notification
 		;
 		$bIsBrowser = True
-
+		; Trap COM errors and turn off error notification
+		$bStatus = __IEInternalErrorHandlerRegister()
+		If Not $bStatus Then __IEConsoleWriteError("Warning", "_IEAttach", _
+				"Cannot register internal error handler, cannot trap COM errors", _
+				"Use _IEErrorHandlerRegister() to register a user error handler")
 		; Turn off error notification for internal processing
 		$iNotifyStatus = _IEErrorNotify() ; save current error notify status
 		_IEErrorNotify(False)
@@ -351,6 +357,7 @@ Func _IEAttach($sString, $sMode = "Title", $iInstance = 1)
 
 		; restore error notify
 		_IEErrorNotify($iNotifyStatus) ; restore notification status
+		__IEInternalErrorHandlerDeRegister()
 		;------------------------------------------------------------------------------------------
 
 		If $bIsBrowser Then
@@ -445,7 +452,11 @@ Func _IELoadWait(ByRef $oObject, $iDelay = 0, $iTimeout = -1)
 
 	Local $oTemp, $bAbort = False, $iErrorStatusCode = $_IESTATUS_Success
 
-	; Turn off error notification for internal processing
+	; Setup internal error handler to Trap COM errors, turn off error notification
+	Local $bStatus = __IEInternalErrorHandlerRegister()
+	If Not $bStatus Then __IEConsoleWriteError("Warning", "_IELoadWait", _
+			"Cannot register internal error handler, cannot trap COM errors", _
+			"Use _IEErrorHandlerRegister() to register a user error handler")
 	Local $iNotifyStatus = _IEErrorNotify() ; save current error notify status
 	_IEErrorNotify(False)
 
@@ -456,7 +467,7 @@ Func _IELoadWait(ByRef $oObject, $iDelay = 0, $iTimeout = -1)
 	If $iTimeout = -1 Then $iTimeout = $__g_iIELoadWaitTimeout
 
 	Select
-		Case __IEIsObjType($oObject, "browser"); Internet Explorer
+		Case __IEIsObjType($oObject, "browser", False); Internet Explorer
 			While Not (String($oObject.readyState) = "complete" Or $oObject.readyState = 4 Or $bAbort)
 				; Trap unrecoverable COM errors
 				If @error Then
@@ -485,7 +496,7 @@ Func _IELoadWait(ByRef $oObject, $iDelay = 0, $iTimeout = -1)
 				EndIf
 				Sleep(100)
 			WEnd
-		Case __IEIsObjType($oObject, "window") ; Window, Frame, iFrame
+		Case __IEIsObjType($oObject, "window", False) ; Window, Frame, iFrame
 			While Not (String($oObject.document.readyState) = "complete" Or $oObject.document.readyState = 4 Or $bAbort)
 				; Trap unrecoverable COM errors
 				If @error Then
@@ -514,7 +525,7 @@ Func _IELoadWait(ByRef $oObject, $iDelay = 0, $iTimeout = -1)
 				EndIf
 				Sleep(100)
 			WEnd
-		Case __IEIsObjType($oObject, "document") ; Document
+		Case __IEIsObjType($oObject, "document", False) ; Document
 			$oTemp = $oObject.parentWindow
 			While Not (String($oTemp.document.readyState) = "complete" Or $oTemp.document.readyState = 4 Or $bAbort)
 				; Trap unrecoverable COM errors
@@ -578,6 +589,7 @@ Func _IELoadWait(ByRef $oObject, $iDelay = 0, $iTimeout = -1)
 
 	; restore error notify
 	_IEErrorNotify($iNotifyStatus) ; restore notification status
+	__IEInternalErrorHandlerDeRegister()
 
 	Switch $iErrorStatusCode
 		Case $_IESTATUS_Success
@@ -1029,7 +1041,7 @@ EndFunc   ;==>_IEFormElementGetValue
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEFormElementSetValue(ByRef $oObject, $sNewvalue, $iFireEvent = 1)
+Func _IEFormElementSetValue(ByRef $oObject, $sNewValue, $iFireEvent = 1)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEFormElementSetValue", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -1041,11 +1053,11 @@ Func _IEFormElementSetValue(ByRef $oObject, $sNewvalue, $iFireEvent = 1)
 	EndIf
 	;
 	If String($oObject.type) = "file" Then
-		__IEConsoleWriteError("Error", "_IEFormElementSetValue", "$_IESTATUS_InvalidObjectType", "Browser securuty prevents SetValue of TYPE=FILE")
+		__IEConsoleWriteError("Error", "_IEFormElementSetValue", "$_IESTATUS_InvalidObjectType", "Browser security prevents SetValue of TYPE=FILE")
 		Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 	EndIf
 	;
-	$oObject.value = $sNewvalue
+	$oObject.value = $sNewValue
 	If @error Then ; Trap COM error, report and return
 		__IEConsoleWriteError("Error", "_IEFormElementSetValue", "$_IESTATUS_COMError", @error)
 		Return SetError($_IESTATUS_ComError, @error, 0)
@@ -1590,7 +1602,7 @@ EndFunc   ;==>_IEBodyReadText
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEBodyWriteHTML(ByRef $oObject, $sHtml)
+Func _IEBodyWriteHTML(ByRef $oObject, $sHTML)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEBodyWriteHTML", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -1600,7 +1612,7 @@ Func _IEBodyWriteHTML(ByRef $oObject, $sHtml)
 		Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 	EndIf
 	;
-	$oObject.document.body.innerHTML = $sHtml
+	$oObject.document.body.innerHTML = $sHTML
 	If @error Then ; Trap COM error, report and return
 		__IEConsoleWriteError("Error", "_IEBodyWriteHTML", "$_IESTATUS_COMError", @error)
 		Return SetError($_IESTATUS_ComError, @error, 0)
@@ -1629,7 +1641,7 @@ EndFunc   ;==>_IEDocReadHTML
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEDocWriteHTML(ByRef $oObject, $sHtml)
+Func _IEDocWriteHTML(ByRef $oObject, $sHTML)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEDocWriteHTML", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -1639,7 +1651,7 @@ Func _IEDocWriteHTML(ByRef $oObject, $sHtml)
 		Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 	EndIf
 	;
-	$oObject.document.Write($sHtml)
+	$oObject.document.Write($sHTML)
 	$oObject.document.close()
 	Local $oTemp = $oObject.document
 	If @error Then ; Trap COM error, report and return
@@ -1726,7 +1738,7 @@ EndFunc   ;==>_IEDocInsertHTML
 ; Author ........: Dale Hohm
 ; Modified ......: jpm
 ; ===============================================================================================================================
-Func _IEHeadInsertEventScript(ByRef $oObject, $sHtmlFor, $sEvent, $sScript)
+Func _IEHeadInsertEventScript(ByRef $oObject, $sHTMLFor, $sEvent, $sScript)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEHeadInsertEventScript", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -1742,7 +1754,7 @@ Func _IEHeadInsertEventScript(ByRef $oObject, $sHtmlFor, $sEvent, $sScript)
 		.defer = True
 		.language = "jscript"
 		.type = "text/javascript"
-		.htmlFor = $sHtmlFor
+		.htmlFor = $sHTMLFor
 		.event = $sEvent
 		.text = $sScript
 	EndWith
@@ -1873,7 +1885,7 @@ EndFunc   ;==>_IEGetObjByName
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEGetObjById(ByRef $oObject, $sId)
+Func _IEGetObjById(ByRef $oObject, $sID)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEGetObjById", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -1884,10 +1896,10 @@ Func _IEGetObjById(ByRef $oObject, $sId)
 		Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 	EndIf
 	;
-	If IsObj($oObject.document.getElementById($sId)) Then
-		Return SetError($_IESTATUS_Success, 0, $oObject.document.getElementById($sId))
+	If IsObj($oObject.document.getElementById($sID)) Then
+		Return SetError($_IESTATUS_Success, 0, $oObject.document.getElementById($sID))
 	Else
-		__IEConsoleWriteError("Warning", "_IEGetObjById", "$_IESTATUS_NoMatch", $sId)
+		__IEConsoleWriteError("Warning", "_IEGetObjById", "$_IESTATUS_NoMatch", $sID)
 		Return SetError($_IESTATUS_NoMatch, 2, 0)
 	EndIf
 EndFunc   ;==>_IEGetObjById
@@ -2324,7 +2336,7 @@ EndFunc   ;==>_IEPropertyGet
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
 ; ===============================================================================================================================
-Func _IEPropertySet(ByRef $oObject, $sProperty, $sNewvalue)
+Func _IEPropertySet(ByRef $oObject, $sProperty, $vValue)
 	If Not IsObj($oObject) Then
 		__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidDataType")
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
@@ -2339,67 +2351,67 @@ Func _IEPropertySet(ByRef $oObject, $sProperty, $sNewvalue)
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.AddressBar = $sNewvalue
+			$oObject.AddressBar = $vValue
 		Case $sProperty = "height"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.Height = $sNewvalue
+			$oObject.Height = $vValue
 		Case $sProperty = "left"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.Left = $sNewvalue
+			$oObject.Left = $vValue
 		Case $sProperty = "menubar"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.MenuBar = $sNewvalue
+			$oObject.MenuBar = $vValue
 		Case $sProperty = "offline"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.OffLine = $sNewvalue
+			$oObject.OffLine = $vValue
 		Case $sProperty = "resizable"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.Resizable = $sNewvalue
+			$oObject.Resizable = $vValue
 		Case $sProperty = "statusbar"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.StatusBar = $sNewvalue
+			$oObject.StatusBar = $vValue
 		Case $sProperty = "statustext"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.StatusText = $sNewvalue
+			$oObject.StatusText = $vValue
 		Case $sProperty = "top"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.Top = $sNewvalue
+			$oObject.Top = $vValue
 		Case $sProperty = "width"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			$oObject.Width = $sNewvalue
+			$oObject.Width = $vValue
 		Case $sProperty = "theatermode"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			If $sNewvalue Then
+			If $vValue Then
 				$oObject.TheaterMode = True
 			Else
 				$oObject.TheaterMode = False
@@ -2409,7 +2421,7 @@ Func _IEPropertySet(ByRef $oObject, $sProperty, $sNewvalue)
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			If $sNewvalue Then
+			If $vValue Then
 				$oObject.ToolBar = True
 			Else
 				$oObject.ToolBar = False
@@ -2420,7 +2432,7 @@ Func _IEPropertySet(ByRef $oObject, $sProperty, $sNewvalue)
 			Else
 				$oTemp = $oObject
 			EndIf
-			If $sNewvalue Then
+			If $vValue Then
 				$oTemp.contentEditable = "true"
 			Else
 				$oTemp.contentEditable = "false"
@@ -2431,36 +2443,36 @@ Func _IEPropertySet(ByRef $oObject, $sProperty, $sNewvalue)
 			Else
 				$oTemp = $oObject
 			EndIf
-			$oTemp.innerText = $sNewvalue
+			$oTemp.innerText = $vValue
 		Case $sProperty = "outertext"
 			If __IEIsObjType($oObject, "documentcontainer") Or __IEIsObjType($oObject, "document") Then
 				$oTemp = $oObject.document.body
 			Else
 				$oTemp = $oObject
 			EndIf
-			$oTemp.outerText = $sNewvalue
+			$oTemp.outerText = $vValue
 		Case $sProperty = "innerhtml"
 			If __IEIsObjType($oObject, "documentcontainer") Or __IEIsObjType($oObject, "document") Then
 				$oTemp = $oObject.document.body
 			Else
 				$oTemp = $oObject
 			EndIf
-			$oTemp.innerHTML = $sNewvalue
+			$oTemp.innerHTML = $vValue
 		Case $sProperty = "outerhtml"
 			If __IEIsObjType($oObject, "documentcontainer") Or __IEIsObjType($oObject, "document") Then
 				$oTemp = $oObject.document.body
 			Else
 				$oTemp = $oObject
 			EndIf
-			$oTemp.outerHTML = $sNewvalue
+			$oTemp.outerHTML = $vValue
 		Case $sProperty = "title"
-			$oObject.document.title = $sNewvalue
+			$oObject.document.title = $vValue
 		Case $sProperty = "silent"
 			If Not __IEIsObjType($oObject, "browser") Then
 				__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_InvalidObjectType")
 				Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
 			EndIf
-			If $sNewvalue Then
+			If $vValue Then
 				$oObject.silent = True
 			Else
 				$oObject.silent = False
@@ -2492,6 +2504,86 @@ Func _IEErrorNotify($vNotify = Default)
 	EndIf
 	Return 1
 EndFunc   ;==>_IEErrorNotify
+
+; #NO_DOC_FUNCTION# =============================================================================================================
+; Name...........: _IEErrorHandlerRegister
+; Description ...: Register and enable a user COM error handler
+; Parameters ....: $sFunctionName - String variable with the name of a user-defined COM error handler
+;									  defaults to the internal COM error handler in this UDF
+; Return values .: On Success 	- Returns 1
+;                  On Failure	- Returns 0 and sets @error
+;					@error		- 0 ($_IEStatus_Success) = No Error
+;								- 1 ($_IEStatus_GeneralError) = General Error
+;					@extended	- Contains invalid parameter number
+; Author ........: Dale Hohm
+; ===============================================================================================================================
+Func _IEErrorHandlerRegister($sFunctionName = "__IEInternalErrorHandler")
+	$__g_oIEErrorHandler = ObjEvent("AutoIt.Error", $sFunctionName)
+	If IsObj($__g_oIEErrorHandler) Then
+		$__g_sIEUserErrorHandler = $sFunctionName
+		Return SetError($_IESTATUS_Success, 0, 1)
+	Else
+		$__g_oIEErrorHandler = ""
+		__IEConsoleWriteError("Error", "_IEErrorHandlerRegister", "$_IEStatus_GeneralError", _
+				"Error Handler Not Registered - Check existance of error function")
+		Return SetError($_IEStatus_GeneralError, 1, 0)
+	EndIf
+EndFunc   ;==>_IEErrorHandlerRegister
+
+; #NO_DOC_FUNCTION# =============================================================================================================
+; Name...........: _IEErrorHandlerDeRegister
+; Description ...: Disable a registered user COM error handler
+; Parameters ....: None
+; Return values .: On Success 	- Returns 1
+;                  On Failure	- None
+; Author ........: Dale Hohm
+; ===============================================================================================================================
+Func _IEErrorHandlerDeRegister()
+	$__g_sIEUserErrorHandler = ""
+	$__g_oIEErrorHandler = ""
+	Return SetError($_IESTATUS_Success, 0, 1)
+EndFunc   ;==>_IEErrorHandlerDeRegister
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name...........: __IEInternalErrorHandlerRegister
+; Description ...: to be called on error
+; Author ........: Dale Hohm
+; Modified ......:
+; ===============================================================================================================================
+Func __IEInternalErrorHandlerRegister()
+	Local $sCurrentErrorHandler = ObjEvent("AutoIt.Error")
+	If $sCurrentErrorHandler <> "" And Not IsObj($__g_oIEErrorHandler) Then
+		; We've got trouble... User COM Error handler assigned without using _IEUserErrorHandlerRegister
+		Return SetError($_IEStatus_GeneralError, 0, False)
+	EndIf
+	$__g_oIEErrorHandler = ObjEvent("AutoIt.Error", "__IEInternalErrorHandler")
+	If IsObj($__g_oIEErrorHandler) Then
+		Return SetError($_IESTATUS_Success, 0, True)
+	Else
+		$__g_oIEErrorHandler = ""
+		Return SetError($_IEStatus_GeneralError, 0, False)
+	EndIf
+EndFunc   ;==>__IEInternalErrorHandlerRegister
+
+Func __IEInternalErrorHandlerDeRegister()
+	$__g_oIEErrorHandler = ""
+	If $__g_sIEUserErrorHandler <> "" Then
+		$__g_oIEErrorHandler = ObjEvent("AutoIt.Error", $__g_sIEUserErrorHandler)
+	EndIf
+	Return SetError($_IESTATUS_Success, 0, 1)
+EndFunc   ;==>__IEInternalErrorHandlerDeRegister
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name...........: __IEInternalErrorHandler
+; Description ...: to be called on error
+; Author ........: Dale Hohm
+; Modified ......:
+; ===============================================================================================================================
+Func __IEInternalErrorHandler($oCOMError)
+	If $__g_bIEErrorNotify Or $__g_bIEAU3Debug Then ConsoleWrite("--> " & __COMErrorFormating($oCOMError, "----> $IEComError") & @CRLF)
+	SetError($_IEStatus_ComError)
+	Return
+EndFunc   ;==>__IEInternalErrorHandler
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
@@ -2525,66 +2617,66 @@ EndFunc   ;==>_IEQuit
 ; Modified ......: jpm
 ; ===============================================================================================================================
 Func _IE_Introduction($sModule = "basic")
-	Local $sHtml = ""
+	Local $sHTML = ""
 	Switch $sModule
 		Case "basic"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Introduction ("basic")</title>' & @CR
-			$sHtml &= '<style>body {font-family: Arial}' & @CR
-			$sHtml &= 'td {padding:6px}</style>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<body>' & @CR
-			$sHtml &= '<table border=1 id="table1" style="width:600px;border-spacing:6px;">' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<h1>Welcome to IE.au3</h1>' & @CR
-			$sHtml &= 'IE.au3 is a UDF (User Defined Function) library for the ' & @CR
-			$sHtml &= '<a href="http://www.autoitscript.com">AutoIt</a> scripting language.' & @CR
-			$sHtml &= '<br>  ' & @CR
-			$sHtml &= 'IE.au3 allows you to either create or attach to an Internet Explorer browser and do ' & @CR
-			$sHtml &= 'just about anything you could do with it interactively with the mouse and ' & @CR
-			$sHtml &= 'keyboard, but do it through script.' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= 'You can navigate to pages, click links, fill and submit forms etc. You can ' & @CR
-			$sHtml &= 'also do things you cannot do interactively like change or rewrite page ' & @CR
-			$sHtml &= 'content and JavaScripts, read, parse and save page content and monitor and act ' & @CR
-			$sHtml &= 'upon browser "events".<br>' & @CR
-			$sHtml &= 'IE.au3 uses the COM interface in AutoIt to interact with the Internet Explorer ' & @CR
-			$sHtml &= 'object model and the DOM (Document Object Model) supported by the browser.' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= 'Here are some links for more information and helpful tools:<br>' & @CR
-			$sHtml &= 'Reference Material: ' & @CR
-			$sHtml &= '<ul>' & @CR
-			$sHtml &= '<li><a href="http://msdn1.microsoft.com/">MSDN (Microsoft Developer Network)</a></li>' & @CR
-			$sHtml &= '<li><a href="http://msdn2.microsoft.com/en-us/library/aa752084.aspx" target="_blank">InternetExplorer Object</a></li>' & @CR
-			$sHtml &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms531073.aspx" target="_blank">Document Object</a></li>' & @CR
-			$sHtml &= '<li><a href="http://msdn2.microsoft.com/en-us/ie/aa740473.aspx" target="_blank">Overviews and Tutorials</a></li>' & @CR
-			$sHtml &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms533029.aspx" target="_blank">DHTML Objects</a></li>' & @CR
-			$sHtml &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms533051.aspx" target="_blank">DHTML Events</a></li>' & @CR
-			$sHtml &= '</ul><br>' & @CR
-			$sHtml &= 'Helpful Tools: ' & @CR
-			$sHtml &= '<ul>' & @CR
-			$sHtml &= '<li><a href="http://www.autoitscript.com/forum/index.php?showtopic=19368" target="_blank">AutoIt IE Builder</a> (build IE scripts interactively)</li>' & @CR
-			$sHtml &= '<li><a href="http://www.debugbar.com/" target="_blank">DebugBar</a> (DOM inspector, HTTP inspector, HTML validator and more - free for personal use) Recommended</li>' & @CR
-			$sHtml &= '<li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=e59c3964-672d-4511-bb3e-2d5e1db91038&amp;displaylang=en" target="_blank">IE Developer Toolbar</a> (comprehensive DOM analysis tool)</li>' & @CR
-			$sHtml &= '<li><a href="http://slayeroffice.com/tools/modi/v2.0/modi_help.html" target="_blank">MODIV2</a> (view the DOM of a web page by mousing around)</li>' & @CR
-			$sHtml &= '<li><a href="http://validator.w3.org/" target="_blank">HTML Validator</a> (verify HTML follows format rules)</li>' & @CR
-			$sHtml &= '<li><a href="http://www.fiddlertool.com/fiddler/" target="_blank">Fiddler</a> (examine HTTP traffic)</li>' & @CR
-			$sHtml &= '</ul>' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '</table>' & @CR
-			$sHtml &= '</body>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Introduction ("basic")</title>' & @CR
+			$sHTML &= '<style>body {font-family: Arial}' & @CR
+			$sHTML &= 'td {padding:6px}</style>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<body>' & @CR
+			$sHTML &= '<table border=1 id="table1" style="width:600px;border-spacing:6px;">' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<h1>Welcome to IE.au3</h1>' & @CR
+			$sHTML &= 'IE.au3 is a UDF (User Defined Function) library for the ' & @CR
+			$sHTML &= '<a href="http://www.autoitscript.com">AutoIt</a> scripting language.' & @CR
+			$sHTML &= '<br>  ' & @CR
+			$sHTML &= 'IE.au3 allows you to either create or attach to an Internet Explorer browser and do ' & @CR
+			$sHTML &= 'just about anything you could do with it interactively with the mouse and ' & @CR
+			$sHTML &= 'keyboard, but do it through script.' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= 'You can navigate to pages, click links, fill and submit forms etc. You can ' & @CR
+			$sHTML &= 'also do things you cannot do interactively like change or rewrite page ' & @CR
+			$sHTML &= 'content and JavaScripts, read, parse and save page content and monitor and act ' & @CR
+			$sHTML &= 'upon browser "events".<br>' & @CR
+			$sHTML &= 'IE.au3 uses the COM interface in AutoIt to interact with the Internet Explorer ' & @CR
+			$sHTML &= 'object model and the DOM (Document Object Model) supported by the browser.' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= 'Here are some links for more information and helpful tools:<br>' & @CR
+			$sHTML &= 'Reference Material: ' & @CR
+			$sHTML &= '<ul>' & @CR
+			$sHTML &= '<li><a href="http://msdn1.microsoft.com/">MSDN (Microsoft Developer Network)</a></li>' & @CR
+			$sHTML &= '<li><a href="http://msdn2.microsoft.com/en-us/library/aa752084.aspx" target="_blank">InternetExplorer Object</a></li>' & @CR
+			$sHTML &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms531073.aspx" target="_blank">Document Object</a></li>' & @CR
+			$sHTML &= '<li><a href="http://msdn2.microsoft.com/en-us/ie/aa740473.aspx" target="_blank">Overviews and Tutorials</a></li>' & @CR
+			$sHTML &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms533029.aspx" target="_blank">DHTML Objects</a></li>' & @CR
+			$sHTML &= '<li><a href="http://msdn2.microsoft.com/en-us/library/ms533051.aspx" target="_blank">DHTML Events</a></li>' & @CR
+			$sHTML &= '</ul><br>' & @CR
+			$sHTML &= 'Helpful Tools: ' & @CR
+			$sHTML &= '<ul>' & @CR
+			$sHTML &= '<li><a href="http://www.autoitscript.com/forum/index.php?showtopic=19368" target="_blank">AutoIt IE Builder</a> (build IE scripts interactively)</li>' & @CR
+			$sHTML &= '<li><a href="http://www.debugbar.com/" target="_blank">DebugBar</a> (DOM inspector, HTTP inspector, HTML validator and more - free for personal use) Recommended</li>' & @CR
+			$sHTML &= '<li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=e59c3964-672d-4511-bb3e-2d5e1db91038&amp;displaylang=en" target="_blank">IE Developer Toolbar</a> (comprehensive DOM analysis tool)</li>' & @CR
+			$sHTML &= '<li><a href="http://slayeroffice.com/tools/modi/v2.0/modi_help.html" target="_blank">MODIV2</a> (view the DOM of a web page by mousing around)</li>' & @CR
+			$sHTML &= '<li><a href="http://validator.w3.org/" target="_blank">HTML Validator</a> (verify HTML follows format rules)</li>' & @CR
+			$sHTML &= '<li><a href="http://www.fiddlertool.com/fiddler/" target="_blank">Fiddler</a> (examine HTTP traffic)</li>' & @CR
+			$sHTML &= '</ul>' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '</table>' & @CR
+			$sHTML &= '</body>' & @CR
+			$sHTML &= '</html>'
 		Case Else
 			__IEConsoleWriteError("Error", "_IE_Introduction", "$_IESTATUS_InvalidValue")
 			Return SetError($_IESTATUS_InvalidValue, 1, 0)
 	EndSwitch
 	Local $oObject = _IECreate()
-	_IEDocWriteHTML($oObject, $sHtml)
+	_IEDocWriteHTML($oObject, $sHTML)
 	Return SetError($_IESTATUS_Success, 0, $oObject)
 EndFunc   ;==>_IE_Introduction
 
@@ -2593,261 +2685,261 @@ EndFunc   ;==>_IE_Introduction
 ; Modified ......: jpm
 ; ===============================================================================================================================
 Func _IE_Example($sModule = "basic")
-	Local $sHtml = "", $oObject
+	Local $sHTML = "", $oObject
 	Switch $sModule
 		Case "basic"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Example("basic")</title>' & @CR
-			$sHtml &= '<style>body {font-family: Arial}</style>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<body>' & @CR
-			$sHtml &= '<a href="http://www.autoitscript.com"><img src="http://www.autoitscript.com/images/autoit_6_240x100.jpg" id="AutoItImage" alt="AutoIt Homepage Image"></a>' & @CR
-			$sHtml &= '<p></p>' & @CR
-			$sHtml &= '<div id="line1">This is a simple HTML page with text, links and images.</div>' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= '<div id="line2"><a href="http://www.autoitscript.com">AutoIt</a> is a wonderful automation scripting language.</div>' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= '<div id="line3">It is supported by a very active and supporting <a href="http://www.autoitscript.com/forum/">user forum</a>.</div>' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= '<div id="IEAu3Data"></div>' & @CR
-			$sHtml &= '</body>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Example("basic")</title>' & @CR
+			$sHTML &= '<style>body {font-family: Arial}</style>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<body>' & @CR
+			$sHTML &= '<a href="http://www.autoitscript.com"><img src="http://www.autoitscript.com/images/autoit_6_240x100.jpg" id="AutoItImage" alt="AutoIt Homepage Image"></a>' & @CR
+			$sHTML &= '<p></p>' & @CR
+			$sHTML &= '<div id="line1">This is a simple HTML page with text, links and images.</div>' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= '<div id="line2"><a href="http://www.autoitscript.com">AutoIt</a> is a wonderful automation scripting language.</div>' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= '<div id="line3">It is supported by a very active and supporting <a href="http://www.autoitscript.com/forum/">user forum</a>.</div>' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= '<div id="IEAu3Data"></div>' & @CR
+			$sHTML &= '</body>' & @CR
+			$sHTML &= '</html>'
 			$oObject = _IECreate()
-			_IEDocWriteHTML($oObject, $sHtml)
+			_IEDocWriteHTML($oObject, $sHTML)
 		Case "table"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=utf-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Example("table")</title>' & @CR
-			$sHtml &= '<style>body {font-family: Arial}</style>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<body>' & @CR
-			$sHtml &= '$oTableOne = _IETableGetObjByName($oIE, "tableOne")<br>' & @CR
-			$sHtml &= '&lt;table border=1 id="tableOne"&gt;<br>' & @CR
-			$sHtml &= '<table border=1 id="tableOne">' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>AutoIt</td>' & @CR
-			$sHtml &= '		<td>is</td>' & @CR
-			$sHtml &= '		<td>really</td>' & @CR
-			$sHtml &= '		<td>great</td>' & @CR
-			$sHtml &= '		<td>with</td>' & @CR
-			$sHtml &= '		<td>IE.au3</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>1</td>' & @CR
-			$sHtml &= '		<td>2</td>' & @CR
-			$sHtml &= '		<td>3</td>' & @CR
-			$sHtml &= '		<td>4</td>' & @CR
-			$sHtml &= '		<td>5</td>' & @CR
-			$sHtml &= '		<td>6</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>the</td>' & @CR
-			$sHtml &= '		<td>quick</td>' & @CR
-			$sHtml &= '		<td>red</td>' & @CR
-			$sHtml &= '		<td>fox</td>' & @CR
-			$sHtml &= '		<td>jumped</td>' & @CR
-			$sHtml &= '		<td>over</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>the</td>' & @CR
-			$sHtml &= '		<td>lazy</td>' & @CR
-			$sHtml &= '		<td>brown</td>' & @CR
-			$sHtml &= '		<td>dog</td>' & @CR
-			$sHtml &= '		<td>the</td>' & @CR
-			$sHtml &= '		<td>time</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>has</td>' & @CR
-			$sHtml &= '		<td>come</td>' & @CR
-			$sHtml &= '		<td>for</td>' & @CR
-			$sHtml &= '		<td>all</td>' & @CR
-			$sHtml &= '		<td>good</td>' & @CR
-			$sHtml &= '		<td>men</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>to</td>' & @CR
-			$sHtml &= '		<td>come</td>' & @CR
-			$sHtml &= '		<td>to</td>' & @CR
-			$sHtml &= '		<td>the</td>' & @CR
-			$sHtml &= '		<td>aid</td>' & @CR
-			$sHtml &= '		<td>of</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '</table>' & @CR
-			$sHtml &= '<br>' & @CR
-			$sHtml &= '$oTableTwo = _IETableGetObjByName($oIE, "tableTwo")<br>' & @CR
-			$sHtml &= '&lt;table border="1" id="tableTwo"&gt;<br>' & @CR
-			$sHtml &= '<table border=1 id="tableTwo">' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td colspan="4">Table Top</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>One</td>' & @CR
-			$sHtml &= '		<td colspan="3">Two</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>Three</td>' & @CR
-			$sHtml &= '		<td>Four</td>' & @CR
-			$sHtml &= '		<td colspan="2">Five</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>Six</td>' & @CR
-			$sHtml &= '		<td colspan="3">Seven</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '	<tr>' & @CR
-			$sHtml &= '		<td>Eight</td>' & @CR
-			$sHtml &= '		<td>Nine</td>' & @CR
-			$sHtml &= '		<td>Ten</td>' & @CR
-			$sHtml &= '		<td>Eleven</td>' & @CR
-			$sHtml &= '	</tr>' & @CR
-			$sHtml &= '</table>' & @CR
-			$sHtml &= '</body>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=utf-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Example("table")</title>' & @CR
+			$sHTML &= '<style>body {font-family: Arial}</style>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<body>' & @CR
+			$sHTML &= '$oTableOne = _IETableGetObjByName($oIE, "tableOne")<br>' & @CR
+			$sHTML &= '&lt;table border=1 id="tableOne"&gt;<br>' & @CR
+			$sHTML &= '<table border=1 id="tableOne">' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>AutoIt</td>' & @CR
+			$sHTML &= '		<td>is</td>' & @CR
+			$sHTML &= '		<td>really</td>' & @CR
+			$sHTML &= '		<td>great</td>' & @CR
+			$sHTML &= '		<td>with</td>' & @CR
+			$sHTML &= '		<td>IE.au3</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>1</td>' & @CR
+			$sHTML &= '		<td>2</td>' & @CR
+			$sHTML &= '		<td>3</td>' & @CR
+			$sHTML &= '		<td>4</td>' & @CR
+			$sHTML &= '		<td>5</td>' & @CR
+			$sHTML &= '		<td>6</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>the</td>' & @CR
+			$sHTML &= '		<td>quick</td>' & @CR
+			$sHTML &= '		<td>red</td>' & @CR
+			$sHTML &= '		<td>fox</td>' & @CR
+			$sHTML &= '		<td>jumped</td>' & @CR
+			$sHTML &= '		<td>over</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>the</td>' & @CR
+			$sHTML &= '		<td>lazy</td>' & @CR
+			$sHTML &= '		<td>brown</td>' & @CR
+			$sHTML &= '		<td>dog</td>' & @CR
+			$sHTML &= '		<td>the</td>' & @CR
+			$sHTML &= '		<td>time</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>has</td>' & @CR
+			$sHTML &= '		<td>come</td>' & @CR
+			$sHTML &= '		<td>for</td>' & @CR
+			$sHTML &= '		<td>all</td>' & @CR
+			$sHTML &= '		<td>good</td>' & @CR
+			$sHTML &= '		<td>men</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>to</td>' & @CR
+			$sHTML &= '		<td>come</td>' & @CR
+			$sHTML &= '		<td>to</td>' & @CR
+			$sHTML &= '		<td>the</td>' & @CR
+			$sHTML &= '		<td>aid</td>' & @CR
+			$sHTML &= '		<td>of</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '</table>' & @CR
+			$sHTML &= '<br>' & @CR
+			$sHTML &= '$oTableTwo = _IETableGetObjByName($oIE, "tableTwo")<br>' & @CR
+			$sHTML &= '&lt;table border="1" id="tableTwo"&gt;<br>' & @CR
+			$sHTML &= '<table border=1 id="tableTwo">' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td colspan="4">Table Top</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>One</td>' & @CR
+			$sHTML &= '		<td colspan="3">Two</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>Three</td>' & @CR
+			$sHTML &= '		<td>Four</td>' & @CR
+			$sHTML &= '		<td colspan="2">Five</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>Six</td>' & @CR
+			$sHTML &= '		<td colspan="3">Seven</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '	<tr>' & @CR
+			$sHTML &= '		<td>Eight</td>' & @CR
+			$sHTML &= '		<td>Nine</td>' & @CR
+			$sHTML &= '		<td>Ten</td>' & @CR
+			$sHTML &= '		<td>Eleven</td>' & @CR
+			$sHTML &= '	</tr>' & @CR
+			$sHTML &= '</table>' & @CR
+			$sHTML &= '</body>' & @CR
+			$sHTML &= '</html>'
 			$oObject = _IECreate()
-			_IEDocWriteHTML($oObject, $sHtml)
+			_IEDocWriteHTML($oObject, $sHTML)
 		Case "form"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Example("form")</title>' & @CR
-			$sHtml &= '<style>body {font-family: Arial}' & @CR
-			$sHtml &= 'td {padding:6px}</style>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<body>' & @CR
-			$sHtml &= '<form name="ExampleForm" onSubmit="javascript:alert(''ExampleFormSubmitted'');" method="post">' & @CR
-			$sHtml &= '<table style="border-spacing:6px 6px;" border=1>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>ExampleForm</td>' & @CR
-			$sHtml &= '<td>&lt;form name="ExampleForm" onSubmit="javascript:alert(''ExampleFormSubmitted'');" method="post"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>Hidden Input Element<input type="hidden" name="hiddenExample" value="secret value"></td>' & @CR
-			$sHtml &= '<td>&lt;input type="hidden" name="hiddenExample" value="secret value"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="text" name="textExample" value="http://" size="20" maxlength="30">' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input type="text" name="textExample" value="http://" size="20" maxlength="30"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="password" name="passwordExample" size="10">' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input type="password" name="passwordExample" size="10"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="file" name="fileExample">' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input type="file" name="fileExample"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg">' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<textarea name="textareaExample" rows="5" cols="15">Hello!</textarea>' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;textarea name="textareaExample" rows="5" cols="15"&gt;Hello!&lt;/textarea&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="checkbox" name="checkboxG1Example" value="gameBasketball">Basketball<br>' & @CR
-			$sHtml &= '<input type="checkbox" name="checkboxG1Example" value="gameFootball">Football<br>' & @CR
-			$sHtml &= '<input type="checkbox" name="checkboxG2Example" value="gameTennis" checked>Tennis<br>' & @CR
-			$sHtml &= '<input type="checkbox" name="checkboxG2Example" value="gameBaseball">Baseball' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input type="checkbox" name="checkboxG1Example" value="gameBasketball"&gt;Basketball&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="checkbox" name="checkboxG1Example" value="gameFootball"&gt;Football&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="checkbox" name="checkboxG2Example" value="gameTennis" checked&gt;Tennis&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="checkbox" name="checkboxG2Example" value="gameBaseball"&gt;Baseball</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input type="radio" name="radioExample" value="vehicleAirplane">Airplane<br>' & @CR
-			$sHtml &= '<input type="radio" name="radioExample" value="vehicleTrain" checked>Train<br>' & @CR
-			$sHtml &= '<input type="radio" name="radioExample" value="vehicleBoat">Boat<br>' & @CR
-			$sHtml &= '<input type="radio" name="radioExample" value="vehicleCar">Car</td>' & @CR
-			$sHtml &= '<td>&lt;input type="radio" name="radioExample" value="vehicleAirplane"&gt;Airplane&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="radio" name="radioExample" value="vehicleTrain" checked&gt;Train&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="radio" name="radioExample" value="vehicleBoat"&gt;Boat&lt;br&gt;<br>' & @CR
-			$sHtml &= '&lt;input type="radio" name="radioExample" value="vehicleCar"&gt;Car&lt;br&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<select name="selectExample">' & @CR
-			$sHtml &= '<option value="homepage.html">Homepage' & @CR
-			$sHtml &= '<option value="midipage.html">Midipage' & @CR
-			$sHtml &= '<option value="freepage.html">Freepage' & @CR
-			$sHtml &= '</select>' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;select name="selectExample"&gt;<br>' & @CR
-			$sHtml &= '&lt;option value="homepage.html"&gt;Homepage<br>' & @CR
-			$sHtml &= '&lt;option value="midipage.html"&gt;Midipage<br>' & @CR
-			$sHtml &= '&lt;option value="freepage.html"&gt;Freepage<br>' & @CR
-			$sHtml &= '&lt;/select&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<select name="multipleSelectExample" size="6" multiple>' & @CR
-			$sHtml &= '<option value="Name1">Aaron' & @CR
-			$sHtml &= '<option value="Name2">Bruce' & @CR
-			$sHtml &= '<option value="Name3">Carlos' & @CR
-			$sHtml &= '<option value="Name4">Denis' & @CR
-			$sHtml &= '<option value="Name5">Ed' & @CR
-			$sHtml &= '<option value="Name6">Freddy' & @CR
-			$sHtml &= '</select>' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;select name="multipleSelectExample" size="6" multiple&gt;<br>' & @CR
-			$sHtml &= '&lt;option value="Name1"&gt;Aaron<br>' & @CR
-			$sHtml &= '&lt;option value="Name2"&gt;Bruce<br>' & @CR
-			$sHtml &= '&lt;option value="Name3"&gt;Carlos<br>' & @CR
-			$sHtml &= '&lt;option value="Name4"&gt;Denis<br>' & @CR
-			$sHtml &= '&lt;option value="Name5"&gt;Ed<br>' & @CR
-			$sHtml &= '&lt;option value="Name6"&gt;Freddy<br>' & @CR
-			$sHtml &= '&lt;/select&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td>' & @CR
-			$sHtml &= '<input name="submitExample" type="submit" value="Submit">' & @CR
-			$sHtml &= '<input name="resetExample" type="reset" value="Reset">' & @CR
-			$sHtml &= '</td>' & @CR
-			$sHtml &= '<td>&lt;input name="submitExample" type="submit" value="Submit"&gt;<br>' & @CR
-			$sHtml &= '&lt;input name="resetExample" type="reset" value="Reset"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '</table>' & @CR
-			$sHtml &= '<input type="hidden" name="hiddenExample" value="secret value">' & @CR
-			$sHtml &= '</form>' & @CR
-			$sHtml &= '</body>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Example("form")</title>' & @CR
+			$sHTML &= '<style>body {font-family: Arial}' & @CR
+			$sHTML &= 'td {padding:6px}</style>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<body>' & @CR
+			$sHTML &= '<form name="ExampleForm" onSubmit="javascript:alert(''ExampleFormSubmitted'');" method="post">' & @CR
+			$sHTML &= '<table style="border-spacing:6px 6px;" border=1>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>ExampleForm</td>' & @CR
+			$sHTML &= '<td>&lt;form name="ExampleForm" onSubmit="javascript:alert(''ExampleFormSubmitted'');" method="post"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>Hidden Input Element<input type="hidden" name="hiddenExample" value="secret value"></td>' & @CR
+			$sHTML &= '<td>&lt;input type="hidden" name="hiddenExample" value="secret value"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="text" name="textExample" value="http://" size="20" maxlength="30">' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input type="text" name="textExample" value="http://" size="20" maxlength="30"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="password" name="passwordExample" size="10">' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input type="password" name="passwordExample" size="10"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="file" name="fileExample">' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input type="file" name="fileExample"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg">' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<textarea name="textareaExample" rows="5" cols="15">Hello!</textarea>' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;textarea name="textareaExample" rows="5" cols="15"&gt;Hello!&lt;/textarea&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="checkbox" name="checkboxG1Example" value="gameBasketball">Basketball<br>' & @CR
+			$sHTML &= '<input type="checkbox" name="checkboxG1Example" value="gameFootball">Football<br>' & @CR
+			$sHTML &= '<input type="checkbox" name="checkboxG2Example" value="gameTennis" checked>Tennis<br>' & @CR
+			$sHTML &= '<input type="checkbox" name="checkboxG2Example" value="gameBaseball">Baseball' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input type="checkbox" name="checkboxG1Example" value="gameBasketball"&gt;Basketball&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="checkbox" name="checkboxG1Example" value="gameFootball"&gt;Football&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="checkbox" name="checkboxG2Example" value="gameTennis" checked&gt;Tennis&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="checkbox" name="checkboxG2Example" value="gameBaseball"&gt;Baseball</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input type="radio" name="radioExample" value="vehicleAirplane">Airplane<br>' & @CR
+			$sHTML &= '<input type="radio" name="radioExample" value="vehicleTrain" checked>Train<br>' & @CR
+			$sHTML &= '<input type="radio" name="radioExample" value="vehicleBoat">Boat<br>' & @CR
+			$sHTML &= '<input type="radio" name="radioExample" value="vehicleCar">Car</td>' & @CR
+			$sHTML &= '<td>&lt;input type="radio" name="radioExample" value="vehicleAirplane"&gt;Airplane&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="radio" name="radioExample" value="vehicleTrain" checked&gt;Train&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="radio" name="radioExample" value="vehicleBoat"&gt;Boat&lt;br&gt;<br>' & @CR
+			$sHTML &= '&lt;input type="radio" name="radioExample" value="vehicleCar"&gt;Car&lt;br&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<select name="selectExample">' & @CR
+			$sHTML &= '<option value="homepage.html">Homepage' & @CR
+			$sHTML &= '<option value="midipage.html">Midipage' & @CR
+			$sHTML &= '<option value="freepage.html">Freepage' & @CR
+			$sHTML &= '</select>' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;select name="selectExample"&gt;<br>' & @CR
+			$sHTML &= '&lt;option value="homepage.html"&gt;Homepage<br>' & @CR
+			$sHTML &= '&lt;option value="midipage.html"&gt;Midipage<br>' & @CR
+			$sHTML &= '&lt;option value="freepage.html"&gt;Freepage<br>' & @CR
+			$sHTML &= '&lt;/select&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<select name="multipleSelectExample" size="6" multiple>' & @CR
+			$sHTML &= '<option value="Name1">Aaron' & @CR
+			$sHTML &= '<option value="Name2">Bruce' & @CR
+			$sHTML &= '<option value="Name3">Carlos' & @CR
+			$sHTML &= '<option value="Name4">Denis' & @CR
+			$sHTML &= '<option value="Name5">Ed' & @CR
+			$sHTML &= '<option value="Name6">Freddy' & @CR
+			$sHTML &= '</select>' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;select name="multipleSelectExample" size="6" multiple&gt;<br>' & @CR
+			$sHTML &= '&lt;option value="Name1"&gt;Aaron<br>' & @CR
+			$sHTML &= '&lt;option value="Name2"&gt;Bruce<br>' & @CR
+			$sHTML &= '&lt;option value="Name3"&gt;Carlos<br>' & @CR
+			$sHTML &= '&lt;option value="Name4"&gt;Denis<br>' & @CR
+			$sHTML &= '&lt;option value="Name5"&gt;Ed<br>' & @CR
+			$sHTML &= '&lt;option value="Name6"&gt;Freddy<br>' & @CR
+			$sHTML &= '&lt;/select&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td>' & @CR
+			$sHTML &= '<input name="submitExample" type="submit" value="Submit">' & @CR
+			$sHTML &= '<input name="resetExample" type="reset" value="Reset">' & @CR
+			$sHTML &= '</td>' & @CR
+			$sHTML &= '<td>&lt;input name="submitExample" type="submit" value="Submit"&gt;<br>' & @CR
+			$sHTML &= '&lt;input name="resetExample" type="reset" value="Reset"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '</table>' & @CR
+			$sHTML &= '<input type="hidden" name="hiddenExample" value="secret value">' & @CR
+			$sHTML &= '</form>' & @CR
+			$sHTML &= '</body>' & @CR
+			$sHTML &= '</html>'
 			$oObject = _IECreate()
-			_IEDocWriteHTML($oObject, $sHtml)
+			_IEDocWriteHTML($oObject, $sHTML)
 		Case "frameset"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Example("frameset")</title>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<frameset rows="25,200">' & @CR
-			$sHtml &= '	<frame name=Top SRC=about:blank>' & @CR
-			$sHtml &= '	<frameset cols="100,500">' & @CR
-			$sHtml &= '		<frame name=Menu SRC=about:blank>' & @CR
-			$sHtml &= '		<frame name=Main SRC=about:blank>' & @CR
-			$sHtml &= '	</frameset>' & @CR
-			$sHtml &= '</frameset>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Example("frameset")</title>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<frameset rows="25,200">' & @CR
+			$sHTML &= '	<frame name=Top SRC=about:blank>' & @CR
+			$sHTML &= '	<frameset cols="100,500">' & @CR
+			$sHTML &= '		<frame name=Menu SRC=about:blank>' & @CR
+			$sHTML &= '		<frame name=Main SRC=about:blank>' & @CR
+			$sHTML &= '	</frameset>' & @CR
+			$sHTML &= '</frameset>' & @CR
+			$sHTML &= '</html>'
 			$oObject = _IECreate()
-			_IEDocWriteHTML($oObject, $sHtml)
+			_IEDocWriteHTML($oObject, $sHTML)
 			_IEAction($oObject, "refresh")
 			Local $oFrameTop = _IEFrameGetObjByName($oObject, "Top")
 			Local $oFrameMenu = _IEFrameGetObjByName($oObject, "Menu")
@@ -2856,28 +2948,28 @@ Func _IE_Example($sModule = "basic")
 			_IEBodyWriteHTML($oFrameMenu, '$oFrameMenu = _IEFrameGetObjByName($oIE, "Menu")')
 			_IEBodyWriteHTML($oFrameMain, '$oFrameMain = _IEFrameGetObjByName($oIE, "Main")')
 		Case "iframe"
-			$sHtml &= '<!DOCTYPE html>' & @CR
-			$sHtml &= '<html>' & @CR
-			$sHtml &= '<head>' & @CR
-			$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-			$sHtml &= '<title>_IE_Example("iframe")</title>' & @CR
-			$sHtml &= '<style>td {padding:6px}</style>' & @CR
-			$sHtml &= '</head>' & @CR
-			$sHtml &= '<body>' & @CR
-			$sHtml &= '<table style="border-spacing:6px" border=1>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td><iframe name="iFrameOne" src="about:blank" title="iFrameOne"></iframe></td>' & @CR
-			$sHtml &= '<td>&lt;iframe name="iFrameOne" src="about:blank" title="iFrameOne"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '<tr>' & @CR
-			$sHtml &= '<td><iframe name="iFrameTwo" src="about:blank" title="iFrameTwo"></iframe></td>' & @CR
-			$sHtml &= '<td>&lt;iframe name="iFrameTwo" src="about:blank" title="iFrameTwo"&gt;</td>' & @CR
-			$sHtml &= '</tr>' & @CR
-			$sHtml &= '</table>' & @CR
-			$sHtml &= '</body>' & @CR
-			$sHtml &= '</html>'
+			$sHTML &= '<!DOCTYPE html>' & @CR
+			$sHTML &= '<html>' & @CR
+			$sHTML &= '<head>' & @CR
+			$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+			$sHTML &= '<title>_IE_Example("iframe")</title>' & @CR
+			$sHTML &= '<style>td {padding:6px}</style>' & @CR
+			$sHTML &= '</head>' & @CR
+			$sHTML &= '<body>' & @CR
+			$sHTML &= '<table style="border-spacing:6px" border=1>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td><iframe name="iFrameOne" src="about:blank" title="iFrameOne"></iframe></td>' & @CR
+			$sHTML &= '<td>&lt;iframe name="iFrameOne" src="about:blank" title="iFrameOne"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '<tr>' & @CR
+			$sHTML &= '<td><iframe name="iFrameTwo" src="about:blank" title="iFrameTwo"></iframe></td>' & @CR
+			$sHTML &= '<td>&lt;iframe name="iFrameTwo" src="about:blank" title="iFrameTwo"&gt;</td>' & @CR
+			$sHTML &= '</tr>' & @CR
+			$sHTML &= '</table>' & @CR
+			$sHTML &= '</body>' & @CR
+			$sHTML &= '</html>'
 			$oObject = _IECreate()
-			_IEDocWriteHTML($oObject, $sHtml)
+			_IEDocWriteHTML($oObject, $sHTML)
 			_IEAction($oObject, "refresh")
 			Local $oIFrameOne = _IEFrameGetObjByName($oObject, "iFrameOne")
 			Local $oIFrameTwo = _IEFrameGetObjByName($oObject, "iFrameTwo")
@@ -2968,7 +3060,7 @@ Func __IEControlGetObjFromHWND(ByRef $hWin)
 	If @error Then Return SetError(3, @error, 0)
 
 	If IsObj($aRet[4]) Then
-		Local $oIE = $aRet[4] .Script()
+		Local $oIE = $aRet[4].Script()
 		; $oIE is now a valid IDispatch object
 		Return $oIE.Document.parentwindow
 	Else
@@ -3011,13 +3103,20 @@ EndFunc   ;==>__IESendMessageTimeout
 ; Author ........: Dale Hohm
 ; Modified ......: jpm
 ; ===============================================================================================================================
-Func __IEIsObjType(ByRef $oObject, $sType)
-;~ 	Local $Name_IEIsObjType = String(ObjName($oObject))
+Func __IEIsObjType(ByRef $oObject, $sType, $bRegister = True)
 	If Not IsObj($oObject) Then
 		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
 	EndIf
 
-	; Turn off error notification for internal processing
+	; Setup internal error handler to Trap COM errors, turn off error notification
+	Local $bStatus = $bRegister
+	If $bRegister Then
+		$bStatus = __IEInternalErrorHandlerRegister()
+		If Not $bStatus Then __IEConsoleWriteError("Warning", "internal function __IEIsObjType", _
+				"Cannot register internal error handler, cannot trap COM errors", _
+				"Use _IEErrorHandlerRegister() to register a user error handler")
+	EndIf
+
 	Local $iNotifyStatus = _IEErrorNotify() ; save current error notify status
 	_IEErrorNotify(False)
 	;
@@ -3025,13 +3124,13 @@ Func __IEIsObjType(ByRef $oObject, $sType)
 
 	Switch $sType
 		Case "browserdom"
-			If __IEIsObjType($oObject, "documentcontainer") Then
+			If __IEIsObjType($oObject, "documentcontainer", False) Then
 				$iErrorStatus = $_IESTATUS_Success
-			ElseIf __IEIsObjType($oObject, "document") Then
+			ElseIf __IEIsObjType($oObject, "document", False) Then
 				$iErrorStatus = $_IESTATUS_Success
 			Else
 				Local $oTemp = $oObject.document
-				If __IEIsObjType($oTemp, "document") Then
+				If __IEIsObjType($oTemp, "document", False) Then
 					$iErrorStatus = $_IESTATUS_Success
 				EndIf
 			EndIf
@@ -3040,7 +3139,7 @@ Func __IEIsObjType(ByRef $oObject, $sType)
 		Case "window"
 			If $sName = "HTMLWindow2" Then $iErrorStatus = $_IESTATUS_Success
 		Case "documentContainer"
-			If __IEIsObjType($oObject, "window") Or __IEIsObjType($oObject, "browser") Then $iErrorStatus = $_IESTATUS_Success
+			If __IEIsObjType($oObject, "window", False) Or __IEIsObjType($oObject, "browser", False) Then $iErrorStatus = $_IESTATUS_Success
 		Case "document"
 			If $sName = "HTMLDocument" Then $iErrorStatus = $_IESTATUS_Success
 		Case "table"
@@ -3060,6 +3159,10 @@ Func __IEIsObjType(ByRef $oObject, $sType)
 
 	; restore error notify
 	_IEErrorNotify($iNotifyStatus) ; restore notification status
+
+	If $bRegister Then
+		__IEInternalErrorHandlerDeRegister()
+	EndIf
 
 	If $iErrorStatus = $_IESTATUS_Success Then
 		Return SetError($_IESTATUS_Success, 0, 1)
@@ -3258,19 +3361,19 @@ Func __IECreateNewIE($sTitle, $sHead = "", $sBody = "")
 		Return SetError($_IESTATUS_GeneralError, 1, 0)
 	EndIf
 
-	Local $sHtml = ''
-	$sHtml &= '<!DOCTYPE html>' & @CR
-	$sHtml &= '<html>' & @CR
-	$sHtml &= '<head>' & @CR
-	$sHtml &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
-	$sHtml &= '<title>' & $sTemp & '</title>' & @CR & $sHead & @CR
-	$sHtml &= '</head>' & @CR
-	$sHtml &= '<body>' & @CR & $sBody & @CR
-	$sHtml &= '</body>' & @CR
-	$sHtml &= '</html>'
+	Local $sHTML = ''
+	$sHTML &= '<!DOCTYPE html>' & @CR
+	$sHTML &= '<html>' & @CR
+	$sHTML &= '<head>' & @CR
+	$sHTML &= '<meta content="text/html; charset=UTF-8" http-equiv="content-type">' & @CR
+	$sHTML &= '<title>' & $sTemp & '</title>' & @CR & $sHead & @CR
+	$sHTML &= '</head>' & @CR
+	$sHTML &= '<body>' & @CR & $sBody & @CR
+	$sHTML &= '</body>' & @CR
+	$sHTML &= '</html>'
 
 	Local $hFile = FileOpen($sTemp, $FO_OVERWRITE)
-	FileWrite($hFile, $sHtml)
+	FileWrite($hFile, $sHTML)
 	FileClose($hFile)
 	If @error Then
 		__IEConsoleWriteError("Error", "_IECreateNewIE", "", "Error creating temporary file in @TempDir or @ScriptDir")

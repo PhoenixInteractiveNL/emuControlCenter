@@ -7,7 +7,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Event_Log
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist Windows System logs.
 ; Description ...: When an error occurs, the system administrator or support technicians must determine what  caused  the  error,
@@ -367,9 +367,15 @@ Func __EventLog_DecodeTime($iEventTime)
 	Local $iMinutes = DllStructGetData($tSystTime, "Minute")
 	Local $iSeconds = DllStructGetData($tSystTime, "Second")
 	Local $sAMPM = "AM"
-	If $iHours > 11 Then
+	If $iHours < 12 Then
+		If $iHours = 0 Then
+			$iHours = 12
+		EndIf
+	Else
 		$sAMPM = "PM"
-		$iHours = $iHours - 12
+		If $iHours > 12 Then
+			$iHours -= 12
+		EndIf
 	EndIf
 	Return StringFormat("%02d:%02d:%02d %s", $iHours, $iMinutes, $iSeconds, $sAMPM)
 EndFunc   ;==>__EventLog_DecodeTime

@@ -11,11 +11,9 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Description ...: Additional variables, constants and functions for the WinAPIDiag.au3
 ; Author(s) .....: Yashied, jpm
-; Dll(s) ........: dbghelp.dll, kernel32.dll, connect.dll, sensapi.dll, ntdll.dll, advapi32.dll
-; Requirements ..: AutoIt v3.3 +, Developed/Tested on Windows XP Pro Service Pack 2 and Windows Vista/7
 ; ===============================================================================================================================
 
 #Region Global Variables and Constants
@@ -369,7 +367,7 @@ EndFunc   ;==>_WinAPI_DisplayStruct
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_EnumDllProc($sPath, $sMask = '', $iFlags = 0)
+Func _WinAPI_EnumDllProc($sFilePath, $sMask = '', $iFlags = 0)
 	If Not __DLL('dbghelp.dll') Then Return SetError(103, 0, 0)
 
 	Local $vVer = __Ver('dbghelp.dll')
@@ -383,7 +381,7 @@ Func _WinAPI_EnumDllProc($sPath, $sMask = '', $iFlags = 0)
 		If Not @error And $aRet[0] Then $vWOW64 = $aRet[1]
 	EndIf
 	Do
-		$aRet = DllCall('kernel32.dll', 'dword', 'SearchPathW', 'ptr', 0, 'wstr', $sPath, 'ptr', 0, 'dword', 4096, 'wstr', '', 'ptr', 0)
+		$aRet = DllCall('kernel32.dll', 'dword', 'SearchPathW', 'ptr', 0, 'wstr', $sFilePath, 'ptr', 0, 'dword', 4096, 'wstr', '', 'ptr', 0)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 10
 			ExitLoop
@@ -548,7 +546,7 @@ EndFunc   ;==>_WinAPI_SetErrorMode
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_ShowLastError($sText = '', $bAbort = False, $iLanguage = 0, $iCurErr = @error, $iCurExt = @extended)
+Func _WinAPI_ShowLastError($sText = '', $bAbort = False, $iLanguage = 0, Const $_iCurrentError = @error, Const $_iCurrentExtended = @extended)
 	Local $sError
 
 	Local $iLastError = _WinAPI_GetLastError()
@@ -573,7 +571,7 @@ Func _WinAPI_ShowLastError($sText = '', $bAbort = False, $iLanguage = 0, $iCurEr
 		EndIf
 	EndIf
 
-	Return SetError($iCurErr, $iCurExt, 1)
+	Return SetError($_iCurrentError, $_iCurrentExtended, 1)
 EndFunc   ;==>_WinAPI_ShowLastError
 
 ; #FUNCTION# ====================================================================================================================
@@ -891,7 +889,7 @@ Func __MD5($sData)
 	Local $hProv = DllCall('advapi32.dll', 'int', 'CryptAcquireContextW', 'ptr*', 0, 'ptr', 0, 'ptr', 0, 'dword', 3, 'dword', 0xF0000000)
 	If @error Or Not $hProv[0] Then Return SetError(@error + 10, @extended, '')
 	Do
-		$hHash = DllCall('advapi32.dll', 'int', 'CryptCreateHash', 'ptr', $hProv[1], 'uint', 0x00008003, 'ptr', 0, 'dword', 0, _
+		$hHash = DllCall('advapi32.dll', 'int', 'CryptCreateHash', 'handle', $hProv[1], 'uint', 0x00008003, 'ptr', 0, 'dword', 0, _
 				'ptr*', 0)
 		If @error Or Not $hHash[0] Then
 			$iError = @error + 20
@@ -901,14 +899,14 @@ Func __MD5($sData)
 		$hHash = $hHash[5]
 		Local $tData = DllStructCreate('byte[' & BinaryLen($sData) & ']')
 		DllStructSetData($tData, 1, $sData)
-		Local $aRet = DllCall('advapi32.dll', 'int', 'CryptHashData', 'ptr', $hHash, 'struct*', $tData, _
+		Local $aRet = DllCall('advapi32.dll', 'int', 'CryptHashData', 'handle', $hHash, 'struct*', $tData, _
 				'dword', DllStructGetSize($tData), 'dword', 1)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 30
 			ExitLoop
 		EndIf
 		$tData = DllStructCreate('byte[16]')
-		$aRet = DllCall('advapi32.dll', 'int', 'CryptGetHashParam', 'ptr', $hHash, 'dword', 2, 'struct*', $tData, 'dword*', 16, _
+		$aRet = DllCall('advapi32.dll', 'int', 'CryptGetHashParam', 'handle', $hHash, 'dword', 2, 'struct*', $tData, 'dword*', 16, _
 				'dword', 0)
 		If @error Or Not $aRet[0] Then
 			$iError = @error + 40
@@ -916,7 +914,7 @@ Func __MD5($sData)
 		EndIf
 	Until 1
 	If $hHash Then
-		DllCall('advapi32.dll', 'int', 'CryptDestroyHash', 'ptr', $hHash)
+		DllCall('advapi32.dll', 'int', 'CryptDestroyHash', 'handle', $hHash)
 	EndIf
 	If $iError Then Return SetError($iError, 0, '')
 	Return StringTrimLeft(DllStructGetData($tData, 1), 2)

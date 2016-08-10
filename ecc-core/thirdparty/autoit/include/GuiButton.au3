@@ -7,7 +7,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Button
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Button control management.
 ;                  A button is a control the user can click to provide input to an application.
@@ -297,12 +297,12 @@ EndFunc   ;==>_GUICtrlButton_GetText
 ; ===============================================================================================================================
 Func _GUICtrlButton_GetTextMargin($hWnd)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	Local $tRect = DllStructCreate($tagRECT), $aRect[4]
-	If Not _SendMessage($hWnd, $BCM_GETTEXTMARGIN, 0, $tRect, 0, "wparam", "struct*") Then Return SetError(-1, -1, $aRect)
-	$aRect[0] = DllStructGetData($tRect, "Left")
-	$aRect[1] = DllStructGetData($tRect, "Top")
-	$aRect[2] = DllStructGetData($tRect, "Right")
-	$aRect[3] = DllStructGetData($tRect, "Bottom")
+	Local $tRECT = DllStructCreate($tagRECT), $aRect[4]
+	If Not _SendMessage($hWnd, $BCM_GETTEXTMARGIN, 0, $tRECT, 0, "wparam", "struct*") Then Return SetError(-1, -1, $aRect)
+	$aRect[0] = DllStructGetData($tRECT, "Left")
+	$aRect[1] = DllStructGetData($tRECT, "Top")
+	$aRect[2] = DllStructGetData($tRECT, "Right")
+	$aRect[3] = DllStructGetData($tRECT, "Bottom")
 	Return $aRect
 EndFunc   ;==>_GUICtrlButton_GetTextMargin
 
@@ -365,7 +365,7 @@ EndFunc   ;==>_GUICtrlButton_SetFocus
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $bLarge = False)
+Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $iIconID = -1, $bLarge = False)
 	Local $hImage, $hPrevImage
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
@@ -381,7 +381,7 @@ Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $bLarge = False)
 			Return True
 		EndIf
 	Else
-		If $nIconId = -1 Then
+		If $iIconID = -1 Then
 			$hImage = _WinAPI_LoadImage(0, $sImageFile, 1, 0, 0, BitOR($LR_LOADFROMFILE, $LR_CREATEDIBSECTION))
 			If Not $hImage Then Return SetError(-1, -1, False)
 			$hPrevImage = _SendMessage($hWnd, $BM_SETIMAGE, 1, $hImage)
@@ -394,9 +394,9 @@ Func _GUICtrlButton_SetImage($hWnd, $sImageFile, $nIconId = -1, $bLarge = False)
 			Local $tIcon = DllStructCreate("handle Handle")
 			Local $iRet
 			If $bLarge Then
-				$iRet = _WinAPI_ExtractIconEx($sImageFile, $nIconId, $tIcon, 0, 1)
+				$iRet = _WinAPI_ExtractIconEx($sImageFile, $iIconID, $tIcon, 0, 1)
 			Else
-				$iRet = _WinAPI_ExtractIconEx($sImageFile, $nIconId, 0, $tIcon, 1)
+				$iRet = _WinAPI_ExtractIconEx($sImageFile, $iIconID, 0, $tIcon, 1)
 			EndIf
 			If Not $iRet Then Return SetError(-1, -1, False)
 			$hPrevImage = _SendMessage($hWnd, $BM_SETIMAGE, 1, DllStructGetData($tIcon, "Handle"))
@@ -414,9 +414,9 @@ EndFunc   ;==>_GUICtrlButton_SetImage
 ; Author ........: Gary Frost
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlButton_SetImageList($hWnd, $hImage, $nAlign = 0, $iLeft = 1, $iTop = 1, $iRight = 1, $iBottom = 1)
+Func _GUICtrlButton_SetImageList($hWnd, $hImage, $iAlign = 0, $iLeft = 1, $iTop = 1, $iRight = 1, $iBottom = 1)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	If $nAlign < 0 Or $nAlign > 4 Then $nAlign = 0
+	If $iAlign < 0 Or $iAlign > 4 Then $iAlign = 0
 
 	Local $tBUTTON_IMAGELIST = DllStructCreate($tagBUTTON_IMAGELIST)
 
@@ -425,7 +425,7 @@ Func _GUICtrlButton_SetImageList($hWnd, $hImage, $nAlign = 0, $iLeft = 1, $iTop 
 	DllStructSetData($tBUTTON_IMAGELIST, "Top", $iTop)
 	DllStructSetData($tBUTTON_IMAGELIST, "Right", $iRight)
 	DllStructSetData($tBUTTON_IMAGELIST, "Bottom", $iBottom)
-	DllStructSetData($tBUTTON_IMAGELIST, "Align", $nAlign)
+	DllStructSetData($tBUTTON_IMAGELIST, "Align", $iAlign)
 
 	Local $bEnabled = _GUICtrlButton_Enable($hWnd, False)
 	Local $iRet = _SendMessage($hWnd, $BCM_SETIMAGELIST, 0, $tBUTTON_IMAGELIST, 0, "wparam", "struct*") <> 0
@@ -535,12 +535,12 @@ EndFunc   ;==>_GUICtrlButton_SetText
 ; ===============================================================================================================================
 Func _GUICtrlButton_SetTextMargin($hWnd, $iLeft = 1, $iTop = 1, $iRight = 1, $iBottom = 1)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
-	Local $tRect = DllStructCreate($tagRECT)
-	DllStructSetData($tRect, "Left", $iLeft)
-	DllStructSetData($tRect, "Top", $iTop)
-	DllStructSetData($tRect, "Right", $iRight)
-	DllStructSetData($tRect, "Bottom", $iBottom)
-	Return _SendMessage($hWnd, $BCM_SETTEXTMARGIN, 0, $tRect, 0, "wparam", "struct*") <> 0
+	Local $tRECT = DllStructCreate($tagRECT)
+	DllStructSetData($tRECT, "Left", $iLeft)
+	DllStructSetData($tRECT, "Top", $iTop)
+	DllStructSetData($tRECT, "Right", $iRight)
+	DllStructSetData($tRECT, "Bottom", $iBottom)
+	Return _SendMessage($hWnd, $BCM_SETTEXTMARGIN, 0, $tRECT, 0, "wparam", "struct*") <> 0
 EndFunc   ;==>_GUICtrlButton_SetTextMargin
 
 ; #FUNCTION# ====================================================================================================================

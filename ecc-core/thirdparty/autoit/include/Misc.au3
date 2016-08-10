@@ -6,11 +6,10 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Misc
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Common Dialogs.
 ; Author(s) .....: Gary Frost, Florian Fida (Piccaso), Dale (Klaatu) Thompson, Valik, ezzetabi, Jon, Paul Campbell (PaulIA)
-; Dll(s) ........: comdlg32.dll, user32.dll, kernel32.dll, advapi32.dll, gdi32.dll
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -200,6 +199,7 @@ EndFunc   ;==>_ChooseColor
 ; ===============================================================================================================================
 Func _ChooseFont($sFontName = "Courier New", $iPointSize = 10, $iFontColorRef = 0, $iFontWeight = 0, $bItalic = False, $bUnderline = False, $bStrikethru = False, $hWndOwner = 0)
 	Local $iItalic = 0, $iUnderline = 0, $iStrikeout = 0
+	$iFontColorRef = BitOR(BitShift(BitAND($iFontColorRef, 0x000000FF), -16), BitAND($iFontColorRef, 0x0000FF00), BitShift(BitAND($iFontColorRef, 0x00FF0000), 16))
 
 	Local $hDC = __MISC_GetDC(0)
 	Local $iHeight = Round(($iPointSize * __MISC_GetDeviceCaps($hDC, $LOGPIXELSX)) / 72, 0)
@@ -248,11 +248,11 @@ EndFunc   ;==>_ChooseFont
 ; Author ........: Piccaso (Florian Fida)
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
-Func _ClipPutFile($sFile, $sSeparator = "|")
+Func _ClipPutFile($sFilePath, $sDelimiter = "|")
 	Local Const $GMEM_MOVEABLE = 0x0002, $CF_HDROP = 15
 
-	$sFile &= $sSeparator & $sSeparator
-	Local $nGlobMemSize = 2 * (StringLen($sFile) + 20)
+	$sFilePath &= $sDelimiter & $sDelimiter
+	Local $nGlobMemSize = 2 * (StringLen($sFilePath) + 20)
 
 	Local $aResult = DllCall("user32.dll", "bool", "OpenClipboard", "hwnd", 0)
 	If @error Or $aResult[0] = 0 Then Return SetError(1, _WinAPI_GetLastError(), False)
@@ -274,7 +274,7 @@ Func _ClipPutFile($sFile, $sSeparator = "|")
 				$iLastError = _WinAPI_GetLastError()
 			Else
 				Local $hLock = $aResult[0]
-				Local $tDROPFILES = DllStructCreate("dword pFiles;" & $tagPOINT & ";bool fNC;bool fWide;wchar[" & StringLen($sFile) + 1 & "]", $hLock)
+				Local $tDROPFILES = DllStructCreate("dword pFiles;" & $tagPOINT & ";bool fNC;bool fWide;wchar[" & StringLen($sFilePath) + 1 & "]", $hLock)
 				If @error Then Return SetError(5, 6, False)
 
 				Local $tStruct = DllStructCreate("dword;long;long;bool;bool")
@@ -284,9 +284,9 @@ Func _ClipPutFile($sFile, $sSeparator = "|")
 				DllStructSetData($tDROPFILES, "Y", 0)
 				DllStructSetData($tDROPFILES, "fNC", 0)
 				DllStructSetData($tDROPFILES, "fWide", 1)
-				DllStructSetData($tDROPFILES, 6, $sFile)
-				For $i = 1 To StringLen($sFile)
-					If DllStructGetData($tDROPFILES, 6, $i) = $sSeparator Then DllStructSetData($tDROPFILES, 6, Chr(0), $i)
+				DllStructSetData($tDROPFILES, 6, $sFilePath)
+				For $i = 1 To StringLen($sFilePath)
+					If DllStructGetData($tDROPFILES, 6, $i) = $sDelimiter Then DllStructSetData($tDROPFILES, 6, Chr(0), $i)
 				Next
 
 				$aResult = DllCall("user32.dll", "handle", "SetClipboardData", "uint", $CF_HDROP, "handle", $hGlobal)
@@ -332,12 +332,12 @@ Func _MouseTrap($iLeft = 0, $iTop = 0, $iRight = 0, $iBottom = 0)
 			$iRight = $iLeft + 1
 			$iBottom = $iTop + 1
 		EndIf
-		Local $tRect = DllStructCreate($tagRECT)
-		DllStructSetData($tRect, "Left", $iLeft)
-		DllStructSetData($tRect, "Top", $iTop)
-		DllStructSetData($tRect, "Right", $iRight)
-		DllStructSetData($tRect, "Bottom", $iBottom)
-		$aReturn = DllCall("user32.dll", "bool", "ClipCursor", "struct*", $tRect)
+		Local $tRECT = DllStructCreate($tagRECT)
+		DllStructSetData($tRECT, "Left", $iLeft)
+		DllStructSetData($tRECT, "Top", $iTop)
+		DllStructSetData($tRECT, "Right", $iRight)
+		DllStructSetData($tRECT, "Bottom", $iBottom)
+		$aReturn = DllCall("user32.dll", "bool", "ClipCursor", "struct*", $tRECT)
 		If @error Or Not $aReturn[0] Then Return SetError(2, _WinAPI_GetLastError(), False)
 	EndIf
 	Return True
@@ -347,7 +347,7 @@ EndFunc   ;==>_MouseTrap
 ; Author ........: Valik
 ; Modified.......:
 ; ===============================================================================================================================
-Func _Singleton($sOccurenceName, $iFlag = 0)
+Func _Singleton($sOccurrenceName, $iFlag = 0)
 	Local Const $ERROR_ALREADY_EXISTS = 183
 	Local Const $SECURITY_DESCRIPTOR_REVISION = 1
 	Local $tSecurityAttributes = 0
@@ -378,7 +378,7 @@ Func _Singleton($sOccurenceName, $iFlag = 0)
 		EndIf
 	EndIf
 
-	Local $aHandle = DllCall("kernel32.dll", "handle", "CreateMutexW", "struct*", $tSecurityAttributes, "bool", 1, "wstr", $sOccurenceName)
+	Local $aHandle = DllCall("kernel32.dll", "handle", "CreateMutexW", "struct*", $tSecurityAttributes, "bool", 1, "wstr", $sOccurrenceName)
 	If @error Then Return SetError(@error, @extended, 0)
 	Local $aLastError = DllCall("kernel32.dll", "dword", "GetLastError")
 	If @error Then Return SetError(@error, @extended, 0)
@@ -412,35 +412,59 @@ EndFunc   ;==>_IsPressed
 ; ===============================================================================================================================
 Func _VersionCompare($sVersion1, $sVersion2)
 	If $sVersion1 = $sVersion2 Then Return 0
+	Local $sSubVersion1 = "", $sSubVersion2 = ""
+	If StringIsAlpha(StringRight($sVersion1, 1)) Then
+		$sSubVersion1 = StringRight($sVersion1, 1)
+		$sVersion1 = StringTrimRight($sVersion1, 1)
+	EndIf
+	If StringIsAlpha(StringRight($sVersion2, 1)) Then
+		$sSubVersion2 = StringRight($sVersion2, 1)
+		$sVersion2 = StringTrimRight($sVersion2, 1)
+	EndIf
+
 	Local $aVersion1 = StringSplit($sVersion1, ".,"), _
 			$aVersion2 = StringSplit($sVersion2, ".,")
-	If UBound($aVersion1) <> UBound($aVersion2) Or UBound($aVersion1) = 0 Then
-		; Compare as Strings
-		If $sVersion1 > $sVersion2 Then
-			Return SetExtended(1, 1) ; @extended set to 1 for string comparison.
-		ElseIf $sVersion1 < $sVersion2 Then
-			Return SetExtended(1, -1) ; @extended set to 1 for string comparison.
-		EndIf
-	Else
-		For $i = 1 To UBound($aVersion1) - 1
-			; Compare this segment as numbers
-			If StringIsDigit($aVersion1[$i]) And StringIsDigit($aVersion2[$i]) Then
-				If Number($aVersion1[$i]) > Number($aVersion2[$i]) Then
-					Return SetExtended(2, 1) ; @extended set to 2 for number comparison.
-				ElseIf Number($aVersion1[$i]) < Number($aVersion2[$i]) Then
-					Return SetExtended(2, -1) ; @extended set to 2 for number comparison.
-				EndIf
-			Else ; Compare the segment as strings
-				If $aVersion1[$i] > $aVersion2[$i] Then
-					Return SetExtended(1, 1) ; @extended set to 1 for string comparison.
-				ElseIf $aVersion1[$i] < $aVersion2[$i] Then
-					Return SetExtended(1, -1) ; @extended set to 1 for string comparison.
-				EndIf
-			EndIf
+	Local $iPartDifference = ($aVersion1[0] - $aVersion2[0])
+	If $iPartDifference < 0 Then
+		;$sVersion1 consists of less parts, fill the missing parts with zeros
+		ReDim $aVersion1[UBound($aVersion2)]
+		$aVersion1[0] = UBound($aVersion1) - 1
+		For $i = (UBound($aVersion1) - Abs($iPartDifference)) To $aVersion1[0]
+			$aVersion1[$i] = "0"
+		Next
+	ElseIf $iPartDifference > 0 Then
+		;$sVersion2 consists of less parts, fill the missing parts with zeros
+		ReDim $aVersion2[UBound($aVersion1)]
+		$aVersion2[0] = UBound($aVersion2) - 1
+		For $i = (UBound($aVersion2) - Abs($iPartDifference)) To $aVersion2[0]
+			$aVersion2[$i] = "0"
 		Next
 	EndIf
-	; This point should never be reached
-	Return SetError(2, 0, 0)
+	For $i = 1 To $aVersion1[0]
+		; Compare this segment as numbers
+		If StringIsDigit($aVersion1[$i]) And StringIsDigit($aVersion2[$i]) Then
+			If Number($aVersion1[$i]) > Number($aVersion2[$i]) Then
+				Return SetExtended(2, 1) ; @extended set to 2 for number comparison.
+			ElseIf Number($aVersion1[$i]) < Number($aVersion2[$i]) Then
+				Return SetExtended(2, -1) ; @extended set to 2 for number comparison.
+			ElseIf $i = $aVersion1[0] Then
+				; compare extra version informtion as string
+				If $sSubVersion1 > $sSubVersion2 Then
+					Return SetExtended(3, 1) ; @extended set to 3 for subversion comparison.
+				ElseIf $sSubVersion1 < $sSubVersion2 Then
+					Return SetExtended(3, -1) ; @extended set to 3 for subversion comparison.
+				EndIf
+			EndIf
+		Else ; Compare the segment as strings
+			If $aVersion1[$i] > $aVersion2[$i] Then
+				Return SetExtended(1, 1) ; @extended set to 1 for string comparison.
+			ElseIf $aVersion1[$i] < $aVersion2[$i] Then
+				Return SetExtended(1, -1) ; @extended set to 1 for string comparison.
+			EndIf
+		EndIf
+	Next
+	; Versions are equal
+	Return SetExtended(Abs($iPartDifference), 0)
 EndFunc   ;==>_VersionCompare
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -458,7 +482,7 @@ EndFunc   ;==>_VersionCompare
 ; Example .......:
 ; ===============================================================================================================================
 Func __MISC_GetDC($hWnd)
-	Local $aResult = DllCall("User32.dll", "handle", "GetDC", "hwnd", $hWnd)
+	Local $aResult = DllCall("user32.dll", "handle", "GetDC", "hwnd", $hWnd)
 	If @error Or Not $aResult[0] Then Return SetError(1, _WinAPI_GetLastError(), 0)
 	Return $aResult[0]
 EndFunc   ;==>__MISC_GetDC
@@ -478,7 +502,7 @@ EndFunc   ;==>__MISC_GetDC
 ; Example .......:
 ; ===============================================================================================================================
 Func __MISC_GetDeviceCaps($hDC, $iIndex)
-	Local $aResult = DllCall("GDI32.dll", "int", "GetDeviceCaps", "handle", $hDC, "int", $iIndex)
+	Local $aResult = DllCall("gdi32.dll", "int", "GetDeviceCaps", "handle", $hDC, "int", $iIndex)
 	If @error Then Return SetError(@error, @extended, 0)
 	Return $aResult[0]
 EndFunc   ;==>__MISC_GetDeviceCaps
@@ -500,7 +524,7 @@ EndFunc   ;==>__MISC_GetDeviceCaps
 ; Example .......:
 ; ===============================================================================================================================
 Func __MISC_ReleaseDC($hWnd, $hDC)
-	Local $aResult = DllCall("User32.dll", "int", "ReleaseDC", "hwnd", $hWnd, "handle", $hDC)
+	Local $aResult = DllCall("user32.dll", "int", "ReleaseDC", "hwnd", $hWnd, "handle", $hDC)
 	If @error Then Return SetError(@error, @extended, False)
 	Return $aResult[0] <> 0
 EndFunc   ;==>__MISC_ReleaseDC

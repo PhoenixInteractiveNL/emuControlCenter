@@ -5,7 +5,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ScreenCapture
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Screen Capture management.
 ;                  This module allows you to copy the screen or a region of the screen and save it to file. Depending on the type
@@ -41,10 +41,11 @@ Global Const $__SCREENCAPTURECONSTANT_SRCCOPY = 0x00CC0020
 ; Modified.......:
 ; ===============================================================================================================================
 Func _ScreenCapture_Capture($sFileName = "", $iLeft = 0, $iTop = 0, $iRight = -1, $iBottom = -1, $bCursor = True)
+	Local $bRet = False
 	If $iRight = -1 Then $iRight = _WinAPI_GetSystemMetrics($__SCREENCAPTURECONSTANT_SM_CXSCREEN) - 1
 	If $iBottom = -1 Then $iBottom = _WinAPI_GetSystemMetrics($__SCREENCAPTURECONSTANT_SM_CYSCREEN) - 1
-	If $iRight < $iLeft Then Return SetError(-1, 0, 0)
-	If $iBottom < $iTop Then Return SetError(-2, 0, 0)
+	If $iRight < $iLeft Then Return SetError(-1, 0, $bRet)
+	If $iBottom < $iTop Then Return SetError(-2, 0, $bRet)
 
 	Local $iW = ($iRight - $iLeft) + 1
 	Local $iH = ($iBottom - $iTop) + 1
@@ -61,9 +62,11 @@ Func _ScreenCapture_Capture($sFileName = "", $iLeft = 0, $iTop = 0, $iRight = -1
 			$bCursor = True ; Cursor info was found.
 			Local $hIcon = _WinAPI_CopyIcon($aCursor[2])
 			Local $aIcon = _WinAPI_GetIconInfo($hIcon)
-			_WinAPI_DeleteObject($aIcon[4]) ; delete bitmap mask return by _WinAPI_GetIconInfo()
-			If $aIcon[5] <> 0 Then _WinAPI_DeleteObject($aIcon[5]); delete bitmap hbmColor return by _WinAPI_GetIconInfo()
-			_WinAPI_DrawIcon($hCDC, $aCursor[3] - $aIcon[2] - $iLeft, $aCursor[4] - $aIcon[3] - $iTop, $hIcon)
+			If Not @error Then
+				_WinAPI_DeleteObject($aIcon[4]) ; delete bitmap mask return by _WinAPI_GetIconInfo()
+				If $aIcon[5] <> 0 Then _WinAPI_DeleteObject($aIcon[5]); delete bitmap hbmColor return by _WinAPI_GetIconInfo()
+				_WinAPI_DrawIcon($hCDC, $aCursor[3] - $aIcon[2] - $iLeft, $aCursor[4] - $aIcon[3] - $iTop, $hIcon)
+			EndIf
 			_WinAPI_DestroyIcon($hIcon)
 		EndIf
 	EndIf
@@ -72,7 +75,7 @@ Func _ScreenCapture_Capture($sFileName = "", $iLeft = 0, $iTop = 0, $iRight = -1
 	_WinAPI_DeleteDC($hCDC)
 	If $sFileName = "" Then Return $hBMP
 
-	Local $bRet = _ScreenCapture_SaveImage($sFileName, $hBMP, True)
+	$bRet = _ScreenCapture_SaveImage($sFileName, $hBMP, True)
 	Return SetError(@error, @extended, $bRet)
 EndFunc   ;==>_ScreenCapture_Capture
 
@@ -82,27 +85,28 @@ EndFunc   ;==>_ScreenCapture_Capture
 ; ===============================================================================================================================
 Func _ScreenCapture_CaptureWnd($sFileName, $hWnd, $iLeft = 0, $iTop = 0, $iRight = -1, $iBottom = -1, $bCursor = True)
 	If Not IsHWnd($hWnd) Then $hWnd = WinGetHandle($hWnd)
-	Local $tRect = DllStructCreate($tagRECT)
+	Local $tRECT = DllStructCreate($tagRECT)
 	; needed to get rect when Aero theme is active : Thanks Kafu, Zedna
 	Local Const $DWMWA_EXTENDED_FRAME_BOUNDS = 9
-	Local $bRet = DllCall("dwmapi.dll", "long", "DwmGetWindowAttribute", "hwnd", $hWnd, "dword", $DWMWA_EXTENDED_FRAME_BOUNDS, "struct*", $tRect, "dword", DllStructGetSize($tRect))
-	If (@error Or $bRet[0] Or (Abs(DllStructGetData($tRect, "Left")) + Abs(DllStructGetData($tRect, "Top")) + _
-			Abs(DllStructGetData($tRect, "Right")) + Abs(DllStructGetData($tRect, "Bottom"))) = 0) Then
-		$tRect = _WinAPI_GetWindowRect($hWnd)
-		If @error Then Return SetError(@error, @extended, 0)
+	Local $bRet = DllCall("dwmapi.dll", "long", "DwmGetWindowAttribute", "hwnd", $hWnd, "dword", $DWMWA_EXTENDED_FRAME_BOUNDS, "struct*", $tRECT, "dword", DllStructGetSize($tRECT))
+	If (@error Or $bRet[0] Or (Abs(DllStructGetData($tRECT, "Left")) + Abs(DllStructGetData($tRECT, "Top")) + _
+			Abs(DllStructGetData($tRECT, "Right")) + Abs(DllStructGetData($tRECT, "Bottom"))) = 0) Then
+		$tRECT = _WinAPI_GetWindowRect($hWnd)
+		If @error Then Return SetError(@error + 10, @extended, False)
 	EndIf
 
-	$iLeft += DllStructGetData($tRect, "Left")
-	$iTop += DllStructGetData($tRect, "Top")
-	If $iRight = -1 Then $iRight = DllStructGetData($tRect, "Right") - DllStructGetData($tRect, "Left") - 1
-	If $iBottom = -1 Then $iBottom = DllStructGetData($tRect, "Bottom") - DllStructGetData($tRect, "Top") - 1
-	$iRight += DllStructGetData($tRect, "Left")
-	$iBottom += DllStructGetData($tRect, "Top")
-	If $iLeft > DllStructGetData($tRect, "Right") Then $iLeft = DllStructGetData($tRect, "Left")
-	If $iTop > DllStructGetData($tRect, "Bottom") Then $iTop = DllStructGetData($tRect, "Top")
-	If $iRight > DllStructGetData($tRect, "Right") Then $iRight = DllStructGetData($tRect, "Right") - 1
-	If $iBottom > DllStructGetData($tRect, "Bottom") Then $iBottom = DllStructGetData($tRect, "Bottom") - 1
-	Return _ScreenCapture_Capture($sFileName, $iLeft, $iTop, $iRight, $iBottom, $bCursor)
+	$iLeft += DllStructGetData($tRECT, "Left")
+	$iTop += DllStructGetData($tRECT, "Top")
+	If $iRight = -1 Then $iRight = DllStructGetData($tRECT, "Right") - DllStructGetData($tRECT, "Left") - 1
+	If $iBottom = -1 Then $iBottom = DllStructGetData($tRECT, "Bottom") - DllStructGetData($tRECT, "Top") - 1
+	$iRight += DllStructGetData($tRECT, "Left")
+	$iBottom += DllStructGetData($tRECT, "Top")
+	If $iLeft > DllStructGetData($tRECT, "Right") Then $iLeft = DllStructGetData($tRECT, "Left")
+	If $iTop > DllStructGetData($tRECT, "Bottom") Then $iTop = DllStructGetData($tRECT, "Top")
+	If $iRight > DllStructGetData($tRECT, "Right") Then $iRight = DllStructGetData($tRECT, "Right") - 1
+	If $iBottom > DllStructGetData($tRECT, "Bottom") Then $iBottom = DllStructGetData($tRECT, "Bottom") - 1
+	$bRet = _ScreenCapture_Capture($sFileName, $iLeft, $iTop, $iRight, $iBottom, $bCursor)
+	Return SetError(@error, @extended, $bRet)
 EndFunc   ;==>_ScreenCapture_CaptureWnd
 
 ; #FUNCTION# ====================================================================================================================

@@ -46,7 +46,7 @@
 			2 : B & W
 			3 : WYSIWYG but without background colour
 		-->
-        <GUIConfig name="Print" lineNumber="no" printOption="0" headerLeft="$(FULL_CURRENT_PATH)" headerMiddle="" headerRight="$(LONG_DATE) $(TIME)" headerFontName="IBMPC" headerFontStyle="1" headerFontSize="8" footerLeft="" footerMiddle="-$(CURRENT_PRINTING_PAGE)-" footerRight="" footerFontName="" footerFontStyle="0" footerFontSize="9" margeLeft="0" margeTop="0" margeRight="0" margeBottom="0" />
+        <GUIConfig name="Print" lineNumber="no" printOption="3" headerLeft="$(FULL_CURRENT_PATH)" headerMiddle="" headerRight="$(LONG_DATE) $(TIME)" headerFontName="IBMPC" headerFontStyle="1" headerFontSize="8" footerLeft="" footerMiddle="-$(CURRENT_PRINTING_PAGE)-" footerRight="" footerFontName="" footerFontStyle="0" footerFontSize="9" margeLeft="0" margeTop="0" margeRight="0" margeBottom="0" />
         <!--
                             Backup Setting :
                                 0 : non backup
@@ -74,6 +74,7 @@
         <GUIConfig name="URL">2</GUIConfig>
         <GUIConfig name="globalOverride" fg="no" bg="no" font="no" fontSize="no" bold="no" italic="no" underline="no" />
         <GUIConfig name="auto-completion" autoCAction="3" triggerFromNbChar="1" funcParams="yes" />
+		<GUIConfig name="auto-insert" parentheses="yes" brackets="yes" curlyBrackets="yes" quotes="no" doubleQuotes="yes" htmlXmlTag="no" />
         <GUIConfig name="multiInst" setting="0" />
         <GUIConfig name="sessionExt"></GUIConfig>
     </GUIConfigs>

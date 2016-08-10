@@ -5,14 +5,13 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WindowsNetworking
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with Windows Networking management.
 ;                  The Windows Networking (WNet) functions allow you to implement networking  capabilities  in  your  application
 ;                  without making allowances for a particular network  provider  or  physical  network  implementation.  This  is
 ;                  because the WNet functions are network independent.
 ; Author(s) .....: Paul Campbell (PaulIA)
-; Dll(s) ........: mpr.dll
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
@@ -171,7 +170,7 @@ Global Const $WNNC_CRED_MANAGER = 0xFFFF0000
 ;                  |$CONNDLG_NOT_PERSIST - Do not restore the connection at logon
 ;                  DevNum   - If the call to the _WNet_ConnectionDialog1 function is successful, this member returns  the  number
 ;                  +of the connected device. The value is 1 for A:, 2 for B:, 3 for C:, and so on.  If the user made a deviceless
-;                  +connection, the value is –1.
+;                  +connection, the value is â€“1.
 ; Author ........: Paul Campbell (PaulIA)
 ; Remarks .......:
 ; ===============================================================================================================================
@@ -481,7 +480,7 @@ EndFunc   ;==>_WinNet_DisconnectDialog1
 ; Modified.......:
 ; ===============================================================================================================================
 Func _WinNet_EnumResource($hEnum, ByRef $iCount, $pBuffer, ByRef $iBufSize)
-	Local $aResult = DllCall("mpr.dll", "dword", "WNetEnumResourceW", "handle", $hEnum, "dword*", $iCount, "ptr", $pBuffer, "dword*", $iBufSize)
+	Local $aResult = DllCall("mpr.dll", "dword", "WNetEnumResourceW", "handle", $hEnum, "dword*", $iCount, "struct*", $pBuffer, "dword*", $iBufSize)
 	If @error Then Return SetError(@error, @extended, False)
 	$iCount = $aResult[2]
 	$iBufSize = $aResult[4]
@@ -764,9 +763,9 @@ EndFunc   ;==>__WinNet_NETRESOURCEToArray
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
-; Modified.......:
+; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinNet_OpenEnum($iScope, $iType, $iUsage, $pResource, ByRef $hEnum)
+Func _WinNet_OpenEnum($iScope, $iType, $iUsage, $tResource, ByRef $hEnum)
 	Switch $iScope
 		Case 1
 			$iScope = $RESOURCE_GLOBALNET
@@ -783,7 +782,7 @@ Func _WinNet_OpenEnum($iScope, $iType, $iUsage, $pResource, ByRef $hEnum)
 	If BitAND($iUsage, 2) <> 0 Then $iFlags = BitOR($iFlags, $RESOURCEUSAGE_CONTAINER)
 	If BitAND($iUsage, 4) <> 0 Then $iFlags = BitOR($iFlags, $RESOURCEUSAGE_ATTACHED)
 
-	Local $aResult = DllCall("mpr.dll", "dword", "WNetOpenEnum", "dword", $iScope, "dword", $iType, "dword", $iFlags, "ptr", $pResource, "handle*", 0)
+	Local $aResult = DllCall("mpr.dll", "dword", "WNetOpenEnum", "dword", $iScope, "dword", $iType, "dword", $iFlags, "struct*", $tResource, "handle*", 0)
 	If @error Then Return SetError(@error, @extended, False)
 
 	$hEnum = $aResult[5]

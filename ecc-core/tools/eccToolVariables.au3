@@ -1,6 +1,6 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.5
+; Script version         : v1.0.0.6
 ; Last changed           : 2014.06.24
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
@@ -32,6 +32,7 @@ FileChangeDir(@ScriptDir)
 #include "..\thirdparty\autoit\include\XMLDomWrapper.au3"
 #include "..\thirdparty\autoit\include\IE.au3"
 #include "..\thirdparty\autoit\include\GetCRC32.au3"
+#include "..\thirdparty\autoit\include\Crypt.au3"
 
 ; Global FILE variables
 Global $eccInstallPath 		= StringReplace(@Scriptdir, "\ecc-core\tools", "")
@@ -95,7 +96,7 @@ Global $StartFolderName 	= "emuControlCenter"
 
 ; ECC update variables
 Global $eccUpdateLogFile 	= @Scriptdir & "\eccUpdate.log"
-Global $UpdateServer 		= "http://eccupdate.phoenixinteractive.nl/" ; don't forget the / on the end!
+Global $UpdateServer 		= "https://raw.githubusercontent.com/PhoenixInteractiveNL/ecc-updates/master/" ; don't forget the / on the end!
 
 ; ECC GALLERY variables
 Global $GalleryImageUrl 	= "http://ecc.phoenixinteractive.nl"
@@ -106,6 +107,7 @@ Global $eccSig 				= "3AC741E3A76D7BD5B31256A1B67A7D6A238D" ;Please do NOT alter
 Global $EmuMoviesServer 	= "https://api.gamesdbase.com/"
 Global $EmuMoviesWebsite 	= "http://emumovies.com/"
 Global $EmuMoviesList 		= @ScriptDir & "\emuMoviesDownloader.list"
+Global $EmuMovieshKey		= "emuControlCenter"
 
 ; ECC MobyGames Importer (MGI)
 Global $MGIConfigFile		= @Scriptdir & "\MobyGamesImporter.ini"

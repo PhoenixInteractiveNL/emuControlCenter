@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.0.0.8
-Global $ScriptVersion = "v1.0.0.8"
-; Last changed           : 2014.04.10
+; Script version         : v1.2.0.0
+Global $ScriptVersion = "v1.2.0.0"
+; Last changed           : 2016.08.10
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -129,7 +129,7 @@ EndIf
 AddNote("info: update server is: " & $UpdateServer & "#")
 
 AddNote("query: update server...")
-$ServerMessage = InetRead($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $eccLocalLastUpdate & "&command=message", 1)
+$ServerMessage = InetRead($UpdateServer & "message.txt", 1)
 If StringLen(BinaryToString($ServerMessage)) > 10 Then
    AddNote("succes!#")
    AddNote("*********************** Server message **********************#")
@@ -141,7 +141,8 @@ Else
 EndIf
 
 AddNote("check: updates available?...")
-$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $eccLocalLastUpdate & "&command=lastupdate", 1))
+$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1))
+
 If $eccLastUpdate > $eccLocalLastUpdate Then
 	If $eccLastUpdate - $eccLocalLastUpdate > 30 Then
 		Addnote("yes,#")
@@ -175,15 +176,14 @@ EndIf
 
 For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 
-   Global $UpdateToDownload = Stringformat("%05s", $Download) ;Convert number to 5 digit including 0's
-   Global $FileDate = BinaryToString(InetRead($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=date", 1))
-   Global $FileDownloadSize = InetGetSize($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=download")
+	Global $UpdateToDownload = Stringformat("%05s", $Download) ;Convert number to 5 digit including 0's
+	Global $FileDownloadSize = InetGetSize($UpdateServer & "ecc_update_" & $UpdateToDownload & "\ecc_update_" & $UpdateToDownload & ".7z")
 
-   AddNote("------------------------ UPDATE " & $UpdateToDownload & " ------------------------#")
+	AddNote("------------------------ UPDATE " & $UpdateToDownload & " ------------------------#")
 
-   ;Download update instructions, INI (part 1)
-   AddNote("action: downloading update " & $UpdateToDownload & " info & instructions...") ;do NOT use 1024 otherwise the values of ROUND do not match!
-   $FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=instructions", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", 1, 1)
+	;Download update instructions, INI (part 1)
+	AddNote("action: downloading update " & $UpdateToDownload & " info & instructions...")
+	$FileDownloadHandle = InetGet($UpdateServer & "ecc_update_" & $UpdateToDownload & "\ecc_update_" & $UpdateToDownload & ".ini", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", 1, 1)
 	Do
 		If GUIGetMsg($eccUPDATE) = $GUI_EVENT_CLOSE Then
 			; Catch close button.
@@ -192,6 +192,7 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 	Sleep(100)
 	AddNote("succes!#")
 
+	Global $UpdateDate = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Date", "-")
 	Global $ShortInfo = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "ShortInfo", "-")
 	Global $Credits = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Credits", "-")
 	Global $Message = IniRead(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_INFO", "Message", "")
@@ -201,13 +202,12 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 	  MsgBox(64, "eccUpdate important message for update " & $UpdateToDownload, $Message)
 	EndIf
 
-   AddNote("info: " & $ShortInfo & "#")
-   AddNote("date: " & $FileDate & "#")
-   AddNote("credits: " & $Credits & "#")
-   AddNote("download size: " & Round($FileDownloadSize/1000, 0) & " kB#") ;do NOT use 1024 otherwise the values of ROUND do not match!
+	AddNote("info: " & $ShortInfo & "#")
+	AddNote("date: " & $UpdateDate & "#")
+	AddNote("credits: " & $Credits & "#")
+	AddNote("download size: " & Round($FileDownloadSize/1000, 0) & " kB#") ;do NOT use 1024 otherwise the values of ROUND do not match!
 
-
-	;Download update instructions, INI
+	;Read update instructions.
 	$UpdateInstructions = IniReadSection(@ScriptDir & "\ecc_update_" & $UpdateToDownload & ".ini", "UPDATE_ACTION") ;$var[$i][0] = key, $var[$i][1] = value
 
 	;Execute update instructions (part 1) ;Skip update?
@@ -224,7 +224,7 @@ For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 
 	;Download update files, 7Z
 	AddNote("action: downloading update " & $UpdateToDownload & "...")
-	$FileDownloadHandle = InetGet($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $UpdateToDownload & "&command=download", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z", 1, 1)
+	$FileDownloadHandle = InetGet($UpdateServer & "ecc_update_" & $UpdateToDownload & "\ecc_update_" & $UpdateToDownload & ".7z", @ScriptDir & "\ecc_update_" & $UpdateToDownload & ".7z", 1, 1)
 	Do
 		$InetBytesRead = InetGetInfo($FileDownloadHandle, 0)
 		$DownloadProcent = (($InetBytesRead/$FileDownloadSize) * 100)
@@ -354,7 +354,7 @@ Exit
 EndFunc ;UpdateComplete
 
 Func CheckForUpdates()
-$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "update.php?idt=" & $eccIdt & "&eccversion=" & $eccCurrentVersion & "&eccbuild=" & $eccCurrentBuild & "&eccupdate=" & $eccLocalLastUpdate & "&command=check", 1))
+$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1))
 If $eccLastUpdate > $eccLocalLastUpdate Then
    $Choice = MsgBox(64+4, "eccUpdate", "Found " & $eccLastUpdate - $eccLocalLastUpdate & " update(s) available for ECC, would you like to update now?")
    If $Choice = 6 Then ;Yes

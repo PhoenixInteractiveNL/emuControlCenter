@@ -21,12 +21,14 @@ http://notepad-plus-plus.org/features/function-list.html
 			<association langID="1" id="php_function"/>
 			<association langID="2" id="c_function"/>
 			<association langID="3" id="c_cpp_function"/>
+			<association langID="4" id="cs_function"/>
 			<association langID="6" id="java"/>
 			<association langID="9" id="xml_node"/>
 			<association langID="12" id="batch_label"/>
 			<association langID="13" id="ini_section"/>
 			<association langID="19" id="js_function"/>
 			<association langID="21" id="perl_function"/>
+			<association langID="22" id="python_function"/>
 			<association langID="26" id="bash_function"/>
 			<association langID="28" id="nsis_syntax"/>
 		<!--
@@ -74,16 +76,16 @@ http://notepad-plus-plus.org/features/function-list.html
 			</parser>
 
 			<parser id="java" displayName="Java" commentExpr="((/\*.*?\*)/|(//.**$))">
-				<classRange mainExpr="^[\t ]*((public|protected|private|static|final|abstract|synchronized|@(\w)+)\s+)*(class|enum|interface|@interface)\s+\w+(<\s*\w+(,\s*\w+)*\s*>)?(\s+extends\s+\w+)?(\s+implements\s+\w+(,\s*\w+)*)?\s*\{" openSymbole="\{" closeSymbole="\}">
+				<classRange mainExpr="^[\t ]*((public|protected|private|static|final|abstract|synchronized|@(\w)+)\s+)*(class|enum|interface|@interface)\s+\w+(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?(\s+extends\s+\w+)?(\s+implements\s+\w+(,\s*\w+)*)?\s*\{" openSymbole="\{" closeSymbole="\}">
 					<className>
-						<nameExpr expr="(class|enum|interface|@interface)\s+\w+(<\s*\w+(,\s*\w+)*\s*>)?"></nameExpr>
-						<nameExpr expr="\s+\w+(<\s*\w+(,\s*\w+)*\s*>)?"></nameExpr>
-						<nameExpr expr="\w+(<\s*\w+(,\s*\w+)*\s*>)?"></nameExpr>
+						<nameExpr expr="(class|enum|interface|@interface)\s+\w+(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?"></nameExpr>
+						<nameExpr expr="\s+\w+(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?"></nameExpr>
+						<nameExpr expr="\w+(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?"></nameExpr>
 					</className>
-					<function mainExpr="^[\t ]*((public|protected|private|static|final|abstract|synchronized|@(\w)+)\s+)*(\w*(\[\s*])*\s+)?(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(<\s*\w+(,\s*\w+)*\s*>)?\s*\([^\)\(]*\)(\s+throws\s+\w+)?\s*\{">
+					<function mainExpr="^[\t ]*((public|protected|private|static|final|abstract|synchronized|@(\w)+)\s+)*(\w*(\[\s*])*\s+)?(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?\s*\([^\)\(]*\)(\s+throws\s+\w+)?\s*\{">
 						<functionName>
-							<funcNameExpr expr="(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(<\s*\w+(,\s*\w+)*\s*>)?\s*\("></funcNameExpr>
-							<funcNameExpr expr="(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(<\s*\w+(,\s*\w+)*\s*>)?"></funcNameExpr>
+							<funcNameExpr expr="(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?\s*\("></funcNameExpr>
+							<funcNameExpr expr="(?!(if|while|for|switch|catch|synchronized)\b)\w+(\[\s*])*(&lt;\s*\w+(,\s*\w+)*\s*&gt;)?"></funcNameExpr>
 						</functionName>
 					</function>
 				</classRange>
@@ -91,7 +93,7 @@ http://notepad-plus-plus.org/features/function-list.html
 
 			<parser id="c_function" displayName="C source" commentExpr="((/\*.*?\*)/|(//.*?$))">
 				<function
-				    mainExpr="^[\t ]*((static|const|virtual)[\s]+)?[\w:]+([\s]+[\w]+)?([\s]+|\*[\s]+|[\s]+\*|[\s]+\*[\s]+)([\w_]+[\s]*::)?(?!(if|while|for))[\w_]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?[\n\s]*\{"
+				    mainExpr="^[\t ]*((static|const|virtual)[\s]+)?[\w:]+([\s]+[\w]+)?([\s]+|(\*|\*\*)[\s]+|[\s]+(\*|\*\*)|[\s]+(\*|\*\*)[\s]+)([\w_]+[\s]*::)?(?!(if|while|for))[\w_]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?[\n\s]*\{"
 					displayMode="$functionName">
 					<functionName>
 						<nameExpr expr="(?!(if|while|for))[\w_~]+[\s]*\("/>
@@ -119,7 +121,7 @@ http://notepad-plus-plus.org/features/function-list.html
 
 			<parser id="c_cpp_function" displayName="C++ Class" commentExpr="((/\*.*?\*)/|(//.*?$))">
 				<classRange
-					mainExpr="^[\t ]*(class|struct)[\t ]+[\w]+[\s]*(:[\s]*(public|protected|private)[\s]+[\w]+[\s]*)?\{"
+					mainExpr="^[\t ]*(class|struct)[\t ]+[\w]+[\s]*(final)?[\s]*(:[\s]*(public|protected|private)[\s]+[\w]+[\s]*)?\{"
 					openSymbole = "\{"
 					closeSymbole = "\}"
 					displayMode="node">
@@ -129,7 +131,7 @@ http://notepad-plus-plus.org/features/function-list.html
 						<nameExpr expr="[\w]+"/>
 					</className>
 					<function
-						mainExpr="^[\t ]*((static|const|virtual)[\s]+)?([\w]+([\s]+[\w]+)?([\s]+|\*[\s]+|[\s]+\*|[\s]+\*[\s]+))?([\w_]+[\s]*::)?(?!(if|while|for|switch))[\w_~]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?[\n\s]*\{">
+						mainExpr="^[\t ]*((static|const|virtual)[\s]+)?([\w]+([\s]+[\w]+)?([\s]+|(\*|\*\*|&amp;)[\s]+|[\s]+(\*|\*\*|&amp;)|[\s]+(\*|\*\*|&amp;)[\s]+))?([\w_]+[\s]*::)?(?!(if|while|for|switch))[\w_~]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?([\s]*(final|override|final[\s]*override|override[\s]*final)[\s]*)?[\n\s]*\{">
 						<functionName>
 							<funcNameExpr expr="(?!(if|while|for|switch))[\w_~]+[\s]*\("/>
 							<funcNameExpr expr="(?!(if|while|for|switch))[\w_~]+"/>
@@ -137,7 +139,7 @@ http://notepad-plus-plus.org/features/function-list.html
 					</function>
 				</classRange>
 				<function
-				    mainExpr="^[\t ]*((static|const|virtual)[\s]+)?[\w]+([\s]+[\w]+)?([\s]+|\*[\s]+|[\s]+\*|[\s]+\*[\s]+)([\w_]+[\s]*::)?(?!(if|while|for))[\w_]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?[\n\s]*\{"
+				    mainExpr="^[\t ]*((static|const|virtual)[\s]+)?[\w]+([\s]+[\w]+)?([\s]+|(\*|\*\*|&amp;)[\s]+|[\s]+(\*|\*\*|&amp;)|[\s]+(\*|\*\*|&amp;)[\s]+)([\w_]+[\s]*::)?(?!(if|while|for))[\w_]+[\s]*\([^\)\(]*\)([\s]*const[\s]*)?[\n\s]*\{"
 					displayMode="$className->$functionName">
 					<functionName>
 						<nameExpr expr="(?!(if|while|for))[\w_]+[\s]*\("/>
@@ -160,7 +162,7 @@ http://notepad-plus-plus.org/features/function-list.html
 			</parser>
 			
 			<parser id="perl_function" displayName="Perl">
-				<function mainExpr="^[\s]*(?<!#)[\s]*sub[\s]+[\w]+[\s]*\(?[^\)\(]*\)?[\n\s]*\{" displayMode="$className->$functionName">
+				<function mainExpr="^[\s]*(?&lt;!#)[\s]*sub[\s]+[\w]+[\s]*\(?[^\)\(]*?\)?[\n\s]*\{" displayMode="$className->$functionName">
 					<functionName>
 						<nameExpr expr="(sub[\s]+)?\K[\w]+"/>
 					</functionName>
@@ -172,7 +174,7 @@ http://notepad-plus-plus.org/features/function-list.html
 			
             <parser id="php_function" displayName="PHP" commentExpr="((/\*.*?\*)/|(//.*?$))">
                 <classRange
-                    mainExpr="^[\s]*(class|abstract[\s]+class|final[\s]+class)[\t ]+[\w]+([\s]*|[\s]*(extends|implements)[\s]+[\w\\]+[\s]*)?\{"
+                    mainExpr="^[\s]*(class|abstract[\s]+class|final[\s]+class)[\t ]+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*([\s]*|[\s]*(extends|implements|(extends[\s]+(\\|[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)+[\s]+implements))[\s]+(\,[\s]*|(\\|[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*))+[\s]*)?\{"
                     openSymbole = "\{"
                     closeSymbole = "\}"
                     displayMode="node">
@@ -212,7 +214,46 @@ http://notepad-plus-plus.org/features/function-list.html
 					</functionName>
 				</function>
 			</parser>
+			<parser id="python_function" displayName="Python class" commentExpr="(#.*?$|'''.*?('''|\Z))">
+				<classRange mainExpr="(?&lt;=^class ).*?(?=\n\S|\Z)">
+					<className>
+						<nameExpr expr="\w+(?=[\(|:])"/>
+					</className>
+					<function mainExpr="(?&lt;=def ).+?(?=:)">
+						<functionName>
+							<funcNameExpr expr=".*"/>
+						</functionName>
+					</function>
+				</classRange>
+				<function mainExpr="(?&lt;=def ).+?(?=:)">
+					<functionName>
+						<funcNameExpr expr=".*"/>
+					</functionName>
+				</function>
+			</parser>
 			
+			<parser id="cs_function" displayName="C# Class" commentExpr="((/\*.*?\*)/|(//.*?$))">
+				<classRange
+					mainExpr="^[\t ]*((public|protected|private|internal)[\s]+)?([\w]+[\s]*)?(class|struct|interface)[\t ]+[^\{]+\{"
+					openSymbole = "\{"
+					closeSymbole = "\}"
+					displayMode="node">
+					<className>
+						<nameExpr expr="(class|struct|interface)[\t ]+[\w]+"/>
+						<nameExpr expr="[\t ]+[\w]+"/>
+						<nameExpr expr="[\w]+"/>
+					</className>
+					<function
+						mainExpr="^[^\S\r\n]*(?&lt;modifier1&gt;(?:public|protected|internal|private)\s*)?(?&lt;modifier2&gt;(?:new|static|virtual|sealed|override|abstract|extern)\s*)?(partial\s*)?(?&lt;type&gt;(?!(return|if|else))\w+(?&lt;genericType&gt;&lt;[\w,\s&lt;&gt;]+&gt;)?\s+)(?&lt;name&gt;\w+(?&lt;genericNameType&gt;&lt;[\w,\s&lt;&gt;]+&gt;)?\s?)\((?&lt;params&gt;[\w\s,&lt;&gt;\[\]\:=\.]*)\)(?&lt;ctorChain&gt;\s*\:\s*(?:base|this)\s*\((?&lt;ctorParams&gt;[\w\s,&lt;&gt;\[\]\:=\.]*)\))?[\w\s&lt;&gt;\:,\(\)\[\]]*(?:\{|;)">
+						<functionName>
+							<funcNameExpr expr="(\w+(&lt;[\w,\s&lt;&gt;]+&gt;)?\s?)\("/>
+							<funcNameExpr expr="(\w+(&lt;[\w,\s&lt;&gt;]+&gt;)?\s?)"/>
+						</functionName>
+					</function>
+				</classRange>
+				<function mainExpr="">
+				</function>
+			</parser>
 		</parsers>
 	</functionList>
 </NotepadPlus>

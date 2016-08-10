@@ -6,11 +6,10 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: File
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Functions that assist with files and directories.
 ; Author(s) .....: Brian Keene, Michael Michta, erifash, Jon, JdeB, Jeremy Landes, MrCreatoR, cdkid, Valik, Erik Pilsits, Kurt, Dale, guinness, DXRW4E, Melba23
-; Dll(s) ........: shell32.dll
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -68,12 +67,12 @@ EndFunc   ;==>_FileCreate
 ; Author ........: Michael Michta
 ; Modified.......: guinness - Added optional parameter to return the full path.
 ; ===============================================================================================================================
-Func _FileListToArray($sFilePath, $sFilter = "*", $iFlag = 0, $bReturnPath = False)
+Func _FileListToArray($sFilePath, $sFilter = "*", $iFlag = $FLTA_FILESFOLDERS, $bReturnPath = False)
 	Local $sDelimiter = "|", $sFileList = "", $sFileName = "", $sFullPath = ""
 
 	; Check parameters for the Default keyword or they meet a certain criteria
 	$sFilePath = StringRegExpReplace($sFilePath, "[\\/]+$", "") & "\" ; Ensure a single trailing backslash
-	If $iFlag = Default Then $iFlag = 0
+	If $iFlag = Default Then $iFlag = $FLTA_FILESFOLDERS
 	If $bReturnPath Then $sFullPath = $sFilePath
 	If $sFilter = Default Then $sFilter = "*"
 
@@ -98,58 +97,66 @@ EndFunc   ;==>_FileListToArray
 ; Author ........: Melba23 - with credits for code snippets to Ultima, Partypooper, Spiff59, guinness, wraithdu
 ; Modified ......:
 ; ===============================================================================================================================
-Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0, $iSort = 0, $iReturnPath = 1)
-	Local $asReturnList[100] = [0], $asFileMatchList[100] = [0], $asRootFileMatchList[100] = [0], $asFolderMatchList[100] = [0], $asFolderSearchList[100] = [1]
-	Local $sInclude_List = "*", $sExclude_List, $sExclude_List_Folder, $sInclude_File_Mask = ".+", $sExclude_File_Mask = ":", $sInclude_Folder_Mask = ".+", $sExclude_Folder_Mask = ":"
-	Local $sFolderSlash = "", $iMaxLevel, $hSearch, $bFolder, $sRetPath = "", $sCurrentPath, $sName, $iAttribs, $iHide_HS = 0, $iHide_Link = 0, $bLongPath = False
-	Local $asFolderFileSectionList[100][2] = [[0, 0]], $sFolderToFind, $iFileSectionStartIndex, $iFileSectionEndIndex
-
-	; Check for valid path
-	If StringLeft($sInitialPath, 4) == "\\?\" Then
-		$bLongPath = True
-	EndIf
-	If Not FileExists($sInitialPath) Then Return SetError(1, 1, "")
-
-	; Check if folders should have trailing \ and ensure that initial path does have one
-	If StringRight($sInitialPath, 1) = "\" Then
-		$sFolderSlash = "\"
-	Else
-		$sInitialPath = $sInitialPath & "\"
-	EndIf
-	; Add path to folder search list
-	$asFolderSearchList[1] = $sInitialPath
+Func _FileListToArrayRec($sFilePath, $sMask = "*", $iReturn = $FLTAR_FILESFOLDERS, $iRecur = $FLTAR_NORECUR, $iSort = $FLTAR_NOSORT, $iReturnPath = $FLTAR_RELPATH)
+	If Not FileExists($sFilePath) Then Return SetError(1, 1, "")
 
 	; Check for Default keyword
 	If $sMask = Default Then $sMask = "*"
-	If $iReturn = Default Then $iReturn = 0
-	If $iRecur = Default Then $iRecur = 0
-	If $iSort = Default Then $iSort = 0
-	If $iReturnPath = Default Then $iReturnPath = 1
+	If $iReturn = Default Then $iReturn = $FLTAR_FILESFOLDERS
+	If $iRecur = Default Then $iRecur = $FLTAR_NORECUR
+	If $iSort = Default Then $iSort = $FLTAR_NOSORT
+	If $iReturnPath = Default Then $iReturnPath = $FLTAR_RELPATH
 
+	; Check for valid recur value
+	If $iRecur > 1 Or Not IsInt($iRecur) Then Return SetError(1, 6, "")
+
+	Local $bLongPath = False
+	; Check for valid path
+	If StringLeft($sFilePath, 4) == "\\?\" Then
+		$bLongPath = True
+	EndIf
+
+	Local $sFolderSlash = ""
+	; Check if folders should have trailing \ and ensure that initial path does have one
+	If StringRight($sFilePath, 1) = "\" Then
+		$sFolderSlash = "\"
+	Else
+		$sFilePath = $sFilePath & "\"
+	EndIf
+
+	Local $asFolderSearchList[100] = [1]
+	; Add path to folder search list
+	$asFolderSearchList[1] = $sFilePath
+
+	Local $iHide_HS = 0, _
+			$sHide_HS = ""
 	; Check for H or S omitted
 	If BitAND($iReturn, 4) Then
 		$iHide_HS += 2
+		$sHide_HS &= "H"
 		$iReturn -= 4
 	EndIf
 	If BitAND($iReturn, 8) Then
 		$iHide_HS += 4
+		$sHide_HS &= "S"
 		$iReturn -= 8
 	EndIf
 
+	Local $iHide_Link = 0
 	; Check for link/junction omitted
 	If BitAND($iReturn, 16) Then
 		$iHide_Link = 0x400
 		$iReturn -= 16
 	EndIf
 
-	; Check for valid recur value
-	If $iRecur > 1 Or Not IsInt($iRecur) Then Return SetError(1, 6, "")
+	Local $iMaxLevel = 0
 	; If required, determine \ count for max recursive level setting
 	If $iRecur < 0 Then
-		StringReplace($sInitialPath, "\", "", 0, $STR_NOCASESENSEBASIC)
+		StringReplace($sFilePath, "\", "", 0, $STR_NOCASESENSEBASIC)
 		$iMaxLevel = @extended - $iRecur
 	EndIf
 
+	Local $sExclude_List = "", $sExclude_List_Folder = "", $sInclude_List = "*"
 	; Check mask parameter
 	Local $aMaskSplit = StringSplit($sMask, "|")
 	; Check for multiple sections and set values
@@ -164,10 +171,13 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 			$sInclude_List = $aMaskSplit[1]
 	EndSwitch
 
+	Local $sInclude_File_Mask = ".+"
 	; Create Include mask for files
 	If $sInclude_List <> "*" Then
 		If Not __FLTAR_ListToMask($sInclude_File_Mask, $sInclude_List) Then Return SetError(1, 2, "")
 	EndIf
+
+	Local $sInclude_Folder_Mask = ".+"
 	; Set Include mask for folders
 	Switch $iReturn
 		Case 0
@@ -182,11 +192,13 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 			$sInclude_Folder_Mask = $sInclude_File_Mask
 	EndSwitch
 
+	Local $sExclude_File_Mask = ":"
 	; Create Exclude List mask for files
 	If $sExclude_List <> "" Then
 		If Not __FLTAR_ListToMask($sExclude_File_Mask, $sExclude_List) Then Return SetError(1, 3, "")
 	EndIf
 
+	Local $sExclude_Folder_Mask = ":"
 	; Create Exclude mask for folders
 	If $iRecur Then
 		If $sExclude_List_Folder Then
@@ -208,12 +220,20 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 	If Not ($iReturnPath = 0 Or $iReturnPath = 1 Or $iReturnPath = 2) Then Return SetError(1, 8, "")
 
 	; Prepare for DllCall if required
-	If $iHide_HS Or $iHide_Link Then
+	If $iHide_Link Then
 		Local $tFile_Data = DllStructCreate("struct;align 4;dword FileAttributes;uint64 CreationTime;uint64 LastAccessTime;uint64 LastWriteTime;" & _
 				"dword FileSizeHigh;dword FileSizeLow;dword Reserved0;dword Reserved1;wchar FileName[260];wchar AlternateFileName[14];endstruct")
-		Local $pFile_Data = DllStructGetPtr($tFile_Data), $hDLL = DllOpen('kernel32.dll'), $aDLL_Ret
+		Local $hDLL = DllOpen('kernel32.dll'), $aDLL_Ret
 	EndIf
 
+	Local $asReturnList[100] = [0]
+	Local $asFileMatchList = $asReturnList, $asRootFileMatchList = $asReturnList, $asFolderMatchList = $asReturnList
+	Local $bFolder = False, _
+			$hSearch = 0, _
+			$sCurrentPath = "", $sName = "", $sRetPath = ""
+	Local $iAttribs = 0, _
+			$sAttribs = ''
+	Local $asFolderFileSectionList[100][2] = [[0, 0]]
 	; Search within listed folders
 	While $asFolderSearchList[0] > 0
 
@@ -226,7 +246,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 			; Case 0 ; Name only
 			; Leave as ""
 			Case 1 ;Relative to initial path
-				$sRetPath = StringReplace($sCurrentPath, $sInitialPath, "")
+				$sRetPath = StringReplace($sCurrentPath, $sFilePath, "")
 			Case 2 ; Full path
 				If $bLongPath Then
 					$sRetPath = StringTrimLeft($sCurrentPath, 4)
@@ -236,9 +256,9 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 		EndSwitch
 
 		; Get search handle - use code matched to required listing
-		If $iHide_HS Or $iHide_Link Then
+		If $iHide_Link Then
 			; Use DLL code
-			$aDLL_Ret = DllCall($hDLL, 'ptr', 'FindFirstFileW', 'wstr', $sCurrentPath & "*", 'ptr', $pFile_Data)
+			$aDLL_Ret = DllCall($hDLL, 'handle', 'FindFirstFileW', 'wstr', $sCurrentPath & "*", 'struct*', $tFile_Data)
 			If @error Or Not $aDLL_Ret[0] Then
 				ContinueLoop
 			EndIf
@@ -256,13 +276,14 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 		If $iReturn = 0 And $iSort And $iReturnPath Then
 			__FLTAR_AddToList($asFolderFileSectionList, $sRetPath, $asFileMatchList[0] + 1)
 		EndIf
+		$sAttribs = ''
 
 		; Search folder - use code matched to required listing
 		While 1
 			; Use DLL code
-			If $iHide_HS Or $iHide_Link Then
+			If $iHide_Link Then
 				; Use DLL code
-				$aDLL_Ret = DllCall($hDLL, 'int', 'FindNextFileW', 'ptr', $hSearch, 'ptr', $pFile_Data)
+				$aDLL_Ret = DllCall($hDLL, 'int', 'FindNextFileW', 'handle', $hSearch, 'struct*', $tFile_Data)
 				; Check for end of folder
 				If @error Or Not $aDLL_Ret[0] Then
 					ExitLoop
@@ -279,7 +300,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					ContinueLoop
 				EndIf
 				; Check for link attribute and skip if found
-				If $iHide_Link And BitAND($iAttribs, $iHide_Link) Then
+				If BitAND($iAttribs, $iHide_Link) Then
 					ContinueLoop
 				EndIf
 				; Set subfolder flag
@@ -288,14 +309,23 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					$bFolder = True
 				EndIf
 			Else
+				; Reset folder flag
+				$bFolder = False
 				; Use native code
-				$sName = FileFindNextFile($hSearch)
+				$sName = FileFindNextFile($hSearch, 1)
 				; Check for end of folder
 				If @error Then
 					ExitLoop
 				EndIf
-				; Set subfolder flag - @extended set in 3.3.1.1 +
-				$bFolder = @extended
+				$sAttribs = @extended
+				; Check for folder
+				If StringInStr($sAttribs, "D") Then
+					$bFolder = True
+				EndIf
+				; Check for Hidden/System
+				If StringRegExp($sAttribs, "[" & $sHide_HS & "]") Then
+					ContinueLoop
+				EndIf
 			EndIf
 
 			; If folder then check whether to add to search list
@@ -323,7 +353,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 				Else
 					If StringRegExp($sName, $sInclude_File_Mask) And Not StringRegExp($sName, $sExclude_File_Mask) Then
 						; Select required list for files
-						If $sCurrentPath = $sInitialPath Then
+						If $sCurrentPath = $sFilePath Then
 							__FLTAR_AddToList($asRootFileMatchList, $sRetPath & $sName)
 						Else
 							__FLTAR_AddToList($asFileMatchList, $sRetPath & $sName)
@@ -345,12 +375,16 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 		WEnd
 
 		; Close current search
-		FileClose($hSearch)
+		If $iHide_Link Then
+			DllCall($hDLL, 'int', 'FindClose', 'ptr', $hSearch)
+		Else
+			FileClose($hSearch)
+		EndIf
 
 	WEnd
 
 	; Close the DLL if needed
-	If $iHide_HS Then
+	If $iHide_Link Then
 		DllClose($hDLL)
 	EndIf
 
@@ -405,6 +439,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 					Local $iNextInsertionIndex = $asRootFileMatchList[0] + 1
 					; Sort folder list
 					__ArrayDualPivotSort($asFolderMatchList, 1, $asFolderMatchList[0])
+					Local $sFolderToFind = ""
 					; Work through folder list
 					For $i = 1 To $asFolderMatchList[0]
 						; Add folder to return list
@@ -416,6 +451,7 @@ Func _FileListToArrayRec($sInitialPath, $sMask = "*", $iReturn = 0, $iRecur = 0,
 						Else
 							$sFolderToFind = $asFolderMatchList[$i] & "\"
 						EndIf
+						Local $iFileSectionEndIndex = 0, $iFileSectionStartIndex = 0
 						; Find folder in FolderFileSectionList
 						For $j = 1 To $asFolderFileSectionList[0][0]
 							; If found then deal with files
@@ -548,9 +584,9 @@ EndFunc   ;==>_FilePrint
 ; Modified ......: Jpm - fixed empty line at the end, Gary Fixed file contains only 1 line, guinness - Optional flag to return the array count.
 ;                : Melba23 - Read to 1D/2D arrays, guinness & jchd - Removed looping through 1D array with $FRTA_COUNT flag.
 ; ===============================================================================================================================
-Func _FileReadToArray($sFilePath, ByRef $aArray, $iFlags = $FRTA_COUNT, $sDelimiter = "")
+Func _FileReadToArray($sFilePath, ByRef $vReturn, $iFlags = $FRTA_COUNT, $sDelimiter = "")
 	; Clear the previous contents
-	$aArray = 0
+	$vReturn = 0
 
 	If $iFlags = Default Then $iFlags = $FRTA_COUNT
 	If $sDelimiter = Default Then $sDelimiter = ""
@@ -627,7 +663,7 @@ Func _FileReadToArray($sFilePath, ByRef $aArray, $iFlags = $FRTA_COUNT, $sDelimi
 			EndIf
 		EndIf
 		; Return the array
-		$aArray = $aTemp_Array
+		$vReturn = $aTemp_Array
 	Else ; 1D
 		If $iFlags Then
 			Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
@@ -636,15 +672,15 @@ Func _FileReadToArray($sFilePath, ByRef $aArray, $iFlags = $FRTA_COUNT, $sDelimi
 			FileClose($hFileOpen)
 
 			If StringLen($sFileRead) Then
-				$aArray = StringRegExp(@LF & $sFileRead, "(?|(\N+)\z|(\N*)(?:\R))", 3)
-				$aArray[0] = UBound($aArray) - 1
+				$vReturn = StringRegExp(@LF & $sFileRead, "(?|(\N+)\z|(\N*)(?:\R))", 3)
+				$vReturn[0] = UBound($vReturn) - 1
 			Else
 				Return SetError(2, 0, 0)
 			EndIf
 		Else
-			$aArray = FileReadToArray($sFilePath)
+			$vReturn = FileReadToArray($sFilePath)
 			If @error Then
-				$aArray = 0
+				$vReturn = 0
 				Return SetError(@error, 0, 0)
 			EndIf
 		EndIf
@@ -657,59 +693,61 @@ EndFunc   ;==>_FileReadToArray
 ; Author ........: Jos van der Zande <jdeb at autoitscript dot com>
 ; Modified.......: Updated for file handles by PsaltyDS, @error = 4 msg and 2-dimension capability added by Spiff59 and fixed by guinness.
 ; ===============================================================================================================================
-Func _FileWriteFromArray($sFilePath, Const ByRef $aArray, $iBase = Default, $iUBound = Default, $sDelimeter = "|")
-	; Check if we have a valid array as input
-	If Not IsArray($aArray) Then Return SetError(2, 0, 0)
+Func _FileWriteFromArray($sFilePath, Const ByRef $aArray, $iBase = Default, $iUBound = Default, $sDelimiter = "|")
+	Local $iReturn = 0
+	; Check if we have a valid array as an input.
+	If Not IsArray($aArray) Then Return SetError(2, 0, $iReturn)
 
-	; Check the number of dimensions
+	; Check the number of dimensions is no greater than a 2d array.
 	Local $iDims = UBound($aArray, $UBOUND_DIMENSIONS)
 	If $iDims > 2 Then Return SetError(4, 0, 0)
 
-	; Determine last entry of the array
+	; Determine last entry of the array.
 	Local $iLast = UBound($aArray) - 1
 	If $iUBound = Default Or $iUBound > $iLast Then $iUBound = $iLast
 	If $iBase < 0 Or $iBase = Default Then $iBase = 0
-	If $iBase > $iUBound Then Return SetError(5, 0, 0)
-	If $sDelimeter = Default Then $sDelimeter = "|"
+	If $iBase > $iUBound Then Return SetError(5, 0, $iReturn)
+	If $sDelimiter = Default Then $sDelimiter = "|"
 
-	; Open output file for overwrite by default, or use input file handle if passed
+	; Open output file for overwrite by default, or use input file handle if passed.
 	Local $hFileOpen = $sFilePath
 	If IsString($sFilePath) Then
 		$hFileOpen = FileOpen($sFilePath, $FO_OVERWRITE)
+		If $hFileOpen = -1 Then Return SetError(1, 0, $iReturn)
 	EndIf
-	If $hFileOpen = -1 Then Return SetError(1, 0, 0)
 
-	; Write array data to file
+	; Write array data to file.
 	Local $iError = 0
+	$iReturn = 1 ; Set the return value to true.
 	Switch $iDims
 		Case 1
 			For $i = $iBase To $iUBound
-				If FileWrite($hFileOpen, $aArray[$i] & @CRLF) = 0 Then
+				If Not FileWrite($hFileOpen, $aArray[$i] & @CRLF) Then
 					$iError = 3
+					$iReturn = 0
 					ExitLoop
 				EndIf
 			Next
 		Case 2
 			Local $sTemp = ""
-			Local $iCols = UBound($aArray, $UBOUND_COLUMNS)
 			For $i = $iBase To $iUBound
 				$sTemp = $aArray[$i][0]
-				For $j = 1 To $iCols - 1
-					$sTemp &= $sDelimeter & $aArray[$i][$j]
+				For $j = 1 To UBound($aArray, $UBOUND_COLUMNS) - 1
+					$sTemp &= $sDelimiter & $aArray[$i][$j]
 				Next
-				If FileWrite($hFileOpen, $sTemp & @CRLF) = 0 Then
+				If Not FileWrite($hFileOpen, $sTemp & @CRLF) Then
 					$iError = 3
+					$iReturn = 0
 					ExitLoop
 				EndIf
 			Next
 	EndSwitch
 
-	; Close file only if specified by a string path
+	; Close file only if specified by a string path.
 	If IsString($sFilePath) Then FileClose($hFileOpen)
 
-	; Return results
-	If $iError Then Return SetError($iError, 0, 0)
-	Return 1
+	; Return the results.
+	Return SetError($iError, 0, $iReturn)
 EndFunc   ;==>_FileWriteFromArray
 
 ; #FUNCTION# ====================================================================================================================
@@ -748,14 +786,15 @@ EndFunc   ;==>_FileWriteLog
 ; Author ........: cdkid
 ; Modified.......: partypooper, MrCreatoR
 ; ===============================================================================================================================
-Func _FileWriteToLine($sFilePath, $iLine, $sText, $iOverWrite = 0)
+Func _FileWriteToLine($sFilePath, $iLine, $sText, $bOverWrite = False)
 	If $iLine <= 0 Then Return SetError(4, 0, 0)
 	If Not IsString($sText) Then
 		$sText = String($sText)
 		If $sText = "" Then Return SetError(6, 0, 0)
 	EndIf
-	If $iOverWrite <> 0 And $iOverWrite <> 1 Then Return SetError(5, 0, 0)
-	If FileExists($sFilePath) = 0 Then Return SetError(2, 0, 0)
+	If $bOverWrite = Default Then $bOverWrite = False
+	If Not (IsBool($bOverWrite) Or $bOverWrite = 0 Or $bOverWrite = 1) Then Return SetError(5, 0, 0) ; For old versions.
+	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
 
 	Local $aArray = FileReadToArray($sFilePath)
 	Local $iUBound = UBound($aArray) - 1
@@ -768,7 +807,7 @@ Func _FileWriteToLine($sFilePath, $iLine, $sText, $iOverWrite = 0)
 	$iLine -= 1 ; Now the array is 0-based, so reduce the line number by 1.
 	For $i = 0 To $iUBound
 		If $i = $iLine Then
-			If $iOverWrite Then
+			If $bOverWrite Then
 				If $sText Then $sData &= $sText & @CRLF
 			Else
 				$sData &= $sText & @CRLF & $aArray[$i] & @CRLF
@@ -922,6 +961,8 @@ Func _PathMake($sDrive, $sDir, $sFileName, $sExtension)
 	; Format the directory by adding any necessary slashes
 	If StringLen($sDir) Then
 		If Not (StringRight($sDir, 1) = "\") And Not (StringRight($sDir, 1) = "/") Then $sDir = $sDir & "\"
+	Else
+		$sDir = "\"
 	EndIf
 
 	If StringLen($sDir) Then
@@ -955,6 +996,7 @@ Func _PathSplit($sFilePath, ByRef $sDrive, ByRef $sDir, ByRef $sFileName, ByRef 
 	Else
 		$sDir = StringRegExpReplace($aArray[2], "\h*[\/\\]+\h*", "\\")
 	EndIf
+	$aArray[2] = $sDir
 	$sFileName = $aArray[3]
 	$sExtension = $aArray[4]
 	Return $aArray

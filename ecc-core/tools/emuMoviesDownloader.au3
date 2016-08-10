@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : EmuMoviesDownloader (EMD)
-; Script version         : v1.2.1.1
-; Last changed           : 2014.03.28
+; Script version         : v1.2.1.2
+; Last changed           : 2014.06.24
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -11,8 +11,8 @@
 FileChangeDir(@ScriptDir)
 #include "eccToolVariables.au3"
 
-Global $EmuMoviesName 		= _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), GetCID(), 5)
-Global $EmuMoviesPass 		= _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), GetCID(), 5)
+Global $EmuMoviesName = BinaryToString(_Crypt_DecryptData(Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), $EmuMovieshKey, $CALG_AES_128))
+Global $EmuMoviesPass = BinaryToString(_Crypt_DecryptData(Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), $EmuMovieshKey, $CALG_AES_128))
 Global $EmuMoviesId
 
 Select
@@ -506,8 +506,8 @@ GUICtrlSetTip(-1, "Click to visit website.")
 ;END *** GUI
 ;==============================================================================
 GUICtrlSetImage($Picture, @ScriptDir & "\emuMoviesDownloader_logo.gif")
-If $EmuMoviesPass = 0 Then $EmuMoviesPass = "" ; Decrypt/Encrypt leaves a 0 when attempting on ZERO length data
-If $EmuMoviesName = "0" Then $EmuMoviesName = "" ; Decrypt/Encrypt leaves a 0 when attempting on ZERO length data
+If Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", "") = "" Then $EmuMoviesName = ""
+If Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", "") = "" Then $EmuMoviesPass = ""
 GUICtrlSetData($UserName, $EmuMoviesName)
 GUICtrlSetData($UserPass, $EmuMoviesPass)
 GUISetState(@SW_SHOW, $EMDAccountDataGui)
@@ -523,10 +523,8 @@ While 1
 		Case $Picture
 			Run(@comspec & " /c start " & $EmuMoviesWebsite, "", @SW_HIDE)
 		Case $KnopOK
-			IniWrite(@ScriptDir & "\emuMoviesDownloader.ini", "DATA", "name", _StringEncrypt(1, GUICtrlRead($UserName), GetCID(), 5))
-			IniWrite(@ScriptDir & "\emuMoviesDownloader.ini", "DATA", "pass", _StringEncrypt(1, GUICtrlRead($UserPass), GetCID(), 5))
-			Global $EmuMoviesName = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "name", ""), GetCID(), 5)
-			Global $EmuMoviesPass = _StringEncrypt(0, Iniread(@Scriptdir & "\emuMoviesDownloader.ini", "data", "pass", ""), GetCID(), 5)
+			IniWrite(@ScriptDir & "\emuMoviesDownloader.ini", "DATA", "name", _Crypt_EncryptData(GUICtrlRead($UserName), $EmuMovieshKey, $CALG_AES_128))
+			IniWrite(@ScriptDir & "\emuMoviesDownloader.ini", "DATA", "pass", _Crypt_EncryptData(GUICtrlRead($UserPass), $EmuMovieshKey, $CALG_AES_128))
 			ExitLoop
 	EndSwitch
 Sleep(10)

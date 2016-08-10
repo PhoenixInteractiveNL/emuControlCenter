@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: GUIConstantsEx
-; AutoIt Version : 3.3.12.0
+; AutoIt Version : 3.3.14.2
 ; Language ......: English
 ; Description ...: Constants to be used in GUI applications.
 ; Author(s) .....: Jpm, Valik
@@ -11,6 +11,10 @@
 
 ; #CONSTANTS# ===================================================================================================================
 ; Events and messages
+Global Const $GUI_EVENT_SINGLE = 0 ; (default) Returns a single event.
+Global Const $GUI_EVENT_ARRAY = 1 ; returns an array containing the event and extended information.
+
+Global Const $GUI_EVENT_NONE = 0
 Global Const $GUI_EVENT_CLOSE = -3
 Global Const $GUI_EVENT_MINIMIZE = -4
 Global Const $GUI_EVENT_RESTORE = -5
@@ -51,6 +55,7 @@ Global Const $GUI_EXPAND = 1024
 Global Const $GUI_ONTOP = 2048
 
 ; Font
+Global Const $GUI_FONTNORMAL = 0
 Global Const $GUI_FONTITALIC = 2
 Global Const $GUI_FONTUNDER = 4
 Global Const $GUI_FONTSTRIKE = 8
@@ -92,6 +97,14 @@ Global Const $GUI_GR_NOBKCOLOR = -2
 Global Const $GUI_BKCOLOR_DEFAULT = -1
 Global Const $GUI_BKCOLOR_TRANSPARENT = -2
 Global Const $GUI_BKCOLOR_LV_ALTERNATE = 0xFE000000
+
+; GUICtrlRead Constants
+Global Const $GUI_READ_DEFAULT = 0 ; (Default) Returns a value with state or data of a control.
+Global Const $GUI_READ_EXTENDED = 1 ; Returns extended information of a control (see Remarks).
+
+; GUISetCursor Constants
+Global Const $GUI_CURSOR_NOOVERRIDE = 0 ; (default) Don't override a control's default mouse cursor.
+Global Const $GUI_CURSOR_OVERRIDE = 1 ; override control's default mouse cursor.
 
 ; Other
 Global Const $GUI_WS_EX_PARENTDRAG = 0x00100000

@@ -45,12 +45,6 @@ With eccUpdate you can update ECC directly to the most recent version, these upd
 
 --------------------------------------------------------------------------------
 
-WEBSITE:
-http://ecc.phoenixinteractive.nl
+For more information, please visit:
 
-BOARD/FORUM:
-http://eccforum.phoenixinteractive.nl/
-
-AUTHORS:
-Andreas Scheibel(DE) (ecc@camya.com) / ECC Developer 2005-2009
-Sebastiaan Ebeltjes(NL) (phoenixinteractive@hotmail.com) / ECC Developer 2006-2014
+https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki

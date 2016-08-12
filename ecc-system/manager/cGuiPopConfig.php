@@ -290,7 +290,7 @@ class GuiPopConfig extends GladeXml {
 		$this->cfgImgThumbMinBytesImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_min_filesize.png'));
 		// TAB Color and Fonts
 		$this->cfgEccColorListFontGlobalImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_font.png'));
-		$this->imgUseThemeColors->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_color_picker.png'));	
+		$this->imgUseThemeColors->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_color_picker.png'));
 		// TAB Startup
 		$this->startConfSoundImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_sound.png'));
 		$this->startConfUpdateImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_update.png'));
@@ -687,7 +687,7 @@ class GuiPopConfig extends GladeXml {
 			$this->emuInfoBuffer[$eccident] = $buffer;
 		}
 		$this->emuInfo->set_buffer($this->emuInfoBuffer[$eccident]);
-		$this->emuInfoForum->set_markup('<b>'.sprintf(I18N::get('popupConfig', 'emu_info_footer%s'), '</b>http://ecc.phoenixinteractive.nl/<b>').'</b>');
+		$this->emuInfoForum->set_markup('<b>'.sprintf(I18N::get('popupConfig', 'emu_info_footer%s'), '</b>https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki<b>').'</b>');
 
 		$this->emuAssignGlobalActive->set_active($activeEmu);
 		$this->emuAssignGlobalPath->set_text($path);
@@ -1065,7 +1065,7 @@ class GuiPopConfig extends GladeXml {
 
 		// ECC v1.152 Build 06
 		$this->lblUseThemeColors->set_text(I18N::get('popupConfig', 'lblUseThemeColors'));
-		
+
 		#$this->lbl_ecc_startup_hdl->set_markup('<b>'.I18N::get('popupConfig', 'lbl_ecc_startup_hdl').'</b>');
 		#$this->cfgEccStartupConf->set_label(I18N::get('popupConfig', 'btn_ecc_startup'));
 
@@ -1097,18 +1097,18 @@ class GuiPopConfig extends GladeXml {
 			$this->tabGeneralParsingTriggerValue->set_text($ExtParserTriggerSize_MB);
 		}
 
-		// ECC v1.152 Build 05	
+		// ECC v1.152 Build 05
 		$UnpackGuiTriggerSize_MB = $iniManager->getKey('USER_SWITCHES', 'unpack_gui_trigger_size');
 		if ($UnpackGuiTriggerSize_MB < 1 or $UnpackGuiTriggerSize_MB > 99999 or $UnpackGuiTriggerSize_MB == "" or !is_numeric($UnpackGuiTriggerSize_MB)) { //set default
 			$this->tabGeneralUnpackGUITriggerValue->set_text("50"); //Default value
 		} else{
 			$this->tabGeneralUnpackGUITriggerValue->set_text($UnpackGuiTriggerSize_MB);
-		}		
-		
+		}
+
 		// ECC v1.152 Build 06
 		$cfgUseThemeColors = $iniManager->getKey('ECC_THEME', 'use_theme_colors');
 		$this->cfgUseThemeColors->set_active($cfgUseThemeColors);
-		
+
 		$this->languages = $iniManager->getLanguageFromI18Folders();
 		$languages = I18n::translateArray('languages', $this->languages, true);
 		$selectedLanguage =  $iniManager->getKey('USER_DATA', 'language');

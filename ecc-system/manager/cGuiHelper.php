@@ -66,7 +66,7 @@ class GuiHelper {
 				$eccInfoText = "
 ".str_repeat('-', 80)."
 - This is an emuControlCenter GLOBAL userfolder!
-- You can get the latest version of ECC at http://ecc.phoenixinteractive.nl
+- You can get the latest version of ECC at https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki
 - With ecc, you can manage your roms in an easier way!
 ".str_repeat('-', 80)."
 
@@ -115,7 +115,7 @@ Included subfolder:
 <body>
 <h2>This package is an emuControlCenter eccUser folder for '".htmlspecialchars($platform_name)." (".htmlspecialchars($platform_eccident).")'</h2>
 If you want use this package,<br />
-<strong>download emuControlCenter (ECC) here <a href=\"http://ecc.phoenixinteractive.nl/\">http://ecc.phoenixinteractive.nl/</a></strong><br />
+<strong>download emuControlCenter (ECC) here <a href=\"https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki\">https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki</a></strong><br />
 and add this folder to the eccUser Folder within the emuControlCenter installation.<br />
 <br />
 If you want know more about ecc, found any bugs or have good ideas for new features, you can visit the
@@ -194,7 +194,7 @@ ECC Translations:
 		$dlg->set_version($version);
 		$dlg->set_copyright($this->gui->ecc_release['info_copyright']);
 		$dlg->set_website($website);
-		$dlg->set_comments("Please look for updates at http://ecc.phoenixinteractive.nl");
+		$dlg->set_comments("Please look for updates at https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki");
 		$dlg->set_license(file_get_contents("license.txt"));
 
 		$dlg->run();

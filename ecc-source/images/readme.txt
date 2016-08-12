@@ -1,0 +1,1 @@
+You can use PHOTOSHOP to open and edit PSD files.

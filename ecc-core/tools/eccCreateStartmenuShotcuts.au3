@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Create ECC startmenu shortcuts
-; Script version         : v1.0.0.3
-; Last changed           : 2013.03.28
+; Script version         : v1.0.0.4
+; Last changed           : 2016.08.12
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -37,7 +37,7 @@ $IconNumber = 0
 FileCreateShortcut($FileNametoLink, $LinkFileName, $WorkingDirectory, "", $Description, $Icon, "", $IconNumber,$State)
 
 ; Create shortcut to ECC website
-$FileNameToLink = "http://ecc.phoenixinteractive.nl"
+$FileNameToLink = $eccWebsite
 $WorkingDirectory = ""
 $LinkFileName = @ProgramsDir & "\" & $StartFolderName & "\" & "ECC Website"
 $Description = "Go to ECC Website"

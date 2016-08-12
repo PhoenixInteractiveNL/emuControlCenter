@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.2.0.0
-Global $ScriptVersion = "v1.2.0.0"
-; Last changed           : 2016.08.10
+; Script version         : v1.2.0.1
+Global $ScriptVersion = "v1.2.0.1"
+; Last changed           : 2016.08.12
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -148,7 +148,7 @@ If $eccLastUpdate > $eccLocalLastUpdate Then
 		Addnote("yes,#")
 		Addnote("there are more then 30 updates available!#")
 		Addnote("please download the most recent version of ECC!#")
-		Addnote("visit 'http://ecc.phoenixinteractive.nl' for more information.#")
+		Addnote("visit '" & $eccWebsite & "' for more information.#")
 		ExitOnError()
 	Else
 		Addnote("yes, found " & $eccLastUpdate - $eccLocalLastUpdate & " update(s).#")

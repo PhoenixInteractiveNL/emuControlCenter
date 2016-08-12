@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   width="210mm"
+   height="297mm"
+   sodipodi:docbase="C:\"
+   sodipodi:docname="Tekening4.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+<defs>
+<linearGradient id="orange_red" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" style="stop-color:rgb(255,255,0);
+stop-opacity:1"/>
+<stop offset="100%" style="stop-color:rgb(255,0,0);
+stop-opacity:1"/>
+</linearGradient>
+</defs>
+  <sodipodi:namedview
+     inkscape:window-height="964"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     inkscape:zoom="1.0132605"
+     inkscape:cx="328.01555"
+     inkscape:cy="840.08408"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:current-layer="svg2"
+     showguides="false" />
+  <g
+     id="g4269"
+     style="fill:#7e98b2;fill-opacity:1"
+     transform="matrix(7,0,0,7,-2096.5,-1339.6731)">
+    <path
+       id="path4259"
+       d="M 310,197.36218 L 310,203.36218 L 313,206.36218 L 313,207.36218 L 312,208.36218 L 316,212.36218 L 316,213.36218 L 312,217.36218 L 313,218.36218 L 313,219.36218 L 310,222.36218 L 310,228.36218 L 316,228.36218 L 319,225.36218 L 320,225.36218 L 321,226.36218 L 325,222.36218 L 326,222.36218 L 330,226.36218 L 331,225.36218 L 332,225.36218 L 335,228.36218 L 341,228.36218 L 341,222.36218 L 338,219.36218 L 338,218.36218 L 339,217.36218 L 335,213.36218 L 335,212.36218 L 339,208.36218 L 338,207.36218 L 338,206.36218 L 341,203.36218 L 341,197.36218 L 335,197.36218 L 332,200.36218 L 331,200.36218 L 330,199.36218 L 326,203.36218 L 325,203.36218 L 321,199.36218 L 320,200.36218 L 319,200.36218 L 316,197.36218 L 310,197.36218 z "
+       style="fill:#7e98b2;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4261"
+       d="M 313,206.36218 L 318,205.36218 L 319,200.36218"
+       style="fill:#7e98b2;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4263"
+       d="M 332,200.36218 L 333,205.36218 L 338,206.36218"
+       style="fill:#7e98b2;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4265"
+       d="M 338,219.36218 L 333,220.36218 L 332,225.36218"
+       style="fill:#7e98b2;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4267"
+       d="M 319,225.36218 L 318,220.36218 L 313,219.36218"
+       style="fill:#7e98b2;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+  </svg>

@@ -26,11 +26,11 @@ $eccConfig = array(
 
 		'local_release_date' => $date,
 		'release_state' => '',
-		'website' => 'http://ecc.phoenixinteractive.nl',
+		'website' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
 		'email' => 'phoenixinteractive@hotmail.com',
 		'eccdat_version' => '1.1',
 		'eccdat_state' => '',
-		'info_copyright' => 'Copyright(c) 2005-2014 Sebastiaan Ebeltjes(NL) / Andreas Scheibel(DE)',
+		'info_copyright' => '2005-2016 Sebastiaan Ebeltjes(NL) / Andreas Scheibel(DE)',
 	),
 	'user_path_subfolder_default' => array(
 		'emus',
@@ -548,8 +548,6 @@ $eccConfig = array(
 		'META_ADD_URL' => '',
 		'META_GET_URL' => '',
 		'META_DATFILE_URL' => '',
-		// This didn't work properly anymore, so it's adjusted
-		//'GOOGLE_ROM_SEARCH' => 'http://www.google.com/cse?cx=partner-pub-3180379742673766:lte9rd-5l9g&q=',
 		'GOOGLE_ROM_SEARCH' => 'http://www.google.com/search?q=',
 	),
 	'cs' => array(

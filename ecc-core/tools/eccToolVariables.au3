@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.6
-; Last changed           : 2014.06.24
+; Script version         : v1.0.0.7
+; Last changed           : 2016.08.12
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -12,7 +12,14 @@
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
 
-; AU3 INCLUDES
+; WEB variables
+Global $eccWebsite 					= "https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"
+Global $eccForum 					= "http://eccforum.phoenixinteractive.nl"
+Global $eccDownloadLatest			= "https://phoenixinteractivenl.github.io/emuControlCenter/"
+Global $eccDownloadTaggedReleases 	= "https://github.com/PhoenixInteractiveNL/emuControlCenter/releases"
+
+
+; Autoit includes
 #include "..\thirdparty\autoit\include\GuiEdit.au3"
 #include "..\thirdparty\autoit\include\GuiRichEdit.au3"
 #include "..\thirdparty\autoit\include\ScrollBarConstants.au3"
@@ -99,7 +106,6 @@ Global $eccUpdateLogFile 	= @Scriptdir & "\eccUpdate.log"
 Global $UpdateServer 		= "https://raw.githubusercontent.com/PhoenixInteractiveNL/ecc-updates/master/" ; don't forget the / on the end!
 
 ; ECC GALLERY variables
-Global $GalleryImageUrl 	= "http://ecc.phoenixinteractive.nl"
 Global $FullPathToImageFolder = $eccInstallPath & "\ecc-user\" & $RomEccId & "\images\" & $RomCrc32short & "\" & $RomCrc32 & "\"
 
 ; ECC EMD variables

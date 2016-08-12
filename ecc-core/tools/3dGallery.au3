@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : 3D Gallery for viewing images!
-; Script version         : v1.2.0.0
-; Last changed           : 2014.04.23
+; Script version         : v1.2.0.1
+; Last changed           : 2016.08.12
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -290,7 +290,7 @@ If $Gallery = "tiltviewer" Then
 			$Teller = $Teller + 1
 			_XMLCreateChildNode("tiltviewergallery/photos", "photo")
 			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "imageurl", $FullPathToImageFolder & $file)
-			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "linkurl", $GalleryImageUrl)
+			_XMLSetAttrib("tiltviewergallery/photos/photo[" & $Teller & "]", "linkurl", $eccWebsite)
 			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "title", GetRomTypeContents($file))
 			_XMLCreateChildNode("tiltviewergallery/photos/photo[" & $Teller & "]", "description", $RomName & " [" & $RomEccId & "]")
 		EndIf
@@ -447,7 +447,7 @@ If $Gallery = "simpleviewer" Then
 			_XMLCreateChildNode("simpleviewergallery", "image")
 			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "imageURL", $FullPathToImageFolder & $file)
 			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "thumbURL", $FullPathToImageFolder & $file)
-			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkURL", $GalleryImageUrl)
+			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkURL", $eccWebsite)
 			_XMLSetAttrib("simpleviewergallery/image[" & $Teller & "]", "linkTarget", "_blank")
 			_XMLCreateChildNode("simpleviewergallery/image[" & $Teller & "]", "caption", GetRomTypeContents($file) & " of " & $RomName & " [" & $RomEccId & "]")
 		EndIf
@@ -834,7 +834,7 @@ If $Gallery = "circulargallery" Then
 			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxImage", $FullPathToImageFolder & $file)
 			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxInfo", $FullPathToImageFolder & $file)
 			_XMLSetAttrib("images/photo[" & $Teller & "]", "colorboxClass", "image")
-			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", $GalleryImageUrl)
+			_XMLSetAttrib("images/photo[" & $Teller & "]", "url", $eccWebsite)
 			_XMLSetAttrib("images/photo[" & $Teller & "]", "target", "_blank")
 			_XMLCreateChildNode("photos", "photo")
 			_XMLCreateChildNode("images/photo[" & $Teller & "]", "head", GetRomTypeContents($file))

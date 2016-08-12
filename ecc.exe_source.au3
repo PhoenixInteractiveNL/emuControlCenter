@@ -144,10 +144,10 @@ Global $ecc_splash_timeout =			"20"
 ; -------------------------------------
 If IniRead($ecc_config_file_general_user, "USER_DATA", "language", "") = "" Then
 
-$ECCSTARTUPFIRSTCONFIG = GUICreate("ECC Startup - First time configuration!", 571, 319, -1, -1)
+$ECCSTARTUPFIRSTCONFIG = GUICreate("ECC Startup - First time configuration!", 571, 311, -1, -1)
 GUISetBkColor(0xFFFFFF)
-$ButtonOk = GUICtrlCreateButton("OK", 472, 264, 91, 49)
-$guistring3 = GUICtrlCreateGroup(" Options ", 8, 256, 345, 57)
+$ButtonOk = GUICtrlCreateButton("OK", 472, 264, 91, 41)
+$guistring3 = GUICtrlCreateGroup(" Options ", 8, 256, 345, 49)
 $CheckBoxUpdate = GUICtrlCreateCheckbox("Check for updates on startup.", 16, 272, 329, 17)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $guistring1 = GUICtrlCreateGroup(" Select Language ", 8, 0, 161, 257)
@@ -156,7 +156,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 $guistring2 = GUICtrlCreateGroup(" Please read carefully ", 176, 0, 385, 257)
 $Textbox = GUICtrlCreateEdit("", 184, 16, 369, 233, BitOR($GUI_SS_DEFAULT_EDIT,$ES_READONLY))
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-$ButtonShortcuts = GUICtrlCreateButton("Create startmenu shortcuts", 360, 264, 107, 49, $BS_MULTILINE)
+$ButtonShortcuts = GUICtrlCreateButton("Create startmenu shortcuts", 360, 264, 107, 41, $BS_MULTILINE)
 
 ; -------------------------------------
 ; Fill Language Tree

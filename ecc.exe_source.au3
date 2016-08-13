@@ -32,7 +32,7 @@ AutoItSetOption("WinTitleMatchMode",3)
 ; -------------------------------------
 ; Define baked-in variables
 ; -------------------------------------
-Global $ecc_file_version =				"3.0.0.0"
+Global $ecc_file_version =				"3.0.0.1"
 Global $ecc_messagebox_title =			"ECC"
 Global $ecc_php_file = 					@Scriptdir & "\ecc-system\ecc.php"
 Global $ecc_php_file_q = 				Chr(34) & $ecc_php_file & Chr(34)
@@ -566,7 +566,7 @@ If $DATFileFound > 0 Then
 		If @error Then ExitLoop
 
 		;Unpack 7Z DAT archives
-		ShellExecuteWait($ecc_3rdParty_7zip, " x " & $ecc_datfile_folder & "\" & $File & " -o" & $ecc_datfile_folder & " -y", @ScriptDir, "", @SW_HIDE)
+		ShellExecuteWait($ecc_3rdParty_7zip, " x " & Chr(34) & $ecc_datfile_folder & "\" & $File & Chr(34) & " -o" & Chr(34) & $ecc_datfile_folder & Chr(34) & " -y", @ScriptDir, "", @SW_HIDE)
 
 		FileDelete($ecc_datfile_folder & "\" & $File)
 

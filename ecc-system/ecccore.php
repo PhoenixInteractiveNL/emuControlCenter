@@ -513,8 +513,8 @@ $eccConfig = array(
 
 	'eccHelpLocations' => array(
 		'ECC_DOC_OFFLINE' => '/ecc-docs/index.html',
-		'ECC_DOC_ONLINE' => 'http://ecc.phoenixinteractive.nl/docs/',
-		'ECC_WEBSITE' => 'http://ecc.phoenixinteractive.nl',
+		'ECC_DOC_ONLINE' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
+		'ECC_WEBSITE' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
 		'ECC_FORUM' => 'http://eccforum.phoenixinteractive.nl/',
 
 		'ECC_EXE_START' => 'ecc.exe',

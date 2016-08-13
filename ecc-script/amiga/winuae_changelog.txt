@@ -1,3 +1,7 @@
+v1.0.1.0
+- Merged getgemus script in the eccScript.
+- Moved Amiga Gamebase MDB to ecc-system\datfile folder.
+
 v1.0.0.9b
 - Added GetGemusConfig v1.4 RELOADED permanently! (Phoenix)
 

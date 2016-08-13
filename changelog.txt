@@ -1,4 +1,19 @@
-2016-08-12
+Update 00619 2016-08-13
+- CORE
+  - Updated links in the GUI to the new ECC website.
+  - Updated the teaser image.
+- Scripts
+  - Commodore Amiga: Merged the eccScript with the getgemusconfig script, placed
+    the Amiga Gamebase inside the ecc-system\datfiles folder.
+- ECC Startup v3.0.0.1
+  - Fixed unpacking DAT files with spaces in the filenames.
+- DAT files updates
+  - Amiga Gamebase v1.6 to v2.0
+- 3RD Party updates
+  - Mplayer Redxii-SVN-r37153-4.8.2 to Redxii-SVN-r37871-4.9.3 (i686)
+
+
+Update 00618 2016-08-12
 - ECC SOURCE files released!, they include:
   - KODA AutoIt3 GUI's (KXF)
   - Photoshop images (PSD)

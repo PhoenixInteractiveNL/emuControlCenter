@@ -113,8 +113,8 @@ $i18n['popupConfig'] = array(
 		"Hoofdinstellingen",
 	'tab_label_datfiles' =>
 		"DAT-bestanden",
-	'tab_label_images' =>
-		"Plaatjes",
+	'tab_label_multimedia' =>
+		"Multimedia",
 	'tab_label_colorsandfonts' =>
 		"Kleuren en lettertypen",
 	
@@ -395,5 +395,15 @@ $i18n['popupConfig'] = array(
 	/* 1.152 BUILD 06 */		
 	'lblUseThemeColors' =>	
 		"Gebruik thema kleuren",
+
+	/* 1.20 */		
+	'DatabaseFolderLabel' =>	
+		"Database map:",
+	'DatabaseFolderButton' =>	
+		"Wijzig folder",
+    'dialogDaemontoolsFolder' =>	
+		"Lokaliseer Daemontools bestand",
+    'dialogDatabaseFolder' =>	
+		"Selecteer een map om de database in op te slaan",
 );
 ?>

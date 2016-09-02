@@ -111,8 +111,8 @@ $i18n['popupConfig'] = array(
 		"General",
 	'tab_label_datfiles' =>
 		"DAT files",
-	'tab_label_images' =>
-		"Images",
+	'tab_label_multimedia' =>
+		"Multimedia",
 	'tab_label_colorsandfonts' =>
 		"Colors and Fonts",
 	
@@ -391,5 +391,15 @@ $i18n['popupConfig'] = array(
 	/* 1.152 BUILD 06 */		
 	'lblUseThemeColors' =>	
 		"Use theme colors",
+	
+	/* 1.20 */		
+	'DatabaseFolderLabel' =>	
+		"Database folder:",
+	'DatabaseFolderButton' =>	
+		"Change folder",		
+    'dialogDaemontoolsFolder' =>	
+		"Please locate Daemontools",
+	'dialogDatabaseFolder' =>	
+		"Select a map to store the database",
 );
 ?>

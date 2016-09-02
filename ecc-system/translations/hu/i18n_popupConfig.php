@@ -113,8 +113,8 @@ $i18n['popupConfig'] = array(
 		"Általános",
 	'tab_label_datfiles' =>
 		"Adatfájlok",
-	'tab_label_images' =>
-		"Képek",
+	'tab_label_multimedia' =>
+		"Multimedia",
 	'tab_label_colorsandfonts' =>
 		"Színek és betûtípusok",
 	
@@ -395,5 +395,15 @@ $i18n['popupConfig'] = array(
 	/* 1.152 BUILD 06 */		
 	'lblUseThemeColors' =>	
 		"Use theme colors",
+
+	/* 1.20 */		
+	'DatabaseFolderLabel' =>	
+		"Database folder:",
+	'DatabaseFolderButton' =>	
+		"Change folder",		
+    'dialogDaemontoolsFolder' =>	
+		"Please locate Daemontools",
+	'dialogDatabaseFolder' =>	
+		"Select a map to store the database",
 );
 ?>

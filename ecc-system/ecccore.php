@@ -521,7 +521,6 @@ $eccConfig = array(
 		'ECC_SCRIPT_EXTENSION' => '.eccscript',
 		'LOG_DIR' => '/ecc-user-logs',
 
-		'SCRIPT_ECC_DEV_SQL' => 'ecc-core/thirdparty/sqlitebrowser/sqlitebrowser.au3',
 		'SCRIPT_ECCUPDATE' => 'ecc-core/tools/eccUpdate.au3',
 		'SCRIPT_GTKTHEMESELECT' => 'ecc-core/tools/gtkThemeSelect.au3',
 		'SCRIPT_ECCDIAGNOSTICS' => 'ecc-core/tools/eccDiagnostics.au3',
@@ -542,6 +541,7 @@ $eccConfig = array(
 		'ECC_EXE_HEX_EDITOR' => 'ecc-core/thirdparty/hxd/hxd.exe',
 		'ECC_EXE_DEV_GUI_GLADE' => 'ecc-core/php-gtk2/glade-3.exe',
 		'ECC_EXE_DEV_GUI_KODA' => 'ecc-core/thirdparty/koda/fd.exe',
+		'ECC_EXE_SQL_BROWSER' => 'ecc-core/thirdparty/sqlitebrowser/sqlitebrowser.exe',
 
 	),
 	'eccdb' => array (

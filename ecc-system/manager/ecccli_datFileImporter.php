@@ -15,10 +15,10 @@ print "</pre>\n";
 
 class DatParser {
 	public function parse() {
-		
+
 		$stripInfos = array (
-		
-		
+
+
 			'(19' => array(
 				'regex' => '\((\d\d\d\d)\)',
 				'save_type'	=> 'year',
@@ -31,7 +31,7 @@ class DatParser {
 				'save_string' => true,
 				'save_match' => 1,
 			),
-		
+
 			# 'J' => 'Japanese',
 			# --------------------------
 			'(J)' => array(
@@ -44,7 +44,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'J',
 			),
-			
+
 			# 'E' => 'English',
 			# --------------------------
 			'(E)' => array(
@@ -71,8 +71,8 @@ class DatParser {
 				'regex' => False,
 				'save_type'	=> 'languages',
 				'save_string' => 'E',
-			),			
-			
+			),
+
 			# 'G' => 'German',
 			# --------------------------
 			'(G)' => array(
@@ -86,7 +86,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'G',
 			),
-			
+
 			# 'F' => 'French',
 			# --------------------------
 			'(F)' => array(
@@ -99,7 +99,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'F',
 			),
-			
+
 			# 'I' => 'Italian',
 			# --------------------------
 			'(I)' => array(
@@ -112,7 +112,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'I',
 			),
-			
+
 			# 'S' => 'Spanish',
 			# --------------------------
 			'(S)' => array(
@@ -124,8 +124,8 @@ class DatParser {
 				'regex' => '\(.*?eng.*?\)',
 				'save_type'	=> 'languages',
 				'save_string' => 'S',
-			),			
-			
+			),
+
 			# 'C' => 'Chinese',
 			# --------------------------
 			'(C)' => array(
@@ -138,7 +138,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'C',
 			),
-			
+
 			# 'P' => 'Portugese',
 			# --------------------------
 			'(P)' => array(
@@ -150,8 +150,8 @@ class DatParser {
 				'regex' => False,
 				'save_type'	=> 'languages',
 				'save_string' => 'P',
-			),			
-			
+			),
+
 			# 'PL' => 'Polish',
 			# --------------------------
 			'(PL)' => array(
@@ -164,7 +164,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'PL',
 			),
-			
+
 			# 'KOR' => 'Korean',
 			# --------------------------
 			'(Korean)' => array(
@@ -177,7 +177,7 @@ class DatParser {
 				'save_type'	=> 'languages',
 				'save_string' => 'KOR',
 			),
-			
+
 			# Trainer
 			# --------------------------
 			# --------------------------
@@ -192,8 +192,8 @@ class DatParser {
 				'save_type'	=> 'trainer',
 				'save_string' => 1,
 			),
-			
-			
+
+
 			# --------------------------
 			# --------------------------
 			# --------------------------
@@ -201,8 +201,8 @@ class DatParser {
 				'regex' => false,
 				'save_type'	=> 'freeware',
 				'save_string' => 1,
-			),			
-			
+			),
+
 			# --------------------------
 			# --------------------------
 			# --------------------------
@@ -210,8 +210,8 @@ class DatParser {
 				'regex' => false,
 				'save_type'	=> 'usk',
 				'save_string' => 18,
-			),	
-			
+			),
+
 			# --------------------------
 			# --------------------------
 			# --------------------------
@@ -219,8 +219,8 @@ class DatParser {
 				'regex' => false,
 				'save_type'	=> 'running',
 				'save_string' => 1,
-			),				
-			
+			),
+
 			# --------------------------
 			# --------------------------
 			# --------------------------
@@ -236,7 +236,7 @@ class DatParser {
 				'save_type'	=> 'usermod',
 				'save_string' => 1,
 			),
-			
+
 			/*
 			'NL' => 'Dutch',
 			'NO' => 'Norway',
@@ -244,7 +244,7 @@ class DatParser {
 			'FN' => 'Finnish',
 			'KOR' => 'Korean',
 			*/
-			
+
 			#'(C)' => False,
 			#'(J)' => False,
 			#'(E)' => False,
@@ -387,16 +387,16 @@ class DatParser {
 			'bung' => '\(.*?bung.*?\)',
 			'bung' => '\(.*?bung.*?\)',
 		);
-		
+
 		$ret = array();
-		
+
 		#############################################################################
 		###### // gameboy classic + color + advanced + virtual
 		#############################################################################
-		
+
 		$base_path = "../../../emuControlCenter-user-datfiles/";
-		
-		
+
+
 		$data = array (
 			// GBA
 
@@ -417,7 +417,7 @@ class DatParser {
 					'remove_string' => '-',
 				),
 				*/
-				
+
 			),
 			array(
 				'ecc_ident' => 'gba',
@@ -469,7 +469,7 @@ class DatParser {
 				'strip_info_direct_after' => false,
 				'ini_file' => $base_path."/Nintendo Game Boy Color (20051113_RC).dat",
 			),
-			
+
 			// GBX - GBC and GB
 			array(
 				'ecc_ident' => '',
@@ -504,7 +504,7 @@ class DatParser {
 				'strip_info_direct_after' => false,
 				'ini_file' => $base_path."/Nintendo Virtual Boy (20040525_RC).dat",
 			),
-			
+
 			// N64
 			array(
 				'ecc_ident' => 'n64',
@@ -665,7 +665,7 @@ class DatParser {
 				'strip_info_direct_after' => false,
 				'ini_file' => $base_path."/Atari Lynx (20040625_RC).dat",
 			),
-			
+
 			// pce pc-engine / turbo graphics
 			array(
 				'ecc_ident' => 'pce',
@@ -684,7 +684,7 @@ class DatParser {
 				'strip_info_direct_after' => false,
 				'ini_file' => $base_path."/NEC PC Engine - TurboGrafx 16 (20050626_RC).dat",
 			),
-			
+
 			// wswan wonderswan
 			array(
 				'ecc_ident' => 'wswan',
@@ -746,9 +746,9 @@ class DatParser {
 				'use_extesion_as_eccident' => false,
 				'strip_info_direct_after' => false,
 				'ini_file' => $base_path."/Good7800 2.04.dat",
-			),			
+			),
 		);
-		
+
 		/*
 		* parse images from gba_lister
 		* hack in loop - search for // only for gba_listener
@@ -764,7 +764,7 @@ class DatParser {
 				'strip_info_direct_after' => false,
 				'strip_info_pos_start' => 0,
 				'strip_info_pos_end' => 7,
-				
+
 				'images' => false,
 				/*
 				'images' => array(
@@ -774,53 +774,53 @@ class DatParser {
 					'remove_string' => '-',
 				),
 				*/
-				
+
 			),
 		);
-		
+
 		foreach ($data as $key => $value) {
-			
+
 			$ecc_ident = $value['ecc_ident'];
 			$file_ext_default = $value['file_ext_default'];
 			$extension_from_field = $value['extension_from_field'];
 			$use_extesion_as_eccident = $value['use_extesion_as_eccident'];
 			$ini_file = $value['ini_file'];
 			$strip_info_direct_after = $value['strip_info_direct_after'];
-			
+
 			$strip_info_pos_start = $value['strip_info_pos_start'];
 			$strip_info_pos_end = $value['strip_info_pos_end'];
-			
-			
-			
+
+
+
 			$images = @$value['images'];
-			
-			
+
+
 			$name_from_field = (isset($value['name_from_field']) && $value['name_from_field']!==false) ? $value['name_from_field'] : 1 ;
-			
-			
+
+
 			$ini = $this->parse_ini_file_quotes_safe($ini_file);
-			
+
 			$ret = array();
 			$ret['CREDITS'] = $ini['CREDITS'];
 			$ret['DAT'] = $ini['DAT'];
 			$ret['EMULATOR'] = $ini['EMULATOR'];
-			
+
 			print "\n## Start parsing $ecc_ident: $ini_file (DEFAULT: $file_ext_default)!\n";
 			print str_repeat("#", 80)."\n";
 			print "<pre>";
 			print_r($value);
 			print "</pre>\n";
 			print str_repeat("-", 80)."\n";
-			
+
 			$count_valid = 0;
 			$count_corrupt = 0;
 			$count_total = 0;
-			
+
 			foreach ($ini['GAMES'] as $key => $value) {
 				$split = explode('¬', $key);
-				
 
-				
+
+
 				if (isset($split[1]) && isset($split[4]) && isset($split[5])) {
 					// einige felder sind in lowercase
 					// hier kann angegeben werden, welches feld
@@ -848,35 +848,35 @@ class DatParser {
 					}
 					$eccident = ($use_extesion_as_eccident===true) ? trim(str_replace(".", "", $file_ext)) : $ecc_ident;
 					$file_ext = trim(str_replace(".", "", $file_ext));
-					
-					
+
+
 					$image_id = false;
 					if (isset($images) && $images != false) {
 						$image_id = substr($file_name, $images['image_id_position_start'], $images['image_id_position_end']);
 						$file_name = str_replace($image_id, '', $file_name);
 						$image_id =  (int)str_replace($images['remove_string'], '', $image_id);
 					}
-					
-					
 
-					
-					
+
+
+
+
 					$file_crc32 = $split[6];
 					$file_id = $split[7];
-					
+
 					$stripped_infos = "";
-					
-					
+
+
 					if ($strip_info_pos_start || $strip_info_pos_end) {
 						$strip_info_pos_start = ($strip_info_pos_start) ? $strip_info_pos_start : 0;
 						$strip_info_pos_end = ($strip_info_pos_end) ? $strip_info_pos_end : strlen($file_name);
-						
+
 						$stripped_infos .= substr($file_name, $strip_info_pos_start, $strip_info_pos_end);
 						$file_name = str_replace($stripped_infos, '', $file_name);
 						#print "$test $strip_info_pos_start || $strip_info_pos_end\n";
 						#die;
 					}
-					
+
 					if (isset($strip_info_direct_after) && $strip_info_direct_after !== false) {
 						if ($pos = strpos($file_name, $strip_info_direct_after)) {
 							$file_name_tmp = $file_name;
@@ -885,11 +885,11 @@ class DatParser {
 						}
 					}
 					else {
-						
+
 						// remove crap from info-file-data
 						foreach ($stripInfos as $search => $regex) {
 							if (stripos($file_name, $search)!==false) {
-								
+
 								if ($regex===false) {
 									$file_name_original_tmp = $file_name;
 									$file_name = str_ireplace($search, "", $file_name);
@@ -899,20 +899,20 @@ class DatParser {
 								}
 								else {
 									if (is_array($regex)) {
-										
+
 										$regex_tmp = $regex;
 										$regex = $regex_tmp['regex'];
 										$save_type = $regex_tmp['save_type'];
 										$save_string = $regex_tmp['save_string'];
 										$save_match = (isset($regex_tmp['save_match'])) ?  $regex_tmp['save_match'] : 0;
-										
-										
+
+
 										if ($regex!==false) {
 											preg_match('/'.$regex.'/i', $file_name, $matches);
 											if (isset($matches[0])) {
 												$stripped_infos .= trim($matches[0])."|";
 												$file_name = preg_replace('/'.$regex.'/i', "", $file_name);
-												
+
 												// auto detect
 												if ($save_match) {
 													$save_string = $matches[$save_match];
@@ -921,7 +921,7 @@ class DatParser {
 													$save_string = ($save_string!==false) ? $save_string : $matches[0];
 												}
 												$ret['GAMES'][$file_crc32]['ECC_INFOS'][$save_type][$save_string] = true;
-												
+
 												#if ($save_match) {
 												#	print "['GAMES'][$file_crc32]['ECC_INFOS'][$save_type][$save_string]";
 												#	die;
@@ -933,14 +933,14 @@ class DatParser {
 											$file_name = str_ireplace($search, "", $file_name);
 											if ($file_name != $file_name_original_tmp) {
 												$stripped_infos .= trim($search)."|";
-												
+
 												// auto detect
 												$save_string = ($save_string!==false) ? $save_string : $search;
 												$ret['GAMES'][$file_crc32]['ECC_INFOS'][$save_type][$save_string] = true;
 											}
 										}
-										
-										
+
+
 
 									}
 									else {
@@ -954,7 +954,7 @@ class DatParser {
 							}
 						}
 					}
-					
+
 					$file_name = str_replace("  ", " ", $file_name);
 					$ret['GAMES'][$file_crc32]['ECCIDENT'] = trim(strtolower($eccident));
 					$ret['GAMES'][$file_crc32]['NAME'] = trim($file_name);
@@ -965,13 +965,13 @@ class DatParser {
 					$ret['GAMES'][$file_crc32]['IMAGE_ID'] = trim($image_id);
 					print str_repeat(" ", 180).chr(13);
 					print "? ".$file_name.chr(13);
-					
-					
 
-					/* 
+
+
+					/*
 					if (!isset($count)) $count=0;
 					$count++;
-					
+
 					if ($count < 2) {
 						print "<pre>";
 						print_r($ret['GAMES']);
@@ -979,20 +979,20 @@ class DatParser {
 						#die;
 					}
  */
-					
+
 					// only for gba_listener
-					
+
 					if (isset($images)) {
 						$source_a = $images['image_folder'].DIRECTORY_SEPARATOR.$image_id."a.jpg";
 						$dest_a = $images['image_folder'].DIRECTORY_SEPARATOR."ecc_".$eccident."_".$file_crc32."_ingame_start.jpg";
 						if (realpath($source_a)) copy($source_a, $dest_a);
-						
+
 						$source_b = $images['image_folder'].DIRECTORY_SEPARATOR.$image_id."b.jpg";
 						$dest_b = $images['image_folder'].DIRECTORY_SEPARATOR."ecc_".$eccident."_".$file_crc32."_ingame_play_01.jpg";
 						if (realpath($source_b))copy($source_b, $dest_b);
 					}
-					
-					
+
+
 					$count_valid++;
 				}
 				else {
@@ -1001,22 +1001,27 @@ class DatParser {
 				}
 				$count_total++;
 			}
-			
+
 			print str_repeat(" ", 180).chr(13);
 			print "Parsing DONE!\n";
 			print "count_total $count_total\n";
 			print "count_valid $count_valid\n";
 			print "count_corrupt $count_corrupt\n";
 			print str_repeat("-", 80)."\n";
-			
+
 			$sqliteerror = false;
-			$sqlitDb = new SQLiteDatabase('../database/eccdb', 0666, $sqliteerror);
+
+			$databaseFolder = "../database/"; //Default
+			$databaseFolder = $this->ini->getKey('USER_DATA', 'database_path'); // Load database folder from INI.
+			$databaseFile = $databaseFolder."eccdb";
+
+			$sqlitDb = new SQLiteDatabase($databaseFile, 0666, $sqliteerror);
 			foreach ($ret['GAMES'] as $crc32 => $infos) {
-				
+
 				#print $infos['NAME']."\n";
 				$file_ext = ($infos['EXT']!="") ? strtolower($infos['EXT']) : strtolower($file_ext_default);
 				$file_ext = trim(str_replace(".", "", $file_ext));
-				
+
 				$q = "
 					SELECT
 					*
@@ -1030,19 +1035,19 @@ class DatParser {
 				";
 				#print $q."\n";
 				$hdl = $sqlitDb->query($q);
-				
+
 				if ($res = $hdl->fetch(SQLITE_ASSOC)) {
-					
+
 					$aaa = $res['info']."".$infos['INFO'];
-					
+
 					#print "OLD: $aaa\n";
-					
+
 					$bbb = explode("|", $aaa);
 					$infos_merged = array_unique($bbb);
 					$new_infos = implode("|", $infos_merged);
-					
+
 					#print "NEW: $new_infos\n\n";
-					
+
 					$q = "
 						update
 						mdata
@@ -1053,21 +1058,21 @@ class DatParser {
 					";
 					#print $q."\n";
 					$hdl = $sqlitDb->query($q);
-						
+
 					$id = $res['id'];
 					#print strtoupper($infos['CRC32'])." -> ".$infos['NAME']."\n";
 					print str_repeat(" ", 180).chr(13);
 					print "= ".$infos['NAME'].chr(13);
 				}
 				else {
-					
+
 					$running = (isset($infos['ECC_INFOS']['running'])) ? current(array_keys($infos['ECC_INFOS']['running'])) : "NULL";
 					$usermod = (isset($infos['ECC_INFOS']['usermod'])) ? current(array_keys($infos['ECC_INFOS']['usermod'])) : "NULL";
 					$freeware = (isset($infos['ECC_INFOS']['freeware'])) ? current(array_keys($infos['ECC_INFOS']['freeware'])) : "NULL";
 					$year = (isset($infos['ECC_INFOS']['year'])) ? current(array_keys($infos['ECC_INFOS']['year'])) : "NULL";
 					$usk = (isset($infos['ECC_INFOS']['usk'])) ? current(array_keys($infos['ECC_INFOS']['usk'])) : "NULL";
 					$creator = (isset($infos['ECC_INFOS']['creator'])) ? current(array_keys($infos['ECC_INFOS']['creator'])) : "NULL";
-					
+
 					$q = "
 						INSERT INTO
 						mdata
@@ -1104,17 +1109,17 @@ class DatParser {
 						)
 					";
 					#print $q."\n";
-					
+
 					#die;
-					
+
 					$hdl = $sqlitDb->query($q);
 					$id = $sqlitDb->lastInsertRowid();
-					
+
 					print str_repeat(" ", 180).chr(13);
 					print "+ ".$infos['NAME'].chr(13);
 					#print "+".$infos['NAME']."\n";
 				}
-				
+
 				// process languages
 				if (isset($infos['ECC_INFOS']['languages']) && count($infos['ECC_INFOS']['languages'])) {
 					$this->save_language($sqlitDb, $id, array_keys($infos['ECC_INFOS']['languages']));
@@ -1141,7 +1146,7 @@ class DatParser {
 		}
 		return true;
 	}
-	
+
 	public function parse_ini_file_quotes_safe($f)
 	{
 		$newline = "
@@ -1155,7 +1160,7 @@ class DatParser {
 		$header_section = "";
 		//Read to end of file with the newlines still attached into $f
 		$f=@file($f);
-		// Process all lines from 0 to count($f) 
+		// Process all lines from 0 to count($f)
 		for ($i=0;$i<@count($f);$i++)
 		{
 		$newsec=0;
@@ -1174,9 +1179,9 @@ class DatParser {
 		if (!$newsec)
 		{
 		//
-		// Look for the = char to allow us to split the section into key and value 
+		// Look for the = char to allow us to split the section into key and value
 		$w=@explode("=",$w);$k=@trim($w[0]);unset($w[0]); $v=@trim(@implode("=",$w));
-		// look for the new lines 
+		// look for the new lines
 		if ((@substr($v,0,1)=="\"") and (@substr($v,-1,1)=="\"")) {$v=@substr($v,1,@strlen($v)-2);}
 		if ($sec) {$r[$sec][$k]=$v;} else {$r[$k]=$v;}
 		}

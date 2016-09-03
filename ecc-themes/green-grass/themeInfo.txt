@@ -1,5 +1,0 @@
-name="Green-Theme"
-author="ecc"
-date="20080123"
-contact="ecc@camya.com"
-website="http://www.camya.com/"

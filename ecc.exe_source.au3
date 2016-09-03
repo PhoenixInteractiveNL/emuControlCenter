@@ -16,6 +16,7 @@
 #include "ecc-core\thirdparty\autoit\include\FTPEx.au3"
 #include "ecc-core\thirdparty\autoit\include\Array.au3"
 #include "ecc-core\thirdparty\autoit\include\File.au3"
+#include "ecc-core\thirdparty\autoit\include\GIFAnimation.au3"
 
 Global Const $AC_SRC_ALPHA = 1
 
@@ -32,7 +33,7 @@ AutoItSetOption("WinTitleMatchMode",3)
 ; -------------------------------------
 ; Define baked-in variables
 ; -------------------------------------
-Global $ecc_file_version =				"3.0.0.1"
+Global $ecc_file_version =				"3.0.0.2"
 Global $ecc_messagebox_title =			"ECC"
 Global $ecc_php_file = 					@Scriptdir & "\ecc-system\ecc.php"
 Global $ecc_php_file_q = 				Chr(34) & $ecc_php_file & Chr(34)
@@ -335,8 +336,8 @@ Func ecc_splashscreen()
 ;--------------------------------------
 $ecc_splash_window = GUICreate(chr(32) & $ecc_splash_title, $ecc_splash_image_width, $ecc_splash_image_height, -1, -1, $WS_POPUP, $WS_EX_LAYERED)
 GuiSetIcon($ecc_splash_icon)
-$ecc_splash_image_show=GUICtrlCreatePic($ecc_splash_image_file, 0, 0, $ecc_splash_image_width, $ecc_splash_image_height)
-GuiCtrlCreateAvi($ecc_splash_movie_file, 0, $ecc_splash_movielocation_left, $ecc_splash_movielocation_top, "", "", 0x14)
+$ecc_splash_image_show = GUICtrlCreatePic($ecc_splash_image_file, 0, 0, $ecc_splash_image_width, $ecc_splash_image_height)
+_GUICtrlCreateGIF($ecc_splash_movie_file, "", $ecc_splash_movielocation_left, $ecc_splash_movielocation_top)
 $gui_regel = GuiCtrlCreateLabel("", $ecc_splash_textlocation_left, $ecc_splash_textlocation_top, 300, 20)
 GUICtrlSetBkColor($gui_regel, $GUI_BKCOLOR_TRANSPARENT)
 GUICtrlSetFont($gui_regel, 8, 400, "", "Verdana")
@@ -620,8 +621,8 @@ Func ecc_splashscreen_reload()
 ;--------------------------------------
 $ecc_splash_window_reload = GUICreate(chr(32) & $ecc_restart_title, $ecc_splash_image_width, $ecc_splash_image_height, -1, -1, $WS_POPUP)
 GuiSetIcon($ecc_splash_icon)
-$ecc_splash_image_show=GUICtrlCreatePic($ecc_splash_image_file, 0, 0, $ecc_splash_image_width, $ecc_splash_image_height)
-GuiCtrlCreateAvi($ecc_splash_movie_file, 0, $ecc_splash_movielocation_left, $ecc_splash_movielocation_top, "", "", 0x14)
+$ecc_splash_image_show = GUICtrlCreatePic($ecc_splash_image_file, 0, 0, $ecc_splash_image_width, $ecc_splash_image_height)
+_GUICtrlCreateGIF($ecc_splash_movie_file, "", $ecc_splash_movielocation_left, $ecc_splash_movielocation_top)
 $gui_regel = GuiCtrlCreateLabel("", $ecc_splash_textlocation_left, $ecc_splash_textlocation_top, 300, 20)
 GUICtrlSetBkColor($gui_regel, $GUI_BKCOLOR_TRANSPARENT)
 GUICtrlSetFont($gui_regel, 8, 400, "", "Verdana")

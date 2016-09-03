@@ -1,5 +1,0 @@
-name="Nature Full Green"
-author="Cyrille"
-date="20080706"
-contact="http://eccforum.phoenixinteractive.nl/memberlist.php"
-website=""

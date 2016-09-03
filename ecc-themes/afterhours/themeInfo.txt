@@ -1,5 +1,5 @@
 name="Afterhours"
 author="Cyrille"
 date="20080706"
-contact="http://eccforum.phoenixinteractive.nl/memberlist.php"
-website=""
+contact=""
+website="https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"

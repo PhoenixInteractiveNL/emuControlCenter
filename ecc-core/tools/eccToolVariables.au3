@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.7
-; Last changed           : 2016.08.12
+; Script version         : v1.0.0.8
+; Last changed           : 2016.09.03
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -41,11 +41,11 @@ Global $eccDownloadTaggedReleases 	= "https://github.com/PhoenixInteractiveNL/em
 #include "..\thirdparty\autoit\include\GetCRC32.au3"
 #include "..\thirdparty\autoit\include\Crypt.au3"
 
-; Global FILE variables
+; Global FILE locations
 Global $eccInstallPath 		= StringReplace(@Scriptdir, "\ecc-core\tools", "")
+Global $eccExe 				= $eccInstallPath & "\ecc.exe"
 Global $7zExe 				= $eccInstallPath & "\ecc-core\thirdparty\7zip\7z.exe"
 Global $AutoIt3Exe 			= $eccInstallPath & "\ecc-core\thirdparty\autoit\autoit3.exe"
-Global $eccExe 				= $eccInstallPath & "\ecc.exe"
 Global $NotepadExe 			= $eccInstallPath & "\ecc-core\thirdparty\notepad++\notepad++.exe"
 Global $DATUtilExe 			= $eccInstallPath & "\ecc-core\thirdparty\datutil\datutil.exe"
 Global $XpadderExe			= $eccInstallPath & "\ecc-core\thirdparty\xpadder\xpadder.exe"
@@ -53,25 +53,30 @@ Global $KodaExe				= $eccInstallPath & "\ecc-core\thirdparty\koda\fd.exe"
 Global $StripperExe 		= $eccInstallPath & "\ecc-core\thirdparty\stripper\stripper.exe"
 Global $SQliteExe 			= $eccInstallPath & "\ecc-core\thirdparty\sqlite\sqlite.exe"
 Global $VideoPlayerExe		= $eccInstallPath & "\ecc-core\thirdparty\mplayer\mplayer.exe"
-Global $eccDataBaseFile 	= $eccInstallPath & "\ecc-system\database\eccdb"
 Global $SQLInstructionFile 	= @Scriptdir & "\sqlcommands.inst"
 Global $SQLcommandFile 		= @Scriptdir & "\sqlcommands.cmd"
 Global $PlatformDataFile 	= "platformdata.txt"
+; ECC INI FILE locations
+Global $eccConfigFileGeneralUser = $eccInstallPath & "\ecc-user-configs\config\ecc_general.ini"
+Global $eccLocalVersionIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
+Global $eccLocalUpdateIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_update_info.ini"
+Global $eccDatfileInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
+Global $eccVersionInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
+Global $eccHostInfoIni 		= $eccInstallPath & "\ecc-system\system\info\ecc_local_host_info.ini"
+
+; ECC settings
+Global $eccDataBasePath 	= Iniread($eccConfigFileGeneralUser, "USER_DATA", "database_path", $eccInstallPath & "\ecc-system\database\")
+Global $eccDataBaseFile 	= $eccDataBasePath & "eccdb"
+Global $DaemonToolsExe		= Iniread($eccConfigFileGeneralUser, "DAEMONTOOLS", "daemontools_exe", "")
 
 ; Global INFO variables
 ; version info
-Global $eccLocalVersionIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
 Global $eccCurrentVersion 	= Iniread($eccLocalVersionIni, "GENERAL", "current_version", "x.x")
 Global $eccCurrentDateBuild = Iniread($eccLocalVersionIni, "GENERAL", "date_build", "xxxx.xx.xx")
 Global $eccCurrentBuild 	= Iniread($eccLocalVersionIni, "GENERAL", "current_build", "xxx")
 ; update info
-Global $eccLocalUpdateIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_update_info.ini"
 Global $eccLocalLastUpdate 	= Iniread($eccLocalUpdateIni, "UPDATE", "last_update", "xxxxx")
-Global $eccDatfileInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_datfile_info.ini"
-Global $eccVersionInfoIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
-Global $eccHostInfoIni 		= $eccInstallPath & "\ecc-system\system\info\ecc_local_host_info.ini"
 ; language info
-Global $eccConfigFileGeneralUser = $eccInstallPath & "\ecc-user-configs\config\ecc_general.ini"
 Global $eccLanguageCurrent 	= IniRead($eccConfigFileGeneralUser, "USER_DATA", "language", "")
 Global $ThirdPartyConfigIni = @Scriptdir & "\eccThirdPartyConfig.ini"
 Global $eccLanguageSaved 	= IniRead($ThirdPartyConfigIni, "ECC", "language", "")
@@ -84,7 +89,6 @@ Global $eccUserPathTemp 	= StringReplace(IniRead($eccConfigFileGeneralUser, "USE
 Global $eccUserPath 		= StringReplace($eccUserPathTemp, "..\", $eccInstallPath & "\") ; Add full path to variable if it's an directory within the ECC structure
 ; ECC window title
 Global $eccGeneratedTitle 	=	"emuControlCenter" & " v" & $eccCurrentVersion & " build:" & $eccCurrentBuild & " (" & $eccCurrentDateBuild & ")" & " upd:" & $eccLocalLastUpdate
-
 
 ; ECC SELECTED ROM variables
 Global $eccRomDataFile 		= $eccInstallPath & "\ecc-system\selectedrom.ini"

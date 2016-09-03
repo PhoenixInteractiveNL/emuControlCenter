@@ -1009,7 +1009,7 @@ class App extends GladeXml {
 		$this->status_obj = FACTORY::get('manager/GuiStatus', $this);
 
 		// HELP init
-		$this->updateRomlistTabHelp($this->textview3, array('../readme.txt'));
+		$this->updateRomlistTabHelp($this->textview3, array('../readme.md'));
 
 		// CONNECT TOP MENU SIGNALS
 		$this->connectSignalsForTopMenu();
@@ -1572,7 +1572,7 @@ class App extends GladeXml {
 		$this->mTopToolHexEditor->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_EXE_HEX_EDITOR');
 
 		// TOP-MENU - DEVELOPER
-		$this->mTopDeveloperSQL->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_DEV_SQL');
+		$this->mTopDeveloperSQL->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_SQL_BROWSER');
 		$this->mTopDeveloperGUI->connect_simple('activate', array($this, 'executeCommands'), 'START_ECC_EXE_DEV_GUI_GLADE');
 
 		// TOP-MENU - UPDATES
@@ -4845,15 +4845,19 @@ class App extends GladeXml {
 				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath.' accountdata');
 				break;
-			case 'START_ECC_DEV_SQL':
-				$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
- 				$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_ECC_DEV_SQL']);
+			case 'START_ECC_SQL_BROWSER':
+				$SqlBrowExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SQL_BROWSER']);
 				$objFSO = new COM("Scripting.FileSystemObject");
-				$AutoitExe_ = $objFSO->GetFile($AutoitExe);
-				$AutoitExe_DosPath = $AutoitExe_->ShortPath;
-				$ScriptToRun_ = $objFSO->GetFile($ScriptToRun);
-				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
-				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
+				$SqlBrowExe_ = $objFSO->GetFile($SqlBrowExe);
+				$SqlBrowExe_DosPath = $SqlBrowExe_->ShortPath;
+
+				$this->ini = FACTORY::get('manager/IniFile');
+				if ($this->ini === false) die('miss ini');
+				$databaseFolder = "database/"; //Default
+				$databaseFolder = $this->ini->getKey('USER_DATA', 'database_path'); // Load database folder from INI.
+				$databaseFile = $databaseFolder."eccdb";
+
+				exec($SqlBrowExe_DosPath . " " . $databaseFile);
 				break;
 			case 'START_ECC_EXE_DEV_GUI_GLADE':
 				$GladeExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_DEV_GUI_GLADE']);
@@ -5124,7 +5128,7 @@ class App extends GladeXml {
 						$this->imagePreviewUpdate(0); //Refresh images in sidebar METADATA TAB
 						$this->mainImageListViewUpdate(); //Refresh images in sidebar IMAGES TAB
 						break;
-						case 'START_MOBYGAMES_PLATFORM_AUTO':
+					case 'START_MOBYGAMES_PLATFORM_AUTO':
 						$AutoitExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT']);
  						$ScriptToRun = realpath(ECC_DIR.'/'.$this->eccHelpLocations['SCRIPT_MOBYGAMES']);
 						$objFSO = new COM("Scripting.FileSystemObject");

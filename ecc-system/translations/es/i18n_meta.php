@@ -85,7 +85,15 @@ $i18n['meta'] = array(
 	'lbl_dump_type' =>
 		"Volcado",
 
+	/* 1.20 */
+	'lbl_perspective' =>
+		"Perspectief",	
+	'lbl_visual' =>
+		"Visueel",	
+	'lbl_description' =>
+		"Omschrijving",	
 );
+
 
 $i18n['dropdownMedium'] = array(
 	'unknown' =>
@@ -139,5 +147,43 @@ $i18n['dropdownDumpType'] = array(
 		"Volcado Amiga IPF",
 	'[misc_amiga_SPS]' =>
 		"Volcado Amiga SPS",
+);
+
+/* 1.20 */
+$i18n['dropdownVisual'] = array(
+	'unknown' =>
+		"unknown",
+	'2D scrolling' =>
+		"2D scrolling",
+	'Cinematic camera' =>
+		"Cinematic camer",
+	'Fixed / Flip-screen' =>
+		"Fixed / Flip-screen",
+	'Free-roaming camera' =>
+		"Free-roaming camera",
+	'Isometric' =>
+		"Isometric",
+);
+
+/* 1.20 */
+$i18n['dropdownPerspective'] = array(
+	'unknown' =>
+		"unknown",
+	'1st-person' =>
+		"1st-person",
+	'3rd-person' =>
+		"3rd-person",
+	'Audio game' =>
+		"Audio game",		
+	'Behind view' =>
+		"Behind view",
+	'Birds-eye view' =>
+		"Birds-eye view",
+	'Side view' =>
+		"Side view",
+	'Text-based / Spreadsheet' =>
+		"Text-based / Spreadsheet",
+	'Top-down' =>
+		"Top-down",
 );
 ?>

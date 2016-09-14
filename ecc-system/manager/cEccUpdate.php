@@ -12,13 +12,13 @@ class EccUpdate {
 
 		// get version of ecc stored in db
 		$eccDbVersion = $this->getEccDbVersion();
-
 		// allready updated!
 		if ($eccVersion == $eccDbVersion ) return true;
 		if (!$this->backupEccDb()) return false;
 
 		// handle all update from begining to now
 		$errorVersion = false;
+		echo $eccDbVersion;
 		switch (true) {
 			case $eccDbVersion < '0.9.701':
 				if ($this->updateEccFromConfig('0.9.701')) $this->updateEccDbVersion('0.9.701');
@@ -42,6 +42,12 @@ class EccUpdate {
 				if ($this->updateEccFromConfig('0.9.805')) $this->updateEccDbVersion('0.9.805');
 				else {
 					$errorVersion = '0.9.805';
+					break;
+				}
+			case $eccDbVersion < '1.2003':
+				if ($this->updateEccFromConfig('1.2003')) $this->updateEccDbVersion('1.2003');
+				else {
+					$errorVersion = '1.2003';
 					break;
 				}
 		}

@@ -928,8 +928,18 @@ class App extends GladeXml {
 		// dump type
 		$this->dropdownDumpType = I18n::translateArray('dropdownDumpType', $this->dropdownDumpType);
 		$this->nbMediaInfoStateDumpEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_dump_type').'?', $this->dropdownDumpType, 'metaEditDirectUpdate', 'setDump_type', true);
-		$this->nbMediaInfoStateDumpEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+		$this->nbMediaInfoStateDumpEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
 
+		// perspective
+		$this->dropdownPerspective = I18n::translateArray('dropdownPerspective', $this->dropdownPerspective);
+		$this->nbMediaInfoStatePerspectiveEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_perspective').'?', $this->dropdownPerspective, 'metaEditDirectUpdate', 'setPerspective', true);
+		$this->nbMediaInfoStatePerspectiveEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect1));
+
+		// visual
+		$this->dropdownVisual = I18n::translateArray('dropdownVisual', $this->dropdownVisual);
+		$this->nbMediaInfoStateVisualEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_visual').'?', $this->dropdownVisual, 'metaEditDirectUpdate', 'setVisual', true);
+		$this->nbMediaInfoStateVisualEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
+		
 		// region
 		$this->dropdownRegion = I18n::translateArray('dropdown_meta_region', $this->dropdownRegion);
 
@@ -3068,19 +3078,24 @@ class App extends GladeXml {
 				$dumpType = (!$romMeta->getDump_type()) ? 0 : $romMeta->getDump_type();
 				$this->setSpanMarkup($this->media_nb_info_dump, $this->dropdownDumpType[$dumpType]);
 
+				// option perspective
+				$perspective = (!$romMeta->getPerspective()) ? 0 : $romMeta->getPerspective();
+				$this->setSpanMarkup($this->media_nb_info_perspective, $this->dropdownPerspective[$perspective]);
+
+				// option visual
+				$visual = (!$romMeta->getVisual()) ? 0 : $romMeta->getVisual();
+				$this->setSpanMarkup($this->media_nb_info_visual, $this->dropdownVisual[$visual]);
+				
 				// set category
 				$category = (isset($this->media_category[$romMeta->getCategory()])) ? $this->media_category[$romMeta->getCategory()] : '';
 				$this->setSpanMarkup($this->media_nb_info_category, $category, false, 'b', false);
 
 				// other data like year, developer aso.
+				// OLD: $this->media_nb_info_year->set_text($romMeta->getYear());
 				$this->setSpanMarkup($this->media_nb_info_year, $romMeta->getYear());
-				#$this->media_nb_info_year->set_text($romMeta->getYear());
 				$this->setSpanMarkup($this->media_nb_info_creator, $romMeta->getDeveloper());
-				#$this->media_nb_info_creator->set_text($romMeta->getDeveloper());
 				$this->setSpanMarkup($this->media_nb_info_publisher, $romMeta->getPublisher());
-				#$this->media_nb_info_publisher->set_text($romMeta->getPublisher());
 				$this->setSpanMarkup($this->media_nb_info_year, $romMeta->getYear());
-
 				$this->setRatingImage($this->mInfoRatingImage, $romMeta->getRating());
 
 				// get right rom audit icon
@@ -5445,6 +5460,8 @@ class App extends GladeXml {
 		$this->mediaEditMetaFrameAdditionalInfos->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameAdditionalInfos').'</b>');
 		$this->mediaEditMetaFrameLinks->set_markup('<b>'.i18n::get('metaEdit', 'mediaEditMetaFrameLinks').'</b>');
 		$this->labelMetaEditStorage->set_markup(i18n::get('meta', 'lbl_storage'));
+		$this->labelMetaEditPerspective->set_markup(i18n::get('meta', 'lbl_perspective'));
+		$this->labelMetaEditVisual->set_markup(i18n::get('meta', 'lbl_visual'));
 		$this->labelMetaEditInfoString->set_markup(i18n::get('meta', 'lbl_info'));
 		$this->labelMetaEditInfoId->set_markup(i18n::get('meta', 'lbl_infoid'));
 
@@ -5533,6 +5550,17 @@ class App extends GladeXml {
 		if ($dump_type === null) $dump_type = 0;
 		$this->cb_dump_type->set_active($dump_type);
 
+		// perspective (before $mdata['md_perspective'] = 0) // Added 2016-09-11 v1.20
+		$perspective = $romMeta->getPerspective();
+		if (!$this->obj_perspective) $this->obj_perspective = new IndexedCombobox($this->cb_perspective, false, $this->dropdownPerspective);
+		if ($perspective === null) $perspective = 0;
+		$this->cb_perspective->set_active($perspective);
+
+		// visual (before $mdata['md_visual'] = 0) // Added 2016-09-11 v1.20
+		$visual = $romMeta->getVisual();
+		if (!$this->obj_visual) $this->obj_visual = new IndexedCombobox($this->cb_visual, false, $this->dropdownVisual);
+		if ($visual === null) $visual = 0;
+		$this->cb_visual->set_active($visual);
 
 		// media type / current / count (if ($mdata['md_media_type'] === null) $mdata['md_media_type'] = 0;)
 		if (!$this->obj_media_type){
@@ -5601,6 +5629,11 @@ class App extends GladeXml {
 			$autoCompletion->connect($this->cbe_graphics, $this->comletionData[$field]);
 		}
 
+		// description
+		$textBuffer = new GtkTextBuffer();
+		$textBuffer->set_text($romMeta->getDescription());
+		$this->mEditDescription->set_buffer($textBuffer);
+		
 		// setup rating image and connect signal
 		$this->setRatingImage($this->mediaEditMetaRatingLink, $romMeta->getRating());
 		$this->mediaEditMetaRatingLinkEvent->connect('button-press-event', array($this, 'openTabMediaEditRating'));
@@ -5918,6 +5951,16 @@ class App extends GladeXml {
 		$romMediaCount = $this->tryToGetText($this->cbe_media_count, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditMedium', i18n::get('meta', 'lbl_medium'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
 		if($romMediaCount === false) $error = true;
 
+		
+		// Description
+		$mEditDescription = '';
+		try {
+			$mEditDescriptionBuffer = $this->mEditDescription->get_buffer();
+			$mEditDescription = $mEditDescriptionBuffer->get_text($mEditDescriptionBuffer->get_start_iter(), $mEditDescriptionBuffer->get_end_iter());
+		}
+		catch(PhpGtkGErrorException $e){
+			// NOTHING
+		}
 
 		// USERDATA
 		$mEditUserReviewBody = '';
@@ -6001,7 +6044,8 @@ class App extends GladeXml {
 		$romMeta->setProgrammer(trim(str_replace(';', '', $romProgrammer)));
 		$romMeta->setMusican(trim(str_replace(';', '', $romMusican)));
 		$romMeta->setGraphics(trim(str_replace(';', '', $romGraphics)));
-
+		$romMeta->setDescription(trim(str_replace(';', '', $mEditDescription)));
+		
 		$romMeta->setRunning($this->get_dropdown_bool($this->metaEditFeatureGoodDumpDropdown->get_active()));
 		$romMeta->setBugs($this->get_dropdown_bool($this->metaEditFeatureBugsDropdown->get_active()));
 		$romMeta->setNetplay($this->get_dropdown_bool($this->metaEditFeatureNetplayDropdown->get_active()));
@@ -6016,6 +6060,8 @@ class App extends GladeXml {
 		$romMeta->setStorage($this->cb_storage->get_active());
 		$romMeta->setRegion($this->cb_region->get_active());
 		$romMeta->setDump_type($this->cb_dump_type->get_active());
+		$romMeta->setPerspective($this->cb_perspective->get_active());
+		$romMeta->setVisual($this->cb_visual->get_active());
 
 		// category
 		$romMeta->setCategory(FACTORY::get('manager/IndexedCombo')->getKey($this->cbe_category));
@@ -7825,6 +7871,8 @@ class App extends GladeXml {
 		$this->dropdownRegion = $mngrValidator->getEccCoreKey('dropdownRegion');
 		$this->dropdownDumpType = $mngrValidator->getEccCoreKey('dropdownDumpType');
 		$this->dropdownMediaType = $mngrValidator->getEccCoreKey('dropdownMediaType'); // meta -> dropdownMedium
+		$this->dropdownPerspective = $mngrValidator->getEccCoreKey('dropdownPerspective');
+		$this->dropdownVisual = $mngrValidator->getEccCoreKey('dropdownVisual');
 		$this->eccHelpLocations = $mngrValidator->getEccCoreKey('eccHelpLocations');
 		$this->eccdb = $mngrValidator->getEccCoreKey('eccdb');
 		$this->cs = $mngrValidator->getEccCoreKey('cs');
@@ -8385,7 +8433,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 		$this->translateGuiTopMenu();
 
-
 		// romdetail tabs
 		$this->media_nb_info_lbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabInfo')));
 		$this->infoPersonalLbl->set_label(strtoupper(I18N::get('mainGui', 'romDetailTabPersonal')));
@@ -8423,44 +8470,28 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->paneInfoEccDbGetDatfileButton->set_label(i18n::get('mainGui', 'paneInfoEccDbGetDatfileButton'));
 
 		// metaoptions
+		// OLD: $this->infotab_lbl_category->set_markup('<b>'.I18N::get('meta', 'lbl_category').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_category, I18N::get('meta', 'lbl_category'), false, 'b', false);
-		#$this->infotab_lbl_category->set_markup('<b>'.I18N::get('meta', 'lbl_category').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_developer, I18N::get('meta', 'lbl_developer'), false, 'b', false);
-		#$this->infotab_lbl_developer->set_markup('<b>'.I18N::get('meta', 'lbl_developer').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_publisher, I18N::get('meta', 'lbl_publisher'), false, 'b', false);
-		#$this->infotab_lbl_publisher->set_markup('<b>'.I18N::get('meta', 'lbl_publisher').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_year, I18N::get('meta', 'lbl_year'), false, 'b', false);
-		#$this->infotab_lbl_year->set_markup('<b>'.I18N::get('meta', 'lbl_year').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_info, I18N::get('meta', 'lbl_info'), false, 'b', false);
-		#$this->infotab_lbl_info->set_markup('<b>'.I18N::get('meta', 'lbl_info').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_platform, I18N::get('global', 'platform'), false, 'b', false);
-		#$this->infotab_lbl_platform->set_markup('<b>'.i18n::get('global', 'platform').'</b>');
-
 		$this->setSpanMarkup($this->infotab_lbl_languages, I18N::get('meta', 'lbl_languages'), false, 'b', false);
-		#$this->infotab_lbl_languages->set_markup('<b>'.I18N::get('meta', 'lbl_languages').'</b>');
-
 		$this->setSpanMarkup($this->infotab_lbl_storage, I18N::get('meta', 'lbl_storage'), false, 'b', false);
-		#$this->infotab_lbl_storage->set_markup('<b>'.I18N::get('meta', 'lbl_storage').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_running, I18N::get('meta', 'lbl_running'), false, 'b', false);
-		#$this->infotab_lbl_running->set_markup('<b>'.I18N::get('meta', 'lbl_running').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_buggy, I18N::get('meta', 'lbl_buggy'), false, 'b', false);
-		#$this->infotab_lbl_buggy->set_markup('<b>'.I18N::get('meta', 'lbl_buggy').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_trainer, I18N::get('meta', 'lbl_trainer'), false, 'b', false);
-		#$this->infotab_lbl_trainer->set_markup('<b>'.I18N::get('meta', 'lbl_trainer').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_intro, I18N::get('meta', 'lbl_intro'), false, 'b', false);
-		#$this->infotab_lbl_intro->set_markup('<b>'.I18N::get('meta', 'lbl_intro').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_usermod, I18N::get('meta', 'lbl_usermod'), false, 'b', false);
-		#$this->infotab_lbl_usermod->set_markup('<b>'.I18N::get('meta', 'lbl_usermod').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_freeware, I18N::get('meta', 'lbl_freeware'), false, 'b', false);
-		#$this->infotab_lbl_freeware->set_markup('<b>'.I18N::get('meta', 'lbl_freeware').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_multiplay, I18N::get('meta', 'lbl_multiplay'), false, 'b', false);
-		#$this->infotab_lbl_multiplay->set_markup('<b>'.I18N::get('meta', 'lbl_multiplay').'</b>');
 		$this->setSpanMarkup($this->infotab_lbl_netplay, I18N::get('meta', 'lbl_netplay'), false, 'b', false);
-		#$this->infotab_lbl_netplay->set_markup('<b>'.I18N::get('meta', 'lbl_netplay').'</b>');
-
 		$this->setSpanMarkup($this->infotab_lbl_dump, I18N::get('meta', 'lbl_dump_type'), false, 'b', false);
 		$this->setSpanMarkup($this->infotab_lbl_infoid, I18N::get('meta', 'lbl_infoid'), false, 'b', false);
-
+		$this->setSpanMarkup($this->infotab_lbl_perspective, I18N::get('meta', 'lbl_perspective'), false, 'b', false);
+		$this->setSpanMarkup($this->infotab_lbl_visual, I18N::get('meta', 'lbl_visual'), false, 'b', false);
+		
 		// Fileinfos
 		#$this->infotab_frame_fileinfo->set_markup('<b>'.I18N::get('global', 'fileInfo').'</b>');
 		#$this->setSpanMarkup($this->infotab_frame_fileinfo, I18N::get('global', 'fileInfo'), false, 'b');
@@ -8479,7 +8510,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->iPanePersMetaEditedLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaEditedLbl').':</b>');
 		$this->iPanePersMetaExportLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaExportLbl').':</b>');
 		$this->iPanePersMetaHiscoreLbl->set_markup('<b>'.I18N::get('global', 'hiscore').':</b>');
-
 		$this->iPanePersMetaNotesLbl->set_markup('<b>'.I18N::get('infoPane', 'iPanePersMetaNotesLbl').':</b>');
 
 		// ESEARCH
@@ -8495,7 +8525,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->setSpanMarkup($this->iPaneEsearchOptUsermodLbl, I18N::get('infoPane', 'iPaneEsearchOptUsermodLbl'), false, 'b', false);
 		$this->setSpanMarkup($this->iPaneEsearchOptNetplayLbl, I18N::get('infoPane', 'iPaneEsearchOptNetplayLbl'), false, 'b', false);
 		$this->setSpanMarkup($this->iPaneEsearchOptDumpTypeLbl, I18N::get('infoPane', 'iPaneEsearchOptDumpTypeLbl'), false, 'b', false);
-
+		
 		$this->iPaneEsearchOptResetBtn->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptResetBtn').':</b>');
 		$this->iPaneEsearchHelpLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHelpLbl').':</b>');
 
@@ -8511,7 +8541,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 		$this->setSpanMarkup($this->mainAreaPanelRightTabImages, strtoupper(I18N::get('global', 'images')), false, 'b', 'medium');
 		$this->setSpanMarkup($this->mainAreaPanelRightTabMeta, strtoupper(I18N::get('global', 'metadata')), false, 'b', 'medium');
-
 	}
 
 	/**

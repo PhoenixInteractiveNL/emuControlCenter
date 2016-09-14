@@ -270,6 +270,9 @@ class WebServices {
 		md.cdate as md_cdate,
 		md.uexport as md_uexport,
 		md.dump_type as md_dump_type,
+		md.perspective as md_perspective,
+		md.visual as md_visual,
+		md.description as md_description,
 		fd.id as id,
 		fd.title as title,
 		fd.path as path,
@@ -451,6 +454,5 @@ class WebServices {
 		print "z\n";
 		return true;
 	}
-	
 }
 ?>

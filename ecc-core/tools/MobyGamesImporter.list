@@ -4,7 +4,7 @@
 ; Format:
 ; [ECC PLATFORMID] = [MOBYGAMES URL ID]
 ;
-[DATA]
+[ECCID]
 32x	= sega-32x
 3do	= 3do
 3ds	= 3ds
@@ -199,3 +199,31 @@ xboxone	= xboxone
 zinc	=
 zx81	= zx81
 zxs	= zx-spectrum
+
+; CLEANED NAMES! (meaning no /)
+[PERSPECTIVE]
+unknown			= 0
+
+1st-person		= 1
+
+3rd-person		= 2
+Audio game		= 3
+Behind view		= 4
+Birds-eye view		= 5
+Side view		= 6
+
+Text-based Spreadsheet  = 7
+
+Top-down		= 8
+
+; CLEANED NAMES! (meaning no /)
+[VISUAL]
+unknown			= 0
+
+2D scrolling		= 1
+
+Cinematic camera	= 2
+Fixed Flip-screen	= 3
+
+Free-roaming camera	= 4
+Isometric		= 5	

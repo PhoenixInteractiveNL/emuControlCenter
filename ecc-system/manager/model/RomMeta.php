@@ -83,7 +83,8 @@ class RomMeta extends Item {
 	protected $extension;
 	protected $dump_type; // use filesize temporary
 	protected $filesize; // use filesize temporary
-		
+	protected $description;
+	
 	/**
 	 * meta: array of supported languages
 	 *
@@ -137,6 +138,9 @@ class RomMeta extends Item {
 		'info_id',
 		'languages',
 		'dump_type',
+		'perspective',
+		'visual',
+		'description',
 	);
 	
 	/**
@@ -192,7 +196,6 @@ class RomMeta extends Item {
 		else{
 			return true;	
 		}
-		
 	}
 	
 	/**
@@ -216,23 +219,17 @@ class RomMeta extends Item {
 		return true;
 	}
 	
-	/**
-	 * @param string $romIdent
-	 */
+	 // @param string $romIdent
 	public function getRomIdent() {
 		return $this->createRomIdent();
 	}
 	
-	/**
-	 * @param string $romIdent
-	 */
+	// @param string $romIdent
 	public function setRomIdent($romIdent) {
 		$this->romIdent = $romIdent;
 	}
 	
-	/**
-	 * @param string $romIdent
-	 */
+	// @param string $romIdent
 	private function createRomIdent() {
 		if(!$this->systemIdent || !$this->crc32){
 			$this->setError('systemIdent or crc32 missing');
@@ -243,51 +240,37 @@ class RomMeta extends Item {
 		}
 	}
 	
-	/**
-	 * @param string $systemIdent
-	 */
+	// @param string $systemIdent
 	public function setSystemIdent($systemIdent) {
 		$this->systemIdent = strtolower($systemIdent);
 	}
 	
-	/**
-	 * @return string
-	 */
+	// @return string
 	public function getCrc32() {
 		return $this->crc32;
 	}
 	
-	/**
-	 * @param string $crc32
-	 */
+	// @param string $crc32
 	public function setCrc32($crc32) {
 		$this->crc32 = $crc32;
 	}
 
-	/**
-	 * @return integer
-	 */
+	// @return integer
 	public function getId() {
 		return $this->id;
 	}
 	
-	/**
-	 * @param integer $id
-	 */
+	// @param integer $id
 	public function setId($id) {
 		$this->id = $id;
 	}
 
-	/**
-	 * @return stromg
-	 */
+	// @return stromg
 	public function getName() {
 		return $this->name;
 	}
 	
-	/**
-	 * @param stromg $name
-	 */
+	// @param stromg $name
 	public function setName($name) {
 		$this->name = $name;
 	}
@@ -297,59 +280,43 @@ class RomMeta extends Item {
 		return $this->name.$mediaInfo;
 	}
 	
-	/**
-	 * @return unknown
-	 */
+	// @return unknown
 	public function getDeveloper() {
 		return $this->developer;
 	}
 	
-	/**
-	 * @param unknown_type $developer
-	 */
+	// @param unknown_type $developer
 	public function setDeveloper($developer) {
 		$this->developer = $developer;
 	}
 	
-	/**
-	 * @return unknown
-	 */
+	// @return unknown
 	public function getYear() {
 		return $this->year;
 	}
 	
-	/**
-	 * @param unknown_type $year
-	 */
+	// @param unknown_type $year
 	public function setYear($year) {
 		if((int)$year == 0) $year = null;
 		$this->year = $year;
 	}
 	
-	/**
-	 * @return integer unix timestamp
-	 */
+	// @return integer unix timestamp
 	public function getModified() {
 		return $this->modified;
 	}
 	
-	/**
-	 * @param integer $modified unix timestamp
-	 */
+	// @param integer $modified unix timestamp
 	public function setModified($modified = false) {
 		$this->modified = $modified;
 	}
 	
-	/**
-	 * @return integer unix timestamp
-	 */
+	// @return integer unix timestamp
 	public function getExported() {
 		return $this->exported;
 	}
 	
-	/**
-	  * @param integer $exported unix timestamp
-	 */
+	// @param integer $exported unix timestamp
 	public function setExported($exported = false) {
 		$this->exported = $exported;
 	}
@@ -360,7 +327,17 @@ class RomMeta extends Item {
 			$this->$getFunction($value);
 		}
 	}
+
+	// @return unknown
+	public function getDescription() {
+		return $this->description;
+	}
 	
+	// @param unknown_type $description
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
 	/**
 	 * Creates an array using the db result from TreeviewData getSearchResults()
 	 *
@@ -376,8 +353,7 @@ class RomMeta extends Item {
 		// set metadata
 		$this->setName($dbEntry['md_name']);
 		$this->setDeveloper($dbEntry['md_creator']);
-		$this->setYear($dbEntry['md_year']);
-		
+		$this->setYear($dbEntry['md_year']);	
 		$this->setRunning($dbEntry['md_running']);
 		$this->setBugs($dbEntry['md_bugs']);
 		$this->setTrainer($dbEntry['md_trainer']);
@@ -387,30 +363,27 @@ class RomMeta extends Item {
 		$this->setMultiplayer($dbEntry['md_multiplayer']);
 		$this->setNetplay($dbEntry['md_netplay']);
 		$this->setUsk($dbEntry['md_usk']);
-		
 		$this->setStorage($dbEntry['md_storage']);
 		$this->setRating($dbEntry['md_rating']);
 		$this->setCategory($dbEntry['md_category']);
 		$this->setCategory_base(false);
-		
 		$this->setPublisher($dbEntry['md_publisher']);
 		$this->setProgrammer($dbEntry['md_programmer']);
 		$this->setMusican($dbEntry['md_musican']);
 		$this->setGraphics($dbEntry['md_graphics']);
-		
 		$this->setMedia_type($dbEntry['md_media_type']);
 		$this->setMedia_current($dbEntry['md_media_current']);
 		$this->setMedia_count($dbEntry['md_media_count']);
 		$this->setRegion($dbEntry['md_region']);
-		
 		$this->setInfo($dbEntry['md_info']);
 		$this->setInfo_id($dbEntry['md_info_id']);
 		$this->setLanguages(array());
-		
 		$this->setModified($dbEntry['md_cdate']);
 		$this->setExported($dbEntry['md_uexport']);
-		
 		$this->setDump_type($dbEntry['md_dump_type']);
+		$this->setPerspective($dbEntry['md_perspective']);
+		$this->setVisual($dbEntry['md_visual']);		
+		$this->setDescription($dbEntry['md_description']);
 		
 //		if(!isset($dbEntry['md_dump_type'])){
 //			echo '<pre>';
@@ -418,10 +391,6 @@ class RomMeta extends Item {
 //			echo '</pre>';	
 //			die;		
 //		}
-
-		
-		
-		
 	}
 	
 	public function getCleanInteger($field, $storeEmptyString = false, $storeNullInteger = false){
@@ -467,20 +436,16 @@ class RomMeta extends Item {
 	 * 
 	 * @param resource $dbms
 	 */
-	public function store($dbms){
-		
+	public function store($dbms){	
 		if($this->getId()){
-
-			// update, because id already available
-			
+			// update, because id already available		
 			$q = "
 			UPDATE
 			mdata
 			SET
 			name = ".$this->getCleanString($this->getName()).",
 			info = ".$this->getCleanString($this->getInfo()).",
-			info_id = ".$this->getCleanString($this->getInfo_id()).",
-			
+			info_id = ".$this->getCleanString($this->getInfo_id()).",	
 			running = ".$this->getNullsaveInteger($this->getRunning()).",
 			bugs = ".$this->getNullsaveInteger($this->getBugs()).",
 			trainer = ".$this->getNullsaveInteger($this->getTrainer()).",
@@ -489,7 +454,6 @@ class RomMeta extends Item {
 			multiplayer = ".$this->getNullsaveInteger($this->getMultiplayer()).",
 			netplay = ".$this->getNullsaveInteger($this->getNetplay()).",
 			freeware = ".$this->getNullsaveInteger($this->getFreeware()).",
-			
 			year = ".$this->getCleanInteger($this->getYear()).",
 			usk = ".$this->getCleanInteger($this->getUsk()).",
 			category = ".$this->getCleanInteger($this->getCategory()).",
@@ -504,6 +468,9 @@ class RomMeta extends Item {
 			storage = ".$this->getCleanInteger($this->getStorage()).",
 			region = ".$this->getCleanInteger($this->getRegion()).",
 			dump_type = ".$this->getCleanInteger($this->getDump_type()).",
+			perspective = ".$this->getCleanInteger($this->getPerspective()).",
+			visual = ".$this->getCleanInteger($this->getVisual()).",
+			description = ".$this->getCleanString($this->getDescription()).",			
 			cdate = ".time().",
 			uexport = NULL
 			WHERE
@@ -511,12 +478,9 @@ class RomMeta extends Item {
 			";
 			//print $q;
 			$hdl = $dbms->query($q);
-			
 		}
-		else{
-			
-			// insert, because id is missing
-			
+		else{	
+			// insert, because id is missing	
 			$q = "
 			INSERT INTO mdata (
 				eccident,
@@ -547,6 +511,9 @@ class RomMeta extends Item {
 				storage,
 				region,
 				dump_type,
+				perspective,
+				visual,
+				description,
 				cdate
 			) VALUES (
 				".$this->getCleanString($this->getSystemIdent()).",
@@ -579,16 +546,17 @@ class RomMeta extends Item {
 				".$this->getCleanInteger($this->getStorage()).",
 				".$this->getCleanInteger($this->getRegion()).",
 				".$this->getCleanInteger($this->getDump_type()).",
+				".$this->getCleanInteger($this->getPerspective()).",
+				".$this->getCleanInteger($this->getVisual()).",
+				".$this->getCleanInteger($this->getDescription()).",
 				".time()."
 			)
 			";
 			$hdl = $dbms->query($q);
 			
 			// set the new meta id used for store languages
-			$this->setId($dbms->lastInsertRowid());
-				
-		}
-		
+			$this->setId($dbms->lastInsertRowid());			
+		}	
 		// update also the languages using the meta id!
 		$this->storeLanguages($dbms);
 	}

@@ -1,11 +1,11 @@
 <?php
-$version = '1.20';
-$build = '02';
-$description = '1.20';
+$version = '1.21';
+$build = '01';
+$description = '1.21';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 
 $autor = 'Sebastiaan Ebeltjes(NL) Andreas Scheibel(DE)';
-$date = "2016.09.02";
+$date = "2016.09.14";
 
 $eccConfig = array(
 	'ecc_release' => array(
@@ -28,10 +28,11 @@ $eccConfig = array(
 		'release_state' => '',
 		'website' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
 		'email' => 'phoenixinteractive@hotmail.com',
-		'eccdat_version' => '1.1',
+		'eccdat_version' => '1.2003',
 		'eccdat_state' => '',
 		'info_copyright' => '2005-2016 Sebastiaan Ebeltjes(NL) / Andreas Scheibel(DE)',
 	),
+	
 	'user_path_subfolder_default' => array(
 		'emus',
 		'exports',
@@ -58,6 +59,7 @@ $eccConfig = array(
 		'bmp' => 1,
 		'ico' => 1,
 	),
+	
 	'cbox_yesno' => array(
 		'*',
 		'no',
@@ -66,8 +68,8 @@ $eccConfig = array(
 		'ye?',
 		'?',
 	),
+	
 	'image_type' => array(
-
 		'ingame_title' => 'Ingame - Title',
 		'ingame_play_01' => 'Ingame - Play 1',
 		'ingame_play_02' => 'Ingame - Play 2',
@@ -103,6 +105,7 @@ $eccConfig = array(
 		'booklet_page_09' => 'Booklet: Page 09',
 		'booklet_page_10' => 'Booklet: Page 10',
 	),
+
 	'media_language' => array(
 		'J' => '[[japanese]]',
 		'E' => '[[english]]',
@@ -379,21 +382,23 @@ $eccConfig = array(
 		'YEAR' => '[[year]]',
 		'INFO' => '[[info]]',
 		'INFO_ID' => '[[info_id]]',
-		#'EXTENSION' => '[[extension]]',
 		'PATH' => '[[path]]',
 		'ECCIDENT' => '[[eccident]]',
 		'CRC32' => '[[crc32]]',
 	),
+	
 	'freeformSearchOperators' => array(
 		'AND' => '+',
 		'' => '=',
 		'OR' => '|',
 	),
+	
 	'dropdownStateYesNo' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
 		2	=> '[[YES]]',
 	),
+	
 	'dropdownMultiplayer' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
@@ -401,6 +406,7 @@ $eccConfig = array(
 		3	=> '[[3P]]',
 		4	=> '[[4P]]',
 	),
+	
 	'dropdownStateCount' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
@@ -415,11 +421,13 @@ $eccConfig = array(
 		10	=> '[[09]]',
 		11	=> '[[10]]',
 	),
+	
 	'dropdownStateTrainer' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
 		2	=> '[[YES]]',
 	),
+	
 	'dropdownStorage' => array(
 		0 => '[[empty]]',
 		1 => '[[not_possible]]',
@@ -428,6 +436,7 @@ $eccConfig = array(
 		4 => '[[not_memory_card]]',
 		5 => '[[on_harddrive]]',
 	),
+	
 	'dropdownRegion' => array(
 		0 => '[[empty]]',
 		1 => '[[Asia]]',
@@ -441,6 +450,7 @@ $eccConfig = array(
 		9 => '[[USA-Europe]]',
 		10 => '[[USA-Japan]]',
 	),
+	
 	# meta -> dropdownMedium
 	'dropdownMediaType' => array(
 		0 => 'unknown',
@@ -451,6 +461,7 @@ $eccConfig = array(
 		5 => 'card',
 		6 => 'arcade_board',
 	),
+	
 	'dropdownDumpType' => array(
 		0 => 'unknown',
 		1 => '[!]', // Verified Good Dump
@@ -470,7 +481,29 @@ $eccConfig = array(
 		15 => '[misc_amiga_SPS]', // Amiga SPS dump
 	),
 
-	// germany
+	// Please also edit the file ecc-core\tools\MobyGamesImporter.list to match!
+	'dropdownPerspective' => array(
+		0 => 'unknown',
+		1 => '1st-person',
+		2 => '3rd-person',
+		3 => 'Audio game',
+		4 => 'Behind view',
+		5 => 'Birds-eye view',
+		6 => 'Side view',
+		7 => 'Text-based / Spreadsheet',
+		8 => 'Top-down',
+	),
+
+	// Please also edit the file ecc-core\tools\MobyGamesImporter.list to match!
+	'dropdownVisual' => array(
+		0 => 'unknown',
+		1 => '2D scrolling',
+		2 => 'Cinematic camera',
+		3 => 'Fixed / Flip-screen',
+		4 => 'Free-roaming camera',
+		5 => 'Isometric',
+	),	
+	
 	'ratingUSK' => array(
 		0 => 'unknown',
 		1 => '0',
@@ -479,6 +512,7 @@ $eccConfig = array(
 		4 => '16',
 		5 => '18',
 	),
+	
 	// europe
 	'ratingPEGI' => array(
 		0 => 'unknown',
@@ -490,6 +524,7 @@ $eccConfig = array(
 		6 => '16',
 		7 => '18',
 	),
+	
 	// great britain
 	'ratingBBFC' => array(
 		0 => 'unknown',
@@ -500,6 +535,7 @@ $eccConfig = array(
 		5 => '15',
 		6 => '18',
 	),
+	
 	// usa
 	'ratingESRB' => array(
 		0 => 'unknown',
@@ -544,12 +580,14 @@ $eccConfig = array(
 		'ECC_EXE_SQL_BROWSER' => 'ecc-core/thirdparty/sqlitebrowser/sqlitebrowser.exe',
 
 	),
+	
 	'eccdb' => array (
 		'META_ADD_URL' => '',
 		'META_GET_URL' => '',
 		'META_DATFILE_URL' => '',
 		'GOOGLE_ROM_SEARCH' => 'http://www.google.com/search?q=',
 	),
+	
 	'cs' => array(
 		'cicheckdat' => 'ecc-system/idt/cicheck.idt',
 		'cscheckdat' => 'ecc-system/idt/cscheck.idt',

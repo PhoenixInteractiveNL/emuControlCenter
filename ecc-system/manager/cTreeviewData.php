@@ -57,6 +57,9 @@ class TreeviewData {
 		md.cdate as md_cdate,
 		md.uexport as md_uexport,
 		md.dump_type as md_dump_type,
+		md.perspective as md_perspective,
+		md.visual as md_visual,
+		md.description as md_description,
 		fd.id as id,
 		fd.title as title,
 		fd.path as path,
@@ -118,6 +121,7 @@ class TreeviewData {
 	public function setShowOnlyDisk($state){
 		$this->showOnlyDisk = $state;
 	}
+
 	public function getShowOnlyDisk(){
 		return $this->showOnlyDisk;
 	}		
@@ -125,6 +129,7 @@ class TreeviewData {
 	public function setDumpType($dumpType){
 		$this->dumpType = $dumpType;
 	}
+
 	public function getDumpType(){
 		return $this->dumpType;
 	}		
@@ -132,8 +137,33 @@ class TreeviewData {
 	public function setShowOnlyPersonalMeta($showOnlyPersonalMeta) {
 		$this->showOnlyPersonalMeta = $showOnlyPersonalMeta;
 	}
+
 	public function getShowOnlyPersonalMeta() {
 		return $this->showOnlyPersonalMeta;
+	}	
+
+	public function setPerspective($perspective){
+		$this->Perspective = $perspective;
+	}
+
+	public function getPerspective(){
+		return $this->Perspective;
+	}		
+
+	public function setVisual($visual){
+		$this->Visual = $visual;
+	}
+
+	public function getVisual(){
+		return $this->Visual;
+	}		
+
+	public function setDescription($description){
+		$this->Description = $description;
+	}
+
+	public function getDescription(){
+		return $this->Description;
 	}	
 	
 	/* ------------------------------------------------------------------------
@@ -456,9 +486,6 @@ class TreeviewData {
 		return true;
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function addBookmarkById($id)
 	{
 		if (!$id) return false;
@@ -473,9 +500,6 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function deleteBookmarkById($id) {
 		if ($id) {
 			$q = 'DELETE FROM fdata_bookmarks WHERE file_id = '.(int)$id.'';
@@ -483,9 +507,6 @@ class TreeviewData {
 		}
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function remove_bookmark_all() {
 		$q = 'DELETE FROM fdata_bookmarks';
 		$hdl = $this->dbms->query($q);
@@ -549,9 +570,6 @@ class TreeviewData {
 		return $msg;
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function deleteRomFromDatabase($id, $eccident, $crc32) {
 		if (!$id) return false;
 		
@@ -599,9 +617,6 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function update_file_info($data, $modified=false) {
 		
 		//$modified_snip = ($modified) ? ", cdate = '".time()."'" : "";
@@ -625,6 +640,9 @@ class TreeviewData {
 			usk = '".sqlite_escape_string($data['usk'])."',
 			category = ".$data['category'].",
 			creator = '".sqlite_escape_string($data['creator'])."',
+			perspective = ".sqlite_escape_string($data['perspective']).",
+			visual = ".sqlite_escape_string($data['visual']).",
+			description = ".sqlite_escape_string($data['description']).",
 			publisher = '".sqlite_escape_string($data['publisher'])."',
 			programmer = '".sqlite_escape_string($data['programmer'])."',
 			musican = '".sqlite_escape_string($data['musican'])."',
@@ -649,9 +667,6 @@ class TreeviewData {
 	private function insertMetaData() {
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function insert_file_info($data) {
 		
 		$q = "
@@ -676,6 +691,9 @@ class TreeviewData {
 				usk,
 				category,
 				creator,
+				perspective,
+				visual,
+				description,
 				publisher,
 				programmer,
 				musican,
@@ -707,6 +725,9 @@ class TreeviewData {
 				'".sqlite_escape_string($data['usk'])."',
 				".$data['category'].",
 				'".sqlite_escape_string($data['creator'])."',
+				'".sqlite_escape_string($data['perspective'])."',
+				'".sqlite_escape_string($data['visual'])."',
+				'".sqlite_escape_string($data['description'])."',			
 				'".sqlite_escape_string($data['publisher'])."',
 				'".sqlite_escape_string($data['programmer'])."',
 				'".sqlite_escape_string($data['musican'])."',
@@ -724,9 +745,6 @@ class TreeviewData {
 		return $this->dbms->lastInsertRowid();
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function save_language($data) {
 		$q = "DELETE FROM mdata_language WHERE mdata_id=".$data['id'];
 		$hdl = $this->dbms->query($q);
@@ -737,9 +755,6 @@ class TreeviewData {
 		return true;
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function get_language_status($mdat_id, $lang_ident) {
 		$ret = false;
 		$q = "SELECT mdata_id FROM mdata_language WHERE mdata_id=".$mdat_id." AND lang_id='".sqlite_escape_string($lang_ident)."'";
@@ -748,9 +763,6 @@ class TreeviewData {
 		return ($ret) ? true : false;
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function get_language_by_mdata_id($mdat_id) {
 		$ret = array();;
 		if (!$mdat_id) return $ret;
@@ -770,9 +782,6 @@ class TreeviewData {
 		$hdl = $this->dbms->query($q);
 	}
 	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	public function get_media_count_for_eccident($eccident, $hideDup) {
 		$ret = false;
 		
@@ -789,10 +798,6 @@ class TreeviewData {
 		
 		return $ret;
 	}
-	
-	/* ------------------------------------------------------------------------
-	*
-	*/
 	
 	public function getNavPlatformCounts($extension, $hideDup, $language=false, $category=false, $search_ext=false, $hideMetaless=false, $like=false, $onlyFiles=false)
 	{
@@ -1142,7 +1147,5 @@ class TreeviewData {
 		}
 		return false;
 	}
-	
 }
-
 ?>

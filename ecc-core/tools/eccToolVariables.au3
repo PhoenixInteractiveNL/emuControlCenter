@@ -66,6 +66,7 @@ Global $eccHostInfoIni 		= $eccInstallPath & "\ecc-system\system\info\ecc_local_
 
 ; ECC settings
 Global $eccDataBasePath 	= Iniread($eccConfigFileGeneralUser, "USER_DATA", "database_path", $eccInstallPath & "\ecc-system\database\")
+If $eccDataBasePath = "database/" Then $eccDataBasePath = $eccInstallPath & "\ecc-system\database\" ; Tools need the full path!
 Global $eccDataBaseFile 	= $eccDataBasePath & "eccdb"
 Global $DaemonToolsExe		= Iniread($eccConfigFileGeneralUser, "DAEMONTOOLS", "daemontools_exe", "")
 

@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : MobyGamesImporter (MGI)
-; Script version         : v1.1.0.2
-; Last changed           : 2014.05.25
+; Script version         : v1.2.0.0
+; Last changed           : 2016.09.13
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -13,6 +13,7 @@ FileChangeDir(@ScriptDir)
 
 Global $String, $Mode, $PlatFormRomCountUserList, $PlatFormRomCountUserMeta
 Global $NameToSearchFor, $RomNameBack
+Global $Perspectivenr, $Visualnr
 
 Select
 	Case $CmdLine[0] = 0
@@ -26,35 +27,36 @@ Select
 
 	Case $CmdLine[1] = "rom_manual"
 		$Mode = "rom_manual"
-
 EndSelect
 
 ; Exit if user wants to download from the ECC menu "ALL PLATFORMS", this is not possible, $RomEccId = ""
 If $RomEccId = "" Then
 	ToolTip("You cannot download content for ALL platforms at once!", @DesktopWidth/2, @DesktopHeight/2, "MGI", 1, 6)
-	Sleep(1500)
+	Sleep(2000)
 	Exit
 Endif
 
 ; Check if this platform is available on MobyGames.
-$MobyGamesListData = IniReadSection($MobyGamesList, "DATA")
-For $i = 1 To $MobyGamesListData[0][0]
-	If $MobyGamesListData[$i][0] = $RomEccId Then $MobyGamesId = $MobyGamesListData[$i][1]
+$MobyGamesListECCID = IniReadSection($MobyGamesList, "ECCID")
+For $i = 1 To $MobyGamesListECCID[0][0]
+	If $MobyGamesListECCID[$i][0] = $RomEccId Then $MobyGamesId = $MobyGamesListECCID[$i][1]
 Next
 If $MobyGamesId = "" Then
 	ToolTip("This platform is NOT available on Mobygames!", @DesktopWidth/2, @DesktopHeight/2, "MGI", 1, 6)
-	Sleep(1500)
+	Sleep(2000)
 	Exit
 EndIf
+
+; Preload LIST settings (faster in search functions)
+$MobyGamesListPerspective = IniReadSection($MobyGamesList, "PERSPECTIVE")
+$MobyGamesListVisual = IniReadSection($MobyGamesList, "VISUAL")
 
 ; Fix the Romname
 ;CleanRomName($RomName)
 
-
 ;PLATFORM AUTO MODE
 If $Mode = "platform_auto" Then
-MobyGamesSettings() ;Always show settings when attempting total platoform write!
-
+MobyGamesSettings() ;Always show settings when attempting total platform write!
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
@@ -120,13 +122,11 @@ FileClose($INSTFile)
 $CMDFile = Fileopen($SQLcommandFile, 10)
 FileWrite($CMDFile, Chr(34) & $SQliteExe & Chr(34) & " " & Chr(34) & $eccDataBaseFile & Chr(34) & " <" & Chr(34) & $SQLInstructionFile & Chr(34))
 FileClose($CMDFile)
-
 RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the CMD file with the query
 
 ; Delete the temporally files
 FileDelete($SQLInstructionFile)
 FileDelete($SQLcommandFile)
-Sleep(500)
 
 ; Retrieve META-data for ROMlist from ECC
 ToolTip("Retrieving META-data for ROMlist from ECC database!", @DesktopWidth/2, @DesktopHeight/2, "MGI", 1, 6)
@@ -150,8 +150,7 @@ RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the
 ; Delete the temporally files
 FileDelete($SQLInstructionFile)
 FileDelete($SQLcommandFile)
-Sleep(500)
-
+Sleep(200)
 
 ; Retrieve USER-data for ROMlist from ECC
 ToolTip("Retrieving USER-data for ROMlist from ECC database!", @DesktopWidth/2, @DesktopHeight/2, "MGI", 1, 6)
@@ -175,14 +174,13 @@ RunWait(Chr(34) & $SQLcommandFile & Chr(34), @ScriptDir, @SW_HIDE) ; Execute the
 ; Delete the temporally files
 FileDelete($SQLInstructionFile)
 FileDelete($SQLcommandFile)
-Sleep(500)
+Sleep(200)
 ToolTip("")
-
 
 ; Exit if user has no ROMS imported for the platform
 If FileGetSize(@ScriptDir & "\" & $PlatformDataFileRomList) < 8 Then
 	ToolTip("No imported ROMS found for this platform!", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
-	Sleep(1500)
+	Sleep(2000)
 	Exit
 Else
 	;Count ROMS that the user has imported into ECC.
@@ -203,7 +201,6 @@ GUICtrlSetData($RemainingPlatformLabel, $PlatFormRomCountList)
 
 For $RomCount = 1 to $PlatFormRomCountList
 	$RomMetaData = 0
-	$RomUserData = 0
 
 	$ReadRomData = StringSplit(FileReadLine($PlatformDataFileRomList_handle, $RomCount), ";") ;$ReadRomData[1] = CRC32, $ReadRomData[2] = ROM Name
 	$NameToSearchFor = $ReadRomData[2]
@@ -215,15 +212,6 @@ For $RomCount = 1 to $PlatFormRomCountList
 		If $ReadRomMeta[1] = $ReadRomData[1] Then
 			If $FileNameFlag = "0" Then $NameToSearchFor = $ReadRomMeta[2]
 			$RomMetaData = 1
-			ExitLoop
-		EndIf
-	Next
-
-	;Check is there is user-data inserted , needed to set the "flag" state to update or add data in the ecc database
-	For $UserCount = 1 to $PlatFormRomCountUser
-		$ReadRomUser = StringStripWS(FileReadLine($PlatformDataFileRomUser_handle, $UserCount), 8) ;$ReadRomUser = CRC32
-		If $ReadRomUser = $ReadRomData[1] Then
-			$RomUserData = 1
 			ExitLoop
 		EndIf
 	Next
@@ -240,13 +228,13 @@ For $RomCount = 1 to $PlatFormRomCountList
 	If $MissingData >= 4 Then
 		AddNote("  - Game not found on MobyGames.com!#")
 	Else
-		AddNote("  - DB check: [MetaData=" & $RomMetaData & "], [UserData=" & $RomUserData & "]#")
+		AddNote("  - DB check: [MetaData=" & $RomMetaData & "]#")
 		AddNote("  - Adding data to the database...")
 
 		$RomName = $NameToSearchFor ;Full filename
 		If $NameFlag = "1" Then $RomName = CleanRomName($NameToSearchFor) ;Cleaned name
 
-		eccDatabaseWrite($RomEccId, $ReadRomData[1], $RomName, $Publisher, $Developer, $Released, $Genre, $Description)
+		eccDatabaseWrite($RomEccId, $ReadRomData[1], $RomName, $Publisher, $Developer, $Released, $Genre, $Perspective, $Visual, $Description)
 		AddNote("OK!#")
 	EndIf
 
@@ -303,8 +291,8 @@ If $Mode = "rom_auto" Then
 	EndIf
 	ToolTip("Writing data to the ECC database...", @DesktopWidth/2, @DesktopHeight/2, "MGI", 1, 6)
 
-	eccDatabaseWrite($RomEccId, $RomCrc32, $RomName, $Publisher, $Developer, $Released, $Genre, $Description)
-	Sleep(1000)
+	eccDatabaseWrite($RomEccId, $RomCrc32, $RomName, $Publisher, $Developer, $Released, $Genre, $Perspectivenr, $Visualnr, $Description)
+	Sleep(300)
 	ToolTip("")
 EndIf
 
@@ -314,7 +302,7 @@ If $Mode = "rom_manual" Then
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $MGIGUI = GUICreate("ECC MobyGamesImporter (MGI) - Rom", 411, 335, -1, -1)
+Global $MGIGUI = GUICreate("ECC MobyGamesImporter (MGI) - Rom", 411, 378, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Label3 = GUICtrlCreateLabel("ECC ID:", 208, 8, 52, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
@@ -334,10 +322,10 @@ Global $mgidLabel = GUICtrlCreateLabel("-", 264, 24, 140, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
 Global $Picture = GUICtrlCreatePic("", 8, 8, 128, 42)
-Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 248, 304, 75, 25)
+Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 248, 344, 75, 25)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
 Global $InputName = GUICtrlCreateInput("", 8, 72, 273, 21)
-Global $platformLabel = GUICtrlCreateLabel("-", 192, 56, 212, 15)
+Global $platformLabel = GUICtrlCreateLabel("-", 200, 56, 204, 15)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
 Global $Label1 = GUICtrlCreateLabel("Publisher:", 16, 104, 68, 15, $SS_RIGHT)
@@ -352,23 +340,35 @@ GUICtrlSetColor(-1, 0x000000)
 Global $Label7 = GUICtrlCreateLabel("Genre:", 184, 152, 52, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
-Global $ButtonSave = GUICtrlCreateButton("SAVE", 328, 304, 75, 25)
+Global $ButtonSave = GUICtrlCreateButton("SAVE", 328, 344, 75, 25)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
-Global $Label8 = GUICtrlCreateLabel("Description:", 0, 184, 84, 15, $SS_RIGHT)
+Global $Label8 = GUICtrlCreateLabel("Description:", 0, 224, 84, 15, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000000)
 Global $InputPublisher = GUICtrlCreateInput("", 112, 104, 289, 21)
 Global $InputDeveloper = GUICtrlCreateInput("", 112, 128, 289, 21)
 Global $InputReleased = GUICtrlCreateInput("", 112, 152, 65, 21)
-Global $InputGenre = GUICtrlCreateInput("", 248, 152, 153, 21)
-Global $InputDescription = GUICtrlCreateEdit("", 112, 184, 289, 113, BitOR($ES_AUTOVSCROLL,$ES_WANTRETURN,$WS_VSCROLL))
+Global $InputGenre = GUICtrlCreateInput("", 248, 152, 153, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY))
+Global $InputDescription = GUICtrlCreateEdit("", 112, 224, 289, 113, BitOR($ES_AUTOVSCROLL,$ES_WANTRETURN,$WS_VSCROLL))
 Global $CheckPublisher = GUICtrlCreateCheckbox("", 88, 104, 17, 17)
 GUICtrlSetTip(-1, "Save this data.")
 Global $CheckDeveloper = GUICtrlCreateCheckbox("", 88, 128, 17, 17)
 GUICtrlSetTip(-1, "Save this data.")
 Global $CheckYear = GUICtrlCreateCheckbox("", 88, 152, 17, 17)
 GUICtrlSetTip(-1, "Save this data.")
-Global $CheckReview = GUICtrlCreateCheckbox("", 88, 184, 17, 17)
+Global $CheckDescription = GUICtrlCreateCheckbox("", 88, 224, 17, 17)
+GUICtrlSetTip(-1, "Save this data.")
+Global $InputPerspective = GUICtrlCreateInput("", 112, 176, 289, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY))
+Global $Label9 = GUICtrlCreateLabel("Perspective:", 0, 176, 84, 15, $SS_RIGHT)
+GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
+GUICtrlSetColor(-1, 0x000000)
+Global $Label10 = GUICtrlCreateLabel("Visual:", 0, 200, 84, 15, $SS_RIGHT)
+GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
+GUICtrlSetColor(-1, 0x000000)
+Global $InputVisual = GUICtrlCreateInput("", 112, 200, 289, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY))
+Global $CheckPerspective = GUICtrlCreateCheckbox("", 88, 176, 17, 17)
+GUICtrlSetTip(-1, "Save this data.")
+Global $CheckVisual = GUICtrlCreateCheckbox("", 88, 200, 17, 17)
 GUICtrlSetTip(-1, "Save this data.")
 ;==============================================================================
 ;END *** GUI
@@ -386,13 +386,18 @@ GUICtrlSetData($InputPublisher, $Publisher)
 GUICtrlSetData($InputDeveloper, $Developer)
 GUICtrlSetData($InputReleased, $Released)
 GUICtrlSetData($InputGenre, $Genre)
+GUICtrlSetData($InputPerspective, $Perspective)
+GUICtrlSetData($InputVisual, $Visual)
 GUICtrlSetData($InputDescription, $Description)
 ToolTip("")
 
 If IniRead($MGIConfigFile, "SETTINGS", "YearFlag", "1") = "1" Then GUICtrlSetState($CheckYear, $GUI_CHECKED)
 If IniRead($MGIConfigFile, "SETTINGS", "DeveloperFlag", "1") = "1" Then GUICtrlSetState($CheckDeveloper, $GUI_CHECKED)
 If IniRead($MGIConfigFile, "SETTINGS", "PublisherFlag", "1") = "1" Then GUICtrlSetState($CheckPublisher, $GUI_CHECKED)
-If IniRead($MGIConfigFile, "SETTINGS", "ReviewFlag", "1") = "1" Then GUICtrlSetState($CheckReview, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "PerspectiveFlag", "1") = "1" Then GUICtrlSetState($CheckPerspective, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "VisualFlag", "1") = "1" Then GUICtrlSetState($CheckVisual, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "DescriptionFlag", "1") = "1" Then GUICtrlSetState($CheckDescription, $GUI_CHECKED)
+
 
 GUISetState(@SW_SHOW, $MGIGUI)
 
@@ -412,11 +417,13 @@ While 1
 			GUICtrlSetData($InputDeveloper, $Developer)
 			GUICtrlSetData($InputReleased, $Released)
 			GUICtrlSetData($InputGenre, $Genre)
+			GUICtrlSetData($InputPerspective, $Perspective)
+			GUICtrlSetData($InputVisual, $Visual)
 			GUICtrlSetData($InputDescription, $Description)
 			ToolTip("")
 
 		Case $ButtonSave
-			eccDatabaseWrite($RomEccId, $RomCrc32, GUICtrlRead($InputName), GUICtrlRead($InputPublisher),  GUICtrlRead($InputDeveloper),  GUICtrlRead($InputReleased), GUICtrlRead($InputGenre), GUICtrlRead($InputDescription))
+			eccDatabaseWrite($RomEccId, $RomCrc32, GUICtrlRead($InputName), GUICtrlRead($InputPublisher),  GUICtrlRead($InputDeveloper),  GUICtrlRead($InputReleased), GUICtrlRead($InputGenre), $Perspectivenr, $Visualnr, GUICtrlRead($InputDescription))
 			Exit
 
 		Case $CheckYear
@@ -434,10 +441,21 @@ While 1
 			If GUICtrlRead($CheckPublisher) = $GUI_UNCHECKED Then $PublisherFlag = "0"
 			Iniwrite($MGIConfigFile, "SETTINGS", "PublisherFlag", $PublisherFlag)
 
-		Case $CheckReview
-			If GUICtrlRead($CheckReview) = $GUI_CHECKED Then $ReviewFlag = "1"
-			If GUICtrlRead($CheckReview) = $GUI_UNCHECKED Then $ReviewFlag = "0"
-			Iniwrite($MGIConfigFile, "SETTINGS", "ReviewFlag", $ReviewFlag)
+		Case $CheckPerspective
+			If GUICtrlRead($CheckPerspective) = $GUI_CHECKED Then $PerspectiveFlag = "1"
+			If GUICtrlRead($CheckPerspective) = $GUI_UNCHECKED Then $PerspectiveFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "PerspectiveFlag", $PerspectiveFlag)
+
+		Case $CheckVisual
+			If GUICtrlRead($CheckVisual) = $GUI_CHECKED Then $VisualFlag = "1"
+			If GUICtrlRead($CheckVisual) = $GUI_UNCHECKED Then $VisualFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "VisualFlag", $VisualFlag)
+
+		Case $CheckDescription
+			If GUICtrlRead($CheckDescription) = $GUI_CHECKED Then $DescriptionFlag = "1"
+			If GUICtrlRead($CheckDescription) = $GUI_UNCHECKED Then $DescriptionFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "DescriptionFlag", $DescriptionFlag)
+
 
 	EndSwitch
 Wend
@@ -501,6 +519,45 @@ If UBound($Genre_tmp_f2) > 0 Then $Genre_tmp_f3 = StringSplit($Genre_tmp_f2[0], 
 If UBound($Genre_tmp_f3) > 2 Then $Genre = CleanHTMLString($Genre_tmp_f3[2]) ;Get the rightmost part ([1] is the left part)
 If $Genre = "Unknown" Then $MissingData = $MissingData + 1
 
+;Perspective
+Global $Perspective = "Unknown" ;Default value
+Dim $Perspective_tmp_f2, $Perspective_tmp_f3
+$Perspective_tmp_f1 = _StringBetween($Cache, "Perspective</div>", "</div>") ;Get the "perspective" line
+If UBound($Perspective_tmp_f1) > 0 Then $Perspective_tmp_f2 = _StringBetween($Perspective_tmp_f1[0], "<a href=", "</a>") ;Stripdown the line some more
+If UBound($Perspective_tmp_f2) > 0 Then $Perspective_tmp_f3 = StringSplit($Perspective_tmp_f2[0], ">") ;Stripdown the line some more
+If UBound($Perspective_tmp_f3) > 2 Then $Perspective = CleanHTMLString($Perspective_tmp_f3[2]) ;Get the rightmost part ([1] is the left part)
+If $Perspective = "Unknown" Then $MissingData = $MissingData + 1
+
+; Convert $Perspective to an integer (see mobygamesimporter.list & ecccore.dat)
+$Perspectivenr = "0"
+For $i = 1 To $MobyGamesListPerspective[0][0]
+	If $MobyGamesListPerspective[$i][0] = $Perspective Then $Perspectivenr = $MobyGamesListPerspective[$i][1]
+Next
+
+;Visual
+Global $Visual = "Unknown" ;Default value
+Dim $Visual_tmp_f2, $Visual_tmp_f3
+$Visual_tmp_f1 = _StringBetween($Cache, "Visual</div>", "</div>") ;Get the "Visual" line
+If UBound($Visual_tmp_f1) > 0 Then $Visual_tmp_f2 = _StringBetween($Visual_tmp_f1[0], "<a href=", "</a>") ;Stripdown the line some more
+If UBound($Visual_tmp_f2) > 0 Then $Visual_tmp_f3 = StringSplit($Visual_tmp_f2[0], ">") ;Stripdown the line some more
+If UBound($Visual_tmp_f3) > 2 Then $Visual = CleanHTMLString($Visual_tmp_f3[2]) ;Get the rightmost part ([1] is the left part)
+If $Visual = "Unknown" Then $MissingData = $MissingData + 1
+
+; Convert $Visual to an integer (see mobygamesimporter.list & ecccore.dat)
+$Visualnr = "0"
+For $i = 1 To $MobyGamesListVisual[0][0]
+	If $MobyGamesListVisual[$i][0] = $Visual Then $Visualnr = $MobyGamesListVisual[$i][1]
+Next
+
+;Gameplay
+Global $Gameplay = "Unknown" ;Default value
+Dim $Gameplay_tmp_f2, $Gameplay_tmp_f3
+$Gameplay_tmp_f1 = _StringBetween($Cache, "Gameplay</div>", "</div>") ;Get the "Gameplay" line
+If UBound($Gameplay_tmp_f1) > 0 Then $Gameplay_tmp_f2 = _StringBetween($Gameplay_tmp_f1[0], "<a href=", "</a>") ;Stripdown the line some more
+If UBound($Gameplay_tmp_f2) > 0 Then $Gameplay_tmp_f3 = StringSplit($Gameplay_tmp_f2[0], ">") ;Stripdown the line some more
+If UBound($Gameplay_tmp_f3) > 2 Then $Gameplay = CleanHTMLString($Gameplay_tmp_f3[2]) ;Get the rightmost part ([1] is the left part)
+If $Gameplay = "Unknown" Then $MissingData = $MissingData + 1
+
 ;Description
 Global $Description = "Unknown" ;Default value
 ;OLD 2013-2014 $Description_tmp_f1 = _StringBetween($Cache, @TAB & @TAB & @TAB & @TAB & @TAB & @TAB & "</div>", "<a class=" & Chr(34) & "edit") ;Get the "description" line
@@ -510,10 +567,12 @@ If UBound($Description_tmp_f1) > 0 Then
 EndIf
 If $Description = "Unknown" Then $MissingData = $MissingData + 1
 
+Msgbox(64, "test", $Genre & "-" & $Gameplay)
+
 EndFunc ;MobyGamesGrabber
 
 
-Func eccDatabaseWrite($RomEccId, $RomCrc32, $RomName, $Publisher, $Developer, $Released, $Genre, $Description)
+Func eccDatabaseWrite($RomEccId, $RomCrc32, $RomName, $Publisher, $Developer, $Released, $Genre, $Perspective, $Visual, $Description)
 ; Delete the temporally files
 FileDelete($SQLInstructionFile)
 FileDelete($SQLcommandFile)
@@ -524,81 +583,62 @@ If $RomMetaData = "1" Then ; There is META-Data available, we need to UPDATE a d
 	;Example UPDATE syntax:
 	;
 	;UPDATE mdata
-	;SET name = 'Adventureland', year = '1981', creator = 'Adventure International', publisher = 'Commodore'
+	;SET name = 'Adventureland', year = '1981', creator = 'Adventure International', publisher = 'Commodore', Perspective = 'Side view', Visual = 'Fixed / Flip-screen', description = 'This is the story of...'
 	;WHERE eccident='vic20' AND crc32='FED52393';
 
 	$INSTFile = Fileopen($SQLInstructionFile, 9)
 	FileWriteLine($INSTFile, "UPDATE mdata")
 	FileWriteLine($INSTFile, "SET name = '" & $RomName & "'")
 	FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
-	FileClose($INSTFile)
 
-	If $YearFlag = "1" Then
-		$INSTFile = Fileopen($SQLInstructionFile, 9)
+	If IniRead($MGIConfigFile, "SETTINGS", "YearFlag", "1") = "1" Then
 		FileWriteLine($INSTFile, "UPDATE mdata")
 		FileWriteLine($INSTFile, "SET year = '" & $Released & "'")
 		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
-		FileClose($INSTFile)
 	EndIf
 
-	If $DeveloperFlag = "1" Then
-		$INSTFile = Fileopen($SQLInstructionFile, 9)
+	If IniRead($MGIConfigFile, "SETTINGS", "DeveloperFlag", "1") = "1" Then
 		FileWriteLine($INSTFile, "UPDATE mdata")
 		FileWriteLine($INSTFile, "SET creator = '" & $Developer & "'")
 		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
-		FileClose($INSTFile)
 	EndIf
 
-	If $PublisherFlag = "1" Then
-		$INSTFile = Fileopen($SQLInstructionFile, 9)
+	If IniRead($MGIConfigFile, "SETTINGS", "PublisherFlag", "1") = "1" Then
 		FileWriteLine($INSTFile, "UPDATE mdata")
 		FileWriteLine($INSTFile, "SET publisher = '" & $Publisher & "'")
 		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
-		FileClose($INSTFile)
 	EndIf
 
+	If IniRead($MGIConfigFile, "SETTINGS", "PerspectiveFlag", "1") = "1" Then
+		FileWriteLine($INSTFile, "UPDATE mdata")
+		FileWriteLine($INSTFile, "SET perspective = '" & $Perspectivenr & "'")
+		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
+	EndIf
+
+	If IniRead($MGIConfigFile, "SETTINGS", "VisualFlag", "1") = "1" Then
+		FileWriteLine($INSTFile, "UPDATE mdata")
+		FileWriteLine($INSTFile, "SET visual = '" & $Visualnr & "'")
+		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
+	EndIf
+
+	If IniRead($MGIConfigFile, "SETTINGS", "DescriptionFlag", "1") = "1" Then
+		FileWriteLine($INSTFile, "UPDATE mdata")
+		FileWriteLine($INSTFile, "SET description = '" & $Description & " " & $MGFooterTag & "'")
+		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
+	EndIf
+
+	FileClose($INSTFile)
 
 Else ;There is no META-Data available, we need to INSERT a new database entry.
 
 	;Example INSERT syntax:
 	;
-	;INSERT INTO mdata (eccident, crc32, name, year, creator, publisher)
-	;VALUES ('vic20','EDDF4AD1', 'Adventureland', '1981', 'Adventure International', 'Commodore');
+	;INSERT INTO mdata (eccident, crc32, name, year, creator, publisher, perspective, visual, description)
+	;VALUES ('vic20','EDDF4AD1', 'Adventureland', '1981', 'Adventure International', 'Commodore', 'Side view', 'Fixed / Flip-screen', 'This is the story of...')
 
 	$INSTFile = Fileopen($SQLInstructionFile, 9)
-	FileWriteLine($INSTFile, "INSERT INTO mdata (eccident, crc32, name, year, creator, publisher)")
-	FileWriteLine($INSTFile, "VALUES ('" & $RomEccId & "', '" & $RomCrc32 & "', '" & $RomName & "', '" & $Released & "', '" & $Developer & "', '" & $Publisher & "');")
-	FileClose($INSTFile)
-
-EndIf
-
-; Review user-data (udata table)
-If $RomUserData = "1" Then  ;There is USERMETA-Data "review" available, we need to UPDATE a new database entry.
-
-	;Example UPDATE syntax:
-	;
-	;UPDATE udata
-	;SET review_title = 'Adventureland', review_body ='This is my review'
-	;WHERE eccident='vic20' AND crc32='FED52393';
-
-	If $ReviewFlag = "1" Then
-		$INSTFile = Fileopen($SQLInstructionFile, 9)
-		FileWriteLine($INSTFile, "UPDATE udata")
-		FileWriteLine($INSTFile, "SET review_title = '" & $RomName & "', review_body = '" & $Description & " " & $MGFooterTag & "'")
-		FileWriteLine($INSTFile, "WHERE eccident='" & $RomEccId & "' AND crc32='" & $RomCrc32 & "';")
-		FileClose($INSTFile)
-	EndIf
-
-Else ;There is no USERMETA-Data "review" available, we need to INSERT a new database entry.
-
-	;Example INSERT syntax:
-	;
-	;INSERT INTO udata (eccident, crc32, review_title, review_body)
-	;VALUES ('vic20','EDDF4AD1', 'Adventureland', 'This is my review');
-
-	$INSTFile = Fileopen($SQLInstructionFile, 9)
-	FileWriteLine($INSTFile, "INSERT INTO udata (eccident, crc32, review_title, review_body)")
-	FileWriteLine($INSTFile, "VALUES ('" & $RomEccId & "', '" & $RomCrc32 & "', '" & $RomName & "', '" & $Description & " " & $MGFooterTag & "');")
+	FileWriteLine($INSTFile, "INSERT INTO mdata (eccident, crc32, name, year, creator, publisher, perspective, visual, description)")
+	FileWriteLine($INSTFile, "VALUES ('" & $RomEccId & "', '" & $RomCrc32 & "', '" & $RomName & "', '" & $Released & "', '" & $Developer & "', '" & $Publisher & "', '" & $Perspectivenr & "', '" & $Visualnr & "', '" & $Description & "');")
 	FileClose($INSTFile)
 
 EndIf
@@ -620,33 +660,37 @@ Func MobyGamesSettings()
 ;==============================================================================
 ;BEGIN *** GUI
 ;==============================================================================
-Global $MGISETTINGS = GUICreate("ECC - MGI - Settings", 322, 376, -1, -1)
+Global $MGISETTINGS = GUICreate("ECC - MGI - Settings", 322, 410, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $Picture = GUICtrlCreatePic("", 96, 8, 128, 42)
-Global $ButtonOk = GUICtrlCreateButton("OK", 240, 344, 75, 25)
+Global $ButtonOk = GUICtrlCreateButton("OK", 240, 376, 75, 25)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
-GUICtrlCreateGroup(" Import META data ", 8, 128, 305, 209)
+GUICtrlCreateGroup(" Import META data ", 8, 128, 305, 241)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
-Global $Label4 = GUICtrlCreateLabel("wich already have META DATA inserted!", 16, 280, 233, 17)
+Global $Label4 = GUICtrlCreateLabel("wich already have META DATA inserted!", 16, 312, 233, 17)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
-Global $Label5 = GUICtrlCreateLabel("NOTE: These settings only affect ROMs wich", 16, 264, 226, 15)
+Global $Label5 = GUICtrlCreateLabel("NOTE: These settings only affect ROMs wich", 16, 296, 226, 15)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
-Global $Label6 = GUICtrlCreateLabel("When there is NO META data, all that is found", 16, 296, 264, 17)
+Global $Label6 = GUICtrlCreateLabel("When there is NO META data, all that is found", 16, 328, 264, 17)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
-Global $Label7 = GUICtrlCreateLabel("will be inserted!", 16, 312, 95, 17)
+Global $Label7 = GUICtrlCreateLabel("will be inserted!", 16, 344, 95, 17)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
-Global $CheckYear = GUICtrlCreateCheckbox("YEAR (replace existing ECC metadata)", 16, 192, 241, 17)
+Global $CheckYear = GUICtrlCreateCheckbox("YEAR (replace existing ECC metadata)", 16, 192, 289, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $CheckDeveloper = GUICtrlCreateCheckbox("DEVELOPER (replace existing ECC metadata)", 16, 208, 281, 17)
+Global $CheckDeveloper = GUICtrlCreateCheckbox("DEVELOPER (replace existing ECC metadata)", 16, 208, 289, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $CheckPublisher = GUICtrlCreateCheckbox("PUBLISHER (replace existing ECC metadata)", 16, 224, 273, 17)
+Global $CheckPublisher = GUICtrlCreateCheckbox("PUBLISHER (replace existing ECC metadata)", 16, 224, 289, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $CheckReview = GUICtrlCreateCheckbox("REVIEW (replace existing ECC metadata)", 16, 240, 257, 17)
+Global $CheckDescription = GUICtrlCreateCheckbox("DESCRIPTION (replace existing ECC metadata)", 16, 272, 289, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $CheckName = GUICtrlCreateCheckbox("NAME > Use 'fixed' MobyGames SEARCH name", 16, 152, 289, 17)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $Label1 = GUICtrlCreateLabel("When disabled MGI will insert the ROM FILENAME", 16, 172, 284, 17)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
+Global $CheckPerspective = GUICtrlCreateCheckbox("PERSPECTIVE (replace existing ECC metadata)", 16, 240, 289, 17)
+GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
+Global $CheckVisual = GUICtrlCreateCheckbox("VISUAL (replace existing ECC metadata)", 16, 256, 289, 17)
+GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 Global $Group2 = GUICtrlCreateGroup(" ROM NAME ", 8, 56, 305, 65)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
@@ -655,7 +699,7 @@ GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $Label2 = GUICtrlCreateLabel("Ignores already inserted META-data NAME.", 16, 96, 250, 17)
 GUICtrlSetFont(-1, 8, 400, 2, "Verdana")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 160, 344, 75, 25)
+Global $ButtonCancel = GUICtrlCreateButton("CANCEL", 160, 376, 75, 25)
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
 ;==============================================================================
 ;END *** GUI
@@ -668,10 +712,11 @@ If IniRead($MGIConfigFile, "SETTINGS", "NameFlag", "1") = "1" Then GUICtrlSetSta
 If IniRead($MGIConfigFile, "SETTINGS", "YearFlag", "1") = "1" Then GUICtrlSetState($CheckYear, $GUI_CHECKED)
 If IniRead($MGIConfigFile, "SETTINGS", "DeveloperFlag", "1") = "1" Then GUICtrlSetState($CheckDeveloper, $GUI_CHECKED)
 If IniRead($MGIConfigFile, "SETTINGS", "PublisherFlag", "1") = "1" Then GUICtrlSetState($CheckPublisher, $GUI_CHECKED)
-If IniRead($MGIConfigFile, "SETTINGS", "ReviewFlag", "1") = "1" Then GUICtrlSetState($CheckReview, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "PerspectiveFlag", "1") = "1" Then GUICtrlSetState($CheckPerspective, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "VisualFlag", "1") = "1" Then GUICtrlSetState($CheckVisual, $GUI_CHECKED)
+If IniRead($MGIConfigFile, "SETTINGS", "DescriptionFlag", "1") = "1" Then GUICtrlSetState($CheckDescription, $GUI_CHECKED)
 
 GUISetState(@SW_SHOW, $MGISETTINGS)
-
 
 While 1
 	$nMsg = GUIGetMsg()
@@ -707,10 +752,20 @@ While 1
 			If GUICtrlRead($CheckPublisher) = $GUI_UNCHECKED Then $PublisherFlag = "0"
 			Iniwrite($MGIConfigFile, "SETTINGS", "PublisherFlag", $PublisherFlag)
 
-		Case $CheckReview
-			If GUICtrlRead($CheckReview) = $GUI_CHECKED Then $ReviewFlag = "1"
-			If GUICtrlRead($CheckReview) = $GUI_UNCHECKED Then $ReviewFlag = "0"
-			Iniwrite($MGIConfigFile, "SETTINGS", "ReviewFlag", $ReviewFlag)
+		Case $CheckPerspective
+			If GUICtrlRead($CheckPerspective) = $GUI_CHECKED Then $PerspectiveFlag = "1"
+			If GUICtrlRead($CheckPerspective) = $GUI_UNCHECKED Then $PerspectiveFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "PerspectiveFlag", $PerspectiveFlag)
+
+		Case $CheckVisual
+			If GUICtrlRead($CheckVisual) = $GUI_CHECKED Then $VisualFlag = "1"
+			If GUICtrlRead($CheckVisual) = $GUI_UNCHECKED Then $VisualFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "VisualFlag", $VisualFlag)
+
+		Case $CheckDescription
+			If GUICtrlRead($CheckDescription) = $GUI_CHECKED Then $DescriptionFlag = "1"
+			If GUICtrlRead($CheckDescription) = $GUI_UNCHECKED Then $DescriptionFlag = "0"
+			Iniwrite($MGIConfigFile, "SETTINGS", "DescriptionFlag", $DescriptionFlag)
 
 		Case $ButtonOk
 			; Read-in MGI settings
@@ -718,14 +773,15 @@ While 1
 			Global $YearFlag = IniRead($MGIConfigFile, "SETTINGS", "YearFlag", "1")
 			Global $DeveloperFlag = IniRead($MGIConfigFile, "SETTINGS", "DeveloperFlag", "1")
 			Global $PublisherFlag = IniRead($MGIConfigFile, "SETTINGS", "PublisherFlag", "1")
-			Global $ReviewFlag = IniRead($MGIConfigFile, "SETTINGS", "ReviewFlag", "1")
+			Global $PerspectiveFlag = IniRead($MGIConfigFile, "SETTINGS", "PerspectiveFlag", "1")
+			Global $VisualFlag = IniRead($MGIConfigFile, "SETTINGS", "VisualFlag", "1")
+			Global $DescriptionFlag = IniRead($MGIConfigFile, "SETTINGS", "DescriptionFlag", "1")
 			GUISetState(@SW_HIDE, $MGISETTINGS)
 			ExitLoop
 
 	EndSwitch
 Sleep(20)
 WEnd
-
 
 EndFunc ;MobyGamesSettings
 
@@ -753,6 +809,7 @@ $String = StringReplace($String, "/", "")
 $String = StringReplace($String, "&nbsp;", " ") ;Space
 $String = StringReplace($String, "&quot;", Chr(34)) ; "
 $String = StringReplace($String, "√∏", "o") ; ¯ in Br¯derbund -> Br√∏derbund
+$String = StringReplace($String, ";", "") ; No conflict with output to CSV based datfile.
 Return StringStripWS($String, 7)
 EndFunc ;CleanHTMLString
 

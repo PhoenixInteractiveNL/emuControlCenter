@@ -85,6 +85,13 @@ $i18n['meta'] = array(
 	'lbl_dump_type' =>
 		"Dump type",
 
+	/* 1.20 */
+	'lbl_perspective' =>
+		"Perspectief",	
+	'lbl_visual' =>
+		"Visueel",	
+	'lbl_description' =>
+		"Omschrijving",	
 );
 
 $i18n['dropdownMedium'] = array(
@@ -139,5 +146,43 @@ $i18n['dropdownDumpType'] = array(
 		"Amiga IPF dump",
 	'[misc_amiga_SPS]' =>
 		"Amiga SPS dump",
+);
+
+/* 1.20 */
+$i18n['dropdownVisual'] = array(
+	'unknown' =>
+		"Onbekend",
+	'2D scrolling' =>
+		"2D scrollend",
+	'Cinematic camera' =>
+		"Cinematische camera",
+	'Fixed / Flip-screen' =>
+		"Vast / Flip-screen",
+	'Free-roaming camera' =>
+		"Vrije camera",
+	'Isometric' =>
+		"Isometrisch",
+);
+
+/* 1.20 */
+$i18n['dropdownPerspective'] = array(
+	'unknown' =>
+		"Onbekend",
+	'1st-person' =>
+		"1e persoon",
+	'3rd-person' =>
+		"3e Persoon",
+	'Audio game' =>
+		"Geluid / hoorspel",		
+	'Behind view' =>
+		"Van achteren",
+	'Birds-eye view' =>
+		"Vogel-oog zicht",
+	'Side view' =>
+		"Vanaf de zijkant",
+	'Text-based / Spreadsheet' =>
+		"Tekst gebasseerd / spreadsheet",
+	'Top-down' =>
+		"Van boven af",
 );
 ?>

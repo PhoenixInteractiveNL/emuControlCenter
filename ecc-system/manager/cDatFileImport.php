@@ -700,15 +700,15 @@ class DatFileImport extends App {
 					$terminator = 24;
 					break;
 				case '0.98':
-					# filesize added (isnt added to database)
 					$terminator = 32;
 					if(count($res) == 24) $terminator = 24; // hotfix for an datfile bug.
 					break;
 				case '1.1':
-					# filesize added (isnt added to database)
 					$terminator = 33;
-					if(count($res) == 24) $terminator = 24; // hotfix for an datfile bug.
 					break;
+				case '1.2003':
+					$terminator = 36;
+					break;					
 			}
 
 			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
@@ -776,6 +776,13 @@ class DatFileImport extends App {
 				if ($version >= '1.1') {
 					$data['dump_type'] = (($res[32] != "")) ? $res[32] : "NULL";
 				}
+
+				// v1.2003
+				if ($version >= '1.2003') {
+					$data['perspective'] = (($res[33] != "")) ? $res[33] : "NULL";
+					$data['visual'] = (($res[34] != "")) ? $res[34] : "NULL";
+					$data['description'] = (($res[35] != "")) ? $res[35] : "NULL";
+				}				
 
 				$q = "
 					SELECT
@@ -891,7 +898,10 @@ class DatFileImport extends App {
 				media_count,
 				region,
 				category_base,
-				dump_type
+				dump_type,
+				perspective,
+				visual,
+				description
 			)
 			VALUES
 			(
@@ -923,8 +933,11 @@ class DatFileImport extends App {
 				".sqlite_escape_string($data['media_count']).",
 				".sqlite_escape_string($data['region']).",
 				".sqlite_escape_string($data['category_base']).",
-				".sqlite_escape_string($data['dump_type'])."
-			)
+				".sqlite_escape_string($data['dump_type']).",
+				".sqlite_escape_string($data['perspective']).",
+				".sqlite_escape_string($data['visual']).",
+				'".sqlite_escape_string($data['description'])."'
+				)
 		";
 		$this->dbms->query($q);
 		return $this->dbms->lastInsertRowid();
@@ -956,7 +969,6 @@ class DatFileImport extends App {
 			creator = '".sqlite_escape_string($data['creator'])."',
 			publisher = '".sqlite_escape_string($data['publisher'])."',
 			storage = ".sqlite_escape_string($data['storage']).",
-
 			programmer = '".sqlite_escape_string($data['programmer'])."',
 			musican = '".sqlite_escape_string($data['musican'])."',
 			graphics = '".sqlite_escape_string($data['graphics'])."',
@@ -966,22 +978,14 @@ class DatFileImport extends App {
 			region = ".sqlite_escape_string($data['region']).",
 			category_base = ".sqlite_escape_string($data['category_base']).",
 			dump_type = ".sqlite_escape_string($data['dump_type']).",
-
+			perspective = ".sqlite_escape_string($data['perspective']).",
+			visual = ".sqlite_escape_string($data['visual']).",
+			description = ".sqlite_escape_string($data['description']).",			
 			uexport = NULL,
 			cdate = NULL
 			WHERE
 			id = ".$id."
 		";
-
-//				$data['programmer'] = "";
-//				$data['musican'] = "";
-//				$data['graphics'] = "";
-//				$data['media_type'] = "NULL";
-//				$data['media_current'] = "NULL";
-//				$data['media_count'] = "NULL";
-//				$data['region'] = "NULL";
-//				$data['category_base'] = "NULL";
-
 		#print $q."\n";
 		$this->dbms->query($q);
 	}

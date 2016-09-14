@@ -172,7 +172,7 @@ class DatFileExport {
 					# remove "invalid ;" in strings
 					foreach($v as $key => $value) if(strpos($value, ';') !== false) $v[$key] = str_replace(';', ',', $value);
 
-					$line = $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";".$v['programmer'].";".$v['musican'].";".$v['graphics'].";".$v['media_type'].";".$v['media_current'].";".$v['media_count'].";".$v['region'].";".$v['category_base'].";".$v['dump_type'].";#\r\n";
+					$line = $v['eccident'].";".$v['name'].";".$v['extension'].";".$v['crc32'].";".$v['running'].";".$v['bugs'].";".$v['trainer'].";".$v['intro'].";".$v['usermod'].";".$v['freeware'].";".$v['multiplayer'].";".$v['netplay'].";".$v['year'].";".$v['usk'].";".$v['category'].";".$languages.";".$v['creator'].";;;".str_replace(" ","", $v['info']).";".$v['info_id'].";".$v['publisher'].";".$v['storage'].";".$fileSize.";".$v['programmer'].";".$v['musican'].";".$v['graphics'].";".$v['media_type'].";".$v['media_current'].";".$v['media_count'].";".$v['region'].";".$v['category_base'].";".$v['dump_type'].";".$v['perspective'].";".$v['visual'].";".$v['description'].";#\r\n";
 
 					#print $line."\r\n";
 					fwrite($fhdl, $line);
@@ -254,7 +254,7 @@ class DatFileExport {
 		$line .= "COMMENT=\t".$this->exportHeader['comment']."\r\n";
 		$line .= "\r\n";
 		$line .= "[ECC_MEDIA]\r\n";
-		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;programmer;musican;graphics;media_type;media_current;media_count;region;category_base;dump_type;#\r\n";
+		$line .= "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;programmer;musican;graphics;media_type;media_current;media_count;region;category_base;dump_type;perspective;visual;description#\r\n";
 		return $line;
 	}
 
@@ -314,7 +314,7 @@ class DatFileExport {
 		$head3 .= "COMMENT;";
 		$line3 .= "".$this->exportHeader['comment'].";";
 
-		$lin5 = "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;programmer;musican;graphics;media_type;media_current;media_count;region;category_base;dump_type;#";
+		$lin5 = "eccident;name;extension;crc32;running;bugs;trainer;intro;usermod;freeware;multiplayer;netplay;year;usk;category;languages;creator;hardware;doublettes;info;info_id;publisher;storage;filesize;programmer;musican;graphics;media_type;media_current;media_count;region;category_base;dump_type;perspective;visual;description#";
 
 		$line = $head1."\r\n".$line1."\r\n".$head2."\r\n".$line2."\r\n".$head3."\r\n".$line3."\r\n\r\n".$lin5."\r\n";
 

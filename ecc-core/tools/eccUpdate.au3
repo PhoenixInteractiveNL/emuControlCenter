@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.2.0.1
-Global $ScriptVersion = "v1.2.0.1"
-; Last changed           : 2016.08.12
+; Script version         : v1.2.0.2
+Global $ScriptVersion = "v1.2.0.2"
+; Last changed           : 2016.09.15
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -22,9 +22,8 @@ FileChangeDir(@ScriptDir)
 $IdtRead = FileOpen($eccUserCidFile)
 Global $eccIdt = FileRead($IdtRead)
 FileClose($IdtRead)
+
 Global $SkipUpdate
-
-
 Global $StartEccAfterUpdate = 0
 
 If $CmdLine[0] > 0 Then
@@ -141,7 +140,8 @@ Else
 EndIf
 
 AddNote("check: updates available?...")
-$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1))
+$eccLastUpdate = StringStripWS(BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1)), 8)
+;Ps. StringStripWS needed if changes are made in GitHub interface due to invisible (linux) character!
 
 If $eccLastUpdate > $eccLocalLastUpdate Then
 	If $eccLastUpdate - $eccLocalLastUpdate > 30 Then
@@ -172,7 +172,6 @@ If WinExists("emuControlCenter" & " v" & $eccCurrentVersion & " build:" & $eccCu
 Else
 	AddNote("no.#")
 EndIf
-
 
 For $Download = $eccLocalLastUpdate + 1 To $eccLastUpdate
 
@@ -319,7 +318,6 @@ GUICtrlSetData($UpdateProgress, 0)
 UpdateComplete()
 Exit
 
-
 Func AddNote($string)
 Global $totalstring
 $string = StringReplace($string, "#", @CRLF)
@@ -354,7 +352,9 @@ Exit
 EndFunc ;UpdateComplete
 
 Func CheckForUpdates()
-$eccLastUpdate = BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1))
+$eccLastUpdate = StringStripWS(BinaryToString(InetRead($UpdateServer & "lastupdate.txt", 1)), 8)
+;Ps. StringStripWS needed if changes are made in GitHub interface due to invisible (linux) character!
+
 If $eccLastUpdate > $eccLocalLastUpdate Then
    $Choice = MsgBox(64+4, "eccUpdate", "Found " & $eccLastUpdate - $eccLocalLastUpdate & " update(s) available for ECC, would you like to update now?")
    If $Choice = 6 Then ;Yes

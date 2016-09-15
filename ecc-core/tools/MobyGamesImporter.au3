@@ -567,8 +567,6 @@ If UBound($Description_tmp_f1) > 0 Then
 EndIf
 If $Description = "Unknown" Then $MissingData = $MissingData + 1
 
-Msgbox(64, "test", $Genre & "-" & $Gameplay)
-
 EndFunc ;MobyGamesGrabber
 
 

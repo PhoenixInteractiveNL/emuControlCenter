@@ -152,11 +152,9 @@ emuControlCenter<br />
 	}
 
 	public function open_splash_screen() {
-		if (!file_exists("license.txt")) die ("missing license.txt");
 		$dlg = new GtkAboutDialog();
 
 		$dlg->set_modal(true);
-		#$dlg->set_transient_for($this->gui->wdo_main);
 		$dlg->set_keep_above(true);
 		$dlg->present();
 
@@ -172,31 +170,11 @@ emuControlCenter<br />
 		$website = $this->gui->ecc_release['website'];
 		$email = $this->gui->ecc_release['email'];
 
-		$dlg->set_translator_credits(trim(
-		'
-ECC Translations:
---------------------------------------
-[DE] Blackering
-[EN] ECC & Phoenix
-[ES] Jarlaxe
-[FR] Cyrille
-[GR] Alkis30
-[HU] Gruby & Delirious
-[JP] Yoshi Matsu
-[NL] Sebastiaan Ebeltjes (Phoenix)
-[PT] Namnam
-[RU] ALLiGaToR
---------------------------------------
-		'
-		));
-
 		$dlg->set_name("");
 		$dlg->set_version($version);
 		$dlg->set_copyright($this->gui->ecc_release['info_copyright']);
 		$dlg->set_website($website);
 		$dlg->set_comments("Please look for updates at https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki");
-		$dlg->set_license(file_get_contents("license.txt"));
-
 		$dlg->run();
 		$dlg->destroy();
 

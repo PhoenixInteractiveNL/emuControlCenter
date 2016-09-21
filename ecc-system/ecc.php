@@ -1487,11 +1487,6 @@ class App extends GladeXml {
 		// ----------------------------
 		// DATFILE
 		// ----------------------------
-		// 2012-07-03 Disabled, this is not needed anymore, ROMdb is no more
-		//$this->mTopDatImportOnlineRomdb->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_ECC_ROMDB');
-		//$this->mTopDatImportOnlineRomdb->set_sensitive(false);
-		//$this->mTopDatExportOnlineRomdb->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'WEBSERVICE', 'SET');
-
 		$this->mTopDatImportRc->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_RC');
 		$this->mTopDatImportCtrlMAME->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_CONTROLMAME');
 		$this->mTopDatImportEcc->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_ECC');
@@ -7071,7 +7066,6 @@ class App extends GladeXml {
 		$this->mTopEmuConfig->set_sensitive($state);
 		$this->mTopDatImportRc->set_sensitive($state);
 		$this->mTopDatImportCtrlMAME->set_sensitive($state);
-		#$this->mTopDatImportOnlineRomdb->set_sensitive($state);
 
 		$isMultiRomPlatform = $this->ini->isMultiRomPlatform($this->_eccident);
 		$this->mTopRomAuditShow->set_sensitive($isMultiRomPlatform);
@@ -8288,11 +8282,6 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopDatClear->get_child()->set_text(I18N::get('menuTop', 'mTopDatClear'));
 		$this->mTopDatClear->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopDatClearTooltip'));
 		$this->mTopDatConfig->get_child()->set_text(I18N::get('menuTop', 'mTopDatConfig'));
-
-		// TOP-ROMDB // Removed from GUI, Service is no longer online!(2012-06-10)
-		$this->mTopRomDB->get_child()->set_text(I18N::get('menuTop', 'mTopRomDB'));
-		$this->mTopDatImportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatImportOnlineRomdb'));
-		$this->mTopDatExportOnlineRomdb->get_child()->set_text(I18N::get('menuTop', 'mTopDatExportOnlineRomdb'));
 
 		// ROM-AUDIT
 		$this->mTopRomAuditShow->get_child()->set_text(I18N::get('menuTop', 'mTopRomAuditShow'));

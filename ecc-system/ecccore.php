@@ -1,6 +1,6 @@
 <?php
 $version = '1.21';
-$build = '01';
+$build = '02';
 $description = '1.21';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 

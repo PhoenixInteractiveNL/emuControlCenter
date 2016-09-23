@@ -1,0 +1,126 @@
+<h2>TEXTBOX WITH SEARCH BUTTON (example "database folder")</h2>
+
+<hr />
+
+<h3>ADD TO GUI > HBOX with 4 items:</h3>
+
+<p>Items:</p>
+
+<p><em>Image   (TAB GENERAL> Name> DatabaseFolderImage) | (TAB Packing> position> 0)</em></p>
+
+<p><em>Label   (TAB GENERAL> Name> DatabaseFolderLabel) | (TAB Packing> position> 1)</em></p>
+
+<p><em>Textbox (TAB GENERAL> Name> DatabaseFolderTextbox) | (TAB Packing> position> 2)</em></p>
+
+<p><em>Button  (TAB GENERAL> Name> DatabaseFolderButton) | (TAB Packing> position> 3)</em></p>
+
+<h2>IMPLEMENTATION STEPS</h2>
+
+<h3>CONFIGURE IMAGE</h3>
+
+<p>ADD a PNG "ecc<em>config</em>database.png" to the path "ecc-themes\default\icon".</p>
+
+<ul>
+<li>LOAD the PNG into the GUI</li>
+</ul>
+
+<p>Edit file: cGuiPopConfig, around line 752, add:</p>
+
+<pre><code>$this-&gt;DatabaseFolderImage-&gt;set_from_file(FACTORY::get('manager/GuiTheme')- &gt;getThemeFolder('icon/ecc_config_database.png'));
+</code></pre>
+
+<h3>CONFIG LABEL LANGUAGE (example NL)</h3>
+
+<ul>
+<li>ADD label translation section in the i18n</li>
+</ul>
+
+<p>Edit file: ecc-system\translations\nl\i18n_popupConfig.php, at the NEAR END, add:</p>
+
+<pre><code>/* ECCVERSION */
+'DatabaseFolderLabel' =&gt;
+"Database map",
+</code></pre>
+
+<ul>
+<li><p>LOAD label from i18n config into GUI
+Edit file: ecc-system\manager\cGuiPopConfig.php, around line 1050, add:</p>
+
+<p>$this->DatabaseFolderLabel->set_text(I18N::get('popupConfig', 'DatabaseFolderLabel'));</p></li>
+</ul>
+
+<h3>LOAD TEXTBOX DATA</h3>
+
+<ul>
+<li>ADD config section/option into ecc config.</li>
+</ul>
+
+<p>Edit "vanilla ecc<em>config", file: "ecc-system\system\config\ecc</em>general.ini", in section [USER_DATA] add:</p>
+
+<pre><code>database_path = "database/"
+</code></pre>
+
+<ul>
+<li>LOAD config section/key into the GUI.</li>
+</ul>
+
+<p>Edit file: ecc-system\manager\cGuiPopConfig.php, around line 1080, add:</p>
+
+<pre><code>$this-&gt;DatabaseFolderTextbox-&gt;set_text($iniManager-&gt;getKey('USER_DATA', 'database_path'));
+</code></pre>
+
+<ul>
+<li>SAVE config to INI file.</li>
+</ul>
+
+<p>Edit file: ecc-system\manager\cGuiPopConfig.php, around line 1240, ADD:</p>
+
+<pre><code>$this-&gt;globalIni['USER_DATA']['database_path'] = $this-&gt;DatabaseFolderTextbox-&gt;get_text();
+</code></pre>
+
+<h3>USING THE VARIABLE IN THE TEXTBOX IN ECC</h3>
+
+<ul>
+<li>LOAD folder config from INI,</li>
+</ul>
+
+<p>Edit (for example) ecc.php, ADD:</p>
+
+<p>$databaseFolder = $this->ini->getKey('USER<em>DATA', 'database</em>path'); // Load database folder from INI.</p>
+
+<h3>CONFIG BUTTON LANGUAGE (example NL)</h3>
+
+<ul>
+<li>LOAD label from i18n config into GUI button</li>
+</ul>
+
+<p>Edit file: ecc-system\manager\cGuiPopConfig.php, around line 1050, ADD:</p>
+
+<pre><code>$this-&gt;DatabaseFolderLabel-&gt;set_text(I18N::get('popupConfig', 'DatabaseFolderLabel'));
+</code></pre>
+
+<h3>USE THE BUTTON</h3>
+
+<ul>
+<li>ADD A SIGNAL TO THE BUTTON (to run a php function "DatabaseFolderSearch")</li>
+</ul>
+
+<p>Edit file: ecc-system\manager\cGuiPopConfig.php, around line 140, ADD:</p>
+
+<p>$this->DatabaseFolderButton->connect_simple('clicked', array($this, 'DatabaseFolderSelect'));</p>
+
+<ul>
+<li>ADD A PHP FUNCTION WITH SEARCHBOX</li>
+</ul>
+
+<p>Edit file: ecc-system\manager\cGuiPopConfig.php, around line 1500, ADD:</p>
+
+<pre><code>public function DatabaseFolderSelect() {
+$oOs = FACTORY::get('manager/Os');
+$path = realpath($this-&gt;DatabaseFolderTextbox-&gt;get_text());
+$title = I18N::get('popupConfig', 'dialogDatabaseFolder');
+$path_new = $oOs-&gt;openChooseFolderDialog($path, $title, false);
+$path_new = $oOs-&gt;eccSetRelativeDir($path_new);
+if ($path_new) $this-&gt;DatabaseFolderTextbox-&gt;set_text($path_new);
+}
+</code></pre>

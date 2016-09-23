@@ -1,0 +1,482 @@
+<h2>Changelogs 2009</h2>
+
+<hr />
+
+<p>Version 1.0.R1 (2009.11.20)</p>
+
+<ul>
+<li><p>Added platforms:</p>
+
+<ul>
+<li>Atari Jaguar CD</li>
+<li>Cosmac VIP</li>
+<li>Mikrosha Radio-86RK</li>
+<li>MSX Turbo R (Panasonic FS-A1GT/ST)</li>
+<li>Panasonic JR-200</li>
+<li>Spectravideo SV318/328</li>
+<li>Taito GNET</li>
+<li>Texas Instruments TI-82</li>
+<li>Texas Instruments TI-83</li>
+<li>Texas Instruments TI-85</li>
+<li>Texas Instruments TI-86</li>
+<li>Texas Instruments TI-92</li>
+<li>IGS PolygameMaster (resources by robertobernardo &amp; te_lanus)</li>
+</ul></li>
+<li><p>Small changes:</p>
+
+<ul>
+<li>Placed Philips G7400+ in 'console' category.</li>
+<li>Added Extensions for:</li>
+<li>Exidy Sorcerer (.snp)</li>
+<li>Texas Instruments TI-99/4A (.TIcart, .TIDisk, .TITape)</li>
+<li>Removed .CSO extensions for ECCid: 3doe, Amigacd32, cdi, cdtv</li>
+<li>Fixed ROM import for: Commodore CDTV (eccid: cdtv)</li>
+<li>Renamed plaform 'Tomy Pyuta/Tutor' to 'Tomy Tutor/Pyuta'</li>
+<li>NOTE: You have to re-import your roms again!, because the eccid has,
+been changed from 'pyuta' to 'tutor'.</li>
+<li>Updated platform images:</li>
+<li>Tomy Tutor teaser image (words turned).</li>
+<li>Nintendo DS teaser image (added nintendo logo in it).</li>
+<li>Fixed ecc-user pathnames for ECCid: l100, atomisw</li>
+<li>Fixed RU (russian) translation selection string for all languages (was missing)</li>
+<li>Script updates:</li>
+<li>Updated: 'psxfin' script, adding code to mount a cd (if needed) (by Bigby)</li>
+<li>Added: 'ePSXe' script, to mount a cd (by Bigby)</li>
+<li>Improved the Virtual Pinball startup, the script isn't needed anymore. (by thetrout)</li>
+<li>Fixed ECC version string to 'v1.0 WIP 06 (2009.08.08)'</li>
+<li>Updated 'Atari Jaguar' teaser with correct console image.</li>
+<li>Fixed name 'Texas Instuments TI-99/4A' to 'Texas Instruments TI-99/4A'</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.3.8</p></li>
+<li>Fixed a bug where unpacked zip files where not deleted due to update 00411 wich
+has a newer beta compile of autoit 3.3.1.5 the function 'Opt("OnExitFunc")'
+doens't work anymore, so i have found another solution, that does work!</li>
+<li>Fixed a bug where unpacked files should be deleted if the user-folder is not
+the default "ecc-user" location.
+v2.3.3.7</li>
+<li>Added a function that configures Xpadder for Windows 7, so that no error occurs
+when Xpadder is started, by writing a XPSP3 compatability mode into the windows
+registery.
+v2.3.3.6</li>
+<li><p>Added a function to delete the 'ecc-user#<em>AUTO</em>UNPACKED' folder on ECC exit.</p>
+
+<ul>
+<li>This feature is only active in ECC v1.1 WIP or above!</li>
+</ul></li>
+<li><p>DATfile updates:</p>
+
+<ul>
+<li>ATOMISW: <em>NEW</em></li>
+<li>PGM    : <em>NEW</em></li>
+<li>MAME   : from v0.134 to v0.135</li>
+<li>MODEL2 : from MAME v0.135</li>
+<li>PGM    : from MAME v0.135</li>
+<li>S16    : from MAME v0.135</li>
+</ul></li>
+</ul>
+
+<p><img src="images/img_misc_great_step.jpg" alt="" title="" /></p>
+
+<p>Version 1.0 (2009.10.11)  A GREAT STEP FORWARD!</p>
+
+<ul>
+<li>Added platforms:
+<ul>
+<li>Apple 3 (resources by: te<em>lanus)</li>
+<li>Commodore 128 (resources by: te</em>lanus)</li>
+<li>Philips Videopac+ G7400 (resources by: te<em>lanus)</li>
+<li>Sega Sammy Atomiswave (resources by: Jarlaxe)</li>
+<li>Sord M5 (resources by: te</em>lanus)</li>
+<li>Vtech Laser 100/110 (resources by: te<em>lanus)</li>
+<li>Vtech Laser 350/500/700 (resources by: te</em>lanus)</li>
+</ul></li>
+</ul>
+
+<p>WIP 06 (2009.08.08)
+- Moved the small ECC teaser image to the 'internal' image folder.
+- Fixed broken links of the 'ecc<em>icon</em>small.ico' file in certain files.
+- The header/banner website bug is fixed.
+- now Show/Hide status of search-panel is saved.
+- fixed "List view options not saved" bug.
+- added new ps1 parser.
+-- You have to update your ecc<em>ps1</em>system.ini, if you want use this parser!</p>
+
+<p>WIP 05 (2009.03.31)
+- implemented new gameid parser for PS1 (resources by zerosan).
+- fixed the doubleclick bug in mainlist.
+- optimized the refresh of imagelist and metadata panel.
+- fixed the imagelist bug (duplicate entries if you navigate fast in mainlist :-)).
+- fixed a bug that avoid, that roms in zip subfolders are removed from temp folder.</p>
+
+<p>WIP 04 (2009.03.21)
+- added new IconView mode. (experimental - not finished).
+- fixed romOf/cloneOf bug.</p>
+
+<p>WIP 03 (2009.02.13)
+- added "IMAGES" panel for direct view of all images.
+- reorganized meta info panel.
+- optimized emuControlCenter for resolution 1024x768.
+- Fixed the French language by changing the charset (finally!).
+- Added back the tool languages for PT &amp; GR (because they are not yet included and supported in the 0.9.9 series).
+- Changed the original author/date/info inside the language files to the rightfull translater.</p>
+
+<p>WIP 02 (2009.02.04)
+- added "info ID" to freeform search.
+- added autocompletion to "info string" and "info id" field in meta edit popup.
+- fixed navigation auto update for "own edited/transfered meta".
+- added "copy/move by searchresult".</p>
+
+<p>WIP 01 (2009.01.26)
+- added new filter modes
+ - own metadata (edited or transfered)
+   - Show your own modified metadata. This mode shows edited but not transfered (to gamedb) and also transfered meta!
+ - own metadata (edited only)
+   - This show only the edited meta, that isn´t transfered yet!
+ - own metadata (transfered only)
+   - This show only the transfered meta. Use this to update already uploaded metadata....
+- Changed translation system. Now a source and destination encoding is setable via charset.ini</p>
+
+<ul>
+<li><p>Small updates:</p>
+
+<ul>
+<li>Added translations:</li>
+<li>Greek (by Alkis30)</li>
+<li>Hungarian (by Gruby &amp; Delirious)</li>
+<li>Portoguese (by Namnam)</li>
+<li>Russian (by ALLiGaToR144)</li>
+<li>Spanish (by Jarlaxe)</li>
+<li>Fixed messagebox icons when selecting another theme then 'default'.</li>
+<li>Added theme color splashscreens for the themes:</li>
+<li>afterhours</li>
+<li>miss-kit-bubblegum</li>
+<li>miss-kit-purple</li>
+<li>Renamed the Platform 'Vtech Laser 200' to 'Vtech Laser 200/210/310'</li>
+<li>Updated the 'Vtech Laser 200/210/310' teaser.</li>
+<li>Updated the 'Dosbox' teaser</li>
+<li>Renamed plaform 'Magnavox Oddysey2' to 'Philips Videopac G7000'</li>
+<li>NOTE: You have to re-import your roms again!, because the eccid has,
+been changed from 'ody2' to 'vg7000'.</li>
+</ul></li>
+<li><p>Script updates:</p>
+
+<ul>
+<li>Added script for 'JVZ200' emulator, for 'Laser 200' (by te_lanus)</li>
+<li>Added script for 'WinAPE' emulator, for 'Amstrad GX4000' (by te_lanus)</li>
+<li>Added script for 'DCVG5K' emulator, for 'Philips VG-5000' (by Vicman)</li>
+<li>Updated ECC ScriptROM SYSTEM file to v1.0.0.7</li>
+<li>Made some gramatical changes in the 'title bar not found' sentance.</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.3.5</p></li>
+<li>Fixed a possible problem to register the OCX files, now using the full path
+and using quotes to register an OCX with 'regsvr32'.
+v2.3.3.4</li>
+<li>Fixed a problem with creating userfolders at the right location, now the userfolder
+location is read from the ecc ini file.</li>
+<li>Fixed a problem with an infinite loop if the userfolder doesn't exist.
+v2.3.3.3</li>
+<li>Xpadder now also appears in the language wich is chosen in ECC.
+v2.3.3.2</li>
+<li>Possible fix for ECC splashscreen starting/staying in minimized mode #2.</li>
+<li>Improved ECC Bugreporting, now the bugreports are being send right away,
+instead on next startup.
+v2.3.3.1</li>
+<li>Possible fix for ECC splashscreen starting/staying in minimized mode.</li>
+<li>Added ECC 1005 error, wich shows the PHP error.log in a GUI when an
+error has occured.
+v2.3.3.0</li>
+<li><p>Improved they way if an (PHP) error occured with ECC.</p>
+
+<ul>
+<li>The GUI splashscreen will be unloaded fist before the messagebox will be shown.
+(the messagebox was sometimes behind the GUI, so it could hardly be clicked)</li>
+<li>When an PHP error has occured (wich writes an error.log file), ECC startup will
+immediatly quit. (instead of waiting a minute and nagging you with the
+waiting splascreen)</li>
+</ul></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Notepad++ v5.5</li>
+</ul></li>
+<li><p>Updated DATfiles:</p>
+
+<ul>
+<li>MAME   : v0.132 to v0.134</li>
+<li>CPS1   : v2009.04.26 to v2009.09.15</li>
+<li>CPS2   : v2009.06.08 to v2009.09.15</li>
+<li>CPS3   : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>MODEL1 : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>MODEL1 : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>NEOGEO : v2009.04.26 to v2009.09.15</li>
+<li>S11    : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>S16    : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>S18    : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>S22    : v2009.09.15 (from MAME v0.134 DAT)</li>
+<li>SVM    : v0.99.1.3 to v0.99.1.5</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.9.R2 (2009.06.28)</p>
+
+<ul>
+<li><p>Added platforms:</p>
+
+<ul>
+<li>Acorn Atom (resources by: te_lanus)</li>
+<li>Bondwell Model 2 (resources by: te_lanus)</li>
+<li>Casio Loopy (resources by: te_lanus)</li>
+<li>DEC PDP-1 (resources by: te_lanus)</li>
+<li>DEC PDP-7 (resources by: te_lanus)</li>
+<li>Sega Pico (resources by: te_lanus)</li>
+<li>Signetics Pipbug (resources by: te_lanus)</li>
+</ul></li>
+<li><p>Small updates:</p>
+
+<ul>
+<li>Fixed the banner (top left) website bug (hyperlink is removed)</li>
+<li>Fixed some EN language strings/typos</li>
+<li>Changed Homelab4 emulator and settings INI's (by Gruby)</li>
+<li>Placed "Magnavox Odyssey 2" in the console catagory.</li>
+<li>Renamed "Tomy Pyuta" to "Tomy Pyuta/Tutor" (incl. new teaser)</li>
+<li>Improved 'option' images, by adding transparancy &amp; removing ugly pixels</li>
+<li>Improved the small ECC teaser image by removing the border at the bottom.</li>
+<li>Moved the small ECC teaser image to the 'internal' image folder.</li>
+<li>Fixed broken links of the 'ecc<em>icon</em>small.ico' file in certain files.</li>
+<li>Added spanish translation instructions for the thirpartytools.</li>
+</ul></li>
+<li><p>Script updates:</p>
+
+<ul>
+<li>Added Microkey Primo script (by Gruby)</li>
+<li>Added script for the 'pdp7' emulator (by te_lanus)</li>
+<li>Updated the "Ultimo" script for "Microkey Primo", v1.0.1.0 to 1.0.1.2, changes:</li>
+<li>New Function - EmulatorControl($EmulatorWindowTitle, $CommandLine) (Thanks to Phoenix)</li>
+<li>Some Primo C (Colour Primo) files is working now.</li>
+<li>Needed Reset handle</li>
+<li>Some fixes...</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.2.9</p></li>
+<li>Added a PNG border to the splashscreen, for some shade (so it doens't look flat)</li>
+<li>When reloading ECC the (reloading)splashscreen now also fades.</li>
+<li><p>Fixed a bug where the 'reloading' string wasn't shown properly when ecc was reloading.</p></li>
+<li><p>ECC Live!
+v3.2.0.3</p></li>
+<li>Fixed issues where filenames to add/replace strings could not be found.
+v3.2.0.2 -fix2</li>
+<li><p>Fixed the word 'Avaialable' to 'Available'</p></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Updated, Notepad++ v5.4</li>
+</ul></li>
+<li><p>DAT file updates:</p>
+
+<ul>
+<li>CPS-1: v2009.03.10 to v2009.04.26</li>
+<li>CPS-2: v2009.01.06 to v2009.06.08</li>
+<li>SVM: v0.99.0.8 to v0.99.1.3</li>
+<li>MAME: v0.130 to v0.132</li>
+<li>NEOGEO: v2009.03.10 to v2009.04.26</li>
+<li>PRIMO: <em>NEW</em> v0.99.1.1 (by Gruby)</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.9.R1 (2009.04.04)</p>
+
+<ul>
+<li><p>Added platforms:</p>
+
+<ul>
+<li>APF Electronics Imagination Machine</li>
+<li>Exidy Sorcerer</li>
+<li>HomeLAB series - HomeLAB4</li>
+</ul></li>
+<li><p>Small updates:</p>
+
+<ul>
+<li>Added transparancy for the Hungarian flag (meta edit).</li>
+<li>Fixed all ECC Startup messages, some where missing.</li>
+<li>Updated French languages for ECC Startup.</li>
+<li>Changed best emulator for Vic-20 to XVIC.EXE.</li>
+<li>Polished the Pinball nav image (ugly pixels).</li>
+<li>Added the Atari logo in the Atari 2600/5200/7800 platform teaser image.</li>
+<li>Added CDI (Disc Juggler image) extensions to CD platforms.</li>
+<li>Fixed the systems info files to be more compatible with unicode languages,
+converted chars:
+‘ > ', ’ > ', “ > ', ” > ', ÷ > /, % > percent, ½ > .1/2, ¼ > .1/4
+• > *, × > x, ¥ > Yen, $ > Dollar, £ > Pound, ~ > Approx.</li>
+<li>Enterprise 64/128 extension update</li>
+<li>Added: TRN, SAP, EP32, EP128S, COM, BAS, IMG, TAP, WAVE, DTF</li>
+<li>Removed: PRG, BIN, 128, ROM</li>
+<li>Removed CSO (Compressed ISO) extension for all CD image platforms.</li>
+<li>Renamed the platform 'Híradástechnikai Szövetkezet HT-1080Z' to
+'Híradástechnika HT-1080Z'</li>
+<li>Rearanged the ECC documentation, also included a FAQ (wip)</li>
+</ul></li>
+<li><p>Script updates:</p>
+
+<ul>
+<li>Updated VIC-20, using the latest VICE emulator XVIC (atm v2.1) wich support
+commandlines, so no INI write is nessessary, all settings can be set with
+commandline parameters.</li>
+<li>Added, VP script for Virtual Pinball, to run tables from the ECC GUI.</li>
+<li>Added, PSXFIN script for Playstation 1, wich run the emulator in fullscreen.</li>
+<li>Updated, script for 'ScummVM' v1.0.0.5 (DerMicha75)</li>
+<li>Improved unpacking of agi/gob/saga files by overwriting existing files!</li>
+<li>Updated, script for 'Project Tempest' v1.0.0.2 (Phoenix)</li>
+<li>Fixed support for Windows Vista</li>
+<li>Added messagebox and handle when have to enter a start address.</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.2.7</p></li>
+<li>Improved language 'switching' for thirdparty tools, in the beginning only on
+firt start the language for thirparty tools where configured, now when changing
+the language inside ECC, the thirdparty tools will also be adjusted ;-)</li>
+<li>Renamed the list 'ecc<em>ThirdPartyConversionList' to 'ecc</em>ThirdPartyLanguageList'
+v2.3.2.5</li>
+<li>Added a 'GetDriveInfo' parameter for drive information
+to let ECC give better support for removable drives!
+v2.3.2.3</li>
+<li>ECC starts in windowed mode when the useable width for ECC &lt; 1000 pixels.
+<ul>
+<li>when &lt; 1000 pixels ECC may experience glitches in the GUI.</li>
+<li>also a messagebox is added to inform the user. (one-time message)</li>
+</ul></li>
+<li>Fixed the Greek GUI language. (by putting the INI in unicode)
+v2.3.2.2</li>
+<li>Fixed AutoIT Error: 'Line -1, Variable used without being declared.' on
+other systems than 2000/XP/Vista, like: Windows Server 2008</li>
+<li><p>Fixed Notepad++ auto-language if 'ThirdPartyConversionList.ini' is not available.</p></li>
+<li><p>ECC Live!
+v3.2.0.2</p></li>
+<li>ECC Live! check on ECC startup will be disabled when there is no active
+internet connection found, this is because it will return errors all the time
+when you have no connection, you have to enable this manually again in the
+ECC configuration screen, when you have re-established the internet connection.</li>
+<li>Messagebox at the end will ask to view the log file now, this is only
+when updates have been installed or when an error has occured.
+v3.2.0.1</li>
+<li><p>Implemented an ERROR KICKSTART for ECC Live!, this way when there is a bug
+in ECC.EXE and it cannot write the configs eccLive needs, it will continue
+to update assuming the OS is WINNT.</p></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Updated, Notepad++ v5.3</li>
+<li>Updated, 7-Zip v4.65</li>
+</ul></li>
+<li><p>DAT file updates:</p>
+
+<ul>
+<li>CPS-2: v2009.01.06 to v2009.03.10</li>
+<li>CPS-3: v2007.07.10 to v2009.01.06 (from mame 0.129 dat)</li>
+<li>MODEL1: <em>NEW</em> v2009.01.05 (from mame 0.129 dat)</li>
+<li>MODEL2: v2008.06.05 to v2009.02.08</li>
+<li>S11: <em>NEW</em> v2009.01.05 (from mame 0.129 dat)</li>
+<li>S16: <em>NEW</em> v2009.01.05 (from mame 0.129 dat)</li>
+<li>S18: <em>NEW</em> v2009.01.05 (from mame 0.129 dat)</li>
+<li>S22: <em>NEW</em> v2009.01.05 (from mame 0.129 dat)</li>
+<li>SVM: <em>NEW</em> v0.99.0.8 (by Gruby)</li>
+<li>ZINC: v2005.07.31 to v2009.01.06 (from mame 0.129 dat)</li>
+<li>MAME: v0.129 to v0.130</li>
+<li>NEOGEO : v2009.01.07 to v2009.03.10</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.9 (2009.01.18)</p>
+
+<p>WIP 06.1 (2009.01.17)
+- added template usage when creating a new script.</p>
+
+<p>WIP 06 (2009.01.17)
+- added eccscript option button in eccscript config
+- added an eccscript refresh button if you add a new script</p>
+
+<p>WIP 05.2 (2008.12.26)
+- fixed the link to the new gamedb in this update :-) Now the search point to the new pages.</p>
+
+<p>WIP 05.1 (2008.12.24)
+- due to namechange of the ECC imageserver, now called imageControlCenter,
+the link to download images in ECC has been adjusted!</p>
+
+<p>WIP 05 (2008.12.13)
+- added new category "platform"
+- fixed the language string portoguese</p>
+
+<p>WIP 04 (2008.10.21)
+- fixed "ECC doesn't like Brøderbund" bug for all metaedit fields!
+- added hungarian language for meta edit</p>
+
+<p>WIP 03 (2008.08.30)
+- fixed storage "Harddrive" bug (Dropdowns not filled)
+- changed storage "Harddrive" to "Harddrive / Floppy" to
+- fixed missing dump_type in romdb export
+- catch crash, if copy text from internet to notes/review
+- removed checksum check on save to avoid problems with rom options
+- made the labels of eSearch a little bit smaller</p>
+
+<p>WIP 02 (2008.08.29)
+- added dump type selection to eSearch
+- fixed "show only first rom" bug
+- Added dump type to rom info area</p>
+
+<p>WIP 01.5 (2008.08.21)
+- Fixed problem, if you click on the top left emuControlCenter logo (open website again and again!)
+- Fixed also the problem, if you open the asset/document folder and click to the main view!
+- added new icon in context menu "browse documents"
+- added documents "patches" folder for ips patches</p>
+
+<p>WIP 01 (2008.08.19)
+- added "open asset folder"
+-- used to store 'manual', 'guides' and 'maps' to the ecc-user folder
+-- implemented availablity state in meta info area</p>
+
+<ul>
+<li>ECC Startup
+v2.3.2.1</li>
+<li>Changed the location of the thirdparty language conversion list.
+v2.3.2.0</li>
+<li>Fixed splashscreen fading not working in Vista</li>
+<li><p>Added automatic language configuration of thirdparty tools.</p></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Added extensions</li>
+<li>Apple II: 2MG</li>
+<li>Nintendo SNES: MGD, GD3</li>
+<li>Removed Extensions:</li>
+<li>Nintendo Gamecube: CSO, IMG, BIN, NRG, MDF</li>
+<li>Updated default config for:</li>
+<li>Hartung Gamemaster</li>
+<li>Nintendo Gamecube (DolphinEx)</li>
+<li>Updated the 'Atari800Win' script to support ATR &amp; COM files properly.</li>
+<li>Better support fo ScummVM</li>
+<li>Added script for ScummVM (v1.0.0.3)</li>
+<li>Made ECC handle ScummVM games like arcade platforms</li>
+<li>Added ctrlmame DAT for ScummVM (by Gruby)</li>
+<li>Updated eccScriptSystem v1.0.0.6:</li>
+<li>Added 3rdparty variables.</li>
+<li>made variables GLOBAL, so you can use these inside functions of your scripts.</li>
+<li>Updated the script template.</li>
+<li>Updated xpadder config with correct pathnames.</li>
+</ul></li>
+<li><p>DAT file updates:</p>
+
+<ul>
+<li>MAME: v0.128 to v0.129</li>
+<li>CPS-1: v2008.10.18 to v2009.01.07</li>
+<li>CPS-2: v2008.10.18 to v2009.01.07</li>
+<li>Neo-Geo: v2008.10.18 to v2009.01.07</li>
+</ul></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Updated, Notepad++ v5.1.4</li>
+<li>Updated, 7-Zip v4.64</li>
+<li>Updated, Autoit v3.3.0.0</li>
+</ul></li>
+</ul>

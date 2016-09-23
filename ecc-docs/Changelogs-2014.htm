@@ -1,0 +1,295 @@
+<h2>Changelogs 2014</h2>
+
+<hr />
+
+<p><img src="images/ecc_splashscreen_116.png" alt="" title="" /></p>
+
+<p>Version 1.16 (2014.06.24) SUMMER 2014 RELEASE</p>
+
+<ul>
+<li>Added new platform: Nintendo Wii U</li>
+<li>Removed platform Sharp MZ-700, it was double, the platform
+has been merged with MZ-1500/MZ-700 a time ago!</li>
+<li>Adjusted names for platforms:
+<ul>
+<li>Nintendo Gamecube to: Nintendo GameCube</li>
+<li>Nintendo GameBoy to: Nintendo Game Boy</li>
+<li>Nintendo GameBoy Advance to: Nintendo Game Boy Advance</li>
+<li>Nintendo GameBoy Color to: Nintendo Game Boy Color</li>
+<li>Sega Megadrive to: Sega Mega Drive</li>
+<li>Philips CDI to: Philips CD-i</li>
+</ul></li>
+<li>Script update for platform:
+<ul>
+<li>Texas Instruments Ti99 - Added script for classic99 3.x.x</li>
+<li>Playstation 1 - ePXSe, Added 3 options trough ECC commandline (see script)</li>
+</ul></li>
+<li>Added filextensions:
+<ul>
+<li>TI99: C, G, D, and BIN</li>
+<li>Commodrode 64: c64, nbz, nib</li>
+</ul></li>
+<li>Added support for compressed CD-Image formats: CSO, CDZ</li>
+<li>Added new feature to ECC to remove LAUNCH data like last played and time played.</li>
+<li>Updated the Spanish (ES) language for v1.15 (Jarlaxe)</li>
+<li>All links, urls an date's are updated due to new website adres .nl</li>
+<li>Fixed option 'none' in ECC Theme select</li>
+<li>Fixed ghosty "er" platform in navigation.</li>
+<li>Fixed missing translations in i18n_metaStorage.</li>
+<li>Fixed default theme colors on plain installation.</li>
+<li>Fixed ECC unpack GUI trigger to work also for ZIP files, therefore the internal
+PHP extractor has been replaced with 7zip.</li>
+<li>Fixed ECC extensions issue in the database when parsed with 7ZIP (7z/rar)
+<ul>
+<li>column title in table fdata</li>
+</ul></li>
+<li>Adjusted the new website and server URLs from .mine.nu to .nl</li>
+<li>Added 'mplayer' video player to play video files in ECC, this replaces the
+VLC ActiveX plugin etc, this did not work on every computer or windows installation.
+This is a thirdparty 'stand alone' program so no installation is needed.
+Website: http://mplayerwin.sourceforge.net</li>
+<li>ECC v1.152 build 06
+<ul>
+<li>Fixed a bug where the custom theme colors of the user dit not work anymore
+due to overrride of theme color settings.
+An config option has been made to enable or disable ecc-theme colors, so that
+user colors will be used.</li>
+</ul></li>
+<li>ECC v1.152 build 05
+<ul>
+<li>Added trigger to show a GUI (and progressbar) when unpacking big files.</li>
+<li>This is configurable (trigger) in the options menu.</li>
+<li>Fixed the 'big file' message pop-up even if the file is not big.</li>
+</ul></li>
+<li>ECC v1.152 Build 02
+<ul>
+<li>Extended multiplayer options to *, NO, 2P, 3P, 4P</li>
+</ul></li>
+<li><p>Notepad++ Improvements:</p>
+
+<ul>
+<li>eccSCript extension now being recognized as autoit script
+this gives colors to functions etc.</li>
+<li>Added autoit autocompletion and function helper
+source: http://www.autoitscript.com/forum/topic/104331-notepad-with-autoit-user-calltips/</li>
+<li>Added plugins to improve creating scripts:</li>
+<li>Overview: http://sourceforge.net/apps/mediawiki/notepad-plus/?title=Plugin_Central</li>
+<li>Color picker v2.3
+<ul>
+<li>http://sourceforge.net/projects/npp-plugins/files/ColorPicker/Color%20Picker%20v.2.3/</li>
+</ul></li>
+<li>Compare plugin v1.5.6.2
+<ul>
+<li>http://npp-compare.sourceforge.net/</li>
+<li>http://sourceforge.net/projects/npp-compare/</li>
+</ul></li>
+<li>Hasmaker v1.0
+<ul>
+<li>http://download.tuxfamily.org/nppplugins/NppHashMaker/</li>
+</ul></li>
+</ul></li>
+<li><p>ECC Startup</p>
+
+<ul>
+<li>v2.4.1.2 (2014.05.12)</li>
+<li>Fixed a crash if ECC is reloading on with 'empty unbpack folder' setting on.</li>
+<li>Fixed website link in exe description.</li>
+<li>Fixed fullscreen on startup, now true fullscreen (maximized)</li>
+<li>Removed 'always on-top' setting of the splashscreen.</li>
+<li>v2.4.1.1 (2014.04.11)</li>
+<li>Fixed a bug where ecc could not detect the proper windows version to set
+compatibility for xpadder, now it will always write the REG key.</li>
+<li>v2.4.1.0 (2014.04.09)</li>
+<li>Added code to install a "SIDE" update with 7zip, for example to update Autoit wich
+eccUpdate cannot do, because of "file in use" while running the script.</li>
+<li>Compiled with new Autoit v3.3.10.2, may return a false positive in some virusscanners!</li>
+</ul></li>
+<li><p>eccUpdate</p>
+
+<ul>
+<li>v1.0.0.8 (2014.04.10)</li>
+<li>Fixed a issue where executable files where not found due to wrong path.</li>
+<li>v1.0.0.7 (2014.04.09)</li>
+<li>Improves code for deleting files and/or folders by setting attributes to write.</li>
+<li>Added new function to force eccUpdate to close</li>
+</ul></li>
+<li><p>ECC ScriptSystem</p>
+
+<ul>
+<li>v1.3.0.0 (2014.05.18)</li>
+<li>Fixed Daemon tools mounting (option "scsi" added)</li>
+<li>New feature: ECC commandline parameters are now passed trough</li>
+<li>Added CCD, TOC, MDS index files for Daemontoools
+referred in ECC CONFIG as "index" files.</li>
+<li>v1.2.1.6 (2014.03.29)</li>
+<li>Fixed a bug in the Daemon Tools algoritm</li>
+<li>v1.2.1.5 (2013.12.29)</li>
+<li>Added img &amp; bin file extensions
+(possibly needs .cue or .m3u file to assist).</li>
+<li>Changed traytips to tooltips.</li>
+</ul></li>
+<li><p>MobyGamesImporter</p>
+
+<ul>
+<li>v1.1.0.2 (2014.05.25)</li>
+<li>Fixed bug when searching for data where multiple files are packed within the same archive.</li>
+<li>On manual search the filename will be put in the title field (when there is no META)</li>
+<li>v1.1.0.1 (2014.04.23)</li>
+<li>Fixed MG description fetching due to changed website structure</li>
+<li>Moved MG tag on the end of the ROM description.</li>
+<li>Added cancel button to platform auto import.</li>
+<li>Changed the logo to the new 2014 version</li>
+<li>Some GUI changes</li>
+<li>v1.1.0.0 (2014.04.23)</li>
+<li>Big update where you can select wich data should be updated.</li>
+<li>Settings are stored in a INI file.</li>
+<li>Rom Manual = Selections can be made what field to store
+(genre is not getting stored, but for info purposses only)</li>
+<li>Rom Auto -> ROM has No META data = FULL auto, so everything gets added,
+including the 'fixed' name</li>
+<li>Rom Auto -> ROM has META data = Asks wich field/value to overwrite,
+option to maintain the fixed name or use the ROM filename.</li>
+<li>Platform Auto -> Asks wich field/value to overwrite, if no META is
+available all data will be added, there is a option to use the fixed
+name or use the ROM filename.</li>
+</ul></li>
+<li><p>ECC 3D Gallery</p>
+
+<ul>
+<li>v1.2.0.0 (2014.04.23)</li>
+<li>Fixed a bug in the scrollbox, the scrollbar did not appear.</li>
+<li>Updated gallery's
+<ul>
+<li>simpleviewer</li>
+<li>tiltviewer</li>
+</ul></li>
+<li>Added gallery's from flashxml.net:
+<ul>
+<li>3dphotorotator</li>
+<li>3dphotozoom</li>
+<li>circulargallery</li>
+<li>polaroidgalleryfx</li>
+</ul></li>
+<li>v1.1.0.8 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+<li>Changed URL's to form MINE.NU to .NL (due to changing webadres)</li>
+</ul></li>
+<li><p>Create ECC startmenu shortcuts</p>
+
+<ul>
+<li>v1.0.0.3 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+<li>Changed URL's to form MINE.NU to .NL (due to changing webadres)</li>
+</ul></li>
+<li><p>eccDatFileUpdater (DFU)</p>
+
+<ul>
+<li>v1.2.5.9 (2014.03.29)</li>
+<li>Fixed a bug where the 7Z backup was not created.</li>
+<li>Fixed a bug calling eccToolsVariables script</li>
+<li>v1.2.5.8 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>eccDiagnostics</p>
+
+<ul>
+<li>v1.0.0.3 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>eccKameleonCode</p>
+
+<ul>
+<li>v1.0.0.2 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>eccThirdPartyConfig</p>
+
+<ul>
+<li>v1.0.0.2 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>eccToolVariables</p>
+
+<ul>
+<li>v1.0.0.1 (2014.03.29)</li>
+<li>Updated variables in eccToolVariables</li>
+<li>v1.0.0.0 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>eccUpdate</p>
+
+<ul>
+<li>v1.0.0.6 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+<li>Changed URL's to form MINE.NU to .NL (due to changing webadres)</li>
+</ul></li>
+<li><p>eccVideoPlayer</p>
+
+<ul>
+<li>v2.0.0.1 (2014.05.10)</li>
+<li>Fixed video window flashing when giving focus back to ECC</li>
+<li>v2.0.0.0 (2014.05.04)</li>
+<li>New initial release that uses 'Mplayer' instead of VLC activeX plugin.</li>
+<li>v1.1.0.4 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>EmuMoviesDownloader (EMD)</p>
+
+<ul>
+<li>v1.2.1.1 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>gtkThemeSelect</p>
+
+<ul>
+<li>v1.0.0.3 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>iccImageInject</p>
+
+<ul>
+<li>v1.1.0.8 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+<li>Changed URL's to form MINE.NU to .NL (due to changing webadres)</li>
+</ul></li>
+<li><p>MobyGamesImporter (MGI)</p>
+
+<ul>
+<li>v1.0.0.2 (2014.03.28)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>ImagePackCenter (IPC)</p>
+
+<ul>
+<li>v2.2.1.1 (2014.04.23)</li>
+<li>Fixed a bug where IPC crashes if there was no imagefile extension.</li>
+<li>v2.2.1.0 (2014.03.29)</li>
+<li>Combined all global variables in the script eccToolVariables</li>
+</ul></li>
+<li><p>Updated thirdparty tools</p>
+
+<ul>
+<li>Autoit v3.3.12.0</li>
+<li>Notepad++ v6.5.5</li>
+<li>7-Zip v9.32</li>
+<li>Stripper v1.5.7.70</li>
+</ul></li>
+<li><p>Updated DAT files for:</p>
+
+<ul>
+<li>CPS-1  : v0.152 to v0.153 (mame)</li>
+<li>CPS-2  : v0.152 to v0.153 (mame)</li>
+<li>CPS-3  : v0.152 to v0.153 (mame)</li>
+<li>MAME   : v0.152 to v0.153</li>
+<li>MODEL1 : v0.152 to v0.153 (mame)</li>
+<li>MODEL2 : v0.152 to v0.153 (mame)</li>
+<li>NAOMI  : v0.152 to v0.153 (mame)</li>
+<li>NEOGEO : v0.152 to v0.153 (mame)</li>
+<li>PGM    : v0.152 to v0.153 (mame)</li>
+<li>S11    : v0.152 to v0.153 (mame)</li>
+<li>S16    : v0.152 to v0.153 (mame)</li>
+<li>S18    : v0.152 to v0.153 (mame)</li>
+<li>S22    : v0.152 to v0.153 (mame)</li>
+<li>ZINC   : v0.152 to v0.153 (mame)</li>
+</ul></li>
+</ul>

@@ -1,0 +1,1192 @@
+<h2>Changelogs 2008</h2>
+
+<hr />
+
+<p>Version 0.9.8.R2 (2008.12.02)</p>
+
+<ul>
+<li><p>Added platforms:</p>
+
+<ul>
+<li>Apple 2GS</li>
+<li>Camputers Lynx</li>
+<li>Coleco Adam</li>
+<li>Híradástechnika Szövetkezet HT-1080Z</li>
+<li>Interact Home Computer System</li>
+<li>Jupiter Cantab - Jupiter Ace</li>
+<li>Microsoft XBox 360</li>
+</ul></li>
+<li><p>Added Scripts:</p>
+
+<ul>
+<li>PALE (Camputers Lynx)</li>
+<li>VINTER (Interact Home Computer System)</li>
+<li>DCMOTO v10.1 (Thomson MO5)</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Fixed bug where Xpadder always ask where to save the setting, by adding a INI file.
+(if you already configured Xpadder, the original .ini will be renamed to .bak)</li>
+<li>Fixed the 'error reporting' notices and warnings, they where set in php.ini
+but didn't help because it was re-configured in the PHP files.</li>
+<li>Cleaned the system informations by removing most of the Wikipedia
+references in-page, like:</li>
+<li>[1] t/m [50]</li>
+<li>[citation needed]</li>
+<li>[verification needed]</li>
+<li>[dead link]</li>
+<li>[...]</li>
+<li>DAT file updates:</li>
+<li>MAME:    v0.124b to v0.128</li>
+<li>CPS-1:   v2007.09.22 to v2008.10.18</li>
+<li>CPS-2:   v2007.11.09 to v2008.10.18</li>
+<li>Neo-Geo: v2008.01.01 to v2008.10.18</li>
+<li>Model2:  v2008.01.03 to v2008.06.05</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.1.2</p></li>
+<li>Fixed a small bug where ECC startup did create the userfolders everytime when
+one or more platforms were disabled.
+v2.3.1.1</li>
+<li>ECC Startup will now scan your userfolder and create userfolders if nessesary
+and if the platform is set active!, this way when new platforms are inserted,
+the userfolders for those added platforms will be automaticly created!
+(thanks to Andreas for the 'create userfolder' implementation!)
+v2.3.1.0</li>
+<li>Made the splashscreen configurable &amp; customizable
+<ul>
+<li>You can edit ecc-themes[THEMENAME]\splashscreen.ini to fit your needs.</li>
+<li>When 'splashscreen.ini' is not found in a ECC theme it uses the settings
+from the "ecc-themes\default\splashscreen.ini" file.
+v2.3.0.5</li>
+</ul></li>
+<li>Let ECC start in fullscreen again.</li>
+<li>Found a better way to 'by-pass' the PHP-GTK window bug.</li>
+<li><p>Many small tweaks and improvements.</p></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Updated, Notepad++ v5.1.1</li>
+<li>Updated, 7-Zip v4.62</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.8.R1 (2008.09.28)</p>
+
+<ul>
+<li><p>Added platforms:</p>
+
+<ul>
+<li>Pinball - Visual Pinball</li>
+<li>Seiko Ruputer/Matsucom OnHand PC</li>
+<li>Sega Titan Video game system</li>
+<li>Memotech MTX 500/512</li>
+</ul></li>
+<li><p>ECC small updates:</p>
+
+<ul>
+<li>Improved the multifile handler for the eccscriptrom DAT.</li>
+<li>Improved the Amiga script to handle LONG filenames again.</li>
+<li>Returned the amiga 8.3 setting to 0 again.</li>
+<li>Updated the French language for 0.9.8</li>
+<li>Renamed 'Nintendo Entertainment System' to 'Nintendo NES/Famicom'.</li>
+<li>Renamed 'Nintendo Famicom/FDS' to 'Nintendo FDS'.</li>
+<li>Renamed eccid 'famicom' to 'fds'.</li>
+<li>Fixed a bug where FDS parser did not work properly (nes eccid).</li>
+<li>Added support for thirdpartytool: Xpadder.</li>
+<li>You can configure this in ECC config.</li>
+<li>Removed the BEEP sound 'GTK error bell' when reaching end of list/page.</li>
+<li>Added extensions</li>
+<li>Amstrad CPC: BAS, BIN</li>
+<li>Atari 8-bit: ATX</li>
+<li>Oric Atmos: ORC</li>
+<li>Removed extensions</li>
+<li>DOSBox: ISO, CSO, NRG, MDF</li>
+<li>Removed CCD extensions, becouse of duplicate ROM import, a CCD file is normal Clone CD behaviour.</li>
+<li>Fixed a bug where ECC did crash when parsing large ZIPPED ROM files >1GB.</li>
+<li>Fixed a bug where ECC selected the 'afterhours' theme at first restart.</li>
+</ul></li>
+<li><p>ECC script updates:</p>
+
+<ul>
+<li>Added scripts:</li>
+<li>Sharp X68000 (pacogf)</li>
+<li>Atari 8-bit (phoenix).</li>
+<li>Fixed a bug in the 'XM6' script. (Sharp X68000) (pacogf)</li>
+<li>Added support for Windows Vista in the 'NullDC' script. (Sega Dreamcast) (wayne69x)</li>
+<li>Added support for Windows Vista in the 'PT' script. (Atari Jaguar) (wayne69x)</li>
+</ul></li>
+<li><p>ECC GTK-theme updates:</p>
+
+<ul>
+<li>Removed the 'Cold Blue' theme, due to problems with the 'libsmooth' engine.</li>
+<li>Removed 'libsmooth' GTK engine, wich is not compatible anymore.</li>
+<li>Added new GTK theme 'Live'.</li>
+<li>Added theme: LiNsta3, this gives ECC an vista look! (select with eccTheme)</li>
+</ul></li>
+<li><p>ECC Startup
+v2.3.0.0</p></li>
+<li>Added support for thirdpartytool: Xpadder.
+v2.3.0.1</li>
+<li>Fixed a problem where ECC restart made a bug in error.log.
+v2.3.0.2</li>
+<li>Added missing translations for the Xpadder addon</li>
+<li>Now registering OCX files (for the tools) at startup (once), so people who use
+RAR packages, have the OCX files registered at ECC startup.
+v2.3.0.3</li>
+<li>ECC now closes Xpadder when ECC closes!</li>
+<li>Improved OCX registering by scanning the tools folder (instead of static commands).</li>
+<li>Improved the option 'minimize to tray' by directly activating it when ECC reloads!</li>
+<li>Improved the option 'start xpadder on startup' by directly activating it when ECC reloads!
+v2.3.0.4</li>
+<li><p>Re-implemented the subroutine to ask for automatic bugreport,
+it was missing after ECC startup v2.9.0.9</p></li>
+<li><p>ECC Live!
+v3.1.0.8</p></li>
+<li>Fixed a problem with some subroutines not working properly.
+<ul>
+<li>Also where ECC did not restart in kickstart mode #2.</li>
+</ul></li>
+<li>Fixed the double 'vv' version tag in the LOG file.</li>
+<li>Fixed a problem where ECC did shutdown where it should not do this.
+v3.1.0.9</li>
+<li>Added driveletter detection.</li>
+<li>Added free space detection.</li>
+<li>Added new update function to replace strings in files.</li>
+<li>Added free space checking before installing update.</li>
+<li>Fixed a problem where the messagebox didn't show up in 'kickstart mode'.
+v3.2.0.0</li>
+<li>Fixed temporally file removal when ECC Live! is forced to shutdown.</li>
+<li>Fixed a bug to replace strings on the first line of a file.</li>
+<li>Fixed a bug where replacing strings in a file would write a currupt file.</li>
+<li>Added a new function to add a line in a file to a specific linenumber.</li>
+<li>Added errorhandler if a temp file could not be renamed.</li>
+<li>Added errorhandler if a file to replace strings does not exist.</li>
+<li><p>Changed discription how to handle when an update has to be done manually.</p></li>
+<li><p>ECC Live! updater
+v1.2.0.2</p></li>
+<li><p>Fixed a problem with some subroutines not working properly</p>
+
+<ul>
+<li>Also where the ECC Live! update did not unpack properly.</li>
+</ul></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Added, Xpadder (for joystick control)</li>
+<li>Updated, Notepad++ v5.0.3</li>
+<li>Updated, 7-Zip v4.60 beta</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.8b (2008.07.25)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Elektor TV Games</li>
+</ul></li>
+<li><p>Small fixes</p>
+
+<ul>
+<li>Added 'readme.txt' file in the ecc-root.</li>
+<li>Updated 'Dutch' translations for 0.9.8.</li>
+<li>Fixed a problem with the media<em>current (media</em>current of media_count)</li>
+<li>Now the media_current is not stored with 0 to the database!</li>
+</ul></li>
+<li><p>ECC script updates</p>
+
+<ul>
+<li>Commodore Amiga (winuae) v1.0.0.7</li>
+<li>Adjusted the script to use new MULTI output with ZIP in eccScriptDat (TheCyberDruid)
+NOTE: It only works with the 8.3 setting enabled, so default config is
+overwritten and set with 8.3 enabled.</li>
+</ul></li>
+<li><p>ECC Live!
+v3.1.0.7</p>
+
+<ul>
+<li>Added new installer function 'execute_normal', without waiting function.</li>
+<li>Added new installer function 'execute_hide', without waiting function.</li>
+<li>Added new installer function 'ecclive_shutdown', wich forces ECC Live! to
+shutdown before installing next update.</li>
+<li>Added new installer function to check the version of ECC Live! (to create stops)</li>
+<li>Added auto-retry mode (3 times) if there is a problem writing to the TEMP folder.</li>
+<li>Added DEBUG mode so the developers can test ECC Live! without using online data</li>
+<li>Fixed a problem where ECC Live! updater would not start to update ECC Live!.</li>
+<li>Fixed a problem with reading the local update info INI.</li>
+<li>Fixed a problem where ECC Live! did not start ECC again in 'kickstart mode'.</li>
+</ul></li>
+<li><p>ECC Live! updater
+v1.2.0.1</p>
+
+<ul>
+<li>Fixed php INI to 'php.ini' (instead of emucontrolcenter-php.ini)</li>
+<li>Fixed a problem with reading the local update info INI.</li>
+</ul></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Updated, Notepad++ v5.0.2</li>
+</ul></li>
+</ul>
+
+<p><img src="images/img_misc_gears.jpg" alt="" title="" /></p>
+
+<p>Version 0.9.8 (2008.07.20) ECC RESTRUCTURED!</p>
+
+<ul>
+<li><p>Platforms added</p>
+
+<ul>
+<li>Enterprise Systems - Enterprise 64/128</li>
+<li>Commodore Amiga CD32</li>
+<li>Commodore CDTV</li>
+<li>Commodore PET</li>
+<li>COMX WOL Comx-35</li>
+<li>CVT Mega Duck/Cougar Boy</li>
+<li>Hartung Game Master</li>
+<li>Sega Dreamcast VMU</li>
+<li>Sega Naomi</li>
+<li>Sinclair QL</li>
+</ul></li>
+<li><p>Small updates/fixes</p>
+
+<ul>
+<li>Fixed all emulator presets for MESS emulator platforms by adding the %ROM% parameter.</li>
+<li>Merged 'Sharp MZ-700' (mz700) and 'Sharp MZ-1500' (mz1500) into 'Sharp MZ-700/1500' (eccident=mz1500)</li>
+<li>Merged 'Commodore 16' (c16) and 'Commodore Plus/4' (cplus4) into 'Commodore 16/plus4' (eccident=c16plus4)</li>
+<li>Removed .WAV extension for 'Sinclair ZX Spectrum'</li>
+<li>User path corrections for platforms (ECCid):</li>
+<li>gba, gbc, gg, sms, ws, wsc, x68000</li>
+<li>Fixed extensions for 'Texas instruments TI-99'.</li>
+<li>Added extensions</li>
+<li>All CD image platforms all have: ISO, CSO, IMG, BIN, NRG, MDF, MDS, CCD</li>
+<li>Commodore Amiga: ADZ, HDZ</li>
+<li>Micobee Systems - Microbee: COM, SUB, MWB, BAS, BIN, DAT, BEE, Z80, MAC, MCL, ML, Z</li>
+<li>Microkey Primo: BIN</li>
+<li>Added best emulator settings</li>
+<li>Micobee Systems - Microbee</li>
+<li>Updated, the ScummVM default config parameter.</li>
+<li>Updated, the Microbee default config parameter.</li>
+<li>Update DATFILES</li>
+<li>MAME v0.123 to v0.124b</li>
+</ul></li>
+<li><p>Whole new scriptsystem (ecc-script folder)</p>
+
+<ul>
+<li>Added scripts for:</li>
+<li>Atari Jaguar (PT, Project Tempest)</li>
+<li>Cellphone Java (JADmaker)</li>
+<li>Commodore Amiga (winuae)</li>
+<li>Commodore VIC-20 (xvic)</li>
+<li>Laser Disc (daphne)</li>
+<li>Gamepark GP32 (geepee32)</li>
+<li>Nintendo Gamecube (Dolphin)</li>
+<li>Nintendo Pokemon Mini (Minimon)</li>
+<li>Panasonic 3DO (FreeDo)</li>
+<li>Philips CD-I (wcdiemu)</li>
+<li>Sega Dreamcast (NullDC)</li>
+<li>Sega Dreamcast VMU (DirectVMS)</li>
+<li>Sega Saturn (SSF)</li>
+<li>Sony Zinc (ZiNc)</li>
+<li>Including CD-Image mounting with Daemon tools LITE</li>
+<li>Including ZIP support (autounpack option in ecc)</li>
+</ul></li>
+</ul>
+
+<p>WIP 06 (2008.07.19)
+- fixed crash while parsing optimizing roms
+- added "rom<em>file</em>extension" for eccScriptRom.dat
+- implemented new default meta setter mechanism for (see a2600+amiga)
+- fixed eccScript preview output (removed path)
+- added 8.3 filepath for eccScriptRom.dat
+- added [p] pirate for dump type dropdown
+- added support for default meta per file extension!
+-- multiplayer
+-- netplay
+-- media<em>type
+-- media</em>current
+-- media_count
+-- storage</p>
+
+<p>WIP 05 (2008.07.14)
+- Improved the MULTI INI lines in eccScriptRom.dat for packed and unpacked filenames.
+- Fixed a bug where the CUE handler would write warnings in the log!
+- added czech for language selection
+- added dump type dropdown in meta edit
+- catch exception, if shortcut for file selector is set already.
+- not using the eccScript tool anymore, now using autoit3 directly.</p>
+
+<p>WIP 04 (2008.07.04)
+- fixed typo in multiplayer dropdown
+- Added more fields to meta compare/merge function
+-- Programmer, Graphics, Musican, Media Type, Region, Storage, USK
+- fixed yes|no translations for meta options (rom detail area)
+- New CELL<em>I and NAV</em>I images so you can also see, that a rom is not available if the rom have images
+- Reorganized the MEDIA images, now also placed in the platform folder
+- Added a tools for ECC Startup to use GD2 instead of Imagemagick
+- Fixed unpack problem, if rom is in a zip-subfolder!
+- added image download from romdb image-server (rom context menu)
+- emulator config
+-- implemented "use .cue file" for isos
+-- if 8.3, escape path is autodisabled
+- zip/7-zip unpack now only unpack, if emulator is available!
+- added icon images for messageboxes
+- reduced the size of system output in fileext<em>problem popup
+- removed error output if no eccscript available in metaedit popup
+- fixed region dropdown in german translation
+- added local version script
+- fixed metainfo area drowdowns and add translations for values
+- replaced "change languages" by language string free image.
+- organized rom context "meta edit" in submenu
+- create idt folder, if not available
+- added an new multi section to the eccScriptRom.dat
+-- automatic detect multifile sequences from filename
+-- detected syntax "filename (3/9).ext", "filename (Disc 3of9).ext", "filename-3.ext", "filename-A.ext"
+-- automaticly create MULIT</em>ROM<em>FILE</em>N commandline paramenters, if file is available (case sensitive)
+-- up to range (e.g. 15 if 4of15), if no range is set, up to 26 or aA-zZ (eg filename-a form -a to -z)
+--- MULTI<em>ROM</em>FILE<em>1 = "monke1-1.adf"
+--- MULTI</em>ROM<em>FILE</em>2 = "monke1-2.adf"
+--- MULTI<em>ROM</em>FILE<em>1 = "test(!)(1/2)(Spanish).adf"
+--- MULTI</em>ROM<em>FILE</em>2 = "test(!)(2/2)(Spanish).adf"
+--- MULTI<em>ROM</em>FILE<em>1 = "test(Disk A)(German).adf"
+--- MULTI</em>ROM<em>FILE</em>2 = "test(Disk B)(Spanish).adf"
+- implemented new parameters for the commandline of emulators
+-- you can add ALL these to the commandline in this syntax
+--- %KEY% e.g. %META<em>NAME% %FILE</em>ROM<em>CRC32% %AUDIT</em>ROM_OF%</p>
+
+<p>WIP 03 (2008.06.06)
+- implemented 7zip packed file parsing
+- implemented 7zip auto unpack
+- fixed wrong zip/7zip filename in file info
+- fixed wrong filename output in detail list for zip/7zip
+- fixed little bug in ecc-script
+- silence missing index in mame import
+- Bugfix in 'cWebServices.php'
+- 7-zip parsing fix
+- RomDB fix</p>
+
+<p>WIP 02 (2008.05.27)
+- new advanced eccScript system...
+-- eccscripts can now found in the ecc-script folder organized by systems
+-- new eccScriptRom.dat contains all needed informations from
+--- file (name, path, size, extension aso.)
+--- meta (name, media type/current/count, player, info id and string)
+--- audit (all available informations from CM dat like name, clone<em>of, rom</em>of, set type)
+--- emulator (all settings you have made in ecc configuration)
+--- ecc (platform name, category, supported extensions)
+-- These informations can be used direct in the eccscripts!
+- implemented new emulator template / rom overwrite for eccscript in metaEdit popup
+-- Used to give eccScript emulator specific config values
+-- Rom stores the diff into the ecc-script user folder.
+- metaEdit - implemented new File information tab.
+- fixed sorting bug in rom lists
+- optimized quick filter for roms without meta data
+- implemented search for rom meta in romdb and google
+- Media count now also shown on rom details panel
+- Removing roms from db now also show fileextension in filename
+- now also left mouse click in empty romlist open "add rom context"
+- refactoring of the rom file, meta and audit data.
+- Updated some i18n strings
+- added image slot "ingame<em>loading" e.g. for 8bit loading screens
+- now info</em>string and id also are added to romdb
+- moved emuControlCenter gui translations to translations/ folder
+- replaced old inline help with default readme.txt
+- added mechanism to show different images in confirm and info popups (see add bookmark)
+- many optimizations, cleanup, refactoring!
+- fixed tooltip warnings
+- fixed wrong dropdown selections!</p>
+
+<p>WIP 01 (2008.05.06)
+- fixed checksums for atari lynx roms. header now removed from crc32 calculation</p>
+
+<ul>
+<li>ECC Startup
+v2.2.0.0</li>
+<li>Removed all MD5 hash checks.</li>
+<li>Removed OS detection, now using the 'ecc-core' structure.</li>
+<li>Adjusted all paths to the new 'ecc-core' structure.
+v2.2.0.2</li>
+<li>Increased free space needed for media images to 9 MB.</li>
+<li>Removed code residue from the ecc core detection.</li>
+<li>Removed splash time out calculation, now always 60 seconds!</li>
+<li>Removed the envment.ini creation, not needed anymore.</li>
+<li>Fixed the titlebar update bug on first restart. (thanks to Andreas)</li>
+<li>Fixed the ECC Bugreport path in the translations.
+v2.2.0.5</li>
+<li>Adjusted the MEDIA image location.</li>
+<li>Now using GD2 instead of imagemagick.</li>
+<li>Added percentage counter for the creation of media images.</li>
+<li>Added creation of CELL<em>I &amp; NAV</em>I images.
+v2.2.0.6</li>
+<li>Added 1 decimal in the percentage counter.</li>
+<li>Increased space needed for media images and userfolders to 11 MB.
+v2.2.0.7</li>
+<li>Fixed a bug where the proper translation from the INI did not work.
+v2.2.0.8</li>
+<li>Fixed a bug where the one-time-message box appears twice.</li>
+<li>Fixed a bug when the language selector did not work properly.
+v2.2.0.9</li>
+<li><p>Startup ECC again with 'php.ini' (instead of 'php-emucontrolcenter.ini')</p></li>
+<li><p>ECC Live!
+v3.1.0.0</p></li>
+<li>Removed OS detection, now using the 'ecc-core' structure.</li>
+<li>Adjusted all paths to the new 'ecc-core' structure.
+v3.1.0.5</li>
+<li>Fixed to get the OS info from the host INI (instead of the envment INI).</li>
+<li>Fixed crash by adding an error handler when 'ecc<em>local</em>update_info.ini' could not be found.</li>
+<li>Added messageboxes to inform the user of updates and error situations.</li>
+<li>Added a more 'detailed' information wich file is missing.
+v3.1.0.6</li>
+<li>Use 'php.ini' again instead of 'php-emuControlCenter.ini' for unpacking files.</li>
+<li>Added better support to detect the installtype, for the 0.9.8 installer.</li>
+<li>Fixed a problem with the language detection, so the language should be working properly again.</li>
+<li>Fixed a problem where the 'info' box did not appear on some error messages.</li>
+<li>Maximum updates before asking to download new ECC version raised from 20 to 30.</li>
+<li><p>Changed layout &amp; background.</p></li>
+<li><p>ECC Live! update
+v1.2.0.0</p></li>
+<li><p>Adjusted all paths to the new 'ecc-core' structure.</p></li>
+<li><p>ECC Bugreport
+v2.3.0.0</p></li>
+<li>Removed OS detection, now using the 'ecc-core' structure.</li>
+<li>Adjusted all paths to the new 'ecc-core' structure.
+v2.3.0.1</li>
+<li>Now using system information from the HOST INI (instead from envment ini)
+v2.3.0.2</li>
+<li>Now using FSUM to compare file hashes (instead of QuickSFV).</li>
+<li>Temporally hash results no longer in %user_temp% folder but
+are stored in the tools folder itself.</li>
+<li>Added GHS (get hash) file, it is actually a helping batchfile,
+it is renamed as a GHS file to prevent the user from starting it directly.
+v2.3.0.3</li>
+<li>Fixed a bug where the user configs 'general' and 'history' INI's
+could not be found.
+v2.3.0.4</li>
+<li>Read 'php.ini' again instead of 'php-emuControlCenter.ini'</li>
+<li><p>Removed the GHS file, bugreport now writes the file itself, instead of renaming it.</p></li>
+<li><p>Themes</p>
+
+<ul>
+<li>Updated GTK Afterhours theme. (Cyrille)</li>
+<li>Added GTK 'Milk 2.0' theme. (Cyrille)</li>
+<li>Added ECC 'afterhours'' theme. (made by Cyrille)</li>
+<li>Added ECC 'nature-full-green' theme. (made by Cyrille)</li>
+<li>Fixed a typo in the INI of the ECC theme 'ecc-miss-bubblegum'.</li>
+</ul></li>
+<li><p>ECC Script</p>
+
+<ul>
+<li>Removed, now using autoit directly.</li>
+</ul></li>
+<li><p>Core components</p>
+
+<ul>
+<li>Updated, PHP-GTK v2 to v2.0.1</li>
+<li>GTK Core update from v2.12.8.0 to v2.12.9.0</li>
+</ul></li>
+<li><p>3rd party updates</p>
+
+<ul>
+<li>Added, 7zip (for handling 7zip files)</li>
+<li>Updated, Notepad++ v5.0</li>
+<li>Updated, AutoIt v3.2.12.1</li>
+<li>Removed, Imagemagick (not needed anymore, now using GD2)</li>
+<li>Removed, QuickSFV (not needed anymore, now using fsum)</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.7.R1 (2008.05.28)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Commodore Amiga</li>
+<li>Microkey Primo</li>
+<li>Sinclair ZX81</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Fixed the Atary Lynx importing, by removing the 64 bytes
+header when nessesary, so that the CRC32 will be good.</li>
+<li>Fixed the white border around the ECC GUI buttons.</li>
+<li>Replaced necessary CELL images with the eccident name for that platform.</li>
+<li>Removed all CUE extensions, these are not ROM files.</li>
+<li>Renamed 'Tandy/Radio Shack TRS-80' to 'Tandy/Radio Shack TRS-80 Color Computer'</li>
+<li>Renamed 'Applied Technologies Microbee' to 'Microbee Systems - Microbee'</li>
+<li>Replaced the 'Applied Technologies' to the 'Microbee Systems' logo in the
+Microbee system platform.</li>
+<li>Fixed necessary emulator pathnames and added where needed.</li>
+<li>Added the 'Casio PV-2000' informations/factsheet.</li>
+<li>Added the watara logo in the 'Watara Supervision' platform.</li>
+<li>Cleaned the 'Watara Supervision' teaser by removing lost pixels.</li>
+<li>Cleaned the 'ScummVM' teaser image by removing lost pixels.</li>
+</ul></li>
+<li><p>Adds &amp; fixes for best parameter/emulators:</p>
+
+<ul>
+<li>Added the Xroar emulator for the TRS-80 Color Computer.</li>
+<li>Added the ubee512 emulator for the Microbee System.</li>
+<li>Added the 'X millennium T-tune' emulator for the Sharp X1 Computer.</li>
+<li>Added the 'WinX1' emulator for the Sharp X1 Computer.</li>
+<li>Selected Fusion to be the best emulator for the Sega.</li>
+<li>Fixed the emulator homepage for the Pokemon Mini 'Minimon' emulator.</li>
+<li>Added best emulator settings for</li>
+<li>Amstrad CPC</li>
+<li>Sharp X68000</li>
+<li>Sony Playstation 1</li>
+</ul></li>
+<li><p>Added Extensions:</p>
+
+<ul>
+<li>Acorn BBC: ADL</li>
+<li>Applied Technologies Microbee: DSK, D40, DS40, S80, SS80,
+D80, DS80, D82, DS82, D84, DS84 (removed ROM, BIN)</li>
+<li>Atari 8-bit: EXE, COM, A8S</li>
+<li>Atari 5200: CAR</li>
+<li>Bandai Wonderswan: BIN</li>
+<li>Bandai Wonderswan Color: BIN</li>
+<li>Casio PV-1000: BAS, PBF</li>
+<li>Commodore 16/plus4: LNX</li>
+<li>Commodore VIC-20: A0, B0, 20, 40, 60, BIN, CRT, 70, 80, P00</li>
+<li>Dragon 32/64: PAK, DXT, DGN, S19</li>
+<li>Matra/Hachete Alice: WAV</li>
+<li>NEC PC-9801: FDD</li>
+<li>Nintendo - Super Nintendo: BIN</li>
+<li>RCA Studio II: BIN, ASM</li>
+<li>Robotron KC series: BAS</li>
+<li>ScummVM : GME, SM0, 000, LA0, 1C (removed DSK)</li>
+<li>Sony PocketStation: GME</li>
+<li>Sega SG-1000: BIN</li>
+<li>Sharp MZ-700: MZF</li>
+<li>Sharp MZ-1500: MZF</li>
+<li>Sharp X1: D88, 2D (removed GBA)</li>
+<li>Sinclair ZX Spectrum: SCL, BLK, CSW, WAV</li>
+<li>Vtech Creativision: BIN</li>
+<li>Vtech Laser 200: VZ, DSK</li>
+<li>Tandy/Radio Shack TRS-80 Color Computer: CCC</li>
+<li>Thomson MO5: BIN</li>
+<li>Tomy Pyuta: BIN</li>
+</ul></li>
+<li><p>ECC Theme
+v1.1.0.5</p></li>
+<li><p>Improved ECC Core detecion, so that ECC software can be found.</p></li>
+<li><p>ECC Bugreport
+v2.2.0.5</p></li>
+<li>Improved ECC Core detecion, so that ECC software can be found.</li>
+<li><p>Updated the MD5 hash file to 0.9.7 WIP20</p></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>AutoIt v3.2.12.0</li>
+<li>Notepad++ v4.9.1</li>
+<li>QuickSFV v2.36</li>
+</ul></li>
+<li><p>ECC Installer
+v1.3.0.6 (ECC v0.9.7.R1):</p></li>
+<li>Compiled with NSIS v2.37.</li>
+<li>Added 2 more options available to install.</li>
+<li>Fixed 2 bugs in the installer that did not work in the 0.9.7 installer:
+<ul>
+<li>Creation of the desktop icon.</li>
+<li>Restructure ECC Images.</li>
+</ul></li>
+<li>Default installfolder now point to the users profile.</li>
+</ul>
+
+<p><img src="images/ecc_header_small.png" alt="" title="" /></p>
+
+<p>Version 0.9.7 (2008.05.01) A NEW LOOK!</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Apple 1</li>
+<li>Apple 2</li>
+<li>Apple Lisa</li>
+<li>Applied Technologies Microbee</li>
+<li>NEC Supergrafx / PC Engine 2</li>
+<li>Nintendo Famicom</li>
+<li>Nintendo Wii</li>
+<li>Nokia N-Gage</li>
+<li>Scumm Virtual Machine</li>
+<li>Sony Playstation 3</li>
+<li>Tiger Electronics Game.com</li>
+<li>Tiger Electronics Gizmondo</li>
+<li>Tomy Pyuta</li>
+</ul></li>
+<li><p>Added extensions</p>
+
+<ul>
+<li>Acorn Electron: SSD</li>
+<li>Atari Jaguar: J64</li>
+<li>Atari ST: STX, STC</li>
+<li>Commodore 16: CRT, BIN, D64</li>
+<li>Commodore 64: CRT, D81, G41, G64, LNX, P00, Z64</li>
+<li>Commodore Plus/4: BIN, D64</li>
+<li>EACA/TS Colour Genie: CGD, CGT, TD0</li>
+<li>NEC PC-6001: BIN</li>
+<li>NEC PC-9801: FDI</li>
+<li>Nintendo Gameboy: SGB</li>
+<li>Vectrex: GAM</li>
+</ul></li>
+<li><p>Changed file extension for:</p>
+
+<ul>
+<li>NEC-PC6001: PC6 to CP6</li>
+</ul></li>
+<li><p>Small Fixes</p>
+
+<ul>
+<li>Fixed an issue where thirdparty tool fsum.exe would not work with strange
+characters/space in the pathname</li>
+<li>Fixed an window focus issue when first run of an emulator when not configured
+correctly.</li>
+<li>Fixed the PC Engine CD factsheet to show correctly.</li>
+<li>Fixed the system name of the NeoGeo CD factsheet.</li>
+</ul></li>
+<li><p>Update DATFILES</p>
+
+<ul>
+<li>MAME v0.122 to v0.123</li>
+</ul></li>
+</ul>
+
+<p>WIP 20 (2008.04.30)
+- fixed bug, if you direct edit options in detail area (like running, bugs aso)
+- Added new ecc-theme/miss-kit-I for girls and boys who dont like blue :-)
+- fixed ecc dat file import bug, if usk is string!
+- added missing translation for graphics
+- added "region" (e.g. hispanic, world, japan, ...) meta dropdown, export, import, romdb</p>
+
+<p>WIP 19 (2008.04.29)
+- added "arcade board" to media type dropdown
+- added imageslots cover<em>inlay</em>01-03 and ingame<em>play</em>boss
+- fixed startup sound bug</p>
+
+<p>WIP 18 (2008.04.28)
+- added more fields to romdb export!
+- Added new imageCenter slot Cover Spine.
+- added updated translation (We are searching for more translations!)
+-- dutch (by phoenix)
+-- french (by cyrille)
+-- german (by ecc, blackerking)
+-- english (by ecc)</p>
+
+<p>WIP 17 (2008.04.20)
+- new imagepack tools in platform context menu
+-- "Remove images for roms that i dont have in database",
+--- Remove all images of roms, that are not available in your romlist.
+If you want have a smaller imagepack without all the never used images!
+-- "Create thumbnails for faster access",
+--- Rebuild all thumbails for the imagpack. Use this, if you have downloaded an
+imagepack from web without thumbs. If using thumbs, emuControlCenter detail
+view is much faster than without thumbs!
+-- "Remove thumbnails for imagepack exchange",
+--- Use this option, if you want to exchange your imagepack with other people.
+This will remove all thumbnails and make the imagepack much smaller
+-- "Remove empty folder",
+---- Cleanup function from imagepacks. Remove empty folders.
+- Added 500 + 1000 as selection for detail view
+-- use this, if you have created thumbs with low quality only! :-)
+- added bookmarks and history entries to userdata xml-export!
+- added updated translation
+-- dutch (by phoenix)</p>
+
+<p>WIP 16 (2008.04.13)
+- added new dropdown for Medium x of n [1/x] button
+-- select only first rom media
+-- select first rom media and unknown
+- fixed a problem in category dropdown (doubble entries)
+- search dropdown
+-- removed file extension
+-- optimized filename now also can find file extension
+- added new Flyer slot + ingame<em>play</em>04/05 for imageCenter</p>
+
+<p>WIP 15 (2008.04.08)
+- Medium x of n
+-- Detail and listview now append "Rom name (1/3)", if this metadata is given.
+-- New mode "Show only disk 1" button hiding all roms not disk 1 :-)
+-- Listviews are now ordered by name + medium (x/n)
+- fixed emulator commandline parameter bug (default spaces before/after %ROM%)
+-- now it is also possible to add parameters like -a:%ROM% (e.g. to start WinX68kHighSpeed)</p>
+
+<p>WIP 14 (2008.03.29)
+- updated conf/mame/driver.ini
+- max per page for list detail new 500 / list 100000 :-)
+- fixed problem, if you direct edit the roms options in detail area
+- hotfixed drag-n-drop of metadata in search mode problem (drop on last record not possible)
+- limit stored window states to maximized</p>
+
+<p>WIP 13 (2008.03.23)
+- gui optimizations
+-- shortcut "Strg F" now toggles fullscreen mode (Close in Fullscreen ALT+F4)
+-- gui position is now restored at starup
+-- gui size is now restored at startup
+-- window state (maximized/fullscreen) is now restored on startup
+-- show/hide navigation will restore the selected size on toggle
+-- main window is now show if all gui settings are done! No flickering at startup!
+- fixed problem with the import from online meta-database romDB
+- New shortcut keys (see shortcuts.txt)
+-- DEL - remove rom from database
+-- STRG+DEL - remove rom metadata
+-- ALT+DEL - remove rom images
+-- SHIFT+DEL - remove rom from harddisk
+- fixed little bug if removing images
+- full settings are now stored, if you hit the save position button im imageCenter
+- romdb datfile now also possible for "# all found"</p>
+
+<p>WIP 12 (2008.03.20)
+- implemented show last selected game on startup
+- implemented select last selected page on startup
+- gui settings
+-- current state of the navigation/search/detail area is now saved by default.
+-- "Save View-Mode settings" store the current selected mode like "roms with metadata"</p>
+
+<p>WIP 11 (2008.03.15)
+- Added option to backup your userdata (reviews, ratings, personal) to an xml file
+-- see topmenu -> options -> backup userdata
+-- xml file will be copied to your ecc-user/#<em>GLOBAL folder
+-- import has to be done, export needs optimization :-)!
+- implemented autohide for options not needed in emulator configuration
+- fixed problem with cached romdb datfile, if #</em>GLOBAL folder dont exists
+- now also emulators containing $ like no$gba are started without problems.
+- fixed problem in fsum large file parsing
+- fixed window focus bug
+- fixed Blank holes when delete images and then refresh
+- now OS_TYPE is lowercase</p>
+
+<p>WIP 10 (2008.03.02)
+- fixed an problem with the new ecc-core-os folder on larger file parsing
+- implemented direct unpack of zip files for emus without zip support
+- fixed problem for games containing invalid characters like % and &amp;
+- fixed problem with F12 - hide info area
+- fixed Incorrect parsing string
+- fixed bug if rom add for arcade platforms is canceled
+- removed some php warnings
+- add some fixes for new php-gtk2 2.0</p>
+
+<p>WIP 09 (2008.02.23)
+- added hidden scrolling for detail area (for resoultion 1024x768) (Jakuchu fix)</p>
+
+<p>WIP 08 (2008.02.19)
+- added helper for eccLive! 3.x</p>
+
+<p>WIP 07 (2008.02.11)
+- add label to search reset button
+- make file, dir and zip paths elipsed (...) at start
+- added theme background to media edit popup
+- theme preview now also changes the background of the config-popup for preview
+- changed host info ini</p>
+
+<p>WIP 06 (2008.02.08)
+- Implemented new meta-fields + eccDat export / romDb export
+-- Programmer
+-- Musican
+-- Graphics
+-- Media [CD|Diskette|...|Tape] [2] OF [5]
+- optimizations for linux port
+- fixed some export issues
+- eccThemes
+-- fixed "none" theme select
+-- added themeColor.ini (in eccThemes folder)
+-- added theme images for dialogs
+- added ecc<em>host</em>info.ini for os detection and autoupdate!</p>
+
+<p>WIP 05 (2007.01.29)
+- ecc-theme images are now png
+- removed os check for popup windows
+- datfile-import
+-- romcenter dat
+--- fixed problem with no-intro datfiles
+--- added some more regex to datfile stripper
+-- CM dat
+--- fixed some warnings if datfile is parsed
+--- added flat logfile containing eccMergedCrc32 + infos from CM-Datfile (set activate loggin on!)
+---- used for image-imports from various mame, cps1-3 aso image-repositories
+- optimized logger to write logfiles of your actions (imports, exports aso) to the ecc-logs folder
+- removed some php warnings
+- added php-gtk2 repository fix (gtk renamed to GObject)</p>
+
+<p>WIP 04 (2008.01.24)
+- if eccScript is selected in emulator config, path is auto-escaped!
+- Rescan all rom folders
+-- fixed wrong output, if "all found" was selected
+-- fixed wrong output, if stored path isnt valid!
+-- implemented auto-optimize for stored paths.
+- Added some new icons
+- implemented ecc-theme selector in configuration
+-- now you can add your own themes into ecc-themes folder</p>
+
+<p>WIP 03 (2008.01.20)
+- optimized reparsing
+- escape path for fsum call
+- added new hide option for search-panel
+- added background images for better look n feel :-)
+- optimized gui
+- romDB datfile is now cached into ecc-user/#_GLOBAL folder</p>
+
+<p>WIP 02 (2008.01.19)
+- Added some missing languages strings
+- Icons for context menus + reorganization</p>
+
+<p>WIP 01 (2008.01.14)
+- New tabs for meta-edit popup
+-- Rating / Review
+-- Personal for notes + hiscores
+- Top menu "View"
+-- Added "last played" (same as "history", ordered by launchtime!)
+-- Added "most played"
+-- Added "never played"
+-- Added "bookmarked" (same as "bookmarks")
+- Added new buttons to direct access these new view options including context menu
+-- Added here also "personal with review"
+- added new icons to metaInfo (right)
+-- [N] Notes
+-- [R] Review
+-- [B] Bookmark
+- Bookmarks and history are now handled line the normal list views!
+- file dialog for "add roms" now starts in ecc user folder!
+- Added new option "Silent ROM parsing (no popup requests)" in general config
+- store path<em>selected</em>last in history ini for dialogs...
+- disable double-click on platform-navigation for "all found"
+- added new categories... dont find an good name now!
+-- "-  Moving blocks (Tetris/Klax aso)"
+-- "-  Finger speed (GuitarHero/DanceTrainer aso)"
+- many more :-)</p>
+
+<ul>
+<li>ECC Startup
+v2.1.5.0</li>
+<li>Added new images and a brand new splashscreen for the 0.9.7 release.</li>
+<li><p>Fixed an issue where the startup sound did not play or preview didn't work.</p></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>Notepad++ v4.8.5</li>
+</ul></li>
+<li><p>Core components</p>
+
+<ul>
+<li>GTK Core update from 2.12.1.0 to v2.12.8.0</li>
+<li>PHP-GTK v2 beta to v2 full</li>
+<li>PHP v5.2.5 to v5.2.5 NON THREAD SAFE</li>
+</ul></li>
+<li><p>ECC Installer
+v1.3.0.3 (ECC v0.9.7):</p></li>
+<li>Compiled with NSIS v2.36.</li>
+<li>Removed DB overwrite warning (because 0.9.7 is compatible with 0.9.6)</li>
+<li>Updated the virtual box image.</li>
+</ul>
+
+<p>Version 0.9.6.R3 (2008.03.10)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Amstrad GX4000</li>
+<li>Texas Instruments TI-99/4A</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Improved ECC OS detect</li>
+<li>Slightly improved the way to detect the OS system.</li>
+<li>Removed the php_mbstring DLL, it's not used anymore, now
+using a internal PHP function to lowercase the OS string.</li>
+<li>Fixed CRC32 calculation error on large files.</li>
+<li>Fixed script creation with notepad++.</li>
+</ul></li>
+<li><p>Small Platform updates</p>
+
+<ul>
+<li>Robotron KC</li>
+<li>Renamed 'Robotron KC' to 'Robotron KC series'.</li>
+<li>Atari 8-bit</li>
+<li>Renamed 'Atari 8-bit' to 'Atari 8-bit series'.</li>
+<li>Amstrad/Schneider PCW/Joyce</li>
+<li>Renamed 'Amstrad/Schneider PCW/Joyce' to 'Amstrad PCW/Schneider Joyce'.</li>
+<li>Capcom Playsystem 3</li>
+<li>Replaced the logo by a darker one (like CPS1 &amp; CPS2).</li>
+<li>Bandai Wonderswan Color</li>
+<li>Removed the 'color' logo from the screen.</li>
+<li>Amstrad CPC</li>
+<li>Replaced the logo and re-made the teaser.</li>
+<li>Amstrad PCW/Schneider Joyce</li>
+<li>Replaced the Amstrad logo and re-made the teaser.</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.3.3</p></li>
+<li><p>Fixed an issue where ECC did not return to the original
+'maximized' size when ECC was minimized.</p></li>
+<li><p>ECC Live!
+v3.0.0.4</p></li>
+<li>Fixed crash when updating ECC Live! to a more recent version.
+v3.0.0.5</li>
+<li>Fixed an infinite loop when a update is not for the operating OS
+or installtype.
+v3.0.0.6</li>
+<li><p>Adjusted to work with ZIP files instead of RAR files, this because
+there is no suitable RAR extension for PHP-GTK2 in feature update.</p></li>
+<li><p>ECC Live! updater
+v1.1.0.6</p></li>
+<li><p>Adjusted to work with ZIP files instead of RAR files, this because
+there is no suitable RAR extension for PHP-GTK2 in feature update.</p></li>
+<li><p>ECC Bugreport
+v2.2.0.3</p></li>
+<li>Adjusted the way the bugreports are stored on the server.
+v2.2.0.4</li>
+<li><p>Fixed a bug that would not remove the temporally log file.</p></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>Notepad++ v4.8.2</li>
+</ul></li>
+</ul>
+
+<p><img src="images/img_misc_multios.jpg" alt="" title="" /></p>
+
+<p>Version 0.9.6.R2 (2008.02.23) MULTI-OS READY</p>
+
+<ul>
+<li><p>Small updates</p>
+
+<ul>
+<li>Fixed and issue where multiple menus popup, when clicked on
+the menu, this is caused if people have costum windows theming
+installed and active on their system</li>
+<li>Fixed an issue loading in Win32 systems where ECC could not
+load a glade GUI file.</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.2.7:</p></li>
+<li>ECC Startup did not run the desired PHP script for OS
+detection due to spaces in paths, this has been corrected
+by quoting the complete path.</li>
+<li>Added full paths to the OS &amp; Bugreport PHP files.
+v2.1.3.0</li>
+<li>Adjusted to work with multiple cores (Win32, WinNT)
+v2.1.3.1</li>
+<li>Fixed update checking, because it did not function on a
+first start of ecc, so we can now also remove the 'update now'
+function from the installer.
+v2.1.3.2</li>
+<li>Fixed an issue where ECC did not start when hailing from
+a offside-location (like from the installer) this is fixed by
+calling full paths.</li>
+<li>The file sOsDetect.php, has been improved to find the correct path.</li>
+<li><p>Removed the Kickstart line from the update INI, it is not used
+anymore.</p></li>
+<li><p>ECC Live!
+v3.0.0.0</p></li>
+<li>Almost a Whole rewrite of the ECC Live! engine, not using table's anymore.
+It's now more advanced even more things implented, user interface has been
+simplified, no more buttons and stuff, also better messages implented.
+v3.0.0.1</li>
+<li>Fixed an issue where ECC Live! did not start after an update
+with the update check.</li>
+<li>The file 'ecc-tools\msflxgrd.ocx' will be removed because it
+is not used anymore.
+v3.0.0.2</li>
+<li><p>Fixed an running problem 'please run from the ecc-tools folder'
+on Win32 systems and maybe other operation systems.</p></li>
+<li><p>ECC Live! updater
+v1.1.0.0</p></li>
+<li>Adjusted ECC Live! Updator to use the PHP RAR extension for extraction.</li>
+<li>Removing the thirdparty tool RAR.EXE, it is not used anymore.
+v1.1.0.1</li>
+<li>Fixed an issue when no ECC software could be found.</li>
+<li>Included the language files for ECC Live! updater.
+v1.1.0.2</li>
+<li>Fixed an issue where the update INI was not deleted.</li>
+<li>Removed an unused image in the file, now ECC Live! update
+is more than 50 KB smaller.
+v1.1.0.3</li>
+<li>Fixed an issue where ECC Live! was in use so that it
+could not be updated.
+v1.1.0.4</li>
+<li>Fixed an issue where ECC Live! was in use so that it
+could not be updated #2, this time using the 'timer'
+handling again.
+v1.1.0.5</li>
+<li><p>Fixed an running problem 'please run from the ecc-tools folder'
+on Win32 systems and maybe other operation systems.</p></li>
+<li><p>ECC Bug report
+v2.2.0.2</p></li>
+<li><p>Fixed an running problem 'please run from the ecc-tools folder'
+on Win32 systems and maybe other operation systems.</p></li>
+<li><p>ECC Theme
+v1.1.0.4</p></li>
+<li><p>Adjusted to look in the right ECC core folder for the themes.</p></li>
+<li><p>ECC Script
+v1.1.0.2</p></li>
+<li><p>Adjusted to look in the right ECC core folder for the
+thirdparty tool Autoit3.exe to run scripts.</p></li>
+<li><p>ECC GTK Core</p>
+
+<ul>
+<li>Updated GTK from 2.10.11 to v2.12.8</li>
+<li>Added a brand new theme engine called 'clearlooks' for a new
+default ecc theme.</li>
+</ul></li>
+<li><p>ECC Installer
+v1.3.0.2 (ECC v0.9.6.R2):</p></li>
+<li>Compiled with NSIS v2.35.</li>
+<li>Added DB overwrite warning (because the 0.9.6 is not compatible with 0.9.5)</li>
+</ul>
+
+<p>Version 0.9.6.R1 (2008.02.05)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Amstrad/Schneider PCW/Joyce</li>
+<li>Epoch/Yeno Super Cassette Vision</li>
+<li>NEC PC-9801</li>
+<li>Sharp MZ-1500</li>
+<li>Sharp MZ-2500</li>
+<li>Sharp X1</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Updated the language files for the 0.9.6 release.</li>
+<li>Added the right MD5 hash file for the 0.9.6 release.</li>
+<li>Enabled the PHP extension 'php_mbsting' to be loaded.</li>
+<li>Updated DAT files</li>
+<li>CPS-1: v2006.07.24 to v2007.09.22</li>
+<li>CPS-2: v2007.06.11 to v2007.11.19</li>
+<li>MAME: v0.117 to v0.122</li>
+<li>Neo-Geo: v2007.07.10 to v2008.01.01</li>
+<li>Model2: v2007.05.31 to v2008.01.03</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.2.6:</p></li>
+<li>Fixed error message 'could not find ecc-core\php-win.exe'
+Some users experienced that 'ecc-core\php-win.exe' could not
+be found, this can happen because of foreign language sets,
+now using full paths instead of relative paths.
+v2.1.2.5:</li>
+<li>Adjusted to look in the ECC rootfolder for ECC error.log.
+v2.1.2.4:</li>
+<li><p>ECC Startup is now hailing PHP to determine on what OS it
+runs, the output syntax from PHP is different then Autoit,
+so this is only to adjust things to the feature, because we
+want to let ECC run on linux/apple/mac systems later-on ;)</p></li>
+<li><p>ECC Bugreport
+v2.2.0.1</p></li>
+<li>Adjusted to look in the ECC rootfolder for ECC error.log.
+v2.2.0.0:</li>
+<li>Now uses the PHP extension 'php_zip.dll' to pack the htm file
+<ul>
+<li>Now the thirdparty tool RAR.EXE isn't needed for this anymore.</li>
+</ul></li>
+<li>Improved the way the bugreport is stored on our server, to give us a much
+better overview, so we can fix bugs faster!</li>
+<li><p>Not using the TEMP folder anymore, the temp file is created in the ecc-tools folder.</p>
+
+<ul>
+<li>This because on a NON writable disc, the PHP error.log can't be created!</li>
+</ul></li>
+<li><p>Image updates</p>
+
+<ul>
+<li>Bally Astrocade</li>
+<li>Fixed the dropshadow (5 pix)</li>
+<li>Move the 'Bally' logo a bit</li>
+<li>Matra Alice</li>
+<li>Added dropshadow</li>
+<li>Removed lost pixels on top of the console</li>
+<li>Mattel Aquarius</li>
+<li>Added dropshadow</li>
+<li>Capcom Play System 3</li>
+<li>Added dropshadow</li>
+<li>Tatung Einstein</li>
+<li>Added dropshadow</li>
+<li>Mattel Intellivision</li>
+<li>Added dropshadow</li>
+<li>Interton VC-4000</li>
+<li>Added dropshadow</li>
+<li>Atari Lynx</li>
+<li>Updated the console picture</li>
+<li>Panasonic 3DO</li>
+<li>Made console picture smaller to fit better</li>
+<li>Adobe Flash</li>
+<li>Removed some lost pixels on top of the logo</li>
+<li>Atari Jaguar</li>
+<li>Removed the '64-bit' line</li>
+<li>Centered the console picture</li>
+<li>Nintendo DS</li>
+<li>Moved the logo on left-top</li>
+<li>Moved the console picture</li>
+<li>NEC PC-FX</li>
+<li>Fixed the dropshadow (5 pix)</li>
+<li>Philips VG-5000</li>
+<li>Fixed the dropshadow (5 pix)</li>
+<li>Nintendo Super Nintendo</li>
+<li>Added Nintendo logo</li>
+<li>Moved console picture to middle</li>
+<li>Moved 'Super Nintendo' logo to right-under</li>
+<li>Bandai Wonderswan</li>
+<li>Removed some lost pixels on top of the console</li>
+<li>Sharp X68000</li>
+<li>Updated the console picture</li>
+<li>Updated the nav picture</li>
+<li>Namco System 11</li>
+<li>Updated the nav picture (red text)</li>
+<li>Namco System 22</li>
+<li>Updated the nav picture (red text)</li>
+<li>Sega System 16</li>
+<li>Updated the nav picture (purple text)</li>
+<li>Sega System 18</li>
+<li>Updated the nav picture (purple text)</li>
+<li>Sony ZiNc</li>
+<li>Updated the nav picture (blue text)</li>
+<li>Emerson Arcadia</li>
+<li>Added Emerson logo</li>
+<li>Removed little Emerson logo from the console logo</li>
+<li>Centered the console</li>
+<li>Sharp MZ-700</li>
+<li>Added dropshadow</li>
+<li>Atari ST</li>
+<li>Made the white screen black</li>
+<li>Centered the console</li>
+</ul></li>
+<li><p>Core components</p>
+
+<ul>
+<li>ECC Core degrade to v2.10.11a
+Using the old core again due to troubleshooting on some systems, we now have a
+'testchamber' in our development section to make feature (core)updates more
+stable before releasing, for now we are using the the old 2.10.11 engine
+from march 28 2007.</li>
+</ul>
+
+<p>Note:
+This also brings back the drivescanning problem of usb drives ect. (for now)</p>
+
+<ul>
+<li>Due to feature multiplatform support, we have to alter some
+settings, one of these is the error.log output, this will
+be in the ECC root folder again.</li>
+</ul></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>Notepad++ v4.7.2</li>
+</ul></li>
+<li><p>ECC Installer
+v1.3.0.1 (ECC v0.9.6.R1):</p></li>
+<li>Compiled with NSIS v2.34.</li>
+<li>Fixed the checkboxes on the 'extra feature page' to handle ccorrect.</li>
+<li>Altered some of the text being displayed on the 'extra feature page'.</li>
+<li>Added the writing of the instal INI.</li>
+</ul>

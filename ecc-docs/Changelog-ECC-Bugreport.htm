@@ -1,0 +1,119 @@
+<h2>Changelog ECC Bugreport (discontinued, now eccDiagnostics)</h2>
+
+<hr />
+
+<p>v2.3.0.4 (2008.07.16)
+- Read 'php.ini' again instead of 'php-emuControlCenter.ini'
+- Removed the GHS file, bugreport now writes the file itself, instead of renaming it.</p>
+
+<p>v2.3.0.3 (2008.07.08)
+- Fixed a bug where the user configs 'general' and 'history' INI's
+could not be found.</p>
+
+<p>v2.3.0.2 (2008.07.08)
+- Now using FSUM to compare file hashes (instead of QuickSFV).
+- Temporally hash results no longer in %user_temp% folder but
+are stored in the tools folder itself.
+- Added GHS (get hash) file, it is actually a helping batchfile,
+it is renamed as a GHS file to prevent the user from starting it directly.</p>
+
+<p>v2.3.0.1 (2008.06.18)
+- Now using system information from the HOST INI (instead from envment ini)</p>
+
+<p>v2.3.0.0 (2008.05.29)
+- Removed OS detection, now using the 'ecc-core' structure.
+- Adjusted all paths to the new 'ecc-core' structure.</p>
+
+<p>v2.2.0.5 (2008.05.03)
+- Improved ECC Core detecion, so that ECC software can be found.
+- Updated the MD5 hash file to 0.9.7 WIP20</p>
+
+<p>v2.2.0.4 (2008.03.09)
+- Fixed a bug that would not remove the temporally log file.</p>
+
+<p>v2.2.0.3 (2008.03.05)
+- Adjusted the way the bugreports are stored on the server.</p>
+
+<p>v2.2.0.2 (2008.02.20)
+- Fixed an running problem 'please run from the ecc-tools folder'
+on Win32 systems and maybe other operation systems.</p>
+
+<p>v2.2.0.1 (2008.02.03)
+- Adjusted to look in the ECC rootfolder for ECC error.log.</p>
+
+<p>v2.2.0.0 (2008.01.19)
+- Now uses the PHP extension 'php_zip.dll' to pack the htm file
+- Now the thirdparty tool RAR.EXE isn't needed for this anymore.
+- Improved the way the bugreport is stored on our server, to give us a much
+better overview, so we can fix bugs faster!
+- Not using the TEMP folder anymore, the temp file is created in the ecc-tools folder.
+- This because on a NON writable disc, the PHP error.log can't be created!</p>
+
+<p>v2.1.0.1 (2007.10.25)
+- Fix for memory 'MB' to 'KB' mistake in the template &amp; envment INI.</p>
+
+<p>v2.1.0.0 (2007.10.25)
+- IP bugsender not noted when manually started the report.
+- Only exe/dll/ocx files are scanned in the 'version detail' lists.
+- Detect linebreaks in ECC general/history INI's.
+- Added 'back to top' in template.
+- Added report of ECC startup version.
+- Fixed displaying some incorrect fileversion informations.
+- The OS now displays a 'long' name.
+- QuickSFV intergration for MD5 hash checkup.
+- Added transations GER / FRA.</p>
+
+<p>v2.0.0.0 (2007.10.22)
+- Almost totally rebuild from scratch!
+- Whole new HTML output (using template file :D)
+- The user can run ECC Bugreport/Diagnostics whenever he/she wants,
+just to view/checkup ECC version/core/environment data.
+(for example placing the bugreport on the forum)</p>
+
+<p>v1.2.0.5 (2007.10.16)
+- Extended the bugreport details/diagnostics with the users environment data.
+- Coming soon: ECC Bugreport diagnostics build-in</p>
+
+<p>v1.2.0.0 (2007.10.02)
+- Removed manual interface.
+- Automatic bug sending when a ECC error occurs.
+- Fully translatable!
+- Fixed an running issue on Win98 systems (and maybe other OS'es).</p>
+
+<p>v1.1.0.2 (2007.05.02) 
+- Fixed 'HALT' on Japanese / Chinese systems.
+- The 'self validation' check on the tools that where incompatible/conflicting
+with japanese / chinese charsets, hopefully this is fixed now!</p>
+
+<p>v1.1.0.0 (2007.04.20)
+- White edition
+- Added XP look
+- Added tooltips on the buttons</p>
+
+<p>v1.0.0.8 (2007.02.06)
+- Increased the 'local' INI size to be sent, otherwise Bugreport won't send the report (fix)
+- Adjusted some text messages.</p>
+
+<p>v1.0.0.7 (2007.02.03)
+- Changed the icon to red!
+- Rechanged calling the OCX Module (fixed filenames)</p>
+
+<p>v1.0.0.6 (2007.01.23)
+- Disable the exit/abort button when building the report. (fix)
+- Changed calling the OCX Module (fixed filenames)</p>
+
+<p>v1.0.0.5 (2007.01.22)
+- Changed all colors to original windows colors (no black theme)
+- Redisignd the GUI interface
+- Added splash screen (2 sec.)
+- Improved the size of phperror.log to be sent (from 1000 to 1500 bytes)
+- Removed retrieval of senders data (windows version, desktop info)
+- Some antivirus programs did detect this as a spyware/trojan thread :(
+- Added 'ecc-core' and 'ecc-core\ext' folder contents to the bugreport
+- Better anti hack check routine
+- Can only run from ECC-TOOLS folder (fix)
+- Display 'bytes left' for message at startup is now fixed!
+- Detects if ECC software is present (otherwise won't startup)</p>
+
+<p>v1.0.0.0 (2007.01.21)
+- Initial (test) release</p>

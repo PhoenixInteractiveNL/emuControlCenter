@@ -1,0 +1,211 @@
+<h2>Changelogs 2016</h2>
+
+<hr />
+
+<p><img src="images/img_misc_source_files.png" alt="" title="" /></p>
+
+<p>ECC v1.21 (2016-09-14)</p>
+
+<ul>
+<li>ECC SOURCE files released!, they include:
+<ul>
+<li>KODA AutoIt3 GUI's (KXF)</li>
+<li>Photoshop images (PSD)</li>
+<li>Fonts (TTF)</li>
+<li>Scalable Vector Graphics (SVG)
+Files are in the 'ecc-source' folder.</li>
+</ul></li>
+<li>ECC CORE
+<ul>
+<li>Updated links in the GUI to the new ECC website.</li>
+<li>Updated the splashscreen image.</li>
+<li>Adjusted all links to the new ECC homepage:</li>
+<li>https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki</li>
+<li>Reworked configuration GUI, placed options together where needed, deleted old options and TABS.</li>
+<li>Selectable ECC DATABASE path!, put your database on a central location so every computer
+in a network can run the same data!</li>
+<li>Some notes setting and using the ECC DATABASE path:
+<ul>
+<li>With manual input always use a ending slash .</li>
+<li>Network paths are not listed, but you can type them manually like: \COMPUTER\PATH.</li>
+<li>Wrong pathnames or no rights to write will reset the DB tot he default "ecc-system\database" location.</li>
+<li>When configuring a location of a existing ECC configuration/database, you have to copy the database
+manually to the new location.</li>
+<li>You may experience slow response form ECC when you store the datbaase on a network path.</li>
+<li>ECC is not tested to run from multiple computers with the same database,
+the database could be "in use by another application" let me know if it works!</li>
+</ul></li>
+<li>Added a new PHP class "ecc-system\manager\cIniFileRegular.php" to read and write INI files easily.</li>
+<li>Database "empty" is now the updated version (save some scripts to be executed everytime)</li>
+<li>Added some more translations to be made in the GUI.</li>
+<li>Fixed link to TAB help on mainscreen to readme.md.</li>
+<li>Manager: ecccli_datFileImporter.php, Fixed database fixed location, now reading ecc settings.</li>
+<li>Fixed and added function to start SQlite browser without the autoit3 script!</li>
+<li>Added 3 new metadata fields to ECC database and GUI, also being exported from and imported to ECC.</li>
+<li>Perspective, Visual, Description</li>
+<li>Some Code and GUI cleanup.  </li>
+</ul></li>
+<li>ECC THEMES
+<ul>
+<li>Added loading aimation for theme: afterhours, miss-kit-purple</li>
+<li>Removed incomplete themes: miss-kit-bubblegum, green-grass, nature-full-green (only on fresh installations)</li>
+</ul></li>
+<li>ECC DOCS
+<ul>
+<li>Placed Autoit and Xpadder docs in their respective folders now.</li>
+<li>Updated Autoit3 Documentation.</li>
+</ul></li>
+<li>ECC Startup
+<ul>
+<li>v3.0.0.1</li>
+<li>Minor GUI adjustement for removed checkbox.</li>
+<li>Fixed unpacking DAT files with spaces in the filenames.</li>
+<li>v3.0.0.2</li>
+<li>Using animated GIF instead of AVI for loading animations, you can make you own easily now!
+You can find instructions at emuControlCenter WIKI on GitHub.</li>
+</ul></li>
+<li>ECC 3D Gallery
+<ul>
+<li>v1.2.0.0</li>
+<li>Adjusted variable to fetch the proper websitelink from toolvariables.au3</li>
+</ul></li>
+<li>ECC CreateStartmenuShotcuts
+<ul>
+<li>v1.0.0.4</li>
+<li>Now fetching website link from toolvariables.au3</li>
+</ul></li>
+<li>ECC Update
+<ul>
+<li>v1.2.0.1</li>
+<li>Now fetching website link from toolvariables.au3</li>
+</ul></li>
+<li>3RD Party updates
+<ul>
+<li>Mplayer Redxii-SVN-r37153-4.8.2 to Redxii-SVN-r37871-4.9.3 (i686)</li>
+</ul></li>
+<li><p>ECC Tool variables</p>
+
+<ul>
+<li>v1.0.0.8</li>
+<li>Added new variables for eccdb, now reading ecc settings.</li>
+<li>Fixed an issue where the database could not be found at the "default" location.</li>
+<li>Mobygames importer</li>
+<li>v1.2.0.0
+<ul>
+<li>Added new fields to fill: Perspective, Visual</li>
+<li>Description now in the META data location (instead of userdata)</li>
+</ul></li>
+</ul></li>
+<li><p>Scripts</p>
+
+<ul>
+<li>Commodore Amiga: Merged the eccScript with the getgemusconfig script, placed
+the Amiga Gamebase inside the ecc-system\datfiles folder.</li>
+</ul></li>
+<li><p>DAT files updates</p>
+
+<ul>
+<li>Amiga Gamebase v1.6 to v2.0</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<p><img src="images/ecc_splashscreen_120.png" alt="" title="" /></p>
+
+<p>Version 1.20 (2016.08.10) THE GITHUB RELEASE</p>
+
+<p>This GITHUB RELEASE means ECC is 'Jailbreaked' in some sort of kind to remove
+limitations and improve it further with the rest of the world ;-)</p>
+
+<ul>
+<li><p>CORE</p>
+
+<ul>
+<li>ECC.EXE source is FREE/ADDED.</li>
+<li>ECCCORE is FREE/ADDED.</li>
+<li>ecc-system\manager\cImportDatControlMame.php</li>
+<li>MAME DAT headers have changed from 'game (' to 'machine (' , therefore adjusted the code to find headers.</li>
+<li>ecc-system\manager\cGuiHelper.php</li>
+<li>Removed version tags and time stamps from TXT and HTML files in the system userfolders.</li>
+<li>ecc-system\manger\cValidator.php</li>
+<li>Removed coding and encryption of ECC CORE settings (before ecccore.dat)
+ECC now loads in the plain PHP settings from ecccore.php.</li>
+<li>New startup sound added.</li>
+<li>Platform generated images and user folders are already generated, so no extra waiting to startup ECC!</li>
+</ul></li>
+<li><p>ECC Startup</p>
+
+<ul>
+<li>v3.0.0.0 (2014.08.10)</li>
+<li>Made opensource witch can be manually compiled to ecc.exe.</li>
+<li>Added function to unzip ECC DAT files at first runtime, to prevent big DAT files hosted on Github.</li>
+<li>Removed send bugreport function from startup screen.</li>
+</ul></li>
+<li><p>EmuMoviesDownloader (EMD)</p>
+
+<ul>
+<li>v1.2.1.2 (2014.06.24)</li>
+<li>Fixed &amp; Updated encryption en decryption algorithm due to function break in
+the new autoit version <em>StringEncrypt has been replaced with _Crypt</em>EncryptData.</li>
+<li>The account log-in data has to be re-entered due to encryption change!</li>
+</ul></li>
+<li><p>ECC Tool Variables</p>
+
+<ul>
+<li>v1.0.0.6 (2014.06.24)</li>
+<li>Updated allround variables for EmuMovies downloader (EMD)</li>
+</ul></li>
+<li><p>DatFileUpdater (DFU)</p>
+
+<ul>
+<li>v1.3.0.0 (2016.08.10)</li>
+<li>Added a feature to unpack 7z files DAT files once on first start due to Github filesize limit.</li>
+<li>Updated and fixed platform listings to grab (.c to .cpp) MAME 0.17x+? to create CLRMAME DAT files.</li>
+<li>Removed DAT dates, seems not te be listed in official MAME DAT anymore.</li>
+<li>Fixed creating always the 'backup' folder, now it will be created only when making a backup.</li>
+<li>Fixed NeoGeo platform DAT generation (seems to be neodriv.hxx?)</li>
+<li>Fixed DAT version find from MAME DAT manual update.</li>
+<li>Upped required space to 150MB when doing a manual MAME DAT update.</li>
+<li>Removed check for ECC executable.</li>
+</ul></li>
+<li><p>eccUpdate</p>
+
+<ul>
+<li>1.2.0.0 (2016.08.10)</li>
+<li>Now using Github to download updates instead of ecc-update server.</li>
+</ul></li>
+<li><p>3RD party updates:</p>
+
+<ul>
+<li>7zip v9.32 to v16.02 (2016-05-21)</li>
+<li>Autoit v3.3.12.0 to v3.3.14.2 (2015-09-18)</li>
+<li>Notepad++ v6.6.6 to v6.9.2 (2016-05-18)</li>
+</ul></li>
+<li><p>Added file extensions</p>
+
+<ul>
+<li>Atari ST: IFC</li>
+<li>WiiU: RPX, WUD</li>
+<li>XBox: XBE</li>
+<li>XBox 360: XEX</li>
+</ul></li>
+<li><p>Updated DAT files for:</p>
+
+<ul>
+<li>CPS-1  : v0.159 to v0.176 (mame)</li>
+<li>CPS-2  : v0.159 to v0.176 (mame)</li>
+<li>CPS-3  : v0.159 to v0.176 (mame)</li>
+<li>MAME   : v0.159 to v0.176</li>
+<li>MODEL1 : v0.159 to v0.176 (mame)</li>
+<li>MODEL2 : v0.159 to v0.176 (mame)</li>
+<li>NAOMI  : v0.159 to v0.176 (mame)</li>
+<li>NEOGEO : v0.159 to v0.176 (mame)</li>
+<li>PGM    : v0.159 to v0.176 (mame)</li>
+<li>S11    : v0.159 to v0.176 (mame)</li>
+<li>S16    : v0.159 to v0.176 (mame)</li>
+<li>S18    : v0.159 to v0.176 (mame)</li>
+<li>S22    : v0.159 to v0.176 (mame)</li>
+<li>ZINC   : v0.159 to v0.176 (mame)</li>
+</ul></li>
+</ul>

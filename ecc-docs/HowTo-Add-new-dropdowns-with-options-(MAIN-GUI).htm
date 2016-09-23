@@ -1,0 +1,287 @@
+<h2>SET DROPDOWN WITH DATABASE DATA (example 2 fields)</h2>
+
+<hr />
+
+<h3>ADD DROPDOWN OPTIONS TO ECCCORE</h3>
+
+<p>Edit file: ecc-system\ecccore.php, around line 490, add these arrays:</p>
+
+<pre><code>'dropdownPerspective' =&gt; array(
+    0 =&gt; 'unknown',
+    1 =&gt; '1st-person',
+    2 =&gt; '3rd-person',
+    3 =&gt; 'Audio game',
+    4 =&gt; 'Behind view',
+    5 =&gt; 'Birds-eye view',
+    6 =&gt; 'Side view',
+    7 =&gt; 'Text-based / Spreadsheet',
+    8 =&gt; 'Top-down',
+),
+
+'dropdownVisual' =&gt; array(
+    0 =&gt; 'unknown',
+    1 =&gt; '2D scrolling',
+    2 =&gt; 'Cinematic camera',
+    3 =&gt; 'Fixed / Flip-screen',
+    4 =&gt; 'Free-roaming camera',
+    5 =&gt; 'Isometric',
+),
+</code></pre>
+
+<h3>LOAD DROPDOWN OPTIONS FROM ECCCORE</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 7840 (funtion: loadEccConfig), add:</p>
+
+<pre><code>$this-&gt;dropdownPerspective = $mngrValidator-&gt;getEccCoreKey('dropdownPerspective');
+$this-&gt;dropdownVisual = $mngrValidator-&gt;getEccCoreKey('dropdownVisual');
+</code></pre>
+
+<h3>ADD TO GUI > 2 rows and 2 columns with items:</h3>
+
+<ul>
+<li>Static labels (left side)</li>
+</ul>
+
+<p><em>media</em>nb<em>info</em>perspective_</p>
+
+<p><em>media</em>nb<em>info</em>visual_</p>
+
+<ul>
+<li>Event boxes (right side)</li>
+</ul>
+
+<p><em>GtkEventBox > nbMediaInfoStatePerspectiveEvent</em></p>
+
+<p><em>GtkEventBox > nbMediaInfoStateVisualEvent</em></p>
+
+<h3>TRANSLATE GUI STATIC LABELS</h3>
+
+<ul>
+<li>Add labels to translation file</li>
+</ul>
+
+<p>Edit file: ecc-system\translations[LANGUAGE]\i18n_meta.php, around line 90, in the META array, add:</p>
+
+<pre><code>/* 1.20 */
+'lbl_perspective' =&gt;
+    "Perspectief",  
+'lbl_visual' =&gt;
+    "Visueel",
+</code></pre>
+
+<ul>
+<li>Load Labels from translation file(s)</li>
+</ul>
+
+<p>Edit file: ecc-system\ecc.php, around line 8480, add:</p>
+
+<pre><code>    $this-&gt;setSpanMarkup($this-&gt;infotab_lbl_perspective, I18N::get('meta', 'lbl_perspective'), false, 'b', false);
+    $this-&gt;setSpanMarkup($this-&gt;infotab_lbl_visual, I18N::get('meta', 'lbl_visual'), false, 'b', false);
+</code></pre>
+
+<h3>CONNECT EVENTS TO DROPDOWNCONTROL</h3>
+
+<p>NOTES: Color effects are set with colEventOptionSelect1 / colEventOptionSelect2</p>
+
+<p>Edit file: ecc-system\ecc.php, around line 930, add:</p>
+
+<pre><code>    // perspective
+    $this-&gt;dropdownPerspective = I18n::translateArray('dropdownPerspective', $this-&gt;dropdownPerspective);
+    $this-&gt;nbMediaInfoStatePerspectiveEvent-&gt;connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_perspective').'?', $this-&gt;dropdownPerspective, 'metaEditDirectUpdate', 'setPerspective', true);
+    $this-&gt;nbMediaInfoStatePerspectiveEvent-&gt;modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this-&gt;colEventOptionSelect1));
+
+    // visual
+    $this-&gt;dropdownVisual = I18n::translateArray('dropdownVisual', $this-&gt;dropdownVisual);
+    $this-&gt;nbMediaInfoStateVisualEvent-&gt;connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_visual').'?', $this-&gt;dropdownVisual, 'metaEditDirectUpdate', 'setVisual', true);
+    $this-&gt;nbMediaInfoStateVisualEvent-&gt;modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this-&gt;colEventOptionSelect2));
+</code></pre>
+
+<h3>TRANSLATE DROPDOWN LABELS (example dutch)</h3>
+
+<ul>
+<li>Add labels to translation file</li>
+</ul>
+
+<p>Edit file: ecc-system\translations[LANGUAGE]\i18n_meta.php, around line, at the end add these array's, add:</p>
+
+<pre><code>$i18n['dropdownVisual'] = array(
+'unknown' =&gt;
+    "Onbekend",
+'2D scrolling' =&gt;
+    "2D scrollend",
+'Cinematic camera' =&gt;
+    "Cinematische camera",
+'Fixed / Flip-screen' =&gt;
+    "Vast / Flip-screen",
+'Free-roaming camera' =&gt;
+    "Vrije camera",
+'Isometric' =&gt;
+    "Isometrisch",
+);
+
+$i18n['dropdownPerspective'] = array(
+'unknown' =&gt;
+    "Onbekend",
+'1st-person' =&gt;
+    "1e persoon",
+'3rd-person' =&gt;
+    "3e Persoon",
+'Behind view' =&gt;
+    "Van achteren",
+'Birds-eye view' =&gt;
+    "Vogel-oog zicht",
+'Side view' =&gt;
+    "Vanaf de zijkant",
+'Text-based / Spreadsheet' =&gt;
+    "Tekst gebaseerd / Spreadsheet",
+'Top-down' =&gt;
+    "Van boven af",
+);
+</code></pre>
+
+<h3>UPDATE ROM PANEL (ON CHANGE)</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 3070 (function: updateRomInfoPanel), add:</p>
+
+<pre><code>            // option perspective
+            $perspective = (!$romMeta-&gt;getPerspective()) ? 0 : $romMeta-&gt;getPerspective();
+            $this-&gt;setSpanMarkup($this-&gt;media_nb_info_perspective, $this-&gt;dropdownPerspective[$perspective]);
+
+            // option visual
+            $visual = (!$romMeta-&gt;getVisual()) ? 0 : $romMeta-&gt;getVisual();
+            $this-&gt;setSpanMarkup($this-&gt;media_nb_info_visual, $this-&gt;dropdownVisual[$visual]);
+</code></pre>
+
+<h3>ADD COLUMN TO ROM METADATA CHECKSUM</h3>
+
+<p>Edit file: ecc-system\manager\model\RomMeta.php, around line 130 ($checksumInclude array), add:</p>
+
+<pre><code>'perspective',
+'visual',
+</code></pre>
+
+<h3>GET METADATA FROM DATABASE</h3>
+
+<p>around line 386 (function fillFromDatabase), add:</p>
+
+<pre><code>$this-&gt;setPerspective($dbEntry['md_perspective']);
+$this-&gt;setVisual($dbEntry['md_visual']);
+</code></pre>
+
+<h3>STORE METADATA IN DATABASE</h3>
+
+<p>around line 510 (function store), add:</p>
+
+<pre><code>perspective = ".$this-&gt;getCleanInteger($this-&gt;getPerspective()).",
+visual = ".$this-&gt;getCleanInteger($this-&gt;getVisual()).",
+</code></pre>
+
+<p>around line 550 (function store), add:</p>
+
+<pre><code>perspective,
+visual,
+</code></pre>
+
+<p>around line 590 (function store), add:</p>
+
+<pre><code>".$this-&gt;getCleanInteger($this-&gt;getPerspective()).",
+".$this-&gt;getCleanInteger($this-&gt;getVisual()).",
+</code></pre>
+
+<h3>ADD NEW DATA TO SQL FIELDS</h3>
+
+<p>Edit file: ecc-system\manager\cTreeviewData.php, around line 60 ($sqlFields), add:</p>
+
+<pre><code>md.perspective as md_perspective,
+md.visual as md_visual,
+</code></pre>
+
+<ul>
+<li>Add new functions to get and store data</li>
+</ul>
+
+<p>around line 150, add these functions:</p>
+
+<pre><code>public function setVisual($visual){
+    $this-&gt;Visual = $visual;
+}
+
+public function getVisual(){
+    return $this-&gt;Visual;
+}
+</code></pre>
+
+<ul>
+<li>Add new fields to functions (save data)</li>
+</ul>
+
+<p>around line 640 (function: update<em>file</em>info), add:</p>
+
+<pre><code>perspective = ".sqlite_escape_string($data['perspective']).",
+visual = ".sqlite_escape_string($data['visual']).",
+</code></pre>
+
+<p>around line 690 (function: insert<em>file</em>info), add:</p>
+
+<pre><code>perspective,
+visual,
+</code></pre>
+
+<p>around line 730 (function: insert<em>file</em>info), add:</p>
+
+<pre><code>'".sqlite_escape_string($data['perspective'])."',
+'".sqlite_escape_string($data['visual'])."',
+</code></pre>
+
+<h2>ADD OPTIONS TO META EDITOR</h2>
+
+<h3>ADD TO GUI (META EDITOR) > 2 rows and 2 columns with items:</h3>
+
+<ul>
+<li>Static labels (left side)</li>
+</ul>
+
+<p><em>labelMetaEditPerspective</em></p>
+
+<p><em>labelMetaEditVisual</em></p>
+
+<ul>
+<li>Combo boxes (right side)</li>
+</ul>
+
+<p><em>GtkComboBox > cb</em>perspective_</p>
+
+<p><em>GtkComboBox > cb</em>visual_</p>
+
+<h3>LOAD TRANSLATIONS FOR LABELS (META EDIT GUI)</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 5465 (function: metaEditPopupOpen), add:</p>
+
+<pre><code>$this-&gt;labelMetaEditPerspective-&gt;set_markup(i18n::get('meta', 'lbl_perspective'));
+$this-&gt;labelMetaEditVisual-&gt;set_markup(i18n::get('meta', 'lbl_visual'));
+</code></pre>
+
+<h3>LOAD SETTINGS FROM DATABASE (META EDIT GUI)</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 5555 (function: metaEditPopupOpen), add:</p>
+
+<pre><code>    // perspective (before $mdata['md_perspective'] = 0) // Added 2016-09-11 v1.20
+    $perspective = $romMeta-&gt;getPerspective();
+    if (!$this-&gt;obj_perspective) $this-&gt;obj_perspective = new IndexedCombobox($this-&gt;cb_perspective, false, $this-&gt;dropdownPerspective);
+    if ($perspective === null) $perspective = 0;
+    $this-&gt;cb_perspective-&gt;set_active($perspective);
+
+    // visual (before $mdata['md_visual'] = 0) // Added 2016-09-11 v1.20
+    $visual = $romMeta-&gt;getVisual();
+    if (!$this-&gt;obj_visual) $this-&gt;obj_visual = new IndexedCombobox($this-&gt;cb_visual, false, $this-&gt;dropdownVisual);
+    if ($visual === null) $visual = 0;
+    $this-&gt;cb_visual-&gt;set_active($visual);
+</code></pre>
+
+<h3>SAVE SETTINGS FROM DATABASE (META EDIT GUI)</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 6050 (function: metaEditPopupSave), add:</p>
+
+<pre><code>    $romMeta-&gt;setPerspective($this-&gt;cb_perspective-&gt;get_active());
+    $romMeta-&gt;setVisual($this-&gt;cb_visual-&gt;get_active());
+</code></pre>

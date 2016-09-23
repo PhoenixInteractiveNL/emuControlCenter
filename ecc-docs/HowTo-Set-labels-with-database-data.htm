@@ -1,0 +1,89 @@
+<h2>SET LABELS WITH DATABASE DATA (example 3 fields)</h2>
+
+<hr />
+
+<h3>ADD TO GUI > 3 rows and 2 columns with items:</h3>
+
+<p>Items:</p>
+
+<ul>
+<li>Static labels (left side)</li>
+</ul>
+
+<p><em>infotab</em>lbl<em>perspective</em></p>
+
+<p><em>infotab</em>lbl<em>visual</em></p>
+
+<p><em>infotab</em>lbl<em>gameplay</em></p>
+
+<ul>
+<li>Data labels (right side)</li>
+</ul>
+
+<p><em>media</em>nb<em>info</em>perspective_</p>
+
+<p><em>media</em>nb<em>info</em>visual_</p>
+
+<p><em>media</em>nb<em>info</em>gameplay_</p>
+
+<h3>TRANSLATE GUI STATIC LABELS</h3>
+
+<ul>
+<li>Add labels to translation file</li>
+</ul>
+
+<p>Edit file: ecc-system\translations[LANGUAGE]\i18n_meta.php, around line 8440, in the META array, add:</p>
+
+<pre><code>/* 1.2.0 */
+'lbl_perspective' =&gt;
+    "Perspectief",
+'lbl_visual' =&gt;
+    "Visueel",
+'lbl_gameplay' =&gt;
+    "Gameplay",
+</code></pre>
+
+<ul>
+<li>Load Labels from translation file(s)</li>
+</ul>
+
+<p>Edit file: ecc-system\ecc.php, around line 8440, add:</p>
+
+<p>$this->setSpanMarkup($this->infotab<em>lbl</em>perspective, I18N::get('meta', 'lbl<em>perspective'), false, 'b', false);
+$this->setSpanMarkup($this->infotab</em>lbl<em>visual, I18N::get('meta', 'lbl</em>visual'), false, 'b', false);
+$this->setSpanMarkup($this->infotab<em>lbl</em>gameplay, I18N::get('meta', 'lbl_gameplay'), false, 'b', false);</p>
+
+<h3>FILL GUI LABELS WITH DATA</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 3085, add:</p>
+
+<p>$this->setSpanMarkup($this->media<em>nb</em>info<em>perspective, $romMeta->getPerspective());
+$this->setSpanMarkup($this->media</em>nb<em>info</em>visual, $romMeta->getVisual());
+$this->setSpanMarkup($this->media<em>nb</em>info_gameplay, $romMeta->getGameplay());</p>
+
+<h3>ADD COLUMN TO ROM METADATA CHECKSUM</h3>
+
+<p>Edit file: ecc-system\manager\model\RomMeta.php, around line 130 ($checksumInclude array), add:</p>
+
+<pre><code>'perspective',
+'visual',
+'gameplay',
+</code></pre>
+
+<h3>GET METADATA FROM DATABASE</h3>
+
+<p>around line 386 (function fillFromDatabase), add:</p>
+
+<pre><code>$this-&gt;setPerspective($dbEntry['md_perspective']);
+$this-&gt;setVisual($dbEntry['md_visual']);
+$this-&gt;setGameplay($dbEntry['md_gameplay']);
+</code></pre>
+
+<h3>ADD NEW DATA TO SQL FIELDS</h3>
+
+<p>Edit file: ecc-system\manager\cTreeviewData.php, around line 60 ($sqlFields), add:</p>
+
+<pre><code>md.perspective as md_perspective,
+md.visual as md_visual,
+md.gameplay as md_gameplay,
+</code></pre>

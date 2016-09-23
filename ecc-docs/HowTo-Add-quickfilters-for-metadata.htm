@@ -1,0 +1,64 @@
+<h2>ADD QUICKFILTERS FOR METADATA (example 3 fields)</h2>
+
+<hr />
+
+<h3>ADD NEW FIELDS INTO ECC CORE</h3>
+
+<p>Edit file: ecc-system\ecccore.php, around line 380, in the 'freeformSearchFields' array, add:</p>
+
+<pre><code>'PERSPECTIVE' =&gt; '[[perspective]]',
+'VISUAL' =&gt; '[[visual]]',
+'GAMEPLAY' =&gt; '[[gameplay]]',
+</code></pre>
+
+<h3>Add labels to translation file</h3>
+
+<p>Edit file: ecc-system\translations[LANGUAGE]\i18n<em>metaStorage.php, around line 50, in the "dropdown</em>search_fields" array, add:</p>
+
+<pre><code>/* 1.2.0 */'
+'[[perspective]]' =&gt;
+    "Perspectief",
+'[[visual]]' =&gt;
+    "Visueel",
+'[[gameplay]]' =&gt;
+    "Gameplay",
+</code></pre>
+
+<h3>ADD FIELDS TO SQL SEARCH</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 7400, add:</p>
+
+<pre><code>case 'PERSPECTIVE':
+    $searchString = $this-&gt;createPseudoFuzzySearch($this-&gt;_search_word, $like_pre, $like_post,"md.perspective like '%s'", $this-&gt;searchFreeformOperator);
+    break;
+case 'VISUAL':
+    $searchString = $this-&gt;createPseudoFuzzySearch($this-&gt;_search_word, $like_pre, $like_post,"md.visual like '%s'", $this-&gt;searchFreeformOperator);
+    break;
+case 'GAMEPLAY':
+    $searchString = $this-&gt;createPseudoFuzzySearch($this-&gt;_search_word, $like_pre, $like_post,"md.gameplay like '%s'", $this-&gt;searchFreeformOperator);
+    break;
+</code></pre>
+
+<h3>ADD FIELDS TO FASTFILTER ON TOP</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 350, add:</p>
+
+<pre><code>case 'PERSPECTIVE':
+  $field = 'perspective';
+  break;
+case 'VISUAL':
+  $field = 'visual';
+  break;
+case 'GAMEPLAY':
+  $field = 'gameplay';
+  break;
+</code></pre>
+
+<h3>ADD FIELDS TO FASTFILTER IN MENU</h3>
+
+<p>Edit file: ecc-system\ecc.php, around line 4490, add:</p>
+
+<pre><code>'PERSPECTIVE' =&gt; array('romMeta', 'getPerspective'),
+'VISUAL' =&gt; array('romMeta', 'getVisual'),
+'GAMEPLAY' =&gt; array('romMeta', 'getGameplay'),
+</code></pre>

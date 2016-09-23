@@ -1,0 +1,308 @@
+<h2>Changelogs 2012</h2>
+
+<hr />
+
+<p><img src="images/img_misc_6thyear.jpg" alt="" title="" /></p>
+
+<p>Version 1.14 (2012.12.29) 6TH YEAR ANNIVERSARY!</p>
+
+<ul>
+<li>Fixed: a bug where external AU3 scripts did not function (being executed) properly
+on some machines and OS'es due usage to of 'start /b', now using COM object!</li>
+<li>Fixed: Thumb quality setting '20' in config can now be selected.</li>
+<li>Fixed: issues with the ROM start options in ECC config, now all options are
+properly disabled and unchecked when needed.</li>
+<li>Fixed: an issue where the ROM parameter box and some ROM start options where
+disabled when using eccScript.</li>
+<li>Fixed: Clearlook theme, this was missing when using the installer.</li>
+<li>Fixed: a bug in the ECC theme engine, where another template was selected it
+did not use the proper icons for that template.</li>
+<li>Fixed: a bug in the images TAB view, where names/titles of the games are the
+same as the archive filename.</li>
+<li>Added: Brand new ECC Video Player, you can now add a MP4/FLV file to your ROM!</li>
+<li>Added: integrated EmuMovie Downloader, with this tool integrated in ECC you can finally make
+your ROM artwork/images complete, you'll need an account on EmuMovies (registration is free)</li>
+<li>Added: a new feature to jump to a page directly (instead of scrolling trough all of them)</li>
+<li>Added new platforms:
+<ul>
+<li>Apple Macintosh</li>
+<li>Atari Falcon</li>
+<li>Nintendo e-Reader</li>
+<li>Sega Model 3</li>
+</ul></li>
+<li>Added filextensions:
+<ul>
+<li>Casio PV-1000: BIN</li>
+<li>Epoch Super Cassette Vision: BIN</li>
+<li>Nintendo Wii: WBFS</li>
+<li>Amstrad CPC: ROM</li>
+</ul></li>
+<li>Added: internal feature for the 'use .cue' option to look if there is a .cue
+file available if not then use normal extension.</li>
+<li>Added: a new option in ECC config to set the 'big filesize' parsing trigger
+to use the internal parser (PHP) or the external parser (autoit3) after a
+size limit. NOTE: PHP could crash if this is set to high!</li>
+<li>Added: a new option in ECC config to set the 'text cutt off' in the
+IMAGE TAB in the 'main view' to give a better view if you have one or more
+long names/titles.</li>
+<li>Added: SSF to be the default emulator for Sega Saturn. (also added website info's)</li>
+<li>Added: default media for platforms id: (MrX_Cuci)
+<ul>
+<li>a8bit, adam, bbc, col</li>
+</ul></li>
+<li>Added: Checkbox icons for options in the config menu.</li>
+<li>Updated: teaser image for 'Sega Model 2'</li>
+<li>Updated: nav images for 'Sega Model 1' and 'Sega Model 2'</li>
+<li>Updated: translations for NL and ES to v1.13</li>
+<li>Updated: the ICC ImageInject icon to 32x32</li>
+<li>Changed: MAME icon in platform contextmenu.</li>
+<li>ImageInject, 3D Gallery, KameleonCode, EmuDownloadCenter have been moved to
+the ecc-core\tools folder, this way all autoit3 tools are in the same folder!</li>
+<li>Changed: contextmenu icon for 'platform picture' and 'ICC'</li>
+<li>Changed: 'cover<em>inlay</em>03' to 'cover_3d', this fits better for the 3d cover images.</li>
+<li>Removed: FSUM support, FSUM cannot work properly with PHP COM objects.
+The COM objects are needed because the Windows 'start /b' does not function
+properly on every Windows OS, so there fore we use the 'new' COM objects.
+The replacement of FSUM is now a Autoit3 CRC32 wrapper, wich is a bit slower
+but works flawlessly! The parser has been renamed from 'ParserFSUM' to
+'ParserExternal', also all platform ini's have been updated.</li>
+<li>Restructured the translation files a bit.</li>
+<li>Totally restyled the config screen, changed: order, layout added new options
+and icons/images.</li>
+<li>Added and adjusted some icons in the ECC config.</li>
+<li><p>Updated the VIC20 script for XVIC:
+v2.2.0.1</p>
+
+<ul>
+<li>Added: Better support for multilanguage keyboard layouts in the script.</li>
+<li>Added: Tooltip on screen when the script is still busy.
+v2.2.0.0</li>
+<li>Added: MultiROM support! (META ID needs to have [multi])</li>
+<li>Added: Roms with SYS value support! (example META ID = [sys7424])</li>
+</ul></li>
+<li><p>Tool/Script updates</p>
+
+<ul>
+<li>3D Gallery
+v1.1.0.7 (2012.11.19)</li>
+<li>Adjusted code to use 'cover<em>3d' instead of 'cover</em>inlay_03'.
+v1.1.0.6 (2012.11.09)</li>
+<li>Adjusted the rom INI information to the new ECC 'selectedrom' triggersystem.
+v1.1.0.5 (2012.10.14)</li>
+<li>Added hotkey ESCAPE to close the gallery.</li>
+<li><p>Converted messageboxes into tooltips.</p></li>
+<li><p>ImagePackCenter (IPC)
+v2.2.0.8 (2012.11.19)</p></li>
+<li>Adjusted code to use 'cover<em>3d' instead of 'cover</em>inlay_03'.
+v2.2.0.7 (2012.11.09)</li>
+<li>Adjusted the rom INI information to the new ECC 'selectedrom' triggersystem
+v2.2.0.6 (2012.09.03)</li>
+<li>Fixed a bug where imported images are counted double!
+v2.2.0.5 (2012.09.02)</li>
+<li><p>Fixed a bug that made IPC crash with the IMPORTER (option to clean was not in
+the GUI)
+So i added this option to 'clean files with stripper' in the
+IMPORTER GUI, so import good
+(clean) images in ECC.</p></li>
+<li><p>ECC ScriptROM system
+v1.2.1.0 (2012.12.07)</p></li>
+<li>Deamontools location now needs to be selected in ECC config!.
+v1.2.0.9 (2012.11.18)</li>
+<li>Added more information if a file extension is not supported by deamontools.
+v1.2.0.8 (2012.11.07)</li>
+<li><p>Added: new function 'GetActiveKeyboardLayout' to get the keyboard layout.</p></li>
+<li><p>ECC Video player
+v1.1.0.3 (2012.11.11)</p></li>
+<li>Using soundvolume variable used from the ECC config.</li>
+<li>Adjusted default settings
+v1.1.0.2 (2012.11.11)</li>
+<li>Fixed a bug where a new video is getting played when added while the ECC
+video player settings are off.</li>
+<li>Fixed a bug in the messagebox that is shown if VLC cannot be initialized.
+v1.1.0.1 (2012.11.10)</li>
+<li>Now stops the video if a rom is being deleted in ECC.</li>
+<li>Added message (tooltip) if the ECC main window cannot be found.
+v1.1.0.0 (2012.11.10)</li>
+<li>Added configurable variables used from the ECC config.</li>
+<li><p>Autodisable video player if VLC is not found!</p></li>
+<li><p>emuMoviesDownloader (EMD)
+v1.2.0.2 (2012.11.19)</p></li>
+<li>Adjusted code to use 'cover<em>3d' instead of 'cover</em>inlay_03'.</li>
+<li>Fixed a bug where files are not downloaded if a folder already exists</li>
+<li>Fixed a bug where 'PCB' images are not downloaded corectly
+v1.2.0.1 (2012.11.15)</li>
+<li>Fixed: Crash on importing/downloading videofiles.</li>
+<li>Improved: Several GUI changes.
+v1.2.0.0 (2012.11.15)</li>
+<li>Added: Cancel button.</li>
+<li>Fixed: EMD will not create any doubles (PNG+JPG) of the same media (images).</li>
+<li>Fixed: File extensions are now lowercased.</li>
+<li>Improved: EMD now on Hyperspeed!, EMD will now first check if the file already
+exists before downloading the images data, this gives enormous speed increase!</li>
+<li>Improved: The content list now only shows the content supported by ECC.</li>
+<li>Improved: Clear processlist when downloading another content.</li>
+<li>Made several GUI improvements and text changes.
+v1.1.0.0 (2012.11.09)</li>
+<li>Added: new feature to download videos MP4/FLV from the EmuMovies server.
+v1.0.0.0 (2012.10.13)</li>
+<li>With this tool integrated in ECC you can finally make your ROM artwork/images
+complete, you'll need an account on EmuMovies (registration is free)</li>
+<li><p>Initial release</p></li>
+<li><p>ICC ImageInject
+v1.1.0.7 (2012.11.09)</p></li>
+<li><p>Adjusted the rom INI information to the new ECC 'selectedrom' triggersystem</p></li>
+<li><p>eccDiagnostics
+v1.0.0.2 (2012.11.19)</p></li>
+<li><p>Fixed scanning files to only scan files inside the ecc-core folder.</p></li>
+<li><p>eccKameleonCode
+v1.0.0.1 (2012.09.27)</p></li>
+<li>Fixed "empty" code for script when pressing cancel or closing the GUI.</li>
+</ul></li>
+<li><p>Notepad++ v6.2</p></li>
+<li>Updated 7zip from v9.28a to v9.30a</li>
+<li>Updated DAT files for:
+CPS-1  : v0.146 to v0.147 (mame)
+CPS-2  : v0.146 to v0.147 (mame)
+CPS-3  : v0.146 to v0.147 (mame)
+MAME   : v0.146 to v0.147
+MODEL1 : v0.146 to v0.147 (mame)
+MODEL2 : v0.146 to v0.147 (mame)
+NAOMI  : v0.146 to v0.147 (mame)
+NEOGEO : v0.146 to v0.147 (mame)
+PGM    : v0.146 to v0.147 (mame)
+S11    : v0.146 to v0.147 (mame)
+S16    : v0.146 to v0.147 (mame)
+S18    : v0.146 to v0.147 (mame)
+S22    : v0.146 to v0.147 (mame)
+ZINC   : v0.146 to v0.147 (mame)</li>
+</ul>
+
+<p>Version 1.13 (2012.09.01)</p>
+
+<ul>
+<li>Fixed some problems using CTRL+F (Toggle Fullscreen)
+You can now undo fullscreen with the same keypresses.
+F9, F10 and F11 will not undo the fullscreen mode anymore.</li>
+<li>Fixed Importing RomCenter DATfiles v2.00/v2.50 when header could be invalid
+ECC is now checking 'other' header parts to confirm proper RomCenter DAT file.</li>
+<li>Fixed DAT importing progressbar counter and 'hanging' on 99%, it wil now
+properly show the count when finished importing.</li>
+<li>Fixed ROM searching on web from filemenu, now working properly again with new google command.</li>
+<li>Fixed typo's (CTRL Mame > CLR Mame, *.ecc > *.eccDat) in all languages</li>
+<li>Fixed some Russian translation files (some where portuguese :S)</li>
+<li>Added FSUM fileparser, this parser will always use fsum to parse big files like
+CD/DVD for a platform, this prevent a chance that ECC will crash using the
+'generic parser' (based on idea of Zaxth (ecc forum member))
+<ul>
+<li>Platforms id's with the new parser:
+3do, amigacd32, cdi, cdtv, dc, fmtowns, gc, jagcd, ngcd, pcecd, ps1, ps2, ps3
+psp, sat, smcd, wii, xbox, xbox360.</li>
+</ul></li>
+<li>Added 4 new genres:
+<ul>
+<li>Adventure - Visual Novel</li>
+<li>Adventure - Tactical RPG</li>
+<li>Adventure - Survival</li>
+<li>Shoot'em Up - Survival</li>
+</ul></li>
+<li>Added new icons and rearranged the platform and rom context menu's.</li>
+<li>Rearranged platform context menu for image(packs) options.</li>
+<li>ECC can now also import/show/handle BMP &amp; ICO files for the rom images.</li>
+<li>Added RAR support for ECC, you can now also parse RAR files! (not for multirom platforms like mame)</li>
+<li>Disabled/Removed ROMdb functions from main ECC GUI and filemenu's.</li>
+<li>Disabled/Removed an old function from the platform menu to convert images from the old ECC structure.</li>
+<li>Removed ECC ROMdb import feature from the platform menu.</li>
+<li>New Feature: Added thumnailsetting 180x120 and 300x200 for ROM detailview.</li>
+<li>Updated EN, ES, NL, DE, FR, HU translations to v1.12</li>
+<li>Added platform: Pinball - Future Pinball (eccid: fp)</li>
+<li>Updated the readme.txt &amp; ECC factsheet.</li>
+<li>Updated the DOSBOX parser, now excluding 'trash' files to maintain a better and correct CRC32.
+NOTE: The CRC32 for this platform will be / are changed after this update!</li>
+<li><p>Tool/Script updates</p>
+
+<ul>
+<li>ECC Startup
+v2.4.0.0 (2012.08.20)</li>
+<li>Removed first startup messageboxes and replaced them with a brand new GUI.
+v2.3.4.8 (2012.08.11)</li>
+<li><p>Adjusted to use eccUpdate instead of ECC Live! when checking for updates.</p></li>
+<li><p>eccUpdate
+v1.0.0.4 (2012.08.31)</p></li>
+<li>Fixed to write 'update increase' and delete TEMP files after ForceReload function.</li>
+<li>Fixed preventing double running of eccUpdate.
+v1.0.0.3 (2012.08.28)</li>
+<li>Added feature to also remove folders from the ecc structure.</li>
+<li>Added feature to restart ECC after updating even if "ForceReload" is used to reload eccUpdate.</li>
+<li>Fixed ECC closing before update may not work in some cases.
+v1.0.0.2 (2012.08.26)</li>
+<li>Fixed scrolling to last line in the textbox, this works better now.</li>
+<li>Added new feature to force reload of eccUpdate, in case if there are new
+instructions wich the old eccUpdate cannot handle.
+v1.0.0.1 (2012.08.22)</li>
+<li>Fixed linefeed in log when there are no updates available.</li>
+<li>Fixed some typo's.</li>
+<li>Fixed "double" logging and checking.
+v1.0.0.0 (2012.08.11)</li>
+<li><p>Replaces ECC Live! wich was programmed in VB6, this is a ported version in Autoit3.</p></li>
+<li><p>ImagePackCenter
+v2.2.0.0 (2012.08.28)</p></li>
+<li>Added new feature to compress the images after export with 7ZIP, also added
+a feature to add the volume size of the compressed archives (if you need to
+upload to filesharing website)
+v2.1.0.5 (2012.08.25)</li>
+<li>Fixed a bug causing IPC to crash when exporting ECC style.</li>
+<li>Added new feature: Removing uncessary metadata (junk) like EXIF, IPTC
+and comments out of the imagefile.
+This method could save loads of unessesary MB's for the imagepacks and
+slink it nicely without loss of imagequality!, this does NOT affect your
+original imagefiles!</li>
+<li>Added new thirdparty tool: Stripper.exe (www.steelbytes.com)
+v2.1.0.1 (2012.08.15)</li>
+<li>Fixed typo "EmuCenter" to "Romcenter"
+v2.1.0.0 (2012.07.09)</li>
+<li>Renamed eccImagePackCreator to eccImagePackCenter</li>
+<li>Fixed bug in the progresslabel</li>
+<li>Made some GUI adjustments and text fixes</li>
+<li>Included a brand new Importer!, with this you can also IMPORT imagefiles
+into ECC! based on CRC32 (No-Intro) or NAMED (Using DAT)
+v2.0.0.5 (2012.07.08)</li>
+<li>Fixed a Bug where IPC freezes when creating an imagepack.</li>
+<li>Added an error handler if a file could not be copied to destination.</li>
+<li>Made some GUI text adjustments.
+v2.0.0.0 (2012.07.07)</li>
+<li>Total overhaul of IPC, including a brand new GUI system. You can now
+export ECC images to various imagepackcollegues like No-Intro or EmuMovies.
+You can define lots of variables to even meet your custom needs!</li>
+<li>Removed the 'create imagepack' option from the TOP menu and included
+this in the platform rightclick-menu.
+v1.2.1.2 (2012.07.04)</li>
+<li><p>Changed filename for 7zip usage due to 7zip update.</p></li>
+<li><p>3D Gallery
+v1.1.0.4 (2012.07.06)</p></li>
+<li>Fixed broken view on startup wich sometimes occured.
+v1.1.0.3 (2012.07.04)</li>
+<li>Added new gallery: flshowcarouselblack (http://www.flshow.net)</li>
+<li><p>Added missing preview image for gallery 'tiltviewer'.</p></li>
+<li><p>Resized all preview images to fit better in the gallery configuration GUI (smoother)</p></li>
+<li><p>ICC ImageInject
+v1.1.0.6 (2012.07.04)</p></li>
+<li>Fixed issue with downloading images, due to other slashes / (instead of )
+v1.1.0.5 (2012.06.27)</li>
+<li><p>Now uses proper ECC User folder, wich is configured in ECC.</p></li>
+<li><p>DatFileUpdater
+v1.2.5.7 (2012.07.04)</p></li>
+<li><p>Changed filename for 7zip usage due to 7zip update.</p></li>
+<li><p>eccThirdPartyConfig
+v1.0.0.1 (2012.07.04)</p></li>
+<li><p>Fixed a bug where the usersetting was't saved properly, causing ThirdPartyConfig not to work as it should.</p></li>
+<li><p>eccCreateStartmenuShotcuts
+v1.0.0.2 (2012.08.11)</p></li>
+<li><p>Adjusted creating of shortcuts to use eccUpdate instead of ECC Live!</p></li>
+<li><p>eccScriptSystem
+v1.2.0.7 (2012.09.01)</p></li>
+<li>Fixed selecting executable for Deamon tools.
+v1.2.0.6 (2012.07.04)</li>
+<li><p>Changed filename for 7zip usage due to 7zip update.</p></li>
+<li><p>Updated 7zip to v9.28a</p></li>
+</ul></li>
+</ul>

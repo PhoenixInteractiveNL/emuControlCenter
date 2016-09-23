@@ -1,0 +1,39 @@
+<h2>EXPORT COLUMN DATA TO DAT FILE (example expand exported metadata)</h2>
+
+<hr />
+
+<p>NOTES:
+Always start at the end of the DAT values to expand it's exported data, never use fields in the
+middle or so, or all older DATS are wrong and corrupt!</p>
+
+<ul>
+<li>ADD DATABSE FIELDS TO BE EXPORTED
+These are the new exported fields in v1.20+</li>
+</ul>
+
+<p><em>- perspective</em></p>
+
+<p><em>- visual</em></p>
+
+<p><em>- gameplay</em></p>
+
+<p><em>- description</em></p>
+
+<p>Edit file: ecc-system\manager\cDatFileExport.php, around line 175, ADD extra fields like:</p>
+
+<pre><code>".$v['perspective'].";".$v['visual'].";".$v['gameplay'].";".$v['description'].";#\r\n";
+</code></pre>
+
+<ul>
+<li>ADD FIELDS TO CSV HEADER (first line of the file)</li>
+</ul>
+
+<p>around line 175 (fields dat header) , ADD extra fields at the end like:</p>
+
+<pre><code>perspective;visual;gameplay;description#\r\n";
+</code></pre>
+
+<p>around line 315 (fields csv header) , ADD extra fields at the end like:</p>
+
+<pre><code>perspective;visual;gameplay;description#\r\n";
+</code></pre>

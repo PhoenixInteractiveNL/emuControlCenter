@@ -1,0 +1,726 @@
+<h2>Changelogs 2006</h2>
+
+<hr />
+
+<p>Version 0.5.899 (2006.12.31)</p>
+
+<ul>
+<li>ROMDB-GET now search for the selected ROM! (online website)</li>
+<li>rearange some widgeds on the right info pane (tabbed)
+<em>* Added DATA-View to pane
+*</em> Moved esearch to pane
+<em>* Moved romdb to pane
+*</em> Moved image-handling to pane
+** Added some helptexts for images and romdb</li>
+<li>changed split for romdb to '.'</li>
+<li>updated the temp-folder create</li>
+<li>Added some more tooltips</li>
+<li>Navigation area now fixed.</li>
+</ul>
+
+<p>Version 0.5.898 (2006.12.31)</p>
+
+<ul>
+<li>fixed space error - emulator could not be started if spaces in filename!</li>
+<li>Fixed a focus bug media-edit. Now it is possible to edit metadata.</li>
+<li>Added some tooltips for eccdb, navigation and main rom-view!</li>
+<li>Rename eccdb within ecc into eccdb_EMPTY for updates!</li>
+<li>Added shortcuts
+<em>* a = add new roms
+*</em> e = edit media
+<em>* b = bookmark
+*</em> x = remove from eccdb</li>
+<li>Implement new ini "ecc<em>navigation.ini" only for navigation
+** This ini isnt transfered into user folder for updates!
+** removed all nav-elements form ecc</em>general.ini</li>
+<li>Added ecc.ex v1.3.9.2</li>
+<li>Try to improved gui for Resolution 1024x768 (Open Status-Detail area)</li>
+<li>Added new platforms
+<em>* Thomson MO5
+*</em> Sega Megadrive 32X (also remove 32x from genesis/megadrive config)
+<em>* Atari 400
+*</em> Atari 800
+<em>* Playstation 1
+*</em> Added Wonderswan nav image</li>
+</ul>
+
+<p>Version 0.5.897 (2006.12.29)</p>
+
+<ul>
+<li>Center all popup/dialog-windows</li>
+<li>ecc-core update (new dll fixes keystroke errors)</li>
+<li>Added new platforms
+<em>* sega sg1000
+*</em> sega sc3000
+** Splitted wonderswan to b/w and color platform</li>
+</ul>
+
+<p><img src="images/img_misc_champagne.jpg" alt="" title="" /></p>
+
+<p>Version 0.5.896 (2006.12.29) PUBLIC RELEASE</p>
+
+<ul>
+<li>Add new field to database :-)</li>
+</ul>
+
+<p>Version 0.5.895  (2006.12.28)</p>
+
+<ul>
+<li>eccdb/add improvements
+** implemented status-area update</li>
+<li>Fixed category dropdown bug - on change emu-config!</li>
+<li>Cleaned all platform configs</li>
+</ul>
+
+<p>Version 0.5.894  (2006.12.23)</p>
+
+<ul>
+<li>eccdb webservice
+<em>* Post implemented!
+*</em> Button for ecc db transfer added</li>
+<li>Added license-notes</li>
+<li>Added file_id.diz</li>
+<li>Update some copyright notes</li>
+</ul>
+
+<p>Version 0.5.893 (2006.12.18)</p>
+
+<ul>
+<li>Added new Folder "ecc-user-configs"
+<em>* This folder make it easier to update the ecc-system without overwriting
+*</em> user configurations every time
+<strong>* On startup, ecc checks, if this folder is available... if not, creates it
+<em></strong> history.ini is autocreated in this folder (it could be deleted on errors)
+<strong></em> general.ini is autocreated in this folder (it could be deleted on errors)
+<em></strong> Every platform.ini changed by the user is auto transfered into this folder
+*</em>* Backups of platform.ini are created in this folder to</li>
+<li>Refactored some ini functions</li>
+<li>Added a "unset ratings"-context menu item!</li>
+<li>create a deploy script for some pre-release tasks
+<em>* implemented eccCore.dat for internal configurations
+*</em> writen some trash collection functions for eg bak files</li>
+<li>Fixed some glitches in category dropdown... not complete fixed :-(</li>
+<li>Fixed wrong labels in plaform-contexe-menu</li>
+<li>Remove some debug-outputs!</li>
+<li>Add some ecc_readme.txt</li>
+</ul>
+
+<p>Version 0.5.892 (2006.12.15)</p>
+
+<ul>
+<li>Bold font in search box</li>
+<li>Added new reset reg command for ecc.exe</li>
+<li>Optimized ecc-configuration area</li>
+<li>Temporarily removed webservices</li>
+</ul>
+
+<p>Version 0.5.891 (2006.12.13)</p>
+
+<ul>
+<li>Optimized categories dropdown.</li>
+<li>Optimize navigation</li>
+<li>optimized icons</li>
+<li>removed some option-menu-items from top menu</li>
+</ul>
+
+<p>Version 0.5.89 (2006.12.10)</p>
+
+<ul>
+<li>Implemented cursor-navigation in main treeview
+<em>* Cursor-Key left/right = prev/next page
+*</em> Cursor-Key ALT+left/right = first/last page</li>
+<li>Implemented icons for visibility options
+<strong>* Top navigation and icons no complete connected :-) TODO!
+<em></strong> Implemented
+<strong></em>* Navigation autoupdate
+<em>*</strong> Navigation hide empty
+<strong></em>* Hide duplicate roms
+**</strong> Hide images</li>
+<li>Fixed a little bug in eventbox for language-edit</li>
+</ul>
+
+<p>Version 0.5.8899 (2006.12.05)</p>
+
+<ul>
+<li>Finaly fixed the link to the support forum :-)</li>
+<li>Added new TopMenu 'Startup' for ecc.exe commandline parameter
+<em>* implemented /deskicon
+*</em> implemented /starticon
+<em>* implemented /phpversion
+*</em> implemented /verify
+** implemented /reset</li>
+</ul>
+
+<p>Version 0.5.8898 (2006.12.03)</p>
+
+<ul>
+<li>Fixed problem, if user folder does not exists</li>
+<li>Fixed problem on save-image</li>
+<li>Added infotext to user-folder with version, platform name aso!
+** create automaticly default ecc-user folder in ecc root directory!</li>
+<li>Media-Info
+** Changes mediaedit-popup now also update media-info area direct!</li>
+<li>Added support button!</li>
+</ul>
+
+<p>Version 0.5.8897 (2006.11.29)</p>
+
+<ul>
+<li>implemented direct editing of meta-flags like running, trainer aso.</li>
+<li>fixed a litte bug in the insert metadata-function</li>
+<li>removed direct rating in to... now build in media-info area!</li>
+<li>implement auto-update-ini for emuDownloadCenter</li>
+</ul>
+
+<p>Version 0.5.8896 (2006.11.26)</p>
+
+<ul>
+<li>Media-Info
+<em>* added language-flags in mediainfo area!
+<strong></em> added edit language button, if no language selected!
+<em></strong> Click opens media-edit!
+*</em> First step of refactoring MediaInfo-Area and MediaEdit popup!
+<strong>* Goal is direct access to change meta-data direct in MediaInfo-Area
+<em></strong> Added direct access eventbox to the rating *
+*</em>* Plans for instant update of MediaInfo-Area! (some refactoring work :-))</li>
+<li>Fixed support-forum link</li>
+<li>Added eula (to be discussed!)</li>
+<li>Fixed a big bug in relative-path handeling.
+** refactor methods to create relative paths</li>
+</ul>
+
+<p>Version 0.5.8895 (2006.11.19)</p>
+
+<ul>
+<li>Size of navigation-pane now rezizeable.</li>
+<li>Freeform-Search
+<em>* Now search automaticlly updates the navigation (if autoupdate selected)
+*</em> Selection of another platform in navigation dont remove search word
+<em>* Wildcard * is allowed
+*</em>* Use it like this: Year 19<em>0 (results in 1990, 1980, 1970 aso)
+*</em> Restructured search-area.
+<em>* Reset button now also reset rating selector
+*</em> Rating-Selector activates Search-Activestate-Button</li>
+<li>Search selectors
+<em>* Added status colors for selector (Blue=default, green=changed)
+<strong></em> Search type
+<em></strong> Search operator
+*</em>* Rating</li>
+<li>Help Menu (TopNavigation)
+<em>* Added links to some urls like website and forum.
+*</em> Added Offline-Documentation link
+<strong>* New folder ecc-help/ with offline documentation
+*</strong> Added a documentation css style and sample-pages</li>
+</ul>
+
+<p>Version 0.5.8894 (2006.11.15)</p>
+
+<ul>
+<li>Freeform-Search
+** Added timeout for keystrokes for better search performace</li>
+</ul>
+
+<p>Version 0.5.8893 (2006.11.13)</p>
+
+<ul>
+<li>Implemented pseudo fuzzy search
+<em>* All words are splitted at the whitespace
+<strong></em> Operators
+<em></strong> = direct search
+<strong></em> + AND search
+*</strong> | OR search</li>
+</ul>
+
+<p>Version 0.5.8892 (2006.11.12)</p>
+
+<ul>
+<li>Implemented Freeform Search selector
+<em>* No, you can also search in other fields by freeform search
+<strong></em> 'Name',
+<em></strong> 'Year',
+<strong></em> 'Developer',
+<em></strong> 'Info',
+<strong></em> 'Fileextension',
+<em></strong> 'EccIdent',
+<strong></em> 'CRC32 Checksum',
+*</strong> 'Filename/Path',</li>
+<li>Implemented Rating search
+** Shows all rated roms ordered by rating</li>
+<li>Implemented new direct media-edit bar
+** Implemented direct rate</li>
+</ul>
+
+<p>Version 0.5.8891 (2006.11.07)</p>
+
+<ul>
+<li>Fixed a big bug in parsing roms.</li>
+</ul>
+
+<p>Version 0.5.889 (2006.11.05)</p>
+
+<ul>
+<li>Implemented functions for context menue and top menu
+<em>* Menu Shell operations
+<strong></em> Implement rename file at harddisk + automatic update of paths in eccdb
+<em></strong> Implement copy file at harddisk + db update
+<strong></em> Implement remove file from harddisk + dbupdate
+** Reparse ROM-Directory
+*</strong> Direct parse the folder of the selected rom. (if your folder has updated!)</li>
+<li>Fixed a bug in parser...
+** if you change the platform while paring, it shows the wrong pf in popups :-)</li>
+</ul>
+
+<p>Version 0.5.888 (2006.10.29)</p>
+
+<ul>
+<li>Context menu update
+<em>* Optimized structure of context menues
+*</em> Fixed problem while opening context menu
+<em>* Added rating submenu
+<strong></em> Shows ratings in cell and mediainfo
+<em></strong> Added a new image to show rating in cellview
+*</em> Added shell operations submenu
+<em>*</em> Implemented browse rom folder</li>
+<li>Added some new categories</li>
+<li>implemented a new class to handle comboboxes</li>
+<li>Designed/Added a new splashscreen and in program teaser image
+** new "emuControlCenter - explore your ROMS faster" :-)</li>
+<li>Added latest version of ecc.exe (1.30)
+** added a hint to get eccLive (thanks to phoenix!)</li>
+<li>Wrote down tonns of todos and new features, i miss at this point.
+<em>* Research in other tools for interesting features :-)
+*</em> Found many but also found, that ecc will be a cool tool :-)</li>
+</ul>
+
+<p>Version 0.5.8879 (2006.10.24)</p>
+
+<ul>
+<li>Updated ecc to PHP 5.1.4</li>
+</ul>
+
+<p>Version 0.5.8878 (2006.10.23)</p>
+
+<ul>
+<li>Added 512MB RAM to my computer.... ecc runs now faster :-) (768 MB)</li>
+<li>Not found base_path for ecc-user will set to default folder (../ecc-user/)</li>
+<li>implemented 'maintenance'->'Reset ecc history' to reset the history file!</li>
+<li>Removed the auto ecc-splashscreen on startup, if ecc history is reseted!</li>
+<li>Adding experimental flag exportType to ecc_general.ini
+<em>* ECC will export datfiles with extension .ecc in datfile style
+*</em> CSV will export commaseperated files for excel/openoffice
+<em>*</em> No import for ecc csv files implemented yet :-)</li>
+<li>fixed bug in create user folder</li>
+<li>Added new extensions to some platforms</li>
+<li>Added new platform "commodore vic20" (by phoenix)</li>
+<li>Updated images for platform "commodore c64" (by phoenix)</li>
+<li>Added msx nav image! (by phoenix)</li>
+</ul>
+
+<p>Version 0.5.8877 (2006.10.16)</p>
+
+<ul>
+<li>finalize a extension in "add new roms" in "all found" autoupdates navigation</li>
+<li>Extended "organize roms" -> now uses names from metadata for orga.</li>
+<li>dispatcher now default off
+** could be enabled [USER_SWITCHES] useExtensionDispatcher = 1</li>
+<li>Double fileextensions are handled be confirm-popups!</li>
+<li>Larger process status area</li>
+<li>create buggy :-( FileParserGen for genesis roms (only to validate!)</li>
+</ul>
+
+<p>Version 0.5.8875 (2006.10.11)</p>
+
+<ul>
+<li>Build in fileextension to fileparser dispatcher
+<em>* dispatcher get data from header to get the right parser for rom
+*</em> Only cDispatchBin/cValidatorGen implemented this time
+<strong>* not really good implemented header check :-) (i will check phoenix infos)
+<em></strong> If not valid bin for gen, print out cmd debug info and dont parse rom!
+*</em>* Better implementation in 888 ;-)</li>
+</ul>
+
+<p>Version 0.5.887 (2006.10.08)</p>
+
+<ul>
+<li>Parsing: Build in extension for many platform problem finder! :-)
+<em>* Added info-popup and exclude direct at #all found
+*</em> Ask for every dup extensions for Platform parse!
+<em>*</em> Added platform names for better overview!</li>
+<li>Added missing image for msx</li>
+<li>removed some debug output :-)</li>
+<li>Added [EXPERIMENTAL] section to ecc_general.ini
+<em>* Added switch to use standard win filssystem dialogs
+*</em> This mode cant remember the last selected folder/file from histroy :-(
+** win32Dialogs = [0|1]</li>
+<li>Added latest version of ecc.exe 1.12 (by phoenix)</li>
+<li>Set main window title to "emuControlCenter"</li>
+<li>fixed a BIG bug in show unsaved images. Now search also in emu/screenshots</li>
+<li>fixed bug "rebuild<em>user</em>folder" in ecc config.</li>
+<li>fixed bug in "Configuration" i18n-language dropdown!</li>
+<li>fixed missing lang "parse<em>rom</em>detail_headers"</li>
+</ul>
+
+<p>Version 0.5.886 (2006.10.03)</p>
+
+<ul>
+<li>Refactoring
+<em>* Start media / os detection
+*</em> glade constructor</li>
+<li>Menu->options: Radios for select view-mode in romlist (Default 1)
+<em>* 1. Show all Roms
+*</em> 2. Show all available metadata
+** 3. Show only roms without metadata</li>
+<li>Added new Platforms
+<em>* MSX (by phoenix)
+*</em> Colorgenie (by phoenix)</li>
+</ul>
+
+<p>Version 0.5.885 (2006.10.01)</p>
+
+<ul>
+<li>Menu options -> show only roms with metadata
+** better overview of missing metadata</li>
+<li>Added show<em>media</em>pp to ecc_general.ini to change the "media per page" value</li>
+<li>refactoring release
+<em>* Added new Singleton FACTORY and refactor manager-names
+*</em> cleanup manager-folder</li>
+<li>I18N
+** Language dropdowns translatable</li>
+<li>Removed save to history.ini for "show only avalable roms"</li>
+<li>Listviews Roms/Platform
+<em>* add background color
+*</em> add hilight color</li>
+<li>Added experimental and buggy "fast<em>list</em>refresh" to ecc_general.ini</li>
+<li>Added experimental webservice for meta/get meta/send (not really working :-))</li>
+</ul>
+
+<p>Version 0.5.884 (2006.09.27)</p>
+
+<ul>
+<li>Added color-swap tho the navigation and main list</li>
+<li>escape &amp; under dos (^&amp;)</li>
+<li>Added window title status "emuControlCenter vX.X build XXX (state)"</li>
+<li>new startup bat
+<em>* ecc.bat
+*</em> ecc-dev.bat (shows debug output)</li>
+<li>fixed translation in context menu</li>
+<li>Remove save to history for hide images</li>
+</ul>
+
+<p>Version 0.5.883 (2006.09.25)</p>
+
+<ul>
+<li>Platform category could be configured in frontend!</li>
+<li>New Platforms added (by phoenix)
+<em>* Coleco Vision
+*</em> GCE Vectrex
+** Mattel Intellivision</li>
+<li>Added new version of platform/media images (by phoenix)</li>
+</ul>
+
+<p>Version 0.5.882 (2006.09.24)</p>
+
+<ul>
+<li>Add Platform category dropdown.
+<em>* Categories could be assigned free in ecc_platform_xxx.ini
+*</em> e.g. category = Console
+** Shows only Platforms for the selected Category</li>
+<li>Imagepopup
+** remove images in contex-menu</li>
+</ul>
+
+<p>Version 0.5.881 (2006.09.18)</p>
+
+<ul>
+<li>imagepopup
+** added imageselect by preview image in scrollable area! :) Cool! :-)</li>
+</ul>
+
+<p>Version 0.5.880 (2006.09.17)</p>
+
+<ul>
+<li>fixed bug in saved image handling. (&lt;0.5.88 could not find saved images)</li>
+<li>Preview image clickable. Opens Imagepopup.</li>
+<li>Mediaedit-popup
+<em>* Mot longer modal... you can get the next rom to edit from the romlist.
+*</em> Added Filename/Packed Filename to popup!</li>
+<li>Imagepopup
+<em>* Popup now has autofocus. A click to the romlist updates the images in popup!
+*</em> Added Imageposition label
+<em>* Buttons a now only sensitive if needed
+*</em> Imagepopup now direct show selected image (position)!</li>
+<li>"Show all images" added to contextmenu ROMS</li>
+<li>Platform navigation scrollbars added</li>
+<li>i18n internationalization
+<em>* ecc-config dropdown for changing languages
+*</em> i18n parser statusarea</li>
+<li>Platform images / emuControlCenter-Logo clickable</li>
+</ul>
+
+<p>Version 0.5.879 (2006.09.13)</p>
+
+<ul>
+<li>Added gif support</li>
+<li>saving title screens as ecc<em>crc32</em>ingame_title.ext</li>
+<li>first version of image-popup for full images.</li>
+</ul>
+
+<p>Version 0.5.878 (2006.09.11)</p>
+
+<ul>
+<li>fixed bugs:
+<em>* problem with escaped string in getEightDotThreePath()
+*</em> writing NULL into db if a ecc-datfile is imported!</li>
+</ul>
+
+<p>Version 0.5.865/0.5.866/0.5.877 (2006.09.10)</p>
+
+<ul>
+<li>ecc-configuration added
+<em>* Set your user folder
+<strong></em> create, if not exists
+<em></strong> create all ecc-system-subfolders in user-folder
+*</em> Activate/Deactivate Platforms from gui
+** Set your datfile-author informations (header for your exports!)</li>
+<li>i18n Internationalization/Translation
+<em>* ecc_general.ini flag language = de
+*</em> Location ecc-system/i18n/language/i18n_popups.php (lang=language 2chars eg. de,en,nl)
+<em>* I step one, all dialogs and context-menues are translatable.
+<strong></em> Done: Context menu Platformnavigation
+<em></strong> Done: Context menu Romlist
+*</em>* Done: All Confirm/Info/File-Pathchooser-Dialogs!
+** In step to, all Strings (also glade strings) are translatable via gettext!</li>
+<li>Start Media: add error-popup if emu is missing or wrong!</li>
+<li>navigation now is automaticlly sorted</li>
+<li>Added more image-slots for coverart and booklets</li>
+<li>Added support for Atari Jaguar. [by phoenix]</li>
+<li>Fix a bug in media-edit.</li>
+<li>set eccident for jaguar=jag, supervision=svn</li>
+<li>Added shortcuts for options and rom-actions (see main menu)</li>
+<li>Optimized platform navigation contextMenu</li>
+<li>media-info
+<em>* added archive - If rom is packed, the path of the packed file is shown.
+*</em> added location - path to the rom-/packed-file</li>
+<li>Added 8.3 Filename-Support for Watara-Supervision emulator</li>
+<li>Emus without commandline-support could be used using the RomRunner-PT [phoenix]</li>
+</ul>
+
+<p><img src="images/img_misc_betatester.png" alt="" title="" /></p>
+
+<p>Version 0.5.085 (2006.08.24) RELEASE TO FIRST BETA-TESTER</p>
+
+<ul>
+<li>Save last selected platform to history</li>
+<li>Reorganize Roms by categories implemented</li>
+<li>MenuBar
+** All options organized in top menubar</li>
+<li>Maintenance
+<em>* Remove duplicate roms from db implemented
+*</em> DB Vacuum -> Vacuum sqlite database
+<em>* ecc-userfolder and subfolder
+<strong></em> ecc creates folders automaticly on demand
+<em></strong> ecc also create missing user-folder
+*</em>* subfolder could be configured in ecc_general.ini</li>
+<li>Absolute/Relative path convertion
+<em>* ecc create relative paths, if data is within the root dir of ecc
+<strong></em> emulators
+<em></strong> roms/media
+*</em> reorganize also creates relative paths, if possible</li>
+<li>ImageProcessing
+** jpeg-compression could be configuredin ecc_general.ini</li>
+<li>File-Filter (File-Dialogs)
+<em>* Filefilter for Romcenter Datfiles (</em>.dat)
+<em>* Filefilter for emuControlCenter Datfiles (</em>.ecc)</li>
+<li>Spellcheck ;-)</li>
+<li>Tooltips wordings fixed :-)</li>
+<li>Images
+<em>* More ingame screenshots possible
+<strong></em> ingame<em>start = startscreen of a game
+*</strong> ingame</em>play<em>1 = first ingame playing screenshot
+<strong>* ingame</em>play<em>2 = second ingame playing screenshot
+*</strong> ingame</em>play_3 = third ingame playing screenshot</li>
+<li>Added platform "Watara Supervision" [by phoenix]</li>
+</ul>
+
+<p>Version 0.5.08  (2006.07.25)</p>
+
+<p><em>* implemented Import of emuControlCenter- and Romcenter-Datfiles
+<strong></em> support for importing Romcenter-Datfiles
+<em>*</strong> Support 2.00/2.50 Dats with assigned fileextensions.
+<strong></em>* Dats without fileextensions couldn?t supported by ecc :-(
+<em>*</strong> Dat-Stripper for Romcenter-Dats implemented
+<strong></em></strong> Clean up names from data like (PD) and [T-<em>]
+<strong></em></strong> Auto-Fill ecc?s extended meta-informations from stripped data
+<strong><em>*</strong> Languages
+<strong></em><em></strong> Freeware/PD
+<strong></em><em></strong> Year
+<strong></em><em></strong> Running (gooddump)
+<strong></em></strong> All stripped data is collected to field info in database!
+<strong><em></strong> Regular expressions could be configured in conf/ecc_dat_stripper.php
+<strong></em></strong> Dat-Stripper could be deactivated in conf/ecc<em>general.ini
+** datfile-export
+<strong>* eSearch-Export
+*</strong> now you can use the eSearch-options to limit your export-data!
+<strong>* meta-informations like languages, status could be removed from database
+*</strong> data could be automaticlly backuped by ecc
+** implemented edit platform.ini
+<strong>* Edit title for navigation now possible in gui
+*</strong> Edit paths and assign emulator now possible in gui
+** implemented new tab platform informations in main-view
+<strong>* Show some facts about the platform like name, manufacurer, history, links
+*</strong> own ini-file (infos/ecc</em>platform<em>a2600</em>info.ini)
+<strong>* maybe used for categories like in MESS (show only platforms by atari)
+<em>* implemented Active [AUTOUPDATE|NORMAL] Navigation
+*</strong> navigation will only show the real result-counts of a search
+<strong></em> combination with "Active [HIDE|SHOW] platforms w/o media" possible!
+<em>* implemented Active [HIDE|SHOW] platforms w/o media.
+*</em> clear dat database added
+<em>* optimized "optimize languages", now using multi-deletes
+*</em> added platforms
+<em>* Optimize null-data ordering, if there are no meta-infos for a file!
+*</em> Changed database
+<em></strong> filedata = fdata
+<strong></em> metadata = mdata
+<em></strong> metadata_languages = mdata_languages
+<strong></em> Atari 2600
+<em></strong> Atari 5200
+*</em>* Atari 7800</p>
+
+<p>Version 0.5.07  (2006.07.16)</p>
+
+<p><em>* Status area
+<strong></em> progressbar
+<em></strong> show status of export, import and parsing
+<strong></em> could be hidden
+<em></strong> processes could be cancled
+*</em> Extended Search
+<strong>* result could be set to option = <em>|no|no+?|yes|yes+?|?
+*</strong> is saved to ecc_histroy.ini
+<strong></em> could be hidden
+<em>* Image-Processing
+*</strong> New image-system improves the speed of ecc
+<strong></em> select start/running ingame-shots in main-view from dropdown
+<em></strong> show only saved or only unsaved images
+*</em> Add Platform-Nav context menu
+** Inline-Help system restructured!</p>
+
+<p>Version 0.5.06  (2006.07.10)</p>
+
+<p><em>* Add Media-History-Button
+<strong></em> Shows all Media, you?ve started in the last time.
+<em></strong> Ordered by last launchtime!
+<strong></em> Count editeable in ecc.ini ([USER<em>SWITCHES] media</em>history = 50)
+<em>* Image Toggle
+*</strong> Now you can toggle images on/off. (saved to history.ini)
+*</em> Cellview
+<strong>* Platform-Ident image added for better overview in all-mode.
+<em></strong> Add more important infos from ecc-dat to cell
+*</em> Media-Edit
+<strong>* Now, edit Meta-Data is allowed from Bookmarks and History
+<em></strong> Now, a media could be started from media-edit window
+<strong></em> New Comboboxes for all options
+<em></strong> category has now a multi-wrap-dropdown
+<strong></em> languages-edit added
+<em>* Add Languages
+*</strong> Add Lanugage-Search
+<strong></em>* Now you can search for media in specified language
+<em></strong> Add Languages-Edit
+<strong></em>* Languages could be added in media-edit popup
+<em>*</strong> languages will shown in cellview and media-info
+<strong></em>* languages are exported and imported pipe-seperated
+<em>*</em></strong> e.g. d64;Bubble Bobble;.d64;8727EFCD;1;0;8;1;0;0;2;0;1987;0;2;E|F|S;;;;;;#
+<strong><em></strong> e.g. English, French, Spanish
+*</em> New Languages
+<strong>* Based on data extracted form datfiles :-)
+<em>* New Categories
+*</strong> based on statistics "Genre Stats" of GBA-Lister
+<strong></em> http://gbalister.emubase.de/show<em>stats</em>2.de.html
+<em>* Gui
+*</strong> Some improvements.
+<strong></em> new background-color :-)
+<em></strong> New navigation-images.
+<strong></em> New images for plattform infos
+<em>* New Function for dropdowns.
+*</strong> now all dropdowns are created on the fly.
+<strong></em> IndexedCombobox create simple or not so simple (image/wrapped) dropdowns.
+<em>* Add confirm-popup for "remove from ecc-db"
+*</em> DEVEL-Dat-Importer
+<em></strong> function to get informations from dat to fill extended ecc-dat-dat
+<strong></em>* languages
+<em>*</strong> pd / freeware (PD)
+<strong></em>* Translations (T+) (T-)
+<em></strong> concat dat-information strings for more predefined meta-informations.
+*</em> Add Splash-Screen at startup
+<em>*</em> only shown first time, you open ecc (saved to history.ini)</p>
+
+<p>Version 0.5.05  (2006.07.04)</p>
+
+<p><em>* new user-folder structure
+<strong></em> now relative and absolut path could be set in ecc.ini
+<em></strong> now every media have his own folder with subfolders eg. images and export
+<strong></em>* better structure for sharing the media-data with other ecc user
+<em>*</strong> first step for a planned user-folder to zip backup.
+<strong></em> refactoring image function
+<em>*</strong> save images now use new user-folder structure
+<strong></em>* fixed little bug in save image that overwrites "image 001" sometimes. :-)
+<em>* DatfileExport
+*</strong> insert credits from ecc.ini (author, web, email, comment)
+*</em>* save export now use new user-folder structure</p>
+
+<p>Version 0.5.04  (2006.07.03)</p>
+
+<p><em>* ini-manager
+<strong></em> complete refactored
+<em></strong> save user-selections for the next ecc-session to history.ini
+<strong></em>* navigation: save last selected plattform
+<em>*</strong> parser: save last parsed folder
+<strong></em>* importer: save last selected eccDatFile
+<em>* Import / Export
+*</strong> optimize import. Now direct export from query without data-array
+*</em> sql
+<strong>* optimize queries
+<em></strong> type-hinting and escaping.
+*</em> media-edit win
+<strong>* ; in user-input not allowed. Reason Import/Export and File-Rename-Option
+<em>* parser popup
+*</strong> file_lister shows found (unpacked and packed) by extension
+<strong></em> parser shows new and changed media
+<em>* Internal windows
+*</strong> media-edit popup changed to splash-screen mode
+*</em>* parser popup changed to splash-screen mode
+** temp. removed md5 support. ecc dont need md5 by now :-)</p>
+
+<p>Version 0.5.03  (2006.07.01)</p>
+
+<p><em>* eccini: refactored
+<strong></em> [NAVIGATION] now creates the main-navigation of ecc
+<em></strong> comments add for all sections
+<strong></em> add new extensions to [FILE<em>PARSER] section
+*</strong> add "all found" to navigation.
+** DatfileImport:
+<strong>* ecc-datFile import implemented
+*</strong> datFileImporter.php for romCenter imports. (DEVEL)
+<strong>** refreshed all mdata</em>ext_game fileinformations
+<em>* MediaMaintenance:
+*</strong> "all found" clear/optimize now have impact for all records.
+<strong></em> function optimize db also optimize bookmarks
+<em></strong> function clear db also optimize bookmarks
+*</em> internal refactoring manager</p>
+
+<p>Version 0.5.02   (2006.06.20)</p>
+
+<p><em>* MediaMaintenance
+<strong></em> add function optimize db
+<em></strong> add function clear db
+*</em> MediaEdit
+<strong>* add usk (altersfreigabe)
+<em></strong> add multiplayer
+<strong></em> add netplay
+** ContextMenu
+*</strong> item remove from eccdb</p>
+
+<p>Version 0.5.01  (2006.05.18)</p>
+
+<ul>
+<li>initial release</li>
+</ul>

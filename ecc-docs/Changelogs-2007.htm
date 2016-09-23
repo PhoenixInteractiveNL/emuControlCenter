@@ -1,0 +1,1499 @@
+<h2>Changelogs 2007</h2>
+
+<hr />
+
+<p><img src="images/img_misc_100plus_platform.png" alt="" title="" /></p>
+
+<p>Version 0.9.6 (2007.12.14) 100+ PLATFORM SUPPORT</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Casio PV-1000</li>
+<li>Casio PV-2000</li>
+<li>Cybiko Classic</li>
+<li>DOSbox - DOS emulator</li>
+<li>Dragon Systems - Dragon 32/64</li>
+<li>Interton VC-4000</li>
+<li>NEC PC-FX</li>
+</ul></li>
+<li><p>Added Arcade platforms</p>
+
+<ul>
+<li>Capcom Play system 1</li>
+<li>Capcom Play system 2</li>
+<li>Capcom Play system 3</li>
+<li>MAME Arcade</li>
+<li>MCA Laserdic Arcade</li>
+<li>Namco System 11</li>
+<li>Namco System 22</li>
+<li>SNK NeoGeo</li>
+<li>SNK NeoGeo CD</li>
+<li>Sega Model 1</li>
+<li>Sega Model 2</li>
+<li>Sega System 16</li>
+<li>Sega System 18</li>
+<li>Sony ZiNc (ZN-1/ZN-2)</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Added MSX1, &amp; MSX2 EMU INI's.</li>
+<li>replaced zlib1.dll with an uncompressed version.</li>
+<li>as from ECC 0.9.5.R2 ECC is not compressed with UPX anymore.
+so hopefully after this update the false virus positives should be gone!</li>
+<li>Theme fix - Valiance</li>
+<li>This update fixes the ECC crash on 'Valiance' theme.</li>
+<li>Fix by Cyrille, our Theme Manager, many thanks Cyrille!.</li>
+</ul></li>
+</ul>
+
+<p>WIP 24 (2007.12.12)
+- size of navigation is saved to ecc_history.ini, if "Save settings" is activated!
+- fixed white menu problems under windows vista (new gtk version)
+- remove romid menu entry
+- removed old ecc-datfile suffix ".ecc" - now only ".eccDat" is supported (rename old .ecc files to .eccDat)
+- removed backup creation for user configs (.bak files)</p>
+
+<p>WIP 23 (2007.12.10)
+- fixed array output for "# All found" popups
+- fixed problem with eccUserFolder eccident-platform.html files (e.g. ZINC)
+- fixed some little glitches in relative path convertion for emulators and roms.
+- "Reparse all ROM folders" added the platforms eccUser Folder as default path for reparsing
+-- Start ecc -> platform menu "Open eccUser folder" -> copy roms to roms folder -> platform menu, choose "Reparse" ... done!
+- "Optimize roms" now also optimize folders not available for "Reparse all Roms" feature
+- added new table fdata_drivemap for future CD/USB drive mapping.
+- renamed some tables in database to fit the naming convention.</p>
+
+<p>WIP 22 (2007.12.07)
+- fixed "ECC 0.9.6 WIP21 list comparing bug"</p>
+
+<p>WIP 21 (2007.12.06)
+- added new entry to platform-navigation "Open eccUser folder (pce)"
+- added new html file e.g. "c64<em>-</em>Commodore_64.html" to eccUser folders. (use rebuild eccUser folder)
+- moved language config to own tab
+- added new option "Send bugreport at startup" in Config/Startup
+- click on emuControlCenter logo now opens ecc website (before opens about-popup).</p>
+
+<p>WIP 20 (2007.12.05)
+- fixed size of large "extension *.??? problem" popup.
+- fixed "Emulator conf. disabled in menu when standing on 'all found'"
+- fixed array output in "remove roms" dialog (for "All found")
+- fixed eccdb datfile import problem (wrong linebreak sequence)</p>
+
+<p>WIP 19 (2007.11.26)
+- fixed crc32 "Double trouble" on large files by ecc "fsum" wrapper for these!
+- emulator config
+-- added platfom name in emuConfig headline for better overview
+-- moved known emulators to new tab "Links &amp; Infos"</p>
+
+<p>WIP 18 (2007.11.19)
+- Config - option to Save View-Mode settings (only experts)
+-- save current list selection (have, donthave, meta aso)
+-- save the state of the panels navigation (key F11) and info (key F12)
+- changed datfile suffix to .eccDat
+- default selection of ecc-system/datfile (arcade), if you choose CtrlMAME-Import
+- catched png decompression exception (better/more error handling in ECC)
+- fixed ECC crashes when 'illegal' characters are in the searchbox
+- eccDAT file with line-breakline-feed (TODO: ecc romdb)
+- fixed ECC Script BUG (URGENT)
+- Double trouble with PSX isos
+-- found bug but and fixed it.... but....
+-- DANGER: ecc will now possible freeze on larger files!! Hopefully we find a way for this!</p>
+
+<p>WIP 17 (2007.09.10)
+- added new colors to config for imageCenter slots
+- fixed imageCenter slot selection bug
+- fixed imageCenter hilighting of empty slots (next, prev buttons)
+- optimized audit speed for multiplatform roms :-)</p>
+
+<p>WIP 16 (2007.08.15)
+- added storage of listview mode (have, donthave aso) in history.ini (+shortcuts)
+- added translation for mame driver-dropdown (ecc-system/conf/mame/driver.ini)
+- fixed rom-audit bug for arcade platforms... please re-audit!
+- fixed stupid bug in imageCenter - now add images works again.
+- fixed an escape problem (&amp;) in romInfo/DATA-Tab
+- fixed little glitch in metaEdit
+- optimized gui
+- optimized the default colors
+- updated shortcuts</p>
+
+<p>WIP 15 (2007.08.13)
+- added preview of "roms you dont have" images
+- added size and position save for imageCenter
+- added mame driver dropdown
+- added mame driver to rom details (MAME (driver.c))
+- added parser state for multifile roms (current file parsed)
+- added soundpreview (ecc.exe /sndprev "full path to audio file")
+- added "naviagation images in list view!" again
+- added more i18n translations
+- added new shortcuts
+- fixed imageCenter "type is not supported" bug
+- fixed list switch / results perpage bug
+- fixed emulator command preview
+- optimized top navigation
+- optimized audit state icons
+- optimized position of save/close buttons in configuration (from ?x600 resolution)
+- optimized mediaEdit labels (now elipsed ...)</p>
+
+<p>WIP 14 (2007.08.05)
+- added "relative paths" for assigned emulator, if in ecc-user folder
+- added "relative paths" for added rom folders
+- added new "shortcut" for folderchooser pointing to the selected platform ecc-user folder
+- added "ecc-user/#_GLOBAL/emus/" folder for emulators used by more than one platform
+- fixed an bug with mame datfile import
+- fixed little glitch in emuConfig</p>
+
+<p>WIP 13 (2007.08.04)
+- added Rom Audit (multirom)
+-- icons for listview/details to show the state of the roms
+-- Popup for current multirom status like valid states, missing files aso.
+--- Repair of wrong filenames implemented (for winkawaks... needs the right filename!)
+- added "reparse all found" option. Select platform or "all found" and hit ALT+F5
+- added "start emulator" button in emulator configuration to make settings in the emu.
+- added error popup to file operations, if rename could not done! (file is allready in place)
+- added new Shortcuts:
+-- ALT+R Rescan rom folder for new roms
+-- ALT+I Show rom audit informations (multiroms)
+-- ALT+F5 Reparse selected Platform / All found (or STRG+F5)
+- added new parameter to ecc<em>ARCADEPLATORM</em>system.ini for automatic mame sourcefile matching!
+-- ecc will automaticly transfer these games to the right platforms later (planed! :-))
+-- @phoenix: please take a look at the datfile/mame.dat for the right sourcefiles
+-- [OPTIONS] mame_sourcefile = cps2.c
+- added more translation strings...
+- fixed an big bug in the auditing multifile roms. !!!
+-- if you have added roms for more than one multirom platform, ecc havent changed the datfile
+-- How to correct you checksums? (USE WIP 12!!!!!)
+--- To correct your checksums, please use the "Import CtrlMAME datfile" function in WIP 12.
+--- this works correct and will change your checksums to the right ones.
+- fixed "Notepad++ cannot create scripts with relative paths"
+- fixed "Glitch in compare layout"
+- fixed "File/games ZIP notice"
+- fixed missing "view" translation
+- fixed both bugs in "ECC config more translated"
+- fixed "Choice of Fonts and Colors" in main romlist
+- removed context menu "add new roms" (romlist) if no platform is selected
+- removed UTF-8 support SWITCHED BACK TEMPORARILY TO CP1250 (!)</p>
+
+<p>WIP 12 (2007.07.23)
+- Reparse rom directory
+-- Now the folder is optimized before new parsed. So removed roms are deleted from db
+-- Menu entry isnt disabled anymore.
+- changed: Image center "add image" confirm-popup dont hide the imagecenter complete.</p>
+
+<p>WIP 11 (2007.07.19)
+- Romlist <br />
+-- Added grey out for missing roms
+-- Now the name is bold in detail-view
+- CtrlMame-Dat
+-- Moved to import submenu
+-- Added i18n entries
+-- removed debug output</p>
+
+<p>WIP 10 (2007.07.15)
+- CtrlMame-Dat
+-- Implemented auto audit for new parsed roms (Neo-Geo / CPS2)
+--- CM-Dat parser automaticlly assign the correct mergedEccCrc32 to the romset
+--- if you want to add the metadata from the datfile, choose "import CtrlMame Dat"
+--- added new folder containing multirom platform CtrlMame (CM) dat files
+-- Optimized CM ControlMame-Dat import
+-- Added state of merged clone sets (only diff to original) (F: Full set / M = Merge set)
+-- crc32 will now also changed for existing meta- and userdata
+- Gamelist view
+-- Added indicator for Have/Donthave
+-- made name resizable
+- Other changes
+-- fixed wrong folder bug for "parse new roms" in history.ini
+-- Disabled "adding roms all found in context menu"
+-- Fixed "Create all ecc user-folders - Missing folder in popup"
+-- Fixed "Bug in platform list sorting"</p>
+
+<p>WIP 9 (2007.07.14)
+- Implemented CM ControlMame-Dat import
+-- first simple Audit for multirom-files like cps2, neo-geo!
+--- This will automaticly change the crc32 to the right combined eccCrc32 from dat
+--- The images are automaticly transfered to the new folder
+--- Infos are shown in the info-field
+---- ok [unique] == only one matching rom found
+---- ok [multi] == many matching roms found, best used!
+---- error [unique] == only one matching rom found, but single files are missing
+---- error [multi] == many matching roms found, best used! but single files are missing
+---- Output of an logfile (array) dump at the end of auditing!</p>
+
+<p>WIP 8 (2007.07.05)
+- ListContext
+-- Added "Add new platform roms"
+-- Added "Remove all platform roms"
+-- Added "Remove ROM metadata"
+- File-/Folder-Chooser popup
+-- Implement multi folder selection for "Add new roms"
+-- Implemented folder-shortcuts for all choosers (bottom left folder selection)
+--- ecc-user folder
+--- all assigned emulator-folders for selected platform
+- imageCenter
+-- fixed some glitches, if you cancel the file-selector
+-- fixed that ecc forgot the path for moved images in file-selector
+-- Tried to set a sticky image preview (not working very good now :-) )
+- Implemented topmenu entry for "Import online datfiles"
+- Added updated frensch translation done by cyrille
+- Fixed "Find duplicate ROMS - Strange popups"
+- Fixed "Optimize database ROM combined"</p>
+
+<p>WIP 7 (2007.07.01)
+- Restructuring Detaillist-Output
+- Reordening downsection "info box"
+- Fixed "Wrong messagebox" bug</p>
+
+<p>WIP 6 (2007.06.30)
+- fixed a little problem with "Start in Emufolder"
+- added i18n for eSearch reset button
+- Implemented 2 Zip-Handeling Modes
+- YOU CANNOT MIX ZIP-PARSER AND OTHER PARSER NOW! DONT TRY IT! :-)
+- If no file left after include/exclude, the file isnt parsed in!</p>
+
+<p>WIP 5 (2007.06.30)
+- emulator configuration
+-- Implemented "Start in Emufolder" for e.g WinKawaks
+-- Optimized the option-selection (Hide unvalid settings)
+-- Add little hint, if there is no emulator assigned :-)</p>
+
+<p>WIP 4 (2007.06.29)
+- i18n translation support
+--  complete top-menu
+--  complete infoPane area
+- Fixed confirm destroy problem</p>
+
+<p>WIP 3 (2007.06.28)
+- emuControlCenter is now UTF-8 ready
+-- set "php-gtk.codepage = UTF-8" in php.ini
+-- Added japanese languages support provided by yoshi
+-- Added charset.ini to i18n folder containing the charset of the tranlation
+--- used to convert given charset to UTF-8
+-- "en", "fr" and "de" tranlations are now UTF-8!!!!
+--- Use Notepad++ (ecc-core/thirdparty ) for translations (UTF-8 without BOM!!!!)
+- Fixed "No extension" path bug
+- Fixed problem, if ecc-user folder is missing!
+- Fixed "Some wierd errors" bug</p>
+
+<p>WIP 2 (2007.06.24)
+- Implemented "first try" version of (multirom) zip parsing
+-- How it works..
+--- ecc parses each file in the zip file and creates checksums for each file!
+--- All singlefile crc32 are ordered acending, concated by "," and used for an global crc32 checksum.
+--- All singlefile crc32 checksums + real size are viewable in the header-tab!
+--- build function to "excludeExtensions = txt, inf, diz, url, tag, www, nfo"
+- Implemented "hide dialog checkbox" for parsing large-file dialog!
+- fileOperations &amp;&amp; Configuration changed background-color
+- Meged updated french translation by cyrille</p>
+
+<p>WIP 1 (2007.06.22)
+- refactured gameLists
+-- Now switch between list and detail view without restart (USE F1/F2 or top menu!)
+-- Very fast list-mode.... :-) (because iï¿½ve removed fields!) Only for DEVEL! :-)
+- Added Datfile-Download from internet
+- mediaEdit
+-- added tearoffs/detach for category-dropdown! (perfect, if you add many meta-informations)
+-- added Fileinfo header
+-- changed background color
+- imageCenter
+-- changed background color
+- Fixed "extension problem windows" size problem
+- Fixed "Ball &amp; Paddle" bug
+- Fixed Glade-Warning on startup
+- Fixed crash on files bigger than 64MB ( arghhhhhhh :-) ) - wrong ini settings
+-- fixed php.ini - wrong memory<em>limit = 64M, changed to wrong memory</em>limit = -1
+-- We have to take care of this ini-settings!
+-- @phoenix: please change error<em>log path to error</em>log= ..\ecc-core-errors.log</p>
+
+<ul>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>Notepad++ v4.6</li>
+<li>Autoit v3.2.10.0</li>
+</ul></li>
+<li><p>Core components</p>
+
+<ul>
+<li>ECC GTK Core update from 2.10.11.0 to v2.12.1.0 (GIMP build)</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.5.R3 (2007.11.14)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Acorn Electron</li>
+<li>NEC PC-Engine CD</li>
+<li>Robotron KC</li>
+<li>Vtech Laser 200</li>
+<li>Tatung Einstein</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Completed the emulator INI files (information/download)</li>
+<li>There where 2 'error_reporting' settings found in PHP.INI,
+now there is one left ;)</li>
+<li>Improved ECC error handling, to let ECC not report WARNING &amp; NOTICE errors.</li>
+<li>Added 'bugsending' translations (FR/GER) for ECC startup v2.1.2.2</li>
+</ul></li>
+<li><p>Platform updates</p>
+
+<ul>
+<li>Removed all '(c)' &amp; 'tm' crap in the logo's.</li>
+<li>Removed some text underneath some logo's.</li>
+<li>Made some images much nicer by splitting-up the logo.</li>
+<li>Replaced &amp; polished some images to look much nicer.</li>
+<li>Updated the PC Engine image (moved logo's)</li>
+<li>Removed the Sega Dreamcast MDF extension, and added CDI, MDS, NRG, GDI, BIN, ELF</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.2.3:</p></li>
+<li>Removed PHP hash checks (now also feature 'core selection' is possible)
+v2.1.2.2:</li>
+<li>Fixed a critical mistake by sending the environment
+data in the bugreport already overwritten by the
+new start of ECC, this means it was not the actual
+environment data when the crash happened, now the
+checking routine has been improved, also ECC Startup
+waits for ECC Bugreport to finish on startup.</li>
+<li>Compiled with ANSI support, so ECC Startup can work
+on WIN 98/ME systems.
+v2.1.2.1:</li>
+<li>Tweaked the ECC 'startup time out' a litte bit, because
+ECC has trouble with some (old) USB Flash disks and
+would not start up the first time.
+v2.1.2.0:</li>
+<li>Fixed GTK load on a server machine.
+<ul>
+<li>This is done by setting the ECC php.ini path in the commandline.</li>
+</ul></li>
+<li>Added desktop data to environment INI.</li>
+<li>Removed the 'Bugreport using' text in ECC Startup.
+v2.1.0.4:</li>
+<li>Fixed the 1st time language selecting, this didn't work, when the user folder
+didn't exist. (it worked after the second time when starting ECC)</li>
+<li>Fixed GTK load on a server machine.
+<ul>
+<li>This is done by setting the ECC php.ini path in the commandline.</li>
+</ul></li>
+<li>Added desktop data to environment INI.</li>
+<li>Removed the 'Bugreport using' text in ECC Startup.
+v2.1.0.3:</li>
+<li><p>Implented messagebox &amp; option to enable automatic bugreport sending.</p></li>
+<li><p>ECC Bugreport
+v2.1.0.1:</p></li>
+<li>Fix for memory 'MB' to 'KB' mistake in the template &amp; envment INI.
+v2.1.0.0:</li>
+<li>IP bugsender not noted when manually started the report.</li>
+<li>Only exe/dll/ocx files are scanned in the 'version detail' lists.</li>
+<li>Detect linebreaks in ECC general/history INI's.</li>
+<li>Added 'back to top' in template.</li>
+<li>Added report of ECC startup version.</li>
+<li>Fixed displaying some incorrect fileversion informations.</li>
+<li>The OS now displays a 'long' name.</li>
+<li>QuickSFV intergration for MD5 hash checkup.</li>
+<li>Added transations GER / FRA.
+v2.0.0.0:</li>
+<li>Almost totally rebuild from scratch!
+<ul>
+<li>Whole new HTML output (using template file :D)</li>
+</ul></li>
+<li>The user can run ECC Bugreport/Diagnostics whenever he/she wants,
+just to view/checkup ECC version/core/environment data.
+(for example placing the bugreport on the forum)
+v1.2.0.5:</li>
+<li>Extended the bugreport details/diagnostics with the users environment data.</li>
+<li>Coming soon: ECC Bugreport diagnostics build-in
+v1.2.0.0:</li>
+<li>Removed manual interface.</li>
+<li>Automatic bug sending when a ECC error occurs.</li>
+<li>Fully translatable!</li>
+<li><p>Fixed an running issue on Win98 systems (and maybe other OS'es).</p></li>
+<li><p>Core components</p>
+
+<ul>
+<li>PHP update from 5.2.4 (30-Aug-2007) to v5.2.5 (08-Nov-2007)</li>
+</ul></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>RAR v3.71</li>
+<li>Notepad++ v4.5</li>
+<li>AutoIt v3 v3.2.8.1 help files</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.5.R2  (2007.09.30)</p>
+
+<ul>
+<li><p>Added platforms</p>
+
+<ul>
+<li>Philips VG-5000</li>
+<li>Sharp MZ-700</li>
+<li>Acorn BBC</li>
+<li>Acorn Archimedes</li>
+<li>Matra/Hachette Alice</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.0.2:</p></li>
+<li>Fixed a bug on creating images, where slow systems (700 Mhz/128 MB) would hang
+with the message 'out of memory / low on system resources'
+v2.1.0.1:</li>
+<li><p>Fixed a bug where ECC would not create the media images when not running from the ECC root folder.</p></li>
+<li><p>ECC Live!
+v2.2.0.4:</p></li>
+<li>Fixed an running issue on Win98 systems (and maybe other OS'es).
+v2.2.0.3:</li>
+<li><p>Set unpacker from 'ecc-core\thirdparty\unrar\unrar.exe' to 'ecc-core\thirdparty\rar\rar.exe'</p></li>
+<li><p>ECC Live! upd
+v1.0.0.5:</p></li>
+<li>Fixed an running issue on Win98 systems (and maybe other OS'es).
+v1.0.0.4:</li>
+<li><p>Set unpacker from 'ecc-core\thirdparty\unrar\unrar.exe' to 'ecc-core\thirdparty\rar\rar.exe'</p></li>
+<li><p>ECC Theme select
+v1.1.0.3:</p></li>
+<li><p>Fixed an running issue on Win98 systems (and maybe other OS'es).</p></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>RAR v3.70</li>
+<li>AutoIt v3 v3.2.8.1</li>
+<li>Notepad++ v4.3</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.5.R1 (2007.09.02)</p>
+
+<ul>
+<li><p>Added platforms  </p>
+
+<ul>
+<li>Commodore plus/4</li>
+<li>Commodore 16</li>
+<li>Mattel Aquarius</li>
+</ul></li>
+<li><p>Platform updates  </p>
+
+<ul>
+<li>GCE Vectrex</li>
+<li>Added the MB (Milton Bradly) logo in the teaser, and adjusted the name to 'GCE/MB Vectrex'</li>
+<li>Coleco Vision</li>
+<li>Updated the teaser with a new fresh platform image.</li>
+<li>Added the Coleco logo in the teaser.</li>
+<li>Changed the name to 'Coleco ColecoVision'</li>
+<li>Colour Genie</li>
+<li>Updated the teaser with a new fresh platform image.</li>
+<li>Added the Colour Genie logo in the teaser.</li>
+<li>Added the 'Mattel' logo in the Intellivision teaser</li>
+</ul></li>
+<li><p>Platform name updates</p>
+
+<ul>
+<li>Renamed 'Colour Genie' to 'EACA/TS Colour Genie'</li>
+<li>Renamed 'Fairchild Channel F' to 'Fairchild Channel-F'</li>
+<li>Renamed 'Game Park 32' to 'GamePark GP32'</li>
+<li>Renamed 'MSX' to 'MSX Home Computer'</li>
+<li>Renamed 'MSX 2' to 'MSX 2 Home Computer'</li>
+<li>Renamed 'Nintendo Gameboy' to 'Nintendo GameBoy'</li>
+<li>Renamed 'Nintendo Gameboy Advance' to 'Nintendo GameBoy Advance'</li>
+<li>Renamed 'Nintendo Gameboy Color' to 'Nintendo GameBoy Color'</li>
+<li>Renamed 'Sega Gamegear' to 'Sega Game Gear'</li>
+<li>Renamed 'Sega Mega Drive/Genesis' to 'Sega MegaDrive/Genesis'</li>
+<li>Renamed 'Sega Megadrive 32X' to 'Sega MegaDrive 32X'</li>
+<li>Renamed 'Sony Playstation 1' to 'Sony PlayStation 1'</li>
+<li>Renamed 'Sony Playstation 2' to 'Sony PlayStation 2'</li>
+<li>Renamed 'Sony Playstation Portable' to 'Sony PlayStation Portable'</li>
+<li>Renamed 'Sony Pocketstation' to 'Sony PocketStation'</li>
+<li>SNK NeoGeo CD is now in arcade section</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Updated the ECC banner to look much more professional</li>
+<li>Fixes the horizontal rating images, now going from left ro right!</li>
+<li>Also added transparency to the images!</li>
+</ul></li>
+<li><p>ECC Startup
+v2.1.0.0:</p></li>
+<li>ECC Startup will generate 'media' images when necessary!
+<ul>
+<li>This saves some MB's on installation, and also 80 KB for each platform update!</li>
+<li>The images look much nicer to!</li>
+<li>Included: thirparty tool 'convert' from imagemagick!
+v2.0.2.0:</li>
+</ul></li>
+<li>ECC Startup can now be translated, files can be found in 'ecc-system\translations'
+v2.0.1.3:</li>
+<li>Fixed 'already started' bug for Windows Vista
+<ul>
+<li>Now gives the user a one-time message when this happens</li>
+</ul></li>
+<li>Removing unused files and folders
+<ul>
+<li>Folder "ecc-core\share\icons\default\16x16"</li>
+<li>Folder "ecc-core\share\icons\default"</li>
+<li>Folder "ecc-core\share\icons"</li>
+<li>This fixes the temporally icon for GTK and uses the default again!</li>
+<li>Folder "ecc-system\item"</li>
+<li>Folder "ecc-system\items"</li>
+<li>File "ecc-system\gui2\ecc<em>media</em>placeholder<em>camya.png</li>
+<li>File "ecc-system\images\ecc<em>ph</em>media</em>camya.png</li>
+<li>File "ecc-system\images\eccsys\internal\ecc<em>header.png</li>
+<li>File "ecc-system\images\eccsys\rating\ecc<em>rating</em>6</em>v.png</li>
+<li>File "ecc-system\manager_OLD_cGui.php"
+v2.0.1.2:</li>
+</ul></li>
+<li>Added a 'LOADING ECC...' label on startup</li>
+<li>Added a loadingbar in upper-right corner, sweet!
+v2.0.1.1:</li>
+<li>Fixed the splashscreen unload before mainwindow pop-up!</li>
+<li>Added a splashscreen when ECC is restarting!
+v2.0.1.0:</li>
+<li>Added a language selector on first startup!</li>
+<li>Added command '/sndprev' to preview the selected startup sound
+<ul>
+<li>eventually there will be a 'sound preview' button in ECC config!
+v2.0.0.9:</li>
+</ul></li>
+<li>Has a 'smart splashscreen timeout calculator' built in ;)
+<ul>
+<li>On some systems ECC could not load within 20 seconds!</li>
+<li>Now validates the system and sets a timeout value!</li>
+</ul></li>
+<li>Added BIN extension to Sega Megadrive 32X
+v2.0.0.8:</li>
+<li><p>Increases the splashscreen timeout to 20 seconds</p>
+
+<ul>
+<li>On some systems ECC could not load within 15 seconds</li>
+</ul></li>
+<li><p>ECC Live!
+v2.2.0.2:</p></li>
+<li>ECC Live! is now also capable to display a message to get the users attention.
+v2.2.0.1:</li>
+<li><p>ECC Live! is now also capable to remove (unused) folders in the ECC structure.</p></li>
+<li><p>Core components</p>
+
+<ul>
+<li>PHP update from 5.2.3 (31-May-2007) to v5.2.4 (30-Aug-2007)</li>
+</ul></li>
+<li><p>3rd party tool updates</p>
+
+<ul>
+<li>AutoIt v3 v3.2.6.0</li>
+<li>Notepad++ v4.2.2</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.5b (2007.06.24)</p>
+
+<p>FYEO 19 (2007.06.17)
+- Dialogs
+-- Added focus to OK-Button
+-- added an checkbox to hide the confirmpopups, if needed.
+-- added shortcuts RETURN &amp; Escape for Dialogs.</p>
+
+<ul>
+<li><p>Added platforms  </p>
+
+<ul>
+<li>Adobe Flash</li>
+<li>Atari-ST</li>
+<li>Fujitsu FM Towns</li>
+<li>Microsoft X-Box</li>
+<li>Sony Playstation 2</li>
+<li>Sony Playstation Portable</li>
+</ul></li>
+<li><p>Added extensions to platforms (also for TOSEC renames)</p>
+
+<ul>
+<li>PC Engine: HES, BIN, ISO</li>
+<li>NeoGeo Pocket: BIN</li>
+<li>NeoGeo Pocket Color: BIN</li>
+<li>GCE Vectrex: BIN</li>
+<li>Watara supervision: BIN</li>
+<li>Sega SG-3000: BIN</li>
+<li>Coleco Vision: BIN</li>
+<li>Gamepark 32: SMC</li>
+</ul></li>
+<li><p>Platform images updates</p>
+
+<ul>
+<li>Atari 2600</li>
+<li>The teaser is replaced by a much better looking image</li>
+<li>Also added correct (new) Atari 2600 MEDIA images</li>
+<li>Atari 8-bit
+-Adding some text in the teaser showing the user what Atari 8-bit systems are!</li>
+<li>Cellphone Java</li>
+<li>Improved the images for the 'Cellphone Java' platform, to look much nicer!</li>
+<li>Adding platform shadows in consoles
+-Fujitsu FM-7</li>
+<li>Gamepark GP32</li>
+</ul></li>
+<li><p>Small updates</p>
+
+<ul>
+<li>Bringing the Fujitsu FM-7 back in the navigation list.</li>
+<li>It wasn't included in the navigation for a while, now it's back!</li>
+</ul></li>
+<li><p>ECC Startup
+v2.0.0.7:</p></li>
+<li>No more hash check on PHP.INI</li>
+<li>Changed PHP.INI settings:
+<ul>
+<li>Changed error log location to 'ecc-core\error.log'</li>
+<li>Changed 'upload<em>max</em>filesize' from 2M to 2048M</li>
+<li>Changed 'post<em>max</em>size' from 8M to 2048M</li>
+<li>Changed 'memory<em>limit' from 64M to -1 (unlimited)</li>
+<li>Changed 'log<em>errors</em>max</em>len' from 1024 to 4096</li>
+<li>Changed 'output_buffering' from 4096 to 16384</li>
+<li>Changed 'max<em>execution</em>time' from 30 to -1 (unlimited)</li>
+</ul></li>
+</ul>
+
+<p>Version 0.9.5 (2007.06.16)</p>
+
+<p>FYEO 18 (2007.06.16)
+- changed the mechanism to get the icon
+- create a valid JAD File for transfering a game to a cellphone
+- fixed an encoding problem in the infopane (causing ecc crash)</p>
+
+<p>FYEO 17 (2007.06.16)
+- fixed a little bug in datfile import
+- fixed some glitches in infoPane
+- added new i18n strings
+- added new popups for confirmation and infos. No more focus problem!</p>
+
+<p>FYEO 16 (2007.06.14)
+- added game icon output to right pane
+- restructured the DATA tab
+- added new HEADER tab for parsed header informations</p>
+
+<p>FYEO 15 (2007.06.11)
+- implements manifest parser for java cellphone games (eccident: celljar)
+-- Automaticlly gather metadata and icon images form jar game (+ copy to ecc-user folder)
+-- validate the file. Corrupt files arent inserted!
+- implemented eccScript comment preview, if an eccScript is available!
+-- Shows max first 15 lines of comment. First Textline is hilighted!</p>
+
+<p>FYEO 14 (2007.06.07)
+- implemented autodetection of eccScripts, if an emulator is assigned.
+- disabled creating of eccScript, if no valid emulator is assigned!
+- fixed problem to migrate to php 5.2.x</p>
+
+<p>FYEO 13 (2007.06.03)
+- tried again to fix the paring bug with big files...
+-- added new process output
+-- now files greater than 96 MB are slower processed!</p>
+
+<p>FYEO 12 (2007.06.03)
+- fixed "ECC Crash on 'Empty datfile database backup'"
+- fixed "Incorrect platform count!"
+- added big file handeling ('SLOW<em>CRC32</em>PARSING<em>FROM', 134217728) (128MB)
+-- ecc asks for confirmation, if an biger file than SLOW</em>CRC32<em>PARSING</em>FROM is found and warns!
+-- added mp3 filter for sound selection</p>
+
+<p>FYEO 11 (2007.06.02)
+- disable commandline-parameters, if eccScript is selected.
+- fixed a problem with saving the startup sound to the ini.
+- fixed the problem with parsing files bigger than 500MB (ps1) ecc crashes
+-- php runs in am memory allocation problem with file<em>get</em>contents
+-- ecc freezes very long if parsing these big files No way now to prevent this!</p>
+
+<p>FYEO 10 (2007.06.01)
+- Implemented new VIEW-MODES "HAVE" + "DONT HAVE"
+- Optimized queries for building and updating navigation.
+- Cache navigation images
+- Implemented image caching for listview images
+- eccScript
+- added indicator, if there is an eccscript available
+- alert error, if there is no valid emulator assigned
+- fixed some little glitches
+- added real language-strings to lang-dropdown in configuration</p>
+
+<p>FYEO 09 (2007.05.28)
+- added a autoupdating preview of the emulator command! COOOL
+- added placeholder %ROM% to "commandline-parameter" in emu-config
+-- "--fullscreen=1 %ROM% --sync=1 == (emu.exe --fullscreen=1 romfile.rom --sync=1)"
+- fixed problem with param 8.3 causing a ecc-crash</p>
+
+<p>FYEO 08 (2007.05.27)
+- added startup configuration</p>
+
+<p>FYEO 07 (2007.05.27)
+- added autoupdate for categories dropdown!
+- optimize speed of import datfiles / parse roms to database</p>
+
+<p>FYEO 06 (2007.04.22)
+- eccScript
+-- added delete-button
+-- escape path for script creation (button edit/create)
+-- changed extension to .eccscript
+-- added active/inactive state for eccscript
+- added the 05+ features</p>
+
+<p>FYEO 05 (2007.05.20)
+- fixed eccScript problem with finding eccScript.exe
+- implemented button to edit eccScript to configuration
+-- for ecc-core/tools-thirdParty/notepad++/notepad++.exe
+- added /fastload for config-changes
+- changed order in emu-config GLOBAL|ALT1|ALT2|extension1|....|extensionN</p>
+
+<p>FYEO 04 (2007.05.20)
+- implemented possibility for platforms, to parse only roms with available metadata entry
+- !!! THIS IS ONLY DEVEL !!! - This could be added to ecc<em>eccident</em>user.ini later
+-- used for multifile platforms like neogeo
+-- Create a datfile with the first (start) file of a game as entry in the datfile
+-- Import this datfile to ecc metadatabase
+--- ecc searches, if this entry is in db and parse the rom, otherwise not!
+--- you have to set the option "connectedMetaOnly = 1" in the ecc<em>eccident</em>system.ini
+&lt; BR > FYEO 03 (2007.05.18)
+- Added possibility to start eccScript direct, if available
+- updated frensh translation by cyrille</p>
+
+<p>FYEO 02 (2007.05.13)
+- imageCenter: implemented storage for imagePopup options and imageslot expander (bottom)
+- fixed a glitch in the compare-popup
+- Full restructured right detail-pane for better overview
+- added more translation files for mainGui and Metainformations pane</p>
+
+<p>FYEO 01 (2007.05.11)
+- Added and fixed some i18n placeholders in configPopup
+- added /fastload to ecc.exe calls</p>
+
+<ul>
+<li><p>Added platforms
+-- Entex Adventure Vision
+-- Sony Pocketstation
+-- Nintendo Pokémon mini
+-- Sharp MZ-2000
+-- Bally Astrocade
+-- RCA Studio II
+-- Cellphone Java games</p></li>
+<li><p>Some small fixes
+-- Nintendo Virtual Boy now in handheld category!
+-- Emu name fix for 'Nintendo Pokemon mini'
+-- Emu name fix for 'Sony Pocketstation'
+-- Removed all 'romrunner' strings in platform user INI
+-- Updated images
+--- TEASER &amp; NAV --> Atari 2600 (the JR console)
+--- NAV --> Atari 5200 (made transparant)
+--- NAV --> Nec Pc Engine (fixed oversize)</p></li>
+<li><p>ECC Documentation
+2007.06.17:</p></li>
+<li>Much better overview</li>
+<li>New section: Scriptfunctions</li>
+<li>Added complete off-line mirror of Autoit3</li>
+<li><p>Added known scripts for ECC</p></li>
+<li><p>ECC Startup
+v2.0.0.6:</p></li>
+<li>Adjusted splashscreen time-out to 15 seconds
+v2.0.0.5:</li>
+<li>Now works with new ECC Live! v2.2.0.0</li>
+<li>Fixed bug when 'startup check' notice shows message everytime!, until the user pressed 'yes'
+v2.0.0.4:</li>
+<li>Fixed bug when ECC did not startup when having spaces in the pathname!</li>
+<li>Added timeout on ECC window catching! when ECC could/did not startup!</li>
+<li>No more splashscreen hanging anymore!!, timeout is set on 5 sec!</li>
+<li>Added extra window on 'error' to notice user to use Bugreport or forum.
+v2.0.0.3:</li>
+<li>Put 'first startup' message to AFTER the checkup message.</li>
+<li>Added warning if user is no admin or not in admin mode
+<ul>
+<li>Because a user in admin mode has 'read-only' priveleges.</li>
+</ul></li>
+<li>Now works with php 5.2.3.3
+v2.0.0.2:</li>
+<li>Fixed some issues with the sound playing</li>
+<li>Fixed that sound plays again on ECC 'fastload'</li>
+<li>Fixed soundplay from being cut-off (because of unload ecc.exe)</li>
+<li>Sound now plays after splashcreen!</li>
+<li>Fixed issue if splashscreen hangs</li>
+<li>When title screen hangs it should be closed when starting ECC again
+<ul>
+<li>This should prevent unnessesary multiple instances of ecc.exe!</li>
+</ul></li>
+<li>ECC teaser image has been locked! (no change allowed)
+v2.0.0.1:</li>
+<li>New splash screen &amp; teaser image!</li>
+<li>All ECC 'yellow' icons have been updated and look much better!</li>
+<li>Added new startup sound</li>
+<li>Added ECC teaser image validation</li>
+<li>Reduced the splashscreen fade-in from 900 ms to 600 ms
+v2.0.0.0:</li>
+<li>Total rewrite of the code (from 60 KB to 11 KB!!)</li>
+<li>I did some 'smart 'n' better' coding ;)</li>
+<li>Removed over 40 messageboxes and other stuff.</li>
+<li>No more usage of 'ecc-system\conf\ecc_startup.ini' (all variables are 'baked-in')</li>
+<li>Removed unnessesary checking of files and values.
+<ul>
+<li>This will also speedup the startup a little bit!</li>
+</ul></li>
+<li>Implented better ECC detection (not checking for 'php.exe' process anymore)
+<ul>
+<li>This will let ECC function on a server machine!</li>
+</ul></li>
+<li>When ECC crashed, it will startup normally again!
+<ul>
+<li>This is without using the (now removed) '/unload' option first.</li>
+</ul></li>
+<li>Changed the icon to the 'yellow' icon.</li>
+<li>New MD5 hash for PHP ini (removed some lines not needed by ECC)</li>
+<li>I have to implent this feature in ECC Live! itself first</li>
+<li>Tweaked the ECC title a little bit now: version...build...date....update</li>
+<li>Updated the 'default' general INI with the new strings</li>
+<li>When general.ini not exist in 'ecc-user-configs' it will be copied from 'ecc-system\conf'</li>
+<li>Removed commandline parameters
+<ul>
+<li>Command '/config' removed (can now configured in ECC itself)</li>
+<li>Command '/about' removed (now in ecc-docs file)</li>
+<li>Command '/regreset' removed (now using INI file)</li>
+<li>Command '/regdelete' removed (now using INI file)</li>
+<li>Command '/deskicon' removed (done by installer)</li>
+<li>Command '/verify' removed (done by external program later)</li>
+<li>Command '/phpinfo' removed (not needed anymore)</li>
+<li>Command '/unload' removed (not needed anymore, ecc should startup again when crashed)
+v1.4.2.2:</li>
+</ul></li>
+<li><p>Fixed a 'ECC can not start twice' bug when changing from detail/list view.</p></li>
+<li><p>ECC Live!
+v2.2.0.0</p></li>
+<li>Own update check-up (instead of ecc.exe v1.4.2.x)</li>
+<li>Using a INI file instead of 'zero byte' files to read-out 'status'</li>
+<li>Updating unrar from v3.20 (2003) to v3.70 (2007)
+<ul>
+<li>Placing unrar in 'thirdparty' and added license.txt</li>
+</ul></li>
+<li>Removed version check-ups of tools</li>
+<li>Adjusting some text in messageboxes</li>
+<li>Changed color &amp; lettertype to verdana in info boxes</li>
+<li><p>Cleaned-up some internal code</p></li>
+<li><p>ECC Live! UPD
+v2.0.0.3</p></li>
+<li><p>Changed Unrar path to 'ecc-core\thirdparty\unrar'</p></li>
+<li><p>ECC Script
+v1.1.0.0</p></li>
+<li>Turbo mode!, by using another function script validation speed has been increased by 50 times!!
+v1.0.0.3</li>
+<li>Removed Autoit3 check</li>
+<li>This will let ECC Script function on computers that have autoit3 running for other purposes</li>
+<li>Multiple scripts can executed at the same time (if needed)
+v1.0.0.2</li>
+<li>Added extra commandline support (pushed to script)</li>
+<li>Commandline 2 in script is extra emulator options BEFORE ROM</li>
+<li>Commandline 3 in script is extra emulator options AFTER ROM</li>
+<li>Internal checks</li>
+<li>Added folder check (ecc-tools)</li>
+<li>Added name check (eccScript.exe)
+v1.0.0.1</li>
+<li>Added 'please wait' text string to validation</li>
+<li><p>Removed the 'close' string from the validation 'blacklist'</p></li>
+<li><p>Tools GLOBAL</p></li>
+<li>Added Thirdparty tools for scriptfunctions
+<ul>
+<li>Autoit v3.2.4.9</li>
+<li>Notepad++ v4.1.2</li>
+</ul></li>
+<li><p>Added NEW tool: eccScript</p>
+
+<ul>
+<li>This is to validate &amp; run ECC scripts.</li>
+</ul></li>
+<li><p>Core components
+-- PHP update from 5.1.4.4 (04-May-2006) to v5.2.3.3 (31-May-2007)</p></li>
+</ul>
+
+<p>Version 0.9.1 (2007.05.06)</p>
+
+<p>FYEO 06 (2007.05.05)
+- platformNav contextmenu "configuration" now opens the emuconfig + selected platform
+- fixed "show only roms w/o meta"
+- Compare/Merge now also for roms you dont have possible (metadata only!)</p>
+
+<p>FYEO 05 (2007.05.04)
+- removed option "navigation autoupdate" Now activated by default!
+- removed the tooltips from navigation and mainlist...
+- optimized search
+-- decrease timeout for freeform search
+-- fixed the strange behavior of "match beginning of searchword"
+- ConfigPopup - added i18n entries for all tab-names
+- updated ecc-datfile format (v0.97) filesize added!
+- fixed open compare popup only, if different roms are selected.
+- Topmenu
+-- now, "Add new ROMS" is deactivated, if no platform is selected!
+--- Also, if a platform is selected, this is shown as "Add new ROMS for Platform"
+--- Better, because the most new user dont know how "All found works" :-(
+--- new i18n file for topmenu translation</p>
+
+<p>FYEO 4 (2007.04.28)
+- Doubleclick on Platform-Navigation opens "Add ROM"
+- optimized contextmenu - 'Start ROM with' - Now begins with emulator-name
+- romCombiner (Compare/Merge)
+-- added FULL merge functionallity to merge eg. title, developer to an other rom!
+--- Use the arrows in popup to merge data!
+-- added mainlist contextmenu 'Compare - Select left side' -> 'Compare to "romname"'
+--- First select a rom with 'Compare - Select left side'
+--- Then a second with 'Compare to "romname"'
+--- OR use drag´n´drop!!!!</p>
+
+<p>FYEO 3 (2007.04.28)
+- Added option "show all roms with personal notes!"
+- romCombiner
+-- as first step added rom-compare - use drag-n-drop in maint listview!
+- ConfigPopup
+-- images: Added Thumbnail quality / min original size selector
+-- emucontrolcenter: reactivate startup-config
+- imageCenter
+-- Added 3 additional slots for storage images (like cds, cartdridges aso)
+- hopefully fixed problem with parsing PS1 Files.
+- mainlist context-menu
+-- added Remove ROM images (also automaticlly called after Remove ROM from database)</p>
+
+<p>FYEO 2 (2007.04.21)
+- emuConfig
+-- added new info area for emulator infos/config-tips/weblink
+- Top-Menu
+-- added "feel lucky", showing a single random game (F4)
+-- added "reload", reloading roms in view (F5)
+-- added new main-menu item for update! (eccLive!)
+- imageCenter
+-- Add/Remove popup dont put imageCenter in background
+- Personal-Tab
+-- added save/delete-confirmation!
+-- Empty note will remove entry in database
+- center all confirm/info/browser popups
+- added some info-popups on add/remove</p>
+
+<p>FYEO 1 (2007.04.20)
+- added nav-autoupdate for "show all available metadata"
+- imageCenter
+-- added contextmenu to add/remove images (rightclick on a imageSlot)
+-- added hilighting on selection
+- optimized listviews performance
+- removed logging from allfound romparsing. To many results freezes ecc
+- better integration of ecc imageConverter + statistcs in status-area</p>
+
+<p>Documentation
+2007.05.06:
+- Updated Changelists
+- New section: Troubleshooting
+ - Added "OCX Outdated"
+ - Added "File is hacked"
+2007.04.29:
+- Updated Changelist
+- Updated ECC Tools Changelists
+- Updated ECC Tools Screenshots (white editions)
+- Updated supported filetypes
+- Fixed empty lines between links
+- New section: Getting started
+ - Added "Adding ROMS to ECC"
+ - Added "Emulator assignment for platform"
+ - Added "Add/Edit ROM media info"
+ - Added "Adding images to a ROM"</p>
+
+<ul>
+<li><p>Added platforms
+-- NEC PC-6001
+-- NEC PC-8801
+-- Fujitsu FM-7</p></li>
+<li><p>ECC Startup
+v1.4.2.0:</p></li>
+<li>Added 'auto update check' on startup!</li>
+<li>This will notify the user if there is an update available!</li>
+<li>Speed up the splashscreen a little bit.</li>
+<li>Sound now start playing when splashscreen is shown.
+v1.4.2.1:</li>
+<li><p>Auto update check on startup in total silent mode!
+-- Not even an error message will be shown, in some cases there is a error
+-- caused by ECC when writing new ini at fresh installation.
+-- And you will not get bothered of error messages showing up when something goes wrong</p></li>
+<li><p>ECC Live!
+v2.1.0.5</p></li>
+<li>Added better connection messages.</li>
+<li>Added a row for 'lastupdate'.</li>
+<li>Added 'ecc start' after updating, this is only when updating from 'autoupdatecheck'.</li>
+<li><p>Resized the updatelist.</p></li>
+<li><p>Tools GLOBAL
+-- White edition
+-- Added XP look
+-- Added tooltips on the buttons
+-- Updated the OCX components!
+-- Fixed 'HALT' on Japanese / Chinese systems.
+--- The 'self validation' check on the tools that where incompatible/conflicting
+--- with japanese / chinese charsets, hopefully this is fixed now!</p></li>
+<li><p>Core components</p></li>
+<li>ECC Core update from 2.10.7.0 to v2.10.11.0</li>
+<li>Pixbufloaders from 2005.08.02 to 2007.03.26</li>
+<li>Immodules from 2005.08.02 to 2007.03.26</li>
+<li>Pango 1.5.0 to 1.6.0</li>
+<li>Updated some graphical engines</li>
+</ul>
+
+<p>Version 0.9 (2007.04.14)</p>
+
+<p>FYEO 9 (2007.04.14)
+- imageCenter - fixed problem with + sign in image filepath
+- fixed Romlist refreshing fix bug :-)
+- fixed help documentation link
+- fixed ECC 0.5.887 Beta - ECC window goes to background (For config and about!) :-)
+- deactivated button for startup config because of focus problems
+- LOGGER
+-- implemented logger checkbox/openFolder in the ecc-config
+-- loging implemented for (logged to ecc-logs/logfiletype.txt)
+--- fileparsing
+--- datfile import ecc / rc
+--- find/remove duplicate roms from db
+--- files remove/rename/copy
+--- Images add/remove
+--- Webservice romdb transfer</p>
+
+<p>FYEO 8 (2007.04.11)
+- implemented new database update mechanism for a easier database update
+-- added new database/eccdb.empty containing no data
+-- added backup folder for backups on version change!
+- Metaedit-Popup
+-- now 3 buttons available... save, save+close, save!
+-- removed year autocompletion :-)
+- fixed encoding problem if using ° signs in detail/list-view
+- fixed Romlist refreshing. Now the detail-list will not be resetet on platform (right)click.
+- reordering ecc-tools menu - adding ecc ROMid</p>
+
+<p>FYEO 7 (2007.04.07)
+- Metaedit-Popup
+- Added error output, if there is no title set!
+-- Added autocompletion for Developer, Publisher, Year
+--- all rom meta-informations are used for autocompletion
+-- removed some buttons and move them to top
+-- Added rating tab - This feature isnt implemented now!
+- Added autocompletion for search-field-selector ([DE] DEVELOPER, [PU] PUBLISHER, [YE] YEAR)
+-- only rom meta-informations of available files are used for autocompletion
+- ImageCenter
+-- fixed problem, if you add images to an game, you dont have! (metadata only)
+- Search filter
+-- reset now also reset the search field/operator
+-- optimized reset mechanism
+- InfoPane
+-- Removed image-tab -> moved direct under the preview-image
+-- changed order... now personal is second tab, third is e(xtended)Search
+- Tools Menu
+-- Added ecc image coverter from V1 to V2 structure!
+- Configuration
+-- Added new color and themes tab
+-- Added image background-color
+- Fixed ordering in listview</p>
+
+<p>FYEO 6 (2007.03.18)
+- Search filter (first menu item in rom context-menu (right mouse click))
+-- lets direct filter for a given value of the selected rom (good feature for listview with hidden panes)
+-- possiblility to reset the serach
+- imageCenter
+-- added new slot media_storage for and image of the media- cartridge, cd, disk aso.
+- added file-operations option to delete also the userimages for a deleted rom
+- info-pane
+-- added new ecc-star images for rating
+-- fileinfo, removed space, chaged Crc32 to CRC32 ;-)
+- media-edit popup
+- fixed taborder (but dont know how! :-))
+- optimized dropdown sizes</p>
+
+<p>FYEO 5 (2007.03.17)
+- fixed Alphabetic listing bug in list and detail view
+- fixed import of ecc datfile version 0.7
+- added new eccTools menu (eccLive, eccBugreport, eccTheme)
+- fixed urlencode problem in imageCenter dragndrop
+- fixed Romlist does not refresh when search is empty
+- restructured fileinfo area</p>
+
+<p>FYEO 4 (2007.03.11)
+- added fast list refresh to image config
+-- this is experimental... (paging problem) but works fine and is ULTRA FAST!!!!! :-)
+- fixed aspect ratio bug on next image in image-preview!
+- imageCenter
+-- added button to open the current image-folder
+-- fixed problem, if colors for dropzones are missing!</p>
+
+<p>FYEO 3 (2007.03.10)
+- implemented image-converter for ecc-user-images (ecc-tools/convertUserImages.bat)
+-- moves the old images to the new folder structure and create thumbnails
+-- please backup your ecc-user folder before using this batch script!
+- imageCenter
+-- fixed problem with not removed thumbnails. (eg. if gif inserted = no thumbnail)
+-- changed colors of dropzones to option<em>select</em>* editable from ecc-configuration
+-- match option now only reset platform cache
+-- optimized caching
+- configuration - new image tab added
+-- moved imagesize from ecc-tab to imgage tab
+-- removed imagesize 480x320 from dropdown
+-- added aspect ratio ooption
+- system / performance
+-- remove duplicate call of update<em>treeview</em>nav</p>
+
+<p>FYEO 2 (2007.04.21)
+- imageCenter
+-- added hilight of the current selected imagetype
+-- implemented autoselect of the choosen imgatype from info-pane image-tab</p>
+
+<p>FYEO 1 (2007.04.20)
+- Imagehandeling
+-- completely refactured image handeling
+-- optimized imagefolder structure for better performance
+-- removed old type of unsaved image-search. (to be replaced)
+-- added new images match-button to show only matching images
+--- used to search for wrong image-assignments
+--- used to see, which images are missing!
+-- implemented new imageCenter with drag-n-drop tagets
+--- possibility to direct assign an image to an image-type using drag-n-drop
+--- automatical thumnail creation
+---- thumbs are only created if needed (gifs, small images &lt;= 30 KB)
+---- thumbs are created as jpg quality 75% in 240x* (no aspect ratio)
+--- copy and move images from source implemented
+--- feature to remove images (including removing thumbnails)
+--- feature to copy/move/delete without confirmation popup
+--- optimized toggle image best fit
+- Topmenu
+-- added emu-menu for direct configuration
+-- added view-menu with view-data, view-type and show/hide areas</p>
+
+<ul>
+<li><p>Added platforms:
+-- Fairchild Channel F
+-- Game Park 32
+-- MGT Sam Coupé
+-- MSX 2
+-- Nintendo Virtual Boy
+-- Oric Atmos/Telestrat</p></li>
+<li><p>New tool: ECC ROMid</p></li>
+<li>All platform info's are updated and present</li>
+<li>ECC Documentation</li>
+<li>Split-up NeoGeo pocket BW/color.</li>
+<li>Removed the 'double' sega logo on the 'Sega Mega CD' platform.</li>
+<li>Renamed the 'Sega Genesis / Megadrive' to 'Sega Megadrive / Genesis' to fit better in the platformlist.</li>
+<li>Renamed the 'Bandai Wonderswan (B/W)' to 'Bandai Wonderswan' to fit better in the platformlist.</li>
+<li>Polished the NDS platform lost pixels and missing dropshadow.</li>
+<li><p>Sorted the 'Navigation' list alphabeticly.</p></li>
+<li><p>ECC Startup
+v1.4.1.2:</p></li>
+<li>'ECC Startup Config' can now only start once (fix)</li>
+<li>Tweaked the 'fixed' title a little bit
+v1.4.1.1:</li>
+<li>The 'minimize-2-tray' function can now be configured!
+<ul>
+<li>Run 'ecc.exe /config' to configure ECC startup!
+v1.4.1.0:</li>
+</ul></li>
+<li>ECC gets a fixed title after capturing the window!</li>
+<li>Added a nice 'minimize-2-tray' function!</li>
+<li>Added an egg... ;)
+v1.4.0.3:</li>
+<li>ECC not longer standing on TOPMOST window! (fix)
+v1.4.0.2:</li>
+<li><p>Fixed the 'freeze' bug on startup, by improving the focusing of the ECC window</p></li>
+<li><p>ECC Installer
+v1.1.0.5 (ECC v0.9):</p></li>
+<li>Compiled with new NSIS v2.25</li>
+<li>Fixed the ECC Live! run on cancel/abort installation.</li>
+<li>Enhanced the discription text visibility.</li>
+<li>Disabled the components page (cannot unselect components).</li>
+<li>Disabled the ECC exist checkup due to an idea of creating an empty/new eccdb when needed.</li>
+<li>Added option to re-structure ECC imagecenter images.</li>
+<li>Added option to add a ECC icon on the desktop.</li>
+<li>Added ROMid startmenu icon.</li>
+<li>Added extra startmenu subfolder 'links'</li>
+<li>Added shortcut to ECC documentation in startmenu.</li>
+<li>Added shortcut to ECC Theme download page in 'links'.</li>
+<li>Added shortcut to ECC support forum in 'links'.</li>
+<li>Added shortcut to imagecenter images v1 to v2 convertor in 'tools'.</li>
+<li>Moved the Camya website link to startmenu folder 'links'</li>
+</ul>
+
+<p>Version 0.8 (2007.03.05)</p>
+
+<ul>
+<li>config-popup
+<em>* Full i18 translation support
+*</em> EMU-SECTION
+<strong>* implemented new emulator parameter
+<em>*</strong> "filename only"
+<strong></em></strong> removes the path eg. "c:/emu/sf2.rom" to "sf2.rom"
+<strong><em></strong> also auto-change the basepath to the rom-directory (standard emu-directory!)
+<strong></em>* "no extension"
+<em>*</em></strong> removes the fileextesion from filename eg. "sf2.rom" to "sf2"
+<em>* ECC-SECTION
+<strong></em> added color-selector for treeview hilight color (bg/fg)
+<em></strong> Added Fontselector for global Gui-Fonts
+*</em>* added button to access startup config</li>
+<li>added true option state (yes, no, value) output to the detail view</li>
+<li>added background-colors to all colums (also image columns)</li>
+<li>fixed order in detail view - some meta-fields are flipped</li>
+<li>renamed ego-shooter to first-person shooter</li>
+<li>optimized pixbuf and textrenderer in treeview</li>
+<li>Polished platform images
+** Removed some artifacts, lost pixels and redone some unsharp images!</li>
+<li>Image transparity and alpha channel
+<em>* All images have been REDONE with image transparity and alpha channel!
+*</em> This is a neat feature.....also for the themes , so NO MORE WHITE BORDERS!!</li>
+<li>Improved rating image
+** Slightly improved the rating image, by darkening the border and faded it some more!</li>
+<li>Improved cell image
+** Slightly improved the cell image, by giving it a border, and used some gradient overlay for extra eye candy!</li>
+<li><p>Added platforms
+<em>* Sinclair ZX Spectrum
+*</em> Sega Mega-CD
+<em>* Sega Saturn
+*</em> Emerson Arcadia 2001
+<em>* Magnavox Odyssey 2
+*</em> Philips CDI
+<em>* Sega Dreamcast
+*</em> Nintendo Gamecube
+** Vtech Creativision</p></li>
+<li><p>ECC Core</p></li>
+<li>Update to GTK v2.10.7 (2007.01.09)</li>
+<li>Libgdk-0 &amp; Libgtk-0
+<ul>
+<li>A small core update that eliminates the error message:</li>
+<li>'This application cannot run because libgdk-0.dll cannot be found, reinstalling this application can solve this problem'</li>
+</ul></li>
+<li>SVG Support for themes</li>
+<li><p>Pango (language)</p>
+
+<ul>
+<li>Pango is a 'font renderer' for GTK, used to display the correct fonts to a specific 'non latin' language.</li>
+</ul></li>
+<li><p>ECC Startup
+v1.4.0.0:</p></li>
+<li>Fixed the registry writing, when not in 'admin' mode (HKLM --> HKCU) (fix)</li>
+<li>Removed 'first startup' pop-up if user wants startmenu icons (ECC installation takes care of this)</li>
+<li>Removed some commands:
+<ul>
+<li>Removed /website (ECC installation takes care of this)</li>
+<li>Removed /starticon (ECC installation takes care of this)</li>
+<li>Removed /disclaimer (Tools and startup are distributed onder the same license)
+v1.4.0.1:</li>
+</ul></li>
+<li>Removed the disclaimer line from the 'about' box.</li>
+<li>Deleted Some old code.</li>
+<li><p>Splash image</p>
+
+<ul>
+<li>Changed the footer line.</li>
+<li>Syncronized the ECC icon with the background.</li>
+<li>Now locked with MD5 Hash (unchangeable).</li>
+</ul></li>
+<li><p>ECC Theme select
+v1.0.0.7</p></li>
+<li>Updated for the 'new GTK v2.10.7 engine', corrected the path to '2.10.0'
+v1.0.0.8</li>
+<li>Updated ECC Theme for the 'Global GUI font' config for ECC v0.7.5+
+v1.0.0.9</li>
+<li><p>Auto highlight theme in list on startup has been fixed.</p></li>
+<li><p>ECC Live!
+v2.0.0.1:</p></li>
+<li>Handling of the separate INI files!
+<ul>
+<li>The file 'ecc<em>local</em>update_info.ini' has been added, ECC Live! keep it's track in this file.</li>
+</ul></li>
+<li>Fixed a small bug that sould say 'No update available...' and not 'Waiting...' when no updates found.
+v2.0.0.2:</li>
+<li>Fixed a bug where ECC Live! crashed when clicked on the update list when updating/downloading.</li>
+<li>Fixed a bug where old file(s) should be deleted on the next update that uses a delete list.</li>
+<li>Made some fields a bit longer, also made the list a bit bigger.</li>
+<li>Added a 'kickstart', when updating ECC Live!, the new version wil directly continue downloading.</li>
+<li><p>Some text strings have been adjusted.</p></li>
+<li><p>ECC Bugreport
+v1.0.0.8:</p></li>
+<li>Increased the 'local' INI size to be sent, otherwise Bugreport won't send the report (fix)</li>
+<li>Adjusted some text messages.</li>
+</ul>
+
+<p>Version 0.71 (2007.02.10)</p>
+
+<ul>
+<li>added search field publisher</li>
+<li>added remove duplicate roms to context-menu</li>
+<li>added error output for found invalid zip files</li>
+<li>config-popup
+** (ecc) added color selectors for event-select boxes</li>
+<li>fixed romcenter datfile import bug</li>
+<li>fixed missing indices to database for better performance</li>
+</ul>
+
+<p>Version 0.7 (2007.02.04)</p>
+
+<ul>
+<li>added config popup
+<em>* platform / emulators
+<strong></em> implemented activation/deactivation of platforms from emuconfig popup
+<em></strong> removed old platform treeview from emuControlCenter config tab
+<strong></em> start rom with (alternate emulator)
+<em></strong> global, extension and alternate emus available
+<strong></em> emus can use fallbacks and can overwrite parameters!!!
+<em></strong> added error output
+<strong></em> added indicator for escape and 8.3
+<em>* emuControlCenter
+*</strong> moved from old tab to new config popup
+<strong></em> added color chooser and font selector
+** Datfile
+*</strong> Added romcenter clean name option to frontend</li>
+<li>extend rom context menu
+<em>* added description in emu-selector context menu for better overview
+*</em> doubleclick on rom without emu opens config</li>
+<li>added platform-icons to list view</li>
+<li>added ecc.exe startup-config to mainmenu</li>
+<li>added new folder "ecc-tools"</li>
+<li>added hotkey F5 and ALT-R for imagereload (fixed F5)</li>
+<li>added meta-fields (metaedit/export/import/romdb)
+<em>* publisher
+*</em> storage type (savegame)</li>
+<li>added extension gen to genesis</li>
+<li>added fileextesion jma to snes</li>
+<li>added missing flags for language dropdown</li>
+<li>added new versions of ecc-tools
+<em>* eccTheme - a theme selector
+*</em> eccLive - for direct updates from internet
+** eccBugreport - for direct bugreports to the ecc developer</li>
+<li>optimized image-error handling
+** for unknown imagetypes and for missing files</li>
+<li>complete refactored startRom</li>
+<li>complete refactored the ini-manager</li>
+<li>fixed bug with not starting on first time!
+** I´ve missed the default ecc-user path in the ecc_general.ini</li>
+<li>fixed extension to parser assignment for wonderswan bw/color</li>
+<li>fix null byte problem in data-tab</li>
+<li>fixed predifined best emu for 32X</li>
+<li>fixed open zip files bug</li>
+</ul>
+
+<p>Version 0.6  (2007.01.13)</p>
+
+<ul>
+<li>Update romdb - the internet rom/emu-metadatabase!
+<em>*www.camya.com/eccdb/
+*</em> Added search functions
+<em>* optimized overview
+*</em> added web2.0 clouds  </li>
+<li>Added french languages files created by Cyrille</li>
+<li>fixed EDIT-Window always up focus problem.</li>
+<li>added default emulator
+** optimize the ini-files for all platforms</li>
+<li>added commandline parameter support for emulators</li>
+<li>added shortcuts</li>
+<li>ALT-A or ALT-Ins = Add new roms</li>
+<li>ALT-X or ALT-Del = Remove rom from database</li>
+<li>ALT-E = Edit</li>
+<li>ALT-B = Bookmark</li>
+<li>ALT-F = search focus!</li>
+<li>added simple listview (default 100 results)
+<em>* fixed graphical bug on 1024x768 (FYEO V2)
+*</em> reorderable
+<em>* cols resizeable!
+*</em> added toggle between detail and list view
+<em>* added some more fiels for this view!
+*</em>* because of an php-gtk2 bug, it is not possible to do this on the fly yet!</li>
+<li>Fixed a little history ini bug!
+** Autoupdate was not saved if never used!</li>
+<li>disable buttons in imagepreview when reached end</li>
+<li>try to catch import bug (playstation 1)</li>
+<li>Platforms
+<em>* added Atari 8-bit Computers a8bit
+<strong></em> added ecc<em>platform</em>a8bit_info.ini
+<em></strong> Removed A400/A800 (allready in a8bit)
+*</em> extensions added for MSX, NES, Sharp X68000
+** changed image of PC Engine</li>
+<li>Added categories:
+<em>* "Action Adventure"
+*</em> "Trading Simulation",
+<em>* "3D Shooter",
+*</em> "Ego Shooter",
+<em>* "Sports/other",
+*</em> "Jump n Run 3D".</li>
+</ul>
+
+<p>Version 0.5.96 (2007.01.11)</p>
+
+<ul>
+<li>Update romdb - the internet rom/emu-metadatabase!
+<em>* www.camya.com/eccdb/
+*</em> Added search functions
+<em>* optimized overview
+*</em> added web2.0 clouds :-)</li>
+<li>Added french languages files created by Cyrille</li>
+<li>fixed EDIT-Window always up focus problem.</li>
+<li>added default emulator
+** optimize the ini-files for all platforms</li>
+<li>added commandline parameter support for emulators</li>
+<li>added shortcuts</li>
+<li>ALT-A or ALT-Ins = Add new roms</li>
+<li>ALT-X or ALT-Del = Remove rom from database</li>
+<li>ALT-E = Edit</li>
+<li>ALT-B = Bookmark</li>
+<li>ALT-F = search focus!</li>
+<li>added simple listview (default 100 results)
+<em>* fixed graphical bug on 1024x768 (FYEO V2)
+*</em> reorderable
+<em>* cols resizeable!
+*</em> added toggle between detail and list view
+<em>* added some more fiels for this view!
+*</em>* because of an php-gtk2 bug, it is not possible to do this on the fly yet!</li>
+<li>Fixed a little history ini bug!
+** Autoupdate was not saved if never used!</li>
+<li>disable buttons in imagepreview when reached end</li>
+<li>try to catch import bug (playstation 1)</li>
+<li>Platforms
+<em>* added Atari 8-bit Computers a8bit
+<strong></em> added ecc<em>platform</em>a8bit_info.ini
+<em></strong> Removed A400/A800 (allready in a8bit)
+*</em> extensions added for MSX, NES, Sharp X68000
+** changed image of PC Engine</li>
+<li>Added categories:
+<em>* "Action Adventure"
+*</em> "Trading Simulation",
+<em>* "3D Shooter",
+*</em> "Ego Shooter",
+<em>* "Sports/other",
+*</em> "Jump n Run 3D"</li>
+</ul>
+
+<p>Version 0.5.95 (2007.01.06)</p>
+
+<ul>
+<li>Implemented "user table"
+** adding/updating rom notes implemented</li>
+<li>Implemented "best fit" in imageCenter
+** option will be written to history.ini</li>
+<li>Implemented "image selection" saving
+** The last imagetype-selection is saved into the history.ini</li>
+<li>Shortcuts implemented
+<em>* F11 Hide navigation area
+*</em> F12 Hide mediainfo area
+<em>* F6 Show media
+*</em> F7 Show bookmarks
+** F8 Show history</li>
+<li>implemented internal database updator for eccLive updates!</li>
+<li>fixed "Number of pages error"</li>
+<li>deactivated support-banner (support banner bug)</li>
+<li>adding platforms
+<em>* Amstrad CPC
+*</em> Panasonic 3DO
+** Sharp X68000</li>
+</ul>
+
+<p>Version 0.5.9 (2007.01.01)</p>
+
+<ul>
+<li>Include new Tab PERSONAL
+<em>* Rom played count
+*</em> Rom played last time
+<em>* Rom rating
+*</em> Rom bookmark status</li>
+<li>Improve config updates. Please resave you genesis/megadrive config!</li>
+<li>Improvements in ROMDB
+<em>* Now all platforms supported by ecc will be accepted
+*</em> Limit length of filename for non breaking divs.
+** Update statistics (platfom, categories)</li>
+</ul>

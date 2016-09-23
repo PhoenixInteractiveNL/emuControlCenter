@@ -1,0 +1,53 @@
+<h2>EXPORT DATABASE DATA TO DAT FILE (example expand exported metadata)</h2>
+
+<hr />
+
+<h3>DEFINE NEW LINE TERMINATOR</h3>
+
+<p>Add lineterminator for new version, 4 extra fields are exported in ECC v1.20+</p>
+
+<p>Edit file: ecc-system\manager\cDatFileImport.php, around line 710, add:</p>
+
+<pre><code>case '1.2003':
+  $terminator = 37;
+break;
+</code></pre>
+
+<h3>DEFINE CSV LOCATION TO ECC DATABASE COLUMNS</h3>
+
+<p>around line 780, add:</p>
+
+<pre><code>// v1.2003
+if ($version &gt;= '1.2003') {
+  $data['perspective'] = (($res[33] != "")) ? $res[33] : "NULL";
+  $data['visual'] = (($res[34] != "")) ? $res[34] : "NULL";
+  $data['gameplay'] = (($res[35] != "")) ? $res[35] : "NULL";
+  $data['description'] = (($res[36] != "")) ? $res[36] : "NULL";
+}
+</code></pre>
+
+<h3>IMPORT DATA TO ECC DATABASE COLUMNS</h3>
+
+<p>around line 900, add:</p>
+
+<pre><code>perspective,
+visual,
+gameplay,
+description
+</code></pre>
+
+<p>around line 940 (add metadate function), add:</p>
+
+<pre><code>'".sqlite_escape_string($data['perspective'])."',
+'".sqlite_escape_string($data['visual'])."',
+'".sqlite_escape_string($data['gameplay'])."',
+'".sqlite_escape_string($data['description'])."'
+</code></pre>
+
+<p>around line 980 (update metadata function), add:</p>
+
+<pre><code>perspective = ".sqlite_escape_string($data['perspective']).",
+visual = ".sqlite_escape_string($data['visual']).",
+gameplay = ".sqlite_escape_string($data['gameplay']).",
+description = ".sqlite_escape_string($data['description']).",
+</code></pre>

@@ -1,0 +1,39 @@
+## Small History of emuControlCenter
+***
+### 2005
+Andreas Scheibel(DE) Starts developing ecc in late november 2005, using python as programming-language. This attempt was canceled in late december 2005.
+
+***
+### 2006
+In may 2006, ecc was written from the scratch in PHP-GTK2 to take a look, if PHP-GTK2 is useable for this kind of project.
+In late October 2006, the first public beta of emuControlCenter arrives.
+Sebastiaan Ebeltjes (NL) saw a potential in the program ECC and becomes the first beta tester, Sebastiaan tested ECC and made some requests what other emulator frontends lack or fail to do.
+This was a succes formula!, giving ECC a good start, a real good program was giving birth!
+The first release of ECC to the public was a fact!, v0.5.897 Beta was released on 29.12.2006.
+
+***
+### 2007-2009
+Andreas Scheibel and Sebastiaan Ebeltjes worked continuously on ECC, giving it dozens of new features, tools and platforms!
+Mostly Andreas made the 'core' PHP changes and Sebastiaan made many tools in VB6 (later on Autoit3) language and added new platforms.
+ECC grows fast!, leaving most frontends far behind, ECC is at this point the best frontend that could be found, supporting over more then 120 platforms!
+
+***
+### 2009-2012
+In 2009 Andreas Scheibel has left the ECC project, due to a burn-out (mail 2013).
+Still many bugs remain in ECC 'beta', but Sebastiaan continues working on ECC, also he put ECC out of the 'beta' state when releasing v1.1 on 08.07.2012.
+
+***
+### 2013
+Many bugfixes and new features are implemented troughout the year like the 'MobyGames Importer (MGI)' to grab developer/publisher/year and description of your roms from MobyGames.com
+
+***
+### 2014
+Many bugfixes and new features are implemented troughout the year, using the MPlayer to show videos snaps of your roms, aslo many improvements of MobyGames Importer.
+
+***
+### 2016
+This is an important step into opensource, Sebastiaan Ebeltjes made ECC really free by removing it's closed source on ECC CORE and ECC.EXE, ECC is waiting te be improved by the rest of the world now!
+Also ECC SOURCE files have been added to ecc, including Autoit GUI's , ECC images and lots more!
+
+The next BIG step this year will be to implement emuDownloadCenter (EDC) into ECC, this is a automatic emulator downloader and installer!
+As of today still many bugs are fixed and new features are added!, visit the forum for more info!

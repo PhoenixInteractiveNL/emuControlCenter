@@ -339,8 +339,6 @@ $i18n['popupConfig'] = array(
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
 		"Третьи стороны",
-	'startConfThirdPartyXpadder' =>
-		"Запустить 'xpadder' при закрузке",
 
     /* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
@@ -409,9 +407,19 @@ $i18n['popupConfig'] = array(
 		"Database folder:",
 	'DatabaseFolderButton' =>	
 		"Change folder",		
-    'dialogDaemontoolsFolder' =>	
-		"Please locate Daemontools",
 	'dialogDatabaseFolder' =>	
 		"Select a map to store the database",
+
+	/* 1.21 */		
+	'extProgDaemontoolsButton' =>
+		"Select",	
+	'extProgJoyEmulatorLabel' =>
+		"Joystick emulator:",	
+	'startConfJoyEmulatorLabel' =>	
+		"Start Joystick emulator on ECC startup",
+    'dialogJoyEmulatorFolder' =>	
+		"Locate Joystick emulator executable",
+	'extProgJoyEmulatorbutton' =>
+		"Select",	
 );
 ?>

@@ -130,34 +130,28 @@ class GuiPopConfig extends GladeXml {
 		$this->buttonSave->connect_simple_after('clicked', array($this, 'onButtonSave'));
 		$this->buttonCancel->connect_simple_after('clicked', array($this, 'onButtonCancel'));
 		$this->cfgNotepad->connect('switch-page', array($this, 'onChangeTab'));
-
 		$this->confEccUserPathButton->connect_simple('clicked', array($this, 'onSelectUserPath'));
 		$this->extProgDaemontoolsButton->connect_simple('clicked', array($this, 'extProgDaemontoolsFind'));
+		$this->extProgJoyEmulatorbutton->connect_simple('clicked', array($this, 'extProgJoyEmulatorbuttonFind'));
 		$this->DatabaseFolderButton->connect_simple('clicked', array($this, 'DatabaseFolderSelect'));
 		$this->emuAssignGlobalEditEccScript->connect_simple_after('clicked', array($this, 'openEccScriptEditor'));
 		$this->emuAssignGlobalEccScriptOptions->connect_simple_after('clicked', array($this, 'openEccScriptOptions'));
 		$this->emuAssignGlobalEccScriptRefresh->connect_simple_after('clicked', array($this, 'updateEccScriptState'));
 		$this->emuAssignGlobalDeleteEccScript->connect_simple_after('clicked', array($this, 'deleteEccScript'));
 		$this->emuAssignGlobalEnableEccScript->connect_simple_after('toggled', array($this, 'updateEccScriptState'));
-
-		# zip auto unpack
 		$this->emuAssignGlobalCheckZipUnpackOpen->connect_simple_after('clicked', array($this, 'openUnpackFolder'));
 		$this->emuAssignGlobalCheckZipUnpackActive->connect_simple_after('toggled', array($this, 'updateUnpackState'));
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_sensitive(false);
 		$this->emuAssignGlobalCheckZipUnpackAll->set_sensitive(false);
 		$this->emuAssignLabelZipUnpack->set_sensitive(false);
-
 		$this->emuStartButton->connect_simple_after('clicked', array($this, 'startEmulator'));
 
 		$this->guiPopConfig->set_title(I18N::get('popupConfig', 'winTitleConfiguration'));
-
 		$this->buttonSave->set_label(I18N::get('global', 'save'));
 		$this->buttonCancel->set_label(I18N::get('global', 'cancel'));
-
 		$this->lbl_emu_platform_name->set_text(I18N::get('popupConfig', 'lbl_emu_platform_name'));
 		$this->lbl_emu_platform_category->set_text(I18N::get('popupConfig', 'lbl_emu_platform_category'));
 		$this->emuPlatformActiveState->set_label(I18N::get('popupConfig', 'emuPlatformActiveState'));
-
 		$this->lbl_emu_assign_path->set_text(I18N::get('popupConfig', 'lbl_emu_assign_path'));
 		$this->emuStartButton->set_label(I18N::get('global', 'start').' '.I18N::get('global', 'emulator'));
 		$this->emuPathButton->set_label(I18N::get('popupConfig', 'btn_emu_assign_path_select'));
@@ -168,45 +162,35 @@ class GuiPopConfig extends GladeXml {
 		$this->emuAssignGlobalFilenameOnly->set_label(I18N::get('popupConfig', 'lbl_emu_assign_nameonly'));
 		$this->emuAssignGlobalNoExtension->set_label(I18N::get('popupConfig', 'lbl_emu_assign_noextension'));
 		$this->emuAssignGlobalExecuteInEmuFolder->set_label(I18N::get('popupConfig', 'lbl_emu_assign_executeinemufolder'));
-
 		$this->emuAssignLabelEccScript->set_markup('<b>'.I18N::get('popupConfig', 'lbl_emu_assign_use_eccscript').'</b>');
 		$this->emuAssignGlobalEditEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_create_eccscript'));
 		$this->emuAssignGlobalEccScriptOptions->set_label(I18N::get('popupConfig', 'emuAssignGlobalEccScriptOptions'));
 		$this->emuAssignGlobalEccScriptRefresh->set_label(I18N::get('popupConfig', 'lbl_emu_assign_refresh_eccscript'));
 		$this->emuAssignGlobalDeleteEccScript->set_label(I18N::get('popupConfig', 'lbl_emu_assign_delete_eccscript'));
 		$this->emuAssignGlobalEnableEccScript->set_label(I18N::get('popupConfig', 'emuAssignGlobalEnableEccScript'));
-
-		# zip unpack
 		$this->emuAssignLabelZipUnpack->set_label(I18N::get('popupConfig', 'emuAssignLabelZipUnpack'));
 		$this->emuAssignGlobalCheckZipUnpackActive->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackActive'));
 		$this->emuAssignGlobalCheckZipUnpackSkip->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackSkip'));
 		$this->emuAssignGlobalCheckZipUnpackOpen->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackOpen'));
-
 		$this->emuAssignGlobalCheckZipUnpackAll->set_label(I18N::get('popupConfig', 'emuAssignGlobalCheckZipUnpackAll'));
 		$this->emuUnpackNotelabel->set_label(I18N::get('popupConfig', 'emuUnpackNotelabel'));
-
 		$this->emuAssignFileextLabel->set_markup('<b>'.I18N::get('popupConfig', 'emuAssignFileextLabel').'</b>');
 		$this->emuAssignPreviewLabel->set_markup('<b>'.I18N::get('popupConfig', 'emuAssignPreviewLabel').'</b>');
-
 		$this->tab_label_platforms->set_label(I18N::get('popupConfig', 'tab_label_platforms'));
 		$this->tab_label_general->set_label(I18N::get('popupConfig', 'tab_label_general'));
 		$this->tab_label_datfiles->set_label(I18N::get('popupConfig', 'tab_label_datfiles'));
 		$this->tab_label_multimedia->set_label(I18N::get('popupConfig', 'tab_label_multimedia'));
 		$this->tab_label_colorsandfonts->set_label(I18N::get('popupConfig', 'tab_label_colorsandfonts'));
 		$this->tab_label_themes->set_label(I18N::get('popupConfig', 'tab_label_themes'));
-
 		$this->tabEmuConfig->set_label(I18N::get('popupConfig', 'tabEmuConfig'));
 		$this->tabEmuPlatformSettings->set_label(I18N::get('popupConfig', 'tabEmuPlatformSettings'));
 		$this->tabEmuInfos->set_label(I18N::get('popupConfig', 'tabEmuInfos'));
-
 		$this->lbl_emu_tips->set_markup('<b>'.I18N::get('popupConfig', 'lbl_emu_tips').'</b>');
 		$this->lbl_emu_tips_ecc->set_markup('<b>'.I18N::get('popupConfig', 'lbl_emu_tips_ecc').'</b>');
 		$this->lbl_img_opt_conv->set_markup('<b>'.I18N::get('popupConfig', 'lbl_img_opt_conv').'</b>');
-
 		$this->lbl_col_opt_global->set_markup('<b>'.I18N::get('popupConfig', 'lbl_col_opt_global').'</b>');
 		$this->lbl_col_opt_list->set_markup('<b>'.I18N::get('popupConfig', 'lbl_col_opt_list').'</b>');
 		$this->lbl_col_opt_options->set_markup('<b>'.I18N::get('popupConfig', 'lbl_col_opt_options').'</b>');
-
 		$this->lbl_img_opt_conv_quality->set_label(I18N::get('popupConfig', 'lbl_img_opt_conv_quality'));
 		$this->lbl_img_opt_conv_quality_def->set_markup('<b>%</b> '.sprintf(I18N::get('popupConfig', 'lbl_img_opt_conv_quality_def%s'), '80'));
 		$this->lbl_img_opt_conv_minsize->set_label(I18N::get('popupConfig', 'lbl_img_opt_conv_minsize'));
@@ -218,7 +202,6 @@ class GuiPopConfig extends GladeXml {
 		$this->emuAssignGlobalUseCueFile->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalNoExtension->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalExecuteInEmuFolder->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
-
 		$this->emuAssignGlobalParam->connect_simple_after('changed', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalPath->connect_simple_after('changed', array($this, 'updateEmuPreview'));
 		$this->emuAssignGlobalEnableEccScript->connect_simple_after('toggled', array($this, 'updateEmuPreview'));
@@ -277,7 +260,8 @@ class GuiPopConfig extends GladeXml {
 		$this->startConfUpdateImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_update.png'));
 		$this->startConfMinimizeImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_minimize.png'));
 		$this->startConfDeleteUnpackedImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_clean.png'));
-		$this->startConfThirdPartyXpadderImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_xpadder.png'));
+		$this->startConfJoyEmulatorImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_trigger.png'));
+		$this->extProgJoyEmulatorImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_joystick.png'));
 		$this->DatabaseFolderImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_database.png'));
 		// TAB DAT files
 		$this->confEccDatNameStripImage->set_from_file(FACTORY::get('manager/GuiTheme')->getThemeFolder('icon/ecc_config_clean.png'));
@@ -1075,11 +1059,10 @@ class GuiPopConfig extends GladeXml {
 		}
 		$this->confEccUserPath->set_text($user_folder);
 
-		// ECC v1.13 Build 12
-		$this->extProgDaemontoolsTextbox->set_text($iniManager->getKey('DAEMONTOOLS', 'daemontools_exe'));
-		// ECC v1.20
-		$this->DatabaseFolderTextbox->set_text($iniManager->getKey('USER_DATA', 'database_path'));
-
+		$this->extProgDaemontoolsTextbox->set_text($iniManager->getKey('DAEMONTOOLS', 'daemontools_exe')); // ECC v1.13 Build 12
+		$this->DatabaseFolderTextbox->set_text($iniManager->getKey('USER_DATA', 'database_path')); // ECC v1.20
+		$this->extProgJoyEmulatorTextbox->set_text($iniManager->getKey('USER_DATA', 'joyemulator_exe'));  // ECC v1.21
+		
 		$text_cuttoff = $iniManager->getKey('USER_SWITCHES', 'text_cuttoff');
 		if ($text_cuttoff < 0 or $text_cuttoff > 100 or $text_cuttoff == "" or !is_numeric($text_cuttoff)) { //set default
 			$this->tabGeneralImageTabTcuttValue->set_text("50"); //Default value
@@ -1222,7 +1205,6 @@ class GuiPopConfig extends GladeXml {
 		}
 	}
 
-
 	public function storeEccData($hidePopup = true) {
 		# USER_DATA
 		$this->globalIni['USER_DATA']['base_path'] = $this->confEccUserPath->get_text();
@@ -1242,7 +1224,8 @@ class GuiPopConfig extends GladeXml {
 
 		# External Programs
 		$this->globalIni['DAEMONTOOLS']['daemontools_exe'] = $this->extProgDaemontoolsTextbox->get_text();
-
+		$this->globalIni['USER_DATA']['joyemulator_exe'] = $this->extProgJoyEmulatorTextbox->get_text();
+		
 		# Video settings
 		$this->globalIni['VIDEOPLAYER']['eccVideoPlayer_enable'] = $this->eccVideoPlayer_enable->get_active();
 		$this->globalIni['VIDEOPLAYER']['eccVideoPlayer_sound'] = $this->eccVideoPlayer_sound->get_active();
@@ -1471,7 +1454,6 @@ class GuiPopConfig extends GladeXml {
 		$originalMinSize =  $iniManager->getKey('USER_SWITCHES', 'image_thumb_original_min_size');
 		if (!$originalMinSize) $originalMinSize = 30000;
 		$this->cfgImgThumbMinBytes->set_value($originalMinSize);
-
 	}
 
 	public function storeImgData($hidePopup = true) {
@@ -1508,6 +1490,14 @@ class GuiPopConfig extends GladeXml {
 		if ($path_new) $this->extProgDaemontoolsTextbox->set_text($path_new);
 	}
 
+	public function extProgJoyEmulatorbuttonFind() {
+		$oOs = FACTORY::get('manager/Os');
+		$path = realpath($this->extProgJoyEmulatorTextbox->get_text());
+		$title = I18N::get('popupConfig', 'dialogJoyEmulatorFolder');
+		$path_new = $oOs->openChooseFileDialog($path, $title, array('exe (*.exe)' => '*.exe'));
+		if ($path_new) $this->extProgJoyEmulatorTextbox->set_text($path_new);
+	}
+	
 	public function initDatData() {
 		if (!$this->datDataInit) $this->datDataInit = true;
 		else return true;
@@ -1562,15 +1552,16 @@ class GuiPopConfig extends GladeXml {
 		$this->startConfSoundPreview->set_label(I18N::get('global', 'preview'));
 
 		// Third Party
-		$this->startConfThirdPartyXpadderLabel->set_label(I18N::get('popupConfig', 'startConfThirdPartyXpadder'));
+		$this->extProgDaemontoolsButton->set_label(I18N::get('popupConfig', 'extProgDaemontoolsButton'));
+		$this->extProgJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorLabel'));
+		$this->startConfJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'startConfJoyEmulatorLabel'));
+		$this->extProgJoyEmulatorbutton->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorbutton'));
+		
 		$iniManager = FACTORY::get('manager/IniFile');
-
 		$sectionExists = $iniManager->getKey('ECC_STARTUP');
-
+		
 		$optSound = $iniManager->getKey('ECC_STARTUP', 'startup_sound');
-
 		$optSound = (!$sectionExists) ? 'ecc-system/sound/ecc_sound_startup_low_volume.mp3' : $optSound;
-
 		$this->startConfSoundPath->set_text($optSound);
 
 		$optUpdate = $iniManager->getKey('ECC_STARTUP', 'startup_update_check');
@@ -1585,11 +1576,10 @@ class GuiPopConfig extends GladeXml {
 		$OptDeleteUnpacked = (!$sectionExists) ? true : $OptDeleteUnpacked;
 		$this->startConfDeleteUnpacked->set_active($OptDeleteUnpacked);
 
-		// Third Party
-		$optStartExpadder = $iniManager->getKey('ECC_STARTUP', 'startup_xpadder');
-		$optStartExpadder = ($optStartExpadder === false || !$sectionExists) ? true : $optStartExpadder;
-		$this->startConfThirdPartyXpadder->set_active($optStartExpadder);
-
+		// Third Party Joystick emulator
+		$optStartJoyEmulator = $iniManager->getKey('ECC_STARTUP', 'startup_joyemulator');
+		$optStartJoyEmulator = ($optStartJoyEmulator === false || !$sectionExists) ? true : $optStartJoyEmulator;
+		$this->startConfJoyEmulator->set_active($optStartJoyEmulator);
 
 		$this->updateEccSoundState(true);
 	}
@@ -1599,7 +1589,7 @@ class GuiPopConfig extends GladeXml {
 		$this->globalIni['ECC_STARTUP']['startup_update_check'] = (int)$this->startConfUpdate->get_active();
 		$this->globalIni['ECC_STARTUP']['minimize_to_tray'] = (int)$this->startConfMinimize->get_active();
 		$this->globalIni['ECC_STARTUP']['delete_unpacked'] = (int)$this->startConfDeleteUnpacked->get_active();
-		$this->globalIni['ECC_STARTUP']['startup_xpadder'] = (int)$this->startConfThirdPartyXpadder->get_active();
+		$this->globalIni['ECC_STARTUP']['startup_joyemulator'] = (int)$this->startConfJoyEmulator->get_active();
 	}
 
 	public function updateEccSoundState($init=false){
@@ -1656,8 +1646,6 @@ class GuiPopConfig extends GladeXml {
 		$this->updateThemePreview($selectedEccTheme);
 
 		$this->comboEccTheme->connect_after("changed", array($this, 'updateThemePreview'));
-
-
 	}
 
 	public function storeThemeData($hidePopup = true) {
@@ -1697,7 +1685,6 @@ class GuiPopConfig extends GladeXml {
 
 		$date = ($themeInfo['date']) ? date('Y.m.d', strtotime($themeInfo['date'])) : '';
 		$this->textThemeDate->set_text($date);
-
 	}
 
 
@@ -1717,6 +1704,5 @@ class GuiPopConfig extends GladeXml {
     public function __get($widgedName) {
     	return self::get_widget($widgedName);
     }
-
 }
 ?>

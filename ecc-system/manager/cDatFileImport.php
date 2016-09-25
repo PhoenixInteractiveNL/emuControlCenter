@@ -614,9 +614,6 @@ class DatFileImport extends App {
 		}
 	}
 
-	/*
-	*
-	*/
 	public function save_language_romcenter($mdata_id, $languages) {
 		foreach ($languages as $void => $lang_ident) {
 			$q = "SELECT * FROM mdata_language WHERE mdata_id=".$mdata_id." AND lang_id='".$lang_ident."'";
@@ -710,14 +707,13 @@ class DatFileImport extends App {
 					$terminator = 36;
 					break;					
 			}
-
+			
 			$is_valid = (isset($res[$terminator]) && $res[$terminator] == '#') ? true : false;
 
 			// if eccident is set, dont import not matching items.
 			if ($this->eccident && $this->eccident!=$res[0]) continue;
 
 			if ($is_valid) {
-
 				$data = array();
 				$data['eccident'] = 	strtolower($res[0]);
 				$data['name'] = 		trim($res[1]);
@@ -760,7 +756,6 @@ class DatFileImport extends App {
 				$data['media_count'] = "NULL";
 				$data['region'] = "NULL";
 				$data['category_base'] = "NULL";
-				$data['dump_type'] = "NULL";
 				if ($version >= '0.98') {
 					$data['programmer'] = (($res[24] != "")) ? $res[24] : "";
 					$data['musican'] = (($res[25] != "")) ? $res[25] : "";
@@ -773,11 +768,15 @@ class DatFileImport extends App {
 				}
 
 				// v1.1
+				$data['dump_type'] = "NULL";
 				if ($version >= '1.1') {
 					$data['dump_type'] = (($res[32] != "")) ? $res[32] : "NULL";
 				}
 
 				// v1.2003
+				$data['perspective'] = "NULL";
+				$data['visual'] = "NULL";
+				$data['description'] = "";
 				if ($version >= '1.2003') {
 					$data['perspective'] = (($res[33] != "")) ? $res[33] : "NULL";
 					$data['visual'] = (($res[34] != "")) ? $res[34] : "NULL";

@@ -1846,7 +1846,9 @@ class App extends GladeXml {
 		if ($this->status_obj->init()) {
 
 			if (!$eccDatfileData) {
-				$path_history = $this->ini->getHistoryKey('eccMediaDat_import');
+				$path_history = $this->ini->getHistoryKey('eccMediaDat_import');		
+				if (!file_exists($path_history)) { $path_history = "/"; } // Fix if path/file does not exist (generates no dialog that get's stuck)
+				
 				$title = sprintf(I18N::get('popup', 'dat_import_filechooser_title%s'), $platfom);
 
 				$shorcutFolder = $this->ini->getShortcutPaths($this->_eccident);
@@ -3717,9 +3719,9 @@ class App extends GladeXml {
 				if (!$test) $test = 'EMU';
 				$this->oGuiConfig->open($test, $this->_eccident);
 				break;
-			case 'IMPORT_ECC_ROMDB':
-				$this->executeRomMenuCommands('WEBSERVICE', 'GET_ROMDB_DATFILE');
-				break;
+//			case 'IMPORT_ECC_ROMDB':
+//				$this->executeRomMenuCommands('WEBSERVICE', 'GET_ROMDB_DATFILE');
+//				break;
 			case 'IMPORT_CONTROLMAME':
 				$isMultiRomPlatform = $this->ini->isMultiRomPlatform($this->_eccident);
 				$this->importDatControlMame($this->_eccident, array('Control MAME (CM) datfiles (*.dat)'=>'*.dat'), $isMultiRomPlatform);

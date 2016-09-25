@@ -33,7 +33,7 @@ AutoItSetOption("WinTitleMatchMode",3)
 ; -------------------------------------
 ; Define baked-in variables
 ; -------------------------------------
-Global $ecc_file_version =				"3.0.0.2"
+Global $ecc_file_version =				"3.0.0.3"
 Global $ecc_messagebox_title =			"ECC"
 Global $ecc_php_file = 					@Scriptdir & "\ecc-system\ecc.php"
 Global $ecc_php_file_q = 				Chr(34) & $ecc_php_file & Chr(34)
@@ -62,10 +62,8 @@ Global $ecc_localversion_update_q=		Chr(34) & $ecc_localversion_update & Chr(34)
 Global $ecc_easteregg_icon =			@ScriptDir & "\ecc-core\php-gtk2\ext\php_icn.dll"
 Global $ecc_image_converter =			@Scriptdir & "\ecc-system\manager\tEccImageGen.php"
 Global $ecc_image_converter_q =			Chr(34) & $ecc_image_converter & Chr(34)
-Global $ecc_thirdparty_xpadder_exe =	@ScriptDir & "\ecc-core\thirdparty\xpadder\xpadder.exe"
 Global $ecc_navigation_ini =			@ScriptDir & "\ecc-system\system\config\ecc_navigation.ini"
 Global $3rdParty_notepad_folder =		@Scriptdir & "\ecc-core\thirdparty\notepad++"
-Global $3rdParty_xpadder_folder =		@Scriptdir & "\ecc-core\thirdparty\xpadder"
 Global $ecc_datfile_folder =			@Scriptdir & "\ecc-system\datfile"
 Global $ecc_datfile_tempfile =			@Scriptdir & $ecc_datfile_folder & "\temp\mamelist.dat"
 Global $ecc_3rdParty_autoit =			@Scriptdir & "\ecc-core\thirdparty\autoit\AutoIt3.exe"
@@ -101,8 +99,19 @@ Global $ecc_startup_sound =				IniRead($ecc_config_file_general_user, "ECC_START
 Global $ecc_startup_soundplay =			"1"
 Global $ecc_startup_bugreport_check =	IniRead($ecc_config_file_general_user, "ECC_STARTUP", "startup_bugreport_check", "")
 Global $ecc_startup_minimize_to_tray =	IniRead($ecc_config_file_general_user, "ECC_STARTUP", "minimize_to_tray", "")
-Global $ecc_startup_xpadder =			IniRead($ecc_config_file_general_user, "ECC_STARTUP", "startup_xpadder", "")
-Global $ecc_base_path =					IniRead($ecc_config_file_general_user, "USER_DATA", "base_path", @ScriptDir & "\ecc-user\") ;ecc user folder
+Global $ecc_external_JoyEmulator =		IniRead($ecc_config_file_general_user, "USER_DATA", "joyemulator_exe", "")
+
+; Set recursive path to full (once)
+If $ecc_external_JoyEmulator = "\ecc-core\thirdparty\wojemulator\WoJEmulatorStandard.exe" Then
+	$ecc_external_JoyEmulator = @Scriptdir & "\ecc-core\thirdparty\wojemulator\WoJEmulatorStandard.exe"
+	IniWrite($ecc_config_file_general_user, "USER_DATA", "joyemulator_exe", Chr(34) & $ecc_external_JoyEmulator & Chr(34))
+EndIf
+
+Local $sDrive = "", $sDir = "", $sFileName = "", $sExtension = ""
+Global $ecc_external_JoyEmulator_temp =	_PathSplit($ecc_external_JoyEmulator, $sDrive, $sDir, $sFileName, $sExtension)
+Global $ecc_external_JoyEmulator_exe =	$ecc_external_JoyEmulator_temp[3] & $ecc_external_JoyEmulator_temp[4]
+Global $ecc_startup_JoyEmulator =		IniRead($ecc_config_file_general_user, "ECC_STARTUP", "startup_joyemulator", "")
+Global $ecc_base_path =					IniRead($ecc_config_file_general_user, "USER_DATA", "base_path", @ScriptDir & "\ecc-user\") ; ecc user folder
 Global $ecc_base_path_full =			StringReplace($ecc_base_path, "..", @ScriptDir) ; If userpath is default '..\ecc-user', replace '..' into ecc root folder, so we have a complete and full pathname
 Global $ecc_base_path_full_fix =		StringReplace($ecc_base_path_full, "/", "\") ; Fix path with 'windows' slashes (seems the path settings in 'cIniFile.php' don't like the '\' string (makes ecc crash)
 
@@ -138,7 +147,6 @@ Global $ecc_splash_textlocation_top =	IniRead($ecc_theme_file, "GENERAL", "Splas
 Global $ecc_splash_text_color =			IniRead($ecc_theme_file, "GENERAL", "SplashTextColor", "")
 Global $ecc_splash_image_fade =			"0x00080000" ; (Fade-in=0x00080000) (Fade-out=0x00090000)
 Global $ecc_splash_timeout =			"20"
-
 
 ; -------------------------------------
 ; First startup config
@@ -205,12 +213,12 @@ While 1
 
 		Case $ButtonOk
 			Global $ChoosenLanguage = StringReplace(StringRight(GUICtrlRead($LanguageTree, 1), 3), ")" , "")
-			IniWrite($ecc_config_file_general_user, "USER_DATA", "language", $ChoosenLanguage)
+			IniWrite($ecc_config_file_general_user, "USER_DATA", "language", Chr(34) & $ChoosenLanguage & Chr(34))
 
 			If GUICtrlRead($CheckBoxUpdate) = $GUI_CHECKED Then
-				IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "startup_update_check", "1")
+				IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "startup_update_check", Chr(34) & "1" & Chr(34))
 			Else
-				IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "startup_update_check", "0")
+				IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "startup_update_check", Chr(34) & "0" Chr(34))
 			EndIf
 
 			$ecc_translation = IniRead($ecc_config_file_general_user, "USER_DATA", "language", "")
@@ -236,7 +244,6 @@ WEnd
 Else
 	$ecc_translation = IniRead($ecc_config_file_general_user, "USER_DATA", "language", "en")
 EndIf
-
 
 ; -------------------------------------
 ; Read-in language strings
@@ -270,18 +277,11 @@ Global $ecc_error_type1_b =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "e
 Global $ecc_error_type1_c =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_error_type1_c", "")
 Global $ecc_error_report_title =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_error_report_title", "")
 Global $ecc_error_report =		IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_error_report", "")
-Global $ecc_thirdparty_xpadder_start =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_start", "")
-Global $ecc_thirdparty_xpadder_message_1 = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_message_1", "")
-Global $ecc_thirdparty_xpadder_message_2 = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_message_2", "")
-Global $ecc_thirdparty_xpadder_message_3 = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_message_3", "")
-Global $ecc_thirdparty_xpadder_message_4 = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_message_4", "")
-Global $ecc_thirdparty_xpadder_message_5 = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_thirdparty_xpadder_message_5", "")
 Global $ecc_startup_createuserfolder =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_createuserfolder", "")
 Global $ecc_startup_configthirdparty =	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_configthirdparty", "")
-Global $ecc_startup_xpadderwin7 = 	IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_xpadderwin7", "")
 Global $ecc_startup_updateemulatorlist = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_updateemulatorlist", "")
 Global $ecc_startup_updatedatfiles = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_updatedatfiles", "")
-
+Global $ecc_3rdparty_JoyEmulator_start = IniRead($ecc_translation_file, "ECC_TRANSLATION", "ecc_startup_joyemulator", "")
 
 ;======================================
 ; *** CHECK INIT ***
@@ -292,7 +292,6 @@ If FileExists($ecc_php_file) <> 1 then ecc_error(2005) 						; Check if ECC PHP 
 If WinExists($ecc_splash_title) Then WinKill($ecc_splash_title) 			; Check if ECC Splashscreen is still there (it got stuck)
 If FileExists($ecc_php_exe) <> 1 then ecc_error(2002) 						; Check files (check if php is there)
 
-
 ;======================================
 ; *** MAIN INIT ***
 ;======================================
@@ -300,19 +299,19 @@ Select
 
 	Case $CmdLine[0] = 0
 		ecc_splashscreen()
-		ecc_xpadderstart()
+		ecc_joyemulatorstart()
 		ecc_load()
 		ecc_update_check()
 		ecc_background()
 
 	Case $CmdLine[1] = "/fastload"
 		ecc_splashscreen_reload()
+		ecc_joyemulatorstart()
 		If WinExists($ecc_generated_title) Then
 			WinClose($ecc_generated_title, "")
 			WinWaitClose($ecc_generated_title, "", 5)
 		EndIf
 		$ecc_startup_soundplay = "0"
-		ecc_xpadderstart()
 		ecc_load()
 		GUIDelete()
 		ecc_background()
@@ -324,7 +323,6 @@ Select
 		ecc_getdriveinfo()
 
 EndSelect
-
 
 ;======================================
 ; *** FUNCTION: SPLASHCREEN LOADER ***
@@ -425,51 +423,37 @@ While 1
 		$imagecount = $imagecount + 1
 		$procent = Round((100 / $totalimagecount) * $imagecount, 1)
 		$procent_2d = StringFormat("%.1f", $procent)
-
 		GuiCtrlSetData($gui_regel, $ecc_generateimages_process & " " & $procent_2d & "%, eccid '" & $eccident & "'")
-
 		ShellExecuteWait($ecc_php_exe_q, $ecc_php_ini_file & $ecc_image_converter_q & " ecc-system\images\platform\ecc_" & $eccident & "_teaser.png #008800 30 ecc-system\images\platform\ecc_" & $eccident & "_media_a.png 1", @ScriptDir, "", @SW_HIDE)
-
 	EndIf
-
 
 	If FileExists(@ScriptDir & "\ecc-system\images\platform\ecc_" & $eccident & "_media_i.png") = 0 Then
 		$imagecount = $imagecount + 1
 		$procent = Round((100 / $totalimagecount) * $imagecount, 1)
 		$procent_2d = StringFormat("%.1f", $procent)
-
 		GuiCtrlSetData($gui_regel, $ecc_generateimages_process & " " & $procent_2d & "%, eccid '" & $eccident & "'")
-
 		ShellExecuteWait($ecc_php_exe_q, $ecc_php_ini_file & $ecc_image_converter_q & " ecc-system\images\platform\ecc_" & $eccident & "_teaser.png #880000 30 ecc-system\images\platform\ecc_" & $eccident & "_media_i.png 1", @ScriptDir, "", @SW_HIDE)
-
 	EndIf
 
 	If FileExists(@ScriptDir & "\ecc-system\images\platform\ecc_" & $eccident & "_cell_i.png") = 0 Then
 		$imagecount = $imagecount + 1
 		$procent = Round((100 / $totalimagecount) * $imagecount, 1)
 		$procent_2d = StringFormat("%.1f", $procent)
-
 		GuiCtrlSetData($gui_regel, $ecc_generateimages_process & " " & $procent_2d & "%, eccid '" & $eccident & "'")
-
 		ShellExecuteWait($ecc_php_exe_q, $ecc_php_ini_file & $ecc_image_converter_q & " ecc-system\images\platform\ecc_" & $eccident & "_cell.png #880000 30 ecc-system\images\platform\ecc_" & $eccident & "_cell_i.png 1", @ScriptDir, "", @SW_HIDE)
-
 	EndIf
 
 	If FileExists(@ScriptDir & "\ecc-system\images\platform\ecc_" & $eccident & "_nav_i.png") = 0 Then
 		$imagecount = $imagecount + 1
 		$procent = Round((100 / $totalimagecount) * $imagecount, 1)
 		$procent_2d = StringFormat("%.1f", $procent)
-
 		GuiCtrlSetData($gui_regel, $ecc_generateimages_process & " " & $procent_2d & "%, eccid '" & $eccident & "'")
-
 		ShellExecuteWait($ecc_php_exe_q, $ecc_php_ini_file & $ecc_image_converter_q & " ecc-system\images\platform\ecc_" & $eccident & "_nav.png #880000 30 ecc-system\images\platform\ecc_" & $eccident & "_nav_i.png 1", @ScriptDir, "", @SW_HIDE)
-
 	EndIf
 
 Wend
 
 FileClose($imagesearch)
-
 
 ;--------------------------------------
 ; Check emulator ini...generate into navigation.ini if not exist (plugin-like)
@@ -495,7 +479,6 @@ While 1
 	EndIf
 
 Wend
-
 
 ;--------------------------------------
 ; Check user folders...generate if not exist
@@ -527,25 +510,11 @@ Next
 ; NOTE: Values are read as RAW text, so "1" will be read as "1".
 
 ;--------------------------------------
-; Configure Xpadder for Windows 7
-;--------------------------------------
-;If @OSVersion = "WIN_7" Or "WIN_LONGHORN" Then --> ALWAYS config!
-	If IniRead($ecc_config_file_general_user, "ECC_STARTUP", "xpadder_compat_config", "") <> "1" Then
-		GuiCtrlSetData($gui_regel, $ecc_startup_xpadderwin7)
-		RegWrite("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", $ecc_thirdparty_xpadder_exe, "REG_SZ", "WINXPSP3")
-		IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "xpadder_compat_config", "1")
-	EndIf
-;EndIf
-GuiCtrlSetData($gui_regel, $ecc_splash_message)
-
-
-;--------------------------------------
 ; Configure 3rd party tools
 ;--------------------------------------
 GuiCtrlSetData($gui_regel, $ecc_startup_configthirdparty)
 ShellExecuteWait($ecc_3rdParty_autoit, Chr(34) & $ecc_tool_ThirdPartyConfig & Chr(34), $ecc_tools_path, "", @SW_HIDE)
 GuiCtrlSetData($gui_regel, $ecc_splash_message)
-
 
 ;--------------------------------------
 ; Check if we need to unpack DATfiles
@@ -722,9 +691,7 @@ While WinExists($ecc_generated_title)
 			Else
 				TraySetState(2)
 			EndIf
-
 		Else
-
 			; This section is a better work-around around the GTK window bug
 			$state = WinGetState($ecc_generated_title, "")
 
@@ -745,8 +712,9 @@ While WinExists($ecc_generated_title)
 	EndSelect
 Wend
 
+; Things todo when ECC closes..
 If IniRead($ecc_config_file_general_user, "ECC_STARTUP", "delete_unpacked", "") = 1 Then DirRemove($ecc_base_path_full_fix & "#_AUTO_UNPACKED", 1) ; Purge the ECC unpacked cache folder on Exit
-If $ecc_startup_xpadder = "1" And ProcessExists("Xpadder.exe") = 1 Then ProcessClose("Xpadder.exe") ; Unload Xpadder if it was started
+If $ecc_startup_JoyEmulator = "1" And ProcessExists($ecc_external_JoyEmulator_exe) Then ProcessClose($ecc_external_JoyEmulator_exe) ; Unload Joystick emulator.
 Exit
 EndFunc
 
@@ -835,7 +803,6 @@ FileWriteLine ($ecc_drive_get_info, ";   NTFS     > Typical file system for Wind
 FileWriteLine ($ecc_drive_get_info, ";   NWFS     > Typical file system for Novell Netware file servers.")
 FileWriteLine ($ecc_drive_get_info, ";   CDFS     > Typically indicates a CD (or an ISO image mounted as a virtual CD drive).")
 FileWriteLine ($ecc_drive_get_info, ";   UDF      > Typically indicates a DVD.")
-
 EndFunc
 
 ;======================================
@@ -850,16 +817,17 @@ $ecc_messagebox_title = $ecc_messagebox_title & " (" & $error_code & ")" ; Add e
 
 Select
 
-Case 	$error_code = "1001"
-	MsgBox(64, $ecc_messagebox_title, $ecc_error_1001)
-Case 	$error_code = "1002"
-	MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & @ScriptDir & "\" & @ScriptName & $ecc_error_type1_b)
-Case 	$error_code = "1003"
-	MsgBox(16, $ecc_messagebox_title, "Please compile the source first and run emuControlCenter with ecc.exe")
-	Exit
-Case 	$error_code = "1004"
+	Case 	$error_code = "1001"
+		MsgBox(64, $ecc_messagebox_title, $ecc_error_1001)
+	Case 	$error_code = "1002"
+		MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & @ScriptDir & "\" & @ScriptName & $ecc_error_type1_b)
+	Case 	$error_code = "1003"
+		MsgBox(16, $ecc_messagebox_title, "Please compile the source first and run emuControlCenter with ecc.exe")
+		Exit
+	Case 	$error_code = "1004"
 		MsgBox(48, $ecc_messagebox_title, $ecc_error_1004)
-Case 	$error_code = "1005"
+	Case 	$error_code = "1005"
+
 	MsgBox(48, $ecc_messagebox_title, $ecc_error_1004)
 	#Region ### START Koda GUI section ###
 	$eccErrorGUI = GUICreate($ecc_messagebox_title & " ERROR.LOG Contents:", 515, 180, -1, -1)
@@ -889,14 +857,14 @@ Case 	$error_code = "1005"
 		EndSwitch
 	Wend
 
-Case 	$error_code = "2004"
-	MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_splash_image_file & $ecc_error_type1_c)
-Case 	$error_code = "2005"
-	MsgBox(16, $ecc_messagebox_title, $ecc_error_2005)
-Case 	$error_code = "2006"
-	MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_teaser_image & $ecc_error_type1_c)
-Case 	$error_code = "2007"
-	MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_splash_movie_file & $ecc_error_type1_c)
+	Case 	$error_code = "2004"
+		MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_splash_image_file & $ecc_error_type1_c)
+	Case 	$error_code = "2005"
+		MsgBox(16, $ecc_messagebox_title, $ecc_error_2005)
+	Case 	$error_code = "2006"
+		MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_teaser_image & $ecc_error_type1_c)
+	Case 	$error_code = "2007"
+		MsgBox(16, $ecc_messagebox_title, $ecc_error_type1_a & $ecc_splash_movie_file & $ecc_error_type1_c)
 EndSelect
 
 MsgBox(48, $ecc_error_report_title, $ecc_error_report)
@@ -905,23 +873,15 @@ Endfunc
 
 
 ; -------------------------------------
-; Xpadder start
+; Joystick Emulator start
 ; -------------------------------------
-Func ecc_xpadderstart()
+Func ecc_joyemulatorstart()
 
-If $ecc_startup_xpadder = "1" Then
-
-	If FileExists($ecc_thirdparty_xpadder_exe) = 1 then
-		GuiCtrlSetData($gui_regel, $ecc_thirdparty_xpadder_start)
-		ShellExecute($ecc_thirdparty_xpadder_exe, "", @ScriptDir & "\ecc-core\thirdparty\xpadder", "", @SW_MINIMIZE)
-		ProcessWait("Xpadder.exe")
-	Else
-		MsgBox(64, $ecc_messagebox_title, $ecc_thirdparty_xpadder_message_1 & @CRLF & _
-		$ecc_thirdparty_xpadder_message_2 & @CRLF & _
-		$ecc_thirdparty_xpadder_message_3 & @CRLF & _
-		$ecc_thirdparty_xpadder_message_4 & @CRLF & _
-		$ecc_thirdparty_xpadder_message_5)
-		IniWrite($ecc_config_file_general_user, "ECC_STARTUP", "startup_xpadder", "0")
+If $ecc_startup_JoyEmulator = "1" Then
+	If FileExists($ecc_external_JoyEmulator) = 1 then
+		GuiCtrlSetData($gui_regel, $ecc_3rdparty_JoyEmulator_start)
+		ShellExecute($ecc_external_JoyEmulator, "", "", "", @SW_MINIMIZE)
+		ProcessWait($ecc_external_JoyEmulator_exe, 5)
 	EndIf
 EndIf
 

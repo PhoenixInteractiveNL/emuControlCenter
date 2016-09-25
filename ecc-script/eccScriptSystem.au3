@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.3.0.0 (2014.05.18)
+; Version: 1.3.0.1 (2016.09.25)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -74,7 +74,7 @@ $eccSystemEccFolder = 					StringMid($eccSystemEccFolder, 1, Stringlen($eccSyste
 ;[THIRDPARTY]
 Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7z.exe" & Chr(34)
 Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
-Global $eccThirdPartyXpadder = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\xpadder\xpadder.exe" & Chr(34)
+Global $eccJoyEmulator = 				IniRead($eccConfigFile, "USER_DATA", "joyemulator_exe", "")
 ;[ECCCONFIG]
 Global $eccConfigFile =					$eccSystemEccFolder & "\ecc-user-configs\config\ecc_general.ini"
 Global $eccUserLanguage =				IniRead($eccConfigFile, "USER_DATA", "language", "en") ;ecc language

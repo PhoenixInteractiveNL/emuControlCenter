@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.8
-; Last changed           : 2016.09.03
+; Script version         : v1.0.0.9
+; Last changed           : 2016.09.25
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -48,7 +48,6 @@ Global $7zExe 				= $eccInstallPath & "\ecc-core\thirdparty\7zip\7z.exe"
 Global $AutoIt3Exe 			= $eccInstallPath & "\ecc-core\thirdparty\autoit\autoit3.exe"
 Global $NotepadExe 			= $eccInstallPath & "\ecc-core\thirdparty\notepad++\notepad++.exe"
 Global $DATUtilExe 			= $eccInstallPath & "\ecc-core\thirdparty\datutil\datutil.exe"
-Global $XpadderExe			= $eccInstallPath & "\ecc-core\thirdparty\xpadder\xpadder.exe"
 Global $KodaExe				= $eccInstallPath & "\ecc-core\thirdparty\koda\fd.exe"
 Global $StripperExe 		= $eccInstallPath & "\ecc-core\thirdparty\stripper\stripper.exe"
 Global $SQliteExe 			= $eccInstallPath & "\ecc-core\thirdparty\sqlite\sqlite.exe"
@@ -56,6 +55,7 @@ Global $VideoPlayerExe		= $eccInstallPath & "\ecc-core\thirdparty\mplayer\mplaye
 Global $SQLInstructionFile 	= @Scriptdir & "\sqlcommands.inst"
 Global $SQLcommandFile 		= @Scriptdir & "\sqlcommands.cmd"
 Global $PlatformDataFile 	= "platformdata.txt"
+
 ; ECC INI FILE locations
 Global $eccConfigFileGeneralUser = $eccInstallPath & "\ecc-user-configs\config\ecc_general.ini"
 Global $eccLocalVersionIni 	= $eccInstallPath & "\ecc-system\system\info\ecc_local_version_info.ini"
@@ -69,6 +69,7 @@ Global $eccDataBasePath 	= Iniread($eccConfigFileGeneralUser, "USER_DATA", "data
 If $eccDataBasePath = "database/" Then $eccDataBasePath = $eccInstallPath & "\ecc-system\database\" ; Tools need the full path!
 Global $eccDataBaseFile 	= $eccDataBasePath & "eccdb"
 Global $DaemonToolsExe		= Iniread($eccConfigFileGeneralUser, "DAEMONTOOLS", "daemontools_exe", "")
+Global $JoyEmulatorExe		= Iniread($eccConfigFileGeneralUser, "USER_DATA", "joyemulator_exe", "")
 
 ; Global INFO variables
 ; version info

@@ -213,7 +213,6 @@ $i18n['popupConfig'] = array(
 
 	/* 0.9.6 FYEO 13 */
 
-
 	'winTitleConfiguration' =>
 		"Configuration",
 
@@ -302,7 +301,6 @@ $i18n['popupConfig'] = array(
 		"activate platform",
 	'tabGeneralHlListOptions' =>
 		"List view options",	
-			
 		
 	/* 0.9.7 WIP 04 */
 	'tab_label_themes' =>
@@ -341,8 +339,6 @@ $i18n['popupConfig'] = array(
     /* 0.9.9. WIP 01 */
 	'startConfThirdPartyHdl' =>
 		"Third Party",
-	'startConfThirdPartyXpadder' =>
-		"Start 'xpadder' at startup",
 
     /* 0.9.9. WIP 06 */
 	'emuAssignGlobalEccScriptOptions' =>
@@ -403,9 +399,19 @@ $i18n['popupConfig'] = array(
 		"Database folder:",
 	'DatabaseFolderButton' =>	
 		"Change folder",		
-    'dialogDaemontoolsFolder' =>	
-		"Please locate Daemontools",
 	'dialogDatabaseFolder' =>	
 		"Select a map to store the database",
+
+	/* 1.21 */		
+	'extProgDaemontoolsButton' =>
+		"Select",	
+	'extProgJoyEmulatorLabel' =>
+		"Joystick emulator:",	
+	'startConfJoyEmulatorLabel' =>	
+		"Start Joystick emulator on ECC startup",
+    'dialogJoyEmulatorFolder' =>	
+		"Locate Joystick emulator executable",
+	'extProgJoyEmulatorbutton' =>
+		"Select",	
 );
 ?>

@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC Thirdparty config
-; Script version         : v1.0.0.2
-; Last changed           : 2014.03.28
+; Script version         : v1.0.0.3
+; Last changed           : 2016.09.25
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -22,18 +22,6 @@ If $eccLanguageCurrent <> $eccLanguageSaved Then ; Language has been changed (co
 			$NotepadFolder = $eccInstallPath & "\ecc-core\thirdparty\notepad++"
 			FileDelete($NotepadFolder & "\nativeLang.xml")
 			FileCopy($NotepadFolder & "\localization\" & $NotepadLanguageData, $NotepadFolder & "\nativeLang.xml") ; Copy the language to 'NativeLanguage.xml' file.
-		EndIf
-	EndIf
-
-	; Configure proper language for XPADDER
-	; Copy the language to the root folder of Xpadder.
-	; XML Files located in the 'ecc-core\thirdparty\xpadder\languages\' folder.
-	If FileExists($XpadderExe) = 1 Then
-		$XpadderLanguageData = IniRead($ThirdPartyConfigIni, "XPADDER", $eccLanguageCurrent, "")
-		If $XpadderLanguageData <> "" Then ; a language setting has been found
-			$XpadderFolder = $eccInstallPath & "\ecc-core\thirdparty\xpadder"
-			FileDelete($XpadderFolder & "\*.xpadderlanguage")
-			FileCopy($XpadderFolder & "\languages\" & $XpadderLanguageData, $XpadderFolder)
 		EndIf
 	EndIf
 

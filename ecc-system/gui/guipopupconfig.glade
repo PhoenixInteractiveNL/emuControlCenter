@@ -2066,7 +2066,61 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="startConfThirdPartyXpadder">
+                              <widget class="GtkHBox" id="hbox1">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkImage" id="extProgJoyEmulatorImage">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-execute</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="extProgJoyEmulatorLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">Joystick emulator:</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkEntry" id="extProgJoyEmulatorTextbox">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="invisible_char">&#x25CF;</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">2</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkButton" id="extProgJoyEmulatorbutton">
+                                    <property name="label" translatable="yes">select</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="startConfJoyEmulator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2081,7 +2135,7 @@
                                         <property name="visible">True</property>
                                         <property name="spacing">2</property>
                                         <child>
-                                          <widget class="GtkImage" id="startConfThirdPartyXpadderImage">
+                                          <widget class="GtkImage" id="startConfJoyEmulatorImage">
                                             <property name="visible">True</property>
                                             <property name="stock">gtk-jump-to</property>
                                             <property name="icon-size">1</property>
@@ -2094,9 +2148,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkLabel" id="startConfThirdPartyXpadderLabel">
+                                          <widget class="GtkLabel" id="startConfJoyEmulatorLabel">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Start 'xpadder' at startup</property>
+                                            <property name="label" translatable="yes">Start Joystick emulator at startup</property>
                                             <property name="use_underline">True</property>
                                           </widget>
                                           <packing>
@@ -2114,7 +2168,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">1</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                           </widget>

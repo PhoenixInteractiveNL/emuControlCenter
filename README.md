@@ -2,6 +2,8 @@
 emuControlCenter - Console/Computer Rom-Manager (Windows)
 --------------------------------------------------------------------------------
 
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_121.png)
+
 emuControlCenter is a start- and searchcenter for various older and newer
 consoles/handhelds/computer games. ecc have extended search functions build in,
 so everything rom every rom-releated metainformation could be searched from

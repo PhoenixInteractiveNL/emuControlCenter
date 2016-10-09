@@ -121,7 +121,7 @@ $i18n['global'] = array(
 	'prev' =>
 		"Anterior",
 	'prevShort' =>
-		"Ant",
+		"Ant.",
 
 	'image' =>
 		"Imagen",

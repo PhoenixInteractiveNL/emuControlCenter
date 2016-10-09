@@ -376,7 +376,7 @@ $i18n['popupConfig'] = array(
 	'tabGeneralImageTabTcuttLabel' =>	
 		"Longitud del texto (caracteres):",
 	'tabGeneralParsingUnpackingOptions' =>	
-		"Parsing / Unpacking options",
+		"Análisis / Opciones de descompresión",
 	'tabGeneralParsingTriggerLabel' =>	
 		"Análizar archivos grandes (MB)",
 	'tabGeneralParsingTriggerNoteLabel' =>	
@@ -386,32 +386,32 @@ $i18n['popupConfig'] = array(
 		
 	/* 1.152 BUILD 04 */		
 	'tabGeneralUnpackGUITriggerLabel' =>	
-		"Unpack GUI (progressbar) trigger size (MB)",
+		"Interfaz de descompresión (barra de progreso) tamaño en (MB)",
 	'tabGeneralUnpackGUITriggerNoteLabel' =>	
-		"(depends on computer speed / wait time)",
+		"(Velocidad / tiempo de espera dependiendo de tu PC)",
 
 	/* 1.152 BUILD 06 */		
 	'lblUseThemeColors' =>	
-		"Use theme colors",
+		"Usar colores del tema",
 
 	/* 1.20 */		
 	'DatabaseFolderLabel' =>	
-		"Database folder:",
+		"Carpeta de la Base de Datos:",
 	'DatabaseFolderButton' =>	
-		"Change folder",		
+		"Cambiar carpeta",		
 	'dialogDatabaseFolder' =>	
-		"Select a map to store the database",
+		"Elegir la ruta para guardar la Base de Datos",
 
 	/* 1.21 */		
 	'extProgDaemontoolsButton' =>
-		"Select",	
+		"Elegir",	
 	'extProgJoyEmulatorLabel' =>
-		"Joystick emulator:",	
+		"Emulador de Joystick:",	
 	'startConfJoyEmulatorLabel' =>	
-		"Start Joystick emulator on ECC startup",
+		"Ejecutar el Emulador de Joystick al iniciar ECC",
     'dialogJoyEmulatorFolder' =>	
-		"Locate Joystick emulator executable",
+		"Localizar el ejecutable del Emulador de Joystick",
 	'extProgJoyEmulatorbutton' =>
-		"Select",	
+		"Elegir",	
 );
 ?>

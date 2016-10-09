@@ -87,11 +87,11 @@ $i18n['meta'] = array(
 
 	/* 1.20 */
 	'lbl_perspective' =>
-		"Perspectief",	
+		"Perspectiva",	
 	'lbl_visual' =>
-		"Visueel",	
+		"Cámara",	
 	'lbl_description' =>
-		"Omschrijving",	
+		"Descripción",	
 );
 
 
@@ -152,38 +152,38 @@ $i18n['dropdownDumpType'] = array(
 /* 1.20 */
 $i18n['dropdownVisual'] = array(
 	'unknown' =>
-		"unknown",
+		"Desconocido",
 	'2D scrolling' =>
-		"2D scrolling",
+		"Scroll 2D",
 	'Cinematic camera' =>
-		"Cinematic camer",
+		"Cámara cinemática",
 	'Fixed / Flip-screen' =>
-		"Fixed / Flip-screen",
+		"Pantalla Fija / Girada",
 	'Free-roaming camera' =>
-		"Free-roaming camera",
+		"Cámara libre",
 	'Isometric' =>
-		"Isometric",
+		"Isométrica",
 );
 
 /* 1.20 */
 $i18n['dropdownPerspective'] = array(
 	'unknown' =>
-		"unknown",
+		"Desconocido",
 	'1st-person' =>
-		"1st-person",
+		"Primera Persona",
 	'3rd-person' =>
-		"3rd-person",
+		"Tercera Persona",
 	'Audio game' =>
-		"Audio game",		
+		"Juego de audio",		
 	'Behind view' =>
-		"Behind view",
+		"Vista trasera",
 	'Birds-eye view' =>
-		"Birds-eye view",
+		"Vista panorámica",
 	'Side view' =>
-		"Side view",
+		"Vista lateral",
 	'Text-based / Spreadsheet' =>
-		"Text-based / Spreadsheet",
+		"Basado en Texto / Hoja de cálculo",
 	'Top-down' =>
-		"Top-down",
+		"De arriba hacia abajo",
 );
 ?>

@@ -1,5 +1,30 @@
 ----- ECC v1.2x -----
 
+UPDATE 00627
+- Updated ES language to ECC v1.21 [Jarlaxe]
+- Fixed some language lines in 'i18n_meta.php' files to be translated.
+- DatFileUpdater
+  - v1.3.0.1
+    - Removed DATE function and string, not used in newer MAME dats anymore
+    - Fixed NeoGeo driver from 'neodrvr.cpp' to 'neodriv.hxx'
+- MobyGamesImporter
+  - Updated MobyGamesImporter list to support more ECC platforms [zoopcrewkid]
+- Updated DAT files for:
+ - CPS-1  : v0.176 to v0.178 (mame)
+ - CPS-2  : v0.176 to v0.178 (mame)
+ - CPS-3  : v0.176 to v0.178 (mame)
+ - MAME   : v0.176 to v0.178 (mame)
+ - MODEL1 : v0.176 to v0.178 (mame)
+ - MODEL2 : v0.176 to v0.178 (mame)
+ - NAOMI  : v0.176 to v0.178 (mame)
+ - NEOGEO : v0.176 to v0.178 (mame)
+ - PGM    : v0.176 to v0.178 (mame)
+ - S11    : v0.176 to v0.178 (mame)
+ - S16    : v0.176 to v0.178 (mame)
+ - S18    : v0.176 to v0.178 (mame)
+ - S22    : v0.176 to v0.178 (mame)
+ - ZINC   : v0.176 to v0.178 (mame)
+
 UPDATE 00626
 - CORE
   - Fixed an "freeze" issue with datfile importing if the path did not exist.
@@ -33,6 +58,6 @@ UPDATE 00624
 UPDATE 00623
 - eccUpdate!
   - v1.2.0.2 (2016.09.15)
-    - Fixed a bug where eccUpdate! could not find the last updatete from the server correctly. 
+    - Fixed a bug where eccUpdate! could not find the last update from the server correctly. 
 
 ----- ECC v1.21 -----

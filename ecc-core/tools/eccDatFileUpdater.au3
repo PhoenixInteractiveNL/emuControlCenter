@@ -1,11 +1,10 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.3.0.0
-; Last changed           : 2016.09.08
+; Script version         : v1.3.0.1
+; Last changed           : 2016.10.09
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
-; Code contributions:
 ;
 ; NOTES: Nothing yet ;-)
 ;
@@ -69,22 +68,17 @@ If FileExists($DATfileMameFile) <> 1 Then
 		$MameTempFile = FileOpen($DATfileInfoFile, 0)
 		$RawData = FileReadLine($MameTempFile)
 		FileClose($MameTempFile)
-		Global $MameVersion = StringMid($RawData, 11, 5)
-		Global $MameDate = StringReplace($RawData, " - Multiple Arcade Machine Emulator", "")
-		$MameDate = StringReplace($MameDate, $MameVersion, "")
-		$MameDate = StringReplace($MameDate, "M.A.M.E. v", "")
-		$MameDate = StringStripWS($MameDate, 3)
-		MameCpuDates($MameDate)
+		Global $MameVersion = StringMid($RawData, 7, 5)
 		ToolTip("")
 
 		If $MameVersion = $InstalledMameVersion Then
-			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your DATfile versions are already UP-TO-DATE, an update is not nessesary!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & @CRLF & "Selected version: " & @TAB & $MameVersion & @CRLF & @CRLF & "Suggestion: your DATfile versions are already UP-TO-DATE, an update is not nessesary!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 		If $MameVersion < $InstalledMameVersion Then
-			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is OLDER then the DATfiles already installed, it will be unwise to update!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(324, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & @CRLF & "Selected version: " & @TAB & $MameVersion & @CRLF & @CRLF & "Suggestion: your selected MAME update is OLDER then the DATfiles already installed, it will be unwise to update!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 		If $MameVersion > $InstalledMameVersion Then
-			$UpdateBox = Msgbox(68, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion & " " & $InstalledMameDateStr & @CRLF & "Selected version: " & @TAB & $MameVersion & " " & $MameDate & @CRLF & @CRLF & "Suggestion: your selected MAME update is NEWER then the DATfiles already installed, an update would be advisable!" & @CRLF & @CRLF & "Do you want to continue with the process?")
+			$UpdateBox = Msgbox(68, "ECC DatFileUpdater", "DATfile info:" & @CRLF & @CRLF & "Currently installed: " & @TAB & $InstalledMameVersion& @CRLF & "Selected version: " & @TAB & $MameVersion & @CRLF & @CRLF & "Suggestion: your selected MAME update is NEWER then the DATfiles already installed, an update would be advisable!" & @CRLF & @CRLF & "Do you want to continue with the process?")
 		EndIf
 
 		If $UpdateBox = 6 Then ;YES selected
@@ -107,68 +101,19 @@ If FileExists($DATfileMameFile) <> 1 Then
 	EndIf
 Else
 	; OBSOLETE, BUT STILL HANDY TO CREATE THE DAT FILES FOR GITHUB!!!
-	;Check if the MAME version in the ECC update is newer then the user has installed.
-	$CheckMameUpdateFile = FileOpen($DATfileMameFile,0)
-	For $checkline = 50 to 200
-		$LineToCheck = FileReadLine($CheckMameUpdateFile, $checkline)
-		If StringInStr($LineToCheck, "mame build=") Then
-			Global $MameVersion = StringMid($LineToCheck, 14, 5)
-			$MameUpdateFileDateBegin = StringInStr($LineToCheck, "(")
-			$MameUpdateFileDateEnd = StringInStr($LineToCheck, ")")
-			Global $MameDate = StringMid($LineToCheck, $MameUpdateFileDateBegin, StringLen($LineToCheck)-($MameUpdateFileDateBegin + $MameUpdateFileDateEnd) + 4)
-			MameCpuDates($MameDate)
-			ExitLoop
-		EndIf
-	Next
-	FileClose($CheckMameUpdateFile)
-	If $MameVersion > $InstalledMameVersion Then
-		UpdatePlatforms()
-		WriteIniData()
-	Else
-		FileDelete($DATfileMameFile)
-	EndIf
+	$MameVersion = "0.178" ;  Manual!
+	UpdatePlatforms()
+	WriteIniData()
 EndIf
 
 ;Remove TEMP files before exit
 FileDelete($DATfileInfoFile)
-
-
 Exit
 
 Func WriteIniData()
 	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_version", $MameVersion)
-	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_str", $MameDate)
-	IniWrite($eccDatfileInfoIni, "GENERAL", "datfile_mame_date_ymd", $MameCPUDateYear & $MameCPUDateMonth & $MameCPUDateDay)
 EndFunc
 
-
-Func MameCpuDates($Date)
-	; This function translates the 'humanoid' readable date into a YYYY.MM.DD version
-	; Example: (Apr  3 2011) will result in 2011.04.03
-	$MameCPUDate = $Date
-	$MameCPUDate = StringReplace($MameCPUDate, "(", "")
-	$MameCPUDate = StringReplace($MameCPUDate, ")", "")
-	$MameCPUDate = StringReplace($MameCPUDate, "Jan", "01")
-	$MameCPUDate = StringReplace($MameCPUDate, "Feb", "02")
-	$MameCPUDate = StringReplace($MameCPUDate, "Mar", "03")
-	$MameCPUDate = StringReplace($MameCPUDate, "Apr", "04")
-	$MameCPUDate = StringReplace($MameCPUDate, "May", "05")
-	$MameCPUDate = StringReplace($MameCPUDate, "Jun", "06")
-	$MameCPUDate = StringReplace($MameCPUDate, "Jul", "07")
-	$MameCPUDate = StringReplace($MameCPUDate, "Aug", "08")
-	$MameCPUDate = StringReplace($MameCPUDate, "Sep", "09")
-	$MameCPUDate = StringReplace($MameCPUDate, "Sept", "09")
-	$MameCPUDate = StringReplace($MameCPUDate, "Oct", "10")
-	$MameCPUDate = StringReplace($MameCPUDate, "Nov", "11")
-	$MameCPUDate = StringReplace($MameCPUDate, "Dec", "12")
-	$MameCPUDate = StringStripWS($MameCPUDate, 8)
-	Global $MameCPUDateMonth = StringLeft($MameCPUDate, 2)
-	Global $MameCPUDateYear = StringRight($MameCPUDate, 4)
-	Global $MameCPUDateDay = $MameCPUDate
-	$MameCPUDateDay = StringReplace($MameCPUDateDay, $MameCPUDateMonth, "", 1)
-	$MameCPUDateDay = StringReplace($MameCPUDateDay, $MameCPUDateYear, "", 1)
-	If $MameCPUDateDay < 10 Then $MameCPUDateDay = "0" & $MameCPUDateDay ; Add a 0 before the variable so you always have 2 digits
-EndFunc
 
 Func UpdatePlatforms()
 	WriteDatFileWithHeader("mame.dat", "MAME", "MAME")
@@ -208,7 +153,7 @@ Func UpdatePlatforms()
 	ToolTip("")
 
 	WriteDatFileWithHeader("ng.dat", "NEOGEO", "SNK NeoGeo")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neodrvr.cpp -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neodriv.hxx -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s11.dat", "SYSTEM-11", "Namco System 11")
@@ -241,10 +186,9 @@ Func WriteDatFileWithHeader($Filename, $Name, $Category)
 	$datfile = FileOpen($DATfilePath & $Filename, 2)
 	FileWriteLine($datfile, "clrmamepro (")
 	FileWriteLine($datfile, @TAB & "name " & Chr(34) & $Name & Chr(34))
-	FileWriteLine($datfile, @TAB & "description " & Chr(34) & $Name & " " & $MameCPUDateYear & $MameCPUDateMonth & $MameCPUDateDay & Chr(34))
+	FileWriteLine($datfile, @TAB & "description " & Chr(34) & $Name & Chr(34))
 	FileWriteLine($datfile, @TAB & "category " & Chr(34) & $Category & Chr(34))
 	FileWriteLine($datfile, @TAB & "version " & Chr(34) & $MameVersion & " (MAME)" & Chr(34))
-	FileWriteLine($datfile, @TAB & "date " & Chr(34) & $MameCPUDateYear & "-" & $MameCPUDateMonth & "-" & $MameCPUDateDay & Chr(34))
 	FileWriteLine($datfile, @TAB & "author " & Chr(34) & "MAME Developement team" & Chr(34))
 	FileWriteLine($datfile, @TAB & "homepage " & Chr(34) & "Multiple Arcade Machine Emulator" & Chr(34))
 	FileWriteLine($datfile, @TAB & "url " & Chr(34) & "http://mamedev.org" & Chr(34))

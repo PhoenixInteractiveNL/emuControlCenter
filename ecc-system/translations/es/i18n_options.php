@@ -64,7 +64,7 @@ $i18n['languages'] = array(
 	'[[it]]' =>
 		"Italiano",
 	'[[es]]' =>
-		"Espanol",
+		"Spanish",
 
 	/* 0.9.6 WIP 3 */
 	'[[jp]]' =>

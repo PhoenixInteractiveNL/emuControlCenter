@@ -87,11 +87,11 @@ $i18n['meta'] = array(
 
 	/* 1.20 */
 	'lbl_perspective' =>
-		"Perspectief",	
+		"Perspective",	
 	'lbl_visual' =>
-		"Visueel",	
+		"Visual",	
 	'lbl_description' =>
-		"Omschrijving",	
+		"Description",	
 );
 
 $i18n['dropdownMedium'] = array(

@@ -36,7 +36,7 @@ $i18n['menu'] = array(
 	'lbl_dat_export_ecc_esearch' =>
 		"Exportar datos ECC de búsqueda",
 	'lbl_dat_empty' =>
-		"Base de datos vacía",
+		"Vaciar la Base de Datos",
 	'lbl_help' =>
 		"Ayuda",
 	// -------------------------------------------------------------
@@ -230,7 +230,7 @@ $i18n['menu'] = array(
 
 	/* 1.152 BUILD 3 */
 	'lbl_roms_clear_launchdata' =>
-		"Clear ROM launch data",
+		"Limpiar las veces que se han lanzado las ROMs",
 
 	);
 ?>

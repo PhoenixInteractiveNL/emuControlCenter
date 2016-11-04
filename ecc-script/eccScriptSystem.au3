@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------
 ; ECC ScriptROM SYSTEM file
 ;
-; Version: 1.3.0.1 (2016.09.25)
+; Version: 1.3.0.2 (2016.11.04)
 ; Author: Sebastiaan Ebeltjes (Phoenix Interactive)
 ; ------------------------------------------------------------
 
@@ -71,10 +71,6 @@ Global $eccSystemExtensions = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "exten
 Global $eccSystemLanguage = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "language", "")
 Global $eccSystemEccFolder = 			IniRead("..\eccScriptRom.dat", "SYSTEM", "ecc_folder", "")
 $eccSystemEccFolder = 					StringMid($eccSystemEccFolder, 1, Stringlen($eccSystemEccFolder)-1) ;remove last slash
-;[THIRDPARTY]
-Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7z.exe" & Chr(34)
-Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
-Global $eccJoyEmulator = 				IniRead($eccConfigFile, "USER_DATA", "joyemulator_exe", "")
 ;[ECCCONFIG]
 Global $eccConfigFile =					$eccSystemEccFolder & "\ecc-user-configs\config\ecc_general.ini"
 Global $eccUserLanguage =				IniRead($eccConfigFile, "USER_DATA", "language", "en") ;ecc language
@@ -83,6 +79,10 @@ Global $eccUserPath =					IniRead($eccConfigFile, "USER_DATA", "base_path", $ecc
 $eccUserPath =							StringReplace($eccUserPath, "..", $eccSystemEccFolder)
 ; Fix path with 'windows' slashes (seems the path settings in 'cIniFile.php' don't like the '\' string (makes ecc crash), so we do it here...
 $eccUserPath =							StringReplace($eccUserPath, "/", "\")
+;[THIRDPARTY]
+Global $eccThirdParty7zip = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\7zip\7z.exe" & Chr(34)
+Global $eccThirdPartyNotepad = 			Chr(34) & $eccSystemEccFolder & "\ecc-core\thirdparty\notepad++\notepad++.exe" & Chr(34)
+Global $eccJoyEmulator = 				IniRead($eccConfigFile, "USER_DATA", "joyemulator_exe", "")
 Global $DaemonTools =					IniRead($eccConfigFile, "DAEMONTOOLS", "daemontools_exe", "")
 
 Global $eccMultiRoms = 					"" ;Declare variable

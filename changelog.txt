@@ -1,4 +1,6 @@
 ----- ECC v1.2x -----
+UPDATE 00628
+- Fixed a "JoyEmulator" variable bug in eccScriptSystem.
 
 UPDATE 00627
 - Updated ES language to ECC v1.21 [Jarlaxe]

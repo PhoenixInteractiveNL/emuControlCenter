@@ -1,4 +1,7 @@
 ----- ECC v1.2x -----
+UPDATE 00629
+- Updated the emuMoviesDownloaderlist from 2012-10-10 to 2016-11-05.
+
 UPDATE 00628
 - Fixed a "JoyEmulator" variable bug in eccScriptSystem.
 

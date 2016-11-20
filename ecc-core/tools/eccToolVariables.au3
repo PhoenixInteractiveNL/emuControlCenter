@@ -171,6 +171,6 @@ Global $AutoSavedIpcFile 	= @ScriptDir & "\eccImagePackCenter.ipc"
 Global $VideoWindowTitle	= "The Movie Player"
 
 Func GetAES($StringtoAES)
-$bHash = _Crypt_EncryptData($StringtoAES, $CALG_AES_128)
+$bHash = _Crypt_EncryptData($StringtoAES, "", $CALG_AES_128)
 Return StringUpper(StringTrimLeft($bHash, 2)) ;removes the 0x
 EndFunc ;GetMD5

@@ -1,5 +1,8 @@
 ----- ECC v1.2x -----
 UPDATE 00630
+- UID Hotfix.
+
+UPDATE 00630
 - ECC License now GPLv3
 - CORE
   - Removed unique CID structure in ECC, now implemented UID in autoit variables

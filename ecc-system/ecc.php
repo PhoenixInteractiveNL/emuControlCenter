@@ -7874,7 +7874,7 @@ class App extends GladeXml {
 		$this->cs = $mngrValidator->getEccCoreKey('cs');
 		$this->sessionTime = time();
 
-		$this->cleanupConfigsIfCopied();
+		//$this->cleanupConfigsIfCopied();
 	}
 
 	/**
@@ -7890,24 +7890,6 @@ date_build="'.$this->ecc_release['local_release_date'].'"
 current_build="'.$this->ecc_release['release_build'].'"
 ';
 		file_put_contents(ECC_DIR_SYSTEM.'/system/info/ecc_local_version_info.ini', trim($versionInfos));
-	}
-
-	/**
-	 * Cleanup emuControlCenter inis, if this version is copied!
-	 */
-	private function cleanupConfigsIfCopied() {
-		$ciString = @$_SERVER['USERDOMAIN']."|".@$_SERVER['TEMP']."|".@$_SERVER['TMP']."|".@$_SERVER['APPDATA']."|".@$_SERVER['COMPUTERNAME']."|".@$_SERVER['HOMEPATH'];
-		$ciCheck = sprintf('%08X', crc32($ciString));
-		$ciDatPath = ECC_DIR.'/'.$this->cs['cicheckdat'];
-		if(!is_dir(dirname($ciDatPath))) mkdir(dirname($ciDatPath));
-		if (file_exists($ciDatPath)) {
-			$ciCheckFound = @file_get_contents($ciDatPath);
-			if ($ciCheckFound != $ciCheck) {
-				@unlink($ciDatPath);
-				@unlink(ECC_DIR.'/'.$this->cs['cscheckdat']);
-			}
-		}
-		@file_put_contents($ciDatPath, $ciCheck);
 	}
 
 	// Opens the romdb online page for this rom to show meta informations!

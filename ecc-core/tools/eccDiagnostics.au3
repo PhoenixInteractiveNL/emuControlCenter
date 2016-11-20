@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccDiagnostics (ECC-DIAG)
 ;
-$ScriptVersion = "1.0.0.3"
-; Last changed           : 2014.03.28
+$ScriptVersion = "1.0.0.4"
+; Last changed           : 2016.11.20
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ; Code contributions:
@@ -78,13 +78,6 @@ GUICtrlSetState(-1, $GUI_DISABLE)
 GUISetIcon (@ScriptDir & "\eccDiagnostics.ico", "", $eccDiagnostics) ;Set proper icon for the window.
 If $BackgroundRun = 0 Then GUISetState(@SW_SHOW)
 
-;User CID info ================================================================
-Global $iEccUserCidFile
-$oEccUserCidFile = FileOpen($eccUserCidFile, 0) ; Open file.
-If $oEccUserCidFile = 1 Then $iEccUserCidFile = FileRead($oEccUserCidFile) ; Read-in data from file.
-FileClose($oEccUserCidFile) ; Close the file.
-;User CID info ================================================================
-
 ;Main Info ================================================================
 If $BackgroundRun = 0 Then ToolTip("Gathering Main Info...", @DesktopWidth/2, @DesktopHeight/2, "eccDiagnostics", 1, 6)
 Global $MainInfoContents
@@ -100,7 +93,7 @@ $MainInfoContents = $MainInfoContents & "upd: " & IniRead($eccLocalUpdateIni, "U
 $MainInfoContents = $MainInfoContents & "Startup  : v" & FileGetVersion($eccInstallPath & "\ecc.exe") & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & "Core     : ECC is using PHP v" & FileGetVersion($eccInstallPath & "\ecc-core\php-gtk2\php5.dll") & " and "
 $MainInfoContents = $MainInfoContents & "GTK v" & FileGetVersion($eccInstallPath & "\ecc-core\php-gtk2\libgtk-win32-2.0-0.dll") & Chr(13) & Chr(10)
-$MainInfoContents = $MainInfoContents & "User CID : " & $iEccUserCidFile  & Chr(13) & Chr(10)
+$MainInfoContents = $MainInfoContents & "User UID : " & $UIDuser  & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & "[LOCAL ENVIRONMENT]" & Chr(13) & Chr(10)
 $MainInfoContents = $MainInfoContents & "Processor(s) : " & IniRead($eccHostInfoIni, "ECC_HOST_INFO", "NUMBER_OF_PROCESSORS", "----") & " processor(s) "

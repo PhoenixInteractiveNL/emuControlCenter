@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.0.9
-; Last changed           : 2016.09.25
+; Script version         : v1.0.1.0
+; Last changed           : 2016.11.20
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -12,19 +12,13 @@
 ; ------------------------------------------------------------------------------
 FileChangeDir(@ScriptDir)
 
-; WEB variables
-Global $eccWebsite 					= "https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"
-Global $eccForum 					= "http://eccforum.phoenixinteractive.nl"
-Global $eccDownloadLatest			= "https://phoenixinteractivenl.github.io/emuControlCenter/"
-Global $eccDownloadTaggedReleases 	= "https://github.com/PhoenixInteractiveNL/emuControlCenter/releases"
-
-
 ; Autoit includes
 #include "..\thirdparty\autoit\include\GuiEdit.au3"
 #include "..\thirdparty\autoit\include\GuiRichEdit.au3"
 #include "..\thirdparty\autoit\include\ScrollBarConstants.au3"
 #include "..\thirdparty\autoit\include\ButtonConstants.au3"
 #include "..\thirdparty\autoit\include\Constants.au3"
+#include "..\thirdparty\autoit\include\ColorConstants.au3"
 #include "..\thirdparty\autoit\include\EditConstants.au3"
 #include "..\thirdparty\autoit\include\GUIConstantsEx.au3"
 #include "..\thirdparty\autoit\include\GUIListBox.au3"
@@ -40,6 +34,13 @@ Global $eccDownloadTaggedReleases 	= "https://github.com/PhoenixInteractiveNL/em
 #include "..\thirdparty\autoit\include\IE.au3"
 #include "..\thirdparty\autoit\include\GetCRC32.au3"
 #include "..\thirdparty\autoit\include\Crypt.au3"
+#include "..\thirdparty\autoit\include\Misc.au3"
+
+; WEB variables
+Global $eccWebsite 					= "https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"
+Global $eccForum 					= "http://eccforum.phoenixinteractive.nl"
+Global $eccDownloadLatest			= "https://phoenixinteractivenl.github.io/emuControlCenter/"
+Global $eccDownloadTaggedReleases 	= "https://github.com/PhoenixInteractiveNL/emuControlCenter/releases"
 
 ; Global FILE locations
 Global $eccInstallPath 		= StringReplace(@Scriptdir, "\ecc-core\tools", "")
@@ -86,7 +87,8 @@ Global $eccLanguageSaved 	= IniRead($ThirdPartyConfigIni, "ECC", "language", "")
 Global $EccUserPathTemp 	= StringReplace(Iniread($eccConfigFileGeneralUser, "USER_DATA", "base_path", ""), "/", "\")
 Global $EccUserPath 		= StringReplace($EccUserPathTemp, "..\", $eccInstallPath & "\") ;Add full path to variable if it's an directory within the ECC structure
 ; Userdata
-Global $eccUserCidFile 		= $eccInstallPath & "\ecc-system\idt\cicheck.idt"
+$UIDdata					= @ScriptDir & @ComputerName & @UserName & @CPUArch & @OSArch & @OSType & @OSVersion & @OSBuild
+$UIDuser					= GetAES($UIDdata)
 Global $eccUserPathTemp 	= StringReplace(IniRead($eccConfigFileGeneralUser, "USER_DATA", "base_path", ""), "/", "\")
 Global $eccUserPath 		= StringReplace($eccUserPathTemp, "..\", $eccInstallPath & "\") ; Add full path to variable if it's an directory within the ECC structure
 ; ECC window title
@@ -103,6 +105,11 @@ Global $RomPlatformName 	= IniRead($EccRomDataFile, "ROMDATA", "rom_platformname
 Global $RomMetaData 		= IniRead($EccRomDataFile, "ROMDATA", "rom_meta_data", "")
 Global $RomUserData 		= IniRead($EccRomDataFile, "ROMDATA", "rom_user_data", "")
 Global $eccImageFolder		= $eccUserPath & $RomEccId & "\images"
+
+; emuDownloadCenter
+Global $EDCServer 			= "https://raw.githubusercontent.com/PhoenixInteractiveNL/edc-masterhook/master/"
+Global $EDCEmulatorList		= $EDCServer & "emulatorlist.ini"
+Global $EDCStatistics		= $EDCServer & "statistics.ini"
 
 ; ECC CREATE SHORTCUT variables
 Global $StartFolderName 	= "emuControlCenter"
@@ -162,3 +169,8 @@ Global $AutoSavedIpcFile 	= @ScriptDir & "\eccImagePackCenter.ipc"
 
 ; VIDEOPLAYER (MPLAYER) variables
 Global $VideoWindowTitle	= "The Movie Player"
+
+Func GetAES($StringtoAES)
+$bHash = _Crypt_EncryptData($StringtoAES, $CALG_AES_128)
+Return StringUpper(StringTrimLeft($bHash, 2)) ;removes the 0x
+EndFunc ;GetMD5

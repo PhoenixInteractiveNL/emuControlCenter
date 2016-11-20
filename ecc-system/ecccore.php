@@ -1,11 +1,11 @@
 <?php
 $version = '1.21';
-$build = '03';
+$build = '04';
 $description = '1.21';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 
 $autor = 'Sebastiaan Ebeltjes(NL) Andreas Scheibel(DE)';
-$date = "2016.09.24";
+$date = "2016.11.20";
 
 $eccConfig = array(
 	'ecc_release' => array(
@@ -587,10 +587,5 @@ $eccConfig = array(
 		'META_DATFILE_URL' => '',
 		'GOOGLE_ROM_SEARCH' => 'http://www.google.com/search?q=',
 	),
-	
-	'cs' => array(
-		'cicheckdat' => 'ecc-system/idt/cicheck.idt',
-		'cscheckdat' => 'ecc-system/idt/cscheck.idt',
-	)
 );
 ?>

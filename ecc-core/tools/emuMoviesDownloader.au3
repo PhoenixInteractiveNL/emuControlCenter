@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : EmuMoviesDownloader (EMD)
-; Script version         : v1.2.1.2
-; Last changed           : 2014.06.24
+; Script version         : v1.2.1.3
+; Last changed           : 2014.11.20
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -148,6 +148,12 @@ EndIf
 ; $LoginOk = "True"
 ToolTip("Downloading SYSTEM data...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
 Global $EmuMoviesSystemCacheTemp = InetRead($EmuMoviesServer & "getsystems.aspx?sessionid=" & $SessionID & "&product=" & $eccSig, 1) ;Download Systems XML
+
+$FileHandleOut = FileOpen("Arcade.md", 1)
+FileWriteLine($FileHandleOut, $EmuMoviesSystemCacheTemp)
+FileClose($FileHandleOut)
+
+
 Global $EmuMoviesSystemCache = StringToBinary("<Root>") & $EmuMoviesSystemCacheTemp & StringToBinary("</Root>") ;Add a 'virtual' ROOT node to make it a proper XML file.
 ;~ ToolTip("Downloading MEDIA data...", @DesktopWidth/2, @DesktopHeight/2, "EMD", 1, 6)
 ;~ InetGet($EmuMoviesServer & "getmedias.aspx?sessionid=" & $SessionID, $EmuMoviesMediaFile, 1) ; Download Media XML
@@ -557,11 +563,3 @@ $totalstring = $totalstring & $string
 GUICtrlSetData($ProcessingList, $totalstring)
 _GUICtrlEdit_LineScroll($ProcessingList, 0, _GUICtrlEdit_GetLineCount($ProcessingList))
 EndFunc ;Addnote
-
-Func GetCID()
-Global $iEccUserCidFile
-$oEccUserCidFile = FileOpen($eccUserCidFile, 0)
-If $oEccUserCidFile = 1 Then $iEccUserCidFile = FileRead($oEccUserCidFile)
-FileClose($oEccUserCidFile)
-Return $iEccUserCidFile
-EndFunc ;GetCID

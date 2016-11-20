@@ -1,9 +1,9 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter eccUpdate
 ;
-; Script version         : v1.2.0.2
-Global $ScriptVersion = "v1.2.0.2"
-; Last changed           : 2016.09.15
+; Script version         : v1.2.0.3
+Global $ScriptVersion = "v1.2.0.3"
+; Last changed           : 2016.11.20
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -19,10 +19,6 @@ FileChangeDir(@ScriptDir)
 ;==============================================================================
 ;BEGIN *** CHECK & VALIDATE
 ;==============================================================================
-$IdtRead = FileOpen($eccUserCidFile)
-Global $eccIdt = FileRead($IdtRead)
-FileClose($IdtRead)
-
 Global $SkipUpdate
 Global $StartEccAfterUpdate = 0
 

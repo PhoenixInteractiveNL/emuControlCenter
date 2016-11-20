@@ -1,6 +1,6 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : ECC ImageInject!
-; Script version         : v1.1.0.8
+; Script version         : v1.1.0.9
 Global $ServerScriptVersion = "1100"
 ; Last changed           : 2014.03.28
 ;
@@ -31,10 +31,6 @@ If $EccUserPath = "" Then
 	MsgBox(64,"ECC ImageInject", "Please make sure you have ECC run once!, aborting...")
 	Exit
 EndIf
-
-$IdtRead = FileOpen($eccUserCidFile)
-Global $EccIdt = FileRead($IdtRead)
-FileClose($IdtRead)
 
 Select
 	Case $CmdLine[0] = 0
@@ -103,7 +99,7 @@ Func ImageDownload($iRomEccId, $iRomCrc32)
 $ErrorFlag = 0
 $PlatformRomCount = $PlatformRomCount + 1
 FileDelete(@Scriptdir & "\" & $ImagesINI) ; Delete old file first, Inetget does not overwrite!
-InetGet($ICCServerUrl & "download" & $ServerScriptVersion & ".php?idt=" & $EccIdt & "&eccid=" & $iRomEccId & "&crc32=" & $iRomCrc32 & "&file=" & $ImagesINI & "&code=" & $EccKameleonCode, @Scriptdir & "\" & $ImagesINI)
+InetGet($ICCServerUrl & "download" & $ServerScriptVersion & ".php?idt=" & $UIDuser & "&eccid=" & $iRomEccId & "&crc32=" & $iRomCrc32 & "&file=" & $ImagesINI & "&code=" & $EccKameleonCode, @Scriptdir & "\" & $ImagesINI)
 CheckForERROR()
 
 If $FullPlatformFlag = 0 Then CreateGUI() ;Hotfix to not display the GUI (in single mode) when a ROM is not found!
@@ -149,7 +145,7 @@ For $i = 1 To $ImagesInIni[0]
 		GUICtrlSetData($RemainingLabelPlatform, $PlatFormRomCountUser - $PlatformRomCount)
 		DirCreate($ImageFolderLocal)
 
-		$FileDownloadHandle = InetGet($ICCServerUrl & "download" & $ServerScriptVersion & ".php?idt=" & $EccIdt & "&eccid=" & $iRomEccId & "&crc32=" & $iRomCrc32 & "&file=" & $FileToDownload & "&code=" & $EccKameleonCode, $ImageFolderLocal & $FileToDownload, 1, 1)
+		$FileDownloadHandle = InetGet($ICCServerUrl & "download" & $ServerScriptVersion & ".php?idt=" & $UIDuser & "&eccid=" & $iRomEccId & "&crc32=" & $iRomCrc32 & "&file=" & $FileToDownload & "&code=" & $EccKameleonCode, $ImageFolderLocal & $FileToDownload, 1, 1)
 
 		Do
 			$InetBytesRead = InetGetInfo($FileDownloadHandle, 0)

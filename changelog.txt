@@ -1,4 +1,24 @@
 ----- ECC v1.2x -----
+UPDATE 00630
+- ECC License now GPLv3
+- CORE
+  - Removed unique CID structure in ECC, now implemented UID in autoit variables
+- eccToolVariables
+  - v1.0.1.0
+    - Added UID string.
+- emuMoviesdownloader
+  - v1.2.1.3
+    - Removed redundant CID checks.
+- eccUpdate
+  - v1.2.0.3
+    - Removed redundant CID checks.
+- iccImageInject
+  - v1.1.0.9
+    - Adjusted CID checks to UID.
+- eccDiagnostics
+  - v1.0.0.4
+    - Adjusted CID checks to UID.
+
 UPDATE 00629
 - Updated the emuMoviesDownloaderlist from 2012-10-10 to 2016-11-05.
 

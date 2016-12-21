@@ -1,4 +1,24 @@
 ----- ECC v1.2x -----
+UPDATE 00631
+- Thirdparty updates
+  - 7-zip v16.02 to v16.04
+  - Notepad++ v6.9.2 to v7.2.2
+- Updated DAT files for:
+ - CPS-1  : v0.178 to v0.180 (mame)
+ - CPS-2  : v0.178 to v0.180 (mame)
+ - CPS-3  : v0.178 to v0.180 (mame)
+ - MAME   : v0.178 to v0.180 (mame)
+ - MODEL1 : v0.178 to v0.180 (mame)
+ - MODEL2 : v0.178 to v0.180 (mame)
+ - NAOMI  : v0.178 to v0.180 (mame)
+ - NEOGEO : v0.178 to v0.180 (mame)
+ - PGM    : v0.178 to v0.180 (mame)
+ - S11    : v0.178 to v0.180 (mame)
+ - S16    : v0.178 to v0.180 (mame)
+ - S18    : v0.178 to v0.180 (mame)
+ - S22    : v0.178 to v0.180 (mame)
+ - ZINC   : v0.178 to v0.180 (mame)
+
 UPDATE 00630
 - UID Hotfix.
 

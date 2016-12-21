@@ -1,6 +1,19 @@
 HISTORY of the 7-Zip
 --------------------
 
+16.04          2016-10-04
+-------------------------
+- The bug was fixed: 7-Zip 16.03 exe installer under Vista didn't create 
+  links in Start / Programs menu.
+- Some bugs were fixed in RAR code.
+
+
+16.03          2016-09-28
+-------------------------
+- Installer and SFX modules now use some protection against DLL preloading attack.
+- Some bugs were fixed in 7z, NSIS, SquashFS, RAR5 and another code.
+
+
 16.02          2016-05-21
 -------------------------
 - 7-Zip now can extract multivolume ZIP archives (z01, z02, ... , zip).

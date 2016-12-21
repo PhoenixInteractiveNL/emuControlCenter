@@ -2,7 +2,7 @@
 emuControlCenter - Console/Computer Rom-Manager & Frontend (Windows)
 --------------------------------------------------------------------------------
 
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_122.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_121.png)
 
 Get the best multi-emulator frontend! - Manage roms for more than 190 gaming platforms with one tool!
 
@@ -17,11 +17,6 @@ There is also a 'ImageCenter' build-in for a fullsize preview of screens and cov
 It's possible to load and parse roms even when they are archived with ZIP / 7-Zip / RAR.
 emuControlCenter can get the checksums directly without unpacking compressed files.
 It's also possible to parse one or more ROMs from a single ZIP / 7-ZIP / RAR-File!
-
-### Download emulators directly from emuDownloadCenter!
-
-With the EDC module you can instantly download, install and configure emulators in a
-few clicks without searching for them on the internet!
 
 ### Import/Export video & images from EmuMovies / No-Intro 
 

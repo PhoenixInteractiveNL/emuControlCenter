@@ -1,5 +1,5 @@
 ----- ECC v1.2x -----
-UPDATE 00631
+UPDATE 00632
 - Thirdparty updates
   - 7-zip v16.02 to v16.04
   - Notepad++ v6.9.2 to v7.2.2
@@ -19,7 +19,7 @@ UPDATE 00631
  - S22    : v0.178 to v0.180 (mame)
  - ZINC   : v0.178 to v0.180 (mame)
 
-UPDATE 00630
+UPDATE 00631
 - UID Hotfix.
 
 UPDATE 00630

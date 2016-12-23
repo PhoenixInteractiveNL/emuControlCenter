@@ -122,9 +122,9 @@ $i18n['tooltips'] = array(
 	'mTopServicesKameleonCodeTooltip' =>
 		"Esto abrirá una ventana donde puedes introducir el código Kameleon para poder utilizar los servicios de ECC. (sólo miembros registrados del foro)",
 	// # TOP-HELP
-	'mTopHelpWebsiteTooltip' =>
+	'mTopSocialWebsiteECCTooltip' =>
 		"Esto abrirá la página web de ECC en tu navegador de Internet.",
-	'mTopHelpForumTooltip' =>
+	'mTopSocialForumTooltip' =>
 		"Esto abrirá el foro de soporte de ECC en tu navegador de Internet.",
 	'mTopHelpDocOfflineTooltip' =>
 		"Esto abrirá la documentación de ECC a nivel local.",
@@ -142,6 +142,13 @@ $i18n['tooltips'] = array(
 		"Esto abrirá el bloc de notas donde puedes editar archivos de texto y scripts si fuese necesario.",
 	'mTopToolHexEditorTooltip' =>
 		"Esto abrirá un editor hexadecimal que permite editar archivos binarios si fuese necesario.",
-		
+
+	/* 1.22 BUILD 1 */
+	'mTopEmuDownloadTooltip' =>
+		"Download, install and configure emulators with emuDownloadCenter!",
+	'mTopSocialWebsiteEDCTooltip' =>
+		"Open the EDC Project page, and see how you can help to collect emulators!",
+	'mTopSocialFacebookTooltip' =>
+		"Visit the ECC facebook page and like it to get the latest news!",
 	);
 ?>

@@ -201,12 +201,10 @@ $i18n['menu'] = array(
 	/* 1.13 BUILD 02 */
 	'lbl_emulator' =>
 		"Platform emulators",
-		
-	'lbl_emulator_import_online' =>
-		"Download emulators van internet (kameleon code nodig)",	
-		
-	'lbl_emulator_information' =>
-		"Open informatiebestand waar emulators te downloaden",
+	'lbl_emulator_edc_download' =>
+		"Download emulators van emuDownloadCenter (online)",
+	'lbl_emulator_edc_webpage' =>
+		"Open emuDownloadCenter project pagina",
 
 	/* 1.13 BUILD 03 */
 	'lbl_image_platform_import_emumovies' =>

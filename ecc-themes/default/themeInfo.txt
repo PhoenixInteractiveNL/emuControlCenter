@@ -1,5 +1,5 @@
-name="Default"
+name="Default - Sonic splash"
 author="ECC Team"
-date="20080123"
+date="20161222"
 contact=""
 website="https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"

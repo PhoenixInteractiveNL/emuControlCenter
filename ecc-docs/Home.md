@@ -1,12 +1,15 @@
-## Home
+﻿## Home
 ***
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_121.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_122.png)
 
 ### About
 Get the best multi-emulator frontend! - Manage roms for more than 190 gaming platforms with one tool!
 
-Easy and intuitive!
-emuControlCenter is build for people who want to play games quick 'n' easy, without searching to much, ECC supports images and previews them directy in the 'Resultview'. Also there is a 'ImageCenter' build-in for a fullsize preview!
+emuControlCenter is a Console/Computer Rom-Manager & Frontend for various older and newer
+consoles/handheld/computer games and is build for people who want to play games quick 'n' easy without
+searching to much. ECC uses rom-releated meta and has extended search functions built-in, it supports bookmarks,
+ratings and a history for roms. You can also add images and preview them directy in the 'Resultview'.
+There is also a 'ImageCenter' build-in for a fullsize preview of screens and covers.
 ***
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_zip.png)
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_7zip.png)
@@ -15,16 +18,23 @@ emuControlCenter is build for people who want to play games quick 'n' easy, with
 ZIP, 7-ZIP & RAR support
 It's possible to load and parse roms even when they are archived with ZIP / 7-Zip / RAR. emuControlCenter can get the checksums directly without unpacking compressed files. It's also possible to parse one or more ROMs from a single ZIP / 7-ZIP / RAR-File!
 ***
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_nointro_small.png)
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_emumovies.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/edc_banner.png)
 
-Import & Export images directly from No-Intro / EmuMovies
+Download emulators directly from emuDownloadCenter!
+
+With the EDC module you can instantly download, install and configure emulators in a few clicks without searching for them on the internet!
+
+More information here: https://github.com/PhoenixInteractiveNL/emuDownloadCenter/wiki
+***
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_emumovies.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_nointro_small.png)
+
+Import & Export images directly from EmuMovies / No-Intro
 With the build-in ‘ImageControlCenter’ it is possible to import No-Intro (CRC32 based) & EmuMovies (NAME based) images into ECC, you can also export them to these format, it’s fully configurable!
 ***
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_mobygames_2013.png)
 
-Import ROM information directly form MobyGames
-Import ROM information like Developer, Publisher, Year, and Description directly from MobyGemes.com!
+Import ROM information directly from MobyGames like: Developer, Publisher, Year, Perspective, Visual and Description!
 ***
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_mplayer.png)
 

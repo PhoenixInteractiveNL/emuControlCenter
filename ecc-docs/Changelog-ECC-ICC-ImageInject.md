@@ -1,5 +1,8 @@
 ## Changelog ECC ICC ImageInject
 ***
+v1.1.0.9
+- Adjusted CID checks to UID.
+
 v1.1.0.8 (2014.03.28)
 - Combined all global variables in the script eccToolVariables
 - Changed URL's to form MINE.NU to .NL (due to changing webadres)

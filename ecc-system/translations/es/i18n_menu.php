@@ -203,7 +203,7 @@ $i18n['menu'] = array(
 		"Emuladores de la plataforma",
 		
 	'lbl_emulator_import_online' =>
-		"Descargar emuladores online (necesita código kameleon)",	
+		"Descargar emuladores online",	
 		
 	'lbl_emulator_information' =>
 		"Abrir archivo de información de donde conseguir emuladores",

@@ -1,0 +1,158 @@
+<p>To convert the XML DAT to an CSV FILE from the command line you need this tool:<a href="https://github.com/PhoenixInteractiveNL/ecc-toolsused/tree/master/xml2csv">xml2csv</a></p>
+
+<ul>
+<li>Usage:</li>
+</ul>
+
+<p><code>xml2csv.exe &lt;name of the XML file for input&gt; &lt;name of the CSV file to create&gt; "&lt;data to save (data1;data2)&gt;" -D=&lt;seperation mark&gt;</code></p>
+
+<p>Example for the NDS xml dat:</p>
+
+<p><code>xml2csv.exe ADVANsCEne_NDScrc.xml ADVANsCEne_NDScrc.csv "imageNumber;romCRC;title" -D=;</code></p>
+
+<p>This will output a CSV file, wich has data seperated by ";" ,examples of the CSV file, after processing an XML DAT:</p>
+
+<ul>
+<li>XML DAT:
+<code>xml
+&lt;game&gt;
+     &lt;imageNumber&gt;1&lt;/imageNumber&gt;
+     &lt;releaseNumber&gt;1&lt;/releaseNumber&gt;
+     &lt;title&gt;Metroid Prime Hunters - First Hunt (Demo)&lt;/title&gt;
+     &lt;saveType&gt;None&lt;/saveType&gt;
+     &lt;romSize&gt;16777216&lt;/romSize&gt;
+     &lt;publisher&gt;Nintendo&lt;/publisher&gt;
+     &lt;location&gt;1&lt;/location&gt;
+     &lt;sourceRom&gt;Darkfader&lt;/sourceRom&gt;
+     &lt;language&gt;2&lt;/language&gt;
+     &lt;files&gt;
+        &lt;romCRC extension=".nds"&gt;C2FB5233&lt;/romCRC&gt;
+     &lt;/files&gt;
+     &lt;im1CRC&gt;789F71C4&lt;/im1CRC&gt;
+     &lt;im2CRC&gt;633C8693&lt;/im2CRC&gt;
+     &lt;icoCRC&gt;52079D61&lt;/icoCRC&gt;
+     &lt;nfoCRC&gt;F0245E69&lt;/nfoCRC&gt;
+     &lt;genre&gt;Demo&lt;/genre&gt;
+     &lt;dumpdate&gt;2005-03-08&lt;/dumpdate&gt;
+     &lt;internalname&gt;FIRST HUNT&lt;/internalname&gt;
+     &lt;serial&gt;NTR-AMFE-USA&lt;/serial&gt;
+     &lt;version&gt;1.0&lt;/version&gt;
+     &lt;wifi&gt;No&lt;/wifi&gt;
+     &lt;filename&gt;metroid.prime.first.hunt-df.zip&lt;/filename&gt;
+     &lt;dirname&gt;Metroid_Prime_First_Hunt_NDS-DF&lt;/dirname&gt;
+     &lt;duplicateid&gt;30&lt;/duplicateid&gt;
+     &lt;comment&gt;xxxx&lt;/comment&gt;
+  &lt;/game&gt;
+  &lt;game&gt;
+     &lt;imageNumber&gt;2&lt;/imageNumber&gt;
+     &lt;releaseNumber&gt;2&lt;/releaseNumber&gt;
+     &lt;title&gt;Electroplankton&lt;/title&gt;
+     &lt;saveType&gt;None&lt;/saveType&gt;
+     &lt;romSize&gt;16777216&lt;/romSize&gt;
+     &lt;publisher&gt;Nintendo&lt;/publisher&gt;
+     &lt;location&gt;7&lt;/location&gt;
+     &lt;sourceRom&gt;Trashman&lt;/sourceRom&gt;
+     &lt;language&gt;256&lt;/language&gt;
+     &lt;files&gt;
+        &lt;romCRC extension=".nds"&gt;94767CD4&lt;/romCRC&gt;
+     &lt;/files&gt;
+     &lt;im1CRC&gt;4CF966EA&lt;/im1CRC&gt;
+     &lt;im2CRC&gt;82AA0065&lt;/im2CRC&gt;
+     &lt;icoCRC&gt;15F11361&lt;/icoCRC&gt;
+     &lt;nfoCRC&gt;54DEE27A&lt;/nfoCRC&gt;
+     &lt;genre&gt;Music&lt;/genre&gt;
+     &lt;dumpdate&gt;2005-06-17&lt;/dumpdate&gt;
+     &lt;internalname&gt;ELE PLANKTON&lt;/internalname&gt;
+     &lt;serial&gt;NTR-ATIJ-JPN&lt;/serial&gt;
+     &lt;version&gt;1.0&lt;/version&gt;
+     &lt;wifi&gt;No&lt;/wifi&gt;
+     &lt;filename&gt;trm-elpl.zip&lt;/filename&gt;
+     &lt;dirname&gt;Electroplankton_JPN_NDS-TRM&lt;/dirname&gt;
+     &lt;duplicateid&gt;72&lt;/duplicateid&gt;
+     &lt;comment&gt;0001&lt;/comment&gt;
+  &lt;/game&gt;
+  &lt;game&gt;
+     &lt;imageNumber&gt;3&lt;/imageNumber&gt;
+     &lt;releaseNumber&gt;3&lt;/releaseNumber&gt;
+     &lt;title&gt;Need for Speed - Underground 2&lt;/title&gt;
+     &lt;saveType&gt;Eeprom - 64 kbit&lt;/saveType&gt;
+     &lt;romSize&gt;33554432&lt;/romSize&gt;
+     &lt;publisher&gt;Electronic Arts&lt;/publisher&gt;
+     &lt;location&gt;1&lt;/location&gt;
+     &lt;sourceRom&gt;Trashman&lt;/sourceRom&gt;
+     &lt;language&gt;4291&lt;/language&gt;
+     &lt;files&gt;
+        &lt;romCRC extension=".nds"&gt;C37AB273&lt;/romCRC&gt;
+     &lt;/files&gt;
+     &lt;im1CRC&gt;8C84BB28&lt;/im1CRC&gt;
+     &lt;im2CRC&gt;03FE72D8&lt;/im2CRC&gt;
+     &lt;icoCRC&gt;10F4712C&lt;/icoCRC&gt;
+     &lt;nfoCRC&gt;8CE36F9D&lt;/nfoCRC&gt;
+     &lt;genre&gt;Racing&lt;/genre&gt;
+     &lt;dumpdate&gt;2005-06-17&lt;/dumpdate&gt;
+     &lt;internalname&gt;NFSU2&lt;/internalname&gt;
+     &lt;serial&gt;NTR-AUGE-USA&lt;/serial&gt;
+     &lt;version&gt;1.0&lt;/version&gt;
+     &lt;wifi&gt;No&lt;/wifi&gt;
+     &lt;filename&gt;trm-nfs2.zip&lt;/filename&gt;
+     &lt;dirname&gt;Need_For_Speed_Underground_2_USA_NDS-TRM&lt;/dirname&gt;
+     &lt;duplicateid&gt;34&lt;/duplicateid&gt;
+     &lt;comment&gt;0002&lt;/comment&gt;
+  &lt;/game&gt;
+</code></li>
+</ul>
+
+<p>CSV OUTPUT:</p>
+
+<pre><code>imageNumber;romCRC;title
+1;C2FB5233;Metroid Prime Hunters - First Hunt (Demo)
+2;94767CD4;Electroplankton
+3;C37AB273;Need for Speed - Underground 2
+4;03D56334;Yoshi Touch &amp; Go
+5;662D929F;Feel the Magic - XY XX
+6;2CE68FAD;WarioWare - Touched!
+7;9B49BD53;Polarium
+8;E84022EC;Puyo Pop Fever
+9;F6AF8061;Pac-Pix
+10;FCC4DDF5;Space Invaders DS
+11;58126FB5;Cool 104 Joker &amp; Setline
+12;5A18290A;Guru Guru Nagetto
+13;4F604498;Asphalt - Urban GT
+14;1CE5E154;WarioWare - Touched! (Demo)
+15;1D829D6F;Yoshi Touch &amp; Go
+16;652FE4BC;Pac-Pix
+17;35EBD240;Catch! Touch! Yoshi!
+18;138556D1;Meteos
+19;0AD5A96F;Ridge Racer DS
+20;8CAF8639;WarioWare - Touched!
+21;E6BFA3BC;Mr. Driller - Drill Spirits
+22;1DA5EF2B;Chokkan Hitofude
+23;1915C4BB;Project Rub
+24;29715DEC;Super Mario 64 DS
+25;3F3F7DC8;Star Wars Episode III - Revenge of the Sith
+26;35281C5C;Robots
+27;AAC9842D;Super Mario 64 DS
+28;0D8B2B06;Pokemon Dash
+29;1276FB36;Metroid Prime Hunters - First Hunt (Demo)
+30;B909ADB3;Mr. Driller - Drill Spirits
+31;FE7DC5EE;Kirby - Canvas Curse
+32;BB881C67;GoldenEye - Rogue Agent
+33;441C4158;Sprung - The Dating Game
+34;7E1223DA;Polarium
+35;0F805B72;Bomberman
+36;82FF50C5;Kenshuui Tendo Dokuta
+37;0989A92C;Zoo Keeper
+38;00247816;Touch! Kirby's Magic Paintbrush
+39;1722923E;Daigasso! Band Brothers
+40;E6321562;Super Mario 64 DS
+41;7BBBABEE;Ping Pals
+42;EC861AB2;Another Code - 2tsu no Kioku
+43;B42072B8;Hanjuku Eiyuu DS - Egg Monster Hero
+44;5092F331;Need for Speed - Underground 2
+45;4823C71C;Nintendogs - Chihuahua &amp; Friends
+46;3B275B19;Spider-Man 2
+47;CCF40226;Tennis no Ouji-Sama 2005 - Crystal Drive
+48;EC29F9F7;Urbz - Sims in the City, The
+49;925E2F90;Yakuman DS
+50;AA6EA8E3;Rayman DS
+</code></pre>

@@ -2,11 +2,17 @@
 [_Home_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki)
 
 [**Forum**](http://eccforum.phoenixinteractive.nl)
+
+[_Contact_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-Contact)
+
+[![Donate](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_misc_donate_paypal.png)](http://paypal.me/phoenixinteractive)
 ***
 ### Downloads
 [**Latest developement version**](https://phoenixinteractivenl.github.io/emuControlCenter/)
 
 [**Tagged releases**](https://github.com/PhoenixInteractiveNL/emuControlCenter/releases)
+
+[**Emulators (EDC)**](https://github.com/PhoenixInteractiveNL/edc-masterhook/wiki)
 
 [**ECC DAT Files**](https://github.com/PhoenixInteractiveNL/ecc-datfiles)
 ***
@@ -24,11 +30,16 @@
 
 [**Live! updates**](https://github.com/PhoenixInteractiveNL/ecc-updates)
 
-[_HowTo Code examples_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-HowTo-code-examples)
-
 [_Programs used_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Programs-Used)
 
 [_Links and Partners_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Links-and-Partners)
+***
+### HowTo Tutorials
+[_HowTo Translate ECC_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-HowTo-Translate-ECC)
+
+[_HowTo Code examples_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-HowTo-code-examples)
+
+[_HowTo DATfile examples_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-HowTo-DATfile-examples)
 ***
 ### Changelogs ECC
 [_Changelogs 2016_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelogs-2016)
@@ -49,11 +60,11 @@
 
 [_ECC eccScriptSystem_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-eccScriptSystem)
 
-[_ECC DATFile Updater (DFU)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-DATFileUpdater-(DFU))
+[_ECC DATFile Updater (DFU)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-DATFileUpdater)
 
-[_ECC GtkThemeSelect (GTKTS)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-GtkThemeSelect-(GTKTS))
+[_ECC GtkThemeSelect (GTKTS)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-GtkThemeSelect)
 
-[_ECC ImagePackCenter (IPC)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-ImagePackCenter-(IPC))
+[_ECC ImagePackCenter (IPC)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-ImagePackCenter)
 
 [_ECC eccDiagnostics_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-eccDiagnostics)
 
@@ -69,9 +80,9 @@
 
 [_ECC eccVideoPlayer_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-eccVideoPlayer)
 
-[_ECC emuMoviesDownloader (EMD)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-emuMoviesDownloader-(EMD))
+[_ECC emuMoviesDownloader (EMD)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-emuMoviesDownloader)
 
-[_ECC MobyGames Importer (MGI)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-MobyGames-Importer-(MGI))
+[_ECC MobyGames Importer (MGI)_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-MobyGames-Importer)
 
 [_ECC Tool Variables_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-Tool-Variables)
 ***

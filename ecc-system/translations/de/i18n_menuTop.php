@@ -126,9 +126,9 @@ $i18n['menuTop'] = array(
 	/* HELP */
 	'mTopHelp' =>
 		"Hilfe",
-	'mTopHelpWebsite' =>
+	'mTopSocialWebsiteECC' =>
 		"Offizielle Website",
-	'mTopHelpForum' =>
+	'mTopSocialForum' =>
 		"Support Forum",
 	'mTopHelpDocOffline' =>
 		"Dokumentation",

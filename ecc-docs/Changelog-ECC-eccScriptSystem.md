@@ -1,5 +1,8 @@
 ## Changelog ECC eccScriptSystem
 ***
+v1.3.0.1 (2016.09.25)
+- Removed Xpadder variable, added JoyEmulator variable.
+
 v1.3.0.0 (2014.05.18)
 - Fixed Daemon tools mounting (option "scsi" added)
 - New feature: ECC commandline parameters are now passed trough

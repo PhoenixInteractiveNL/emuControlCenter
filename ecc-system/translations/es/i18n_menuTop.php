@@ -126,9 +126,9 @@ $i18n['menuTop'] = array(
 	/* HELP */
 	'mTopHelp' =>
 		"Ayuda",
-	'mTopHelpWebsite' =>
+	'mTopSocialWebsiteECC' =>
 		"Página oficial",
-	'mTopHelpForum' =>
+	'mTopSocialForum' =>
 		"Foro de soporte",
 	'mTopHelpDocOffline' =>
 		"Documentación",
@@ -241,5 +241,15 @@ $i18n['menuTop'] = array(
 		'Iniciar Notepad (Notepad++)',
 	'mTopToolHexEditor' =>
 		'Iniciar Hex Editor (HxD)',
+
+	/* 1.22 BUILD 1 */
+	'mTopEmuDownload' =>
+		'Download from EDC',
+	'mTopSocial' =>
+		'Social',	
+	'mTopSocialWebsiteEDC' =>
+		'emuDownloadCenter website',			
+	'mTopSocialFacebook' =>
+		'Facebook',			
 	);
 ?>

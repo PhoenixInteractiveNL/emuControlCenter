@@ -1,5 +1,8 @@
 ## Changelog ECC emuMoviesDownloader (EMD)
 ***
+v1.2.1.3
+- Removed redundant CID checks.
+
 v1.2.1.2 (2014.06.24)
 - Fixed & Updated encryption en decryption algorithm due to function break in
  the new autoit version _StringEncrypt has been replaced with _Crypt_EncryptData.

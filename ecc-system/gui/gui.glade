@@ -9,8 +9,8 @@
     <property name="has_default">True</property>
     <property name="title" translatable="yes">emuControlCenter</property>
     <property name="window_position">center</property>
-    <property name="default_width">1024</property>
-    <property name="default_height">768</property>
+    <property name="default_width">1080</property>
+    <property name="default_height">900</property>
     <property name="urgency_hint">True</property>
     <property name="gravity">center</property>
     <child>
@@ -37,7 +37,7 @@
                         <signal name="activate" handler="on_add_new_roms_to_ecc1_activate"/>
                         <accelerator key="A" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image1">
+                          <widget class="GtkImage" id="menuTopRomAddNewRom_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-directory</property>
                           </widget>
@@ -57,7 +57,7 @@
                         <signal name="activate" handler="on_topMenuReparseRomFolder_activate"/>
                         <accelerator key="R" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image3">
+                          <widget class="GtkImage" id="mMenuReparseFolder_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-refresh</property>
                             <property name="icon-size">1</property>
@@ -73,7 +73,7 @@
                         <signal name="activate" handler="on_mMenuReparseFolderAll_activate"/>
                         <accelerator key="F5" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image4">
+                          <widget class="GtkImage" id="mMenuReparseFolderAll_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-refresh</property>
                             <property name="icon-size">1</property>
@@ -96,7 +96,7 @@
                         <signal name="activate" handler="on_optimize_roms_in_ecc1_activate"/>
                         <accelerator key="O" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image6">
+                          <widget class="GtkImage" id="mTopRomOptimize_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-spell-check</property>
                             <property name="icon-size">1</property>
@@ -118,7 +118,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_menubar_maint_duplicate_remove_all_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image7">
+                          <widget class="GtkImage" id="mTopRomRemoveDups_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-delete</property>
                             <property name="icon-size">1</property>
@@ -135,7 +135,7 @@
                         <property name="always_show_image">True</property>
                         <accelerator key="R" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image12">
+                          <widget class="GtkImage" id="mTopRomRemoveRoms_image">
                             <property name="visible">True</property>
                             <property name="yalign">0.49000000953674316</property>
                             <property name="stock">gtk-delete</property>
@@ -147,7 +147,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image2">
+                  <widget class="GtkImage" id="mTopRom_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-directory</property>
                     <property name="icon-size">1</property>
@@ -172,9 +172,24 @@
                         <signal name="activate" handler="on_edit/assign_emulator1_activate"/>
                         <accelerator key="C" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image13">
+                          <widget class="GtkImage" id="mTopEmuConfig_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-preferences</property>
+                            <property name="icon-size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopEmuDownload">
+                        <property name="label">Download</property>
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_stock">False</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="mTopEmuDownload_image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-go-down</property>
                             <property name="icon-size">1</property>
                           </widget>
                         </child>
@@ -183,7 +198,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image5">
+                  <widget class="GtkImage" id="mTopEmu_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-network</property>
                     <property name="icon-size">1</property>
@@ -215,7 +230,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_import_emuControlCenter_datfile_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image15">
+                                  <widget class="GtkImage" id="mTopDatImportEcc_image">
                                     <property name="visible">True</property>
                                     <property name="xalign">0.47999998927116394</property>
                                     <property name="stock">gtk-open</property>
@@ -233,7 +248,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_mTopDatImportCtrlMAME_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image16">
+                                  <widget class="GtkImage" id="mTopDatImportCtrlMAME_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-open</property>
                                     <property name="icon-size">1</property>
@@ -250,7 +265,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_import_ecc/romcenter_datfile1_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image17">
+                                  <widget class="GtkImage" id="mTopDatImportRc_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-open</property>
                                     <property name="icon-size">1</property>
@@ -278,7 +293,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_export_ecc_datfile_full1_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image18">
+                                  <widget class="GtkImage" id="mTopDatExportEccFull_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-save</property>
                                     <property name="icon-size">1</property>
@@ -296,7 +311,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_export_ecc_datfile_user1_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image19">
+                                  <widget class="GtkImage" id="mTopDatExportEccUser_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-save</property>
                                     <property name="icon-size">1</property>
@@ -313,7 +328,7 @@
                                 <property name="always_show_image">True</property>
                                 <signal name="activate" handler="on_export_ecc_datfile_esearch1_activate"/>
                                 <child internal-child="image">
-                                  <widget class="GtkImage" id="image20">
+                                  <widget class="GtkImage" id="mTopDatExportEccEsearch_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-save</property>
                                     <property name="icon-size">1</property>
@@ -334,7 +349,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_empty_datfile_database1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image23">
+                          <widget class="GtkImage" id="mTopDatClear_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-delete</property>
                             <property name="icon-size">1</property>
@@ -356,7 +371,7 @@
                         <signal name="activate" handler="on_mTopRomAuditShow_activate"/>
                         <accelerator key="I" signal="activate" modifiers="GDK_MOD1_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image26">
+                          <widget class="GtkImage" id="mTopRomAuditShow_image">
                             <property name="visible">True</property>
                             <property name="yalign">0.51999998092651367</property>
                             <property name="stock">gtk-unindent</property>
@@ -378,7 +393,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_configuration1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image27">
+                          <widget class="GtkImage" id="mTopDatConfig_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-properties</property>
                             <property name="icon-size">1</property>
@@ -389,7 +404,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image14">
+                  <widget class="GtkImage" id="mTopDat_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-dnd</property>
                     <property name="icon-size">1</property>
@@ -412,7 +427,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image31">
+                          <widget class="GtkImage" id="mTopFileRename_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-strikethrough</property>
                             <property name="icon-size">1</property>
@@ -427,7 +442,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image30">
+                          <widget class="GtkImage" id="mTopFileCopy_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-copy</property>
                             <property name="icon-size">1</property>
@@ -443,7 +458,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_topMenuFilesRemoveFile_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image29">
+                          <widget class="GtkImage" id="mTopFileRemove_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-delete</property>
                             <property name="icon-size">1</property>
@@ -463,7 +478,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image32">
+                          <widget class="GtkImage" id="mTopFileSearch_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-spell-check</property>
                             <property name="icon-size">1</property>
@@ -474,7 +489,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image28">
+                  <widget class="GtkImage" id="mTopFile_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-harddisk</property>
                     <property name="icon-size">1</property>
@@ -619,7 +634,7 @@
                         <signal name="activate" handler="on_topMenuViewFeelLucky_activate"/>
                         <accelerator key="F4" signal="activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image33">
+                          <widget class="GtkImage" id="mTopViewRandomGame_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-jump-to</property>
                             <property name="icon-size">1</property>
@@ -636,7 +651,7 @@
                         <signal name="activate" handler="on_topMenuViewReload_activate"/>
                         <accelerator key="F5" signal="activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image35">
+                          <widget class="GtkImage" id="mTopViewReload_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-refresh</property>
                             <property name="icon-size">1</property>
@@ -715,7 +730,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image34">
+                  <widget class="GtkImage" id="mTopView_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-dialog-info</property>
                     <property name="icon-size">1</property>
@@ -740,7 +755,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_menubar_maint_db_vacuum_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image37">
+                          <widget class="GtkImage" id="mTopOptionDbVacuum_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-execute</property>
                             <property name="icon-size">1</property>
@@ -757,7 +772,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_create_all_ecc_user-folders1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image39">
+                          <widget class="GtkImage" id="mTopOptionCreateUserFolder_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-execute</property>
                             <property name="icon-size">1</property>
@@ -774,7 +789,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_menubarMaintCleanHistory_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image40">
+                          <widget class="GtkImage" id="mTopOptionCleanHistory_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-help</property>
                             <property name="icon-size">1</property>
@@ -791,7 +806,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_mTopOptionBackupUserdata_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image41">
+                          <widget class="GtkImage" id="mTopOptionBackupUserdata_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-save</property>
                             <property name="icon-size">1</property>
@@ -807,7 +822,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image42">
+                          <widget class="GtkImage" id="mTopOptionCreateStartmenuShortcuts_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-redo</property>
                             <property name="icon-size">1</property>
@@ -829,7 +844,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_menubar_config_ecc_config_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image43">
+                          <widget class="GtkImage" id="mTopOptionConfig_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-preferences</property>
                             <property name="icon-size">1</property>
@@ -840,7 +855,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image36">
+                  <widget class="GtkImage" id="mTopOption_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-properties</property>
                     <property name="icon-size">1</property>
@@ -850,7 +865,7 @@
             </child>
             <child>
               <widget class="GtkImageMenuItem" id="mTopTool">
-                <property name="label">Configuration</property>
+                <property name="label">Tools</property>
                 <property name="visible">True</property>
                 <property name="use_stock">False</property>
                 <property name="always_show_image">True</property>
@@ -865,7 +880,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_item2_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image45">
+                          <widget class="GtkImage" id="mTopToolEccGtkts_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-color-picker</property>
                             <property name="icon-size">1</property>
@@ -882,7 +897,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_send_bugreport1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image46">
+                          <widget class="GtkImage" id="mTopToolEccDiagnostics_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-zoom-fit</property>
                             <property name="icon-size">1</property>
@@ -898,7 +913,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image47">
+                          <widget class="GtkImage" id="mTopDatDFU_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-refresh</property>
                             <property name="icon-size">1</property>
@@ -919,7 +934,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image51">
+                          <widget class="GtkImage" id="mTopToolAutoIt3_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-find-and-replace</property>
                             <property name="icon-size">1</property>
@@ -935,7 +950,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image52">
+                          <widget class="GtkImage" id="mTopToolNotepadEditor_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-edit</property>
                             <property name="icon-size">1</property>
@@ -951,7 +966,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image53">
+                          <widget class="GtkImage" id="mTopToolHexEditor_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-sort-ascending</property>
                             <property name="icon-size">1</property>
@@ -962,7 +977,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image44">
+                  <widget class="GtkImage" id="mTopTool_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-execute</property>
                     <property name="icon-size">1</property>
@@ -986,7 +1001,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image55">
+                          <widget class="GtkImage" id="mTopDeveloperSQL_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-find</property>
                             <property name="icon-size">1</property>
@@ -1002,7 +1017,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image56">
+                          <widget class="GtkImage" id="mTopDeveloperGUI_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-fullscreen</property>
                             <property name="icon-size">1</property>
@@ -1013,7 +1028,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image54">
+                  <widget class="GtkImage" id="mTopDeveloper_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-preferences</property>
                     <property name="icon-size">1</property>
@@ -1039,7 +1054,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_topMenuHelpUpdCheckLive_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image58">
+                          <widget class="GtkImage" id="mTopToolEccUpdate_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-goto-top</property>
                             <property name="icon-size">1</property>
@@ -1050,7 +1065,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image57">
+                  <widget class="GtkImage" id="mTopUpdate_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-goto-top</property>
                     <property name="icon-size">1</property>
@@ -1072,9 +1087,8 @@
                         <property name="visible">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="use_stock">False</property>
-                        <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image60">
+                          <widget class="GtkImage" id="mTopServicesKameleonCode_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-spell-check</property>
                             <property name="icon-size">1</property>
@@ -1090,7 +1104,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image61">
+                          <widget class="GtkImage" id="mTopServicesEmuMoviesAD_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-spell-check</property>
                             <property name="icon-size">1</property>
@@ -1101,7 +1115,7 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image59">
+                  <widget class="GtkImage" id="mTopServices_image">
                     <property name="visible">True</property>
                     <property name="xalign">0.47999998927116394</property>
                     <property name="stock">gtk-apply</property>
@@ -1119,45 +1133,6 @@
                 <child>
                   <widget class="GtkMenu" id="mTopHelp_menu">
                     <child>
-                      <widget class="GtkImageMenuItem" id="mTopHelpWebsite">
-                        <property name="label">Official website</property>
-                        <property name="visible">True</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="use_stock">False</property>
-                        <property name="always_show_image">True</property>
-                        <signal name="activate" handler="on_official_website1_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="image63">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-about</property>
-                            <property name="icon-size">1</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="mTopHelpForum">
-                        <property name="label">Support forum</property>
-                        <property name="visible">True</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="use_stock">False</property>
-                        <property name="always_show_image">True</property>
-                        <signal name="activate" handler="on_support_forum1_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="image64">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-dialog-question</property>
-                            <property name="icon-size">1</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separator27">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
                       <widget class="GtkImageMenuItem" id="mTopHelpDocOffline">
                         <property name="label">Documentation</property>
                         <property name="visible">True</property>
@@ -1166,7 +1141,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_documentation1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image65">
+                          <widget class="GtkImage" id="mTopHelpDocOffline_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-justify-center</property>
                             <property name="icon-size">1</property>
@@ -1183,7 +1158,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_documentation_(online)1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image66">
+                          <widget class="GtkImage" id="mTopHelpDocOnline_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-justify-center</property>
                             <property name="icon-size">1</property>
@@ -1206,7 +1181,7 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="on_about1_activate"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image67">
+                          <widget class="GtkImage" id="mTopHelpAbout_image">
                             <property name="visible">True</property>
                             <property name="stock">gtk-info</property>
                             <property name="icon-size">1</property>
@@ -1217,9 +1192,102 @@
                   </widget>
                 </child>
                 <child internal-child="image">
-                  <widget class="GtkImage" id="image62">
+                  <widget class="GtkImage" id="mTopHelp_image">
                     <property name="visible">True</property>
                     <property name="stock">gtk-help</property>
+                    <property name="icon-size">1</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkImageMenuItem" id="mTopSocial">
+                <property name="label">Social</property>
+                <property name="visible">True</property>
+                <property name="use_stock">False</property>
+                <property name="always_show_image">True</property>
+                <child>
+                  <widget class="GtkMenu" id="mTopSocial_menu">
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopSocialWebsiteECC">
+                        <property name="label">emuControlCenter website</property>
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="mTopSocialWebsiteECC_image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-home</property>
+                            <property name="icon-size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopSocialForum">
+                        <property name="label">Support forum</property>
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="mTopSocialForum_image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-about</property>
+                            <property name="icon-size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separator3">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopSocialWebsiteEDC">
+                        <property name="label">emuDownloadCenter website</property>
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="mTopSocialWebsiteEDC_image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-home</property>
+                            <property name="icon-size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separator1">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="mTopSocialFacebook">
+                        <property name="label">Facebook</property>
+                        <property name="visible">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="mTopSocialFacebook_image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-orientation-portrait</property>
+                            <property name="icon-size">1</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child internal-child="image">
+                  <widget class="GtkImage" id="mTopSocial_image">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-home</property>
                     <property name="icon-size">1</property>
                   </widget>
                 </child>

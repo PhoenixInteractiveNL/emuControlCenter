@@ -1,5 +1,5 @@
 @ECHO OFF
-title ECC documentation generator v1.0.0
+title ECC documentation generator v1.0.0.1
 rem This script converts GitHub wiki markdown to offline HTML documentation.
 rem
 rem Made by: Sebastiaan Ebeltjes (aka Phoenix)
@@ -24,7 +24,7 @@ rem f=full filename(C:\Users\Family\Desktop\Example\test1.txt)
 
 echo # PATCHING HTML files...
 FOR %%X in ("*.htm") DO (
-  rem  Replace IMAGE links to local in HTML...
+  rem Replace IMAGE links to local in HTML...
   %FARTFILE% %%~dfX --quiet --remove "https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/"
   rem Replace wiki PAGE links to local in HTML...
   %FARTFILE% %%~dfX --quiet --remove "https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/"
@@ -47,7 +47,7 @@ echo "</HEAD>" >> %TITLEFILE%
 echo "<h2><center><b>emuControlCenter documentation<b/></center><h2>" >> %TITLEFILE%
 echo "</HTML>" >> %TITLEFILE%
 rem remove "
-..\ecc-core\thirdparty\fart\fart.exe %TITLEFILE% --quiet --remove -C "\x22"
+%FARTFILE% %TITLEFILE% --quiet --remove -C "\x22"
 
 echo # Build INDEX html...
 
@@ -82,7 +82,7 @@ rem FRAMEDATA2= *,20%
 %FARTFILE% %INDEXFILE% --quiet -C "FRAMEDATA1" "\x34\x25\x2c\x2a\x2c\x35\x25"
 %FARTFILE% %INDEXFILE% --quiet -C "FRAMEDATA2" "\x2a\x2c\x32\x30\x25"
 
-rem last patcht for HOME link in sidebar.
+rem last patch for HOME link in sidebar.
 %FARTFILE% _Sidebar.htm --quiet -C "https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki.htm" "home.htm"
 
 echo Done!

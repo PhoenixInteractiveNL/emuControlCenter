@@ -1,0 +1,5 @@
+name="Default - Megaman splash"
+author="ECC Team"
+date="20160903"
+contact=""
+website="https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki"

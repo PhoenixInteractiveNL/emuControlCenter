@@ -4,7 +4,7 @@
  * ------------------------------------------
  * language:en (english)
  * author:	andreas scheibel
- * date:	2006/09/09 
+ * date:	2006/09/09
  * ------------------------------------------
  */
 $i18n['menu'] = array(
@@ -90,22 +90,22 @@ $i18n['menu'] = array(
 		"Remove META from DB",
 	'lbl_rating_unset' =>
 		"Unset ratings",
-	
+
 	/* 0.9 FYEO 9*/
 	'lbl_roms_remove_dup_preview%s' =>
 		"Find duplicate ROMS",
 	/* 0.9 FYEO 9*/
 	'lbl_roms_dup' =>
 		"Duplicate ROMS",
-	
+
 	/* 0.9.1 FYEO 3*/
 	'lbl_img_remove_all' =>
 		"Remove ROM images",
 	/* 0.9.1 FYEO 4*/
 	'lbl_meta_compare_left' =>
-		"COMPARE - Select left side",		
+		"COMPARE - Select left side",
 	'lbl_meta_compare_right%s' =>
-		"COMPARE to \"%s\"",	
+		"COMPARE to \"%s\"",
 
 	/* 0.9.2 FYEO 2*/
 	'lbl_start_with' =>
@@ -142,7 +142,7 @@ $i18n['menu'] = array(
 		"Rescan all rom folders",
 	'lbl_roms_add' =>
 		"Add new roms",
-		
+
 	/* 0.9.6 FYEO 11 */
 	'lbl_open_eccuser_folder%s' =>
 		"Open eccUser-Folder (%s)",
@@ -152,7 +152,7 @@ $i18n['menu'] = array(
 		"Edit notes",
 	'menuItemPersonalEditReview' =>
 		"Edit review",
-		
+
 	/* 0.9.6 FYEO 11 */
 	'menuItemRomOptions' =>
 		"Rom options",
@@ -173,7 +173,7 @@ $i18n['menu'] = array(
 
 	/* 0.9.7 FYEO 17 */
 	'onlineSearchForRom' =>
-		"Search for rom in web",
+		"Search for ROM on internet (google)",
 	'onlineEccRomdbShowWebInfo' =>
 		"Search for rom in romdb",
 
@@ -187,21 +187,21 @@ $i18n['menu'] = array(
 
 	/* 1.12 BUILD 06 */
 	'lbl_image_platform' =>
-		"Platform images",	
+		"Platform images",
 	'lbl_image_platform_import_online' =>
-		"Download platform images online from ICC (kameleon code needed)",	
+		"Download platform images online from ICC (kameleon code needed)",
 	'lbl_image_platform_import_local' =>
 		"Import platform images from local folder (non ecc, like no-intro)",
 	'lbl_image_platform_export_local' =>
 		"Create platform imagepack (ecc, no-intro, emumovies)",
-		
+
 	/* 1.13 BUILD 02 */
 	'lbl_emulator' =>
 		"Platform emulators",
-	'lbl_emulator_import_online' =>
-		"Download emulators online (kameleon code needed)",	
-	'lbl_emulator_information' =>
-		"Open info file where to get emulators",
+	'lbl_emulator_edc_download' =>
+		"Download emulators from emuDownloadCenter (online)",
+	'lbl_emulator_edc_webpage' =>
+		"Open emuDownloadCenter project page",
 
 	/* 1.13 BUILD 03 */
 	'lbl_image_platform_import_emumovies' =>
@@ -209,14 +209,14 @@ $i18n['menu'] = array(
 
 	/* 1.13 BUILD 04 */
 	'lbl_rom_content' =>
-		"ROM Content/Media",	
+		"ROM Content/Media",
 	'lbl_image_inject' =>
 		"Download images online from ICC server (kameleon code needed)",
 	'lbl_rom_video_add' =>
 		"Add videofile",
 	'lbl_rom_video_delete' =>
 		"Delete videofile(s)",
-		
+
 	/* 1.14 BUILD 4 */
 	'lbl_rom_moby_import_manual' =>
 		"Import ROM information from MobyGames.com (manual)",

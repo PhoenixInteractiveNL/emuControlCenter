@@ -1,5 +1,8 @@
 ## Changelog ECC eccThirdPartyConfig
 ***
+v1.0.0.3 (2016.09.25)
+- Removed Xpadder config.
+
 v1.0.0.2 (2014.03.28)
 - Combined all global variables in the script eccToolVariables
 

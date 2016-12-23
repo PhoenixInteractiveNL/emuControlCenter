@@ -1,5 +1,11 @@
 ## Changelog ECC Update
 ***
+v1.2.0.3
+- Removed redundant CID checks.
+
+v1.2.0.2 (2016.09.15)
+- Fixed a bug where eccUpdate! could not find the last update from the server correctly. 
+
 v1.2.0.1 (ECC v1.21)
 - Now fetching website link from toolvariables.au3
 

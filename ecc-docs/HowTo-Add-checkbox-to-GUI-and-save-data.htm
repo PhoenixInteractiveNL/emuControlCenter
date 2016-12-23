@@ -1,0 +1,54 @@
+<h2>HowTo Add checkbox to GUI and save data</h2>
+
+<hr />
+
+<p>Edit the file ecc-system\gui\guiPopupConfig.glade, Add these elements in the GUI:</p>
+
+<p>checkbox: startConfJoyEmulator</p>
+
+<p>image: startConfJoyEmulatorImage</p>
+
+<p>label: startConfJoyEmulatorLabel</p>
+
+<p>Add an image in the theme folder, PNG icon 24x24:</p>
+
+<pre><code>ecc-themes\default\icon\ecc_config_joystick.png
+</code></pre>
+
+<h3>EDIT: ecc-system\translations[LANGUAGE]\i18n_popupConfig.php</h3>
+
+<p>Add translation for Label checkbox (example: Dutch)</p>
+
+<pre><code>/* 1.21 */      
+'startConfJoyEmulatorLabel' =&gt;  
+"Start Joystick emulator bij het opstarten",
+</code></pre>
+
+<h3>EDIT: ecc-system\manager\cGuiPopConfig.php</h3>
+
+<p>Configure image, around line 280, add:</p>
+
+<pre><code>$this-&gt;startConfJoyEmulatorImage-&gt;set_from_file(FACTORY::get('manager/GuiTheme')-&gt;getThemeFolder('icon/ecc_config_joystick.png'));
+</code></pre>
+
+<p>Set checkbox label language, around line 1565, add:</p>
+
+<pre><code>$this-&gt;startConfJoyEmulatorLabel-&gt;set_label(I18N::get('popupConfig', 'startConfJoyEmulatorLabel'));
+</code></pre>
+
+<p>Save checkbox settings, around line 1600, add:</p>
+
+<pre><code>$this-&gt;globalIni['ECC_STARTUP']['startup_joyemulator'] = (int)$this-&gt;startConfJoyEmulator-&gt;get_active();
+</code></pre>
+
+<p>Load checkbox settings, line 1590, add:</p>
+
+<pre><code>$optStartJoyEmulator = $iniManager-&gt;getKey('ECC_STARTUP', 'startup_joyemulator');
+$optStartJoyEmulator = ($optStartJoyEmulator === false || !$sectionExists) ? true : $optStartJoyEmulator;
+$this-&gt;startConfJoyEmulator-&gt;set_active($optStartJoyEmulator);
+</code></pre>
+
+<p>There is now a 0 or 1 written in the ECC config:</p>
+
+<pre><code>ecc-user-configs\config\ecc_general.ini
+</code></pre>

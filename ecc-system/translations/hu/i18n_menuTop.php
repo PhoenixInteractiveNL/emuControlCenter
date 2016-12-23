@@ -126,9 +126,9 @@ $i18n['menuTop'] = array(
 	/* HELP */
 	'mTopHelp' =>
 		"Súgó",
-	'mTopHelpWebsite' =>
+	'mTopSocialWebsiteECC' =>
 		"Hivatalos weboldal",
-	'mTopHelpForum' =>
+	'mTopSocialForum' =>
 		"Támogató fórum",
 	'mTopHelpDocOffline' =>
 		"Dokumentáció",
@@ -241,5 +241,15 @@ $i18n['menuTop'] = array(
 		'Start Notepad editor (Notepad++)',
 	'mTopToolHexEditor' =>
 		'Start Hex Editor (HxD)',
+
+	/* 1.22 BUILD 1 */
+	'mTopEmuDownload' =>
+		'Download from EDC',
+	'mTopSocial' =>
+		'Social',	
+	'mTopSocialWebsiteEDC' =>
+		'emuDownloadCenter website',			
+	'mTopSocialFacebook' =>
+		'Facebook',			
 	);
 ?>

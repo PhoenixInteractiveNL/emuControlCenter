@@ -1,5 +1,8 @@
 ## Changelog ECC eccDiagnostics
 ***
+v1.0.0.4
+- Adjusted CID checks to UID.
+
 v1.0.0.3 (2014.03.28)
 - Combined all global variables in the script eccToolVariables
 

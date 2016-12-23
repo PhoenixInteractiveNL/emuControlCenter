@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : Allround ECC variables for ECC tool scripts
-; Script version         : v1.0.1.0
-; Last changed           : 2016.11.20
+; Script version         : v1.0.2.0
+; Last changed           : 2016.12.19
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -108,8 +108,17 @@ Global $eccImageFolder		= $eccUserPath & $RomEccId & "\images"
 
 ; emuDownloadCenter
 Global $EDCServer 			= "https://raw.githubusercontent.com/PhoenixInteractiveNL/edc-masterhook/master/"
-Global $EDCEmulatorList		= $EDCServer & "emulatorlist.ini"
-Global $EDCStatistics		= $EDCServer & "statistics.ini"
+Global $EDCServerEmulatorList= $EDCServer & "ecc_platform_emulators.ini"
+Global $EDCServerStatistics	= $EDCServer & "edc_statistics.ini"
+Global $EDCWindowTitle		= "ECC - emuDownloadCenter"
+Global $EDCWebsitelink		= "https://github.com/PhoenixInteractiveNL/emuDownloadCenter/wiki"
+Global $EDCFolder 			= @Scriptdir & "\emuDownloadCenter\"
+Global $EDCFavoriteINI		= $EDCFolder & "favorites.ini"
+Global $EDCFolderCache		= $EDCFolder & "cache\"
+Global $EDCEmulatorListINI	= $EDCFolderCache & "ecc_platform_emulators.ini"
+Global $EDCEmulatorDownloadsINI = $EDCFolderCache & "emulator_downloads.ini"
+Global $EDCEmulatorConfigINI = $EDCFolderCache & "configs_frontend_ecc.ini"
+Global $EDCStatisticsINI	= $EDCFolderCache & "edc_statistics.ini"
 
 ; ECC CREATE SHORTCUT variables
 Global $StartFolderName 	= "emuControlCenter"

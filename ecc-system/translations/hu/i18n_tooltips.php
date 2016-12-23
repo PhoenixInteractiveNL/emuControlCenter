@@ -122,9 +122,9 @@ $i18n['tooltips'] = array(
 	'mTopServicesKameleonCodeTooltip' =>
 		"Ezzel megnyílik egy ablak ahol megadhatod a kameleon kódot az ECC szolgáltatások használatához. (regisztrált fórum tagoknak)",
 	// # TOP-HELP
-	'mTopHelpWebsiteTooltip' =>
+	'mTopSocialWebsiteECCTooltip' =>
 		"Ez megnyitja az ECC honlapját az internetböngészõdben.",
-	'mTopHelpForumTooltip' =>
+	'mTopSocialForumTooltip' =>
 		"Ez megnyitja az ECC támogatói fórumát az internetböngészõdben.",
 	'mTopHelpDocOfflineTooltip' =>
 		"Ez megnyitja az ECC helyi dokumentációját.",
@@ -142,6 +142,13 @@ $i18n['tooltips'] = array(
 		"This will open the notepad editor where you can edit text files and scripts if needed.",
 	'mTopToolHexEditorTooltip' =>
 		"This will open a HEX editor where you can edit binary files if needed.",
-		
+
+	/* 1.22 BUILD 1 */
+	'mTopEmuDownloadTooltip' =>
+		"Download, install and configure emulators with emuDownloadCenter!",
+	'mTopSocialWebsiteEDCTooltip' =>
+		"Open the EDC Project page, and see how you can help to collect emulators!",
+	'mTopSocialFacebookTooltip' =>
+		"Visit the ECC facebook page and like it to get the latest news!",
 	);
 ?>

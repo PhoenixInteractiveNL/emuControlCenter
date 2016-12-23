@@ -939,7 +939,7 @@ class App extends GladeXml {
 		$this->dropdownVisual = I18n::translateArray('dropdownVisual', $this->dropdownVisual);
 		$this->nbMediaInfoStateVisualEvent->connect_simple_after('button-press-event', array($this, 'simpleContextMenu'), I18N::get('meta', 'lbl_visual').'?', $this->dropdownVisual, 'metaEditDirectUpdate', 'setVisual', true);
 		$this->nbMediaInfoStateVisualEvent->modify_bg(Gtk::STATE_NORMAL, GdkColor::parse($this->colEventOptionSelect2));
-		
+
 		// region
 		$this->dropdownRegion = I18n::translateArray('dropdown_meta_region', $this->dropdownRegion);
 
@@ -1470,81 +1470,59 @@ class App extends GladeXml {
 
 	public function connectSignalsForTopMenu() {
 
-		// ----------------------------
-		// ROMS
-		// ----------------------------
+		// TOP-MENU - ROMS
 		$this->menuTopRomAddNewRom->connect_simple('activate', array($this, 'parseMedia'));
-		$this->mTopEmuConfig->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
 		$this->mTopRomOptimize->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_OPTIMIZE');
 		$this->mMenuReparseFolder->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'ROM_RESCAN_FOLDER');
 		$this->mMenuReparseFolderAll->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ROM_RESCAN_ALL');
-
 		#$this->mMenuReparseFolder->set_sensitive(false);
 		// remove duplicate roms
 		$this->mTopRomRemoveDups->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DUPLICATE_REMOVE_ALL');
 		$this->mTopRomRemoveRoms->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
 
-		// ----------------------------
-		// DATFILE
-		// ----------------------------
+		// TOP-MENU - EMULATORS
+		$this->mTopEmuConfig->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
+		$this->mTopEmuDownload->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER');
+
+		// TOP-MENU - DATFILE
 		$this->mTopDatImportRc->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_RC');
 		$this->mTopDatImportCtrlMAME->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_CONTROLMAME');
 		$this->mTopDatImportEcc->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_ECC');
-
 		$this->mTopDatExportEccFull->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT');
 		$this->mTopDatExportEccUser->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT_USER');
 		$this->mTopDatExportEccEsearch->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT_ESEARCH');
 		$this->mTopDatClear->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_DAT');
 		$this->mTopDatConfig->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT', 'DAT');
 
-		// ----------------------------
-		// FILES
-		// ----------------------------
+		// TOP-MENU - FILES
 		$this->mTopRomAuditShow->connect_simple('activate', array($this, 'openRomAuditPopup'));
-
 		$this->mTopFileRename->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_RENAME');
 		$this->mTopFileRename->set_sensitive(false);
-
 		$this->mTopFileCopy->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_COPY');
 		$this->mTopFileCopy->set_sensitive(false);
-
 		$this->mTopFileRemove->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_REMOVE');
 		$this->mTopFileRemove->set_sensitive(false);
-
 		$this->mTopFileSearch->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
 		$this->mTopFileSearch->set_sensitive(false);
-
 		// 2007.06.28 deactivated
 		// $this->menubar_filesys_organize_roms_preview->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE_PREVIEW');
 		// $this->menubar_filesys_organize_roms->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_FS_ORGANIZE');
 
-		// ----------------------------
-		// MAINTENANCE
-		// ----------------------------
-		// mTopOptionCreateUserFolder
+		// TOP-MENU - OPTIONS
 		$this->mTopOptionCreateUserFolder->connect_simple('activate', array(FACTORY::get('manager/GuiHelper'), 'rebuildEccUserFolder'));
-		// vacuum database
 		$this->mTopOptionDbVacuum->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_VACUUM');
-		// clear ecc history
 		$this->mTopOptionCleanHistory->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_CLEAN_HISTORY');
-		// backup userdata to xml file!
 		$this->mTopOptionBackupUserdata->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_BACKUP_USERDATA');
 
 		// TOP-MENU - VIEW
 		$this->mTopViewRandomGame->connect_simple('activate', array($this, 'presentRandomGame'));
 		$this->mTopViewReload->connect_simple('activate', array($this, 'onReloadRecord'));
-
 		$this->mTopViewToggleLeft->connect_simple('activate', array($this, 'toogleNavPanel'));
 		$this->mTopViewToggleRight->connect_simple('activate', array($this, 'toogleInfoPanel'));
 		$this->mTopViewToggleSearch->connect_simple('activate', array($this, 'toogleSearchPanel'));
-
 		$this->mTopViewOnlyRoms->connect_simple("button-press-event", array($this, 'selectViewModeAllAvailable'));
 		$this->mTopViewOnlyBookmarks->connect_simple("button-press-event", array($this, 'selectViewModeBookmarks'));
 		$this->mTopViewOnlyPlayed->connect_simple("button-press-event", array($this, 'selectViewModePlayedHistory'));
-
-		// ----------------------------
-		// TOP-MENU - OPTIONS
-		// ----------------------------
 		// mainview display-mode
 		$this->mTopViewModeRomHave->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_ALL');
 		$this->mTopViewModeRomDontHave->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_VIEWMODE_DONTHAVE');
@@ -1556,7 +1534,6 @@ class App extends GladeXml {
 		$this->mTopViewModeRomNotPlayed->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_NOTPLAYED');
 		$this->mTopViewModeRomBookmarks->connect_simple("button-press-event", array($this, 'dispatch_menu_context_platform'), 'TOGGLE_MAINVIEV_DISPLAY_BOOKMARKS');
 		$this->mTopOptionCreateStartmenuShortcuts->connect_simple('activate', array($this, 'executeCommands'), 'START_CREATESTARTMENUICONS');
-
 		// List Detail / Simple
 		// First init selected state
 		if ($this->optVisMainListMode) $this->mTopViewListSimple->set_active(true);
@@ -1564,7 +1541,6 @@ class App extends GladeXml {
 		// connect the signals
 		$this->mTopViewListDetail->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
 		$this->mTopViewListSimple->connect_simple("button-press-event", array($this, 'updateEccOptBtnBar'), 'optVisMainListMode', 'toggleMailListMode');
-
 		// Configuration
 		$this->mTopOptionConfig->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT', 'ECC');
 
@@ -1590,9 +1566,13 @@ class App extends GladeXml {
 		// TOP-MENU - HELP
 		$this->mTopHelpDocOffline->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), 'file:///'.realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_DOC_OFFLINE']));
 		$this->mTopHelpDocOnline->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_DOC_ONLINE'], 'open');
-		$this->mTopHelpWebsite->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
-		$this->mTopHelpForum->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_FORUM'], 'open');
 		$this->mTopHelpAbout->connect_simple('activate', array(FACTORY::get('manager/GuiHelper'), 'open_splash_screen'));
+
+		// TOP-MENU - SOCIAL
+		$this->mTopSocialWebsiteECC->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_WEBSITE'], 'open');
+		$this->mTopSocialForum->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_FORUM'], 'open');
+		$this->mTopSocialWebsiteEDC->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['EDC_WEBSITE'], 'open');
+		$this->mTopSocialFacebook->connect_simple('activate', array(FACTORY::get('manager/Os'), 'executeProgramDirect'), $this->eccHelpLocations['ECC_FACEBOOK'], 'open');
 	}
 
 	public function DatFileExport($user_only=false, $userfoder_path=true, $verbose=true, $use_esearch=false)
@@ -1846,9 +1826,9 @@ class App extends GladeXml {
 		if ($this->status_obj->init()) {
 
 			if (!$eccDatfileData) {
-				$path_history = $this->ini->getHistoryKey('eccMediaDat_import');		
+				$path_history = $this->ini->getHistoryKey('eccMediaDat_import');
 				if (!file_exists($path_history)) { $path_history = "/"; } // Fix if path/file does not exist (generates no dialog that get's stuck)
-				
+
 				$title = sprintf(I18N::get('popup', 'dat_import_filechooser_title%s'), $platfom);
 
 				$shorcutFolder = $this->ini->getShortcutPaths($this->_eccident);
@@ -3082,7 +3062,7 @@ class App extends GladeXml {
 				// option visual
 				$visual = (!$romMeta->getVisual()) ? 0 : $romMeta->getVisual();
 				$this->setSpanMarkup($this->media_nb_info_visual, $this->dropdownVisual[$visual]);
-				
+
 				// set category
 				$category = (isset($this->media_category[$romMeta->getCategory()])) ? $this->media_category[$romMeta->getCategory()] : '';
 				$this->setSpanMarkup($this->media_nb_info_category, $category, false, 'b', false);
@@ -3382,7 +3362,7 @@ class App extends GladeXml {
 			// NO IMAGE/ICON
 			// $itmImportControlMame = new GtkMenuItem(I18N::get('menu', 'lbl_importDatCtrlMAME'));
 			// USE IMAGE/ICON
-			// $itmImportControlMame = $this->createImageMenuItem(I18N::get('menu', 'lbl_importDatCtrlMAME'), $this->getThemeFolder('icon/ecc_mame.png'));
+			// $itmImportControlMame = $this->createImageMenuItem(I18N::get('menu', 'lbl_importDatCtrlMAME'), $this->getThemeFolder('icon/mame.png'));
 
 			$menu = new GtkMenu();
 
@@ -3409,18 +3389,18 @@ class App extends GladeXml {
 			// Configure emulator
 			// ----------------------------------------------------------------
 
-			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/ecc_settings.png'));
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/settings.png'));
 			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'PLATFORM_EDIT');
 			$menu->append($menuItem);
 			$menuItem->set_sensitive($this->_eccident);
 
 			$menu->append(new GtkSeparatorMenuItem());
 
-			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_rescan_all'), $this->getThemeFolder('icon/ecc_reload.png'));
+			$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_rescan_all'), $this->getThemeFolder('icon/reload.png'));
 			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'ROM_RESCAN_ALL');
 			$menu->append($menuItem);
 
-			$itm_maint_db_optimize = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_optimize%s'), $platform_name), $this->getThemeFolder('icon/ecc_optimize.png'));
+			$itm_maint_db_optimize = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_optimize%s'), $platform_name), $this->getThemeFolder('icon/optimize.png'));
 			$itm_maint_db_optimize->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_OPTIMIZE');
 			$menu->append($itm_maint_db_optimize);
 
@@ -3429,16 +3409,16 @@ class App extends GladeXml {
 			// ----------------------------------------------------------------
 
 			$menuRomDup = new GtkMenu();
-			$menuItemRomDup = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_dup'), $this->getThemeFolder('icon/ecc_copy.png'));
+			$menuItemRomDup = $this->createImageMenuItem(I18N::get('menu', 'lbl_roms_dup'), $this->getThemeFolder('icon/copy.png'));
 			$menuItemRomDup->set_submenu($menuRomDup);
 			$menu->append($menuItemRomDup);
 
-			$itm_maint_db_clear_media = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove_dup_preview%s'), $platform_name), $this->getThemeFolder('icon/ecc_view.png'));
+			$itm_maint_db_clear_media = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove_dup_preview%s'), $platform_name), $this->getThemeFolder('icon/view.png'));
 			$itm_maint_db_clear_media->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DUPLICATE_REMOVE_ALL_PREVIEW');
 			#$menu->append($itm_maint_db_clear_media);
 			$menuRomDup->append($itm_maint_db_clear_media);
 
-			$itm_maint_db_clear_media = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove_dup%s'), $platform_name), $this->getThemeFolder('icon/ecc_remove.png'));
+			$itm_maint_db_clear_media = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove_dup%s'), $platform_name), $this->getThemeFolder('icon/trash.png'));
 			$itm_maint_db_clear_media->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DUPLICATE_REMOVE_ALL');
 			#$menu->append($itm_maint_db_clear_media);
 			$menuRomDup->append($itm_maint_db_clear_media);
@@ -3447,7 +3427,7 @@ class App extends GladeXml {
 			// Remove ROMS
 			// ----------------------------------------------------------------
 
-			$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove%s'), $platform_name), $this->getThemeFolder('icon/ecc_remove.png'));
+			$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_roms_remove%s'), $platform_name), $this->getThemeFolder('icon/trash.png'));
 			$menuItem->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'MAINT_DB_CLEAR_MEDIA');
 			$menu->append($menuItem);
 
@@ -3466,18 +3446,19 @@ class App extends GladeXml {
 			// ----------------------------------------------------------------
 
 			$menuTop = new GtkMenu();
-			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator'), $this->getThemeFolder('icon/ecc_computer.png'));
+			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator'), $this->getThemeFolder('icon/program.png'));
 			$menuTopItem->set_submenu($menuTop);
 			$menu->append($menuTopItem);
+			$menuTopItem->set_sensitive($this->_eccident); //Set deactivated if no ECCID is selected (ALL Platforms is selected!)
 
 			// download emulators from internet
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_import_online'), $this->getThemeFolder('icon/ecc_download.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_edc_download'), $this->getThemeFolder('icon/edc_icon.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER');
 			$menuTop->append($menuSubItem);
 
 			// open emulator info
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_information'), $this->getThemeFolder('icon/ecc_comment.png'));
-			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER_INFO');
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emulator_edc_webpage'), $this->getThemeFolder('icon/home.png'));
+			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUDOWNLOADCENTER_WEBPAGE');
 			$menuTop->append($menuSubItem);
 
 			// ----------------------------------------------------------------
@@ -3485,9 +3466,10 @@ class App extends GladeXml {
 			// ----------------------------------------------------------------
 
 			$menuTop = new GtkMenu();
-			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform'), $this->getThemeFolder('icon/ecc_picture.png'));
+			$menuTopItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform'), $this->getThemeFolder('icon/picture.png'));
 			$menuTopItem->set_submenu($menuTop);
 			$menu->append($menuTopItem);
+			$menuTopItem->set_sensitive($this->_eccident); //Set deactivated if no ECCID is selected (ALL Platforms is selected!)
 
 			// download platform images from internet (ICC)
 			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_online'), $this->getThemeFolder('icon/ecc_icc.png'));
@@ -3495,17 +3477,17 @@ class App extends GladeXml {
 			$menuTop->append($menuSubItem);
 
 			// download platform images from internet (EmuMovies)
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_emumovies'), $this->getThemeFolder('icon/ecc_emumovies.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_emumovies'), $this->getThemeFolder('icon/emumovies.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_EMUMOVIES');
 			$menuTop->append($menuSubItem);
 
 			// import images from local folder (non ECC).
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_local'), $this->getThemeFolder('icon/ecc_download_folder.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_import_local'), $this->getThemeFolder('icon/download_folder.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEPACKCENTER_IMPORT');
 			$menuTop->append($menuSubItem);
 
 			// create imagepack for platform.
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_export_local'), $this->getThemeFolder('icon/ecc_upload.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_image_platform_export_local'), $this->getThemeFolder('icon/upload.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeCommands'), 'START_IMAGEPACKCENTER_EXPORT');
 			$menuTop->append($menuSubItem);
 
@@ -3517,17 +3499,17 @@ class App extends GladeXml {
 			$menuTop->append($menuSubItem);
 
 			// remove image for roms that are not in the ecc db
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveImagesWithoutRomFile'), $this->getThemeFolder('icon/ecc_remove.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveImagesWithoutRomFile'), $this->getThemeFolder('icon/trash.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveImagesWithoutRomFile', $this->_eccident));
 			$menuTop->append($menuSubItem);
 
 			// remove empty image folders for platform
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveEmptyFolder'), $this->getThemeFolder('icon/ecc_remove.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveEmptyFolder'), $this->getThemeFolder('icon/trash.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveEmptyFolder', $this->_eccident));
 			$menuTop->append($menuSubItem);
 
 			// remove all thumbnails for platform
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveAllThumbnails'), $this->getThemeFolder('icon/ecc_remove.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'imagepackRemoveAllThumbnails'), $this->getThemeFolder('icon/trash.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'setShutdownTask'), array('imagepackRemoveAllThumbnails', $this->_eccident));
 			$menuTop->append($menuSubItem);
 
@@ -3536,12 +3518,13 @@ class App extends GladeXml {
 			// ----------------------------------------------------------------
 
 			$menuTop = new GtkMenu();
-			$menuTopItem = $this->createImageMenuItem(('Platform content'), $this->getThemeFolder('icon/ecc_download_folder.png'));
+			$menuTopItem = $this->createImageMenuItem(('Platform content'), $this->getThemeFolder('icon/download_folder.png'));
 			$menuTopItem->set_submenu($menuTop);
 			$menu->append($menuTopItem);
+			$menuTopItem->set_sensitive($this->_eccident); //Set deactivated if no ECCID is selected (ALL Platforms is selected!)
 
 			// download ROM information from internet (mobygames.com) (full auto)
-			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_fullauto'), $this->getThemeFolder('icon/ecc_mobygames.png'));
+			$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_fullauto'), $this->getThemeFolder('icon/mobygames.png'));
 			$menuSubItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_MOBYGAMES_PLATFORM_AUTO');
 			$menuTop->append($menuSubItem);
 
@@ -3568,12 +3551,12 @@ class App extends GladeXml {
 			$itmImportState = ($this->_eccident) ? true : false;
 
 			#$isMultiRomPlatform = $this->ini->isMultiRomPlatform($this->_eccident);
-			$itmImportControlMame = $this->createImageMenuItem(I18N::get('menu', 'lbl_importDatCtrlMAME'), $this->getThemeFolder('icon/ecc_mame.png'));
+			$itmImportControlMame = $this->createImageMenuItem(I18N::get('menu', 'lbl_importDatCtrlMAME'), $this->getThemeFolder('icon/mame.png'));
 			$itmImportControlMame->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_CONTROLMAME', false);
 			$menuImport->append($itmImportControlMame);
 			$itmImportControlMame->set_sensitive($itmImportState);
 
-			$itmImportRc = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_import_rc'), $this->getThemeFolder('icon/ecc_romcenter.png'));
+			$itmImportRc = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_import_rc'), $this->getThemeFolder('icon/romcenter.png'));
 			$itmImportRc->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'IMPORT_RC');
 			$menuImport->append($itmImportRc);
 			$itmImportRc->set_sensitive($itmImportState);
@@ -3587,15 +3570,15 @@ class App extends GladeXml {
 			$menuItemExport->set_submenu($menuExport);
 			$menu->append($menuItemExport);
 
-			$itm_export = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_full'), $this->getThemeFolder('icon/ecc_upload.png'));
+			$itm_export = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_full'), $this->getThemeFolder('icon/upload.png'));
 			$itm_export->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT');
 			$menuExport->append($itm_export);
 
-			$itm_export_user = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_user'), $this->getThemeFolder('icon/ecc_upload.png'));
+			$itm_export_user = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_user'), $this->getThemeFolder('icon/upload.png'));
 			$itm_export_user->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT_USER');
 			$menuExport->append($itm_export_user);
 
-			$itm_export_esearch = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_esearch'), $this->getThemeFolder('icon/ecc_upload.png'));
+			$itm_export_esearch = $this->createImageMenuItem(I18N::get('menu', 'lbl_dat_export_ecc_esearch'), $this->getThemeFolder('icon/upload.png'));
 			$itm_export_esearch->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'EXPORT_ESEARCH');
 			$menuExport->append($itm_export_esearch);
 
@@ -3618,7 +3601,7 @@ class App extends GladeXml {
 //			$menu->append($itm_maint_db_clear_dat);
 //			$menu->append(new GtkSeparatorMenuItem());
 
-			$mItemUserFolder = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_open_eccuser_folder%s'), $this->_eccident), $this->getThemeFolder('icon/ecc_download_folder.png'));
+			$mItemUserFolder = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lbl_open_eccuser_folder%s'), $this->_eccident), $this->getThemeFolder('icon/download_folder.png'));
 			$mItemUserFolder->connect_simple('activate', array($this, 'dispatch_menu_context_platform'), 'OPEN_ECCUSER_FOLDER', $this->_eccident);
 			$mItemUserFolder->set_sensitive($this->_eccident);
 			$menu->append($mItemUserFolder);
@@ -4341,7 +4324,7 @@ class App extends GladeXml {
 				$menu->append($menuItem);
 
 				// configure emulator
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/ecc_settings.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_emu_config'), $this->getThemeFolder('icon/settings.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'OPEN_CONFIG',  'EMU', $romFile->getSystemIdent());
 				$menu->append($menuItem);
 
@@ -4352,7 +4335,7 @@ class App extends GladeXml {
 				// ----------------------------------------------------------------
 
 				// search online (google)
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'onlineSearchForRom'), $this->getThemeFolder('icon/ecc_google.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'onlineSearchForRom'), $this->getThemeFolder('icon/google.png'));
 				$menuItem->connect_simple('activate', array($this, 'onlineSearchForRom'), $rom);
 				$menu->append($menuItem);
 
@@ -4411,7 +4394,7 @@ class App extends GladeXml {
 				$menu->append($menuItem);
 
 				// open asset folder
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lblOpenAssetFolder'), $this->getThemeFolder('icon/ecc_assets.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lblOpenAssetFolder'), $this->getThemeFolder('icon/assets.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'BROWSE_ASSET');
 				$menuItem->set_sensitive($romFile->getId());
 				$menu->append($menuItem);
@@ -4423,7 +4406,7 @@ class App extends GladeXml {
 				// ROM content options
 				// ----------------------------------------------------------------
 				$subMenu = new GtkMenu();
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_content'), $this->getThemeFolder('icon/ecc_download_folder.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_content'), $this->getThemeFolder('icon/download_folder.png'));
 				$menuItem->set_submenu($subMenu);
 				$menu->append($menuItem);
 
@@ -4434,22 +4417,22 @@ class App extends GladeXml {
 				$subMenu->append($menuItem);
 
 				// download ROM information from internet (mobygames.com) (full auto)
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_fullauto'), $this->getThemeFolder('icon/ecc_mobygames.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_fullauto'), $this->getThemeFolder('icon/mobygames.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_MOBYGAMES_ROM_AUTO');
 				$subMenu->append($menuItem);
 
 				// download ROM information from internet (mobygames.com) (manual)
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_manual'), $this->getThemeFolder('icon/ecc_mobygames.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_moby_import_manual'), $this->getThemeFolder('icon/mobygames.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_MOBYGAMES_ROM_MANUAL');
 				$subMenu->append($menuItem);
 
 				// add videofile for ROM
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_video_add'), $this->getThemeFolder('icon/ecc_video.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_video_add'), $this->getThemeFolder('icon/video.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_VIDEOPLAYER_VIDEOADD');
 				$subMenu->append($menuItem);
 
 				// delete videofile(s) for ROM
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_video_delete'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_video_delete'), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'START_VIDEOPLAYER_VIDEODELETE');
 				$subMenu->append($menuItem);
 
@@ -4459,7 +4442,7 @@ class App extends GladeXml {
 				$menu->append($subMenuContent);
 
 				// reload images
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_reload'), $this->getThemeFolder('icon/ecc_reload.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_reload'), $this->getThemeFolder('icon/reload.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'RELOAD');
 				$menu->append($menuItem);
 
@@ -4473,7 +4456,7 @@ class App extends GladeXml {
 				$menuSub = new GtkMenu();
 				$menuItem->set_submenu($menuSub);
 
-				$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_quickfilter_reset'), $this->getThemeFolder('icon/ecc_reset.png'));
+				$menuSubItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_quickfilter_reset'), $this->getThemeFolder('icon/reset.png'));
 				$menuSubItem->connect_simple('activate', array($this, 'onResetSearch'));
 				$menuSub->append($menuSubItem);
 				$menuSub->append(new GtkSeparatorMenuItem());
@@ -4524,7 +4507,7 @@ class App extends GladeXml {
 				$menu->append($menuItem);
 
 				// reparse/rescan folder of current rom
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_rescan_folder'), $this->getThemeFolder('icon/ecc_reload.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_rescan_folder'), $this->getThemeFolder('icon/reload.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'ROM_RESCAN_FOLDER');
 				$menuItem->set_sensitive($romFile->getId());
 				$menu->append($menuItem);
@@ -4541,31 +4524,31 @@ class App extends GladeXml {
 				// ----------------------------------------------------------------
 
 				$subMenu = new GtkMenu();
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove_toplevel'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove_toplevel'), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->set_submenu($subMenu);
 				$menu->append($menuItem);
 
 				// remove rom file
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_rom_remove'), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_MEDIA');
 				$menuItem->set_sensitive($romFile->getId());
 				$subMenu->append($menuItem);
 
 				// remove rom meta
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lContextMetaRemove'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lContextMetaRemove'), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'REMOVE_META_SINGLE');
 				$menuItem->set_sensitive($romMeta->getId());
 				$subMenu->append($menuItem);
 
 				// remove rom file and meta and images
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_remove_all'), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_img_remove_all'), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'IMG_REMOVE_ALL');
 				$subMenu->append($menuItem);
 
 				$subMenu->append(new GtkSeparatorMenuItem());
 
 				// remove all roms
-				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($rom->getSystemIdent())), $this->getThemeFolder('icon/ecc_remove.png'));
+				$menuItem = $this->createImageMenuItem(sprintf(I18N::get('menu', 'lContextRomSelectionRemoveRoms%s'), $this->ini->getPlatformName($rom->getSystemIdent())), $this->getThemeFolder('icon/trash.png'));
 				$menuItem->connect_simple('activate', array($this, 'MediaMaintDb'), 'CLEAR_MEDIA', $rom->getSystemIdent());
 				$subMenu->append($menuItem);
 
@@ -4576,7 +4559,7 @@ class App extends GladeXml {
 				// ----------------------------------------------------------------
 
 				$subMenu = new GtkMenu();
-				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_submenu'), $this->getThemeFolder('icon/ecc_save.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_submenu'), $this->getThemeFolder('icon/save.png'));
 				$menuItem->set_submenu($subMenu);
 				$menu->append($menuItem);
 
@@ -4587,17 +4570,17 @@ class App extends GladeXml {
 					$menuItem->set_sensitive(true);
 
 					// rename file
-					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_rename'), $this->getThemeFolder('icon/ecc_how_to.png'));
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_rename'), $this->getThemeFolder('icon/rename.png'));
 					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_RENAME');
 					$subMenu->append($menuItem);
 
 					// copy file
-					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_copy'), $this->getThemeFolder('icon/ecc_copy.png'));
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_copy'), $this->getThemeFolder('icon/copy.png'));
 					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_COPY');
 					$subMenu->append($menuItem);
 
 					// remove file
-					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_remove'), $this->getThemeFolder('icon/ecc_remove.png'));
+					$menuItem = $this->createImageMenuItem(I18N::get('menu', 'lbl_shellop_file_remove'), $this->getThemeFolder('icon/trash.png'));
 					$menuItem->connect_simple('activate', array($this, 'executeRomMenuCommands'), 'SHELLOP', 'FILE_REMOVE');
 					$subMenu->append($menuItem);
 				}
@@ -4605,7 +4588,7 @@ class App extends GladeXml {
 				$menu->append(new GtkSeparatorMenuItem());
 
 				// search file
-				$menuItem = $this->createImageMenuItem(I18N::get('menuTop', 'mTopFileSearch'), $this->getThemeFolder('icon/ecc_sync.png'));
+				$menuItem = $this->createImageMenuItem(I18N::get('menuTop', 'mTopFileSearch'), $this->getThemeFolder('icon/sync.png'));
 				$menuItem->connect_simple('activate', array($this, 'executeSystemMenuCommands'), 'SHELLOP', 'FILE_SEARCH');
 				$subMenu->append($menuItem);
 				$menuItem->set_sensitive($this->_eccident);
@@ -4631,7 +4614,7 @@ class App extends GladeXml {
 
 				// rom meta compare
 				$label = (!$this->compareLeftId) ? I18N::get('menu', 'lbl_meta_compare_left') : sprintf(I18N::get('menu', 'lbl_meta_compare_right%s'), $this->compareLeftName);
-				$menuItem = $this->createImageMenuItem($label, $this->getThemeFolder('icon/ecc_equal.png'));
+				$menuItem = $this->createImageMenuItem($label, $this->getThemeFolder('icon/compare.png'));
 				$menuItem->connect_simple('activate', array($this, 'setupCompare'));
 				$menu->append($menuItem);
 
@@ -4935,12 +4918,8 @@ class App extends GladeXml {
 				$ScriptToRun_DosPath = $ScriptToRun_->ShortPath;
 				exec($AutoitExe_DosPath.' '.$ScriptToRun_DosPath);
 				break;
-			case 'START_EMUDOWNLOADCENTER_INFO':
-				$NotepadExe = realpath(ECC_DIR.'/'.$this->eccHelpLocations['ECC_EXE_SCRIPT_EDITOR']);
-				$objFSO = new COM("Scripting.FileSystemObject");
-				$NotepadExe_ = $objFSO->GetFile($NotepadExe);
-				$NotepadExe_DosPath = $NotepadExe_->ShortPath;
-				exec($NotepadExe_DosPath.' '.realpath(ECC_DIR.'/ecc-core/tools/emuDownloadCenter.txt'));
+			case 'START_EMUDOWNLOADCENTER_WEBPAGE':
+				FACTORY::get('manager/Os')->executeProgramDirect($this->eccHelpLocations['EDC_WEBSITE'], 'open');
 				break;
 			}
 	}
@@ -5630,7 +5609,7 @@ class App extends GladeXml {
 		$textBuffer = new GtkTextBuffer();
 		$textBuffer->set_text($romMeta->getDescription());
 		$this->mEditDescription->set_buffer($textBuffer);
-		
+
 		// setup rating image and connect signal
 		$this->setRatingImage($this->mediaEditMetaRatingLink, $romMeta->getRating());
 		$this->mediaEditMetaRatingLinkEvent->connect('button-press-event', array($this, 'openTabMediaEditRating'));
@@ -5948,7 +5927,7 @@ class App extends GladeXml {
 		$romMediaCount = $this->tryToGetText($this->cbe_media_count, 'mediaEditTabMeta', i18n::get('metaEdit', 'mediaEditTabMeta'), 'labelMetaEditMedium', i18n::get('meta', 'lbl_medium'), i18n::get('metaEdit', 'mEditUserWrongCharacters'));
 		if($romMediaCount === false) $error = true;
 
-		
+
 		// Description
 		$mEditDescription = '';
 		try {
@@ -6042,7 +6021,7 @@ class App extends GladeXml {
 		$romMeta->setMusican(trim(str_replace(';', '', $romMusican)));
 		$romMeta->setGraphics(trim(str_replace(';', '', $romGraphics)));
 		$romMeta->setDescription(trim(str_replace(';', '', $mEditDescription)));
-		
+
 		$romMeta->setRunning($this->get_dropdown_bool($this->metaEditFeatureGoodDumpDropdown->get_active()));
 		$romMeta->setBugs($this->get_dropdown_bool($this->metaEditFeatureBugsDropdown->get_active()));
 		$romMeta->setNetplay($this->get_dropdown_bool($this->metaEditFeatureNetplayDropdown->get_active()));
@@ -7066,6 +7045,7 @@ class App extends GladeXml {
 
 		// Only works, if a eccident is selected!
 		$this->mTopEmuConfig->set_sensitive($state);
+		$this->mTopEmuDownload->set_sensitive($state);
 		$this->mTopDatImportRc->set_sensitive($state);
 		$this->mTopDatImportCtrlMAME->set_sensitive($state);
 
@@ -8246,6 +8226,8 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->mTopEmu->get_child()->set_text(I18N::get('menuTop', 'mTopEmu'));
 		$this->mTopEmuConfig->get_child()->set_text(I18N::get('menuTop', 'mTopEmuConfig'));
 		$this->mTopEmuConfig->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopEmuConfigTooltip'));
+		$this->mTopEmuDownload->get_child()->set_text(I18N::get('menuTop', 'mTopEmuDownload'));
+		$this->mTopEmuDownload->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopEmuDownloadTooltip'));
 
 		// TOP-DAT
 		$this->mTopDat->get_child()->set_text(I18N::get('menuTop', 'mTopDat'));
@@ -8354,16 +8336,23 @@ current_build="'.$this->ecc_release['release_build'].'"
 
 		// TOP-HELP
 		$this->mTopHelp->get_child()->set_text(I18N::get('menuTop', 'mTopHelp'));
-		$this->mTopHelpWebsite->get_child()->set_text(I18N::get('menuTop', 'mTopHelpWebsite'));
-		$this->mTopHelpWebsite->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpWebsiteTooltip'));
-		$this->mTopHelpForum->get_child()->set_text(I18N::get('menuTop', 'mTopHelpForum'));
-		$this->mTopHelpForum->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpForumTooltip'));
 		$this->mTopHelpDocOffline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOffline'));
 		$this->mTopHelpDocOffline->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpDocOfflineTooltip'));
 		$this->mTopHelpDocOnline->get_child()->set_text(I18N::get('menuTop', 'mTopHelpDocOnline'));
 		$this->mTopHelpDocOnline->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpDocOnlineTooltip'));
 		$this->mTopHelpAbout->get_child()->set_text(I18N::get('menuTop', 'mTopHelpAbout'));
 		$this->mTopHelpAbout->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopHelpAboutTooltip'));
+
+		// TOP-SOCIAL
+		$this->mTopSocial->get_child()->set_text(I18N::get('menuTop', 'mTopSocial'));
+		$this->mTopSocialWebsiteECC->get_child()->set_text(I18N::get('menuTop', 'mTopSocialWebsiteECC'));
+		$this->mTopSocialWebsiteECC->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopSocialWebsiteECCTooltip'));
+		$this->mTopSocialForum->get_child()->set_text(I18N::get('menuTop', 'mTopSocialForum'));
+		$this->mTopSocialForum->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopSocialForumTooltip'));
+		$this->mTopSocialWebsiteEDC->get_child()->set_text(I18N::get('menuTop', 'mTopSocialWebsiteEDC'));
+		$this->mTopSocialWebsiteEDC->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopSocialWebsiteEDCTooltip'));
+		$this->mTopSocialFacebook->get_child()->set_text(I18N::get('menuTop', 'mTopSocialFacebook'));
+		$this->mTopSocialFacebook->connect('query-tooltip', array($this, 'showTooltip'), I18N::get('tooltips', 'mTopSocialFacebookTooltip'));
 	}
 
 	private function guiInit(){
@@ -8375,13 +8364,98 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$imageObject->setWidgetBackground($this->statusAreaBackground, 'background/box_hilight.png');
 		$imageObject->setWidgetBackground($this->scrolledwindow1, 'background/box.png');
 
+		// SET TOP ICONS
+
+		// Roms
+		$this->mTopRom_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/folder_roms.png', true)));
+		$this->menuTopRomAddNewRom_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/add.png', true)));
+		$this->mMenuReparseFolder_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/reload.png', true)));
+		$this->mMenuReparseFolderAll_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/reload.png', true)));
+		$this->mTopRomOptimize_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/optimize.png', true)));
+		$this->mTopRomRemoveDups_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/trash.png', true)));
+		$this->mTopRomRemoveRoms_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/trash.png', true)));
+
+		// Emulators
+		$this->mTopEmu_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/program.png', true)));
+		$this->mTopEmuConfig_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/settings.png', true)));
+		$this->mTopEmuDownload_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/edc_icon.png', true)));
+
+		// Datfiles
+		$this->mTopDat_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/lists.png', true)));
+		$this->mTopDatImportEcc_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/import.png', true)));
+		$this->mTopDatImportCtrlMAME_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/import.png', true)));
+		$this->mTopDatImportRc_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/import.png', true)));
+		$this->mTopDatExportEccFull_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/save.png', true)));
+		$this->mTopDatExportEccUser_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/save.png', true)));
+		$this->mTopDatExportEccEsearch_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/save.png', true)));
+		$this->mTopDatClear_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/trash.png', true)));
+		$this->mTopRomAuditShow_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/how_to.png', true)));
+		$this->mTopDatConfig_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/wrench.png', true)));
+
+		// Files
+		$this->mTopFile_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/how_to.png', true)));
+		$this->mTopFileRename_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/reload.png', true)));
+		$this->mTopFileCopy_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/copy.png', true)));
+		$this->mTopFileRemove_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/trash.png', true)));
+		//$this->mTopFileSearch_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/gift.png', true)));
+
+		// View
+		$this->mTopView_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/detail_view.png', true)));
+		$this->mTopViewReload_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/reload.png', true)));
+		$this->mTopViewRandomGame_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/gift.png', true)));
+
+		// Options
+		$this->mTopOption_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/settings.png', true)));
+		$this->mTopOptionDbVacuum_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/database.png', true)));
+		$this->mTopOptionCreateUserFolder_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/download_folder.png', true)));
+		$this->mTopOptionCleanHistory_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/undo.png', true)));
+		$this->mTopOptionBackupUserdata_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/save.png', true)));
+		$this->mTopOptionCreateStartmenuShortcuts_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/reset.png', true)));
+		$this->mTopOptionConfig_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/wrench.png', true)));
+
+		// Tools
+		$this->mTopTool_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/toolbox.png', true)));
+		$this->mTopToolEccGtkts_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/window_colors.png', true)));
+		$this->mTopToolEccDiagnostics_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/search.png', true)));
+		$this->mTopDatDFU_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/update.png', true)));
+		$this->mTopToolAutoIt3_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/frames_layout.png', true)));
+		$this->mTopToolNotepadEditor_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/notepad_plusplus.png', true)));
+		$this->mTopToolHexEditor_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/edit_hex.png', true)));
+
+		// Developer
+		$this->mTopDeveloper_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/create.png', true)));
+		$this->mTopDeveloperSQL_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/search_page.png', true)));
+		$this->mTopDeveloperGUI_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/frames_layout.png', true)));
+
+		// Updates
+		$this->mTopUpdate_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/update.png', true)));
+		$this->mTopToolEccUpdate_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/update.png', true)));
+
+		// Services
+		$this->mTopServices_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/edit_new.png', true)));
+		$this->mTopServicesKameleonCode_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/password_field.png', true)));
+		$this->mTopServicesEmuMoviesAD_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/password_field.png', true)));
+
+		// Help
+		$this->mTopHelp_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/help_book.png', true)));
+		$this->mTopHelpDocOffline_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/text.png', true)));
+		$this->mTopHelpDocOnline_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/text.png', true)));
+		$this->mTopHelpAbout_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/about.png', true)));
+
+		//Social
+		$this->mTopSocial_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/home.png', true)));
+		$this->mTopSocialForum_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/comment.png', true)));
+		$this->mTopSocialWebsiteECC_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/home.png', true)));
+		$this->mTopSocialWebsiteEDC_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/home.png', true)));
+		$this->mTopSocialFacebook_image->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/facebook.png', true)));
+
 		#setup icons for rom/bookmark/history buttons
 		$this->btnMainShowAllRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/controller.png', true)));
 		$this->btnMainShowBookmarkedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/heart.png', true)));
 		$this->btnMainShowLaunchedRomsIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/clock.png', true)));
-		$this->statusAreaIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_working.png', true)));
-		$this->btn_3dgallery_start_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_3dgallery_start.png', true)));
-		$this->btn_3dgallery_config_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/ecc_3dgallery_config.png', true)));
+		$this->statusAreaIcon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/working.png', true)));
+		$this->btn_3dgallery_start_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/start.png', true)));
+		$this->btn_3dgallery_config_icon->set_from_pixbuf($this->oHelper->getPixbuf($this->getThemeFolder('icon/tune.png', true)));
 	}
 
 	public function getThemeFolder($subfolder = '', $important = false){
@@ -8464,7 +8538,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->setSpanMarkup($this->infotab_lbl_infoid, I18N::get('meta', 'lbl_infoid'), false, 'b', false);
 		$this->setSpanMarkup($this->infotab_lbl_perspective, I18N::get('meta', 'lbl_perspective'), false, 'b', false);
 		$this->setSpanMarkup($this->infotab_lbl_visual, I18N::get('meta', 'lbl_visual'), false, 'b', false);
-		
+
 		// Fileinfos
 		#$this->infotab_frame_fileinfo->set_markup('<b>'.I18N::get('global', 'fileInfo').'</b>');
 		#$this->setSpanMarkup($this->infotab_frame_fileinfo, I18N::get('global', 'fileInfo'), false, 'b');
@@ -8498,7 +8572,7 @@ current_build="'.$this->ecc_release['release_build'].'"
 		$this->setSpanMarkup($this->iPaneEsearchOptUsermodLbl, I18N::get('infoPane', 'iPaneEsearchOptUsermodLbl'), false, 'b', false);
 		$this->setSpanMarkup($this->iPaneEsearchOptNetplayLbl, I18N::get('infoPane', 'iPaneEsearchOptNetplayLbl'), false, 'b', false);
 		$this->setSpanMarkup($this->iPaneEsearchOptDumpTypeLbl, I18N::get('infoPane', 'iPaneEsearchOptDumpTypeLbl'), false, 'b', false);
-		
+
 		$this->iPaneEsearchOptResetBtn->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchOptResetBtn').':</b>');
 		$this->iPaneEsearchHelpLbl->set_markup('<b>'.I18N::get('infoPane', 'iPaneEsearchHelpLbl').':</b>');
 

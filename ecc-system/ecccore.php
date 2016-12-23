@@ -1,11 +1,11 @@
 <?php
-$version = '1.21';
-$build = '04';
-$description = '1.21';
+$version = '1.22';
+$build = '01';
+$description = '1.22';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 
 $autor = 'Sebastiaan Ebeltjes(NL) Andreas Scheibel(DE)';
-$date = "2016.11.20";
+$date = "2016.12.23";
 
 $eccConfig = array(
 	'ecc_release' => array(
@@ -32,7 +32,7 @@ $eccConfig = array(
 		'eccdat_state' => '',
 		'info_copyright' => '2005-2016 Sebastiaan Ebeltjes(NL) / Andreas Scheibel(DE)',
 	),
-	
+
 	'user_path_subfolder_default' => array(
 		'emus',
 		'exports',
@@ -59,7 +59,7 @@ $eccConfig = array(
 		'bmp' => 1,
 		'ico' => 1,
 	),
-	
+
 	'cbox_yesno' => array(
 		'*',
 		'no',
@@ -68,7 +68,7 @@ $eccConfig = array(
 		'ye?',
 		'?',
 	),
-	
+
 	'image_type' => array(
 		'ingame_title' => 'Ingame - Title',
 		'ingame_play_01' => 'Ingame - Play 1',
@@ -386,19 +386,19 @@ $eccConfig = array(
 		'ECCIDENT' => '[[eccident]]',
 		'CRC32' => '[[crc32]]',
 	),
-	
+
 	'freeformSearchOperators' => array(
 		'AND' => '+',
 		'' => '=',
 		'OR' => '|',
 	),
-	
+
 	'dropdownStateYesNo' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
 		2	=> '[[YES]]',
 	),
-	
+
 	'dropdownMultiplayer' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
@@ -406,7 +406,7 @@ $eccConfig = array(
 		3	=> '[[3P]]',
 		4	=> '[[4P]]',
 	),
-	
+
 	'dropdownStateCount' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
@@ -421,13 +421,13 @@ $eccConfig = array(
 		10	=> '[[09]]',
 		11	=> '[[10]]',
 	),
-	
+
 	'dropdownStateTrainer' => array(
 		0 	=> '[[empty]]',
 		1	=> '[[NO]]',
 		2	=> '[[YES]]',
 	),
-	
+
 	'dropdownStorage' => array(
 		0 => '[[empty]]',
 		1 => '[[not_possible]]',
@@ -436,7 +436,7 @@ $eccConfig = array(
 		4 => '[[not_memory_card]]',
 		5 => '[[on_harddrive]]',
 	),
-	
+
 	'dropdownRegion' => array(
 		0 => '[[empty]]',
 		1 => '[[Asia]]',
@@ -450,7 +450,7 @@ $eccConfig = array(
 		9 => '[[USA-Europe]]',
 		10 => '[[USA-Japan]]',
 	),
-	
+
 	# meta -> dropdownMedium
 	'dropdownMediaType' => array(
 		0 => 'unknown',
@@ -461,7 +461,7 @@ $eccConfig = array(
 		5 => 'card',
 		6 => 'arcade_board',
 	),
-	
+
 	'dropdownDumpType' => array(
 		0 => 'unknown',
 		1 => '[!]', // Verified Good Dump
@@ -502,8 +502,8 @@ $eccConfig = array(
 		3 => 'Fixed / Flip-screen',
 		4 => 'Free-roaming camera',
 		5 => 'Isometric',
-	),	
-	
+	),
+
 	'ratingUSK' => array(
 		0 => 'unknown',
 		1 => '0',
@@ -512,7 +512,7 @@ $eccConfig = array(
 		4 => '16',
 		5 => '18',
 	),
-	
+
 	// europe
 	'ratingPEGI' => array(
 		0 => 'unknown',
@@ -524,7 +524,7 @@ $eccConfig = array(
 		6 => '16',
 		7 => '18',
 	),
-	
+
 	// great britain
 	'ratingBBFC' => array(
 		0 => 'unknown',
@@ -535,7 +535,7 @@ $eccConfig = array(
 		5 => '15',
 		6 => '18',
 	),
-	
+
 	// usa
 	'ratingESRB' => array(
 		0 => 'unknown',
@@ -552,6 +552,8 @@ $eccConfig = array(
 		'ECC_DOC_ONLINE' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
 		'ECC_WEBSITE' => 'https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki',
 		'ECC_FORUM' => 'http://eccforum.phoenixinteractive.nl/',
+		'ECC_FACEBOOK' => 'https://www.facebook.com/emuControlCenter/',
+		'EDC_WEBSITE' => 'https://github.com/PhoenixInteractiveNL/emuDownloadCenter/wiki',
 
 		'ECC_EXE_START' => 'ecc.exe',
 		'ECC_SCRIPT_EXTENSION' => '.eccscript',
@@ -580,7 +582,7 @@ $eccConfig = array(
 		'ECC_EXE_SQL_BROWSER' => 'ecc-core/thirdparty/sqlitebrowser/sqlitebrowser.exe',
 
 	),
-	
+
 	'eccdb' => array (
 		'META_ADD_URL' => '',
 		'META_GET_URL' => '',

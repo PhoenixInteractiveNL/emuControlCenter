@@ -1,0 +1,36 @@
+<h2>ECC HowTo Translate ECC</h2>
+
+<hr />
+
+<p><img src="images/img_languages_globe.jpg" alt="" title="" /></p>
+
+<p>Here is a small tutorial about how to add languages to emuControlCenter:</p>
+
+<p>1) <a href="ECC-wiki-country-abbreviation.htm" target="MAIN"><em>Determine your country abbreviation</em></a></p>
+
+<p>2) Create a folder named with your country abbreviation in <code>ecc-system\transations</code> (use lowercase letters)</p>
+
+<p>3) Copy the contents from the <code>en</code> folder to your country folder.</p>
+
+<p>4) To let your translations correctly shown in ECC there is a file <code>charset.ini</code> in your country folder, you can edit it with notepad, now you'll see 2 settings:</p>
+
+<pre><code>encoding_source
+encoding_destination
+</code></pre>
+
+<p>The <code>encoding_source</code> setting is mostly for 99% of the translations set to "UTF-8" (you can leave this unchanged)</p>
+
+<p>The <code>encoding_destination</code> setting needs your country charset, so you may want to change that, here's a <a href="ECC-wiki-charset-list.htm" target="MAIN"><em>Charset list</em></a></p>
+
+<p>5) After that you can edit and translate all PHP &amp; INI files in the language folder, please try out in what format you should save your translation, this can be UTF-8 or ANSI, some language need to be saved in UTF-8 and other in ANSI to work correctly:
+<img src="images/img_howto_translation_format.png" alt="" title="" /></p>
+
+<p>6) After all is done you can select your language in the config from ECC (ecc will restart)</p>
+
+<p>7) When errors are found, you can find these in the PHP LOG file <code>error.log</code> in your ECC root folder.</p>
+
+<p>You can ZIP your language folder and upload it to the <a href="http://eccforum.phoenixinteractive.nl/viewforum.php?f=21" target="_blank"><strong>ECC Forum</strong></a> or</p>
+
+<p>E-Mail @ <code>phoenixinteractive -at- hotmail -dot- com</code></p>
+
+<p>If you have any questions....feel free to ask on our forum!</p>

@@ -1,5 +1,93 @@
 ## Changelogs 2016
 ***
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/edc_banner.png)
+
+ECC v1.22 (2016-12-23)
+
+- ECC Core
+  - ECC License now GPLv3
+  - Fixed some missing icons in the Platform and Rom sub menu system.
+  - Fixed an "freeze" issue with datfile importing if the path did not exist.
+  - Fixed issue where you could not import v1.1 or older ECC DAT files properly.
+  - Fixed an issue where calling the ABOUT screen made ECC close.
+  - Fixed startup of some GUI's to CENTER screen.
+  - Fixed some language lines in 'i18n_meta.php' files to be translated.
+  - Fixed some issues & link in the offline helpfiles.
+  - Updated PHP-GTK Glade3 GUI from v3.4.3 to v3.6.1.
+  - Reworked all GLADE GUI's due to update, some icons have been changed/added.
+  - Rearranged TOP menu icons.
+  - Added new theme icons to the TOP menu, no more stock PHP-GTK icons.
+  - Added proper deactivation on menu items when ALL PLATFORMS has beem selected.
+  - Cleaned up code in GUI and php code for ROMdb.
+  - Removed Xpadder and Xpadder options, the freeware v5.3 crashes on Windows 8/10.
+  - New Option to select a external Joystick emulator yourself now.
+  - Shipping WorldOfJoysticks v1.57 standard edition (worldofjoysticks.com) with ECC.
+  - Updated ES language to ECC v1.21 [Jarlaxe]
+  - Removed unique CID structure in ECC, now implemented UID in autoit variables.
+  - Updated ECC EMU INI files in "ecc-system\system" these are now exported by EDC.
+- EMUDOWNLOADCENTER
+  - Introducing the new EDC module for ECC, with this you can download, install and
+    configure emulators with a few clicks!
+  - Project page is on GitHub: https://github.com/PhoenixInteractiveNL/emuDownloadCenter/wiki
+  - This project had been started in OCT-2016, and with help of 'Shando' we have a lift-off!
+  - You can help collecting and adding more platforms and emulators, it's all open source!
+  - You can request specific EDC data export to a file, but you have to work for it ;-)
+- ECC Documentation
+  - Now using GitHub wiki markdown documentation, this way it's maintained better!
+  - Made a Github wiki markdown to HMTL converter to generate offline documentation!
+- ECC Update
+  - v1.2.0.3
+    - Removed redundant CID checks.
+  - v1.2.0.2 (2016.09.15)
+    - Fixed a bug where eccUpdate! could not find the last update from the server correctly. 
+- eccThirdPartyConfig
+  - v1.0.0.3 (2016.09.25)
+    - Removed Xpadder config.
+- eccScriptSystem
+  - v1.3.0.1 (2016.09.25)
+    - Removed Xpadder variable, added JoyEmulator variable.
+- eccToolVariables
+  - v1.0.2.0
+    - Added EDC variables.
+  - v1.0.1.0
+    - Added UID string.
+  - v1.0.0.9 (2016.09.25)
+    - Removed Xpadder variable, added JoyEmulator variable.
+- DatFileUpdater
+  - v1.3.0.1
+    - Removed DATE function and string, not used in newer MAME dats anymore
+    - Fixed NeoGeo driver from 'neodrvr.cpp' to 'neodriv.hxx'
+- MobyGamesImporter
+  - Updated the emuMoviesDownloaderlist from 2012-10-10 to 2016-11-05.
+- emuMoviesdownloader
+  - v1.2.1.3
+    - Removed redundant CID checks.
+- iccImageInject
+  - v1.1.0.9
+    - Adjusted CID checks to UID.
+- eccDiagnostics
+  - v1.0.0.4
+    - Adjusted CID checks to UID.
+- Thirdparty updates
+  - 7-zip v16.02 to v16.04
+  - Notepad++ v6.9.2 to v7.2.2
+- Updated DAT files for:
+ - CPS-1  : v0.178 to v0.180 (mame)
+ - CPS-2  : v0.178 to v0.180 (mame)
+ - CPS-3  : v0.178 to v0.180 (mame)
+ - MAME   : v0.178 to v0.180 (mame)
+ - MODEL1 : v0.178 to v0.180 (mame)
+ - MODEL2 : v0.178 to v0.180 (mame)
+ - NAOMI  : v0.178 to v0.180 (mame)
+ - NEOGEO : v0.178 to v0.180 (mame)
+ - PGM    : v0.178 to v0.180 (mame)
+ - S11    : v0.178 to v0.180 (mame)
+ - S16    : v0.178 to v0.180 (mame)
+ - S18    : v0.178 to v0.180 (mame)
+ - S22    : v0.178 to v0.180 (mame)
+ - ZINC   : v0.178 to v0.180 (mame)
+
+***
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_misc_source_files.png)
 
 ECC v1.21 (2016-09-14)
@@ -77,7 +165,6 @@ ECC v1.21 (2016-09-14)
   - Amiga Gamebase v1.6 to v2.0
 
 ***
-
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_120.png)
 
 Version 1.20 (2016.08.10) THE GITHUB RELEASE

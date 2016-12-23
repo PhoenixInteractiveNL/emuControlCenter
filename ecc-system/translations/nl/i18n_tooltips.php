@@ -122,9 +122,9 @@ $i18n['tooltips'] = array(
 	'mTopServicesKameleonCodeTooltip' =>
 		"Dit zal een venster openen waar je de Kameleon code kunt invoeren om gebruik te maken van diverse ECC diensten. (voor geregistreerde forum leden)",
 	// # TOP-HELP
-	'mTopHelpWebsiteTooltip' =>
+	'mTopSocialWebsiteECCTooltip' =>
 		"Dit zal de ECC website openen in je internetbrowser.",
-	'mTopHelpForumTooltip' =>
+	'mTopSocialForumTooltip' =>
 		"Dit zal de ECC hulp forum openen in je internetbrowser.",
 	'mTopHelpDocOfflineTooltip' =>
 		"Dit zal de lokale ECC documentatie openen.",
@@ -143,5 +143,12 @@ $i18n['tooltips'] = array(
 	'mTopToolHexEditorTooltip' =>
 		"Dit zal een HEX editor openen waarmee je binaire bestanden kan bewerken indien nodig.",
 
+	/* 1.22 BUILD 1 */
+	'mTopEmuDownloadTooltip' =>
+		"Download, installeer en configureer emulators met emuDownloadCenter!",
+	'mTopSocialWebsiteEDCTooltip' =>
+		"Open de EDC Project pagina, en bekijk hoe je zelf emulators kan toevoegen!",
+	'mTopSocialFacebookTooltip' =>
+		"Bekijk de ECC facebook pagina en like om op de hoogte gehouden te worden van het laatrste nieuws!",
 	);
 ?>

@@ -1,5 +1,9 @@
 ## Changelog ECC DATFileUpdater (DFU)
 ***
+v1.3.0.1
+- Removed DATE function and string, not used in newer MAME dats anymore
+- Fixed NeoGeo driver from 'neodrvr.cpp' to 'neodriv.hxx'
+
 v1.3.0.0 (2016.08.10)
 - Added a feature to unpack 7z files DAT files once on first start due to Github filesize limit.
 - Updated and fixed platform listings to grab (.c to .cpp) MAME 0.17x+? to create CLRMAME DAT files.

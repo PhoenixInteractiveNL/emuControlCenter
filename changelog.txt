@@ -1,5 +1,8 @@
-UPDATE 00634
+UPDATE 00635
+- emuDownloadCenter v1.0.0.1
+  - Config bugfixes, now the ECC configs should be written properly!
 
+UPDATE 00634
 - Added CISO extension to all CD-based platforms.
 - Updated system EMU INI's.
 

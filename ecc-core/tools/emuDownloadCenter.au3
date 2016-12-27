@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : emuDownloadCenter (EDC)
-; Script version         : 1.0.0.0
-Global $EDCScriptVersion = "1.0.0.0"
-; Last changed           : 2016.12.19
+; Script version         : 1.0.0.1
+Global $EDCScriptVersion = "1.0.0.1"
+; Last changed           : 2016.12.27
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -687,49 +687,50 @@ If FileExists($EmuConfigFileUser) = 0 Then FileCopy($EmuConfigFile, $EmuConfigFi
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "active", Chr(34) & "1" & Chr(34))
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "path", Chr(34) & $EmuInstallPathFull & "\" & $ExecutableFile & Chr(34))
 
-Global $CFG_ECCParameter = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_ECCParameter", "X") ;Read-out VERSION specific information.
-If $CFG_ECCParameter = "X" Then $CFG_ECCParameter = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_ECCParameter", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "param", Chr(34) & $CFG_ECCParameter & Chr(34))
+Global $CFG_param = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_param", "X") ;Read-out VERSION specific information.
+If $CFG_param = "X" Then $CFG_param = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_param", "") ;Read-out GLOBAL confguration for this emulator.
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "param", Chr(34) & $CFG_param & Chr(34))
 
 Global $CFG_escape = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_escape", "X") ;Read-out VERSION specific information.
 If $CFG_escape = "X" Then $CFG_escape = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_escape", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_ECCParameter & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_escape & Chr(34))
 
 Global $CFG_win8char = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_win8char", "X") ;Read-out VERSION specific information.
 If $CFG_win8char = "X" Then $CFG_win8char = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_win8char", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_win8char & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "win8char", Chr(34) & $CFG_win8char & Chr(34))
 
 Global $CFG_useCueFile = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_useCueFile", "X") ;Read-out VERSION specific information.
 If $CFG_useCueFile = "X" Then $CFG_useCueFile = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_useCueFile", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_useCueFile & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "useCueFile", Chr(34) & $CFG_useCueFile & Chr(34))
 
 Global $CFG_filenameOnly = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_filenameOnly", "X") ;Read-out VERSION specific information.
 If $CFG_filenameOnly = "X" Then $CFG_filenameOnly = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_filenameOnly", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_filenameOnly & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "filenameOnly", Chr(34) & $CFG_filenameOnly & Chr(34))
 
 Global $CFG_noExtension = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_noExtension", "X") ;Read-out VERSION specific information.
 If $CFG_noExtension = "X" Then $CFG_noExtension = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_noExtension", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_noExtension & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "noExtension", Chr(34) & $CFG_noExtension & Chr(34))
 
 Global $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_executeInEmuFolder", "X") ;Read-out VERSION specific information.
 If $CFG_executeInEmuFolder = "X" Then $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_executeInEmuFolder", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_executeInEmuFolder & Chr(34))
-
-Global $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_executeInEmuFolder", "X") ;Read-out VERSION specific information.
-If $CFG_executeInEmuFolder = "X" Then $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_executeInEmuFolder", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_executeInEmuFolder & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "executeInEmuFolder", Chr(34) & $CFG_executeInEmuFolder & Chr(34))
 
 Global $CFG_enableEccScript = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableEccScript", "X") ;Read-out VERSION specific information.
 If $CFG_enableEccScript = "X" Then $CFG_enableEccScript = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableEccScript", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_enableEccScript & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableEccScript", Chr(34) & $CFG_enableEccScript & Chr(34))
 
 Global $CFG_enableZipUnpackActive = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableZipUnpackActive", "X") ;Read-out VERSION specific information.
 If $CFG_enableZipUnpackActive = "X" Then $CFG_enableZipUnpackActive = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableZipUnpackActive", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_enableZipUnpackActive & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackActive", Chr(34) & $CFG_enableZipUnpackActive & Chr(34))
+
+Global $CFG_enableZipUnpackAll = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "enableZipUnpackAll", "X") ;Read-out VERSION specific information.
+If $CFG_enableZipUnpackAll = "X" Then $CFG_enableZipUnpackAll = IniRead($EDCEmulatorConfigINI, "GLOBAL", "enableZipUnpackAll", "") ;Read-out GLOBAL confguration for this emulator.
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackAll", Chr(34) & $CFG_enableZipUnpackAll & Chr(34))
 
 Global $CFG_enableZipUnpackSkip = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableZipUnpackSkip", "X") ;Read-out VERSION specific information.
 If $CFG_enableZipUnpackSkip = "X" Then $CFG_enableZipUnpackSkip = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableZipUnpackSkip", "") ;Read-out GLOBAL confguration for this emulator.
-IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_enableZipUnpackSkip & Chr(34))
+IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackSkip", Chr(34) & $CFG_enableZipUnpackSkip & Chr(34))
+
 
 GUICtrlSetData($ConfigureBar, "100")
 GUICtrlSetData($ConfigureStatusLabel, "Succesfull!")

@@ -1,3 +1,8 @@
+UPDATE 00636
+- emuDownloadCenter v1.0.0.1
+  - Added Language label on emulator select
+- Updated system EMU INI's.
+
 UPDATE 00635
 - emuDownloadCenter v1.0.0.1
   - Config bugfixes, now the ECC configs should be written properly!

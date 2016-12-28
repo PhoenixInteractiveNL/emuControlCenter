@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : emuDownloadCenter (EDC)
-; Script version         : 1.0.0.1
-Global $EDCScriptVersion = "1.0.0.1"
-; Last changed           : 2016.12.27
+; Script version         : 1.0.0.2
+Global $EDCScriptVersion = "1.0.0.2"
+; Last changed           : 2016.12.28
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -80,7 +80,7 @@ Func EmuSelect()
 ; -----------------------------------------------------------------------------------------
 ; EMULATOR SELECT GUI
 ; -----------------------------------------------------------------------------------------
-Global $EDCEMULATOR = GUICreate("ECC - emuDownloadCenter", 763, 734, -1, -1)
+Global $EDCEMULATOR = GUICreate("ECC - emuDownloadCenter", 763, 752, -1, -1)
 GUISetBkColor(0xFFFFFF)
 Global $SelectEmulatorGroup = GUICtrlCreateGroup(" Select emulator ", 8, 0, 745, 505, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
@@ -102,15 +102,15 @@ Global $FavoriteEmulator = GUICtrlCreateLabel("-", 48, 472, 122, 25, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $ButtonSelect = GUICtrlCreateButton("SELECT", 632, 696, 121, 33)
+Global $ButtonSelect = GUICtrlCreateButton("SELECT", 632, 712, 121, 33)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
-Global $EmulatorInfoGroup = GUICtrlCreateGroup(" Emulator info ", 8, 512, 745, 177, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+Global $EmulatorInfoGroup = GUICtrlCreateGroup(" Emulator info ", 8, 512, 745, 193, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
 Global $Label4 = GUICtrlCreateLabel("Author(s):", 10, 528, 78, 17, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $Label5 = GUICtrlCreateLabel("License:", 10, 544, 78, 17, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $Label6 = GUICtrlCreateLabel("Need BIOS?:", 10, 560, 78, 17, $SS_RIGHT)
+Global $Label6 = GUICtrlCreateLabel("Need BIOS?:", 10, 576, 78, 17, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 Global $EmulatorAuthor = GUICtrlCreateLabel("-", 96, 528, 258, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
@@ -118,37 +118,42 @@ GUICtrlSetColor(-1, 0x0000FF)
 Global $EmulatorLicense = GUICtrlCreateLabel("-", 96, 544, 258, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
-Global $EmulatorBios = GUICtrlCreateLabel("-", 96, 560, 98, 17, 0)
+Global $EmulatorBios = GUICtrlCreateLabel("-", 96, 576, 98, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
 Global $Label8 = GUICtrlCreateLabel("Notes:", 368, 528, 47, 17, 0)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $EmulatorNotes = GUICtrlCreateLabel("-", 368, 544, 378, 129, 0)
+Global $EmulatorNotes = GUICtrlCreateLabel("-", 368, 544, 378, 153, 0)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
-Global $Label2 = GUICtrlCreateLabel("Last Check:", 10, 584, 78, 17, $SS_RIGHT)
+Global $Label2 = GUICtrlCreateLabel("Last Check:", 10, 600, 78, 17, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $EmulatorLastCheck = GUICtrlCreateLabel("-", 96, 584, 98, 17, 0)
+Global $EmulatorLastCheck = GUICtrlCreateLabel("-", 96, 600, 98, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
-Global $Label7 = GUICtrlCreateLabel("Complete?:", 10, 600, 78, 17, $SS_RIGHT)
+Global $Label7 = GUICtrlCreateLabel("Complete?:", 10, 616, 78, 17, $SS_RIGHT)
 GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
-Global $EmulatorComplete = GUICtrlCreateLabel("-", 96, 600, 98, 17, 0)
+Global $EmulatorComplete = GUICtrlCreateLabel("-", 96, 616, 98, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
-Global $EmulatorLogo = GUICtrlCreatePic("", 96, 624, 161, 57, BitOR($GUI_SS_DEFAULT_PIC,$SS_CENTERIMAGE))
+Global $EmulatorLogo = GUICtrlCreatePic("", 96, 640, 161, 57, BitOR($GUI_SS_DEFAULT_PIC,$SS_CENTERIMAGE))
 GUICtrlSetResizing(-1, $GUI_DOCKHEIGHT)
+Global $EmulatorLanguage = GUICtrlCreateLabel("-", 96, 560, 98, 17, 0)
+GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
+GUICtrlSetColor(-1, 0x0000FF)
+Global $Label10 = GUICtrlCreateLabel("Language:", 10, 560, 78, 17, $SS_RIGHT)
+GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $ButtonExit = GUICtrlCreateButton("EXIT", 8, 696, 121, 33)
+Global $ButtonExit = GUICtrlCreateButton("EXIT", 8, 712, 121, 33)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
-Global $EDCInfoLabel = GUICtrlCreateLabel("", 160, 696, 448, 17, $SS_CENTER)
+Global $EDCInfoLabel = GUICtrlCreateLabel("", 160, 712, 448, 17, $SS_CENTER)
 GUICtrlSetFont(-1, 8, 800, 2, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
-Global $EDCLink = GUICtrlCreateLabel("Open EDC Project website", 374, 716, 234, 17, $SS_CENTER)
+Global $EDCLink = GUICtrlCreateLabel("Open EDC Project website", 374, 732, 234, 17, $SS_CENTER)
 GUICtrlSetFont(-1, 8, 800, 6, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
 GUICtrlSetCursor (-1, 0)
-Global $EDCUpdate = GUICtrlCreateLabel("Last EDC update: Unknown", 160, 716, 212, 17, $SS_CENTER)
+Global $EDCUpdate = GUICtrlCreateLabel("Last EDC update: Unknown", 160, 732, 212, 17, $SS_CENTER)
 GUICtrlSetFont(-1, 8, 800, 2, "Verdana")
 GUICtrlSetColor(-1, 0x800000)
 ; -----------------------------------------------------------------------------------------
@@ -247,6 +252,7 @@ If $SelectedEmulator <> $OldEmulator And $SelectedEmulator <> "" Then ; User cli
 	ToolTip("Downloading emulator data...", @DesktopWidth/2, @DesktopHeight/2, "EDC", 1, 6)
 	;Download emulator information.
 	InetGet($EDCServer & "hooks/" & $SelectedEmulatorShortName & "/emulator_info.ini", $EDCFolderCache & "emulator_info.ini", 1)
+	InetGet($EDCServer & "edc_conversion_language.ini", $EDCFolderCache & "edc_conversion_language.ini", 1)
 	;Download emulator images.
 	FileDelete($EDCFolderCache & "emulator_logo.png") ;Delete image because logo can be jpg or png.
 	FileDelete($EDCFolderCache & "emulator_logo.jpg") ;Delete image because logo can be jpg or png.
@@ -257,6 +263,10 @@ If $SelectedEmulator <> $OldEmulator And $SelectedEmulator <> "" Then ; User cli
 	GUICtrlSetData($EmulatorInfoGroup, " Emulator info (" & $SelectedEmulator & ") ")
 	GUICtrlSetData($EmulatorAuthor, IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "Author", "-"))
 	GUICtrlSetData($EmulatorLicense, IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "License", "-"))
+
+	Global $EmulatorLanguageData = IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "Language", "")
+	GUICtrlSetData($EmulatorLanguage, IniRead($EDCFolderCache & "edc_conversion_language.ini", "LANGUAGE", $EmulatorLanguageData, "Unknown"))
+
 	$EmulatorBiosNeeded = IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "BiosNeeded", "-")
 	If $EmulatorBiosNeeded = "1" Then $EmulatorBiosNeeded = "Yes"
 	If $EmulatorBiosNeeded = "0" Then $EmulatorBiosNeeded = "No"

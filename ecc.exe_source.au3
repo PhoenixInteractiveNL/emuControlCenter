@@ -33,7 +33,7 @@ AutoItSetOption("WinTitleMatchMode",3)
 ; -------------------------------------
 ; Define baked-in variables
 ; -------------------------------------
-Global $ecc_file_version =				"3.0.0.3"
+Global $ecc_file_version =				"3.0.0.4"
 Global $ecc_messagebox_title =			"ECC"
 Global $ecc_php_file = 					@Scriptdir & "\ecc-system\ecc.php"
 Global $ecc_php_file_q = 				Chr(34) & $ecc_php_file & Chr(34)
@@ -100,6 +100,7 @@ Global $ecc_startup_soundplay =			"1"
 Global $ecc_startup_bugreport_check =	IniRead($ecc_config_file_general_user, "ECC_STARTUP", "startup_bugreport_check", "")
 Global $ecc_startup_minimize_to_tray =	IniRead($ecc_config_file_general_user, "ECC_STARTUP", "minimize_to_tray", "")
 Global $ecc_external_JoyEmulator =		IniRead($ecc_config_file_general_user, "USER_DATA", "joyemulator_exe", "")
+Global $ecc_external_JoyEmulator_param =IniRead($ecc_config_file_general_user, "USER_DATA", "joyemulator_param", "")
 
 ; Set recursive path to full (once)
 If $ecc_external_JoyEmulator = "\ecc-core\thirdparty\wojemulator\WoJEmulatorStandard.exe" Then
@@ -880,7 +881,7 @@ Func ecc_joyemulatorstart()
 If $ecc_startup_JoyEmulator = "1" Then
 	If FileExists($ecc_external_JoyEmulator) = 1 then
 		GuiCtrlSetData($gui_regel, $ecc_3rdparty_JoyEmulator_start)
-		ShellExecute($ecc_external_JoyEmulator, "", "", "", @SW_MINIMIZE)
+		ShellExecute($ecc_external_JoyEmulator, $ecc_external_JoyEmulator_param, "", "", @SW_MINIMIZE)
 		ProcessWait($ecc_external_JoyEmulator_exe, 5)
 	EndIf
 EndIf

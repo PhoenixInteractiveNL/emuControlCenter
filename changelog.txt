@@ -1,5 +1,18 @@
+UPDATE 00637
+- CORE
+  - Added support for joystick emulator commandline parameters!
+- emuDownloadCenter v1.0.0.3
+  - Added GLOBAL install location wich is recommended, this saves a lot of diskspace using multi-emulators!
+  - Now using multi-emulator configurations on platform level used in the EDC ini's.
+  - Changed location of emulator logo's to the wiki resource, this is reducing bandwidth.
+  - Fixed crash when clicking on website link.
+  - Fixed waiting for up/down keypresses using cpu resources.
+- ECC Startup 3.0.0.4
+  - Added support for joystick emulator commandline parameters!
+- Updated system EMU INI's.
+
 UPDATE 00636
-- emuDownloadCenter v1.0.0.1
+- emuDownloadCenter v1.0.0.2
   - Added Language label on emulator select
 - Updated system EMU INI's.
 

@@ -1087,11 +1087,13 @@
                                   </widget>
                                   <packing>
                                     <property name="expand">False</property>
+                                    <property name="padding">2</property>
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -1101,6 +1103,7 @@
                                 <property name="label" translatable="yes">Database path notes: Always use a ending slash '\', Network paths are not listed, but you can type them manually like: \\COMPUTER\PATH\</property>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">3</property>
                               </packing>
                             </child>
@@ -1197,6 +1200,7 @@
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1286,6 +1290,7 @@
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1386,6 +1391,7 @@
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1453,6 +1459,7 @@
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -1554,6 +1561,7 @@
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
+                                    <property name="padding">2</property>
                                     <property name="position">4</property>
                                   </packing>
                                 </child>
@@ -1568,11 +1576,13 @@
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
+                                    <property name="padding">2</property>
                                     <property name="position">5</property>
                                   </packing>
                                 </child>
                               </widget>
                               <packing>
+                                <property name="padding">2</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1625,6 +1635,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="padding">2</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -1677,6 +1688,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="padding">2</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -1729,6 +1741,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="padding">2</property>
                                 <property name="position">3</property>
                               </packing>
                             </child>
@@ -1814,6 +1827,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="padding">2</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1867,6 +1881,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="padding">2</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -2057,12 +2072,23 @@
                                   </widget>
                                   <packing>
                                     <property name="expand">False</property>
+                                    <property name="padding">2</property>
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
                               </widget>
                               <packing>
                                 <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkHSeparator" id="hseparator1">
+                                <property name="visible">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="padding">4</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
@@ -2111,64 +2137,96 @@
                                   </widget>
                                   <packing>
                                     <property name="expand">False</property>
+                                    <property name="padding">2</property>
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="position">1</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="startConfJoyEmulator">
+                              <widget class="GtkHBox" id="hbox26">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="draw_indicator">True</property>
                                 <child>
-                                  <widget class="GtkAlignment" id="alignment43">
+                                  <widget class="GtkCheckButton" id="startConfJoyEmulator">
                                     <property name="visible">True</property>
-                                    <property name="xscale">0</property>
-                                    <property name="yscale">0</property>
-                                    <child>
-                                      <widget class="GtkHBox" id="hbox13">
-                                        <property name="visible">True</property>
-                                        <property name="spacing">2</property>
-                                        <child>
-                                          <widget class="GtkImage" id="startConfJoyEmulatorImage">
-                                            <property name="visible">True</property>
-                                            <property name="stock">gtk-jump-to</property>
-                                            <property name="icon-size">1</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="startConfJoyEmulatorLabel">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Start Joystick emulator at startup</property>
-                                            <property name="use_underline">True</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </widget>
-                                    </child>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="draw_indicator">True</property>
                                   </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkImage" id="startConfJoyEmulatorImage">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0.49000000953674316</property>
+                                    <property name="yalign">0.49000000953674316</property>
+                                    <property name="stock">gtk-jump-to</property>
+                                    <property name="icon-size">1</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="startConfJoyEmulatorLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">Start Joystick emulator at startup</property>
+                                    <property name="use_underline">True</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkVSeparator" id="vseparator1">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">100</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="extProgJoyEmulatorParamLabel">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0.44999998807907104</property>
+                                    <property name="label" translatable="yes">Commandline parameter:</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="padding">2</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkEntry" id="extProgJoyEmulatorParamTextbox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="invisible_char">&#x25CF;</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="position">5</property>
+                                  </packing>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
+                                <property name="padding">2</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                           </widget>

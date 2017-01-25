@@ -413,5 +413,9 @@ $i18n['popupConfig'] = array(
 		"Lokaliseer Joystick emulator bestand",
 	'extProgJoyEmulatorbutton' =>
 		"Selecteer",	
-	);
+
+	/* 1.22 */
+	'extProgJoyEmulatorParamLabel' =>
+	"Commandolijn parameter(s):",
+);
 ?>

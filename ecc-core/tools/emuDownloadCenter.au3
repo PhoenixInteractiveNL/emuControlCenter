@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; Script for             : emuDownloadCenter (EDC)
-; Script version         : 1.0.0.2
-Global $EDCScriptVersion = "1.0.0.2"
-; Last changed           : 2016.12.28
+; Script version         : 1.0.0.3
+Global $EDCScriptVersion = "1.0.0.3"
+; Last changed           : 2017.01.25
 ;
 ; Author: Sebastiaan Ebeltjes (AKA Phoenix)
 ;
@@ -12,7 +12,7 @@ Global $EDCScriptVersion = "1.0.0.2"
 FileChangeDir(@ScriptDir)
 #include "eccToolVariables.au3"
 
-Global $SelectedEmulatorShortName, $UserClickedAnother, $OldVersion, $OldEmulator
+Global $SelectedEmulatorShortName, $UserClickedAnother, $OldVersion, $OldEmulator, $Websitelink
 
 Global Const $STD_INPUT_HANDLE = -10
 Global Const $STD_OUTPUT_HANDLE = -11
@@ -137,7 +137,7 @@ Global $EmulatorComplete = GUICtrlCreateLabel("-", 96, 616, 98, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
 Global $EmulatorLogo = GUICtrlCreatePic("", 96, 640, 161, 57, BitOR($GUI_SS_DEFAULT_PIC,$SS_CENTERIMAGE))
-GUICtrlSetResizing(-1, $GUI_DOCKHEIGHT)
+GUICtrlSetResizing(-1, $GUI_DOCKHCENTER+$GUI_DOCKHEIGHT)
 Global $EmulatorLanguage = GUICtrlCreateLabel("-", 96, 560, 98, 17, 0)
 GUICtrlSetFont(-1, 8, 800, 0, "Verdana")
 GUICtrlSetColor(-1, 0x0000FF)
@@ -257,8 +257,7 @@ If $SelectedEmulator <> $OldEmulator And $SelectedEmulator <> "" Then ; User cli
 	FileDelete($EDCFolderCache & "emulator_logo.png") ;Delete image because logo can be jpg or png.
 	FileDelete($EDCFolderCache & "emulator_logo.jpg") ;Delete image because logo can be jpg or png.
 	InetGet($EDCServer & "hooks/" & $SelectedEmulatorShortName & "/emulator_screen_01.jpg", $EDCFolderCache & "emulator_screen_01.jpg", 1)
-	InetGet($EDCServer & "hooks/" & $SelectedEmulatorShortName & "/emulator_logo.jpg", $EDCFolderCache & "emulator_logo.jpg", 1)
-	InetGet($EDCServer & "hooks/" & $SelectedEmulatorShortName & "/emulator_logo.png", $EDCFolderCache & "emulator_logo.png", 1)
+	InetGet($EDCWebsitelink & "/images_emulator/" & $SelectedEmulatorShortName & "_logo.jpg", $EDCFolderCache & "emulator_logo.jpg", 1)
 
 	GUICtrlSetData($EmulatorInfoGroup, " Emulator info (" & $SelectedEmulator & ") ")
 	GUICtrlSetData($EmulatorAuthor, IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "Author", "-"))
@@ -267,14 +266,15 @@ If $SelectedEmulator <> $OldEmulator And $SelectedEmulator <> "" Then ; User cli
 	Global $EmulatorLanguageData = IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "Language", "")
 	GUICtrlSetData($EmulatorLanguage, IniRead($EDCFolderCache & "edc_conversion_language.ini", "LANGUAGE", $EmulatorLanguageData, "Unknown"))
 
-	$EmulatorBiosNeeded = IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "BiosNeeded", "-")
+	$EmulatorBiosNeeded = IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "BiosNeeded", "Unknown")
 	If $EmulatorBiosNeeded = "1" Then $EmulatorBiosNeeded = "Yes"
 	If $EmulatorBiosNeeded = "0" Then $EmulatorBiosNeeded = "No"
-	If $EmulatorBiosNeeded = "" Then $EmulatorBiosNeeded = "?"
 	GUICtrlSetData($EmulatorBios, $EmulatorBiosNeeded)
 
 	$EmulatorLastCheckData = IniRead($EDCFolderCache & "emulator_info.ini", "INFO", "LastCheck", "Unknown")
 	$EmulatorCompleteData = IniRead($EDCFolderCache & "emulator_info.ini", "INFO", "CompleteFlag", "Unknown")
+	If $EmulatorCompleteData  = "1" Then $EmulatorCompleteData = "Yes"
+	If $EmulatorCompleteData = "0" Then $EmulatorCompleteData = "No"
 	If $EmulatorLastCheckData = "" Then $EmulatorLastCheckData = "Unknown"
 	If $EmulatorCompleteData = "" Then $EmulatorCompleteData = "Unknown"
 
@@ -286,7 +286,7 @@ If $SelectedEmulator <> $OldEmulator And $SelectedEmulator <> "" Then ; User cli
 	GUICtrlSetData($EmulatorNotes, IniRead($EDCFolderCache & "emulator_info.ini", "EMULATOR", "Notes", "-"))
 	GUICtrlSetImage($EmulatorImage, $EDCFolderCache & "emulator_screen_01.jpg")
 	GUICtrlSetImage($EmulatorLogo, "")
-	If FileExists($EDCFolderCache & "emulator_logo.png") Then GUICtrlSetImage($EmulatorLogo, $EDCFolderCache & "emulator_logo.png")
+
 	If FileExists($EDCFolderCache & "emulator_logo.jpg") Then GUICtrlSetImage($EmulatorLogo, $EDCFolderCache & "emulator_logo.jpg")
 	ToolTip("", @DesktopWidth/2, @DesktopHeight/2, "EDC", 1, 6)
 
@@ -329,7 +329,7 @@ GUICtrlSetFont(-1, 7, 400, 0, "Verdana")
 GUICtrlSetColor(-1, 0x000080)
 Global $UnpackBar = GUICtrlCreateProgress(312, 712, 246, 17, BitOR($PBS_SMOOTH,$WS_BORDER))
 Global $DownloadBar = GUICtrlCreateProgress(64, 712, 246, 17, BitOR($PBS_SMOOTH,$WS_BORDER))
-GUICtrlSetColor(-1, 0x3399FF)
+GUICtrlSetColor(-1, 0x0078D7)
 Global $ExitButton = GUICtrlCreateButton("EXIT", 816, 728, 81, 33, BitOR($BS_MULTILINE,$BS_NOTIFY))
 GUICtrlSetFont(-1, 10, 800, 0, "Verdana")
 GUICtrlSetTip(-1, "Exit EDC.")
@@ -361,6 +361,8 @@ Global $ConfigButton = GUICtrlCreateButton("CONFIGURE", 904, 688, 97, 73, BitOR(
 GUICtrlSetFont(-1, 9, 800, 0, "Verdana")
 GUICtrlSetState(-1, $GUI_DISABLE)
 GUICtrlSetTip(-1, "Re-Configure Emulator with ECC.")
+Global $CheckGlobalFolder = GUICtrlCreateCheckbox("Use GLOBAL folder (recommended)", 560, 672, 225, 17)
+GUICtrlSetFont(-1, 8, 400, 0, "Verdana")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 Global $SelectVersionGroup = GUICtrlCreateGroup(" select version ", 8, 0, 1113, 345, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
 GUICtrlSetFont(-1, 9, 800, 2, "Verdana")
@@ -387,6 +389,9 @@ GUISetIcon(@ScriptDir & "\emuDownloadCenter.ico", "", $EDCVERSION) ;Set proper i
 GUICtrlSetData($SelectVersionGroup, " select version (" & $SelectedEmulator & ")")
 GUICtrlSetData($EDCInfoLabel2, "emuDownloadCenter v" & $EDCScriptVersion) ;Set version in the infolabel.
 GUICtrlSetData($InstallButton, "INSTALL")
+
+Global $GlobalFolderFlag = IniRead($EDCSettingsINI, "SETTINGS", "GlobalFolder", "1")
+If $GlobalFolderFlag = "1" Then GUICtrlSetState($CheckGlobalFolder, $GUI_CHECKED)
 
 GUISetState(@SW_SHOW, $EDCVERSION)
 
@@ -472,15 +477,16 @@ While 1
 			GUICtrlSetState($ConfigButton, $GUI_DISABLE) ;Enable the config button.
 			EmulatorConfig()
 
+		Case $CheckGlobalFolder
+			If GUICtrlRead($CheckGlobalFolder) = $GUI_CHECKED Then IniWrite($EDCSettingsINI, "SETTINGS", "GlobalFolder", "1")
+			If GUICtrlRead($CheckGlobalFolder) = $GUI_UNCHECKED Then IniWrite($EDCSettingsINI, "SETTINGS", "GlobalFolder", "0")
+			UpdateEmuVariables()
+			ConfigButtons()
+
 		Case $BackButton
 			GUIDelete($EDCVERSION) ;Close the SelectVersion GUI.
 			EmuSelect()
 
-		Case _IsPressed("26") ;UP arrow key pressed.
-			UpdateEmuVariables()
-
-		Case _IsPressed("28") ;DOWN arrow key pressed.
-			UpdateEmuVariables()
 
 		Case $GUI_EVENT_PRIMARYDOWN ;Left mouse button prerssed.
 			UpdateEmuVariables()
@@ -489,6 +495,9 @@ While 1
 			UpdateEmuVariables()
 	EndSwitch
 
+	If _IsPressed("26") Then UpdateEmuVariables() ;UP arrow key pressed.
+	If _IsPressed("28") Then UpdateEmuVariables() ;DOWN arrow key pressed.
+
 	If WinActive($EDCVERSION) Then ;Catch ESCAPE in EDC but only when the EDC window is active, this way ESC won't be blocked for other applications.
 		HotKeySet("{ESC}", "CatchEscape")
 	Else
@@ -496,7 +505,7 @@ While 1
 	EndIf
 
 Sleep(20)
-WEnd
+Wend
 
 EndFunc ;VersionSelect()
 
@@ -505,14 +514,24 @@ $SelectedRow = _GUICtrlListView_GetItemTextString($VersionList) ;Get current row
 $RowData = StringSplit($SelectedRow, "|")
 Global $SelectedVersion = $Rowdata[1] ;Get emulator version from the list.
 Global $SelectedOSEmulatorArch = $Rowdata[3] ;Get emulator architecture from the list.
-Global $EmuInstallPathShort = "ecc-user\" & $RomEccId & "\emus\" & $SelectedEmulatorShortName & "_" & $SelectedVersion
+
+;Read settings
+Global $GlobalFolderFlag = IniRead($EDCSettingsINI, "SETTINGS", "GlobalFolder", "1")
+If $GlobalFolderFlag = "1" Then
+	Global $EmuInstallPathShort = "\ecc-user\#_GLOBAL\emus\" & $SelectedEmulatorShortName & "_" & $SelectedVersion
+Else
+	Global $EmuInstallPathShort = "\ecc-user\" & $RomEccId & "\emus\" & $SelectedEmulatorShortName & "_" & $SelectedVersion
+EndIf
+
 Global $EmuInstallPathFull = $eccInstallPath & "\" & $EmuInstallPathShort
 Global $UnpackSize = IniRead($EDCEmulatorDownloadsINI, $SelectedVersion, "INFO_UnpackedSize", "")
 Global $ExecutableFile = IniRead($EDCEmulatorDownloadsINI, $SelectedVersion, "EMU_ExecutableFile", "")
-Global $EmuInstallPathFull = $eccInstallPath & "\ecc-user\" & $RomEccId & "\emus\" & $SelectedEmulatorShortName & "_" & $SelectedVersion
 Global $EmuConfigFile = $eccInstallPath & "\ecc-system\system\ecc_" & $RomEccId & "_user.ini" ;Determine emulator config INI file.
 
-If $SelectedVersion <> $OldVersion And $SelectedVersion <> "" Then ; User clicked on another one.
+;Always refresh because of config options.
+GUICtrlSetData($EmuInstallPathLabel, $EmuInstallPathShort)
+
+If $SelectedVersion <> $OldVersion And $SelectedVersion <> "" Then ; User clicked on another version.
 	;Reset BARS/GUI/BUTTONS
 	GUICtrlSetState($InstallButton, $GUI_DISABLE) ;Disable the install button.
 	GUICtrlSetState($ConfigButton, $GUI_DISABLE) ;Disable the config button.
@@ -552,21 +571,27 @@ If $SelectedVersion <> $OldVersion And $SelectedVersion <> "" Then ; User clicke
 		GUICtrlSetData($ArchiveContentsText, "Not present/available")
 	EndIf
 
-	GUICtrlSetData($EmuInstallPathLabel, $EmuInstallPathShort)
+	ConfigButtons()
 
-	;Check if emulator has already been installed.
-	If FileExists($eccInstallPath & "\" & $EmuInstallPathShort & "\" & $ExecutableFile) Then
-		GUICtrlSetData($InstallButton, "RE-INSTALL?")
-		GUICtrlSetState($ConfigButton, $GUI_ENABLE) ;Enable the config button.
-	EndIf
-
-	GUICtrlSetState($InstallButton, $GUI_ENABLE) ;Enable the installbutton.
 	$Oldversion = $SelectedVersion ;Save the version the user has clicked before.
 	Message("delete")
 EndIf
 
 EndFunc ;UpdateEmuVariables
 
+
+Func ConfigButtons()
+;Check if emulator has already been installed.
+If FileExists($eccInstallPath & "\" & $EmuInstallPathShort & "\" & $ExecutableFile) Then
+	GUICtrlSetData($InstallButton, "RE-INSTALL?")
+	GUICtrlSetState($ConfigButton, $GUI_ENABLE) ;Enable the config button.
+Else
+	GUICtrlSetData($InstallButton, "INSTALL")
+	GUICtrlSetState($ConfigButton, $GUI_DISABLE) ;Enable the config button.
+EndIf
+
+GUICtrlSetState($InstallButton, $GUI_ENABLE) ;Enable the installbutton.
+EndFunc ;ConfigButtons()
 
 Func EmulatorInstall()
 ; DOWNLOAD -----------------------------------------------
@@ -698,49 +723,59 @@ IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "active", Chr(34) & "1" & Chr(34))
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "path", Chr(34) & $EmuInstallPathFull & "\" & $ExecutableFile & Chr(34))
 
 Global $CFG_param = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_param", "X") ;Read-out VERSION specific information.
+If $CFG_param = "X" Then $CFG_param = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_param", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_param = "X" Then $CFG_param = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_param", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "param", Chr(34) & $CFG_param & Chr(34))
 
 Global $CFG_escape = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_escape", "X") ;Read-out VERSION specific information.
+If $CFG_escape = "X" Then $CFG_escape = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_escape", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_escape = "X" Then $CFG_escape = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_escape", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "escape", Chr(34) & $CFG_escape & Chr(34))
 
 Global $CFG_win8char = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_win8char", "X") ;Read-out VERSION specific information.
+If $CFG_win8char = "X" Then $CFG_win8char = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_win8char", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_win8char = "X" Then $CFG_win8char = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_win8char", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "win8char", Chr(34) & $CFG_win8char & Chr(34))
 
 Global $CFG_useCueFile = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_useCueFile", "X") ;Read-out VERSION specific information.
+If $CFG_useCueFile = "X" Then $CFG_useCueFile = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_useCueFile", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_useCueFile = "X" Then $CFG_useCueFile = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_useCueFile", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "useCueFile", Chr(34) & $CFG_useCueFile & Chr(34))
 
 Global $CFG_filenameOnly = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_filenameOnly", "X") ;Read-out VERSION specific information.
+If $CFG_filenameOnly = "X" Then $CFG_filenameOnly = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_filenameOnly", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_filenameOnly = "X" Then $CFG_filenameOnly = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_filenameOnly", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "filenameOnly", Chr(34) & $CFG_filenameOnly & Chr(34))
 
 Global $CFG_noExtension = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_noExtension", "X") ;Read-out VERSION specific information.
+If $CFG_noExtension = "X" Then $CFG_noExtension = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_noExtension", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_noExtension = "X" Then $CFG_noExtension = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_noExtension", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "noExtension", Chr(34) & $CFG_noExtension & Chr(34))
 
 Global $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_executeInEmuFolder", "X") ;Read-out VERSION specific information.
+If $CFG_executeInEmuFolder = "X" Then $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_executeInEmuFolder", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_executeInEmuFolder = "X" Then $CFG_executeInEmuFolder = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_executeInEmuFolder", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "executeInEmuFolder", Chr(34) & $CFG_executeInEmuFolder & Chr(34))
 
 Global $CFG_enableEccScript = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableEccScript", "X") ;Read-out VERSION specific information.
+If $CFG_enableEccScript = "X" Then $CFG_enableEccScript = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_enableEccScript", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_enableEccScript = "X" Then $CFG_enableEccScript = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableEccScript", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableEccScript", Chr(34) & $CFG_enableEccScript & Chr(34))
 
 Global $CFG_enableZipUnpackActive = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableZipUnpackActive", "X") ;Read-out VERSION specific information.
+If $CFG_enableZipUnpackActive = "X" Then $CFG_enableZipUnpackActive = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_enableZipUnpackActive", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_enableZipUnpackActive = "X" Then $CFG_enableZipUnpackActive = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableZipUnpackActive", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackActive", Chr(34) & $CFG_enableZipUnpackActive & Chr(34))
 
 Global $CFG_enableZipUnpackAll = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "enableZipUnpackAll", "X") ;Read-out VERSION specific information.
+If $CFG_enableZipUnpackAll = "X" Then $CFG_enableZipUnpackAll = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_enableZipUnpackAll", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_enableZipUnpackAll = "X" Then $CFG_enableZipUnpackAll = IniRead($EDCEmulatorConfigINI, "GLOBAL", "enableZipUnpackAll", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackAll", Chr(34) & $CFG_enableZipUnpackAll & Chr(34))
 
 Global $CFG_enableZipUnpackSkip = IniRead($EDCEmulatorConfigINI, $SelectedVersion, "CFG_enableZipUnpackSkip", "X") ;Read-out VERSION specific information.
+If $CFG_enableZipUnpackSkip = "X" Then $CFG_enableZipUnpackSkip = IniRead($EDCEmulatorConfigINI, $RomEccId, "CFG_enableZipUnpackSkip", "X") ;Read-out PLATFORM confguration for this emulator.
 If $CFG_enableZipUnpackSkip = "X" Then $CFG_enableZipUnpackSkip = IniRead($EDCEmulatorConfigINI, "GLOBAL", "CFG_enableZipUnpackSkip", "") ;Read-out GLOBAL confguration for this emulator.
 IniWrite($EmuConfigFileUser, "EMU.GLOBAL", "enableZipUnpackSkip", Chr(34) & $CFG_enableZipUnpackSkip & Chr(34))
-
 
 GUICtrlSetData($ConfigureBar, "100")
 GUICtrlSetData($ConfigureStatusLabel, "Succesfull!")

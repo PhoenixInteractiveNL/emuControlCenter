@@ -1024,6 +1024,21 @@ class GuiPopConfig extends GladeXml {
 		$this->confEccStatusLogOpen->set_label(I18N::get('popupConfig', 'confEccStatusLogOpen'));
 		$this->confEccSaveViewSettingsLabel->set_label(I18N::get('popupConfig', 'confEccSaveViewSettings'));
 		$this->confEccSilentParsingLabel->set_label(I18N::get('popupConfig', 'confEccSilentParsing'));
+		$this->startConfSoundHdl->set_label(I18N::get('popupConfig', 'startConfSoundHdl'));
+		$this->startConfOptHdl->set_markup('<b>'.I18N::get('popupConfig', 'startConfOptHdl').'</b>');
+		$this->startConfUpdateLabel->set_label(I18N::get('popupConfig', 'startConfUpdate'));
+		$this->startConfMinimizeLabel->set_label(I18N::get('popupConfig', 'startConfMinimize'));
+		$this->startConfDeleteUnpackedLabel->set_label(I18N::get('popupConfig', 'startConfDeleteUnpacked'));
+		$this->startConfSoundSelect->set_label(I18N::get('popupConfig', 'startConfSoundSelect'));
+		$this->startConfSoundPreview->set_label(I18N::get('global', 'preview'));
+
+		// Third Party
+		$this->extProgDaemontoolsButton->set_label(I18N::get('popupConfig', 'extProgDaemontoolsButton'));
+		$this->extProgJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorLabel'));
+		$this->startConfJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'startConfJoyEmulatorLabel'));
+		$this->extProgJoyEmulatorbutton->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorbutton'));
+		$this->extProgJoyEmulatorParamLabel->set_text(I18N::get('popupConfig', 'extProgJoyEmulatorParamLabel'));
+
 		// ECC v1.13 Build 4-8
 		$this->eccVideoPlayer_enableLabel->set_label(I18N::get('popupConfig', 'eccVideoPlayer_enable'));
 		$this->eccVideoPlayer_soundLabel->set_label(I18N::get('popupConfig', 'eccVideoPlayer_sound'));
@@ -1046,7 +1061,7 @@ class GuiPopConfig extends GladeXml {
 		// ECC 1.20
 		$this->DatabaseFolderLabel->set_text(I18N::get('popupConfig', 'DatabaseFolderLabel'));
 		$this->DatabaseFolderButton->set_label(I18N::get('popupConfig', 'DatabaseFolderButton'));
-
+		
 		// Load in other variables like textboxes
 		$iniManager = FACTORY::get('manager/IniFile');
 		$this->globalIni = $iniManager->getIniGlobalWithoutPlatforms();
@@ -1062,6 +1077,7 @@ class GuiPopConfig extends GladeXml {
 		$this->extProgDaemontoolsTextbox->set_text($iniManager->getKey('DAEMONTOOLS', 'daemontools_exe')); // ECC v1.13 Build 12
 		$this->DatabaseFolderTextbox->set_text($iniManager->getKey('USER_DATA', 'database_path')); // ECC v1.20
 		$this->extProgJoyEmulatorTextbox->set_text($iniManager->getKey('USER_DATA', 'joyemulator_exe'));  // ECC v1.21
+		$this->extProgJoyEmulatorParamTextbox->set_text($iniManager->getKey('USER_DATA', 'joyemulator_param'));  // ECC v1.22
 		
 		$text_cuttoff = $iniManager->getKey('USER_SWITCHES', 'text_cuttoff');
 		if ($text_cuttoff < 0 or $text_cuttoff > 100 or $text_cuttoff == "" or !is_numeric($text_cuttoff)) { //set default
@@ -1225,6 +1241,7 @@ class GuiPopConfig extends GladeXml {
 		# External Programs
 		$this->globalIni['DAEMONTOOLS']['daemontools_exe'] = $this->extProgDaemontoolsTextbox->get_text();
 		$this->globalIni['USER_DATA']['joyemulator_exe'] = $this->extProgJoyEmulatorTextbox->get_text();
+		$this->globalIni['USER_DATA']['joyemulator_param'] = $this->extProgJoyEmulatorParamTextbox->get_text();
 		
 		# Video settings
 		$this->globalIni['VIDEOPLAYER']['eccVideoPlayer_enable'] = $this->eccVideoPlayer_enable->get_active();
@@ -1543,20 +1560,6 @@ class GuiPopConfig extends GladeXml {
 		$this->startConfSoundPreview->connect_simple_after('clicked', array($this, 'onButtonPreviewSound'));
 		$this->startConfSoundCheck->connect_simple_after('toggled', array($this, 'updateEccSoundState'));
 
-		$this->startConfSoundHdl->set_label(I18N::get('popupConfig', 'startConfSoundHdl'));
-		$this->startConfOptHdl->set_markup('<b>'.I18N::get('popupConfig', 'startConfOptHdl').'</b>');
-		$this->startConfUpdateLabel->set_label(I18N::get('popupConfig', 'startConfUpdate'));
-		$this->startConfMinimizeLabel->set_label(I18N::get('popupConfig', 'startConfMinimize'));
-		$this->startConfDeleteUnpackedLabel->set_label(I18N::get('popupConfig', 'startConfDeleteUnpacked'));
-		$this->startConfSoundSelect->set_label(I18N::get('popupConfig', 'startConfSoundSelect'));
-		$this->startConfSoundPreview->set_label(I18N::get('global', 'preview'));
-
-		// Third Party
-		$this->extProgDaemontoolsButton->set_label(I18N::get('popupConfig', 'extProgDaemontoolsButton'));
-		$this->extProgJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorLabel'));
-		$this->startConfJoyEmulatorLabel->set_label(I18N::get('popupConfig', 'startConfJoyEmulatorLabel'));
-		$this->extProgJoyEmulatorbutton->set_label(I18N::get('popupConfig', 'extProgJoyEmulatorbutton'));
-		
 		$iniManager = FACTORY::get('manager/IniFile');
 		$sectionExists = $iniManager->getKey('ECC_STARTUP');
 		

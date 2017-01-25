@@ -1,11 +1,11 @@
 <?php
 $version = '1.22';
-$build = '01';
+$build = '02';
 $description = '1.22';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 
 $autor = 'Sebastiaan Ebeltjes(NL) Andreas Scheibel(DE)';
-$date = "2016.12.23";
+$date = "2017.01.15";
 
 $eccConfig = array(
 	'ecc_release' => array(

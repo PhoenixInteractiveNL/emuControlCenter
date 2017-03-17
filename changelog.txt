@@ -1,3 +1,9 @@
+UPDATE 00638
+- Added platforms
+  - Videoton TV-Computer
+  - Chip-8
+- Updated Interton logo to the correct one!
+
 UPDATE 00637
 - CORE
   - Added support for joystick emulator commandline parameters!

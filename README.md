@@ -1,6 +1,5 @@
-﻿--------------------------------------------------------------------------------
-emuControlCenter - Console/Computer Rom-Manager & Frontend (Windows)
---------------------------------------------------------------------------------
+﻿emuControlCenter - Console/Computer Rom-Manager & Frontend (Windows)
+***
 
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_122.png)
 

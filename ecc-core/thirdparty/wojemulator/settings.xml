@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Application settings-->
+<Settings>
+  <MainSettings>
+    <Path></Path>
+    <Language>0</Language>
+    <Mode>Mapping</Mode>
+    <Interface>DirectInput</Interface>
+    <StartMinimized>Normal</StartMinimized>
+    <Autoconnect>Yes</Autoconnect>
+    <Radio>
+      <ChannelIndex>0</ChannelIndex>
+      <Mute>0</Mute>
+      <Volume>60</Volume>
+    </Radio>
+    <Usage>4,5</Usage>
+    <EmergencyKey>PrintScreen</EmergencyKey>
+    <EmergencyKeyPollingRate>2000</EmergencyKeyPollingRate>
+  </MainSettings>
+</Settings>

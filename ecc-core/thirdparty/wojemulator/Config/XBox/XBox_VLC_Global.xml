@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Joystick settings and mapping-->
+<Configuration>
+  <Settings>
+    <Interface>XInput</Interface>
+    <NumOfDevices>1</NumOfDevices>
+    <Device0></Device0>
+    <ButtonsPollingRate>10</ButtonsPollingRate>
+    <AxesPollingRate>10</AxesPollingRate>
+    <AxisThresholdFrom>25000</AxisThresholdFrom>
+    <AxisThresholdTo>40000</AxisThresholdTo>
+    <TriggerLeftFrom>25000</TriggerLeftFrom>
+    <TriggerLeftTo>40000</TriggerLeftTo>
+    <TriggerRightFrom>25000</TriggerRightFrom>
+    <TriggerRightTo>40000</TriggerRightTo>
+    <StickLeftXFrom>25000</StickLeftXFrom>
+    <StickLeftXTo>40000</StickLeftXTo>
+    <StickLeftYFrom>25000</StickLeftYFrom>
+    <StickLeftYTo>40000</StickLeftYTo>
+    <StickRightXFrom>25000</StickRightXFrom>
+    <StickRightXTo>40000</StickRightXTo>
+    <StickRightYFrom>25000</StickRightYFrom>
+    <StickRightYTo>40000</StickRightYTo>
+    <Sensitivity1AxisX>30</Sensitivity1AxisX>
+    <Sensitivity1AxisY>30</Sensitivity1AxisY>
+    <Sensitivity2AxisX>1</Sensitivity2AxisX>
+    <Sensitivity2AxisY>1</Sensitivity2AxisY>
+    <Sound>0</Sound>
+    <ExtEnter>0</ExtEnter>
+    <Toggles>0</Toggles>
+    <ExclusiveMode>False</ExclusiveMode>
+    <HandleFailures>False</HandleFailures>
+  </Settings>
+  <Mapping>
+    <Item0>
+      <Src>Joystick0 Button X</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item0>
+    <Item1>
+      <Src>Joystick0 Button X</Src>
+      <Dest>Keyboard Space</Dest>
+      <Action>Play \ Pause</Action>
+    </Item1>
+    <Item2>
+      <Src>Joystick0 D-pad Right</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item2>
+    <Item3>
+      <Src>Joystick0 D-pad Right</Src>
+      <Dest>Keyboard Right</Dest>
+      <Action>Next</Action>
+    </Item3>
+    <Item4>
+      <Src>Joystick0 D-pad Left</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item4>
+    <Item5>
+      <Src>Joystick0 D-pad Left</Src>
+      <Dest>Keyboard Left</Dest>
+      <Action>Previous</Action>
+    </Item5>
+    <Item6>
+      <Src>Joystick0 Button Back</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item6>
+    <Item7>
+      <Src>Joystick0 Button Back</Src>
+      <Dest>Keyboard W</Dest>
+      <Action>Clear Playlist</Action>
+    </Item7>
+    <Item8>
+      <Src>Joystick0 Button A</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item8>
+    <Item9>
+      <Src>Joystick0 Button A</Src>
+      <Dest>Keyboard S</Dest>
+      <Action>Stop</Action>
+    </Item9>
+    <Item10>
+      <Src>Joystick0 Stick Left Y [+]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item10>
+    <Item11>
+      <Src>Joystick0 Stick Left Y [+]</Src>
+      <Dest>Keyboard Up</Dest>
+      <Action>VLC Volume Up</Action>
+    </Item11>
+    <Item12>
+      <Src>Joystick0 Stick Left Y [-]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item12>
+    <Item13>
+      <Src>Joystick0 Stick Left Y [-]</Src>
+      <Dest>Keyboard Down</Dest>
+      <Action>VLC Volume Down</Action>
+    </Item13>
+    <Item14>
+      <Src>Joystick0 Stick Right X</Src>
+      <Dest>Mouse Axis X</Dest>
+      <Action>Mouse X Axis</Action>
+    </Item14>
+    <Item15>
+      <Src>Joystick0 Stick Right Y</Src>
+      <Dest>Mouse Axis Y Inverted</Dest>
+      <Action>Mouse Y Axis</Action>
+    </Item15>
+    <Item16>
+      <Src>Joystick0 Bumper Right</Src>
+      <Dest>Keyboard VolumeUp</Dest>
+      <Action>Sys Volume Up</Action>
+    </Item16>
+    <Item17>
+      <Src>Joystick0 Bumper Left</Src>
+      <Dest>Keyboard VolumeDown</Dest>
+      <Action>Sys Volume Down</Action>
+    </Item17>
+    <Item18>
+      <Src>Joystick0 Trigger Right</Src>
+      <Dest>Mouse Left</Dest>
+      <Action>Left Click</Action>
+    </Item18>
+    <Item19>
+      <Src>Joystick0 Trigger Left</Src>
+      <Dest>Mouse Right</Dest>
+      <Action>Right Click</Action>
+    </Item19>
+  </Mapping>
+</Configuration>

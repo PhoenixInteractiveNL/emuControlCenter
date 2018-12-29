@@ -33,7 +33,7 @@ AutoItSetOption("WinTitleMatchMode",3)
 ; -------------------------------------
 ; Define baked-in variables
 ; -------------------------------------
-Global $ecc_file_version =				"3.0.0.4"
+Global $ecc_file_version =				"3.0.0.5"
 Global $ecc_messagebox_title =			"ECC"
 Global $ecc_php_file = 					@Scriptdir & "\ecc-system\ecc.php"
 Global $ecc_php_file_q = 				Chr(34) & $ecc_php_file & Chr(34)
@@ -103,8 +103,8 @@ Global $ecc_external_JoyEmulator =		IniRead($ecc_config_file_general_user, "USER
 Global $ecc_external_JoyEmulator_param =IniRead($ecc_config_file_general_user, "USER_DATA", "joyemulator_param", "")
 
 ; Set recursive path to full (once)
-If $ecc_external_JoyEmulator = "\ecc-core\thirdparty\wojemulator\WoJEmulatorStandard.exe" Then
-	$ecc_external_JoyEmulator = @Scriptdir & "\ecc-core\thirdparty\wojemulator\WoJEmulatorStandard.exe"
+If $ecc_external_JoyEmulator = "\ecc-core\thirdparty\wojemulator\WoJKeyboardAndMouseEmulator.exe" Then
+	$ecc_external_JoyEmulator = @Scriptdir & "\ecc-core\thirdparty\wojemulator\WoJKeyboardAndMouseEmulator.exe"
 	IniWrite($ecc_config_file_general_user, "USER_DATA", "joyemulator_exe", Chr(34) & $ecc_external_JoyEmulator & Chr(34))
 EndIf
 

@@ -5,1470 +5,2470 @@
 		<English> already assigned!</English>
 		<Russian> уже назначено!</Russian>
 		<German>Bereits zugewiesen!</German>
+		<Spanish>Ya ha sido asignado!</Spanish>
 	</record>
 	<record>
 		<ID>2</ID>
 		<English>2. Device</English>
 		<Russian>2. Устройство</Russian>
 		<German>2. Gerät</German>
+		<Spanish>Dispositivo</Spanish>
 	</record>
 	<record>
 		<ID>3</ID>
 		<English>2. Select Device</English>
 		<Russian>2. Выберите устройство</Russian>
 		<German>2. Gerät wählen</German>
+		<Spanish>Selección dispositivo</Spanish>
 	</record>
 	<record>
 		<ID>4</ID>
 		<English>About</English>
 		<Russian>О программе</Russian>
 		<German>Über...</German>
-		<Spanish>acerca de</Spanish>
+		<Spanish>Acerca de</Spanish>
 	</record>
 	<record>
 		<ID>5</ID>
 		<English>Action in the game</English>
 		<Russian>Действие в игре</Russian>
 		<German>Aktion im Spiel</German>
+		<Spanish>Acción en juego</Spanish>
 	</record>
 	<record>
 		<ID>6</ID>
 		<English>Add Control</English>
 		<Russian>Добавить Элемент Управления</Russian>
 		<German>Befehl hinzufügen</German>
+		<Spanish>Añadir control</Spanish>
 	</record>
 	<record>
 		<ID>7</ID>
 		<English>Added Controls</English>
 		<Russian>Элементы Управления</Russian>
 		<German>Hinzugefügte Befehle</German>
+		<Spanish>Controles añadidos</Spanish>
 	</record>
 	<record>
 		<ID>8</ID>
 		<English>Adjust sensitivity of X mouse axis here. (1-100)</English>
 		<Russian>Регулирует чувствительность оси мыши X. (1-100)</Russian>
 		<German>X-Mausachsen-Sensitivität einstellen (1-100)</German>
+		<Spanish>Ajustar sensibilidad eje X ratón aquí (1-100)</Spanish>
 	</record>
 	<record>
 		<ID>9</ID>
 		<English>Adjust sensitivity of Y mouse axis here. (1-100)</English>
 		<Russian>Регулирует чувствительность оси мыши Y. (1-100)</Russian>
 		<German>Y-Mausachsen-Sensitivität einstellen (1-100)</German>
+		<Spanish>Ajustar sensibilidad eje Y ratón aquí (1-100)</Spanish>
 	</record>
 	<record>
 		<ID>10</ID>
 		<English>Adjusts sensitivity of Mouse Axis X when&#10; it is assigned on some Orientation Axis</English>
 		<Russian>Регулирует чувствительность Оси Мыши X когда&#10; она назначена на одну из осей ориентации</Russian>
 		<German>Legt die Sensivität der Mausache X fest, wenn&#10;  sie einer Richtungsachse zugewiesen ist</German>
+		<Spanish>Ajusta sensibilidad eje X del ratón cuando&#10; es asignado a un eje de orientación</Spanish>
 	</record>
 	<record>
 		<ID>11</ID>
 		<English>Adjusts sensitivity of Mouse Axis Y when&#10; it is assigned on some Orientation Axis</English>
 		<Russian>Регулирует чувствительность Оси Мыши Y когда&#10; она назначена на одну из осей ориентации</Russian>
 		<German>Legt die Sensivität der Maausache Y fest, wenn&#10; sie einer Richtungsachse zugewiesen ist</German>
+		<Spanish>Ajustar sensibilidad eje Y del ratón cuando&#10; es asignado a un eje de orientación</Spanish>
 	</record>
 	<record>
 		<ID>12</ID>
 		<English>Assign</English>
 		<Russian>Назначить</Russian>
 		<German>Zuweisen</German>
+		<Spanish>Asignar</Spanish>
 	</record>
 	<record>
 		<ID>13</ID>
 		<English>Assigned Controls</English>
 		<Russian>Назначенные Элементы Управления</Russian>
 		<German>Zugewiesene Befehle</German>
+		<Spanish>Controles asignados</Spanish>
 	</record>
 	<record>
 		<ID>14</ID>
 		<English>Assignment Wizard</English>
 		<Russian>Мастер Настройки</Russian>
 		<German>Zuweisungs-Assistent</German>
+		<Spanish>Asistente de asignación</Spanish>
 	</record>
 	<record>
 		<ID>15</ID>
 		<English>Autoconnect</English>
 		<Russian>Автоподключение</Russian>
 		<German>Automatisch Verbinden</German>
+		<Spanish>Autoconexión</Spanish>
 	</record>
 	<record>
 		<ID>16</ID>
 		<English>Automatically connects first gaming controller to&#10;emulator when you connect it to USB-port</English>
 		<Russian>Автоматически подключает первое игровое устройство к&#10;эмулятору при подключении к USB-порту.</Russian>
 		<German>Verbindet automatisch den ersten Controller &#10;der per USB-port angeschlossen wird,&#10;mit dem Emulator.</German>
+		<Spanish>Automático conecta el primer controlador &#10; de juego al emulador al conectar al puerto USB.</Spanish>
 	</record>
 	<record>
 		<ID>17</ID>
 		<English>Autostart</English>
 		<Russian>Автостарт</Russian>
 		<German>Autostart</German>
+		<Spanish>Autostart</Spanish>
 	</record>
 	<record>
 		<ID>18</ID>
 		<English>Axes Deadzone</English>
 		<Russian>Мёртвая Зона Осей</Russian>
 		<German>Tot. Winkel Achsen</German>
+		<Spanish>Zona muerta ejes</Spanish>
 	</record>
 	<record>
 		<ID>19</ID>
 		<English>Axes Mapping</English>
 		<Russian>Назначение Осей</Russian>
 		<German>Achsenzuweisung</German>
+		<Spanish>Mapa de ejes</Spanish>
 	</record>
 	<record>
 		<ID>20</ID>
 		<English>Axis X</English>
 		<Russian>Ось X</Russian>
 		<German>X-Achse</German>
+		<Spanish>Eje X</Spanish>
 	</record>
 	<record>
 		<ID>21</ID>
 		<English>Axis Y</English>
 		<Russian>Ось Y</Russian>
 		<German>Y-Achse</German>
+		<Spanish>Eje Y</Spanish>
 	</record>
 	<record>
 		<ID>22</ID>
 		<English>Back</English>
 		<Russian>Назад</Russian>
 		<German>Zurück</German>
+		<Spanish>Atrás</Spanish>
 	</record>
 	<record>
 		<ID>23</ID>
 		<English>Background Image Url</English>
 		<Russian>Url Фоновой Картинки</Russian>
 		<German>Hintergundbild-Url</German>
+		<Spanish>Imagen de fondo URL</Spanish>
 	</record>
 	<record>
 		<ID>24</ID>
 		<English>Brand Name:</English>
 		<Russian>Производитель:</Russian>
 		<German>Markenname:</German>
+		<Spanish>Nombre comer.:</Spanish>
 	</record>
 	<record>
 		<ID>25</ID>
 		<English>Button (No Repeat)</English>
 		<Russian>Кнопка (Без повтора)</Russian>
 		<German>Taste (Keine Wiederholung)</German>
+		<Spanish>Botón (no repetir)</Spanish>
 	</record>
 	<record>
 		<ID>26</ID>
 		<English>Button (Repeat)</English>
 		<Russian>Кнопка (С повтором)</Russian>
 		<German>Taste (Wiederholung)</German>
+		<Spanish>Botón (repetir)</Spanish>
 	</record>
 	<record>
 		<ID>27</ID>
 		<English>Button was not pressed!</English>
 		<Russian>Кнопка не была нажата!</Russian>
 		<German>Taste wurde nicht gedrückt!</German>
+		<Spanish>No ha presionado el botón!</Spanish>
 	</record>
 	<record>
 		<ID>28</ID>
 		<English>Buttons Mapping</English>
 		<Russian>Назначение кнопок</Russian>
 		<German>Tastenzuweisung</German>
+		<Spanish>Mapa de botones</Spanish>
 	</record>
 	<record>
 		<ID>29</ID>
 		<English>Cancel current configuration?</English>
 		<Russian>Отменить текущую конфигурацию?</Russian>
 		<German>Aktuelle Konfiguration verwerfen?</German>
+		<Spanish>¿Cancelar la configuración actual?</Spanish>
 	</record>
 	<record>
 		<ID>30</ID>
 		<English>Cannot save configuration, no devices connected!</English>
-		<Russian>Невозможно сохранить конфигурацию,&#10;ни одно из устройств не подключено!</Russian>
+		<Russian>Невозможно сохранить конфигурацию,&#10;джойстики не подключены!</Russian>
 		<German>Kein Gerät verbunden! Konfig. wird nicht gespeichert!</German>
+		<Spanish>No se puede salvar configuración, no hay dispositivos conectados!</Spanish>
 	</record>
 	<record>
 		<ID>31</ID>
 		<English>Choose a device.</English>
 		<Russian>Выберите устройство.</Russian>
 		<German>Gerät auswählen.</German>
+		<Spanish>Elegir dispositivo.</Spanish>
 	</record>
 	<record>
 		<ID>32</ID>
 		<English>Choose a device. Change the Interface&#10;if devices are not available.</English>
 		<Russian>Выберите устройство. Смените Интерфейс&#10;если нет доступных устройств.</Russian>
 		<German>Gerät auswählen. Interface ändern&#10;falls Geräte nicht verfügbar sind</German>
+		<Spanish>Elegir dispositivo. Cambio interface&#10; si dispositivos no están disponibles.</Spanish>
 	</record>
 	<record>
 		<ID>33</ID>
 		<English>Click to add a new control</English>
 		<Russian>Нажмите чтобы добавить новый&#10;элемент управления</Russian>
 		<German>Neuen Befehl hinzufügen</German>
+		<Spanish>Clic para añadir un nuevo control</Spanish>
 	</record>
 	<record>
 		<ID>34</ID>
 		<English>Click to choose a font for control</English>
 		<Russian>Нажмите чтобы выберать шрифт текста&#10;для элемента управления</Russian>
 		<German>Klicken, um Befehl-Font zu wählen</German>
+		<Spanish>Clic para añadir un tipo de fuente para el control</Spanish>
 	</record>
 	<record>
 		<ID>35</ID>
 		<English>Click to choose the background&#10;color for whole screen if background&#10;URL is not assigned</English>
 		<Russian>Нажмите чтобы выберать цвет фона&#10;для всего экрана если URL&#10;фонового изображения не назначен</Russian>
 		<German>Klicken, um die Bildschirm-&#10;Hintergrundfarbezu wählen, wenn keine Hintergrund-URL&#10;definiert wurde</German>
+		<Spanish>Clic para elegir el color del fondo para toda&#10; la pantalla URL no está asignada</Spanish>
 	</record>
 	<record>
 		<ID>36</ID>
 		<English>Click to choose the background color for&#10;control if background URL is not assigned</English>
 		<Russian>Нажмите чтобы выберать цвет фона&#10;для элемента управления если URL&#10;фонового изображения не назначен</Russian>
 		<German>Klicken, um die Befehls-Hintergrundfarbe zu wählen, wenn keine Hintergrund-URL&#10;definiert wurde</German>
+		<Spanish>Clic para elegir un control para el color del fondo&#10; si URL del fondo no está asignada</Spanish>
 	</record>
 	<record>
 		<ID>37</ID>
 		<English>Click to choose the text color for control</English>
 		<Russian>Нажмите чтобы выберать цвет текста&#10;для элемента управления</Russian>
 		<German>Klicken, um Befehls-Textfarbe zu wählen</German>
+		<Spanish>Clic para elegir el color del texto para control</Spanish>
 	</record>
 	<record>
 		<ID>38</ID>
 		<English>Click to clear all the fields&#10;before creating a new control</English>
 		<Russian>Нажмите чтобы очистить все поля перед&#10;созданием нового элемента управления</Russian>
 		<German>Klicken, um vor Erstellen eines&#10;neuen Befehls  alle Felder zu löschen.</German>
+		<Spanish>Clic para limpiar campos antes&#10; de crear un nuevo control.</Spanish>
 	</record>
 	<record>
 		<ID>39</ID>
 		<English>Click to close the form, and then&#10;press Save button to save all these&#10;settings in the configuration file.</English>
 		<Russian>Нажмите чтобы закрыть форму, а потом&#10;нажмите кнопку Сохранить чтобы все эти настройки&#10;сохранились в файле конфигурации.</Russian>
 		<German>Klicken, um die Form zu wählen und&#10;Speicher-Taste drücken, um alle &#10;Einstellungen in der Konfigurationsdatei zu speichern.</German>
+		<Spanish>Clic para cerrar el formato, y presionar&#10; el botón Salvar para salvar estas asignaciones&#10; en el archivo de configuración.</Spanish>
 	</record>
 	<record>
 		<ID>40</ID>
 		<English>Click to modify the selected control</English>
 		<Russian>Нажмите чтобы отредактировать&#10;выбранный элемент управления</Russian>
 		<German>Klicke. um den gewählten Befehl zu ändern</German>
+		<Spanish>Clic para cambiar el control seleccionado</Spanish>
 	</record>
 	<record>
 		<ID>41</ID>
 		<English>Click to Preview the layout</English>
 		<Russian>Нажмите для предпросмотра схемы</Russian>
 		<German>Kicke für eine Layout-Vorschau</German>
+		<Spanish>Clic para vista previa del diseño</Spanish>
 	</record>
 	<record>
 		<ID>42</ID>
 		<English>Click to remove the selected control</English>
 		<Russian>Нажмите чтобы удалить выбранный&#10;элемент управления</Russian>
 		<German>Gewählte Vorschau entfernen</German>
+		<Spanish>Clic para eliminar el control seleccionado</Spanish>
 	</record>
 	<record>
 		<ID>43</ID>
 		<English>Click to Save layout as HTML on&#10;the PC, after connecting it will be&#10;sent to your mobile device</English>
 		<Russian>Нажмите чтобы сохранить схему на ПК&#10;в формате HTML, при подключении она будет&#10;отправлена на мобильное устройство</Russian>
 		<German>Klicke, um das Layout als HTML auf &#10;dem PC zu speichern, bei Verbinden des&#10;Mobilgeräts wird es darauf übertragen</German>
+		<Spanish>Clic para salvar el diseño como HTML&#10; en PC, después de conectar será&#10; enviado a tu dispositivo móvil.</Spanish>
 	</record>
 	<record>
 		<ID>44</ID>
 		<English>Close</English>
 		<Russian>Закрыть</Russian>
 		<German>Schließen</German>
+		<Spanish>Cerrar</Spanish>
 	</record>
 	<record>
 		<ID>45</ID>
 		<English>Color</English>
 		<Russian>Цвет</Russian>
 		<German>Farbe</German>
+		<Spanish>Color</Spanish>
 	</record>
 	<record>
 		<ID>46</ID>
 		<English>Configuration is not saved, save it?</English>
 		<Russian>Конфигурация не сохранена, сохранить?</Russian>
 		<German>Ungespeicherte Konfiguration! Jetzt speichen?</German>
+		<Spanish>Configuración no salvada, ¿desea salvarla?</Spanish>
 	</record>
 	<record>
 		<ID>47</ID>
 		<English>Configuration will be lost.&#10; Are you agree?</English>
 		<Russian>Конфигурация не будет сохранена. Вы согласны?</Russian>
 		<German>Konfiguration wird verworfen.&#10; Einverstanden?</German>
+		<Spanish>Configuración se perderá.&#10;  ¿De acuerdo?</Spanish>
 	</record>
 	<record>
 		<ID>48</ID>
 		<English>Configuration will be saved and shared&#10;with other owners of this device.&#10; Are you agree?</English>
 		<Russian>Конфигурация будет сохранена и доступна&#10;другим владельцам этого устройства.&#10;Вы согласны?</Russian>
 		<German>Konfiguration wird gespeichert und&#10; Besitzern gleicher Geräte Zur Verfügung gestellt.&#10; Einverstanden?</German>
+		<Spanish>La configuración se salvará/compartirá con otros propietarios del dispositivo. ¿De acuerdo?</Spanish>
 	</record>
 	<record>
 		<ID>49</ID>
 		<English>Connect joystick</English>
 		<Russian>Подключить джойстик</Russian>
 		<German>Joystick verbinden</German>
+		<Spanish>Conectar joystick</Spanish>
 	</record>
 	<record>
 		<ID>50</ID>
 		<English>Control with such a name already exists!</English>
 		<Russian>Элементы управления с таким&#10;именем уже присутствует!</Russian>
 		<German>Es gibt schon einen Befehl mit diesem Namen!</German>
+		<Spanish>Ya existe un control con ese nombre</Spanish>
 	</record>
 	<record>
 		<ID>51</ID>
 		<English>Controls have not been added!</English>
 		<Russian>Элементы управления не добавлены!</Russian>
 		<German>Keine Befehle hinzugefügt!</German>
+		<Spanish>Controles no añadidos</Spanish>
 	</record>
 	<record>
 		<ID>52</ID>
 		<English>Create new configuration file.</English>
 		<Russian>Создать новый файл конфигурации.</Russian>
 		<German>Neue Konfigurationsdatei erstellen.</German>
+		<Spanish>Crear nuevo archivo configuración.</Spanish>
 	</record>
 	<record>
 		<ID>53</ID>
 		<English>Disabling this option saves local&#10;bandwidth and improves performance.&#10;Enable it only if you are going&#10;to use Orientation sensor!</English>
 		<Russian>Отключение этой опции экономит локальный&#10;трафик и улучшает производительность.&#10;Включайте её только если будете&#10;использовать датчик Ориентации!</Russian>
 		<German>Abschalten dieser Option spart lokale Bandbreite&#10;und verbessert die Leistung.&#10;Aktivieren Sie sie nur, wenn sie den Bewegungssensor benutzen wollen!</German>
+		<Spanish>Desactivar esta opción salva el ancho&#10; de banda local y mejora el rendimiento.&#10; Activar solo si usa sensor de orientación¡</Spanish>
 	</record>
 	<record>
 		<ID>54</ID>
 		<English>Done</English>
 		<Russian>Готово</Russian>
 		<German>Fertig</German>
+		<Spanish>Hecho</Spanish>
 	</record>
 	<record>
 		<ID>55</ID>
 		<English>Don't use Z axis of orientation&#10;simultaneously with X and Y.&#10;Simplifies control of aircraft</English>
 		<Russian>Не использовать ось Z ориентации&#10;одновременно с осями X и Y.&#10;Упрощает управление самолётом</Russian>
 		<German>Benutzen Sie nicht  die Z-Richtungsachse&#10;gleichzeitig mit X  und Y.&#10; Das erleichtert die Flugzeugsteuerung.</German>
+		<Spanish>No usar el eje Z de orientación&#10; simultáneamente con X e Y.&#10; Simplifica el control del avión.</Spanish>
 	</record>
 	<record>
 		<ID>56</ID>
 		<English>Driving</English>
 		<Russian>Езда</Russian>
 		<German>Antrieb</German>
+		<Spanish>Condu.</Spanish>
 	</record>
 	<record>
 		<ID>57</ID>
 		<English>Duration (ms)</English>
 		<Russian>Длительность (мс)</Russian>
 		<German>Dauer (ms)</German>
+		<Spanish>Duración (ms)</Spanish>
 	</record>
 	<record>
 		<ID>58</ID>
 		<English>e.g: Vibrate,Pause,Vibrate,Pause,Vibrate…</English>
 		<Russian>пример: Вибр,Пауза,Вибр,Пауза,Вибр...</Russian>
 		<German>z.B: Vibrieren, Pausieren, Vibrieren, Pausieren, usw.</German>
+		<Spanish>ej.: Vibración, Pausa, Vibración, Pausa, Vibración….</Spanish>
 	</record>
 	<record>
 		<ID>59</ID>
 		<English>Effect</English>
 		<Russian>Эффект</Russian>
 		<German>Effekt</German>
+		<Spanish>Efecto</Spanish>
 	</record>
 	<record>
 		<ID>60</ID>
 		<English>E-mail address is not defined!</English>
 		<Russian>Адрес электронной почты не определён!</Russian>
 		<German>Keine E-Mailadresse angegeben!</German>
+		<Spanish>Dirección de e-mail no definida!</Spanish>
 	</record>
 	<record>
 		<ID>61</ID>
 		<English>Enter the background image URL&#10;for whole screen</English>
 		<Russian>Введите URL фонового изображения&#10;для всего экрана</Russian>
 		<German>Hintergrundbild-URL für&#10;den gesamten Bildschirm eingeben</German>
+		<Spanish>Entre la imagen de fondo&#10; para toda la pantalla URL</Spanish>
 	</record>
 	<record>
 		<ID>62</ID>
 		<English>Enter the background image URL for control</English>
 		<Russian>Введите URL фонового изображения&#10;для элемента управления</Russian>
 		<German>Hintergrundbild-URL für den Befehl eingeben</German>
+		<Spanish>Entre imagen de fondo para control URL</Spanish>
 	</record>
 	<record>
 		<ID>63</ID>
 		<English>Enter the height of control&#10;(in percents from display height)</English>
 		<Russian>Введите высоту элемента управления&#10;(в процентах от высоты экрана)</Russian>
 		<German>Höhe des Befehls (in Prozent der Bildschirmhöhe) festlegen</German>
+		<Spanish>Entre altura de control&#10; (en porcentaje de altura mostrada)</Spanish>
 	</record>
 	<record>
 		<ID>64</ID>
 		<English>Enter the left position&#10;for FullScreen button&#10;(in percents from display width)</English>
 		<Russian>Введите позицию слева для&#10;кнопки полноэкранного режима&#10;(в процентах от ширины экрана)</Russian>
 		<German>Linke Position der&#10;Fullscreen-Taste festlegen&#10;(in Prozent der Bildschirmweite)</German>
+		<Spanish>Entre posición izquierda para botón de pantalla completa (en porcentaje de anchura)</Spanish>
 	</record>
 	<record>
 		<ID>65</ID>
 		<English>Enter the left position for control&#10;(in percents from display width)</English>
 		<Russian>Введите позицию слева для элемента управления&#10;(в процентах от ширины экрана)</Russian>
 		<German>Linke Position für Befehl festlegen&#10;(in Prozent der Bildschirmweite)</German>
+		<Spanish>Entre posición izquierda para control&#10; (en porcentaje de anchura)</Spanish>
 	</record>
 	<record>
 		<ID>66</ID>
 		<English>Enter the minimal touch force for&#10;the buttons, it is experimental parameter,&#10;it always 1.0 if mobile device or&#10;web-browser do not support this feature&#10;(from 0.0 to 1.0)</English>
 		<Russian>Введите минимальную силу нажатия для&#10;кнопок, это экпериментальный параметр,&#10;будет всегда 1.0 если мобильное устройство&#10;или веб-браузер не поддерживают эту функцию&#10;(от 0.0 до 1.0)</Russian>
 		<German>Minimale Berührungsstärke für&#10;die Tasten eingeben. (0.0 bis 1.0)&#10;Wenn Mobilgeräte oder Browser dieses experimentelle Feature nicht unterstützen, ist sie immer 1.0</German>
+		<Spanish>Entre mínima fuerza de toque para botones,&#10; es un parámetro experimental, siempre es 1.0&#10; si es un móvil o el navegador web&#10; no soporta esta característica ( 0,0 a 1,0)</Spanish>
 	</record>
 	<record>
 		<ID>67</ID>
 		<English>Enter the name of control, it will appear in the&#10;Buttons Mapping - Joystick dropdown list</English>
 		<Russian>Введите название элемента управления,&#10;оно будет присутствовать в списке&#10;Назначение Кнопок - Джойстик</Russian>
 		<German>Namen des Befehls eingeben für die Anzeige in der&#10;Joystick-Tastenzuweisungs-Dropdownliste</German>
+		<Spanish>Entre nombre de control, aparecerá&#10; en el mapa de botones - lista desplegable del joystick</Spanish>
 	</record>
 	<record>
 		<ID>68</ID>
 		<English>Enter the Polling Rate for Touchpads and Orientation&#10;(in milliseconds from 10 to 100)</English>
 		<Russian>Введите частоту опроса для точпадов и ориентации&#10;(в милисекундах от 10 до 100)</Russian>
 		<German>Abfragerate für Touchpads und Richtungssensorenn(in millisekunden von 10 bis 100)</German>
+		<Spanish>Entre rango de votación para alfombrilla&#10; táctil y orientación ( de 10 a 100 ms)</Spanish>
 	</record>
 	<record>
 		<ID>69</ID>
 		<English>Enter the Repeat Rate for&#10;Touch Buttons while holding&#10;(in milliseconds from 10 to 100)</English>
 		<Russian>Введите частоту повтора для&#10;кнопок с повтором при удержании&#10;(в милисекундах от 10 до 100)</Russian>
 		<German>Wiederholungsrate für  Touch-&#10;Tasten festlegen, die gehalten werden&#10;(in Millisekunden von 10 bis 100)</German>
+		<Spanish>Entre rango de repetición para los botones táctiles&#10; mientras los mantiene pulsados ( de 10 a 100 ms)</Spanish>
 	</record>
 	<record>
 		<ID>70</ID>
 		<English>Enter the Screen Height&#10;(in pixels from 480 to 1600)</English>
 		<Russian>Введите высоту экрана&#10;(в пикселях от 480 до 1600)</Russian>
 		<German>Bildschirmhöhe eingeben&#10;(480b bis 1600 px)</German>
+		<Spanish>Entre altura de pantalla&#10; (480 a 1600 px)</Spanish>
 	</record>
 	<record>
 		<ID>71</ID>
 		<English>Enter the Screen Width&#10;(in pixels from 640 to 2560)</English>
 		<Russian>Введите ширину экрана&#10;(в пикселях от 640 до 2560)</Russian>
 		<German>Bildschirmhöhe eingeben&#10;(640 bis 2560 px)</German>
+		<Spanish>Entre ancho de pantalla&#10; (640 a 2560 px)</Spanish>
 	</record>
 	<record>
 		<ID>72</ID>
 		<English>Enter the text for control</English>
 		<Russian>Введите текст для элемента управления</Russian>
 		<German>Name des Befehls eingeben</German>
+		<Spanish>Entre el texto de control</Spanish>
 	</record>
 	<record>
 		<ID>73</ID>
 		<English>Enter the top position&#10;for FullScreen button&#10;(in percents from display height)</English>
 		<Russian>Введите позицию сверху для&#10;кнопки полноэкранного режима&#10;(в процентах от высоты экрана)</Russian>
 		<German>Obere Position der Fulllsreen-Taste festlegen&#10;(in Prozent der Bildschirmweite)</German>
+		<Spanish>Entre posición mas alta para&#10; botón de pantalla completa&#10;. (en % de altura)</Spanish>
 	</record>
 	<record>
 		<ID>74</ID>
 		<English>Enter the top position for control&#10;(in percents from display height)</English>
 		<Russian>Введите позицию сверху для элемента управления&#10;(в процентах от высоты экрана)</Russian>
 		<German>Obere Position für Befehl festlegen&#10;(in Prozent der Bildschirmweite)</German>
+		<Spanish>Entre posición mas alta para control&#10; (en % de la altura mostrada)</Spanish>
 	</record>
 	<record>
 		<ID>75</ID>
 		<English>Enter the width of control&#10;(in percents from display width)</English>
 		<Russian>Введите ширину элемента управления&#10;(в процентах от ширины экрана)</Russian>
 		<German>Breite des Befehls festlegen&#10;(in Prozent der Bildschirmweite)</German>
+		<Spanish>Entre ancho de control&#10; (en % del ancho mostrada)</Spanish>
 	</record>
 	<record>
 		<ID>76</ID>
 		<English>Enter your registration Email,&#10;it will be used for connecting&#10;to your mobile device</English>
 		<Russian>Введите адрес электронной почты&#10;который вы использовали при регистрации,&#10;это нужно для подключения к вашему&#10;мобильному устройству</Russian>
 		<German>Registrierte Email eingeben, um&#10;eine Verbindung mit ihrem&#10;Mobilgerät herzustellen</German>
+		<Spanish>Entre su e-mail de registro,&#10; será utilizado para conectar&#10; con su móvil.</Spanish>
 	</record>
 	<record>
 		<ID>77</ID>
 		<English>Exclusive Z axis of orientation</English>
 		<Russian>Эксклюзивная ось Z ориентации</Russian>
 		<German>Dedizierte Z-Achse für Richtung</German>
+		<Spanish>Z eje exclusivo de orientación</Spanish>
 	</record>
 	<record>
 		<ID>78</ID>
 		<English>Exit</English>
 		<Russian>Выход</Russian>
 		<German>Schließen</German>
+		<Spanish>Salida</Spanish>
 	</record>
 	<record>
 		<ID>79</ID>
 		<English>Feedback</English>
 		<Russian>Обратная Связь</Russian>
 		<German>Feedback</German>
+		<Spanish>Realimentación</Spanish>
 	</record>
 	<record>
 		<ID>80</ID>
 		<English>Flight Joystick</English>
 		<Russian>Самолётный Джойстик</Russian>
 		<German>Flugzeug-Joystick</German>
+		<Spanish>Joystick de vuelo</Spanish>
 	</record>
 	<record>
 		<ID>81</ID>
 		<English>Font</English>
 		<Russian>Шрифт</Russian>
 		<German>Font</German>
+		<Spanish>Fuente</Spanish>
 	</record>
 	<record>
 		<ID>82</ID>
 		<English>From:</English>
 		<Russian>От:</Russian>
 		<German>Von:</German>
+		<Spanish>De:</Spanish>
 	</record>
 	<record>
 		<ID>83</ID>
 		<English>Full Screen Button:</English>
 		<Russian>Кнопка На Весь Экран:</Russian>
 		<German>Vollbild-Taste:</German>
+		<Spanish>Botón toda pantalla</Spanish>
 	</record>
 	<record>
 		<ID>84</ID>
 		<English>Gain</English>
 		<Russian>Усиление</Russian>
 		<German>Verstärkung</German>
+		<Spanish>Ganancia</Spanish>
 	</record>
 	<record>
 		<ID>85</ID>
 		<English>Gain From</English>
 		<Russian>Усиление От</Russian>
 		<German>Verstärkung von</German>
+		<Spanish>Ganancia de</Spanish>
 	</record>
 	<record>
 		<ID>86</ID>
 		<English>Gain To</English>
 		<Russian>Усиление До</Russian>
 		<German>Verstärkung bis</German>
+		<Spanish>Ganancia a</Spanish>
 	</record>
 	<record>
 		<ID>87</ID>
 		<English>Gamepad with Holder</English>
 		<Russian>Геймпад с Держателем</Russian>
 		<German>Gamepad mit Halterung</German>
+		<Spanish>gamepad con soporte</Spanish>
 	</record>
 	<record>
 		<ID>88</ID>
 		<English>Height (%)</English>
 		<Russian>Высота (%)</Russian>
 		<German>Höhe (%)</German>
+		<Spanish>Altura (%)</Spanish>
 	</record>
 	<record>
 		<ID>89</ID>
 		<English>Help</English>
 		<Russian>Помощь</Russian>
 		<German>Hilfe</German>
+		<Spanish>Ayuda</Spanish>
 	</record>
 	<record>
 		<ID>90</ID>
 		<English>Hide to Tray</English>
 		<Russian>Спрятать в Трэй</Russian>
 		<German>Im Tray Verbergen</German>
+		<Spanish>Ocultar a bandeja</Spanish>
 	</record>
 	<record>
 		<ID>91</ID>
 		<English>Image URL</English>
 		<Russian>URL Картинки</Russian>
 		<German>Bild-URL</German>
+		<Spanish>Imagen URL</Spanish>
 	</record>
 	<record>
 		<ID>92</ID>
 		<English>Image URL of background is not valid!</English>
 		<Russian>Некорректный URL фоновой картинки!</Russian>
 		<German>Hintergrundbild-URL ist ungültig!</German>
+		<Spanish>Imagen URL de respaldo no valida!</Spanish>
 	</record>
 	<record>
 		<ID>93</ID>
 		<English>Image URL of control is not valid!</English>
 		<Russian>Некорректный URL картинки!</Russian>
 		<German>Befehl-Bild-URL ist ungültig!</German>
+		<Spanish>Imagen URL de control no valida!</Spanish>
 	</record>
 	<record>
 		<ID>94</ID>
 		<English>Interface</English>
 		<Russian>Интерфейс</Russian>
 		<German>Interface</German>
+		<Spanish>Interface</Spanish>
 	</record>
 	<record>
 		<ID>95</ID>
 		<English>Invalid E-mail address!</English>
 		<Russian>Некорректный адрес электронной почты!</Russian>
 		<German>Ungültige E-Mail-Adresse</German>
+		<Spanish>Dirección e-mail inválida</Spanish>
 	</record>
 	<record>
 		<ID>96</ID>
 		<English>Joystick</English>
 		<Russian>Джойстик</Russian>
 		<German>Joystick</German>
+		<Spanish>Joystick  </Spanish>
 	</record>
 	<record>
 		<ID>97</ID>
-		<English>Joystick Axis</English>
-		<Russian>Ось Джойстика</Russian>
-		<German>Joystick-Achse</German>
+		<English>Joystick Axes</English>
+		<Russian>Оси Джойстика</Russian>
+		<German>Joystick-Achsen</German>
+		<Spanish>Ejes del Joystick</Spanish>
 	</record>
 	<record>
 		<ID>98</ID>
 		<English>Joysticks are not connected!</English>
 		<Russian>Джойстики не подключены!</Russian>
 		<German>Keine Joysticks angeschlossen!</German>
+		<Spanish>Joysticks no conectados</Spanish>
 	</record>
 	<record>
 		<ID>99</ID>
 		<English>Keyboard / Mouse</English>
 		<Russian>Клавиатура / Мышь</Russian>
 		<German>Tastatur / Maus</German>
+		<Spanish>Teclado / Ratón</Spanish>
 	</record>
 	<record>
 		<ID>100</ID>
 		<English>Label</English>
 		<Russian>Надпись</Russian>
 		<German>Label</German>
+		<Spanish>Etique.</Spanish>
 	</record>
 	<record>
 		<ID>101</ID>
 		<English>Language</English>
 		<Russian>Язык</Russian>
 		<German>Sprache</German>
+		<Spanish>Lengua</Spanish>
 	</record>
 	<record>
 		<ID>102</ID>
-		<English>Launch World of Joysticks Emulator&#10;automatically on system startup</English>
-		<Russian>Запускать Эмулятор Мира Джойстиков&#10;автоматически при старте системы</Russian>
-		<German>Automatischer Start von World of Joysticks&#10;Emulator beim Systemstart</German>
+		<English>Launch automatically on system startup</English>
+		<Russian>Запускать автоматически при старте системы</Russian>
+		<German>Automatischer Start beim Systemstart</German>
+		<Spanish>Iniciar automático al arrancar sistema</Spanish>
 	</record>
 	<record>
 		<ID>103</ID>
 		<English>Left limit of Axes Deadzone. (0-32767)</English>
 		<Russian>Левая граница мёртвой зоны осей. (0-32767)</Russian>
 		<German>Linker Limit für Toten Winkel der Achse (0-32767)</German>
+		<Spanish>Limite izquierdo zona muerta de ejes. (0-32767)</Spanish>
 	</record>
 	<record>
 		<ID>104</ID>
 		<English>Left Motor Speed (%)</English>
 		<Russian>Скорость Левого Мотора (%)</Russian>
 		<German>Linke Motorgeschw. (%)</German>
+		<Spanish>Velocidad motor izqui. (%)</Spanish>
 	</record>
 	<record>
 		<ID>105</ID>
 		<English>Left Position (%)</English>
 		<Russian>Позиция Слева (%)</Russian>
 		<German>Linke Position (%)</German>
+		<Spanish>Posición izqui. (%)</Spanish>
 	</record>
 	<record>
 		<ID>106</ID>
 		<English>Load</English>
 		<Russian>Загрузить</Russian>
 		<German>Laden</German>
+		<Spanish>Carga</Spanish>
 	</record>
 	<record>
 		<ID>107</ID>
 		<English>Load configuration file.</English>
 		<Russian>Загрузить файл конфигурации.</Russian>
 		<German>Konfigurationsdatei laden.</German>
+		<Spanish>Carga archivo configuración</Spanish>
 	</record>
 	<record>
 		<ID>108</ID>
 		<English>Magnitude</English>
 		<Russian>Магнитуда</Russian>
 		<German>Ausmaß</German>
+		<Spanish>Magnitud</Spanish>
 	</record>
 	<record>
 		<ID>109</ID>
 		<English>Manufacturer is not defined!</English>
 		<Russian>Производитель устройства не указан!</Russian>
 		<German>Hersteller ist nicht angegeben</German>
+		<Spanish>Fabricante no definido!</Spanish>
 	</record>
 	<record>
 		<ID>110</ID>
 		<English>Minimize window</English>
 		<Russian>Минимизировать окно</Russian>
 		<German>Fenster Minimieren</German>
+		<Spanish>Minimizar ventana</Spanish>
 	</record>
 	<record>
 		<ID>111</ID>
 		<English>Mobile Vibration Preferences</English>
 		<Russian>Настройки Мобильной Вибрации</Russian>
 		<German>Vibrationseinstellungen Mobilgerät</German>
+		<Spanish>Preferencias vibración del móvil</Spanish>
 	</record>
 	<record>
 		<ID>112</ID>
 		<English>Mode</English>
 		<Russian>Режим</Russian>
 		<German>Modus</German>
+		<Spanish>Modo</Spanish>
 	</record>
 	<record>
 		<ID>113</ID>
 		<English>Model is not defined!</English>
 		<Russian>Модель устройства не указана!</Russian>
 		<German>Kein Modell angegeben!</German>
+		<Spanish>No esta definido modelo!</Spanish>
 	</record>
 	<record>
 		<ID>114</ID>
 		<English>Model:</English>
 		<Russian>Модель:</Russian>
 		<German>Modell:</German>
+		<Spanish>Modelo:</Spanish>
 	</record>
 	<record>
 		<ID>115</ID>
 		<English>Modify</English>
 		<Russian>Изменить</Russian>
 		<German>Anpassen</German>
+		<Spanish>Cambiar</Spanish>
 	</record>
 	<record>
 		<ID>116</ID>
 		<English>Mouse Axis</English>
 		<Russian>Ось Мыши</Russian>
 		<German>Maus-Achse</German>
+		<Spanish>Ejes ratón</Spanish>
 	</record>
 	<record>
 		<ID>117</ID>
 		<English>Mouse on Orientation Sensitivity:</English>
 		<Russian>Чувствительность мыши на ориентацию:</Russian>
 		<German>Bewegungsempfindlickeit Maus/</German>
+		<Spanish>Sensibilidad orientación de ratón:</Spanish>
 	</record>
 	<record>
 		<ID>118</ID>
 		<English>Move the joystick axes to identify them.</English>
 		<Russian>Подвигайте осями джойстика чтобы опознать их.</Russian>
 		<German>Joystick-Achsen durch Bewegung identifizieren.</German>
+		<Spanish>Mueve ejes del joystick para identificarlos</Spanish>
 	</record>
 	<record>
 		<ID>119</ID>
 		<English>Name</English>
 		<Russian>Название</Russian>
 		<German>Name</German>
+		<Spanish>Nombre  </Spanish>
 	</record>
 	<record>
 		<ID>120</ID>
 		<English>Name of control is not defined!</English>
 		<Russian>Название элемента управления не определено!</Russian>
 		<German>Der Befehl hat keinen Namen!</German>
+		<Spanish>El nombre de control no está definido!</Spanish>
 	</record>
 	<record>
 		<ID>121</ID>
 		<English>New</English>
 		<Russian>Создать</Russian>
 		<German>Neu</German>
+		<Spanish>Nuevo</Spanish>
 	</record>
 	<record>
 		<ID>122</ID>
 		<English>Next</English>
 		<Russian>Вперёд</Russian>
 		<German>Weiter</German>
+		<Spanish>Siguie.</Spanish>
 	</record>
 	<record>
 		<ID>123</ID>
 		<English>Normal</English>
 		<Russian>Нормал.</Russian>
 		<German>Normal</German>
+		<Spanish>Normal</Spanish>
 	</record>
 	<record>
 		<ID>124</ID>
 		<English>One or more joysticks are not connected!</English>
 		<Russian>Один или более джойстиков не подключены!</Russian>
 		<German>Mindestens ein Joystick ist nicht verbunden!</German>
+		<Spanish>Uno o mas joysticks no conectados!</Spanish>
 	</record>
 	<record>
 		<ID>125</ID>
 		<English>Orientation</English>
 		<Russian>Ориентация</Russian>
 		<German>Ausrichtung</German>
+		<Spanish>Orientación</Spanish>
 	</record>
 	<record>
 		<ID>126</ID>
 		<English>Orientation (%)</English>
 		<Russian>Ориентация (%)</Russian>
 		<German>Ausrichtung (%)</German>
+		<Spanish>Orientación (%)</Spanish>
 	</record>
 	<record>
 		<ID>127</ID>
 		<English>Play sounds when Sensitivity 2 is selected.</English>
 		<Russian>Воспроизводить звуки когда&#10;выбрана Чувствительность 2.</Russian>
 		<German>Sound spielen, wenn Sensitivität 2 gewählt wird</German>
+		<Spanish>Hacer sonidos cuando sensibilidad 2 seleccionada.</Spanish>
 	</record>
 	<record>
 		<ID>128</ID>
 		<English>Playing</English>
 		<Russian>Игра</Russian>
 		<German>Spielen</German>
+		<Spanish>Jugando</Spanish>
 	</record>
 	<record>
 		<ID>129</ID>
 		<English>Please identify your gamepad</English>
 		<Russian>Пожалуйста идентифицируйте свой геймпад</Russian>
 		<German>Bitte Gamepad identifizieren</German>
+		<Spanish>Por favor identifique su gamepad</Spanish>
 	</record>
 	<record>
 		<ID>130</ID>
 		<English>Polling rate (ms)</English>
 		<Russian>Частота опроса (мс)</Russian>
 		<German>Abfragerate (ms)</German>
+		<Spanish>Tasa refresco (ms)</Spanish>
 	</record>
 	<record>
 		<ID>131</ID>
 		<English>Polling Rate of buttons in milliseconds. (1-100)</English>
 		<Russian>Частота опроса кнопок в миллисекундах. (1-100)</Russian>
 		<German>Tasten-Abfragerate in Millisekunden. (1-100)</German>
+		<Spanish>Tasa de refresco de botones en ms. (1-100)</Spanish>
 	</record>
 	<record>
 		<ID>132</ID>
 		<English>POV switch was not pressed!</English>
 		<Russian>POV переключатель не был нажат!</Russian>
 		<German>POV-Schalter nicht gedrückt!</German>
+		<Spanish>El interruptor POV no se presionó!</Spanish>
 	</record>
 	<record>
 		<ID>133</ID>
 		<English>Press a jostick key here.</English>
 		<Russian>Нажмите кнопку джойстика здесь.</Russian>
 		<German>Hier Joystick-Knopf drücken.</German>
+		<Spanish>Presionar tecla del joystick aquí.</Spanish>
 	</record>
 	<record>
 		<ID>134</ID>
-		<English>Press a keyboard key or mouse button here.</English>
-		<Russian>Нажмите клавишу на клавиатуре или кнопку мыши здесь.</Russian>
+		<English>Press a keyboard key or mouse button here</English>
+		<Russian>Нажмите клавишу на клавиатуре или кнопку мыши здесь</Russian>
 		<German>Hier eine Taste oder Mausknopf drücken:</German>
+		<Spanish>Presionar una tecla del teclado o del mouse aquí.</Spanish>
 	</record>
 	<record>
 		<ID>135</ID>
 		<English>Press the button of your gamepad&#10;that corresponds Xbox %</English>
 		<Russian>Нажмите кнопку своего геймпада&#10;которая соответствует Xbox %</Russian>
 		<German>Drücken sie den Knopf auf Ihrem Gamepad,&#10;der Xbox % entspricht</German>
+		<Spanish>Presionar un botón del gamepad&#10; que corresponda a Xbox %</Spanish>
 	</record>
 	<record>
 		<ID>136</ID>
 		<English>Press the POV switch of your gamepad&#10;that corresponds Xbox D-pad (in any direction).</English>
 		<Russian>Нажмите POV переключатель своего геймпада&#10;который соответствует Xbox D-pad (в любом направлении)</Russian>
 		<German>Drücken Sie den POV-Schalter, der dem&#10;Xbox-Steuerkreuz entspricht (beliebige Richtung).</German>
+		<Spanish>Presiona interruptor POV en gamepad que&#10; corresponde a Xbox D-pad (cualquier dirección)</Spanish>
 	</record>
 	<record>
 		<ID>137</ID>
 		<English>Press to assign Axis.</English>
 		<Russian>Нажмите чтобы назначить ось.</Russian>
 		<German>Drücken, um Achse zuzuweisen.</German>
+		<Spanish>Presionar para asignar ejes.</Spanish>
 	</record>
 	<record>
 		<ID>138</ID>
 		<English>Press to assign Button.</English>
 		<Russian>Нажмите чтобы назначить кнопку.</Russian>
 		<German>Drücken, um Knopf zuzuweisen</German>
+		<Spanish>Presiona para asignar botón</Spanish>
 	</record>
 	<record>
 		<ID>139</ID>
 		<English>Press to choose virtual switch-button of&#10;Sensitivity (1/2) , Mouse Moving Direction or Vibration.</English>
 		<Russian>Нажмите чтобы выбрать виртуальную кнопку переключения конфигураций&#10;Чувствительности (1/2) , Направление Движения Мыши или Вибрацию.</Russian>
 		<German>Drücken für Umschalten der&#10;Empfindlichkeit (1/2),  der Mausbewegungsrichtung&#10;oder der Vibration.</German>
+		<Spanish>Presiona para elegir un botón-interruptor de sensibilidad,(1/2)&#10; dirección de movimiento o vibración de ratón</Spanish>
 	</record>
 	<record>
 		<ID>140</ID>
 		<English>Preview</English>
 		<Russian>Предпросмотр</Russian>
 		<German>Vorschau</German>
+		<Spanish>Previsualiza</Spanish>
 	</record>
 	<record>
 		<ID>141</ID>
 		<English>Push Down the Left Stick of your gamepad &#10;that corresponds Xbox Stick Left Y [+]</English>
 		<Russian>Нажмите вниз Левый Стик своего геймпада&#10;что соответствует Xbox Stick Left Y [-]</Russian>
 		<German>Linken Analogstick des Gamepads nach UNTEN bewegen.&#10;Entspricht linkem Xbox Analogstick Y [+]</German>
+		<Spanish>Mover↓palanca izquierda de gamepad&#10; relativa a palanca izquierda Y del Xbox [+]</Spanish>
 	</record>
 	<record>
 		<ID>142</ID>
 		<English>Push Down the Right Stick of your gamepad &#10;that corresponds Xbox Stick Right Y [+]</English>
 		<Russian>Нажмите вниз Правый Стик своего геймпада&#10;что соответствует Xbox Stick Right Y [-]</Russian>
 		<German>Rechten Analogstick des Gamepads nach UNTEN bewegen.&#10;Entspricht rechtem Xbox Analogstick Y [+]</German>
+		<Spanish>Mover↓la palanca derecha del gamepad&#10; relativa a palanca derecha Y del Xbox [+]</Spanish>
 	</record>
 	<record>
 		<ID>143</ID>
 		<English>Push Right the Left Stick of your gamepad &#10;that corresponds Xbox Stick Left X [+]</English>
 		<Russian>Нажмите вправо Левый Стик своего геймпада&#10;что соответствует Xbox Stick Left X [+]</Russian>
 		<German>Linken Analogstick des Gamepads nach RECHTS bewegen.&#10;Entspricht linkem Xbox Analogstick X [+]</German>
+		<Spanish>Mover → la palanca izquierda del gamepad&#10; relativa a palanca izquierda X del Xbox [+]</Spanish>
 	</record>
 	<record>
 		<ID>144</ID>
 		<English>Push Right the Right Stick of your gamepad &#10;that corresponds Xbox Stick Right X [+]</English>
 		<Russian>Нажмите вправо Правый Стик своего геймпада&#10;что соответствует Xbox Stick Right X [+]</Russian>
 		<German>Rechten Analogstick des Gamepads nach RECHTS bewegen.&#10;Entspricht rechtem Xbox Analogstick X [+]</German>
+		<Spanish>Mover → la palanca derecha del gamepad&#10; relativa a la palanca derecha X del Xbox [+]</Spanish>
 	</record>
 	<record>
 		<ID>145</ID>
 		<English>Push the Left Trigger/Button of your gamepad &#10;that corresponds Xbox Trigger Left</English>
 		<Russian>Нажмите Левый Триггер/Кнопку своего геймпада&#10;что соответствует Xbox Trigger Left</Russian>
 		<German>Linken Trigger/Schulterknopf des Gamepads drücken.&#10;Entspricht linkem Xbox-Trigger</German>
+		<Spanish>Pulsar botón izquierdo disparo de gamepad&#10; relativo al disparo izquierdo de Xbox</Spanish>
 	</record>
 	<record>
 		<ID>146</ID>
 		<English>Push the Right Trigger/Button of your gamepad &#10;that corresponds Xbox Trigger Right</English>
 		<Russian>Нажмите Правый Триггер/Кнопку своего геймпада&#10;что соответствует Xbox Trigger Right</Russian>
 		<German>Rechten Trigger/Schulterknopf des Gamepads drücken.&#10;Entspricht rechtem Xbox-Trigger</German>
+		<Spanish>Pulsar botón derecho disparo de gamepad&#10; relativo al disparo derecho de Xbox</Spanish>
 	</record>
 	<record>
 		<ID>147</ID>
 		<English>Racing Wheel</English>
 		<Russian>Руль</Russian>
 		<German>Lenkrad</German>
+		<Spanish>Volante carrera</Spanish>
 	</record>
 	<record>
 		<ID>148</ID>
 		<English>Reconnect</English>
 		<Russian>Перезапуск</Russian>
 		<German>Neu verbinden</German>
+		<Spanish>Reconectar</Spanish>
 	</record>
 	<record>
 		<ID>149</ID>
 		<English>Register</English>
 		<Russian>Зарегистрироваться</Russian>
 		<German>Registrieren</German>
+		<Spanish>Registrar</Spanish>
 	</record>
 	<record>
 		<ID>150</ID>
 		<English>Remove</English>
 		<Russian>Удалить</Russian>
 		<German>Entfernen</German>
+		<Spanish>Eliminar</Spanish>
 	</record>
 	<record>
 		<ID>151</ID>
 		<English>Remove Selected Assignments</English>
-		<Russian>Удалить Выбранные Назначения</Russian>
+		<Russian>Удалить выбранные назначения</Russian>
 		<German>Gewählte Zuweisungen entfernen</German>
+		<Spanish>Eliminar selección asignación</Spanish>
 	</record>
 	<record>
 		<ID>152</ID>
 		<English>Repeat Rate (ms)</English>
 		<Russian>Чаcтота повтора (мс)</Russian>
 		<German>Wiederholungsrate (ms)</German>
+		<Spanish>Velo. repetición (ms)</Spanish>
 	</record>
 	<record>
 		<ID>153</ID>
 		<English>Restores main window</English>
 		<Russian>Восстанавливает основное окно</Russian>
 		<German>Hauptfenster wiederherstellen</German>
+		<Spanish>Restaura ventana principal</Spanish>
 	</record>
 	<record>
 		<ID>154</ID>
 		<English>Right limit of Axes Deadzone. (32767-65535)</English>
 		<Russian>Правая граница мёртвой зоны осей. (32767-65535)</Russian>
 		<German>Rechte Grenze für Toten Winkel d. Achse (32767-65535)</German>
+		<Spanish>Limite derecho zona muerta de ejes. (32767-65535)</Spanish>
 	</record>
 	<record>
 		<ID>155</ID>
 		<English>Right Motor Speed (%)</English>
 		<Russian>Скорость Правого Мотора (%)</Russian>
 		<German>Geschwindigkeit rechter Motor (%)</German>
+		<Spanish>Velocidad motor derecho (%)</Spanish>
 	</record>
 	<record>
 		<ID>156</ID>
 		<English>Save As</English>
 		<Russian>Сохранить</Russian>
 		<German>Speichern als</German>
+		<Spanish>Salvar como</Spanish>
 	</record>
 	<record>
 		<ID>157</ID>
 		<English>Save as configuration file.</English>
 		<Russian>Сохранить как файл конфигурации.</Russian>
 		<German>Speichern als Konfigurationsdatei</German>
+		<Spanish>Salvar como config. file</Spanish>
 	</record>
 	<record>
 		<ID>158</ID>
 		<English>Save as HTML</English>
 		<Russian>Сохранить как HTML</Russian>
 		<German>Speichern als HTML</German>
+		<Spanish>Salvar como HTML</Spanish>
 	</record>
 	<record>
 		<ID>159</ID>
 		<English>Screen Resolution (px)</English>
 		<Russian>Разрешение экрана (px)</Russian>
 		<German>Bildschirmauflösung (px)</German>
+		<Spanish>Resolución pantalla (px)</Spanish>
 	</record>
 	<record>
 		<ID>160</ID>
-		<English>Select a joystick Axis.</English>
-		<Russian>Выберите ось джойстика.</Russian>
-		<German>Joystick-Achse wählen.</German>
+		<English>Select a joystick Axis</English>
+		<Russian>Выберите ось джойстика</Russian>
+		<German>Joystick-Achse wählen</German>
+		<Spanish>Seleccione eje de joystick</Spanish>
 	</record>
 	<record>
 		<ID>161</ID>
-		<English>Select a mouse Axis.</English>
-		<Russian>Выберите ось мыши.</Russian>
-		<German>Maus-Achse wählen.</German>
+		<English>Select a mouse Axis</English>
+		<Russian>Выберите ось мыши</Russian>
+		<German>Maus-Achse wählen</German>
+		<Spanish>Seleccione eje mouse</Spanish>
 	</record>
 	<record>
 		<ID>162</ID>
 		<English>Select an Axis with direction [+,-]&#10;to use it as button.</English>
 		<Russian>Выберите Ось с направлением [+,-] &#10;чтобы использовать как кнопку.</Russian>
 		<German>Achse mit Richtung [+,-] wählen&#10; um sie als Taste zu benutzen.</German>
+		<Spanish>Seleccionar eje con dirección [+,-] para utilizarlo como botón</Spanish>
 	</record>
 	<record>
 		<ID>163</ID>
 		<English>Select Device</English>
 		<Russian>Выберите устройство</Russian>
 		<German>Gerät wählen</German>
+		<Spanish>Selec.dispositivo</Spanish>
 	</record>
 	<record>
 		<ID>164</ID>
 		<English>Select Interface</English>
 		<Russian>Выберите интерфейс</Russian>
 		<German>Interface wählen</German>
+		<Spanish>Sele.interface</Spanish>
 	</record>
 	<record>
 		<ID>165</ID>
 		<English>Select the type of control from the list</English>
 		<Russian>Выберите тип элемента управления из списка</Russian>
 		<German>Befehlstyp aus der Liste wählen</German>
+		<Spanish>Seleccione tipo de control de la lista</Spanish>
 	</record>
 	<record>
 		<ID>166</ID>
 		<English>Send</English>
 		<Russian>Отправить</Russian>
 		<German>Senden</German>
+		<Spanish>Enviar</Spanish>
 	</record>
 	<record>
 		<ID>167</ID>
 		<English>Sensitivity 1</English>
 		<Russian>Чувствительность 1</Russian>
 		<German>Sensitivität 1</German>
+		<Spanish>Sensibilidad 1</Spanish>
 	</record>
 	<record>
 		<ID>168</ID>
 		<English>Sensitivity 2</English>
 		<Russian>Чувствительность 2</Russian>
 		<German>Sensitivität 2</German>
+		<Spanish>Sensibilidad 2</Spanish>
 	</record>
 	<record>
 		<ID>169</ID>
 		<English>Setting</English>
 		<Russian>Настройка</Russian>
 		<German>Einstellung</German>
+		<Spanish>Ajustes</Spanish>
 	</record>
 	<record>
 		<ID>170</ID>
 		<English>Shooting</English>
 		<Russian>Стрельба</Russian>
 		<German>Schießen</German>
+		<Spanish>Disparo</Spanish>
 	</record>
 	<record>
 		<ID>171</ID>
 		<English>Show</English>
 		<Russian>Показать</Russian>
 		<German>Anzeigen</German>
+		<Spanish>Mostrar</Spanish>
 	</record>
 	<record>
 		<ID>172</ID>
 		<English>Smartphone</English>
 		<Russian>Смартфон</Russian>
 		<German>Smartphone</German>
+		<Spanish>Smartphone</Spanish>
 	</record>
 	<record>
 		<ID>173</ID>
 		<English>Sound</English>
 		<Russian>Звук</Russian>
 		<German>Sound</German>
+		<Spanish>Sound</Spanish>
 	</record>
 	<record>
 		<ID>174</ID>
 		<English>Start</English>
 		<Russian>Старт</Russian>
 		<German>Start</German>
+		<Spanish>Start</Spanish>
 	</record>
 	<record>
 		<ID>175</ID>
 		<English>Starts joystick polling</English>
 		<Russian>Включает опрос джойстика</Russian>
 		<German>Aktiviert Joystick-Abfrage</German>
+		<Spanish>Iniciar refresco de joystick</Spanish>
 	</record>
 	<record>
 		<ID>176</ID>
 		<English>Step % from</English>
 		<Russian>Шаг % из </Russian>
 		<German>Schritt % von</German>
+		<Spanish>Paso % de</Spanish>
 	</record>
 	<record>
 		<ID>177</ID>
 		<English>Stick was not pushed!</English>
 		<Russian>Стик не был нажат!</Russian>
 		<German>Stick wurde nicht gedrückt</German>
+		<Spanish>La palanca no se actuó!</Spanish>
 	</record>
 	<record>
 		<ID>178</ID>
 		<English>Stop</English>
 		<Russian>Остановить</Russian>
 		<German>Stop</German>
+		<Spanish>Paro</Spanish>
 	</record>
 	<record>
 		<ID>179</ID>
 		<English>Stops joystick polling</English>
 		<Russian>Выключает опрос джойстика</Russian>
 		<German>Deaktiviert Joystick-Abfrage</German>
+		<Spanish>Parar refresco joystick</Spanish>
 	</record>
 	<record>
 		<ID>180</ID>
 		<English>Tablet</English>
 		<Russian>Планшет</Russian>
 		<German>Tablet</German>
+		<Spanish>Tablet</Spanish>
 	</record>
 	<record>
 		<ID>181</ID>
 		<English>Text</English>
 		<Russian>Текст</Russian>
 		<German>Text</German>
+		<Spanish>Texto</Spanish>
 	</record>
 	<record>
 		<ID>182</ID>
 		<English>Thank you!</English>
 		<Russian>Спасибо!</Russian>
 		<German>Danke!</German>
+		<Spanish>Gracias!</Spanish>
 	</record>
 	<record>
 		<ID>183</ID>
 		<English>The file is incompatible with connected&#10;devices, you can try a different configuration&#10;file or create a new one!</English>
 		<Russian>Файл несовместим с подключенными устройствами,&#10;вы можете попробовать другой файл конфигурации&#10;или создать новый!</Russian>
 		<German>Die Datei ist mit verbundenen Geräten&#10;inkompatibel. Versuchen Sie es mit einer anderen&#10;Konfigurationsdatei oder erstellen Sie eine Neue</German>
+		<Spanish>Este archivo es incompatible con los&#10; dispositivos conectados, intentar  configuración&#10; diferente del archivo o crear nuevo!</Spanish>
 	</record>
 	<record>
 		<ID>184</ID>
 		<English>This application needs Administrator privileges to run properly!</English>
 		<Russian>Это приложение должно иметь права Администратора для правильной работы!</Russian>
 		<German>Für die korrekte Funktion sind Administratorrechte nötig!</German>
+		<Spanish>Aplicación requiere privilegios de administrador para funcionar bien!</Spanish>
 	</record>
 	<record>
 		<ID>185</ID>
 		<English>This control is already assigned!</English>
 		<Russian>Этот элемент управления уже назначен!</Russian>
 		<German>Dieser Befehl ist bereits zugewiesen!</German>
+		<Spanish>Este control ya está asignado</Spanish>
 	</record>
 	<record>
 		<ID>186</ID>
 		<English>To:</English>
 		<Russian>До:</Russian>
 		<German>Bis:</German>
+		<Spanish>A:</Spanish>
 	</record>
 	<record>
 		<ID>187</ID>
 		<English>Top Position (%)</English>
 		<Russian>Позиция Сверху (%)</Russian>
 		<German>Obere Position (%)</German>
+		<Spanish>Posición +alta (%)</Spanish>
 	</record>
 	<record>
 		<ID>188</ID>
 		<English>Touch Force</English>
 		<Russian>Сила Нажатия</Russian>
 		<German>Berührungsstärke</German>
+		<Spanish>Fuerza del toque</Spanish>
 	</record>
 	<record>
 		<ID>189</ID>
 		<English>Touch Gamepad</English>
 		<Russian>Сенсорный Геймпад</Russian>
 		<German>Touch-Gamepad</German>
+		<Spanish>toque gamepad </Spanish>
 	</record>
 	<record>
 		<ID>190</ID>
 		<English>Touch Gamepad is connected.&#10;Click to disconnect.</English>
 		<Russian>Сенсорный геймпад подключен.&#10;Нажмите чтобы отключить.</Russian>
 		<German>Touch-Gamepad ist verbunden.&#10;Klicken, um zu trennen.</German>
+		<Spanish>El tacto de gamepad esta conectado.&#10; Clic para desconectar</Spanish>
 	</record>
 	<record>
 		<ID>191</ID>
 		<English>Touchpad (Mouse)</English>
 		<Russian>Точпад (Мышь)</Russian>
 		<German>Touchpad (Maus)</German>
+		<Spanish>Alfombra ratón</Spanish>
 	</record>
 	<record>
 		<ID>192</ID>
 		<English>Trigger or Button was not pushed!</English>
 		<Russian>Триггер или Кнопка не были нажаты!</Russian>
 		<German>Trigger oder Knopf wurde nicht gedrückt!</German>
+		<Spanish>Disparo o botón no fueron pulsados!</Spanish>
 	</record>
 	<record>
 		<ID>193</ID>
 		<English>Try</English>
 		<Russian>Попробовать</Russian>
 		<German>Versuch</German>
+		<Spanish>Intentar</Spanish>
 	</record>
 	<record>
 		<ID>194</ID>
 		<English>Type</English>
 		<Russian>Тип</Russian>
 		<German>Typ</German>
+		<Spanish>Tipo</Spanish>
 	</record>
 	<record>
 		<ID>195</ID>
 		<English>Type of control is not selected!</English>
 		<Russian>Тип элемента управления не выбран!</Russian>
 		<German>Befehlstyp ist nicht ausgewählt!</German>
+		<Spanish>Tipo de control no seleccionado!</Spanish>
 	</record>
 	<record>
 		<ID>196</ID>
 		<English>Use smartphone or tablet&#10;as Touch Gamepad</English>
 		<Russian>Использовать смартфон или планшет&#10;как Сенсорный Геймпад</Russian>
 		<German>Smartphone oder Tablet&#10;als Touch-Gamepad verwenden</German>
+		<Spanish>Utilice smartphone o tablet como&#10; gamepad táctil</Spanish>
 	</record>
 	<record>
 		<ID>197</ID>
 		<English>Use XInput mode only for standard XBox 360 devices.&#10;Use DirectInput for any other devices or&#10;for XBox 360 but without Vibration.</English>
 		<Russian>Режим XInput подходит только для стандартных XBox 360 устройств.&#10;Используйте DirectInput для любых других устройств&#10;или для XBox 360 но без вибрации.</Russian>
 		<German>XInput-Modus nur für Xbox360-Standardgeräte verwenden&#10;DirectInput für alle anderen Geräte oder&#10;XBox 360 ohne Vibration.</German>
+		<Spanish>Utilice entrada X solo para dispositivos estándar Xbox 360.&#10; Utilice entrada directa para otros dispositivos&#10; o para Xbox 360 sin vibración</Spanish>
 	</record>
 	<record>
 		<ID>198</ID>
 		<English>User Guide</English>
 		<Russian>Руководство Пользователя</Russian>
 		<German>User-Anleitung</German>
+		<Spanish>Guía del usuario</Spanish>
 	</record>
 	<record>
 		<ID>199</ID>
 		<English>Verified: OK</English>
 		<Russian>Проверено: Работает</Russian>
 		<German>Verifiziert:OK</German>
+		<Spanish>Verificado: OK</Spanish>
 	</record>
 	<record>
 		<ID>200</ID>
 		<English>Vibration Converter</English>
 		<Russian>Конвертер Вибрации</Russian>
 		<German>Vibrationskonverter</German>
+		<Spanish>Convertidor vibración</Spanish>
 	</record>
 	<record>
 		<ID>201</ID>
 		<English>Vibration Converter Preferences</English>
 		<Russian>Настройки Конвертера Вибрации</Russian>
 		<German>Vibrationskonverter-Einstellungen</German>
+		<Spanish>Preferencias convertidor vibración</Spanish>
 	</record>
 	<record>
 		<ID>202</ID>
 		<English>Vibration Pattern (ms)</English>
 		<Russian>Схема Вибрации (мс)</Russian>
 		<German>Vibrationsmuster (ms)</German>
+		<Spanish>Patrón vibraci. (ms)</Spanish>
 	</record>
 	<record>
 		<ID>203</ID>
 		<English>Vibration pattern is wrong!&#10; example: 1000,500,1000</English>
 		<Russian>Неправильная схема вибрации!&#10; пример: 1000,500,1000</Russian>
 		<German>Vibrationsmuster falsch!&#10; Beispiel: 1000,500,1000</German>
+		<Spanish>Patrón de vibración incorrecto!&#10; Ej.: 1000,500,1000</Spanish>
 	</record>
 	<record>
 		<ID>204</ID>
 		<English>Vibration Preferences</English>
 		<Russian>Настройки Вибрации</Russian>
 		<German>Vibrationseinstellungen</German>
+		<Spanish>Preferencias vibración.</Spanish>
 	</record>
 	<record>
 		<ID>205</ID>
 		<English>Waiting for Touch Gamepad…</English>
 		<Russian>Ожидание сенсорного геймпада...</Russian>
 		<German>Warten auf Touch-Gamepad...</German>
+		<Spanish>Esperando toque de gamepad..</Spanish>
 	</record>
 	<record>
 		<ID>206</ID>
 		<English>Web-Site</English>
 		<Russian>Веб-Сайт</Russian>
 		<German>Web-Site</German>
+		<Spanish>Sitio web</Spanish>
 	</record>
 	<record>
 		<ID>207</ID>
 		<English>Width (%)</English>
 		<Russian>Ширина (%)</Russian>
 		<German>Breite (%)</German>
+		<Spanish>Ancho (%)</Spanish>
 	</record>
 	<record>
 		<ID>208</ID>
 		<English>Wired Gamepad</English>
 		<Russian>Проводной Геймпад</Russian>
 		<German>Kabelgebundenes Gamepad</German>
+		<Spanish>Gamepad con cable</Spanish>
 	</record>
 	<record>
 		<ID>209</ID>
 		<English>Wireless Gamepad</English>
 		<Russian>Безпроводной Геймпад</Russian>
 		<German>Kabelloses Gamepad</German>
+		<Spanish>Gamepad sin cable</Spanish>
 	</record>
 	<record>
 		<ID>210</ID>
 		<English>WoJ Emulator works fine&#10; with my device:</English>
 		<Russian>WoJ Emulator отлично работает&#10; с моим устройством:</Russian>
 		<German>WOJ Emulator funktioniert gut&#10;mit meinem Gerät:</German>
+		<Spanish>Emulador WoJ trabaja bien&#10; con mi dispositivo:</Spanish>
 	</record>
 	<record>
 		<ID>211</ID>
 		<English>WORLD of JOYSTICKS</English>
 		<Russian>Мир Джойстиков</Russian>
 		<German>WORLD of JOYSTICKS</German>
+		<Spanish>WORLD of JOYSTICKS</Spanish>
 	</record>
 	<record>
 		<ID>212</ID>
 		<English>World of Joysticks server is unavailable,&#10;cannot use Touch Gamepad.&#10;However you can use usual joysticks.</English>
 		<Russian>Сервер Мира Джойстиков недоступен,&#10;невозможно  использовать Сенсорный Геймпад.&#10;Однако вы можете использовать обычные джойстики.</Russian>
 		<German>Der World of Joysticks-Server ist nicht erreichbar,&#10;Touch-Gamepad nicht verfügbar.&#10; Gewöhnliche Gamecontroller funktionieren weiterhin </German>
+		<Spanish>Servidor de WoJ no está disponible,&#10; no se puede usar el Gamepad táctil.&#10; Pero puede usar un joystick convencional</Spanish>
 	</record>
 	<record>
 		<ID>213</ID>
 		<English>Xbox / Keyboard / Mouse</English>
 		<Russian>Xbox / Клавиатура / Мышь</Russian>
 		<German>Xbox / Tastatur / Maus</German>
+		<Spanish>Xbox / teclado / ratón</Spanish>
 	</record>
 	<record>
 		<ID>214</ID>
 		<English>Xbox Axes / Mouse Axes</English>
 		<Russian>Оси Xbox / Оси Мыши</Russian>
 		<German>Xbox-Achsen / Maus-Achsen</German>
+		<Spanish>Ejes Xbox / Ejes ratón</Spanish>
 	</record>
 	<record>
 		<ID>215</ID>
 		<English>Radio</English>
 		<Russian>Радио</Russian>
 		<German>Radio</German>
+		<Spanish>Radio</Spanish>
 	</record>
 	<record>
 		<ID>216</ID>
 		<English>Off</English>
 		<Russian>Выключено</Russian>
 		<German>Aus</German>
+		<Spanish>Apagado</Spanish>
 	</record>
 	<record>
 		<ID>217</ID>
 		<English>Play</English>
 		<Russian>Воспроизведение</Russian>
 		<German>Play</German>
+		<Spanish>Jugar</Spanish>
 	</record>
 	<record>
 		<ID>218</ID>
 		<English>Pause</English>
 		<Russian>Пауза</Russian>
 		<German>Pause</German>
+		<Spanish>Pausa</Spanish>
 	</record>
 	<record>
 		<ID>219</ID>
 		<English>Stop</English>
 		<Russian>Стоп</Russian>
 		<German>Stop</German>
+		<Spanish>Paro</Spanish>
 	</record>
 	<record>
 		<ID>220</ID>
 		<English>Mute</English>
 		<Russian>Без звука</Russian>
 		<German>Stumm</German>
+		<Spanish>Silencio</Spanish>
 	</record>
 	<record>
 		<ID>221</ID>
 		<English>Next Channel</English>
 		<Russian>Следующий канал</Russian>
 		<German>Nächster Kanal</German>
+		<Spanish>Próximo canal</Spanish>
 	</record>
 	<record>
 		<ID>222</ID>
 		<English>Previous Channel</English>
 		<Russian>Предыдущий канал</Russian>
 		<German>Voriger Kanal</German>
+		<Spanish>Canal anterior</Spanish>
 	</record>
 	<record>
 		<ID>223</ID>
 		<English>Edit Channels</English>
 		<Russian>Редактировать каналы</Russian>
 		<German>Kanäle verwalten</German>
+		<Spanish>Editar canales</Spanish>
 	</record>
 	<record>
 		<ID>224</ID>
 		<English>Volume</English>
 		<Russian>Громкость</Russian>
 		<German>Lautstärke</German>
+		<Spanish>Volumen</Spanish>
 	</record>
 	<record>
 		<ID>225</ID>
 		<English>URL for Windows Media Player</English>
 		<Russian>URL для Windows Media Player</Russian>
 		<German>URL für Windows Media Player</German>
+		<Spanish>URL Windows Media Player</Spanish>
 	</record>
 	<record>
 		<ID>226</ID>
 		<English>Add</English>
 		<Russian>Добавить</Russian>
 		<German>Hinzufügen</German>
+		<Spanish>Añadir</Spanish>
 	</record>
 	<record>
 		<ID>227</ID>
 		<English>Radio Channels Editor</English>
 		<Russian>Редактор Радиоканалов</Russian>
 		<German>Radiokanal-Manager</German>
+		<Spanish>Editor canales radio</Spanish>
 	</record>
 	<record>
 		<ID>228</ID>
 		<English>Title</English>
 		<Russian>Название</Russian>
 		<German>Titel</German>
+		<Spanish>Título</Spanish>
 	</record>
 	<record>
 		<ID>229</ID>
 		<English>WoJ Emulator (Click: Play/Stop, DblClick: Next Channel)</English>
 		<Russian>WoJ Emulator (Клик: Воспр./Стоп, Двойной Клик: След. канал)</Russian>
 		<German>WoJ Emulator (Klick: Play/Stop, Doppelklick: Nächster Kanal)</German>
+		<Spanish>Emulador WoJ (Clic: on/off, Doble Clic: Siguiente canal)</Spanish>
 	</record>
 	<record>
 		<ID>230</ID>
 		<English>Incorrect Title</English>
 		<Russian>Некорректное Название</Russian>
 		<German>Falscher Titel</German>
+		<Spanish>Titulo incorrecto</Spanish>
 	</record>
 	<record>
 		<ID>231</ID>
 		<English>Incorrect URL</English>
 		<Russian>Некорректный URL</Russian>
 		<German>Falsche URL</German>
+		<Spanish>URL incorrecta</Spanish>
 	</record>
 	<record>
 		<ID>232</ID>
 		<English>Are you sure?</English>
 		<Russian>Вы уверены?</Russian>
 		<German>Sind Sie sicher?</German>
+		<Spanish>Esta seguro?</Spanish>
 	</record>
 	<record>
 		<ID>233</ID>
 		<English>Channel with the same Title already exists!</English>
 		<Russian>Канал с таким названием уже существует!</Russian>
 		<German>Kanal mit diesem Titel existiert bereits!</German>
+		<Spanish>Ya existe un canal con ese nombre!</Spanish>
 	</record>
 	<record>
 		<ID>234</ID>
 		<English>Channel with the same URL already exists!</English>
 		<Russian>Канал с таким URL уже существует!</Russian>
 		<German>Kanal mit dieser URL existiert bereits!</German>
+		<Spanish>Ya existe un canal con esa URL!</Spanish>
 	</record>
 	<record>
 		<ID>235</ID>
 		<English>(Click: Play/Stop, DblClick: Next Channel)</English>
 		<Russian>(Клик: Воспр./Стоп, Двойной Клик: След. канал)</Russian>
 		<German>(Klick: Play/Stop, Doppelklick: Nächster Kanal)</German>
+		<Spanish>(Clic: on/off, Doble Clic: Siguiente canal)</Spanish>
 	</record>
 	<record>
 		<ID>236</ID>
 		<English>Buffering...</English>
 		<Russian>Буферизация…</Russian>
 		<German>Buffern...</German>
+		<Spanish>Mitigación..</Spanish>
 	</record>
 	<record>
 		<ID>237</ID>
 		<English>Preparing new media…</English>
 		<Russian>Подготовка нового радиоканала...</Russian>
 		<German>Neues Radio vorbereiten...</German>
+		<Spanish>Preparando nuevo medio…</Spanish>
 	</record>
 	<record>
 		<ID>238</ID>
 		<English>Cannot load this media, please select another channel.</English>
 		<Russian>Ошибка загрузки, пожалуйста выберите другой радиоканал.</Russian>
 		<German>Radio kann nicht geladen werden, bitte anderen Kanal wählen.</German>
+		<Spanish>No se puede cargar este medio, seleccionar otro canal</Spanish>
 	</record>
 	<record>
 		<ID>239</ID>
 		<English>Close Editor and Play selected channel</English>
 		<Russian>Закрыть редактор и включить выбранный радиоканал</Russian>
 		<German>Manager schließen und gewählten Kanal abspielen</German>
+		<Spanish>Cierre el editor y encienda el canal seleccionado</Spanish>
 	</record>
 	<record>
 		<ID>240</ID>
 		<English>Push Left and Right Triggers of&#10; your gamepad to initialize them.&#10; See the changes on the Axes panel below.</English>
 		<Russian>Понажимайте Левый и Правый Триггеры своего&#10; геймпада чтобы инициализировать их.&#10; Вы должны видеть изменения на Панели Осей снизу.</Russian>
 		<German>Drücken Sie den linken und rechten Trigger&#10;Ihres Gamepads, um sie zu initialisieren.&#10; Bewegungen sind unten im Achsen-Panel sichtbar.</German>
+		<Spanish>Pulse los disparadores izquierdo&#10; y derecho de gamepad para inicializarlos.&#10; Ver cambios en el panel de ejes abajo</Spanish>
 	</record>
 	<record>
 		<ID>241</ID>
 		<English>Extra Duration (ms)</English>
 		<Russian>Доп. Время (мс)</Russian>
 		<German>Zusatzdauer (ms)</German>
+		<Spanish>Tiempo extra (ms)</Spanish>
 	</record>
 	<record>
 		<ID>242</ID>
 		<English>Polling Rate of Axes in milliseconds. (1-100)</English>
 		<Russian>Частота опроса осей в миллисекундах. (1-100)</Russian>
 		<German>Achsen-Abfragerate in Millisekunden. (1-100)</German>
+		<Spanish>Rango de votación de los ejes en ms (1-100)</Spanish>
 	</record>
 	<record>
 		<ID>243</ID>
 		<English>Buttons</English>
 		<Russian>Кнопки</Russian>
 		<German>Tasten</German>
+		<Spanish>Botón</Spanish>
 	</record>
 	<record>
 		<ID>244</ID>
 		<English>Axes</English>
 		<Russian>Оси</Russian>
 		<German>Achsen</German>
+		<Spanish>Ejes</Spanish>
 	</record>
 	<record>
 		<ID>245</ID>
 		<English>Automat</English>
 		<Russian>Автомат</Russian>
 		<German>Automatik</German>
+		<Spanish>Automát.</Spanish>
+	</record>
+	<record>
+		<ID>246</ID>
+		<English>The file is incompatible with connected device(s),&#10;if you continue mouse can become crazy,&#10;in this case disconnect your device(s).&#10;Continue? </English>
+		<Russian>Файл несовместим с подключенными устройствами,&#10;если продолжать то мышь может стать неуправляемой,&#10;в этом случае отключите устройства.&#10;Продолжать?</Russian>
+		<German>Die Datei ist mit mindestens einem verbundenen Gerät inkompatibel,&#10;wenn Sie fortfahren, kann die Maus verrückt spielen.&#10;Trennen Sie in diesem Fall Ihr(e) Gerät(e). Fortfahren?</German>
+		<Spanish>El archivo es incompatible con dispositivo(s) conectados,&#10; si continua el ratón puede volverse loco,&#10; en ese caso desconecte su dispositivo(s).&#10; ¿Desea continuar?</Spanish>
+	</record>
+	<record>
+		<ID>247</ID>
+		<English>Xbox Gamepad</English>
+		<Russian>Xbox Геймпад</Russian>
+		<German>Xbox Gamepad</German>
+		<Spanish>Xbox Gamepad</Spanish>
+	</record>
+	<record>
+		<ID>248</ID>
+		<English>Comment</English>
+		<Russian>Комментарий</Russian>
+		<German>Kommentar</German>
+		<Spanish>Comentario</Spanish>
+	</record>
+	<record>
+		<ID>249</ID>
+		<English>Trigger As</English>
+		<Russian>Триггер как</Russian>
+		<German>Trigger als</German>
+		<Spanish>Trigger como</Spanish>
+	</record>
+	<record>
+		<ID>250</ID>
+		<English>Axis</English>
+		<Russian>Ось</Russian>
+		<German>Achse</German>
+		<Spanish>Eje</Spanish>
+	</record>
+	<record>
+		<ID>251</ID>
+		<English>Button</English>
+		<Russian>Кнопка</Russian>
+		<German>Taste</German>
+		<Spanish>Botón</Spanish>
+	</record>
+	<record>
+		<ID>252</ID>
+		<English>Pedal</English>
+		<Russian>Педаль</Russian>
+		<German>Pedal</German>
+		<Spanish>Pedal</Spanish>
+	</record>
+	<record>
+		<ID>253</ID>
+		<English>Triggers as two separate one-direction Axes.</English>
+		<Russian>Триггеры как две отдельные однонаправленные оси.</Russian>
+		<German>Trigger als zwei separate unidirektionale Achsen.</German>
+		<Spanish>Se activa como dos ejes separados de una dirección.</Spanish>
+	</record>
+	<record>
+		<ID>254</ID>
+		<English>Triggers as two buttons.</English>
+		<Russian>Триггеры как две кнопки.</Russian>
+		<German>Trigger als zwei Tasten.</German>
+		<Spanish>Se activa como dos botones.</Spanish>
+	</record>
+	<record>
+		<ID>255</ID>
+		<English>Triggers as single two-direction Axis.</English>
+		<Russian>Триггеры как одна общая двунаправленная ось.</Russian>
+		<German>Trigger als einzelne bidirektionale Achse.</German>
+		<Spanish>Se activa como un único eje de dos direcciones.</Spanish>
+	</record>
+	<record>
+		<ID>256</ID>
+		<English>Delayed Reconnect</English>
+		<Russian>Переподключение с задержкой</Russian>
+		<German>Verzögerte Neuverbindung</German>
+		<Spanish>Reconexión retardada</Spanish>
+	</record>
+	<record>
+		<ID>257</ID>
+		<English>min</English>
+		<Russian>мин</Russian>
+		<German>min</German>
+		<Spanish>minuto</Spanish>
+	</record>
+	<record>
+		<ID>258</ID>
+		<English>sec</English>
+		<Russian>сек</Russian>
+		<German>sek</German>
+		<Spanish>seg</Spanish>
+	</record>
+	<record>
+		<ID>259</ID>
+		<English>Connection</English>
+		<Russian>Подключение</Russian>
+		<German>Verbindung</German>
+		<Spanish>Conexión</Spanish>
+	</record>
+	<record>
+		<ID>260</ID>
+		<English>Exclusive mode</English>
+		<Russian>Эксклюзивный режим</Russian>
+		<German>Exklusivmodus</German>
+		<Spanish>Modo Exclusivo</Spanish>
+	</record>
+	<record>
+		<ID>261</ID>
+		<English>Handle Failures</English>
+		<Russian>Обработка отключений</Russian>
+		<German>Fehlerbehandlung</German>
+		<Spanish>Manejo de los fallos</Spanish>
+	</record>
+	<record>
+		<ID>262</ID>
+		<English>Start your game now!</English>
+		<Russian>Сейчас надо включить игру!</Russian>
+		<German>Spiel jetzt starten!</German>
+		<Spanish>¡Comienza a jugar ahora!</Spanish>
+	</record>
+	<record>
+		<ID>263</ID>
+		<English>Delayed Reconnect fully reconnects your gaming controllers,&#10; including disabling and enabling them in the device manager.</English>
+		<Russian>Переподключение с задержкой полностью переподключает контроллеры,&#10; включая отключение и включение в диспетчере устройств.</Russian>
+		<German>Verzögerte Neuverbindung verbindet deine Gamecontroller komplett neu, &#10; dabei wird er im Gerätemanager deaktiviert und wieder aktiviert.</German>
+		<Spanish>Reconexión retardada vuelve a conectar completamente los controladores de juegos,&#10; incluso deshabilitándolos y habilitándolos en el administrador de dispositivos.</Spanish>
+	</record>
+	<record>
+		<ID>264</ID>
+		<English>Try to change this option in the case of any problem with connecting to game.</English>
+		<Russian>Попробуйте изменить это если есть сложности с подключением к игре.</Russian>
+		<German>Bei Schwierigkeiten mit der Verbindung zu einem Spiel sollte dieser Modus umgeschaltet werden.</German>
+		<Spanish>Intente cambiar esta opción en caso de cualquier problema con la conexión al juego.</Spanish>
+	</record>
+	<record>
+		<ID>265</ID>
+		<English>Activate DS4 Touchpad</English>
+		<Russian>Активировать DS4 Тачпад</Russian>
+		<German>DS4-Touchpad aktivieren</German>
+		<Spanish>Activar el Touchpad DS4</Spanish>
+	</record>
+	<record>
+		<ID>266</ID>
+		<English>Modify Selected Assignment</English>
+		<Russian>Модифицировать выбранное назначение</Russian>
+		<German>Gewählte Zuweisung bearbeiten</German>
+		<Spanish>Modificar la asignación seleccionada</Spanish>
+	</record>
+	<record>
+		<ID>267</ID>
+		<English>Show Mapping</English>
+		<Russian>Показать схему назначений</Russian>
+		<German>Zuweisung anzeigen</German>
+		<Spanish>Mostrar asignación</Spanish>
+	</record>
+	<record>
+		<ID>268</ID>
+		<English>Add New Assignment</English>
+		<Russian>Добавить новое назначение</Russian>
+		<German>Neue Zuweisung hinzuf.</German>
+		<Spanish>Añadir nueva asignación</Spanish>
+	</record>
+	<record>
+		<ID>269</ID>
+		<English>Clear</English>
+		<Russian>Очистить</Russian>
+		<German>Alle enfernen</German>
+		<Spanish>Limpiar</Spanish>
+	</record>
+	<record>
+		<ID>270</ID>
+		<English>Joystick Axis</English>
+		<Russian>Ось Джойстика</Russian>
+		<German>Controller-Achse</German>
+		<Spanish>Ejes del Joystick</Spanish>
+	</record>
+	<record>
+		<ID>271</ID>
+		<English>Edit Macros</English>
+		<Russian>Редактировать макросы</Russian>
+		<German>Makros bearbeiten</German>
+		<Spanish>Editar Macros</Spanish>
+	</record>
+	<record>
+		<ID>272</ID>
+		<English>Actions of Macro</English>
+		<Russian>Действия Макроса</Russian>
+		<German>Makro-Aktion</German>
+		<Spanish>Acciones del Macro</Spanish>
+	</record>
+	<record>
+		<ID>273</ID>
+		<English>Existing Macros</English>
+		<Russian>Имеющиеся Макросы</Russian>
+		<German>Existierende Makros</German>
+		<Spanish>Macros existentes</Spanish>
+	</record>
+	<record>
+		<ID>274</ID>
+		<English>Repeat</English>
+		<Russian>Повтор</Russian>
+		<German>Wiederholen</German>
+		<Spanish>Repetir</Spanish>
+	</record>
+	<record>
+		<ID>275</ID>
+		<English>Add Keyboard or Mouse Key Action</English>
+		<Russian>Добавить действие кнопки клавиатуры или мыши</Russian>
+		<German>Maus-oder Keyboardaktion hinzuf.</German>
+		<Spanish>Añadir acción clave del  teclado o ratón </Spanish>
+	</record>
+	<record>
+		<ID>276</ID>
+		<English>Add Mouse Move Action</English>
+		<Russian>Добавить действие движения мыши</Russian>
+		<German>Mausbewegungs-Aktion hinzuf.</German>
+		<Spanish>Añadir acción de movimiento del ratón</Spanish>
+	</record>
+	<record>
+		<ID>277</ID>
+		<English>Add Delay (ms)</English>
+		<Russian>Добавить Паузу (мс)</Russian>
+		<German>Verzögerung hinzuf. (ms)</German>
+		<Spanish>Añadir retardo (ms)</Spanish>
+	</record>
+	<record>
+		<ID>278</ID>
+		<English>Press</English>
+		<Russian>Нажато</Russian>
+		<German>Drücken</German>
+		<Spanish>Presionar</Spanish>
+	</record>
+	<record>
+		<ID>279</ID>
+		<English>Release</English>
+		<Russian>Отпущено</Russian>
+		<German>Loslassen</German>
+		<Spanish>Soltar</Spanish>
+	</record>
+	<record>
+		<ID>280</ID>
+		<English>Step</English>
+		<Russian>Шаг</Russian>
+		<German>Entfernung</German>
+		<Spanish>Paso</Spanish>
+	</record>
+	<record>
+		<ID>281</ID>
+		<English>Amount</English>
+		<Russian>Количество</Russian>
+		<German>Anzahl</German>
+		<Spanish>Cantidad</Spanish>
+	</record>
+	<record>
+		<ID>282</ID>
+		<English>Timeout (ms)</English>
+		<Russian>Задержка (мс)</Russian>
+		<German>Timeout (ms)</German>
+		<Spanish>Tiempo de espera (ms)</Spanish>
+	</record>
+	<record>
+		<ID>283</ID>
+		<English>Create new macro</English>
+		<Russian>Создать новый макрос</Russian>
+		<German>Neues Makro erstellen</German>
+		<Spanish>Crear nuevo Macro</Spanish>
+	</record>
+	<record>
+		<ID>284</ID>
+		<English>Remove selected macro</English>
+		<Russian>Удалить выбранный макрос</Russian>
+		<German>Gewähltes Makro entfernen</German>
+		<Spanish>Eliminar el Macro seleccionado</Spanish>
+	</record>
+	<record>
+		<ID>285</ID>
+		<English>Remove selected action from macro</English>
+		<Russian>Удалить выбранное действие из макроса</Russian>
+		<German>Gewählte Aktion aus Makro löschen</German>
+		<Spanish>Eliminar la acción seleccionada del macro</Spanish>
+	</record>
+	<record>
+		<ID>286</ID>
+		<English>Move selected action upper</English>
+		<Russian>Передвинуть выбранное действие выше</Russian>
+		<German>Gewählte Aktion nach unten</German>
+		<Spanish>Mover la acción seleccionada arriba</Spanish>
+	</record>
+	<record>
+		<ID>287</ID>
+		<English>Move selected action  lower</English>
+		<Russian>Передвинуть выбранное действие ниже</Russian>
+		<German>Gewählte Aktion nach oben</German>
+		<Spanish>Mover la acción seleccionada abajo</Spanish>
+	</record>
+	<record>
+		<ID>288</ID>
+		<English>Save actions as macro</English>
+		<Russian>Сохранить действия как макрос</Russian>
+		<German>Aktionen als Makro speichern</German>
+		<Spanish>Guardar las acciones como Macro</Spanish>
+	</record>
+	<record>
+		<ID>289</ID>
+		<English>Repeat macro until joystick button released</English>
+		<Russian>Повторять макрос пока нажата кнопка джойстика</Russian>
+		<German>Makro wiederholen solange Controllertaste gedrückt</German>
+		<Spanish>Repita la Macro hasta que se suelte el botón del joystick</Spanish>
+	</record>
+	<record>
+		<ID>290</ID>
+		<English>Macro Name</English>
+		<Russian>Название Макроса</Russian>
+		<German>Makro-Name</German>
+		<Spanish>Nombre del Macro</Spanish>
+	</record>
+	<record>
+		<ID>291</ID>
+		<English>Close Macros Editor</English>
+		<Russian>Закрыть Редактор Макросов</Russian>
+		<German>Makro-Editor schließen</German>
+		<Spanish>Cierra el editor de Macros</Spanish>
+	</record>
+	<record>
+		<ID>292</ID>
+		<English>Add action to macro</English>
+		<Russian>Добавить действие в макрос</Russian>
+		<German>Aktion zu Makro hinzuf.</German>
+		<Spanish>Añadir accion a Macro</Spanish>
+	</record>
+	<record>
+		<ID>293</ID>
+		<English>Select Mouse Move direction</English>
+		<Russian>Выберите направление движение мыши</Russian>
+		<German>Maus-Bewegungsrichtung wählen</German>
+		<Spanish>Selecciona la dirección del movimiento del ratón</Spanish>
+	</record>
+	<record>
+		<ID>294</ID>
+		<English>Step of mouse movement</English>
+		<Russian>Шаг движения мыши</Russian>
+		<German>Mausbewegungs-Distanz</German>
+		<Spanish>Paso del movimiento del ratón</Spanish>
+	</record>
+	<record>
+		<ID>295</ID>
+		<English>Amount of continuous mouse movements</English>
+		<Russian>Количество последовательных движений мыши</Russian>
+		<German>Anzahl ununterbrochner Mausbewegungen</German>
+		<Spanish>Cantidad de movimientos continuos del ratón</Spanish>
+	</record>
+	<record>
+		<ID>296</ID>
+		<English>Delay between mouse movements</English>
+		<Russian>Задержка между движениями мыши</Russian>
+		<German>Pause zwischen Mausbewegungen</German>
+		<Spanish>Retraso entre los movimientos del ratón</Spanish>
+	</record>
+	<record>
+		<ID>297</ID>
+		<English>Add this delay between actions of macro</English>
+		<Russian>Добавьте эту задержку между действиями макроса</Russian>
+		<German>Diese Pause zwischen Makro-Aktionen hinzufügen</German>
+		<Spanish>Añadir este retraso entre acciones de macro</Spanish>
+	</record>
+	<record>
+		<ID>298</ID>
+		<English>Community</English>
+		<Russian>Сообщество</Russian>
+		<German>Gemeinschaft</German>
+		<Spanish>Comunidad</Spanish>
+	</record>
+	<record>
+		<ID>299</ID>
+		<English>Output &gt; Keyboard / Mouse / Macro</English>
+		<Russian>Вывод &gt; Клавиатура / Мышь / Макрос</Russian>
+		<German>Ausgabe &gt; Tastatur / Maus / Maus</German>
+		<Spanish>Salida &gt; Teclado / Ratón / Macro</Spanish>
+	</record>
+	<record>
+		<ID>300</ID>
+		<English>Input &lt; Joystick / Keyboard / Mouse</English>
+		<Russian>Ввод &lt; Джойстик / Клавиатура / Мышь</Russian>
+		<German>Eingabe &lt; Controller / Tastatur / Maus</German>
+		<Spanish>Entrada &lt; Joystick / Teclado / Ratón</Spanish>
+	</record>
+	<record>
+		<ID>301</ID>
+		<English>Input &lt; Joystick Axis</English>
+		<Russian>Ввод &lt; Ось Джойстика</Russian>
+		<German>Eingabe &lt; Controllerachse</German>
+		<Spanish>Entrada &lt; Ejes del Joystick</Spanish>
+	</record>
+	<record>
+		<ID>302</ID>
+		<English>Output &gt; Mouse Axis</English>
+		<Russian>Вывод &gt; Ось Мыши</Russian>
+		<German>Ausgabe &gt; Mausachse</German>
+		<Spanish>Salida &gt; Ejes ratón</Spanish>
+	</record>
+	<record>
+		<ID>303</ID>
+		<English>Input</English>
+		<Russian>Ввод</Russian>
+		<German>Eingabe</German>
+		<Spanish>Entrada</Spanish>
+	</record>
+	<record>
+		<ID>304</ID>
+		<English>Output</English>
+		<Russian>Вывод</Russian>
+		<German>Ausgabe</German>
+		<Spanish>Salida</Spanish>
+	</record>
+	<record>
+		<ID>305</ID>
+		<English>Donate</English>
+		<Russian>Пожертвовать</Russian>
+		<German>Spenden</German>
+		<Spanish>Donar</Spanish>
+	</record>
+	<record>
+		<ID>306</ID>
+		<English>Server</English>
+		<Russian>Сервер</Russian>
+		<German>Server</German>
+		<Spanish>Servidor</Spanish>
+	</record>
+	<record>
+		<ID>307</ID>
+		<English>IP or Name:</English>
+		<Russian>IP или Имя:</Russian>
+		<German>IP oder Name:</German>
+		<Spanish>IP o nombre:</Spanish>
+	</record>
+	<record>
+		<ID>308</ID>
+		<English>Port:</English>
+		<Russian>Порт:</Russian>
+		<German>Port:</German>
+		<Spanish>Puerto:</Spanish>
+	</record>
+	<record>
+		<ID>309</ID>
+		<English>Connect</English>
+		<Russian>Подключить</Russian>
+		<German>Verbinden</German>
+		<Spanish>Conectar</Spanish>
+	</record>
+	<record>
+		<ID>310</ID>
+		<English>Disconnected</English>
+		<Russian>Отключено</Russian>
+		<German>Getrennt</German>
+		<Spanish>Desconectado</Spanish>
+	</record>
+	<record>
+		<ID>311</ID>
+		<English>Closed</English>
+		<Russian>Закрыто</Russian>
+		<German>Geschlossen</German>
+		<Spanish>Cerrado</Spanish>
+	</record>
+	<record>
+		<ID>312</ID>
+		<English>Already disconnected</English>
+		<Russian>Уже отключено</Russian>
+		<German>Bereits getrennt</German>
+		<Spanish>Ya desconectado</Spanish>
+	</record>
+	<record>
+		<ID>313</ID>
+		<English>Connecting</English>
+		<Russian>Подключение</Russian>
+		<German>Verbinden</German>
+		<Spanish>Conectando</Spanish>
+	</record>
+	<record>
+		<ID>314</ID>
+		<English>Connected</English>
+		<Russian>Подключено</Russian>
+		<German>Verbunden</German>
+		<Spanish>Conectado</Spanish>
+	</record>
+	<record>
+		<ID>315</ID>
+		<English>Disconnect</English>
+		<Russian>Отключить</Russian>
+		<German>Trennen</German>
+		<Spanish>Desconectar</Spanish>
+	</record>
+	<record>
+		<ID>316</ID>
+		<English>Already connected</English>
+		<Russian>Уже подключено</Russian>
+		<German>Schon verbunden</German>
+		<Spanish>Ya conectado</Spanish>
+	</record>
+	<record>
+		<ID>317</ID>
+		<English>Already listening</English>
+		<Russian>Уже ждём</Russian>
+		<German>Ich höre schon zu</German>
+		<Spanish>Ya estoy escuchando</Spanish>
+	</record>
+	<record>
+		<ID>318</ID>
+		<English>Waiting</English>
+		<Russian>Ожидание</Russian>
+		<German>Warten</German>
+		<Spanish>Esperando</Spanish>
+	</record>
+	<record>
+		<ID>319</ID>
+		<English>Sending</English>
+		<Russian>Посылаем</Russian>
+		<German>Senden</German>
+		<Spanish>Enviando</Spanish>
+	</record>
+	<record>
+		<ID>320</ID>
+		<English>Wrong port number</English>
+		<Russian>Неправильный порт</Russian>
+		<German>Falsche Portnummer</German>
+		<Spanish>Número de puerto incorrecto</Spanish>
+	</record>
+	<record>
+		<ID>321</ID>
+		<English>Wrong IP format</English>
+		<Russian>Неправильный IP формат</Russian>
+		<German>Falsches IP-Format</German>
+		<Spanish>Formato IP incorrecto</Spanish>
+	</record>
+	<record>
+		<ID>322</ID>
+		<English>Connection failed</English>
+		<Russian>Соединение потеряно</Russian>
+		<German>Verbindung fehlgeschlagen</German>
+		<Spanish>La conexión falló</Spanish>
+	</record>
+	<record>
+		<ID>323</ID>
+		<English>Toggle Switches</English>
+		<Russian>Тумблеры</Russian>
+		<German>Schalter</German>
+		<Spanish>Acción secuencial</Spanish>
+	</record>
+	<record>
+		<ID>324</ID>
+		<English>Several assignments to the same Joystick button will emulate&#10; different actions on each press (wrap-around)</English>
+		<Russian>Несколько назначений на одну Кнопку Джойстика будут&#10; эмулировать различные действия (циклически)</Russian>
+		<German>Mehrere verschiedene Aktionen werden einer einzigen&#10; Controllertaste (nacheinander umschaltbar) zugewiesen.</German>
+		<Spanish>Varias asignaciones al mismo botón de Joystick simularán diferentes acciones en cada pulsación. (secuencia circular)</Spanish>
+	</record>
+	<record>
+		<ID>325</ID>
+		<English>Emulate keyboard key</English>
+		<Russian>Эмулировать клавишу клавиатуры</Russian>
+		<German>Tastaturtaste simulieren</German>
+		<Spanish>Tecla emuladora del teclado</Spanish>
+	</record>
+	<record>
+		<ID>326</ID>
+		<English>Emulate mouse button or wheel</English>
+		<Russian>Эмулировать кнопку или колёсико мыши</Russian>
+		<German>Maustaste oder -rad simulieren</German>
+		<Spanish>Emulador de botón o rueda del ratón.</Spanish>
+	</record>
+	<record>
+		<ID>327</ID>
+		<English>Run macro from the list</English>
+		<Russian>Запустить макрос из списка</Russian>
+		<German>Makro von Liste ausführen</German>
+		<Spanish>Ejecutar macro de la lista</Spanish>
+	</record>
+	<record>
+		<ID>328</ID>
+		<English>Run radio function from the list</English>
+		<Russian>Запустить функцию радио из списка</Russian>
+		<German>Radiofunktion von Liste ausführen</German>
+		<Spanish>Ejecutar la función de radio de la lista</Spanish>
+	</record>
+	<record>
+		<ID>329</ID>
+		<English>Run Windows command</English>
+		<Russian>Запустить команду Windows</Russian>
+		<German>Windows-Befehl ausführen</German>
+		<Spanish>Ejecutar el comando de Windows</Spanish>
+	</record>
+	<record>
+		<ID>330</ID>
+		<English>Switch mouse sensitivity</English>
+		<Russian>Переключить чувствительность мыши</Russian>
+		<German>Mausempfindlichkeit umschalten</German>
+		<Spanish>Cambiar la sensibilidad del mouse</Spanish>
+	</record>
+	<record>
+		<ID>331</ID>
+		<English>Input from joystick key or action selected from the list</English>
+		<Russian>Ввод с кнопки джойстика или действия выбранного из списка</Russian>
+		<German>Aktion durch Controllereingabe oder Liste wählen </German>
+		<Spanish>Entrada desde tecla del joystick o acción seleccionada de la lista</Spanish>
+	</record>
+	<record>
+		<ID>332</ID>
+		<English>Input from keyboard key</English>
+		<Russian>Ввод с клавиши клавиатуры</Russian>
+		<German>Eingabe durch Tastaturtaste</German>
+		<Spanish>Entrada desde tecla del teclado</Spanish>
+	</record>
+	<record>
+		<ID>333</ID>
+		<English>Input from mouse button or wheel</English>
+		<Russian>Ввод с кнопки или колёсика мыши</Russian>
+		<German>Eingabe durch Maustaste oder -rad</German>
+		<Spanish>Entrada desde botón o rueda del mouse</Spanish>
+	</record>
+	<record>
+		<ID>334</ID>
+		<English>Emulate mouse movement</English>
+		<Russian>Эмулировать движение мыши</Russian>
+		<German>Mausbewegung simulieren</German>
+		<Spanish>Emular el movimiento del mouse</Spanish>
+	</record>
+	<record>
+		<ID>335</ID>
+		<English>Input from joystick axis</English>
+		<Russian>Ввод с оси джойстика</Russian>
+		<German>Eingabe durch Controllerachse</German>
+		<Spanish>Entrada desde la palanca del joystick</Spanish>
+	</record>
+	<record>
+		<ID>336</ID>
+		<English>Select output action from the list</English>
+		<Russian>Выберите действие для вывода из списка</Russian>
+		<German>Ausgabeaktion von Liste wählen</German>
+		<Spanish>Seleccionar acción de salida de la lista</Spanish>
+	</record>
+	<record>
+		<ID>337</ID>
+		<English>Select input action from the list</English>
+		<Russian>Выберите действие для ввода из списка</Russian>
+		<German>Eingabeaktion von Liste wählen</German>
+		<Spanish>Seleccionar acción de entrada de la lista</Spanish>
+	</record>
+	<record>
+		<ID>338</ID>
+		<English>Press joystick, keyboard or mouse key here</English>
+		<Russian>Нажмите кнопку джойстика, клавиатуры или мыши здесь</Russian>
+		<German>Hier Controller- Tastatur- oder Maustaste drücken</German>
+		<Spanish>Presione aquí una tecla del joystick, el teclado o del mouse</Spanish>
+	</record>
+	<record>
+		<ID>339</ID>
+		<English>Share Configuration</English>
+		<Russian>Поделиться конфигурацией</Russian>
+		<German>Gemeinsame Konfiguration</German>
+		<Spanish>Compartir configuración</Spanish>
+	</record>
+	<record>
+		<ID>340</ID>
+		<English>Game or Application</English>
+		<Russian>Игра или приложение</Russian>
+		<German>Spiel oder Anwendung</German>
+		<Spanish>Juego o aplicación</Spanish>
+	</record>
+	<record>
+		<ID>341</ID>
+		<English>Cancel</English>
+		<Russian>Отменить</Russian>
+		<German>Stornieren</German>
+		<Spanish>Cancelar</Spanish>
+	</record>
+	<record>
+		<ID>342</ID>
+		<English>Long Press '%' key switches the mode</English>
+		<Russian>Длинное нажатие клавиши '%' переключает режим</Russian>
+		<German>Langer Tastendruck '%' schaltet den Modus um</German>
+		<Spanish>Pulsación larga La tecla '%' cambia el modo</Spanish>
+	</record>
+	<record>
+		<ID>343</ID>
+		<English>XInput Emulator</English>
+		<Russian>XInput Эмулятор</Russian>
+		<German>XInput-Emulator</German>
+		<Spanish>Emulador de controles de entrada Xinput</Spanish>
+	</record>
+	<record>
+		<ID>344</ID>
+		<English>DS4 Touchpad</English>
+		<Russian>DS4 Тачпад</Russian>
+		<German>DS4-Touchpad</German>
+		<Spanish>Panel tactil DS4 para el ratón en un portatil</Spanish>
+	</record>
+	<record>
+		<ID>345</ID>
+		<English>Emulate</English>
+		<Russian>Эмулировать</Russian>
+		<German>Emulieren</German>
+		<Spanish>Emular</Spanish>
+	</record>
+	<record>
+		<ID>346</ID>
+		<English>Left Stick</English>
+		<Russian>Левый Стик</Russian>
+		<German>Linker Analogstick</German>
+		<Spanish>Joystick izquierdo en un mando de consola o gamepad</Spanish>
+	</record>
+	<record>
+		<ID>347</ID>
+		<English>Right Stick</English>
+		<Russian>Правый Стик</Russian>
+		<German>Rechter Analogstick</German>
+		<Spanish>Joystick derecho en un mando de consola o gamepad</Spanish>
+	</record>
+	<record>
+		<ID>348</ID>
+		<English>Nothing</English>
+		<Russian>Ничего</Russian>
+		<German>Nichts</German>
+		<Spanish>Nada</Spanish>
+	</record>
+	<record>
+		<ID>349</ID>
+		<English>Invert Vertical</English>
+		<Russian>Инвертировать вертикаль</Russian>
+		<German>Vertikal invertieren</German>
+		<Spanish>Invertir vertical</Spanish>
+	</record>
+	<record>
+		<ID>350</ID>
+		<English>Start Automatic Adjustment</English>
+		<Russian>Начать автоматическую настройку</Russian>
+		<German>Automatische Justierung starten</German>
+		<Spanish>Comience el ajuste automático</Spanish>
+	</record>
+	<record>
+		<ID>351</ID>
+		<English>Stop Automatic Adjustment</English>
+		<Russian>Прервать автоматическую настройку</Russian>
+		<German>Automatische Justierung beenden</German>
+		<Spanish>Detener el ajuste automático</Spanish>
+	</record>
+	<record>
+		<ID>352</ID>
+		<English>Reset to Defaults</English>
+		<Russian>Вернуть настройки по умолчанию</Russian>
+		<German>Standardwerte wiederherstellen</German>
+		<Spanish>Restablecer los valores predeterminados </Spanish>
+	</record>
+	<record>
+		<ID>353</ID>
+		<English>Adjusting DeadZone</English>
+		<Russian>Автоматическая настройка мёртвой зоны осей</Russian>
+		<German>Toten Winkel justieren</German>
+		<Spanish>Ajuste de zona muerta</Spanish>
 	</record>
 </data-set>

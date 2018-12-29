@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Joystick settings and mapping-->
+<Configuration>
+  <Settings>
+    <Interface>XInput</Interface>
+    <NumOfDevices>1</NumOfDevices>
+    <Device0></Device0>
+    <ButtonsPollingRate>10</ButtonsPollingRate>
+    <AxesPollingRate>10</AxesPollingRate>
+    <AxisThresholdFrom>25000</AxisThresholdFrom>
+    <AxisThresholdTo>40000</AxisThresholdTo>
+    <TriggerLeftFrom>25000</TriggerLeftFrom>
+    <TriggerLeftTo>40000</TriggerLeftTo>
+    <TriggerRightFrom>25000</TriggerRightFrom>
+    <TriggerRightTo>40000</TriggerRightTo>
+    <StickLeftXFrom>25000</StickLeftXFrom>
+    <StickLeftXTo>40000</StickLeftXTo>
+    <StickLeftYFrom>25000</StickLeftYFrom>
+    <StickLeftYTo>40000</StickLeftYTo>
+    <StickRightXFrom>25000</StickRightXFrom>
+    <StickRightXTo>40000</StickRightXTo>
+    <StickRightYFrom>25000</StickRightYFrom>
+    <StickRightYTo>40000</StickRightYTo>
+    <Sensitivity1AxisX>30</Sensitivity1AxisX>
+    <Sensitivity1AxisY>30</Sensitivity1AxisY>
+    <Sensitivity2AxisX>1</Sensitivity2AxisX>
+    <Sensitivity2AxisY>1</Sensitivity2AxisY>
+    <Sound>1</Sound>
+    <ExtEnter>0</ExtEnter>
+    <Toggles>1</Toggles>
+    <ExclusiveMode>True</ExclusiveMode>
+    <HandleFailures>True</HandleFailures>
+  </Settings>
+  <Mapping>
+    <Item0>
+      <Src>Joystick0 Trigger Right</Src>
+      <Dest>Mouse Left</Dest>
+      <Action>Shoot</Action>
+    </Item0>
+    <Item1>
+      <Src>Joystick0 D-pad Up</Src>
+      <Dest>Keyboard W</Dest>
+      <Action>Forward</Action>
+    </Item1>
+    <Item2>
+      <Src>Joystick0 D-pad Down</Src>
+      <Dest>Keyboard S</Dest>
+      <Action>Backward</Action>
+    </Item2>
+    <Item3>
+      <Src>Joystick0 D-pad Left</Src>
+      <Dest>Keyboard A</Dest>
+      <Action>Left</Action>
+    </Item3>
+    <Item4>
+      <Src>Joystick0 D-pad Right</Src>
+      <Dest>Keyboard D</Dest>
+      <Action>Right</Action>
+    </Item4>
+    <Item5>
+      <Src>Joystick0 Stick Left Y [+]</Src>
+      <Dest>Keyboard W</Dest>
+      <Action>Forward</Action>
+    </Item5>
+    <Item6>
+      <Src>Joystick0 Stick Left Y [-]</Src>
+      <Dest>Keyboard S</Dest>
+      <Action>Backward</Action>
+    </Item6>
+    <Item7>
+      <Src>Joystick0 Stick Left X [-]</Src>
+      <Dest>Keyboard A</Dest>
+      <Action>Left</Action>
+    </Item7>
+    <Item8>
+      <Src>Joystick0 Stick Left X [+]</Src>
+      <Dest>Keyboard D</Dest>
+      <Action>Right</Action>
+    </Item8>
+    <Item9>
+      <Src>Joystick0 Stick Right X</Src>
+      <Dest>Mouse Axis X</Dest>
+      <Action>Rotate Weapon Horiz.</Action>
+    </Item9>
+    <Item10>
+      <Src>Joystick0 Stick Right Y</Src>
+      <Dest>Mouse Axis Y Inverted</Dest>
+      <Action>Rotate Weapon Vert.</Action>
+    </Item10>
+    <Item11>
+      <Src>Joystick0 Trigger Left</Src>
+      <Dest>Keyboard ShiftKey Left</Dest>
+      <Action>Zoom</Action>
+    </Item11>
+    <Item12>
+      <Src>Joystick0 Button Back</Src>
+      <Dest>Keyboard Escape</Dest>
+      <Action>Back</Action>
+    </Item12>
+    <Item13>
+      <Src>Joystick0 Button Start</Src>
+      <Dest>Keyboard R</Dest>
+      <Action>Auto Forward</Action>
+    </Item13>
+    <Item14>
+      <Src>Joystick0 Button X</Src>
+      <Dest>Keyboard X</Dest>
+      <Action>Artillery Fix Body</Action>
+    </Item14>
+    <Item15>
+      <Src>Joystick0 Button Y</Src>
+      <Dest>Sensitivity 1/2</Dest>
+      <Action>Sensitivity 1/2</Action>
+    </Item15>
+    <Item16>
+      <Src>Joystick0 Button B</Src>
+      <Dest>Mouse Right</Dest>
+      <Action>Follow the Target</Action>
+    </Item16>
+    <Item17>
+      <Src>Joystick0 Bumper Right</Src>
+      <Dest>Mouse Wheel Up</Dest>
+      <Action>Zoom In</Action>
+    </Item17>
+    <Item18>
+      <Src>Joystick0 Bumper Left</Src>
+      <Dest>Mouse Wheel Down</Dest>
+      <Action>Zoom Out</Action>
+    </Item18>
+    <Item19>
+      <Src>Joystick0 Button A</Src>
+      <Dest>Keyboard C</Dest>
+      <Action>Reloading</Action>
+    </Item19>
+    <Item20>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D1</Dest>
+      <Action></Action>
+    </Item20>
+    <Item21>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D1</Dest>
+      <Action>Ammunition 1</Action>
+    </Item21>
+    <Item22>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D2</Dest>
+      <Action></Action>
+    </Item22>
+    <Item23>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D2</Dest>
+      <Action>Ammunition 2</Action>
+    </Item23>
+    <Item24>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D3</Dest>
+      <Action></Action>
+    </Item24>
+    <Item25>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard D3</Dest>
+      <Action>Ammunition 3</Action>
+    </Item25>
+    <Item26>
+      <Src>Joystick0 StickBtn Left</Src>
+      <Dest>Keyboard D4</Dest>
+      <Action>Ammunition 4</Action>
+    </Item26>
+    <Item27>
+      <Src>Joystick0 StickBtn Left</Src>
+      <Dest>Keyboard D5</Dest>
+      <Action>Ammunition 5</Action>
+    </Item27>
+  </Mapping>
+</Configuration>

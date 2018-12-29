@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Joystick settings and mapping-->
+<Configuration>
+  <Settings>
+    <NumOfDevices>1</NumOfDevices>
+    <Device0></Device0>
+    <RefreshRate>11</RefreshRate>
+    <AxisThresholdFrom>25000</AxisThresholdFrom>
+    <AxisThresholdTo>40000</AxisThresholdTo>
+  </Settings>
+  <Mapping>
+    <Item0>
+      <Src>Joystick0 Button 1</Src>
+      <Dest>Xbox Button A</Dest>
+      <Comment></Comment>
+    </Item0>
+    <Item1>
+      <Src>Joystick0 Button 2</Src>
+      <Dest>Xbox Button B</Dest>
+      <Comment></Comment>
+    </Item1>
+    <Item2>
+      <Src>Joystick0 Button 0</Src>
+      <Dest>Xbox Button X</Dest>
+      <Comment></Comment>
+    </Item2>
+    <Item3>
+      <Src>Joystick0 Button 3</Src>
+      <Dest>Xbox Button Y</Dest>
+      <Comment></Comment>
+    </Item3>
+    <Item4>
+      <Src>Joystick0 Button 9</Src>
+      <Dest>Xbox Button Start</Dest>
+      <Comment></Comment>
+    </Item4>
+    <Item5>
+      <Src>Joystick0 Button 8</Src>
+      <Dest>Xbox Button Back</Dest>
+      <Comment></Comment>
+    </Item5>
+    <Item6>
+      <Src>Joystick0 Button 4</Src>
+      <Dest>Xbox Bumper Left</Dest>
+      <Comment></Comment>
+    </Item6>
+    <Item7>
+      <Src>Joystick0 Button 5</Src>
+      <Dest>Xbox Bumper Right</Dest>
+      <Comment></Comment>
+    </Item7>
+    <Item8>
+      <Src>Joystick0 Pov Up</Src>
+      <Dest>Xbox D-pad Up</Dest>
+      <Comment></Comment>
+    </Item8>
+    <Item9>
+      <Src>Joystick0 Pov Down</Src>
+      <Dest>Xbox D-pad Down</Dest>
+      <Comment></Comment>
+    </Item9>
+    <Item10>
+      <Src>Joystick0 Pov Left</Src>
+      <Dest>Xbox D-pad Left</Dest>
+      <Comment></Comment>
+    </Item10>
+    <Item11>
+      <Src>Joystick0 Pov Right</Src>
+      <Dest>Xbox D-pad Right</Dest>
+      <Comment></Comment>
+    </Item11>
+    <Item12>
+      <Src>Joystick0 Pov UpLeft</Src>
+      <Dest>Xbox D-pad UpLeft</Dest>
+      <Comment></Comment>
+    </Item12>
+    <Item13>
+      <Src>Joystick0 Pov UpRight</Src>
+      <Dest>Xbox D-pad UpRight</Dest>
+      <Comment></Comment>
+    </Item13>
+    <Item14>
+      <Src>Joystick0 Pov DownLeft</Src>
+      <Dest>Xbox D-pad DownLeft</Dest>
+      <Comment></Comment>
+    </Item14>
+    <Item15>
+      <Src>Joystick0 Pov DownRight</Src>
+      <Dest>Xbox D-pad DownRight</Dest>
+      <Comment></Comment>
+    </Item15>
+    <Item16>
+      <Src>Joystick0 Button 10</Src>
+      <Dest>Xbox StickBtn Left</Dest>
+      <Comment></Comment>
+    </Item16>
+    <Item17>
+      <Src>Joystick0 Button 11</Src>
+      <Dest>Xbox StickBtn Right</Dest>
+      <Comment></Comment>
+    </Item17>
+    <Item18>
+      <Src>Joystick0 Axis Rx</Src>
+      <Dest>Xbox Trigger Left</Dest>
+      <Comment></Comment>
+    </Item18>
+    <Item19>
+      <Src>Joystick0 Axis Ry</Src>
+      <Dest>Xbox Trigger Right</Dest>
+      <Comment></Comment>
+    </Item19>
+    <Item20>
+      <Src>Joystick0 Axis X</Src>
+      <Dest>Xbox Stick Left X</Dest>
+      <Comment></Comment>
+    </Item20>
+    <Item21>
+      <Src>Joystick0 Axis Y</Src>
+      <Dest>Xbox Stick Left Y Inverted</Dest>
+      <Comment></Comment>
+    </Item21>
+    <Item22>
+      <Src>Joystick0 Axis Z</Src>
+      <Dest>Xbox Stick Right X</Dest>
+      <Comment></Comment>
+    </Item22>
+    <Item23>
+      <Src>Joystick0 Axis Rz</Src>
+      <Dest>Xbox Stick Right Y Inverted</Dest>
+      <Comment></Comment>
+    </Item23>
+  </Mapping>
+</Configuration>

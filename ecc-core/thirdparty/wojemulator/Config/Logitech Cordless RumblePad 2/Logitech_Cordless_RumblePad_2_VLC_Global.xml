@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Joystick settings and mapping-->
+<Configuration>
+  <Settings>
+    <Interface>DirectInput</Interface>
+    <NumOfDevices>1</NumOfDevices>
+    <Device0></Device0>
+    <ButtonsPollingRate>10</ButtonsPollingRate>
+    <AxesPollingRate>10</AxesPollingRate>
+    <X_From>25000</X_From>
+    <X_To>40000</X_To>
+    <Y_From>25000</Y_From>
+    <Y_To>40000</Y_To>
+    <Z_From>25000</Z_From>
+    <Z_To>40000</Z_To>
+    <ARx_From>25000</ARx_From>
+    <ARx_To>40000</ARx_To>
+    <ARy_From>25000</ARy_From>
+    <ARy_To>40000</ARy_To>
+    <ARz_From>25000</ARz_From>
+    <ARz_To>40000</ARz_To>
+    <AX_From>25000</AX_From>
+    <AX_To>40000</AX_To>
+    <AY_From>25000</AY_From>
+    <AY_To>40000</AY_To>
+    <AZ_From>25000</AZ_From>
+    <AZ_To>40000</AZ_To>
+    <FRx_From>25000</FRx_From>
+    <FRx_To>40000</FRx_To>
+    <FRy_From>25000</FRy_From>
+    <FRy_To>40000</FRy_To>
+    <FRz_From>25000</FRz_From>
+    <FRz_To>40000</FRz_To>
+    <FX_From>25000</FX_From>
+    <FX_To>40000</FX_To>
+    <FY_From>25000</FY_From>
+    <FY_To>40000</FY_To>
+    <FZ_From>25000</FZ_From>
+    <FZ_To>40000</FZ_To>
+    <Rx_From>25000</Rx_From>
+    <Rx_To>40000</Rx_To>
+    <Ry_From>25000</Ry_From>
+    <Ry_To>40000</Ry_To>
+    <Rz_From>25000</Rz_From>
+    <Rz_To>40000</Rz_To>
+    <VRx_From>25000</VRx_From>
+    <VRx_To>40000</VRx_To>
+    <VRy_From>25000</VRy_From>
+    <VRy_To>40000</VRy_To>
+    <VRz_From>25000</VRz_From>
+    <VRz_To>40000</VRz_To>
+    <VX_From>25000</VX_From>
+    <VX_To>40000</VX_To>
+    <VY_From>25000</VY_From>
+    <VY_To>40000</VY_To>
+    <VZ_From>25000</VZ_From>
+    <VZ_To>40000</VZ_To>
+    <U_From>25000</U_From>
+    <U_To>40000</U_To>
+    <V_From>25000</V_From>
+    <V_To>40000</V_To>
+    <Sensitivity1AxisX>30</Sensitivity1AxisX>
+    <Sensitivity1AxisY>30</Sensitivity1AxisY>
+    <Sensitivity2AxisX>1</Sensitivity2AxisX>
+    <Sensitivity2AxisY>1</Sensitivity2AxisY>
+    <Sound>0</Sound>
+    <ExtEnter>0</ExtEnter>
+    <Toggles>0</Toggles>
+    <ExclusiveMode>False</ExclusiveMode>
+    <HandleFailures>False</HandleFailures>
+  </Settings>
+  <Mapping>
+    <Item0>
+      <Src>Joystick0 Button 0</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item0>
+    <Item1>
+      <Src>Joystick0 Button 0</Src>
+      <Dest>Keyboard Space</Dest>
+      <Action>Play \ Pause</Action>
+    </Item1>
+    <Item2>
+      <Src>Joystick0 Pov Right</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item2>
+    <Item3>
+      <Src>Joystick0 Pov Right</Src>
+      <Dest>Keyboard Right</Dest>
+      <Action>Next</Action>
+    </Item3>
+    <Item4>
+      <Src>Joystick0 Pov Left</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item4>
+    <Item5>
+      <Src>Joystick0 Pov Left</Src>
+      <Dest>Keyboard Left</Dest>
+      <Action>Previous</Action>
+    </Item5>
+    <Item6>
+      <Src>Joystick0 Button 8</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item6>
+    <Item7>
+      <Src>Joystick0 Button 8</Src>
+      <Dest>Keyboard W</Dest>
+      <Action>Clear Playlist</Action>
+    </Item7>
+    <Item8>
+      <Src>Joystick0 Button 1</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item8>
+    <Item9>
+      <Src>Joystick0 Button 1</Src>
+      <Dest>Keyboard S</Dest>
+      <Action>Stop</Action>
+    </Item9>
+    <Item10>
+      <Src>Joystick0 Axis Y [-]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item10>
+    <Item11>
+      <Src>Joystick0 Axis Y [-]</Src>
+      <Dest>Keyboard Up</Dest>
+      <Action>VLC Volume Up</Action>
+    </Item11>
+    <Item12>
+      <Src>Joystick0 Axis Y [+]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action></Action>
+    </Item12>
+    <Item13>
+      <Src>Joystick0 Axis Y [+]</Src>
+      <Dest>Keyboard Down</Dest>
+      <Action>VLC Volume Down</Action>
+    </Item13>
+    <Item14>
+      <Src>Joystick0 Axis Z</Src>
+      <Dest>Mouse Axis X</Dest>
+      <Action>Mouse X Axis</Action>
+    </Item14>
+    <Item15>
+      <Src>Joystick0 Axis Rz</Src>
+      <Dest>Mouse Axis Y</Dest>
+      <Action>Mouse Y Axis</Action>
+    </Item15>
+    <Item16>
+      <Src>Joystick0 Button 5</Src>
+      <Dest>Keyboard VolumeUp</Dest>
+      <Action>Sys Volume Up</Action>
+    </Item16>
+    <Item17>
+      <Src>Joystick0 Button 4</Src>
+      <Dest>Keyboard VolumeDown</Dest>
+      <Action>Sys Volume Down</Action>
+    </Item17>
+    <Item18>
+      <Src>Joystick0 Button 7</Src>
+      <Dest>Mouse Left</Dest>
+      <Action>Left Click</Action>
+    </Item18>
+    <Item19>
+      <Src>Joystick0 Button 6</Src>
+      <Dest>Mouse Right</Dest>
+      <Action>Right Click</Action>
+    </Item19>
+  </Mapping>
+</Configuration>

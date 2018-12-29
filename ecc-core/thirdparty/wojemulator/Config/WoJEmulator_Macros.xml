@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WoJ_Emulator_Macros>
+  <Macros>
+    <Name>WoWS_HE_Shells</Name>
+    <Repeat>False</Repeat>
+  </Macros>
+  <Macros>
+    <Name>WoWS_AP_Shells</Name>
+    <Repeat>False</Repeat>
+  </Macros>
+  <WoWS_HE_Shells>
+    <Action>Keyboard D1 Press</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Keyboard D1 Release</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Keyboard D1 Press</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_HE_Shells>
+  <WoWS_HE_Shells>
+    <Action>Keyboard D1 Release</Action>
+  </WoWS_HE_Shells>
+  <WoWS_AP_Shells>
+    <Action>Keyboard D2 Press</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Keyboard D2 Release</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Keyboard D2 Press</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Delay 100</Action>
+  </WoWS_AP_Shells>
+  <WoWS_AP_Shells>
+    <Action>Keyboard D2 Release</Action>
+  </WoWS_AP_Shells>
+</WoJ_Emulator_Macros>

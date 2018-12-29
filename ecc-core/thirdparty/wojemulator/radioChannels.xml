@@ -1,0 +1,207 @@
+<?xml version="1.0" standalone="yes"?>
+<data-set>
+  <record>
+    <MenuTitle>[BY] Wargaming FM</MenuTitle>
+    <Url>http://sv.wargaming.fm:8051/128?source=player</Url>
+  </record>
+  <record>
+    <MenuTitle>[BY] Unistar - Минск</MenuTitle>
+    <Url>http://radiogrom.com/online/belarus_fm/unistar_fm_online.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Megapolis</MenuTitle>
+    <Url>http://radiogrom.com/online/moskva_fm/megapolis_fm_online.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Ленинград</MenuTitle>
+    <Url>http://radio.sosimc.ru:9000/8382</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] VIP MIX Radio</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/vip_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Teodor Radio</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/teo_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Record Dancecore</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/dc_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Record Breaks</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/brks_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Chillout Radio</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/chil_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Record Urban</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/dub_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Superdiskoteka 90's</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/sd90_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Pump'N'Klubb</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/pump_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Medlyak FM</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/mdl_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Gop FM</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/gop_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Record Russian Mix</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/rus_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] YO! FM</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/yo_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Radio Record</MenuTitle>
+    <Url>http://air.radiorecord.ru:8101/rr_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Trancemission</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/tm_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Record Club Radio</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/club_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Pirate Station</MenuTitle>
+    <Url>http://air.radiorecord.ru:8102/ps_128</Url>
+  </record>
+  <record>
+    <MenuTitle>[RU] Silver Rain</MenuTitle>
+    <Url>http://www.silver.ru/radio/128.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[UA] MFM</MenuTitle>
+    <Url>http://radiogrom.com/online/ua_fm/mfm_fm_radio_online.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[UA] Europa Plus</MenuTitle>
+    <Url>http://radiogrom.com/online/ua_fm/radio_europa_plus_kiev_online.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[DE] FFH</MenuTitle>
+    <Url>http://streams.ffh.de/radioffh/mp3/livestream.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[DE] HR3</MenuTitle>
+    <Url>http://metafiles.gl-systemhaus.de/hr/hr3_2.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[DE] SWR3</MenuTitle>
+    <Url>http://mp3-live.swr3.de/swr3_m.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[DE] Regenbogen</MenuTitle>
+    <Url>http://217.151.151.91/live</Url>
+  </record>
+  <record>
+    <MenuTitle>[DE] Bayern 3</MenuTitle>
+    <Url>http://streams.br-online.de/bayern3_2.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[HU] Szent Korona</MenuTitle>
+    <Url>http://radio.szentkoronaradio.com:8048/</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] Capital FM</MenuTitle>
+    <Url>http://radiogrom.com/online/great_britain/capital_fm_london_95_8_online.m3u</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] BBC Radio 1</MenuTitle>
+    <Url>http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] BBC 6 Music</MenuTitle>
+    <Url>http://bbcmedia.ic.llnwd.net/stream/bbcmedia_6music_mf_p</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] The Arrow</MenuTitle>
+    <Url>http://media-the.musicradio.com:80/ArrowMP3</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] Bridge FM</MenuTitle>
+    <Url>http://icy-e-05-gos.sharp-stream.com:80/tcbridge.mp3</Url>
+  </record>
+  <record>
+    <MenuTitle>[UK] Jazz FM</MenuTitle>
+    <Url>http://adsi-e-02-boh.sharp-stream.com/jazzfmmobile.mp3</Url>
+  </record>
+  <record>
+    <MenuTitle>[ES] KISSFM</MenuTitle>
+    <Url>http://kissfm.es.audio1.glb.ipercast.net:8000/kissfm.es/mp3</Url>
+  </record>
+  <record>
+    <MenuTitle>[PT] Rádio Universidade de Coimbra</MenuTitle>
+    <Url>http://ruc1.cidadedecoimbra.com:8000/</Url>
+  </record>
+  <record>
+    <MenuTitle>[FR] Activ Radio</MenuTitle>
+    <Url>http://stream.activradio.com/roanne.mp3</Url>
+  </record>
+  <record>
+    <MenuTitle>[FR] Chante France</MenuTitle>
+    <Url>http://stream1.evasionfm.com:80/Chante_France</Url>
+  </record>
+  <record>
+    <MenuTitle>[FR] HotmixRadio Dance</MenuTitle>
+    <Url>http://streamingads.hotmixradio.fm/hotmixradio-dance-128.mp3</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Beatles</MenuTitle>
+    <Url>http://relay.181.fm:8062</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Power 181 (Top 40)</MenuTitle>
+    <Url>http://relay.181.fm:8128</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] The Mix</MenuTitle>
+    <Url>http://relay.181.fm:8032</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Rock 181</MenuTitle>
+    <Url>http://relay.181.fm:8008</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] The Rock! (Hard Rock)</MenuTitle>
+    <Url>http://relay.181.fm:8064</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Energy 98</MenuTitle>
+    <Url>http://relay.181.fm:8800</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] 90's Dance</MenuTitle>
+    <Url>http://relay.181.fm:8140</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] True R&amp;B</MenuTitle>
+    <Url>http://relay.181.fm:8022</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Salsa</MenuTitle>
+    <Url>http://relay.181.fm:8098</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] Real Country</MenuTitle>
+    <Url>http://relay.181.fm:8034</Url>
+  </record>
+  <record>
+    <MenuTitle>[US] The Vibe of Vegas</MenuTitle>
+    <Url>http://relay.181.fm:8074</Url>
+  </record>
+</data-set>

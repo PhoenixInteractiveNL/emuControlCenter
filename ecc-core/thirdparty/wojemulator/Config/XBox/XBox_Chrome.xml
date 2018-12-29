@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Joystick settings and mapping-->
+<Configuration>
+  <Settings>
+    <Interface>XInput</Interface>
+    <NumOfDevices>1</NumOfDevices>
+    <Device0></Device0>
+    <ButtonsPollingRate>10</ButtonsPollingRate>
+    <AxesPollingRate>10</AxesPollingRate>
+    <AxisThresholdFrom>25000</AxisThresholdFrom>
+    <AxisThresholdTo>40000</AxisThresholdTo>
+    <TriggerLeftFrom>25000</TriggerLeftFrom>
+    <TriggerLeftTo>40000</TriggerLeftTo>
+    <TriggerRightFrom>25000</TriggerRightFrom>
+    <TriggerRightTo>40000</TriggerRightTo>
+    <StickLeftXFrom>25000</StickLeftXFrom>
+    <StickLeftXTo>40000</StickLeftXTo>
+    <StickLeftYFrom>25000</StickLeftYFrom>
+    <StickLeftYTo>40000</StickLeftYTo>
+    <StickRightXFrom>25000</StickRightXFrom>
+    <StickRightXTo>40000</StickRightXTo>
+    <StickRightYFrom>25000</StickRightYFrom>
+    <StickRightYTo>40000</StickRightYTo>
+    <Sensitivity1AxisX>30</Sensitivity1AxisX>
+    <Sensitivity1AxisY>30</Sensitivity1AxisY>
+    <Sensitivity2AxisX>1</Sensitivity2AxisX>
+    <Sensitivity2AxisY>1</Sensitivity2AxisY>
+    <Sound>0</Sound>
+    <ExtEnter>0</ExtEnter>
+    <Toggles>0</Toggles>
+    <ExclusiveMode>True</ExclusiveMode>
+    <HandleFailures>True</HandleFailures>
+  </Settings>
+  <Mapping>
+    <Item0>
+      <Src>Joystick0 Stick Right X</Src>
+      <Dest>Mouse Axis X</Dest>
+      <Action>Move mouse by X</Action>
+    </Item0>
+    <Item1>
+      <Src>Joystick0 Stick Right Y</Src>
+      <Dest>Mouse Axis Y Inverted</Dest>
+      <Action>Move mouse by Y</Action>
+    </Item1>
+    <Item2>
+      <Src>Joystick0 Trigger Right</Src>
+      <Dest>Mouse Left</Dest>
+      <Action>Left mouse click</Action>
+    </Item2>
+    <Item3>
+      <Src>Joystick0 Trigger Left</Src>
+      <Dest>Mouse Right</Dest>
+      <Action>Right mouse click</Action>
+    </Item3>
+    <Item4>
+      <Src>Joystick0 Button Y</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>New Tab</Action>
+    </Item4>
+    <Item5>
+      <Src>Joystick0 Button Y</Src>
+      <Dest>Keyboard T</Dest>
+      <Action>New Tab</Action>
+    </Item5>
+    <Item6>
+      <Src>Joystick0 Button A</Src>
+      <Dest>Keyboard LWin</Dest>
+      <Action>Show Desktop</Action>
+    </Item6>
+    <Item7>
+      <Src>Joystick0 Button A</Src>
+      <Dest>Keyboard D</Dest>
+      <Action>Show Desktop</Action>
+    </Item7>
+    <Item8>
+      <Src>Joystick0 Button X</Src>
+      <Dest>Keyboard Menu Left</Dest>
+      <Action>Previous Page</Action>
+    </Item8>
+    <Item9>
+      <Src>Joystick0 Button X</Src>
+      <Dest>Keyboard Left</Dest>
+      <Action>Previous Page</Action>
+    </Item9>
+    <Item10>
+      <Src>Joystick0 Button B</Src>
+      <Dest>Keyboard Menu Left</Dest>
+      <Action>Next Page</Action>
+    </Item10>
+    <Item11>
+      <Src>Joystick0 Button B</Src>
+      <Dest>Keyboard Right</Dest>
+      <Action>Next Page</Action>
+    </Item11>
+    <Item12>
+      <Src>Joystick0 Stick Left X [-]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Previous Tab</Action>
+    </Item12>
+    <Item13>
+      <Src>Joystick0 Stick Left X [-]</Src>
+      <Dest>Keyboard ShiftKey Left</Dest>
+      <Action>Previous Tab</Action>
+    </Item13>
+    <Item14>
+      <Src>Joystick0 Stick Left X [-]</Src>
+      <Dest>Keyboard Tab</Dest>
+      <Action>Previous Tab</Action>
+    </Item14>
+    <Item15>
+      <Src>Joystick0 Stick Left X [+]</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Next Tab</Action>
+    </Item15>
+    <Item16>
+      <Src>Joystick0 Stick Left X [+]</Src>
+      <Dest>Keyboard Tab</Dest>
+      <Action>Next Tab</Action>
+    </Item16>
+    <Item17>
+      <Src>Joystick0 D-pad Up</Src>
+      <Dest>Mouse Wheel Up</Dest>
+      <Action>Scroll Up</Action>
+    </Item17>
+    <Item18>
+      <Src>Joystick0 D-pad Down</Src>
+      <Dest>Mouse Wheel Down</Dest>
+      <Action>Scroll Down</Action>
+    </Item18>
+    <Item19>
+      <Src>Joystick0 Bumper Right</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Zoom In</Action>
+    </Item19>
+    <Item20>
+      <Src>Joystick0 Bumper Right</Src>
+      <Dest>Keyboard Add</Dest>
+      <Action>Zoom In</Action>
+    </Item20>
+    <Item21>
+      <Src>Joystick0 Bumper Left</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Zoom Out</Action>
+    </Item21>
+    <Item22>
+      <Src>Joystick0 Bumper Left</Src>
+      <Dest>Keyboard Subtract</Dest>
+      <Action>Zoom Out</Action>
+    </Item22>
+    <Item23>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Close Current Tab</Action>
+    </Item23>
+    <Item24>
+      <Src>Joystick0 StickBtn Right</Src>
+      <Dest>Keyboard W</Dest>
+      <Action>Close Current Tab</Action>
+    </Item24>
+    <Item25>
+      <Src>Joystick0 D-pad Left</Src>
+      <Dest>Keyboard Left</Dest>
+      <Action>Scroll Left</Action>
+    </Item25>
+    <Item26>
+      <Src>Joystick0 D-pad Right</Src>
+      <Dest>Keyboard Right</Dest>
+      <Action>Scroll Right</Action>
+    </Item26>
+    <Item27>
+      <Src>Joystick0 Button Back</Src>
+      <Dest>Keyboard F5</Dest>
+      <Action>Reload</Action>
+    </Item27>
+    <Item28>
+      <Src>Joystick0 Button Start</Src>
+      <Dest>Keyboard Menu Left</Dest>
+      <Action>Home Page</Action>
+    </Item28>
+    <Item29>
+      <Src>Joystick0 Button Start</Src>
+      <Dest>Keyboard Home</Dest>
+      <Action>Home Page</Action>
+    </Item29>
+    <Item30>
+      <Src>Joystick0 StickBtn Left</Src>
+      <Dest>Keyboard ControlKey Left</Dest>
+      <Action>Bookmarks Manager</Action>
+    </Item30>
+    <Item31>
+      <Src>Joystick0 StickBtn Left</Src>
+      <Dest>Keyboard ShiftKey Left</Dest>
+      <Action>Bookmarks Manager</Action>
+    </Item31>
+    <Item32>
+      <Src>Joystick0 StickBtn Left</Src>
+      <Dest>Keyboard O</Dest>
+      <Action>Bookmarks Manager</Action>
+    </Item32>
+  </Mapping>
+</Configuration>

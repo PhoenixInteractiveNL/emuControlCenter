@@ -1,8 +1,8 @@
 ; ------------------------------------------------------------------------------
 ; emuControlCenter DatFileUpdater (ECC-DFU)
 ;
-; Script version         : v1.3.0.1
-; Last changed           : 2016.10.09
+; Script version         : v1.3.0.2
+; Last changed           : 2018.12.29
 ;
 ; Author: Sebastiaan Ebeltjes (aka Phoenix)
 ;
@@ -153,7 +153,7 @@ Func UpdatePlatforms()
 	ToolTip("")
 
 	WriteDatFileWithHeader("ng.dat", "NEOGEO", "SNK NeoGeo")
-	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neodriv.hxx -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
+	ExecuteCMD(Chr(34) & $DATUtilExe & Chr(34) & " -G neogeo.cpp -a " & Chr(34) & $DATfilePath & "ng.dat" & Chr(34) & " -f cmp " & Chr(34) & $DATfileMameFile & Chr(34))
 	ToolTip("")
 
 	WriteDatFileWithHeader("s11.dat", "SYSTEM-11", "Namco System 11")

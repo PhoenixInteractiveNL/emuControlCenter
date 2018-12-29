@@ -1,7 +1,7 @@
-HxD License
+ï»¿HxD License
 ===========
 
-HxD Copyright© 2002-2009 by Maël Hörz. All rights reserved.
+HxD CopyrightÂ© 2002-2018 by MaÃ«l HÃ¶rz. All rights reserved.
 
 "Software" refers to HxD and all files belonging to the program, including 
 documentation.
@@ -35,6 +35,5 @@ warranty disclaimer is accepted and the following conditions are met:
    not represent in any way that you are selling the Software itself.
 
 
-Maël Hörz
-support@mh-nexus.de
+MaÃ«l HÃ¶rz
 http://www.mh-nexus.de

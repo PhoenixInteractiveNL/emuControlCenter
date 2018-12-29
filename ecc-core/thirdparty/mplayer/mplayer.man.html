@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.3 -->
-<!-- CreationDate: Sat Jun  4 17:50:33 2016 -->
+<!-- CreationDate: Tue Dec 25 12:47:08 2018 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -715,9 +715,10 @@ equalizer=</b>), equ_channel_1 ... equ_channel_6 (<b>af
 channels=</b>), gui_main_pos_x, gui_main_pos_y, gui_save_pos
 (yes/no), gui_tv_digital (yes/no), gui_video_out_pos_x,
 gui_video_out_pos_y, load_fullscreen (yes/no), playbar
-(enable/disable), show_videowin (yes/no), vf_lavc (<b>vf
-lavc</b>) (DXR3 only), vf_pp (<b>vf pp</b>), vo_dxr3_device
-(unused) (DXR3 only).</p>
+(enable/disable), replay_gain (enable/disable),
+replay_gain_adjustment (-30..10), show_videowin (yes/no),
+vf_lavc (<b>vf lavc</b>) (DXR3 only), vf_pp (<b>vf pp</b>),
+vo_dxr3_device (unused) (DXR3 only).</p>
 
 <p style="margin-left:11%; margin-top: 1em">MPlayer options
 stored in gui.conf (GUI option names, MPlayer option names
@@ -736,11 +737,13 @@ font_name (<b>font</b>), font_osd_scale
 (<b>subfont-outline</b>) (FreeType only), font_text_scale
 (<b>subfont-text-scale</b>) (FreeType only), gui_skin
 (<b>skin</b>), idle (<b>idle</b>), osd_level
-(<b>osdlevel</b>), softvol (<b>softvol</b>),
-stopxscreensaver (<b>stop-xscreensaver</b>), sub_auto_load
-(<b>autosub</b>), sub_cp (<b>subcp</b>) (iconv only),
-sub_overlap (<b>overlapsub</b>), sub_pos (<b>subpos</b>),
-sub_unicode (<b>unicode</b>), sub_utf8 (<b>utf8</b>), v_flip
+(<b>osdlevel</b>), playlist_support
+(<b>allow-dangerous-playlist-parsing</b>), softvol
+(<b>softvol</b>), stopxscreensaver
+(<b>stop-xscreensaver</b>), sub_auto_load (<b>autosub</b>),
+sub_cp (<b>subcp</b>) (iconv only), sub_overlap
+(<b>overlapsub</b>), sub_pos (<b>subpos</b>), sub_unicode
+(<b>unicode</b>), sub_utf8 (<b>utf8</b>), v_flip
 (<b>flip</b>), v_framedrop (<b>framedrop</b>), v_idx
 (<b>idx</b>), v_ni (<b>ni</b>), v_vfm (<b>vfm</b>), vf_autoq
 (<b>autoq</b>), vo_direct_render (<b>panscan</b>),
@@ -1458,7 +1461,8 @@ properties.</p>
 &lt;number&gt;</b></p>
 
 <p style="margin-left:22%;">Loops movie playback
-&lt;number&gt; times. 0 means forever.</p>
+&lt;number&gt; times. 0 means forever. Use &minus;loop 0 to
+automatically reconnect to live streaming URLs.</p>
 
 <p style="margin-left:11%;"><b>&minus;menu (OSD menu
 only)</b></p>
@@ -18435,6 +18439,15 @@ settings</p>
 
 <p style="margin-left:22%;">GUI configuration file</p>
 
+<p style="margin-left:11%;">~/.mplayer/gui.gain</p>
+
+<p style="margin-left:22%;">for audio files not containing
+ReplayGain data, add a line with replay gain and filename
+separated by a space character, e.g.</p>
+
+<p style="margin-left:22%; margin-top: 1em">+1.50
+/home/me/music/Song.mp3</p>
+
 <p style="margin-left:11%;">~/.mplayer/gui.history</p>
 
 <p style="margin-left:22%;">GUI directory history</p>
@@ -18640,7 +18653,7 @@ initially written by Arpad Gereoffy. See the AUTHORS file
 for a list of some of the many other contributors.</p>
 
 <p style="margin-left:11%; margin-top: 1em">MPlayer is (C)
-2000&minus;2016 The MPlayer Team</p>
+2000&minus;2018 The MPlayer Team</p>
 
 <p style="margin-left:11%; margin-top: 1em">This man page
 was written mainly by Gabucino, Jonas Jermann and Diego

@@ -9,6 +9,17 @@ release 20111012
 ;                   VIDEO CODECS
 ;=============================================================================
 
+videocodec ffiff
+  info "FFmpeg IFF ANIM/ILBM/PBM/RGB8/RGBN"
+  status working
+  fourcc ANIM
+  fourcc ILBM
+  fourcc "PBM "
+  fourcc RGB8,RGBN
+  driver ffmpeg
+  dll iff
+  out BGR8,BGR32,Y8,RGBA,BGR12
+
 videocodec ffanm
   info "FFmpeg Deluxe Paint Animation"
   status working
@@ -198,7 +209,15 @@ videocodec geoh264
   fourcc G264
   driver vfw
   dll "GX264.dll"
-  out RGB24,RGB32,BGR32,BGR24 flip
+  out RGB24,RGB32,BGR32,BGR24
+
+videocodec ffimm4
+  info "ffmpeg infinity cctv decoder"
+  status working
+  fourcc IMM4
+  driver ffmpeg
+  dll "imm4"
+  out YV12
 
 videocodec imm4
   info "infinity cctv codec"
@@ -382,6 +401,19 @@ videocodec blackmagic
   driver vfw
   dll "BMDCodecLib.dll"
   out BGR32,RGB32
+
+videocodec ffsheer
+  info "ffmpeg sheervideo"
+  status working
+  fourcc Shr0,Shr1,Shr2
+  fourcc Shr3,Shr4,Shr5
+  fourcc Shr6,Shr7
+  driver ffmpeg
+  dll "sheervideo"
+  out 444P,422P,444A
+  out 422A,RGBA,ARGB
+  out BGR24,BGR16,YUY2
+  out 422P10,444P10
 
 videocodec qtsheer
   info "QuickTime sheervideo"
@@ -991,6 +1023,14 @@ videocodec ylc
   driver vfw
   dll "ylc.vcm"
   out BGR24 flip
+
+videocodec ffylc
+  info "YUY2 lossless codec"
+  status working
+  fourcc YLC0
+  driver ffmpeg
+  dll "ylc"
+  out YUY2
 
 videocodec smartsight
   info "Verint Video Manager"
@@ -1999,7 +2039,7 @@ videocodec ffmjpeg
   fourcc MVJP       ; Midvid JPEG Video Codec
   fourcc IJLV       ; Intel JPEG Library Video Codec
   fourcc CJPG       ; Creative MJPG
-  fourcc MSC2
+  fourcc MSC2,JR24
   fourcc avi1,avi2
   fourcc MTSJ,ZJPG,MJPx,FLJP
   fourcc FMJP,SJPG
@@ -2048,6 +2088,15 @@ videocodec m3jpeg
   driver vfw
   dll "m3jpeg32.dll"
 ;  out YV12,I420
+  out YUY2,UYVY
+  out BGR32,BGR24,BGR15
+
+videocodec mtvmj
+  info "Morgan TVMJ LSI M-JPEG Codec"
+  status working
+  fourcc TVMJ,FLJP
+  driver vfw
+  dll "mmtvmj.dll"
   out YUY2,UYVY
   out BGR32,BGR24,BGR15
 
@@ -2449,7 +2498,7 @@ videocodec ffdv
   fourcc dvh5,dvh6,dvh3
   fourcc dvhd,dvsl,dv25,dc25
   fourcc dvs1,dvh1,dvis,PDVC
-  fourcc IPDV,ipdv
+  fourcc IPDV,ipdv,dvrs,DVRS
   fourcc SL25,SLDV
   driver ffmpeg
   dll dvvideo
@@ -3340,6 +3389,13 @@ videocodec matchware
   dll "mwsc.dll"
   out BGR24 flip
 
+videocodec ffscpr
+  status working
+  fourcc SCPR
+  driver ffmpeg
+  dll scpr
+  out BGRA,ARGB
+
 videocodec screenpressor
   info "ScreenPressor Lossless Codec"
   status working
@@ -3444,6 +3500,24 @@ videocodec smsvvfw
   dll "wv32vfw.dll"
   out BGR24 flip
 
+videocodec bluvismpeg4
+  info "dvrcodec"
+  status working
+  comment "requires forged*.sys files from installer"
+  fourcc 3RVC
+  driver vfw
+  dll "MPEG4V.DLL"
+  out BGR24 flip
+
+videocodec qwtjr24
+  info "Quadrox Jr24"
+  status working
+  fourcc JR24
+  driver dmo
+  dll "OPJPEGDecmprDMO.dll"
+  guid 0x9004F687, 0xFEFC, 0x4F8F, 0xB2, 0x3A, 0xDD, 0xD3, 0x74, 0x80, 0x82, 0xE7
+  out BGR24 flip
+
 videocodec adv601
   info "Analog Devices Wavelet Codec"
   status working
@@ -3467,6 +3541,14 @@ videocodec loronixwavlet
   driver vfw
   dll "wavlor.dll"
   out BGR24
+
+videocodec fffoxmotion
+  info "FFmpeg foxmotion video"
+  status working
+  fourcc FMVC
+  driver ffmpeg
+  dll fmvc
+  out BGR24,BGRA,BGR15
 
 videocodec foxmotion
   info "fox motion video"
@@ -3656,6 +3738,15 @@ videocodec qtavui
   dll "AvidQTAVUICodec.qtx"
   out YUY2
 
+videocodec qtaffinity
+  info "QuickTime affinity"
+  comment "requires -demuxer mov"
+  status working
+  fourcc ImJG
+  driver qtvideo
+  dll "AFFINITYVIDEOCODEC.QTx"
+  out BGR24
+
 videocodec qth263
   info "Win32/QuickTime H.263"
   status crashing
@@ -3777,6 +3868,14 @@ videocodec ffaic
   driver ffmpeg
   dll aic
   out YV12
+
+videocodec ffpxlt
+  info "FFmpeg Apple Pixlet"
+  status working
+  fourcc pxlt
+  driver ffmpeg
+  dll pixlet
+  out 420P16
 
 videocodec qtaic
   info "QuickTime AIC video decoder"
@@ -3956,7 +4055,6 @@ videocodec fftscc2
   dll tscc2
   out 444P
 
-; sample videos: http://www.techsmith.com/products/camtasia/examplevideos.asp
 videocodec camtasia
   info "TechSmith Camtasia Screen Codec"
   status working
@@ -4671,6 +4769,13 @@ audiocodec ffqdm2
   fourcc QDM2
   driver ffmpeg
   dll "qdm2"
+
+audiocodec ffqdmc
+  info "FFmpeg QDMC audio"
+  status working
+  fourcc QDMC
+  driver ffmpeg
+  dll "qdmc"
 
 audiocodec qdmc
   info "QuickTime QDMC/QDM2 audio"

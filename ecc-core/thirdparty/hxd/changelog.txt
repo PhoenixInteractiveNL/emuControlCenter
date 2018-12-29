@@ -1,8 +1,99 @@
-Version history of HxD
+﻿Version history of HxD
 ======================
 
 Below you find a list with the added features, changes and fixes for
 each version.
+
+
+Version 2.1.0.0
+---------------
+  * New: UTF-8 Codepoint in datainspector gives much more detailed feedback when a code point is invalid
+    • Now also rejects every possible encoding error and handles characters entered as surrogate pairs
+  * New: bytes-per-line option for Intel Hex / Motorola S-Record export
+  * New: option to lock toolbars in place
+  * Enhancement: ask to close files opened in HxD before securely deleting them
+  * Enhancement: RTF exporter uses always UTF-8, even for Latin1, which improves compatibility
+  * Enhancement: displayed and inspectable volume size is not limited anymore to just the file system area, but covers the entire volume extent
+  * Enhancement: compare feature: set caret and scroll position to last compared bytes, even when no difference was found
+    • Together with improved error message makes results more clear
+  * Enhancement: HxD's internal clipboard is not limited to 4GiB anymore
+  * Change: Enforce HxD 2.0 to run on WinXP+ only
+  * Fix: after starting HxD, it would be in minimized state if it was last closed in a minimized state
+  * Fix: HTML exporter - encoding rules and comments now follow https://www.w3.org/International/questions/qa-html-encoding-declarations#utf16
+  * Fix: properly display volume size (instead of the hosting physical disk(s) size)
+  * Fix: assertion and encoding errors in source code exporters
+  * Fix: canceling a compare would give the wrong message, that files are identical, but the file sizes differ.
+  * Fix: trying to delete a selection or a single byte using the del key (while not having write rights) would not properly abort the operation: temporarily an unintended selection would be created or the caret would remain hidden
+  * Fix: data inspector sees only a selection of one byte after deleting a byte with del key
+  * Fix: error in computing SHA512 in debug builds
+  * Updated translations
+  * Various minor UI fixes
+
+
+Version 2.0.0.0
+---------------
+
+  * New: Data inspector
+    • interprets bytes at the current caret position into various datatypes:
+      - binary (bit sequence), integer, floats, time and date, character, GUID and disassembly (x86 and AMD64)
+    • allows editing all types except for assembly
+    • option to display integers in hexadecimal
+    • option to select big/little endian byte order
+    • property grid widget/control written from scratch
+  * New: 64-bit version of HxD
+    • support for RAM/virtual memory editing of other 64-bit processes
+    • integration into 64-bit Windows Explorer context menu
+  * New: Fully Unicode based GUI and program code
+  * Enhanced: Disk-open window
+    • Shows disks to non-admins to allow opening those that normal users have access to (e.g., removable USB drives) instead of always requiring to restart as admin.
+    • Shows more information (name, hardware id, type, size) for easier identification
+    • Sortable by columns/categories
+    • Resizeable window
+  * Enhanced: RAM/virtual memory open window
+    • allows sorting, shows PID and bitness (32/64) of each process
+  * Enhanced: Disk write handling
+    • automatically unmount relevant partitions/volumes before writing, to avoid access errors where possible
+  * Enhanced: Reduced locking to a minimum and adapted caching
+    • significant code redesign and rewrite to allow for minimal file locking to enable easier sharing files with another program
+    • less disturbing "file has changed externally" messages, at the bottom of a hex editor window
+  * New: Import function
+    • supported formats are: Intel Hex, Motorola S-Record and ETL Extended
+  * Enhanced: Export function
+    • new format: PureBasic
+  * New: Alternating color for hex columns (configurable)
+  * Enhanced: Compare window
+    • option groupbox for window arrangement
+    • option groupbox to select compare scope
+  * New: Unified setup (includes all languages, all editions, 32/64-bitness)
+      - Portable edition can be configured through setup, then becomes independent.
+        - Ensures a user is not surprised when storing HxD to a write-once medium, then HxD opens for the first time and the configuration can't be changed.
+      - Allows to create readonly config for HxD (e.g., for use on CD/DVD or USB thumb drives).
+  * Better Windows Vista and higher support
+    • Automatic request for admin priviledges when configuring Windows explorer context-menu
+    • Better error handling for inaccessible disks
+    • New file open/save windows
+  * New: Recently opened disk images (restores bytes per sector as well)
+  * Enhanced: Disk editor detects sectors larger than 512 byte and can access full size of a volume/disk (Windows could limit it to file system's end)
+  * Enhanced: Allow “bytes per row” to go up to 4096 instead of just 512
+  * New: Option to make hexadecimal numbers in editor lower case
+  * New: Add CRC-32C as new supported checksum
+  * Enhanced: CustomCRCSettings stored to config file
+  * Changed: Statistics window evaluates the current selection only, or the entire file if there is no selection
+  * Enhanced: Search window
+    • Tab per datatype instead of a combobox
+    • New "Search all" button (and result window)
+  * Enhanced: Windows explorer context menu
+    • Option to choose with entries to add, instead of adding both, "Open with HxD (readonly)" and "Open with HxD", by default
+  * Enhanced: Update checker supports proxies that require user authentication
+  * Enhanced: Hex Exporter adds number base when outputting offsets, e.g., "StartOffset(h): 12345678" 
+  
+  * Babelfish and related translation tool chain significantly enhanced for easier automation, 64 bit (PE file handling), Unicode, full XML, and new Delphi version support.
+  
+  * Performance enhancements, flicker reduction
+  * Many bug fixes and other refinements of code and GUI (some listed in the forums)
+  
+  * Rewriting or updating lots of third party libs to x64 and Unicode
+  * Patching Delphi RTL/VCL bugs
 
 
 Version 1.7.7.0

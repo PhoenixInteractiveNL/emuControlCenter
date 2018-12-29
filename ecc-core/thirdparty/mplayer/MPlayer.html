@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>MPlayer - The Movie Player</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="en" class="book"><div class="titlepage"><div><div><h1 class="title"><a name="index"></a><span class="application">MPlayer</span> - The Movie Player</h1></div><div><h2 class="subtitle"><a class="ulink" href="http://www.mplayerhq.hu" target="_top">http://www.mplayerhq.hu</a></h2></div><div><p class="copyright">Copyright © 2000-2016 MPlayer team</p></div><div><div class="legalnotice"><a name="idp6460691856"></a><p class="legalnotice-title"><b>License</b></p><p>MPlayer is free software; you can redistribute it and/or modify
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>MPlayer - The Movie Player</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="en" class="book"><div class="titlepage"><div><div><h1 class="title"><a name="index"></a><span class="application">MPlayer</span> - The Movie Player</h1></div><div><h2 class="subtitle"><a class="ulink" href="http://www.mplayerhq.hu" target="_top">http://www.mplayerhq.hu</a></h2></div><div><p class="copyright">Copyright © 2000-2018 MPlayer team</p></div><div><div class="legalnotice"><a name="idp2757954256"></a><p class="legalnotice-title"><b>License</b></p><p>MPlayer is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 2 as
   published by the Free Software Foundation.</p><p>MPlayer is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
@@ -332,7 +332,7 @@ the Preferences menu is currently UNIMPLEMENTED!
 compliant video codec. Note that Xvid is not necessary to decode Xvid-encoded
 video. <code class="systemitem">libavcodec</code> is used by
 default as it offers better speed.
-</p><div class="procedure"><a name="idp6465374272"></a><p class="title"><b>Installing <code class="systemitem">Xvid</code></b></p><p>
+</p><div class="procedure"><a name="idp2762821424"></a><p class="title"><b>Installing <code class="systemitem">Xvid</code></b></p><p>
   Like most open source software, it is available in two flavors:
   <a class="ulink" href="http://www.xvid.org/downloads.html" target="_top">official releases</a>
   and the CVS version.
@@ -854,7 +854,7 @@ mplayer -udp-master -udp-ip 192.168.0.255 video1.mpg
 </pre><p>
 On each slave, run:
 </p><pre class="screen">
-mplayer -udp-slave videoN.mpg
+mplayer -udp-slave -udp-ip 192.168.0.255 videoN.mpg
 </pre><p>
 Seeking, pausing and even playback speed adjustment (see the
 <tt class="option">-input</tt> option) can be done on the master, and all the slaves
@@ -1039,7 +1039,7 @@ channel 2 --&gt; channel 2</pre><p>
   matter as long as they are properly grouped into
   <em class="replaceable"><code>source:destination</code></em> pairs.
 </p></li></ol></div><p>
-</p><h4><a name="idp6465866864"></a>Example: one channel in two speakers</h4><p>
+</p><h4><a name="idp2763307184"></a>Example: one channel in two speakers</h4><p>
 Here is an example of another way to play one channel in both speakers. Suppose
 for this example that the left channel should be played and the right channel
 discarded. Following the steps above:
@@ -1063,7 +1063,7 @@ The advantage this example has over <tt class="option">extrastereo</tt> is that 
 volume of each output channel is the same as the input channel. The disadvantage
 is that the suboptions must be changed to "2:2:1:0:1:1" when the desired audio
 is in the right channel. Also, it is more difficult to remember and type.
-</p><h4><a name="idp6465873632"></a>Example: left channel in two speakers shortcut</h4><p>
+</p><h4><a name="idp2763313088"></a>Example: left channel in two speakers shortcut</h4><p>
 There is actually a much easier way to use the <tt class="option">channels</tt> filter
 for playing the left channel in both speakers:
 </p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af channels=1</pre><p>
@@ -1071,7 +1071,7 @@ The second channel is discarded and, with no further suboptions, the single
 remaining channel is left alone. Sound card drivers automatically play
 single-channel audio in both speakers. This only works when the desired channel
 is on the left.
-</p><h4><a name="idp6465876224"></a>Example: duplicate front channels to the rear</h4><p>
+</p><h4><a name="idp2763315504"></a>Example: duplicate front channels to the rear</h4><p>
 Another common operation is to duplicate the front channels and play them back
 on the rear speakers of a quadraphonic setup.
 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
@@ -1116,7 +1116,7 @@ more. Unfortunately, the suboptions are much more complicated.
   but it is best to keep the values of <tt class="option">pan</tt> low enough that
   clipping is not necessary.
   </p></li></ol></div><p>
-</p><h4><a name="idp6465892208"></a>Example: one channel in two speakers</h4><p>
+</p><h4><a name="idp2763329472"></a>Example: one channel in two speakers</h4><p>
 Here is yet another example for playing the left channel in two speakers. Follow
 the steps above:
 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
@@ -1137,14 +1137,14 @@ Putting those options together gives:
 </p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af pan=2:1:1:0:0</pre><p>
 If the right channel is desired instead of the left, the suboptions to
 <tt class="option">pan</tt> will be "2:0:0:1:1".
-</p><h4><a name="idp6465897824"></a>Example: left channel in two speakers shortcut</h4><p>
+</p><h4><a name="idp2763334672"></a>Example: left channel in two speakers shortcut</h4><p>
 As with <tt class="option">channels</tt>, there is a shortcut that only works with the
 left channel:
 </p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af pan=1:1</pre><p>
 Since <tt class="option">pan</tt> has only one channel of input (the other channel is
 discarded), there is only one set with one suboption, which specifies that the
 only channel gets 100% of itself.
-</p><h4><a name="idp6465900784"></a>Example: downmixing 6-channel PCM</h4><p>
+</p><h4><a name="idp2763337472"></a>Example: downmixing 6-channel PCM</h4><p>
 <span class="application">MPlayer</span>'s decoder for 6-channel PCM is not capable of
 downmixing. Here is a way to downmix PCM using <tt class="option">pan</tt>:
 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
@@ -1175,7 +1175,7 @@ Put all that together, for:
 mplayer <em class="replaceable"><code>6-channel.wav</code></em> -af pan=2:1:0:0:1:1:0:0:1:0.5:0.5:1:1
 </pre><p>
 The percentages listed above are only a rough example. Feel free to tweak them.
-</p><h4><a name="idp6465908560"></a>Example: Playing 5.1 audio on big speakers without a subwoofer</h4><p>
+</p><h4><a name="idp2763344128"></a>Example: Playing 5.1 audio on big speakers without a subwoofer</h4><p>
 If you have a huge pair of front speakers you may not want to waste any money on
 buying a subwoofer for a complete 5.1 sound system. If you use
 <tt class="option">-channels 5</tt> to request that liba52 decode 5.1 audio in 5.0,
@@ -1804,7 +1804,7 @@ Subversion repository of mga_vid which can be checked out via
 </p><pre class="screen">
 svn checkout svn://svn.mplayerhq.hu/mga_vid
 </pre><p>
-</p><div class="procedure"><a name="idp6466571920"></a><p class="title"><b>Installation:</b></p><ol class="procedure" type="1"><li class="step"><p>
+</p><div class="procedure"><a name="idp2763993344"></a><p class="title"><b>Installation:</b></p><ol class="procedure" type="1"><li class="step"><p>
   To use it, you first have to compile <tt class="filename">drivers/mga_vid.o</tt>:
   </p><pre class="screen">
 make drivers</pre><p>
@@ -1857,7 +1857,7 @@ driver since <code class="systemitem">tdfx_vid</code> uses AGP.
 Pass <tt class="option">--enable-tdfxfb</tt> to <span class="command"><strong>configure</strong></span>
 to build the video output driver and build the kernel module with
 the following instructions.
-</p><div class="procedure"><a name="idp6466603232"></a><p class="title"><b>Installing the tdfx_vid.o kernel module:</b></p><ol class="procedure" type="1"><li class="step"><p>
+</p><div class="procedure"><a name="idp2764024656"></a><p class="title"><b>Installing the tdfx_vid.o kernel module:</b></p><ol class="procedure" type="1"><li class="step"><p>
   Compile <tt class="filename">drivers/tdfx_vid.o</tt>:
   </p><pre class="screen">
 make drivers</pre><p>
@@ -6785,110 +6785,110 @@ vbitrate=1152:vrc_maxrate=1152:acodec=mp2:abitrate=224:aspect=16/9 -ofps 30000/1
   The same encode may not look the same on someone else's monitor or
   when played back by a different decoder, so future-proof your encodes by
   playing them back on different setups.
-  </p></div></div></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="faq"></a>Chapter 8. Frequently Asked Questions</h1></div></div></div><div class="qandaset"><a name="idp6471454608"></a><dl><dt>8.1.  <a href="#faq-development">Development</a></dt><dd><dl><dt>Q: <a href="#idp6471456304">
+  </p></div></div></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="faq"></a>Chapter 8. Frequently Asked Questions</h1></div></div></div><div class="qandaset"><a name="idp2768877232"></a><dl><dt>8.1.  <a href="#faq-development">Development</a></dt><dd><dl><dt>Q: <a href="#idp2768878928">
 How do I create a proper patch for MPlayer?
-</a></dt><dt>Q: <a href="#idp6471502160">
+</a></dt><dt>Q: <a href="#idp2768924800">
 How do I translate MPlayer to a new language?
-</a></dt><dt>Q: <a href="#idp6471506048">
+</a></dt><dt>Q: <a href="#idp2768928688">
 How can I support MPlayer development?
-</a></dt><dt>Q: <a href="#idp6471509920">
+</a></dt><dt>Q: <a href="#idp2768932560">
 How can I become an MPlayer developer?
-</a></dt><dt>Q: <a href="#idp6471514768">
+</a></dt><dt>Q: <a href="#idp2768937408">
 Why don't you use autoconf/automake?
-</a></dt></dl></dd><dt>8.2.  <a href="#faq-compilation-installation">Compilation and installation</a></dt><dd><dl><dt>Q: <a href="#idp6471518896">
+</a></dt></dl></dd><dt>8.2.  <a href="#faq-compilation-installation">Compilation and installation</a></dt><dd><dl><dt>Q: <a href="#idp2768941584">
 Compilation fails with an error and gcc bails out
 with some cryptic message containing the phrase
 internal compiler error or
 unable to find a register to spill or
 can't find a register in class `GENERAL_REGS'
 while reloading `asm'.
-</a></dt><dt>Q: <a href="#idp6471526144">
+</a></dt><dt>Q: <a href="#idp2768948832">
 Are there binary (RPM/Debian) packages of MPlayer?
-</a></dt><dt>Q: <a href="#idp6471530208">
+</a></dt><dt>Q: <a href="#idp2768952896">
 How can I build a 32 bit MPlayer on a 64 bit Athlon?
-</a></dt><dt>Q: <a href="#idp6471533408">
+</a></dt><dt>Q: <a href="#idp2768956096">
 Configure ends with this text, and MPlayer won't compile!
 Your gcc does not support even i386 for '-march' and '-mcpu'
-</a></dt><dt>Q: <a href="#idp6471537168">
+</a></dt><dt>Q: <a href="#idp2768959856">
 I have a Matrox G200/G400/G450/G550, how do I compile/use the
 mga_vid driver?
-</a></dt><dt>Q: <a href="#idp6471540336">
+</a></dt><dt>Q: <a href="#idp2768963024">
 During 'make', MPlayer complains about
 missing X11 libraries. I don't understand, I do
 have X11 installed!?
-</a></dt></dl></dd><dt>8.3.  <a href="#faq-general">General questions</a></dt><dd><dl><dt>Q: <a href="#idp6471549200">
+</a></dt></dl></dd><dt>8.3.  <a href="#faq-general">General questions</a></dt><dd><dl><dt>Q: <a href="#idp2768971888">
 Are there any mailing lists on MPlayer?
-</a></dt><dt>Q: <a href="#idp6471552224">
+</a></dt><dt>Q: <a href="#idp2768974912">
 I've found a nasty bug when I tried to play my favorite video!
 Who should I inform?
-</a></dt><dt>Q: <a href="#idp6471554896">
+</a></dt><dt>Q: <a href="#idp2768977584">
 I get a core dump when trying to dump streams, what's wrong?
-</a></dt><dt>Q: <a href="#idp6471557808">
+</a></dt><dt>Q: <a href="#idp2768980496">
 When I start playing, I get this message but everything seems fine:
 Linux RTC init: ioctl (rtc_pie_on): Permission denied
-</a></dt><dt>Q: <a href="#idp6471561200">
+</a></dt><dt>Q: <a href="#idp2768983888">
 How can I make a screenshot?
-</a></dt><dt>Q: <a href="#idp6471566992">
+</a></dt><dt>Q: <a href="#idp2768989680">
 What is the meaning of the numbers on the status line?
-</a></dt><dt>Q: <a href="#idp6471593520">
+</a></dt><dt>Q: <a href="#idp2769016112">
 There are error messages about file not found
 /usr/local/lib/codecs/ ...
-</a></dt><dt>Q: <a href="#idp6471596656">
+</a></dt><dt>Q: <a href="#idp2769019248">
 How can I make MPlayer remember the options I
 use for a particular file, e.g. movie.avi?
-</a></dt><dt>Q: <a href="#idp6471601568">
+</a></dt><dt>Q: <a href="#idp2769024160">
 Subtitles are very nice, the most beautiful I've ever seen, but they
 slow down playing! I know it's unlikely ...
-</a></dt><dt>Q: <a href="#idp6471606192">
+</a></dt><dt>Q: <a href="#idp2769028784">
 How can I run MPlayer in the background?
-</a></dt></dl></dd><dt>8.4.  <a href="#faq-playback">Playback problems</a></dt><dd><dl><dt>Q: <a href="#idp6471611648">
+</a></dt></dl></dd><dt>8.4.  <a href="#faq-playback">Playback problems</a></dt><dd><dl><dt>Q: <a href="#idp2769034192">
 I cannot pinpoint the cause of some strange playback problem.
-</a></dt><dt>Q: <a href="#idp6471618256">
+</a></dt><dt>Q: <a href="#idp2769040800">
 How can I get subtitles to appear on the black margins around a movie?
-</a></dt><dt>Q: <a href="#idp6471621504">
+</a></dt><dt>Q: <a href="#idp2769044048">
 How can I select audio/subtitle tracks from a DVD, OGM, Matroska or NUT file?
-</a></dt><dt>Q: <a href="#idp6471628352">
+</a></dt><dt>Q: <a href="#idp2769050896">
 I'm trying to play a random stream off the internet but it fails.
-</a></dt><dt>Q: <a href="#idp6471630432">
+</a></dt><dt>Q: <a href="#idp2769052976">
 I downloaded a movie off a P2P network and it doesn't work!
-</a></dt><dt>Q: <a href="#idp6471632976">
+</a></dt><dt>Q: <a href="#idp2769055520">
 I'm having trouble getting my subtitles to display, help!!
-</a></dt><dt>Q: <a href="#idp6471637024">
+</a></dt><dt>Q: <a href="#idp2769059504">
 Why doesn't MPlayer work on Fedora Core?
-</a></dt><dt>Q: <a href="#idp6471654720">
+</a></dt><dt>Q: <a href="#idp2769077200">
 MPlayer dies with
 MPlayer interrupted by signal 4 in module: decode_video
-</a></dt><dt>Q: <a href="#idp6471659264">
+</a></dt><dt>Q: <a href="#idp2769081744">
 When I try to grab from my tuner, it works, but colors are strange.
 It's OK with other applications.
-</a></dt><dt>Q: <a href="#idp6471662048">
+</a></dt><dt>Q: <a href="#idp2769084528">
 I get very strange percentage values (way too big)
 while playing files on my notebook.
-</a></dt><dt>Q: <a href="#idp6471665632">
+</a></dt><dt>Q: <a href="#idp2769088112">
 The audio/video gets totally out of sync when I run
 MPlayer as
 root on my notebook.
 It works normal when i run it as a user.
-</a></dt><dt>Q: <a href="#idp6471670480">
+</a></dt><dt>Q: <a href="#idp2769092960">
 While playing a movie it suddenly gets jerky and I get the following message:
 Badly interleaved AVI file detected - switching to -ni mode...
-</a></dt></dl></dd><dt>8.5.  <a href="#faq-driver">Video/audio driver problems (vo/ao)</a></dt><dd><dl><dt>Q: <a href="#idp6471675408">
+</a></dt></dl></dd><dt>8.5.  <a href="#faq-driver">Video/audio driver problems (vo/ao)</a></dt><dd><dl><dt>Q: <a href="#idp2769097904">
 When I go into fullscreen mode I just get black borders around the image
 and no real scaling to fullscreen mode.
-</a></dt><dt>Q: <a href="#idp6471681584">
+</a></dt><dt>Q: <a href="#idp2769104080">
 I've just installed MPlayer. When I want to
 open a video file it causes a fatal error:
 Error opening/initializing the selected video_out (-vo) device.
 How can I solve my problem?
-</a></dt><dt>Q: <a href="#idp6471689536">
+</a></dt><dt>Q: <a href="#idp2769112032">
 I have problems with [your window manager]
 and fullscreen xv/xmga/sdl/x11 modes ...
-</a></dt><dt>Q: <a href="#idp6471692896">
+</a></dt><dt>Q: <a href="#idp2769115392">
 Audio goes out of sync playing an AVI file.
-</a></dt><dt>Q: <a href="#idp6471696336">
+</a></dt><dt>Q: <a href="#idp2769118832">
 How can I use dmix with
 MPlayer?
-</a></dt><dt>Q: <a href="#idp6471700512">
+</a></dt><dt>Q: <a href="#idp2769123008">
 I have no sound when playing a video and get error messages similar to this one:
 
 AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
@@ -6897,115 +6897,115 @@ Could not open/initialize audio device -&gt; no sound.
 Audio: no sound
 Starting playback...
 
-</a></dt><dt>Q: <a href="#idp6471705680">
+</a></dt><dt>Q: <a href="#idp2769128176">
 When starting MPlayer under KDE I just get a black
 screen and nothing happens. After about one minute the video starts playing.
-</a></dt><dt>Q: <a href="#idp6471710256">
+</a></dt><dt>Q: <a href="#idp2769132752">
 I have A/V sync problems.
 Some of my AVIs play fine, but some play with double speed!
-</a></dt><dt>Q: <a href="#idp6471712896">
+</a></dt><dt>Q: <a href="#idp2769135392">
 When I play this movie I get video-audio desync and/or
 MPlayer crashes with the following message:
 
 Too many (945 in 8390980 bytes) video packets in the buffer!
 
-</a></dt><dt>Q: <a href="#idp6471723952">
+</a></dt><dt>Q: <a href="#idp2769146448">
 How can I get rid of A/V desynchronization
 while seeking through RealMedia streams?
-</a></dt></dl></dd><dt>8.6.  <a href="#faq-dvd">DVD playback</a></dt><dd><dl><dt>Q: <a href="#idp6471727664">
+</a></dt></dl></dd><dt>8.6.  <a href="#faq-dvd">DVD playback</a></dt><dd><dl><dt>Q: <a href="#idp2769150048">
 What about DVD navigation/menus?
-</a></dt><dt>Q: <a href="#idp6471730000">
+</a></dt><dt>Q: <a href="#idp2769152384">
 What about subtitles? Can MPlayer display them?
-</a></dt><dt>Q: <a href="#idp6471733056">
+</a></dt><dt>Q: <a href="#idp2769155440">
 How can I set the region code of my DVD-drive? I don't have Windows!
-</a></dt><dt>Q: <a href="#idp6471735424">
+</a></dt><dt>Q: <a href="#idp2769157808">
 I can't play a DVD, MPlayer hangs or outputs "Encrypted VOB file!" errors.
-</a></dt><dt>Q: <a href="#idp6471737344">
+</a></dt><dt>Q: <a href="#idp2769159728">
 Do I need to be (setuid) root to be able to play a DVD?
-</a></dt><dt>Q: <a href="#idp6471740064">
+</a></dt><dt>Q: <a href="#idp2769162448">
 Is it possible to play/encode only selected chapters?
-</a></dt><dt>Q: <a href="#idp6471742112">
+</a></dt><dt>Q: <a href="#idp2769164496">
 My DVD playback is sluggish!
-</a></dt><dt>Q: <a href="#idp6471744992">
+</a></dt><dt>Q: <a href="#idp2769167376">
 I copied a DVD using vobcopy. How do I play/encode it from my hard disk?
-</a></dt></dl></dd><dt>8.7.  <a href="#faq-features">Feature requests</a></dt><dd><dl><dt>Q: <a href="#idp6471749488">
+</a></dt></dl></dd><dt>8.7.  <a href="#faq-features">Feature requests</a></dt><dd><dl><dt>Q: <a href="#idp2769171984">
 If MPlayer is paused and I try to seek or press any
 key at all, MPlayer ceases to be paused.
 I would like to be able to seek in the paused movie.
-</a></dt><dt>Q: <a href="#idp6471752896">
+</a></dt><dt>Q: <a href="#idp2769175392">
 I'd like to seek +/- 1 frame instead of 10 seconds.
-</a></dt></dl></dd><dt>8.8.  <a href="#faq-encoding">Encoding</a></dt><dd><dl><dt>Q: <a href="#idp6471757200">
+</a></dt></dl></dd><dt>8.8.  <a href="#faq-encoding">Encoding</a></dt><dd><dl><dt>Q: <a href="#idp2769179696">
 How can I encode?
-</a></dt><dt>Q: <a href="#idp6471759952">
+</a></dt><dt>Q: <a href="#idp2769182448">
 How can I dump a full DVD title into a file?
-</a></dt><dt>Q: <a href="#idp6471764496">
+</a></dt><dt>Q: <a href="#idp2769186992">
 How can I create (S)VCDs automatically?
-</a></dt><dt>Q: <a href="#idp6471767936">
+</a></dt><dt>Q: <a href="#idp2769190432">
 How can I create (S)VCDs?
-</a></dt><dt>Q: <a href="#idp6471771568">
+</a></dt><dt>Q: <a href="#idp2769194064">
 How can I join two video files?
-</a></dt><dt>Q: <a href="#idp6471778416">
+</a></dt><dt>Q: <a href="#idp2769200912">
 How can I fix AVI files with a broken index or bad interleaving?
-</a></dt><dt>Q: <a href="#idp6471782928">
+</a></dt><dt>Q: <a href="#idp2769205424">
 How can I fix the aspect ratio of an AVI file?
-</a></dt><dt>Q: <a href="#idp6471787504">
+</a></dt><dt>Q: <a href="#idp2769210000">
 How can I backup and encode a VOB file with a broken beginning?
-</a></dt><dt>Q: <a href="#idp6471794464">
+</a></dt><dt>Q: <a href="#idp2769216960">
 I can't encode DVD subtitles into the AVI!
-</a></dt><dt>Q: <a href="#idp6471796512">
+</a></dt><dt>Q: <a href="#idp2769219008">
 How can I encode only selected chapters from a DVD?
-</a></dt><dt>Q: <a href="#idp6471799040">
+</a></dt><dt>Q: <a href="#idp2769221536">
 I'm trying to work with 2GB+ files on a VFAT file system. Does it work?
-</a></dt><dt>Q: <a href="#idp6471800736">
+</a></dt><dt>Q: <a href="#idp2769223232">
 What is the meaning of the numbers on the status line
 during the encoding process?
-</a></dt><dt>Q: <a href="#idp6471817792">
+</a></dt><dt>Q: <a href="#idp2769240288">
 Why is the recommended bitrate printed by MEncoder
 negative?
-</a></dt><dt>Q: <a href="#idp6471820304">
+</a></dt><dt>Q: <a href="#idp2769242800">
 I can't encode an ASF file to AVI/MPEG-4 (DivX) because it uses 1000 fps.
-</a></dt><dt>Q: <a href="#idp6471822560">
+</a></dt><dt>Q: <a href="#idp2769245056">
 How can I put subtitles in the output file?
-</a></dt><dt>Q: <a href="#idp6471825824">
+</a></dt><dt>Q: <a href="#idp2769248320">
 How do I encode only sound from a music video?
-</a></dt><dt>Q: <a href="#idp6471833888">
+</a></dt><dt>Q: <a href="#idp2769256384">
 Why do third-party players fail to play MPEG-4 movies encoded by
 MEncoder versions later than 1.0pre7?
-</a></dt><dt>Q: <a href="#idp6471847472">
+</a></dt><dt>Q: <a href="#idp2769269968">
 How can I encode an audio only file?
-</a></dt><dt>Q: <a href="#idp6471850816">
+</a></dt><dt>Q: <a href="#idp2769273312">
 How can I play subtitles embedded in AVI?
-</a></dt><dt>Q: <a href="#idp6471854928">
+</a></dt><dt>Q: <a href="#idp2769277424">
 MEncoder won't...
-</a></dt></dl></dd></dl><table border="0" style="width: 100%;"><colgroup><col align="left" width="1%"><col></colgroup><tbody><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-development"></a>8.1. Development</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471456304">
+</a></dt></dl></dd></dl><table border="0" style="width: 100%;"><colgroup><col align="left" width="1%"><col></colgroup><tbody><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-development"></a>8.1. Development</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2768878928">
 How do I create a proper patch for MPlayer?
-</a></dt><dt>Q: <a href="#idp6471502160">
+</a></dt><dt>Q: <a href="#idp2768924800">
 How do I translate MPlayer to a new language?
-</a></dt><dt>Q: <a href="#idp6471506048">
+</a></dt><dt>Q: <a href="#idp2768928688">
 How can I support MPlayer development?
-</a></dt><dt>Q: <a href="#idp6471509920">
+</a></dt><dt>Q: <a href="#idp2768932560">
 How can I become an MPlayer developer?
-</a></dt><dt>Q: <a href="#idp6471514768">
+</a></dt><dt>Q: <a href="#idp2768937408">
 Why don't you use autoconf/automake?
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471456304"></a><a name="idp6471456560"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768878928"></a><a name="idp2768879184"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How do I create a proper patch for <span class="application">MPlayer</span>?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 We made a <a class="ulink" href="../../tech/patches.txt" target="_top">short document</a>
 describing all the necessary details. Please follow the instructions.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471502160"></a><a name="idp6471502416"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768924800"></a><a name="idp2768925056"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How do I translate <span class="application">MPlayer</span> to a new language?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Read the <a class="ulink" href="../../tech/translations.txt" target="_top">translation HOWTO</a>,
 it should explain everything. You can get further help on the
 <a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-translations" target="_top">MPlayer-translations</a>
 mailing list.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471506048"></a><a name="idp6471506304"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768928688"></a><a name="idp2768928944"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I support <span class="application">MPlayer</span> development?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 We are more than happy to accept your hardware and software
 <a class="ulink" href="http://www.mplayerhq.hu/donations.html" target="_top">donations</a>.
 They help us in continuously improving <span class="application">MPlayer</span>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471509920"></a><a name="idp6471510176"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768932560"></a><a name="idp2768932816"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I become an <span class="application">MPlayer</span> developer?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 We always welcome coders and documenters. Read the
@@ -7016,34 +7016,34 @@ mailing list and start coding. If you want to help out with the documentation,
 join the
 <a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-docs" target="_top">MPlayer-docs</a>
 mailing list.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471514768"></a><a name="idp6471515024"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768937408"></a><a name="idp2768937664"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Why don't you use autoconf/automake?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 We have a modular, handwritten build system. It does a reasonably good
 job, so why change? Besides, we dislike the auto* tools, just like
 <a class="ulink" href="http://freshmeat.net/articles/view/889/" target="_top">other people</a>.
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-compilation-installation"></a>8.2. Compilation and installation</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471518896">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-compilation-installation"></a>8.2. Compilation and installation</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2768941584">
 Compilation fails with an error and gcc bails out
 with some cryptic message containing the phrase
 internal compiler error or
 unable to find a register to spill or
 can't find a register in class `GENERAL_REGS'
 while reloading `asm'.
-</a></dt><dt>Q: <a href="#idp6471526144">
+</a></dt><dt>Q: <a href="#idp2768948832">
 Are there binary (RPM/Debian) packages of MPlayer?
-</a></dt><dt>Q: <a href="#idp6471530208">
+</a></dt><dt>Q: <a href="#idp2768952896">
 How can I build a 32 bit MPlayer on a 64 bit Athlon?
-</a></dt><dt>Q: <a href="#idp6471533408">
+</a></dt><dt>Q: <a href="#idp2768956096">
 Configure ends with this text, and MPlayer won't compile!
 Your gcc does not support even i386 for '-march' and '-mcpu'
-</a></dt><dt>Q: <a href="#idp6471537168">
+</a></dt><dt>Q: <a href="#idp2768959856">
 I have a Matrox G200/G400/G450/G550, how do I compile/use the
 mga_vid driver?
-</a></dt><dt>Q: <a href="#idp6471540336">
+</a></dt><dt>Q: <a href="#idp2768963024">
 During 'make', MPlayer complains about
 missing X11 libraries. I don't understand, I do
 have X11 installed!?
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471518896"></a><a name="idp6471519152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768941584"></a><a name="idp2768941840"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Compilation fails with an error and <span class="application">gcc</span> bails out
 with some cryptic message containing the phrase
 <code class="systemitem">internal compiler error</code> or
@@ -7058,30 +7058,30 @@ trigger compiler bugs frequently. Nevertheless we cannot fix them and do not
 add workarounds for compiler bugs to our sources. To avoid this problem,
 either stick with a compiler version that is known to be reliable and
 stable, or upgrade frequently.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471526144"></a><a name="idp6471526400"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768948832"></a><a name="idp2768949088"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Are there binary (RPM/Debian) packages of <span class="application">MPlayer</span>?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 See the <a class="link" href="#debian" title="5.1.1. Debian packaging">Debian</a> and <a class="link" href="#rpm" title="5.1.2. RPM packaging">RPM</a>
 section for details.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471530208"></a><a name="idp6471530464"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768952896"></a><a name="idp2768953152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I build a 32 bit <span class="application">MPlayer</span> on a 64 bit Athlon?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Try the following configure options:
 </p><pre class="screen">
 ./configure --target=i386-linux --cc="gcc -m32" --as="as --32" --with-extralibdir=/usr/lib
 </pre><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471533408"></a><a name="idp6471533664"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768956096"></a><a name="idp2768956352"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Configure ends with this text, and <span class="application">MPlayer</span> won't compile!
 </p><pre class="screen">Your gcc does not support even i386 for '-march' and '-mcpu'</pre><p>
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Your gcc isn't installed correctly, check the <tt class="filename">config.log</tt>
 file for details.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471537168"></a><a name="idp6471537424"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768959856"></a><a name="idp2768960112"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I have a Matrox G200/G400/G450/G550, how do I compile/use the
 <code class="systemitem">mga_vid</code> driver?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Read the <a class="link" href="#mga_vid" title="4.5. Matrox framebuffer (mga_vid)">mga_vid</a> section.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471540336"></a><a name="idp6471540592"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768963024"></a><a name="idp2768963280"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 During 'make', <span class="application">MPlayer</span> complains about
 missing X11 libraries. I don't understand, I <span class="emphasis"><em>do</em></span>
 have X11 installed!?
@@ -7092,56 +7092,56 @@ It's called <tt class="filename">XFree86-devel*</tt> under Red Hat,
 <tt class="filename">libx11-dev</tt> under Debian Sarge. Also check if the
 <tt class="filename">/usr/X11</tt> and
 <tt class="filename">/usr/include/X11</tt> symlinks exist.
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-general"></a>8.3. General questions</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471549200">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-general"></a>8.3. General questions</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2768971888">
 Are there any mailing lists on MPlayer?
-</a></dt><dt>Q: <a href="#idp6471552224">
+</a></dt><dt>Q: <a href="#idp2768974912">
 I've found a nasty bug when I tried to play my favorite video!
 Who should I inform?
-</a></dt><dt>Q: <a href="#idp6471554896">
+</a></dt><dt>Q: <a href="#idp2768977584">
 I get a core dump when trying to dump streams, what's wrong?
-</a></dt><dt>Q: <a href="#idp6471557808">
+</a></dt><dt>Q: <a href="#idp2768980496">
 When I start playing, I get this message but everything seems fine:
 Linux RTC init: ioctl (rtc_pie_on): Permission denied
-</a></dt><dt>Q: <a href="#idp6471561200">
+</a></dt><dt>Q: <a href="#idp2768983888">
 How can I make a screenshot?
-</a></dt><dt>Q: <a href="#idp6471566992">
+</a></dt><dt>Q: <a href="#idp2768989680">
 What is the meaning of the numbers on the status line?
-</a></dt><dt>Q: <a href="#idp6471593520">
+</a></dt><dt>Q: <a href="#idp2769016112">
 There are error messages about file not found
 /usr/local/lib/codecs/ ...
-</a></dt><dt>Q: <a href="#idp6471596656">
+</a></dt><dt>Q: <a href="#idp2769019248">
 How can I make MPlayer remember the options I
 use for a particular file, e.g. movie.avi?
-</a></dt><dt>Q: <a href="#idp6471601568">
+</a></dt><dt>Q: <a href="#idp2769024160">
 Subtitles are very nice, the most beautiful I've ever seen, but they
 slow down playing! I know it's unlikely ...
-</a></dt><dt>Q: <a href="#idp6471606192">
+</a></dt><dt>Q: <a href="#idp2769028784">
 How can I run MPlayer in the background?
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471549200"></a><a name="idp6471549456"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768971888"></a><a name="idp2768972144"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Are there any mailing lists on <span class="application">MPlayer</span>?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Yes. Look at the
 <a class="ulink" href="http://www.mplayerhq.hu/design7/mailing_lists.html" target="_top">mailing lists section</a>
 of our homepage.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471552224"></a><a name="idp6471552480"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768974912"></a><a name="idp2768975168"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I've found a nasty bug when I tried to play my favorite video!
 Who should I inform?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Please read the <a class="link" href="#bugreports" title="Appendix A. How to report bugs">bug reporting guidelines</a>
 and follow the instructions.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471554896"></a><a name="idp6471555152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768977584"></a><a name="idp2768977840"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I get a core dump when trying to dump streams, what's wrong?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Don't panic. Make sure you know where your towel is.</p><p>
 Seriously, notice the smiley and start looking for files that end in
 <tt class="filename">.dump</tt>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471557808"></a><a name="idp6471558064"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768980496"></a><a name="idp2768980752"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 When I start playing, I get this message but everything seems fine:
 </p><pre class="screen">Linux RTC init: ioctl (rtc_pie_on): Permission denied</pre><p>
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You need a specially set up kernel to use the RTC timing code.
 For details see the <a class="link" href="#rtc" title="2.6. RTC">RTC</a> section of the documentation.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471561200"></a><a name="idp6471561456"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768983888"></a><a name="idp2768984144"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I make a screenshot?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You have to use a video output driver that does not employ an overlay to be
@@ -7152,7 +7152,7 @@ Alternatively you can run <span class="application">MPlayer</span> with the
 <code class="systemitem">screenshot</code> video filter
 (<tt class="option">-vf screenshot</tt>), and press the <span class="keycap"><b>s</b></span>
 key to grab a screenshot.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471566992"></a><a name="idp6471567248"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2768989680"></a><a name="idp2768989936"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 What is the meaning of the numbers on the status line?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Example:
@@ -7176,20 +7176,20 @@ This is because it is called directly from the codec and thus cannot
 be measured separately. If you wish to know the video_out speed, compare
 the difference when playing the file with <tt class="option">-vo null</tt> and
 your usual video output driver.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471593520"></a><a name="idp6471593776"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769016112"></a><a name="idp2769016368"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 There are error messages about file not found
 <tt class="filename">/usr/local/lib/codecs/</tt> ...
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Download and install the binary codecs from our
 <a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">download page</a>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471596656"></a><a name="idp6471596912"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769019248"></a><a name="idp2769019504"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I make <span class="application">MPlayer</span> remember the options I
 use for a particular file, e.g. <tt class="filename">movie.avi</tt>?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Create a file named <tt class="filename">movie.avi.conf</tt> with the file-specific
 options in it and put it in <tt class="filename">~/.mplayer</tt>
 or in the same directory as the file.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471601568"></a><a name="idp6471601824"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769024160"></a><a name="idp2769024416"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Subtitles are very nice, the most beautiful I've ever seen, but they
 slow down playing! I know it's unlikely ...
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7197,45 +7197,45 @@ After running <tt class="filename">./configure</tt>,
 edit <tt class="filename">config.h</tt> and replace
 <code class="systemitem">#undef FAST_OSD</code> with
 <code class="systemitem">#define FAST_OSD</code>. Then recompile.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471606192"></a><a name="idp6471606448"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769028784"></a><a name="idp2769029040"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I run <span class="application">MPlayer</span> in the background?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use:
 </p><pre class="screen">
 mplayer <em class="replaceable"><code>options</code></em> <em class="replaceable"><code>filename</code></em> &lt; /dev/null &amp;
 </pre><p>
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-playback"></a>8.4. Playback problems</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471611648">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-playback"></a>8.4. Playback problems</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2769034192">
 I cannot pinpoint the cause of some strange playback problem.
-</a></dt><dt>Q: <a href="#idp6471618256">
+</a></dt><dt>Q: <a href="#idp2769040800">
 How can I get subtitles to appear on the black margins around a movie?
-</a></dt><dt>Q: <a href="#idp6471621504">
+</a></dt><dt>Q: <a href="#idp2769044048">
 How can I select audio/subtitle tracks from a DVD, OGM, Matroska or NUT file?
-</a></dt><dt>Q: <a href="#idp6471628352">
+</a></dt><dt>Q: <a href="#idp2769050896">
 I'm trying to play a random stream off the internet but it fails.
-</a></dt><dt>Q: <a href="#idp6471630432">
+</a></dt><dt>Q: <a href="#idp2769052976">
 I downloaded a movie off a P2P network and it doesn't work!
-</a></dt><dt>Q: <a href="#idp6471632976">
+</a></dt><dt>Q: <a href="#idp2769055520">
 I'm having trouble getting my subtitles to display, help!!
-</a></dt><dt>Q: <a href="#idp6471637024">
+</a></dt><dt>Q: <a href="#idp2769059504">
 Why doesn't MPlayer work on Fedora Core?
-</a></dt><dt>Q: <a href="#idp6471654720">
+</a></dt><dt>Q: <a href="#idp2769077200">
 MPlayer dies with
 MPlayer interrupted by signal 4 in module: decode_video
-</a></dt><dt>Q: <a href="#idp6471659264">
+</a></dt><dt>Q: <a href="#idp2769081744">
 When I try to grab from my tuner, it works, but colors are strange.
 It's OK with other applications.
-</a></dt><dt>Q: <a href="#idp6471662048">
+</a></dt><dt>Q: <a href="#idp2769084528">
 I get very strange percentage values (way too big)
 while playing files on my notebook.
-</a></dt><dt>Q: <a href="#idp6471665632">
+</a></dt><dt>Q: <a href="#idp2769088112">
 The audio/video gets totally out of sync when I run
 MPlayer as
 root on my notebook.
 It works normal when i run it as a user.
-</a></dt><dt>Q: <a href="#idp6471670480">
+</a></dt><dt>Q: <a href="#idp2769092960">
 While playing a movie it suddenly gets jerky and I get the following message:
 Badly interleaved AVI file detected - switching to -ni mode...
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471611648"></a><a name="idp6471611904"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769034192"></a><a name="idp2769034448"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I cannot pinpoint the cause of some strange playback problem.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Do you have a stray <tt class="filename">codecs.conf</tt> file in
@@ -7249,14 +7249,14 @@ made in newer program versions. Unless used by experts it is a recipe
 for disaster in the form of seemingly random and very hard to localize
 crashes and playback problems. If you still have it somewhere on your
 system, you should remove it now.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471618256"></a><a name="idp6471618512"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769040800"></a><a name="idp2769041056"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I get subtitles to appear on the black margins around a movie?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use the <code class="systemitem">expand</code> video filter to increase the
 area onto which the movie is rendered vertically and place the movie
 at the top border, for example:
 </p><pre class="screen">mplayer -vf expand=0:-100:0:0 -slang de dvd://1</pre><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471621504"></a><a name="idp6471621760"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769044048"></a><a name="idp2769044304"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I select audio/subtitle tracks from a DVD, OGM, Matroska or NUT file?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You have to use <tt class="option">-aid</tt> (audio ID) or <tt class="option">-alang</tt>
@@ -7271,17 +7271,17 @@ To see which ones are available:
 mplayer -vo null -ao null -frames 0 -v <em class="replaceable"><code>filename</code></em> | grep sid
 mplayer -vo null -ao null -frames 0 -v <em class="replaceable"><code>filename</code></em> | grep aid
 </pre><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471628352"></a><a name="idp6471628608"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769050896"></a><a name="idp2769051152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I'm trying to play a random stream off the internet but it fails.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Try playing the stream with the <tt class="option">-playlist</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471630432"></a><a name="idp6471630688"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769052976"></a><a name="idp2769053232"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I downloaded a movie off a P2P network and it doesn't work!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Your file is most probably broken or a fake file. If you got it from
 a friend, and he says it works, try comparing
 <span class="application">md5sum</span> hashes.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471632976"></a><a name="idp6471633232"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769055520"></a><a name="idp2769055776"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I'm having trouble getting my subtitles to display, help!!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Make sure you have installed fonts properly. Run through the steps in the
@@ -7290,7 +7290,7 @@ section again. If you are using TrueType fonts, verify that you have the
 <code class="systemitem">FreeType</code> library installed.
 Other things include checking your subtitles in a text editor or with other
 players. Also try converting them to another format.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471637024"></a><a name="idp6471637280"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769059504"></a><a name="idp2769059760"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Why doesn't <span class="application">MPlayer</span> work on Fedora Core?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 There is a bad interaction on Fedora between exec-shield,
@@ -7328,21 +7328,21 @@ If you run into this problem you have two options:
     (This turns off exec-shield for the
     <span class="application">MPlayer</span> binary.)
   </p></li></ol></div></li></ul></div><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471654720"></a><a name="idp6471654976"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769077200"></a><a name="idp2769077456"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 <span class="application">MPlayer</span> dies with
 </p><pre class="screen">MPlayer interrupted by signal 4 in module: decode_video</pre><p>
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Don't use <span class="application">MPlayer</span> on a CPU different from the one
 it was compiled on or recompile with runtime CPU detection
 (<span class="command"><strong>./configure --enable-runtime-cpudetection</strong></span>).
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471659264"></a><a name="idp6471659520"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769081744"></a><a name="idp2769082000"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 When I try to grab from my tuner, it works, but colors are strange.
 It's OK with other applications.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Your card probably reports some colorspaces as supported when in fact
 it does not support them. Try with YUY2 instead of the
 default YV12 (see the <a class="link" href="#tv-input" title="3.12. TV input">TV</a> section).
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471662048"></a><a name="idp6471662304"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769084528"></a><a name="idp2769084784"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I get very strange percentage values (way too big)
 while playing files on my notebook.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7352,7 +7352,7 @@ It's an effect of the power management / power saving system of your notebook
 also try whether
 <a class="ulink" href="http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufreq.html" target="_top">cpufreq</a>
 (a SpeedStep interface for Linux) helps you.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471665632"></a><a name="idp6471665888"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769088112"></a><a name="idp2769088368"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 The audio/video gets totally out of sync when I run
 <span class="application">MPlayer</span> as
 <code class="systemitem">root</code> on my notebook.
@@ -7361,29 +7361,29 @@ It works normal when i run it as a user.
 This is again a power management effect (see above). Plug the external power
 connector in <span class="bold"><strong>before</strong></span> you power on your notebook
 or make sure you do not use the <tt class="option">-rtc</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471670480"></a><a name="idp6471670736"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769092960"></a><a name="idp2769093216"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 While playing a movie it suddenly gets jerky and I get the following message:
 </p><pre class="screen">Badly interleaved AVI file detected - switching to -ni mode...</pre><p>
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Badly interleaved files and <tt class="option">-cache</tt> don't work well together.
 Try <tt class="option">-nocache</tt>.
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-driver"></a>8.5. Video/audio driver problems (vo/ao)</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471675408">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-driver"></a>8.5. Video/audio driver problems (vo/ao)</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2769097904">
 When I go into fullscreen mode I just get black borders around the image
 and no real scaling to fullscreen mode.
-</a></dt><dt>Q: <a href="#idp6471681584">
+</a></dt><dt>Q: <a href="#idp2769104080">
 I've just installed MPlayer. When I want to
 open a video file it causes a fatal error:
 Error opening/initializing the selected video_out (-vo) device.
 How can I solve my problem?
-</a></dt><dt>Q: <a href="#idp6471689536">
+</a></dt><dt>Q: <a href="#idp2769112032">
 I have problems with [your window manager]
 and fullscreen xv/xmga/sdl/x11 modes ...
-</a></dt><dt>Q: <a href="#idp6471692896">
+</a></dt><dt>Q: <a href="#idp2769115392">
 Audio goes out of sync playing an AVI file.
-</a></dt><dt>Q: <a href="#idp6471696336">
+</a></dt><dt>Q: <a href="#idp2769118832">
 How can I use dmix with
 MPlayer?
-</a></dt><dt>Q: <a href="#idp6471700512">
+</a></dt><dt>Q: <a href="#idp2769123008">
 I have no sound when playing a video and get error messages similar to this one:
 
 AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
@@ -7392,22 +7392,22 @@ Could not open/initialize audio device -&gt; no sound.
 Audio: no sound
 Starting playback...
 
-</a></dt><dt>Q: <a href="#idp6471705680">
+</a></dt><dt>Q: <a href="#idp2769128176">
 When starting MPlayer under KDE I just get a black
 screen and nothing happens. After about one minute the video starts playing.
-</a></dt><dt>Q: <a href="#idp6471710256">
+</a></dt><dt>Q: <a href="#idp2769132752">
 I have A/V sync problems.
 Some of my AVIs play fine, but some play with double speed!
-</a></dt><dt>Q: <a href="#idp6471712896">
+</a></dt><dt>Q: <a href="#idp2769135392">
 When I play this movie I get video-audio desync and/or
 MPlayer crashes with the following message:
 
 Too many (945 in 8390980 bytes) video packets in the buffer!
 
-</a></dt><dt>Q: <a href="#idp6471723952">
+</a></dt><dt>Q: <a href="#idp2769146448">
 How can I get rid of A/V desynchronization
 while seeking through RealMedia streams?
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471675408"></a><a name="idp6471675664"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769097904"></a><a name="idp2769098160"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 When I go into fullscreen mode I just get black borders around the image
 and no real scaling to fullscreen mode.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7419,7 +7419,7 @@ video output driver. Try adding <tt class="option">-vo xv</tt> to the command
 line or read the <a class="link" href="#video" title="Chapter 4. Video output devices">video section</a> to find out
 about alternative video output drivers. The <tt class="option">-zoom</tt>
 option explicitly enables software scaling.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471681584"></a><a name="idp6471681840"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769104080"></a><a name="idp2769104336"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I've just installed <span class="application">MPlayer</span>. When I want to
 open a video file it causes a fatal error:
 </p><pre class="screen">Error opening/initializing the selected video_out (-vo) device.</pre><p>
@@ -7438,28 +7438,28 @@ to <tt class="filename">~/.mplayer/config</tt> and/or
 vo_driver = <em class="replaceable"><code>selected_vo</code></em>
 </pre><p>
 to <tt class="filename">~/.mplayer/gui.conf</tt>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471689536"></a><a name="idp6471689792"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769112032"></a><a name="idp2769112288"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I have problems with <em class="replaceable"><code>[your window manager]</code></em>
 and fullscreen xv/xmga/sdl/x11 modes ...
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Read the <a class="link" href="#bugreports" title="Appendix A. How to report bugs">bug reporting guidelines</a> and send us
 a proper bug report.
 Also try experimenting with the <tt class="option">-fstype</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471692896"></a><a name="idp6471693152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769115392"></a><a name="idp2769115648"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Audio goes out of sync playing an AVI file.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Try the <tt class="option">-bps</tt> or <tt class="option">-nobps</tt> option. If it does not
 improve, read the
 <a class="link" href="#bugreports" title="Appendix A. How to report bugs">bug reporting guidelines</a>
 and upload the file to FTP.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471696336"></a><a name="idp6471696592"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769118832"></a><a name="idp2769119088"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I use <span class="application">dmix</span> with
 <span class="application">MPlayer</span>?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 After setting up your
 <a class="ulink" href="http://alsa.opensrc.org/index.php?page=DmixPlugin" target="_top">asoundrc</a>
 you have to use <tt class="option">-ao alsa:device=dmix</tt>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471700512"></a><a name="idp6471700768"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769123008"></a><a name="idp2769123264"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I have no sound when playing a video and get error messages similar to this one:
 </p><pre class="screen">
 AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
@@ -7476,7 +7476,7 @@ aRts or ESD.
 You might also be running ALSA without OSS emulation, try loading the ALSA OSS
 kernel modules or add <tt class="option">-ao alsa</tt> to your command line to
 directly use the ALSA audio output driver.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471705680"></a><a name="idp6471705936"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769128176"></a><a name="idp2769128432"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 When starting <span class="application">MPlayer</span> under KDE I just get a black
 screen and nothing happens. After about one minute the video starts playing.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7486,14 +7486,14 @@ aRts sound, specify audio output via our native aRts audio driver
 (<tt class="option">-ao arts</tt>). If it fails or isn't compiled in, try SDL
 (<tt class="option">-ao sdl</tt>) and make sure your SDL can handle aRts sound. Yet
 another option is to start <span class="application">MPlayer</span> with artsdsp.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471710256"></a><a name="idp6471710512"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769132752"></a><a name="idp2769133008"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I have A/V sync problems.
 Some of my AVIs play fine, but some play with double speed!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You have a buggy sound card/driver. Most likely it's fixed at 44100Hz, and you
 try to play a file which has 22050Hz audio. Try the
 <code class="systemitem">resample</code> audio filter.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471712896"></a><a name="idp6471713152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769135392"></a><a name="idp2769135648"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 When I play this movie I get video-audio desync and/or
 <span class="application">MPlayer</span> crashes with the following message:
 </p><pre class="screen">
@@ -7518,61 +7518,61 @@ This can have multiple reasons.
 </p></li><li class="listitem"><p>
   Your sound driver is buggy.
 </p></li></ul></div><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471723952"></a><a name="idp6471724208"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769146448"></a><a name="idp2769146704"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I get rid of A/V desynchronization
 while seeking through RealMedia streams?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 <tt class="option">-mc 0.1</tt> can help.
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-dvd"></a>8.6. DVD playback</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471727664">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-dvd"></a>8.6. DVD playback</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2769150048">
 What about DVD navigation/menus?
-</a></dt><dt>Q: <a href="#idp6471730000">
+</a></dt><dt>Q: <a href="#idp2769152384">
 What about subtitles? Can MPlayer display them?
-</a></dt><dt>Q: <a href="#idp6471733056">
+</a></dt><dt>Q: <a href="#idp2769155440">
 How can I set the region code of my DVD-drive? I don't have Windows!
-</a></dt><dt>Q: <a href="#idp6471735424">
+</a></dt><dt>Q: <a href="#idp2769157808">
 I can't play a DVD, MPlayer hangs or outputs "Encrypted VOB file!" errors.
-</a></dt><dt>Q: <a href="#idp6471737344">
+</a></dt><dt>Q: <a href="#idp2769159728">
 Do I need to be (setuid) root to be able to play a DVD?
-</a></dt><dt>Q: <a href="#idp6471740064">
+</a></dt><dt>Q: <a href="#idp2769162448">
 Is it possible to play/encode only selected chapters?
-</a></dt><dt>Q: <a href="#idp6471742112">
+</a></dt><dt>Q: <a href="#idp2769164496">
 My DVD playback is sluggish!
-</a></dt><dt>Q: <a href="#idp6471744992">
+</a></dt><dt>Q: <a href="#idp2769167376">
 I copied a DVD using vobcopy. How do I play/encode it from my hard disk?
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471727664"></a><a name="idp6471727920"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769150048"></a><a name="idp2769150304"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 What about DVD navigation/menus?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 <span class="application">MPlayer</span> should support DVD menus nowadays.
 Your mileage may vary.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471730000"></a><a name="idp6471730256"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769152384"></a><a name="idp2769152640"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 What about subtitles? Can <span class="application">MPlayer</span> display them?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Yes. See the <a class="link" href="#dvd" title="3.5. DVD playback">DVD chapter</a>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471733056"></a><a name="idp6471733312"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769155440"></a><a name="idp2769155696"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I set the region code of my DVD-drive? I don't have Windows!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use the
 <a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset tool</a>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471735424"></a><a name="idp6471735680"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769157808"></a><a name="idp2769158064"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I can't play a DVD, MPlayer hangs or outputs "Encrypted VOB file!" errors.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 CSS decryption code does not work with some DVD drives unless you set
 the region code appropriately. See the answer to the previous question.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471737344"></a><a name="idp6471737600"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769159728"></a><a name="idp2769159984"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Do I need to be (setuid) root to be able to play a DVD?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 No. However you must have the proper rights
 on the DVD device entry (in <tt class="filename">/dev/</tt>).
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471740064"></a><a name="idp6471740320"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769162448"></a><a name="idp2769162704"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Is it possible to play/encode only selected chapters?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Yes, try the <tt class="option">-chapter</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471742112"></a><a name="idp6471742368"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769164496"></a><a name="idp2769164752"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 My DVD playback is sluggish!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use the <tt class="option">-cache</tt> option (described in the man page) and try
 enabling DMA for the DVD drive with the <span class="command"><strong>hdparm</strong></span> tool.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471744992"></a><a name="idp6471745248"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769167376"></a><a name="idp2769167632"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I copied a DVD using vobcopy. How do I play/encode it from my hard disk?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use the <tt class="option">-dvd-device</tt> option to refer to the directory
@@ -7580,75 +7580,75 @@ that contains the files:
 </p><pre class="screen">
 mplayer dvd://1 -dvd-device <em class="replaceable"><code>/path/to/directory</code></em>
 </pre><p>
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-features"></a>8.7. Feature requests</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471749488">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-features"></a>8.7. Feature requests</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2769171984">
 If MPlayer is paused and I try to seek or press any
 key at all, MPlayer ceases to be paused.
 I would like to be able to seek in the paused movie.
-</a></dt><dt>Q: <a href="#idp6471752896">
+</a></dt><dt>Q: <a href="#idp2769175392">
 I'd like to seek +/- 1 frame instead of 10 seconds.
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471749488"></a><a name="idp6471749744"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769171984"></a><a name="idp2769172240"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 If <span class="application">MPlayer</span> is paused and I try to seek or press any
 key at all, <span class="application">MPlayer</span> ceases to be paused.
 I would like to be able to seek in the paused movie.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 This is very tricky to implement without losing A/V synchronization.
 All attempts have failed so far, but patches are welcome.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471752896"></a><a name="idp6471753152"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769175392"></a><a name="idp2769175648"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I'd like to seek +/- 1 frame instead of 10 seconds.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You can step forward one frame by pressing <span class="keycap"><b>.</b></span>.
 If the movie was not paused it will be paused afterwards
 (see the man page for details).
 Stepping backwards is unlikely to be implemented anytime soon.
-</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-encoding"></a>8.8. Encoding</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp6471757200">
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-encoding"></a>8.8. Encoding</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="#idp2769179696">
 How can I encode?
-</a></dt><dt>Q: <a href="#idp6471759952">
+</a></dt><dt>Q: <a href="#idp2769182448">
 How can I dump a full DVD title into a file?
-</a></dt><dt>Q: <a href="#idp6471764496">
+</a></dt><dt>Q: <a href="#idp2769186992">
 How can I create (S)VCDs automatically?
-</a></dt><dt>Q: <a href="#idp6471767936">
+</a></dt><dt>Q: <a href="#idp2769190432">
 How can I create (S)VCDs?
-</a></dt><dt>Q: <a href="#idp6471771568">
+</a></dt><dt>Q: <a href="#idp2769194064">
 How can I join two video files?
-</a></dt><dt>Q: <a href="#idp6471778416">
+</a></dt><dt>Q: <a href="#idp2769200912">
 How can I fix AVI files with a broken index or bad interleaving?
-</a></dt><dt>Q: <a href="#idp6471782928">
+</a></dt><dt>Q: <a href="#idp2769205424">
 How can I fix the aspect ratio of an AVI file?
-</a></dt><dt>Q: <a href="#idp6471787504">
+</a></dt><dt>Q: <a href="#idp2769210000">
 How can I backup and encode a VOB file with a broken beginning?
-</a></dt><dt>Q: <a href="#idp6471794464">
+</a></dt><dt>Q: <a href="#idp2769216960">
 I can't encode DVD subtitles into the AVI!
-</a></dt><dt>Q: <a href="#idp6471796512">
+</a></dt><dt>Q: <a href="#idp2769219008">
 How can I encode only selected chapters from a DVD?
-</a></dt><dt>Q: <a href="#idp6471799040">
+</a></dt><dt>Q: <a href="#idp2769221536">
 I'm trying to work with 2GB+ files on a VFAT file system. Does it work?
-</a></dt><dt>Q: <a href="#idp6471800736">
+</a></dt><dt>Q: <a href="#idp2769223232">
 What is the meaning of the numbers on the status line
 during the encoding process?
-</a></dt><dt>Q: <a href="#idp6471817792">
+</a></dt><dt>Q: <a href="#idp2769240288">
 Why is the recommended bitrate printed by MEncoder
 negative?
-</a></dt><dt>Q: <a href="#idp6471820304">
+</a></dt><dt>Q: <a href="#idp2769242800">
 I can't encode an ASF file to AVI/MPEG-4 (DivX) because it uses 1000 fps.
-</a></dt><dt>Q: <a href="#idp6471822560">
+</a></dt><dt>Q: <a href="#idp2769245056">
 How can I put subtitles in the output file?
-</a></dt><dt>Q: <a href="#idp6471825824">
+</a></dt><dt>Q: <a href="#idp2769248320">
 How do I encode only sound from a music video?
-</a></dt><dt>Q: <a href="#idp6471833888">
+</a></dt><dt>Q: <a href="#idp2769256384">
 Why do third-party players fail to play MPEG-4 movies encoded by
 MEncoder versions later than 1.0pre7?
-</a></dt><dt>Q: <a href="#idp6471847472">
+</a></dt><dt>Q: <a href="#idp2769269968">
 How can I encode an audio only file?
-</a></dt><dt>Q: <a href="#idp6471850816">
+</a></dt><dt>Q: <a href="#idp2769273312">
 How can I play subtitles embedded in AVI?
-</a></dt><dt>Q: <a href="#idp6471854928">
+</a></dt><dt>Q: <a href="#idp2769277424">
 MEncoder won't...
-</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471757200"></a><a name="idp6471757456"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769179696"></a><a name="idp2769179952"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I encode?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Read the <a class="link" href="#mencoder" title="Chapter 6. Basic usage of MEncoder"><span class="application">MEncoder</span></a>
 section.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471759952"></a><a name="idp6471760208"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769182448"></a><a name="idp2769182704"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I dump a full DVD title into a file?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Once you have selected your title, and made sure it plays fine with
@@ -7659,14 +7659,14 @@ mplayer dvd://5 -dumpstream -dumpfile <em class="replaceable"><code>dvd_dump.vob
 </pre><p>
 will dump the 5th title of the DVD into the file
 <em class="replaceable"><code>dvd_dump.vob</code></em>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471764496"></a><a name="idp6471764752"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769186992"></a><a name="idp2769187248"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I create (S)VCDs automatically?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Try the <tt class="filename">mencvcd.sh</tt> script from the
 <tt class="filename">TOOLS</tt> subdirectory.
 With it you can encode DVDs or other movies to VCD or SVCD format
 and even burn them directly to CD.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471767936"></a><a name="idp6471768192"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769190432"></a><a name="idp2769190688"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I create (S)VCDs?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Newer versions of <span class="application">MEncoder</span> can directly
@@ -7677,7 +7677,7 @@ friends).
 Please read
 <a class="link" href="#menc-feat-vcd-dvd" title="7.8. Using MEncoder to create VCD/SVCD/DVD-compliant files">Using MEncoder to create VCD/SVCD/DVD-compliant files</a>
 for more details.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471771568"></a><a name="idp6471771824"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769194064"></a><a name="idp2769194320"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I join two video files?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 MPEG files can be concatenated into a single file with luck.
@@ -7693,7 +7693,7 @@ You can also try
 <span class="application">avimerge</span> (part of the
 <a class="ulink" href="http://www.transcoding.org/" target="_top">transcode</a>
 tool set).
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471778416"></a><a name="idp6471778672"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769200912"></a><a name="idp2769201168"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I fix AVI files with a broken index or bad interleaving?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 To avoid having to use <tt class="option">-idx</tt> to be able to seek in
@@ -7705,7 +7705,7 @@ mencoder <em class="replaceable"><code>input.avi</code></em> -idx -ovc copy -oac
 to copy the video and audio streams into a new AVI file while
 regenerating the index and correctly interleaving the data.
 Of course this cannot fix possible bugs in the video and/or audio streams.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471782928"></a><a name="idp6471783184"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769205424"></a><a name="idp2769205680"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I fix the aspect ratio of an AVI file?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You can do such a thing thanks to <span class="application">MEncoder</span>'s
@@ -7714,7 +7714,7 @@ stored in the AVI OpenDML vprp header option. For example:
 </p><pre class="screen">
 mencoder <em class="replaceable"><code>input.avi</code></em> -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em> -force-avi-aspect 4/3
 </pre><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471787504"></a><a name="idp6471787760"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769210000"></a><a name="idp2769210256"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I backup and encode a VOB file with a broken beginning?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 The main problem when you want to encode a VOB file which is corrupted
@@ -7730,20 +7730,20 @@ Then you can create a new file which contains just the clean part:
 </p><pre class="screen">
 dd if=<em class="replaceable"><code>input.vob</code></em> of=<em class="replaceable"><code>output_cut.vob</code></em> skip=1 ibs=<em class="replaceable"><code>nb_of_bytes_to_skip</code></em>
 </pre><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471794464"></a><a name="idp6471794720"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769216960"></a><a name="idp2769217216"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I can't encode DVD subtitles into the AVI!
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 You have to properly specify the <tt class="option">-sid</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471796512"></a><a name="idp6471796768"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769219008"></a><a name="idp2769219264"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I encode only selected chapters from a DVD?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use the <tt class="option">-chapter</tt> option correctly,
 like: <tt class="option">-chapter 5-7</tt>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471799040"></a><a name="idp6471799296"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769221536"></a><a name="idp2769221792"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I'm trying to work with 2GB+ files on a VFAT file system. Does it work?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 No, VFAT doesn't support 2GB+ files.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471800736"></a><a name="idp6471800992"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769223232"></a><a name="idp2769223488"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 What is the meaning of the numbers on the status line
 during the encoding process?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7754,23 +7754,23 @@ Pos: 264.5s   6612f ( 2%)  7.12fps Trem: 576min 2856mb  A-V:0.065 [2126:192]
 </p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="systemitem">Pos: 264.5s</code></span></dt><dd><p>time position in the encoded stream</p></dd><dt><span class="term"><code class="systemitem">6612f</code></span></dt><dd><p>number of video frames encoded</p></dd><dt><span class="term"><code class="systemitem">( 2%)</code></span></dt><dd><p>portion of the input stream encoded</p></dd><dt><span class="term"><code class="systemitem">7.12fps</code></span></dt><dd><p>encoding speed</p></dd><dt><span class="term"><code class="systemitem">Trem: 576min</code></span></dt><dd><p>estimated remaining encoding time</p></dd><dt><span class="term"><code class="systemitem">2856mb</code></span></dt><dd><p>estimated size of the final encode</p></dd><dt><span class="term"><code class="systemitem">A-V:0.065</code></span></dt><dd><p>current delay between audio and video streams</p></dd><dt><span class="term"><code class="systemitem">[2126:192]</code></span></dt><dd><p>
   average video bitrate (in kb/s) and average audio bitrate (in kb/s)
   </p></dd></dl></div><p>
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471817792"></a><a name="idp6471818048"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769240288"></a><a name="idp2769240544"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Why is the recommended bitrate printed by <span class="application">MEncoder</span>
 negative?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Because the bitrate you encoded the audio with is too large to fit the
 movie on any CD. Check if you have libmp3lame installed properly.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471820304"></a><a name="idp6471820560"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769242800"></a><a name="idp2769243056"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 I can't encode an ASF file to AVI/MPEG-4 (DivX) because it uses 1000 fps.
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Since ASF uses variable framerate but AVI uses a fixed one, you
 have to set it by hand with the <tt class="option">-ofps</tt> option.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471822560"></a><a name="idp6471822816"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769245056"></a><a name="idp2769245312"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I put subtitles in the output file?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Just pass the <tt class="option">-sub &lt;filename&gt;</tt> (or <tt class="option">-sid</tt>,
 respectively) option to <span class="application">MEncoder</span>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471825824"></a><a name="idp6471826080"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769248320"></a><a name="idp2769248576"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How do I encode only sound from a music video?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 It's not possible directly, but you can try this (note the
@@ -7785,7 +7785,7 @@ rm <em class="replaceable"><code>encode</code></em>
 This allows you to use any encoder, not only <span class="application">LAME</span>,
 just replace <span class="command"><strong>lame</strong></span> with your favorite audio encoder in the
 above command.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471833888"></a><a name="idp6471834144"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769256384"></a><a name="idp2769256640"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 Why do third-party players fail to play MPEG-4 movies encoded by
 <span class="application">MEncoder</span> versions later than 1.0pre7?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
@@ -7816,19 +7816,19 @@ hardware players may choke on some advanced features that
 doesn't; on the other hand <code class="systemitem">Xvid</code>
 is closer to <code class="systemitem">libavcodec</code> in
 terms of functionality, and is supported by all decent players.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471847472"></a><a name="idp6471847728"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769269968"></a><a name="idp2769270224"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I encode an audio only file?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use <tt class="filename">aconvert.sh</tt> from the
 <tt class="filename">TOOLS</tt>
 subdirectory in the MPlayer source tree.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471850816"></a><a name="idp6471851072"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769273312"></a><a name="idp2769273568"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 How can I play subtitles embedded in AVI?
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Use <tt class="filename">avisubdump.c</tt> from the
 <tt class="filename">TOOLS</tt> subdirectory or read
 <a class="ulink" href="http://xlife.zuavra.net/curse/0012/" target="_top">this document about extracting/demultiplexing subtitles embedded in OpenDML AVI files</a>.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp6471854928"></a><a name="idp6471855184"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp2769277424"></a><a name="idp2769277680"></a><p><b>Q:</b></p></td><td align="left" valign="top"><p>
 MEncoder won't...
 </p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>A:</b></p></td><td align="left" valign="top"><p>
 Have a look at the <tt class="filename">TOOLS</tt>
@@ -7988,7 +7988,7 @@ to subscribe to actually receive your answer.
 </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. What to report</h2></div></div></div><p>
 You may need to include log, configuration or sample files in your bug report.
 If some of them are quite big then it is better to upload them to our
-<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">FTP server</a> in a
+<a class="ulink" href="http://streams.videolan.org/upload/" target="_top">HTTP server</a> in a
 compressed format (gzip and bzip2 preferred) and include only the path and file
 name in your bug report. Our mailing lists have a message size limit of 80k, if
 you have something bigger you have to compress or upload it.
@@ -8061,7 +8061,7 @@ mplayer -v <em class="replaceable"><code>options</code></em> <em class="replacea
 </p><p>
 If your problem is specific to one or more files,
 then please upload the offender(s) to:
-<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+<a class="ulink" href="http://streams.videolan.org/upload/" target="_top">http://streams.videolan.org/upload/</a>
 </p><p>
 Also upload a small text file having the same base name as your file with a .txt
 extension. Describe the problem you are having with the particular file there
@@ -8200,7 +8200,10 @@ menu entries to work, <span class="application">MPlayer</span> must know what to
 do if they are clicked. This is done by <a class="link" href="#skin-gui" title="B.4. GUI messages">messages</a>
 (events). For these items you must define the messages to be generated when
 they are clicked.
-</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Image formats</h3></div></div></div><p>Images must be truecolor (24 or 32 bpp) PNGs.</p><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Image formats</h3></div></div></div><p>
+Images must be PNGs—either truecolor (24 or 32 bpp)
+or 8 bpp with a RGBA color palette.
+</p><p>
 In the main window and in the playbar (see below) you can use images with
 `transparency': Regions filled with the color #FF00FF (magenta) are fully
 transparent when viewed by <span class="application">MPlayer</span>. This means
@@ -8420,6 +8423,10 @@ blocks.
     individual images.</p></li><li class="listitem"><p>
     <code class="literal">default</code> - default value for the potentiometer
     (in the range <code class="literal">0</code> to <code class="literal">100</code>)
+    </p><p>
+    (If message is <code class="literal">evSetVolume</code>, it's allowed to use a
+    plain hyphen-minus as value. This will cause the currently set volume to
+    remain unchanged.)
   </p></li><li class="listitem"><p>
     <code class="literal">X</code>, <code class="literal">Y</code> - position for the potentiometer
   </p></li><li class="listitem"><p>
@@ -8479,7 +8486,7 @@ blocks.
     a character according to the stream type (file: <span class="keycap"><b>f</b></span>,
     CD: <span class="keycap"><b>a</b></span>, Video CD: <span class="keycap"><b>v</b></span>, DVD: <span class="keycap"><b>d</b></span>,
     URL: <span class="keycap"><b>u</b></span>, TV/DVB: <span class="keycap"><b>b</b></span>, CUE: <span class="keycap"><b>c</b></span>)
-    </td></tr><tr><td>$P</td><td>a character according to the playback state (stopped: <span class="keycap"><b>s</b></span>, playing: <span class="keycap"><b>p</b></span>, paused: <span class="keycap"><b>e</b></span>)</td></tr><tr><td>$p</td><td>the <span class="keycap"><b>p</b></span> character (if a movie is playing)</td></tr><tr><td>$s</td><td>the <span class="keycap"><b>s</b></span> character (if the movie is stopped)</td></tr><tr><td>$e</td><td>the <span class="keycap"><b>e</b></span> character (if playback is paused)</td></tr><tr><td>$x</td><td>video width</td></tr><tr><td>$y</td><td>video height</td></tr><tr><td>$C</td><td>name of the codec used</td></tr></tbody></table></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+    </td></tr><tr><td>$P</td><td>a character according to the playback state (stopped: <span class="keycap"><b>s</b></span>, playing: <span class="keycap"><b>p</b></span>, paused: <span class="keycap"><b>e</b></span>)</td></tr><tr><td>$p</td><td>the <span class="keycap"><b>p</b></span> character (if a movie is playing)</td></tr><tr><td>$s</td><td>the <span class="keycap"><b>s</b></span> character (if the movie is stopped)</td></tr><tr><td>$e</td><td>the <span class="keycap"><b>e</b></span> character (if playback is paused)</td></tr><tr><td>$g</td><td>the <span class="keycap"><b>g</b></span> character (if ReplayGain is active)</td></tr><tr><td>$x</td><td>video width</td></tr><tr><td>$y</td><td>video height</td></tr><tr><td>$C</td><td>name of the codec used</td></tr></tbody></table></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
   The <code class="literal">$a, $T, $P, $p, $s</code> and <code class="literal">$e</code>
   variables all return characters that should be displayed as special symbols
   (for example, <span class="keycap"><b>e</b></span> is for the pause symbol that usually looks
@@ -8569,7 +8576,7 @@ instead of the character '<code class="literal">d</code>' for a DVD stream.
 </p><p>
 The following table lists all the characters that can be used to display
 symbols (and thus require a different font).
-</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Character</th><th>Symbol</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>play</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pause</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>no sound</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>mono sound</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>stereo sound</td></tr><tr><td><span class="keycap"><b>r</b></span></td><td>surround sound</td></tr><tr><td><span class="keycap"><b>space</b></span></td><td>no (known)stream</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>stream is a file</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>stream is a CD</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>stream is a Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>stream is a DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>stream is a URL</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>stream is a TV/DVB broadcast</td></tr><tr><td><span class="keycap"><b>c</b></span></td><td>stream is a cue sheet</td></tr></tbody></table></div></div></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-gui"></a>B.4. GUI messages</h2></div></div></div><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Character</th><th>Symbol</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>play</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pause</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>no sound</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>mono sound</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>stereo sound</td></tr><tr><td><span class="keycap"><b>r</b></span></td><td>surround sound</td></tr><tr><td><span class="keycap"><b>g</b></span></td><td>replay gain</td></tr><tr><td><span class="keycap"><b>space</b></span></td><td>no (known)stream</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>stream is a file</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>stream is a CD</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>stream is a Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>stream is a DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>stream is a URL</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>stream is a TV/DVB broadcast</td></tr><tr><td><span class="keycap"><b>c</b></span></td><td>stream is a cue sheet</td></tr></tbody></table></div></div></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-gui"></a>B.4. GUI messages</h2></div></div></div><p>
 These are the messages that can be generated by buttons, potmeters and
 menu entries.
 </p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evNone</strong></span></span></dt><dd><p>

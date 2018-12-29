@@ -1,11 +1,11 @@
 <?php
 $version = '1.22';
-$build = '02';
+$build = '03';
 $description = '1.22';
 $part = 'MAIN'; // CORE / TOOLS / HELP / THEMES
 
 $autor = 'Sebastiaan Ebeltjes(NL) Andreas Scheibel(DE)';
-$date = "2017.01.15";
+$date = "2018.12.29";
 
 $eccConfig = array(
 	'ecc_release' => array(
@@ -576,7 +576,7 @@ $eccConfig = array(
 		'SCRIPT_GETCRC32' => 'ecc-core/tools/getCRC32.au3',
 		'ECC_EXE_SCRIPT' => 'ecc-core/thirdparty/autoit/AutoIt3.exe',
 		'ECC_EXE_SCRIPT_EDITOR' => 'ecc-core/thirdparty/notepad++/notepad++.exe',
-		'ECC_EXE_HEX_EDITOR' => 'ecc-core/thirdparty/hxd/hxd.exe',
+		'ECC_EXE_HEX_EDITOR' => 'ecc-core/thirdparty/hxd/HxD32.exe',
 		'ECC_EXE_DEV_GUI_GLADE' => 'ecc-core/php-gtk2/glade-3.exe',
 		'ECC_EXE_DEV_GUI_KODA' => 'ecc-core/thirdparty/koda/fd.exe',
 		'ECC_EXE_SQL_BROWSER' => 'ecc-core/thirdparty/sqlitebrowser/sqlitebrowser.exe',

@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants to be included in an AutoIt v3 script.
 ; Author(s) .....: JLandes, Nutster, CyberSlug, Holger, ...
@@ -281,7 +281,7 @@ Global Const $EXITCLOSE_NORMAL = 0 ; Natural closing.
 Global Const $EXITCLOSE_BYEXIT = 1 ; close by Exit function.
 Global Const $EXITCLOSE_BYCLICK = 2 ; close by clicking on exit of the systray.
 Global Const $EXITCLOSE_BYLOGOFF = 3 ; close by user logoff.
-Global Const $EXITCLOSE_BYSUTDOWN = 4 ; close by Windows shutdown.
+Global Const $EXITCLOSE_BYSHUTDOWN = 4 ; close by Windows shutdown.
 
 ; ProcessGetStats Constants
 Global Const $PROCESS_STATS_MEMORY = 0
@@ -335,4 +335,12 @@ Global Const $TIP_FORCEVISIBLE = 4
 ; WindowsSetOnTop Constants
 Global Const $WINDOWS_NOONTOP = 0
 Global Const $WINDOWS_ONTOP = 1
+
+; WinGetState Constants
+Global Const $WIN_STATE_EXISTS = 1
+Global Const $WIN_STATE_VISIBLE  = 2
+Global Const $WIN_STATE_ENABLED = 4
+Global Const $WIN_STATE_ACTIVE = 8
+Global Const $WIN_STATE_MINIMIZED = 16
+Global Const $WIN_STATE_MAXIMIZED = 32
 ; ===============================================================================================================================

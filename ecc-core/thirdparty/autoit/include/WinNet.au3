@@ -1,11 +1,11 @@
 #include-once
 
 #include "StructureConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WindowsNetworking
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Windows Networking management.
 ;                  The Windows Networking (WNet) functions allow you to implement networking  capabilities  in  your  application
@@ -170,7 +170,7 @@ Global Const $WNNC_CRED_MANAGER = 0xFFFF0000
 ;                  |$CONNDLG_NOT_PERSIST - Do not restore the connection at logon
 ;                  DevNum   - If the call to the _WNet_ConnectionDialog1 function is successful, this member returns  the  number
 ;                  +of the connected device. The value is 1 for A:, 2 for B:, 3 for C:, and so on.  If the user made a deviceless
-;                  +connection, the value is â€“1.
+;                  +connection, the value is –1.
 ; Author ........: Paul Campbell (PaulIA)
 ; Remarks .......:
 ; ===============================================================================================================================

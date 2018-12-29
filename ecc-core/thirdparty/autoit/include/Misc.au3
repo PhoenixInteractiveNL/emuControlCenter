@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Misc
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Common Dialogs.
 ; Author(s) .....: Gary Frost, Florian Fida (Piccaso), Dale (Klaatu) Thompson, Valik, ezzetabi, Jon, Paul Campbell (PaulIA)
@@ -398,12 +398,10 @@ EndFunc   ;==>_Singleton
 ; Author ........: ezzetabi and Jon
 ; Modified.......:
 ; ===============================================================================================================================
-Func _IsPressed($sHexKey, $vDLL = 'user32.dll')
-	; $hexKey must be the value of one of the keys.
-	; _Is_Key_Pressed will return 0 if the key is not pressed, 1 if it is.
-	Local $a_R = DllCall($vDLL, "short", "GetAsyncKeyState", "int", '0x' & $sHexKey)
+Func _IsPressed($sHexKey, $vDLL = "user32.dll")
+	Local $aReturn = DllCall($vDLL, "short", "GetAsyncKeyState", "int", "0x" & $sHexKey)
 	If @error Then Return SetError(@error, @extended, False)
-	Return BitAND($a_R[0], 0x8000) <> 0
+	Return BitAND($aReturn[0], 0x8000) <> 0
 EndFunc   ;==>_IsPressed
 
 ; #FUNCTION# ====================================================================================================================

@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPIReg Constants UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants that can be used with UDF library
 ; Author(s) .....: Yashied, Jpm
@@ -83,10 +83,10 @@ Global Const $KEY_QUERY_VALUE = 0x0001
 Global Const $KEY_SET_VALUE = 0x0002
 Global Const $KEY_WOW64_32KEY = 0x0200
 Global Const $KEY_WOW64_64KEY = 0x0100
-Global Const $KEY_READ = 0x00020019 ; BitOR($STANDARD_RIGHTS_READ, $KEY_ENUMERATE_SUB_KEYS, $KEY_NOTIFY, $KEY_QUERY_VALUE)
-Global Const $KEY_WRITE = 0x0002006 ; BitOR($STANDARD_RIGHTS_WRITE, $KEY_CREATE_SUB_KEY, $KEY_SET_VALUE)
+Global Const $KEY_READ = 0x00020019 ; BitOR($STANDARD_RIGHTS_READ, $KEY_QUERY_VALUE, $KEY_ENUMERATE_SUB_KEYS, $KEY_NOTIFY)
+Global Const $KEY_WRITE = 0x00020006 ; BitOR($STANDARD_RIGHTS_WRITE, $KEY_SET_VALUE, $KEY_CREATE_SUB_KEY)
 Global Const $KEY_EXECUTE = $KEY_READ
-Global Const $KEY_ALL_ACCESS = 0x000f003f ; BitOR($STANDARD_RIGHTS_REQUIRED, $KEY_CREATE_LINK, $KEY_CREATE_SUB_KEY, $KEY_ENUMERATE_SUB_KEYS, $KEY_NOTIFY, $KEY_QUERY_VALUE, $KEY_SET_VALUE)
+Global Const $KEY_ALL_ACCESS = 0x000f003f ; BitOR($STANDARD_RIGHTS_REQUIRED, $KEY_QUERY_VALUE, $KEY_SET_VALUE, $KEY_CREATE_SUB_KEY, $KEY_ENUMERATE_SUB_KEYS, $KEY_NOTIFY, $KEY_CREATE_LINK)
 
 Global Const $REG_NOTIFY_CHANGE_NAME = 0x01
 Global Const $REG_NOTIFY_CHANGE_ATTRIBUTES = 0x02

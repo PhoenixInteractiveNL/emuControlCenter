@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Timers
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Timers management.
 ;                  An application uses a timer to schedule an event for a window after a specified time has elapsed.
@@ -178,6 +178,7 @@ EndFunc   ;==>__Timer_QueryPerformanceFrequency
 ; Modified.......: Squirrely1
 ; ===============================================================================================================================
 Func _Timer_SetTimer($hWnd, $iElapse = 250, $sTimerFunc = "", $iTimerID = -1)
+	#Au3Stripper_Ignore_Funcs=$sTimerFunc
 	Local $aResult[1] = [0], $pTimerFunc = 0, $hCallBack = 0, $iIndex = $__g_aTimers_aTimerIDs[0][0] + 1
 	If $iTimerID = -1 Then ; create a new timer
 		ReDim $__g_aTimers_aTimerIDs[$iIndex + 1][3]

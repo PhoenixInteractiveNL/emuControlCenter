@@ -4,11 +4,12 @@
 #include "StringConstants.au3"
 #include "StructureConstants.au3"
 #include "WinAPICom.au3"
-#include "WinAPIInternals.au3"
+#include "WinAPIError.au3"
+#include "WinAPIMem.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIReg.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -19,6 +20,7 @@
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
+Global Const $__WINAPICONSTANT_ERROR_MORE_DATA = 234 ; More data is available.
 ; ===============================================================================================================================
 #EndRegion Global Variables and Constants
 
@@ -574,7 +576,7 @@ Func _WinAPI_RegQueryValue($hKey, $sValueName, ByRef $tValueData)
 	Local $aRet = DllCall('advapi32.dll', 'long', 'RegQueryValueExW', 'handle', $hKey, 'wstr', $sValueName, 'dword', 0, _
 			'dword*', 0, 'struct*', $tValueData, 'dword*', DllStructGetSize($tValueData))
 	If @error Then Return SetError(@error, @extended, 0)
-	If $aRet[0] Then Return SetError(10, $aRet[0], 0)
+	If $aRet[0] <> $__WINAPICONSTANT_ERROR_MORE_DATA Then Return SetError(10, $aRet[0], 0)
 
 	Return SetExtended($aRet[4], $aRet[6])
 EndFunc   ;==>_WinAPI_RegQueryValue

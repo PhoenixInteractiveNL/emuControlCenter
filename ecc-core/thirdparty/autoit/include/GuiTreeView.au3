@@ -6,11 +6,14 @@
 #include "StructureConstants.au3"
 #include "TreeViewConstants.au3"
 #include "UDFGlobalID.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIGdi.au3"
+#include "WinAPIRes.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: TreeView
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with TreeView control management.
 ;                  A TreeView control is a window that displays a hierarchical list of items, such as the headings in a document,
@@ -36,7 +39,7 @@ Global Const $__TREEVIEWCONSTANT_DEFAULT_GUI_FONT = 17
 ; ===============================================================================================================================
 
 ; #NO_DOC_FUNCTION# =============================================================================================================
-; Not working/documented/implrmented at this time
+; Not working/documented/implemented at this time
 ;
 ; _GUICtrlTreeView_GetOverlayImageIndex
 ; _GUICtrlTreeView_MapAccIDToItem
@@ -167,6 +170,7 @@ Global Const $__TREEVIEWCONSTANT_DEFAULT_GUI_FONT = 17
 ; __GUICtrlTreeView_GetItem
 ; __GUICtrlTreeView_ReverseColorOrder
 ; __GUICtrlTreeView_SetItem
+; __GUICtrlTreeView_SortGetFirstChild
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -1075,33 +1079,33 @@ Func _GUICtrlTreeView_GetItemParam($hWnd, $hItem = 0)
 	If IsHWnd($hWnd) Then
 		; get the handle to item selected
 		If $hItem = 0x00000000 Then $hItem = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_CARET, 0, 0, "wparam", "lparam", "handle")
-		If $hItem = 0x00000000 Then Return False
+		If $hItem = 0x00000000 Then Return 0
 		DllStructSetData($tItem, "hItem", $hItem)
 		; get the item properties
 		If $bUnicode Then
-			If _SendMessage($hWnd, $TVM_GETITEMW, 0, $tItem, 0, "wparam", "struct*") = 0 Then Return False
+			If _SendMessage($hWnd, $TVM_GETITEMW, 0, $tItem, 0, "wparam", "struct*") = 0 Then Return 0
 		Else
-			If _SendMessage($hWnd, $TVM_GETITEMA, 0, $tItem, 0, "wparam", "struct*") = 0 Then Return False
+			If _SendMessage($hWnd, $TVM_GETITEMA, 0, $tItem, 0, "wparam", "struct*") = 0 Then Return 0
 		EndIf
 	Else
 		; get the handle to item selected
 		If $hItem = 0x00000000 Then
 			$hItem = Ptr(GUICtrlSendMsg($hWnd, $TVM_GETNEXTITEM, $TVGN_CARET, 0))
-			If $hItem = 0x00000000 Then Return False
+			If $hItem = 0x00000000 Then Return 0
 		Else
 			Local $hTempItem = GUICtrlGetHandle($hItem)
 			If $hTempItem <> 0x00000000 Then
 				$hItem = $hTempItem
 			Else
-				Return False
+				Return 0
 			EndIf
 		EndIf
 		DllStructSetData($tItem, "hItem", $hItem)
 		; get the item properties
 		If $bUnicode Then
-			If GUICtrlSendMsg($hWnd, $TVM_GETITEMW, 0, DllStructGetPtr($tItem)) = 0 Then Return False
+			If GUICtrlSendMsg($hWnd, $TVM_GETITEMW, 0, DllStructGetPtr($tItem)) = 0 Then Return 0
 		Else
-			If GUICtrlSendMsg($hWnd, $TVM_GETITEMA, 0, DllStructGetPtr($tItem)) = 0 Then Return False
+			If GUICtrlSendMsg($hWnd, $TVM_GETITEMA, 0, DllStructGetPtr($tItem)) = 0 Then Return 0
 		EndIf
 	EndIf
 
@@ -1241,7 +1245,7 @@ Func _GUICtrlTreeView_GetParentHandle($hWnd, $hItem = 0)
 	If $hItem = 0x00000000 Then
 		If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 		$hItem = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_CARET, 0, 0, "wparam", "handle", "handle")
-		If $hItem = 0x00000000 Then Return False
+		If $hItem = 0x00000000 Then Return 0
 	Else
 		If Not IsHWnd($hItem) Then $hItem = _GUICtrlTreeView_GetItemHandle($hWnd, $hItem)
 		If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
@@ -1267,7 +1271,7 @@ Func _GUICtrlTreeView_GetParentParam($hWnd, $hItem = 0)
 	If IsHWnd($hWnd) Then
 		; get the handle to item selected
 		If $hItem = 0x00000000 Then $hItem = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_CARET, 0, 0, "wparam", "handle", "handle")
-		If $hItem = 0x00000000 Then Return False
+		If $hItem = 0x00000000 Then Return 0
 		; get the handle of the parent item
 		$hParent = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_PARENT, $hItem, 0, "wparam", "handle", "handle")
 		DllStructSetData($tTVITEM, "hItem", $hParent)
@@ -1277,20 +1281,20 @@ Func _GUICtrlTreeView_GetParentParam($hWnd, $hItem = 0)
 		; get the handle to item selected
 		If $hItem = 0x00000000 Then
 			$hItem = GUICtrlSendMsg($hWnd, $TVM_GETNEXTITEM, $TVGN_CARET, 0)
-			If $hItem = 0x00000000 Then Return False
+			If $hItem = 0x00000000 Then Return 0
 		Else
 			Local $hTempItem = GUICtrlGetHandle($hItem)
 			If $hTempItem <> 0x00000000 Then
 				$hItem = $hTempItem
 			Else
-				Return False
+				Return 0
 			EndIf
 		EndIf
 		; get the handle of the parent item
 		$hParent = GUICtrlSendMsg($hWnd, $TVM_GETNEXTITEM, $TVGN_PARENT, $hItem)
 		DllStructSetData($tTVITEM, "hItem", $hParent)
 		; get the item properties
-		If GUICtrlSendMsg($hWnd, $TVM_GETITEMA, 0, DllStructGetPtr($tTVITEM)) = 0 Then Return False
+		If GUICtrlSendMsg($hWnd, $TVM_GETITEMA, 0, DllStructGetPtr($tTVITEM)) = 0 Then Return 0
 	EndIf
 
 	Return DllStructGetData($tTVITEM, "Param")
@@ -1487,9 +1491,9 @@ Func _GUICtrlTreeView_GetText($hWnd, $hItem = 0)
 	Local $tText
 	Local $bUnicode = _GUICtrlTreeView_GetUnicodeFormat($hWnd)
 	If $bUnicode Then
-		$tText = DllStructCreate("wchar Buffer[4096]"); create a text 'area' for receiving the text
+		$tText = DllStructCreate("wchar Buffer[4096]") ; create a text 'area' for receiving the text
 	Else
-		$tText = DllStructCreate("char Buffer[4096]"); create a text 'area' for receiving the text
+		$tText = DllStructCreate("char Buffer[4096]") ; create a text 'area' for receiving the text
 	EndIf
 
 	DllStructSetData($tTVITEM, "Mask", $TVIF_TEXT)
@@ -1558,7 +1562,7 @@ Func _GUICtrlTreeView_GetTree($hWnd, $hItem = 0)
 		$sPath = _GUICtrlTreeView_GetText($hWnd, $hItem)
 
 		Local $hParent, $sSeparator = Opt("GUIDataSeparatorChar")
-		Do; Get now the parent item handle if there is one
+		Do ; Get now the parent item handle if there is one
 			$hParent = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_PARENT, $hItem, 0, "wparam", "handle", "handle")
 			If $hParent <> 0x00000000 Then $sPath = _GUICtrlTreeView_GetText($hWnd, $hParent) & $sSeparator & $sPath
 			$hItem = $hParent
@@ -2453,32 +2457,52 @@ EndFunc   ;==>_GUICtrlTreeView_SetUnicodeFormat
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Gary Frost (gafrost)
-; Modified.......: mlipok, guinness
+; Modified.......: mlipok, guinness, gillesg
 ; ===============================================================================================================================
 Func _GUICtrlTreeView_Sort($hWnd)
 	If Not IsHWnd($hWnd) Then $hWnd = GUICtrlGetHandle($hWnd)
 
 	Local $iItemCount = _GUICtrlTreeView_GetCount($hWnd)
 	If $iItemCount Then
-		Local $aTreeView[$iItemCount], $hItem = 0
-		For $i = 0 To $iItemCount - 1
-			If $i Then
-				$hItem = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_NEXT, $hItem, 0, "wparam", "handle", "handle")
-			Else
-				$hItem = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_CHILD, $TVI_ROOT, 0, "wparam", "handle", "handle")
-			EndIf
-			$aTreeView[$i] = $hItem
-		Next
-		Local $hChild = 0, $iRecursive = 1
-		For $i = 0 To $iItemCount - 1
-			_SendMessage($hWnd, $TVM_SORTCHILDREN, $iRecursive, $aTreeView[$i], 0, "wparam", "handle") ; Sort the items in root
-			Do ; Sort all child items
-				$hChild = _SendMessage($hWnd, $TVM_GETNEXTITEM, $TVGN_CHILD, $hItem, 0, "wparam", "handle", "handle")
-				If $hChild Then
-					_SendMessage($hWnd, $TVM_SORTCHILDREN, $iRecursive, $hChild, 0, "wparam", "handle")
-				EndIf
-				$hItem = $hChild
-			Until $hItem = 0x00000000
+		Local $aTreeView[$iItemCount], $i = 0
+		; get only A child at each level
+		Local $hHandle = _GUICtrlTreeView_GetFirstItem($hWnd)
+		$aTreeView[1] = $hHandle
+		$aTreeView[0] = 2
+		__GUICtrlTreeView_SortGetFirstChild($hWnd, $hHandle, $aTreeView)
+		ReDim $aTreeView[$aTreeView[0]]
+		$aTreeView[0] = 0
+
+		For $i = 0 To UBound($aTreeView) - 1
+			_SendMessage($hWnd, $TVM_SORTCHILDREN, 0, $aTreeView[$i], 0, "wparam", "handle") ; Sort the items in root
 		Next
 	EndIf
+
 EndFunc   ;==>_GUICtrlTreeView_Sort
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name...........: __GUICtrlTreeView_SortGetFirstChild
+; Description ...: Sets some or all of a items attributes
+; Syntax.........: __GUICtrlTreeView_SortGetFirstChild ( $hWnd, $hItem, ByRef $aTreeView )
+; Parameters ....: $hWnd        - Handle to the control
+;                  $hItem       - Handle to the item
+;                  $aTreeView   - Byref array to store first chidren handles
+; Return values .: None
+; Author ........: gillesg
+; Modified.......:
+; Remarks .......: This function is used internally and should not normally be called by the end user
+; Related .......:
+; Link ..........: https://www.autoitscript.com/trac/autoit/ticket/3585
+; Example .......:
+; ===============================================================================================================================
+Func __GUICtrlTreeView_SortGetFirstChild($hWnd, $hItem, ByRef $aTreeView)
+	Local $hChild = _GUICtrlTreeView_GetFirstChild($hWnd, $hItem)
+	If $hChild <> 0 Then
+		$aTreeView[$aTreeView[0]] = $hChild
+		$aTreeView[0] += 1
+		__GUICtrlTreeView_SortGetFirstChild($hWnd, $hChild, $aTreeView)
+	EndIf
+	Local $hNext = _GUICtrlTreeView_GetNextSibling($hWnd, $hItem)
+	If $hNext <> 0 Then __GUICtrlTreeView_SortGetFirstChild($hWnd, $hNext, $aTreeView)
+
+EndFunc   ;==>__GUICtrlTreeView_SortGetFirstChild

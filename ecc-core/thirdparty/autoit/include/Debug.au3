@@ -1,5 +1,6 @@
 #include-once
 
+#include "ArrayDisplayInternals.au3"
 #include "AutoItConstants.au3"
 #include "MsgBoxConstants.au3"
 #include "SendMessage.au3"
@@ -8,7 +9,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Debug
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions to help script debugging.
 ; Author(s) .....: Nutster, Jpm, Valik, guinness, water
@@ -26,11 +27,12 @@ Global $__g_hReportEdit_Debug = 0
 Global $__g_hReportNotepadEdit_Debug = 0
 Global $__g_sReportCallBack_Debug
 Global $__g_bReportTimeStamp_Debug = False
-Global $__g_bComErrorExit_Debug = False, $__g_sComError_Debug = ""
+Global $__g_bComErrorExit_Debug = False, $__g_oComError_Debug = Null
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
 ; _Assert
+; _DebugArrayDisplay
 ; _DebugBugReportEnv
 ; _DebugCOMError
 ; _DebugOut
@@ -65,6 +67,15 @@ Func _Assert($sCondition, $bExit = True, $iCode = 0x7FFFFFFF, $sLine = @ScriptLi
 EndFunc   ;==>_Assert
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Melba23
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _DebugArrayDisplay(Const ByRef $aArray, $sTitle = Default, $sArrayRange = Default, $iFlags = Default, $vUser_Separator = Default, $sHeader = Default, $iMax_ColWidth = Default, $hUser_Function = Default)
+	Local $iRet = __ArrayDisplay_Share($aArray, $sTitle, $sArrayRange, $iFlags, $vUser_Separator, $sHeader, $iMax_ColWidth, $hUser_Function, True)
+	Return SetError(@error, @extended, $iRet)
+EndFunc   ;==>_DebugArrayDisplay
+
+; #FUNCTION# ====================================================================================================================
 ; Author ........: jpm
 ; Modified.......:
 ; ===============================================================================================================================
@@ -93,23 +104,24 @@ Func _DebugCOMError($iComDebug = Default, $bExit = False)
 	If Not IsInt($iComDebug) Or $iComDebug < -1 Or $iComDebug > 1 Then Return SetError(1, 0, 0)
 	Switch $iComDebug
 		Case -1
-			Return SetError(IsObj($__g_sComError_Debug), $__g_bComErrorExit_Debug, 1)
+			Return SetError(IsObj($__g_oComError_Debug), $__g_bComErrorExit_Debug, 1)
 		Case 0
-			If $__g_sComError_Debug = "" Then SetError(0, 3, 1) ; COM error handler already disabled
-			$__g_sComError_Debug = ""
+			If $__g_oComError_Debug = Null Then SetError(0, 3, 1) ; COM error handler already disabled
+			$__g_oComError_Debug = Null
 			$__g_bComErrorExit_Debug = False
 			Return 1
 		Case Else
 			; A COM error handler will be initialized only if one does not exist
 			$__g_bComErrorExit_Debug = $bExit
-			If ObjEvent("AutoIt.Error") = "" Then
-				$__g_sComError_Debug = ObjEvent("AutoIt.Error", "__Debug_COMErrorHandler") ; Creates a custom error handler
+			Local $vComErrorChecking = ObjEvent("AutoIt.Error")
+			If $vComErrorChecking = "" Then
+				$__g_oComError_Debug = ObjEvent("AutoIt.Error", __Debug_COMErrorHandler) ; Creates a custom error handler
 				If @error Then Return SetError(4, @error, 0)
 				Return SetError(0, 1, 1)
-			ElseIf ObjEvent("AutoIt.Error") = "__Debug_COMErrorHandler" Then
+			ElseIf FuncName($vComErrorChecking) = FuncName(__Debug_COMErrorHandler) Then
 				Return SetError(0, 2, 1) ; COM error handler already set by a previous call to this function
 			Else
-				Return SetError(2, 0, 0) ; COM error handler already set to another function
+				Return SetError(2, 0, 0) ; COM error handler already set to another function - not by this UDF
 			EndIf
 	EndSwitch
 EndFunc   ;==>_DebugCOMError
@@ -280,7 +292,7 @@ EndFunc   ;==>_DebugReportVar
 ; Example .......:
 ; ===============================================================================================================================
 Func __Debug_COMErrorHandler($oCOMError)
-	_DebugReport(__COMErrorFormating("@@DEBUG " & $oCOMError), False, $__g_bComErrorExit_Debug)
+	_DebugReport(__COMErrorFormating($oCOMError), False, $__g_bComErrorExit_Debug)
 EndFunc   ;==>__Debug_COMErrorHandler
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -445,9 +457,7 @@ EndFunc   ;==>__Debug_ReportWindowCreate
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-#Au3Stripper_Off
 Func __Debug_ReportWindowWrite($sData)
-	#Au3Stripper_On
 	If $__g_bReportWindowClosed_Debug Then __Debug_ReportWindowCreate()
 
 	Local Const $WM_GETTEXTLENGTH = 0x000E
@@ -542,9 +552,7 @@ EndFunc   ;==>__Debug_ReportNotepadCreate
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-#Au3Stripper_Off
 Func __Debug_ReportNotepadWrite($sData)
-	#Au3Stripper_On
 	If $__g_hReportEdit_Debug = 0 Then __Debug_ReportNotepadCreate()
 
 	ControlCommand($__g_hReportEdit_Debug, "", "Edit1", "EditPaste", String($sData))
@@ -555,7 +563,7 @@ EndFunc   ;==>__Debug_ReportNotepadWrite
 ; Description ...: Write on Report
 ; Syntax.........: __Debug_ReportWrite ( $sData [, $bLastError [, $iCurEXT = @extended]} )
 ; Parameters ....:
-; Return values .:
+; Return values .: $iCurEXT
 ; Author ........: jpm
 ; Modified.......:
 ; Remarks .......:

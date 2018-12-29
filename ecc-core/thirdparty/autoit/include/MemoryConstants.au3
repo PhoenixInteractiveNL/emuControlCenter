@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Memory_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants for Memory functions.
 ; Author(s) .....: Paul Campbell (PaulIA)
@@ -52,4 +52,7 @@ Global Const $PAGE_WRITECOPY = 0x00000008
 
 Global Const $MEM_DECOMMIT = 0x00004000
 Global Const $MEM_RELEASE = 0x00008000
+
+; MemGetStats Constants
+Global Enum $MEM_LOAD, $MEM_TOTALPHYSRAM, $MEM_AVAILPHYSRAM, $MEM_TOTALPAGEFILE, $MEM_AVAILPAGEFILE, $MEM_TOTALVIRTUAL, $MEM_AVAILVIRTUAL
 ; ===============================================================================================================================

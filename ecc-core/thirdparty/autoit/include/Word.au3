@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Microsoft Word Function Library (MS Word 2003 and later)
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: A collection of functions for accessing and manipulating Microsoft Word documents
 ; Author(s) .....: Bob Anthony, rewritten by water
@@ -96,7 +96,7 @@ Func _Word_DocAdd($oAppl, $iDocumentType = Default, $sDocumentTemplate = Default
 	If $sDocumentTemplate = Default Then $sDocumentTemplate = ""
 	If $bNewTemplate = Default Then $bNewTemplate = False
 	If Not IsObj($oAppl) Then Return SetError(1, 0, 0)
-	If StringStripWS($sDocumentTemplate, $STR_STRIPLEADING + $STR_STRIPTRAILING) <> "" And FileExists($sDocumentTemplate) <> 1 Then Return SetError(2, 0, 0)
+	If StringStripWS($sDocumentTemplate, BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) <> "" And FileExists($sDocumentTemplate) <> 1 Then Return SetError(2, 0, 0)
 	Local $oDoc = $oAppl.Documents.Add($sDocumentTemplate, $bNewTemplate, $iDocumentType)
 	If @error Or Not IsObj($oDoc) Then Return SetError(3, @error, 0)
 	Return $oDoc
@@ -115,7 +115,7 @@ Func _Word_DocAttach($oAppl, $sString, $sMode = Default, $iCase = Default)
 	If $sMode = Default Then $sMode = "FilePath"
 	If $iCase = Default Then $iCase = 0
 	If Not IsObj($oAppl) Then Return SetError(1, 0, 0)
-	If StringStripWS($sString, $STR_STRIPLEADING + $STR_STRIPTRAILING) = "" Then Return SetError(2, 0, 0)
+	If StringStripWS($sString, BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) = "" Then Return SetError(2, 0, 0)
 	If $sMode <> "filepath" And $sMode <> "filename" And $sMode <> "text" Then Return SetError(3, 0, 0)
 	For $oDoc In $oAppl.Documents
 		Select
@@ -521,7 +521,8 @@ Func _Word_DocSaveAs($oDoc, $sFileName = Default, $iFileFormat = Default, $bRead
 	If $sPassword = Default Then $sPassword = ""
 	If $sWritePassword = Default Then $sWritePassword = ""
 	If Not IsObj($oDoc) Then Return SetError(1, 0, 0)
-	$oDoc.SaveAs($sFileName, $iFileFormat, False, $sPassword, $bAddToRecentFiles, $sWritePassword, $bReadOnlyRecommended)
+	$oDoc.SaveAs2($sFileName, $iFileFormat, False, $sPassword, $bAddToRecentFiles, $sWritePassword, $bReadOnlyRecommended) ; Try to save for >= Word 2010
+	If @error = 0x80020006 Then $oDoc.SaveAs($sFileName, $iFileFormat, False, $sPassword, $bAddToRecentFiles, $sWritePassword, $bReadOnlyRecommended) ; COM error "Unknown Name" hence save for <= Word 2007
 	If @error Then Return SetError(2, @error, 0)
 	Return 1
 EndFunc   ;==>_Word_DocSaveAs

@@ -1,11 +1,11 @@
 #include-once
 
 #include "StructureConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Network_Share
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Network Share.
 ;                  The network share functions control shared resources.  A shared resource is a local resource on a server  (for
@@ -265,7 +265,8 @@ Global Const $tagSTAT_WORKSTATION_0 = "int64 StartTime;int64 BytesRecv;int64 SMB
 Func __Net_Share_APIBufferFree($pBuffer)
 	Local $aResult = DllCall("netapi32.dll", "int", "NetApiBufferFree", "ptr", $pBuffer)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>__Net_Share_APIBufferFree
 
 ; #FUNCTION# ====================================================================================================================
@@ -279,28 +280,27 @@ Func _Net_Share_ConnectionEnum($sServer, $sQualifier)
 	Local $aResult = DllCall("netapi32.dll", "int", "NetConnectionEnum", "wstr", $sServer, "wstr", $sQualifier, "dword", 1, _
 			"ptr*", 0, "dword", -1, "dword*", 0, "dword*", 0, "ptr", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
 	Local $iCount = $aResult[6]
 	Local $aInfo[$iCount + 1][7]
 	$aInfo[0][0] = $iCount
-	If $aResult[0] = 0 Then
-		Local $pInfo = $aResult[4]
-		Local $tInfo
-		For $iI = 1 To $iCount
-			$tInfo = DllStructCreate($tagCONNECTION_INFO_1, $pInfo)
-			$aInfo[$iI][0] = DllStructGetData($tInfo, "ID")
-			$aInfo[$iI][1] = DllStructGetData($tInfo, "Type")
-			$aInfo[$iI][2] = DllStructGetData($tInfo, "Opens")
-			$aInfo[$iI][3] = DllStructGetData($tInfo, "Users")
-			$aInfo[$iI][4] = DllStructGetData($tInfo, "Time")
-			$aInfo[$iI][5] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
-			$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
-			$pInfo += DllStructGetSize($tInfo)
-		Next
-	EndIf
+	Local $pInfo = $aResult[4]
+	Local $tInfo
+	For $iI = 1 To $iCount
+		$tInfo = DllStructCreate($tagCONNECTION_INFO_1, $pInfo)
+		$aInfo[$iI][0] = DllStructGetData($tInfo, "ID")
+		$aInfo[$iI][1] = DllStructGetData($tInfo, "Type")
+		$aInfo[$iI][2] = DllStructGetData($tInfo, "Opens")
+		$aInfo[$iI][3] = DllStructGetData($tInfo, "Users")
+		$aInfo[$iI][4] = DllStructGetData($tInfo, "Time")
+		$aInfo[$iI][5] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
+		$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
+		$pInfo += DllStructGetSize($tInfo)
+	Next
 
 	__Net_Share_APIBufferFree($aResult[4])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_ConnectionEnum
 
 ; #FUNCTION# ====================================================================================================================
@@ -313,7 +313,8 @@ Func _Net_Share_FileClose($sServer, $iFileID)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetFileClose", "wstr", $sServer, "dword", $iFileID)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>_Net_Share_FileClose
 
 ; #FUNCTION# ====================================================================================================================
@@ -327,26 +328,25 @@ Func _Net_Share_FileEnum($sServer = "", $sBaseName = "", $sUserName = "")
 	Local $aResult = DllCall("netapi32.dll", "int", "NetFileEnum", "wstr", $sServer, "wstr", $sBaseName, "wstr", $sUserName, "dword", 3, _
 			"ptr*", 0, "INT", -1, "dword*", 0, "dword*", 0, "ptr", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
 	Local $iCount = $aResult[7]
 	Local $aInfo[$iCount + 1][5]
 	$aInfo[0][0] = $iCount
-	If $aResult[0] = 0 Then
-		Local $pInfo = $aResult[5]
-		Local $tInfo
-		For $iI = 1 To $iCount
-			$tInfo = DllStructCreate($tagFILE_INFO_3, $pInfo)
-			$aInfo[$iI][0] = DllStructGetData($tInfo, "ID")
-			$aInfo[$iI][1] = DllStructGetData($tInfo, "Permissions")
-			$aInfo[$iI][2] = DllStructGetData($tInfo, "Locks")
-			$aInfo[$iI][3] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "PathName"))
-			$aInfo[$iI][4] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
-			$pInfo += DllStructGetSize($tInfo)
-		Next
-	EndIf
+	Local $pInfo = $aResult[5]
+	Local $tInfo
+	For $iI = 1 To $iCount
+		$tInfo = DllStructCreate($tagFILE_INFO_3, $pInfo)
+		$aInfo[$iI][0] = DllStructGetData($tInfo, "ID")
+		$aInfo[$iI][1] = DllStructGetData($tInfo, "Permissions")
+		$aInfo[$iI][2] = DllStructGetData($tInfo, "Locks")
+		$aInfo[$iI][3] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "PathName"))
+		$aInfo[$iI][4] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
+		$pInfo += DllStructGetSize($tInfo)
+	Next
 
 	__Net_Share_APIBufferFree($aResult[5])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_FileEnum
 
 ; #FUNCTION# ====================================================================================================================
@@ -361,19 +361,18 @@ Func _Net_Share_FileGetInfo($sServer, $iFileID)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetFileGetInfo", "wstr", $sServer, "dword", $iFileID, "dword", 3, "ptr*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
-	If $aResult[0] = 0 Then
-		Local $tInfo
-		$tInfo = DllStructCreate($tagFILE_INFO_3, $aResult[4])
-		$aInfo[0] = DllStructGetData($tInfo, "ID")
-		$aInfo[1] = DllStructGetData($tInfo, "Permissions")
-		$aInfo[2] = DllStructGetData($tInfo, "Locks")
-		$aInfo[3] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "PathName"))
-		$aInfo[4] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
-	EndIf
+	Local $tInfo
+	$tInfo = DllStructCreate($tagFILE_INFO_3, $aResult[4])
+	$aInfo[0] = DllStructGetData($tInfo, "ID")
+	$aInfo[1] = DllStructGetData($tInfo, "Permissions")
+	$aInfo[2] = DllStructGetData($tInfo, "Locks")
+	$aInfo[3] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "PathName"))
+	$aInfo[4] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
 
 	__Net_Share_APIBufferFree($aResult[4])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_FileGetInfo
 
 ; #FUNCTION# ====================================================================================================================
@@ -430,7 +429,8 @@ Func _Net_Share_SessionDel($sServer = "", $sClientName = "", $sUserName = "")
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetSessionDel", "wstr", $sServer, "wstr", $sClientName, "wstr", $sUserName)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>_Net_Share_SessionDel
 
 ; #FUNCTION# ====================================================================================================================
@@ -445,29 +445,28 @@ Func _Net_Share_SessionEnum($sServer = "", $sClientName = "", $sUserName = "")
 	Local $aResult = DllCall("netapi32.dll", "int", "NetSessionEnum", "wstr", $sServer, "wstr", $sClientName, "wstr", $sUserName, _
 			"dword", 502, "ptr*", 0, "dword", -1, "dword*", 0, "dword*", 0, "ptr", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
 	Local $iCount = $aResult[7]
 	Local $aInfo[$iCount + 1][8]
 	$aInfo[0][0] = $iCount
-	If $aResult[0] = 0 Then
-		Local $pInfo = $aResult[5]
-		Local $tInfo
-		For $iI = 1 To $iCount
-			$tInfo = DllStructCreate($tagSESSION_INFO_502, $pInfo)
-			$aInfo[$iI][0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "CName"))
-			$aInfo[$iI][1] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
-			$aInfo[$iI][2] = DllStructGetData($tInfo, "Opens")
-			$aInfo[$iI][3] = DllStructGetData($tInfo, "Time")
-			$aInfo[$iI][4] = DllStructGetData($tInfo, "Idle")
-			$aInfo[$iI][5] = DllStructGetData($tInfo, "Flags")
-			$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "TypeName"))
-			$aInfo[$iI][7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Transport"))
-			$pInfo += DllStructGetSize($tInfo)
-		Next
-	EndIf
+	Local $pInfo = $aResult[5]
+	Local $tInfo
+	For $iI = 1 To $iCount
+		$tInfo = DllStructCreate($tagSESSION_INFO_502, $pInfo)
+		$aInfo[$iI][0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "CName"))
+		$aInfo[$iI][1] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
+		$aInfo[$iI][2] = DllStructGetData($tInfo, "Opens")
+		$aInfo[$iI][3] = DllStructGetData($tInfo, "Time")
+		$aInfo[$iI][4] = DllStructGetData($tInfo, "Idle")
+		$aInfo[$iI][5] = DllStructGetData($tInfo, "Flags")
+		$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "TypeName"))
+		$aInfo[$iI][7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Transport"))
+		$pInfo += DllStructGetSize($tInfo)
+	Next
 
 	__Net_Share_APIBufferFree($aResult[5])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_SessionEnum
 
 ; #FUNCTION# ====================================================================================================================
@@ -484,21 +483,20 @@ Func _Net_Share_SessionGetInfo($sServer, $sClientName, $sUserName)
 	Local $aResult = DllCall("netapi32.dll", "int", "NetSessionGetInfo", "wstr", $sServer, "wstr", $sClientName, "wstr", $sUserName, _
 			"dword", 2, "ptr*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
-	If $aResult[0] = 0 Then
-		Local $tInfo
-		$tInfo = DllStructCreate($tagSESSION_INFO_2, $aResult[5])
-		$aInfo[0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "CName"))
-		$aInfo[1] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
-		$aInfo[2] = DllStructGetData($tInfo, "Opens")
-		$aInfo[3] = DllStructGetData($tInfo, "Time")
-		$aInfo[4] = DllStructGetData($tInfo, "Idle")
-		$aInfo[5] = DllStructGetData($tInfo, "Flags")
-		$aInfo[6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "TypeName"))
-	EndIf
+	Local $tInfo
+	$tInfo = DllStructCreate($tagSESSION_INFO_2, $aResult[5])
+	$aInfo[0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "CName"))
+	$aInfo[1] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "UserName"))
+	$aInfo[2] = DllStructGetData($tInfo, "Opens")
+	$aInfo[3] = DllStructGetData($tInfo, "Time")
+	$aInfo[4] = DllStructGetData($tInfo, "Idle")
+	$aInfo[5] = DllStructGetData($tInfo, "Flags")
+	$aInfo[6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "TypeName"))
 
 	__Net_Share_APIBufferFree($aResult[5])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_SessionGetInfo
 
 ; #FUNCTION# ====================================================================================================================
@@ -529,7 +527,8 @@ Func _Net_Share_ShareAdd($sServer, $sShare, $iType, $sResourcePath, $sComment = 
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareAdd", "wstr", $sServer, "dword", 2, "struct*", $tInfo, "dword*", 0)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>_Net_Share_ShareAdd
 
 ; #FUNCTION# ====================================================================================================================
@@ -542,7 +541,7 @@ Func _Net_Share_ShareCheck($sServer, $sShare)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareCheck", "wstr", $sServer, "wstr", $sShare, "dword*", 0)
 	If @error Then Return SetError(@error, @extended, -1)
-	If $aResult[0] Then Return SetExtended($aResult[0], -1)
+	If $aResult[0] Then Return SetError(10, $aResult[0], -1)
 	Return $aResult[3]
 EndFunc   ;==>_Net_Share_ShareCheck
 
@@ -556,7 +555,8 @@ Func _Net_Share_ShareDel($sServer, $sShare)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareDel", "wstr", $sServer, "wstr", $sShare, "dword", 0)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>_Net_Share_ShareDel
 
 ; #FUNCTION# ====================================================================================================================
@@ -570,28 +570,28 @@ Func _Net_Share_ShareEnum($sServer = "")
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareEnum", "wstr", $sServer, "dword", 2, "ptr*", 0, "dword", -1, _
 			"dword*", 0, "dword*", 0, "ptr", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
+
 	Local $iCount = $aResult[5]
 	Local $aInfo[$iCount + 1][8]
 	$aInfo[0][0] = $iCount
-	If $aResult[0] = 0 Then
-		Local $pInfo = $aResult[3]
-		Local $tInfo
-		For $iI = 1 To $iCount
-			$tInfo = DllStructCreate($tagSHARE_INFO_2, $pInfo)
-			$aInfo[$iI][0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
-			$aInfo[$iI][1] = DllStructGetData($tInfo, "Type")
-			$aInfo[$iI][2] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Remark"))
-			$aInfo[$iI][3] = DllStructGetData($tInfo, "Permissions")
-			$aInfo[$iI][4] = DllStructGetData($tInfo, "MaxUses")
-			$aInfo[$iI][5] = DllStructGetData($tInfo, "CurrentUses")
-			$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Path"))
-			$aInfo[$iI][7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Password"))
-			$pInfo += DllStructGetSize($tInfo)
-		Next
-	EndIf
+	Local $pInfo = $aResult[3]
+	Local $tInfo
+	For $iI = 1 To $iCount
+		$tInfo = DllStructCreate($tagSHARE_INFO_2, $pInfo)
+		$aInfo[$iI][0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
+		$aInfo[$iI][1] = DllStructGetData($tInfo, "Type")
+		$aInfo[$iI][2] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Remark"))
+		$aInfo[$iI][3] = DllStructGetData($tInfo, "Permissions")
+		$aInfo[$iI][4] = DllStructGetData($tInfo, "MaxUses")
+		$aInfo[$iI][5] = DllStructGetData($tInfo, "CurrentUses")
+		$aInfo[$iI][6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Path"))
+		$aInfo[$iI][7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Password"))
+		$pInfo += DllStructGetSize($tInfo)
+	Next
 
 	__Net_Share_APIBufferFree($aResult[3])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_ShareEnum
 
 ; #FUNCTION# ====================================================================================================================
@@ -606,22 +606,21 @@ Func _Net_Share_ShareGetInfo($sServer, $sShare)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareGetInfo", "wstr", $sServer, "wstr", $sShare, "dword", 2, "ptr*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
-	If $aResult[0] = 0 Then
-		Local $tInfo
-		$tInfo = DllStructCreate($tagSHARE_INFO_2, $aResult[4])
-		$aInfo[0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
-		$aInfo[1] = DllStructGetData($tInfo, "Type")
-		$aInfo[2] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Remark"))
-		$aInfo[3] = DllStructGetData($tInfo, "Permissions")
-		$aInfo[4] = DllStructGetData($tInfo, "MaxUses")
-		$aInfo[5] = DllStructGetData($tInfo, "CurrentUses")
-		$aInfo[6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Path"))
-		$aInfo[7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Password"))
-	EndIf
+	Local $tInfo
+	$tInfo = DllStructCreate($tagSHARE_INFO_2, $aResult[4])
+	$aInfo[0] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "NetName"))
+	$aInfo[1] = DllStructGetData($tInfo, "Type")
+	$aInfo[2] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Remark"))
+	$aInfo[3] = DllStructGetData($tInfo, "Permissions")
+	$aInfo[4] = DllStructGetData($tInfo, "MaxUses")
+	$aInfo[5] = DllStructGetData($tInfo, "CurrentUses")
+	$aInfo[6] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Path"))
+	$aInfo[7] = _WinAPI_WideCharToMultiByte(DllStructGetData($tInfo, "Password"))
 
 	__Net_Share_APIBufferFree($aResult[4])
-	Return SetExtended($aResult[0], $aInfo)
+	Return $aInfo
 EndFunc   ;==>_Net_Share_ShareGetInfo
 
 ; #FUNCTION# ====================================================================================================================
@@ -642,7 +641,8 @@ Func _Net_Share_ShareSetInfo($sServer, $sShare, $sComment, $iMaxUses)
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetShareSetInfo", "wstr", $sServer, "wstr", $sShare, "dword", 2, "struct*", $tInfo, "ptr", 0)
 	If @error Then Return SetError(@error, @extended, False)
-	Return $aResult[0]
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
 EndFunc   ;==>_Net_Share_ShareSetInfo
 
 ; #FUNCTION# ====================================================================================================================
@@ -656,28 +656,27 @@ Func _Net_Share_StatisticsGetSvr($sServer = "")
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetStatisticsGet", "wstr", $sServer, "struct*", $tService, "dword", 0, "dword", 0, "ptr*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
-	If $aResult[0] = 0 Then
-		Local $tStatInfo = DllStructCreate($tagSTAT_SERVER_0, $aResult[5])
-		$aStats[0] = DllStructGetData($tStatInfo, "Start")
-		$aStats[1] = DllStructGetData($tStatInfo, "FOpens")
-		$aStats[2] = DllStructGetData($tStatInfo, "DevOpens")
-		$aStats[3] = DllStructGetData($tStatInfo, "JobsQueued")
-		$aStats[4] = DllStructGetData($tStatInfo, "SOpens")
-		$aStats[5] = DllStructGetData($tStatInfo, "STimedOut")
-		$aStats[6] = DllStructGetData($tStatInfo, "SErrorOut")
-		$aStats[7] = DllStructGetData($tStatInfo, "PWErrors")
-		$aStats[8] = DllStructGetData($tStatInfo, "PermErrors")
-		$aStats[9] = DllStructGetData($tStatInfo, "SysErrors")
-		$aStats[10] = DllStructGetData($tStatInfo, "ByteSent")
-		$aStats[11] = DllStructGetData($tStatInfo, "ByteRecv")
-		$aStats[12] = DllStructGetData($tStatInfo, "AvResponse")
-		$aStats[13] = DllStructGetData($tStatInfo, "ReqBufNeed")
-		$aStats[14] = DllStructGetData($tStatInfo, "BigBufNeed")
-	EndIf
+	Local $tStatInfo = DllStructCreate($tagSTAT_SERVER_0, $aResult[5])
+	$aStats[0] = DllStructGetData($tStatInfo, "Start")
+	$aStats[1] = DllStructGetData($tStatInfo, "FOpens")
+	$aStats[2] = DllStructGetData($tStatInfo, "DevOpens")
+	$aStats[3] = DllStructGetData($tStatInfo, "JobsQueued")
+	$aStats[4] = DllStructGetData($tStatInfo, "SOpens")
+	$aStats[5] = DllStructGetData($tStatInfo, "STimedOut")
+	$aStats[6] = DllStructGetData($tStatInfo, "SErrorOut")
+	$aStats[7] = DllStructGetData($tStatInfo, "PWErrors")
+	$aStats[8] = DllStructGetData($tStatInfo, "PermErrors")
+	$aStats[9] = DllStructGetData($tStatInfo, "SysErrors")
+	$aStats[10] = DllStructGetData($tStatInfo, "ByteSent")
+	$aStats[11] = DllStructGetData($tStatInfo, "ByteRecv")
+	$aStats[12] = DllStructGetData($tStatInfo, "AvResponse")
+	$aStats[13] = DllStructGetData($tStatInfo, "ReqBufNeed")
+	$aStats[14] = DllStructGetData($tStatInfo, "BigBufNeed")
 
 	__Net_Share_APIBufferFree($aResult[5])
-	Return SetExtended($aResult[0], $aStats)
+	Return $aStats
 EndFunc   ;==>_Net_Share_StatisticsGetSvr
 
 ; #FUNCTION# ====================================================================================================================
@@ -691,53 +690,52 @@ Func _Net_Share_StatisticsGetWrk($sWorkStation = "")
 
 	Local $aResult = DllCall("netapi32.dll", "int", "NetStatisticsGet", "wstr", $sWorkStation, "struct*", $tService, "dword", 0, "dword", 0, "ptr*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
-	If $aResult[0] = 0 Then
-		Local $tStatInfo = DllStructCreate($tagSTAT_WORKSTATION_0, $aResult[5])
-		$aStats[0] = DllStructGetData($tStatInfo, "StartTime")
-		$aStats[1] = DllStructGetData($tStatInfo, "BytesRecv")
-		$aStats[2] = DllStructGetData($tStatInfo, "SMBSRecv")
-		$aStats[3] = DllStructGetData($tStatInfo, "PageRead")
-		$aStats[4] = DllStructGetData($tStatInfo, "NonPageRead")
-		$aStats[5] = DllStructGetData($tStatInfo, "CacheRead")
-		$aStats[6] = DllStructGetData($tStatInfo, "NetRead")
-		$aStats[7] = DllStructGetData($tStatInfo, "BytesTran")
-		$aStats[8] = DllStructGetData($tStatInfo, "SMBSTran")
-		$aStats[9] = DllStructGetData($tStatInfo, "PageWrite")
-		$aStats[10] = DllStructGetData($tStatInfo, "NonPageWrite")
-		$aStats[11] = DllStructGetData($tStatInfo, "CacheWrite")
-		$aStats[12] = DllStructGetData($tStatInfo, "NetWrite")
-		$aStats[13] = DllStructGetData($tStatInfo, "InitFailed")
-		$aStats[14] = DllStructGetData($tStatInfo, "FailedComp")
-		$aStats[15] = DllStructGetData($tStatInfo, "ReadOp")
-		$aStats[16] = DllStructGetData($tStatInfo, "RandomReadOp")
-		$aStats[17] = DllStructGetData($tStatInfo, "ReadSMBS")
-		$aStats[18] = DllStructGetData($tStatInfo, "LargeReadSMBS")
-		$aStats[19] = DllStructGetData($tStatInfo, "SmallReadSMBS")
-		$aStats[20] = DllStructGetData($tStatInfo, "WriteOp")
-		$aStats[21] = DllStructGetData($tStatInfo, "RandomWriteOp")
-		$aStats[22] = DllStructGetData($tStatInfo, "WriteSMBS")
-		$aStats[23] = DllStructGetData($tStatInfo, "LargeWriteSMBS")
-		$aStats[24] = DllStructGetData($tStatInfo, "SmallWriteSMBS")
-		$aStats[25] = DllStructGetData($tStatInfo, "RawReadsDenied")
-		$aStats[26] = DllStructGetData($tStatInfo, "RawWritesDenied")
-		$aStats[27] = DllStructGetData($tStatInfo, "NetworkErrors")
-		$aStats[28] = DllStructGetData($tStatInfo, "Sessions")
-		$aStats[29] = DllStructGetData($tStatInfo, "FailedSessions")
-		$aStats[30] = DllStructGetData($tStatInfo, "Reconnects")
-		$aStats[31] = DllStructGetData($tStatInfo, "CoreConnects")
-		$aStats[32] = DllStructGetData($tStatInfo, "LM20Connects")
-		$aStats[33] = DllStructGetData($tStatInfo, "LM21Connects")
-		$aStats[34] = DllStructGetData($tStatInfo, "LMNTConnects")
-		$aStats[35] = DllStructGetData($tStatInfo, "ServerDisconnects")
-		$aStats[36] = DllStructGetData($tStatInfo, "HungSessions")
-		$aStats[37] = DllStructGetData($tStatInfo, "UseCount")
-		$aStats[38] = DllStructGetData($tStatInfo, "FailedUseCount")
-		$aStats[39] = DllStructGetData($tStatInfo, "CurrentCommands")
-	EndIf
+	Local $tStatInfo = DllStructCreate($tagSTAT_WORKSTATION_0, $aResult[5])
+	$aStats[0] = DllStructGetData($tStatInfo, "StartTime")
+	$aStats[1] = DllStructGetData($tStatInfo, "BytesRecv")
+	$aStats[2] = DllStructGetData($tStatInfo, "SMBSRecv")
+	$aStats[3] = DllStructGetData($tStatInfo, "PageRead")
+	$aStats[4] = DllStructGetData($tStatInfo, "NonPageRead")
+	$aStats[5] = DllStructGetData($tStatInfo, "CacheRead")
+	$aStats[6] = DllStructGetData($tStatInfo, "NetRead")
+	$aStats[7] = DllStructGetData($tStatInfo, "BytesTran")
+	$aStats[8] = DllStructGetData($tStatInfo, "SMBSTran")
+	$aStats[9] = DllStructGetData($tStatInfo, "PageWrite")
+	$aStats[10] = DllStructGetData($tStatInfo, "NonPageWrite")
+	$aStats[11] = DllStructGetData($tStatInfo, "CacheWrite")
+	$aStats[12] = DllStructGetData($tStatInfo, "NetWrite")
+	$aStats[13] = DllStructGetData($tStatInfo, "InitFailed")
+	$aStats[14] = DllStructGetData($tStatInfo, "FailedComp")
+	$aStats[15] = DllStructGetData($tStatInfo, "ReadOp")
+	$aStats[16] = DllStructGetData($tStatInfo, "RandomReadOp")
+	$aStats[17] = DllStructGetData($tStatInfo, "ReadSMBS")
+	$aStats[18] = DllStructGetData($tStatInfo, "LargeReadSMBS")
+	$aStats[19] = DllStructGetData($tStatInfo, "SmallReadSMBS")
+	$aStats[20] = DllStructGetData($tStatInfo, "WriteOp")
+	$aStats[21] = DllStructGetData($tStatInfo, "RandomWriteOp")
+	$aStats[22] = DllStructGetData($tStatInfo, "WriteSMBS")
+	$aStats[23] = DllStructGetData($tStatInfo, "LargeWriteSMBS")
+	$aStats[24] = DllStructGetData($tStatInfo, "SmallWriteSMBS")
+	$aStats[25] = DllStructGetData($tStatInfo, "RawReadsDenied")
+	$aStats[26] = DllStructGetData($tStatInfo, "RawWritesDenied")
+	$aStats[27] = DllStructGetData($tStatInfo, "NetworkErrors")
+	$aStats[28] = DllStructGetData($tStatInfo, "Sessions")
+	$aStats[29] = DllStructGetData($tStatInfo, "FailedSessions")
+	$aStats[30] = DllStructGetData($tStatInfo, "Reconnects")
+	$aStats[31] = DllStructGetData($tStatInfo, "CoreConnects")
+	$aStats[32] = DllStructGetData($tStatInfo, "LM20Connects")
+	$aStats[33] = DllStructGetData($tStatInfo, "LM21Connects")
+	$aStats[34] = DllStructGetData($tStatInfo, "LMNTConnects")
+	$aStats[35] = DllStructGetData($tStatInfo, "ServerDisconnects")
+	$aStats[36] = DllStructGetData($tStatInfo, "HungSessions")
+	$aStats[37] = DllStructGetData($tStatInfo, "UseCount")
+	$aStats[38] = DllStructGetData($tStatInfo, "FailedUseCount")
+	$aStats[39] = DllStructGetData($tStatInfo, "CurrentCommands")
 
 	__Net_Share_APIBufferFree($aResult[5])
-	Return SetExtended($aResult[0], $aStats)
+	Return $aStats
 EndFunc   ;==>_Net_Share_StatisticsGetWrk
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================

@@ -4,11 +4,12 @@
 #include "SendMessage.au3"
 #include "StatusBarConstants.au3"
 #include "UDFGlobalID.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: StatusBar
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with StatusBar control management.
 ;                  A status bar is a horizontal window at the bottom of a parent window in which an application can display
@@ -466,12 +467,10 @@ EndFunc   ;==>_GUICtrlStatusBar_Resize
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
-; Modified.......: Gary Frost (gafrost)
+; Modified.......: Gary Frost (gafrost), jpm
 ; ===============================================================================================================================
 Func _GUICtrlStatusBar_SetBkColor($hWnd, $iColor)
 	$iColor = _SendMessage($hWnd, $SB_SETBKCOLOR, 0, $iColor)
-	If $iColor = $__STATUSBARCONSTANT_CLR_DEFAULT Then Return '0x' & Hex($__STATUSBARCONSTANT_CLR_DEFAULT)
-	Return $iColor
 EndFunc   ;==>_GUICtrlStatusBar_SetBkColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -505,36 +504,47 @@ EndFunc   ;==>_GUICtrlStatusBar_SetMinHeight
 ; Author ........: Gary Frost (gafrost)
 ; Modified.......:
 ; ===============================================================================================================================
-Func _GUICtrlStatusBar_SetParts($hWnd, $aParts = -1, $aPartWidth = 25)
+Func _GUICtrlStatusBar_SetParts($hWnd, $vPartEdge = -1, $vPartWidth = 25)
+	If IsArray($vPartEdge) And IsArray($vPartWidth) Then Return False
+
 	;== start sizing parts
-	Local $tParts, $iParts = 1
-	If IsArray($aParts) <> 0 Then ; adding array of parts (contains widths)
-		$aParts[UBound($aParts) - 1] = -1
-		$iParts = UBound($aParts)
+	Local $tParts, $iParts
+	If IsArray($vPartEdge) Then ; adding array of parts (contains widths)
+		$vPartEdge[UBound($vPartEdge) - 1] = -1
+		$iParts = UBound($vPartEdge)
 		$tParts = DllStructCreate("int[" & $iParts & "]")
 		For $x = 0 To $iParts - 2
-			DllStructSetData($tParts, 1, $aParts[$x], $x + 1)
+			DllStructSetData($tParts, 1, $vPartEdge[$x], $x + 1)
 		Next
 		DllStructSetData($tParts, 1, -1, $iParts)
-	ElseIf IsArray($aPartWidth) <> 0 Then ; adding array of part widths (make parts an array)
-		$iParts = UBound($aPartWidth)
-		$tParts = DllStructCreate("int[" & $iParts & "]")
-		For $x = 0 To $iParts - 2
-			DllStructSetData($tParts, 1, $aPartWidth[$x], $x + 1)
-		Next
-		DllStructSetData($tParts, 1, -1, $iParts)
-	ElseIf $aParts > 1 Then ; adding parts with default width
-		$iParts = $aParts
-		$tParts = DllStructCreate("int[" & $iParts & "]")
-		For $x = 1 To $iParts - 1
-			DllStructSetData($tParts, 1, $aPartWidth * $x, $x)
-		Next
-		DllStructSetData($tParts, 1, -1, $iParts)
-	Else ; defaulting to 1 part
-		$tParts = DllStructCreate("int")
-		DllStructSetData($tParts, $iParts, -1)
+	Else
+		If $vPartEdge < -1 Then Return False
+
+		If IsArray($vPartWidth) Then ; adding array of part widths (make parts an array)
+			$iParts = UBound($vPartWidth)
+			$tParts = DllStructCreate("int[" & $iParts & "]")
+			Local $iPartRightEdge = 0
+			For $x = 0 To $iParts - 2
+				$iPartRightEdge += $vPartWidth[$x]
+				If $vPartWidth[$x] <= 0 Then Return False
+				DllStructSetData($tParts, 1, $iPartRightEdge, $x + 1)
+			Next
+			DllStructSetData($tParts, 1, -1, $iParts)
+		ElseIf $vPartEdge > 1 Then ; adding parts with default width
+			$iParts = $vPartEdge
+			$tParts = DllStructCreate("int[" & $iParts & "]")
+			For $x = 1 To $iParts - 1
+				DllStructSetData($tParts, 1, $vPartWidth * $x, $x)
+			Next
+			DllStructSetData($tParts, 1, -1, $iParts)
+		Else ; defaulting to 1 part
+			$iParts = 1
+			$tParts = DllStructCreate("int")
+			DllStructSetData($tParts, 1, -1)
+		EndIf
 	EndIf
 	;== end set sizing
+
 	If _WinAPI_InProcess($hWnd, $__g_hSBLastWnd) Then
 		_SendMessage($hWnd, $SB_SETPARTS, $iParts, $tParts, 0, "wparam", "struct*")
 	Else

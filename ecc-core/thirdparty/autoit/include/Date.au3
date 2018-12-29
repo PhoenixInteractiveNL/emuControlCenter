@@ -4,12 +4,13 @@
 #include "Memory.au3"
 #include "Security.au3"
 #include "StructureConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPIError.au3"
+#include "WinAPIHObj.au3"
 #include "WinAPILocale.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Date
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Date/Time management.
 ;                  There are five time formats: System, File, Local, MS-DOS and Windows.  Time related functions return  time  in
@@ -1040,7 +1041,7 @@ Func _SetTime($iHour, $iMinute, $iSecond = 0, $iMSeconds = 0)
 	;============================================================================
 	DllStructSetData($tSYSTEMTIME, "Hour", $iHour)
 	DllStructSetData($tSYSTEMTIME, "Minute", $iMinute)
-	If $iSecond > 0 Then DllStructSetData($tSYSTEMTIME, "Seconds", $iSecond)
+	If $iSecond > 0 Then DllStructSetData($tSYSTEMTIME, "Second", $iSecond)
 	If $iMSeconds > 0 Then DllStructSetData($tSYSTEMTIME, "MSeconds", $iMSeconds)
 
 	;============================================================================
@@ -1525,10 +1526,10 @@ Func _Date_Time_GetTimeZoneInformation()
 	Local $aInfo[8]
 	$aInfo[0] = $aResult[0]
 	$aInfo[1] = DllStructGetData($tTimeZone, "Bias")
-	$aInfo[2] = _WinAPI_WideCharToMultiByte(DllStructGetPtr($tTimeZone, "StdName"))
+	$aInfo[2] = DllStructGetData($tTimeZone, "StdName")
 	$aInfo[3] = __Date_Time_CloneSystemTime(DllStructGetPtr($tTimeZone, "StdDate"))
 	$aInfo[4] = DllStructGetData($tTimeZone, "StdBias")
-	$aInfo[5] = _WinAPI_WideCharToMultiByte(DllStructGetPtr($tTimeZone, "DayName"))
+	$aInfo[5] = DllStructGetData($tTimeZone, "DayName")
 	$aInfo[6] = __Date_Time_CloneSystemTime(DllStructGetPtr($tTimeZone, "DayDate"))
 	$aInfo[7] = DllStructGetData($tTimeZone, "DayBias")
 	Return $aInfo
@@ -1622,21 +1623,19 @@ EndFunc   ;==>_Date_Time_SetSystemTimeAdjustment
 ; Modified.......: Gary Frost (gafrost)
 ; ===============================================================================================================================
 Func _Date_Time_SetTimeZoneInformation($iBias, $sStdName, $tStdDate, $iStdBias, $sDayName, $tDayDate, $iDayBias)
-	Local $tStdName = _WinAPI_MultiByteToWideChar($sStdName)
-	Local $tDayName = _WinAPI_MultiByteToWideChar($sDayName)
 	Local $tZoneInfo = DllStructCreate($tagTIME_ZONE_INFORMATION)
 	DllStructSetData($tZoneInfo, "Bias", $iBias)
-	DllStructSetData($tZoneInfo, "StdName", DllStructGetData($tStdName, 1))
+	DllStructSetData($tZoneInfo, "StdName", $sStdName)
 	_MemMoveMemory($tStdDate, DllStructGetPtr($tZoneInfo, "StdDate"), DllStructGetSize($tStdDate))
 	DllStructSetData($tZoneInfo, "StdBias", $iStdBias)
-	DllStructSetData($tZoneInfo, "DayName", DllStructGetData($tDayName, 1))
+	DllStructSetData($tZoneInfo, "DayName", $sDayName)
 	_MemMoveMemory($tDayDate, DllStructGetPtr($tZoneInfo, "DayDate"), DllStructGetSize($tDayDate))
 	DllStructSetData($tZoneInfo, "DayBias", $iDayBias)
 
-	; Enable system time privileged mode
+	; Enable time zone privileged mode
 	Local $hToken = _Security__OpenThreadTokenEx(BitOR($TOKEN_ADJUST_PRIVILEGES, $TOKEN_QUERY))
 	If @error Then Return SetError(@error + 10, @extended, False)
-	_Security__SetPrivilege($hToken, "SeSystemtimePrivilege", True)
+	_Security__SetPrivilege($hToken, "SeTimeZonePrivilege", True)
 	Local $iError = @error
 	Local $iLastError = @extended
 	Local $bRet = False
@@ -1654,8 +1653,8 @@ Func _Date_Time_SetTimeZoneInformation($iBias, $sStdName, $tStdDate, $iStdBias, 
 			$iLastError = _WinAPI_GetLastError()
 		EndIf
 
-		; Disable system time privileged mode
-		_Security__SetPrivilege($hToken, "SeSystemtimePrivilege", False)
+		; Disable time zone privileged mode
+		_Security__SetPrivilege($hToken, "SeTimeZonePrivilege", False)
 		If Not $iError And @error Then $iError = 22
 	EndIf
 	_WinAPI_CloseHandle($hToken)

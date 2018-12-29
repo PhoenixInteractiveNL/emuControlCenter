@@ -2,12 +2,15 @@
 
 #include "GDIPlusConstants.au3"
 #include "StructureConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPICom.au3"
+#include "WinAPIConv.au3"
 #include "WinAPIGdi.au3"
+#include "WinAPIHObj.au3"
+#include "WinAPIIcons.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: GDIPlus
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Microsoft Windows GDI+ management.
 ;                  It enables applications to use graphics and formatted text on both the video display and the printer.
@@ -162,6 +165,7 @@ Global $__g_bGDIP_V1_0 = True
 ; _GDIPlus_ImageAttributesSetColorKeys
 ; _GDIPlus_ImageAttributesSetColorMatrix
 ; _GDIPlus_ImageDispose
+; _GDIPlus_ImageGetDimension
 ; _GDIPlus_ImageGetFlags
 ; _GDIPlus_ImageGetGraphicsContext
 ; _GDIPlus_ImageGetHeight
@@ -335,7 +339,7 @@ Global $__g_bGDIP_V1_0 = True
 ; _GDIPlus_DrawImageFX
 ; _GDIPlus_DrawImageFXEx
 ; _GDIPlus_PaletteInitialize
-
+;
 ; _GDIPlus_EffectCreate
 ; _GDIPlus_EffectCreateBlur
 ; _GDIPlus_EffectCreateBrightnessContrast
@@ -351,6 +355,27 @@ Global $__g_bGDIP_V1_0 = True
 ; _GDIPlus_EffectDispose
 ; _GDIPlus_EffectGetParameters
 ; _GDIPlus_EffectSetParameters
+;
+;	New functions
+; _GDIPlus_BitmapSetResolution
+; _GDIPlus_ImageAttributesSetRemapTable
+; _GDIPlus_ImageAttributesSetThreshold
+; _GDIPlus_ImageClone
+; _GDIPlus_ImageGetFrameCount
+; _GDIPlus_ImageGetPropertyIdList
+; _GDIPlus_ImageGetPropertyItem
+; _GDIPlus_ImageSaveAdd
+; _GDIPlus_ImageSaveAddImage
+; _GDIPlus_ImageSelectActiveFrame
+; _GDIPlus_MatrixCreate2
+; _GDIPlus_PenResetTransform
+; _GDIPlus_PenRotateTransform
+; _GDIPlus_PenScaleTransform
+; _GDIPlus_PenSetCompound
+; _GDIPlus_PenSetTransform
+; _GDIPlus_RegionSetEmpty
+; _GDIPlus_RegionSetInfinite
+
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -358,6 +383,8 @@ Global $__g_bGDIP_V1_0 = True
 ; __GDIPlus_BrushDefDispose
 ; __GDIPlus_EffectGetParameterSize
 ; __GDIPlus_ExtractFileExt
+; __GDIPlus_ImageGetPropertyCount
+; __GDIPlus_ImageGetPropertyItemSize
 ; __GDIPlus_LastDelimiter
 ; __GDIPlus_PenDefCreate
 ; __GDIPlus_PenDefDispose
@@ -758,6 +785,17 @@ Func _GDIPlus_BitmapSetPixel($hBitmap, $iX, $iY, $iARGB)
 
 	Return True
 EndFunc   ;==>_GDIPlus_BitmapSetPixel
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_BitmapSetResolution($hBitmap, $fDpiX, $fDpiY)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipBitmapSetResolution", "handle", $hBitmap, "float", $fDpiX, "float", $fDpiY)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_BitmapSetResolution
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
@@ -2276,6 +2314,56 @@ Func _GDIPlus_ImageAttributesSetColorMatrix($hImageAttributes, $iColorAdjustType
 EndFunc   ;==>_GDIPlus_ImageAttributesSetColorMatrix
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_ImageAttributesSetRemapTable($hImageAttributes, $aColorMap = 0, $iColorAdjustType = 0, $bEnable = True)
+	Local $aResult
+
+	If IsArray($aColorMap) Then
+		Local $iCount = $aColorMap[0][0]
+		Local $tColorMap = DllStructCreate("uint[" & $iCount * 2 & "]")
+
+		For $i = 1 To $iCount
+			DllStructSetData($tColorMap, 1, $aColorMap[$i][0], ($i - 1) * 2 + 1)
+			DllStructSetData($tColorMap, 1, $aColorMap[$i][1], ($i - 1) * 2 + 2)
+		Next
+
+		$aResult = DllCall($__g_hGDIPDll, "int", "GdipSetImageAttributesRemapTable", "handle", $hImageAttributes, "int", $iColorAdjustType, "int", $bEnable, "int", $iCount, "struct*", $tColorMap)
+	Else
+		$aResult = DllCall($__g_hGDIPDll, "int", "GdipSetImageAttributesRemapTable", "handle", $hImageAttributes, "int", $iColorAdjustType, "int", $bEnable, "int", 0, "struct*", 0)
+	EndIf
+
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Return True
+EndFunc   ;==>_GDIPlus_ImageAttributesSetRemapTable
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: UEZ
+; Modified ......:
+; ===============================================================================================================================
+Func _GDIPlus_ImageAttributesSetThreshold($hImageAttributes, $fThreshold, $iColorAdjustType = $GDIP_COLORADJUSTTYPE_DEFAULT, $bEnable = True)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSetImageAttributesThreshold", "handle", $hImageAttributes, "int", $iColorAdjustType, "bool", $bEnable, "float", $fThreshold)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Return True
+EndFunc   ;==>_GDIPlus_ImageAttributesSetThreshold
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: UEZ
+; Modified ......:
+; ===============================================================================================================================
+Func _GDIPlus_ImageClone($hImage)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipCloneImage", "handle", $hImage, "handle*", 0)
+	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
+	Return $aResult[2]
+EndFunc   ;==>_GDIPlus_ImageClone
+
+; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
@@ -2339,6 +2427,18 @@ Func _GDIPlus_ImageGetFlags($hImage)
 	Next
 	Return $aFlag
 EndFunc   ;==>_GDIPlus_ImageGetFlags
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: UEZ
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_ImageGetFrameCount($hImage, $sDimensionID)
+	Local $tGUID = _WinAPI_GUIDFromString($sDimensionID)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipImageGetFrameCount", "handle", $hImage, "struct*", $tGUID, "uint*", 0)
+	If @error Then Return SetError(@error, @extended, -1)
+	If $aResult[0] Then Return SetError(10, $aResult[0], -1)
+	Return $aResult[3]
+EndFunc   ;==>_GDIPlus_ImageGetFrameCount
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
@@ -2413,6 +2513,138 @@ Func _GDIPlus_ImageGetPixelFormat($hImage)
 
 	Return SetError(12, 0, $aFormat)
 EndFunc   ;==>_GDIPlus_ImageGetPixelFormat
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __GDIPlus_ImageGetPropertyCount
+; Description ...: Gets the number of properties (pieces of metadata) stored in an image object
+; Syntax ........: __GDIPlus_ImageGetPropertyCount($hImage)
+; Parameters ....: $hImage      - Pointer to an image object
+; Return values .: Success      - Number of property items stored in the image object
+;                  Failure      - -1 and sets the @error flag to non-zero, @extended may contain GPSTATUS error code ($GPID_ERR*).
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; Remarks .......:
+; Related .......: _GDIPlus_ImageGetPropertyIdList
+; Link ..........: @@MsdnLink@@ GdipGetPropertyCount
+; Example .......: No
+; ===============================================================================================================================
+Func __GDIPlus_ImageGetPropertyCount($hImage)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipGetPropertyCount", "handle", $hImage, "uint*", 0)
+	If @error Then Return SetError(@error, @extended, -1)
+	If $aResult[0] Then Return SetError(10, $aResult[0], -1)
+	Return $aResult[2]
+EndFunc   ;==>__GDIPlus_ImageGetPropertyCount
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Eukalyptus
+; Modified ......:
+; ===============================================================================================================================
+Func _GDIPlus_ImageGetPropertyIdList($hImage)
+	Local $iCount = __GDIPlus_ImageGetPropertyCount($hImage)
+	If @error Then Return SetError(@error, @extended, False)
+
+	Local $tProperties = DllStructCreate("uint[" & $iCount & "]")
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipGetPropertyIdList", "handle", $hImage, "int", $iCount, "struct*", $tProperties)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Local $sPropertyTagInfo = "0x0000=GpsVer;0x0001=GpsLatitudeRef;0x0002=GpsLatitude;0x0003=GpsLongitudeRef;0x0004=GpsLongitude;0x0005=GpsAltitudeRef;0x0006=GpsAltitude;0x0007=GpsGpsTime;0x0008=GpsGpsSatellites;0x0009=GpsGpsStatus;0x000A=GpsGpsMeasureMode;0x000B=GpsGpsDop;0x000C=GpsSpeedRef;0x000D=GpsSpeed;0x000E=GpsTrackRef;0x000F=GpsTrack;0x0010=GpsImgDirRef;0x0011=GpsImgDir;0x0012=GpsMapDatum;0x0013=GpsDestLatRef;0x0014=GpsDestLat;0x0015=GpsDestLongRef;0x0016=GpsDestLong;0x0017=GpsDestBearRef;0x0018=GpsDestBear;0x0019=GpsDestDistRef;0x001A=GpsDestDist;0x00FE=NewSubfileType;0x00FF=SubfileType;0x0100=ImageWidth;0x0101=ImageHeight;0x0102=BitsPerSample;0x0103=Compression;0x0106=PhotometricInterp;0x0107=ThreshHolding;0x0108=CellWidth;0x0109=CellHeight;0x010A=FillOrder;0x010D=DocumentName;0x010E=ImageDescription;0x010F=EquipMake;0x0110=EquipModel;0x0111=StripOffsets;0x0112=Orientation;0x0115=SamplesPerPixel;0x0116=RowsPerStrip;0x0117=StripBytesCount;0x0118=MinSampleValue;0x0119=MaxSampleValue;0x011A=XResolution;0x011B=YResolution;0x011C=PlanarConfig;0x011D=PageName;0x011E=XPosition;0x011F=YPosition;0x0120=FreeOffset;0x0121=FreeByteCounts;0x0122=GrayResponseUnit;0x0123=GrayResponseCurve;0x0124=T4Option;0x0125=T6Option;0x0128=ResolutionUnit;0x0129=PageNumber;0x012D=TransferFunction;0x0131=SoftwareUsed;0x0132=DateTime;0x013B=Artist;0x013C=HostComputer;0x013D=Predictor;0x013E=WhitePoint;0x013F=PrimaryChromaticities;0x0140=ColorMap;0x0141=HalftoneHints;0x0142=TileWidth;0x0143=TileLength;0x0144=TileOffset;0x0145=TileByteCounts;0x014C=InkSet;0x014D=InkNames;0x014E=NumberOfInks;0x0150=DotRange;0x0151=TargetPrinter;0x0152=ExtraSamples;0x0153=SampleFormat;0x0154=SMinSampleValue;0x0155=SMaxSampleValue;0x0156=TransferRange;0x0200=JPEGProc;0x0201=JPEGInterFormat;0x0202=JPEGInterLength;0x0203=JPEGRestartInterval;0x0205=JPEGLosslessPredictors;0x0206=JPEGPointTransforms;0x0207=JPEGQTables;0x0208=JPEGDCTables;0x0209=JPEGACTables;0x0211=YCbCrCoefficients;0x0212=YCbCrSubsampling;0x0213=YCbCrPositioning;0x0214=REFBlackWhite;0x0301=Gamma;0x0302=ICCProfileDescriptor;0x0303=SRGBRenderingIntent;0x0320=ImageTitle;0x5001=ResolutionXUnit;0x5002=ResolutionYUnit;0x5003=ResolutionXLengthUnit;0x5004=ResolutionYLengthUnit;0x5005=PrintFlags;0x5006=PrintFlagsVersion;0x5007=PrintFlagsCrop;0x5008=PrintFlagsBleedWidth;0x5009=PrintFlagsBleedWidthScale;0x500A=HalftoneLPI;0x500B=HalftoneLPIUnit;0x500C=HalftoneDegree;" & _
+			"0x500D=HalftoneShape;0x500E=HalftoneMisc;0x500F=HalftoneScreen;0x5010=JPEGQuality;0x5011=GridSize;0x5012=ThumbnailFormat;0x5013=ThumbnailWidth;0x5014=ThumbnailHeight;0x5015=ThumbnailColorDepth;0x5016=ThumbnailPlanes;0x5017=ThumbnailRawBytes;0x5018=ThumbnailSize;0x5019=ThumbnailCompressedSize;0x501A=ColorTransferFunction;0x501B=ThumbnailData;0x5020=ThumbnailImageWidth;0x5021=ThumbnailImageHeight;0x5022=ThumbnailBitsPerSample;0x5023=ThumbnailCompression;0x5024=ThumbnailPhotometricInterp;0x5025=ThumbnailImageDescription;0x5026=ThumbnailEquipMake;0x5027=ThumbnailEquipModel;0x5028=ThumbnailStripOffsets;0x5029=ThumbnailOrientation;0x502A=ThumbnailSamplesPerPixel;0x502B=ThumbnailRowsPerStrip;0x502C=ThumbnailStripBytesCount;0x502D=ThumbnailResolutionX;0x502E=ThumbnailResolutionY;0x502F=ThumbnailPlanarConfig;0x5030=ThumbnailResolutionUnit;0x5031=ThumbnailTransferFunction;0x5032=ThumbnailSoftwareUsed;0x5033=ThumbnailDateTime;0x5034=ThumbnailArtist;0x5035=ThumbnailWhitePoint;0x5036=ThumbnailPrimaryChromaticities;0x5037=ThumbnailYCbCrCoefficients;0x5038=ThumbnailYCbCrSubsampling;0x5039=ThumbnailYCbCrPositioning;0x503A=ThumbnailRefBlackWhite;0x503B=ThumbnailCopyRight;0x5090=LuminanceTable;0x5091=ChrominanceTable;0x5100=FrameDelay;0x5101=LoopCount;0x5102=GlobalPalette;0x5103=IndexBackground;0x5104=IndexTransparent;0x5110=PixelUnit;0x5111=PixelPerUnitX;0x5112=PixelPerUnitY;0x5113=PaletteHistogram;0x8298=Copyright;0x829A=ExifExposureTime;0x829D=ExifFNumber;0x8769=ExifIFD;0x8773=ICCProfile;0x8822=ExifExposureProg;0x8824=ExifSpectralSense;0x8825=GpsIFD;0x8827=ExifISOSpeed;0x8828=ExifOECF;0x9000=ExifVer;0x9003=ExifDTOrig;0x9004=ExifDTDigitized;0x9101=ExifCompConfig;0x9102=ExifCompBPP;0x9201=ExifShutterSpeed;0x9202=ExifAperture;0x9203=ExifBrightness;0x9204=ExifExposureBias;0x9205=ExifMaxAperture;0x9206=ExifSubjectDist;0x9207=ExifMeteringMode;0x9208=ExifLightSource;0x9209=ExifFlash;0x920A=ExifFocalLength;0x927C=ExifMakerNote;0x9286=ExifUserComment;0x9290=ExifDTSubsec;0x9291=ExifDTOrigSS;0x9292=ExifDTDigSS;0xA000=ExifFPXVer;0xA001=ExifColorSpace;0xA002=ExifPixXDim;0xA003=ExifPixYDim;0xA004=ExifRelatedWav;0xA005=ExifInterop;0xA20B=ExifFlashEnergy;0xA20C=ExifSpatialFR;0xA20E=ExifFocalXRes;0xA20F=ExifFocalYRes;0xA210=ExifFocalResUnit;0xA214=ExifSubjectLoc;0xA215=ExifExposureIndex;0xA217=ExifSensingMethod;0xA300=ExifFileSource;0xA301=ExifSceneType;0xA302=ExifCfaPattern"
+
+	Local $aProperties[$iCount + 1][2] = [[$iCount]]
+	Local $aRegExp
+	For $i = 1 To $iCount
+		$aProperties[$i][0] = DllStructGetData($tProperties, 1, $i)
+		$aRegExp = StringRegExp($sPropertyTagInfo, "(?i)" & Hex(DllStructGetData($tProperties, 1, $i), 4) & "=(\w+)", 3)
+		Switch IsArray($aRegExp)
+			Case True
+				$aProperties[$i][1] = $aRegExp[0]
+			Case Else
+				$aProperties[$i][1] = "PropertyTagUnKnown"
+		EndSwitch
+	Next
+
+	Return $aProperties
+EndFunc   ;==>_GDIPlus_ImageGetPropertyIdList
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __GDIPlus_ImageGetPropertyItemSize
+; Description ...: Gets the size, in bytes, of a specified property item of an image object
+; Syntax ........: __GDIPlus_ImageGetPropertyItemSize($hImage, $iPropID)
+; Parameters ....: $hImage              - Pointer to an image object
+;                  $iPropID             - Identifier of the property item to be retrieved
+; Return values .: Success      - Size in bytes of the property item
+;                  Failure      - -1 and sets the @error flag to non-zero, @extended may contain GPSTATUS error code ($GPID_ERR*).
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; Remarks .......:
+; Related .......: _GDIPlus_ImageGetPropertyItem
+; Link ..........: @@MsdnLink@@ GdipGetPropertyItemSize
+; Example .......: No
+; ===============================================================================================================================
+Func __GDIPlus_ImageGetPropertyItemSize($hImage, $iPropID)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipGetPropertyItemSize", "handle", $hImage, "uint", $iPropID, "uint*", 0)
+	If @error Then Return SetError(@error, @extended, -1)
+	If $aResult[0] Then Return SetError(10, $aResult[0], -1)
+	Return $aResult[3]
+EndFunc   ;==>__GDIPlus_ImageGetPropertyItemSize
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Eukalyptus
+; Modified ......:
+; ===============================================================================================================================
+Func _GDIPlus_ImageGetPropertyItem($hImage, $iPropID)
+	Local $iSize = __GDIPlus_ImageGetPropertyItemSize($hImage, $iPropID)
+	If @error Then Return SetError(@error, @extended, False)
+
+	Local $tBuffer = DllStructCreate("byte[" & $iSize & "];")
+	Local $pBuffer = DllStructGetPtr($tBuffer)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipGetPropertyItem", "handle", $hImage, "uint", $iPropID, "uint", $iSize, "struct*", $tBuffer)
+	If @error Then Return SetError(@error, @extended, -1)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Local $tPropertyItem = DllStructCreate("int id; int length; short type; ptr value;", $pBuffer)
+	Local $iBytes = DllStructGetData($tPropertyItem, "length")
+	Local $pValue = DllStructGetData($tPropertyItem, "value")
+
+	Local $tValues, $iValues
+	Switch DllStructGetData($tPropertyItem, "type")
+		Case 2 ;ASCII String
+			$iValues = 1
+			$tValues = DllStructCreate("char[" & $iBytes & "];", $pValue)
+		Case 3 ;Array of UShort
+			$iValues = Int($iBytes / 2)
+			$tValues = DllStructCreate("ushort[" & $iValues & "];", $pValue)
+		Case 4, 5 ;Array of UInt / Fraction
+			$iValues = Int($iBytes / 4)
+			$tValues = DllStructCreate("uint[" & $iValues & "];", $pValue)
+		Case 9, 10 ;Array of Int / Fraction
+			$iValues = Int($iBytes / 4)
+			$tValues = DllStructCreate("int[" & $iValues & "];", $pValue)
+		Case Else ;Array of Bytes
+			$iValues = 1
+			$tValues = DllStructCreate("byte[" & $iBytes & "];", $pValue)
+	EndSwitch
+
+	Local $aValues[$iValues + 1] = [$iValues]
+	Switch DllStructGetData($tPropertyItem, "type")
+		Case 5, 10 ;Pair of UInt Fraction [numerator][denominator]
+			$iValues = Int($iValues / 2)
+			ReDim $aValues[$iValues + 1]
+			$aValues[0] = $iValues
+			For $j = 1 To $iValues
+				$aValues[$j] = DllStructGetData($tValues, 1, ($j - 1) * 2 + 1) / DllStructGetData($tValues, 1, ($j - 1) * 2 + 2)
+			Next
+		Case 3, 4, 9
+			For $j = 1 To $iValues
+				$aValues[$j] = DllStructGetData($tValues, 1, $j)
+			Next
+		Case Else
+			$aValues[1] = DllStructGetData($tValues, 1)
+	EndSwitch
+
+	Return $aValues
+EndFunc   ;==>_GDIPlus_ImageGetPropertyItem
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: rover
@@ -2558,6 +2790,28 @@ Func _GDIPlus_ImageRotateFlip($hImage, $iRotateFlipType)
 EndFunc   ;==>_GDIPlus_ImageRotateFlip
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_ImageSaveAdd($hImage, $tParams)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSaveAdd", "handle", $hImage, "struct*", $tParams)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_ImageSaveAdd
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_ImageSaveAddImage($hImage, $hImageNew, $tParams)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSaveAddImage", "handle", $hImage, "handle", $hImageNew, "struct*", $tParams)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_ImageSaveAddImage
+
+; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
@@ -2626,6 +2880,18 @@ Func _GDIPlus_ImageScale($hImage, $iScaleW, $iScaleH, $iInterpolationMode = $GDI
 	_GDIPlus_GraphicsDispose($hBmpCtxt)
 	Return $hBitmap
 EndFunc   ;==>_GDIPlus_ImageScale
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: UEZ
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_ImageSelectActiveFrame($hImage, $sDimensionID, $iFrameIndex)
+	Local $tGUID = _WinAPI_GUIDFromString($sDimensionID)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipImageSelectActiveFrame", "handle", $hImage, "struct*", $tGUID, "uint", $iFrameIndex)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_ImageSelectActiveFrame
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: UEZ
@@ -2866,6 +3132,17 @@ Func _GDIPlus_MatrixCreate()
 
 	Return $aResult[1]
 EndFunc   ;==>_GDIPlus_MatrixCreate
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Eukalyptus
+; Modified ......: UEZ
+; ===============================================================================================================================
+Func _GDIPlus_MatrixCreate2($nM11 = 1, $nM12 = 1, $nM21 = 1, $nM22 = 1, $nDX = 0, $nDY = 0)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipCreateMatrix2", "float", $nM11, "float", $nM12, "float", $nM21, "float", $nM22, "float", $nDX, "float", $nDY, "handle*", 0)
+	If @error Then Return SetError(@error, @extended, 0)
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
+	Return $aResult[7]
+EndFunc   ;==>_GDIPlus_MatrixCreate2
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Authenticity
@@ -4116,6 +4393,41 @@ Func _GDIPlus_PenGetWidth($hPen)
 EndFunc   ;==>_GDIPlus_PenGetWidth
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_PenResetTransform($hPen)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipResetPenTransform", "handle", $hPen)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_PenResetTransform
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_PenRotateTransform($hPen, $fAngle, $iOrder = 0)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipRotatePenTransform", "handle", $hPen, "float", $fAngle, "int", $iOrder)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Return True
+EndFunc   ;==>_GDIPlus_PenRotateTransform
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_PenScaleTransform($hPen, $fScaleX, $fScaleY, $iOrder = 0)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipScalePenTransform", "handle", $hPen, "float", $fScaleX, "float", $fScaleY, "int", $iOrder)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Return True
+EndFunc   ;==>_GDIPlus_PenScaleTransform
+
+; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
 ; Modified.......: Gary Frost
 ; ===============================================================================================================================
@@ -4138,6 +4450,24 @@ Func _GDIPlus_PenSetColor($hPen, $iARGB)
 
 	Return True
 EndFunc   ;==>_GDIPlus_PenSetColor
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_PenSetCompound($hPen, $aCompounds)
+	Local $iCount = $aCompounds[0]
+	Local $tCompounds = DllStructCreate("float[" & $iCount & "];")
+	For $i = 1 To $iCount
+		DllStructSetData($tCompounds, 1, $aCompounds[$i], $i)
+	Next
+
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSetPenCompoundArray", "handle", $hPen, "struct*", $tCompounds, "int", $iCount)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+
+	Return True
+EndFunc   ;==>_GDIPlus_PenSetCompound
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
@@ -4235,6 +4565,17 @@ Func _GDIPlus_PenSetStartCap($hPen, $iLineCap)
 
 	Return True
 EndFunc   ;==>_GDIPlus_PenSetStartCap
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_PenSetTransform($hPen, $hMatrix)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSetPenTransform", "handle", $hPen, "handle", $hMatrix)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_PenSetTransform
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Paul Campbell (PaulIA)
@@ -4387,6 +4728,28 @@ Func _GDIPlus_RegionGetHRgn($hRegion, $hGraphics = 0)
 
 	Return $aResult[3]
 EndFunc   ;==>_GDIPlus_RegionGetHRgn
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_RegionSetEmpty($hRegion)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSetEmpty", "handle", $hRegion)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_RegionSetEmpty
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Authenticity
+; Modified ......: Eukalyptus
+; ===============================================================================================================================
+Func _GDIPlus_RegionSetInfinite($hRegion)
+	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipSetInfinite", "handle", $hRegion)
+	If @error Then Return SetError(@error, @extended, False)
+	If $aResult[0] Then Return SetError(10, $aResult[0], False)
+	Return True
+EndFunc   ;==>_GDIPlus_RegionSetInfinite
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Authenticity
@@ -4660,7 +5023,7 @@ Func __GDIPlus_LastDelimiter($sDelimiters, $sString)
 
 	For $iI = 1 To StringLen($sDelimiters)
 		$sDelimiter = StringMid($sDelimiters, $iI, 1)
-		$iN = StringInStr($sString, $sDelimiter, 0, -1)
+		$iN = StringInStr($sString, $sDelimiter, $STR_NOCASESENSEBASIC, -1)
 		If $iN > 0 Then Return $iN
 	Next
 EndFunc   ;==>__GDIPlus_LastDelimiter
@@ -4703,7 +5066,6 @@ Func __GDIPlus_PenDefDispose($iCurError = @error, $iCurExtended = @extended)
 	EndIf
 	Return SetError($iCurError, $iCurExtended) ; restore caller @error and @extended
 EndFunc   ;==>__GDIPlus_PenDefDispose
-
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Eukalyptus
@@ -4886,12 +5248,21 @@ Func _GDIPlus_EffectCreate($sEffectGUID)
 	If $__g_bGDIP_V1_0 Then Return SetError(-1, 0, 0)
 
 	Local $tGUID = _WinAPI_GUIDFromString($sEffectGUID)
+	Local $aResult = 0
+
+	If @AutoItX64 Then
+		$aResult = DllCall($__g_hGDIPDll, "int", "GdipCreateEffect", "struct*", $tGUID, "handle*", 0)
+		If @error Then Return SetError(@error, @extended, 0)
+
+		If $aResult[0] Then Return SetError(10, $aResult[0], 0)
+		Return $aResult[2]
+	EndIf
+
 	Local $tElem = DllStructCreate("uint64[2];", DllStructGetPtr($tGUID))
-
-	Local $aResult = DllCall($__g_hGDIPDll, "int", "GdipCreateEffect", "uint64", DllStructGetData($tElem, 1, 1), "uint64", DllStructGetData($tElem, 1, 2), "handle*", 0)
+	$aResult = DllCall($__g_hGDIPDll, "int", "GdipCreateEffect", "uint64", DllStructGetData($tElem, 1, 1), "uint64", DllStructGetData($tElem, 1, 2), "handle*", 0)
 	If @error Then Return SetError(@error, @extended, 0)
-	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 
+	If $aResult[0] Then Return SetError(10, $aResult[0], 0)
 	Return $aResult[3]
 EndFunc   ;==>_GDIPlus_EffectCreate
 

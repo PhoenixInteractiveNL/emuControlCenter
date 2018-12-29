@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: NTSTATUS UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: NT error codes (NTSTATUS) to be used with WinAPI* UDF library
 ; Author(s) .....: Yashied
 ; ===============================================================================================================================
@@ -834,12 +834,12 @@ Global Const $STATUS_WMI_ALREADY_DISABLED = 0xC0000302 ; Collection or events fo
 Global Const $STATUS_WMI_ALREADY_ENABLED = 0xC0000303 ; Collection or events for the WMI GUID is already enabled.
 Global Const $STATUS_MFT_TOO_FRAGMENTED = 0xC0000304 ; The master file table on the volume is too fragmented to complete this operation.
 Global Const $STATUS_COPY_PROTECTION_FAILURE = 0xC0000305 ; Copy protection failure.
-Global Const $STATUS_CSS_AUTHENTICATION_FAILURE = 0xC0000306 ; Copy protection error�DVD CSS Authentication failed.
-Global Const $STATUS_CSS_KEY_NOT_PRESENT = 0xC0000307 ; Copy protection error�The specified sector does not contain a valid key.
-Global Const $STATUS_CSS_KEY_NOT_ESTABLISHED = 0xC0000308 ; Copy protection error�DVD session key not established.
-Global Const $STATUS_CSS_SCRAMBLED_SECTOR = 0xC0000309 ; Copy protection error�The read failed because the sector is encrypted.
-Global Const $STATUS_CSS_REGION_MISMATCH = 0xC000030A ; Copy protection error�The region of the specified DVD does not correspond to the region setting of the drive.
-Global Const $STATUS_CSS_RESETS_EXHAUSTED = 0xC000030B ; Copy protection error�The region setting of the drive may be permanent.
+Global Const $STATUS_CSS_AUTHENTICATION_FAILURE = 0xC0000306 ; Copy protection error? DVD CSS Authentication failed.
+Global Const $STATUS_CSS_KEY_NOT_PRESENT = 0xC0000307 ; Copy protection error? The specified sector does not contain a valid key.
+Global Const $STATUS_CSS_KEY_NOT_ESTABLISHED = 0xC0000308 ; Copy protection error? DVD session key not established.
+Global Const $STATUS_CSS_SCRAMBLED_SECTOR = 0xC0000309 ; Copy protection error? The read failed because the sector is encrypted.
+Global Const $STATUS_CSS_REGION_MISMATCH = 0xC000030A ; Copy protection error? The region of the specified DVD does not correspond to the region setting of the drive.
+Global Const $STATUS_CSS_RESETS_EXHAUSTED = 0xC000030B ; Copy protection error? The region setting of the drive may be permanent.
 Global Const $STATUS_PKINIT_FAILURE = 0xC0000320 ; The Kerberos protocol encountered an error while validating the KDC certificate during smart card logon. There is more information in the system event log.
 Global Const $STATUS_SMARTCARD_SUBSYSTEM_FAILURE = 0xC0000321 ; The Kerberos protocol encountered an error while attempting to use the smart card subsystem.
 Global Const $STATUS_NO_KERB_KEY = 0xC0000322 ; The target server does not have acceptable Kerberos credentials.

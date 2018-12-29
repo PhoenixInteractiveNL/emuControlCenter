@@ -2,11 +2,18 @@
 
 #include "APIDlgConstants.au3"
 #include "StringConstants.au3"
+#include "StructureConstants.au3"
+#include "WinAPICom.au3"
+#include "WinAPIConstants.au3"
+#include "WinAPIInternals.au3"
+#include "WinAPIMem.au3"
+#include "WinAPIMisc.au3"
 #include "WinAPIShellEx.au3"
+#include "WinAPIShPath.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIDlg.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -18,10 +25,11 @@ Global $__g_pFRBuffer = 0, $__g_iFRBufferSize = 16385
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
+Global Const $tagDEVNAMES = 'ushort DriverOffset;ushort DeviceOffset;ushort OutputOffset;ushort Default'
 Global Const $tagFINDREPLACE = 'dword Size;hwnd hOwner;ptr hInstance;dword Flags;ptr FindWhat;ptr ReplaceWith;ushort FindWhatLen;ushort ReplaceWithLen;lparam lParam;ptr Hook;ptr TemplateName'
 Global Const $tagMSGBOXPARAMS = 'uint Size;hwnd hOwner;ptr hInstance;int_ptr Text;int_ptr Caption;dword Style;int_ptr Icon;dword_ptr ContextHelpId;ptr MsgBoxCallback;dword LanguageId'
 Global Const $tagPAGESETUPDLG = 'dword Size;hwnd hOwner;ptr hDevMode;ptr hDevNames;dword Flags;long PaperWidth;long PaperHeight;long MarginMinLeft;long MarginMinTop;long MarginMinRight;long MarginMinBottom;long MarginLeft;long MarginTop;long MarginRight;long MarginBottom;ptr hInstance;lparam lParam;ptr PageSetupHook;ptr PagePaintHook;ptr PageSetupTemplateName;ptr hPageSetupTemplate'
-Global Const $tagPRINTDLG = __Iif(@AutoItX64, '', 'align 2;') & 'dword Size;hwnd hOwner;handle hDevMode;handle hDevNames;handle hDC;dword Flags;word FromPage;word ToPage;word MinPage;word MaxPage;word Copies;handle hInstance;lparam lParam;ptr PrintHook;ptr SetupHook;ptr PrintTemplateName;ptr SetupTemplateName;handle hPrintTemplate;handle hSetupTemplate'
+Global Const $tagPRINTDLG = (@AutoItX64 ? '' : 'align 2;') & 'dword Size;hwnd hOwner;handle hDevMode;handle hDevNames;handle hDC;dword Flags;word FromPage;word ToPage;word MinPage;word MaxPage;word Copies;handle hInstance;lparam lParam;ptr PrintHook;ptr SetupHook;ptr PrintTemplateName;ptr SetupTemplateName;handle hPrintTemplate;handle hSetupTemplate'
 Global Const $tagPRINTDLGEX = 'dword Size;hwnd hOwner;handle hDevMode;handle hDevNames;handle hDC;dword Flags;dword Flags2;dword ExclusionFlags;dword NumPageRanges;dword MaxPageRanges;ptr PageRanges;dword MinPage;dword MaxPage;dword Copies;handle hInstance;ptr PrintTemplateName;lparam lParam;dword NumPropertyPages;ptr hPropertyPages;dword StartPage;dword ResultAction'
 Global Const $tagPRINTPAGERANGE = 'dword FromPage;dword ToPage'
 ; ===============================================================================================================================
@@ -31,6 +39,7 @@ Global Const $tagPRINTPAGERANGE = 'dword FromPage;dword ToPage'
 
 ; #CURRENT# =====================================================================================================================
 ; _WinAPI_BrowseForFolderDlg
+; _WinAPI_CommDlgExtendedError
 ; _WinAPI_CommDlgExtendedErrorEx
 ; _WinAPI_ConfirmCredentials
 ; _WinAPI_FindTextDlg
@@ -38,6 +47,8 @@ Global Const $tagPRINTPAGERANGE = 'dword FromPage;dword ToPage'
 ; _WinAPI_FormatDriveDlg
 ; _WinAPI_GetConnectedDlg
 ; _WinAPI_GetFRBuffer
+; _WinAPI_GetOpenFileName
+; _WinAPI_GetSaveFileName
 ; _WinAPI_MessageBoxCheck
 ; _WinAPI_MessageBoxIndirect
 ; _WinAPI_OpenFileDlg
@@ -55,6 +66,13 @@ Global Const $tagPRINTPAGERANGE = 'dword FromPage;dword ToPage'
 ; _WinAPI_ShellUserAuthenticationDlg
 ; _WinAPI_ShellUserAuthenticationDlgEx
 ; ===============================================================================================================================
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; __OFNDlg
+; __WinAPI_ParseMultiSelectFileDialogPath
+; __WinAPI_ParseFileDialogPath
+; ===============================================================================================================================
+
 #EndRegion Functions list
 
 #Region Public Functions
@@ -102,6 +120,73 @@ Func _WinAPI_BrowseForFolderDlg($sRoot = '', $sText = '', $iFlags = 0, $pBrowseP
 
 	Return $sResult
 EndFunc   ;==>_WinAPI_BrowseForFolderDlg
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Gary Frost
+; Modified.......: JPM
+; ===============================================================================================================================
+Func _WinAPI_CommDlgExtendedError()
+	Local Const $CDERR_DIALOGFAILURE = 0xFFFF
+	Local Const $CDERR_FINDRESFAILURE = 0x06
+	Local Const $CDERR_INITIALIZATION = 0x02
+	Local Const $CDERR_LOADRESFAILURE = 0x07
+	Local Const $CDERR_LOADSTRFAILURE = 0x05
+	Local Const $CDERR_LOCKRESFAILURE = 0x08
+	Local Const $CDERR_MEMALLOCFAILURE = 0x09
+	Local Const $CDERR_MEMLOCKFAILURE = 0x0A
+	Local Const $CDERR_NOHINSTANCE = 0x04
+	Local Const $CDERR_NOHOOK = 0x0B
+	Local Const $CDERR_NOTEMPLATE = 0x03
+	Local Const $CDERR_REGISTERMSGFAIL = 0x0C
+	Local Const $CDERR_STRUCTSIZE = 0x01
+	Local Const $FNERR_BUFFERTOOSMALL = 0x3003
+	Local Const $FNERR_INVALIDFILENAME = 0x3002
+	Local Const $FNERR_SUBCLASSFAILURE = 0x3001
+	Local $aResult = DllCall("comdlg32.dll", "dword", "CommDlgExtendedError")
+	If Not @error Then
+		Switch $aResult[0]
+			Case $CDERR_DIALOGFAILURE
+				Return SetError($aResult[0], 0, "The dialog box could not be created." & @LF & _
+						"The common dialog box function's call to the DialogBox function failed." & @LF & _
+						"For example, this error occurs if the common dialog box call specifies an invalid window handle.")
+			Case $CDERR_FINDRESFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function failed to find a specified resource.")
+			Case $CDERR_INITIALIZATION
+				Return SetError($aResult[0], 0, "The common dialog box function failed during initialization." & @LF & "This error often occurs when sufficient memory is not available.")
+			Case $CDERR_LOADRESFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function failed to load a specified resource.")
+			Case $CDERR_LOADSTRFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function failed to load a specified string.")
+			Case $CDERR_LOCKRESFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function failed to lock a specified resource.")
+			Case $CDERR_MEMALLOCFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function was unable to allocate memory for internal structures.")
+			Case $CDERR_MEMLOCKFAILURE
+				Return SetError($aResult[0], 0, "The common dialog box function was unable to lock the memory associated with a handle.")
+			Case $CDERR_NOHINSTANCE
+				Return SetError($aResult[0], 0, "The ENABLETEMPLATE flag was set in the Flags member of the initialization structure for the corresponding common dialog box," & @LF & _
+						"but you failed to provide a corresponding instance handle.")
+			Case $CDERR_NOHOOK
+				Return SetError($aResult[0], 0, "The ENABLEHOOK flag was set in the Flags member of the initialization structure for the corresponding common dialog box," & @LF & _
+						"but you failed to provide a pointer to a corresponding hook procedure.")
+			Case $CDERR_NOTEMPLATE
+				Return SetError($aResult[0], 0, "The ENABLETEMPLATE flag was set in the Flags member of the initialization structure for the corresponding common dialog box," & @LF & _
+						"but you failed to provide a corresponding template.")
+			Case $CDERR_REGISTERMSGFAIL
+				Return SetError($aResult[0], 0, "The RegisterWindowMessage function returned an error code when it was called by the common dialog box function.")
+			Case $CDERR_STRUCTSIZE
+				Return SetError($aResult[0], 0, "The lStructSize member of the initialization structure for the corresponding common dialog box is invalid")
+			Case $FNERR_BUFFERTOOSMALL
+				Return SetError($aResult[0], 0, "The buffer pointed to by the lpstrFile member of the OPENFILENAME structure is too small for the file name specified by the user." & @LF & _
+						"The first two bytes of the lpstrFile buffer contain an integer value specifying the size, in TCHARs, required to receive the full name.")
+			Case $FNERR_INVALIDFILENAME
+				Return SetError($aResult[0], 0, "A file name is invalid.")
+			Case $FNERR_SUBCLASSFAILURE
+				Return SetError($aResult[0], 0, "An attempt to subclass a list box failed because sufficient memory was not available.")
+		EndSwitch
+	EndIf
+	Return SetError(@error, @extended, '0x' & Hex($aResult[0]))
+EndFunc   ;==>_WinAPI_CommDlgExtendedError
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -240,6 +325,33 @@ EndFunc   ;==>_WinAPI_GetConnectedDlg
 Func _WinAPI_GetFRBuffer()
 	Return $__g_iFRBufferSize - 1
 EndFunc   ;==>_WinAPI_GetFRBuffer
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Gary Frost
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _WinAPI_GetOpenFileName($sTitle = "", $sFilter = "All files (*.*)", $sInitalDir = ".", $sDefaultFile = "", $sDefaultExt = "", $iFilterIndex = 1, $iFlags = 0, $iFlagsEx = 0, $hWndOwner = 0)
+;~ 	Local $aFiles[1] = [0]
+	Local $vResult = __OFNDlg(0, $sTitle, $sInitalDir, $sFilter, $iFilterIndex, $sDefaultFile, $sDefaultExt, $iFlags, $iFlagsEx, 0, 0, $hWndOwner)
+	If @error Then Return SetError(@error, @extended, '')
+	If BitAND($iFlags, $OFN_ALLOWMULTISELECT) Then
+		Return __WinAPI_ParseMultiSelectFileDialogPath($vResult)
+	Else
+		Return __WinAPI_ParseFileDialogPath($vResult)
+	EndIf
+EndFunc   ;==>_WinAPI_GetOpenFileName
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Gary Frost
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _WinAPI_GetSaveFileName($sTitle = "", $sFilter = "All files (*.*)", $sInitalDir = ".", $sDefaultFile = "", $sDefaultExt = "", $iFilterIndex = 1, $iFlags = 0, $iFlagsEx = 0, $hWndOwner = 0)
+;~ 	Local $aFiles[1] = [0]
+	Local $sReturn = __OFNDlg(1, $sTitle, $sInitalDir, $sFilter, $iFilterIndex, $sDefaultFile, $sDefaultExt, $iFlags, $iFlagsEx, 0, 0, $hWndOwner)
+	If @error Then Return SetError(@error, @extended, '')
+
+	Return __WinAPI_ParseFileDialogPath($sReturn)
+EndFunc   ;==>_WinAPI_GetSaveFileName
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -541,8 +653,8 @@ Func __OFNDlg($iDlg, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDe
 	Local $tFilters = 0, $tDefExt = 0, $tInitDir = 0, $tTitle = 0
 
 	Local $tOFN = DllStructCreate($tagOPENFILENAME)
-	DllStructSetData($tOFN, 1, DllStructGetSize($tOFN))
-	DllStructSetData($tOFN, 2, $hParent)
+	DllStructSetData($tOFN, "StructSize", DllStructGetSize($tOFN))
+	DllStructSetData($tOFN, "hwndOwner", $hParent)
 	DllStructSetData($tOFN, 3, 0)
 	Local $aData = StringSplit($sFilters, '|')
 	Local $aFilters[$aData[0] * 2]
@@ -560,16 +672,16 @@ Func __OFNDlg($iDlg, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDe
 			; Nothing
 		EndIf
 	EndIf
-	DllStructSetData($tOFN, 4, DllStructGetPtr($tFilters))
+	DllStructSetData($tOFN, "lpstrFilter", DllStructGetPtr($tFilters))
 	DllStructSetData($tOFN, 5, 0)
 	DllStructSetData($tOFN, 6, 0)
-	DllStructSetData($tOFN, 7, $iDefFilter)
+	DllStructSetData($tOFN, "nFilterIndex", $iDefFilter)
 	$sDefFile = StringStripWS($sDefFile, $STR_STRIPLEADING + $STR_STRIPTRAILING)
 	If $sDefFile Then
 		DllStructSetData($tBuffer, 1, $sDefFile)
 	EndIf
-	DllStructSetData($tOFN, 8, DllStructGetPtr($tBuffer))
-	DllStructSetData($tOFN, 9, 32768)
+	DllStructSetData($tOFN, "lpstrFile", DllStructGetPtr($tBuffer))
+	DllStructSetData($tOFN, "nMaxFile", 32768)
 	DllStructSetData($tOFN, 10, 0)
 	DllStructSetData($tOFN, 11, 0)
 	$sInitDir = StringStripWS($sInitDir, $STR_STRIPLEADING + $STR_STRIPTRAILING)
@@ -577,14 +689,14 @@ Func __OFNDlg($iDlg, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDe
 		$tInitDir = DllStructCreate('wchar[' & (StringLen($sInitDir) + 1) & ']')
 	EndIf
 	DllStructSetData($tInitDir, 1, $sInitDir)
-	DllStructSetData($tOFN, 12, DllStructGetPtr($tInitDir))
+	DllStructSetData($tOFN, "lpstrInitialDir", DllStructGetPtr($tInitDir))
 	$sTitle = StringStripWS($sTitle, $STR_STRIPLEADING + $STR_STRIPTRAILING)
 	If $sTitle Then
 		$tTitle = DllStructCreate('wchar[' & (StringLen($sTitle) + 1) & ']')
 	EndIf
 	DllStructSetData($tTitle, 1, $sTitle)
-	DllStructSetData($tOFN, 13, DllStructGetPtr($tTitle))
-	DllStructSetData($tOFN, 14, $iFlags)
+	DllStructSetData($tOFN, "lpstrTitle", DllStructGetPtr($tTitle))
+	DllStructSetData($tOFN, "Flags", $iFlags)
 	DllStructSetData($tOFN, 15, 0)
 	DllStructSetData($tOFN, 16, 0)
 	$sDefExt = StringStripWS($sDefExt, $STR_STRIPLEADING + $STR_STRIPTRAILING)
@@ -592,26 +704,26 @@ Func __OFNDlg($iDlg, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDe
 		$tDefExt = DllStructCreate('wchar[' & (StringLen($tDefExt) + 1) & ']')
 	EndIf
 	DllStructSetData($tDefExt, 1, StringReplace($sDefExt, '.', ''))
-	DllStructSetData($tOFN, 17, DllStructGetPtr($tDefExt))
-	DllStructSetData($tOFN, 18, $pData)
-	DllStructSetData($tOFN, 19, $pOFNProc)
+	DllStructSetData($tOFN, "lpstrDefExt", DllStructGetPtr($tDefExt))
+	DllStructSetData($tOFN, "lCustData", $pData)
+	DllStructSetData($tOFN, "lpfnHook", $pOFNProc)
 	DllStructSetData($tOFN, 20, 0)
 	DllStructSetData($tOFN, 21, 0)
 	DllStructSetData($tOFN, 22, 0)
-	DllStructSetData($tOFN, 23, $iFlagsEx)
+	DllStructSetData($tOFN, "FlagsEx", $iFlagsEx)
 	Local $aRet
 	Switch $iDlg
 		Case 0
-			$aRet = DllCall('comdlg32.dll', 'int', 'GetOpenFileNameW', 'struct*', $tOFN)
+			$aRet = DllCall('comdlg32.dll', 'bool', 'GetOpenFileNameW', 'struct*', $tOFN)
 		Case 1
-			$aRet = DllCall('comdlg32.dll', 'int', 'GetSaveFileNameW', 'struct*', $tOFN)
+			$aRet = DllCall('comdlg32.dll', 'bool', 'GetSaveFileNameW', 'struct*', $tOFN)
 		Case Else
 
 	EndSwitch
 	If @error Then Return SetError(@error, @extended, '')
 	If Not $aRet[0] Then Return SetError(10, _WinAPI_CommDlgExtendedErrorEx(), '')
-	If BitAND($iFlags, 0x00000200) Then
-		If BitAND($iFlags, 0x00080000) Then
+	If BitAND($iFlags, $OFN_ALLOWMULTISELECT) Then
+		If BitAND($iFlags, $OFN_EXPLORER) Then
 			$aData = _WinAPI_StructToArray($tBuffer)
 			If @error Then
 				Return SetError(11, 0, '')
@@ -638,5 +750,23 @@ Func __OFNDlg($iDlg, $sTitle, $sInitDir, $sFilters, $iDefFilter, $sDefFile, $sDe
 	$__g_vExt = $tOFN
 	Return $aData
 EndFunc   ;==>__OFNDlg
+
+Func __WinAPI_ParseMultiSelectFileDialogPath($aPath)
+	Local $aFiles[UBound($aPath) + 1]
+	$aFiles[0] = UBound($aPath)
+	$aFiles[1] = StringMid($aPath[1], 1, StringInStr($aPath[1], "\", $STR_NOCASESENSEBASIC, -1) - 1)
+	For $i = 1 To UBound($aPath) - 1
+		$aFiles[$i + 1] = StringMid($aPath[$i], StringInStr($aPath[$i], "\", $STR_NOCASESENSEBASIC, -1) + 1)
+	Next
+	Return $aFiles
+EndFunc   ;==>__WinAPI_ParseMultiSelectFileDialogPath
+
+Func __WinAPI_ParseFileDialogPath($sPath)
+	Local $aFiles[3]
+	$aFiles[0] = 2
+	$aFiles[1] = StringMid($sPath, 1, StringInStr($sPath, "\", $STR_NOCASESENSEBASIC, -1) - 1)
+	$aFiles[2] = StringMid($sPath, StringInStr($sPath, "\", $STR_NOCASESENSEBASIC, -1) + 1)
+	Return $aFiles
+EndFunc   ;==>__WinAPI_ParseFileDialogPath
 
 #EndRegion Internal Functions

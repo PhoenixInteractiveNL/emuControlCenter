@@ -7,11 +7,21 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Memory
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Functions that assist with Memory management.
 ;                  The memory manager implements virtual memory, provides a core set of services such  as  memory  mapped  files,
 ;                  copy-on-write memory, large memory support, and underlying support for the cache manager.
 ; Author(s) .....: Paul Campbell (PaulIA)
+; ===============================================================================================================================
+
+; #NO_DOC_FUNCTION# =============================================================================================================
+;
+; Used by GUI UDF not to be documented
+;
+; _MemFree
+; _MemInit
+; _MemRead
+; _MemWrite
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
@@ -29,10 +39,6 @@
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; $tagMEMMAP
-; _MemFree
-; _MemInit
-; _MemRead
-; _MemWrite
 ; __Mem_OpenProcess
 ; ===============================================================================================================================
 
@@ -47,7 +53,7 @@
 ; ===============================================================================================================================
 Global Const $tagMEMMAP = "handle hProc;ulong_ptr Size;ptr Mem"
 
-; #INTERNAL_USE_ONLY# ===========================================================================================================
+; #NO_DOC_FUNCTION# =============================================================================================================
 ; Name...........: _MemFree
 ; Description ...: Releases a memory map structure for a control
 ; Syntax.........: _MemFree ( ByRef $tMemMap )
@@ -120,7 +126,7 @@ Func _MemGlobalUnlock($hMemory)
 	Return $aResult[0]
 EndFunc   ;==>_MemGlobalUnlock
 
-; #INTERNAL_USE_ONLY# ===========================================================================================================
+; #NO_DOC_FUNCTION# =============================================================================================================
 ; Name...........: _MemInit
 ; Description ...: Initializes a tagMEMMAP structure for a control
 ; Syntax.........: _MemInit ( $hWnd, $iSize, ByRef $tMemMap )
@@ -165,7 +171,7 @@ Func _MemMoveMemory($pSource, $pDest, $iLength)
 	If @error Then Return SetError(@error, @extended)
 EndFunc   ;==>_MemMoveMemory
 
-; #INTERNAL_USE_ONLY# ===========================================================================================================
+; #NO_DOC_FUNCTION# =============================================================================================================
 ; Name...........: _MemRead
 ; Description ...: Transfer memory from external address space to internal address space
 ; Syntax.........: _MemRead ( ByRef $tMemMap, $pSrce, $pDest, $iSize )
@@ -189,7 +195,7 @@ Func _MemRead(ByRef $tMemMap, $pSrce, $pDest, $iSize)
 	Return $aResult[0]
 EndFunc   ;==>_MemRead
 
-; #INTERNAL_USE_ONLY# ===========================================================================================================
+; #NO_DOC_FUNCTION# =============================================================================================================
 ; Name...........: _MemWrite
 ; Description ...: Transfer memory to external address space from internal address space
 ; Syntax.........: _MemWrite ( ByRef $tMemMap, $pSrce [, $pDest = 0 [, $iSize = 0 [, $sSrce = "ptr"]]] )
@@ -262,7 +268,7 @@ EndFunc   ;==>_MemVirtualFreeEx
 ; Syntax.........: _WinAPI_OpenProcess ( $iAccess, $bInherit, $iProcessID [, $bDebugPriv = False] )
 ; Parameters ....: $iAccess     - Specifies the access to the process object
 ;                  $bInherit    - Specifies whether the returned handle can be inherited
-;                  $iProcessID  - Specifies the process identifier of the process to open
+;                  $iPID        - Specifies the process identifier of the process to open
 ;                  $bDebugPriv  - Certain system processes can not be opened unless you have the  debug  security  privilege.  If
 ;                  +True, this function will attempt to open the process with debug priviliges if the process can not  be  opened
 ;                  +with standard access privileges.
@@ -274,38 +280,37 @@ EndFunc   ;==>_MemVirtualFreeEx
 ; Link ..........: @@MsdnLink@@ OpenProcess
 ; Example .......:
 ; ===============================================================================================================================
-Func __Mem_OpenProcess($iAccess, $bInherit, $iProcessID, $bDebugPriv = False)
+Func __Mem_OpenProcess($iAccess, $bInherit, $iPID, $bDebugPriv = False)
 	; Attempt to open process with standard security priviliges
-	Local $aResult = DllCall("kernel32.dll", "handle", "OpenProcess", "dword", $iAccess, "bool", $bInherit, "dword", $iProcessID)
-	If @error Then Return SetError(@error + 10, @extended, 0)
+	Local $aResult = DllCall("kernel32.dll", "handle", "OpenProcess", "dword", $iAccess, "bool", $bInherit, "dword", $iPID)
+	If @error Then Return SetError(@error, @extended, 0)
 	If $aResult[0] Then Return $aResult[0]
-	If Not $bDebugPriv Then Return 0
+	If Not $bDebugPriv Then Return SetError(100, 0, 0)
 
 	; Enable debug privileged mode
 	Local $hToken = _Security__OpenThreadTokenEx(BitOR($TOKEN_ADJUST_PRIVILEGES, $TOKEN_QUERY))
-	If @error Then Return SetError(@error + 20, @extended, 0)
+	If @error Then Return SetError(@error + 10, @extended, 0)
 	_Security__SetPrivilege($hToken, "SeDebugPrivilege", True)
 	Local $iError = @error
-	Local $iLastError = @extended
+	Local $iExtended = @extended
 	Local $iRet = 0
 	If Not @error Then
 		; Attempt to open process with debug privileges
-		$aResult = DllCall("kernel32.dll", "handle", "OpenProcess", "dword", $iAccess, "bool", $bInherit, "dword", $iProcessID)
+		$aResult = DllCall("kernel32.dll", "handle", "OpenProcess", "dword", $iAccess, "bool", $bInherit, "dword", $iPID)
 		$iError = @error
-		$iLastError = @extended
+		$iExtended = @extended
 		If $aResult[0] Then $iRet = $aResult[0]
 
 		; Disable debug privileged mode
 		_Security__SetPrivilege($hToken, "SeDebugPrivilege", False)
 		If @error Then
-			$iError = @error + 30
-			$iLastError = @extended
+			$iError = @error + 20
+			$iExtended = @extended
 		EndIf
 	Else
-		$iError = @error + 40
+		$iError = @error + 30 ; SeDebugPrivilege=True error
 	EndIf
 	DllCall("kernel32.dll", "bool", "CloseHandle", "handle", $hToken)
-	; No need to test @error.
 
-	Return SetError($iError, $iLastError, $iRet)
+	Return SetError($iError, $iExtended, $iRet)
 EndFunc   ;==>__Mem_OpenProcess

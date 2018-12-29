@@ -3,11 +3,12 @@
 #include "Date.au3"
 #include "FileConstants.au3"
 #include "StructureConstants.au3"
+#include "WinAPIConv.au3"
 #include "WinAPIError.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: FTP
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with FTP.
 ; Author(s) .....: Wouter, Prog@ndy, jpm, Beege
@@ -29,12 +30,15 @@ Global Const $FTP_TRANSFER_TYPE_UNKNOWN = 0 ;Defaults to FTP_TRANSFER_TYPE_BINAR
 Global Const $FTP_TRANSFER_TYPE_ASCII = 1 ;Type A transfer method. Control and formatting information is converted to local equivalents.
 Global Const $FTP_TRANSFER_TYPE_BINARY = 2 ;Type I transfer method. The file is transferred exactly as it exists with no changes.
 
+Global Const $INTERNET_FLAG_DEFAULT = 0
 Global Const $INTERNET_FLAG_PASSIVE = 0x08000000
 Global Const $INTERNET_FLAG_TRANSFER_ASCII = $FTP_TRANSFER_TYPE_ASCII
 Global Const $INTERNET_FLAG_TRANSFER_BINARY = $FTP_TRANSFER_TYPE_BINARY
 
 Global Const $INTERNET_DEFAULT_FTP_PORT = 21
 Global Const $INTERNET_SERVICE_FTP = 1
+Global Const $INTERNET_SERVICE_GOPHER = 2
+Global Const $INTERNET_SERVICE_HTTP = 3
 
 ; _FTP_FindFileFirst flags
 Global Const $INTERNET_FLAG_HYPERLINK = 0x00000400
@@ -416,12 +420,12 @@ EndFunc   ;==>_FTP_FileRename
 ; Author ........: Prog@ndy
 ; Modified.......:
 ; ===============================================================================================================================
-Func _FTP_FileTimeLoHiToStr($iLoDWORD, $iHiDWORD, $bFmt = 0)
+Func _FTP_FileTimeLoHiToStr($iLoDWORD, $iHiDWORD, $iFmt = 0)
 	Local $tFileTime = DllStructCreate($tagFILETIME)
 	If Not $iLoDWORD And Not $iHiDWORD Then Return SetError(1, 0, "")
 	DllStructSetData($tFileTime, 1, $iLoDWORD)
 	DllStructSetData($tFileTime, 2, $iHiDWORD)
-	Local $sDate = _Date_Time_FileTimeToStr($tFileTime, $bFmt)
+	Local $sDate = _Date_Time_FileTimeToStr($tFileTime, $iFmt)
 	Return SetError(@error, @extended, $sDate)
 EndFunc   ;==>_FTP_FileTimeLoHiToStr
 
@@ -734,6 +738,7 @@ EndFunc   ;==>_FTP_ProgressUpload
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _FTP_SetStatusCallback($hInternetSession, $sFunctionName)
+	#Au3Stripper_Ignore_Funcs=$sFunctionName
 	If $__g_hWinInet_FTP = -1 Then Return SetError(-2, 0, 0)
 
 	Local $hCallBack_Register = DllCallbackRegister($sFunctionName, "none", "ptr;ptr;dword;ptr;dword")

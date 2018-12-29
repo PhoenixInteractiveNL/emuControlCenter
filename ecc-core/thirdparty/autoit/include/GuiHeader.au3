@@ -5,11 +5,13 @@
 #include "SendMessage.au3"
 #include "StructureConstants.au3"
 #include "UDFGlobalID.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIHObj.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Header
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Functions that assist with Header control management.
 ;                  A header control is a window that is usually positioned above columns of text or numbers.  It contains a title
 ;                  for each column, and it can be divided into parts.

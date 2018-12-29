@@ -7,10 +7,13 @@
 #include "SendMessage.au3"
 #include "StructureConstants.au3"
 #include "UDFGlobalID.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIHobj.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Rich Edit
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Programmer-friendly Rich Edit control
 ; Author(s) .....: GaryFrost, grham, Prog@ndy, KIP, c.haslam
@@ -229,7 +232,7 @@ Global Const $tagEDITSTREAM = "align 4;dword_ptr dwCookie;dword dwError;ptr pfnC
 ; Fields ........: cbSize    - Specifies the size, in bytes, of the structure
 ;                  wMask     - A set of mask bits that determine which of the wEffects flags will be set to 1 or 0 by the rich edit control. This approach eliminates the need to read the effects flags before changing them.
 ;                  |Obsolete bits are valid only for the bidirectional version of Rich Edit 1.0.
-;                  |  $BOM_DEFPARADIR       - Default paragraph directionâ€”implies alignment (obsolete).
+;                  |  $BOM_DEFPARADIR       - Default paragraph direction—implies alignment (obsolete).
 ;                  |  $BOM_PLAINTEXT        - Use plain text layout (obsolete).
 ;                  |  $BOM_NEUTRALOVERRIDE  - Override neutral layout.
 ;                  |  $BOM_CONTEXTREADING   - Context reading order.
@@ -237,7 +240,7 @@ Global Const $tagEDITSTREAM = "align 4;dword_ptr dwCookie;dword dwError;ptr pfnC
 ;                  |  $BOM_LEGACYBIDICLASS  - Treatment of plus, minus, and slash characters in right-to-left (LTR) or bidirectional text.
 ;                  wEffects  - A set of flags that indicate the desired or current state of the effects flags. Obsolete bits are valid only for the bidirectional version of Rich Edit 1.0.
 ;                  |Obsolete bits are valid only for the bidirectional version of Rich Edit 1.0.
-;                  |  $BOE_RTLDIR           - Default paragraph directionâ€”implies alignment (obsolete).
+;                  |  $BOE_RTLDIR           - Default paragraph direction—implies alignment (obsolete).
 ;                  |  $BOE_PLAINTEXT        - Uses plain text layout (obsolete).
 ;                  |  $BOE_NEUTRALOVERRIDE  - Overrides neutral layout.
 ;                  |  $BOE_CONTEXTREADING   - Context reading order.
@@ -2674,7 +2677,7 @@ Func _GUICtrlRichEdit_SetParaSpacing($hWnd, $vInter = Default, $iBefore = Defaul
 	Local $iMask = 0
 	If $vInter <> Default Then
 		$vInter = StringStripWS($vInter, $STR_STRIPALL) ; strip all spaces
-		Local $iP = StringInStr($vInter, "line", 2) ; case-insensitive, faster
+		Local $iP = StringInStr($vInter, "line", $STR_NOCASESENSEBASIC) ; case-insensitive, faster
 		If $iP <> 0 Then
 			$vInter = StringLeft($vInter, $iP - 1)
 		EndIf
@@ -2878,18 +2881,21 @@ EndFunc   ;==>_GUICtrlRichEdit_SetUndoLimit
 
 ; #FUNCTION# ====================================================================================================================
 ; Authors........: Chris Haslam (c.haslam)
-; Modified ......:
+; Modified ......: mLipok
 ; ===============================================================================================================================
-Func _GUICtrlRichEdit_StreamFromFile($hWnd, $sFileSpec)
+Func _GUICtrlRichEdit_StreamFromFile($hWnd, $sFileSpec, $iFileEncoding = Default)
 	If Not _WinAPI_IsClassName($hWnd, $__g_sRTFClassName) Then Return SetError(101, 0, False)
 
 	Local $tEditStream = DllStructCreate($tagEDITSTREAM)
 	DllStructSetData($tEditStream, "pfnCallback", DllCallbackGetPtr($__g_pGRC_StreamFromFileCallback))
-	Local $hFile = FileOpen($sFileSpec, $FO_READ)
+	If $iFileEncoding = Default Then $iFileEncoding = 0
+	Local $hFile = FileOpen($sFileSpec, $FO_READ + $iFileEncoding)
+
 	If $hFile = -1 Then Return SetError(1021, 0, False)
 	Local $sBuf = FileRead($hFile, 5)
 	FileClose($hFile)
-	$hFile = FileOpen($sFileSpec, $FO_READ) ; reopen it at the start
+
+	$hFile = FileOpen($sFileSpec, $FO_READ + $iFileEncoding) ; reopen it at the start
 	DllStructSetData($tEditStream, "dwCookie", $hFile) ; -> Send handle to CallbackFunc
 	Local $wParam = ($sBuf == "{\rtf" Or $sBuf == "{urtf") ? $SF_RTF : $SF_TEXT
 	$wParam = BitOR($wParam, $SFF_SELECTION)
@@ -2899,7 +2905,7 @@ Func _GUICtrlRichEdit_StreamFromFile($hWnd, $sFileSpec)
 	Local $iQchs = _SendMessage($hWnd, $EM_STREAMIN, $wParam, $tEditStream, 0, "wparam", "struct*")
 	FileClose($hFile)
 	Local $iError = DllStructGetData($tEditStream, "dwError")
-	If $iError <> 1 Then SetError(700, $iError, False)
+	If $iError <> 0 Then Return SetError(700, $iError, False)
 	If $iQchs = 0 Then
 		If FileGetSize($sFileSpec) = 0 Then Return SetError(1022, 0, False)
 		Return SetError(700, $iError, False)
@@ -2909,7 +2915,7 @@ EndFunc   ;==>_GUICtrlRichEdit_StreamFromFile
 
 ; #FUNCTION# ====================================================================================================================
 ; Authors........: Chris Haslam (c.haslam)
-; Modified ......:
+; Modified ......: mLipok
 ; ===============================================================================================================================
 Func _GUICtrlRichEdit_StreamFromVar($hWnd, $sVar)
 	If Not _WinAPI_IsClassName($hWnd, $__g_sRTFClassName) Then Return SetError(101, 0, False)
@@ -2925,15 +2931,15 @@ Func _GUICtrlRichEdit_StreamFromVar($hWnd, $sVar)
 	EndIf
 	_SendMessage($hWnd, $EM_STREAMIN, $wParam, $tEditStream, 0, "wparam", "struct*")
 	Local $iError = DllStructGetData($tEditStream, "dwError")
-	If $iError <> 1 Then Return SetError(700, $iError, False)
+	If $iError <> 0 Then Return SetError(700, $iError, False)
 	Return True
 EndFunc   ;==>_GUICtrlRichEdit_StreamFromVar
 
 ; #FUNCTION# ====================================================================================================================
 ; Authors........: Chris Haslam (c.haslam)
-; Modified ......:
+; Modified ......: mLipok
 ; ===============================================================================================================================
-Func _GUICtrlRichEdit_StreamToFile($hWnd, $sFileSpec, $bIncludeCOM = True, $iOpts = 0, $iCodePage = 0)
+Func _GUICtrlRichEdit_StreamToFile($hWnd, $sFileSpec, $bIncludeCOM = True, $iOpts = 0, $iCodePage = 0, $iFileEncoding = Default)
 	If Not _WinAPI_IsClassName($hWnd, $__g_sRTFClassName) Then Return SetError(101, 0, False)
 
 	Local $wParam
@@ -2957,20 +2963,21 @@ Func _GUICtrlRichEdit_StreamToFile($hWnd, $sFileSpec, $bIncludeCOM = True, $iOpt
 	EndIf
 	Local $tEditStream = DllStructCreate($tagEDITSTREAM)
 	DllStructSetData($tEditStream, "pfnCallback", DllCallbackGetPtr($__g_pGRC_StreamToFileCallback))
-	Local $hFile = FileOpen($sFileSpec, $FO_OVERWRITE)
+	If $iFileEncoding = Default Then $iFileEncoding = 0
+	Local $hFile = FileOpen($sFileSpec, $FO_OVERWRITE + $iFileEncoding)
 	If $hFile = -1 Then Return SetError(102, 0, False)
 
 	DllStructSetData($tEditStream, "dwCookie", $hFile) ; -> Send handle to CallbackFunc
 	_SendMessage($hWnd, $EM_STREAMOUT, $wParam, $tEditStream, 0, "wparam", "struct*")
 	FileClose($hFile)
 	Local $iError = DllStructGetData($tEditStream, "dwError")
-	If $iError <> 0 Then SetError(700, $iError, False)
+	If $iError <> 0 Then Return SetError(700, $iError, False)
 	Return True
 EndFunc   ;==>_GUICtrlRichEdit_StreamToFile
 
 ; #FUNCTION# ====================================================================================================================
 ; Authors........: Chris Haslam (c.haslam)
-; Modified ......:
+; Modified ......: mLipok
 ; ===============================================================================================================================
 Func _GUICtrlRichEdit_StreamToVar($hWnd, $bRtf = True, $bIncludeCOM = True, $iOpts = 0, $iCodePage = 0)
 	If Not _WinAPI_IsClassName($hWnd, $__g_sRTFClassName) Then Return SetError(101, 0, "")
@@ -3000,7 +3007,7 @@ Func _GUICtrlRichEdit_StreamToVar($hWnd, $bRtf = True, $bIncludeCOM = True, $iOp
 	$__g_pGRC_sStreamVar = ""
 	_SendMessage($hWnd, $EM_STREAMOUT, $wParam, $tEditStream, 0, "wparam", "struct*")
 	Local $iError = DllStructGetData($tEditStream, "dwError")
-	If $iError <> 0 Then SetError(700, $iError, "")
+	If $iError <> 0 Then Return SetError(700, $iError, "")
 	Return $__g_pGRC_sStreamVar
 EndFunc   ;==>_GUICtrlRichEdit_StreamToVar
 

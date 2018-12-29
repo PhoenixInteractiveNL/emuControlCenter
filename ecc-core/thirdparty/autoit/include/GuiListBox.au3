@@ -4,11 +4,13 @@
 #include "ListBoxConstants.au3"
 #include "SendMessage.au3"
 #include "UDFGlobalID.au3"
-#include "WinAPI.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIRes.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ListBox
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with ListBox control management.
 ; Author(s) .....: Paul Campbell (PaulIA)
@@ -489,9 +491,14 @@ EndFunc   ;==>_GUICtrlListBox_GetSel
 Func _GUICtrlListBox_GetSelCount($hWnd)
 	If IsHWnd($hWnd) Then
 		Return _SendMessage($hWnd, $LB_GETSELCOUNT)
-	Else
+	EndIf
+
+	If IsHWnd(GUICtrlGetHandle($hWnd)) Then
 		Return GUICtrlSendMsg($hWnd, $LB_GETSELCOUNT, 0, 0)
 	EndIf
+
+	; Invalid controlID
+	Return -1
 EndFunc   ;==>_GUICtrlListBox_GetSelCount
 
 ; #FUNCTION# ====================================================================================================================

@@ -4,10 +4,12 @@
 #include "GuiComboBox.au3"
 #include "Memory.au3"
 #include "UDFGlobalID.au3"
+#include "WinAPIGdi.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ComboBoxEx
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with ComboBoxEx control management.
 ;                  ComboBoxEx Controls are an extension of the combo box control that provides native support for item images.

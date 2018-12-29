@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Windows_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: <a href="../appendix/GUIStyles.htm">GUI control Windows styles</a> and much more constants.
 ; Author(s) .....: Valik, Gary Frost, ...
@@ -522,8 +522,10 @@ Global Const $SM_CYHSCROLL = 3
 Global Const $SM_CYCAPTION = 4
 Global Const $SM_CXBORDER = 5
 Global Const $SM_CYBORDER = 6
-Global Const $SM_CXDLGFRAME = 7
-Global Const $SM_CYDLGFRAME = 8
+Global Const $SM_CXFIXEDFRAME = 7
+Global Const $SM_CXDLGFRAME = $SM_CXFIXEDFRAME
+Global Const $SM_CYFIXEDFRAME = 8
+Global Const $SM_CYDLGFRAME = $SM_CYFIXEDFRAME
 Global Const $SM_CYVTHUMB = 9
 Global Const $SM_CXHTHUMB = 10
 Global Const $SM_CXICON = 11
@@ -547,8 +549,10 @@ Global Const $SM_CXMIN = 28
 Global Const $SM_CYMIN = 29
 Global Const $SM_CXSIZE = 30
 Global Const $SM_CYSIZE = 31
-Global Const $SM_CXFRAME = 32
-Global Const $SM_CYFRAME = 33
+Global Const $SM_CXSIZEFRAME = 32
+Global Const $SM_CXFRAME = $SM_CXSIZEFRAME
+Global Const $SM_CYSIZEFRAME = 33
+Global Const $SM_CYFRAME = $SM_CYSIZEFRAME
 Global Const $SM_CXMINTRACK = 34
 Global Const $SM_CYMINTRACK = 35
 Global Const $SM_CXDOUBLECLK = 36

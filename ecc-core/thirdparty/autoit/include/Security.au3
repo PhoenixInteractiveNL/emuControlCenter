@@ -5,7 +5,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Security
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Functions that assist with Security management.
 ; Author(s) .....: Paul Campbell (PaulIA), trancexx
 ; ===============================================================================================================================
@@ -289,6 +289,7 @@ Func _Security__SidToStringSid($pSID)
 
 	Local $aLen = DllCall("kernel32.dll", "int", "lstrlenW", "struct*", $pStringSid)
 	Local $sSID = DllStructGetData(DllStructCreate("wchar Text[" & $aLen[0] + 1 & "]", $pStringSid), "Text")
+	; _WinAPI_LocalFree($pStringSid)
 	DllCall("kernel32.dll", "handle", "LocalFree", "handle", $pStringSid)
 
 	Return $sSID
@@ -337,6 +338,7 @@ Func _Security__StringSidToSid($sSID)
 	Local $tBuffer = DllStructCreate("byte Data[" & _Security__GetLengthSid($pSID) & "]", $pSID)
 	Local $tSID = DllStructCreate("byte Data[" & DllStructGetSize($tBuffer) & "]")
 	DllStructSetData($tSID, "Data", DllStructGetData($tBuffer, "Data"))
+	; _WinAPI_LocalFree($pSID)
 	DllCall("kernel32.dll", "handle", "LocalFree", "handle", $pSID)
 
 	Return $tSID

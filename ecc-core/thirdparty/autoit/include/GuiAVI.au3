@@ -4,10 +4,13 @@
 #include "Memory.au3"
 #include "SendMessage.au3"
 #include "UDFGlobalID.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIInternals.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Animation
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with AVI control management.
 ;                  An animation control is a window that displays an Audio-Video Interleaved (AVI) clip.  An AVI clip is a series

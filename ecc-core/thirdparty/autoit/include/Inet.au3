@@ -3,11 +3,11 @@
 #include "Date.au3"
 #include "InetConstants.au3"
 #include "StringConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPIInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Edit Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Internet.
 ; Author(s) .....: Larry, Ezzetabi, Jarvis Stubblefield, Wes Wolfe-Wolvereness, Wouter, Walkabout, Florian Fida, guinness
@@ -55,7 +55,7 @@ Func _GetIP()
 		http://www.telize.com/ip
 		http://www.trackip.net/ip
 	#ce
-	Local $aGetIPURL[] = ["http://checkip.dyndns.org", "http://www.myexternalip.com/raw", "http://bot.whatismyipaddress.com"], _
+	Local $aGetIPURL = ["https://api.ipify.org", "http://checkip.dyndns.org", "http://www.myexternalip.com/raw", "http://bot.whatismyipaddress.com"], _
 			$aReturn = 0, _
 			$sReturn = ""
 
@@ -334,7 +334,7 @@ EndFunc   ;==>_TCPIpToName
 Func __TCPIpToName_szStringRead($pStr, $iLen = -1)
 	Local $tString
 	If $pStr < 1 Then Return "" ; Null Pointer
-	If $iLen < 0 Then $iLen = _WinAPI_StringLenA($pStr)
+	If $iLen < 0 Then $iLen = _WinAPI_StrLen($pStr, False)
 	$tString = DllStructCreate("char[" & $iLen & "]", $pStr)
 	If @error Then Return SetError(2, 0, "")
 	Return SetExtended($iLen, DllStructGetData($tString, 1))

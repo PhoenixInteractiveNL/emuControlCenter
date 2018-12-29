@@ -3,11 +3,13 @@
 #include "Date.au3"
 #include "Security.au3"
 #include "StructureConstants.au3"
-#include "WinAPI.au3"
+#include "WinAPIError.au3"
+#include "WinAPIRes.au3"
+#include "WinAPISys.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Event_Log
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist Windows System logs.
 ; Description ...: When an error occurs, the system administrator or support technicians must determine what  caused  the  error,
@@ -235,33 +237,51 @@ EndFunc   ;==>__EventLog_DecodeDate
 ; Example .......:
 ; ===============================================================================================================================
 Func __EventLog_DecodeDesc($tEventLog)
-	Local $aStrings = __EventLog_DecodeStrings($tEventLog)
-	Local $sSource = __EventLog_DecodeSource($tEventLog)
-	Local $iEventID = DllStructGetData($tEventLog, "EventID")
-	Local $sKey = "HKLM\SYSTEM\CurrentControlSet\Services\Eventlog\" & $__g_sSourceName_Event & "\" & $sSource
-	Local $aMsgDLL = StringSplit(_WinAPI_ExpandEnvironmentStrings(RegRead($sKey, "EventMessageFile")), ";")
+    Local $aStrings = __EventLog_DecodeStrings($tEventLog)
+    Local $sSource = __EventLog_DecodeSource($tEventLog)
+    Local $iEventID = DllStructGetData($tEventLog, "EventID")
+    Local $sKey = "HKLM\SYSTEM\CurrentControlSet\Services\Eventlog\" & $__g_sSourceName_Event & "\" & $sSource
+    Local $aMsgDLL = StringSplit(_WinAPI_ExpandEnvironmentStrings(RegRead($sKey, "EventMessageFile")), ";")
 
-	Local $iFlags = BitOR($__EVENTLOG_FORMAT_MESSAGE_FROM_HMODULE, $__EVENTLOG_FORMAT_MESSAGE_IGNORE_INSERTS)
-	Local $sDesc = ""
+    Local $iFlags = BitOR($__EVENTLOG_FORMAT_MESSAGE_FROM_HMODULE, $__EVENTLOG_FORMAT_MESSAGE_IGNORE_INSERTS)
+    Local $sDesc = ""
+    Local $tBuffer = 0
 	For $iI = 1 To $aMsgDLL[0]
-		Local $hDLL = _WinAPI_LoadLibraryEx($aMsgDLL[$iI], $__EVENTLOG_LOAD_LIBRARY_AS_DATAFILE)
-		If $hDLL = 0 Then ContinueLoop
-		Local $tBuffer = DllStructCreate("wchar Text[4096]")
-		_WinAPI_FormatMessage($iFlags, $hDLL, $iEventID, 0, $tBuffer, 4096, 0)
-		_WinAPI_FreeLibrary($hDLL)
-		$sDesc &= DllStructGetData($tBuffer, "Text")
-	Next
+        Local $hDLL = _WinAPI_LoadLibraryEx($aMsgDLL[$iI], $__EVENTLOG_LOAD_LIBRARY_AS_DATAFILE)
+        If $hDLL = 0 Then ContinueLoop
+        $tBuffer = DllStructCreate("wchar Text[4096]")
+        _WinAPI_FormatMessage($iFlags, $hDLL, $iEventID, 0, $tBuffer, 4096, 0)
+        _WinAPI_FreeLibrary($hDLL)
+        $sDesc &= DllStructGetData($tBuffer, "Text")
+    Next
+    $sKey = "HKLM\SYSTEM\CurrentControlSet\Services\Eventlog\" & $__g_sSourceName_Event & "\" & $__g_sSourceName_Event
+    $aMsgDLL = StringSplit(_WinAPI_ExpandEnvironmentStrings(RegRead($sKey, "ParameterMessageFile")), ";")
 
-	If $sDesc = "" Then
-		For $iI = 1 To $aStrings[0]
-			$sDesc &= $aStrings[$iI]
-		Next
-	Else
-		For $iI = 1 To $aStrings[0]
-			$sDesc = StringReplace($sDesc, "%" & $iI, $aStrings[$iI])
-		Next
-	EndIf
-	Return StringStripWS($sDesc, $STR_STRIPLEADING + $STR_STRIPTRAILING)
+    For $iI = 1 To $aMsgDLL[0]
+        $hDLL = _WinAPI_LoadLibraryEx($aMsgDLL[$iI], $__EVENTLOG_LOAD_LIBRARY_AS_DATAFILE)
+        If $hDLL <> 0 Then
+            For $iJ = 1 To $aStrings[0] ;Added to parse secondary replacements
+                $tBuffer = DllStructCreate("wchar Text[4096]")
+                If StringLeft($aStrings[$iJ], 2) == "%%" Then
+                    _WinAPI_FormatMessage($iFlags, $hDLL, Int(StringTrimLeft($aStrings[$iJ], 2)), 0, $tBuffer, 4096, 0)
+                    If Not @error Then
+                        $aStrings[$iJ] = DllStructGetData($tBuffer, "Text")
+                    EndIf
+                EndIf
+            Next
+            _WinAPI_FreeLibrary($hDLL)
+        EndIf
+    Next
+    If $sDesc = "" Then
+        For $iI = 1 To $aStrings[0]
+            $sDesc &= $aStrings[$iI]
+        Next
+    Else
+        For $iI = 1 To $aStrings[0]
+            $sDesc = StringRegExpReplace($sDesc, ("(%" & $iI & ")(\R|\Z)"), StringReplace($aStrings[$iI], "\", "\\") & "$2")
+        Next
+    EndIf
+    Return StringStripWS($sDesc, $STR_STRIPLEADING + $STR_STRIPTRAILING)
 EndFunc   ;==>__EventLog_DecodeDesc
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -431,8 +451,8 @@ Func __EventLog_DecodeUserName($tEventLog)
 	If DllStructGetData($tEventLog, "UserSidLength") = 0 Then Return ""
 	Local $pAcctSID = $pEventLog + DllStructGetData($tEventLog, "UserSidOffset")
 	Local $aAcctInfo = _Security__LookupAccountSid($pAcctSID)
-	If IsArray($aAcctInfo) Then Return $aAcctInfo[1]
-	Return ''
+	If UBound($aAcctInfo) >= 2 Then Return (Not StringLen($aAcctInfo[1]) ? "" : $aAcctInfo[1] & "\") & $aAcctInfo[0]
+	Return ""
 EndFunc   ;==>__EventLog_DecodeUserName
 
 ; #FUNCTION# ====================================================================================================================

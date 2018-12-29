@@ -1,11 +1,12 @@
 #include-once
 
 #include "APIThemeConstants.au3"
+#include "StructureConstants.au3"
 #include "WinAPIInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPITheme.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -773,7 +774,7 @@ EndFunc   ;==>_WinAPI_SetThemeAppProperties
 ; Author.........: Yashied
 ; Modified.......: jpm
 ; ===============================================================================================================================
-Func _WinAPI_SetWindowTheme($hWnd, $sName = 0, $sList = 0)
+Func _WinAPI_SetWindowTheme($hWnd, $sName = Default, $sList = Default)
 	Local $sTypeOfName = 'wstr', $sTypeOfList = 'wstr'
 	If Not IsString($sName) Then
 		$sTypeOfName = 'ptr'

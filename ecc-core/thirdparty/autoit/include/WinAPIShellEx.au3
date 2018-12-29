@@ -1,12 +1,16 @@
 #include-once
 
 #include "APIShellExConstants.au3"
+#include "StringConstants.au3"
 #include "WinAPICom.au3"
+#include "WinAPIMem.au3"
+#include "WinAPIMisc.au3"
 #include "WinAPIShPath.au3"
+#include "WinAPISys.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIShellEx.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -33,6 +37,7 @@ Global Const $tagSHSTOCKICONINFO = 'dword Size;ptr hIcon;int SysImageIndex;int i
 ; #CURRENT# =====================================================================================================================
 ; _WinAPI_DefSubclassProc
 ; _WinAPI_DllGetVersion
+; _WinAPI_FindExecutable
 ; _WinAPI_GetAllUsersProfileDirectory
 ; _WinAPI_GetDefaultUserProfileDirectory
 ; _WinAPI_GetWindowSubclass
@@ -110,6 +115,18 @@ Func _WinAPI_DllGetVersion($sFilePath)
 	Next
 	Return $aResult
 EndFunc   ;==>_WinAPI_DllGetVersion
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Paul Campbell (PaulIA)
+; Modified.......: JPM
+; ===============================================================================================================================
+Func _WinAPI_FindExecutable($sFileName, $sDirectory = "")
+	Local $aResult = DllCall("shell32.dll", "INT", "FindExecutableW", "wstr", $sFileName, "wstr", $sDirectory, "wstr", "")
+	If @error Then Return SetError(@error, @extended, '')
+	If $aResult[0] <= 32 Then Return SetError(10, $aResult[0], '')
+
+	Return SetExtended($aResult[0], $aResult[3])
+EndFunc   ;==>_WinAPI_FindExecutable
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied

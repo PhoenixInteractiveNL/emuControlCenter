@@ -8,7 +8,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: SQLite
-; AutoIt Version : 3.3.15.1
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist access to an SQLite database.
 ; Author(s) .....: Fida Florian (piccaso), jchd, jpm
@@ -239,6 +239,21 @@ Func _SQLite_Startup($sDll_Filename = "", $bUTF8ErrorMsg = False, $iForceLocal =
 			ElseIf __SQLite_VersCmp(@WorkingDir & "\" & $sDll_Filename, $vInlineVersion) = $SQLITE_OK Then
 				$sDll_Dirname = @WorkingDir & "\"
 				$bDownloadDLL = False
+			Else
+				$sDll_Filename = StringReplace($sDll_Filename, ".dll", "") & "_" & $vInlineVersion &  ".dll"
+				If __SQLite_VersCmp(@ScriptDir & "\" & $sDll_Filename, $vInlineVersion) = $SQLITE_OK Then
+					$sDll_Dirname = @ScriptDir & "\"
+					$bDownloadDLL = False
+				ElseIf __SQLite_VersCmp(@SystemDir & "\" & $sDll_Filename, $vInlineVersion) = $SQLITE_OK Then
+					$sDll_Dirname = @SystemDir & "\"
+					$bDownloadDLL = False
+				ElseIf __SQLite_VersCmp(@WindowsDir & "\" & $sDll_Filename, $vInlineVersion) = $SQLITE_OK Then
+					$sDll_Dirname = @WindowsDir & "\"
+					$bDownloadDLL = False
+				ElseIf __SQLite_VersCmp(@WorkingDir & "\" & $sDll_Filename, $vInlineVersion) = $SQLITE_OK Then
+					$sDll_Dirname = @WorkingDir & "\"
+					$bDownloadDLL = False
+				EndIf
 			EndIf
 		EndIf
 
@@ -848,7 +863,7 @@ Func _SQLite_SQLiteExe($sDatabaseFile, $sInput, ByRef $sOutput, $sSQLiteExeFilen
 			$iRval = $SQLITE_MISUSE ; SQLite.exe not found
 		Else
 			$sOutput = FileRead($sOutputFile, FileGetSize($sOutputFile))
-			If StringInStr($sOutput, "SQL error:", 1) > 0 Or StringInStr($sOutput, "Incomplete SQL:", 1) > 0 Then $iRval = $SQLITE_ERROR ; SQL error / Incomplete SQL
+			If StringInStr($sOutput, "SQL error:", $STR_CASESENSE) > 0 Or StringInStr($sOutput, "Incomplete SQL:", $STR_CASESENSE) > 0 Then $iRval = $SQLITE_ERROR ; SQL error / Incomplete SQL
 		EndIf
 	Else
 		$iRval = $SQLITE_CANTOPEN ; Can't open Input File
@@ -909,8 +924,8 @@ EndFunc   ;==>_SQLite_Escape
 ; Author ........: jchd
 ; ===============================================================================================================================
 Func _SQLite_FastEncode($vData)
-	If Not IsBinary($vData) Then Return SetError(1, 0, "")
-	Return "X'" & Hex($vData) & "'"
+    If Not IsBinary($vData) Then $vData = Binary($vData)
+    Return "X'" & StringTrimLeft($vData, 2) & "'"
 EndFunc   ;==>_SQLite_FastEncode
 
 ; #FUNCTION# ====================================================================================================================

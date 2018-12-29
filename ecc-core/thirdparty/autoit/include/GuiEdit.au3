@@ -4,13 +4,15 @@
 #include "GuiStatusBar.au3"
 #include "Memory.au3"
 #include "SendMessage.au3"
-#include "UDFGlobalID.au3"
-#include "WinAPI.au3"
 #include "ToolTipConstants.au3" ; for _GUICtrlEdit_ShowBalloonTip()
+#include "UDFGlobalID.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIHObj.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Edit
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Edit control management.
 ;                  An edit control is a rectangular control window typically used in a dialog box to permit the user to enter

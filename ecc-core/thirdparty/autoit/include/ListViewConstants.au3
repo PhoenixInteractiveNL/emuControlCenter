@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ListView_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: <a href="../appendix/GUIStyles.htm#ListView">GUI control ListView styles</a> and much more constants.
 ; Author(s) .....: Valik, Gary Frost, ...
@@ -411,4 +411,13 @@ Global Const $LVSICF_NOSCROLL = 0x00000002
 Global Const $LVSIL_NORMAL = 0
 Global Const $LVSIL_SMALL = 1
 Global Const $LVSIL_STATE = 2
+
+Global Const $LVFN_DIR_LEFT = 0
+Global Const $LVFN_DIR_RIGHT = 1
+Global Const $LVFN_DIR_UP = 2
+Global Const $LVFN_DIR_DOWN = 3
+Global Const $LVFN_DIR_START = 4
+Global Const $LVFN_DIR_MEND = 5
+Global Const $LVFN_DIR_PRIOR = 6
+Global Const $LVFN_DIR_NEXT = 7
 ; ===============================================================================================================================

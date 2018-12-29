@@ -2,16 +2,17 @@
 
 #include "APIDiagConstants.au3"
 #include "StringConstants.au3"
-#include "WinAPI.au3"
 #include "WinAPIFiles.au3"
-#include "WinAPIInternals.au3"
+#include "WinAPIHObj.au3"
+#include "WinAPIMem.au3"
 #include "WinAPIProc.au3"
+#include "WinAPIRes.au3"
 #include "WinAPIShellEx.au3"
 #include "WinAPITheme.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIDiag.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -33,14 +34,12 @@ Global $__g_hFRDlg = 0, $__g_hFRDll = 0
 ; _WinAPI_EnumDllProc
 ; _WinAPI_FatalExit
 ; _WinAPI_GetApplicationRestartSettings
-; _WinAPI_GetErrorMessage
 ; _WinAPI_GetErrorMode
 ; _WinAPI_IsInternetConnected
 ; _WinAPI_IsNetworkAlive
 ; _WinAPI_NtStatusToDosError
 ; _WinAPI_RegisterApplicationRestart
 ; _WinAPI_SetErrorMode
-; _WinAPI_ShowLastError
 ; _WinAPI_UniqueHardwareID
 ; _WinAPI_UnregisterApplicationRestart
 ; ===============================================================================================================================
@@ -93,7 +92,7 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 		$iStyle = BitOR($iStyle, 0x00000008)
 	EndIf
 	$__g_hFRDlg = GUICreate($sTitle, 570, 620, -1, -1, 0x80C70000, $iStyle, $hParent)
-	Local $idLV = GUICtrlCreateListView('#|Member|Offset|Type|Size|Value', 0, 0, 570, 620, 0x0000800D, __Iif($__WINVER < 0x0600, 0x00010031, 0x00010030))
+	Local $idLV = GUICtrlCreateListView('#|Member|Offset|Type|Size|Value', 0, 0, 570, 620, 0x0000800D, (($__WINVER < 0x0600) ? 0x00010031 : 0x00010030))
 	Local $hLV = GUICtrlGetHandle($idLV)
 	If $__WINVER >= 0x0600 Then
 		_WinAPI_SetWindowTheme($hLV, 'Explorer')
@@ -127,19 +126,19 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 			['DWORD', 4], _
 			['INT64', 8], _
 			['UINT64', 8], _
-			['ptr', __Iif(@AutoItX64, 8, 4)], _
-			['HWND', __Iif(@AutoItX64, 8, 4)], _
-			['HANDLE', __Iif(@AutoItX64, 8, 4)], _
+			['ptr', (@AutoItX64 ? 8 : 4)], _
+			['HWND', (@AutoItX64 ? 8 : 4)], _
+			['HANDLE', (@AutoItX64 ? 8 : 4)], _
 			['float', 4], _
 			['double', 8], _
-			['INT_PTR', __Iif(@AutoItX64, 8, 4)], _
-			['LONG_PTR', __Iif(@AutoItX64, 8, 4)], _
-			['LRESULT', __Iif(@AutoItX64, 8, 4)], _
-			['LPARAM', __Iif(@AutoItX64, 8, 4)], _
-			['UINT_PTR', __Iif(@AutoItX64, 8, 4)], _
-			['ULONG_PTR', __Iif(@AutoItX64, 8, 4)], _
-			['DWORD_PTR', __Iif(@AutoItX64, 8, 4)], _
-			['WPARAM', __Iif(@AutoItX64, 8, 4)]]
+			['INT_PTR', (@AutoItX64 ? 8 : 4)], _
+			['LONG_PTR', (@AutoItX64 ? 8 : 4)], _
+			['LRESULT', (@AutoItX64 ? 8 : 4)], _
+			['LPARAM', (@AutoItX64 ? 8 : 4)], _
+			['UINT_PTR', (@AutoItX64 ? 8 : 4)], _
+			['ULONG_PTR', (@AutoItX64 ? 8 : 4)], _
+			['DWORD_PTR', (@AutoItX64 ? 8 : 4)], _
+			['WPARAM', (@AutoItX64 ? 8 : 4)]]
 
 	For $i = 1 To $aData[0]
 		$aItem = StringSplit(StringStripWS($aData[$i], $STR_STRIPLEADING + $STR_STRIPTRAILING), ' ')
@@ -247,7 +246,7 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 				__Inc($aVal)
 				$aVal[$aVal[0]] = DllStructGetData($tData, $iCount, $j)
 				If BitAND($iFlags, 128) Then
-					$aVal[$aVal[0]] = __Hex($aVal[$aVal[0]], $aItem[1])
+					$aVal[$aVal[0]] = __WinAPIDiag_Hex($aVal[$aVal[0]], $aItem[1])
 				EndIf
 				$idLVItem = GUICtrlCreateListViewItem($sItem & StringFormat($sPattern, $j) & $aVal[$aVal[0]], $idLV)
 				If ($aSel[0] = $iCount) And (Not $aSel[1]) Then
@@ -273,7 +272,7 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 			If $iMode Then
 				$aVal[$aVal[0]] = DllStructGetData($tData, $iCount)
 				If BitAND($iFlags, 128) Then
-					$aVal[$aVal[0]] = __Hex($aVal[$aVal[0]], $aItem[1])
+					$aVal[$aVal[0]] = __WinAPIDiag_Hex($aVal[$aVal[0]], $aItem[1])
 				EndIf
 				$idLVItem = GUICtrlCreateListViewItem($sItem & $aVal[$aVal[0]], $idLV)
 			Else
@@ -329,7 +328,7 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 	$__g_hFRDll = DllCallbackRegister('__DlgSubclassProc', 'lresult', 'hwnd;uint;wparam;lparam;uint;ptr')
 	Local $pDll = DllCallbackGetPtr($__g_hFRDll)
 	If _WinAPI_SetWindowSubclass($__g_hFRDlg, $pDll, 1000, DllStructGetPtr($tParam)) Then
-		OnAutoItExitRegister('__Quit')
+		OnAutoItExitRegister('__WinAPIDiag_Quit')
 	Else
 		DllCallbackFree($__g_hFRDll)
 		$__g_hFRDll = 0
@@ -349,9 +348,9 @@ Func _WinAPI_DisplayStruct($tStruct, $sStruct = '', $sTitle = '', $iItem = 0, $i
 		EndSwitch
 	WEnd
 	If $__g_hFRDll Then
-		OnAutoItExitUnRegister('__Quit')
+		OnAutoItExitUnRegister('__WinAPIDiag_Quit')
 	EndIf
-	__Quit()
+	__WinAPIDiag_Quit()
 	If $hParent Then
 		GUISetState(@SW_ENABLE, $hParent)
 	EndIf
@@ -370,7 +369,7 @@ EndFunc   ;==>_WinAPI_DisplayStruct
 Func _WinAPI_EnumDllProc($sFilePath, $sMask = '', $iFlags = 0)
 	If Not __DLL('dbghelp.dll') Then Return SetError(103, 0, 0)
 
-	Local $vVer = __Ver('dbghelp.dll')
+	Local $vVer = __WinAPIDiag_Ver('dbghelp.dll')
 	If $vVer < 0x0501 Then Return SetError(2, 0, 0)
 
 	$__g_vEnum = 0
@@ -429,7 +428,7 @@ EndFunc   ;==>_WinAPI_EnumDllProc
 Func _WinAPI_GetApplicationRestartSettings($iPID = 0)
 	If Not $iPID Then $iPID = @AutoItPID
 
-	Local $hProcess = DllCall('kernel32.dll', 'handle', 'OpenProcess', 'dword', __Iif($__WINVER < 0x0600, 0x00000410, 0x00001010), _
+	Local $hProcess = DllCall('kernel32.dll', 'handle', 'OpenProcess', 'dword', (($__WINVER < 0x0600) ? 0x00000410 : 0x00001010), _
 			'bool', 0, 'dword', $iPID)
 	If @error Or Not $hProcess[0] Then Return SetError(@error + 20, @extended, 0)
 
@@ -442,7 +441,7 @@ Func _WinAPI_GetApplicationRestartSettings($iPID = 0)
 		$iError = 10
 		$iExtended = $aRet[0]
 	EndIf
-	_WinAPI_CloseHandle($hProcess[0])
+	DllCall("kernel32.dll", "bool", "CloseHandle", "handle", $hProcess[0])
 	If $iError Then Return SetError($iError, $iExtended, 0)
 
 	Local $aResult[2]
@@ -450,19 +449,6 @@ Func _WinAPI_GetApplicationRestartSettings($iPID = 0)
 	$aResult[1] = $aRet[4]
 	Return $aResult
 EndFunc   ;==>_WinAPI_GetApplicationRestartSettings
-
-; #FUNCTION# ====================================================================================================================
-; Author.........: Yashied
-; Modified.......: Jpm
-; ===============================================================================================================================
-Func _WinAPI_GetErrorMessage($iCode, $iLanguage = 0)
-	Local $aRet = DllCall('kernel32.dll', 'dword', 'FormatMessageW', 'dword', 0x1000, 'ptr', 0, 'dword', $iCode, _
-			'dword', $iLanguage, 'wstr', '', 'dword', 4096, 'ptr', 0)
-	If @error Or Not $aRet[0] Then Return SetError(@error, @extended, '')
-	; If Not $aRet[0] Then Return SetError(1000, 0, '')
-
-	Return StringRegExpReplace($aRet[5], '[' & @LF & ',' & @CR & ']*\Z', '')
-EndFunc   ;==>_WinAPI_GetErrorMessage
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -475,6 +461,15 @@ Func _WinAPI_GetErrorMode()
 
 	Return $aRet[0]
 EndFunc   ;==>_WinAPI_GetErrorMode
+
+; #FUNCTION# ====================================================================================================================
+; Author.........: Yashied
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _WinAPI_FatalExit($iCode)
+	DllCall('kernel32.dll', 'none', 'FatalExit', 'int', $iCode)
+	If @error Then Return SetError(@error, @extended)
+EndFunc   ;==>_WinAPI_FatalExit
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -541,38 +536,6 @@ Func _WinAPI_SetErrorMode($iMode)
 
 	Return $aRet[0]
 EndFunc   ;==>_WinAPI_SetErrorMode
-
-; #FUNCTION# ====================================================================================================================
-; Author.........: Yashied
-; Modified.......: jpm
-; ===============================================================================================================================
-Func _WinAPI_ShowLastError($sText = '', $bAbort = False, $iLanguage = 0, Const $_iCurrentError = @error, Const $_iCurrentExtended = @extended)
-	Local $sError
-
-	Local $iLastError = _WinAPI_GetLastError()
-	While 1
-		$sError = _WinAPI_GetErrorMessage($iLastError, $iLanguage)
-		If @error And $iLanguage Then
-			$iLanguage = 0
-		Else
-			ExitLoop
-		EndIf
-	WEnd
-	If StringStripWS($sText, $STR_STRIPLEADING + $STR_STRIPTRAILING) Then
-		$sText &= @CRLF & @CRLF
-	Else
-		$sText = ''
-	EndIf
-	_WinAPI_MsgBox(BitOR(0x00040000, BitShift(0x00000010, -2 * (Not $iLastError))), $iLastError, $sText & $sError)
-	If $iLastError Then
-		_WinAPI_SetLastError($iLastError)
-		If $bAbort Then
-			Exit $iLastError
-		EndIf
-	EndIf
-
-	Return SetError($_iCurrentError, $_iCurrentExtended, 1)
-EndFunc   ;==>_WinAPI_ShowLastError
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -658,7 +621,7 @@ Func _WinAPI_UniqueHardwareID($iFlags = 0)
 			$sHw &= $sText
 		EndIf
 	EndIf
-	Local $sHash = __MD5($sHw)
+	Local $sHash = __WinAPIDiag_MD5($sHw)
 	If Not $sHash Then Return SetError(6, 0, '')
 
 	Return SetExtended($iExtended, '{' & StringMid($sHash, 1, 8) & '-' & StringMid($sHash, 9, 4) & '-' & StringMid($sHash, 13, 4) & '-' & StringMid($sHash, 17, 4) & '-' & StringMid($sHash, 21, 12) & '}')
@@ -686,7 +649,7 @@ Func __DlgSubclassProc($sHwnd, $iMsg, $wParam, $lParam, $idLV, $pData)
 	Switch $iMsg
 		Case 0x004E ; WM_NOTIFY
 
-			Local $tNMIA = DllStructCreate('hwnd;uint_ptr;' & __Iif(@AutoItX64, 'int;int', 'int') & ';int Item;int;uint;uint;uint;long;long;lparam;uint', $lParam)
+			Local $tNMIA = DllStructCreate('hwnd;uint_ptr;' & (@AutoItX64 ? 'int;int' : 'int') & ';int Item;int;uint;uint;uint;long;long;lparam;uint', $lParam)
 			Local $hListView = DllStructGetData($tNMIA, 1)
 			Local $nMsg = DllStructGetData($tNMIA, 3)
 			Local $tParam = DllStructCreate('ptr;uint', $pData)
@@ -859,7 +822,7 @@ Func __EnumSymbolsProcW($pSymInfo, $iSymSize, $lParam)
 	Return 1
 EndFunc   ;==>__EnumSymbolsProcW
 
-Func __Hex($iValue, $sType)
+Func __WinAPIDiag_Hex($iValue, $sType)
 	Local $iLength
 
 	Switch $sType
@@ -872,7 +835,7 @@ Func __Hex($iValue, $sType)
 		Case 'INT64', 'UINT64'
 			$iLength = 16
 		Case 'INT_PTR', 'UINT_PTR', 'LONG_PTR', 'ULONG_PTR', 'DWORD_PTR', 'WPARAM', 'LPARAM', 'LRESULT'
-			$iLength = __Iif(@AutoItX64, 16, 8)
+			$iLength = (@AutoItX64 ? 16 : 8)
 		Case Else
 			$iLength = 0
 	EndSwitch
@@ -881,9 +844,9 @@ Func __Hex($iValue, $sType)
 	Else
 		Return $iValue
 	EndIf
-EndFunc   ;==>__Hex
+EndFunc   ;==>__WinAPIDiag_Hex
 
-Func __MD5($sData)
+Func __WinAPIDiag_MD5($sData)
 	Local $hHash, $iError = 0
 
 	Local $hProv = DllCall('advapi32.dll', 'int', 'CryptAcquireContextW', 'ptr*', 0, 'ptr', 0, 'ptr', 0, 'dword', 3, 'dword', 0xF0000000)
@@ -918,18 +881,18 @@ Func __MD5($sData)
 	EndIf
 	If $iError Then Return SetError($iError, 0, '')
 	Return StringTrimLeft(DllStructGetData($tData, 1), 2)
-EndFunc   ;==>__MD5
+EndFunc   ;==>__WinAPIDiag_MD5
 
-Func __Quit()
+Func __WinAPIDiag_Quit()
 	Local $pDll = DllCallbackGetPtr($__g_hFRDll)
 	If $pDll Then
 		_WinAPI_RemoveWindowSubclass($__g_hFRDlg, $pDll, 1000)
 		DllCallbackFree($__g_hFRDll)
 	EndIf
 	$__g_hFRDll = 0
-EndFunc   ;==>__Quit
+EndFunc   ;==>__WinAPIDiag_Quit
 
-Func __Ver($sPath)
+Func __WinAPIDiag_Ver($sPath)
 	Local $hLibrary = _WinAPI_GetModuleHandle($sPath)
 	If Not $hLibrary Then Return SetError(@error + 10, @extended, 0)
 	$sPath = _WinAPI_GetModuleFileNameEx(_WinAPI_GetCurrentProcess(), $hLibrary)
@@ -939,6 +902,6 @@ Func __Ver($sPath)
 	$vVer = StringSplit($vVer, '.', $STR_NOCOUNT)
 	If UBound($vVer) < 2 Then Return SetError(2, 0, 0)
 	Return BitOR(BitShift(Number($vVer[0]), -8), Number($vVer[1]))
-EndFunc   ;==>__Ver
+EndFunc   ;==>__WinAPIDiag_Ver
 
 #EndRegion Internal Functions

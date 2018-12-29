@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ExcelConstants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants to be included in an AutoIt script when using the Excel UDF.
 ; Author(s) .....: water
@@ -134,7 +134,7 @@ Global Const $xlDBF2 = 7 ; DBF2
 Global Const $xlDBF3 = 8 ; DBF3
 Global Const $xlDBF4 = 11 ; DBF4
 Global Const $xlDIF = 9 ; DIF
-Global Const $xlExcel12 = 50 ; Excel12 (Excel Binary Workbook in 2007 with or without macroâ€™s, .xlsb)
+Global Const $xlExcel12 = 50 ; Excel12 (Excel Binary Workbook in 2007 with or without macro’s, .xlsb)
 Global Const $xlExcel2 = 16 ; Excel2
 Global Const $xlExcel2FarEast = 27 ; Excel2 FarEast
 Global Const $xlExcel3 = 29 ; Excel3
@@ -151,8 +151,8 @@ Global Const $xlOpenDocumentSpreadsheet = 60 ; OpenDocument Spreadsheet
 Global Const $xlOpenXMLAddIn = 55 ; Open XML Add-In
 Global Const $xlOpenXMLTemplate = 54 ; Open XML Template
 Global Const $xlOpenXMLTemplateMacroEnabled = 53 ; Open XML Template Macro Enabled
-Global Const $xlOpenXMLWorkbook = 51 ; Open XML Workbook (without macroâ€™s in 2007, .xlsx)
-Global Const $xlOpenXMLWorkbookMacroEnabled = 52 ; Open XML Workbook Macro Enabled (with or without macroâ€™s in 2007, .xlsm)
+Global Const $xlOpenXMLWorkbook = 51 ; Open XML Workbook (without macro’s in 2007, .xlsx)
+Global Const $xlOpenXMLWorkbookMacroEnabled = 52 ; Open XML Workbook Macro Enabled (with or without macro’s in 2007, .xlsm)
 Global Const $xlSYLK = 2 ; SYLK
 Global Const $xlTemplate = 17 ; Template
 Global Const $xlTemplate8 = 17 ; Template 8
@@ -191,8 +191,8 @@ Global Const $xlQualityStandard = 0 ; Standard quality
 
 ; XlFixedFormatType Enumeration. Specifies the type of file format.
 ; See: http://msdn.microsoft.com/en-us/library/ff195006(v=office.14).aspx
-Global Const $xlTypePDF = 0 ; "PDF" â€” Portable Document Format file (.pdf)
-Global Const $xlTypeXPS = 1 ; "XPS" â€” XPS Document (.xps)
+Global Const $xlTypePDF = 0 ; "PDF" — Portable Document Format file (.pdf)
+Global Const $xlTypeXPS = 1 ; "XPS" — XPS Document (.xps)
 
 ; XlFormatConditionOperator Enumeration. Specifies the operator to use to compare a formula against the value in a cell or, for xlBetween and xlNotBetween, to compare two formulas.
 ; See: http://msdn.microsoft.com/en-us/library/ff840923(v=office.14).aspx

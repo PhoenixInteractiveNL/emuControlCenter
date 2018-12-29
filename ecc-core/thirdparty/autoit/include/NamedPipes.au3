@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Pipes
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Named Pipes.
 ;                  A named pipe is a named, one-way or duplex pipe for communication between the pipe server and one or more pipe

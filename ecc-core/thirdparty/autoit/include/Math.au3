@@ -4,15 +4,18 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Mathematical calculations
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with mathematical calculations.
 ; Author(s) .....: Valik, Gary Frost, guinness ...
 ; ===============================================================================================================================
 
+; #NO_DOC_FUNCTION# =============================================================================================================
+; _MathCheckDiv
+; ===============================================================================================================================
+
 ; #CURRENT# =====================================================================================================================
 ; _Degree
-; _MathCheckDiv
 ; _Max
 ; _Min
 ; _Radian
@@ -22,12 +25,24 @@
 ; Author ........: Erifash <erifash at gmail dot com>
 ; ===============================================================================================================================
 Func _Degree($iRadians)
-	Return IsNumber($iRadians) ? $iRadians * $MATH_DEGREES : SetError(1, 0, "")
+	Return IsNumber($iRadians) ? $iRadians * $MATH_DEGREES : SetError(1, 0, 0)
 EndFunc   ;==>_Degree
 
-; #FUNCTION# ====================================================================================================================
+; #NO_DOC_FUNCTION# =============================================================================================================
+; Name...........: _MathCheckDiv
+; Description ...: Checks if first number is divisible by the second number.
+; Syntax.........: _MathCheckDiv ( $iNum1, $iNum2 = 2 )
+; Parameters ....: $iNum1 - Integer value to check
+;                  $iNum2 - [optional] Integer value to divide by (default = 2)
+; Return values .: Success - $MATH_ISNOTDIVISIBLE (1) for not divisible.
+;                            $MATH_ISDIVISIBLE (2) for divisible.
+;                  Failure - -1 and sets the @error flag to non-zero if non-integers are entered.
 ; Author ........: Wes Wolfe-Wolvereness <Weswolf at aol dot com>
 ; Modified ......: czardas - rewritten for compatibility with Int64
+; Remarks .......: This function by default checks if the first number is either odd or even, as the second value is default to 2.
+; Related .......:
+; Link ..........:
+; Example .......:
 ; ===============================================================================================================================
 Func _MathCheckDiv($iNum1, $iNum2 = 2)
 	If Not (IsInt($iNum1) And IsInt($iNum2)) Then
@@ -62,5 +77,5 @@ EndFunc   ;==>_Min
 ; Author ........: Erifash <erifash at gmail dot com>
 ; ===============================================================================================================================
 Func _Radian($iDegrees)
-	Return Number($iDegrees) ? $iDegrees / $MATH_DEGREES : SetError(1, 0, "")
+	Return Number($iDegrees) ? $iDegrees / $MATH_DEGREES : SetError(1, 0, 0)
 EndFunc   ;==>_Radian

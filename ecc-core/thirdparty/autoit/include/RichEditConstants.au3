@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: RichEdit_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: <a href="../appendix/GUIStyles.htm#Edit">GUI control Edit/Input styles</a> and much more constants.
 ; Author(s) .....: Gary Frost, ...
@@ -40,6 +40,7 @@ Global Const $EM_GETPARAFORMAT = $__RICHEDITCONSTANT_WM_USER + 61
 Global Const $EM_GETPUNCTUATION = $__RICHEDITCONSTANT_WM_USER + 101
 Global Const $EM_GETREDONAME = $__RICHEDITCONSTANT_WM_USER + 87
 Global Const $EM_GETSCROLLPOS = $__RICHEDITCONSTANT_WM_USER + 221
+Global Const $EM_GETTABLEPARMS = $__RICHEDITCONSTANT_WM_USER + 265
 Global Const $EM_GETSELTEXT = $__RICHEDITCONSTANT_WM_USER + 62
 Global Const $EM_GETTEXTEX = $__RICHEDITCONSTANT_WM_USER + 94
 Global Const $EM_GETTEXTLENGTHEX = $__RICHEDITCONSTANT_WM_USER + 95
@@ -51,6 +52,7 @@ Global Const $EM_GETWORDBREAKPROCEX = $__RICHEDITCONSTANT_WM_USER + 80
 Global Const $EM_GETWORDWRAPMODE = $__RICHEDITCONSTANT_WM_USER + 103
 Global Const $EM_GETZOOM = $__RICHEDITCONSTANT_WM_USER + 224
 Global Const $EM_HIDESELECTION = $__RICHEDITCONSTANT_WM_USER + 63
+Global Const $EM_INSERTTABLE = $__RICHEDITCONSTANT_WM_USER + 232
 Global Const $EM_PASTESPECIAL = $__RICHEDITCONSTANT_WM_USER + 64
 Global Const $EM_RECONVERSION = $__RICHEDITCONSTANT_WM_USER + 125
 Global Const $EM_REDO = $__RICHEDITCONSTANT_WM_USER + 84
@@ -72,6 +74,7 @@ Global Const $EM_SETPALETTE = $__RICHEDITCONSTANT_WM_USER + 93
 Global Const $EM_SETPARAFORMAT = $__RICHEDITCONSTANT_WM_USER + 71
 Global Const $EM_SETPUNCTUATION = $__RICHEDITCONSTANT_WM_USER + 100
 Global Const $EM_SETSCROLLPOS = $__RICHEDITCONSTANT_WM_USER + 222
+Global Const $EM_SETTABLEPARMS = $__RICHEDITCONSTANT_WM_USER + 307
 Global Const $EM_SETTARGETDEVICE = $__RICHEDITCONSTANT_WM_USER + 72
 Global Const $EM_SETTEXTEX = $__RICHEDITCONSTANT_WM_USER + 97
 Global Const $EM_SETTEXTMODE = $__RICHEDITCONSTANT_WM_USER + 89

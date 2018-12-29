@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: GDIPlus_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants for GDI+
 ; Author(s) .....: Valik, Gary Frost, UEZ
@@ -315,11 +315,11 @@ Global Const $GDIP_ColorCurveEffectGuid = '{DD6A0022-58E4-4a67-9D9B-D48EB881A53D
 Global Const $GDIP_AdjustExposure = 0 ;[-255..255]
 Global Const $GDIP_AdjustDensity = 1 ;[-255..255]
 Global Const $GDIP_AdjustContrast = 2 ;[-100..100]
-Global Const $GDIP_AdjustHighlight = 3;[-100..100]
-Global Const $GDIP_AdjustShadow = 4;[-100..100]
-Global Const $GDIP_AdjustMidtone = 5;[-100..100]
-Global Const $GDIP_AdjustWhiteSaturation = 6;[0..255]
-Global Const $GDIP_AdjustBlackSaturation = 7;[0..255]
+Global Const $GDIP_AdjustHighlight = 3 ;[-100..100]
+Global Const $GDIP_AdjustShadow = 4 ;[-100..100]
+Global Const $GDIP_AdjustMidtone = 5 ;[-100..100]
+Global Const $GDIP_AdjustWhiteSaturation = 6 ;[0..255]
+Global Const $GDIP_AdjustBlackSaturation = 7 ;[0..255]
 
 Global Const $GDIP_CurveChannelAll = 0
 Global Const $GDIP_CurveChannelRed = 1
@@ -399,4 +399,18 @@ Global Const $GDIP_Rotate270FlipY = $GDIP_Rotate90FlipX
 Global Const $GDIP_RotateNoneFlipXY = $GDIP_Rotate180FlipNone
 Global Const $GDIP_Rotate90FlipXY = $GDIP_Rotate270FlipNone
 Global Const $GDIP_Rotate270FlipXY = $GDIP_Rotate90FlipNone
+
+; Multi-frame dimensions (Globally Unique Identifier (GUID))
+Global Const $GDIP_FRAMEDIMENSION_TIME = "{6AEDBD6D-3FB5-418A-83A6-7F45229DC872}"
+Global Const $GDIP_FRAMEDIMENSION_RESOLUTION = "{84236F7B-3BD3-428F-8DAB-4EA1439CA315}"
+Global Const $GDIP_FRAMEDIMENSION_PAGE = "{7462DC86-6180-4C7E-8E3F-EE7333A7A483}"
+
+;ImageAttributesSetThreshold constants
+Global Const $GDIP_COLORADJUSTTYPE_DEFAULT = 0
+Global Const $GDIP_COLORADJUSTTYPE_BITMAP = 1
+Global Const $GDIP_COLORADJUSTTYPE_BRUSH = 2
+Global Const $GDIP_COLORADJUSTTYPE_PEN = 3
+Global Const $GDIP_COLORADJUSTTYPE_TEXT = 4
+Global Const $GDIP_COLORADJUSTTYPE_COUNT = 5
+Global Const $GDIP_COLORADJUSTTYPE_ANY = 6
 ;===============================================================================================================================

@@ -4,7 +4,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Color
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ..... : English
 ; Description ...: Functions that assist with color management.
 ; Author(s) .....: Ultima, Jon, Jpm

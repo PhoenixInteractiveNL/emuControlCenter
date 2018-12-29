@@ -6,7 +6,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Internet Explorer Automation UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: A collection of functions for creating, attaching to, reading from and manipulating Internet Explorer.
 ; Author(s) .....: DaleHohm, big_daddy, jpm
@@ -20,8 +20,8 @@
 	Description: A collection of functions for creating, attaching to, reading from and manipulating Internet Explorer
 	Author:   DaleHohm
 	Modified: jpm, Jon
-	Version:  T3.0-1
-	Last Update: 13/06/02
+	Version:  T3.0-2
+	Last Update: 14/08/19
 	Requirements: AutoIt3 3.3.9 or higher
 
 	Update History:
@@ -1071,136 +1071,137 @@ EndFunc   ;==>_IEFormElementSetValue
 
 ; #FUNCTION# ====================================================================================================================
 ; Author ........: Dale Hohm
+; Modified ......: benners
 ; ===============================================================================================================================
 Func _IEFormElementOptionSelect(ByRef $oObject, $sString, $iSelect = 1, $sMode = "byValue", $iFireEvent = 1)
-	If Not IsObj($oObject) Then
-		__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidDataType")
-		Return SetError($_IESTATUS_InvalidDataType, 1, 0)
-	EndIf
-	;
-	If Not __IEIsObjType($oObject, "formselectelement") Then
-		__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidObjectType")
-		Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
-	EndIf
-	;
-	Local $oItem, $oItems = $oObject.options, $iNumItems = $oObject.options.length, $bIsMultiple = $oObject.multiple
+    If Not IsObj($oObject) Then
+        __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidDataType")
+        Return SetError($_IESTATUS_InvalidDataType, 1, 0)
+    EndIf
+    ;
+    If Not __IEIsObjType($oObject, "formselectelement") Then
+        __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidObjectType")
+        Return SetError($_IESTATUS_InvalidObjectType, 1, 0)
+    EndIf
+    ;
+    Local $oItem, $oItems = $oObject.options, $iNumItems = $oObject.options.length, $bIsMultiple = $oObject.multiple
 
-	Switch $sMode
-		Case "byValue"
-			For $oItem In $oItems
-				If $oItem.value = $sString Then
-					Switch $iSelect
-						Case -1
-							Return SetError($_IESTATUS_Success, 0, $oItem.selected)
-						Case 0
-							If Not $bIsMultiple Then
-								__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
-										"$iSelect=0 only valid for type=select multiple")
-								SetError($_IESTATUS_InvalidValue, 3)
-							EndIf
-							If $oItem.selected Then
-								$oItem.selected = False
-								If $iFireEvent Then
-									$oObject.fireEvent("onChange")
-									$oObject.fireEvent("OnClick")
-								EndIf
-							EndIf
-							Return SetError($_IESTATUS_Success, 0, 1)
-						Case 1
-							If Not $oItem.selected Then
-								$oItem.selected = True
-								If $iFireEvent Then
-									$oObject.fireEvent("onChange")
-									$oObject.fireEvent("OnClick")
-								EndIf
-							EndIf
-							Return SetError($_IESTATUS_Success, 0, 1)
-						Case Else
-							__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
-							Return SetError($_IESTATUS_InvalidValue, 3, 0)
-					EndSwitch
-					__IEConsoleWriteError("Warning", "_IEFormElementOptionSelect", "$_IESTATUS_NoMatch", "Value not matched")
-					Return SetError($_IESTATUS_NoMatch, 2, 0)
-				EndIf
-			Next
-		Case "byText"
-			For $oItem In $oItems
-				If String($oItem.text) = $sString Then
-					Switch $iSelect
-						Case -1
-							Return SetError($_IESTATUS_Success, 0, $oItem.selected)
-						Case 0
-							If Not $bIsMultiple Then
-								__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
-										"$iSelect=0 only valid for type=select multiple")
-								SetError($_IESTATUS_InvalidValue, 3)
-							EndIf
-							If $oItem.selected Then
-								$oItem.selected = False
-								If $iFireEvent Then
-									$oObject.fireEvent("onChange")
-									$oObject.fireEvent("OnClick")
-								EndIf
-							EndIf
-							Return SetError($_IESTATUS_Success, 0, 1)
-						Case 1
-							If Not $oItem.selected Then
-								$oItem.selected = True
-								If $iFireEvent Then
-									$oObject.fireEvent("onChange")
-									$oObject.fireEvent("OnClick")
-								EndIf
-							EndIf
-							Return SetError($_IESTATUS_Success, 0, 1)
-						Case Else
-							__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
-							Return SetError($_IESTATUS_InvalidValue, 3, 0)
-					EndSwitch
-					__IEConsoleWriteError("Warning", "_IEFormElementOptionSelect", "$_IESTATUS_NoMatch", "Text not matched")
-					Return SetError($_IESTATUS_NoMatch, 2, 0)
-				EndIf
-			Next
-		Case "byIndex"
-			Local $iIndex = Number($sString)
-			If $iIndex < 0 Or $iIndex >= $iNumItems Then
-				__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid index value, " & $iIndex)
-				Return SetError($_IESTATUS_InvalidValue, 2, 0)
-			EndIf
-			$oItem = $oItems.item($iIndex)
-			Switch $iSelect
-				Case -1
-					Return SetError($_IESTATUS_Success, 0, $oItems.item($iIndex).selected)
-				Case 0
-					If Not $bIsMultiple Then
-						__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
-								"$iSelect=0 only valid for type=select multiple")
-						SetError($_IESTATUS_InvalidValue, 3)
-					EndIf
-					If $oItem.selected Then
-						$oItems.item($iIndex).selected = False
-						If $iFireEvent Then
-							$oObject.fireEvent("onChange")
-							$oObject.fireEvent("OnClick")
-						EndIf
-					EndIf
-					Return SetError($_IESTATUS_Success, 0, 1)
-				Case 1
-					If Not $oItem.selected Then
-						$oItems.item($iIndex).selected = True
-						If $iFireEvent Then
-							$oObject.fireEvent("onChange")
-							$oObject.fireEvent("OnClick")
-						EndIf
-					EndIf
-					Return SetError($_IESTATUS_Success, 0, 1)
-				Case Else
-					__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
-					Return SetError($_IESTATUS_InvalidValue, 3, 0)
-			EndSwitch
-		Case Else
-			__IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid Mode")
-			Return SetError($_IESTATUS_InvalidValue, 4, 0)
-	EndSwitch
+    Switch $sMode
+        Case "byValue"
+            For $oItem In $oItems
+                If $oItem.value = $sString Then
+                    Switch $iSelect
+                        Case -1
+                            Return SetError($_IESTATUS_Success, 0, $oItem.selected)
+                        Case 0
+                            If Not $bIsMultiple Then
+                                __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
+                                        "$iSelect=0 only valid for type=select multiple")
+                                Return SetError($_IESTATUS_InvalidValue, 3)
+                            EndIf
+                            If $oItem.selected Then
+                                $oItem.selected = False
+                                If $iFireEvent Then
+                                    $oObject.fireEvent("onChange")
+                                    $oObject.fireEvent("OnClick")
+                                EndIf
+                            EndIf
+                            Return SetError($_IESTATUS_Success, 0, 1)
+                        Case 1
+                            If Not $oItem.selected Then
+                                $oItem.selected = True
+                                If $iFireEvent Then
+                                    $oObject.fireEvent("onChange")
+                                    $oObject.fireEvent("OnClick")
+                                EndIf
+                            EndIf
+                            Return SetError($_IESTATUS_Success, 0, 1)
+                        Case Else
+                            __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
+                            Return SetError($_IESTATUS_InvalidValue, 3, 0)
+                    EndSwitch
+                EndIf
+            Next
+            __IEConsoleWriteError("Warning", "_IEFormElementOptionSelect", "$_IESTATUS_NoMatch", "Value not matched")
+            Return SetError($_IESTATUS_NoMatch, 2, 0)
+        Case "byText"
+            For $oItem In $oItems
+                If String($oItem.text) = $sString Then
+                    Switch $iSelect
+                        Case -1
+                            Return SetError($_IESTATUS_Success, 0, $oItem.selected)
+                        Case 0
+                            If Not $bIsMultiple Then
+                                __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
+                                        "$iSelect=0 only valid for type=select multiple")
+                                Return SetError($_IESTATUS_InvalidValue, 3)
+                            EndIf
+                            If $oItem.selected Then
+                                $oItem.selected = False
+                                If $iFireEvent Then
+                                    $oObject.fireEvent("onChange")
+                                    $oObject.fireEvent("OnClick")
+                                EndIf
+                            EndIf
+                            Return SetError($_IESTATUS_Success, 0, 1)
+                        Case 1
+                            If Not $oItem.selected Then
+                                $oItem.selected = True
+                                If $iFireEvent Then
+                                    $oObject.fireEvent("onChange")
+                                    $oObject.fireEvent("OnClick")
+                                EndIf
+                            EndIf
+                            Return SetError($_IESTATUS_Success, 0, 1)
+                        Case Else
+                            __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
+                            Return SetError($_IESTATUS_InvalidValue, 3, 0)
+                    EndSwitch
+                EndIf
+            Next
+            __IEConsoleWriteError("Warning", "_IEFormElementOptionSelect", "$_IESTATUS_NoMatch", "Text not matched")
+            Return SetError($_IESTATUS_NoMatch, 2, 0)
+        Case "byIndex"
+            Local $iIndex = Number($sString)
+            If $iIndex < 0 Or $iIndex >= $iNumItems Then
+                __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid index value, " & $iIndex)
+                Return SetError($_IESTATUS_InvalidValue, 2, 0)
+            EndIf
+            $oItem = $oItems.item($iIndex)
+            Switch $iSelect
+                Case -1
+                    Return SetError($_IESTATUS_Success, 0, $oItems.item($iIndex).selected)
+                Case 0
+                    If Not $bIsMultiple Then
+                        __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", _
+                                "$iSelect=0 only valid for type=select multiple")
+                        Return SetError($_IESTATUS_InvalidValue, 3)
+                    EndIf
+                    If $oItem.selected Then
+                        $oItems.item($iIndex).selected = False
+                        If $iFireEvent Then
+                            $oObject.fireEvent("onChange")
+                            $oObject.fireEvent("OnClick")
+                        EndIf
+                    EndIf
+                    Return SetError($_IESTATUS_Success, 0, 1)
+                Case 1
+                    If Not $oItem.selected Then
+                        $oItems.item($iIndex).selected = True
+                        If $iFireEvent Then
+                            $oObject.fireEvent("onChange")
+                            $oObject.fireEvent("OnClick")
+                        EndIf
+                    EndIf
+                    Return SetError($_IESTATUS_Success, 0, 1)
+                Case Else
+                    __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid $iSelect value")
+                    Return SetError($_IESTATUS_InvalidValue, 3, 0)
+            EndSwitch
+        Case Else
+            __IEConsoleWriteError("Error", "_IEFormElementOptionSelect", "$_IESTATUS_InvalidValue", "Invalid Mode")
+            Return SetError($_IESTATUS_InvalidValue, 4, 0)
+    EndSwitch
 EndFunc   ;==>_IEFormElementOptionSelect
 
 ; #FUNCTION# ====================================================================================================================
@@ -2487,7 +2488,7 @@ Func _IEPropertySet(ByRef $oObject, $sProperty, $vValue)
 		__IEConsoleWriteError("Error", "_IEPropertySet", "$_IESTATUS_COMError", @error)
 		Return SetError($_IESTATUS_ComError, @error, 0)
 	EndIf
-	Return SetError($_IESTATUS_Success, 0, 0)
+	Return SetError($_IESTATUS_Success, 0, 1)
 EndFunc   ;==>_IEPropertySet
 
 ; #FUNCTION# ====================================================================================================================
@@ -2696,7 +2697,7 @@ Func _IE_Example($sModule = "basic")
 			$sHTML &= '<style>body {font-family: Arial}</style>' & @CR
 			$sHTML &= '</head>' & @CR
 			$sHTML &= '<body>' & @CR
-			$sHTML &= '<a href="http://www.autoitscript.com"><img src="http://www.autoitscript.com/images/autoit_6_240x100.jpg" id="AutoItImage" alt="AutoIt Homepage Image"></a>' & @CR
+			$sHTML &= '<a href="http://www.autoitscript.com"><img src="http://www.autoitscript.com/images/logo_autoit_210x72.png" id="AutoItImage" alt="AutoIt Homepage Image" style="background: #204080;"></a>' & @CR
 			$sHTML &= '<p></p>' & @CR
 			$sHTML &= '<div id="line1">This is a simple HTML page with text, links and images.</div>' & @CR
 			$sHTML &= '<br>' & @CR
@@ -2841,9 +2842,9 @@ Func _IE_Example($sModule = "basic")
 			$sHTML &= '</tr>' & @CR
 			$sHTML &= '<tr>' & @CR
 			$sHTML &= '<td>' & @CR
-			$sHTML &= '<input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg">' & @CR
+			$sHTML &= '<input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/logo_autoit_210x72.png" style="background: #204080;>' & @CR
 			$sHTML &= '</td>' & @CR
-			$sHTML &= '<td>&lt;input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/autoit_6_240x100.jpg"&gt;</td>' & @CR
+			$sHTML &= '<td>&lt;input type="image" name="imageExample" alt="AutoIt Homepage" src="http://www.autoitscript.com/images/logo_autoit_210x72.png"&gt;</td>' & @CR
 			$sHTML &= '</tr>' & @CR
 			$sHTML &= '<tr>' & @CR
 			$sHTML &= '<td>' & @CR

@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Progress_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: <a href="../appendix/GUIStyles.htm#Progress">GUI control Progress styles</a> and much more constants.
 ; Author(s) .....: Valik, Gary Frost, ...

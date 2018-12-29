@@ -2,11 +2,12 @@
 
 #include "APIShPathConstants.au3"
 #include "StringConstants.au3"
+#include "StructureConstants.au3"
 #include "WinAPIInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIShPath.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -30,6 +31,7 @@
 ; _WinAPI_PathFindExtension
 ; _WinAPI_PathFindFileName
 ; _WinAPI_PathFindNextComponent
+; _WinAPI_PathFindOnPath
 ; _WinAPI_PathGetArgs
 ; _WinAPI_PathGetCharType
 ; _WinAPI_PathGetDriveNumber
@@ -346,6 +348,44 @@ Func _WinAPI_PathFindNextComponent($sFilePath)
 
 	Return _WinAPI_GetString($aRet[0])
 EndFunc   ;==>_WinAPI_PathFindNextComponent
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Daniel Miranda (danielkza)
+; Modified.......: JPM
+; ===============================================================================================================================
+Func _WinAPI_PathFindOnPath(Const $sFilePath, $aExtraPaths = "", Const $sPathDelimiter = @LF)
+	Local $iExtraCount = 0
+	If IsString($aExtraPaths) Then
+		If StringLen($aExtraPaths) Then
+			$aExtraPaths = StringSplit($aExtraPaths, $sPathDelimiter, $STR_ENTIRESPLIT + $STR_NOCOUNT)
+			$iExtraCount = UBound($aExtraPaths, $UBOUND_ROWS)
+		EndIf
+	ElseIf IsArray($aExtraPaths) Then
+		$iExtraCount = UBound($aExtraPaths)
+	EndIf
+
+	Local $tPaths, $tPathPtrs
+	If $iExtraCount Then
+		Local $tagStruct = ""
+		For $path In $aExtraPaths
+			$tagStruct &= "wchar[" & StringLen($path) + 1 & "];"
+		Next
+
+		$tPaths = DllStructCreate($tagStruct)
+		$tPathPtrs = DllStructCreate("ptr[" & $iExtraCount + 1 & "]")
+
+		For $i = 1 To $iExtraCount
+			DllStructSetData($tPaths, $i, $aExtraPaths[$i - 1])
+			DllStructSetData($tPathPtrs, 1, DllStructGetPtr($tPaths, $i), $i)
+		Next
+		DllStructSetData($tPathPtrs, 1, Ptr(0), $iExtraCount + 1)
+	EndIf
+
+	Local $aResult = DllCall("shlwapi.dll", "bool", "PathFindOnPathW", "wstr", $sFilePath, "struct*", $tPathPtrs)
+	If @error Or Not $aResult[0] Then Return SetError(@error + 10, @extended, $sFilePath)
+
+	Return $aResult[1]
+EndFunc   ;==>_WinAPI_PathFindOnPath
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied

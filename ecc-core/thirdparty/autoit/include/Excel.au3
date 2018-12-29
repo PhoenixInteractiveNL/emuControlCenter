@@ -1,10 +1,10 @@
 #include-once
-#include <Array.au3>
-#include <ExcelConstants.au3>
+#include "Array.au3"
+#include "ExcelConstants.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Microsoft Excel Function Library
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: A collection of functions for accessing and manipulating Microsoft Excel files
 ; Author(s) .....: SEO (Locodarwin), DaLiMan, Stanley Lim, MikeOsdx, MRDev, big_daddy, PsaltyDS, litlmike, water, spiff59, golfinhu, bowmore, GMX, Andreu, danwilli
@@ -56,6 +56,9 @@
 ; Modified ......:
 ; ===============================================================================================================================
 Func _Excel_Open($bVisible = Default, $bDisplayAlerts = Default, $bScreenUpdating = Default, $bInteractive = Default, $bForceNew = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $oExcel, $bApplCloseOnQuit = False
 	If $bVisible = Default Then $bVisible = True
 	If $bDisplayAlerts = Default Then $bDisplayAlerts = False
@@ -117,6 +120,7 @@ Func _Excel_BookAttach($sString, $sMode = Default, $oInstance = Default)
 	While True
 		$oWorkbook = ObjGet("", $sCLSID_Workbook, $iCount + 1)
 		If @error Then Return SetError(1, @error, 0)
+		$iCount += 1
 		If $oInstance <> Default And $oInstance <> $oWorkbook.Parent Then ContinueLoop
 		Switch $sMode
 			Case "filename"
@@ -128,7 +132,6 @@ Func _Excel_BookAttach($sString, $sMode = Default, $oInstance = Default)
 			Case Else
 				Return SetError(2, 0, 0)
 		EndSwitch
-		$iCount += 1
 	WEnd
 EndFunc   ;==>_Excel_BookAttach
 
@@ -157,6 +160,9 @@ EndFunc   ;==>_Excel_BookClose
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_BookList($oExcel = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	Local $aBooks[1][3], $iIndex = 0
 	If IsObj($oExcel) Then
 		If ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, 0, 0)
@@ -219,12 +225,13 @@ Func _Excel_BookOpen($oExcel, $sFilePath, $bReadOnly = Default, $bVisible = Defa
 	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
 	#forceref $oError
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, @error, 0)
-	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
+	If StringLeft($sFilePath, "HTTP") = 0 And Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
 	If $bReadOnly = Default Then $bReadOnly = False
 	If $bVisible = Default Then $bVisible = True
 	Local $oWorkbook = $oExcel.Workbooks.Open($sFilePath, $bUpdateLinks, $bReadOnly, Default, $sPassword, $sWritePassword)
 	If @error Then Return SetError(3, @error, 0)
-	$oExcel.Windows($oWorkbook.Name).Visible = $bVisible
+	Local $oWindow = $oExcel.Windows($oWorkbook.Name)
+	If IsObj($oWindow) Then $oWindow.Visible = $bVisible
 	; If a read-write workbook was opened read-only then set @extended = 1
 	If $bReadOnly = False And $oWorkbook.Readonly = True Then Return SetError(0, 1, $oWorkbook)
 	Return $oWorkbook
@@ -240,7 +247,7 @@ Func _Excel_BookOpenText($oExcel, $sFilePath, $iStartRow = Default, $iDataType =
 	#forceref $oError
 	Local $bTab = False, $bSemicolon = False, $bComma = False, $bSpace = False, $aDelimiter[1], $bOther = False, $sOtherChar
 	If Not IsObj($oExcel) Or ObjName($oExcel, 1) <> "_Application" Then Return SetError(1, @error, 0)
-	If Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
+	If StringLeft($sFilePath, "HTTP") = 0 And Not FileExists($sFilePath) Then Return SetError(2, 0, 0)
 	If $iStartRow = Default Then $iStartRow = 1
 	If $sTextQualifier = Default Then $sTextQualifier = $xlTextQualifierDoubleQuote
 	If $bConsecutiveDelimiter = Default Then $bConsecutiveDelimiter = False
@@ -250,7 +257,7 @@ Func _Excel_BookOpenText($oExcel, $sFilePath, $iStartRow = Default, $iDataType =
 	If StringInStr($sDelimiter, ";") > 0 Then $bSemicolon = True
 	If StringInStr($sDelimiter, ",") > 0 Then $bComma = True
 	If StringInStr($sDelimiter, " ") > 0 Then $bSpace = True
-	$aDelimiter = StringRegExp($sDelimiter, "[^;, " & @TAB & "]", 1)
+	$aDelimiter = StringRegExp($sDelimiter, "[^;, " & @TAB & "]", $STR_REGEXPARRAYMATCH)
 	If Not @error Then
 		$sOtherChar = $aDelimiter[0]
 		$bOther = True
@@ -631,8 +638,11 @@ EndFunc   ;==>_Excel_RangeDelete
 ; Modified.......:
 ; ===============================================================================================================================
 Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Default, $iLookAt = Default, $bMatchcase = Default)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
-	If StringStripWS($sSearch, 3) = "" Then Return SetError(2, 0, 0)
+	If StringStripWS($sSearch, BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) = "" Then Return SetError(2, 0, 0)
 	If $iLookIn = Default Then $iLookIn = $xlValues
 	If $iLookAt = Default Then $iLookAt = $xlPart
 	If $bMatchcase = Default Then $bMatchcase = False
@@ -645,7 +655,7 @@ Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Defaul
 		$vRange = $oWorkbook.Activesheet.Range($vRange)
 		If @error Then Return SetError(3, @error, 0)
 	EndIf
-	Local $aResult[100][6], $iIndex = 0, $iIndexSheets = 1
+	Local $aResult[100][6], $iIndex = 0, $iIndexSheets = 1, $oTemp
 	While 1
 		$oMatch = $vRange.Find($sSearch, Default, $iLookIn, $iLookAt, Default, Default, $bMatchcase)
 		If @error Then Return SetError(4, @error, 0)
@@ -653,11 +663,13 @@ Func _Excel_RangeFind($oWorkbook, $sSearch, $vRange = Default, $iLookIn = Defaul
 			$sFirst = $oMatch.Address
 			While 1
 				$aResult[$iIndex][0] = $oMatch.Worksheet.Name
-				$aResult[$iIndex][1] = $oMatch.Name.Name
+				$oTemp = $oMatch.Name
+				If Not @error Then $aResult[$iIndex][1] = $oTemp.Name
 				$aResult[$iIndex][2] = $oMatch.Address
 				$aResult[$iIndex][3] = $oMatch.Value
 				$aResult[$iIndex][4] = $oMatch.Formula
-				$aResult[$iIndex][5] = $oMatch.Comment.Text
+				$oTemp = $oMatch.Comment
+				If IsObj($oTemp) Then $aResult[$iIndex][5] = $oTemp.Text
 				$iIndex = $iIndex + 1
 				If Mod($iIndex, 100) = 0 Then ReDim $aResult[UBound($aResult, 1) + 100][6]
 				$oMatch = $vRange.Findnext($oMatch)
@@ -822,7 +834,7 @@ Func _Excel_RangeReplace($oWorkbook, $vWorksheet, $vRange, $sSearch, $sReplace, 
 	ElseIf ObjName($vWorksheet, 1) <> "_Worksheet" Then
 		Return SetError(2, @error, 0)
 	EndIf
-	If StringStripWS($sSearch, 3) = "" Then Return SetError(3, 0, 0)
+	If StringStripWS($sSearch, BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) = "" Then Return SetError(3, 0, 0)
 	If $vRange = Default Then
 		$vRange = $vWorksheet.Usedrange
 	ElseIf Not IsObj($vRange) Then
@@ -1108,7 +1120,7 @@ Func _Excel_SheetCopyMove($oSourceBook, $vSourceSheet = Default, $oTargetBook = 
 	Else
 		$vSourceSheet.Move($vBefore, $vAfter)
 	EndIf
-	If @error Then Return SetError(5, 0, 0)
+	If @error Then Return SetError(5, @error, 0)
 	If $bBefore Then
 		Return $oTargetBook.Sheets($vTargetSheet.Index - 1)
 	Else
@@ -1144,6 +1156,9 @@ EndFunc   ;==>_Excel_SheetDelete
 ; Modified.......: litlmike, water
 ; ===============================================================================================================================
 Func _Excel_SheetList($oWorkbook)
+	; Error handler, automatic cleanup at end of function
+	Local $oError = ObjEvent("AutoIt.Error", "__Excel_COMErrFunc")
+	#forceref $oError
 	If Not IsObj($oWorkbook) Or ObjName($oWorkbook, 1) <> "_Workbook" Then Return SetError(1, 0, 0)
 	Local $iSheetCount = $oWorkbook.Sheets.Count
 	Local $aSheets[$iSheetCount][2]
@@ -1155,8 +1170,21 @@ Func _Excel_SheetList($oWorkbook)
 EndFunc   ;==>_Excel_SheetList
 
 ; #INTERNAL_USE_ONLY#============================================================================================================
+; Name...........: __Excel_CloseOnQuit
+; Description ...: Sets or returns the state used to determine if the Excel instance can be closed by _Excel_Close.
+; Syntax.........: __Excel_CloseOnQuit($oExcel[, $bNewState = Default])
+; Parameters ....: $oExcel    - Object of the Excel instance to be processed
+;                  $bNewState - Optional: The following values can be passed:
+;                  |True if the Excel instance was started by function _Excel_Open and can be closed by _Excel_Close
+;                  |False if the Excel instance was just closed by _Excel_Close and needs to be removed from the table
+;                  |Default returns the current state (True, False) for the specified Excel instance
+; Return values .: Success - Current state. Can be either True (Instance will be closed by _Excel_Close) or False (Instance will not be closed by _Excel_Close)
 ; Author ........: Valik
 ; Modified ......: water
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
 ; ===============================================================================================================================
 Func __Excel_CloseOnQuit($oExcel, $bNewState = Default)
 	Static $bState[101] = [0]

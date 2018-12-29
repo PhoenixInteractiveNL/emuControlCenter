@@ -1,11 +1,14 @@
 #include-once
 
 #include "GDIPlus.au3"
-#include "WinAPI.au3"
+#include "WinAPIGdiInternals.au3"
+#include "WinAPIHObj.au3"
+#include "WinAPIInternals.au3"
+#include "WinAPISysInternals.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ScreenCapture
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with Screen Capture management.
 ;                  This module allows you to copy the screen or a region of the screen and save it to file. Depending on the type

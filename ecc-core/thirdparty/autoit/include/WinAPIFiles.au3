@@ -2,12 +2,15 @@
 
 #include "APIFilesConstants.au3"
 #include "FileConstants.au3"
+#include "WinAPIConv.au3"
+#include "WinAPIError.au3"
+#include "WinAPIMem.au3"
 #include "WinAPIMisc.au3"
 #include "WinAPIShPath.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: WinAPI Extended UDF Library for AutoIt3
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Description ...: Additional variables, constants and functions for the WinAPIFiles.au3
 ; Author(s) .....: Yashied, jpm
 ; ===============================================================================================================================
@@ -19,8 +22,6 @@ Global $__g_iHeapSize = 8388608
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
-Global Const $tagDEVMODE = 'wchar DeviceName[32];ushort SpecVersion;ushort DriverVersion;ushort Size;ushort DriverExtra;dword Fields;short Orientation;short PaperSize;short PaperLength;short PaperWidth;short Scale;short Copies;short DefaultSource;short PrintQuality;short Color;short Duplex;short YResolution;short TTOption;short Collate;wchar FormName[32];ushort Unused1;dword Unused2[3];dword Nup;dword Unused3;dword ICMMethod;dword ICMIntent;dword MediaType;dword DitherType;dword Reserved1;dword Reserved2;dword PanningWidth;dword PanningHeight'
-Global Const $tagDEVNAMES = 'ushort DriverOffset;ushort DeviceOffset;ushort OutputOffset;ushort Default'
 Global Const $tagFILEINFO = 'uint64 CreationTime;uint64 LastAccessTime;uint64 LastWriteTime;uint64 ChangeTime;dword Attributes'
 Global Const $tagFILE_ID_DESCRIPTOR = 'dword Size;uint Type;' & $tagGUID
 Global Const $tagWIN32_FIND_STREAM_DATA = 'int64 StreamSize;wchar StreamName[296]'
@@ -70,6 +71,7 @@ Global Const $tagWIN32_STREAM_ID = 'dword StreamId;dword StreamAttributes;int64 
 ; _WinAPI_FindNextFile
 ; _WinAPI_FindNextFileName
 ; _WinAPI_FindNextStream
+; _WinAPI_FlushFileBuffers
 ; _WinAPI_FlushViewOfFile
 ; _WinAPI_GetBinaryType
 ; _WinAPI_GetCDType
@@ -86,6 +88,7 @@ Global Const $tagWIN32_STREAM_ID = 'dword StreamId;dword StreamAttributes;int64 
 ; _WinAPI_GetFileInformationByHandle
 ; _WinAPI_GetFileInformationByHandleEx
 ; _WinAPI_GetFilePointerEx
+; _WinAPI_GetFileSizeEx
 ; _WinAPI_GetFileSizeOnDisk
 ; _WinAPI_GetFileTitle
 ; _WinAPI_GetFileType
@@ -94,6 +97,7 @@ Global Const $tagWIN32_STREAM_ID = 'dword StreamId;dword StreamAttributes;int64 
 ; _WinAPI_GetFullPathName
 ; _WinAPI_GetLogicalDrives
 ; _WinAPI_GetObjectID
+; _WinAPI_GetOverlappedResult
 ; _WinAPI_GetPEType
 ; _WinAPI_GetProfilesDirectory
 ; _WinAPI_GetTempFileName
@@ -111,7 +115,6 @@ Global Const $tagWIN32_STREAM_ID = 'dword StreamId;dword StreamAttributes;int64 
 ; _WinAPI_MoveFileEx
 ; _WinAPI_OpenFileById
 ; _WinAPI_OpenFileMapping
-; _WinAPI_PathIsDirectory
 ; _WinAPI_PathIsDirectoryEmpty
 ; _WinAPI_QueryDosDevice
 ; _WinAPI_ReadDirectoryChanges
@@ -121,8 +124,10 @@ Global Const $tagWIN32_STREAM_ID = 'dword StreamId;dword StreamAttributes;int64 
 ; _WinAPI_SearchPath
 ; _WinAPI_SetCompression
 ; _WinAPI_SetCurrentDirectory
+; _WinAPI_SetEndOfFile
 ; _WinAPI_SetFileAttributes
 ; _WinAPI_SetFileInformationByHandleEx
+; _WinAPI_SetFilePointer
 ; _WinAPI_SetFilePointerEx
 ; _WinAPI_SetFileShortName
 ; _WinAPI_SetFileValidData
@@ -561,7 +566,7 @@ Func _WinAPI_EnumFileStreams($sFilePath)
 	Local $hFile = _WinAPI_CreateFileEx($sFilePath, $OPEN_EXISTING, 0, $FILE_SHARE_READWRITE, $FILE_FLAG_BACKUP_SEMANTICS)
 	If @error Then Return SetError(@error + 20, @extended, 0)
 
-	Local $iError = 0; JPM: ????
+	Local $iError = 0
 	Local $tIOSB = DllStructCreate('ptr;ulong_ptr')
 	Local $aRet = DllCall('ntdll.dll', 'long', 'ZwQueryInformationFile', 'handle', $hFile, 'struct*', $tIOSB, 'ptr', $pData, _
 			'ulong', 32768, 'uint', 22)
@@ -797,6 +802,17 @@ Func _WinAPI_FindNextStream($hSearch, $tData)
 
 	Return $aRet[0]
 EndFunc   ;==>_WinAPI_FindNextStream
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Paul Campbell (PaulIA)
+; Modified.......:
+; ===============================================================================================================================
+Func _WinAPI_FlushFileBuffers($hFile)
+	Local $aResult = DllCall("kernel32.dll", "bool", "FlushFileBuffers", "handle", $hFile)
+	If @error Then Return SetError(@error, @extended, False)
+
+	Return $aResult[0]
+EndFunc   ;==>_WinAPI_FlushFileBuffers
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -1089,6 +1105,17 @@ Func _WinAPI_GetFilePointerEx($hFile)
 EndFunc   ;==>_WinAPI_GetFilePointerEx
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Paul Campbell (PaulIA)
+; Modified.......: JPM
+; ===============================================================================================================================
+Func _WinAPI_GetFileSizeEx($hFile)
+	Local $aResult = DllCall("kernel32.dll", "bool", "GetFileSizeEx", "handle", $hFile, "int64*", 0)
+	If @error Or Not $aResult[0] Then Return SetError(@error, @extended, -1)
+
+	Return $aResult[2]
+EndFunc   ;==>_WinAPI_GetFileSizeEx
+
+; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
@@ -1203,6 +1230,19 @@ Func _WinAPI_GetObjectID($sFilePath)
 	; EndIf
 	Return $tGUID
 EndFunc   ;==>_WinAPI_GetObjectID
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Paul Campbell (PaulIA)
+; Modified.......: JPM
+; ===============================================================================================================================
+Func _WinAPI_GetOverlappedResult($hFile, $tOverlapped, ByRef $iBytes, $bWait = False)
+	Local $aResult = DllCall("kernel32.dll", "bool", "GetOverlappedResult", "handle", $hFile, "struct*", $tOverlapped, "dword*", 0, _
+			"bool", $bWait)
+	If @error Or Not $aResult[0] Then Return SetError(@error, @extended, False)
+
+	$iBytes = $aResult[3]
+	Return $aResult[0]
+EndFunc   ;==>_WinAPI_GetOverlappedResult
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
@@ -1360,7 +1400,7 @@ Func _WinAPI_IsDoorOpen($sDrive)
 	Local $hFile = _WinAPI_CreateFileEx('\\.\' & $sDrive, $OPEN_EXISTING, $GENERIC_READWRITE, $FILE_SHARE_READWRITE)
 	If @error Then Return SetError(@error + 20, @extended, False)
 
-	Local $tSPT = DllStructCreate('ushort Length;byte ScsiStatus;byte PathId;byte TargetId;byte Lun;byte CdbLength;byte SenseInfoLength;byte DataIn;byte Alignment[3];ulong DataTransferLength;ulong TimeOutValue;ulong_ptr DataBufferOffset;ulong SenseInfoOffset;byte Cdb[16]' & __Iif(@AutoItX64, ';byte[4]', '') & ';byte Hdr[8]')
+	Local $tSPT = DllStructCreate('ushort Length;byte ScsiStatus;byte PathId;byte TargetId;byte Lun;byte CdbLength;byte SenseInfoLength;byte DataIn;byte Alignment[3];ulong DataTransferLength;ulong TimeOutValue;ulong_ptr DataBufferOffset;ulong SenseInfoOffset;byte Cdb[16]' & (@AutoItX64 ? ';byte[4]' : '') & ';byte Hdr[8]')
 	Local $tCDB = DllStructCreate('byte;byte;byte[6];byte[2];byte;byte;byte[4]', DllStructGetPtr($tSPT, 'Cdb'))
 	Local $tHDR = DllStructCreate('byte;byte;byte[3];byte;byte[2]', DllStructGetPtr($tSPT, 'Hdr'))
 	Local $iSize = DllStructGetPtr($tSPT, 'Hdr') - DllStructGetPtr($tSPT)
@@ -1705,6 +1745,17 @@ Func _WinAPI_SetCurrentDirectory($sDir)
 EndFunc   ;==>_WinAPI_SetCurrentDirectory
 
 ; #FUNCTION# ====================================================================================================================
+; Author ........: Zedna
+; Modified.......:
+; ===============================================================================================================================
+Func _WinAPI_SetEndOfFile($hFile)
+	Local $aResult = DllCall("kernel32.dll", "bool", "SetEndOfFile", "handle", $hFile)
+	If @error Then Return SetError(@error, @extended, False)
+
+	Return $aResult[0]
+EndFunc   ;==>_WinAPI_SetEndOfFile
+
+; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied
 ; Modified.......: Jpm
 ; ===============================================================================================================================
@@ -1728,6 +1779,17 @@ Func _WinAPI_SetFileInformationByHandleEx($hFile, $tFILEINFO)
 
 	Return 1
 EndFunc   ;==>_WinAPI_SetFileInformationByHandleEx
+
+; #FUNCTION# ====================================================================================================================
+; Author ........: Zedna
+; Modified.......: jpm
+; ===============================================================================================================================
+Func _WinAPI_SetFilePointer($hFile, $iPos, $iMethod = 0)
+	Local $aResult = DllCall("kernel32.dll", "INT", "SetFilePointer", "handle", $hFile, "long", $iPos, "ptr", 0, "long", $iMethod)
+	If @error Then Return SetError(@error, @extended, -1)
+
+	Return $aResult[0]
+EndFunc   ;==>_WinAPI_SetFilePointer
 
 ; #FUNCTION# ====================================================================================================================
 ; Author.........: Yashied

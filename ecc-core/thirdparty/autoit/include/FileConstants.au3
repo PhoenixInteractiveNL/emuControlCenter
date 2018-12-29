@@ -2,7 +2,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: File_Constants
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Constants to be included in an AutoIt v3 script when using File functions.
 ; Author(s) .....: Valik, Gary Frost, ...
@@ -149,4 +149,11 @@ Global Const $FLTAR_FASTSORT = 2
 Global Const $FLTAR_NOPATH = 0
 Global Const $FLTAR_RELPATH = 1
 Global Const $FLTAR_FULLPATH = 2
+
+; _PathSplit Constants
+Global Const $PATH_ORIGINAL = 0
+Global Const $PATH_DRIVE = 1
+Global Const $PATH_DIRECTORY = 2
+Global Const $PATH_FILENAME = 3
+Global Const $PATH_EXTENSION = 4
 ; ===============================================================================================================================

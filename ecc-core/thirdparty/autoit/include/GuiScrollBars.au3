@@ -5,7 +5,7 @@
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: ScrollBar
-; AutoIt Version : 3.3.14.2
+; AutoIt Version : 3.3.14.5
 ; Language ......: English
 ; Description ...: Functions that assist with ScrollBar management.
 ;                  A scroll bar consists of a shaded shaft with an arrow button at each end and a scroll box (sometimes called a thumb)
@@ -284,7 +284,7 @@ Func _GUIScrollBars_Init($hWnd, $iMaxH = -1, $iMaxV = -1)
 	If $iError Then Return SetError($iError, $iExtended)
 
 	Local $iUpperX, $iXAmount = DllStructGetData($tTEXTMETRIC, "tmAveCharWidth")
-	If BitAND(DllStructGetData($tTEXTMETRIC, "tmPitchAndFamily"), 1) Then
+	If BitAND(DllStructGetData($tTEXTMETRIC, "tmPitchAndFamily"), 1) Then ; $TMPF_FIXED_PITCH
 		$iUpperX = 3 * $iXAmount / 2
 	Else
 		$iUpperX = 2 * $iXAmount / 2

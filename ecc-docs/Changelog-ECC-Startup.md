@@ -1,5 +1,11 @@
 ## Changelog ECC Startup
 ***
+v3.0.0.5 (ECC v1.23)
+- Thirdparty tool World of Joystick filename changed.
+
+v3.0.0.4 (ECC v1.22)
+- Added support for joystick emulator commandline parameters!
+
 v3.0.0.2 (ECC v1.21)
 - Using animated GIF instead of AVI for loading animations, you can make you own easily now! You can find instructions at emuControlCenter WIKI on GitHub.
 

@@ -42,6 +42,7 @@
 [_HowTo DATfile examples_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/ECC-HowTo-DATfile-examples)
 ***
 ### Changelogs ECC
+[_Changelogs 2019_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelogs-2019)
 [_Changelogs 2016_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelogs-2016)
 [_Changelogs 2014_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelogs-2014)
 [_Changelogs 2013_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelogs-2013)
@@ -57,6 +58,8 @@
 [_ECC Startup_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-Startup)
 
 [_ECC Update_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-Update)
+
+[_ECC emuDownloadCenter_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-emuDownloadCenter)
 
 [_ECC eccScriptSystem_](https://github.com/PhoenixInteractiveNL/emuControlCenter/wiki/Changelog-ECC-eccScriptSystem)
 

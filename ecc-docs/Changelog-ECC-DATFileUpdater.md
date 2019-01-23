@@ -1,5 +1,8 @@
 ## Changelog ECC DATFileUpdater (DFU)
 ***
+v1.3.0.2
+- Updated "NeoGeo" datfile extract naming to match MAME v2.00+
+
 v1.3.0.1
 - Removed DATE function and string, not used in newer MAME dats anymore
 - Fixed NeoGeo driver from 'neodrvr.cpp' to 'neodriv.hxx'

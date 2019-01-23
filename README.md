@@ -1,9 +1,9 @@
 ﻿emuControlCenter - Console/Computer Rom-Manager & Frontend (Windows)
 ***
 
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_122.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_123.png)
 
-Get the best multi-emulator frontend! - Manage roms for more than 190 gaming platforms with one tool!
+Get the best multi-emulator frontend! - Manage roms for more than 200 gaming platforms with one tool!
 
 emuControlCenter is a Console/Computer Rom-Manager & Frontend for various older and newer
 consoles/handheld/computer games and is build for people who want to play games quick 'n' easy without

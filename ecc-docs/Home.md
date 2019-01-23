@@ -1,9 +1,9 @@
 ﻿## Home
 ***
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_122.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/ecc_splashscreen_123.png)
 
 ### About
-Get the best multi-emulator frontend! - Manage roms for more than 190 gaming platforms with one tool!
+Get the best multi-emulator frontend! - Manage roms and emulators for more than 200 gaming platforms with one tool!
 
 emuControlCenter is a Console/Computer Rom-Manager & Frontend for various older and newer
 consoles/handheld/computer games and is build for people who want to play games quick 'n' easy without
@@ -16,7 +16,7 @@ There is also a 'ImageCenter' build-in for a fullsize preview of screens and cov
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_logo_rar.png)
 
 ZIP, 7-ZIP & RAR support
-It's possible to load and parse roms even when they are archived with ZIP / 7-Zip / RAR. emuControlCenter can get the checksums directly without unpacking compressed files. It's also possible to parse one or more ROMs from a single ZIP / 7-ZIP / RAR-File!
+It's possible to load and parse roms even when they are archived with ZIP, 7-Zip or RAR. emuControlCenter can get the checksums directly without unpacking compressed files. It's also possible to parse one or more ROMs from a single ZIP, 7-ZIP or RAR file!
 ***
 ![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/edc_banner.png)
 
@@ -66,7 +66,7 @@ Thanks for translating to:
 
 [DE] Blackering / [EN] ECC & Phoenix / [ES] Jarlaxe / [FR] Cyrille / [GR] Alkis30 / [HU] Gruby & Delirious / [JP] Yoshi Matsu / [NL] Sebastiaan Ebeltjes (Phoenix) / [PT] Namnam / [RU] ALLiGaToR
 ***
-![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_update icon.png)
+![](https://raw.githubusercontent.com/wiki/PhoenixInteractiveNL/emuControlCenter/images/img_update_icon.png)
 
 Live! updates
 With eccUpdate you can update ECC directly to the most recent version, these updates include fixes/updates/additions.
